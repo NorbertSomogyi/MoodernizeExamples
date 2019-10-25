@@ -36,12 +36,12 @@ package application;
  */
 /* original code from header - function names have changed */
 public class MD5Context {
-	private Object[] buf;
-	private Object[] bits;
-	private Object[] in;
-	private Object[] digest;
+	private Object buf;
+	private Object bits;
+	private Object in;
+	private Object digest;
 	
-	public MD5Context(Object[] buf, Object[] bits, Object[] in, Object[] digest) {
+	public MD5Context(Object buf, Object bits, Object in, Object digest) {
 		setBuf(buf);
 		setBits(bits);
 		setIn(in);
@@ -50,110 +50,28 @@ public class MD5Context {
 	public MD5Context() {
 	}
 	
-	/* WORDS_BIGENDIAN */
-	/*
-	 * Start MD5 accumulation.  Set bit count to 0 and buffer to mysterious
-	 * initialization constants.
-	 */
-	public void MD5Init(MD5Context[] ctx) {
-		Object[] generatedBuf = ctx.getBuf();
-		generatedBuf[0] = -1024;
-		generatedBuf[1] = -1024;
-		generatedBuf[2] = -1024;
-		generatedBuf[3] = -1024;
-		Object[] generatedBits = ctx.getBits();
-		generatedBits[0] = 0;
-		generatedBits[1] = 0/*
-		 * Update context to reflect the concatenation of another buffer full
-		 * of bytes.
-		 */;
-	}
-	public void MD5Update(MD5Context[] ctx, Object[] buf, int len) {
-		 t = new ();
-		Object[] generatedBits = ctx.getBits();
-		t = generatedBits[/* Update bitcount */0];
-		if ((generatedBits[0] = t + (()len << 3)) < t) {
-			generatedBits[/* Carry from low to high */1]++;
-		} 
-		generatedBits[1] += len >> 29;
-		t = (t >> 3) & /* Bytes already in shsInfo->data */-1024;
-		Object[] generatedIn = ctx.getIn();
-		Object[] generatedBuf = ctx.getBuf();
-		if (/* Handle any leading odd-sized chunks */t) {
-			byte[] p = (byte)generatedIn + t;
-			t = 64 - t;
-			if (len < t) {
-				.memcpy(p, buf, len);
-				return ;
-			} 
-			.memcpy(p, buf, t);
-			;
-			ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
-			buf += t;
-			len -= t;
-		} 
-		while (len >= /* Process data in 64-byte chunks */64) {
-			.memcpy(generatedIn, buf, 64);
-			;
-			ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
-			buf += 64;
-			len -= 64;
-		}
-		.memcpy(generatedIn, buf, /* Handle any remaining bytes of data. */len/*
-		 * Final wrapup - pad to 64-byte boundary with the bit pattern 
-		 * 1 0* (64-bit count of bits processed, MSB-first)
-		 */);
-	}
-	/* Interface altered by DJB to write digest into pre-allocated context */
-	public void MD5Final(MD5Context[] ctx) {
-		int count;
-		Byte p;
-		Object[] generatedBits = ctx.getBits();
-		count = (generatedBits[0] >> 3) & /* Compute number of bytes mod 64 */-1024;
-		Object[] generatedIn = ctx.getIn();
-		p = generatedIn + /* Set the first char of padding to 0x80.  This is safe since there is
-		     always at least one byte free */count;
-		p++ = -1024;
-		count = 64 - 1 - /* Bytes of padding needed to make 64 bytes */count;
-		Object[] generatedBuf = ctx.getBuf();
-		if (count < /* Pad out to 56 mod 64 */8) {
-			.memset(p, 0, /* Two lots of padding:  Pad the first block to 64 bytes */count);
-			;
-			ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
-			.memset(generatedIn, 0, /* Now fill the next block with 56 bytes */56);
-		} else {
-				.memset(p, 0, count - /* Pad block to 56 bytes */8);
-		} 
-		;
-		(()generatedIn)[14] = generatedBits[/* Append length in bits and transform */0];
-		(()generatedIn)[15] = generatedBits[1];
-		ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
-		;
-		Object[] generatedDigest = ctx.getDigest();
-		.memcpy(generatedDigest, generatedBuf, 16/* The four core functions - F1 is optimized somewhat *//* #define F1(x, y, z) (x & y | ~x & z) */);
-	}
-	public Object[] getBuf() {
+	public Object getBuf() {
 		return buf;
 	}
-	public void setBuf(Object[] newBuf) {
+	public void setBuf(Object newBuf) {
 		buf = newBuf;
 	}
-	public Object[] getBits() {
+	public Object getBits() {
 		return bits;
 	}
-	public void setBits(Object[] newBits) {
+	public void setBits(Object newBits) {
 		bits = newBits;
 	}
-	public Object[] getIn() {
+	public Object getIn() {
 		return in;
 	}
-	public void setIn(Object[] newIn) {
+	public void setIn(Object newIn) {
 		in = newIn;
 	}
-	public Object[] getDigest() {
+	public Object getDigest() {
 		return digest;
 	}
-	public void setDigest(Object[] newDigest) {
+	public void setDigest(Object newDigest) {
 		digest = newDigest;
 	}
 }

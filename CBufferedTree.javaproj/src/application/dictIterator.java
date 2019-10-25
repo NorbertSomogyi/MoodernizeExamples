@@ -1,14 +1,14 @@
 package application;
 
 public class dictIterator {
-	private dict[] d;
+	private Object d;
 	private int table;
 	private int index;
 	private int safe;
-	private dictEntry[] entry;
-	private dictEntry[] nextEntry;
+	private Object entry;
+	private Object nextEntry;
 	
-	public dictIterator(dict[] d, int table, int index, int safe, dictEntry[] entry, dictEntry[] nextEntry) {
+	public dictIterator(Object d, int table, int index, int safe, Object entry, Object nextEntry) {
 		setD(d);
 		setTable(table);
 		setIndex(index);
@@ -19,37 +19,10 @@ public class dictIterator {
 	public dictIterator() {
 	}
 	
-	public dictIterator[] dictGetIterator(dict[] d) {
-		dictIterator[] iter = .malloc();
-		iter.setD(d);
-		iter.setTable(0);
-		iter.setIndex(-1);
-		iter.setSafe(0);
-		iter.setEntry(((Object)0));
-		iter.setNextEntry(((Object)0));
-		return iter;
-	}
-	public dictIterator[] dictGetSafeIterator(dict[] d) {
-		dictIterator dictIterator = new dictIterator();
-		dictIterator[] i = dictIterator.dictGetIterator(d);
-		i.setSafe(1);
-		return i;
-	}
-	public void dictReleaseIterator(dictIterator[] iter) {
-		int generatedSafe = iter.getSafe();
-		int generatedIndex = iter.getIndex();
-		int generatedTable = iter.getTable();
-		dict[] generatedD = iter.getD();
-		int generatedIterators = generatedD.getIterators();
-		if (generatedSafe && !(generatedIndex == -1 && generatedTable == 0)) {
-			generatedIterators--;
-		} 
-		.free(iter);
-	}
-	public dict[] getD() {
+	public Object getD() {
 		return d;
 	}
-	public void setD(dict[] newD) {
+	public void setD(Object newD) {
 		d = newD;
 	}
 	public int getTable() {
@@ -70,16 +43,16 @@ public class dictIterator {
 	public void setSafe(int newSafe) {
 		safe = newSafe;
 	}
-	public dictEntry[] getEntry() {
+	public Object getEntry() {
 		return entry;
 	}
-	public void setEntry(dictEntry[] newEntry) {
+	public void setEntry(Object newEntry) {
 		entry = newEntry;
 	}
-	public dictEntry[] getNextEntry() {
+	public Object getNextEntry() {
 		return nextEntry;
 	}
-	public void setNextEntry(dictEntry[] newNextEntry) {
+	public void setNextEntry(Object newNextEntry) {
 		nextEntry = newNextEntry;
 	}
 }
