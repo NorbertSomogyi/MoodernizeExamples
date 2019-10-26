@@ -1,0 +1,18 @@
+package application;
+
+public enum todo_command {
+	TODO_PICK, 
+	TODO_REVERT, 
+	TODO_EDIT, 
+	TODO_REWORD, 
+	TODO_FIXUP, 
+	TODO_SQUASH, 
+	TODO_EXEC, 
+	TODO_BREAK, 
+	TODO_LABEL, 
+	TODO_RESET, 
+	TODO_MERGE, 
+	TODO_NOOP, 
+	TODO_DROP, 
+	TODO_COMMENT
+}

@@ -2,16 +2,16 @@ package application;
 
 /* individual pieces of the URL */
 public class urlpieces {
-	private Object scheme;
-	private Object hostname;
-	private Object port;
-	private Object user;
-	private Object password;
-	private Object options;
-	private Object path;
-	private Object query;
+	private Byte scheme;
+	private Byte hostname;
+	private Byte port;
+	private Byte user;
+	private Byte password;
+	private Byte options;
+	private Byte path;
+	private Byte query;
 	
-	public urlpieces(Object scheme, Object hostname, Object port, Object user, Object password, Object options, Object path, Object query) {
+	public urlpieces(Byte scheme, Byte hostname, Byte port, Byte user, Byte password, Byte options, Byte path, Byte query) {
 		setScheme(scheme);
 		setHostname(hostname);
 		setPort(port);
@@ -24,52 +24,52 @@ public class urlpieces {
 	public urlpieces() {
 	}
 	
-	public Object getScheme() {
+	public Byte getScheme() {
 		return scheme;
 	}
-	public void setScheme(Object newScheme) {
+	public void setScheme(Byte newScheme) {
 		scheme = newScheme;
 	}
-	public Object getHostname() {
+	public Byte getHostname() {
 		return hostname;
 	}
-	public void setHostname(Object newHostname) {
+	public void setHostname(Byte newHostname) {
 		hostname = newHostname;
 	}
-	public Object getPort() {
+	public Byte getPort() {
 		return port;
 	}
-	public void setPort(Object newPort) {
+	public void setPort(Byte newPort) {
 		port = newPort;
 	}
-	public Object getUser() {
+	public Byte getUser() {
 		return user;
 	}
-	public void setUser(Object newUser) {
+	public void setUser(Byte newUser) {
 		user = newUser;
 	}
-	public Object getPassword() {
+	public Byte getPassword() {
 		return password;
 	}
-	public void setPassword(Object newPassword) {
+	public void setPassword(Byte newPassword) {
 		password = newPassword;
 	}
-	public Object getOptions() {
+	public Byte getOptions() {
 		return options;
 	}
-	public void setOptions(Object newOptions) {
+	public void setOptions(Byte newOptions) {
 		options = newOptions;
 	}
-	public Object getPath() {
+	public Byte getPath() {
 		return path;
 	}
-	public void setPath(Object newPath) {
+	public void setPath(Byte newPath) {
 		path = newPath;
 	}
-	public Object getQuery() {
+	public Byte getQuery() {
 		return query;
 	}
-	public void setQuery(Object newQuery) {
+	public void setQuery(Byte newQuery) {
 		query = newQuery;
 	}
 }

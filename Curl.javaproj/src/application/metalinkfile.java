@@ -1,12 +1,12 @@
 package application;
 
 public class metalinkfile {
-	private Object next;
-	private Object filename;
-	private Object checksum;
-	private Object resource;
+	private metalinkfile next;
+	private Byte filename;
+	private metalink_checksum checksum;
+	private metalink_resource resource;
 	
-	public metalinkfile(Object next, Object filename, Object checksum, Object resource) {
+	public metalinkfile(metalinkfile next, Byte filename, metalink_checksum checksum, metalink_resource resource) {
 		setNext(next);
 		setFilename(filename);
 		setChecksum(checksum);
@@ -15,28 +15,28 @@ public class metalinkfile {
 	public metalinkfile() {
 	}
 	
-	public Object getNext() {
+	public metalinkfile getNext() {
 		return next;
 	}
-	public void setNext(Object newNext) {
+	public void setNext(metalinkfile newNext) {
 		next = newNext;
 	}
-	public Object getFilename() {
+	public Byte getFilename() {
 		return filename;
 	}
-	public void setFilename(Object newFilename) {
+	public void setFilename(Byte newFilename) {
 		filename = newFilename;
 	}
-	public Object getChecksum() {
+	public metalink_checksum getChecksum() {
 		return checksum;
 	}
-	public void setChecksum(Object newChecksum) {
+	public void setChecksum(metalink_checksum newChecksum) {
 		checksum = newChecksum;
 	}
-	public Object getResource() {
+	public metalink_resource getResource() {
 		return resource;
 	}
-	public void setResource(Object newResource) {
+	public void setResource(metalink_resource newResource) {
 		resource = newResource;
 	}
 }

@@ -1,0 +1,16 @@
+package application;
+
+public enum kern_run {
+	KERN_RUN_1, 
+	KERN_RUN_12, 
+	KERN_RUN_2, 
+	KERN_RUN_23, 
+	KERN_RUN_3, 
+	KERN_RUN_4, 
+	KERN_RUN_INIT2, 
+	KERN_RUN_LOOP2, 
+	KERN_RUN_AUX1, 
+	KERN_RUN_AUX2, 
+	KERN_RUN_AUX3, 
+	KERN_RUN_AUX4
+}

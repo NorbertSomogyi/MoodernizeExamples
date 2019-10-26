@@ -3,18 +3,18 @@ package application;
 /** Dynamically allocated strings, MUST be freed before this **/
 /** struct is killed.                                      **/
 public class dynamically_allocated_data {
-	private Object proxyuserpwd;
-	private Object uagent;
-	private Object accept_encoding;
-	private Object userpwd;
-	private Object rangeline;
-	private Object ref;
-	private Object host;
-	private Object cookiehost;
-	private Object rtsp_transport;
-	private Object te;
+	private Byte proxyuserpwd;
+	private Byte uagent;
+	private Byte accept_encoding;
+	private Byte userpwd;
+	private Byte rangeline;
+	private Byte ref;
+	private Byte host;
+	private Byte cookiehost;
+	private Byte rtsp_transport;
+	private Byte te;
 	
-	public dynamically_allocated_data(Object proxyuserpwd, Object uagent, Object accept_encoding, Object userpwd, Object rangeline, Object ref, Object host, Object cookiehost, Object rtsp_transport, Object te) {
+	public dynamically_allocated_data(Byte proxyuserpwd, Byte uagent, Byte accept_encoding, Byte userpwd, Byte rangeline, Byte ref, Byte host, Byte cookiehost, Byte rtsp_transport, Byte te) {
 		setProxyuserpwd(proxyuserpwd);
 		setUagent(uagent);
 		setAccept_encoding(accept_encoding);
@@ -29,64 +29,64 @@ public class dynamically_allocated_data {
 	public dynamically_allocated_data() {
 	}
 	
-	public Object getProxyuserpwd() {
+	public Byte getProxyuserpwd() {
 		return proxyuserpwd;
 	}
-	public void setProxyuserpwd(Object newProxyuserpwd) {
+	public void setProxyuserpwd(Byte newProxyuserpwd) {
 		proxyuserpwd = newProxyuserpwd;
 	}
-	public Object getUagent() {
+	public Byte getUagent() {
 		return uagent;
 	}
-	public void setUagent(Object newUagent) {
+	public void setUagent(Byte newUagent) {
 		uagent = newUagent;
 	}
-	public Object getAccept_encoding() {
+	public Byte getAccept_encoding() {
 		return accept_encoding;
 	}
-	public void setAccept_encoding(Object newAccept_encoding) {
+	public void setAccept_encoding(Byte newAccept_encoding) {
 		accept_encoding = newAccept_encoding;
 	}
-	public Object getUserpwd() {
+	public Byte getUserpwd() {
 		return userpwd;
 	}
-	public void setUserpwd(Object newUserpwd) {
+	public void setUserpwd(Byte newUserpwd) {
 		userpwd = newUserpwd;
 	}
-	public Object getRangeline() {
+	public Byte getRangeline() {
 		return rangeline;
 	}
-	public void setRangeline(Object newRangeline) {
+	public void setRangeline(Byte newRangeline) {
 		rangeline = newRangeline;
 	}
-	public Object getRef() {
+	public Byte getRef() {
 		return ref;
 	}
-	public void setRef(Object newRef) {
+	public void setRef(Byte newRef) {
 		ref = newRef;
 	}
-	public Object getHost() {
+	public Byte getHost() {
 		return host;
 	}
-	public void setHost(Object newHost) {
+	public void setHost(Byte newHost) {
 		host = newHost;
 	}
-	public Object getCookiehost() {
+	public Byte getCookiehost() {
 		return cookiehost;
 	}
-	public void setCookiehost(Object newCookiehost) {
+	public void setCookiehost(Byte newCookiehost) {
 		cookiehost = newCookiehost;
 	}
-	public Object getRtsp_transport() {
+	public Byte getRtsp_transport() {
 		return rtsp_transport;
 	}
-	public void setRtsp_transport(Object newRtsp_transport) {
+	public void setRtsp_transport(Byte newRtsp_transport) {
 		rtsp_transport = newRtsp_transport;
 	}
-	public Object getTe() {
+	public Byte getTe() {
 		return te;
 	}
-	public void setTe(Object newTe) {
+	public void setTe(Byte newTe) {
 		te = newTe;
 	}
 }

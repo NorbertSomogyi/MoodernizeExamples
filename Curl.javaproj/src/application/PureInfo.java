@@ -15,8 +15,8 @@ public class PureInfo {
 	private long proxyauthavail;
 	private long httpauthavail;
 	private long numconnects;
-	private Object contenttype;
-	private Object wouldredirect;
+	private Byte contenttype;
+	private Byte wouldredirect;
 	private Object retry_after;
 	private Object conn_primary_ip;
 	private long conn_primary_port;
@@ -27,7 +27,7 @@ public class PureInfo {
 	private curl_certinfo certs;
 	private Object timecond;
 	
-	public PureInfo(int httpcode, int httpproxycode, int httpversion, Object filetime, Object header_size, Object request_size, long proxyauthavail, long httpauthavail, long numconnects, Object contenttype, Object wouldredirect, Object retry_after, Object conn_primary_ip, long conn_primary_port, Object conn_local_ip, long conn_local_port, Object conn_scheme, int conn_protocol, curl_certinfo certs, Object timecond) {
+	public PureInfo(int httpcode, int httpproxycode, int httpversion, Object filetime, Object header_size, Object request_size, long proxyauthavail, long httpauthavail, long numconnects, Byte contenttype, Byte wouldredirect, Object retry_after, Object conn_primary_ip, long conn_primary_port, Object conn_local_ip, long conn_local_port, Object conn_scheme, int conn_protocol, curl_certinfo certs, Object timecond) {
 		setHttpcode(httpcode);
 		setHttpproxycode(httpproxycode);
 		setHttpversion(httpversion);
@@ -106,16 +106,16 @@ public class PureInfo {
 	public void setNumconnects(long newNumconnects) {
 		numconnects = newNumconnects;
 	}
-	public Object getContenttype() {
+	public Byte getContenttype() {
 		return contenttype;
 	}
-	public void setContenttype(Object newContenttype) {
+	public void setContenttype(Byte newContenttype) {
 		contenttype = newContenttype;
 	}
-	public Object getWouldredirect() {
+	public Byte getWouldredirect() {
 		return wouldredirect;
 	}
-	public void setWouldredirect(Object newWouldredirect) {
+	public void setWouldredirect(Byte newWouldredirect) {
 		wouldredirect = newWouldredirect;
 	}
 	public Object getRetry_after() {

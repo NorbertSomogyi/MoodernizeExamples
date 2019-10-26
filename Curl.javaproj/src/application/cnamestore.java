@@ -2,10 +2,10 @@ package application;
 
 public class cnamestore {
 	private Object len;
-	private Object alloc;
+	private Byte alloc;
 	private Object allocsize;
 	
-	public cnamestore(Object len, Object alloc, Object allocsize) {
+	public cnamestore(Object len, Byte alloc, Object allocsize) {
 		setLen(len);
 		setAlloc(alloc);
 		setAllocsize(allocsize);
@@ -13,16 +13,41 @@ public class cnamestore {
 	public cnamestore() {
 	}
 	
+	public  cnameappend(Byte src, Object len) {
+		Byte generatedAlloc = this.getAlloc();
+		Object generatedAllocsize = this.getAllocsize();
+		if (!generatedAlloc) {
+			this.setAllocsize(len + 1);
+			this.setAlloc(.Curl_cmalloc(generatedAllocsize));
+			if (!generatedAlloc) {
+				return .DOH_OUT_OF_MEM;
+			} 
+		}  else if (generatedAllocsize < (generatedAllocsize + len + 1)) {
+			byte ptr;
+			generatedAllocsize += len + 1;
+			ptr = .Curl_crealloc(generatedAlloc, generatedAllocsize);
+			if (!ptr) {
+				.Curl_cfree(generatedAlloc);
+				return .DOH_OUT_OF_MEM;
+			} 
+			this.setAlloc(ptr);
+		} 
+		Object generatedLen = this.getLen();
+		.memcpy(generatedAlloc[generatedLen], src, len);
+		generatedLen += len;
+		generatedAlloc[generatedLen] = /* keep it zero terminated */0;
+		return .DOH_OK;
+	}
 	public Object getLen() {
 		return len;
 	}
 	public void setLen(Object newLen) {
 		len = newLen;
 	}
-	public Object getAlloc() {
+	public Byte getAlloc() {
 		return alloc;
 	}
-	public void setAlloc(Object newAlloc) {
+	public void setAlloc(Byte newAlloc) {
 		alloc = newAlloc;
 	}
 	public Object getAllocsize() {

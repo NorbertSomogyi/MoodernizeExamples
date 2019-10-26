@@ -1,20 +1,20 @@
 package application;
 
 public class Names {
-	private Object hostcache;
+	private curl_hash hostcache;
 	private  hostcachetype;
 	
-	public Names(Object hostcache,  hostcachetype) {
+	public Names(curl_hash hostcache,  hostcachetype) {
 		setHostcache(hostcache);
 		setHostcachetype(hostcachetype);
 	}
 	public Names() {
 	}
 	
-	public Object getHostcache() {
+	public curl_hash getHostcache() {
 		return hostcache;
 	}
-	public void setHostcache(Object newHostcache) {
+	public void setHostcache(curl_hash newHostcache) {
 		hostcache = newHostcache;
 	}
 	public  getHostcachetype() {

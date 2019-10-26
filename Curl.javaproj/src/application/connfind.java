@@ -1,20 +1,20 @@
 package application;
 
 public class connfind {
-	private Object tofind;
+	private connectdata tofind;
 	private  found;
 	
-	public connfind(Object tofind,  found) {
+	public connfind(connectdata tofind,  found) {
 		setTofind(tofind);
 		setFound(found);
 	}
 	public connfind() {
 	}
 	
-	public Object getTofind() {
+	public connectdata getTofind() {
 		return tofind;
 	}
-	public void setTofind(Object newTofind) {
+	public void setTofind(connectdata newTofind) {
 		tofind = newTofind;
 	}
 	public  getFound() {

@@ -6,14 +6,14 @@ public class http_connect_state {
 	private Object connect_buffer;
 	private int perline;
 	private int keepon;
-	private Object line_start;
-	private Object ptr;
+	private Byte line_start;
+	private byte ptr;
 	private Object cl;
 	private  tunnel_state;
 	private Object chunked_encoding;
 	private Object close_connection;
 	
-	public http_connect_state(Object connect_buffer, int perline, int keepon, Object line_start, Object ptr, Object cl,  tunnel_state, Object chunked_encoding, Object close_connection) {
+	public http_connect_state(Object connect_buffer, int perline, int keepon, Byte line_start, byte ptr, Object cl,  tunnel_state, Object chunked_encoding, Object close_connection) {
 		setConnect_buffer(connect_buffer);
 		setPerline(perline);
 		setKeepon(keepon);
@@ -45,16 +45,16 @@ public class http_connect_state {
 	public void setKeepon(int newKeepon) {
 		keepon = newKeepon;
 	}
-	public Object getLine_start() {
+	public Byte getLine_start() {
 		return line_start;
 	}
-	public void setLine_start(Object newLine_start) {
+	public void setLine_start(Byte newLine_start) {
 		line_start = newLine_start;
 	}
-	public Object getPtr() {
+	public byte getPtr() {
 		return ptr;
 	}
-	public void setPtr(Object newPtr) {
+	public void setPtr(byte newPtr) {
 		ptr = newPtr;
 	}
 	public Object getCl() {

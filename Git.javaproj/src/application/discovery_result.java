@@ -1,0 +1,11 @@
+package application;
+
+public enum discovery_result {
+	GIT_DIR_NONE, 
+	GIT_DIR_EXPLICIT, 
+	GIT_DIR_DISCOVERED, 
+	GIT_DIR_BARE, 
+	GIT_DIR_HIT_CEILING, 
+	GIT_DIR_HIT_MOUNT_POINT, 
+	GIT_DIR_INVALID_GITFILE
+}

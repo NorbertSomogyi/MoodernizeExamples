@@ -3,12 +3,12 @@ package application;
 /* SMB request data */
 public class smb_request {
 	private smb_req_state state;
-	private Object path;
+	private Byte path;
 	private int tid;
 	private int fid;
-	private  result;
+	private Object result;
 	
-	public smb_request(smb_req_state state, Object path, int tid, int fid,  result) {
+	public smb_request(smb_req_state state, Byte path, int tid, int fid, Object result) {
 		setState(state);
 		setPath(path);
 		setTid(tid);
@@ -24,10 +24,10 @@ public class smb_request {
 	public void setState(smb_req_state newState) {
 		state = newState;
 	}
-	public Object getPath() {
+	public Byte getPath() {
 		return path;
 	}
-	public void setPath(Object newPath) {
+	public void setPath(Byte newPath) {
 		path = newPath;
 	}
 	public int getTid() {
@@ -42,10 +42,10 @@ public class smb_request {
 	public void setFid(int newFid) {
 		fid = newFid;
 	}
-	public  getResult() {
+	public Object getResult() {
 		return result;
 	}
-	public void setResult( newResult) {
+	public void setResult(Object newResult) {
 		result = newResult;
 	}
 }

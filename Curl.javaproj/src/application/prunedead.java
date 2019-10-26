@@ -1,26 +1,26 @@
 package application;
 
 public class prunedead {
-	private Object data;
-	private Object extracted;
+	private Curl_easy data;
+	private connectdata extracted;
 	
-	public prunedead(Object data, Object extracted) {
+	public prunedead(Curl_easy data, connectdata extracted) {
 		setData(data);
 		setExtracted(extracted);
 	}
 	public prunedead() {
 	}
 	
-	public Object getData() {
+	public Curl_easy getData() {
 		return data;
 	}
-	public void setData(Object newData) {
+	public void setData(Curl_easy newData) {
 		data = newData;
 	}
-	public Object getExtracted() {
+	public connectdata getExtracted() {
 		return extracted;
 	}
-	public void setExtracted(Object newExtracted) {
+	public void setExtracted(connectdata newExtracted) {
 		extracted = newExtracted;
 	}
 }

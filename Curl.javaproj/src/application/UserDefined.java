@@ -2,9 +2,9 @@ package application;
 
 /* values set by the libcurl user */
 public class UserDefined {
-	private Object err;
+	private _iobuf err;
 	private Object debugdata;
-	private Object errorbuffer;
+	private Byte errorbuffer;
 	private long proxyport;
 	private Object out;
 	private Object in_set;
@@ -55,42 +55,42 @@ public class UserDefined {
 	private Object max_send_speed;
 	private Object max_recv_speed;
 	private Object set_resume_from;
-	private Object headers;
-	private Object proxyheaders;
-	private Object httppost;
-	private curl_mimepart_s mimepost;
-	private Object quote;
-	private Object postquote;
-	private Object prequote;
-	private Object source_quote;
-	private Object source_prequote;
-	private Object source_postquote;
-	private Object telnet_options;
-	private Object resolve;
-	private Object connect_to;
-	private  timecondition;
+	private curl_slist headers;
+	private curl_slist proxyheaders;
+	private curl_httppost httppost;
+	private Object mimepost;
+	private curl_slist quote;
+	private curl_slist postquote;
+	private curl_slist prequote;
+	private curl_slist source_quote;
+	private curl_slist source_prequote;
+	private curl_slist source_postquote;
+	private curl_slist telnet_options;
+	private curl_slist resolve;
+	private curl_slist connect_to;
+	private Object timecondition;
 	private Object timevalue;
 	private  httpreq;
 	private long httpversion;
 	private ssl_config_data ssl;
 	private ssl_config_data proxy_ssl;
 	private ssl_general_config general_ssl;
-	private  proxytype;
+	private Object proxytype;
 	private long dns_cache_timeout;
 	private long buffer_size;
 	private Object upload_buffer_size;
 	private Object private_data;
-	private Object http200aliases;
+	private curl_slist http200aliases;
 	private long ipver;
 	private Object max_filesize;
 	private  ftp_filemethod;
-	private  ftpsslauth;
-	private  ftp_ccc;
+	private Object ftpsslauth;
+	private Object ftp_ccc;
 	private int ftp_create_missing_dirs;
 	private Object ssh_keyfunc;
 	private Object ssh_keyfunc_userp;
 	private CURL_NETRC_OPTION use_netrc;
-	private  use_ssl;
+	private Object use_ssl;
 	private long new_file_perms;
 	private long new_directory_perms;
 	private long ssh_auth_types;
@@ -98,7 +98,7 @@ public class UserDefined {
 	private int scope_id;
 	private long allowed_protocols;
 	private long redir_protocols;
-	private Object mail_rcpt;
+	private curl_slist mail_rcpt;
 	private  rtspreq;
 	private long rtspversion;
 	private Object chunk_bgn;
@@ -110,14 +110,14 @@ public class UserDefined {
 	private long tcp_keepintvl;
 	private Object maxconnects;
 	private long expect_100_timeout;
-	private Object stream_depends_on;
+	private Curl_easy stream_depends_on;
 	private int stream_weight;
-	private Object stream_dependents;
+	private Curl_http2_dep stream_dependents;
 	private Object resolver_start;
 	private Object resolver_start_client;
 	private long upkeep_interval_ms;
 	private Object fmultidone;
-	private Object dohfor;
+	private Curl_easy dohfor;
 	private Object uh;
 	private Object trailer_data;
 	private Object trailer_callback;
@@ -180,7 +180,7 @@ public class UserDefined {
 	private Object doh_get;
 	private Object http09_allowed;
 	
-	public UserDefined(Object err, Object debugdata, Object errorbuffer, long proxyport, Object out, Object in_set, Object writeheader, Object rtp_out, long use_port, long httpauth, long proxyauth, long socks5auth, long followlocation, long maxredirs, int keep_post, Object postfields, Object seek_func, Object postfieldsize, int localport, int localportrange, Object fwrite_func, Object fwrite_header, Object fwrite_rtp, Object fread_func_set, Object fprogress, Object fxferinfo, Object fdebug, Object ioctl_func, Object fsockopt, Object sockopt_client, Object fopensocket, Object opensocket_client, Object fclosesocket, Object closesocket_client, Object seek_client, Object convfromnetwork, Object convtonetwork, Object convfromutf8, Object progress_client, Object ioctl_client, long timeout, long connecttimeout, long accepttimeout, long happy_eyeballs_timeout, long server_response_timeout, long maxage_conn, long tftp_blksize, Object filesize, long low_speed_limit, long low_speed_time, Object max_send_speed, Object max_recv_speed, Object set_resume_from, Object headers, Object proxyheaders, Object httppost, curl_mimepart_s mimepost, Object quote, Object postquote, Object prequote, Object source_quote, Object source_prequote, Object source_postquote, Object telnet_options, Object resolve, Object connect_to,  timecondition, Object timevalue,  httpreq, long httpversion, ssl_config_data ssl, ssl_config_data proxy_ssl, ssl_general_config general_ssl,  proxytype, long dns_cache_timeout, long buffer_size, Object upload_buffer_size, Object private_data, Object http200aliases, long ipver, Object max_filesize,  ftp_filemethod,  ftpsslauth,  ftp_ccc, int ftp_create_missing_dirs, Object ssh_keyfunc, Object ssh_keyfunc_userp, CURL_NETRC_OPTION use_netrc,  use_ssl, long new_file_perms, long new_directory_perms, long ssh_auth_types, Object str, int scope_id, long allowed_protocols, long redir_protocols, Object mail_rcpt,  rtspreq, long rtspversion, Object chunk_bgn, Object chunk_end, Object fnmatch, Object fnmatch_data, long gssapi_delegation, long tcp_keepidle, long tcp_keepintvl, Object maxconnects, long expect_100_timeout, Object stream_depends_on, int stream_weight, Object stream_dependents, Object resolver_start, Object resolver_start_client, long upkeep_interval_ms, Object fmultidone, Object dohfor, Object uh, Object trailer_data, Object trailer_callback, Object is_fread_set, Object is_fwrite_set, Object free_referer, Object tftp_no_options, Object sep_headers, Object cookiesession, Object crlf, Object strip_path_slash, Object ssh_compression, Object get_filetime, Object tunnel_thru_httpproxy, Object prefer_ascii, Object ftp_append, Object ftp_list_only, Object ftp_use_port, Object ftp_use_epsv, Object ftp_use_eprt, Object ftp_use_pret, Object ftp_skip_ip, Object hide_progress, Object http_fail_on_error, Object http_keep_sending_on_error, Object http_follow_location, Object http_transfer_encoding, Object allow_auth_to_other_hosts, Object include_header, Object http_set_referer, Object http_auto_referer, Object opt_no_body, Object upload, Object verbose, Object krb, Object reuse_forbid, Object reuse_fresh, Object no_signal, Object tcp_nodelay, Object ignorecl, Object connect_only, Object http_te_skip, Object http_ce_skip, Object proxy_transfer_mode, Object sasl_ir, Object wildcard_enabled, Object tcp_keepalive, Object tcp_fastopen, Object ssl_enable_npn, Object ssl_enable_alpn, Object path_as_is, Object pipewait, Object suppress_connect_headers, Object dns_shuffle_addresses, Object stream_depends_e, Object haproxyprotocol, Object abstract_unix_socket, Object disallow_username_in_url, Object doh, Object doh_get, Object http09_allowed) {
+	public UserDefined(_iobuf err, Object debugdata, Byte errorbuffer, long proxyport, Object out, Object in_set, Object writeheader, Object rtp_out, long use_port, long httpauth, long proxyauth, long socks5auth, long followlocation, long maxredirs, int keep_post, Object postfields, Object seek_func, Object postfieldsize, int localport, int localportrange, Object fwrite_func, Object fwrite_header, Object fwrite_rtp, Object fread_func_set, Object fprogress, Object fxferinfo, Object fdebug, Object ioctl_func, Object fsockopt, Object sockopt_client, Object fopensocket, Object opensocket_client, Object fclosesocket, Object closesocket_client, Object seek_client, Object convfromnetwork, Object convtonetwork, Object convfromutf8, Object progress_client, Object ioctl_client, long timeout, long connecttimeout, long accepttimeout, long happy_eyeballs_timeout, long server_response_timeout, long maxage_conn, long tftp_blksize, Object filesize, long low_speed_limit, long low_speed_time, Object max_send_speed, Object max_recv_speed, Object set_resume_from, curl_slist headers, curl_slist proxyheaders, curl_httppost httppost, Object mimepost, curl_slist quote, curl_slist postquote, curl_slist prequote, curl_slist source_quote, curl_slist source_prequote, curl_slist source_postquote, curl_slist telnet_options, curl_slist resolve, curl_slist connect_to, Object timecondition, Object timevalue,  httpreq, long httpversion, ssl_config_data ssl, ssl_config_data proxy_ssl, ssl_general_config general_ssl, Object proxytype, long dns_cache_timeout, long buffer_size, Object upload_buffer_size, Object private_data, curl_slist http200aliases, long ipver, Object max_filesize,  ftp_filemethod, Object ftpsslauth, Object ftp_ccc, int ftp_create_missing_dirs, Object ssh_keyfunc, Object ssh_keyfunc_userp, CURL_NETRC_OPTION use_netrc, Object use_ssl, long new_file_perms, long new_directory_perms, long ssh_auth_types, Object str, int scope_id, long allowed_protocols, long redir_protocols, curl_slist mail_rcpt,  rtspreq, long rtspversion, Object chunk_bgn, Object chunk_end, Object fnmatch, Object fnmatch_data, long gssapi_delegation, long tcp_keepidle, long tcp_keepintvl, Object maxconnects, long expect_100_timeout, Curl_easy stream_depends_on, int stream_weight, Curl_http2_dep stream_dependents, Object resolver_start, Object resolver_start_client, long upkeep_interval_ms, Object fmultidone, Curl_easy dohfor, Object uh, Object trailer_data, Object trailer_callback, Object is_fread_set, Object is_fwrite_set, Object free_referer, Object tftp_no_options, Object sep_headers, Object cookiesession, Object crlf, Object strip_path_slash, Object ssh_compression, Object get_filetime, Object tunnel_thru_httpproxy, Object prefer_ascii, Object ftp_append, Object ftp_list_only, Object ftp_use_port, Object ftp_use_epsv, Object ftp_use_eprt, Object ftp_use_pret, Object ftp_skip_ip, Object hide_progress, Object http_fail_on_error, Object http_keep_sending_on_error, Object http_follow_location, Object http_transfer_encoding, Object allow_auth_to_other_hosts, Object include_header, Object http_set_referer, Object http_auto_referer, Object opt_no_body, Object upload, Object verbose, Object krb, Object reuse_forbid, Object reuse_fresh, Object no_signal, Object tcp_nodelay, Object ignorecl, Object connect_only, Object http_te_skip, Object http_ce_skip, Object proxy_transfer_mode, Object sasl_ir, Object wildcard_enabled, Object tcp_keepalive, Object tcp_fastopen, Object ssl_enable_npn, Object ssl_enable_alpn, Object path_as_is, Object pipewait, Object suppress_connect_headers, Object dns_shuffle_addresses, Object stream_depends_e, Object haproxyprotocol, Object abstract_unix_socket, Object disallow_username_in_url, Object doh, Object doh_get, Object http09_allowed) {
 		setErr(err);
 		setDebugdata(debugdata);
 		setErrorbuffer(errorbuffer);
@@ -362,10 +362,10 @@ public class UserDefined {
 	public UserDefined() {
 	}
 	
-	public Object getErr() {
+	public _iobuf getErr() {
 		return err;
 	}
-	public void setErr(Object newErr) {
+	public void setErr(_iobuf newErr) {
 		err = newErr;
 	}
 	public Object getDebugdata() {
@@ -374,10 +374,10 @@ public class UserDefined {
 	public void setDebugdata(Object newDebugdata) {
 		debugdata = newDebugdata;
 	}
-	public Object getErrorbuffer() {
+	public Byte getErrorbuffer() {
 		return errorbuffer;
 	}
-	public void setErrorbuffer(Object newErrorbuffer) {
+	public void setErrorbuffer(Byte newErrorbuffer) {
 		errorbuffer = newErrorbuffer;
 	}
 	public long getProxyport() {
@@ -680,88 +680,88 @@ public class UserDefined {
 	public void setSet_resume_from(Object newSet_resume_from) {
 		set_resume_from = newSet_resume_from;
 	}
-	public Object getHeaders() {
+	public curl_slist getHeaders() {
 		return headers;
 	}
-	public void setHeaders(Object newHeaders) {
+	public void setHeaders(curl_slist newHeaders) {
 		headers = newHeaders;
 	}
-	public Object getProxyheaders() {
+	public curl_slist getProxyheaders() {
 		return proxyheaders;
 	}
-	public void setProxyheaders(Object newProxyheaders) {
+	public void setProxyheaders(curl_slist newProxyheaders) {
 		proxyheaders = newProxyheaders;
 	}
-	public Object getHttppost() {
+	public curl_httppost getHttppost() {
 		return httppost;
 	}
-	public void setHttppost(Object newHttppost) {
+	public void setHttppost(curl_httppost newHttppost) {
 		httppost = newHttppost;
 	}
-	public curl_mimepart_s getMimepost() {
+	public Object getMimepost() {
 		return mimepost;
 	}
-	public void setMimepost(curl_mimepart_s newMimepost) {
+	public void setMimepost(Object newMimepost) {
 		mimepost = newMimepost;
 	}
-	public Object getQuote() {
+	public curl_slist getQuote() {
 		return quote;
 	}
-	public void setQuote(Object newQuote) {
+	public void setQuote(curl_slist newQuote) {
 		quote = newQuote;
 	}
-	public Object getPostquote() {
+	public curl_slist getPostquote() {
 		return postquote;
 	}
-	public void setPostquote(Object newPostquote) {
+	public void setPostquote(curl_slist newPostquote) {
 		postquote = newPostquote;
 	}
-	public Object getPrequote() {
+	public curl_slist getPrequote() {
 		return prequote;
 	}
-	public void setPrequote(Object newPrequote) {
+	public void setPrequote(curl_slist newPrequote) {
 		prequote = newPrequote;
 	}
-	public Object getSource_quote() {
+	public curl_slist getSource_quote() {
 		return source_quote;
 	}
-	public void setSource_quote(Object newSource_quote) {
+	public void setSource_quote(curl_slist newSource_quote) {
 		source_quote = newSource_quote;
 	}
-	public Object getSource_prequote() {
+	public curl_slist getSource_prequote() {
 		return source_prequote;
 	}
-	public void setSource_prequote(Object newSource_prequote) {
+	public void setSource_prequote(curl_slist newSource_prequote) {
 		source_prequote = newSource_prequote;
 	}
-	public Object getSource_postquote() {
+	public curl_slist getSource_postquote() {
 		return source_postquote;
 	}
-	public void setSource_postquote(Object newSource_postquote) {
+	public void setSource_postquote(curl_slist newSource_postquote) {
 		source_postquote = newSource_postquote;
 	}
-	public Object getTelnet_options() {
+	public curl_slist getTelnet_options() {
 		return telnet_options;
 	}
-	public void setTelnet_options(Object newTelnet_options) {
+	public void setTelnet_options(curl_slist newTelnet_options) {
 		telnet_options = newTelnet_options;
 	}
-	public Object getResolve() {
+	public curl_slist getResolve() {
 		return resolve;
 	}
-	public void setResolve(Object newResolve) {
+	public void setResolve(curl_slist newResolve) {
 		resolve = newResolve;
 	}
-	public Object getConnect_to() {
+	public curl_slist getConnect_to() {
 		return connect_to;
 	}
-	public void setConnect_to(Object newConnect_to) {
+	public void setConnect_to(curl_slist newConnect_to) {
 		connect_to = newConnect_to;
 	}
-	public  getTimecondition() {
+	public Object getTimecondition() {
 		return timecondition;
 	}
-	public void setTimecondition( newTimecondition) {
+	public void setTimecondition(Object newTimecondition) {
 		timecondition = newTimecondition;
 	}
 	public Object getTimevalue() {
@@ -800,10 +800,10 @@ public class UserDefined {
 	public void setGeneral_ssl(ssl_general_config newGeneral_ssl) {
 		general_ssl = newGeneral_ssl;
 	}
-	public  getProxytype() {
+	public Object getProxytype() {
 		return proxytype;
 	}
-	public void setProxytype( newProxytype) {
+	public void setProxytype(Object newProxytype) {
 		proxytype = newProxytype;
 	}
 	public long getDns_cache_timeout() {
@@ -830,10 +830,10 @@ public class UserDefined {
 	public void setPrivate_data(Object newPrivate_data) {
 		private_data = newPrivate_data;
 	}
-	public Object getHttp200aliases() {
+	public curl_slist getHttp200aliases() {
 		return http200aliases;
 	}
-	public void setHttp200aliases(Object newHttp200aliases) {
+	public void setHttp200aliases(curl_slist newHttp200aliases) {
 		http200aliases = newHttp200aliases;
 	}
 	public long getIpver() {
@@ -854,16 +854,16 @@ public class UserDefined {
 	public void setFtp_filemethod( newFtp_filemethod) {
 		ftp_filemethod = newFtp_filemethod;
 	}
-	public  getFtpsslauth() {
+	public Object getFtpsslauth() {
 		return ftpsslauth;
 	}
-	public void setFtpsslauth( newFtpsslauth) {
+	public void setFtpsslauth(Object newFtpsslauth) {
 		ftpsslauth = newFtpsslauth;
 	}
-	public  getFtp_ccc() {
+	public Object getFtp_ccc() {
 		return ftp_ccc;
 	}
-	public void setFtp_ccc( newFtp_ccc) {
+	public void setFtp_ccc(Object newFtp_ccc) {
 		ftp_ccc = newFtp_ccc;
 	}
 	public int getFtp_create_missing_dirs() {
@@ -890,10 +890,10 @@ public class UserDefined {
 	public void setUse_netrc(CURL_NETRC_OPTION newUse_netrc) {
 		use_netrc = newUse_netrc;
 	}
-	public  getUse_ssl() {
+	public Object getUse_ssl() {
 		return use_ssl;
 	}
-	public void setUse_ssl( newUse_ssl) {
+	public void setUse_ssl(Object newUse_ssl) {
 		use_ssl = newUse_ssl;
 	}
 	public long getNew_file_perms() {
@@ -938,10 +938,10 @@ public class UserDefined {
 	public void setRedir_protocols(long newRedir_protocols) {
 		redir_protocols = newRedir_protocols;
 	}
-	public Object getMail_rcpt() {
+	public curl_slist getMail_rcpt() {
 		return mail_rcpt;
 	}
-	public void setMail_rcpt(Object newMail_rcpt) {
+	public void setMail_rcpt(curl_slist newMail_rcpt) {
 		mail_rcpt = newMail_rcpt;
 	}
 	public  getRtspreq() {
@@ -1010,10 +1010,10 @@ public class UserDefined {
 	public void setExpect_100_timeout(long newExpect_100_timeout) {
 		expect_100_timeout = newExpect_100_timeout;
 	}
-	public Object getStream_depends_on() {
+	public Curl_easy getStream_depends_on() {
 		return stream_depends_on;
 	}
-	public void setStream_depends_on(Object newStream_depends_on) {
+	public void setStream_depends_on(Curl_easy newStream_depends_on) {
 		stream_depends_on = newStream_depends_on;
 	}
 	public int getStream_weight() {
@@ -1022,10 +1022,10 @@ public class UserDefined {
 	public void setStream_weight(int newStream_weight) {
 		stream_weight = newStream_weight;
 	}
-	public Object getStream_dependents() {
+	public Curl_http2_dep getStream_dependents() {
 		return stream_dependents;
 	}
-	public void setStream_dependents(Object newStream_dependents) {
+	public void setStream_dependents(Curl_http2_dep newStream_dependents) {
 		stream_dependents = newStream_dependents;
 	}
 	public Object getResolver_start() {
@@ -1052,10 +1052,10 @@ public class UserDefined {
 	public void setFmultidone(Object newFmultidone) {
 		fmultidone = newFmultidone;
 	}
-	public Object getDohfor() {
+	public Curl_easy getDohfor() {
 		return dohfor;
 	}
-	public void setDohfor(Object newDohfor) {
+	public void setDohfor(Curl_easy newDohfor) {
 		dohfor = newDohfor;
 	}
 	public Object getUh() {

@@ -36,10 +36,10 @@ package application;
    used. */
 public class POP3 {
 	private  transfer;
-	private Object id;
-	private Object custom;
+	private Byte id;
+	private Byte custom;
 	
-	public POP3( transfer, Object id, Object custom) {
+	public POP3( transfer, Byte id, Byte custom) {
 		setTransfer(transfer);
 		setId(id);
 		setCustom(custom);
@@ -53,16 +53,16 @@ public class POP3 {
 	public void setTransfer( newTransfer) {
 		transfer = newTransfer;
 	}
-	public Object getId() {
+	public Byte getId() {
 		return id;
 	}
-	public void setId(Object newId) {
+	public void setId(Byte newId) {
 		id = newId;
 	}
-	public Object getCustom() {
+	public Byte getCustom() {
 		return custom;
 	}
-	public void setCustom(Object newCustom) {
+	public void setCustom(Byte newCustom) {
 		custom = newCustom;
 	}
 }

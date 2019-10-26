@@ -1,0 +1,23 @@
+package application;
+
+public enum parse_opt_type {
+	OPTION_END, 
+	OPTION_ARGUMENT, 
+	OPTION_GROUP, 
+	OPTION_NUMBER, 
+	OPTION_ALIAS, 
+	OPTION_BIT, 
+	OPTION_NEGBIT, 
+	OPTION_BITOP, 
+	OPTION_COUNTUP, 
+	OPTION_SET_INT, 
+	OPTION_CMDMODE, 
+	OPTION_STRING, 
+	OPTION_INTEGER, 
+	OPTION_MAGNITUDE, 
+	OPTION_CALLBACK, 
+	OPTION_LOWLEVEL_CALLBACK, 
+	OPTION_FILENAME
+}
+/* special types */
+/* options with no arguments */

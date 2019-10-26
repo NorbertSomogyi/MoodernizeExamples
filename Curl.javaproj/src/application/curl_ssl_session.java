@@ -3,8 +3,8 @@ package application;
 /* information stored about one single SSL session */
 /* array of 'max_ssl_sessions' size */
 public class curl_ssl_session {
-	private Object name;
-	private Object conn_to_host;
+	private Byte name;
+	private Byte conn_to_host;
 	private Object scheme;
 	private Object sessionid;
 	private Object idsize;
@@ -13,7 +13,7 @@ public class curl_ssl_session {
 	private int conn_to_port;
 	private ssl_primary_config ssl_config;
 	
-	public curl_ssl_session(Object name, Object conn_to_host, Object scheme, Object sessionid, Object idsize, long age, int remote_port, int conn_to_port, ssl_primary_config ssl_config) {
+	public curl_ssl_session(Byte name, Byte conn_to_host, Object scheme, Object sessionid, Object idsize, long age, int remote_port, int conn_to_port, ssl_primary_config ssl_config) {
 		setName(name);
 		setConn_to_host(conn_to_host);
 		setScheme(scheme);
@@ -27,16 +27,16 @@ public class curl_ssl_session {
 	public curl_ssl_session() {
 	}
 	
-	public Object getName() {
+	public Byte getName() {
 		return name;
 	}
-	public void setName(Object newName) {
+	public void setName(Byte newName) {
 		name = newName;
 	}
-	public Object getConn_to_host() {
+	public Byte getConn_to_host() {
 		return conn_to_host;
 	}
-	public void setConn_to_host(Object newConn_to_host) {
+	public void setConn_to_host(Byte newConn_to_host) {
 		conn_to_host = newConn_to_host;
 	}
 	public Object getScheme() {

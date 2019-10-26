@@ -27,13 +27,13 @@ public class ProgressData {
 	private Object prev;
 	private timeval prevtime;
 	private int width;
-	private Object out;
+	private _iobuf out;
 	private Object initial_size;
 	private int tick;
 	private int bar;
 	private int barmove;
 	
-	public ProgressData(int calls, Object prev, timeval prevtime, int width, Object out, Object initial_size, int tick, int bar, int barmove) {
+	public ProgressData(int calls, Object prev, timeval prevtime, int width, _iobuf out, Object initial_size, int tick, int bar, int barmove) {
 		setCalls(calls);
 		setPrev(prev);
 		setPrevtime(prevtime);
@@ -47,6 +47,41 @@ public class ProgressData {
 	public ProgressData() {
 	}
 	
+	public void fly( moved) {
+		byte[] buf = new byte[256];
+		int pos;
+		int generatedWidth = this.getWidth();
+		int check = generatedWidth - 2;
+		ModernizedCProgram.curl_msnprintf(buf, , "%*s\r", generatedWidth - 1, " ");
+		int generatedBar = this.getBar();
+		.memcpy(buf[generatedBar], "-=O=-", 5);
+		int generatedTick = this.getTick();
+		pos = ModernizedCProgram.sinus[generatedTick % 200] / (10000 / check);
+		buf[pos] = (byte)'#';
+		pos = ModernizedCProgram.sinus[(generatedTick + 5) % 200] / (10000 / check);
+		buf[pos] = (byte)'#';
+		pos = ModernizedCProgram.sinus[(generatedTick + 10) % 200] / (10000 / check);
+		buf[pos] = (byte)'#';
+		pos = ModernizedCProgram.sinus[(generatedTick + 15) % 200] / (10000 / check);
+		buf[pos] = (byte)'#';
+		_iobuf generatedOut = this.getOut();
+		.fputs(buf, generatedOut);
+		generatedTick += 2;
+		if (generatedTick >= 200) {
+			generatedTick -= 200;
+		} 
+		int generatedBarmove = this.getBarmove();
+		generatedBar += (moved ? generatedBarmove : 0);
+		if (generatedBar >= (generatedWidth - 6)) {
+			this.setBarmove(-1);
+			this.setBar(generatedWidth - 6);
+		}  else if (generatedBar < 0) {
+			this.setBarmove(1);
+			this.setBar(0/*
+			** callback for CURLOPT_XFERINFOFUNCTION
+			*/);
+		} 
+	}
 	public int getCalls() {
 		return calls;
 	}
@@ -71,10 +106,10 @@ public class ProgressData {
 	public void setWidth(int newWidth) {
 		width = newWidth;
 	}
-	public Object getOut() {
+	public _iobuf getOut() {
 		return out;
 	}
-	public void setOut(Object newOut) {
+	public void setOut(_iobuf newOut) {
 		out = newOut;
 	}
 	public Object getInitial_size() {

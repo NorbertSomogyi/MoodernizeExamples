@@ -1,0 +1,10 @@
+package application;
+
+public enum trailer_if_exists {
+	EXISTS_DEFAULT, 
+	EXISTS_ADD_IF_DIFFERENT_NEIGHBOR, 
+	EXISTS_ADD_IF_DIFFERENT, 
+	EXISTS_ADD, 
+	EXISTS_REPLACE, 
+	EXISTS_DO_NOTHING
+}

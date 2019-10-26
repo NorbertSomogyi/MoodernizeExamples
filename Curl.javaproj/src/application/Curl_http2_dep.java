@@ -1,26 +1,26 @@
 package application;
 
 public class Curl_http2_dep {
-	private Object next;
-	private Object data;
+	private Curl_http2_dep next;
+	private Curl_easy data;
 	
-	public Curl_http2_dep(Object next, Object data) {
+	public Curl_http2_dep(Curl_http2_dep next, Curl_easy data) {
 		setNext(next);
 		setData(data);
 	}
 	public Curl_http2_dep() {
 	}
 	
-	public Object getNext() {
+	public Curl_http2_dep getNext() {
 		return next;
 	}
-	public void setNext(Object newNext) {
+	public void setNext(Curl_http2_dep newNext) {
 		next = newNext;
 	}
-	public Object getData() {
+	public Curl_easy getData() {
 		return data;
 	}
-	public void setData(Object newData) {
+	public void setData(Curl_easy newData) {
 		data = newData;
 	}
 }

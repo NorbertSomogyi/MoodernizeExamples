@@ -2,17 +2,17 @@ package application;
 
 /* Data for synchronization between resolver thread and its parent */
 public class thread_sync_data {
-	private Object mtx;
+	private _CRITICAL_SECTION mtx;
 	private int done;
-	private Object hostname;
+	private Byte hostname;
 	private int port;
-	private Object conn;
+	private connectdata conn;
 	private Object sock_pair;
 	private int sock_error;
-	private Object res;
-	private Object td;
+	private Curl_addrinfo res;
+	private thread_data td;
 	
-	public thread_sync_data(Object mtx, int done, Object hostname, int port, Object conn, Object sock_pair, int sock_error, Object res, Object td) {
+	public thread_sync_data(_CRITICAL_SECTION mtx, int done, Byte hostname, int port, connectdata conn, Object sock_pair, int sock_error, Curl_addrinfo res, thread_data td) {
 		setMtx(mtx);
 		setDone(done);
 		setHostname(hostname);
@@ -26,10 +26,34 @@ public class thread_sync_data {
 	public thread_sync_data() {
 	}
 	
-	public Object getMtx() {
+	public thread_sync_data conn_thread_sync_data(connectdata conn) {
+		Curl_async generatedAsync = conn.getAsync();
+		Object generatedOs_specific = generatedAsync.getOs_specific();
+		return (((thread_data)generatedOs_specific).getTsd());
+	}
+	/* Destroy resolver thread synchronization data */
+	public void destroy_thread_sync_data() {
+		_CRITICAL_SECTION generatedMtx = this.getMtx();
+		if (generatedMtx) {
+			.DeleteCriticalSection(generatedMtx);
+			.Curl_cfree(generatedMtx);
+		} 
+		Byte generatedHostname = this.getHostname();
+		.Curl_cfree(generatedHostname);
+		Curl_addrinfo generatedRes = this.getRes();
+		if (generatedRes) {
+			generatedRes.Curl_freeaddrinfo();
+		} 
+		Object generatedSock_pair = this.getSock_pair();
+		if (generatedSock_pair[1] != CURL_SOCKET_BAD) {
+			.closesocket((generatedSock_pair[1]));
+		} 
+		.memset(tsd, 0, );
+	}
+	public _CRITICAL_SECTION getMtx() {
 		return mtx;
 	}
-	public void setMtx(Object newMtx) {
+	public void setMtx(_CRITICAL_SECTION newMtx) {
 		mtx = newMtx;
 	}
 	public int getDone() {
@@ -38,10 +62,10 @@ public class thread_sync_data {
 	public void setDone(int newDone) {
 		done = newDone;
 	}
-	public Object getHostname() {
+	public Byte getHostname() {
 		return hostname;
 	}
-	public void setHostname(Object newHostname) {
+	public void setHostname(Byte newHostname) {
 		hostname = newHostname;
 	}
 	public int getPort() {
@@ -50,10 +74,10 @@ public class thread_sync_data {
 	public void setPort(int newPort) {
 		port = newPort;
 	}
-	public Object getConn() {
+	public connectdata getConn() {
 		return conn;
 	}
-	public void setConn(Object newConn) {
+	public void setConn(connectdata newConn) {
 		conn = newConn;
 	}
 	public Object getSock_pair() {
@@ -68,16 +92,16 @@ public class thread_sync_data {
 	public void setSock_error(int newSock_error) {
 		sock_error = newSock_error;
 	}
-	public Object getRes() {
+	public Curl_addrinfo getRes() {
 		return res;
 	}
-	public void setRes(Object newRes) {
+	public void setRes(Curl_addrinfo newRes) {
 		res = newRes;
 	}
-	public Object getTd() {
+	public thread_data getTd() {
 		return td;
 	}
-	public void setTd(Object newTd) {
+	public void setTd(thread_data newTd) {
 		td = newTd;
 	}
 }

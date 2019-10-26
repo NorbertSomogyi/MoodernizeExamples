@@ -2,28 +2,28 @@ package application;
 
 /* A mime part. */
 public class curl_mimepart_s {
-	private Object easy;
+	private Curl_easy easy;
 	private Object parent;
 	private Object nextpart;
 	private mimekind kind;
-	private Object data;
+	private Byte data;
 	private Object readfunc;
 	private Object seekfunc;
 	private Object freefunc;
 	private Object arg;
-	private Object fp;
-	private Object curlheaders;
-	private Object userheaders;
-	private Object mimetype;
-	private Object filename;
-	private Object name;
+	private _iobuf fp;
+	private curl_slist curlheaders;
+	private curl_slist userheaders;
+	private Byte mimetype;
+	private Byte filename;
+	private Byte name;
 	private Object datasize;
 	private int flags;
 	private  state;
 	private Object encoder;
 	private  encstate;
 	
-	public curl_mimepart_s(Object easy, Object parent, Object nextpart, mimekind kind, Object data, Object readfunc, Object seekfunc, Object freefunc, Object arg, Object fp, Object curlheaders, Object userheaders, Object mimetype, Object filename, Object name, Object datasize, int flags,  state, Object encoder,  encstate) {
+	public curl_mimepart_s(Curl_easy easy, Object parent, Object nextpart, mimekind kind, Byte data, Object readfunc, Object seekfunc, Object freefunc, Object arg, _iobuf fp, curl_slist curlheaders, curl_slist userheaders, Byte mimetype, Byte filename, Byte name, Object datasize, int flags,  state, Object encoder,  encstate) {
 		setEasy(easy);
 		setParent(parent);
 		setNextpart(nextpart);
@@ -48,10 +48,53 @@ public class curl_mimepart_s {
 	public curl_mimepart_s() {
 	}
 	
-	public Object getEasy() {
+	public  mime_string_call(Object string, int ccsid, Object mimefunc) {
+		byte s = (byte)((Object)0);
+		CURLcode result = new CURLcode();
+		if (!string) {
+			return .mimefunc(part, string);
+		} 
+		s = ModernizedCProgram.dynconvert(819, string, -1, ccsid);
+		if (!s) {
+			return .CURLE_OUT_OF_MEMORY;
+		} 
+		result = .mimefunc(part, s);
+		.free(s);
+		return result;
+	}
+	public  curl_mime_name_ccsid(Object name, int ccsid) {
+		return part.mime_string_call(name, ccsid, ModernizedCProgram.curl_mime_name);
+	}
+	public  curl_mime_filename_ccsid(Object filename, int ccsid) {
+		return part.mime_string_call(filename, ccsid, ModernizedCProgram.curl_mime_filename);
+	}
+	public  curl_mime_type_ccsid(Object mimetype, int ccsid) {
+		return part.mime_string_call(mimetype, ccsid, ModernizedCProgram.curl_mime_type);
+	}
+	public  curl_mime_encoder_ccsid(Object encoding, int ccsid) {
+		return part.mime_string_call(encoding, ccsid, ModernizedCProgram.curl_mime_encoder);
+	}
+	public  curl_mime_filedata_ccsid(Object filename, int ccsid) {
+		return part.mime_string_call(filename, ccsid, ModernizedCProgram.curl_mime_filedata);
+	}
+	public  curl_mime_data_ccsid(Object data, Object datasize, int ccsid) {
+		byte s = (byte)((Object)0);
+		CURLcode result = new CURLcode();
+		if (!data) {
+			return ModernizedCProgram.curl_mime_data(part, data, datasize);
+		} 
+		s = ModernizedCProgram.dynconvert(819, data, datasize, ccsid);
+		if (!s) {
+			return .CURLE_OUT_OF_MEMORY;
+		} 
+		result = ModernizedCProgram.curl_mime_data(part, s, datasize);
+		.free(s);
+		return result;
+	}
+	public Curl_easy getEasy() {
 		return easy;
 	}
-	public void setEasy(Object newEasy) {
+	public void setEasy(Curl_easy newEasy) {
 		easy = newEasy;
 	}
 	public Object getParent() {
@@ -72,10 +115,10 @@ public class curl_mimepart_s {
 	public void setKind(mimekind newKind) {
 		kind = newKind;
 	}
-	public Object getData() {
+	public Byte getData() {
 		return data;
 	}
-	public void setData(Object newData) {
+	public void setData(Byte newData) {
 		data = newData;
 	}
 	public Object getReadfunc() {
@@ -102,40 +145,40 @@ public class curl_mimepart_s {
 	public void setArg(Object newArg) {
 		arg = newArg;
 	}
-	public Object getFp() {
+	public _iobuf getFp() {
 		return fp;
 	}
-	public void setFp(Object newFp) {
+	public void setFp(_iobuf newFp) {
 		fp = newFp;
 	}
-	public Object getCurlheaders() {
+	public curl_slist getCurlheaders() {
 		return curlheaders;
 	}
-	public void setCurlheaders(Object newCurlheaders) {
+	public void setCurlheaders(curl_slist newCurlheaders) {
 		curlheaders = newCurlheaders;
 	}
-	public Object getUserheaders() {
+	public curl_slist getUserheaders() {
 		return userheaders;
 	}
-	public void setUserheaders(Object newUserheaders) {
+	public void setUserheaders(curl_slist newUserheaders) {
 		userheaders = newUserheaders;
 	}
-	public Object getMimetype() {
+	public Byte getMimetype() {
 		return mimetype;
 	}
-	public void setMimetype(Object newMimetype) {
+	public void setMimetype(Byte newMimetype) {
 		mimetype = newMimetype;
 	}
-	public Object getFilename() {
+	public Byte getFilename() {
 		return filename;
 	}
-	public void setFilename(Object newFilename) {
+	public void setFilename(Byte newFilename) {
 		filename = newFilename;
 	}
-	public Object getName() {
+	public Byte getName() {
 		return name;
 	}
-	public void setName(Object newName) {
+	public void setName(Byte newName) {
 		name = newName;
 	}
 	public Object getDatasize() {

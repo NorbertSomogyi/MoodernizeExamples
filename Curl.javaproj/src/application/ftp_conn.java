@@ -4,17 +4,17 @@ package application;
    struct */
 public class ftp_conn {
 	private pingpong pp;
-	private Object entrypath;
-	private Object dirs;
+	private Byte entrypath;
+	private Byte dirs;
 	private int dirdepth;
-	private Object file;
+	private Byte file;
 	private  dont_check;
 	private  ctl_valid;
 	private  cwddone;
 	private int cwdcount;
 	private  cwdfail;
 	private  wait_data_conn;
-	private Object prevpath;
+	private Byte prevpath;
 	private byte transfertype;
 	private int count1;
 	private int count2;
@@ -22,12 +22,12 @@ public class ftp_conn {
 	private  state;
 	private  state_saved;
 	private Object retr_size_saved;
-	private Object server_os;
+	private Byte server_os;
 	private Object known_filesize;
-	private Object newhost;
+	private Byte newhost;
 	private int newport;
 	
-	public ftp_conn(pingpong pp, Object entrypath, Object dirs, int dirdepth, Object file,  dont_check,  ctl_valid,  cwddone, int cwdcount,  cwdfail,  wait_data_conn, Object prevpath, byte transfertype, int count1, int count2, int count3,  state,  state_saved, Object retr_size_saved, Object server_os, Object known_filesize, Object newhost, int newport) {
+	public ftp_conn(pingpong pp, Byte entrypath, Byte dirs, int dirdepth, Byte file,  dont_check,  ctl_valid,  cwddone, int cwdcount,  cwdfail,  wait_data_conn, Byte prevpath, byte transfertype, int count1, int count2, int count3,  state,  state_saved, Object retr_size_saved, Byte server_os, Object known_filesize, Byte newhost, int newport) {
 		setPp(pp);
 		setEntrypath(entrypath);
 		setDirs(dirs);
@@ -55,22 +55,51 @@ public class ftp_conn {
 	public ftp_conn() {
 	}
 	
+	public void freedirs() {
+		Byte generatedDirs = this.getDirs();
+		int generatedDirdepth = this.getDirdepth();
+		if (generatedDirs) {
+			int i;
+			for (i = 0; i < generatedDirdepth; i++) {
+				.Curl_cfree(generatedDirs[i]);
+				generatedDirs[i] = ((Object)0);
+			}
+			.Curl_cfree(generatedDirs);
+			this.setDirs(((Object)0));
+			this.setDirdepth(0);
+		} 
+		Byte generatedFile = this.getFile();
+		do {
+			.Curl_cfree((generatedFile));
+			(generatedFile) = ((Object)0);
+		} while (0);
+		Byte generatedNewhost = this.getNewhost();
+		do {
+			.Curl_cfree((generatedNewhost));
+			(generatedNewhost) = ((Object)0);
+		} while (/* no longer of any use */0/* Returns non-zero if the given string contains CR (\r) or LF (\n),
+		   which are not allowed within RFC 959 <string>.
+		   Note: The input string is in the client's encoding which might
+		   not be ASCII, so escape sequences \r & \n must be used instead
+		   of hex values 0x0d & 0x0a.
+		*/);
+	}
 	public pingpong getPp() {
 		return pp;
 	}
 	public void setPp(pingpong newPp) {
 		pp = newPp;
 	}
-	public Object getEntrypath() {
+	public Byte getEntrypath() {
 		return entrypath;
 	}
-	public void setEntrypath(Object newEntrypath) {
+	public void setEntrypath(Byte newEntrypath) {
 		entrypath = newEntrypath;
 	}
-	public Object getDirs() {
+	public Byte getDirs() {
 		return dirs;
 	}
-	public void setDirs(Object newDirs) {
+	public void setDirs(Byte newDirs) {
 		dirs = newDirs;
 	}
 	public int getDirdepth() {
@@ -79,10 +108,10 @@ public class ftp_conn {
 	public void setDirdepth(int newDirdepth) {
 		dirdepth = newDirdepth;
 	}
-	public Object getFile() {
+	public Byte getFile() {
 		return file;
 	}
-	public void setFile(Object newFile) {
+	public void setFile(Byte newFile) {
 		file = newFile;
 	}
 	public  getDont_check() {
@@ -121,10 +150,10 @@ public class ftp_conn {
 	public void setWait_data_conn( newWait_data_conn) {
 		wait_data_conn = newWait_data_conn;
 	}
-	public Object getPrevpath() {
+	public Byte getPrevpath() {
 		return prevpath;
 	}
-	public void setPrevpath(Object newPrevpath) {
+	public void setPrevpath(Byte newPrevpath) {
 		prevpath = newPrevpath;
 	}
 	public byte getTransfertype() {
@@ -169,10 +198,10 @@ public class ftp_conn {
 	public void setRetr_size_saved(Object newRetr_size_saved) {
 		retr_size_saved = newRetr_size_saved;
 	}
-	public Object getServer_os() {
+	public Byte getServer_os() {
 		return server_os;
 	}
-	public void setServer_os(Object newServer_os) {
+	public void setServer_os(Byte newServer_os) {
 		server_os = newServer_os;
 	}
 	public Object getKnown_filesize() {
@@ -181,10 +210,10 @@ public class ftp_conn {
 	public void setKnown_filesize(Object newKnown_filesize) {
 		known_filesize = newKnown_filesize;
 	}
-	public Object getNewhost() {
+	public Byte getNewhost() {
 		return newhost;
 	}
-	public void setNewhost(Object newNewhost) {
+	public void setNewhost(Byte newNewhost) {
 		newhost = newNewhost;
 	}
 	public int getNewport() {

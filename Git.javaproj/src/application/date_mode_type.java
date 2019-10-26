@@ -1,0 +1,14 @@
+package application;
+
+public enum date_mode_type {
+	DATE_NORMAL, 
+	DATE_HUMAN, 
+	DATE_RELATIVE, 
+	DATE_SHORT, 
+	DATE_ISO8601, 
+	DATE_ISO8601_STRICT, 
+	DATE_RFC2822, 
+	DATE_STRFTIME, 
+	DATE_RAW, 
+	DATE_UNIX
+}

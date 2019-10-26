@@ -1,0 +1,9 @@
+package application;
+
+public enum grep_header_field {
+	GREP_HEADER_FIELD_MIN, 
+	GREP_HEADER_AUTHOR, 
+	GREP_HEADER_COMMITTER, 
+	GREP_HEADER_REFLOG, 
+	GREP_HEADER_FIELD_MAX
+}

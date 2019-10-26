@@ -1,11 +1,11 @@
 package application;
 
 public class tempbuf {
-	private Object buf;
+	private Byte buf;
 	private Object len;
 	private int type;
 	
-	public tempbuf(Object buf, Object len, int type) {
+	public tempbuf(Byte buf, Object len, int type) {
 		setBuf(buf);
 		setLen(len);
 		setType(type);
@@ -13,10 +13,10 @@ public class tempbuf {
 	public tempbuf() {
 	}
 	
-	public Object getBuf() {
+	public Byte getBuf() {
 		return buf;
 	}
-	public void setBuf(Object newBuf) {
+	public void setBuf(Byte newBuf) {
 		buf = newBuf;
 	}
 	public Object getLen() {

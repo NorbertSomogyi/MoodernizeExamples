@@ -32,6 +32,21 @@ public class fileinfo {
 	public fileinfo() {
 	}
 	
+	public fileinfo Curl_fileinfo_alloc() {
+		return .Curl_ccalloc(1, );
+	}
+	public void Curl_fileinfo_cleanup() {
+		if (!finfo) {
+			return ;
+		} 
+		curl_fileinfo generatedInfo = this.getInfo();
+		Object generatedCurl_fileinfo = generatedInfo.getCurl_fileinfo();
+		do {
+			.Curl_cfree((generatedCurl_fileinfo));
+			(generatedCurl_fileinfo) = ((Object)0);
+		} while (0);
+		.Curl_cfree(finfo);
+	}
 	public curl_fileinfo getInfo() {
 		return info;
 	}

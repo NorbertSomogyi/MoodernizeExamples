@@ -1,0 +1,16 @@
+package application;
+
+/* Commit formats */
+public enum cmit_fmt {
+	CMIT_FMT_RAW, 
+	CMIT_FMT_MEDIUM, 
+	CMIT_FMT_DEFAULT, 
+	CMIT_FMT_SHORT, 
+	CMIT_FMT_FULL, 
+	CMIT_FMT_FULLER, 
+	CMIT_FMT_ONELINE, 
+	CMIT_FMT_EMAIL, 
+	CMIT_FMT_MBOXRD, 
+	CMIT_FMT_USERFORMAT, 
+	CMIT_FMT_UNSPECIFIED
+}

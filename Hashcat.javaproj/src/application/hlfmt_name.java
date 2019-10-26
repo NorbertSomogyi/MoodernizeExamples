@@ -1,0 +1,14 @@
+package application;
+
+public enum hlfmt_name {
+	HLFMT_HASHCAT, 
+	HLFMT_PWDUMP, 
+	HLFMT_PASSWD, 
+	HLFMT_SHADOW, 
+	HLFMT_DCC, 
+	HLFMT_DCC2, 
+	HLFMT_NETNTLM1, 
+	HLFMT_NETNTLM2, 
+	HLFMT_NSLDAP, 
+	HLFMT_NSLDAPS
+}

@@ -1,0 +1,8 @@
+package application;
+
+public enum commit_graph_write_flags {
+	COMMIT_GRAPH_WRITE_APPEND, 
+	COMMIT_GRAPH_WRITE_PROGRESS, 
+	COMMIT_GRAPH_WRITE_SPLIT, 
+	COMMIT_GRAPH_WRITE_CHECK_OIDS
+}

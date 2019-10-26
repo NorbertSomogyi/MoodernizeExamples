@@ -32,9 +32,9 @@ public class conncache {
 	private Object num_conn;
 	private long next_connection_id;
 	private curltime last_cleanup;
-	private Object closure_handle;
+	private Curl_easy closure_handle;
 	
-	public conncache(curl_hash hash, Object num_conn, long next_connection_id, curltime last_cleanup, Object closure_handle) {
+	public conncache(curl_hash hash, Object num_conn, long next_connection_id, curltime last_cleanup, Curl_easy closure_handle) {
 		setHash(hash);
 		setNum_conn(num_conn);
 		setNext_connection_id(next_connection_id);
@@ -44,6 +44,64 @@ public class conncache {
 	public conncache() {
 	}
 	
+	public Object upkeep(Object data) {
+		ModernizedCProgram.Curl_conncache_foreach(/* Loop over every connection and make connection alive. */data, conn_cache, data, conn_upkeep);
+		return CURLE_OK/*
+		 * Performs connection upkeep for the given session handle.
+		 */;
+	}
+	public int Curl_conncache_init(int size) {
+		int rc;
+		Curl_easy curl_easy = new Curl_easy();
+		this.setClosure_handle(curl_easy.curl_easy_init());
+		Curl_easy generatedClosure_handle = this.getClosure_handle();
+		if (!generatedClosure_handle) {
+			return /* bad */1;
+		} 
+		curl_hash generatedHash = this.getHash();
+		rc = generatedHash.Curl_hash_init(size, ModernizedCProgram.Curl_hash_str, ModernizedCProgram.Curl_str_key_compare, free_bundle_hash_entry);
+		Object generatedState = generatedClosure_handle.getState();
+		if (rc) {
+			generatedClosure_handle.Curl_close();
+			this.setClosure_handle(((Object)0));
+		} else {
+				generatedState.setConn_cache(connc);
+		} 
+		return rc;
+	}
+	public void Curl_conncache_destroy() {
+		curl_hash generatedHash = this.getHash();
+		if (connc) {
+			generatedHash.Curl_hash_destroy();
+		} 
+	}
+	public void Curl_conncache_close_all_connections() {
+		connectdata conn = new connectdata();
+		connectdata connectdata = new connectdata();
+		conn = connectdata.conncache_find_first_connection(connc);
+		Curl_easy generatedClosure_handle = this.getClosure_handle();
+		while (conn) {
+			;
+			conn.setData(generatedClosure_handle);
+			do {
+			} while (0);
+			conn.Curl_conncontrol(/* This will remove the connection from the cache */1);
+			(Object)ModernizedCProgram.Curl_disconnect(generatedClosure_handle, conn, 0);
+			do {
+			} while (0);
+			conn = connectdata.conncache_find_first_connection(connc);
+		}
+		Object generatedDns = generatedClosure_handle.getDns();
+		if (generatedClosure_handle) {
+			;
+			do {
+			} while (0);
+			ModernizedCProgram.Curl_hostcache_clean(generatedClosure_handle, generatedDns.getHostcache());
+			generatedClosure_handle.Curl_close();
+			do {
+			} while (0/* Useful for debugging the connection cache */);
+		} 
+	}
 	public curl_hash getHash() {
 		return hash;
 	}
@@ -68,10 +126,10 @@ public class conncache {
 	public void setLast_cleanup(curltime newLast_cleanup) {
 		last_cleanup = newLast_cleanup;
 	}
-	public Object getClosure_handle() {
+	public Curl_easy getClosure_handle() {
 		return closure_handle;
 	}
-	public void setClosure_handle(Object newClosure_handle) {
+	public void setClosure_handle(Curl_easy newClosure_handle) {
 		closure_handle = newClosure_handle;
 	}
 }

@@ -4,11 +4,11 @@ package application;
 public class proxy_info {
 	private hostname host;
 	private long port;
-	private  proxytype;
-	private Object user;
-	private Object passwd;
+	private Object proxytype;
+	private Byte user;
+	private Byte passwd;
 	
-	public proxy_info(hostname host, long port,  proxytype, Object user, Object passwd) {
+	public proxy_info(hostname host, long port, Object proxytype, Byte user, Byte passwd) {
 		setHost(host);
 		setPort(port);
 		setProxytype(proxytype);
@@ -30,22 +30,22 @@ public class proxy_info {
 	public void setPort(long newPort) {
 		port = newPort;
 	}
-	public  getProxytype() {
+	public Object getProxytype() {
 		return proxytype;
 	}
-	public void setProxytype( newProxytype) {
+	public void setProxytype(Object newProxytype) {
 		proxytype = newProxytype;
 	}
-	public Object getUser() {
+	public Byte getUser() {
 		return user;
 	}
-	public void setUser(Object newUser) {
+	public void setUser(Byte newUser) {
 		user = newUser;
 	}
-	public Object getPasswd() {
+	public Byte getPasswd() {
 		return passwd;
 	}
-	public void setPasswd(Object newPasswd) {
+	public void setPasswd(Byte newPasswd) {
 		passwd = newPasswd;
 	}
 }

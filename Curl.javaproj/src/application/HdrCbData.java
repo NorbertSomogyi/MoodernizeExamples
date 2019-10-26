@@ -36,13 +36,13 @@ package application;
  * set 'outs' filename, otherwise FALSE;
  */
 public class HdrCbData {
-	private Object global;
-	private Object config;
-	private Object outs;
-	private Object heads;
+	private GlobalConfig global;
+	private OperationConfig config;
+	private OutStruct outs;
+	private OutStruct heads;
 	private  honor_cd_filename;
 	
-	public HdrCbData(Object global, Object config, Object outs, Object heads,  honor_cd_filename) {
+	public HdrCbData(GlobalConfig global, OperationConfig config, OutStruct outs, OutStruct heads,  honor_cd_filename) {
 		setGlobal(global);
 		setConfig(config);
 		setOuts(outs);
@@ -52,28 +52,28 @@ public class HdrCbData {
 	public HdrCbData() {
 	}
 	
-	public Object getGlobal() {
+	public GlobalConfig getGlobal() {
 		return global;
 	}
-	public void setGlobal(Object newGlobal) {
+	public void setGlobal(GlobalConfig newGlobal) {
 		global = newGlobal;
 	}
-	public Object getConfig() {
+	public OperationConfig getConfig() {
 		return config;
 	}
-	public void setConfig(Object newConfig) {
+	public void setConfig(OperationConfig newConfig) {
 		config = newConfig;
 	}
-	public Object getOuts() {
+	public OutStruct getOuts() {
 		return outs;
 	}
-	public void setOuts(Object newOuts) {
+	public void setOuts(OutStruct newOuts) {
 		outs = newOuts;
 	}
-	public Object getHeads() {
+	public OutStruct getHeads() {
 		return heads;
 	}
-	public void setHeads(Object newHeads) {
+	public void setHeads(OutStruct newHeads) {
 		heads = newHeads;
 	}
 	public  getHonor_cd_filename() {

@@ -1,0 +1,9 @@
+package application;
+
+public enum hc_luks_hash_type {
+	HC_LUKS_HASH_TYPE_SHA1, 
+	HC_LUKS_HASH_TYPE_SHA256, 
+	HC_LUKS_HASH_TYPE_SHA512, 
+	HC_LUKS_HASH_TYPE_RIPEMD160, 
+	HC_LUKS_HASH_TYPE_WHIRLPOOL
+}

@@ -50,6 +50,88 @@ public class MD5Context {
 	public MD5Context() {
 	}
 	
+	/* WORDS_BIGENDIAN */
+	/*
+	 * Start MD5 accumulation.  Set bit count to 0 and buffer to mysterious
+	 * initialization constants.
+	 */
+	public void MD5Init() {
+		Object generatedBuf = this.getBuf();
+		generatedBuf[0] = -1024;
+		generatedBuf[1] = -1024;
+		generatedBuf[2] = -1024;
+		generatedBuf[3] = -1024;
+		Object generatedBits = this.getBits();
+		generatedBits[0] = 0;
+		generatedBits[1] = 0/*
+		 * Update context to reflect the concatenation of another buffer full
+		 * of bytes.
+		 */;
+	}
+	public void MD5Update(Object buf, int len) {
+		 t = new ();
+		Object generatedBits = this.getBits();
+		t = generatedBits[/* Update bitcount */0];
+		if ((generatedBits[0] = t + (()len << 3)) < t) {
+			generatedBits[/* Carry from low to high */1]++;
+		} 
+		generatedBits[1] += len >> 29;
+		t = (t >> 3) & /* Bytes already in shsInfo->data */-1024;
+		Object generatedIn = this.getIn();
+		Object generatedBuf = this.getBuf();
+		if (/* Handle any leading odd-sized chunks */t) {
+			byte p = (byte)generatedIn + t;
+			t = 64 - t;
+			if (len < t) {
+				.memcpy(p, buf, len);
+				return ;
+			} 
+			.memcpy(p, buf, t);
+			;
+			ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
+			buf += t;
+			len -= t;
+		} 
+		while (len >= /* Process data in 64-byte chunks */64) {
+			.memcpy(generatedIn, buf, 64);
+			;
+			ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
+			buf += 64;
+			len -= 64;
+		}
+		.memcpy(generatedIn, buf, /* Handle any remaining bytes of data. */len/*
+		 * Final wrapup - pad to 64-byte boundary with the bit pattern 
+		 * 1 0* (64-bit count of bits processed, MSB-first)
+		 */);
+	}
+	/* Interface altered by DJB to write digest into pre-allocated context */
+	public void MD5Final() {
+		int count;
+		byte p;
+		Object generatedBits = this.getBits();
+		count = (generatedBits[0] >> 3) & /* Compute number of bytes mod 64 */-1024;
+		Object generatedIn = this.getIn();
+		p = generatedIn + /* Set the first char of padding to 0x80.  This is safe since there is
+		     always at least one byte free */count;
+		p++ = -1024;
+		count = 64 - 1 - /* Bytes of padding needed to make 64 bytes */count;
+		Object generatedBuf = this.getBuf();
+		if (count < /* Pad out to 56 mod 64 */8) {
+			.memset(p, 0, /* Two lots of padding:  Pad the first block to 64 bytes */count);
+			;
+			ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
+			.memset(generatedIn, 0, /* Now fill the next block with 56 bytes */56);
+		} else {
+				.memset(p, 0, count - /* Pad block to 56 bytes */8);
+		} 
+		;
+		(()generatedIn)[14] = generatedBits[/* Append length in bits and transform */0];
+		(()generatedIn)[15] = generatedBits[1];
+		ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
+		;
+		Object generatedDigest = this.getDigest();
+		.memcpy(generatedDigest, generatedBuf, 16/* The four core functions - F1 is optimized somewhat */)/* #define F1(x, y, z) (x & y | ~x & z) */;/* #define F1(x, y, z) (x & y | ~x & z) */
+	}
 	public Object getBuf() {
 		return buf;
 	}

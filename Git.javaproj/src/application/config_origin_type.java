@@ -1,0 +1,9 @@
+package application;
+
+public enum config_origin_type {
+	CONFIG_ORIGIN_BLOB, 
+	CONFIG_ORIGIN_FILE, 
+	CONFIG_ORIGIN_STDIN, 
+	CONFIG_ORIGIN_SUBMODULE_BLOB, 
+	CONFIG_ORIGIN_CMDLINE
+}

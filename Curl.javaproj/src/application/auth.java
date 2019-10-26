@@ -30,6 +30,54 @@ public class auth {
 	public auth() {
 	}
 	
+	public  pickoneauth(long mask) {
+		bool picked = new bool();
+		long generatedAvail = this.getAvail();
+		long generatedWant = this.getWant();
+		long avail = generatedAvail & generatedWant & /* only deal with authentication we want */mask;
+		picked = 1;
+		if (avail & /* The order of these checks is highly relevant, as this will be the order
+		     of preference in case of the existence of multiple accepted types. */CURLAUTH_NEGOTIATE) {
+			this.setPicked(CURLAUTH_NEGOTIATE);
+		}  else if (avail & CURLAUTH_BEARER) {
+			this.setPicked(CURLAUTH_BEARER);
+		}  else if (avail & CURLAUTH_DIGEST) {
+			this.setPicked(CURLAUTH_DIGEST);
+		}  else if (avail & CURLAUTH_NTLM) {
+			this.setPicked(CURLAUTH_NTLM);
+		}  else if (avail & CURLAUTH_NTLM_WB) {
+			this.setPicked(CURLAUTH_NTLM_WB);
+		}  else if (avail & CURLAUTH_BASIC) {
+			this.setPicked(CURLAUTH_BASIC);
+		} else {
+				this.setPicked((1 << /* we select to use nothing */30));
+				picked = 0;
+		} 
+		this.setAvail(/* clear it here */CURLAUTH_NONE);
+		return picked/*
+		 * http_perhapsrewind()
+		 *
+		 * If we are doing POST or PUT {
+		 *   If we have more data to send {
+		 *     If we are doing NTLM {
+		 *       Keep sending since we must not disconnect
+		 *     }
+		 *     else {
+		 *       If there is more than just a little data left to send, close
+		 *       the current connection by force.
+		 *     }
+		 *   }
+		 *   If we have sent any data {
+		 *     If we don't have track of all the data {
+		 *       call app to tell it to rewind
+		 *     }
+		 *     else {
+		 *       rewind internally so that the operation can restart fine
+		 *     }
+		 *   }
+		 * }
+		 */;
+	}
 	public long getWant() {
 		return want;
 	}

@@ -38,7 +38,26 @@ public class timeval {
 	public timeval() {
 	}
 	
+	public int getMicroSecondTimeout() {
+		timeval now = new timeval();
+		ssize_t result = new ssize_t();
+		timeval timeval = new timeval();
+		now = timeval.tutil_tvnow();
+		long generatedTv_sec = now.getTv_sec();
+		long generatedTv_usec = now.getTv_usec();
+		result = (ssize_t)((ModernizedCProgram.timeout.getTv_sec() - generatedTv_sec) * 1000000 + ModernizedCProgram.timeout.getTv_usec() - generatedTv_usec);
+		if (result < 0) {
+			result = 0;
+		} 
+		return ModernizedCProgram.curlx_sztosi(result/**
+		 * Update a fd_set with all of the sockets in use.
+		 */);
+	}
 	public timeval tvnow() {
+		timeval now = new timeval();
+		now.setTimeval((long).time(((Object)/* time() returns the value of time in seconds since the epoch */0)));
+		now.setTimeval(0);
+		return now;
 		timeval now = new timeval();
 		DWORD milliseconds = .GetTickCount();
 		now.setTv_sec((long)(milliseconds / 1000));
@@ -49,10 +68,49 @@ public class timeval {
 		  ** could be the system start-up time, the Epoch, or something else,
 		  ** in any case the time starting point does not change once that the
 		  ** system has started up.
-		  *//*
-		  ** Even when the configure process has truly detected monotonic clock
-		  ** availability, it might happen that it is not actually available at
-		  ** run-time. When this occurs simply fallback to other time source.
+		  */;
+		timeval now = new timeval();
+		DWORD milliseconds = .GetTickCount();
+		now.setTv_sec((long)(milliseconds / 1000));
+		now.setTv_usec((long)((milliseconds % 1000) * 1000));
+		return now/*
+		  ** clock_gettime() is granted to be increased monotonically when the
+		  ** monotonic clock is queried. Time starting point is unspecified, it
+		  ** could be the system start-up time, the Epoch, or something else,
+		  ** in any case the time starting point does not change once that the
+		  ** system has started up.
+		  */;
+		timeval now = new timeval();
+		now.setTimeval((long).time(((Object)/* time() returns the value of time in seconds since the epoch */0)));
+		now.setTimeval(0);
+		return now;
+		timeval now = new timeval();
+		now.setTimeval((long).time(((Object)/* time() returns the value of time in seconds since the epoch */0)));
+		now.setTimeval(0);
+		return now;
+	}
+	public long tvdiff(timeval older) {
+		Object generatedTimeval = this.getTimeval();
+		return (generatedTimeval - generatedTimeval) * 1000 + (generatedTimeval - generatedTimeval) / 1000;
+		long generatedTv_sec = this.getTv_sec();
+		long generatedTv_usec = this.getTv_usec();
+		return (long)(generatedTv_sec - generatedTv_sec) * 1000 + (long)(generatedTv_usec - generatedTv_usec) / 1000;
+		Object generatedTimeval = this.getTimeval();
+		return (generatedTimeval - generatedTimeval) * 1000 + (generatedTimeval - generatedTimeval) / 1000;
+		Object generatedTimeval = this.getTimeval();
+		return (generatedTimeval - generatedTimeval) * 1000 + (generatedTimeval - generatedTimeval) / 1000;
+	}
+	public timeval tutil_tvnow() {
+		timeval now = new timeval();
+		DWORD milliseconds = .GetTickCount();
+		now.setTv_sec(milliseconds / 1000);
+		now.setTv_usec((milliseconds % 1000) * 1000);
+		return now/*
+		  ** clock_gettime() is granted to be increased monotonically when the
+		  ** monotonic clock is queried. Time starting point is unspecified, it
+		  ** could be the system start-up time, the Epoch, or something else,
+		  ** in any case the time starting point does not change once that the
+		  ** system has started up.
 		  */;
 	}
 	/*
@@ -69,8 +127,39 @@ public class timeval {
 	 *
 	 * Returns: the time difference in number of milliseconds.
 	 */
-	public long tvdiff(timeval older) {
+	public long tutil_tvdiff(timeval older) {
 		long generatedTv_sec = this.getTv_sec();
+		long generatedTv_usec = this.getTv_usec();
+		return (long)(generatedTv_sec - generatedTv_sec) * 1000 + (long)(generatedTv_usec - generatedTv_usec) / 1000/*
+		 * Same as tutil_tvdiff but with full usec resolution.
+		 *
+		 * Returns: the time difference in seconds with subsecond resolution.
+		 */;
+	}
+	public double tutil_tvdiff_secs(timeval older) {
+		long generatedTv_sec = this.getTv_sec();
+		long generatedTv_usec = this.getTv_usec();
+		if (generatedTv_sec != generatedTv_sec) {
+			return (double)(generatedTv_sec - generatedTv_sec) + (double)(generatedTv_usec - generatedTv_usec) / 1000000.0;
+		} 
+		return (double)(generatedTv_usec - generatedTv_usec) / 1000000.0;
+	}
+	/*
+	  ** gettimeofday() is not granted to be increased monotonically, due to
+	  ** clock drifting and external source time synchronization it can jump
+	  ** forward or backward in time.
+	  */
+	/*
+	  ** time() returns the value of time in seconds since the Epoch.
+	  */
+	public long timediff(timeval older) {
+		long generatedTv_sec = this.getTv_sec();
+		timediff_t diff = generatedTv_sec - generatedTv_sec;
+		if (diff >= (LONG_MAX / 1000)) {
+			return LONG_MAX;
+		}  else if (diff <= (LONG_MIN / 1000)) {
+			return LONG_MIN;
+		} 
 		long generatedTv_usec = this.getTv_usec();
 		return (long)(generatedTv_sec - generatedTv_sec) * 1000 + (long)(generatedTv_usec - generatedTv_usec) / 1000;
 	}

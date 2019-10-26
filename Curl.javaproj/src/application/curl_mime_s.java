@@ -2,14 +2,14 @@ package application;
 
 /* A mime multipart. */
 public class curl_mime_s {
-	private Object easy;
+	private Curl_easy easy;
 	private Object parent;
 	private Object firstpart;
 	private Object lastpart;
 	private Object boundary;
 	private  state;
 	
-	public curl_mime_s(Object easy, Object parent, Object firstpart, Object lastpart, Object boundary,  state) {
+	public curl_mime_s(Curl_easy easy, Object parent, Object firstpart, Object lastpart, Object boundary,  state) {
 		setEasy(easy);
 		setParent(parent);
 		setFirstpart(firstpart);
@@ -20,10 +20,10 @@ public class curl_mime_s {
 	public curl_mime_s() {
 	}
 	
-	public Object getEasy() {
+	public Curl_easy getEasy() {
 		return easy;
 	}
-	public void setEasy(Object newEasy) {
+	public void setEasy(Curl_easy newEasy) {
 		easy = newEasy;
 	}
 	public Object getParent() {

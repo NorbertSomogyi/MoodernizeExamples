@@ -23,10 +23,10 @@ package application;
  ***************************************************************************/
 public class curl_llist_element {
 	private Object ptr;
-	private Object prev;
-	private Object next;
+	private curl_llist_element prev;
+	private curl_llist_element next;
 	
-	public curl_llist_element(Object ptr, Object prev, Object next) {
+	public curl_llist_element(Object ptr, curl_llist_element prev, curl_llist_element next) {
 		setPtr(ptr);
 		setPrev(prev);
 		setNext(next);
@@ -40,16 +40,16 @@ public class curl_llist_element {
 	public void setPtr(Object newPtr) {
 		ptr = newPtr;
 	}
-	public Object getPrev() {
+	public curl_llist_element getPrev() {
 		return prev;
 	}
-	public void setPrev(Object newPrev) {
+	public void setPrev(curl_llist_element newPrev) {
 		prev = newPrev;
 	}
-	public Object getNext() {
+	public curl_llist_element getNext() {
 		return next;
 	}
-	public void setNext(Object newNext) {
+	public void setNext(curl_llist_element newNext) {
 		next = newNext;
 	}
 }

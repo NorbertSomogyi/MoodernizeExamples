@@ -2,18 +2,18 @@ package application;
 
 /* for create_transfer() */
 public class State {
-	private Object urlnode;
-	private Object inglob;
-	private Object urls;
-	private Object outfiles;
-	private Object httpgetfields;
-	private Object uploadfile;
+	private getout urlnode;
+	private  inglob;
+	private  urls;
+	private Byte outfiles;
+	private Byte httpgetfields;
+	private Byte uploadfile;
 	private long infilenum;
 	private long up;
 	private long urlnum;
 	private long li;
 	
-	public State(Object urlnode, Object inglob, Object urls, Object outfiles, Object httpgetfields, Object uploadfile, long infilenum, long up, long urlnum, long li) {
+	public State(getout urlnode,  inglob,  urls, Byte outfiles, Byte httpgetfields, Byte uploadfile, long infilenum, long up, long urlnum, long li) {
 		setUrlnode(urlnode);
 		setInglob(inglob);
 		setUrls(urls);
@@ -28,40 +28,40 @@ public class State {
 	public State() {
 	}
 	
-	public Object getUrlnode() {
+	public getout getUrlnode() {
 		return urlnode;
 	}
-	public void setUrlnode(Object newUrlnode) {
+	public void setUrlnode(getout newUrlnode) {
 		urlnode = newUrlnode;
 	}
-	public Object getInglob() {
+	public  getInglob() {
 		return inglob;
 	}
-	public void setInglob(Object newInglob) {
+	public void setInglob( newInglob) {
 		inglob = newInglob;
 	}
-	public Object getUrls() {
+	public  getUrls() {
 		return urls;
 	}
-	public void setUrls(Object newUrls) {
+	public void setUrls( newUrls) {
 		urls = newUrls;
 	}
-	public Object getOutfiles() {
+	public Byte getOutfiles() {
 		return outfiles;
 	}
-	public void setOutfiles(Object newOutfiles) {
+	public void setOutfiles(Byte newOutfiles) {
 		outfiles = newOutfiles;
 	}
-	public Object getHttpgetfields() {
+	public Byte getHttpgetfields() {
 		return httpgetfields;
 	}
-	public void setHttpgetfields(Object newHttpgetfields) {
+	public void setHttpgetfields(Byte newHttpgetfields) {
 		httpgetfields = newHttpgetfields;
 	}
-	public Object getUploadfile() {
+	public Byte getUploadfile() {
 		return uploadfile;
 	}
-	public void setUploadfile(Object newUploadfile) {
+	public void setUploadfile(Byte newUploadfile) {
 		uploadfile = newUploadfile;
 	}
 	public long getInfilenum() {

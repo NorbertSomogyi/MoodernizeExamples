@@ -39,12 +39,12 @@ package application;
    used. */
 public class SMTP {
 	private  transfer;
-	private Object custom;
-	private Object rcpt;
+	private Byte custom;
+	private curl_slist rcpt;
 	private Object eob;
 	private  trailing_crlf;
 	
-	public SMTP( transfer, Object custom, Object rcpt, Object eob,  trailing_crlf) {
+	public SMTP( transfer, Byte custom, curl_slist rcpt, Object eob,  trailing_crlf) {
 		setTransfer(transfer);
 		setCustom(custom);
 		setRcpt(rcpt);
@@ -60,16 +60,16 @@ public class SMTP {
 	public void setTransfer( newTransfer) {
 		transfer = newTransfer;
 	}
-	public Object getCustom() {
+	public Byte getCustom() {
 		return custom;
 	}
-	public void setCustom(Object newCustom) {
+	public void setCustom(Byte newCustom) {
 		custom = newCustom;
 	}
-	public Object getRcpt() {
+	public curl_slist getRcpt() {
 		return rcpt;
 	}
-	public void setRcpt(Object newRcpt) {
+	public void setRcpt(curl_slist newRcpt) {
 		rcpt = newRcpt;
 	}
 	public Object getEob() {

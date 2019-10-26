@@ -1,23 +1,23 @@
 package application;
 
 public class flickcurl_collection_s {
-	private Object id;
+	private Byte id;
 	private int child_count;
 	private int date_created;
-	private Object iconlarge;
-	private Object iconsmall;
+	private Byte iconlarge;
+	private Byte iconsmall;
 	private int server;
-	private Object secret;
-	private Object title;
-	private Object description;
-	private Object photos;
+	private Byte secret;
+	private Byte title;
+	private Byte description;
+	private flickcurl_photo_s photos;
 	private int photos_count;
-	private Object collections;
+	private flickcurl_collection_s collections;
 	private int collections_count;
-	private Object sets;
+	private flickcurl_photoset_s sets;
 	private int sets_count;
 	
-	public flickcurl_collection_s(Object id, int child_count, int date_created, Object iconlarge, Object iconsmall, int server, Object secret, Object title, Object description, Object photos, int photos_count, Object collections, int collections_count, Object sets, int sets_count) {
+	public flickcurl_collection_s(Byte id, int child_count, int date_created, Byte iconlarge, Byte iconsmall, int server, Byte secret, Byte title, Byte description, flickcurl_photo_s photos, int photos_count, flickcurl_collection_s collections, int collections_count, flickcurl_photoset_s sets, int sets_count) {
 		setId(id);
 		setChild_count(child_count);
 		setDate_created(date_created);
@@ -37,10 +37,391 @@ public class flickcurl_collection_s {
 	public flickcurl_collection_s() {
 	}
 	
-	public Object getId() {
+	/* -*- Mode: c; c-basic-offset: 2 -*-
+	 *
+	 * collections-api.c - Flickr flickr.collections.* API calls
+	 *
+	 * Copyright (C) 2009-2012, David Beckett http://www.dajobe.org/
+	 * 
+	 * This file is licensed under the following three licenses as alternatives:
+	 *   1. GNU Lesser General Public License (LGPL) V2.1 or any newer version
+	 *   2. GNU General Public License (GPL) V2 or any newer version
+	 *   3. Apache License, V2.0 or any newer version
+	 * 
+	 * You may not use this file except in compliance with at least one of
+	 * the above three licenses.
+	 * 
+	 * See LICENSE.html or LICENSE.txt at the top of this package for the
+	 * complete terms and further detail along with the license texts for
+	 * the licenses in COPYING.LIB, COPYING and LICENSE-2.0.txt respectively.
+	 * 
+	 */
+	/**
+	 * flickcurl_collections_getInfo:
+	 * @fc: flickcurl context
+	 * @collection_id: The ID of the collection to fetch information for.
+	 * 
+	 * Returns information for a single collection.  Currently can only
+	 * be called by the collection owner, this may change.
+	 *
+	 * Implements flickr.collections.getInfo (1.12)
+	 * 
+	 * Return value: a collection or NULL on failure
+	 **/
+	public flickcurl_collection_s flickcurl_collections_getInfo(flickcurl_s fc, Object collection_id) {
+		 doc = ((Object)0);
+		 xpathCtx = ((Object)0);
+		flickcurl_collection collection = ((Object)0);
+		fc.flickcurl_init_params(0);
+		if (!collection_id) {
+			return ((Object)0);
+		} 
+		fc.flickcurl_add_param("collection_id", collection_id);
+		fc.flickcurl_end_params();
+		if (fc.flickcurl_prepare("flickr.collections.getInfo")) {
+			;
+		} 
+		doc = fc.flickcurl_invoke();
+		if (!doc) {
+			;
+		} 
+		xpathCtx = .xmlXPathNewContext(doc);
+		if (!xpathCtx) {
+			fc.flickcurl_error("Failed to create XPath context for document");
+			fc.setFailed(1);
+			;
+		} 
+		flickcurl_collection_s flickcurl_collection_s = new flickcurl_collection_s();
+		collection = flickcurl_collection_s.flickcurl_build_collection(fc, xpathCtx, ()"/rsp/collection");
+		int generatedFailed = fc.getFailed();
+		if (generatedFailed) {
+			if (collection) {
+				collection.flickcurl_free_collection();
+			} 
+			collection = ((Object)0);
+		} 
+		return collection/**
+		 * flickcurl_collections_getTree:
+		 * @fc: flickcurl context
+		 * @collection_id: The ID of the collection to fetch a tree for, or zero to fetch the root collection. Defaults to zero. (or NULL)
+		 * @user_id: The ID of the account to fetch the collection tree for. Deafults to the calling user. (or NULL)
+		 * 
+		 * Returns a tree (or sub tree) of collections belonging to a given user.
+		 *
+		 * Implements flickr.collections.getTree (1.12)
+		 * 
+		 * Return value: a collection or NULL on failure
+		 **/;
+	}
+	public flickcurl_collection_s flickcurl_collections_getTree(flickcurl_s fc, Object collection_id, Object user_id) {
+		 doc = ((Object)0);
+		 xpathCtx = ((Object)0);
+		flickcurl_collection collection = ((Object)0);
+		fc.flickcurl_init_params(0);
+		if (collection_id) {
+			fc.flickcurl_add_param("collection_id", collection_id);
+		} 
+		if (user_id) {
+			fc.flickcurl_add_param("user_id", user_id);
+		} 
+		fc.flickcurl_end_params();
+		if (fc.flickcurl_prepare("flickr.collections.getTree")) {
+			;
+		} 
+		doc = fc.flickcurl_invoke();
+		if (!doc) {
+			;
+		} 
+		xpathCtx = .xmlXPathNewContext(doc);
+		if (!xpathCtx) {
+			fc.flickcurl_error("Failed to create XPath context for document");
+			fc.setFailed(1);
+			;
+		} 
+		flickcurl_collection_s flickcurl_collection_s = new flickcurl_collection_s();
+		collection = flickcurl_collection_s.flickcurl_build_collection(fc, xpathCtx, ()"/rsp/collections/collection");
+		int generatedFailed = fc.getFailed();
+		if (generatedFailed) {
+			if (collection) {
+				collection.flickcurl_free_collection();
+			} 
+			collection = ((Object)0);
+		} 
+		return collection;
+	}
+	/* -*- Mode: c; c-basic-offset: 2 -*-
+	 *
+	 * collection.c - Flickcurl collection functions
+	 *
+	 * Copyright (C) 2009-2012, David Beckett http://www.dajobe.org/
+	 * 
+	 * This file is licensed under the following three licenses as alternatives:
+	 *   1. GNU Lesser General Public License (LGPL) V2.1 or any newer version
+	 *   2. GNU General Public License (GPL) V2 or any newer version
+	 *   3. Apache License, V2.0 or any newer version
+	 * 
+	 * You may not use this file except in compliance with at least one of
+	 * the above three licenses.
+	 * 
+	 * See LICENSE.html or LICENSE.txt at the top of this package for the
+	 * complete terms and further detail along with the license texts for
+	 * the licenses in COPYING.LIB, COPYING and LICENSE-2.0.txt respectively.
+	 * 
+	 */
+	/**
+	 * flickcurl_free_collection:
+	 * @collection: collection
+	 *
+	 * Destructor collection
+	 */
+	public void flickcurl_free_collection() {
+		do {
+			if (!collection) {
+				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_collection is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\collection.c", 46, __func__);
+				return ;
+			} 
+		} while (0);
+		flickcurl_collection_s generatedCollections = this.getCollections();
+		if (generatedCollections) {
+			int i;
+			for (i = 0; generatedCollections[i]; i++) {
+				generatedCollections[i].flickcurl_free_collection();
+			}
+		} 
+		flickcurl_photo_s generatedPhotos = this.getPhotos();
+		if (generatedPhotos) {
+			generatedPhotos.flickcurl_free_photos();
+		} 
+		Byte generatedDescription = this.getDescription();
+		if (generatedDescription) {
+			.free(generatedDescription);
+		} 
+		Byte generatedTitle = this.getTitle();
+		if (generatedTitle) {
+			.free(generatedTitle);
+		} 
+		Byte generatedSecret = this.getSecret();
+		if (generatedSecret) {
+			.free(generatedSecret);
+		} 
+		Byte generatedIconsmall = this.getIconsmall();
+		if (generatedIconsmall) {
+			.free(generatedIconsmall);
+		} 
+		Byte generatedIconlarge = this.getIconlarge();
+		if (generatedIconlarge) {
+			.free(generatedIconlarge);
+		} 
+		Byte generatedId = this.getId();
+		if (generatedId) {
+			.free(generatedId);
+		} 
+		.free(collection);
+	}
+	public flickcurl_collection_s flickcurl_build_collections(flickcurl_s fc, Object xpathCtx, Object xpathExpr, int collection_count_p) {
+		flickcurl_collection collections = ((Object)0);
+		int nodes_count;
+		int collection_count;
+		 xpathObj = ((Object)0);
+		 nodes = new ();
+		[] full_xpath = new ();
+		size_t xpathExpr_len = new size_t();
+		int i;
+		xpathExpr_len = .strlen((byte)xpathExpr);
+		.memcpy(full_xpath, xpathExpr, xpathExpr_len + 1);
+		xpathObj = .xmlXPathEvalExpression(xpathExpr, xpathCtx);
+		if (!xpathObj) {
+			fc.flickcurl_error("Unable to evaluate XPath expression \"%s\"", xpathExpr);
+			fc.setFailed(1);
+			;
+		} 
+		nodes = xpathObj.getNodesetval();
+		nodes_count = .xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
+		collections = (flickcurl_collection).calloc(, nodes_count + 1);
+		int generatedPhotos_count = collection.getPhotos_count();
+		flickcurl_photo_s flickcurl_photo_s = new flickcurl_photo_s();
+		int generatedFailed = fc.getFailed();
+		for (; i < nodes_count; i++) {
+			 node = nodes.getNodeTab()[i];
+			flickcurl_collection collection = new flickcurl_collection();
+			int expri;
+			 xpathNodeCtx = ((Object)0);
+			if (node.getType() != XML_ELEMENT_NODE) {
+				fc.flickcurl_error("Got unexpected node type %d", node.getType());
+				fc.setFailed(1);
+				break;
+			} 
+			collection = (flickcurl_collection).calloc(, 1);
+			xpathNodeCtx = .xmlXPathNewContext(xpathCtx.getDoc());
+			xpathNodeCtx.setNode(node);
+			for (expri = 0; collection_fields_table[expri].getXpath(); expri++) {
+				flickcurl_collection_field_type field = collection_fields_table[expri].getField();
+				flickcurl_field_value_type datatype = collection_fields_table[expri].getType();
+				 field_xpath = collection_fields_table[expri].getXpath();
+				byte string_value;
+				int int_value = -1;
+				time_t unix_time = new time_t();
+				if (datatype == .VALUE_TYPE_ICON_PHOTOS) {
+					collection.setPhotos(flickcurl_photo_s.flickcurl_build_photos(fc, xpathNodeCtx, field_xpath, generatedPhotos_count));
+					continue;
+				} 
+				string_value = fc.flickcurl_xpath_eval(xpathNodeCtx, field_xpath);
+				if (!string_value) {
+					continue;
+				} 
+				switch (datatype) {
+				case .VALUE_TYPE_UNIXTIME:
+				case .VALUE_TYPE_DATETIME:
+						if (datatype == .VALUE_TYPE_UNIXTIME) {
+							unix_time = .atoi(string_value);
+						} else {
+								unix_time = .curl_getdate((byte)string_value, ((Object)0));
+						} 
+						if (unix_time >= 0) {
+							int_value = (int)unix_time;
+						} else {
+								int_value = -/* else failed to convert */1;
+						} 
+						break;
+				case .VALUE_TYPE_PHOTO_ID:
+				case .VALUE_TYPE_COLLECTION_ID:
+				case .VALUE_TYPE_NONE:
+				case .VALUE_TYPE_INTEGER:
+				case /* This case is handled above */.VALUE_TYPE_ICON_PHOTOS:
+						.abort();
+				case .VALUE_TYPE_BOOLEAN:
+						int_value = .atoi(string_value);
+						break;
+				case .VALUE_TYPE_PERSON_ID:
+						.abort();
+				case .VALUE_TYPE_PHOTO_URI:
+				case .VALUE_TYPE_URI:
+						break;
+				case .VALUE_TYPE_MEDIA_TYPE:
+				case .VALUE_TYPE_FLOAT:
+				case .VALUE_TYPE_TAG_STRING:
+				case .VALUE_TYPE_STRING:
+				}
+				switch (field) {
+				case .COLLECTION_FIELD_date_created:
+						collection.setDate_created(int_value);
+						break;
+				case .COLLECTION_FIELD_iconlarge:
+						collection.setIconlarge(string_value);
+						string_value = ((Object)0);
+						break;
+				case .COLLECTION_FIELD_server:
+						collection.setServer(int_value);
+						break;
+				case .COLLECTION_FIELD_iconsmall:
+						collection.setIconsmall(string_value);
+						string_value = ((Object)0);
+						break;
+				case .COLLECTION_FIELD_title:
+						collection.setTitle(string_value);
+						string_value = ((Object)0);
+						break;
+				case .COLLECTION_FIELD_id:
+						collection.setId(string_value);
+						string_value = ((Object)0);
+						break;
+				case .COLLECTION_FIELD_iconphotos:
+						.fprintf((_iob[2]), "Do not know how to handle iconphotos field yet\n");
+						break;
+				case .COLLECTION_FIELD_secret:
+						collection.setSecret(string_value);
+						string_value = ((Object)0);
+						break;
+				case .COLLECTION_FIELD_child_count:
+						collection.setChild_count(int_value);
+						break;
+				case .COLLECTION_FIELD_description:
+						collection.setDescription(string_value);
+						string_value = ((Object)0);
+						break;
+				}
+				if (string_value) {
+					.free(string_value);
+				} 
+				if (generatedFailed) {
+					if (collection) {
+						collection.flickcurl_free_collection();
+					} 
+					;
+				} 
+			}
+			collections[collection_count++] = collection/* for collections */;
+		}
+		if (collection_count_p) {
+			collection_count_p = collection_count;
+		} 
+		if (generatedFailed) {
+			if (collections) {
+				collections.flickcurl_free_collections();
+			} 
+			collections = ((Object)0);
+		} 
+		return collections;
+	}
+	public flickcurl_collection_s flickcurl_build_collection(flickcurl_s fc, Object xpathCtx, Object root_xpathExpr) {
+		flickcurl_collection collections = new flickcurl_collection();
+		flickcurl_collection result = ((Object)0);
+		flickcurl_collection_s flickcurl_collection_s = new flickcurl_collection_s();
+		collections = flickcurl_collection_s.flickcurl_build_collections(fc, xpathCtx, root_xpathExpr, ((Object)0));
+		if (collections) {
+			result = collections[0];
+			.free(collections);
+		} 
+		return result/**
+		 * flickcurl_free_collections:
+		 * @collections: collection object array
+		 *
+		 * Destructor for array of collection object
+		 */;
+	}
+	public void flickcurl_free_collections() {
+		int i;
+		do {
+			if (!collections) {
+				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_collection_array is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\collection.c", 393, __func__);
+				return ;
+			} 
+		} while (0);
+		for (i = 0; collections[i]; i++) {
+			collections[i].flickcurl_free_collection();
+		}
+		.free(collections);
+	}
+	public void command_print_collection() {
+		Byte generatedId = this.getId();
+		Byte generatedSecret = this.getSecret();
+		int generatedServer = this.getServer();
+		Byte generatedTitle = this.getTitle();
+		Byte generatedDescription = this.getDescription();
+		Byte generatedIconlarge = this.getIconlarge();
+		Byte generatedIconsmall = this.getIconsmall();
+		.fprintf((_iob[1]), "Collection id %s  secret %s  server %d\n  Title %s\n  Description %s\n  Large icon %s\n  Small Icon %s\n", generatedId, generatedSecret, generatedServer, generatedTitle, (generatedDescription ? generatedDescription : "(None)"), generatedIconlarge, generatedIconsmall);
+		flickcurl_photo_s generatedPhotos = this.getPhotos();
+		if (generatedPhotos) {
+			int i;
+			for (i = 0; generatedPhotos[i]; i++) {
+				.fprintf((_iob[1]), "  icon photo %d) ", i);
+				generatedPhotos[i].command_print_photo();
+			}
+		} 
+		flickcurl_collection_s generatedCollections = this.getCollections();
+		if (generatedCollections) {
+			int i;
+			for (i = 0; generatedCollections[i]; i++) {
+				.fprintf((_iob[1]), "  Sub-Collection %d)", i);
+				generatedCollections[i].command_print_collection();
+			}
+		} 
+	}
+	public Byte getId() {
 		return id;
 	}
-	public void setId(Object newId) {
+	public void setId(Byte newId) {
 		id = newId;
 	}
 	public int getChild_count() {
@@ -55,16 +436,16 @@ public class flickcurl_collection_s {
 	public void setDate_created(int newDate_created) {
 		date_created = newDate_created;
 	}
-	public Object getIconlarge() {
+	public Byte getIconlarge() {
 		return iconlarge;
 	}
-	public void setIconlarge(Object newIconlarge) {
+	public void setIconlarge(Byte newIconlarge) {
 		iconlarge = newIconlarge;
 	}
-	public Object getIconsmall() {
+	public Byte getIconsmall() {
 		return iconsmall;
 	}
-	public void setIconsmall(Object newIconsmall) {
+	public void setIconsmall(Byte newIconsmall) {
 		iconsmall = newIconsmall;
 	}
 	public int getServer() {
@@ -73,28 +454,28 @@ public class flickcurl_collection_s {
 	public void setServer(int newServer) {
 		server = newServer;
 	}
-	public Object getSecret() {
+	public Byte getSecret() {
 		return secret;
 	}
-	public void setSecret(Object newSecret) {
+	public void setSecret(Byte newSecret) {
 		secret = newSecret;
 	}
-	public Object getTitle() {
+	public Byte getTitle() {
 		return title;
 	}
-	public void setTitle(Object newTitle) {
+	public void setTitle(Byte newTitle) {
 		title = newTitle;
 	}
-	public Object getDescription() {
+	public Byte getDescription() {
 		return description;
 	}
-	public void setDescription(Object newDescription) {
+	public void setDescription(Byte newDescription) {
 		description = newDescription;
 	}
-	public Object getPhotos() {
+	public flickcurl_photo_s getPhotos() {
 		return photos;
 	}
-	public void setPhotos(Object newPhotos) {
+	public void setPhotos(flickcurl_photo_s newPhotos) {
 		photos = newPhotos;
 	}
 	public int getPhotos_count() {
@@ -103,10 +484,10 @@ public class flickcurl_collection_s {
 	public void setPhotos_count(int newPhotos_count) {
 		photos_count = newPhotos_count;
 	}
-	public Object getCollections() {
+	public flickcurl_collection_s getCollections() {
 		return collections;
 	}
-	public void setCollections(Object newCollections) {
+	public void setCollections(flickcurl_collection_s newCollections) {
 		collections = newCollections;
 	}
 	public int getCollections_count() {
@@ -115,10 +496,10 @@ public class flickcurl_collection_s {
 	public void setCollections_count(int newCollections_count) {
 		collections_count = newCollections_count;
 	}
-	public Object getSets() {
+	public flickcurl_photoset_s getSets() {
 		return sets;
 	}
-	public void setSets(Object newSets) {
+	public void setSets(flickcurl_photoset_s newSets) {
 		sets = newSets;
 	}
 	public int getSets_count() {

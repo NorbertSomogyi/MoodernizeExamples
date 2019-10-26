@@ -6,11 +6,11 @@ package application;
  * Currently, only used for tracking incomplete RTP data reads
  */
 public class rtsp_conn {
-	private Object rtp_buf;
+	private Byte rtp_buf;
 	private Object rtp_bufsize;
 	private int rtp_channel;
 	
-	public rtsp_conn(Object rtp_buf, Object rtp_bufsize, int rtp_channel) {
+	public rtsp_conn(Byte rtp_buf, Object rtp_bufsize, int rtp_channel) {
 		setRtp_buf(rtp_buf);
 		setRtp_bufsize(rtp_bufsize);
 		setRtp_channel(rtp_channel);
@@ -18,10 +18,10 @@ public class rtsp_conn {
 	public rtsp_conn() {
 	}
 	
-	public Object getRtp_buf() {
+	public Byte getRtp_buf() {
 		return rtp_buf;
 	}
-	public void setRtp_buf(Object newRtp_buf) {
+	public void setRtp_buf(Byte newRtp_buf) {
 		rtp_buf = newRtp_buf;
 	}
 	public Object getRtp_bufsize() {

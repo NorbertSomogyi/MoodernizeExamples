@@ -14,10 +14,10 @@ public class imap_conn {
 	private  tls_supported;
 	private  login_disabled;
 	private  ir_supported;
-	private Object mailbox;
-	private Object mailbox_uidvalidity;
+	private Byte mailbox;
+	private Byte mailbox_uidvalidity;
 	
-	public imap_conn(pingpong pp,  state,  ssldone,  preauth, SASL sasl, int preftype, int cmdid, Object resptag,  tls_supported,  login_disabled,  ir_supported, Object mailbox, Object mailbox_uidvalidity) {
+	public imap_conn(pingpong pp,  state,  ssldone,  preauth, SASL sasl, int preftype, int cmdid, Object resptag,  tls_supported,  login_disabled,  ir_supported, Byte mailbox, Byte mailbox_uidvalidity) {
 		setPp(pp);
 		setState(state);
 		setSsldone(ssldone);
@@ -101,16 +101,16 @@ public class imap_conn {
 	public void setIr_supported( newIr_supported) {
 		ir_supported = newIr_supported;
 	}
-	public Object getMailbox() {
+	public Byte getMailbox() {
 		return mailbox;
 	}
-	public void setMailbox(Object newMailbox) {
+	public void setMailbox(Byte newMailbox) {
 		mailbox = newMailbox;
 	}
-	public Object getMailbox_uidvalidity() {
+	public Byte getMailbox_uidvalidity() {
 		return mailbox_uidvalidity;
 	}
-	public void setMailbox_uidvalidity(Object newMailbox_uidvalidity) {
+	public void setMailbox_uidvalidity(Byte newMailbox_uidvalidity) {
 		mailbox_uidvalidity = newMailbox_uidvalidity;
 	}
 }

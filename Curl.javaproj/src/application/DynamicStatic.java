@@ -2,15 +2,15 @@ package application;
 
 /* possibly modified userdefined data */
 public class DynamicStatic {
-	private Object url;
-	private Object referer;
-	private Object cookielist;
-	private Object resolve;
+	private Byte url;
+	private Byte referer;
+	private curl_slist cookielist;
+	private curl_slist resolve;
 	private Object url_alloc;
 	private Object referer_alloc;
 	private Object wildcard_resolve;
 	
-	public DynamicStatic(Object url, Object referer, Object cookielist, Object resolve, Object url_alloc, Object referer_alloc, Object wildcard_resolve) {
+	public DynamicStatic(Byte url, Byte referer, curl_slist cookielist, curl_slist resolve, Object url_alloc, Object referer_alloc, Object wildcard_resolve) {
 		setUrl(url);
 		setReferer(referer);
 		setCookielist(cookielist);
@@ -22,28 +22,28 @@ public class DynamicStatic {
 	public DynamicStatic() {
 	}
 	
-	public Object getUrl() {
+	public Byte getUrl() {
 		return url;
 	}
-	public void setUrl(Object newUrl) {
+	public void setUrl(Byte newUrl) {
 		url = newUrl;
 	}
-	public Object getReferer() {
+	public Byte getReferer() {
 		return referer;
 	}
-	public void setReferer(Object newReferer) {
+	public void setReferer(Byte newReferer) {
 		referer = newReferer;
 	}
-	public Object getCookielist() {
+	public curl_slist getCookielist() {
 		return cookielist;
 	}
-	public void setCookielist(Object newCookielist) {
+	public void setCookielist(curl_slist newCookielist) {
 		cookielist = newCookielist;
 	}
-	public Object getResolve() {
+	public curl_slist getResolve() {
 		return resolve;
 	}
-	public void setResolve(Object newResolve) {
+	public void setResolve(curl_slist newResolve) {
 		resolve = newResolve;
 	}
 	public Object getUrl_alloc() {

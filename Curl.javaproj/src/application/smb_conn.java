@@ -2,19 +2,19 @@ package application;
 
 public class smb_conn {
 	private smb_conn_state state;
-	private Object user;
-	private Object domain;
-	private Object share;
+	private Byte user;
+	private Byte domain;
+	private Byte share;
 	private Object challenge;
 	private int session_key;
 	private int uid;
-	private Object recv_buf;
+	private Byte recv_buf;
 	private Object upload_size;
 	private Object send_size;
 	private Object sent;
 	private Object got;
 	
-	public smb_conn(smb_conn_state state, Object user, Object domain, Object share, Object challenge, int session_key, int uid, Object recv_buf, Object upload_size, Object send_size, Object sent, Object got) {
+	public smb_conn(smb_conn_state state, Byte user, Byte domain, Byte share, Object challenge, int session_key, int uid, Byte recv_buf, Object upload_size, Object send_size, Object sent, Object got) {
 		setState(state);
 		setUser(user);
 		setDomain(domain);
@@ -37,22 +37,22 @@ public class smb_conn {
 	public void setState(smb_conn_state newState) {
 		state = newState;
 	}
-	public Object getUser() {
+	public Byte getUser() {
 		return user;
 	}
-	public void setUser(Object newUser) {
+	public void setUser(Byte newUser) {
 		user = newUser;
 	}
-	public Object getDomain() {
+	public Byte getDomain() {
 		return domain;
 	}
-	public void setDomain(Object newDomain) {
+	public void setDomain(Byte newDomain) {
 		domain = newDomain;
 	}
-	public Object getShare() {
+	public Byte getShare() {
 		return share;
 	}
-	public void setShare(Object newShare) {
+	public void setShare(Byte newShare) {
 		share = newShare;
 	}
 	public Object getChallenge() {
@@ -73,10 +73,10 @@ public class smb_conn {
 	public void setUid(int newUid) {
 		uid = newUid;
 	}
-	public Object getRecv_buf() {
+	public Byte getRecv_buf() {
 		return recv_buf;
 	}
-	public void setRecv_buf(Object newRecv_buf) {
+	public void setRecv_buf(Byte newRecv_buf) {
 		recv_buf = newRecv_buf;
 	}
 	public Object getUpload_size() {

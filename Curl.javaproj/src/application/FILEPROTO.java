@@ -25,11 +25,11 @@ package application;
  * FILE unique setup
  ***************************************************************************/
 public class FILEPROTO {
-	private Object path;
-	private Object freepath;
+	private Byte path;
+	private Byte freepath;
 	private int fd;
 	
-	public FILEPROTO(Object path, Object freepath, int fd) {
+	public FILEPROTO(Byte path, Byte freepath, int fd) {
 		setPath(path);
 		setFreepath(freepath);
 		setFd(fd);
@@ -37,16 +37,16 @@ public class FILEPROTO {
 	public FILEPROTO() {
 	}
 	
-	public Object getPath() {
+	public Byte getPath() {
 		return path;
 	}
-	public void setPath(Object newPath) {
+	public void setPath(Byte newPath) {
 		path = newPath;
 	}
-	public Object getFreepath() {
+	public Byte getFreepath() {
 		return freepath;
 	}
-	public void setFreepath(Object newFreepath) {
+	public void setFreepath(Byte newFreepath) {
 		freepath = newFreepath;
 	}
 	public int getFd() {

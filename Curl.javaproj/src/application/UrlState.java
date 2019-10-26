@@ -3,21 +3,21 @@ package application;
 /* struct for fields used for state info and
                                   other dynamic purposes */
 public class UrlState {
-	private Object conn_cache;
+	private conncache conn_cache;
 	private curltime keeps_speed;
-	private Object lastconnect;
-	private Object headerbuff;
+	private connectdata lastconnect;
+	private Byte headerbuff;
 	private Object headersize;
-	private Object buffer;
-	private Object ulbuf;
+	private Byte buffer;
+	private Byte ulbuf;
 	private Object current_speed;
-	private Object first_host;
+	private Byte first_host;
 	private int first_remote_port;
-	private Object session;
+	private curl_ssl_session session;
 	private long sessionage;
 	private int tempcount;
 	private Object tempwrite;
-	private Object scratch;
+	private Byte scratch;
 	private int os_errno;
 	private digestdata digest;
 	private digestdata proxydigest;
@@ -28,9 +28,9 @@ public class UrlState {
 	private Curl_tree timenode;
 	private curl_llist timeoutlist;
 	private Object expires;
-	private Object most_recent_ftp_entrypath;
+	private Byte most_recent_ftp_entrypath;
 	private int httpversion;
-	private Object range;
+	private Byte range;
 	private Object resume_from;
 	private long rtsp_next_client_CSeq;
 	private long rtsp_next_server_CSeq;
@@ -39,12 +39,12 @@ public class UrlState {
 	private Object drain;
 	private Object fread_func;
 	private Object in;
-	private Object stream_depends_on;
+	private Curl_easy stream_depends_on;
 	private int stream_weight;
 	private Object uh;
 	private urlpieces up;
 	private Object trailers_bytes_sent;
-	private Object trailers_buf;
+	private Curl_send_buffer trailers_buf;
 	private  trailers_state;
 	private Object multi_owned_by_easy;
 	private Object this_is_a_follow;
@@ -62,7 +62,7 @@ public class UrlState {
 	private Object previouslypending;
 	private Object cookie_engine;
 	
-	public UrlState(Object conn_cache, curltime keeps_speed, Object lastconnect, Object headerbuff, Object headersize, Object buffer, Object ulbuf, Object current_speed, Object first_host, int first_remote_port, Object session, long sessionage, int tempcount, Object tempwrite, Object scratch, int os_errno, digestdata digest, digestdata proxydigest, auth authhost, auth authproxy, Object resolver, curltime expiretime, Curl_tree timenode, curl_llist timeoutlist, Object expires, Object most_recent_ftp_entrypath, int httpversion, Object range, Object resume_from, long rtsp_next_client_CSeq, long rtsp_next_server_CSeq, long rtsp_CSeq_recv, Object infilesize, Object drain, Object fread_func, Object in, Object stream_depends_on, int stream_weight, Object uh, urlpieces up, Object trailers_bytes_sent, Object trailers_buf,  trailers_state, Object multi_owned_by_easy, Object this_is_a_follow, Object refused_stream, Object errorbuf, Object allow_port, Object authproblem, Object ftp_trying_alternative, Object wildcardmatch, Object expect100header, Object use_range, Object rangestringalloc, Object done, Object stream_depends_e, Object previouslypending, Object cookie_engine) {
+	public UrlState(conncache conn_cache, curltime keeps_speed, connectdata lastconnect, Byte headerbuff, Object headersize, Byte buffer, Byte ulbuf, Object current_speed, Byte first_host, int first_remote_port, curl_ssl_session session, long sessionage, int tempcount, Object tempwrite, Byte scratch, int os_errno, digestdata digest, digestdata proxydigest, auth authhost, auth authproxy, Object resolver, curltime expiretime, Curl_tree timenode, curl_llist timeoutlist, Object expires, Byte most_recent_ftp_entrypath, int httpversion, Byte range, Object resume_from, long rtsp_next_client_CSeq, long rtsp_next_server_CSeq, long rtsp_CSeq_recv, Object infilesize, Object drain, Object fread_func, Object in, Curl_easy stream_depends_on, int stream_weight, Object uh, urlpieces up, Object trailers_bytes_sent, Curl_send_buffer trailers_buf,  trailers_state, Object multi_owned_by_easy, Object this_is_a_follow, Object refused_stream, Object errorbuf, Object allow_port, Object authproblem, Object ftp_trying_alternative, Object wildcardmatch, Object expect100header, Object use_range, Object rangestringalloc, Object done, Object stream_depends_e, Object previouslypending, Object cookie_engine) {
 		setConn_cache(conn_cache);
 		setKeeps_speed(keeps_speed);
 		setLastconnect(lastconnect);
@@ -125,10 +125,10 @@ public class UrlState {
 	public UrlState() {
 	}
 	
-	public Object getConn_cache() {
+	public conncache getConn_cache() {
 		return conn_cache;
 	}
-	public void setConn_cache(Object newConn_cache) {
+	public void setConn_cache(conncache newConn_cache) {
 		conn_cache = newConn_cache;
 	}
 	public curltime getKeeps_speed() {
@@ -137,16 +137,16 @@ public class UrlState {
 	public void setKeeps_speed(curltime newKeeps_speed) {
 		keeps_speed = newKeeps_speed;
 	}
-	public Object getLastconnect() {
+	public connectdata getLastconnect() {
 		return lastconnect;
 	}
-	public void setLastconnect(Object newLastconnect) {
+	public void setLastconnect(connectdata newLastconnect) {
 		lastconnect = newLastconnect;
 	}
-	public Object getHeaderbuff() {
+	public Byte getHeaderbuff() {
 		return headerbuff;
 	}
-	public void setHeaderbuff(Object newHeaderbuff) {
+	public void setHeaderbuff(Byte newHeaderbuff) {
 		headerbuff = newHeaderbuff;
 	}
 	public Object getHeadersize() {
@@ -155,16 +155,16 @@ public class UrlState {
 	public void setHeadersize(Object newHeadersize) {
 		headersize = newHeadersize;
 	}
-	public Object getBuffer() {
+	public Byte getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(Object newBuffer) {
+	public void setBuffer(Byte newBuffer) {
 		buffer = newBuffer;
 	}
-	public Object getUlbuf() {
+	public Byte getUlbuf() {
 		return ulbuf;
 	}
-	public void setUlbuf(Object newUlbuf) {
+	public void setUlbuf(Byte newUlbuf) {
 		ulbuf = newUlbuf;
 	}
 	public Object getCurrent_speed() {
@@ -173,10 +173,10 @@ public class UrlState {
 	public void setCurrent_speed(Object newCurrent_speed) {
 		current_speed = newCurrent_speed;
 	}
-	public Object getFirst_host() {
+	public Byte getFirst_host() {
 		return first_host;
 	}
-	public void setFirst_host(Object newFirst_host) {
+	public void setFirst_host(Byte newFirst_host) {
 		first_host = newFirst_host;
 	}
 	public int getFirst_remote_port() {
@@ -185,10 +185,10 @@ public class UrlState {
 	public void setFirst_remote_port(int newFirst_remote_port) {
 		first_remote_port = newFirst_remote_port;
 	}
-	public Object getSession() {
+	public curl_ssl_session getSession() {
 		return session;
 	}
-	public void setSession(Object newSession) {
+	public void setSession(curl_ssl_session newSession) {
 		session = newSession;
 	}
 	public long getSessionage() {
@@ -209,10 +209,10 @@ public class UrlState {
 	public void setTempwrite(Object newTempwrite) {
 		tempwrite = newTempwrite;
 	}
-	public Object getScratch() {
+	public Byte getScratch() {
 		return scratch;
 	}
-	public void setScratch(Object newScratch) {
+	public void setScratch(Byte newScratch) {
 		scratch = newScratch;
 	}
 	public int getOs_errno() {
@@ -275,10 +275,10 @@ public class UrlState {
 	public void setExpires(Object newExpires) {
 		expires = newExpires;
 	}
-	public Object getMost_recent_ftp_entrypath() {
+	public Byte getMost_recent_ftp_entrypath() {
 		return most_recent_ftp_entrypath;
 	}
-	public void setMost_recent_ftp_entrypath(Object newMost_recent_ftp_entrypath) {
+	public void setMost_recent_ftp_entrypath(Byte newMost_recent_ftp_entrypath) {
 		most_recent_ftp_entrypath = newMost_recent_ftp_entrypath;
 	}
 	public int getHttpversion() {
@@ -287,10 +287,10 @@ public class UrlState {
 	public void setHttpversion(int newHttpversion) {
 		httpversion = newHttpversion;
 	}
-	public Object getRange() {
+	public Byte getRange() {
 		return range;
 	}
-	public void setRange(Object newRange) {
+	public void setRange(Byte newRange) {
 		range = newRange;
 	}
 	public Object getResume_from() {
@@ -341,10 +341,10 @@ public class UrlState {
 	public void setIn(Object newIn) {
 		in = newIn;
 	}
-	public Object getStream_depends_on() {
+	public Curl_easy getStream_depends_on() {
 		return stream_depends_on;
 	}
-	public void setStream_depends_on(Object newStream_depends_on) {
+	public void setStream_depends_on(Curl_easy newStream_depends_on) {
 		stream_depends_on = newStream_depends_on;
 	}
 	public int getStream_weight() {
@@ -371,10 +371,10 @@ public class UrlState {
 	public void setTrailers_bytes_sent(Object newTrailers_bytes_sent) {
 		trailers_bytes_sent = newTrailers_bytes_sent;
 	}
-	public Object getTrailers_buf() {
+	public Curl_send_buffer getTrailers_buf() {
 		return trailers_buf;
 	}
-	public void setTrailers_buf(Object newTrailers_buf) {
+	public void setTrailers_buf(Curl_send_buffer newTrailers_buf) {
 		trailers_buf = newTrailers_buf;
 	}
 	public  getTrailers_state() {

@@ -1,11 +1,11 @@
 package application;
 
 public class flickcurl_chunk_s {
-	private Object content;
+	private Byte content;
 	private Object size;
-	private Object prev;
+	private flickcurl_chunk_s prev;
 	
-	public flickcurl_chunk_s(Object content, Object size, Object prev) {
+	public flickcurl_chunk_s(Byte content, Object size, flickcurl_chunk_s prev) {
 		setContent(content);
 		setSize(size);
 		setPrev(prev);
@@ -13,10 +13,10 @@ public class flickcurl_chunk_s {
 	public flickcurl_chunk_s() {
 	}
 	
-	public Object getContent() {
+	public Byte getContent() {
 		return content;
 	}
-	public void setContent(Object newContent) {
+	public void setContent(Byte newContent) {
 		content = newContent;
 	}
 	public Object getSize() {
@@ -25,10 +25,10 @@ public class flickcurl_chunk_s {
 	public void setSize(Object newSize) {
 		size = newSize;
 	}
-	public Object getPrev() {
+	public flickcurl_chunk_s getPrev() {
 		return prev;
 	}
-	public void setPrev(Object newPrev) {
+	public void setPrev(flickcurl_chunk_s newPrev) {
 		prev = newPrev;
 	}
 }

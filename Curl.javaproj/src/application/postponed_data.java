@@ -14,12 +14,12 @@ package application;
 /* No extra information. */
 /* The connection is dead. */
 public class postponed_data {
-	private Object buffer;
+	private Byte buffer;
 	private Object allocated_size;
 	private Object recv_size;
 	private Object recv_processed;
 	
-	public postponed_data(Object buffer, Object allocated_size, Object recv_size, Object recv_processed) {
+	public postponed_data(Byte buffer, Object allocated_size, Object recv_size, Object recv_processed) {
 		setBuffer(buffer);
 		setAllocated_size(allocated_size);
 		setRecv_size(recv_size);
@@ -28,10 +28,10 @@ public class postponed_data {
 	public postponed_data() {
 	}
 	
-	public Object getBuffer() {
+	public Byte getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(Object newBuffer) {
+	public void setBuffer(Byte newBuffer) {
 		buffer = newBuffer;
 	}
 	public Object getAllocated_size() {

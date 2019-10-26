@@ -32,12 +32,12 @@ public class Curl_share {
 	private Object clientdata;
 	private conncache conn_cache;
 	private curl_hash hostcache;
-	private Object cookies;
-	private Object sslsession;
+	private CookieInfo cookies;
+	private curl_ssl_session sslsession;
 	private Object max_ssl_sessions;
 	private long sessionage;
 	
-	public Curl_share(int specifier, Object dirty, Object lockfunc, Object unlockfunc, Object clientdata, conncache conn_cache, curl_hash hostcache, Object cookies, Object sslsession, Object max_ssl_sessions, long sessionage) {
+	public Curl_share(int specifier, Object dirty, Object lockfunc, Object unlockfunc, Object clientdata, conncache conn_cache, curl_hash hostcache, CookieInfo cookies, curl_ssl_session sslsession, Object max_ssl_sessions, long sessionage) {
 		setSpecifier(specifier);
 		setDirty(dirty);
 		setLockfunc(lockfunc);
@@ -53,6 +53,136 @@ public class Curl_share {
 	public Curl_share() {
 	}
 	
+	public Curl_share curl_share_init() {
+		Curl_share share = .Curl_ccalloc(1, );
+		int generatedSpecifier = share.getSpecifier();
+		curl_hash generatedHostcache = share.getHostcache();
+		if (share) {
+			generatedSpecifier |=  (1 << CURL_LOCK_DATA_SHARE);
+			if (generatedHostcache.Curl_mk_dnscache()) {
+				.Curl_cfree(share);
+				return ((Object)0);
+			} 
+		} 
+		return share;
+	}
+	public Object curl_share_setopt(Object option) {
+		va_list param = new va_list();
+		int type;
+		 lockfunc = new ();
+		 unlockfunc = new ();
+		Object ptr;
+		 res = CURLSHE_OK;
+		Object generatedDirty = this.getDirty();
+		if (generatedDirty) {
+			return CURLSHE_IN_USE;
+		} 
+		.__builtin_va_start(param, option);
+		int generatedSpecifier = this.getSpecifier();
+		CookieInfo generatedCookies = this.getCookies();
+		conncache generatedConn_cache = this.getConn_cache();
+		switch (option) {
+		case CURLSHOPT_SHARE:
+				type = (int)/* this is a type this share will share */param;
+				generatedSpecifier |=  (1 << type);
+				switch (type) {
+				case CURL_LOCK_DATA_DNS:
+						break;
+				case CURL_LOCK_DATA_SSL_SESSION:
+						res = CURLSHE_NOT_BUILT_IN;
+						break;
+				case /* not supported (yet) */CURL_LOCK_DATA_CONNECT:
+						if (generatedConn_cache.Curl_conncache_init(103)) {
+							res = CURLSHE_NOMEM;
+						} 
+						break;
+				case CURL_LOCK_DATA_PSL:
+						res = CURLSHE_NOT_BUILT_IN;
+						break;
+				case CURL_LOCK_DATA_COOKIE:
+						if (!generatedCookies) {
+							this.setCookies(((Object)0).Curl_cookie_init(((Object)0), ((Object)0), 1));
+							if (!generatedCookies) {
+								res = CURLSHE_NOMEM/* CURL_DISABLE_HTTP */;
+							} 
+						} 
+						break;
+				default:
+						res = CURLSHE_BAD_OPTION;
+				}
+				break;
+		case CURLSHOPT_UNLOCKFUNC:
+				unlockfunc = (int)param;
+				this.setUnlockfunc(unlockfunc);
+				break;
+		case CURLSHOPT_USERDATA:
+				ptr = (int)param;
+				this.setClientdata(ptr);
+				break;
+		case CURLSHOPT_UNSHARE:
+				type = (int)/* this is a type this share will no longer share */param;
+				generatedSpecifier &=  ~(1 << type);
+				switch (type) {
+				case CURL_LOCK_DATA_COOKIE:
+						if (generatedCookies) {
+							generatedCookies.Curl_cookie_cleanup();
+							this.setCookies(((Object)0/* CURL_DISABLE_HTTP */));
+						} 
+						break;
+				case CURL_LOCK_DATA_DNS:
+						break;
+				case CURL_LOCK_DATA_CONNECT:
+						break;
+				case CURL_LOCK_DATA_SSL_SESSION:
+						res = CURLSHE_NOT_BUILT_IN;
+						break;
+				default:
+						res = CURLSHE_BAD_OPTION;
+						break;
+				}
+				break;
+		case CURLSHOPT_LOCKFUNC:
+				lockfunc = (int)param;
+				this.setLockfunc(lockfunc);
+				break;
+		default:
+				res = CURLSHE_BAD_OPTION;
+				break;
+		}
+		.__builtin_va_end(param);
+		return res;
+	}
+	public Object curl_share_cleanup() {
+		if (share == ((Object)0)) {
+			return CURLSHE_INVALID;
+		} 
+		Object generatedLockfunc = this.getLockfunc();
+		Object generatedClientdata = this.getClientdata();
+		if (generatedLockfunc) {
+			.UNRECOGNIZEDFUNCTIONNAME(((Object)0), CURL_LOCK_DATA_SHARE, CURL_LOCK_ACCESS_SINGLE, generatedClientdata);
+		} 
+		Object generatedDirty = this.getDirty();
+		Object generatedUnlockfunc = this.getUnlockfunc();
+		if (generatedDirty) {
+			if (generatedUnlockfunc) {
+				.UNRECOGNIZEDFUNCTIONNAME(((Object)0), CURL_LOCK_DATA_SHARE, generatedClientdata);
+			} 
+			return CURLSHE_IN_USE;
+		} 
+		conncache generatedConn_cache = this.getConn_cache();
+		generatedConn_cache.Curl_conncache_close_all_connections();
+		generatedConn_cache.Curl_conncache_destroy();
+		curl_hash generatedHostcache = this.getHostcache();
+		generatedHostcache.Curl_hash_destroy();
+		CookieInfo generatedCookies = this.getCookies();
+		generatedCookies.Curl_cookie_cleanup();
+		;
+		if (generatedUnlockfunc) {
+			.UNRECOGNIZEDFUNCTIONNAME(((Object)0), CURL_LOCK_DATA_SHARE, generatedClientdata);
+		} 
+		.Curl_cfree(share);
+		return CURLSHE_OK;
+	}
 	public int getSpecifier() {
 		return specifier;
 	}
@@ -95,16 +225,16 @@ public class Curl_share {
 	public void setHostcache(curl_hash newHostcache) {
 		hostcache = newHostcache;
 	}
-	public Object getCookies() {
+	public CookieInfo getCookies() {
 		return cookies;
 	}
-	public void setCookies(Object newCookies) {
+	public void setCookies(CookieInfo newCookies) {
 		cookies = newCookies;
 	}
-	public Object getSslsession() {
+	public curl_ssl_session getSslsession() {
 		return sslsession;
 	}
-	public void setSslsession(Object newSslsession) {
+	public void setSslsession(curl_ssl_session newSslsession) {
 		sslsession = newSslsession;
 	}
 	public Object getMax_ssl_sessions() {

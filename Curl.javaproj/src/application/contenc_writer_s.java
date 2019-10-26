@@ -24,10 +24,10 @@ package application;
 /* Decoding writer. */
 public class contenc_writer_s {
 	private Object handler;
-	private Object downstream;
+	private contenc_writer_s downstream;
 	private Object params;
 	
-	public contenc_writer_s(Object handler, Object downstream, Object params) {
+	public contenc_writer_s(Object handler, contenc_writer_s downstream, Object params) {
 		setHandler(handler);
 		setDownstream(downstream);
 		setParams(params);
@@ -35,16 +35,30 @@ public class contenc_writer_s {
 	public contenc_writer_s() {
 	}
 	
+	/* Create an unencoding writer stage using the given handler. */
+	public contenc_writer_s new_unencoding_writer(connectdata conn, Object handler) {
+		size_t sz = ((size_t)((contenc_writer)0).getParams()) + handler.getParamsize();
+		contenc_writer writer = (contenc_writer).Curl_ccalloc(1, sz);
+		if (writer) {
+			writer.setHandler(handler);
+			writer.setDownstream(downstream);
+			if (.UNRECOGNIZEDFUNCTIONNAME(conn, writer)) {
+				.Curl_cfree(writer);
+				writer = ((Object)0);
+			} 
+		} 
+		return writer;
+	}
 	public Object getHandler() {
 		return handler;
 	}
 	public void setHandler(Object newHandler) {
 		handler = newHandler;
 	}
-	public Object getDownstream() {
+	public contenc_writer_s getDownstream() {
 		return downstream;
 	}
-	public void setDownstream(Object newDownstream) {
+	public void setDownstream(contenc_writer_s newDownstream) {
 		downstream = newDownstream;
 	}
 	public Object getParams() {

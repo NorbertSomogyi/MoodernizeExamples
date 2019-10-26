@@ -16,12 +16,12 @@ public class HTTP {
 	private Object postdata;
 	private Object p_pragma;
 	private Object p_accept;
-	private curl_mimepart_s form;
+	private Object form;
 	private back backup;
 	private  sending;
-	private Object send_buffer;
+	private Curl_send_buffer send_buffer;
 	
-	public HTTP(Object sendit, Object postsize, Object postdata, Object p_pragma, Object p_accept, curl_mimepart_s form, back backup,  sending, Object send_buffer) {
+	public HTTP(Object sendit, Object postsize, Object postdata, Object p_pragma, Object p_accept, Object form, back backup,  sending, Curl_send_buffer send_buffer) {
 		setSendit(sendit);
 		setPostsize(postsize);
 		setPostdata(postdata);
@@ -65,10 +65,10 @@ public class HTTP {
 	public void setP_accept(Object newP_accept) {
 		p_accept = newP_accept;
 	}
-	public curl_mimepart_s getForm() {
+	public Object getForm() {
 		return form;
 	}
-	public void setForm(curl_mimepart_s newForm) {
+	public void setForm(Object newForm) {
 		form = newForm;
 	}
 	public back getBackup() {
@@ -83,10 +83,10 @@ public class HTTP {
 	public void setSending( newSending) {
 		sending = newSending;
 	}
-	public Object getSend_buffer() {
+	public Curl_send_buffer getSend_buffer() {
 		return send_buffer;
 	}
-	public void setSend_buffer(Object newSend_buffer) {
+	public void setSend_buffer(Curl_send_buffer newSend_buffer) {
 		send_buffer = newSend_buffer;
 	}
 }

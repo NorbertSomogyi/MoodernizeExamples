@@ -36,17 +36,17 @@ package application;
    used. */
 public class IMAP {
 	private  transfer;
-	private Object mailbox;
-	private Object uidvalidity;
-	private Object uid;
-	private Object mindex;
-	private Object section;
-	private Object partial;
-	private Object query;
-	private Object custom;
-	private Object custom_params;
+	private Byte mailbox;
+	private Byte uidvalidity;
+	private Byte uid;
+	private Byte mindex;
+	private Byte section;
+	private Byte partial;
+	private Byte query;
+	private Byte custom;
+	private Byte custom_params;
 	
-	public IMAP( transfer, Object mailbox, Object uidvalidity, Object uid, Object mindex, Object section, Object partial, Object query, Object custom, Object custom_params) {
+	public IMAP( transfer, Byte mailbox, Byte uidvalidity, Byte uid, Byte mindex, Byte section, Byte partial, Byte query, Byte custom, Byte custom_params) {
 		setTransfer(transfer);
 		setMailbox(mailbox);
 		setUidvalidity(uidvalidity);
@@ -67,58 +67,58 @@ public class IMAP {
 	public void setTransfer( newTransfer) {
 		transfer = newTransfer;
 	}
-	public Object getMailbox() {
+	public Byte getMailbox() {
 		return mailbox;
 	}
-	public void setMailbox(Object newMailbox) {
+	public void setMailbox(Byte newMailbox) {
 		mailbox = newMailbox;
 	}
-	public Object getUidvalidity() {
+	public Byte getUidvalidity() {
 		return uidvalidity;
 	}
-	public void setUidvalidity(Object newUidvalidity) {
+	public void setUidvalidity(Byte newUidvalidity) {
 		uidvalidity = newUidvalidity;
 	}
-	public Object getUid() {
+	public Byte getUid() {
 		return uid;
 	}
-	public void setUid(Object newUid) {
+	public void setUid(Byte newUid) {
 		uid = newUid;
 	}
-	public Object getMindex() {
+	public Byte getMindex() {
 		return mindex;
 	}
-	public void setMindex(Object newMindex) {
+	public void setMindex(Byte newMindex) {
 		mindex = newMindex;
 	}
-	public Object getSection() {
+	public Byte getSection() {
 		return section;
 	}
-	public void setSection(Object newSection) {
+	public void setSection(Byte newSection) {
 		section = newSection;
 	}
-	public Object getPartial() {
+	public Byte getPartial() {
 		return partial;
 	}
-	public void setPartial(Object newPartial) {
+	public void setPartial(Byte newPartial) {
 		partial = newPartial;
 	}
-	public Object getQuery() {
+	public Byte getQuery() {
 		return query;
 	}
-	public void setQuery(Object newQuery) {
+	public void setQuery(Byte newQuery) {
 		query = newQuery;
 	}
-	public Object getCustom() {
+	public Byte getCustom() {
 		return custom;
 	}
-	public void setCustom(Object newCustom) {
+	public void setCustom(Byte newCustom) {
 		custom = newCustom;
 	}
-	public Object getCustom_params() {
+	public Byte getCustom_params() {
 		return custom_params;
 	}
-	public void setCustom_params(Object newCustom_params) {
+	public void setCustom_params(Byte newCustom_params) {
 		custom_params = newCustom_params;
 	}
 }

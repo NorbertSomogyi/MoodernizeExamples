@@ -12,26 +12,26 @@ public class SingleRequest {
 	private curltime now;
 	private  badheader;
 	private int headerline;
-	private Object hbufp;
+	private byte hbufp;
 	private Object hbuflen;
-	private Object str;
-	private Object str_start;
-	private Object end_ptr;
-	private Object p;
+	private byte str;
+	private Byte str_start;
+	private Byte end_ptr;
+	private byte p;
 	private Object offset;
 	private int httpcode;
 	private curltime start100;
 	private expect100 exp100;
 	private upgrade101 upgr101;
-	private Object writer_stack;
+	private contenc_writer_s writer_stack;
 	private Object timeofdoc;
 	private long bodywrites;
-	private Object buf;
+	private Byte buf;
 	private int keepon;
-	private Object location;
-	private Object newurl;
+	private Byte location;
+	private Byte newurl;
 	private Object upload_present;
-	private Object upload_fromhere;
+	private Byte upload_fromhere;
 	private Object protop;
 	private dohdata doh;
 	private Object header;
@@ -44,7 +44,7 @@ public class SingleRequest {
 	private Object getheader;
 	private Object forbidchunk;
 	
-	public SingleRequest(Object size, Object maxdownload, Object bytecount, Object writebytecount, Object headerbytecount, Object deductheadercount, curltime start, curltime now,  badheader, int headerline, Object hbufp, Object hbuflen, Object str, Object str_start, Object end_ptr, Object p, Object offset, int httpcode, curltime start100, expect100 exp100, upgrade101 upgr101, Object writer_stack, Object timeofdoc, long bodywrites, Object buf, int keepon, Object location, Object newurl, Object upload_present, Object upload_fromhere, Object protop, dohdata doh, Object header, Object content_range, Object upload_done, Object ignorebody, Object http_bodyless, Object chunk, Object upload_chunky, Object getheader, Object forbidchunk) {
+	public SingleRequest(Object size, Object maxdownload, Object bytecount, Object writebytecount, Object headerbytecount, Object deductheadercount, curltime start, curltime now,  badheader, int headerline, byte hbufp, Object hbuflen, byte str, Byte str_start, Byte end_ptr, byte p, Object offset, int httpcode, curltime start100, expect100 exp100, upgrade101 upgr101, contenc_writer_s writer_stack, Object timeofdoc, long bodywrites, Byte buf, int keepon, Byte location, Byte newurl, Object upload_present, Byte upload_fromhere, Object protop, dohdata doh, Object header, Object content_range, Object upload_done, Object ignorebody, Object http_bodyless, Object chunk, Object upload_chunky, Object getheader, Object forbidchunk) {
 		setSize(size);
 		setMaxdownload(maxdownload);
 		setBytecount(bytecount);
@@ -150,10 +150,10 @@ public class SingleRequest {
 	public void setHeaderline(int newHeaderline) {
 		headerline = newHeaderline;
 	}
-	public Object getHbufp() {
+	public byte getHbufp() {
 		return hbufp;
 	}
-	public void setHbufp(Object newHbufp) {
+	public void setHbufp(byte newHbufp) {
 		hbufp = newHbufp;
 	}
 	public Object getHbuflen() {
@@ -162,28 +162,28 @@ public class SingleRequest {
 	public void setHbuflen(Object newHbuflen) {
 		hbuflen = newHbuflen;
 	}
-	public Object getStr() {
+	public byte getStr() {
 		return str;
 	}
-	public void setStr(Object newStr) {
+	public void setStr(byte newStr) {
 		str = newStr;
 	}
-	public Object getStr_start() {
+	public Byte getStr_start() {
 		return str_start;
 	}
-	public void setStr_start(Object newStr_start) {
+	public void setStr_start(Byte newStr_start) {
 		str_start = newStr_start;
 	}
-	public Object getEnd_ptr() {
+	public Byte getEnd_ptr() {
 		return end_ptr;
 	}
-	public void setEnd_ptr(Object newEnd_ptr) {
+	public void setEnd_ptr(Byte newEnd_ptr) {
 		end_ptr = newEnd_ptr;
 	}
-	public Object getP() {
+	public byte getP() {
 		return p;
 	}
-	public void setP(Object newP) {
+	public void setP(byte newP) {
 		p = newP;
 	}
 	public Object getOffset() {
@@ -216,10 +216,10 @@ public class SingleRequest {
 	public void setUpgr101(upgrade101 newUpgr101) {
 		upgr101 = newUpgr101;
 	}
-	public Object getWriter_stack() {
+	public contenc_writer_s getWriter_stack() {
 		return writer_stack;
 	}
-	public void setWriter_stack(Object newWriter_stack) {
+	public void setWriter_stack(contenc_writer_s newWriter_stack) {
 		writer_stack = newWriter_stack;
 	}
 	public Object getTimeofdoc() {
@@ -234,10 +234,10 @@ public class SingleRequest {
 	public void setBodywrites(long newBodywrites) {
 		bodywrites = newBodywrites;
 	}
-	public Object getBuf() {
+	public Byte getBuf() {
 		return buf;
 	}
-	public void setBuf(Object newBuf) {
+	public void setBuf(Byte newBuf) {
 		buf = newBuf;
 	}
 	public int getKeepon() {
@@ -246,16 +246,16 @@ public class SingleRequest {
 	public void setKeepon(int newKeepon) {
 		keepon = newKeepon;
 	}
-	public Object getLocation() {
+	public Byte getLocation() {
 		return location;
 	}
-	public void setLocation(Object newLocation) {
+	public void setLocation(Byte newLocation) {
 		location = newLocation;
 	}
-	public Object getNewurl() {
+	public Byte getNewurl() {
 		return newurl;
 	}
-	public void setNewurl(Object newNewurl) {
+	public void setNewurl(Byte newNewurl) {
 		newurl = newNewurl;
 	}
 	public Object getUpload_present() {
@@ -264,10 +264,10 @@ public class SingleRequest {
 	public void setUpload_present(Object newUpload_present) {
 		upload_present = newUpload_present;
 	}
-	public Object getUpload_fromhere() {
+	public Byte getUpload_fromhere() {
 		return upload_fromhere;
 	}
-	public void setUpload_fromhere(Object newUpload_fromhere) {
+	public void setUpload_fromhere(Byte newUpload_fromhere) {
 		upload_fromhere = newUpload_fromhere;
 	}
 	public Object getProtop() {

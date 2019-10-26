@@ -4,13 +4,13 @@ package application;
 /* Always last in the struct */
 public class OperationConfig {
 	private  remote_time;
-	private Object random_file;
-	private Object egd_file;
-	private Object useragent;
-	private Object cookie;
-	private Object cookiejar;
-	private Object cookiefile;
-	private Object altsvc;
+	private Byte random_file;
+	private Byte egd_file;
+	private Byte useragent;
+	private Byte cookie;
+	private Byte cookiejar;
+	private Byte cookiefile;
+	private Byte altsvc;
 	private  cookiesession;
 	private  encoding;
 	private  tr_encoding;
@@ -24,44 +24,44 @@ public class OperationConfig {
 	private  proto_present;
 	private long proto_redir;
 	private  proto_redir_present;
-	private Object proto_default;
+	private Byte proto_default;
 	private Object resume_from;
-	private Object postfields;
+	private Byte postfields;
 	private Object postfieldsize;
-	private Object referer;
+	private Byte referer;
 	private double timeout;
 	private double connecttimeout;
 	private long maxredirs;
 	private Object max_filesize;
-	private Object headerfile;
-	private Object ftpport;
-	private Object iface;
+	private Byte headerfile;
+	private Byte ftpport;
+	private Byte iface;
 	private long localport;
 	private long localportrange;
 	private int porttouse;
-	private Object range;
+	private Byte range;
 	private long low_speed_limit;
 	private long low_speed_time;
-	private Object dns_servers;
-	private Object dns_interface;
-	private Object dns_ipv4_addr;
-	private Object dns_ipv6_addr;
-	private Object userpwd;
-	private Object login_options;
-	private Object tls_username;
-	private Object tls_password;
-	private Object tls_authtype;
-	private Object proxy_tls_username;
-	private Object proxy_tls_password;
-	private Object proxy_tls_authtype;
-	private Object proxyuserpwd;
-	private Object proxy;
+	private Byte dns_servers;
+	private Byte dns_interface;
+	private Byte dns_ipv4_addr;
+	private Byte dns_ipv6_addr;
+	private Byte userpwd;
+	private Byte login_options;
+	private Byte tls_username;
+	private Byte tls_password;
+	private Byte tls_authtype;
+	private Byte proxy_tls_username;
+	private Byte proxy_tls_password;
+	private Byte proxy_tls_authtype;
+	private Byte proxyuserpwd;
+	private Byte proxy;
 	private int proxyver;
-	private Object noproxy;
-	private Object mail_from;
-	private Object mail_rcpt;
-	private Object mail_auth;
-	private Object sasl_authzid;
+	private Byte noproxy;
+	private Byte mail_from;
+	private curl_slist mail_rcpt;
+	private Byte mail_auth;
+	private Byte sasl_authzid;
 	private  sasl_ir;
 	private  proxytunnel;
 	private  ftp_append;
@@ -75,42 +75,42 @@ public class OperationConfig {
 	private  unrestricted_auth;
 	private  netrc_opt;
 	private  netrc;
-	private Object netrc_file;
-	private Object url_list;
-	private Object url_last;
-	private Object url_get;
-	private Object url_out;
-	private Object url_ul;
-	private Object doh_url;
-	private Object cipher_list;
-	private Object proxy_cipher_list;
-	private Object cipher13_list;
-	private Object proxy_cipher13_list;
-	private Object cert;
-	private Object proxy_cert;
-	private Object cert_type;
-	private Object proxy_cert_type;
-	private Object cacert;
-	private Object proxy_cacert;
-	private Object capath;
-	private Object proxy_capath;
-	private Object crlfile;
-	private Object proxy_crlfile;
-	private Object pinnedpubkey;
-	private Object proxy_pinnedpubkey;
-	private Object key;
-	private Object proxy_key;
-	private Object key_type;
-	private Object proxy_key_type;
-	private Object key_passwd;
-	private Object proxy_key_passwd;
-	private Object pubkey;
-	private Object hostpubmd5;
-	private Object engine;
+	private Byte netrc_file;
+	private getout url_list;
+	private getout url_last;
+	private getout url_get;
+	private getout url_out;
+	private getout url_ul;
+	private Byte doh_url;
+	private Byte cipher_list;
+	private Byte proxy_cipher_list;
+	private Byte cipher13_list;
+	private Byte proxy_cipher13_list;
+	private Byte cert;
+	private Byte proxy_cert;
+	private Byte cert_type;
+	private Byte proxy_cert_type;
+	private Byte cacert;
+	private Byte proxy_cacert;
+	private Byte capath;
+	private Byte proxy_capath;
+	private Byte crlfile;
+	private Byte proxy_crlfile;
+	private Byte pinnedpubkey;
+	private Byte proxy_pinnedpubkey;
+	private Byte key;
+	private Byte proxy_key;
+	private Byte key_type;
+	private Byte proxy_key_type;
+	private Byte key_passwd;
+	private Byte proxy_key_passwd;
+	private Byte pubkey;
+	private Byte hostpubmd5;
+	private Byte engine;
 	private  crlf;
-	private Object customrequest;
-	private Object krblevel;
-	private Object request_target;
+	private Byte customrequest;
+	private Byte krblevel;
+	private Byte request_target;
 	private long httpversion;
 	private  http09_allowed;
 	private  nobuffer;
@@ -129,24 +129,24 @@ public class OperationConfig {
 	private  proxydigest;
 	private  proxybasic;
 	private  proxyanyauth;
-	private Object writeout;
-	private Object quote;
-	private Object postquote;
-	private Object prequote;
+	private Byte writeout;
+	private curl_slist quote;
+	private curl_slist postquote;
+	private curl_slist prequote;
 	private long ssl_version;
 	private long ssl_version_max;
 	private long proxy_ssl_version;
 	private long ip_version;
-	private  timecond;
+	private Object timecond;
 	private Object condtime;
-	private Object headers;
-	private Object proxyheaders;
-	private Object mimeroot;
-	private Object mimecurrent;
+	private curl_slist headers;
+	private curl_slist proxyheaders;
+	private tool_mime mimeroot;
+	private tool_mime mimecurrent;
 	private Object mimepost;
-	private Object telnet_options;
-	private Object resolve;
-	private Object connect_to;
+	private curl_slist telnet_options;
+	private curl_slist resolve;
+	private curl_slist connect_to;
 	private  httpreq;
 	private Object sendpersecond;
 	private Object recvpersecond;
@@ -155,19 +155,19 @@ public class OperationConfig {
 	private  ftp_ssl_control;
 	private  ftp_ssl_ccc;
 	private int ftp_ssl_ccc_mode;
-	private Object preproxy;
+	private Byte preproxy;
 	private int socks5_gssapi_nec;
 	private long socks5_auth;
-	private Object proxy_service_name;
-	private Object service_name;
+	private Byte proxy_service_name;
+	private Byte service_name;
 	private  tcp_nodelay;
 	private  tcp_fastopen;
 	private long req_retry;
 	private  retry_connrefused;
 	private long retry_delay;
 	private long retry_maxtime;
-	private Object ftp_account;
-	private Object ftp_alternative_to_user;
+	private Byte ftp_account;
+	private Byte ftp_alternative_to_user;
 	private int ftp_filemethod;
 	private long tftp_blksize;
 	private  tftp_no_options;
@@ -187,12 +187,12 @@ public class OperationConfig {
 	private  proxy_ssl_allow_beast;
 	private  ssl_no_revoke;
 	private  use_metalink;
-	private Object metalinkfile_list;
-	private Object metalinkfile_last;
-	private Object oauth_bearer;
+	private metalinkfile metalinkfile_list;
+	private metalinkfile metalinkfile_last;
+	private Byte oauth_bearer;
 	private  nonpn;
 	private  noalpn;
-	private Object unix_socket_path;
+	private Byte unix_socket_path;
 	private  abstract_unix_socket;
 	private  falsestart;
 	private  path_as_is;
@@ -203,12 +203,12 @@ public class OperationConfig {
 	private long happy_eyeballs_timeout_ms;
 	private  haproxy_protocol;
 	private  disallow_username_in_url;
-	private Object global;
-	private Object prev;
-	private Object next;
+	private GlobalConfig global;
+	private OperationConfig prev;
+	private OperationConfig next;
 	private State state;
 	
-	public OperationConfig( remote_time, Object random_file, Object egd_file, Object useragent, Object cookie, Object cookiejar, Object cookiefile, Object altsvc,  cookiesession,  encoding,  tr_encoding, long authtype,  use_resume,  resume_from_current,  disable_epsv,  disable_eprt,  ftp_pret, long proto,  proto_present, long proto_redir,  proto_redir_present, Object proto_default, Object resume_from, Object postfields, Object postfieldsize, Object referer, double timeout, double connecttimeout, long maxredirs, Object max_filesize, Object headerfile, Object ftpport, Object iface, long localport, long localportrange, int porttouse, Object range, long low_speed_limit, long low_speed_time, Object dns_servers, Object dns_interface, Object dns_ipv4_addr, Object dns_ipv6_addr, Object userpwd, Object login_options, Object tls_username, Object tls_password, Object tls_authtype, Object proxy_tls_username, Object proxy_tls_password, Object proxy_tls_authtype, Object proxyuserpwd, Object proxy, int proxyver, Object noproxy, Object mail_from, Object mail_rcpt, Object mail_auth, Object sasl_authzid,  sasl_ir,  proxytunnel,  ftp_append,  use_ascii,  autoreferer,  failonerror,  show_headers,  no_body,  dirlistonly,  followlocation,  unrestricted_auth,  netrc_opt,  netrc, Object netrc_file, Object url_list, Object url_last, Object url_get, Object url_out, Object url_ul, Object doh_url, Object cipher_list, Object proxy_cipher_list, Object cipher13_list, Object proxy_cipher13_list, Object cert, Object proxy_cert, Object cert_type, Object proxy_cert_type, Object cacert, Object proxy_cacert, Object capath, Object proxy_capath, Object crlfile, Object proxy_crlfile, Object pinnedpubkey, Object proxy_pinnedpubkey, Object key, Object proxy_key, Object key_type, Object proxy_key_type, Object key_passwd, Object proxy_key_passwd, Object pubkey, Object hostpubmd5, Object engine,  crlf, Object customrequest, Object krblevel, Object request_target, long httpversion,  http09_allowed,  nobuffer,  readbusy,  globoff,  use_httpget,  insecure_ok,  proxy_insecure_ok,  terminal_binary_ok,  verifystatus,  create_dirs,  ftp_create_dirs,  ftp_skip_ip,  proxynegotiate,  proxyntlm,  proxydigest,  proxybasic,  proxyanyauth, Object writeout, Object quote, Object postquote, Object prequote, long ssl_version, long ssl_version_max, long proxy_ssl_version, long ip_version,  timecond, Object condtime, Object headers, Object proxyheaders, Object mimeroot, Object mimecurrent, Object mimepost, Object telnet_options, Object resolve, Object connect_to,  httpreq, Object sendpersecond, Object recvpersecond,  ftp_ssl,  ftp_ssl_reqd,  ftp_ssl_control,  ftp_ssl_ccc, int ftp_ssl_ccc_mode, Object preproxy, int socks5_gssapi_nec, long socks5_auth, Object proxy_service_name, Object service_name,  tcp_nodelay,  tcp_fastopen, long req_retry,  retry_connrefused, long retry_delay, long retry_maxtime, Object ftp_account, Object ftp_alternative_to_user, int ftp_filemethod, long tftp_blksize,  tftp_no_options,  ignorecl,  disable_sessionid,  raw,  post301,  post302,  post303,  nokeepalive, long alivetime,  content_disposition, int default_node_flags,  xattr, long gssapi_delegation,  ssl_allow_beast,  proxy_ssl_allow_beast,  ssl_no_revoke,  use_metalink, Object metalinkfile_list, Object metalinkfile_last, Object oauth_bearer,  nonpn,  noalpn, Object unix_socket_path,  abstract_unix_socket,  falsestart,  path_as_is, double expect100timeout,  suppress_connect_headers,  synthetic_error,  ssh_compression, long happy_eyeballs_timeout_ms,  haproxy_protocol,  disallow_username_in_url, Object global, Object prev, Object next, State state) {
+	public OperationConfig( remote_time, Byte random_file, Byte egd_file, Byte useragent, Byte cookie, Byte cookiejar, Byte cookiefile, Byte altsvc,  cookiesession,  encoding,  tr_encoding, long authtype,  use_resume,  resume_from_current,  disable_epsv,  disable_eprt,  ftp_pret, long proto,  proto_present, long proto_redir,  proto_redir_present, Byte proto_default, Object resume_from, Byte postfields, Object postfieldsize, Byte referer, double timeout, double connecttimeout, long maxredirs, Object max_filesize, Byte headerfile, Byte ftpport, Byte iface, long localport, long localportrange, int porttouse, Byte range, long low_speed_limit, long low_speed_time, Byte dns_servers, Byte dns_interface, Byte dns_ipv4_addr, Byte dns_ipv6_addr, Byte userpwd, Byte login_options, Byte tls_username, Byte tls_password, Byte tls_authtype, Byte proxy_tls_username, Byte proxy_tls_password, Byte proxy_tls_authtype, Byte proxyuserpwd, Byte proxy, int proxyver, Byte noproxy, Byte mail_from, curl_slist mail_rcpt, Byte mail_auth, Byte sasl_authzid,  sasl_ir,  proxytunnel,  ftp_append,  use_ascii,  autoreferer,  failonerror,  show_headers,  no_body,  dirlistonly,  followlocation,  unrestricted_auth,  netrc_opt,  netrc, Byte netrc_file, getout url_list, getout url_last, getout url_get, getout url_out, getout url_ul, Byte doh_url, Byte cipher_list, Byte proxy_cipher_list, Byte cipher13_list, Byte proxy_cipher13_list, Byte cert, Byte proxy_cert, Byte cert_type, Byte proxy_cert_type, Byte cacert, Byte proxy_cacert, Byte capath, Byte proxy_capath, Byte crlfile, Byte proxy_crlfile, Byte pinnedpubkey, Byte proxy_pinnedpubkey, Byte key, Byte proxy_key, Byte key_type, Byte proxy_key_type, Byte key_passwd, Byte proxy_key_passwd, Byte pubkey, Byte hostpubmd5, Byte engine,  crlf, Byte customrequest, Byte krblevel, Byte request_target, long httpversion,  http09_allowed,  nobuffer,  readbusy,  globoff,  use_httpget,  insecure_ok,  proxy_insecure_ok,  terminal_binary_ok,  verifystatus,  create_dirs,  ftp_create_dirs,  ftp_skip_ip,  proxynegotiate,  proxyntlm,  proxydigest,  proxybasic,  proxyanyauth, Byte writeout, curl_slist quote, curl_slist postquote, curl_slist prequote, long ssl_version, long ssl_version_max, long proxy_ssl_version, long ip_version, Object timecond, Object condtime, curl_slist headers, curl_slist proxyheaders, tool_mime mimeroot, tool_mime mimecurrent, Object mimepost, curl_slist telnet_options, curl_slist resolve, curl_slist connect_to,  httpreq, Object sendpersecond, Object recvpersecond,  ftp_ssl,  ftp_ssl_reqd,  ftp_ssl_control,  ftp_ssl_ccc, int ftp_ssl_ccc_mode, Byte preproxy, int socks5_gssapi_nec, long socks5_auth, Byte proxy_service_name, Byte service_name,  tcp_nodelay,  tcp_fastopen, long req_retry,  retry_connrefused, long retry_delay, long retry_maxtime, Byte ftp_account, Byte ftp_alternative_to_user, int ftp_filemethod, long tftp_blksize,  tftp_no_options,  ignorecl,  disable_sessionid,  raw,  post301,  post302,  post303,  nokeepalive, long alivetime,  content_disposition, int default_node_flags,  xattr, long gssapi_delegation,  ssl_allow_beast,  proxy_ssl_allow_beast,  ssl_no_revoke,  use_metalink, metalinkfile metalinkfile_list, metalinkfile metalinkfile_last, Byte oauth_bearer,  nonpn,  noalpn, Byte unix_socket_path,  abstract_unix_socket,  falsestart,  path_as_is, double expect100timeout,  suppress_connect_headers,  synthetic_error,  ssh_compression, long happy_eyeballs_timeout_ms,  haproxy_protocol,  disallow_username_in_url, GlobalConfig global, OperationConfig prev, OperationConfig next, State state) {
 		setRemote_time(remote_time);
 		setRandom_file(random_file);
 		setEgd_file(egd_file);
@@ -417,52 +417,928 @@ public class OperationConfig {
 	public OperationConfig() {
 	}
 	
+	/***************************************************************************
+	 *                                  _   _ ____  _
+	 *  Project                     ___| | | |  _ \| |
+	 *                             / __| | | | |_) | |
+	 *                            | (__| |_| |  _ <| |___
+	 *                             \___|\___/|_| \_\_____|
+	 *
+	 * Copyright (C) 1998 - 2019, Daniel Stenberg, <daniel@haxx.se>, et al.
+	 *
+	 * This software is licensed as described in the file COPYING, which
+	 * you should have received as part of this distribution. The terms
+	 * are also available at https://curl.haxx.se/docs/copyright.html.
+	 *
+	 * You may opt to use, copy, modify, merge, publish, distribute and/or sell
+	 * copies of the Software, and permit persons to whom the Software is
+	 * furnished to do so, under the terms of the COPYING file.
+	 *
+	 * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+	 * KIND, either express or implied.
+	 *
+	 ***************************************************************************/
+	/* use our own printf() functions */
+	/* keep this as LAST include */
+	public void clean_getout() {
+		getout generatedNext = node.getNext();
+		Byte generatedUrl = node.getUrl();
+		byte generatedOutfile = node.getOutfile();
+		Byte generatedInfile = node.getInfile();
+		if (ModernizedCProgram.config) {
+			getout next = new getout();
+			getout node = ModernizedCProgram.config.getUrl_list();
+			while (node) {
+				next = generatedNext;
+				do {
+					.free((generatedUrl));
+					(generatedUrl) = ((Object)0);
+				} while (0);
+				do {
+					.free((generatedOutfile));
+					(generatedOutfile) = ((Object)0);
+				} while (0);
+				do {
+					.free((generatedInfile));
+					(generatedInfile) = ((Object)0);
+				} while (0);
+				do {
+					.free((node));
+					(node) = ((Object)0);
+				} while (0);
+				node = next;
+			}
+			ModernizedCProgram.config.setUrl_list(((Object)0));
+		} 
+	}
+	public void single_transfer_cleanup() {
+		 generatedUrls = state.getUrls();
+		Byte generatedOutfiles = state.getOutfiles();
+		Byte generatedHttpgetfields = state.getHttpgetfields();
+		Byte generatedUploadfile = state.getUploadfile();
+		 generatedInglob = state.getInglob();
+		if (ModernizedCProgram.config) {
+			State state = ModernizedCProgram.config.getState();
+			if (generatedUrls) {
+				generatedUrls.glob_cleanup();
+				state.setUrls(((Object)0));
+			} 
+			do {
+				.free((generatedOutfiles));
+				(generatedOutfiles) = ((Object)0);
+			} while (0);
+			do {
+				.free((generatedHttpgetfields));
+				(generatedHttpgetfields) = ((Object)0);
+			} while (0);
+			do {
+				.free((generatedUploadfile));
+				(generatedUploadfile) = ((Object)0);
+			} while (0);
+			if (generatedInglob) {
+				generatedInglob.glob_cleanup();
+				state.setInglob(((Object)0));
+			} 
+		} 
+	}
+	public int get_param_part(byte endchar, byte str, byte pdata, byte ptype, byte pfilename, byte pencoder, Object pheaders) {
+		byte p = str;
+		byte type = ((Object)0);
+		byte filename = ((Object)0);
+		byte encoder = ((Object)0);
+		byte endpos;
+		byte tp;
+		byte sep;
+		byte[] type_major = "";
+		byte[] type_minor = "";
+		byte endct = ((Object)0);
+		curl_slist headers = ((Object)0);
+		if (ptype) {
+			ptype = ((Object)0);
+		} 
+		if (pfilename) {
+			pfilename = ((Object)0);
+		} 
+		if (pheaders) {
+			pheaders = ((Object)0);
+		} 
+		if (pencoder) {
+			pencoder = ((Object)0);
+		} 
+		while ((ModernizedCProgram.Curl_isspace((int)((byte)p)))) {
+			p++;
+		}
+		tp = p;
+		pdata = ModernizedCProgram.get_param_word(p, endpos, endchar);
+		if (pdata == /* If not quoted, strip trailing spaces. */tp) {
+			while (endpos > pdata && (ModernizedCProgram.Curl_isspace((int)((byte)endpos[-1])))) {
+				endpos--;
+			}
+		} 
+		sep = p;
+		endpos = (byte)'\0';
+		while (sep == (byte)';') {
+			while ((ModernizedCProgram.Curl_isspace((int)((byte)++p)))) {
+				;
+			}
+			if (!endct && ModernizedCProgram.curl_strnequal("type=", p, .strlen("type="))) {
+				for (p += 5; (ModernizedCProgram.Curl_isspace((int)((byte)p))); p++) {
+					;
+				}
+				type = /* set type pointer */p;
+				if (2 != .sscanf(type, "%127[^/ ]/%127[^;, \n]", type_major, /* verify that this is a fine type specifier */type_minor)) {
+					ModernizedCProgram.config.getGlobal().warnf("Illegally formatted content-type field!\n");
+					headers.curl_slist_free_all();
+					return -/* illegal content-type syntax! */1;
+				} 
+				p = type + .strlen(type_major) + .strlen(type_minor) + /* now point beyond the content-type specifier */1;
+				for (endct = p; p && p != (byte)';' && p != endchar; p++) {
+					if (!(ModernizedCProgram.Curl_isspace((int)((byte)p)))) {
+						endct = p + 1;
+					} 
+				}
+				sep = p;
+			}  else if (ModernizedCProgram.curl_strnequal("filename=", p, .strlen("filename="))) {
+				if (endct) {
+					endct = (byte)'\0';
+					endct = ((Object)0);
+				} 
+				for (p += 9; (ModernizedCProgram.Curl_isspace((int)((byte)p))); p++) {
+					;
+				}
+				tp = p;
+				filename = ModernizedCProgram.get_param_word(p, endpos, endchar);
+				if (filename == /* If not quoted, strip trailing spaces. */tp) {
+					while (endpos > filename && (ModernizedCProgram.Curl_isspace((int)((byte)endpos[-1])))) {
+						endpos--;
+					}
+				} 
+				sep = p;
+				endpos = (byte)'\0';
+			}  else if (ModernizedCProgram.curl_strnequal("headers=", p, .strlen("headers="))) {
+				if (endct) {
+					endct = (byte)'\0';
+					endct = ((Object)0);
+				} 
+				p += 8;
+				if (p == (byte)'@' || p == (byte)'<') {
+					byte hdrfile;
+					FILE fp = new FILE();
+					do {
+						p++;
+					} while ((ModernizedCProgram.Curl_isspace((int)((byte)p))));
+					tp = p;
+					hdrfile = ModernizedCProgram.get_param_word(p, endpos, endchar);
+					if (hdrfile == /* If not quoted, strip trailing spaces. */tp) {
+						while (endpos > hdrfile && (ModernizedCProgram.Curl_isspace((int)((byte)endpos[-1])))) {
+							endpos--;
+						}
+					} 
+					sep = p;
+					endpos = (byte)'\0';
+					fp = .fopen(hdrfile, "rt");
+					if (!fp) {
+						ModernizedCProgram.config.getGlobal().warnf("Cannot read from %s: %s\n", hdrfile, .strerror((._errno())));
+					} else {
+							int i = ModernizedCProgram.read_field_headers(ModernizedCProgram.config, hdrfile, fp, headers);
+							.fclose(fp);
+							if (i) {
+								headers.curl_slist_free_all();
+								return -1;
+							} 
+					} 
+				} else {
+						byte hdr;
+						while ((ModernizedCProgram.Curl_isspace((int)((byte)p)))) {
+							p++;
+						}
+						tp = p;
+						hdr = ModernizedCProgram.get_param_word(p, endpos, endchar);
+						if (hdr == /* If not quoted, strip trailing spaces. */tp) {
+							while (endpos > hdr && (ModernizedCProgram.Curl_isspace((int)((byte)endpos[-1])))) {
+								endpos--;
+							}
+						} 
+						sep = p;
+						endpos = (byte)'\0';
+						if (ModernizedCProgram.slist_append(headers, hdr)) {
+							ModernizedCProgram.config.getGlobal().getErrors().curl_mfprintf("Out of memory for field header!\n");
+							headers.curl_slist_free_all();
+							return -1;
+						} 
+				} 
+			}  else if (ModernizedCProgram.curl_strnequal("encoder=", p, .strlen("encoder="))) {
+				if (endct) {
+					endct = (byte)'\0';
+					endct = ((Object)0);
+				} 
+				for (p += 8; (ModernizedCProgram.Curl_isspace((int)((byte)p))); p++) {
+					;
+				}
+				tp = p;
+				encoder = ModernizedCProgram.get_param_word(p, endpos, endchar);
+				if (encoder == /* If not quoted, strip trailing spaces. */tp) {
+					while (endpos > encoder && (ModernizedCProgram.Curl_isspace((int)((byte)endpos[-1])))) {
+						endpos--;
+					}
+				} 
+				sep = p;
+				endpos = (byte)'\0';
+			}  else if (endct) {
+				for (endct = p; p && p != (byte)';' && p != endchar; /* This is part of content type. */p++) {
+					if (!(ModernizedCProgram.Curl_isspace((int)((byte)p)))) {
+						endct = p + 1;
+					} 
+				}
+				sep = p;
+			} else {
+					byte unknown = ModernizedCProgram.get_param_word(p, endpos, /* unknown prefix, skip to next block */endchar);
+					sep = p;
+					endpos = (byte)'\0';
+					if (unknown) {
+						ModernizedCProgram.config.getGlobal().warnf("skip unknown form field: %s\n", unknown);
+					} 
+			} 
+		}
+		if (/* Terminate content type. */endct) {
+			endct = (byte)'\0';
+		} 
+		if (ptype) {
+			ptype = type;
+		}  else if (type) {
+			ModernizedCProgram.config.getGlobal().warnf("Field content type not allowed here: %s\n", type);
+		} 
+		if (pfilename) {
+			pfilename = filename;
+		}  else if (filename) {
+			ModernizedCProgram.config.getGlobal().warnf("Field file name not allowed here: %s\n", filename);
+		} 
+		if (pencoder) {
+			pencoder = encoder;
+		}  else if (encoder) {
+			ModernizedCProgram.config.getGlobal().warnf("Field encoder not allowed here: %s\n", encoder);
+		} 
+		Object generatedCurl_slist = headers.getCurl_slist();
+		if (pheaders) {
+			pheaders = headers;
+		}  else if (headers) {
+			ModernizedCProgram.config.getGlobal().warnf("Field headers not allowed here: %s\n", generatedCurl_slist);
+			headers.curl_slist_free_all();
+		} 
+		str = p;
+		return sep & -1024/***************************************************************************
+		 *
+		 * formparse()
+		 *
+		 * Reads a 'name=value' parameter and builds the appropriate linked list.
+		 *
+		 * If the value is of the form '<filename', field data is read from the
+		 * given file.
+		
+		 * Specify files to upload with 'name=@filename', or 'name=@"filename"'
+		 * in case the filename contain ',' or ';'. Supports specified
+		 * given Content-Type of the files. Such as ';type=<content-type>'.
+		 *
+		 * If literal_value is set, any initial '@' or '<' in the value string
+		 * loses its special meaning, as does any embedded ';type='.
+		 *
+		 * You may specify more than one file for a single name (field). Specify
+		 * multiple files by writing it like:
+		 *
+		 * 'name=@filename,filename2,filename3'
+		 *
+		 * or use double-quotes quote the filename:
+		 *
+		 * 'name=@"filename","filename2","filename3"'
+		 *
+		 * If you want content-types specified for each too, write them like:
+		 *
+		 * 'name=@filename;type=image/gif,filename2,filename3'
+		 *
+		 * If you want custom headers added for a single part, write them in a separate
+		 * file and do like this:
+		 *
+		 * 'name=foo;headers=@headerfile' or why not
+		 * 'name=@filemame;headers=@headerfile'
+		 *
+		 * To upload a file, but to fake the file name that will be included in the
+		 * formpost, do like this:
+		 *
+		 * 'name=@filename;filename=/dev/null' or quote the faked filename like:
+		 * 'name=@filename;filename="play, play, and play.txt"'
+		 *
+		 * If filename/path contains ',' or ';', it must be quoted by double-quotes,
+		 * else curl will fail to figure out the correct filename. if the filename
+		 * tobe quoted contains '"' or '\', '"' and '\' must be escaped by backslash.
+		 *
+		 ***************************************************************************/;
+	}
+	public int SetHTTPrequest( req,  store) {
+		/* this mirrors the HttpReq enum in tool_sdecls.h */byte[] reqname = new byte[]{/* unspec */"", "GET (-G, --get)", "HEAD (-I, --head)", "multipart formpost (-F, --form)", "POST (-d, --data)"};
+		if ((store == .HTTPREQ_UNSPEC) || (store == req)) {
+			store = req;
+			return 0;
+		} 
+		ModernizedCProgram.config.getGlobal().warnf("You can only select one HTTP request method! You asked for both %s and %s.\n", reqname[req], reqname[store]);
+		return 1;
+	}
+	public void customrequest_helper( req, Byte method) {
+		/* this mirrors the HttpReq enum in tool_sdecls.h */byte[] dflt = new byte[]{"GET", "GET", "HEAD", "POST", "POST"};
+		if (!method) {
+			;
+		}  else if (ModernizedCProgram.curl_strequal(method, dflt[req])) {
+			ModernizedCProgram.config.getGlobal().notef("Unnecessary use of -X or --request, %s is already inferred.\n", dflt[req]);
+		}  else if (ModernizedCProgram.curl_strequal(method, "head")) {
+			ModernizedCProgram.config.getGlobal().warnf("Setting custom HTTP method to HEAD with -X/--request may not work the way you want. Consider using -I/--head instead.\n");
+		} 
+	}
+	/* MSDOS && (__DJGPP__ || __GO32__) */
+	/*
+	 * Function to find CACert bundle on a Win32 platform using SearchPath.
+	 * (SearchPath is already declared via inclusions done in setup header file)
+	 * (Use the ASCII version instead of the unicode one!)
+	 * The order of the directories it searches is:
+	 *  1. application's directory
+	 *  2. current working directory
+	 *  3. Windows System directory (e.g. C:\windows\system32)
+	 *  4. Windows Directory (e.g. C:\windows)
+	 *  5. all directories along %PATH%
+	 *
+	 * For WinXP and later search order actually depends on registry value:
+	 * HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\SafeProcessSearchMode
+	 */
+	public Object FindWin32CACert(Object backend, Object bundle_file) {
+		 result = CURLE_OK/* Search and set cert file only if libcurl supports SSL.
+		   *
+		   * If Schannel is the selected SSL backend then these locations are
+		   * ignored. We allow setting CA location for schannel only when explicitly
+		   * specified by the user via CURLOPT_CAINFO / --cacert.
+		   */;
+		if ((ModernizedCProgram.curlinfo.getFeatures() & CURL_VERSION_SSL) && backend != CURLSSLBACKEND_SCHANNEL) {
+			DWORD res_len = new DWORD();
+			byte[] buf = new byte[260];
+			byte ptr = ((Object)0);
+			ModernizedCProgram.buf[0] = (byte)'\0';
+			res_len = .SearchPathA(((Object)0), bundle_file, ((Object)0), 260, ModernizedCProgram.buf, ptr);
+			if (res_len > 0) {
+				do {
+					.free((ModernizedCProgram.config.getCacert()));
+					(ModernizedCProgram.config.getCacert()) = ((Object)0);
+				} while (0);
+				ModernizedCProgram.config.setCacert(.strdup(ModernizedCProgram.buf));
+				if (!ModernizedCProgram.config.getCacert()) {
+					result = CURLE_OUT_OF_MEMORY;
+				} 
+			} 
+		} 
+		return result;
+	}
+	public long proto2num(long val, Object str) {
+		byte buffer;
+		byte sep = ",";
+		byte token;
+		Object[] protos = new Object[]{{"all", CURLPROTO_ALL}, {"http", CURLPROTO_HTTP}, {"https", CURLPROTO_HTTPS}, {"ftp", CURLPROTO_FTP}, {"ftps", CURLPROTO_FTPS}, {"scp", CURLPROTO_SCP}, {"sftp", CURLPROTO_SFTP}, {"telnet", CURLPROTO_TELNET}, {"ldap", CURLPROTO_LDAP}, {"ldaps", CURLPROTO_LDAPS}, {"dict", CURLPROTO_DICT}, {"file", CURLPROTO_FILE}, {"tftp", CURLPROTO_TFTP}, {"imap", CURLPROTO_IMAP}, {"imaps", CURLPROTO_IMAPS}, {"pop3", CURLPROTO_POP3}, {"pop3s", CURLPROTO_POP3S}, {"smtp", CURLPROTO_SMTP}, {"smtps", CURLPROTO_SMTPS}, {"rtsp", CURLPROTO_RTSP}, {"gopher", CURLPROTO_GOPHER}, {"smb", CURLPROTO_SMB}, {"smbs", CURLPROTO_SMBS}, {((Object)0), 0}};
+		if (!str) {
+			return 1;
+		} 
+		buffer = .strdup(/* because strtok corrupts it */str);
+		if (!buffer) {
+			return 1;
+		} 
+		for (token = .strtok(buffer, /* Allow strtok() here since this isn't used threaded *//* !checksrc! disable BANNEDFUNC 2 */sep); token; token = .strtok(((Object)0), sep)) {
+			Object action = e_action.allow;
+			sprotos pp = new sprotos();
+			while (!(ModernizedCProgram.Curl_isalnum((int)((byte)/* Process token modifiers *//* may be NULL if token is all modifiers */token)))) {
+				switch (token++) {
+				case (byte)'-':
+						e_action.action = e_action.deny;
+						break;
+				case (byte)'+':
+						e_action.action = e_action.allow;
+						break;
+				case (byte)'=':
+						e_action.action = e_action.set;
+						break;
+				default:
+						do {
+							.free((buffer));
+							(buffer) = ((Object)0);
+						} while (0);
+						return 1;
+				}
+			}
+			for (pp = protos; pp.getName(); pp++) {
+				if (ModernizedCProgram.curl_strequal(token, pp.getName())) {
+					switch (e_action.action) {
+					case e_action.deny:
+							val &=  ~(pp.getBit());
+							break;
+					case e_action.allow:
+							val |=  pp.getBit();
+							break;
+					case e_action.set:
+							val = pp.getBit();
+							break;
+					}
+					break;
+				} 
+			}
+			if (!(pp.getName())) {
+				if (e_action.action == e_action.set) {
+					val = 0;
+				} 
+				ModernizedCProgram.config.getGlobal().warnf("unrecognized protocol '%s'\n", token);
+			} 
+		}
+		do {
+			.free((buffer));
+			(buffer) = ((Object)0);
+		} while (0);
+		return 0/**
+		 * Check if the given string is a protocol supported by libcurl
+		 *
+		 * @param str  the protocol name
+		 * @return PARAM_OK  protocol supported
+		 * @return PARAM_LIBCURL_UNSUPPORTED_PROTOCOL  protocol not supported
+		 * @return PARAM_REQUIRES_PARAMETER   missing parameter
+		 */;
+	}
+	public int ftpfilemethod(Object str) {
+		if (ModernizedCProgram.curl_strequal("singlecwd", str)) {
+			return CURLFTPMETHOD_SINGLECWD;
+		} 
+		if (ModernizedCProgram.curl_strequal("nocwd", str)) {
+			return CURLFTPMETHOD_NOCWD;
+		} 
+		if (ModernizedCProgram.curl_strequal("multicwd", str)) {
+			return CURLFTPMETHOD_MULTICWD;
+		} 
+		ModernizedCProgram.config.getGlobal().warnf("unrecognized ftp file method '%s', using default\n", str);
+		return CURLFTPMETHOD_MULTICWD;
+	}
+	public int ftpcccmethod(Object str) {
+		if (ModernizedCProgram.curl_strequal("passive", str)) {
+			return CURLFTPSSL_CCC_PASSIVE;
+		} 
+		if (ModernizedCProgram.curl_strequal("active", str)) {
+			return CURLFTPSSL_CCC_ACTIVE;
+		} 
+		ModernizedCProgram.config.getGlobal().warnf("unrecognized ftp CCC method '%s', using default\n", str);
+		return CURLFTPSSL_CCC_PASSIVE;
+	}
+	public long delegation(Byte str) {
+		if (ModernizedCProgram.curl_strequal("none", str)) {
+			return CURLGSSAPI_DELEGATION_NONE;
+		} 
+		if (ModernizedCProgram.curl_strequal("policy", str)) {
+			return CURLGSSAPI_DELEGATION_POLICY_FLAG;
+		} 
+		if (ModernizedCProgram.curl_strequal("always", str)) {
+			return CURLGSSAPI_DELEGATION_FLAG;
+		} 
+		ModernizedCProgram.config.getGlobal().warnf("unrecognized delegation method '%s', using none\n", str);
+		return CURLGSSAPI_DELEGATION_NONE/*
+		 * my_useragent: returns allocated string with default user agent
+		 */;
+	}
+	public Object get_args(Object i) {
+		 result = CURLE_OK;
+		bool last = (ModernizedCProgram.config.getNext() ? 0 : 1);
+		if (ModernizedCProgram.config.getUserpwd() && !ModernizedCProgram.config.getOauth_bearer()) {
+			result = ModernizedCProgram.checkpasswd("host", i, last, ModernizedCProgram.config.getUserpwd());
+			if (result) {
+				return result;
+			} 
+		} 
+		if (ModernizedCProgram.config.getProxyuserpwd()) {
+			result = ModernizedCProgram.checkpasswd("proxy", i, last, ModernizedCProgram.config.getProxyuserpwd());
+			if (result) {
+				return result;
+			} 
+		} 
+		if (!ModernizedCProgram.config.getUseragent()) {
+			ModernizedCProgram.config.setUseragent(ModernizedCProgram.my_useragent());
+			if (!ModernizedCProgram.config.getUseragent()) {
+				ModernizedCProgram.config.getGlobal().getErrors().helpf("out of memory\n");
+				result = CURLE_OUT_OF_MEMORY;
+			} 
+		} 
+		return result/*
+		 * Parse the string and modify ssl_version in the val argument. Return PARAM_OK
+		 * on success, otherwise a parameter error enum. ONLY ACCEPTS POSITIVE NUMBERS!
+		 *
+		 * Since this function gets called with the 'nextarg' pointer from within the
+		 * getparameter a lot, we must check it for NULL before accessing the str
+		 * data.
+		 */;
+	}
+	/***************************************************************************
+	 *                                  _   _ ____  _
+	 *  Project                     ___| | | |  _ \| |
+	 *                             / __| | | | |_) | |
+	 *                            | (__| |_| |  _ <| |___
+	 *                             \___|\___/|_| \_\_____|
+	 *
+	 * Copyright (C) 1998 - 2019, Daniel Stenberg, <daniel@haxx.se>, et al.
+	 *
+	 * This software is licensed as described in the file COPYING, which
+	 * you should have received as part of this distribution. The terms
+	 * are also available at https://curl.haxx.se/docs/copyright.html.
+	 *
+	 * You may opt to use, copy, modify, merge, publish, distribute and/or sell
+	 * copies of the Software, and permit persons to whom the Software is
+	 * furnished to do so, under the terms of the COPYING file.
+	 *
+	 * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+	 * KIND, either express or implied.
+	 *
+	 ***************************************************************************/
+	/* keep this as LAST include */
+	public void config_init() {
+		.memset(ModernizedCProgram.config, 0, );
+		ModernizedCProgram.config.setPostfieldsize(-1);
+		ModernizedCProgram.config.setUse_httpget(0);
+		ModernizedCProgram.config.setCreate_dirs(0);
+		ModernizedCProgram.config.setMaxredirs(-1024);
+		ModernizedCProgram.config.setProto(CURLPROTO_ALL);
+		ModernizedCProgram.config.setProto_present(0);
+		ModernizedCProgram.config.setProto_redir(/* All except FILE, SCP and SMB */CURLPROTO_ALL & ~(CURLPROTO_FILE | CURLPROTO_SCP | CURLPROTO_SMB | CURLPROTO_SMBS));
+		ModernizedCProgram.config.setProto_redir_present(0);
+		ModernizedCProgram.config.setProto_default(((Object)0));
+		ModernizedCProgram.config.setTcp_nodelay(/* enabled by default */1);
+		ModernizedCProgram.config.setHappy_eyeballs_timeout_ms(CURL_HET_DEFAULT);
+		ModernizedCProgram.config.setHttp09_allowed(0);
+	}
+	public void free_config_fields() {
+		getout urlnode = new getout();
+		do {
+			.free((ModernizedCProgram.config.getRandom_file()));
+			(ModernizedCProgram.config.getRandom_file()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getEgd_file()));
+			(ModernizedCProgram.config.getEgd_file()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getUseragent()));
+			(ModernizedCProgram.config.getUseragent()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getAltsvc()));
+			(ModernizedCProgram.config.getAltsvc()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getCookie()));
+			(ModernizedCProgram.config.getCookie()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getCookiejar()));
+			(ModernizedCProgram.config.getCookiejar()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getCookiefile()));
+			(ModernizedCProgram.config.getCookiefile()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getPostfields()));
+			(ModernizedCProgram.config.getPostfields()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getReferer()));
+			(ModernizedCProgram.config.getReferer()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getHeaderfile()));
+			(ModernizedCProgram.config.getHeaderfile()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getFtpport()));
+			(ModernizedCProgram.config.getFtpport()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getIface()));
+			(ModernizedCProgram.config.getIface()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getRange()));
+			(ModernizedCProgram.config.getRange()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getUserpwd()));
+			(ModernizedCProgram.config.getUserpwd()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getTls_username()));
+			(ModernizedCProgram.config.getTls_username()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getTls_password()));
+			(ModernizedCProgram.config.getTls_password()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getTls_authtype()));
+			(ModernizedCProgram.config.getTls_authtype()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_tls_username()));
+			(ModernizedCProgram.config.getProxy_tls_username()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_tls_password()));
+			(ModernizedCProgram.config.getProxy_tls_password()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_tls_authtype()));
+			(ModernizedCProgram.config.getProxy_tls_authtype()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxyuserpwd()));
+			(ModernizedCProgram.config.getProxyuserpwd()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy()));
+			(ModernizedCProgram.config.getProxy()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getDns_ipv6_addr()));
+			(ModernizedCProgram.config.getDns_ipv6_addr()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getDns_ipv4_addr()));
+			(ModernizedCProgram.config.getDns_ipv4_addr()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getDns_interface()));
+			(ModernizedCProgram.config.getDns_interface()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getDns_servers()));
+			(ModernizedCProgram.config.getDns_servers()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getNoproxy()));
+			(ModernizedCProgram.config.getNoproxy()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getMail_from()));
+			(ModernizedCProgram.config.getMail_from()) = ((Object)0);
+		} while (0);
+		ModernizedCProgram.config.getMail_rcpt().curl_slist_free_all();
+		do {
+			.free((ModernizedCProgram.config.getMail_auth()));
+			(ModernizedCProgram.config.getMail_auth()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getNetrc_file()));
+			(ModernizedCProgram.config.getNetrc_file()) = ((Object)0);
+		} while (0);
+		urlnode = ModernizedCProgram.config.getUrl_list();
+		getout generatedNext = urlnode.getNext();
+		Byte generatedUrl = urlnode.getUrl();
+		byte generatedOutfile = urlnode.getOutfile();
+		Byte generatedInfile = urlnode.getInfile();
+		while (urlnode) {
+			getout next = generatedNext;
+			do {
+				.free((generatedUrl));
+				(generatedUrl) = ((Object)0);
+			} while (0);
+			do {
+				.free((generatedOutfile));
+				(generatedOutfile) = ((Object)0);
+			} while (0);
+			do {
+				.free((generatedInfile));
+				(generatedInfile) = ((Object)0);
+			} while (0);
+			do {
+				.free((urlnode));
+				(urlnode) = ((Object)0);
+			} while (0);
+			urlnode = next;
+		}
+		ModernizedCProgram.config.setUrl_list(((Object)0));
+		ModernizedCProgram.config.setUrl_last(((Object)0));
+		ModernizedCProgram.config.setUrl_get(((Object)0));
+		ModernizedCProgram.config.setUrl_out(((Object)0));
+		do {
+			.free((ModernizedCProgram.config.getDoh_url()));
+			(ModernizedCProgram.config.getDoh_url()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getCipher_list()));
+			(ModernizedCProgram.config.getCipher_list()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_cipher_list()));
+			(ModernizedCProgram.config.getProxy_cipher_list()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getCert()));
+			(ModernizedCProgram.config.getCert()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_cert()));
+			(ModernizedCProgram.config.getProxy_cert()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getCert_type()));
+			(ModernizedCProgram.config.getCert_type()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_cert_type()));
+			(ModernizedCProgram.config.getProxy_cert_type()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getCacert()));
+			(ModernizedCProgram.config.getCacert()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_cacert()));
+			(ModernizedCProgram.config.getProxy_cacert()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getCapath()));
+			(ModernizedCProgram.config.getCapath()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_capath()));
+			(ModernizedCProgram.config.getProxy_capath()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getCrlfile()));
+			(ModernizedCProgram.config.getCrlfile()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getPinnedpubkey()));
+			(ModernizedCProgram.config.getPinnedpubkey()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_pinnedpubkey()));
+			(ModernizedCProgram.config.getProxy_pinnedpubkey()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_crlfile()));
+			(ModernizedCProgram.config.getProxy_crlfile()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getKey()));
+			(ModernizedCProgram.config.getKey()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_key()));
+			(ModernizedCProgram.config.getProxy_key()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getKey_type()));
+			(ModernizedCProgram.config.getKey_type()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_key_type()));
+			(ModernizedCProgram.config.getProxy_key_type()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getKey_passwd()));
+			(ModernizedCProgram.config.getKey_passwd()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_key_passwd()));
+			(ModernizedCProgram.config.getProxy_key_passwd()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getPubkey()));
+			(ModernizedCProgram.config.getPubkey()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getHostpubmd5()));
+			(ModernizedCProgram.config.getHostpubmd5()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getEngine()));
+			(ModernizedCProgram.config.getEngine()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getRequest_target()));
+			(ModernizedCProgram.config.getRequest_target()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getCustomrequest()));
+			(ModernizedCProgram.config.getCustomrequest()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getKrblevel()));
+			(ModernizedCProgram.config.getKrblevel()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getOauth_bearer()));
+			(ModernizedCProgram.config.getOauth_bearer()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getSasl_authzid()));
+			(ModernizedCProgram.config.getSasl_authzid()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getUnix_socket_path()));
+			(ModernizedCProgram.config.getUnix_socket_path()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getWriteout()));
+			(ModernizedCProgram.config.getWriteout()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProto_default()));
+			(ModernizedCProgram.config.getProto_default()) = ((Object)0);
+		} while (0);
+		ModernizedCProgram.config.getQuote().curl_slist_free_all();
+		ModernizedCProgram.config.getPostquote().curl_slist_free_all();
+		ModernizedCProgram.config.getPrequote().curl_slist_free_all();
+		ModernizedCProgram.config.getHeaders().curl_slist_free_all();
+		ModernizedCProgram.config.getProxyheaders().curl_slist_free_all();
+		ModernizedCProgram.curl_mime_free(ModernizedCProgram.config.getMimepost());
+		ModernizedCProgram.config.setMimepost(((Object)0));
+		ModernizedCProgram.config.getMimeroot().tool_mime_free();
+		ModernizedCProgram.config.setMimeroot(((Object)0));
+		ModernizedCProgram.config.setMimecurrent(((Object)0));
+		ModernizedCProgram.config.getTelnet_options().curl_slist_free_all();
+		ModernizedCProgram.config.getResolve().curl_slist_free_all();
+		ModernizedCProgram.config.getConnect_to().curl_slist_free_all();
+		do {
+			.free((ModernizedCProgram.config.getPreproxy()));
+			(ModernizedCProgram.config.getPreproxy()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getProxy_service_name()));
+			(ModernizedCProgram.config.getProxy_service_name()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getService_name()));
+			(ModernizedCProgram.config.getService_name()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getFtp_account()));
+			(ModernizedCProgram.config.getFtp_account()) = ((Object)0);
+		} while (0);
+		do {
+			.free((ModernizedCProgram.config.getFtp_alternative_to_user()));
+			(ModernizedCProgram.config.getFtp_alternative_to_user()) = ((Object)0);
+		} while (0);
+	}
+	public void config_free() {
+		OperationConfig last = ModernizedCProgram.config;
+		OperationConfig generatedPrev = last.getPrev();
+		while (/* Free each of the structures in reverse order */last) {
+			OperationConfig prev = generatedPrev;
+			last.free_config_fields();
+			.free(last);
+			last = prev;
+		}
+	}
 	public  getRemote_time() {
 		return remote_time;
 	}
 	public void setRemote_time( newRemote_time) {
 		remote_time = newRemote_time;
 	}
-	public Object getRandom_file() {
+	public Byte getRandom_file() {
 		return random_file;
 	}
-	public void setRandom_file(Object newRandom_file) {
+	public void setRandom_file(Byte newRandom_file) {
 		random_file = newRandom_file;
 	}
-	public Object getEgd_file() {
+	public Byte getEgd_file() {
 		return egd_file;
 	}
-	public void setEgd_file(Object newEgd_file) {
+	public void setEgd_file(Byte newEgd_file) {
 		egd_file = newEgd_file;
 	}
-	public Object getUseragent() {
+	public Byte getUseragent() {
 		return useragent;
 	}
-	public void setUseragent(Object newUseragent) {
+	public void setUseragent(Byte newUseragent) {
 		useragent = newUseragent;
 	}
-	public Object getCookie() {
+	public Byte getCookie() {
 		return cookie;
 	}
-	public void setCookie(Object newCookie) {
+	public void setCookie(Byte newCookie) {
 		cookie = newCookie;
 	}
-	public Object getCookiejar() {
+	public Byte getCookiejar() {
 		return cookiejar;
 	}
-	public void setCookiejar(Object newCookiejar) {
+	public void setCookiejar(Byte newCookiejar) {
 		cookiejar = newCookiejar;
 	}
-	public Object getCookiefile() {
+	public Byte getCookiefile() {
 		return cookiefile;
 	}
-	public void setCookiefile(Object newCookiefile) {
+	public void setCookiefile(Byte newCookiefile) {
 		cookiefile = newCookiefile;
 	}
-	public Object getAltsvc() {
+	public Byte getAltsvc() {
 		return altsvc;
 	}
-	public void setAltsvc(Object newAltsvc) {
+	public void setAltsvc(Byte newAltsvc) {
 		altsvc = newAltsvc;
 	}
 	public  getCookiesession() {
@@ -543,10 +1419,10 @@ public class OperationConfig {
 	public void setProto_redir_present( newProto_redir_present) {
 		proto_redir_present = newProto_redir_present;
 	}
-	public Object getProto_default() {
+	public Byte getProto_default() {
 		return proto_default;
 	}
-	public void setProto_default(Object newProto_default) {
+	public void setProto_default(Byte newProto_default) {
 		proto_default = newProto_default;
 	}
 	public Object getResume_from() {
@@ -555,10 +1431,10 @@ public class OperationConfig {
 	public void setResume_from(Object newResume_from) {
 		resume_from = newResume_from;
 	}
-	public Object getPostfields() {
+	public Byte getPostfields() {
 		return postfields;
 	}
-	public void setPostfields(Object newPostfields) {
+	public void setPostfields(Byte newPostfields) {
 		postfields = newPostfields;
 	}
 	public Object getPostfieldsize() {
@@ -567,10 +1443,10 @@ public class OperationConfig {
 	public void setPostfieldsize(Object newPostfieldsize) {
 		postfieldsize = newPostfieldsize;
 	}
-	public Object getReferer() {
+	public Byte getReferer() {
 		return referer;
 	}
-	public void setReferer(Object newReferer) {
+	public void setReferer(Byte newReferer) {
 		referer = newReferer;
 	}
 	public double getTimeout() {
@@ -597,22 +1473,22 @@ public class OperationConfig {
 	public void setMax_filesize(Object newMax_filesize) {
 		max_filesize = newMax_filesize;
 	}
-	public Object getHeaderfile() {
+	public Byte getHeaderfile() {
 		return headerfile;
 	}
-	public void setHeaderfile(Object newHeaderfile) {
+	public void setHeaderfile(Byte newHeaderfile) {
 		headerfile = newHeaderfile;
 	}
-	public Object getFtpport() {
+	public Byte getFtpport() {
 		return ftpport;
 	}
-	public void setFtpport(Object newFtpport) {
+	public void setFtpport(Byte newFtpport) {
 		ftpport = newFtpport;
 	}
-	public Object getIface() {
+	public Byte getIface() {
 		return iface;
 	}
-	public void setIface(Object newIface) {
+	public void setIface(Byte newIface) {
 		iface = newIface;
 	}
 	public long getLocalport() {
@@ -633,10 +1509,10 @@ public class OperationConfig {
 	public void setPorttouse(int newPorttouse) {
 		porttouse = newPorttouse;
 	}
-	public Object getRange() {
+	public Byte getRange() {
 		return range;
 	}
-	public void setRange(Object newRange) {
+	public void setRange(Byte newRange) {
 		range = newRange;
 	}
 	public long getLow_speed_limit() {
@@ -651,88 +1527,88 @@ public class OperationConfig {
 	public void setLow_speed_time(long newLow_speed_time) {
 		low_speed_time = newLow_speed_time;
 	}
-	public Object getDns_servers() {
+	public Byte getDns_servers() {
 		return dns_servers;
 	}
-	public void setDns_servers(Object newDns_servers) {
+	public void setDns_servers(Byte newDns_servers) {
 		dns_servers = newDns_servers;
 	}
-	public Object getDns_interface() {
+	public Byte getDns_interface() {
 		return dns_interface;
 	}
-	public void setDns_interface(Object newDns_interface) {
+	public void setDns_interface(Byte newDns_interface) {
 		dns_interface = newDns_interface;
 	}
-	public Object getDns_ipv4_addr() {
+	public Byte getDns_ipv4_addr() {
 		return dns_ipv4_addr;
 	}
-	public void setDns_ipv4_addr(Object newDns_ipv4_addr) {
+	public void setDns_ipv4_addr(Byte newDns_ipv4_addr) {
 		dns_ipv4_addr = newDns_ipv4_addr;
 	}
-	public Object getDns_ipv6_addr() {
+	public Byte getDns_ipv6_addr() {
 		return dns_ipv6_addr;
 	}
-	public void setDns_ipv6_addr(Object newDns_ipv6_addr) {
+	public void setDns_ipv6_addr(Byte newDns_ipv6_addr) {
 		dns_ipv6_addr = newDns_ipv6_addr;
 	}
-	public Object getUserpwd() {
+	public Byte getUserpwd() {
 		return userpwd;
 	}
-	public void setUserpwd(Object newUserpwd) {
+	public void setUserpwd(Byte newUserpwd) {
 		userpwd = newUserpwd;
 	}
-	public Object getLogin_options() {
+	public Byte getLogin_options() {
 		return login_options;
 	}
-	public void setLogin_options(Object newLogin_options) {
+	public void setLogin_options(Byte newLogin_options) {
 		login_options = newLogin_options;
 	}
-	public Object getTls_username() {
+	public Byte getTls_username() {
 		return tls_username;
 	}
-	public void setTls_username(Object newTls_username) {
+	public void setTls_username(Byte newTls_username) {
 		tls_username = newTls_username;
 	}
-	public Object getTls_password() {
+	public Byte getTls_password() {
 		return tls_password;
 	}
-	public void setTls_password(Object newTls_password) {
+	public void setTls_password(Byte newTls_password) {
 		tls_password = newTls_password;
 	}
-	public Object getTls_authtype() {
+	public Byte getTls_authtype() {
 		return tls_authtype;
 	}
-	public void setTls_authtype(Object newTls_authtype) {
+	public void setTls_authtype(Byte newTls_authtype) {
 		tls_authtype = newTls_authtype;
 	}
-	public Object getProxy_tls_username() {
+	public Byte getProxy_tls_username() {
 		return proxy_tls_username;
 	}
-	public void setProxy_tls_username(Object newProxy_tls_username) {
+	public void setProxy_tls_username(Byte newProxy_tls_username) {
 		proxy_tls_username = newProxy_tls_username;
 	}
-	public Object getProxy_tls_password() {
+	public Byte getProxy_tls_password() {
 		return proxy_tls_password;
 	}
-	public void setProxy_tls_password(Object newProxy_tls_password) {
+	public void setProxy_tls_password(Byte newProxy_tls_password) {
 		proxy_tls_password = newProxy_tls_password;
 	}
-	public Object getProxy_tls_authtype() {
+	public Byte getProxy_tls_authtype() {
 		return proxy_tls_authtype;
 	}
-	public void setProxy_tls_authtype(Object newProxy_tls_authtype) {
+	public void setProxy_tls_authtype(Byte newProxy_tls_authtype) {
 		proxy_tls_authtype = newProxy_tls_authtype;
 	}
-	public Object getProxyuserpwd() {
+	public Byte getProxyuserpwd() {
 		return proxyuserpwd;
 	}
-	public void setProxyuserpwd(Object newProxyuserpwd) {
+	public void setProxyuserpwd(Byte newProxyuserpwd) {
 		proxyuserpwd = newProxyuserpwd;
 	}
-	public Object getProxy() {
+	public Byte getProxy() {
 		return proxy;
 	}
-	public void setProxy(Object newProxy) {
+	public void setProxy(Byte newProxy) {
 		proxy = newProxy;
 	}
 	public int getProxyver() {
@@ -741,34 +1617,34 @@ public class OperationConfig {
 	public void setProxyver(int newProxyver) {
 		proxyver = newProxyver;
 	}
-	public Object getNoproxy() {
+	public Byte getNoproxy() {
 		return noproxy;
 	}
-	public void setNoproxy(Object newNoproxy) {
+	public void setNoproxy(Byte newNoproxy) {
 		noproxy = newNoproxy;
 	}
-	public Object getMail_from() {
+	public Byte getMail_from() {
 		return mail_from;
 	}
-	public void setMail_from(Object newMail_from) {
+	public void setMail_from(Byte newMail_from) {
 		mail_from = newMail_from;
 	}
-	public Object getMail_rcpt() {
+	public curl_slist getMail_rcpt() {
 		return mail_rcpt;
 	}
-	public void setMail_rcpt(Object newMail_rcpt) {
+	public void setMail_rcpt(curl_slist newMail_rcpt) {
 		mail_rcpt = newMail_rcpt;
 	}
-	public Object getMail_auth() {
+	public Byte getMail_auth() {
 		return mail_auth;
 	}
-	public void setMail_auth(Object newMail_auth) {
+	public void setMail_auth(Byte newMail_auth) {
 		mail_auth = newMail_auth;
 	}
-	public Object getSasl_authzid() {
+	public Byte getSasl_authzid() {
 		return sasl_authzid;
 	}
-	public void setSasl_authzid(Object newSasl_authzid) {
+	public void setSasl_authzid(Byte newSasl_authzid) {
 		sasl_authzid = newSasl_authzid;
 	}
 	public  getSasl_ir() {
@@ -849,196 +1725,196 @@ public class OperationConfig {
 	public void setNetrc( newNetrc) {
 		netrc = newNetrc;
 	}
-	public Object getNetrc_file() {
+	public Byte getNetrc_file() {
 		return netrc_file;
 	}
-	public void setNetrc_file(Object newNetrc_file) {
+	public void setNetrc_file(Byte newNetrc_file) {
 		netrc_file = newNetrc_file;
 	}
-	public Object getUrl_list() {
+	public getout getUrl_list() {
 		return url_list;
 	}
-	public void setUrl_list(Object newUrl_list) {
+	public void setUrl_list(getout newUrl_list) {
 		url_list = newUrl_list;
 	}
-	public Object getUrl_last() {
+	public getout getUrl_last() {
 		return url_last;
 	}
-	public void setUrl_last(Object newUrl_last) {
+	public void setUrl_last(getout newUrl_last) {
 		url_last = newUrl_last;
 	}
-	public Object getUrl_get() {
+	public getout getUrl_get() {
 		return url_get;
 	}
-	public void setUrl_get(Object newUrl_get) {
+	public void setUrl_get(getout newUrl_get) {
 		url_get = newUrl_get;
 	}
-	public Object getUrl_out() {
+	public getout getUrl_out() {
 		return url_out;
 	}
-	public void setUrl_out(Object newUrl_out) {
+	public void setUrl_out(getout newUrl_out) {
 		url_out = newUrl_out;
 	}
-	public Object getUrl_ul() {
+	public getout getUrl_ul() {
 		return url_ul;
 	}
-	public void setUrl_ul(Object newUrl_ul) {
+	public void setUrl_ul(getout newUrl_ul) {
 		url_ul = newUrl_ul;
 	}
-	public Object getDoh_url() {
+	public Byte getDoh_url() {
 		return doh_url;
 	}
-	public void setDoh_url(Object newDoh_url) {
+	public void setDoh_url(Byte newDoh_url) {
 		doh_url = newDoh_url;
 	}
-	public Object getCipher_list() {
+	public Byte getCipher_list() {
 		return cipher_list;
 	}
-	public void setCipher_list(Object newCipher_list) {
+	public void setCipher_list(Byte newCipher_list) {
 		cipher_list = newCipher_list;
 	}
-	public Object getProxy_cipher_list() {
+	public Byte getProxy_cipher_list() {
 		return proxy_cipher_list;
 	}
-	public void setProxy_cipher_list(Object newProxy_cipher_list) {
+	public void setProxy_cipher_list(Byte newProxy_cipher_list) {
 		proxy_cipher_list = newProxy_cipher_list;
 	}
-	public Object getCipher13_list() {
+	public Byte getCipher13_list() {
 		return cipher13_list;
 	}
-	public void setCipher13_list(Object newCipher13_list) {
+	public void setCipher13_list(Byte newCipher13_list) {
 		cipher13_list = newCipher13_list;
 	}
-	public Object getProxy_cipher13_list() {
+	public Byte getProxy_cipher13_list() {
 		return proxy_cipher13_list;
 	}
-	public void setProxy_cipher13_list(Object newProxy_cipher13_list) {
+	public void setProxy_cipher13_list(Byte newProxy_cipher13_list) {
 		proxy_cipher13_list = newProxy_cipher13_list;
 	}
-	public Object getCert() {
+	public Byte getCert() {
 		return cert;
 	}
-	public void setCert(Object newCert) {
+	public void setCert(Byte newCert) {
 		cert = newCert;
 	}
-	public Object getProxy_cert() {
+	public Byte getProxy_cert() {
 		return proxy_cert;
 	}
-	public void setProxy_cert(Object newProxy_cert) {
+	public void setProxy_cert(Byte newProxy_cert) {
 		proxy_cert = newProxy_cert;
 	}
-	public Object getCert_type() {
+	public Byte getCert_type() {
 		return cert_type;
 	}
-	public void setCert_type(Object newCert_type) {
+	public void setCert_type(Byte newCert_type) {
 		cert_type = newCert_type;
 	}
-	public Object getProxy_cert_type() {
+	public Byte getProxy_cert_type() {
 		return proxy_cert_type;
 	}
-	public void setProxy_cert_type(Object newProxy_cert_type) {
+	public void setProxy_cert_type(Byte newProxy_cert_type) {
 		proxy_cert_type = newProxy_cert_type;
 	}
-	public Object getCacert() {
+	public Byte getCacert() {
 		return cacert;
 	}
-	public void setCacert(Object newCacert) {
+	public void setCacert(Byte newCacert) {
 		cacert = newCacert;
 	}
-	public Object getProxy_cacert() {
+	public Byte getProxy_cacert() {
 		return proxy_cacert;
 	}
-	public void setProxy_cacert(Object newProxy_cacert) {
+	public void setProxy_cacert(Byte newProxy_cacert) {
 		proxy_cacert = newProxy_cacert;
 	}
-	public Object getCapath() {
+	public Byte getCapath() {
 		return capath;
 	}
-	public void setCapath(Object newCapath) {
+	public void setCapath(Byte newCapath) {
 		capath = newCapath;
 	}
-	public Object getProxy_capath() {
+	public Byte getProxy_capath() {
 		return proxy_capath;
 	}
-	public void setProxy_capath(Object newProxy_capath) {
+	public void setProxy_capath(Byte newProxy_capath) {
 		proxy_capath = newProxy_capath;
 	}
-	public Object getCrlfile() {
+	public Byte getCrlfile() {
 		return crlfile;
 	}
-	public void setCrlfile(Object newCrlfile) {
+	public void setCrlfile(Byte newCrlfile) {
 		crlfile = newCrlfile;
 	}
-	public Object getProxy_crlfile() {
+	public Byte getProxy_crlfile() {
 		return proxy_crlfile;
 	}
-	public void setProxy_crlfile(Object newProxy_crlfile) {
+	public void setProxy_crlfile(Byte newProxy_crlfile) {
 		proxy_crlfile = newProxy_crlfile;
 	}
-	public Object getPinnedpubkey() {
+	public Byte getPinnedpubkey() {
 		return pinnedpubkey;
 	}
-	public void setPinnedpubkey(Object newPinnedpubkey) {
+	public void setPinnedpubkey(Byte newPinnedpubkey) {
 		pinnedpubkey = newPinnedpubkey;
 	}
-	public Object getProxy_pinnedpubkey() {
+	public Byte getProxy_pinnedpubkey() {
 		return proxy_pinnedpubkey;
 	}
-	public void setProxy_pinnedpubkey(Object newProxy_pinnedpubkey) {
+	public void setProxy_pinnedpubkey(Byte newProxy_pinnedpubkey) {
 		proxy_pinnedpubkey = newProxy_pinnedpubkey;
 	}
-	public Object getKey() {
+	public Byte getKey() {
 		return key;
 	}
-	public void setKey(Object newKey) {
+	public void setKey(Byte newKey) {
 		key = newKey;
 	}
-	public Object getProxy_key() {
+	public Byte getProxy_key() {
 		return proxy_key;
 	}
-	public void setProxy_key(Object newProxy_key) {
+	public void setProxy_key(Byte newProxy_key) {
 		proxy_key = newProxy_key;
 	}
-	public Object getKey_type() {
+	public Byte getKey_type() {
 		return key_type;
 	}
-	public void setKey_type(Object newKey_type) {
+	public void setKey_type(Byte newKey_type) {
 		key_type = newKey_type;
 	}
-	public Object getProxy_key_type() {
+	public Byte getProxy_key_type() {
 		return proxy_key_type;
 	}
-	public void setProxy_key_type(Object newProxy_key_type) {
+	public void setProxy_key_type(Byte newProxy_key_type) {
 		proxy_key_type = newProxy_key_type;
 	}
-	public Object getKey_passwd() {
+	public Byte getKey_passwd() {
 		return key_passwd;
 	}
-	public void setKey_passwd(Object newKey_passwd) {
+	public void setKey_passwd(Byte newKey_passwd) {
 		key_passwd = newKey_passwd;
 	}
-	public Object getProxy_key_passwd() {
+	public Byte getProxy_key_passwd() {
 		return proxy_key_passwd;
 	}
-	public void setProxy_key_passwd(Object newProxy_key_passwd) {
+	public void setProxy_key_passwd(Byte newProxy_key_passwd) {
 		proxy_key_passwd = newProxy_key_passwd;
 	}
-	public Object getPubkey() {
+	public Byte getPubkey() {
 		return pubkey;
 	}
-	public void setPubkey(Object newPubkey) {
+	public void setPubkey(Byte newPubkey) {
 		pubkey = newPubkey;
 	}
-	public Object getHostpubmd5() {
+	public Byte getHostpubmd5() {
 		return hostpubmd5;
 	}
-	public void setHostpubmd5(Object newHostpubmd5) {
+	public void setHostpubmd5(Byte newHostpubmd5) {
 		hostpubmd5 = newHostpubmd5;
 	}
-	public Object getEngine() {
+	public Byte getEngine() {
 		return engine;
 	}
-	public void setEngine(Object newEngine) {
+	public void setEngine(Byte newEngine) {
 		engine = newEngine;
 	}
 	public  getCrlf() {
@@ -1047,22 +1923,22 @@ public class OperationConfig {
 	public void setCrlf( newCrlf) {
 		crlf = newCrlf;
 	}
-	public Object getCustomrequest() {
+	public Byte getCustomrequest() {
 		return customrequest;
 	}
-	public void setCustomrequest(Object newCustomrequest) {
+	public void setCustomrequest(Byte newCustomrequest) {
 		customrequest = newCustomrequest;
 	}
-	public Object getKrblevel() {
+	public Byte getKrblevel() {
 		return krblevel;
 	}
-	public void setKrblevel(Object newKrblevel) {
+	public void setKrblevel(Byte newKrblevel) {
 		krblevel = newKrblevel;
 	}
-	public Object getRequest_target() {
+	public Byte getRequest_target() {
 		return request_target;
 	}
-	public void setRequest_target(Object newRequest_target) {
+	public void setRequest_target(Byte newRequest_target) {
 		request_target = newRequest_target;
 	}
 	public long getHttpversion() {
@@ -1173,28 +2049,28 @@ public class OperationConfig {
 	public void setProxyanyauth( newProxyanyauth) {
 		proxyanyauth = newProxyanyauth;
 	}
-	public Object getWriteout() {
+	public Byte getWriteout() {
 		return writeout;
 	}
-	public void setWriteout(Object newWriteout) {
+	public void setWriteout(Byte newWriteout) {
 		writeout = newWriteout;
 	}
-	public Object getQuote() {
+	public curl_slist getQuote() {
 		return quote;
 	}
-	public void setQuote(Object newQuote) {
+	public void setQuote(curl_slist newQuote) {
 		quote = newQuote;
 	}
-	public Object getPostquote() {
+	public curl_slist getPostquote() {
 		return postquote;
 	}
-	public void setPostquote(Object newPostquote) {
+	public void setPostquote(curl_slist newPostquote) {
 		postquote = newPostquote;
 	}
-	public Object getPrequote() {
+	public curl_slist getPrequote() {
 		return prequote;
 	}
-	public void setPrequote(Object newPrequote) {
+	public void setPrequote(curl_slist newPrequote) {
 		prequote = newPrequote;
 	}
 	public long getSsl_version() {
@@ -1221,10 +2097,10 @@ public class OperationConfig {
 	public void setIp_version(long newIp_version) {
 		ip_version = newIp_version;
 	}
-	public  getTimecond() {
+	public Object getTimecond() {
 		return timecond;
 	}
-	public void setTimecond( newTimecond) {
+	public void setTimecond(Object newTimecond) {
 		timecond = newTimecond;
 	}
 	public Object getCondtime() {
@@ -1233,28 +2109,28 @@ public class OperationConfig {
 	public void setCondtime(Object newCondtime) {
 		condtime = newCondtime;
 	}
-	public Object getHeaders() {
+	public curl_slist getHeaders() {
 		return headers;
 	}
-	public void setHeaders(Object newHeaders) {
+	public void setHeaders(curl_slist newHeaders) {
 		headers = newHeaders;
 	}
-	public Object getProxyheaders() {
+	public curl_slist getProxyheaders() {
 		return proxyheaders;
 	}
-	public void setProxyheaders(Object newProxyheaders) {
+	public void setProxyheaders(curl_slist newProxyheaders) {
 		proxyheaders = newProxyheaders;
 	}
-	public Object getMimeroot() {
+	public tool_mime getMimeroot() {
 		return mimeroot;
 	}
-	public void setMimeroot(Object newMimeroot) {
+	public void setMimeroot(tool_mime newMimeroot) {
 		mimeroot = newMimeroot;
 	}
-	public Object getMimecurrent() {
+	public tool_mime getMimecurrent() {
 		return mimecurrent;
 	}
-	public void setMimecurrent(Object newMimecurrent) {
+	public void setMimecurrent(tool_mime newMimecurrent) {
 		mimecurrent = newMimecurrent;
 	}
 	public Object getMimepost() {
@@ -1263,22 +2139,22 @@ public class OperationConfig {
 	public void setMimepost(Object newMimepost) {
 		mimepost = newMimepost;
 	}
-	public Object getTelnet_options() {
+	public curl_slist getTelnet_options() {
 		return telnet_options;
 	}
-	public void setTelnet_options(Object newTelnet_options) {
+	public void setTelnet_options(curl_slist newTelnet_options) {
 		telnet_options = newTelnet_options;
 	}
-	public Object getResolve() {
+	public curl_slist getResolve() {
 		return resolve;
 	}
-	public void setResolve(Object newResolve) {
+	public void setResolve(curl_slist newResolve) {
 		resolve = newResolve;
 	}
-	public Object getConnect_to() {
+	public curl_slist getConnect_to() {
 		return connect_to;
 	}
-	public void setConnect_to(Object newConnect_to) {
+	public void setConnect_to(curl_slist newConnect_to) {
 		connect_to = newConnect_to;
 	}
 	public  getHttpreq() {
@@ -1329,10 +2205,10 @@ public class OperationConfig {
 	public void setFtp_ssl_ccc_mode(int newFtp_ssl_ccc_mode) {
 		ftp_ssl_ccc_mode = newFtp_ssl_ccc_mode;
 	}
-	public Object getPreproxy() {
+	public Byte getPreproxy() {
 		return preproxy;
 	}
-	public void setPreproxy(Object newPreproxy) {
+	public void setPreproxy(Byte newPreproxy) {
 		preproxy = newPreproxy;
 	}
 	public int getSocks5_gssapi_nec() {
@@ -1347,16 +2223,16 @@ public class OperationConfig {
 	public void setSocks5_auth(long newSocks5_auth) {
 		socks5_auth = newSocks5_auth;
 	}
-	public Object getProxy_service_name() {
+	public Byte getProxy_service_name() {
 		return proxy_service_name;
 	}
-	public void setProxy_service_name(Object newProxy_service_name) {
+	public void setProxy_service_name(Byte newProxy_service_name) {
 		proxy_service_name = newProxy_service_name;
 	}
-	public Object getService_name() {
+	public Byte getService_name() {
 		return service_name;
 	}
-	public void setService_name(Object newService_name) {
+	public void setService_name(Byte newService_name) {
 		service_name = newService_name;
 	}
 	public  getTcp_nodelay() {
@@ -1395,16 +2271,16 @@ public class OperationConfig {
 	public void setRetry_maxtime(long newRetry_maxtime) {
 		retry_maxtime = newRetry_maxtime;
 	}
-	public Object getFtp_account() {
+	public Byte getFtp_account() {
 		return ftp_account;
 	}
-	public void setFtp_account(Object newFtp_account) {
+	public void setFtp_account(Byte newFtp_account) {
 		ftp_account = newFtp_account;
 	}
-	public Object getFtp_alternative_to_user() {
+	public Byte getFtp_alternative_to_user() {
 		return ftp_alternative_to_user;
 	}
-	public void setFtp_alternative_to_user(Object newFtp_alternative_to_user) {
+	public void setFtp_alternative_to_user(Byte newFtp_alternative_to_user) {
 		ftp_alternative_to_user = newFtp_alternative_to_user;
 	}
 	public int getFtp_filemethod() {
@@ -1521,22 +2397,22 @@ public class OperationConfig {
 	public void setUse_metalink( newUse_metalink) {
 		use_metalink = newUse_metalink;
 	}
-	public Object getMetalinkfile_list() {
+	public metalinkfile getMetalinkfile_list() {
 		return metalinkfile_list;
 	}
-	public void setMetalinkfile_list(Object newMetalinkfile_list) {
+	public void setMetalinkfile_list(metalinkfile newMetalinkfile_list) {
 		metalinkfile_list = newMetalinkfile_list;
 	}
-	public Object getMetalinkfile_last() {
+	public metalinkfile getMetalinkfile_last() {
 		return metalinkfile_last;
 	}
-	public void setMetalinkfile_last(Object newMetalinkfile_last) {
+	public void setMetalinkfile_last(metalinkfile newMetalinkfile_last) {
 		metalinkfile_last = newMetalinkfile_last;
 	}
-	public Object getOauth_bearer() {
+	public Byte getOauth_bearer() {
 		return oauth_bearer;
 	}
-	public void setOauth_bearer(Object newOauth_bearer) {
+	public void setOauth_bearer(Byte newOauth_bearer) {
 		oauth_bearer = newOauth_bearer;
 	}
 	public  getNonpn() {
@@ -1551,10 +2427,10 @@ public class OperationConfig {
 	public void setNoalpn( newNoalpn) {
 		noalpn = newNoalpn;
 	}
-	public Object getUnix_socket_path() {
+	public Byte getUnix_socket_path() {
 		return unix_socket_path;
 	}
-	public void setUnix_socket_path(Object newUnix_socket_path) {
+	public void setUnix_socket_path(Byte newUnix_socket_path) {
 		unix_socket_path = newUnix_socket_path;
 	}
 	public  getAbstract_unix_socket() {
@@ -1617,22 +2493,22 @@ public class OperationConfig {
 	public void setDisallow_username_in_url( newDisallow_username_in_url) {
 		disallow_username_in_url = newDisallow_username_in_url;
 	}
-	public Object getGlobal() {
+	public GlobalConfig getGlobal() {
 		return global;
 	}
-	public void setGlobal(Object newGlobal) {
+	public void setGlobal(GlobalConfig newGlobal) {
 		global = newGlobal;
 	}
-	public Object getPrev() {
+	public OperationConfig getPrev() {
 		return prev;
 	}
-	public void setPrev(Object newPrev) {
+	public void setPrev(OperationConfig newPrev) {
 		prev = newPrev;
 	}
-	public Object getNext() {
+	public OperationConfig getNext() {
 		return next;
 	}
-	public void setNext(Object newNext) {
+	public void setNext(OperationConfig newNext) {
 		next = newNext;
 	}
 	public State getState() {

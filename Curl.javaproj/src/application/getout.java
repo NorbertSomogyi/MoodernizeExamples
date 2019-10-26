@@ -2,13 +2,13 @@ package application;
 
 /* next one */
 public class getout {
-	private Object next;
-	private Object url;
-	private Object outfile;
-	private Object infile;
+	private getout next;
+	private Byte url;
+	private byte outfile;
+	private Byte infile;
 	private int flags;
 	
-	public getout(Object next, Object url, Object outfile, Object infile, int flags) {
+	public getout(getout next, Byte url, byte outfile, Byte infile, int flags) {
 		setNext(next);
 		setUrl(url);
 		setOutfile(outfile);
@@ -18,28 +18,44 @@ public class getout {
 	public getout() {
 	}
 	
-	public Object getNext() {
+	public getout new_getout(OperationConfig config) {
+		getout node = .calloc(1, );
+		getout generatedUrl_last = config.getUrl_last();
+		getout last = generatedUrl_last;
+		int generatedDefault_node_flags = config.getDefault_node_flags();
+		if (node) {
+			if (/* append this new node last in the list */last) {
+				last.setNext(node);
+			} else {
+					config.setUrl_list(/* first node */node);
+			} 
+			config.setUrl_last(/* move the last pointer */node);
+			node.setFlags(generatedDefault_node_flags);
+		} 
+		return node;
+	}
+	public getout getNext() {
 		return next;
 	}
-	public void setNext(Object newNext) {
+	public void setNext(getout newNext) {
 		next = newNext;
 	}
-	public Object getUrl() {
+	public Byte getUrl() {
 		return url;
 	}
-	public void setUrl(Object newUrl) {
+	public void setUrl(Byte newUrl) {
 		url = newUrl;
 	}
-	public Object getOutfile() {
+	public byte getOutfile() {
 		return outfile;
 	}
-	public void setOutfile(Object newOutfile) {
+	public void setOutfile(byte newOutfile) {
 		outfile = newOutfile;
 	}
-	public Object getInfile() {
+	public Byte getInfile() {
 		return infile;
 	}
-	public void setInfile(Object newInfile) {
+	public void setInfile(Byte newInfile) {
 		infile = newInfile;
 	}
 	public int getFlags() {

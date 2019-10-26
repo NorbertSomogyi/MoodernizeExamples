@@ -23,9 +23,9 @@ package application;
  ***************************************************************************/
 /* first node */
 public class per_transfer {
-	private Object next;
-	private Object prev;
-	private Object config;
+	private per_transfer next;
+	private per_transfer prev;
+	private OperationConfig config;
 	private Object curl;
 	private long retry_numretries;
 	private long retry_sleep_default;
@@ -33,10 +33,10 @@ public class per_transfer {
 	private timeval retrystart;
 	private  metalink;
 	private  metalink_next_res;
-	private Object mlfile;
-	private Object mlres;
-	private Object this_url;
-	private Object outfile;
+	private metalinkfile mlfile;
+	private metalink_resource mlres;
+	private Byte this_url;
+	private Byte outfile;
 	private  infdopen;
 	private int infd;
 	private ProgressData progressbar;
@@ -52,11 +52,11 @@ public class per_transfer {
 	private Object ulnow;
 	private  dltotal_added;
 	private  ultotal_added;
-	private Object separator_err;
-	private Object separator;
-	private Object uploadfile;
+	private Byte separator_err;
+	private Byte separator;
+	private Byte uploadfile;
 	
-	public per_transfer(Object next, Object prev, Object config, Object curl, long retry_numretries, long retry_sleep_default, long retry_sleep, timeval retrystart,  metalink,  metalink_next_res, Object mlfile, Object mlres, Object this_url, Object outfile,  infdopen, int infd, ProgressData progressbar, OutStruct outs, OutStruct heads, InStruct input, HdrCbData hdrcbdata, Object errorbuffer,  added, Object dltotal, Object dlnow, Object ultotal, Object ulnow,  dltotal_added,  ultotal_added, Object separator_err, Object separator, Object uploadfile) {
+	public per_transfer(per_transfer next, per_transfer prev, OperationConfig config, Object curl, long retry_numretries, long retry_sleep_default, long retry_sleep, timeval retrystart,  metalink,  metalink_next_res, metalinkfile mlfile, metalink_resource mlres, Byte this_url, Byte outfile,  infdopen, int infd, ProgressData progressbar, OutStruct outs, OutStruct heads, InStruct input, HdrCbData hdrcbdata, Object errorbuffer,  added, Object dltotal, Object dlnow, Object ultotal, Object ulnow,  dltotal_added,  ultotal_added, Byte separator_err, Byte separator, Byte uploadfile) {
 		setNext(next);
 		setPrev(prev);
 		setConfig(config);
@@ -93,22 +93,71 @@ public class per_transfer {
 	public per_transfer() {
 	}
 	
-	public Object getNext() {
+	public Object add_per_transfer() {
+		per_transfer p = new per_transfer();
+		p = .calloc(, 1);
+		if (!p) {
+			return CURLE_OUT_OF_MEMORY;
+		} 
+		if (!ModernizedCProgram.transfers) {
+			ModernizedCProgram.transfersl = ModernizedCProgram.transfers = /* first entry */p;
+		} else {
+				ModernizedCProgram.transfersl.setNext(/* make the last node point to the new node */p);
+				p.setPrev(/* make the new node point back to the formerly last node */ModernizedCProgram.transfersl);
+				ModernizedCProgram.transfersl = /* move the last node pointer to the new entry */p;
+		} 
+		per = p;
+		/* count total number of transfers added */ModernizedCProgram.all_xfers++;
+		return CURLE_OK;
+	}
+	public per_transfer del_per_transfer() {
+		per_transfer n = new per_transfer();
+		per_transfer p = new per_transfer();
+		do {
+		} while (0);
+		do {
+		} while (0);
+		do {
+		} while (0);
+		per_transfer generatedNext = this.getNext();
+		n = generatedNext;
+		per_transfer generatedPrev = this.getPrev();
+		p = generatedPrev;
+		if (p) {
+			p.setNext(n);
+		} else {
+				ModernizedCProgram.transfers = n;
+		} 
+		if (n) {
+			n.setPrev(p);
+		} else {
+				ModernizedCProgram.transfersl = p;
+		} 
+		.free(per);
+		return n;
+	}
+	public void progress_finalize() {
+		Object generatedDlnow = this.getDlnow();
+		ModernizedCProgram.all_dlalready += generatedDlnow;
+		Object generatedUlnow = this.getUlnow();
+		ModernizedCProgram.all_ulalready += generatedUlnow;
+	}
+	public per_transfer getNext() {
 		return next;
 	}
-	public void setNext(Object newNext) {
+	public void setNext(per_transfer newNext) {
 		next = newNext;
 	}
-	public Object getPrev() {
+	public per_transfer getPrev() {
 		return prev;
 	}
-	public void setPrev(Object newPrev) {
+	public void setPrev(per_transfer newPrev) {
 		prev = newPrev;
 	}
-	public Object getConfig() {
+	public OperationConfig getConfig() {
 		return config;
 	}
-	public void setConfig(Object newConfig) {
+	public void setConfig(OperationConfig newConfig) {
 		config = newConfig;
 	}
 	public Object getCurl() {
@@ -153,28 +202,28 @@ public class per_transfer {
 	public void setMetalink_next_res( newMetalink_next_res) {
 		metalink_next_res = newMetalink_next_res;
 	}
-	public Object getMlfile() {
+	public metalinkfile getMlfile() {
 		return mlfile;
 	}
-	public void setMlfile(Object newMlfile) {
+	public void setMlfile(metalinkfile newMlfile) {
 		mlfile = newMlfile;
 	}
-	public Object getMlres() {
+	public metalink_resource getMlres() {
 		return mlres;
 	}
-	public void setMlres(Object newMlres) {
+	public void setMlres(metalink_resource newMlres) {
 		mlres = newMlres;
 	}
-	public Object getThis_url() {
+	public Byte getThis_url() {
 		return this_url;
 	}
-	public void setThis_url(Object newThis_url) {
+	public void setThis_url(Byte newThis_url) {
 		this_url = newThis_url;
 	}
-	public Object getOutfile() {
+	public Byte getOutfile() {
 		return outfile;
 	}
-	public void setOutfile(Object newOutfile) {
+	public void setOutfile(Byte newOutfile) {
 		outfile = newOutfile;
 	}
 	public  getInfdopen() {
@@ -267,22 +316,22 @@ public class per_transfer {
 	public void setUltotal_added( newUltotal_added) {
 		ultotal_added = newUltotal_added;
 	}
-	public Object getSeparator_err() {
+	public Byte getSeparator_err() {
 		return separator_err;
 	}
-	public void setSeparator_err(Object newSeparator_err) {
+	public void setSeparator_err(Byte newSeparator_err) {
 		separator_err = newSeparator_err;
 	}
-	public Object getSeparator() {
+	public Byte getSeparator() {
 		return separator;
 	}
-	public void setSeparator(Object newSeparator) {
+	public void setSeparator(Byte newSeparator) {
 		separator = newSeparator;
 	}
-	public Object getUploadfile() {
+	public Byte getUploadfile() {
 		return uploadfile;
 	}
-	public void setUploadfile(Object newUploadfile) {
+	public void setUploadfile(Byte newUploadfile) {
 		uploadfile = newUploadfile;
 	}
 }

@@ -6,13 +6,13 @@ public class smtp_conn {
 	private pingpong pp;
 	private  state;
 	private  ssldone;
-	private Object domain;
+	private Byte domain;
 	private SASL sasl;
 	private  tls_supported;
 	private  size_supported;
 	private  auth_supported;
 	
-	public smtp_conn(pingpong pp,  state,  ssldone, Object domain, SASL sasl,  tls_supported,  size_supported,  auth_supported) {
+	public smtp_conn(pingpong pp,  state,  ssldone, Byte domain, SASL sasl,  tls_supported,  size_supported,  auth_supported) {
 		setPp(pp);
 		setState(state);
 		setSsldone(ssldone);
@@ -43,10 +43,10 @@ public class smtp_conn {
 	public void setSsldone( newSsldone) {
 		ssldone = newSsldone;
 	}
-	public Object getDomain() {
+	public Byte getDomain() {
 		return domain;
 	}
-	public void setDomain(Object newDomain) {
+	public void setDomain(Byte newDomain) {
 		domain = newDomain;
 	}
 	public SASL getSasl() {

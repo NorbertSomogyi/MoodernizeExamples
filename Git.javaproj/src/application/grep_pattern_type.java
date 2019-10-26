@@ -1,0 +1,9 @@
+package application;
+
+public enum grep_pattern_type {
+	GREP_PATTERN_TYPE_UNSPECIFIED, 
+	GREP_PATTERN_TYPE_BRE, 
+	GREP_PATTERN_TYPE_ERE, 
+	GREP_PATTERN_TYPE_FIXED, 
+	GREP_PATTERN_TYPE_PCRE
+}

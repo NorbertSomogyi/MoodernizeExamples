@@ -1,0 +1,10 @@
+package application;
+
+public enum color_clean {
+	CLEAN_COLOR_RESET, 
+	CLEAN_COLOR_PLAIN, 
+	CLEAN_COLOR_PROMPT, 
+	CLEAN_COLOR_HEADER, 
+	CLEAN_COLOR_HELP, 
+	CLEAN_COLOR_ERROR
+}

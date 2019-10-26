@@ -13,18 +13,18 @@ package application;
    Everything that is strictly related to a connection is banned from this
    struct. */
 public class SSHPROTO {
-	private Object path;
+	private Byte path;
 	
-	public SSHPROTO(Object path) {
+	public SSHPROTO(Byte path) {
 		setPath(path);
 	}
 	public SSHPROTO() {
 	}
 	
-	public Object getPath() {
+	public Byte getPath() {
 		return path;
 	}
-	public void setPath(Object newPath) {
+	public void setPath(Byte newPath) {
 		path = newPath;
 	}
 }

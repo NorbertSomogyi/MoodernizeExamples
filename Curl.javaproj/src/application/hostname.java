@@ -3,12 +3,12 @@ package application;
 /* the host to connect to. valid only if
                                    bits.conn_to_host is set */
 public class hostname {
-	private Object rawalloc;
-	private Object encalloc;
-	private Object name;
+	private Byte rawalloc;
+	private Byte encalloc;
+	private Byte name;
 	private Object dispname;
 	
-	public hostname(Object rawalloc, Object encalloc, Object name, Object dispname) {
+	public hostname(Byte rawalloc, Byte encalloc, Byte name, Object dispname) {
 		setRawalloc(rawalloc);
 		setEncalloc(encalloc);
 		setName(name);
@@ -17,22 +17,41 @@ public class hostname {
 	public hostname() {
 	}
 	
-	public Object getRawalloc() {
+	public void strip_trailing_dot() {
+		size_t len = new size_t();
+		Byte generatedName = this.getName();
+		if (!host || !generatedName) {
+			return ;
+		} 
+		len = .strlen(generatedName);
+		if (len && (generatedName[len - 1] == (byte)'.')) {
+			generatedName[len - 1] = 0/*
+			 * Perform any necessary IDN conversion of hostname
+			 */;
+		} 
+	}
+	public void free_idnconverted_hostname() {
+		(Object)/* must be freed with free() since this was
+		                           allocated by curl_win32_idn_to_ascii */host;
+	}
+	/* must be freed with idn2_free() since this was
+	                                 allocated by libidn */
+	public Byte getRawalloc() {
 		return rawalloc;
 	}
-	public void setRawalloc(Object newRawalloc) {
+	public void setRawalloc(Byte newRawalloc) {
 		rawalloc = newRawalloc;
 	}
-	public Object getEncalloc() {
+	public Byte getEncalloc() {
 		return encalloc;
 	}
-	public void setEncalloc(Object newEncalloc) {
+	public void setEncalloc(Byte newEncalloc) {
 		encalloc = newEncalloc;
 	}
-	public Object getName() {
+	public Byte getName() {
 		return name;
 	}
-	public void setName(Object newName) {
+	public void setName(Byte newName) {
 		name = newName;
 	}
 	public Object getDispname() {

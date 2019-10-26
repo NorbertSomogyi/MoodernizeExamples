@@ -5,27 +5,27 @@ package application;
 public class ssh_conn {
 	private Object authlist;
 	private Object passphrase;
-	private Object rsa_pub;
-	private Object rsa;
+	private Byte rsa_pub;
+	private Byte rsa;
 	private  authed;
 	private  state;
 	private  nextstate;
-	private  actualcode;
-	private Object quote_item;
-	private Object quote_path1;
-	private Object quote_path2;
+	private Object actualcode;
+	private curl_slist quote_item;
+	private Byte quote_path1;
+	private Byte quote_path2;
 	private  acceptfail;
-	private Object homedir;
+	private Byte homedir;
 	private Object readdir_len;
 	private Object readdir_totalLen;
 	private Object readdir_currLen;
-	private Object readdir_line;
-	private Object readdir_linkPath;
+	private Byte readdir_line;
+	private Byte readdir_linkPath;
 	private int secondCreateDirs;
-	private Object slash_pos;
+	private Byte slash_pos;
 	private int orig_waitfor;
 	
-	public ssh_conn(Object authlist, Object passphrase, Object rsa_pub, Object rsa,  authed,  state,  nextstate,  actualcode, Object quote_item, Object quote_path1, Object quote_path2,  acceptfail, Object homedir, Object readdir_len, Object readdir_totalLen, Object readdir_currLen, Object readdir_line, Object readdir_linkPath, int secondCreateDirs, Object slash_pos, int orig_waitfor) {
+	public ssh_conn(Object authlist, Object passphrase, Byte rsa_pub, Byte rsa,  authed,  state,  nextstate, Object actualcode, curl_slist quote_item, Byte quote_path1, Byte quote_path2,  acceptfail, Byte homedir, Object readdir_len, Object readdir_totalLen, Object readdir_currLen, Byte readdir_line, Byte readdir_linkPath, int secondCreateDirs, Byte slash_pos, int orig_waitfor) {
 		setAuthlist(authlist);
 		setPassphrase(passphrase);
 		setRsa_pub(rsa_pub);
@@ -63,16 +63,16 @@ public class ssh_conn {
 	public void setPassphrase(Object newPassphrase) {
 		passphrase = newPassphrase;
 	}
-	public Object getRsa_pub() {
+	public Byte getRsa_pub() {
 		return rsa_pub;
 	}
-	public void setRsa_pub(Object newRsa_pub) {
+	public void setRsa_pub(Byte newRsa_pub) {
 		rsa_pub = newRsa_pub;
 	}
-	public Object getRsa() {
+	public Byte getRsa() {
 		return rsa;
 	}
-	public void setRsa(Object newRsa) {
+	public void setRsa(Byte newRsa) {
 		rsa = newRsa;
 	}
 	public  getAuthed() {
@@ -93,28 +93,28 @@ public class ssh_conn {
 	public void setNextstate( newNextstate) {
 		nextstate = newNextstate;
 	}
-	public  getActualcode() {
+	public Object getActualcode() {
 		return actualcode;
 	}
-	public void setActualcode( newActualcode) {
+	public void setActualcode(Object newActualcode) {
 		actualcode = newActualcode;
 	}
-	public Object getQuote_item() {
+	public curl_slist getQuote_item() {
 		return quote_item;
 	}
-	public void setQuote_item(Object newQuote_item) {
+	public void setQuote_item(curl_slist newQuote_item) {
 		quote_item = newQuote_item;
 	}
-	public Object getQuote_path1() {
+	public Byte getQuote_path1() {
 		return quote_path1;
 	}
-	public void setQuote_path1(Object newQuote_path1) {
+	public void setQuote_path1(Byte newQuote_path1) {
 		quote_path1 = newQuote_path1;
 	}
-	public Object getQuote_path2() {
+	public Byte getQuote_path2() {
 		return quote_path2;
 	}
-	public void setQuote_path2(Object newQuote_path2) {
+	public void setQuote_path2(Byte newQuote_path2) {
 		quote_path2 = newQuote_path2;
 	}
 	public  getAcceptfail() {
@@ -123,10 +123,10 @@ public class ssh_conn {
 	public void setAcceptfail( newAcceptfail) {
 		acceptfail = newAcceptfail;
 	}
-	public Object getHomedir() {
+	public Byte getHomedir() {
 		return homedir;
 	}
-	public void setHomedir(Object newHomedir) {
+	public void setHomedir(Byte newHomedir) {
 		homedir = newHomedir;
 	}
 	public Object getReaddir_len() {
@@ -147,16 +147,16 @@ public class ssh_conn {
 	public void setReaddir_currLen(Object newReaddir_currLen) {
 		readdir_currLen = newReaddir_currLen;
 	}
-	public Object getReaddir_line() {
+	public Byte getReaddir_line() {
 		return readdir_line;
 	}
-	public void setReaddir_line(Object newReaddir_line) {
+	public void setReaddir_line(Byte newReaddir_line) {
 		readdir_line = newReaddir_line;
 	}
-	public Object getReaddir_linkPath() {
+	public Byte getReaddir_linkPath() {
 		return readdir_linkPath;
 	}
-	public void setReaddir_linkPath(Object newReaddir_linkPath) {
+	public void setReaddir_linkPath(Byte newReaddir_linkPath) {
 		readdir_linkPath = newReaddir_linkPath;
 	}
 	public int getSecondCreateDirs() {
@@ -165,10 +165,10 @@ public class ssh_conn {
 	public void setSecondCreateDirs(int newSecondCreateDirs) {
 		secondCreateDirs = newSecondCreateDirs;
 	}
-	public Object getSlash_pos() {
+	public Byte getSlash_pos() {
 		return slash_pos;
 	}
-	public void setSlash_pos(Object newSlash_pos) {
+	public void setSlash_pos(Byte newSlash_pos) {
 		slash_pos = newSlash_pos;
 	}
 	public int getOrig_waitfor() {

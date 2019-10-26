@@ -1,14 +1,14 @@
 package application;
 
 public class FTP {
-	private Object user;
-	private Object passwd;
-	private Object path;
-	private Object pathalloc;
+	private Byte user;
+	private Byte passwd;
+	private Byte path;
+	private Byte pathalloc;
 	private  transfer;
 	private Object downloadsize;
 	
-	public FTP(Object user, Object passwd, Object path, Object pathalloc,  transfer, Object downloadsize) {
+	public FTP(Byte user, Byte passwd, Byte path, Byte pathalloc,  transfer, Object downloadsize) {
 		setUser(user);
 		setPasswd(passwd);
 		setPath(path);
@@ -19,28 +19,28 @@ public class FTP {
 	public FTP() {
 	}
 	
-	public Object getUser() {
+	public Byte getUser() {
 		return user;
 	}
-	public void setUser(Object newUser) {
+	public void setUser(Byte newUser) {
 		user = newUser;
 	}
-	public Object getPasswd() {
+	public Byte getPasswd() {
 		return passwd;
 	}
-	public void setPasswd(Object newPasswd) {
+	public void setPasswd(Byte newPasswd) {
 		passwd = newPasswd;
 	}
-	public Object getPath() {
+	public Byte getPath() {
 		return path;
 	}
-	public void setPath(Object newPath) {
+	public void setPath(Byte newPath) {
 		path = newPath;
 	}
-	public Object getPathalloc() {
+	public Byte getPathalloc() {
 		return pathalloc;
 	}
-	public void setPathalloc(Object newPathalloc) {
+	public void setPathalloc(Byte newPathalloc) {
 		pathalloc = newPathalloc;
 	}
 	public  getTransfer() {

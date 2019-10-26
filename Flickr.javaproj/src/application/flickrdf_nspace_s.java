@@ -37,14 +37,14 @@ package application;
  */
 /* Machine tag namespaces */
 public class flickrdf_nspace_s {
-	private Object prefix;
-	private Object uri;
+	private Byte prefix;
+	private Byte uri;
 	private Object prefix_len;
 	private Object uri_len;
 	private int seen;
-	private Object next;
+	private flickrdf_nspace_s next;
 	
-	public flickrdf_nspace_s(Object prefix, Object uri, Object prefix_len, Object uri_len, int seen, Object next) {
+	public flickrdf_nspace_s(Byte prefix, Byte uri, Object prefix_len, Object uri_len, int seen, flickrdf_nspace_s next) {
 		setPrefix(prefix);
 		setUri(uri);
 		setPrefix_len(prefix_len);
@@ -55,16 +55,104 @@ public class flickrdf_nspace_s {
 	public flickrdf_nspace_s() {
 	}
 	
-	public Object getPrefix() {
+	public flickrdf_nspace_s nspace_add_new(Byte prefix, Byte uri) {
+		flickrdf_nspace ns = new flickrdf_nspace();
+		ns = (flickrdf_nspace).malloc();
+		ns.setPrefix_len(.strlen(prefix));
+		ns.setUri_len(.strlen(uri));
+		Object generatedPrefix_len = ns.getPrefix_len();
+		ns.setPrefix((byte).malloc(generatedPrefix_len + 1));
+		Byte generatedPrefix = ns.getPrefix();
+		.memcpy(generatedPrefix, prefix, generatedPrefix_len + 1);
+		Object generatedUri_len = ns.getUri_len();
+		ns.setUri((byte).malloc(generatedUri_len + 1));
+		Byte generatedUri = ns.getUri();
+		.memcpy(generatedUri, uri, generatedUri_len + 1);
+		ns.setNext(list);
+		return ns;
+	}
+	public flickrdf_nspace_s nspace_add_if_not_declared(Object prefix, Object nspace_uri) {
+		int n;
+		flickrdf_nspace ns = new flickrdf_nspace();
+		size_t prefix_len = prefix ? .strlen(prefix) : 0;
+		size_t uri_len = nspace_uri ? .strlen(nspace_uri) : 0;
+		Object generatedUri_len = ns.getUri_len();
+		Byte generatedUri = ns.getUri();
+		Object generatedPrefix_len = ns.getPrefix_len();
+		Byte generatedPrefix = ns.getPrefix();
+		flickrdf_nspace_s generatedNext = ns.getNext();
+		for (ns = list; ns; ns = generatedNext) {
+			if (nspace_uri && generatedUri_len == uri_len && !.strcmp(generatedUri, nspace_uri)) {
+				break;
+			} 
+			if (prefix && generatedPrefix_len == prefix_len && !.strcmp(generatedPrefix, prefix)) {
+				break;
+			} 
+		}
+		if (ns) {
+			return list;
+		} 
+		ns = ((Object)0);
+		for (n = 0; generatedUri; n++) {
+			if (prefix && generatedPrefix_len == prefix_len && !.strcmp(generatedPrefix, prefix)) {
+				ns = ModernizedCProgram.namespace_table[n];
+				break;
+			} 
+			if (nspace_uri && generatedUri_len == uri_len && !.strcmp(generatedUri, nspace_uri)) {
+				ns = ModernizedCProgram.namespace_table[n];
+				break;
+			} 
+		}
+		if (!ns) {
+			return list;
+		} 
+		return list.nspace_add_new(generatedPrefix, generatedUri);
+	}
+	public flickrdf_nspace_s nspace_get_by_prefix(Object prefix) {
+		flickrdf_nspace ns = new flickrdf_nspace();
+		size_t prefix_len = .strlen(prefix);
+		Object generatedPrefix_len = ns.getPrefix_len();
+		Byte generatedPrefix = ns.getPrefix();
+		flickrdf_nspace_s generatedNext = ns.getNext();
+		for (ns = list; ns; ns = generatedNext) {
+			if (generatedPrefix_len == prefix_len && !.strcmp(generatedPrefix, prefix)) {
+				break;
+			} 
+		}
+		return ns;
+	}
+	public void free_nspaces() {
+		flickrdf_nspace next = new flickrdf_nspace();
+		flickrdf_nspace_s generatedNext = this.getNext();
+		Byte generatedPrefix = this.getPrefix();
+		Byte generatedUri = this.getUri();
+		for (; list; list = next) {
+			next = generatedNext;
+			if (generatedPrefix) {
+				.free(generatedPrefix);
+			} 
+			.free(generatedUri);
+			.free(list/**
+			 * flickcurl_serialize_photo:
+			 * @fcs: flickcurl serializer object
+			 * @photo: photo object
+			 *
+			 * Serialize photo description to RDF triples
+			 *
+			 * Return value: non-0 on failure
+			 */);
+		}
+	}
+	public Byte getPrefix() {
 		return prefix;
 	}
-	public void setPrefix(Object newPrefix) {
+	public void setPrefix(Byte newPrefix) {
 		prefix = newPrefix;
 	}
-	public Object getUri() {
+	public Byte getUri() {
 		return uri;
 	}
-	public void setUri(Object newUri) {
+	public void setUri(Byte newUri) {
 		uri = newUri;
 	}
 	public Object getPrefix_len() {
@@ -85,10 +173,10 @@ public class flickrdf_nspace_s {
 	public void setSeen(int newSeen) {
 		seen = newSeen;
 	}
-	public Object getNext() {
+	public flickrdf_nspace_s getNext() {
 		return next;
 	}
-	public void setNext(Object newNext) {
+	public void setNext(flickrdf_nspace_s newNext) {
 		next = newNext;
 	}
 }

@@ -1,0 +1,7 @@
+package application;
+
+public enum CUsharedconfig_enum {
+	CU_SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE, 
+	CU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE, 
+	CU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE
+}

@@ -12,6 +12,21 @@ public class timespec {
 	public timespec() {
 	}
 	
+	public int nanosleep(Object rqtp) {
+		int msec;
+		int sec;
+		sec = rqtp.getTv_sec();
+		msec = (rqtp.getTv_nsec() / 1000000);
+		msec += 1000 * /* carefully avoid sleeping forever with a sleep(0) */sec;
+		if (!msec) {
+			msec = 1;
+		} 
+		.Sleep(msec/* otherwise use sleep() (POSIX) and possibly usleep() (4.3BSD) */)/* 0 seconds so ensure msec is at least 1 */;/* 0 seconds so ensure msec is at least 1 */
+		/* use usleep() for fractions of a second only (when available)
+		   * since some implementations won't let it sleep for more than a
+		   * second.
+		   */return 0/* end HAVE_NANOSLEEP */;
+	}
 	public long getTv_sec() {
 		return tv_sec;
 	}

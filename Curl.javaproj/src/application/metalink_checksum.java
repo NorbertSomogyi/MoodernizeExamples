@@ -2,9 +2,9 @@ package application;
 
 public class metalink_checksum {
 	private Object digest_def;
-	private Object digest;
+	private Byte digest;
 	
-	public metalink_checksum(Object digest_def, Object digest) {
+	public metalink_checksum(Object digest_def, Byte digest) {
 		setDigest_def(digest_def);
 		setDigest(digest);
 	}
@@ -17,10 +17,10 @@ public class metalink_checksum {
 	public void setDigest_def(Object newDigest_def) {
 		digest_def = newDigest_def;
 	}
-	public Object getDigest() {
+	public Byte getDigest() {
 		return digest;
 	}
-	public void setDigest(Object newDigest) {
+	public void setDigest(Byte newDigest) {
 		digest = newDigest;
 	}
 }

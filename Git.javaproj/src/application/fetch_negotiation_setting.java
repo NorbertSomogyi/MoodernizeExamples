@@ -1,0 +1,8 @@
+package application;
+
+public enum fetch_negotiation_setting {
+	FETCH_NEGOTIATION_UNSET, 
+	FETCH_NEGOTIATION_NONE, 
+	FETCH_NEGOTIATION_DEFAULT, 
+	FETCH_NEGOTIATION_SKIPPING
+}

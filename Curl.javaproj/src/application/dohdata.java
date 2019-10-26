@@ -2,13 +2,13 @@ package application;
 
 /* DoH specific data for this request */
 public class dohdata {
-	private Object headers;
+	private curl_slist headers;
 	private Object probe;
 	private int pending;
 	private Object host;
 	private int port;
 	
-	public dohdata(Object headers, Object probe, int pending, Object host, int port) {
+	public dohdata(curl_slist headers, Object probe, int pending, Object host, int port) {
 		setHeaders(headers);
 		setProbe(probe);
 		setPending(pending);
@@ -18,10 +18,10 @@ public class dohdata {
 	public dohdata() {
 	}
 	
-	public Object getHeaders() {
+	public curl_slist getHeaders() {
 		return headers;
 	}
-	public void setHeaders(Object newHeaders) {
+	public void setHeaders(curl_slist newHeaders) {
 		headers = newHeaders;
 	}
 	public Object getProbe() {

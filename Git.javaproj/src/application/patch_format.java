@@ -1,0 +1,10 @@
+package application;
+
+public enum patch_format {
+	PATCH_FORMAT_UNKNOWN, 
+	PATCH_FORMAT_MBOX, 
+	PATCH_FORMAT_STGIT, 
+	PATCH_FORMAT_STGIT_SERIES, 
+	PATCH_FORMAT_HG, 
+	PATCH_FORMAT_MBOXRD
+}

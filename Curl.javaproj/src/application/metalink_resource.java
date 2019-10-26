@@ -1,26 +1,26 @@
 package application;
 
 public class metalink_resource {
-	private Object next;
-	private Object url;
+	private metalink_resource next;
+	private Byte url;
 	
-	public metalink_resource(Object next, Object url) {
+	public metalink_resource(metalink_resource next, Byte url) {
 		setNext(next);
 		setUrl(url);
 	}
 	public metalink_resource() {
 	}
 	
-	public Object getNext() {
+	public metalink_resource getNext() {
 		return next;
 	}
-	public void setNext(Object newNext) {
+	public void setNext(metalink_resource newNext) {
 		next = newNext;
 	}
-	public Object getUrl() {
+	public Byte getUrl() {
 		return url;
 	}
-	public void setUrl(Object newUrl) {
+	public void setUrl(Byte newUrl) {
 		url = newUrl;
 	}
 }

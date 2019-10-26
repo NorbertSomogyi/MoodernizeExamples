@@ -2,20 +2,20 @@ package application;
 
 /* talking upgraded protocol */
 public class dohresponse {
-	private Object memory;
+	private Byte memory;
 	private Object size;
 	
-	public dohresponse(Object memory, Object size) {
+	public dohresponse(Byte memory, Object size) {
 		setMemory(memory);
 		setSize(size);
 	}
 	public dohresponse() {
 	}
 	
-	public Object getMemory() {
+	public Byte getMemory() {
 		return memory;
 	}
-	public void setMemory(Object newMemory) {
+	public void setMemory(Byte newMemory) {
 		memory = newMemory;
 	}
 	public Object getSize() {

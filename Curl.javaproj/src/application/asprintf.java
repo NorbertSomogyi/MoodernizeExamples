@@ -1,12 +1,12 @@
 package application;
 
 public class asprintf {
-	private Object buffer;
+	private Byte buffer;
 	private Object len;
 	private Object alloc;
 	private int fail;
 	
-	public asprintf(Object buffer, Object len, Object alloc, int fail) {
+	public asprintf(Byte buffer, Object len, Object alloc, int fail) {
 		setBuffer(buffer);
 		setLen(len);
 		setAlloc(alloc);
@@ -15,10 +15,10 @@ public class asprintf {
 	public asprintf() {
 	}
 	
-	public Object getBuffer() {
+	public Byte getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(Object newBuffer) {
+	public void setBuffer(Byte newBuffer) {
 		buffer = newBuffer;
 	}
 	public Object getLen() {
