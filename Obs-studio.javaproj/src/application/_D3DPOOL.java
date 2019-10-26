@@ -1,0 +1,10 @@
+package application;
+
+/* Pool types */
+public enum _D3DPOOL {
+	D3DPOOL_DEFAULT, 
+	D3DPOOL_MANAGED, 
+	D3DPOOL_SYSTEMMEM, 
+	D3DPOOL_SCRATCH, 
+	D3DPOOL_FORCE_DWORD
+}

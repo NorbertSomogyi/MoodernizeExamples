@@ -1,0 +1,7 @@
+package application;
+
+public enum _NV_ENC_DEVICE_TYPE {
+	NV_ENC_DEVICE_TYPE_DIRECTX, 
+	NV_ENC_DEVICE_TYPE_CUDA, 
+	NV_ENC_DEVICE_TYPE_OPENGL
+}

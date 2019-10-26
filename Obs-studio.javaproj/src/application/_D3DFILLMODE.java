@@ -1,0 +1,8 @@
+package application;
+
+public enum _D3DFILLMODE {
+	D3DFILL_POINT, 
+	D3DFILL_WIREFRAME, 
+	D3DFILL_SOLID, 
+	D3DFILL_FORCE_DWORD
+}

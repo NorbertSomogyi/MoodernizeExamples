@@ -1,0 +1,12 @@
+package application;
+
+// Primitives supported by draw-primitive API
+public enum _D3DPRIMITIVETYPE {
+	D3DPT_POINTLIST, 
+	D3DPT_LINELIST, 
+	D3DPT_LINESTRIP, 
+	D3DPT_TRIANGLELIST, 
+	D3DPT_TRIANGLESTRIP, 
+	D3DPT_TRIANGLEFAN, 
+	D3DPT_FORCE_DWORD
+}

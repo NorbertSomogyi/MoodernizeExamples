@@ -1,0 +1,17 @@
+package application;
+
+/* Custom Windows messages */
+public enum user_message_type {
+	UM_FORMAT_COMPLETED, 
+	UM_MEDIA_CHANGE, 
+	UM_PROGRESS_INIT, 
+	UM_PROGRESS_EXIT, 
+	UM_NO_UPDATE, 
+	UM_UPDATE_CSM_TOOLTIP, 
+	UM_RESIZE_BUTTONS, 
+	UM_ENABLE_CONTROLS, 
+	UM_SELECT_ISO, 
+	UM_TIMER_START, 
+	UM_FORMAT_START, 
+	UM_LANGUAGE_MENU
+}

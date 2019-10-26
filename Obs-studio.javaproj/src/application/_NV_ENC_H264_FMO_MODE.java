@@ -1,0 +1,7 @@
+package application;
+
+public enum _NV_ENC_H264_FMO_MODE {
+	NV_ENC_H264_FMO_AUTOSELECT, 
+	NV_ENC_H264_FMO_ENABLE, 
+	NV_ENC_H264_FMO_DISABLE
+}

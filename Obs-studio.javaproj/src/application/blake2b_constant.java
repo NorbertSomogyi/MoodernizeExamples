@@ -1,0 +1,9 @@
+package application;
+
+public enum blake2b_constant {
+	BLAKE2B_BLOCKBYTES, 
+	BLAKE2B_OUTBYTES, 
+	BLAKE2B_KEYBYTES, 
+	BLAKE2B_SALTBYTES, 
+	BLAKE2B_PERSONALBYTES
+}

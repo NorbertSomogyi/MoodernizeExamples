@@ -1,0 +1,8 @@
+package application;
+
+public enum _D3DLIGHTTYPE {
+	D3DLIGHT_POINT, 
+	D3DLIGHT_SPOT, 
+	D3DLIGHT_DIRECTIONAL, 
+	D3DLIGHT_FORCE_DWORD
+}

@@ -1,0 +1,18 @@
+package application;
+
+public enum _BMDVideoOutputConversionMode {
+	bmdNoVideoOutputConversion, 
+	bmdVideoOutputLetterboxDownconversion, 
+	bmdVideoOutputAnamorphicDownconversion, 
+	bmdVideoOutputHD720toHD1080Conversion, 
+	bmdVideoOutputHardwareLetterboxDownconversion, 
+	bmdVideoOutputHardwareAnamorphicDownconversion, 
+	bmdVideoOutputHardwareCenterCutDownconversion, 
+	bmdVideoOutputHardware720p1080pCrossconversion, 
+	bmdVideoOutputHardwareAnamorphic720pUpconversion, 
+	bmdVideoOutputHardwareAnamorphic1080iUpconversion, 
+	bmdVideoOutputHardwareAnamorphic149To720pUpconversion, 
+	bmdVideoOutputHardwareAnamorphic149To1080iUpconversion, 
+	bmdVideoOutputHardwarePillarbox720pUpconversion, 
+	bmdVideoOutputHardwarePillarbox1080iUpconversion
+}
