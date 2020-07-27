@@ -64,10 +64,10 @@ package application;
 public class dir_iterator {
 	private strbuf path;
 	private Object relative_path;
-	private Object basename;
+	private Object[] basename;
 	private stat st;
 	
-	public dir_iterator(strbuf path, Object relative_path, Object basename, stat st) {
+	public dir_iterator(strbuf path, Object relative_path, Object[] basename, stat st) {
 		setPath(path);
 		setRelative_path(relative_path);
 		setBasename(basename);
@@ -84,28 +84,28 @@ public class dir_iterator {
 		int generatedFlags = iter.getFlags();
 		Object generatedLevels_nr = iter.getLevels_nr();
 		if ((((generatedSt_mode) & -1024) == -1024) && iter.push_level()) {
-			if ((._errno()) != 2 && generatedFlags & (1 << 0)) {
+			if ((/*Error: Function owner not recognized*/_errno()) != 2 && generatedFlags & (1 << 0)) {
 				;
 			} 
 			if (generatedLevels_nr == 0) {
 				;
 			} 
 		} 
-		dir_iterator_level generatedLevels = iter.getLevels();
+		dir_iterator_level[] generatedLevels = iter.getLevels();
 		strbuf generatedPath = generatedBase.getPath();
 		Object generatedPrefix_len = level.getPrefix_len();
 		 generatedDir = level.getDir();
 		dirent dirent = new dirent();
-		byte generatedBuf = generatedPath.getBuf();
+		byte[] generatedBuf = generatedPath.getBuf();
 		Object generatedD_name = de.getD_name();
 		while (/* Loop until we find an entry that we can give back to the caller. */1) {
 			dirent de = new dirent();
 			dir_iterator_level level = generatedLevels[generatedLevels_nr - 1];
 			generatedPath.strbuf_setlen(generatedPrefix_len);
-			(._errno()) = 0;
+			(/*Error: Function owner not recognized*/_errno()) = 0;
 			de = dirent.readdir(generatedDir);
 			if (!de) {
-				if ((._errno())) {
+				if ((/*Error: Function owner not recognized*/_errno())) {
 					ModernizedCProgram.warning_errno("error reading directory '%s'", generatedBuf);
 					if (generatedFlags & (1 << 0)) {
 						;
@@ -119,7 +119,7 @@ public class dir_iterator {
 				continue;
 			} 
 			if (ModernizedCProgram.prepare_next_entry_data(iter, de)) {
-				if ((._errno()) != 2 && generatedFlags & (1 << 0)) {
+				if ((/*Error: Function owner not recognized*/_errno()) != 2 && generatedFlags & (1 << 0)) {
 					;
 				} 
 				continue;
@@ -131,18 +131,18 @@ public class dir_iterator {
 	public int dir_iterator_abort() {
 		dir_iterator_int iter = (dir_iterator_int)dir_iterator;
 		Object generatedLevels_nr = iter.getLevels_nr();
-		dir_iterator_level generatedLevels = iter.getLevels();
+		dir_iterator_level[] generatedLevels = iter.getLevels();
 		 generatedDir = level.getDir();
 		dir_iterator generatedBase = iter.getBase();
 		strbuf generatedPath = generatedBase.getPath();
 		Object generatedPrefix_len = level.getPrefix_len();
-		byte generatedBuf = generatedPath.getBuf();
+		byte[] generatedBuf = generatedPath.getBuf();
 		for (; generatedLevels_nr; generatedLevels_nr--) {
 			dir_iterator_level level = generatedLevels[generatedLevels_nr - 1];
 			if (generatedDir && generatedDir.closedir()) {
-				int saved_errno = (._errno());
+				int saved_errno = (/*Error: Function owner not recognized*/_errno());
 				generatedPath.strbuf_setlen(generatedPrefix_len);
-				(._errno()) = saved_errno;
+				(/*Error: Function owner not recognized*/_errno()) = saved_errno;
 				ModernizedCProgram.warning_errno("error closing directory '%s'", generatedBuf);
 			} 
 		}
@@ -152,7 +152,7 @@ public class dir_iterator {
 		return -1;
 	}
 	public dir_iterator dir_iterator_begin(Object path, int flags) {
-		dir_iterator_int iter = ModernizedCProgram.xcalloc(1, );
+		dir_iterator_int iter = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		dir_iterator generatedBase = iter.getBase();
 		dir_iterator dir_iterator = generatedBase;
 		int saved_errno;
@@ -160,7 +160,7 @@ public class dir_iterator {
 		generatedPath.strbuf_init(260);
 		generatedPath.strbuf_addstr(path);
 		Object generatedLevels_alloc = iter.getLevels_alloc();
-		dir_iterator_level generatedLevels = iter.getLevels();
+		dir_iterator_level[] generatedLevels = iter.getLevels();
 		do {
 			if ((true) > generatedLevels_alloc) {
 				if ((((generatedLevels_alloc) + 16) * 3 / 2) < (true)) {
@@ -168,7 +168,7 @@ public class dir_iterator {
 				} else {
 						iter.setLevels_alloc((((generatedLevels_alloc) + 16) * 3 / 2));
 				} 
-				(generatedLevels) = ModernizedCProgram.xrealloc((generatedLevels), ModernizedCProgram.st_mult(, (generatedLevels_alloc)));
+				(generatedLevels) = ModernizedCProgram.xrealloc((generatedLevels), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedLevels_alloc)));
 			} 
 		} while (0);
 		iter.setLevels_nr(0);
@@ -176,10 +176,10 @@ public class dir_iterator {
 			 * Note: stat already checks for NULL or empty strings and
 			 * inexistent paths.
 			 */);
-		byte generatedBuf = generatedPath.getBuf();
+		byte[] generatedBuf = generatedPath.getBuf();
 		stat generatedSt = generatedBase.getSt();
-		if (.stat(generatedBuf, generatedSt) < 0) {
-			saved_errno = (._errno());
+		if (/*Error: Function owner not recognized*/stat(generatedBuf, generatedSt) < 0) {
+			saved_errno = (/*Error: Function owner not recognized*/_errno());
 			;
 		} 
 		Object generatedSt_mode = generatedSt.getSt_mode();
@@ -188,7 +188,7 @@ public class dir_iterator {
 			;
 		} 
 		return dir_iterator;
-		(._errno()) = saved_errno;
+		(/*Error: Function owner not recognized*/_errno()) = saved_errno;
 		return ((Object)0);
 	}
 	public strbuf getPath() {
@@ -203,10 +203,10 @@ public class dir_iterator {
 	public void setRelative_path(Object newRelative_path) {
 		relative_path = newRelative_path;
 	}
-	public Object getBasename() {
+	public Object[] getBasename() {
 		return basename;
 	}
-	public void setBasename(Object newBasename) {
+	public void setBasename(Object[] newBasename) {
 		basename = newBasename;
 	}
 	public stat getSt() {

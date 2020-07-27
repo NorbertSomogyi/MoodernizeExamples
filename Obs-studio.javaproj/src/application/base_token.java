@@ -13,16 +13,19 @@ public class base_token {
 	public base_token() {
 	}
 	
+	public void base_token_clear() {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(t, 0, /*Error: Unsupported expression*/);
+	}
+	public void base_token_copy(base_token src) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dst, src, /*Error: Unsupported expression*//* ------------------------------------------------------------------------- */);
+	}
 	public boolean cf_is_token_break(Object token) {
 		strref generatedText = this.getText();
-		Object generatedArray = generatedText.getArray();
+		Object[] generatedArray = generatedText.getArray();
 		base_token_type generatedType = this.getType();
 		switch (generatedType) {
-		case base_token_type.BASETOKEN_DIGIT:
-				if (token.getType() == base_token_type.BASETOKEN_WHITESPACE || (token.getType() == base_token_type.BASETOKEN_OTHER && token.getText().getArray() != (byte)'.')) {
-					return 1;
-				} 
-				break;
+		case /* Falls through. */base_token_type.BASETOKEN_NONE:
+				return 1;
 		case base_token_type.BASETOKEN_OTHER:
 				if (generatedArray == (byte)'.' && token.getType() == base_token_type.BASETOKEN_DIGIT) {
 					this.setType(base_token_type.BASETOKEN_DIGIT);
@@ -33,8 +36,11 @@ public class base_token {
 					return 1;
 				} 
 				break;
-		case /* Falls through. */base_token_type.BASETOKEN_NONE:
-				return 1;
+		case base_token_type.BASETOKEN_DIGIT:
+				if (token.getType() == base_token_type.BASETOKEN_WHITESPACE || (token.getType() == base_token_type.BASETOKEN_OTHER && token.getText().getArray() != (byte)'.')) {
+					return 1;
+				} 
+				break;
 		case base_token_type.BASETOKEN_WHITESPACE:
 				if (ModernizedCProgram.is_space_or_tab(generatedArray) && ModernizedCProgram.is_space_or_tab(generatedArray)) {
 					break;
@@ -42,12 +48,6 @@ public class base_token {
 				return 1;
 		}
 		return 0;
-	}
-	public void base_token_clear() {
-		.memset(t, 0, );
-	}
-	public void base_token_copy(base_token src) {
-		.memcpy(dst, src, /* ------------------------------------------------------------------------- */);
 	}
 	public strref getText() {
 		return text;

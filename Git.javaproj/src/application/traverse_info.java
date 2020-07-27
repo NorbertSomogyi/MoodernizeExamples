@@ -34,7 +34,7 @@ public class traverse_info {
 		unpack_trees_options o = generatedData;
 		int generatedDiff_index_cached = o.getDiff_index_cached();
 		if (generatedDiff_index_cached) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		o.setCache_bottom(bottom);
 	}
@@ -82,7 +82,7 @@ public class traverse_info {
 				 */);
 		} 
 		index_state generatedSrc_index = o.getSrc_index();
-		cache_entry generatedCache = generatedSrc_index.getCache();
+		cache_entry[][] generatedCache = generatedSrc_index.getCache();
 		object_id generatedOid = tree_ce.getOid();
 		Object generatedName = tree_ce.getName();
 		for (i = 0; i < nr_entries; i++) {
@@ -95,7 +95,7 @@ public class traverse_info {
 			if (new_ce_len > ce_len) {
 				new_ce_len <<=  1;
 				tree_ce = ModernizedCProgram.xrealloc(tree_ce, new_ce_len);
-				.memset(tree_ce, 0, new_ce_len);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(tree_ce, 0, new_ce_len);
 				ce_len = new_ce_len;
 				tree_ce.setCe_flags(ModernizedCProgram.create_ce_flags(0));
 				for (d = 1; d <= nr_names; d++) {
@@ -105,7 +105,7 @@ public class traverse_info {
 			tree_ce.setCe_mode(src[0].getCe_mode());
 			tree_ce.setCe_namelen(ModernizedCProgram.len);
 			generatedOid.oidcpy(generatedOid);
-			.memcpy(generatedName, generatedName, ModernizedCProgram.len + 1);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, generatedName, ModernizedCProgram.len + 1);
 			ModernizedCProgram.rc = o.call_unpack_fn((cache_entry)src);
 			if (ModernizedCProgram.rc < 0) {
 				ModernizedCProgram.free(tree_ce);
@@ -116,7 +116,7 @@ public class traverse_info {
 		ModernizedCProgram.free(tree_ce);
 		int generatedDebug_unpack = o.getDebug_unpack();
 		if (generatedDebug_unpack) {
-			.printf("Unpacked %d entries from %s to %s using cache-tree\n", nr_entries, generatedName, generatedName);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Unpacked %d entries from %s to %s using cache-tree\n", nr_entries, generatedName, generatedName);
 		} 
 		return 0;
 	}
@@ -129,7 +129,7 @@ public class traverse_info {
 		Object generatedPathlen = this.getPathlen();
 		int pfxlen = generatedPathlen;
 		int generatedCache_nr = index.getCache_nr();
-		cache_entry generatedCache = index.getCache();
+		cache_entry[][] generatedCache = index.getCache();
 		int generatedCache_bottom = o.getCache_bottom();
 		Object generatedTraverse_path = this.getTraverse_path();
 		for (pos = generatedCache_bottom; pos < generatedCache_nr; pos++) {
@@ -154,14 +154,14 @@ public class traverse_info {
 						 * entries in the traverse path).
 						 */)) {
 				if (generatedTraverse_path) {
-					if (.strncmp(ce.getName(), generatedTraverse_path, generatedPathlen) > 0) {
+					if (/*Error: Function owner not recognized*/strncmp(ce.getName(), generatedTraverse_path, generatedPathlen) > 0) {
 						break;
 					} 
 				} 
 				continue;
 			} 
 			ce_name = ce.getName() + pfxlen;
-			ce_slash = .strchr(ce_name, (byte)'/');
+			ce_slash = /*Error: Function owner not recognized*/strchr(ce_name, (byte)'/');
 			if (ce_slash) {
 				ce_len = ce_slash - ce_name;
 			} else {
@@ -177,7 +177,7 @@ public class traverse_info {
 			if (0 < cmp) {
 				continue;
 			} 
-			if (p_len < ce_len && !.memcmp(ce_name, p, p_len) && ce_name[p_len] < (byte)'/') {
+			if (p_len < ce_len && !/*Error: Function owner not recognized*/memcmp(ce_name, p, p_len) && ce_name[p_len] < (byte)'/') {
 				continue;
 			} 
 			break;
@@ -190,15 +190,15 @@ public class traverse_info {
 		if (generatedPrev) {
 			generatedPrev.debug_path();
 			if (generatedName) {
-				.putchar((byte)'/');
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'/');
 			} 
 		} 
-		.printf("%s", generatedName);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s", generatedName);
 	}
-	public void setup_traverse_info(Object base) {
-		size_t pathlen = .strlen(base);
+	public void setup_traverse_info(Object[] base) {
+		size_t pathlen = /*Error: Function owner not recognized*/strlen(base);
 		traverse_info dummy = new traverse_info();
-		.memset(info, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(info, 0, /*Error: sizeof expression not supported yet*/);
 		if (pathlen && base[pathlen - 1] == (byte)'/') {
 			pathlen--;
 		} 

@@ -71,6 +71,23 @@ public class obs_core_data {
 		}
 		return recalculate;
 	}
+	public Object calc_min_ts(Object sample_rate, Object min_ts) {
+		byte buffering_name = ModernizedCProgram.data.find_min_ts(min_ts);
+		if (ModernizedCProgram.data.mark_invalid_sources(sample_rate, min_ts)) {
+			buffering_name = ModernizedCProgram.data.find_min_ts(min_ts);
+		} 
+		return buffering_name;
+		 min_ts = 0;
+		for ( i = 0;
+		 i < 2; i++) {
+			if (sources[i] && !sources[i].getAudio_pending()) {
+				if (!min_ts || sources[i].getAudio_ts() < min_ts) {
+					min_ts = sources[i].getAudio_ts();
+				} 
+			} 
+		}
+		return min_ts;
+	}
 	public obs_source getFirst_source() {
 		return first_source;
 	}

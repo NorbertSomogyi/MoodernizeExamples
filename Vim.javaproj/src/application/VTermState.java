@@ -14,14 +14,14 @@ public class VTermState {
 	private int scrollregion_bottom;
 	private int scrollregion_left;
 	private int scrollregion_right;
-	private Byte tabstops;
-	private  lineinfo;
+	private byte[] tabstops;
+	private [] lineinfo;
 	private int mouse_col;
 	private int mouse_row;
 	private int mouse_buttons;
 	private int mouse_flags;
 	private  mouse_protocol;
-	private Object combine_chars;
+	private Object[] combine_chars;
 	private Object combine_chars_size;
 	private int combine_width;
 	private  combine_pos;
@@ -41,7 +41,7 @@ public class VTermState {
 	private int protected_cell;
 	private  saved;
 	
-	public VTermState(VTerm vt, Object callbacks, Object cbdata, Object fallbacks, Object fbdata, int rows, int cols,  pos, int at_phantom, int scrollregion_top, int scrollregion_bottom, int scrollregion_left, int scrollregion_right, Byte tabstops,  lineinfo, int mouse_col, int mouse_row, int mouse_buttons, int mouse_flags,  mouse_protocol, Object combine_chars, Object combine_chars_size, int combine_width,  combine_pos,  mode, Object encoding,  encoding_utf8, int gl_set, int gr_set, int gsingle_set, VTermPen pen,  default_fg,  default_bg, Object colors, int fg_index, int bg_index, int bold_is_highbright, int protected_cell,  saved) {
+	public VTermState(VTerm vt, Object callbacks, Object cbdata, Object fallbacks, Object fbdata, int rows, int cols,  pos, int at_phantom, int scrollregion_top, int scrollregion_bottom, int scrollregion_left, int scrollregion_right, byte[] tabstops, [] lineinfo, int mouse_col, int mouse_row, int mouse_buttons, int mouse_flags,  mouse_protocol, Object[] combine_chars, Object combine_chars_size, int combine_width,  combine_pos,  mode, Object encoding,  encoding_utf8, int gl_set, int gr_set, int gsingle_set, VTermPen pen,  default_fg,  default_bg, Object colors, int fg_index, int bg_index, int bold_is_highbright, int protected_cell,  saved) {
 		setVt(vt);
 		setCallbacks(callbacks);
 		setCbdata(cbdata);
@@ -86,7 +86,7 @@ public class VTermState {
 	}
 	
 	public VTermState vterm_state_new(VTerm vt) {
-		VTermState state = vt.vterm_allocator_malloc();
+		VTermState state = vt.vterm_allocator_malloc(/*Error: Unsupported expression*/);
 		if (state == ((Object)0)) {
 			return ((Object)0);
 		} 
@@ -125,8 +125,8 @@ public class VTermState {
 	}
 	public void grow_combine_buffer() {
 		size_t new_size = ModernizedCProgram.state.getCombine_chars_size() * 2;
-		uint32_t new_chars = ModernizedCProgram.state.getVt().vterm_allocator_malloc(new_size * );
-		.memcpy(new_chars, ModernizedCProgram.state.getCombine_chars(), ModernizedCProgram.state.getCombine_chars_size() * );
+		uint32_t new_chars = ModernizedCProgram.state.getVt().vterm_allocator_malloc(new_size * /*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(new_chars, ModernizedCProgram.state.getCombine_chars(), ModernizedCProgram.state.getCombine_chars_size() * /*Error: sizeof expression not supported yet*/);
 		ModernizedCProgram.state.getVt().vterm_allocator_free(ModernizedCProgram.state.getCombine_chars());
 		ModernizedCProgram.state.setCombine_chars(new_chars);
 		ModernizedCProgram.state.setCombine_chars_size(new_size);
@@ -147,12 +147,12 @@ public class VTermState {
 		while (count > 0) {
 			if (direction > 0) {
 				if (ModernizedCProgram.state.getPos().getCol() >= ((ModernizedCProgram.state).getLineinfo()[((ModernizedCProgram.state).getPos().getRow())].getDoublewidth() ? ((ModernizedCProgram.state).getCols() / 2) : (ModernizedCProgram.state).getCols()) - 1) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				ModernizedCProgram.state.getPos().getCol()++;
 			}  else if (direction < 0) {
 				if (ModernizedCProgram.state.getPos().getCol() < 1) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				ModernizedCProgram.state.getPos().getCol()--;
 			} 
@@ -175,7 +175,7 @@ public class VTermState {
 		}  else if (dhl == 2) {
 			info.setDoubleheight(2);
 		} 
-		if ((ModernizedCProgram.state.getCallbacks() && ModernizedCProgram.state.getCallbacks().getSetlineinfo() && .UNRECOGNIZEDFUNCTIONNAME(row, info, ModernizedCProgram.state.getLineinfo() + row, ModernizedCProgram.state.getCbdata())) || force) {
+		if ((ModernizedCProgram.state.getCallbacks() && ModernizedCProgram.state.getCallbacks().getSetlineinfo() && /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(row, info, ModernizedCProgram.state.getLineinfo() + row, ModernizedCProgram.state.getCbdata())) || force) {
 			ModernizedCProgram.state.getLineinfo()[row] = info;
 		} 
 	}
@@ -193,8 +193,8 @@ public class VTermState {
 		byte strvalue;
 		int r;
 		VTermValue val = new VTermValue();
-		strvalue = ModernizedCProgram.state.getVt().vterm_allocator_malloc((len + 1) * );
-		.strncpy(strvalue, str, len);
+		strvalue = ModernizedCProgram.state.getVt().vterm_allocator_malloc((len + 1) * /*Error: Unsupported expression*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strncpy(strvalue, str, len);
 		strvalue[len] = 0;
 		val.setString(strvalue);
 		r = ModernizedCProgram.vterm_state_set_termprop(ModernizedCProgram.state, prop, val);
@@ -220,35 +220,29 @@ public class VTermState {
 	}
 	public void set_mode(int num, int val) {
 		switch (num) {
-		case 4:
-				ModernizedCProgram.state.getMode().setInsert(val);
-				break;
 		case 20:
 				ModernizedCProgram.state.getMode().setNewline(val);
 				break;
+		case 4:
+				ModernizedCProgram.state.getMode().setInsert(val);
+				break;
 		default:
 				;
-				return ;
+				return /*Error: Unsupported expression*/;
 		}
 	}
 	public void set_dec_mode(int num, int val) {
 		switch (num) {
-		case 1:
-				ModernizedCProgram.state.getMode().setCursor(val);
+		case 1004:
+				ModernizedCProgram.state.getMode().setReport_focus(val);
 				break;
-		case 1005:
-				ModernizedCProgram.state.setMouse_protocol(val ? .MOUSE_UTF8 : .MOUSE_X10);
-				break;
-		case 25:
-				ModernizedCProgram.state.settermprop_bool(.VTERM_PROP_CURSORVISIBLE, val);
-				break;
-		case 1003:
-				ModernizedCProgram.state.settermprop_int(.VTERM_PROP_MOUSE, !val ? .VTERM_PROP_MOUSE_NONE : (num == 1000) ? .VTERM_PROP_MOUSE_CLICK : (num == 1002) ? .VTERM_PROP_MOUSE_DRAG : .VTERM_PROP_MOUSE_MOVE);
-				break;
-		case 1000:
 		case 1048:
 				ModernizedCProgram.state.savecursor(val);
 				break;
+		case 5:
+				ModernizedCProgram.state.settermprop_bool(.VTERM_PROP_REVERSE, val);
+				break;
+		case 1002:
 		case 69:
 				ModernizedCProgram.state.getMode().setLeftrightmargin(val);
 				if (val) {
@@ -257,6 +251,17 @@ public class VTermState {
 						ModernizedCProgram.state.set_lineinfo(row, 1, 0, 0);
 					}
 				} 
+				break;
+		case 25:
+				ModernizedCProgram.state.settermprop_bool(.VTERM_PROP_CURSORVISIBLE, val);
+				break;
+		case 1049:
+				ModernizedCProgram.state.settermprop_bool(.VTERM_PROP_ALTSCREEN, val);
+				ModernizedCProgram.state.savecursor(val);
+				break;
+		case 1000:
+		case 2004:
+				ModernizedCProgram.state.getMode().setBracketpaste(val);
 				break;
 		case 6:
 				{ 
@@ -267,104 +272,105 @@ public class VTermState {
 					ModernizedCProgram.updatecursor(ModernizedCProgram.state, oldpos, 1);
 				}
 				break;
-		case 5:
-				ModernizedCProgram.state.settermprop_bool(.VTERM_PROP_REVERSE, val);
-				break;
-		case 7:
-				ModernizedCProgram.state.getMode().setAutowrap(val);
-				break;
-		case 1004:
-				ModernizedCProgram.state.getMode().setReport_focus(val);
-				break;
-		case 2004:
-				ModernizedCProgram.state.getMode().setBracketpaste(val);
-				break;
-		case 1049:
-				ModernizedCProgram.state.settermprop_bool(.VTERM_PROP_ALTSCREEN, val);
-				ModernizedCProgram.state.savecursor(val);
-				break;
-		case 1002:
 		case 12:
 				ModernizedCProgram.state.settermprop_bool(.VTERM_PROP_CURSORBLINK, val);
-				break;
-		case 1006:
-				ModernizedCProgram.state.setMouse_protocol(val ? .MOUSE_SGR : .MOUSE_X10);
-				break;
-		case 1015:
-				ModernizedCProgram.state.setMouse_protocol(val ? .MOUSE_RXVT : .MOUSE_X10);
 				break;
 		case 1047:
 				ModernizedCProgram.state.settermprop_bool(.VTERM_PROP_ALTSCREEN, val);
 				break;
+		case 1:
+				ModernizedCProgram.state.getMode().setCursor(val);
+				break;
+		case 1005:
+				ModernizedCProgram.state.setMouse_protocol(val ? .MOUSE_UTF8 : .MOUSE_X10);
+				break;
+		case 1003:
+				ModernizedCProgram.state.settermprop_int(.VTERM_PROP_MOUSE, !val ? .VTERM_PROP_MOUSE_NONE : (num == 1000) ? .VTERM_PROP_MOUSE_CLICK : (num == 1002) ? .VTERM_PROP_MOUSE_DRAG : .VTERM_PROP_MOUSE_MOVE);
+				break;
+		case 1006:
+				ModernizedCProgram.state.setMouse_protocol(val ? .MOUSE_SGR : .MOUSE_X10);
+				break;
+		case 7:
+				ModernizedCProgram.state.getMode().setAutowrap(val);
+				break;
+		case 1015:
+				ModernizedCProgram.state.setMouse_protocol(val ? .MOUSE_RXVT : .MOUSE_X10);
+				break;
 		default:
 				;
-				return ;
+				return /*Error: Unsupported expression*/;
 		}
 	}
 	public void request_dec_mode(int num) {
 		int reply;
 		switch (num) {
-		case 1005:
-				reply = ModernizedCProgram.state.getMouse_protocol() == .MOUSE_UTF8;
-				break;
-		case 6:
-				reply = ModernizedCProgram.state.getMode().getOrigin();
-				break;
-		case 5:
-				reply = ModernizedCProgram.state.getMode().getScreen();
-				break;
-		case 1002:
+		case 1003:
 				reply = ModernizedCProgram.state.getMouse_flags() == (-1024 | -1024);
-				break;
-		case 1:
-				reply = ModernizedCProgram.state.getMode().getCursor();
-				break;
-		case 25:
-				reply = ModernizedCProgram.state.getMode().getCursor_visible();
-				break;
-		case 1015:
-				reply = ModernizedCProgram.state.getMouse_protocol() == .MOUSE_RXVT;
-				break;
-		case 12:
-				reply = ModernizedCProgram.state.getMode().getCursor_blink();
-				break;
-		case 1006:
-				reply = ModernizedCProgram.state.getMouse_protocol() == .MOUSE_SGR;
 				break;
 		case 1047:
 				reply = ModernizedCProgram.state.getMode().getAlt_screen();
 				break;
-		case 1004:
-				reply = ModernizedCProgram.state.getMode().getReport_focus();
-				break;
-		case 1000:
-				reply = ModernizedCProgram.state.getMouse_flags() == -1024;
-				break;
-		case 1003:
-				reply = ModernizedCProgram.state.getMouse_flags() == (-1024 | -1024);
-				break;
-		case 7:
-				reply = ModernizedCProgram.state.getMode().getAutowrap();
+		case 12:
+				reply = ModernizedCProgram.state.getMode().getCursor_blink();
 				break;
 		case 69:
 				reply = ModernizedCProgram.state.getMode().getLeftrightmargin();
 				break;
+		case 1006:
+				reply = ModernizedCProgram.state.getMouse_protocol() == .MOUSE_SGR;
+				break;
+		case 1015:
+				reply = ModernizedCProgram.state.getMouse_protocol() == .MOUSE_RXVT;
+				break;
+		case 6:
+				reply = ModernizedCProgram.state.getMode().getOrigin();
+				break;
+		case 1000:
+				reply = ModernizedCProgram.state.getMouse_flags() == -1024;
+				break;
+		case 7:
+				reply = ModernizedCProgram.state.getMode().getAutowrap();
+				break;
+		case 5:
+				reply = ModernizedCProgram.state.getMode().getScreen();
+				break;
 		case 2004:
 				reply = ModernizedCProgram.state.getMode().getBracketpaste();
 				break;
+		case 1:
+				reply = ModernizedCProgram.state.getMode().getCursor();
+				break;
+		case 1005:
+				reply = ModernizedCProgram.state.getMouse_protocol() == .MOUSE_UTF8;
+				break;
+		case 1002:
+				reply = ModernizedCProgram.state.getMouse_flags() == (-1024 | -1024);
+				break;
+		case 1004:
+				reply = ModernizedCProgram.state.getMode().getReport_focus();
+				break;
+		case 25:
+				reply = ModernizedCProgram.state.getMode().getCursor_visible();
+				break;
 		default:
 				ModernizedCProgram.state.getVt().vterm_push_output_sprintf_ctrl(.C1_CSI, "?%d;%d$y", num, 0);
-				return ;
+				return /*Error: Unsupported expression*/;
 		}
 		ModernizedCProgram.state.getVt().vterm_push_output_sprintf_ctrl(.C1_CSI, "?%d;%d$y", num, reply ? 1 : 2);
 	}
-	public void request_status_string(Object command, Object cmdlen) {
+	public void request_status_string(Object[] command, Object cmdlen) {
 		if (cmdlen == 1) {
 			switch (command[0]) {
+			case (byte)'r':
+					ModernizedCProgram.state.getVt().vterm_push_output_sprintf_dcs("1$r%d;%dr", ModernizedCProgram.state.getScrollregion_top() + 1, ((ModernizedCProgram.state).getScrollregion_bottom() > -1 ? (ModernizedCProgram.state).getScrollregion_bottom() : (ModernizedCProgram.state).getRows()));
+					return /*Error: Unsupported expression*/;
+			case (byte)'s':
+					ModernizedCProgram.state.getVt().vterm_push_output_sprintf_dcs("1$r%d;%ds", ((ModernizedCProgram.state).getMode().getLeftrightmargin() ? (ModernizedCProgram.state).getScrollregion_left() : 0) + 1, ((ModernizedCProgram.state).getMode().getLeftrightmargin() && (ModernizedCProgram.state).getScrollregion_right() > -1 ? (ModernizedCProgram.state).getScrollregion_right() : (ModernizedCProgram.state).getCols()));
+					return /*Error: Unsupported expression*/;
 			case (byte)'m':
 					{ 
 						long[] args = new long[20];
-						int argc = ModernizedCProgram.state.vterm_state_getpen(args,  / );
+						int argc = ModernizedCProgram.state.vterm_state_getpen(args, /*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/);
 						int argi;
 						ModernizedCProgram.state.getVt().vterm_push_output_sprintf_ctrl(.C1_DCS, "1$r");
 						for (argi = 0; argi < argc; argi++) {
@@ -373,17 +379,11 @@ public class VTermState {
 						ModernizedCProgram.state.getVt().vterm_push_output_sprintf("m");
 						ModernizedCProgram.state.getVt().vterm_push_output_sprintf_ctrl(.C1_ST, "");
 					}
-					return ;
-			case (byte)'r':
-					ModernizedCProgram.state.getVt().vterm_push_output_sprintf_dcs("1$r%d;%dr", ModernizedCProgram.state.getScrollregion_top() + 1, ((ModernizedCProgram.state).getScrollregion_bottom() > -1 ? (ModernizedCProgram.state).getScrollregion_bottom() : (ModernizedCProgram.state).getRows()));
-					return ;
-			case (byte)'s':
-					ModernizedCProgram.state.getVt().vterm_push_output_sprintf_dcs("1$r%d;%ds", ((ModernizedCProgram.state).getMode().getLeftrightmargin() ? (ModernizedCProgram.state).getScrollregion_left() : 0) + 1, ((ModernizedCProgram.state).getMode().getLeftrightmargin() && (ModernizedCProgram.state).getScrollregion_right() > -1 ? (ModernizedCProgram.state).getScrollregion_right() : (ModernizedCProgram.state).getCols()));
-					return ;
+					return /*Error: Unsupported expression*/;
 			}
 		} 
 		if (cmdlen == 2) {
-			if ((.strncmp(command, " q", 2) == 0)) {
+			if ((/*Error: Function owner not recognized*/strncmp(command, " q", 2) == 0)) {
 				int reply;
 				switch (ModernizedCProgram.state.getMode().getCursor_shape()) {
 				case .VTERM_PROP_CURSORSHAPE_BLOCK:
@@ -400,10 +400,10 @@ public class VTermState {
 					reply--;
 				} 
 				ModernizedCProgram.state.getVt().vterm_push_output_sprintf_dcs("1$r%d q", reply);
-				return ;
-			}  else if ((.strncmp(command, "\"q", 2) == 0)) {
+				return /*Error: Unsupported expression*/;
+			}  else if ((/*Error: Function owner not recognized*/strncmp(command, "\"q", 2) == 0)) {
 				ModernizedCProgram.state.getVt().vterm_push_output_sprintf_dcs("1$r%d\"q", ModernizedCProgram.state.getProtected_cell() ? 1 : 2);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		ModernizedCProgram.state.getVt().vterm_push_output_sprintf_dcs("0$r%.s", (int)cmdlen, command);
@@ -423,19 +423,19 @@ public class VTermState {
 		state.setCombine_chars_size(16);
 		VTerm generatedVt = state.getVt();
 		Object generatedCombine_chars_size = state.getCombine_chars_size();
-		Object generatedCombine_chars = state.getCombine_chars();
-		state.setCombine_chars(generatedVt.vterm_allocator_malloc(generatedCombine_chars_size * ));
+		Object[] generatedCombine_chars = state.getCombine_chars();
+		state.setCombine_chars(generatedVt.vterm_allocator_malloc(generatedCombine_chars_size * /*Error: sizeof expression not supported yet*/));
 		int generatedCols = state.getCols();
 		state.setTabstops(generatedVt.vterm_allocator_malloc((generatedCols + 7) / 8));
 		int generatedRows = state.getRows();
-		state.setLineinfo(generatedVt.vterm_allocator_malloc(generatedRows * ));
+		state.setLineinfo(generatedVt.vterm_allocator_malloc(generatedRows * /*Error: Unsupported expression*/));
 		VTermEncoding vTermEncoding = new VTermEncoding();
 		 generatedEncoding_utf8 = state.getEncoding_utf8();
 		generatedEncoding_utf8.setEnc(vTermEncoding.vterm_lookup_encoding(.ENC_UTF8, (byte)'u'));
 		Object generatedEnc = generatedEncoding_utf8.getEnc();
 		Object generatedData = generatedEncoding_utf8.getData();
 		if (generatedEnc.getInit() != ((Object)0)) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedEnc, generatedData);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedEnc, generatedData);
 		} 
 		vt.vterm_parser_set_callbacks(ModernizedCProgram.parser_callbacks, state);
 		return state;
@@ -474,7 +474,7 @@ public class VTermState {
 			}
 		}
 		if (ModernizedCProgram.state.getCallbacks() && ModernizedCProgram.state.getCallbacks().getInitpen()) {
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.state.getCbdata());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.state.getCbdata());
 		} 
 		ModernizedCProgram.state.vterm_state_resetpen();
 		VTermEncoding vTermEncoding = new VTermEncoding();
@@ -485,7 +485,7 @@ public class VTermState {
 			for (i = 0; i < 4; i++) {
 				ModernizedCProgram.state.getEncoding()[i].setEnc(default_enc);
 				if (generatedInit) {
-					.UNRECOGNIZEDFUNCTIONNAME(default_enc, ModernizedCProgram.state.getEncoding()[i].getData());
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(default_enc, ModernizedCProgram.state.getEncoding()[i].getData());
 				} 
 			}
 		}
@@ -511,7 +511,7 @@ public class VTermState {
 			ModernizedCProgram.state.setCallbacks(callbacks);
 			ModernizedCProgram.state.setCbdata(user);
 			if (ModernizedCProgram.state.getCallbacks() && ModernizedCProgram.state.getCallbacks().getInitpen()) {
-				.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.state.getCbdata());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.state.getCbdata());
 			} 
 		} else {
 				ModernizedCProgram.state.setCallbacks(((Object)0));
@@ -619,42 +619,59 @@ public class VTermState {
 	public void vterm_state_set_bold_highbright(int bold_is_highbright) {
 		ModernizedCProgram.state.setBold_is_highbright(bold_is_highbright);
 	}
-	public void vterm_state_setpen(Object args, int argcount) {
+	public void vterm_state_setpen(Object[] args, int argcount) {
 		// SGR - ECMA-48 8.3.117int argi = 0;
 		int value;
 		while (argi < argcount) {
 			int done = 1;
 			long arg;
 			switch (arg = ((args[argi]) & (~(-1024 << 31)))) {
-			case 107:
-					value = ((args[argi]) & (~(-1024 << 31))) - 100 + 8;
-					ModernizedCProgram.state.setBg_index(value);
-					ModernizedCProgram.state.set_pen_col_ansi(.VTERM_ATTR_BACKGROUND, value);
+			case 11:
+			case 17:
+			case 39:
+					ModernizedCProgram.state.setFg_index(-1);
+					ModernizedCProgram.state.getPen().setFg(ModernizedCProgram.state.getDefault_fg());
+					ModernizedCProgram.setpenattr_col(ModernizedCProgram.state, .VTERM_ATTR_FOREGROUND, ModernizedCProgram.state.getPen().getFg());
 					break;
-			case 7:
-					ModernizedCProgram.state.getPen().setReverse(1);
-					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_REVERSE, 1);
+			case 49:
+					ModernizedCProgram.state.setBg_index(-1);
+					ModernizedCProgram.state.getPen().setBg(ModernizedCProgram.state.getDefault_bg());
+					ModernizedCProgram.setpenattr_col(ModernizedCProgram.state, .VTERM_ATTR_BACKGROUND, ModernizedCProgram.state.getPen().getBg());
 					break;
-			case 23:
-					ModernizedCProgram.state.getPen().setItalic(0);
-					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_ITALIC, 0);
+			case 103:
+			case 35:
+			case 14:
+			case 19:
+					ModernizedCProgram.state.getPen().setFont(((args[argi]) & (~(-1024 << 31))) - 10);
+					ModernizedCProgram.state.setpenattr_int(.VTERM_ATTR_FONT, ModernizedCProgram.state.getPen().getFont());
 					break;
-			case 15:
+			case 36:
+			case 106:
+			case 93:
+			case 102:
+			case 34:
+			case 96:
 			case 47:
 					value = ((args[argi]) & (~(-1024 << 31))) - 40;
 					ModernizedCProgram.state.setBg_index(value);
 					ModernizedCProgram.state.set_pen_col_ansi(.VTERM_ATTR_BACKGROUND, value);
 					break;
+			case 13:
+			case 40:
 			case 32:
-			case 43:
-			case 4:
-					ModernizedCProgram.state.getPen().setUnderline(1);
-					ModernizedCProgram.state.setpenattr_int(.VTERM_ATTR_UNDERLINE, 1);
+			case 97:
+					value = ((args[argi]) & (~(-1024 << 31))) - 90 + 8;
+					ModernizedCProgram.state.setFg_index(value);
+					ModernizedCProgram.state.set_pen_col_ansi(.VTERM_ATTR_FOREGROUND, value);
 					break;
-			case 0:
-					ModernizedCProgram.state.vterm_state_resetpen();
+			case 48:
+					ModernizedCProgram.state.setBg_index(-1);
+					if (argcount - argi < 1) {
+						return /*Error: Unsupported expression*/;
+					} 
+					argi += 1 + ModernizedCProgram.state.getPen().getBg().lookup_colour(ModernizedCProgram.state, ((args[argi + 1]) & (~(-1024 << 31))), args + argi + 2, argcount - argi - 2, ModernizedCProgram.state.getBg_index());
+					ModernizedCProgram.setpenattr_col(ModernizedCProgram.state, .VTERM_ATTR_BACKGROUND, ModernizedCProgram.state.getPen().getBg());
 					break;
-			case 11:
 			case 1:
 					ModernizedCProgram.state.getPen().setBold(1);
 					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_BOLD, 1);
@@ -662,63 +679,72 @@ public class VTermState {
 						ModernizedCProgram.state.set_pen_col_ansi(.VTERM_ATTR_FOREGROUND, ModernizedCProgram.state.getFg_index() + (ModernizedCProgram.state.getPen().getBold() ? 8 : 0));
 					} 
 					break;
-			case 18:
-			case 33:
-			case 27:
-					ModernizedCProgram.state.getPen().setReverse(0);
-					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_REVERSE, 0);
-					break;
-			case 30:
-			case 106:
-			case 17:
-			case 34:
-			case 39:
-					ModernizedCProgram.state.setFg_index(-1);
-					ModernizedCProgram.state.getPen().setFg(ModernizedCProgram.state.getDefault_fg());
-					ModernizedCProgram.setpenattr_col(ModernizedCProgram.state, .VTERM_ATTR_FOREGROUND, ModernizedCProgram.state.getPen().getFg());
-					break;
-			case 14:
-			case 10:
-			case 3:
-					ModernizedCProgram.state.getPen().setItalic(1);
-					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_ITALIC, 1);
-					break;
-			case 97:
-					value = ((args[argi]) & (~(-1024 << 31))) - 90 + 8;
-					ModernizedCProgram.state.setFg_index(value);
-					ModernizedCProgram.state.set_pen_col_ansi(.VTERM_ATTR_FOREGROUND, value);
-					break;
-			case 46:
-			case 48:
-					ModernizedCProgram.state.setBg_index(-1);
-					if (argcount - argi < 1) {
-						return ;
-					} 
-					argi += 1 + ModernizedCProgram.state.getPen().getBg().lookup_colour(ModernizedCProgram.state, ((args[argi + 1]) & (~(-1024 << 31))), args + argi + 2, argcount - argi - 2, ModernizedCProgram.state.getBg_index());
-					ModernizedCProgram.setpenattr_col(ModernizedCProgram.state, .VTERM_ATTR_BACKGROUND, ModernizedCProgram.state.getPen().getBg());
-					break;
-			case 40:
-			case 95:
-			case 104:
-			case 91:
-			case ((1 << 30) - 1):
-			case 22:
-					ModernizedCProgram.state.getPen().setBold(0);
-					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_BOLD, 0);
-					break;
+			case 101:
 			case 29:
 					ModernizedCProgram.state.getPen().setStrike(0);
 					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_STRIKE, 0);
 					break;
-			case 31:
-			case 12:
-			case 102:
-			case 42:
-			case 44:
+			case 16:
+			case 21:
+					ModernizedCProgram.state.getPen().setUnderline(2);
+					ModernizedCProgram.state.setpenattr_int(.VTERM_ATTR_UNDERLINE, 2);
+					break;
+			case 46:
+			case 107:
+					value = ((args[argi]) & (~(-1024 << 31))) - 100 + 8;
+					ModernizedCProgram.state.setBg_index(value);
+					ModernizedCProgram.state.set_pen_col_ansi(.VTERM_ATTR_BACKGROUND, value);
+					break;
+			case 0:
+					ModernizedCProgram.state.vterm_state_resetpen();
+					break;
+			case 30:
 			case 45:
-			case 5:
-					ModernizedCProgram.state.getPen().setBlink(1);
-					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_BLINK, 1);
+			case 23:
+					ModernizedCProgram.state.getPen().setItalic(0);
+					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_ITALIC, 0);
+					break;
+			case 43:
+			case 31:
+			case 38:
+					ModernizedCProgram.state.setFg_index(-1);
+					if (argcount - argi < 1) {
+						return /*Error: Unsupported expression*/;
+					} 
+					argi += 1 + ModernizedCProgram.state.getPen().getFg().lookup_colour(ModernizedCProgram.state, ((args[argi + 1]) & (~(-1024 << 31))), args + argi + 2, argcount - argi - 2, ModernizedCProgram.state.getFg_index());
+					ModernizedCProgram.setpenattr_col(ModernizedCProgram.state, .VTERM_ATTR_FOREGROUND, ModernizedCProgram.state.getPen().getFg());
+					break;
+			case ((1 << 30) - 1):
+			case 18:
+			case 95:
+			case 33:
+			case 44:
+			case 41:
+			case 92:
+			case 7:
+					ModernizedCProgram.state.getPen().setReverse(1);
+					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_REVERSE, 1);
+					break;
+			case 104:
+			case 9:
+					ModernizedCProgram.state.getPen().setStrike(1);
+					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_STRIKE, 1);
+					break;
+			case 24:
+					ModernizedCProgram.state.getPen().setUnderline(0);
+					ModernizedCProgram.state.setpenattr_int(.VTERM_ATTR_UNDERLINE, 0);
+					break;
+			case 94:
+			case 42:
+			case 15:
+			case 4:
+					ModernizedCProgram.state.getPen().setUnderline(1);
+					ModernizedCProgram.state.setpenattr_int(.VTERM_ATTR_UNDERLINE, 1);
+					break;
+			case 12:
+			case 3:
+					ModernizedCProgram.state.getPen().setItalic(1);
+					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_ITALIC, 1);
 					break;
 			case 37:
 					value = ((args[argi]) & (~(-1024 << 31))) - 30;
@@ -728,53 +754,27 @@ public class VTermState {
 					} 
 					ModernizedCProgram.state.set_pen_col_ansi(.VTERM_ATTR_FOREGROUND, value);
 					break;
-			case 105:
-			case 100:
-			case 103:
-			case 41:
-			case 94:
 			case 25:
 					ModernizedCProgram.state.getPen().setBlink(0);
 					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_BLINK, 0);
 					break;
-			case 93:
-			case 35:
-			case 92:
 			case 90:
-			case 19:
-					ModernizedCProgram.state.getPen().setFont(((args[argi]) & (~(-1024 << 31))) - 10);
-					ModernizedCProgram.state.setpenattr_int(.VTERM_ATTR_FONT, ModernizedCProgram.state.getPen().getFont());
+			case 27:
+					ModernizedCProgram.state.getPen().setReverse(0);
+					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_REVERSE, 0);
 					break;
-			case 36:
-			case 38:
-					ModernizedCProgram.state.setFg_index(-1);
-					if (argcount - argi < 1) {
-						return ;
-					} 
-					argi += 1 + ModernizedCProgram.state.getPen().getFg().lookup_colour(ModernizedCProgram.state, ((args[argi + 1]) & (~(-1024 << 31))), args + argi + 2, argcount - argi - 2, ModernizedCProgram.state.getFg_index());
-					ModernizedCProgram.setpenattr_col(ModernizedCProgram.state, .VTERM_ATTR_FOREGROUND, ModernizedCProgram.state.getPen().getFg());
+			case 10:
+			case 91:
+			case 22:
+					ModernizedCProgram.state.getPen().setBold(0);
+					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_BOLD, 0);
 					break;
-			case 49:
-					ModernizedCProgram.state.setBg_index(-1);
-					ModernizedCProgram.state.getPen().setBg(ModernizedCProgram.state.getDefault_bg());
-					ModernizedCProgram.setpenattr_col(ModernizedCProgram.state, .VTERM_ATTR_BACKGROUND, ModernizedCProgram.state.getPen().getBg());
+			case 105:
+			case 100:
+			case 5:
+					ModernizedCProgram.state.getPen().setBlink(1);
+					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_BLINK, 1);
 					break;
-			case 24:
-					ModernizedCProgram.state.getPen().setUnderline(0);
-					ModernizedCProgram.state.setpenattr_int(.VTERM_ATTR_UNDERLINE, 0);
-					break;
-			case 9:
-					ModernizedCProgram.state.getPen().setStrike(1);
-					ModernizedCProgram.state.setpenattr_bool(.VTERM_ATTR_STRIKE, 1);
-					break;
-			case 13:
-			case 21:
-					ModernizedCProgram.state.getPen().setUnderline(2);
-					ModernizedCProgram.state.setpenattr_int(.VTERM_ATTR_UNDERLINE, 2);
-					break;
-			case 96:
-			case 16:
-			case 101:
 			default:
 					done = 0;
 					break;
@@ -787,7 +787,7 @@ public class VTermState {
 			}
 		}// This logic is easier to do 'done' backwards; set it true, and make it
 	}
-	public int vterm_state_getpen(Long args, int argcount) {
+	public int vterm_state_getpen(long[] args, int argcount) {
 		int argi = 0;
 		if (ModernizedCProgram.state.getPen().getBold()) {
 			args[argi++] = 1;
@@ -852,6 +852,18 @@ public class VTermState {
 	public void output_mouse(int code, int pressed, int modifiers, int col, int row) {
 		modifiers <<=  2;
 		switch (ModernizedCProgram.state.getMouse_protocol()) {
+		case .MOUSE_X10:
+				if (col + -1024 > -1024) {
+					col = -1024 - -1024;
+				} 
+				if (row + -1024 > -1024) {
+					row = -1024 - -1024;
+				} 
+				if (!pressed) {
+					code = 3;
+				} 
+				ModernizedCProgram.state.getVt().vterm_push_output_sprintf_ctrl(.C1_CSI, "M%c%c%c", (code | modifiers) + -1024, col + -1024, row + -1024);
+				break;
 		case .MOUSE_RXVT:
 				if (!pressed) {
 					code = 3;
@@ -865,27 +877,15 @@ public class VTermState {
 					if (!pressed) {
 						code = 3;
 					} 
-					len += .fill_utf8((code | modifiers) + -1024, utf8 + len);
-					len += .fill_utf8(col + -1024, utf8 + len);
-					len += .fill_utf8(row + -1024, utf8 + len);
+					len += /*Error: Function owner not recognized*/fill_utf8((code | modifiers) + -1024, utf8 + len);
+					len += /*Error: Function owner not recognized*/fill_utf8(col + -1024, utf8 + len);
+					len += /*Error: Function owner not recognized*/fill_utf8(row + -1024, utf8 + len);
 					utf8[len] = 0;
 					ModernizedCProgram.state.getVt().vterm_push_output_sprintf_ctrl(.C1_CSI, "M%s", utf8);
 				}
 				break;
 		case .MOUSE_SGR:
 				ModernizedCProgram.state.getVt().vterm_push_output_sprintf_ctrl(.C1_CSI, "<%d;%d;%d%c", code | modifiers, col + 1, row + 1, pressed ? (byte)'M' : (byte)'m');
-				break;
-		case .MOUSE_X10:
-				if (col + -1024 > -1024) {
-					col = -1024 - -1024;
-				} 
-				if (row + -1024 > -1024) {
-					row = -1024 - -1024;
-				} 
-				if (!pressed) {
-					code = 3;
-				} 
-				ModernizedCProgram.state.getVt().vterm_push_output_sprintf_ctrl(.C1_CSI, "M%c%c%c", (code | modifiers) + -1024, col + -1024, row + -1024);
 				break;
 		}
 	}
@@ -967,16 +967,16 @@ public class VTermState {
 	public void setScrollregion_right(int newScrollregion_right) {
 		scrollregion_right = newScrollregion_right;
 	}
-	public Byte getTabstops() {
+	public byte[] getTabstops() {
 		return tabstops;
 	}
-	public void setTabstops(Byte newTabstops) {
+	public void setTabstops(byte[] newTabstops) {
 		tabstops = newTabstops;
 	}
-	public  getLineinfo() {
+	public [] getLineinfo() {
 		return lineinfo;
 	}
-	public void setLineinfo( newLineinfo) {
+	public void setLineinfo([] newLineinfo) {
 		lineinfo = newLineinfo;
 	}
 	public int getMouse_col() {
@@ -1009,10 +1009,10 @@ public class VTermState {
 	public void setMouse_protocol( newMouse_protocol) {
 		mouse_protocol = newMouse_protocol;
 	}
-	public Object getCombine_chars() {
+	public Object[] getCombine_chars() {
 		return combine_chars;
 	}
-	public void setCombine_chars(Object newCombine_chars) {
+	public void setCombine_chars(Object[] newCombine_chars) {
 		combine_chars = newCombine_chars;
 	}
 	public Object getCombine_chars_size() {

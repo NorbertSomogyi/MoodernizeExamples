@@ -16,10 +16,10 @@ public class island_bitmap {
 	}
 	
 	public island_bitmap island_bitmap_new(Object old) {
-		size_t size =  + (ModernizedCProgram.island_bitmap_size * 4);
+		size_t size = /*Error: Unsupported expression*/ + (ModernizedCProgram.island_bitmap_size * 4);
 		island_bitmap b = ModernizedCProgram.xcalloc(1, size);
 		if (old) {
-			.memcpy(b, old, size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(b, old, size);
 		} 
 		b.setRefcount(1);
 		return b;

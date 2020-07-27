@@ -16,28 +16,9 @@ public class attr_check_item {
 	public attr_check_item() {
 	}
 	
-	public attr_check_item attr_check_append(attr_check check, Object attr) {
-		attr_check_item item = new attr_check_item();
-		int generatedNr = check.getNr();
-		int generatedAlloc = check.getAlloc();
-		attr_check_item generatedItems = check.getItems();
-		do {
-			if ((generatedNr + 1) > generatedAlloc) {
-				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNr + 1)) {
-					check.setAlloc((generatedNr + 1));
-				} else {
-						check.setAlloc((((generatedAlloc) + 16) * 3 / 2));
-				} 
-				(generatedItems) = ModernizedCProgram.xrealloc((generatedItems), ModernizedCProgram.st_mult(, (generatedAlloc)));
-			} 
-		} while (0);
-		item = generatedItems[generatedNr++];
-		item.setAttr(attr);
-		return item;
-	}
 	public Object git_path_check_encoding() {
 		byte value = ModernizedCProgram.check.getValue();
-		if (((value) == ((Object)0)) || !.strlen(value)) {
+		if (((value) == ((Object)0)) || !/*Error: Function owner not recognized*/strlen(value)) {
 			return ((Object)0);
 		} 
 		if (((value) == ModernizedCProgram.git_attr__true) || ((value) == ModernizedCProgram.git_attr__false)) {
@@ -56,9 +37,9 @@ public class attr_check_item {
 			return crlf_action.CRLF_BINARY;
 		}  else if (((value) == ((Object)0))) {
 			;
-		}  else if (!.strcmp(value, "input")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(value, "input")) {
 			return crlf_action.CRLF_TEXT_INPUT;
-		}  else if (!.strcmp(value, "auto")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(value, "auto")) {
 			return crlf_action.CRLF_AUTO;
 		} 
 		return crlf_action.CRLF_UNDEFINED;
@@ -67,9 +48,9 @@ public class attr_check_item {
 		byte value = ModernizedCProgram.check.getValue();
 		if (((value) == ((Object)0))) {
 			;
-		}  else if (!.strcmp(value, "lf")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(value, "lf")) {
 			return eol.EOL_LF;
-		}  else if (!.strcmp(value, "crlf")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(value, "crlf")) {
 			return eol.EOL_CRLF;
 		} 
 		return eol.EOL_UNSET;
@@ -77,6 +58,25 @@ public class attr_check_item {
 	public int git_path_check_ident() {
 		byte value = ModernizedCProgram.check.getValue();
 		return !!((value) == ModernizedCProgram.git_attr__true);
+	}
+	public attr_check_item attr_check_append(attr_check check, Object attr) {
+		attr_check_item item = new attr_check_item();
+		int generatedNr = check.getNr();
+		int generatedAlloc = check.getAlloc();
+		attr_check_item[] generatedItems = check.getItems();
+		do {
+			if ((generatedNr + 1) > generatedAlloc) {
+				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNr + 1)) {
+					check.setAlloc((generatedNr + 1));
+				} else {
+						check.setAlloc((((generatedAlloc) + 16) * 3 / 2));
+				} 
+				(generatedItems) = ModernizedCProgram.xrealloc((generatedItems), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedAlloc)));
+			} 
+		} while (0);
+		item = generatedItems[generatedNr++];
+		item.setAttr(attr);
+		return item;
 	}
 	public Object getAttr() {
 		return attr;

@@ -21,13 +21,13 @@ public class work_item {
 		work_item ret = new work_item();
 		ModernizedCProgram.grep_lock();
 		while (ModernizedCProgram.todo_start == ModernizedCProgram.todo_end && !ModernizedCProgram.all_work_added) {
-			.pthread_cond_wait(ModernizedCProgram.cond_add, ModernizedCProgram.grep_mutex);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_cond_wait(ModernizedCProgram.cond_add, ModernizedCProgram.grep_mutex);
 		}
 		if (ModernizedCProgram.todo_start == ModernizedCProgram.todo_end && ModernizedCProgram.all_work_added) {
 			ret = ((Object)0);
 		} else {
 				ret = ModernizedCProgram.todo[ModernizedCProgram.todo_start];
-				ModernizedCProgram.todo_start = (ModernizedCProgram.todo_start + 1) % ( /  + ( - 1));
+				ModernizedCProgram.todo_start = (ModernizedCProgram.todo_start + 1) % (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		} 
 		ModernizedCProgram.grep_unlock();
 		return ret;
@@ -39,9 +39,9 @@ public class work_item {
 		old_done = ModernizedCProgram.todo_done;
 		strbuf generatedOut = this.getOut();
 		Object generatedLen = generatedOut.getLen();
-		byte generatedBuf = generatedOut.getBuf();
+		byte[] generatedBuf = generatedOut.getBuf();
 		grep_source generatedSource = this.getSource();
-		for (; ModernizedCProgram.todo[ModernizedCProgram.todo_done].getDone() && ModernizedCProgram.todo_done != ModernizedCProgram.todo_start; ModernizedCProgram.todo_done = (ModernizedCProgram.todo_done + 1) % ( /  + ( - 1))) {
+		for (; ModernizedCProgram.todo[ModernizedCProgram.todo_done].getDone() && ModernizedCProgram.todo_done != ModernizedCProgram.todo_start; ModernizedCProgram.todo_done = (ModernizedCProgram.todo_done + 1) % (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1))) {
 			w = ModernizedCProgram.todo[ModernizedCProgram.todo_done];
 			if (generatedLen) {
 				byte p = generatedBuf;
@@ -57,13 +57,13 @@ public class work_item {
 				} 
 				ModernizedCProgram.write_or_die(1, p, ModernizedCProgram.len);
 			} 
-			.grep_source_clear(generatedSource);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/grep_source_clear(generatedSource);
 		}
 		if (old_done != ModernizedCProgram.todo_done) {
-			.pthread_cond_signal(ModernizedCProgram.cond_write);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_cond_signal(ModernizedCProgram.cond_write);
 		} 
 		if (ModernizedCProgram.all_work_added && ModernizedCProgram.todo_done == ModernizedCProgram.todo_end) {
-			.pthread_cond_signal(ModernizedCProgram.cond_result);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_cond_signal(ModernizedCProgram.cond_result);
 		} 
 		ModernizedCProgram.grep_unlock();
 	}

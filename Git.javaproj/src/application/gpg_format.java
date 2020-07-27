@@ -17,8 +17,8 @@ public class gpg_format {
 	
 	public gpg_format get_format_by_name(Object str) {
 		int i;
-		for (i = 0; i < ( /  + ( - 1)); i++) {
-			if (!.strcmp(ModernizedCProgram.gpg_format[i].getName(), str)) {
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
+			if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.gpg_format[i].getName(), str)) {
 				return ModernizedCProgram.gpg_format + i;
 			} 
 		}
@@ -27,7 +27,7 @@ public class gpg_format {
 	public gpg_format get_format_by_sig(Object sig) {
 		int i;
 		int j;
-		for (i = 0; i < ( /  + ( - 1)); i++) {
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
 			for (j = 0; ModernizedCProgram.gpg_format[i].getSigs()[j]; j++) {
 				if (ModernizedCProgram.starts_with(sig, ModernizedCProgram.gpg_format[i].getSigs()[j])) {
 					return ModernizedCProgram.gpg_format + i;

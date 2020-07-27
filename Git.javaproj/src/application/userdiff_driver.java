@@ -1,7 +1,7 @@
 package application;
 
 public class userdiff_driver {
-	private Object name;
+	private Object[] name;
 	private Object external;
 	private int binary;
 	private userdiff_funcname funcname;
@@ -10,7 +10,7 @@ public class userdiff_driver {
 	private notes_cache textconv_cache;
 	private int textconv_want_cache;
 	
-	public userdiff_driver(Object name, Object external, int binary, userdiff_funcname funcname, Object word_regex, Object textconv, notes_cache textconv_cache, int textconv_want_cache) {
+	public userdiff_driver(Object[] name, Object external, int binary, userdiff_funcname funcname, Object word_regex, Object textconv, notes_cache textconv_cache, int textconv_want_cache) {
 		setName(name);
 		setExternal(external);
 		setBinary(binary);
@@ -25,23 +25,23 @@ public class userdiff_driver {
 	
 	public userdiff_driver userdiff_find_by_namelen(Object k, int len) {
 		int i;
-		Object generatedName = drv.getName();
+		Object[] generatedName = drv.getName();
 		for (i = 0; i < ModernizedCProgram.ndrivers; i++) {
 			userdiff_driver drv = ModernizedCProgram.drivers + i;
-			if (!.strncmp(generatedName, k, len) && !generatedName[len]) {
+			if (!/*Error: Function owner not recognized*/strncmp(generatedName, k, len) && !generatedName[len]) {
 				return drv;
 			} 
 		}
-		for (i = 0; i < ( /  + ( - 1)); i++) {
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
 			userdiff_driver drv = ModernizedCProgram.builtin_drivers + i;
-			if (!.strncmp(generatedName, k, len) && !generatedName[len]) {
+			if (!/*Error: Function owner not recognized*/strncmp(generatedName, k, len) && !generatedName[len]) {
 				return drv;
 			} 
 		}
 		return ((Object)0);
 	}
 	public userdiff_driver userdiff_find_by_name(Object name) {
-		int len = .strlen(name);
+		int len = /*Error: Function owner not recognized*/strlen(name);
 		userdiff_driver userdiff_driver = new userdiff_driver();
 		return userdiff_driver.userdiff_find_by_namelen(name, len);
 	}
@@ -55,7 +55,7 @@ public class userdiff_driver {
 			return ((Object)0);
 		} 
 		check.git_check_attr(istate, path);
-		attr_check_item generatedItems = check.getItems();
+		attr_check_item[] generatedItems = check.getItems();
 		if (((generatedItems[0].getValue()) == ModernizedCProgram.git_attr__true)) {
 			return ModernizedCProgram.driver_true;
 		} 
@@ -75,11 +75,11 @@ public class userdiff_driver {
 		} 
 		int generatedTextconv_want_cache = this.getTextconv_want_cache();
 		notes_cache generatedTextconv_cache = this.getTextconv_cache();
-		Object generatedName = this.getName();
-		byte generatedBuf = name.getBuf();
+		Object[] generatedName = this.getName();
+		byte[] generatedBuf = name.getBuf();
 		if (generatedTextconv_want_cache && !generatedTextconv_cache) {
-			notes_cache c = ModernizedCProgram.xmalloc();
-			strbuf name = new strbuf(, , );
+			notes_cache c = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+			strbuf name = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			name.strbuf_addf("textconv/%s", generatedName);
 			ModernizedCProgram.notes_cache_init(r, c, generatedBuf, generatedTextconv);
 			this.setTextconv_cache(c);
@@ -87,10 +87,10 @@ public class userdiff_driver {
 		} 
 		return driver;
 	}
-	public Object getName() {
+	public Object[] getName() {
 		return name;
 	}
-	public void setName(Object newName) {
+	public void setName(Object[] newName) {
 		name = newName;
 	}
 	public Object getExternal() {

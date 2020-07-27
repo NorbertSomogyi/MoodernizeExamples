@@ -31,6 +31,91 @@ public class libfat_filesystem {
 	public libfat_filesystem() {
 	}
 	
+	public Object libfat_nextsector(Object s) {
+		int32_t cluster = new int32_t();
+		int32_t nextcluster = new int32_t();
+		uint32_t fatoffset = new uint32_t();
+		libfat_sector_t fatsect = new libfat_sector_t();
+		uint8_t fsdata = new uint8_t();
+		int generatedClustsize = this.getClustsize();
+		uint32_t clustmask = generatedClustsize - 1;
+		libfat_sector_t rs = new libfat_sector_t();
+		Object generatedData = this.getData();
+		Object generatedRootdir = this.getRootdir();
+		if (s < generatedData) {
+			if (s < generatedRootdir) {
+				return -1;
+			} 
+			/* Root directory */s++;
+			return (s < generatedData) ? s : 0;
+		} 
+		rs = s - generatedData;
+		if (~rs & clustmask) {
+			return s + /* Next sector in cluster */1;
+		} 
+		int generatedClustshift = this.getClustshift();
+		cluster = 2 + (rs >> generatedClustshift);
+		Object generatedEndcluster = this.getEndcluster();
+		if (cluster >= generatedEndcluster) {
+			return -1;
+		} 
+		Object generatedFat = this.getFat();
+		fat_type generatedFat_type = this.getFat_type();
+		switch (generatedFat_type) {
+		case fat_type.FAT16:
+				fatoffset = cluster << 1;
+				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
+				fsdata = fs.libfat_get_sector(fatsect);
+				if (!fsdata) {
+					return -1;
+				} 
+				nextcluster = ModernizedCProgram.read16((le16_t)fsdata[fatoffset & ModernizedCProgram.LIBFAT_SECTOR_MASK]);
+				if (nextcluster >= -1024) {
+					return 0;
+				} 
+				break;
+		case fat_type.FAT28:
+				fatoffset = cluster << 2;
+				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
+				fsdata = fs.libfat_get_sector(fatsect);
+				if (!fsdata) {
+					return -1;
+				} 
+				nextcluster = ModernizedCProgram.read32((le32_t)fsdata[fatoffset & ModernizedCProgram.LIBFAT_SECTOR_MASK]);
+				nextcluster &=  -1024;
+				if (nextcluster >= -1024) {
+					return 0;
+				} 
+				break;
+		case fat_type.FAT12:
+				fatoffset = cluster + (cluster >> /* Get first byte */1);
+				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
+				fsdata = fs.libfat_get_sector(fatsect);
+				if (!fsdata) {
+					return -1;
+				} 
+				nextcluster = fsdata[fatoffset & ModernizedCProgram.LIBFAT_SECTOR_MASK];
+				/* Get second byte */fatoffset++;
+				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
+				fsdata = fs.libfat_get_sector(fatsect);
+				if (!fsdata) {
+					return -1;
+				} 
+				nextcluster |=  fsdata[fatoffset & ModernizedCProgram.LIBFAT_SECTOR_MASK] << 8;
+				if (cluster & /* Extract the FAT entry */1) {
+					nextcluster >>=  4;
+				} else {
+						nextcluster &=  -1024;
+				} 
+				if (nextcluster >= -1024) {
+					return 0;
+				} 
+				break;
+		default:
+				return -/* WTF? */1;
+		}
+		return ModernizedCProgram.libfat_clustertosector(fs, nextcluster);
+	}
 	public libfat_filesystem libfat_open(Object readfunc, Object readptr) {
 		libfat_filesystem fs = ((Object)0);
 		fat_bootsect bs = new fat_bootsect();
@@ -40,7 +125,7 @@ public class libfat_filesystem {
 		uint32_t minfatsize = new uint32_t();
 		uint32_t rootdirsize = new uint32_t();
 		uint32_t nclusters = new uint32_t();
-		fs = .malloc();
+		fs = /*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
 		if (!fs) {
 			;
 		} 
@@ -125,7 +210,7 @@ public class libfat_filesystem {
 	}
 	public void libfat_close() {
 		fs.libfat_flush();
-		.free(fs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(fs);
 	}
 	/* ----------------------------------------------------------------------- *
 	 *
@@ -162,17 +247,17 @@ public class libfat_filesystem {
 				return generatedData;
 			} 
 		}
-		ls = ._mm_malloc( + ModernizedCProgram.LIBFAT_SECTOR_SIZE, /* Not found in cache */16);
+		ls = /*Error: Function owner not recognized*/_mm_malloc(/*Error: Unsupported expression*/ + ModernizedCProgram.LIBFAT_SECTOR_SIZE, /* Not found in cache */16);
 		if (!ls) {
 			fs.libfat_flush();
-			ls = ._mm_malloc( + ModernizedCProgram.LIBFAT_SECTOR_SIZE, 16);
+			ls = /*Error: Function owner not recognized*/_mm_malloc(/*Error: Unsupported expression*/ + ModernizedCProgram.LIBFAT_SECTOR_SIZE, 16);
 			if (!ls) {
 				return ((Object)/* Can't allocate memory */0);
 			} 
 		} 
 		Object generatedReadptr = this.getReadptr();
-		if (.UNRECOGNIZEDFUNCTIONNAME(generatedReadptr, generatedData, ModernizedCProgram.LIBFAT_SECTOR_SIZE, n) != ModernizedCProgram.LIBFAT_SECTOR_SIZE) {
-			._mm_free(ls);
+		if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedReadptr, generatedData, ModernizedCProgram.LIBFAT_SECTOR_SIZE, n) != ModernizedCProgram.LIBFAT_SECTOR_SIZE) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_free(ls);
 			return ((Object)/* I/O error */0);
 		} 
 		ls.setN(n);
@@ -189,93 +274,8 @@ public class libfat_filesystem {
 		libfat_sector generatedNext = ls.getNext();
 		for (ls = lsnext; ls; ls = lsnext) {
 			lsnext = generatedNext;
-			._mm_free(ls);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_free(ls);
 		}
-	}
-	public Object libfat_nextsector(Object s) {
-		int32_t cluster = new int32_t();
-		int32_t nextcluster = new int32_t();
-		uint32_t fatoffset = new uint32_t();
-		libfat_sector_t fatsect = new libfat_sector_t();
-		uint8_t fsdata = new uint8_t();
-		int generatedClustsize = this.getClustsize();
-		uint32_t clustmask = generatedClustsize - 1;
-		libfat_sector_t rs = new libfat_sector_t();
-		Object generatedData = this.getData();
-		Object generatedRootdir = this.getRootdir();
-		if (s < generatedData) {
-			if (s < generatedRootdir) {
-				return -1;
-			} 
-			/* Root directory */s++;
-			return (s < generatedData) ? s : 0;
-		} 
-		rs = s - generatedData;
-		if (~rs & clustmask) {
-			return s + /* Next sector in cluster */1;
-		} 
-		int generatedClustshift = this.getClustshift();
-		cluster = 2 + (rs >> generatedClustshift);
-		Object generatedEndcluster = this.getEndcluster();
-		if (cluster >= generatedEndcluster) {
-			return -1;
-		} 
-		Object generatedFat = this.getFat();
-		fat_type generatedFat_type = this.getFat_type();
-		switch (generatedFat_type) {
-		case fat_type.FAT12:
-				fatoffset = cluster + (cluster >> /* Get first byte */1);
-				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
-				fsdata = fs.libfat_get_sector(fatsect);
-				if (!fsdata) {
-					return -1;
-				} 
-				nextcluster = fsdata[fatoffset & ModernizedCProgram.LIBFAT_SECTOR_MASK];
-				/* Get second byte */fatoffset++;
-				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
-				fsdata = fs.libfat_get_sector(fatsect);
-				if (!fsdata) {
-					return -1;
-				} 
-				nextcluster |=  fsdata[fatoffset & ModernizedCProgram.LIBFAT_SECTOR_MASK] << 8;
-				if (cluster & /* Extract the FAT entry */1) {
-					nextcluster >>=  4;
-				} else {
-						nextcluster &=  -1024;
-				} 
-				if (nextcluster >= -1024) {
-					return 0;
-				} 
-				break;
-		case fat_type.FAT16:
-				fatoffset = cluster << 1;
-				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
-				fsdata = fs.libfat_get_sector(fatsect);
-				if (!fsdata) {
-					return -1;
-				} 
-				nextcluster = ModernizedCProgram.read16((le16_t)fsdata[fatoffset & ModernizedCProgram.LIBFAT_SECTOR_MASK]);
-				if (nextcluster >= -1024) {
-					return 0;
-				} 
-				break;
-		case fat_type.FAT28:
-				fatoffset = cluster << 2;
-				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
-				fsdata = fs.libfat_get_sector(fatsect);
-				if (!fsdata) {
-					return -1;
-				} 
-				nextcluster = ModernizedCProgram.read32((le32_t)fsdata[fatoffset & ModernizedCProgram.LIBFAT_SECTOR_MASK]);
-				nextcluster &=  -1024;
-				if (nextcluster >= -1024) {
-					return 0;
-				} 
-				break;
-		default:
-				return -/* WTF? */1;
-		}
-		return ModernizedCProgram.libfat_clustertosector(fs, nextcluster);
 	}
 	public Object getRead() {
 		return read;

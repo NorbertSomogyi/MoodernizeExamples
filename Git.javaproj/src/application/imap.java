@@ -31,8 +31,8 @@ public class imap {
 		this.setCaps(-1024);
 		int generatedCaps = this.getCaps();
 		while ((arg = ModernizedCProgram.next_arg(cmd))) {
-			for (i = 0; i < ( /  + ( - 1)); i++) {
-				if (!.strcmp(ModernizedCProgram.cap_list[i], arg)) {
+			for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
+				if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.cap_list[i], arg)) {
 					generatedCaps |=  1 << i;
 				} 
 			}

@@ -137,19 +137,102 @@ public class obs_core_video {
 	public obs_core_video() {
 	}
 	
+	public Object init_gpu_encoding() {
+		obs_video_info generatedOvi = this.getOvi();
+		obs_video_info ovi = generatedOvi;
+		this.setGpu_encode_stop(false);
+		circlebuf generatedGpu_encoder_avail_queue = this.getGpu_encoder_avail_queue();
+		generatedGpu_encoder_avail_queue.circlebuf_reserve(3);
+		Object generatedOutput_width = ovi.getOutput_width();
+		Object generatedOutput_height = ovi.getOutput_height();
+		for ( i = 0;
+		 i < 3; i++) {
+			 tex = new ();
+			 tex_uv = new ();
+			tex.gs_texture_create_nv12(tex_uv, generatedOutput_width, generatedOutput_height, GS_RENDER_TARGET | GS_SHARED_KM_TEX);
+			if (!tex) {
+				return false;
+			} 
+			 handle = tex.gs_texture_get_shared_handle();
+			obs_tex_frame frame = new obs_tex_frame(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+			generatedGpu_encoder_avail_queue.circlebuf_push_back(frame, /*Error: sizeof expression not supported yet*/);
+		}
+		Object generatedGpu_encode_semaphore = this.getGpu_encode_semaphore();
+		if (generatedGpu_encode_semaphore.os_sem_init(0) != 0) {
+			return false;
+		} 
+		Object generatedGpu_encode_inactive = this.getGpu_encode_inactive();
+		if (generatedGpu_encode_inactive.os_event_init(OS_EVENT_TYPE_MANUAL) != 0) {
+			return false;
+		} 
+		Object generatedGpu_encode_thread = this.getGpu_encode_thread();
+		if (ModernizedCProgram.pthread_create(generatedGpu_encode_thread, NULL, gpu_encode_thread, NULL) != 0) {
+			return false;
+		} 
+		generatedGpu_encode_inactive.os_event_signal();
+		this.setGpu_encode_thread_initialized(true);
+		return true;
+	}
+	public void stop_gpu_encoding_thread() {
+		Object generatedGpu_encode_thread_initialized = this.getGpu_encode_thread_initialized();
+		Object generatedGpu_encode_stop = this.getGpu_encode_stop();
+		Object generatedGpu_encode_semaphore = this.getGpu_encode_semaphore();
+		Object generatedGpu_encode_thread = this.getGpu_encode_thread();
+		if (generatedGpu_encode_thread_initialized) {
+			ModernizedCProgram.os_atomic_set_bool(generatedGpu_encode_stop, true);
+			generatedGpu_encode_semaphore.os_sem_post();
+			ModernizedCProgram.pthread_join(generatedGpu_encode_thread, NULL);
+			this.setGpu_encode_thread_initialized(false);
+		} 
+	}
+	public void free_gpu_encoding() {
+		Object generatedGpu_encode_semaphore = this.getGpu_encode_semaphore();
+		if (generatedGpu_encode_semaphore) {
+			generatedGpu_encode_semaphore.os_sem_destroy();
+			this.setGpu_encode_semaphore(NULL);
+		} 
+		Object generatedGpu_encode_inactive = this.getGpu_encode_inactive();
+		if (generatedGpu_encode_inactive) {
+			generatedGpu_encode_inactive.os_event_destroy();
+			this.setGpu_encode_inactive(NULL);
+		} 
+		circlebuf generatedGpu_encoder_queue = this.getGpu_encoder_queue();
+		Object generatedCirclebuf = generatedGpu_encoder_queue.getCirclebuf();
+		Object generatedTex = frame.getTex();
+		Object generatedTex_uv = frame.getTex_uv();
+		do {
+			while (generatedCirclebuf) {
+				obs_tex_frame frame = new obs_tex_frame();
+				generatedGpu_encoder_queue.circlebuf_pop_front(frame, /*Error: sizeof expression not supported yet*/);
+				ModernizedCProgram.gs_texture_destroy(generatedTex);
+				ModernizedCProgram.gs_texture_destroy(generatedTex_uv);
+			}
+			generatedGpu_encoder_queue.circlebuf_free();
+		} while (false);
+		circlebuf generatedGpu_encoder_avail_queue = this.getGpu_encoder_avail_queue();
+		do {
+			while (generatedCirclebuf) {
+				obs_tex_frame frame = new obs_tex_frame();
+				generatedGpu_encoder_avail_queue.circlebuf_pop_front(frame, /*Error: sizeof expression not supported yet*/);
+				ModernizedCProgram.gs_texture_destroy(generatedTex);
+				ModernizedCProgram.gs_texture_destroy(generatedTex_uv);
+			}
+			generatedGpu_encoder_avail_queue.circlebuf_free();
+		} while (false);
+	}
 	public void unmap_last_surface() {
 		Object generatedMapped_surfaces = this.getMapped_surfaces();
 		for (int c = 0;
 		 c < 3; ++c) {
 			if (generatedMapped_surfaces[c]) {
-				ModernizedCProgram.gs_stagesurface_unmap(generatedMapped_surfaces[c]);
+				generatedMapped_surfaces[c].gs_stagesurface_unmap();
 				generatedMapped_surfaces[c] = ((Object)0);
 			} 
 		}
 	}
 	public void render_main_texture() {
 		ModernizedCProgram.profile_start(ModernizedCProgram.render_main_texture_name);
-		.GS_DEBUG_MARKER_BEGIN(GS_DEBUG_COLOR_MAIN_TEXTURE, ModernizedCProgram.render_main_texture_name);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GS_DEBUG_MARKER_BEGIN(GS_DEBUG_COLOR_MAIN_TEXTURE, ModernizedCProgram.render_main_texture_name);
 		vec4 clear_color = new vec4();
 		clear_color.vec4_set(0.0, 0.0, 0.0, 0.0);
 		Object generatedRender_texture = this.getRender_texture();
@@ -163,12 +246,12 @@ public class obs_core_video {
 		 i > 0; i--) {
 			draw_callback callback = new draw_callback();
 			ModernizedCProgram.callback = ModernizedCProgram.obs.getData().getDraw_callbacks().getArray() + (i - 1);
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.callback.getParam(), generatedBase_width, generatedBase_height);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.callback.getParam(), generatedBase_width, generatedBase_height);
 		}
 		ModernizedCProgram.pthread_mutex_unlock(ModernizedCProgram.obs.getData().getDraw_callbacks_mutex());
 		ModernizedCProgram.obs.getData().getMain_view().obs_view_render();
 		this.setTexture_rendered(true);
-		.GS_DEBUG_MARKER_END();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GS_DEBUG_MARKER_END();
 		ModernizedCProgram.profile_end(ModernizedCProgram.render_main_texture_name);
 	}
 	public Object get_scale_effect_internal() {
@@ -206,7 +289,7 @@ public class obs_core_video {
 		long width_cmp = (long)generatedBase_width - (long)width;
 		Object generatedBase_height = this.getBase_height();
 		long height_cmp = (long)generatedBase_height - (long)height;
-		return .labs(width_cmp) <= 16 && .labs(height_cmp) <= 16;
+		return /*Error: Function owner not recognized*/labs(width_cmp) <= 16 && /*Error: Function owner not recognized*/labs(height_cmp) <= 16;
 	}
 	public Object get_scale_effect(Object width, Object height) {
 		Object generatedDefault_effect = this.getDefault_effect();
@@ -361,79 +444,11 @@ public class obs_core_video {
 			;
 		} 
 		obs_vframe_info vframe_info = new obs_vframe_info();
-		generatedVframe_info_buffer_gpu.circlebuf_pop_front(vframe_info, );
+		generatedVframe_info_buffer_gpu.circlebuf_pop_front(vframe_info, /*Error: sizeof expression not supported yet*/);
 		Object generatedGpu_encoder_mutex = this.getGpu_encoder_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedGpu_encoder_mutex);
 		ModernizedCProgram.encode_gpu(video, raw_active, vframe_info);
 		ModernizedCProgram.pthread_mutex_unlock(generatedGpu_encoder_mutex);
-	}
-	public void render_video(Object raw_active, Object gpu_active, int cur_texture) {
-		ModernizedCProgram.gs_begin_scene();
-		ModernizedCProgram.gs_enable_depth_test(false);
-		ModernizedCProgram.gs_set_cull_mode(GS_NEITHER);
-		video.render_main_texture();
-		Object generatedGpu_conversion = this.getGpu_conversion();
-		if (raw_active || gpu_active) {
-			 texture = video.render_output_texture();
-			if (gpu_active) {
-				ModernizedCProgram.gs_flush();
-			} 
-			if (generatedGpu_conversion) {
-				video.render_convert_texture(texture);
-			} 
-			if (gpu_active) {
-				ModernizedCProgram.gs_flush();
-				video.output_gpu_encoders(raw_active);
-			} 
-			if (raw_active) {
-				video.stage_output_texture(cur_texture);
-			} 
-		} 
-		ModernizedCProgram.gs_set_render_target(((Object)0), ((Object)0));
-		ModernizedCProgram.gs_enable_blending(true);
-		ModernizedCProgram.gs_end_scene();
-		obs_source_info generatedInfo = source.getInfo();
-		obs_source_type generatedType = generatedInfo.getType();
-		Object generatedOutput_flags = generatedInfo.getOutput_flags();
-		obs_source generatedFilter_parent = source.getFilter_parent();
-		if (generatedType != obs_source_type.OBS_SOURCE_TYPE_FILTER && (generatedOutput_flags & (1 << 0)) == 0) {
-			if (generatedFilter_parent) {
-				source.obs_source_skip_video_filter();
-			} 
-			return ;
-		} 
-		Object generatedRendering_filter = source.getRendering_filter();
-		if (generatedType == obs_source_type.OBS_SOURCE_TYPE_INPUT && (generatedOutput_flags & (1 << 2)) != 0 && !generatedRendering_filter) {
-			if (ModernizedCProgram.deinterlacing_enabled(source)) {
-				source.deinterlace_update_async_video();
-			} 
-			source.obs_source_update_async_video();
-		} 
-		obs_context_data generatedContext = source.getContext();
-		Object generatedData = generatedContext.getData();
-		Object generatedEnabled = source.getEnabled();
-		if (!generatedData || !generatedEnabled) {
-			if (generatedFilter_parent) {
-				source.obs_source_skip_video_filter();
-			} 
-			return ;
-		} 
-		.GS_DEBUG_MARKER_BEGIN_FORMAT(GS_DEBUG_COLOR_SOURCE, .get_type_format(generatedType), ModernizedCProgram.obs_source_get_name(source));
-		Object generatedFilters = source.getFilters();
-		Object generatedVideo_render = generatedInfo.getVideo_render();
-		obs_source generatedFilter_target = source.getFilter_target();
-		if (generatedFilters.getNum() && !generatedRendering_filter) {
-			source.obs_source_render_filters();
-		}  else if (generatedVideo_render) {
-			source.obs_source_main_render();
-		}  else if (generatedFilter_target) {
-			generatedFilter_target.obs_source_video_render();
-		}  else if (ModernizedCProgram.deinterlacing_enabled(source)) {
-			source.deinterlace_render();
-		} else {
-				source.obs_source_render_async_video();
-		} 
-		.GS_DEBUG_MARKER_END();
 	}
 	public Object download_frame(int prev_texture, Object frame) {
 		Object generatedTextures_copied = this.getTextures_copied();
@@ -446,7 +461,7 @@ public class obs_core_video {
 		 channel < 3; ++channel) {
 			 surface = generatedCopy_surfaces[prev_texture][channel];
 			if (surface) {
-				if (!ModernizedCProgram.gs_stagesurface_map(surface, frame.getData()[channel], frame.getLinesize()[channel])) {
+				if (!surface.gs_stagesurface_map(frame.getData()[channel], frame.getLinesize()[channel])) {
 					return false;
 				} 
 				generatedMapped_surfaces[channel] = surface;
@@ -466,19 +481,10 @@ public class obs_core_video {
 				switch (info.getFormat()) {
 				case VIDEO_FORMAT_RGBA:
 				case VIDEO_FORMAT_BGRA:
-				case VIDEO_FORMAT_NV12:
-						{ 
-							 width = info.getWidth();
-							 height = info.getHeight();
-							ModernizedCProgram.set_gpu_converted_plane(width, height, input.getLinesize()[0], output.getLinesize()[0], input.getData()[0], output.getData()[0]);
-							 height_d2 = height / 2;
-							ModernizedCProgram.set_gpu_converted_plane(width, height_d2, input.getLinesize()[1], output.getLinesize()[1], input.getData()[1], output.getData()[1]);
-							break;
-						}
+				case VIDEO_FORMAT_I422:
+				case VIDEO_FORMAT_I40A:
 				case VIDEO_FORMAT_YUY2:
-				case VIDEO_FORMAT_Y800:
-				case VIDEO_FORMAT_NONE:
-				case VIDEO_FORMAT_I42A:
+				case VIDEO_FORMAT_YVYU:
 				case VIDEO_FORMAT_I420:
 						{ 
 							 width = info.getWidth();
@@ -490,7 +496,6 @@ public class obs_core_video {
 							ModernizedCProgram.set_gpu_converted_plane(width_d2, height_d2, input.getLinesize()[2], output.getLinesize()[2], input.getData()[2], output.getData()[2]);
 							break;
 						}
-				case VIDEO_FORMAT_UYVY:
 				case VIDEO_FORMAT_I444:
 						{ 
 							 width = info.getWidth();
@@ -500,14 +505,24 @@ public class obs_core_video {
 							ModernizedCProgram.set_gpu_converted_plane(width, height, input.getLinesize()[2], output.getLinesize()[2], input.getData()[2], output.getData()[2]);
 							break;
 						}
-				case VIDEO_FORMAT_YVYU:
-				case VIDEO_FORMAT_YUVA:
-				case VIDEO_FORMAT_BGR3:
-				case VIDEO_FORMAT_I422:
-				case VIDEO_FORMAT_BGRX:
+				case VIDEO_FORMAT_UYVY:
+				case VIDEO_FORMAT_Y800:
+				case VIDEO_FORMAT_I42A:
 				case VIDEO_FORMAT_AYUV/* unimplemented */:
 						;
-				case VIDEO_FORMAT_I40A:
+				case VIDEO_FORMAT_BGR3:
+				case VIDEO_FORMAT_YUVA:
+				case VIDEO_FORMAT_NONE:
+				case VIDEO_FORMAT_BGRX:
+				case VIDEO_FORMAT_NV12:
+						{ 
+							 width = info.getWidth();
+							 height = info.getHeight();
+							ModernizedCProgram.set_gpu_converted_plane(width, height, input.getLinesize()[0], output.getLinesize()[0], input.getData()[0], output.getData()[0]);
+							 height_d2 = height / 2;
+							ModernizedCProgram.set_gpu_converted_plane(width, height_d2, input.getLinesize()[1], output.getLinesize()[1], input.getData()[1], output.getData()[1]);
+							break;
+						}
 				}
 		} 
 	}
@@ -548,95 +563,12 @@ public class obs_core_video {
 		vframe_info.setCount(count);
 		circlebuf generatedVframe_info_buffer = this.getVframe_info_buffer();
 		if (raw_active) {
-			generatedVframe_info_buffer.circlebuf_push_back(vframe_info, );
+			generatedVframe_info_buffer.circlebuf_push_back(vframe_info, /*Error: sizeof expression not supported yet*/);
 		} 
 		circlebuf generatedVframe_info_buffer_gpu = this.getVframe_info_buffer_gpu();
 		if (gpu_active) {
-			generatedVframe_info_buffer_gpu.circlebuf_push_back(vframe_info, );
+			generatedVframe_info_buffer_gpu.circlebuf_push_back(vframe_info, /*Error: sizeof expression not supported yet*/);
 		} 
-	}
-	public Object init_gpu_encoding() {
-		obs_video_info generatedOvi = this.getOvi();
-		obs_video_info ovi = generatedOvi;
-		this.setGpu_encode_stop(false);
-		circlebuf generatedGpu_encoder_avail_queue = this.getGpu_encoder_avail_queue();
-		generatedGpu_encoder_avail_queue.circlebuf_reserve(3);
-		Object generatedOutput_width = ovi.getOutput_width();
-		Object generatedOutput_height = ovi.getOutput_height();
-		for ( i = 0;
-		 i < 3; i++) {
-			 tex = new ();
-			 tex_uv = new ();
-			tex.gs_texture_create_nv12(tex_uv, generatedOutput_width, generatedOutput_height, GS_RENDER_TARGET | GS_SHARED_KM_TEX);
-			if (!tex) {
-				return false;
-			} 
-			 handle = tex.gs_texture_get_shared_handle();
-			obs_tex_frame frame = new obs_tex_frame(, , );
-			generatedGpu_encoder_avail_queue.circlebuf_push_back(frame, );
-		}
-		Object generatedGpu_encode_semaphore = this.getGpu_encode_semaphore();
-		if (generatedGpu_encode_semaphore.os_sem_init(0) != 0) {
-			return false;
-		} 
-		Object generatedGpu_encode_inactive = this.getGpu_encode_inactive();
-		if (generatedGpu_encode_inactive.os_event_init(OS_EVENT_TYPE_MANUAL) != 0) {
-			return false;
-		} 
-		Object generatedGpu_encode_thread = this.getGpu_encode_thread();
-		if (ModernizedCProgram.pthread_create(generatedGpu_encode_thread, NULL, gpu_encode_thread, NULL) != 0) {
-			return false;
-		} 
-		generatedGpu_encode_inactive.os_event_signal();
-		this.setGpu_encode_thread_initialized(true);
-		return true;
-	}
-	public void stop_gpu_encoding_thread() {
-		Object generatedGpu_encode_thread_initialized = this.getGpu_encode_thread_initialized();
-		Object generatedGpu_encode_stop = this.getGpu_encode_stop();
-		Object generatedGpu_encode_semaphore = this.getGpu_encode_semaphore();
-		Object generatedGpu_encode_thread = this.getGpu_encode_thread();
-		if (generatedGpu_encode_thread_initialized) {
-			ModernizedCProgram.os_atomic_set_bool(generatedGpu_encode_stop, true);
-			generatedGpu_encode_semaphore.os_sem_post();
-			ModernizedCProgram.pthread_join(generatedGpu_encode_thread, NULL);
-			this.setGpu_encode_thread_initialized(false);
-		} 
-	}
-	public void free_gpu_encoding() {
-		Object generatedGpu_encode_semaphore = this.getGpu_encode_semaphore();
-		if (generatedGpu_encode_semaphore) {
-			generatedGpu_encode_semaphore.os_sem_destroy();
-			this.setGpu_encode_semaphore(NULL);
-		} 
-		Object generatedGpu_encode_inactive = this.getGpu_encode_inactive();
-		if (generatedGpu_encode_inactive) {
-			generatedGpu_encode_inactive.os_event_destroy();
-			this.setGpu_encode_inactive(NULL);
-		} 
-		circlebuf generatedGpu_encoder_queue = this.getGpu_encoder_queue();
-		Object generatedCirclebuf = generatedGpu_encoder_queue.getCirclebuf();
-		Object generatedTex = frame.getTex();
-		Object generatedTex_uv = frame.getTex_uv();
-		do {
-			while (generatedCirclebuf) {
-				obs_tex_frame frame = new obs_tex_frame();
-				generatedGpu_encoder_queue.circlebuf_pop_front(frame, );
-				ModernizedCProgram.gs_texture_destroy(generatedTex);
-				ModernizedCProgram.gs_texture_destroy(generatedTex_uv);
-			}
-			generatedGpu_encoder_queue.circlebuf_free();
-		} while (false);
-		circlebuf generatedGpu_encoder_avail_queue = this.getGpu_encoder_avail_queue();
-		do {
-			while (generatedCirclebuf) {
-				obs_tex_frame frame = new obs_tex_frame();
-				generatedGpu_encoder_avail_queue.circlebuf_pop_front(frame, );
-				ModernizedCProgram.gs_texture_destroy(generatedTex);
-				ModernizedCProgram.gs_texture_destroy(generatedTex_uv);
-			}
-			generatedGpu_encoder_avail_queue.circlebuf_free();
-		} while (false);
 	}
 	public Object getGraphics() {
 		return graphics;

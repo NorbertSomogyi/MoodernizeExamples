@@ -54,7 +54,7 @@ public class window {
 		if (ModernizedCProgram.parse_int(instructions, offset, insns_end)) {
 			return -1;
 		} 
-		if (((nbytes) > (-1024 >> ((8 * ) - (8 * ))) - (offset)) || offset + nbytes > ModernizedCProgram.ctx.getIn().getWidth()) {
+		if (((nbytes) > (-1024 >> ((8 * /*Error: Unsupported expression*/) - (8 * /*Error: sizeof expression not supported yet*/))) - (offset)) || offset + nbytes > ModernizedCProgram.ctx.getIn().getWidth()) {
 			return ();
 		} 
 		ModernizedCProgram.ctx.getOut().strbuf_add(ModernizedCProgram.ctx.getIn().getBuf().getBuf() + offset, nbytes);
@@ -75,7 +75,7 @@ public class window {
 	}
 	public int copyfrom_data(Object data_pos, Object nbytes) {
 		size_t pos = data_pos;
-		if (((nbytes) > (-1024 >> ((8 * ) - (8 * ))) - (pos)) || pos + nbytes > ModernizedCProgram.ctx.getData().getLen()) {
+		if (((nbytes) > (-1024 >> ((8 * /*Error: Unsupported expression*/) - (8 * /*Error: sizeof expression not supported yet*/))) - (pos)) || pos + nbytes > ModernizedCProgram.ctx.getData().getLen()) {
 			return ();
 		} 
 		ModernizedCProgram.ctx.getOut().strbuf_add(ModernizedCProgram.ctx.getData().getBuf() + pos, nbytes);
@@ -86,20 +86,20 @@ public class window {
 		int instruction;
 		byte insns_end = ModernizedCProgram.ctx.getInstructions().getBuf() + ModernizedCProgram.ctx.getInstructions().getLen();
 		size_t nbytes = new size_t();
-		((ModernizedCProgram.ctx) ? (Object)0 : ._assert("ctx", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\svndiff.c", 221));
-		((instructions && instructions) ? (Object)0 : ._assert("instructions && *instructions", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\svndiff.c", 222));
-		((data_pos) ? (Object)0 : ._assert("data_pos", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\svndiff.c", 223));
+		((ModernizedCProgram.ctx) ? (Object)0 : /*Error: Function owner not recognized*/_assert("ctx", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\svndiff.c", 221));
+		((instructions && instructions) ? (Object)0 : /*Error: Function owner not recognized*/_assert("instructions && *instructions", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\svndiff.c", 222));
+		((data_pos) ? (Object)0 : /*Error: Function owner not recognized*/_assert("data_pos", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\svndiff.c", 223));
 		instruction = (byte)instructions;
 		if (ModernizedCProgram.parse_first_operand(instructions, nbytes, insns_end)) {
 			return -1;
 		} 
 		switch (instruction & -1024) {
 		case -1024:
+				return ModernizedCProgram.ctx.copyfrom_data(data_pos, nbytes);
+		case -1024:
 				return ModernizedCProgram.ctx.copyfrom_target(instructions, nbytes, insns_end);
 		case -1024:
 				return ModernizedCProgram.ctx.copyfrom_source(instructions, nbytes, insns_end);
-		case -1024:
-				return ModernizedCProgram.ctx.copyfrom_data(data_pos, nbytes);
 		default:
 				return ();
 		}
@@ -110,7 +110,7 @@ public class window {
 			 * Fill ctx->out.buf using data from the source, target,
 			 * and inline data views.
 			 */;
-		for (instructions = ModernizedCProgram.ctx.getInstructions().getBuf(); instructions != ModernizedCProgram.ctx.getInstructions().getBuf() + ModernizedCProgram.ctx.getInstructions().getLen(); ) {
+		for (instructions = ModernizedCProgram.ctx.getInstructions().getBuf(); instructions != ModernizedCProgram.ctx.getInstructions().getBuf() + ModernizedCProgram.ctx.getInstructions().getLen(); /*Error: Unsupported expression*/) {
 			if (ModernizedCProgram.ctx.execute_one_instruction(instructions, data_pos)) {
 				return -1;
 			} 

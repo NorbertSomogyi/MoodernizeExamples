@@ -19,7 +19,7 @@ public class pylinkedlist_S {
 		if (generatedPll_prev == NULL) {
 			if (generatedPll_next == NULL) {
 				last = NULL;
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} else {
 				generatedPll_prev.setPll_next(generatedPll_next);

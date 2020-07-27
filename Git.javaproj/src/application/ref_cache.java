@@ -33,7 +33,7 @@ public class ref_cache {
 		return generatedLoose;
 	}
 	public ref_cache create_ref_cache(ref_store refs, Object fill_ref_dir) {
-		ref_cache ret = ModernizedCProgram.xcalloc(1, );
+		ref_cache ret = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		ret.setRef_store(refs);
 		ret.setFill_ref_dir(fill_ref_dir);
 		ref_entry ref_entry = new ref_entry();

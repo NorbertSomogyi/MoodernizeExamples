@@ -33,36 +33,36 @@ public class circlebuf {
 	public circlebuf() {
 	}
 	
-	public Object num_frames() {
-		Object generatedCirclebuf = this.getCirclebuf();
-		return generatedCirclebuf / ;
-	}
 	public void clear_circlebuf() {
 		Object generatedCirclebuf = this.getCirclebuf();
 		buf.circlebuf_pop_front(NULL, generatedCirclebuf);
 	}
+	public Object num_frames() {
+		Object generatedCirclebuf = this.getCirclebuf();
+		return generatedCirclebuf / /*Error: Unsupported expression*/;
+	}
 	public void circlebuf_init() {
-		.memset(ModernizedCProgram.cb, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.cb, 0, /*Error: Unsupported expression*/);
 	}
 	public void circlebuf_free() {
 		ModernizedCProgram.bfree(ModernizedCProgram.cb.getData());
-		.memset(ModernizedCProgram.cb, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.cb, 0, /*Error: Unsupported expression*/);
 	}
 	public void circlebuf_reorder_data(Object new_capacity) {
 		size_t difference = new size_t();
 		uint8_t data = new uint8_t();
 		if (!ModernizedCProgram.cb.getSize() || !ModernizedCProgram.cb.getStart_pos() || ModernizedCProgram.cb.getEnd_pos() > ModernizedCProgram.cb.getStart_pos()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		difference = new_capacity - ModernizedCProgram.cb.getCapacity();
 		data = (uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos();
-		.memmove(data + difference, data, ModernizedCProgram.cb.getCapacity() - ModernizedCProgram.cb.getStart_pos());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(data + difference, data, ModernizedCProgram.cb.getCapacity() - ModernizedCProgram.cb.getStart_pos());
 		ModernizedCProgram.cb.getStart_pos() += difference;
 	}
 	public void circlebuf_ensure_capacity() {
 		size_t new_capacity = new size_t();
 		if (ModernizedCProgram.cb.getSize() <= ModernizedCProgram.cb.getCapacity()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		new_capacity = ModernizedCProgram.cb.getCapacity() * 2;
 		if (ModernizedCProgram.cb.getSize() > new_capacity) {
@@ -74,7 +74,7 @@ public class circlebuf {
 	}
 	public void circlebuf_reserve(Object capacity) {
 		if (capacity <= ModernizedCProgram.cb.getCapacity()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.cb.setData(ModernizedCProgram.brealloc(ModernizedCProgram.cb.getData(), capacity));
 		ModernizedCProgram.cb.circlebuf_reorder_data(capacity);
@@ -84,7 +84,7 @@ public class circlebuf {
 		size_t add_size = size - ModernizedCProgram.cb.getSize();
 		size_t new_end_pos = ModernizedCProgram.cb.getEnd_pos() + add_size;
 		if (size <= ModernizedCProgram.cb.getSize()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.cb.setSize(size);
 		ModernizedCProgram.cb.circlebuf_ensure_capacity();
@@ -92,12 +92,12 @@ public class circlebuf {
 			size_t back_size = ModernizedCProgram.cb.getCapacity() - ModernizedCProgram.cb.getEnd_pos();
 			size_t loop_size = add_size - back_size;
 			if (back_size) {
-				.memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), 0, back_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), 0, back_size);
 			} 
-			.memset(ModernizedCProgram.cb.getData(), 0, loop_size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.cb.getData(), 0, loop_size);
 			new_end_pos -= ModernizedCProgram.cb.getCapacity();
 		} else {
-				.memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), 0, add_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), 0, add_size);
 		} 
 		ModernizedCProgram.cb.setEnd_pos(new_end_pos);
 	}
@@ -117,11 +117,11 @@ public class circlebuf {
 			size_t back_size = data_end_pos - ModernizedCProgram.cb.getCapacity();
 			size_t loop_size = size - back_size;
 			if (back_size) {
-				.memcpy((uint8_t)ModernizedCProgram.cb.getData() + position, data, loop_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((uint8_t)ModernizedCProgram.cb.getData() + position, data, loop_size);
 			} 
-			.memcpy(ModernizedCProgram.cb.getData(), (uint8_t)data + loop_size, back_size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.cb.getData(), (uint8_t)data + loop_size, back_size);
 		} else {
-				.memcpy((uint8_t)ModernizedCProgram.cb.getData() + position, data, size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((uint8_t)ModernizedCProgram.cb.getData() + position, data, size);
 		} 
 	}
 	public void circlebuf_push_back(Object data, Object size) {
@@ -132,12 +132,12 @@ public class circlebuf {
 			size_t back_size = ModernizedCProgram.cb.getCapacity() - ModernizedCProgram.cb.getEnd_pos();
 			size_t loop_size = size - back_size;
 			if (back_size) {
-				.memcpy((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), data, back_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), data, back_size);
 			} 
-			.memcpy(ModernizedCProgram.cb.getData(), (uint8_t)data + back_size, loop_size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.cb.getData(), (uint8_t)data + back_size, loop_size);
 			new_end_pos -= ModernizedCProgram.cb.getCapacity();
 		} else {
-				.memcpy((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), data, size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), data, size);
 		} 
 		ModernizedCProgram.cb.setEnd_pos(new_end_pos);
 	}
@@ -147,13 +147,13 @@ public class circlebuf {
 		if (ModernizedCProgram.cb.getStart_pos() < size) {
 			size_t back_size = size - ModernizedCProgram.cb.getStart_pos();
 			if (ModernizedCProgram.cb.getStart_pos()) {
-				.memcpy(ModernizedCProgram.cb.getData(), (uint8_t)data + back_size, ModernizedCProgram.cb.getStart_pos());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.cb.getData(), (uint8_t)data + back_size, ModernizedCProgram.cb.getStart_pos());
 			} 
 			ModernizedCProgram.cb.setStart_pos(ModernizedCProgram.cb.getCapacity() - back_size);
-			.memcpy((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), data, back_size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), data, back_size);
 		} else {
 				ModernizedCProgram.cb.getStart_pos() -= size;
-				.memcpy((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), data, size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), data, size);
 		} 
 	}
 	public void circlebuf_push_back_zero(Object size) {
@@ -164,12 +164,12 @@ public class circlebuf {
 			size_t back_size = ModernizedCProgram.cb.getCapacity() - ModernizedCProgram.cb.getEnd_pos();
 			size_t loop_size = size - back_size;
 			if (back_size) {
-				.memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), 0, back_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), 0, back_size);
 			} 
-			.memset(ModernizedCProgram.cb.getData(), 0, loop_size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.cb.getData(), 0, loop_size);
 			new_end_pos -= ModernizedCProgram.cb.getCapacity();
 		} else {
-				.memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), 0, size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos(), 0, size);
 		} 
 		ModernizedCProgram.cb.setEnd_pos(new_end_pos);
 	}
@@ -179,38 +179,38 @@ public class circlebuf {
 		if (ModernizedCProgram.cb.getStart_pos() < size) {
 			size_t back_size = size - ModernizedCProgram.cb.getStart_pos();
 			if (ModernizedCProgram.cb.getStart_pos()) {
-				.memset(ModernizedCProgram.cb.getData(), 0, ModernizedCProgram.cb.getStart_pos());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.cb.getData(), 0, ModernizedCProgram.cb.getStart_pos());
 			} 
 			ModernizedCProgram.cb.setStart_pos(ModernizedCProgram.cb.getCapacity() - back_size);
-			.memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), 0, back_size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), 0, back_size);
 		} else {
 				ModernizedCProgram.cb.getStart_pos() -= size;
-				.memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), 0, size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), 0, size);
 		} 
 	}
 	public void circlebuf_peek_front(Object data, Object size) {
-		((size <= ModernizedCProgram.cb.getSize()) ? (Object)0 : ._assert("size <= cb->size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\circlebuf.h", 237));
+		((size <= ModernizedCProgram.cb.getSize()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("size <= cb->size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\circlebuf.h", 237));
 		if (data) {
 			size_t start_size = ModernizedCProgram.cb.getCapacity() - ModernizedCProgram.cb.getStart_pos();
 			if (start_size < size) {
-				.memcpy(data, (uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), start_size);
-				.memcpy((uint8_t)data + start_size, ModernizedCProgram.cb.getData(), size - start_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(data, (uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), start_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((uint8_t)data + start_size, ModernizedCProgram.cb.getData(), size - start_size);
 			} else {
-					.memcpy(data, (uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), size);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(data, (uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getStart_pos(), size);
 			} 
 		} 
 	}
 	public void circlebuf_peek_back(Object data, Object size) {
-		((size <= ModernizedCProgram.cb.getSize()) ? (Object)0 : ._assert("size <= cb->size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\circlebuf.h", 256));
+		((size <= ModernizedCProgram.cb.getSize()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("size <= cb->size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\circlebuf.h", 256));
 		if (data) {
 			size_t back_size = (ModernizedCProgram.cb.getEnd_pos() ? ModernizedCProgram.cb.getEnd_pos() : ModernizedCProgram.cb.getCapacity());
 			if (back_size < size) {
 				size_t front_size = size - back_size;
 				size_t new_end_pos = ModernizedCProgram.cb.getCapacity() - front_size;
-				.memcpy((uint8_t)data + (size - back_size), ModernizedCProgram.cb.getData(), back_size);
-				.memcpy(data, (uint8_t)ModernizedCProgram.cb.getData() + new_end_pos, front_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((uint8_t)data + (size - back_size), ModernizedCProgram.cb.getData(), back_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(data, (uint8_t)ModernizedCProgram.cb.getData() + new_end_pos, front_size);
 			} else {
-					.memcpy(data, (uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos() - size, size);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(data, (uint8_t)ModernizedCProgram.cb.getData() + ModernizedCProgram.cb.getEnd_pos() - size, size);
 			} 
 		} 
 	}
@@ -219,7 +219,7 @@ public class circlebuf {
 		ModernizedCProgram.cb.getSize() -= size;
 		if (!ModernizedCProgram.cb.getSize()) {
 			ModernizedCProgram.cb.setStart_pos(ModernizedCProgram.cb.setEnd_pos(0));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.cb.getStart_pos() += size;
 		if (ModernizedCProgram.cb.getStart_pos() >= ModernizedCProgram.cb.getCapacity()) {
@@ -231,7 +231,7 @@ public class circlebuf {
 		ModernizedCProgram.cb.getSize() -= size;
 		if (!ModernizedCProgram.cb.getSize()) {
 			ModernizedCProgram.cb.setStart_pos(ModernizedCProgram.cb.setEnd_pos(0));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.cb.getEnd_pos() <= size) {
 			ModernizedCProgram.cb.setEnd_pos(ModernizedCProgram.cb.getCapacity() - (size - ModernizedCProgram.cb.getEnd_pos()));

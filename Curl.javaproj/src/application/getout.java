@@ -4,11 +4,11 @@ package application;
 public class getout {
 	private getout next;
 	private Byte url;
-	private byte outfile;
+	private Byte outfile;
 	private Byte infile;
 	private int flags;
 	
-	public getout(getout next, Byte url, byte outfile, Byte infile, int flags) {
+	public getout(getout next, Byte url, Byte outfile, Byte infile, int flags) {
 		setNext(next);
 		setUrl(url);
 		setOutfile(outfile);
@@ -19,7 +19,7 @@ public class getout {
 	}
 	
 	public getout new_getout(OperationConfig config) {
-		getout node = .calloc(1, );
+		getout node = /*Error: Function owner not recognized*/calloc(1, /*Error: Unsupported expression*/);
 		getout generatedUrl_last = config.getUrl_last();
 		getout last = generatedUrl_last;
 		int generatedDefault_node_flags = config.getDefault_node_flags();
@@ -46,10 +46,10 @@ public class getout {
 	public void setUrl(Byte newUrl) {
 		url = newUrl;
 	}
-	public byte getOutfile() {
+	public Byte getOutfile() {
 		return outfile;
 	}
-	public void setOutfile(byte newOutfile) {
+	public void setOutfile(Byte newOutfile) {
 		outfile = newOutfile;
 	}
 	public Byte getInfile() {

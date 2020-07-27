@@ -11,7 +11,7 @@ public class hash_list {
 	public hash_list() {
 	}
 	
-	public hash_list parse_merge(int count) {
+	public hash_list parse_merge(Integer count) {
 		hash_list list = ((Object)0);
 		hash_list tail = ModernizedCProgram.list;
 		hash_list n = new hash_list();
@@ -21,10 +21,10 @@ public class hash_list {
 		branch branch = new branch();
 		object_id generatedOid = n.getOid();
 		object_entry object_entry = new object_entry();
-		Object generatedType = oe.getType();
+		byte generatedType = oe.getType();
 		hash_list generatedNext = n.getNext();
 		while (ModernizedCProgram.skip_prefix(ModernizedCProgram.command_buf.getBuf(), "merge ", from)) {
-			n = ModernizedCProgram.xmalloc();
+			n = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 			s = branch.lookup_branch(from);
 			if (s) {
 				generatedOid.oidcpy(generatedOid);

@@ -64,36 +64,91 @@ package application;
  */
 /** Callback function type for for_each_string_list */
 public class string_list_item {
-	private byte string;
+	private byte[] string;
 	private Object util;
 	
-	public string_list_item(byte string, Object util) {
+	public string_list_item(byte[] string, Object util) {
 		setString(string);
 		setUtil(util);
 	}
 	public string_list_item() {
 	}
 	
-	public int prefix_cb(Object cb_data) {
-		byte prefix = (byte)cb_data;
-		byte generatedString = this.getString();
-		return ModernizedCProgram.starts_with(generatedString, prefix);
-	}
-	public int remove_available_paths(Object cb_data) {
-		string_list available_paths = cb_data;
-		string_list_item available = new string_list_item();
-		byte generatedString = this.getString();
-		string_list_item string_list_item = new string_list_item();
-		available = string_list_item.string_list_lookup(available_paths, generatedString);
-		if (available) {
-			available.setUtil((Object)generatedString);
+	public string_list_item string_list_insert(string_list list, Object string) {
+		int index = list.add_entry(-1, string);
+		if (index < 0) {
+			index = -1 - index;
 		} 
-		return !available;
+		string_list_item[] generatedItems = list.getItems();
+		return generatedItems + index;
+	}
+	public string_list_item string_list_lookup(string_list list, Object string) {
+		int exact_match;
+		int i = ModernizedCProgram.get_entry_index(list, string, exact_match);
+		if (!exact_match) {
+			return ((Object)0);
+		} 
+		string_list_item[] generatedItems = list.getItems();
+		return generatedItems + i;
+	}
+	public int item_is_not_empty(Object unused) {
+		byte[] generatedString = this.getString();
+		return generatedString != (byte)'\0';
+	}
+	public string_list_item string_list_append_nodup(string_list list, Byte string) {
+		string_list_item retval = new string_list_item();
+		int generatedNr = list.getNr();
+		int generatedAlloc = list.getAlloc();
+		string_list_item[] generatedItems = list.getItems();
+		do {
+			if ((generatedNr + 1) > generatedAlloc) {
+				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNr + 1)) {
+					list.setAlloc((generatedNr + 1));
+				} else {
+						list.setAlloc((((generatedAlloc) + 16) * 3 / 2));
+				} 
+				(generatedItems) = ModernizedCProgram.xrealloc((generatedItems), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedAlloc)));
+			} 
+		} while (0);
+		retval = generatedItems[generatedNr++];
+		retval.setString(string);
+		retval.setUtil(((Object)0));
+		return retval;
+	}
+	public string_list_item string_list_append(string_list list, Object string) {
+		int generatedStrdup_strings = list.getStrdup_strings();
+		string_list_item string_list_item = new string_list_item();
+		return string_list_item.string_list_append_nodup(list, generatedStrdup_strings ? ModernizedCProgram.xstrdup(string) : (byte)string/*
+		 * Encapsulate the compare function pointer because ISO C99 forbids
+		 * casting from void * to a function pointer and vice versa.
+		 */);
+		Object generatedNitems = slp.getNitems();
+		Object generatedNitems_max = slp.getNitems_max();
+		Object[][] generatedItem = slp.getItem();
+		if (generatedNitems >= generatedNitems_max) {
+			slp.setNitems_max(generatedNitems_max * 2 + 4);
+			(generatedItem) = ModernizedCProgram.xrealloc((generatedItem), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedNitems_max)));
+		} 
+		generatedItem[generatedNitems++] = /* Add the string to the end of the list.  */s;
+	}
+	public string_list_item unsorted_string_list_lookup(string_list list, Object string) {
+		string_list_item item = new string_list_item();
+		Object generatedCmp = list.getCmp();
+		compare_strings_fn cmp = generatedCmp ? generatedCmp : strcmp;
+		string_list_item[] generatedItems = (list).getItems();
+		int generatedNr = (list).getNr();
+		byte[] generatedString = item.getString();
+		for (item = generatedItems; item && item < generatedItems + generatedNr; ++item) {
+			if (!ModernizedCProgram.cmp(string, generatedString)) {
+				return item;
+			} 
+		}
+		return ((Object)0);
 	}
 	public int add_remote_to_show_info(Object cb_data) {
 		show_info info = cb_data;
-		byte generatedString = this.getString();
-		int n = .strlen(generatedString);
+		byte[] generatedString = this.getString();
+		int n = /*Error: Function owner not recognized*/strlen(generatedString);
 		int generatedWidth = info.getWidth();
 		if (n > generatedWidth) {
 			info.setWidth(n);
@@ -107,7 +162,7 @@ public class string_list_item {
 		show_info info = cb_data;
 		ref_states generatedStates = info.getStates();
 		ref_states states = generatedStates;
-		byte generatedString = this.getString();
+		byte[] generatedString = this.getString();
 		byte name = generatedString;
 		int generatedQueried = states.getQueried();
 		string_list generatedNew_refs = states.getNew_refs();
@@ -129,11 +184,11 @@ public class string_list_item {
 			} else {
 					arg = ModernizedCProgram._(" ???");
 			} 
-			.printf("    %-*s", generatedWidth, name);
-			.printf(fmt, arg);
-			.printf("\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("    %-*s", generatedWidth, name);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(fmt, arg);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("\n");
 		} else {
-				.printf("    %s\n", name);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("    %s\n", name);
 		} 
 		return 0;
 	}
@@ -150,12 +205,12 @@ public class string_list_item {
 		Byte generatedRemote_name = branch_info.getRemote_name();
 		remote generatedRemote = states.getRemote();
 		Object generatedName = generatedRemote.getName();
-		if (!generatedNr || !generatedRemote_name || .strcmp(generatedName, generatedRemote_name)) {
+		if (!generatedNr || !generatedRemote_name || /*Error: Function owner not recognized*/strcmp(generatedName, generatedRemote_name)) {
 			return 0;
 		} 
-		byte generatedString = this.getString();
+		byte[] generatedString = this.getString();
 		int generatedWidth = show_info.getWidth();
-		if ((n = .strlen(generatedString)) > generatedWidth) {
+		if ((n = /*Error: Function owner not recognized*/strlen(generatedString)) > generatedWidth) {
 			show_info.setWidth(n);
 		} 
 		 generatedRebase = branch_info.getRebase();
@@ -183,8 +238,8 @@ public class string_list_item {
 			();
 			return 0;
 		} 
-		byte generatedString = this.getString();
-		.printf("    %-*s ", generatedWidth, generatedString);
+		byte[] generatedString = this.getString();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("    %-*s ", generatedWidth, generatedString);
 		int generatedAny_rebase = show_info.getAny_rebase();
 		if (generatedRebase) {
 			byte msg;
@@ -204,7 +259,7 @@ public class string_list_item {
 				ModernizedCProgram.printf_ln(ModernizedCProgram._("merges with remote %s"), generatedString);
 		} 
 		for (i = 1; i < generatedNr; i++) {
-			.printf(ModernizedCProgram._("%-*s    and with remote %s\n"), width, "", generatedString);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("%-*s    and with remote %s\n"), width, "", generatedString);
 		}
 		return 0;
 	}
@@ -214,18 +269,19 @@ public class string_list_item {
 		push_info push_info = generatedUtil;
 		string_list_item item = new string_list_item();
 		int n;
-		byte generatedString = this.getString();
+		byte[] generatedString = this.getString();
 		int generatedWidth = show_info.getWidth();
-		if ((n = .strlen(generatedString)) > generatedWidth) {
+		if ((n = /*Error: Function owner not recognized*/strlen(generatedString)) > generatedWidth) {
 			show_info.setWidth(n);
 		} 
 		Byte generatedDest = push_info.getDest();
 		int generatedWidth2 = show_info.getWidth2();
-		if ((n = .strlen(generatedDest)) > generatedWidth2) {
+		if ((n = /*Error: Function owner not recognized*/strlen(generatedDest)) > generatedWidth2) {
 			show_info.setWidth2(n);
 		} 
 		string_list generatedList = show_info.getList();
-		item = generatedList.string_list_append(generatedString);
+		string_list_item string_list_item = new string_list_item();
+		item = string_list_item.string_list_append(generatedList, generatedString);
 		item.setUtil(generatedUtil);
 		return 0/*
 		 * Sorting comparison for a string list that has push_info
@@ -236,7 +292,7 @@ public class string_list_item {
 		show_info show_info = cb_data;
 		Object generatedUtil = this.getUtil();
 		push_info push_info = generatedUtil;
-		byte generatedString = this.getString();
+		byte[] generatedString = this.getString();
 		byte src = generatedString;
 		byte status = ((Object)0);
 		 generatedStatus = push_info.getStatus();
@@ -244,20 +300,20 @@ public class string_list_item {
 		case .PUSH_STATUS_CREATE:
 				status = ModernizedCProgram._("create");
 				break;
-		case .PUSH_STATUS_UPTODATE:
-				status = ModernizedCProgram._("up to date");
+		case .PUSH_STATUS_NOTQUERIED:
 				break;
 		case .PUSH_STATUS_FASTFORWARD:
 				status = ModernizedCProgram._("fast-forwardable");
 				break;
-		case .PUSH_STATUS_OUTOFDATE:
-				status = ModernizedCProgram._("local out of date");
-				break;
-		case .PUSH_STATUS_NOTQUERIED:
-				break;
 		case .PUSH_STATUS_DELETE:
 				status = ModernizedCProgram._("delete");
 				src = ModernizedCProgram._("(none)");
+				break;
+		case .PUSH_STATUS_UPTODATE:
+				status = ModernizedCProgram._("up to date");
+				break;
+		case .PUSH_STATUS_OUTOFDATE:
+				status = ModernizedCProgram._("local out of date");
 				break;
 		}
 		int generatedForced = push_info.getForced();
@@ -279,6 +335,85 @@ public class string_list_item {
 		} 
 		return 0;
 	}
+	public int remove_available_paths(Object cb_data) {
+		string_list available_paths = cb_data;
+		string_list_item available = new string_list_item();
+		byte[] generatedString = this.getString();
+		string_list_item string_list_item = new string_list_item();
+		available = string_list_item.string_list_lookup(available_paths, generatedString);
+		if (available) {
+			available.setUtil((Object)generatedString);
+		} 
+		return !available;
+	}
+	public int keep_one_pack(Object data) {
+		byte[] generatedString = this.getString();
+		ModernizedCProgram.repack.argv_array_pushf("--keep-pack=%s", /*Error: Function owner not recognized*/basename(generatedString));
+		return 0;
+	}
+	public void normalize_glob_ref(Object prefix, Object pattern) {
+		strbuf normalized_pattern = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		if (pattern == (byte)'/') {
+			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\refs.c", 503, "pattern must not start with '/'");
+		} 
+		if (prefix) {
+			normalized_pattern.strbuf_addstr(prefix);
+		}  else if (!ModernizedCProgram.starts_with(pattern, "refs/")) {
+			normalized_pattern.strbuf_addstr("refs/");
+		} 
+		normalized_pattern.strbuf_addstr(pattern);
+		normalized_pattern.strbuf_strip_suffix("/");
+		this.setString(normalized_pattern.strbuf_detach(((Object)0)));
+		byte[] generatedString = this.getString();
+		this.setUtil(ModernizedCProgram.has_glob_specials(pattern) ? ((Object)0) : generatedString);
+		normalized_pattern.strbuf_release();
+	}
+	public int prefix_cb(Object cb_data) {
+		byte prefix = (byte)cb_data;
+		byte[] generatedString = this.getString();
+		return ModernizedCProgram.starts_with(generatedString, prefix);
+	}
+	public int add_one_reference(Object cb_data) {
+		strbuf err = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		int required = cb_data;
+		byte[] generatedString = this.getString();
+		byte ref_git = err.compute_alternate_path(generatedString);
+		byte[] generatedBuf = err.getBuf();
+		if (!ref_git) {
+			if (required) {
+				ModernizedCProgram.die("%s", generatedBuf);
+			} else {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("info: Could not add alternate for '%s': %s\n"), generatedString, generatedBuf);
+			} 
+		} else {
+				strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+				sb.strbuf_addf("%s/objects", ref_git);
+				ModernizedCProgram.add_to_alternates_file(generatedBuf);
+				sb.strbuf_release();
+		} 
+		err.strbuf_release();
+		ModernizedCProgram.free(ref_git);
+		return 0;
+	}
+	/*
+	 * A "string_list_each_func_t" function that normalizes an entry from
+	 * GIT_CEILING_DIRECTORIES.  If the path is unusable for some reason,
+	 * die with an explanation.
+	 */
+	public int normalize_ceiling_entry(Object unused) {
+		byte[] generatedString = this.getString();
+		byte ceil = generatedString;
+		if (!ceil) {
+			ModernizedCProgram.die("Empty path is not supported");
+		} 
+		if (!ModernizedCProgram.is_absolute_path(ceil)) {
+			ModernizedCProgram.die("Path \"%s\" is not absolute", ceil);
+		} 
+		if (ModernizedCProgram.normalize_path_copy(ceil, ceil) < 0) {
+			ModernizedCProgram.die("Path \"%s\" could not be normalized", ceil);
+		} 
+		return 1;
+	}
 	public void wt_porcelain_v2_fix_up_changed() {
 		Object generatedUtil = this.getUtil();
 		wt_status_change_data d = generatedUtil;
@@ -288,75 +423,20 @@ public class string_list_item {
 		object_id generatedOid_head = d.getOid_head();
 		object_id generatedOid_index = d.getOid_index();
 		if (!generatedIndex_status) {
-			((generatedMode_head == 0) ? (Object)0 : ._assert("d->mode_head == 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\wt-status.c", 2126));
+			((generatedMode_head == 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("d->mode_head == 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\wt-status.c", 2126));
 			d.setMode_head(generatedMode_index);
 			generatedOid_head.oidcpy(generatedOid_index);
 		} 
 		int generatedWorktree_status = d.getWorktree_status();
 		int generatedMode_worktree = d.getMode_worktree();
 		if (!generatedWorktree_status) {
-			((generatedMode_worktree == 0) ? (Object)0 : ._assert("d->mode_worktree == 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\wt-status.c", 2147));
+			((generatedMode_worktree == 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("d->mode_worktree == 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\wt-status.c", 2147));
 			d.setMode_worktree(generatedMode_index);
 		} 
 	}
-	public string_list_item string_list_insert(string_list list, Object string) {
-		int index = list.add_entry(-1, string);
-		if (index < 0) {
-			index = -1 - index;
-		} 
-		string_list_item generatedItems = list.getItems();
-		return generatedItems + index;
-	}
-	public string_list_item string_list_lookup(string_list list, Object string) {
-		int exact_match;
-		int i = ModernizedCProgram.get_entry_index(list, string, exact_match);
-		if (!exact_match) {
-			return ((Object)0);
-		} 
-		string_list_item generatedItems = list.getItems();
-		return generatedItems + i;
-	}
-	public int item_is_not_empty(Object unused) {
-		byte generatedString = this.getString();
-		return generatedString != (byte)'\0';
-	}
-	public string_list_item string_list_append_nodup(string_list list, Byte string) {
-		string_list_item retval = new string_list_item();
-		int generatedNr = list.getNr();
-		int generatedAlloc = list.getAlloc();
-		string_list_item generatedItems = list.getItems();
-		do {
-			if ((generatedNr + 1) > generatedAlloc) {
-				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNr + 1)) {
-					list.setAlloc((generatedNr + 1));
-				} else {
-						list.setAlloc((((generatedAlloc) + 16) * 3 / 2));
-				} 
-				(generatedItems) = ModernizedCProgram.xrealloc((generatedItems), ModernizedCProgram.st_mult(, (generatedAlloc)));
-			} 
-		} while (0);
-		retval = generatedItems[generatedNr++];
-		retval.setString(string);
-		retval.setUtil(((Object)0));
-		return retval;
-	}
-	public string_list_item unsorted_string_list_lookup(string_list list, Object string) {
-		string_list_item item = new string_list_item();
-		Object generatedCmp = list.getCmp();
-		compare_strings_fn cmp = generatedCmp ? generatedCmp : strcmp;
-		string_list_item generatedItems = (list).getItems();
-		int generatedNr = (list).getNr();
-		byte generatedString = item.getString();
-		for (item = generatedItems; item && item < generatedItems + generatedNr; ++item) {
-			if (!ModernizedCProgram.cmp(string, generatedString)) {
-				return item;
-			} 
-		}
-		return ((Object)0);
-	}
 	public int canonicalize_ceiling_entry(Object cb_data) {
 		int empty_entry_found = cb_data;
-		byte generatedString = this.getString();
+		byte[] generatedString = this.getString();
 		byte ceil = generatedString;
 		if (!ceil) {
 			empty_entry_found = 1;
@@ -375,28 +455,9 @@ public class string_list_item {
 				return 1;
 		} 
 	}
-	/*
-	 * A "string_list_each_func_t" function that normalizes an entry from
-	 * GIT_CEILING_DIRECTORIES.  If the path is unusable for some reason,
-	 * die with an explanation.
-	 */
-	public int normalize_ceiling_entry(Object unused) {
-		byte generatedString = this.getString();
-		byte ceil = generatedString;
-		if (!ceil) {
-			ModernizedCProgram.die("Empty path is not supported");
-		} 
-		if (!ModernizedCProgram.is_absolute_path(ceil)) {
-			ModernizedCProgram.die("Path \"%s\" is not absolute", ceil);
-		} 
-		if (ModernizedCProgram.normalize_path_copy(ceil, ceil) < 0) {
-			ModernizedCProgram.die("Path \"%s\" could not be normalized", ceil);
-		} 
-		return 1;
-	}
-	public string_list_item lookup_prefix(string_list map, Object string, Object len) {
+	public string_list_item lookup_prefix(string_list map, Object[] string, Object len) {
 		int i = ModernizedCProgram.string_list_find_insert_index(map, string, 1);
-		string_list_item generatedItems = map.getItems();
+		string_list_item[] generatedItems = map.getItems();
 		if (i < 0) {
 			i = -1 - /* exact match */i;
 			if (!string[len]) {
@@ -418,7 +479,7 @@ public class string_list_item {
 		} 
 		int generatedNr = map.getNr();
 		while (0 <= --i && i < generatedNr) {
-			int cmp = .strncasecmp(generatedItems[i].getString(), string, len);
+			int cmp = /*Error: Function owner not recognized*/strncasecmp(generatedItems[i].getString(), string, len);
 			if (cmp < 0/*
 						 * "i" points at a key definitely below the prefix;
 						 * the map does not have string[0:len] in it.
@@ -434,54 +495,10 @@ public class string_list_item {
 		}
 		return ((Object)0);
 	}
-	public int keep_one_pack(Object data) {
-		byte generatedString = this.getString();
-		ModernizedCProgram.repack.argv_array_pushf("--keep-pack=%s", .basename(generatedString));
-		return 0;
-	}
-	public int add_one_reference(Object cb_data) {
-		strbuf err = new strbuf(, , );
-		int required = cb_data;
-		byte generatedString = this.getString();
-		byte ref_git = err.compute_alternate_path(generatedString);
-		byte generatedBuf = err.getBuf();
-		if (!ref_git) {
-			if (required) {
-				ModernizedCProgram.die("%s", generatedBuf);
-			} else {
-					.fprintf((_iob[2]), ModernizedCProgram._("info: Could not add alternate for '%s': %s\n"), generatedString, generatedBuf);
-			} 
-		} else {
-				strbuf sb = new strbuf(, , );
-				sb.strbuf_addf("%s/objects", ref_git);
-				ModernizedCProgram.add_to_alternates_file(generatedBuf);
-				sb.strbuf_release();
-		} 
-		err.strbuf_release();
-		ModernizedCProgram.free(ref_git);
-		return 0;
-	}
-	public void normalize_glob_ref(Object prefix, Object pattern) {
-		strbuf normalized_pattern = new strbuf(, , );
-		if (pattern == (byte)'/') {
-			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\refs.c", 503, "pattern must not start with '/'");
-		} 
-		if (prefix) {
-			normalized_pattern.strbuf_addstr(prefix);
-		}  else if (!ModernizedCProgram.starts_with(pattern, "refs/")) {
-			normalized_pattern.strbuf_addstr("refs/");
-		} 
-		normalized_pattern.strbuf_addstr(pattern);
-		normalized_pattern.strbuf_strip_suffix("/");
-		this.setString(normalized_pattern.strbuf_detach(((Object)0)));
-		byte generatedString = this.getString();
-		this.setUtil(ModernizedCProgram.has_glob_specials(pattern) ? ((Object)0) : generatedString);
-		normalized_pattern.strbuf_release();
-	}
-	public byte getString() {
+	public byte[] getString() {
 		return string;
 	}
-	public void setString(byte newString) {
+	public void setString(byte[] newString) {
 		string = newString;
 	}
 	public Object getUtil() {

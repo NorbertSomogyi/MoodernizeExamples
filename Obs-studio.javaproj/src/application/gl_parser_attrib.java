@@ -35,7 +35,7 @@ public class gl_parser_attrib {
 	}
 	
 	public void gl_parser_attrib_init() {
-		.memset(attr, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(attr, 0, /*Error: Unsupported expression*/);
 	}
 	public void gl_parser_attrib_free() {
 		dstr generatedName = this.getName();

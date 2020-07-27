@@ -24,7 +24,7 @@ public class signlist {
 	public int sign_in_group(Object group) {
 		signgroup_S generatedGroup = this.getGroup();
 		Object generatedSg_name = generatedGroup.getSg_name();
-		return ((group != ((Object)0) && .strcmp((byte)(group), (byte)("*")) == 0) || (group == ((Object)0) && generatedGroup == ((Object)0)) || (group != ((Object)0) && generatedGroup != ((Object)0) && .strcmp((byte)(group), (byte)(generatedSg_name)) == 0/*
+		return ((group != ((Object)0) && /*Error: Function owner not recognized*/strcmp((byte)(group), (byte)("*")) == 0) || (group == ((Object)0) && generatedGroup == ((Object)0)) || (group != ((Object)0) && generatedGroup != ((Object)0) && /*Error: Function owner not recognized*/strcmp((byte)(group), (byte)(generatedSg_name)) == 0/*
 		 * Get the next free sign identifier in the specified group
 		 */));
 	}

@@ -87,7 +87,7 @@ public class bw_info {
 						if (ModernizedCProgram.l > len) {
 							ModernizedCProgram.l = len;
 						} 
-						.memmove((byte)(generatedBw_rest + generatedBw_restlen), (byte)(buf), (size_t)((size_t)ModernizedCProgram.l));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(generatedBw_rest + generatedBw_restlen), (byte)(buf), (size_t)((size_t)ModernizedCProgram.l));
 						n = ModernizedCProgram.utf_ptr2len_len(generatedBw_rest, generatedBw_restlen + ModernizedCProgram.l);
 						if (n > generatedBw_restlen + len) {
 							if (generatedBw_restlen + len > 30) {
@@ -106,7 +106,7 @@ public class bw_info {
 							this.setBw_restlen(0);
 						} else {
 								generatedBw_restlen -= n;
-								.memmove((byte)(generatedBw_rest), (byte)(generatedBw_rest + n), (size_t)((size_t)generatedBw_restlen));
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(generatedBw_rest), (byte)(generatedBw_rest + n), (size_t)((size_t)generatedBw_restlen));
 								n = 0;
 						} 
 					} else {
@@ -116,7 +116,7 @@ public class bw_info {
 									return 0;
 								} 
 								this.setBw_restlen(len - wlen);
-								.memmove((byte)(generatedBw_rest), (byte)(buf + wlen), (size_t)((size_t)generatedBw_restlen));
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(generatedBw_rest), (byte)(buf + wlen), (size_t)((size_t)generatedBw_restlen));
 								break;
 							} 
 							if (n > 1) {
@@ -149,8 +149,8 @@ public class bw_info {
 				if (generatedBw_restlen > 0) {
 					fromlen = len + generatedBw_restlen;
 					from = generatedBw_conv_buf + generatedBw_conv_buflen - fromlen;
-					.memmove((byte)(from), (byte)(generatedBw_rest), (size_t)((size_t)generatedBw_restlen));
-					.memmove((byte)(from + generatedBw_restlen), (byte)(buf), (size_t)((size_t)len));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(from), (byte)(generatedBw_rest), (size_t)((size_t)generatedBw_restlen));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(from + generatedBw_restlen), (byte)(buf), (size_t)((size_t)len));
 				} else {
 						from = buf;
 						fromlen = len;
@@ -172,13 +172,13 @@ public class bw_info {
 						this.setBw_conv_error(1);
 						return 0;
 					} 
-					.memmove((byte)(generatedBw_rest), (byte)(from), (size_t)(fromlen));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(generatedBw_rest), (byte)(from), (size_t)(fromlen));
 					this.setBw_restlen((int)fromlen);
 				} else {
 						this.setBw_restlen(0);
-						needed = .MultiByteToWideChar(enc_codepage, 8, (LPCSTR)from, (int)fromlen, ((Object)0), 0);
+						needed = /*Error: Function owner not recognized*/MultiByteToWideChar(enc_codepage, 8, (LPCSTR)from, (int)fromlen, ((Object)0), 0);
 						if (needed == 0) {
-							needed = .MultiByteToWideChar(enc_codepage, 8, (LPCSTR)from, (int)fromlen - 1, ((Object)0), 0);
+							needed = /*Error: Function owner not recognized*/MultiByteToWideChar(enc_codepage, 8, (LPCSTR)from, (int)fromlen - 1, ((Object)0), 0);
 							if (needed == 0) {
 								this.setBw_conv_error(1);
 								return 0;
@@ -186,7 +186,7 @@ public class bw_info {
 							generatedBw_rest[0] = from[fromlen - 1];
 							this.setBw_restlen(1);
 						} 
-						needed = .MultiByteToWideChar(enc_codepage, 8, (LPCSTR)from, (int)(fromlen - generatedBw_restlen), (LPWSTR)to, needed);
+						needed = /*Error: Function owner not recognized*/MultiByteToWideChar(enc_codepage, 8, (LPCSTR)from, (int)(fromlen - generatedBw_restlen), (LPWSTR)to, needed);
 						if (needed == 0) {
 							this.setBw_conv_error(1);
 							return 0;
@@ -207,7 +207,7 @@ public class bw_info {
 					}
 					len = (int)(to - buf);
 				} else {
-						len = .WideCharToMultiByte((((flags) >> 16) & -1024), 0, (LPCWSTR)generatedBw_conv_buf, (int)fromlen / , (LPSTR)to, (int)(generatedBw_conv_buflen - fromlen), 0, bad);
+						len = /*Error: Function owner not recognized*/WideCharToMultiByte((((flags) >> 16) & -1024), 0, (LPCWSTR)generatedBw_conv_buf, (int)fromlen / /*Error: Unsupported expression*/, (LPSTR)to, (int)(generatedBw_conv_buflen - fromlen), 0, bad);
 						if (bad) {
 							this.setBw_conv_error(1);
 							return 0;

@@ -26,18 +26,18 @@ public class ext2_ext_attr_entry {
 	 */
 	public Object ext2fs_ext_attr_hash_entry(Object data) {
 		 hash = 0;
-		byte name = ((byte)entry) + ;
+		byte name = ((byte)entry) + /*Error: Unsupported expression*/;
 		int n;
 		Object generatedE_name_len = this.getE_name_len();
 		for (n = 0; n < generatedE_name_len; n++) {
-			hash = (hash << 5) ^ (hash >> (8 *  - 5)) ^ name++;
+			hash = (hash << 5) ^ (hash >> (8 * /*Error: sizeof expression not supported yet*/ - 5)) ^ name++;
 		}
 		Object generatedE_value_inum = this.getE_value_inum();
 		Object generatedE_value_size = this.getE_value_size();
 		if (generatedE_value_inum == 0 && generatedE_value_size != /* The hash needs to be calculated on the data in little-endian. */0) {
 			 value = ()data;
 			for (n = (generatedE_value_size + (((int)1 << 2) - 1)) >> 2; n; n--) {
-				hash = (hash << 16) ^ (hash >> (8 *  - 16)) ^ .ext2fs_le32_to_cpu(value++);
+				hash = (hash << 16) ^ (hash >> (8 * /*Error: sizeof expression not supported yet*/ - 16)) ^ /*Error: Function owner not recognized*/ext2fs_le32_to_cpu(value++);
 			}
 		} 
 		return hash/*
@@ -58,7 +58,7 @@ public class ext2_ext_attr_entry {
 			if (retval) {
 				return retval;
 			} 
-			hash = (hash << 16) ^ (hash >> (8 *  - 16)) ^ ea_inode_hash;
+			hash = (hash << 16) ^ (hash >> (8 * /*Error: sizeof expression not supported yet*/ - 16)) ^ ea_inode_hash;
 		} 
 		return 0;
 	}

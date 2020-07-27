@@ -42,30 +42,6 @@ public class ref {
 	public ref() {
 	}
 	
-	public int http_fetch_ref(Object base) {
-		http_get_options options = new http_get_options(0);
-		byte url;
-		strbuf buffer = new strbuf(, , );
-		int ret = -1;
-		options.setNo_cache(1);
-		Object generatedName = this.getName();
-		url = ModernizedCProgram.quote_ref_url(base, generatedName);
-		Object generatedLen = buffer.getLen();
-		byte generatedBuf = buffer.getBuf();
-		object_id generatedOld_oid = this.getOld_oid();
-		if (ModernizedCProgram.http_get_strbuf(url, buffer, options) == 0) {
-			buffer.strbuf_rtrim();
-			if (generatedLen == ModernizedCProgram.the_repository.getHash_algo().getHexsz()) {
-				ret = generatedOld_oid.get_oid_hex(generatedBuf);
-			}  else if (ModernizedCProgram.starts_with(generatedBuf, "ref: ")) {
-				this.setSymref(ModernizedCProgram.xstrdup(generatedBuf + 5));
-				ret = 0;
-			} 
-		} 
-		buffer.strbuf_release();
-		ModernizedCProgram.free(url);
-		return ret;
-	}
 	public void annotate_refs_with_symref_info() {
 		string_list symref = new string_list(((Object)0), 0, 0, 1, ((Object)0));
 		byte feature_list = ModernizedCProgram.server_capabilities_v1;
@@ -100,7 +76,7 @@ public class ref {
 		get_remote_heads_state state = get_remote_heads_state.EXPECTING_FIRST_REF;
 		ModernizedCProgram.list = ((Object)0);
 		int generatedPktlen = reader.getPktlen();
-		Object generatedLine = reader.getLine();
+		Object[] generatedLine = reader.getLine();
 		while (get_remote_heads_state.state != get_remote_heads_state.EXPECTING_DONE) {
 			switch (reader.packet_reader_read()) {
 			case packet_read_status.PACKET_READ_FLUSH:
@@ -115,6 +91,16 @@ public class ref {
 					break;
 			}
 			switch (get_remote_heads_state.state) {
+			case /* fallthrough */get_remote_heads_state.EXPECTING_REF:
+					if (ModernizedCProgram.process_ref(generatedLine, len, ModernizedCProgram.list, flags, extra_have)) {
+						break;
+					} 
+					get_remote_heads_state.state = get_remote_heads_state.EXPECTING_SHALLOW;
+			case /* fallthrough */get_remote_heads_state.EXPECTING_SHALLOW:
+					if (shallow_points.process_shallow(generatedLine, len)) {
+						break;
+					} 
+					ModernizedCProgram.die(ModernizedCProgram._("protocol error: unexpected '%s'"), generatedLine);
 			case get_remote_heads_state.EXPECTING_FIRST_REF:
 					ModernizedCProgram.process_capabilities(generatedLine, len);
 					if (ModernizedCProgram.process_dummy_ref(generatedLine)) {
@@ -124,16 +110,6 @@ public class ref {
 					get_remote_heads_state.state = get_remote_heads_state.EXPECTING_REF;
 			case get_remote_heads_state.EXPECTING_DONE:
 					break;
-			case /* fallthrough */get_remote_heads_state.EXPECTING_SHALLOW:
-					if (shallow_points.process_shallow(generatedLine, len)) {
-						break;
-					} 
-					ModernizedCProgram.die(ModernizedCProgram._("protocol error: unexpected '%s'"), generatedLine);
-			case /* fallthrough */get_remote_heads_state.EXPECTING_REF:
-					if (ModernizedCProgram.process_ref(generatedLine, len, ModernizedCProgram.list, flags, extra_have)) {
-						break;
-					} 
-					get_remote_heads_state.state = get_remote_heads_state.EXPECTING_SHALLOW;
 			}
 		}
 		orig_list.annotate_refs_with_symref_info();
@@ -157,12 +133,12 @@ public class ref {
 			ret = 0;
 			;
 		} 
-		string_list_item generatedItems = line_sections.getItems();
+		string_list_item[] generatedItems = line_sections.getItems();
 		if (old_oid.parse_oid_hex(generatedItems[i++].getString(), end) || end) {
 			ret = 0;
 			;
 		} 
-		ref = .alloc_ref(generatedItems[i++].getString());
+		ref = /*Error: Function owner not recognized*/alloc_ref(generatedItems[i++].getString());
 		object_id generatedOld_oid = ref.getOld_oid();
 		generatedOld_oid.oidcpy(old_oid);
 		ModernizedCProgram.list = ref;
@@ -184,7 +160,7 @@ public class ref {
 					;
 				} 
 				peeled_name = ModernizedCProgram.xstrfmt("%s^{}", generatedName);
-				peeled = .alloc_ref(peeled_name);
+				peeled = /*Error: Function owner not recognized*/alloc_ref(peeled_name);
 				generatedOld_oid.oidcpy(peeled_oid);
 				ModernizedCProgram.list = peeled;
 				ModernizedCProgram.list = generatedNext;
@@ -216,7 +192,7 @@ public class ref {
 			ModernizedCProgram.packet_write_fmt(fd_out, "ref-prefix %s\n", ref_prefixes.getArgv()[i]);
 		}
 		ModernizedCProgram.packet_flush(fd_out);
-		Object generatedLine = reader.getLine();
+		Object[] generatedLine = reader.getLine();
 		while (reader.packet_reader_read() == /* Process response from server */packet_read_status.PACKET_READ_NORMAL) {
 			if (!ModernizedCProgram.list.process_ref_v2(generatedLine)) {
 				ModernizedCProgram.die(ModernizedCProgram._("invalid ls-refs response: %s"), generatedLine);
@@ -227,39 +203,6 @@ public class ref {
 			ModernizedCProgram.die(ModernizedCProgram._("expected flush after ref listing"));
 		} 
 		return ModernizedCProgram.list;
-	}
-	public int fetch_refs(Object remote_name) {
-		remote remote = new remote();
-		transport transport = new transport();
-		int original_fetch_if_missing = ModernizedCProgram.fetch_if_missing;
-		int res;
-		ModernizedCProgram.fetch_if_missing = 0;
-		remote = .remote_get(remote_name);
-		Object generatedUrl = remote.getUrl();
-		if (!generatedUrl[0]) {
-			ModernizedCProgram.die(ModernizedCProgram._("Remote with no URL"));
-		} 
-		transport transport = new transport();
-		transport = transport.transport_get(remote, generatedUrl[0]);
-		transport.transport_set_option("from-promisor", "1");
-		transport.transport_set_option("no-dependents", "1");
-		res = ModernizedCProgram.transport_fetch_refs(transport, ref);
-		ModernizedCProgram.fetch_if_missing = original_fetch_if_missing;
-		return res;
-		int ret = ref_map.check_exist_and_connected();
-		if (ret) {
-			ModernizedCProgram.trace2_region_enter_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\fetch.c", 1089, ("fetch"), ("fetch_refs"), (ModernizedCProgram.the_repository));
-			ret = ModernizedCProgram.transport_fetch_refs(transport, ref_map);
-			ModernizedCProgram.trace2_region_leave_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\fetch.c", 1091, ("fetch"), ("fetch_refs"), (ModernizedCProgram.the_repository));
-		} 
-		if (!ret/*
-				 * Keep the new pack's ".keep" file around to allow the caller
-				 * time to update refs to reference the new objects.
-				 */) {
-			return 0;
-		} 
-		transport.transport_unlock_pack();
-		return ret;
 	}
 	public void find_non_local_tags(Object refs, ref tail) {
 		hashmap existing_refs = new hashmap();
@@ -305,9 +248,9 @@ public class ref {
 				 * add them to the list of refs to be fetched
 				 */.clear_item();
 		} 
-		string_list_item generatedItems = (remote_refs_list).getItems();
+		string_list_item[] generatedItems = (remote_refs_list).getItems();
 		int generatedNr = (remote_refs_list).getNr();
-		byte generatedString = remote_ref_item.getString();
+		byte[] generatedString = remote_ref_item.getString();
 		hashmap_entry hashmap_entry = new hashmap_entry();
 		int generatedIgnore = item.getIgnore();
 		Object generatedRefname = item.getRefname();
@@ -324,8 +267,8 @@ public class ref {
 			if (generatedIgnore) {
 				continue;
 			} 
-			rm = .alloc_ref(generatedRefname);
-			rm.setPeer_ref(.alloc_ref(generatedRefname));
+			rm = /*Error: Function owner not recognized*/alloc_ref(generatedRefname);
+			rm.setPeer_ref(/*Error: Function owner not recognized*/alloc_ref(generatedRefname));
 			generatedOld_oid.oidcpy(generatedOid);
 			tail = rm;
 			tail = generatedNext;
@@ -335,7 +278,7 @@ public class ref {
 		remote_refs_list.string_list_clear(0);
 		fetch_oids.oidset_clear();
 	}
-	public ref get_ref_map(remote remote, Object remote_refs, refspec rs, int tags, int autotags) {
+	public ref get_ref_map(remote remote, Object remote_refs, refspec rs, int tags, Integer autotags) {
 		int i;
 		ref rm = new ref();
 		ref ref_map = ((Object)0);
@@ -344,14 +287,14 @@ public class ref {
 		ref oref_tail = /* opportunistically-updated references: */orefs;
 		hashmap existing_refs = new hashmap();
 		int generatedNr = rs.getNr();
-		refspec_item generatedItems = rs.getItems();
+		refspec_item[] generatedItems = rs.getItems();
 		ref generatedNext = rm.getNext();
 		refspec generatedFetch = remote.getFetch();
 		Object generatedName = remote.getName();
 		if (generatedNr) {
 			refspec fetch_refspec = new refspec();
 			for (i = 0; i < generatedNr; i++) {
-				.get_fetch_map(remote_refs, generatedItems[i], tail, 0);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/get_fetch_map(remote_refs, generatedItems[i], tail, 0);
 				if (generatedItems[i].getDst() && generatedItems[i].getDst()[0]) {
 					autotags = 1;
 				} 
@@ -384,16 +327,16 @@ public class ref {
 					fetch_refspec = generatedFetch;
 			} 
 			for (i = 0; i < generatedNr; i++) {
-				.get_fetch_map(ref_map, generatedItems[i], oref_tail, 1);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/get_fetch_map(ref_map, generatedItems[i], oref_tail, 1);
 			}
 		}  else if (generatedNr) {
 			ModernizedCProgram.die("--refmap option is only meaningful with command-line refspec(s).");
 		} else {
-				branch branch = .branch_get(((Object)/* Use the defaults */0));
-				int has_merge = .branch_has_merge_config(ModernizedCProgram.branch);
-				if (remote && (generatedNr || (has_merge && !.strcmp(ModernizedCProgram.branch.getRemote_name(), generatedName)))) {
+				branch branch = /*Error: Function owner not recognized*/branch_get(((Object)/* Use the defaults */0));
+				int has_merge = /*Error: Function owner not recognized*/branch_has_merge_config(ModernizedCProgram.branch);
+				if (remote && (generatedNr || (has_merge && !/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.branch.getRemote_name(), generatedName)))) {
 					for (i = 0; i < generatedNr; i++) {
-						.get_fetch_map(remote_refs, generatedItems[i], tail, 0);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/get_fetch_map(remote_refs, generatedItems[i], tail, 0);
 						if (generatedItems[i].getDst() && generatedItems[i].getDst()[0]) {
 							autotags = 1;
 						} 
@@ -407,11 +350,11 @@ public class ref {
 										 */);
 						} 
 					}
-					if (has_merge && !.strcmp(ModernizedCProgram.branch.getRemote_name(), generatedName)) {
+					if (has_merge && !/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.branch.getRemote_name(), generatedName)) {
 						ModernizedCProgram.add_merge_config(ref_map, remote_refs, ModernizedCProgram.branch, tail);
 					} 
 				} else {
-						ref_map = .get_remote_ref(remote_refs, "HEAD");
+						ref_map = /*Error: Function owner not recognized*/get_remote_ref(remote_refs, "HEAD");
 						if (!ref_map) {
 							ModernizedCProgram.die(ModernizedCProgram._("Couldn't find remote ref HEAD"));
 						} 
@@ -420,7 +363,7 @@ public class ref {
 				} 
 		} 
 		if (tags == .TAGS_SET) {
-			.get_fetch_map(remote_refs, ModernizedCProgram.tag_refspec, tail, /* also fetch all tags */0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/get_fetch_map(remote_refs, ModernizedCProgram.tag_refspec, tail, /* also fetch all tags */0);
 		}  else if (tags == .TAGS_DEFAULT && autotags) {
 			ref_map.find_non_local_tags(remote_refs, tail);
 		} 
@@ -429,7 +372,7 @@ public class ref {
 			rm.setFetch_head_status(.FETCH_HEAD_IGNORE);
 			tail = generatedNext;
 		}
-		ref_map = .ref_remove_duplicates(ref_map);
+		ref_map = /*Error: Function owner not recognized*/ref_remove_duplicates(ref_map);
 		existing_refs.refname_hash_init();
 		ModernizedCProgram.for_each_ref(add_one_refname, existing_refs);
 		ref generatedPeer_ref = rm.getPeer_ref();
@@ -454,9 +397,9 @@ public class ref {
 	}
 	public int s_update_ref(Object action, int check_old) {
 		byte msg;
-		byte rla = .getenv("GIT_REFLOG_ACTION");
+		byte rla = /*Error: Function owner not recognized*/getenv("GIT_REFLOG_ACTION");
 		ref_transaction transaction = new ref_transaction();
-		strbuf err = new strbuf(, , );
+		strbuf err = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int ret;
 		int df_conflict = 0;
 		if (ModernizedCProgram.dry_run) {
@@ -491,10 +434,10 @@ public class ref {
 	public void prepare_format_display() {
 		ref rm = new ref();
 		byte format = "full";
-		.git_config_get_string_const("fetch.output", format);
-		if (!.strcasecmp(format, "full")) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_get_string_const("fetch.output", format);
+		if (!/*Error: Function owner not recognized*/strcasecmp(format, "full")) {
 			ModernizedCProgram.compact_format = 0;
-		}  else if (!.strcasecmp(format, "compact")) {
+		}  else if (!/*Error: Function owner not recognized*/strcasecmp(format, "compact")) {
 			ModernizedCProgram.compact_format = 1;
 		} else {
 				ModernizedCProgram.die(ModernizedCProgram._("configuration fetch.output contains invalid value %s"), format);
@@ -504,7 +447,7 @@ public class ref {
 		Object generatedName = rm.getName();
 		ref generatedNext = rm.getNext();
 		for (rm = ref_map; rm; rm = generatedNext) {
-			if (generatedStatus == .REF_STATUS_REJECT_SHALLOW || !generatedPeer_ref || !.strcmp(generatedName, "HEAD")) {
+			if (generatedStatus == .REF_STATUS_REJECT_SHALLOW || !generatedPeer_ref || !/*Error: Function owner not recognized*/strcmp(generatedName, "HEAD")) {
 				continue;
 			} 
 			ModernizedCProgram.adjust_refcol_width(rm);
@@ -516,7 +459,7 @@ public class ref {
 		int url_len;
 		int i;
 		int rc = 0;
-		strbuf note = new strbuf(, , );
+		strbuf note = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte what;
 		byte kind;
 		ref rm = new ref();
@@ -524,7 +467,7 @@ public class ref {
 		byte filename = ModernizedCProgram.dry_run ? "/dev/null" : ModernizedCProgram.the_repository.git_path_fetch_head();
 		int want_status;
 		int summary_width = ModernizedCProgram.transport_summary_width(ref_map);
-		fp = .fopen(filename, "a");
+		fp = /*Error: Function owner not recognized*/fopen(filename, "a");
 		if (!fp) {
 			return ();
 		} 
@@ -552,7 +495,7 @@ public class ref {
 		 generatedFetch_head_status = rm.getFetch_head_status();
 		object_id generatedNew_oid = ref.getNew_oid();
 		int generatedForce = generatedPeer_ref.getForce();
-		byte generatedBuf = note.getBuf();
+		byte[] generatedBuf = note.getBuf();
 		Object generatedLen = note.getLen();
 		ref generatedNext = rm.getNext();
 		for (want_status = .FETCH_HEAD_MERGE; want_status <= .FETCH_HEAD_IGNORE; want_status++) {
@@ -565,7 +508,7 @@ public class ref {
 					} 
 					continue;
 				} 
-				commit = .lookup_commit_reference_gently(ModernizedCProgram.the_repository, generatedOld_oid, 1);
+				commit = /*Error: Function owner not recognized*/lookup_commit_reference_gently(ModernizedCProgram.the_repository, generatedOld_oid, 1);
 				if (!commit) {
 					rm.setFetch_head_status(.FETCH_HEAD_NOT_FOR_MERGE);
 				} 
@@ -573,7 +516,7 @@ public class ref {
 					continue;
 				} 
 				if (generatedPeer_ref) {
-					ref = .alloc_ref(generatedName);
+					ref = /*Error: Function owner not recognized*/alloc_ref(generatedName);
 					generatedOld_oid.oidcpy(generatedOld_oid);
 					generatedNew_oid.oidcpy(generatedOld_oid);
 					ref.setForce(generatedForce);
@@ -581,7 +524,7 @@ public class ref {
 				if (ModernizedCProgram.recurse_submodules != .RECURSE_SUBMODULES_OFF) {
 					generatedOld_oid.check_for_new_submodule_commits();
 				} 
-				if (!.strcmp(generatedName, "HEAD")) {
+				if (!/*Error: Function owner not recognized*/strcmp(generatedName, "HEAD")) {
 					kind = "";
 					what = "";
 				}  else if (ModernizedCProgram.starts_with(generatedName, "refs/heads/")) {
@@ -597,12 +540,12 @@ public class ref {
 						kind = "";
 						what = generatedName;
 				} 
-				url_len = .strlen(url);
+				url_len = /*Error: Function owner not recognized*/strlen(url);
 				for (i = url_len - 1; url[i] == (byte)'/' && 0 <= i; i--) {
 					;
 				}
 				url_len = i + 1;
-				if (4 < i && !.strncmp(".git", url + i - 3, 4)) {
+				if (4 < i && !/*Error: Function owner not recognized*/strncmp(".git", url + i - 3, 4)) {
 					url_len = i - 3;
 				} 
 				note.strbuf_setlen(0);
@@ -614,15 +557,15 @@ public class ref {
 				} 
 				switch (generatedFetch_head_status) {
 				case /* fall-through */.FETCH_HEAD_MERGE:
-						.fprintf(fp, "%s\t%s\t%s", ModernizedCProgram.oid_to_hex(generatedOld_oid), merge_status_marker, generatedBuf);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(fp, "%s\t%s\t%s", ModernizedCProgram.oid_to_hex(generatedOld_oid), merge_status_marker, generatedBuf);
 						for (i = 0; i < url_len; ++i) {
 							if ((byte)'\n' == url[i]) {
-								.fputs("\\n", fp);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs("\\n", fp);
 							} else {
-									.fputc(url[i], fp);
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc(url[i], fp);
 							} 
 						}
-						.fputc((byte)'\n', fp);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\n', fp);
 						break;
 				case .FETCH_HEAD_NOT_FOR_MERGE:
 						merge_status_marker = "not-for-merge";
@@ -638,11 +581,11 @@ public class ref {
 				} 
 				if (generatedLen) {
 					if (ModernizedCProgram.verbosity >= 0 && !ModernizedCProgram.shown_url) {
-						.fprintf((_iob[2]), ModernizedCProgram._("From %.*s\n"), url_len, url);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("From %.*s\n"), url_len, url);
 						ModernizedCProgram.shown_url = 1;
 					} 
 					if (ModernizedCProgram.verbosity >= 0) {
-						.fprintf((_iob[2]), " %s\n", generatedBuf);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), " %s\n", generatedBuf);
 					} 
 				} 
 			}
@@ -658,7 +601,7 @@ public class ref {
 			} 
 		} 
 		ModernizedCProgram.free(url);
-		.fclose(fp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fp);
 		return rc/*
 		 * We would want to bypass the object transfer altogether if
 		 * everything we are going to fetch already exists and is connected
@@ -693,261 +636,238 @@ public class ref {
 		return opt.check_connected(iterate_ref_map, rm);
 	}
 	public void check_not_current_branch() {
-		branch current_branch = .branch_get(((Object)0));
+		branch current_branch = /*Error: Function owner not recognized*/branch_get(((Object)0));
 		if (ModernizedCProgram.is_bare_repository() || !current_branch) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ref generatedPeer_ref = this.getPeer_ref();
 		Object generatedRefname = current_branch.getRefname();
 		Object generatedName = generatedPeer_ref.getName();
 		ref generatedNext = this.getNext();
 		for (; ref_map; ref_map = generatedNext) {
-			if (generatedPeer_ref && !.strcmp(generatedRefname, generatedName)) {
+			if (generatedPeer_ref && !/*Error: Function owner not recognized*/strcmp(generatedRefname, generatedName)) {
 				ModernizedCProgram.die(ModernizedCProgram._("Refusing to fetch into current branch %s of non-bare repository"), generatedRefname);
 			} 
 		}
 	}
-	public void add_sought_entry(int nr, int alloc, Object name) {
-		ref ref = new ref();
-		object_id oid = new object_id();
-		byte p;
-		if (!oid.parse_oid_hex(name, p)) {
-			if (p == (byte)' ') {
-				name = p + /* <oid> <ref>, find refname */1;
-			}  else if (p == (byte)'\0') {
-				;
-			} else {
-					/* <ref>, clear cruft from oid */oid.oidclr();
-			} 
-		} else {
-				/* <ref>, clear cruft from get_oid_hex */oid.oidclr();
-		} 
-		ref = .alloc_ref(name);
-		object_id generatedOld_oid = ref.getOld_oid();
-		generatedOld_oid.oidcpy(oid);
-		(nr)++;
-		do {
-			if ((nr) > alloc) {
-				if ((((alloc) + 16) * 3 / 2) < (nr)) {
-					alloc = (nr);
-				} else {
-						alloc = (((alloc) + 16) * 3 / 2);
-				} 
-				(sought) = ModernizedCProgram.xrealloc((sought), ModernizedCProgram.st_mult(, (alloc)));
-			} 
-		} while (0);
-		(sought)[nr - 1] = ref;
-	}
-	public ref parse_git_refs(discovery heads, int for_push) {
-		ref list = ((Object)0);
-		packet_reader reader = new packet_reader();
-		Byte generatedBuf = heads.getBuf();
-		Object generatedLen = heads.getLen();
-		reader.packet_reader_init(-1, generatedBuf, generatedLen, (-1024 << 1) | (-1024 << 0) | (-1024 << 2));
-		heads.setVersion(reader.discover_version());
-		oid_array generatedShallow = heads.getShallow();
-		protocol_version generatedVersion = heads.getVersion();
-		switch (generatedVersion) {
-		case protocol_version.protocol_v1:
-		case protocol_version.protocol_unknown_version:
-				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\remote-curl.c", 236, "unknown protocol version");
-		case protocol_version.protocol_v0:
-				list.get_remote_heads(reader, for_push ? (-1024 << 0) : 0, ((Object)0), generatedShallow);
-				break;
-		case protocol_version.protocol_v2/*
-				 * Do nothing.  This isn't a list of refs but rather a
-				 * capability advertisement.  Client would have run
-				 * 'stateless-connect' so we'll dump this capability listing
-				 * and let them request the refs themselves.
-				 */:
-				break;
-		}
-		return list;
-	}
-	public ref parse_info_refs(discovery heads) {
-		byte data;
-		byte start;
-		byte mid;
-		byte ref_name;
-		int i = 0;
-		ref refs = ((Object)0);
-		ref ref = ((Object)0);
-		ref last_ref = ((Object)0);
-		Byte generatedBuf = heads.getBuf();
-		data = generatedBuf;
-		start = ((Object)0);
-		mid = data;
-		Object generatedLen = heads.getLen();
-		object_id generatedOld_oid = ref.getOld_oid();
-		while (i < generatedLen) {
-			if (!start) {
-				start = data[i];
-			} 
-			if (data[i] == (byte)'\t') {
-				mid = data[i];
-			} 
-			if (data[i] == (byte)'\n') {
-				if (mid - start != ModernizedCProgram.the_repository.getHash_algo().getHexsz()) {
-					ModernizedCProgram.die(ModernizedCProgram._("%sinfo/refs not valid: is this a git repository?"), ModernizedCProgram.transport_anonymize_url(generatedBuf));
-				} 
-				data[i] = 0;
-				ref_name = mid + 1;
-				ref = .alloc_ref(ref_name);
-				generatedOld_oid.get_oid_hex(start);
-				if (!refs) {
-					refs = ref;
-				} 
-				if (last_ref) {
-					last_ref.setNext(ref);
-				} 
-				last_ref = ref;
-				start = ((Object)0);
-			} 
-			i++;
-		}
-		ref = .alloc_ref("HEAD");
-		if (!ref.http_fetch_ref(generatedBuf) && !.resolve_remote_symref(ref, refs)) {
-			ref.setNext(refs);
-			refs = ref;
-		} else {
-				ModernizedCProgram.free(ref);
-		} 
-		return refs;
-	}
-	public ref get_refs(int for_push) {
-		discovery heads = new discovery();
-		discovery discovery = new discovery();
-		if (for_push) {
-			heads = discovery.discover_refs("git-receive-pack", for_push);
-		} else {
-				heads = discovery.discover_refs("git-upload-pack", for_push);
-		} 
-		ref generatedRefs = heads.getRefs();
-		return generatedRefs;
-	}
-	public void output_refs() {
-		ref posn = new ref();
-		Byte generatedSymref = posn.getSymref();
-		Object generatedName = posn.getName();
-		object_id generatedOld_oid = posn.getOld_oid();
-		ref generatedNext = posn.getNext();
-		for (posn = refs; posn; posn = generatedNext) {
-			if (generatedSymref) {
-				.printf("@%s %s\n", generatedSymref, generatedName);
-			} else {
-					.printf("%s %s\n", ModernizedCProgram.oid_to_hex(generatedOld_oid), generatedName);
-			} 
-		}
-		.printf("\n");
-		.fflush((_iob[1]));
-	}
-	public int fetch_dumb(int nr_heads) {
-		walker walker = new walker();
-		byte targets;
-		int ret;
-		int i;
-		(targets) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (nr_heads)));
-		if (ModernizedCProgram.options.getDepth() || ModernizedCProgram.options.getDeepen_since()) {
-			ModernizedCProgram.die(ModernizedCProgram._("dumb http transport does not support shallow capabilities"));
-		} 
-		for (i = 0; i < nr_heads; i++) {
-			targets[i] = ModernizedCProgram.xstrdup(ModernizedCProgram.oid_to_hex(to_fetch[i].getOld_oid()));
-		}
-		walker walker = new walker();
-		walker = walker.get_http_walker(ModernizedCProgram.url.getBuf());
-		walker.setGet_verbosely(ModernizedCProgram.options.getVerbosity() >= 3);
-		walker.setGet_recover(0);
-		ret = walker.walker_fetch(nr_heads, targets, ((Object)0), ((Object)0));
-		walker.walker_free();
-		for (i = 0; i < nr_heads; i++) {
-			ModernizedCProgram.free(targets[i]);
-		}
-		ModernizedCProgram.free(targets);
-		return ret ? () : 0;
-	}
-	public int fetch(int nr_heads) {
-		discovery discovery = new discovery();
-		discovery d = discovery.discover_refs("git-upload-pack", 0);
-		int generatedProto_git = d.getProto_git();
-		if (generatedProto_git) {
-			return ModernizedCProgram.fetch_git(d, nr_heads, to_fetch);
-		} else {
-				return to_fetch.fetch_dumb(nr_heads);
-		} 
-		Object generatedData = transport.getData();
-		helper_data data = generatedData;
-		int i;
-		int count;
+	public ref get_refs_list(transport transport, int for_push, Object ref_prefixes) {
 		child_process child_process = new child_process();
 		child_process.get_helper(transport);
-		if (transport.process_connect(0)) {
+		if (transport.process_connect(for_push)) {
 			transport.do_take_over();
-			return .UNRECOGNIZEDFUNCTIONNAME(transport, nr_heads, to_fetch);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(transport, for_push, ref_prefixes);
 		} 
-		int generatedGet_refs_list_called = data.getGet_refs_list_called();
 		ref ref = new ref();
-		if (!generatedGet_refs_list_called) {
-			ref.get_refs_list_using_list(transport, 0);
+		return ref.get_refs_list_using_list(transport, for_push);
+	}
+	public ref get_refs_list_using_list(transport transport, int for_push) {
+		Object generatedData = transport.getData();
+		helper_data data = generatedData;
+		child_process helper = new child_process();
+		ref ret = ((Object)0);
+		ref tail = ret;
+		ref posn = new ref();
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		data.setGet_refs_list_called(1);
+		child_process child_process = new child_process();
+		helper = child_process.get_helper(transport);
+		int generatedPush = data.getPush();
+		int generatedIn = helper.getIn();
+		if (generatedPush && for_push) {
+			ModernizedCProgram.write_str_in_full(generatedIn, "list for-push\n");
+		} else {
+				ModernizedCProgram.write_str_in_full(generatedIn, "list\n");
 		} 
-		count = 0;
-		for (i = 0; i < nr_heads; i++) {
-			if (!(to_fetch[i].getStatus() & .REF_STATUS_UPTODATE)) {
-				count++;
+		byte[] generatedBuf = buf.getBuf();
+		object_id generatedOld_oid = (tail).getOld_oid();
+		 generatedStatus = (tail).getStatus();
+		Object generatedName = (tail).getName();
+		ref generatedNext = (tail).getNext();
+		while (1) {
+			byte eov;
+			byte eon;
+			if (ModernizedCProgram.recvline(data, buf)) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\transport-helper.c", 1111, (true)));
 			} 
-		}
-		if (!count) {
-			return 0;
-		} 
-		int generatedCheck_connectivity = data.getCheck_connectivity();
-		git_transport_options generatedTransport_options = data.getTransport_options();
-		int generatedCheck_self_contained_and_connected = generatedTransport_options.getCheck_self_contained_and_connected();
-		if (generatedCheck_connectivity && generatedCheck_self_contained_and_connected) {
-			transport.set_helper_option("check-connectivity", "true");
-		} 
-		int generatedCloning = transport.getCloning();
-		if (generatedCloning) {
-			transport.set_helper_option("cloning", "true");
-		} 
-		int generatedUpdate_shallow = generatedTransport_options.getUpdate_shallow();
-		if (generatedUpdate_shallow) {
-			transport.set_helper_option("update-shallow", "true");
-		} 
-		list_objects_filter_options generatedFilter_options = generatedTransport_options.getFilter_options();
-		list_objects_filter_choice generatedChoice = generatedFilter_options.getChoice();
-		if (generatedChoice) {
-			byte spec = generatedFilter_options.expand_list_objects_filter_spec();
-			transport.set_helper_option("filter", spec);
-		} 
-		oid_array generatedNegotiation_tips = generatedTransport_options.getNegotiation_tips();
-		if (generatedNegotiation_tips) {
-			ModernizedCProgram.warning("Ignoring --negotiation-tip because the protocol does not support it.");
-		} 
-		int generatedFetch = data.getFetch();
-		if (generatedFetch) {
-			return ModernizedCProgram.fetch_with_fetch(transport, nr_heads, to_fetch);
-		} 
-		int generatedImport = data.getImport();
-		if (generatedImport) {
-			return ModernizedCProgram.fetch_with_import(transport, nr_heads, to_fetch);
-		} 
-		return -1;
-		Object generatedData = walker.getData();
-		walker_data data = generatedData;
-		alt_base generatedAlt = data.getAlt();
-		alt_base altbase = generatedAlt;
-		if (!walker.fetch_object(hash)) {
-			return 0;
-		} 
-		Byte generatedBase = generatedAlt.getBase();
-		alt_base generatedNext = altbase.getNext();
-		while (altbase) {
-			if (!ModernizedCProgram.http_fetch_pack(walker, altbase, hash)) {
-				return 0;
+			if (!generatedBuf) {
+				break;
 			} 
-			walker.fetch_alternates(generatedBase);
-			altbase = generatedNext;
+			eov = /*Error: Function owner not recognized*/strchr(generatedBuf, (byte)' ');
+			if (!eov) {
+				ModernizedCProgram.die(ModernizedCProgram._("malformed response in ref list: %s"), generatedBuf);
+			} 
+			eon = /*Error: Function owner not recognized*/strchr(eov + 1, (byte)' ');
+			eov = (byte)'\0';
+			if (eon) {
+				eon = (byte)'\0';
+			} 
+			tail = /*Error: Function owner not recognized*/alloc_ref(eov + 1);
+			if (generatedBuf[0] == (byte)'@') {
+				(tail).setSymref(ModernizedCProgram.xstrdup(generatedBuf + 1));
+			}  else if (generatedBuf[0] != (byte)'?') {
+				generatedOld_oid.get_oid_hex(generatedBuf);
+			} 
+			if (eon) {
+				if (ModernizedCProgram.has_attribute(eon + 1, "unchanged")) {
+					generatedStatus |=  .REF_STATUS_UPTODATE;
+					if (generatedOld_oid.read_ref(generatedName) < 0) {
+						ModernizedCProgram.die(ModernizedCProgram._("could not read ref %s"), generatedName);
+					} 
+				} 
+			} 
+			tail = (generatedNext);
 		}
-		return ();
+		if (ModernizedCProgram.debug) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Debug: Read ref listing.\n");
+		} 
+		buf.strbuf_release();
+		for (posn = ret; posn; posn = generatedNext) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/resolve_remote_symref(posn, ret);
+		}
+		return ret;
+	}
+	public void print_helper_status() {
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		 generatedStatus = this.getStatus();
+		Object generatedName = this.getName();
+		Byte generatedRemote_status = this.getRemote_status();
+		byte[] generatedBuf = buf.getBuf();
+		Object generatedLen = buf.getLen();
+		ref generatedNext = this.getNext();
+		for (; ref; ref = generatedNext) {
+			byte msg = ((Object)0);
+			byte res;
+			switch (generatedStatus) {
+			case .REF_STATUS_REMOTE_REJECT:
+					res = "error";
+					break;
+			case .REF_STATUS_EXPECTING_REPORT:
+			case .REF_STATUS_REJECT_NONFASTFORWARD:
+					res = "error";
+					ModernizedCProgram.msg = "non-fast forward";
+					break;
+			case .REF_STATUS_REJECT_FETCH_FIRST:
+					res = "error";
+					ModernizedCProgram.msg = "fetch first";
+					break;
+			case .REF_STATUS_REJECT_NODELETE:
+			case .REF_STATUS_REJECT_ALREADY_EXISTS:
+					res = "error";
+					ModernizedCProgram.msg = "already exists";
+					break;
+			case .REF_STATUS_REJECT_STALE:
+					res = "error";
+					ModernizedCProgram.msg = "stale info";
+					break;
+			case .REF_STATUS_OK:
+					res = "ok";
+					break;
+			case .REF_STATUS_NONE:
+					res = "error";
+					ModernizedCProgram.msg = "no match";
+					break;
+			case .REF_STATUS_UPTODATE:
+					res = "ok";
+					ModernizedCProgram.msg = "up to date";
+					break;
+			case .REF_STATUS_REJECT_NEEDS_FORCE:
+					res = "error";
+					ModernizedCProgram.msg = "needs force";
+					break;
+			default:
+					continue;
+			}
+			buf.strbuf_setlen(0);
+			buf.strbuf_addf("%s %s", res, generatedName);
+			if (generatedRemote_status) {
+				ModernizedCProgram.msg = generatedRemote_status;
+			} 
+			if (ModernizedCProgram.msg) {
+				buf.strbuf_addch((byte)' ');
+				buf.quote_two_c_style("", ModernizedCProgram.msg, 0);
+			} 
+			buf.strbuf_addch((byte)'\n');
+			ModernizedCProgram.write_or_die(1, generatedBuf, generatedLen);
+		}
+		buf.strbuf_release();
+	}
+	public ref find_remote_branch(Object refs, Object branch) {
+		ref ref = new ref();
+		strbuf head = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		head.strbuf_addstr("refs/heads/");
+		head.strbuf_addstr(branch);
+		byte[] generatedBuf = head.getBuf();
+		ref = /*Error: Function owner not recognized*/find_ref_by_name(refs, generatedBuf);
+		head.strbuf_release();
+		if (ref) {
+			return ref;
+		} 
+		head.strbuf_addstr("refs/tags/");
+		head.strbuf_addstr(branch);
+		ref = /*Error: Function owner not recognized*/find_ref_by_name(refs, generatedBuf);
+		head.strbuf_release();
+		return ref;
+	}
+	public ref wanted_peer_refs(Object refs, refspec refspec) {
+		ref head = /*Error: Function owner not recognized*/copy_ref(/*Error: Function owner not recognized*/find_ref_by_name(refs, "HEAD"));
+		ref local_refs = head;
+		ref generatedNext = head.getNext();
+		ref tail = head ? generatedNext : local_refs;
+		ref ref = new ref();
+		int generatedNr = refspec.getNr();
+		refspec_item[] generatedItems = refspec.getItems();
+		if (ModernizedCProgram.option_single_branch) {
+			ref remote_head = ((Object)0);
+			if (!ModernizedCProgram.option_branch) {
+				remote_head = /*Error: Function owner not recognized*/guess_remote_head(head, refs, 0);
+			} else {
+					local_refs = ((Object)0);
+					tail = local_refs;
+					remote_head = /*Error: Function owner not recognized*/copy_ref(ref.find_remote_branch(refs, ModernizedCProgram.option_branch));
+			} 
+			if (!remote_head && ModernizedCProgram.option_branch) {
+				ModernizedCProgram.warning(ModernizedCProgram._("Could not find remote branch %s to clone."), ModernizedCProgram.option_branch);
+			} else {
+					int i;
+					for (i = 0; i < generatedNr; i++) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/get_fetch_map(remote_head, generatedItems[i], tail, 0);
+					}
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/get_fetch_map(remote_head, ModernizedCProgram.tag_refspec, tail, /* if --branch=tag, pull the requested tag explicitly */0);
+			} 
+		} else {
+				int i;
+				for (i = 0; i < generatedNr; i++) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/get_fetch_map(refs, generatedItems[i], tail, 0);
+				}
+		} 
+		if (!ModernizedCProgram.option_mirror && !ModernizedCProgram.option_single_branch && !ModernizedCProgram.option_no_tags) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/get_fetch_map(refs, ModernizedCProgram.tag_refspec, tail, 0);
+		} 
+		return local_refs;
+	}
+	public int http_fetch_ref(Object base) {
+		http_get_options options = new http_get_options(0);
+		byte url;
+		strbuf buffer = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		int ret = -1;
+		options.setNo_cache(1);
+		Object generatedName = this.getName();
+		url = ModernizedCProgram.quote_ref_url(base, generatedName);
+		Object generatedLen = buffer.getLen();
+		byte[] generatedBuf = buffer.getBuf();
+		object_id generatedOld_oid = this.getOld_oid();
+		if (ModernizedCProgram.http_get_strbuf(url, buffer, options) == 0) {
+			buffer.strbuf_rtrim();
+			if (generatedLen == ModernizedCProgram.the_repository.getHash_algo().getHexsz()) {
+				ret = generatedOld_oid.get_oid_hex(generatedBuf);
+			}  else if (ModernizedCProgram.starts_with(generatedBuf, "ref: ")) {
+				this.setSymref(ModernizedCProgram.xstrdup(generatedBuf + 5));
+				ret = 0;
+			} 
+		} 
+		buffer.strbuf_release();
+		ModernizedCProgram.free(url);
+		return ret;
 	}
 	public ref get_refs_from_bundle(transport transport, int for_push, Object ref_prefixes) {
 		Object generatedData = transport.getData();
@@ -960,11 +880,11 @@ public class ref {
 		data.setGet_refs_from_bundle_called(1);
 		int generatedFd = data.getFd();
 		if (generatedFd > 0) {
-			.close(generatedFd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd);
 		} 
 		Object generatedUrl = transport.getUrl();
 		bundle_header generatedHeader = data.getHeader();
-		data.setFd(.read_bundle_header(generatedUrl, generatedHeader));
+		data.setFd(/*Error: Function owner not recognized*/read_bundle_header(generatedUrl, generatedHeader));
 		if (generatedFd < 0) {
 			ModernizedCProgram.die(ModernizedCProgram._("could not read bundle '%s'"), generatedUrl);
 		} 
@@ -976,7 +896,7 @@ public class ref {
 		object_id generatedOid = e.getOid();
 		for (i = 0; i < generatedNr; i++) {
 			ref_list_entry e = generatedList + i;
-			ref ref = .alloc_ref(generatedName);
+			ref ref = /*Error: Function owner not recognized*/alloc_ref(generatedName);
 			generatedOld_oid.oidcpy(generatedOid);
 			ref.setNext(result);
 			result = ref;
@@ -997,9 +917,6 @@ public class ref {
 		oid_array generatedShallow = data.getShallow();
 		protocol_version generatedVersion = data.getVersion();
 		switch (generatedVersion) {
-		case protocol_version.protocol_v1:
-		case protocol_version.protocol_unknown_version:
-				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\transport.c", 311, "unknown protocol version");
 		case protocol_version.protocol_v2:
 				if (must_list_refs) {
 					refs.get_remote_refs(generatedFd[1], reader, for_push, ref_prefixes, generatedServer_options);
@@ -1009,6 +926,9 @@ public class ref {
 				transport.die_if_server_options();
 				refs.get_remote_heads(reader, for_push ? (-1024 << 0) : 0, generatedExtra_have, generatedShallow);
 				break;
+		case protocol_version.protocol_unknown_version:
+				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\transport.c", 311, "unknown protocol version");
+		case protocol_version.protocol_v1:
 		}
 		data.setGot_remote_heads(1);
 		int generatedLine_peeked = reader.getLine_peeked();
@@ -1041,9 +961,9 @@ public class ref {
 		ref generatedNext = this.getNext();
 		for (; ref; ref = generatedNext) {
 			switch (generatedStatus) {
+			case .REF_STATUS_NONE:
 			case .REF_STATUS_UPTODATE:
 					break;
-			case .REF_STATUS_NONE:
 			default:
 					return 1;
 			}
@@ -1054,14 +974,14 @@ public class ref {
 		Object generatedName = from.getName();
 		if (porcelain) {
 			if (from) {
-				.fprintf((_iob[1]), "%c\t%s:%s\t", flag, generatedName, generatedName);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%c\t%s:%s\t", flag, generatedName, generatedName);
 			} else {
-					.fprintf((_iob[1]), "%c\t:%s\t", flag, generatedName);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%c\t:%s\t", flag, generatedName);
 			} 
 			if (msg) {
-				.fprintf((_iob[1]), "%s (%s)\n", summary, msg);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%s (%s)\n", summary, msg);
 			} else {
-					.fprintf((_iob[1]), "%s\n", summary);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%s\n", summary);
 			} 
 		} else {
 				byte red = "";
@@ -1070,18 +990,18 @@ public class ref {
 					red = ModernizedCProgram.transport_get_color(color_transport.TRANSPORT_COLOR_REJECTED);
 					reset = ModernizedCProgram.transport_get_color(color_transport.TRANSPORT_COLOR_RESET);
 				} 
-				.fprintf((_iob[2]), " %s%c %-*s%s ", red, flag, summary_width, summary, reset);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), " %s%c %-*s%s ", red, flag, summary_width, summary, reset);
 				if (from) {
-					.fprintf((_iob[2]), "%s -> %s", ModernizedCProgram.prettify_refname(generatedName), ModernizedCProgram.prettify_refname(generatedName));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s -> %s", ModernizedCProgram.prettify_refname(generatedName), ModernizedCProgram.prettify_refname(generatedName));
 				} else {
-						.fputs(ModernizedCProgram.prettify_refname(generatedName), (_iob[2]));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(ModernizedCProgram.prettify_refname(generatedName), (_iob[2]));
 				} 
 				if (msg) {
-					.fputs(" (", (_iob[2]));
-					.fputs(msg, (_iob[2]));
-					.fputc((byte)')', (_iob[2]));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(" (", (_iob[2]));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(msg, (_iob[2]));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)')', (_iob[2]));
 				} 
-				.fputc((byte)'\n', (_iob[2]));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\n', (_iob[2]));
 		} 
 	}
 	public void print_ok_ref_status(int porcelain, int summary_width) {
@@ -1091,13 +1011,13 @@ public class ref {
 		ref generatedPeer_ref = this.getPeer_ref();
 		int generatedForced_update = this.getForced_update();
 		object_id generatedNew_oid = this.getNew_oid();
-		byte generatedBuf = quickref.getBuf();
+		byte[] generatedBuf = quickref.getBuf();
 		if (generatedDeletion) {
 			ref.print_ref_status((byte)'-', "[deleted]", ((Object)0), ((Object)0), porcelain, summary_width);
 		}  else if (ModernizedCProgram.is_null_oid(generatedOld_oid)) {
 			ref.print_ref_status((byte)'*', (ModernizedCProgram.starts_with(generatedName, "refs/tags/") ? "[new tag]" : "[new branch]"), generatedPeer_ref, ((Object)0), porcelain, summary_width);
 		} else {
-				strbuf quickref = new strbuf(, , );
+				strbuf quickref = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 				byte type;
 				byte msg;
 				quickref.strbuf_add_unique_abbrev(generatedOld_oid, ModernizedCProgram.default_abbrev);
@@ -1118,7 +1038,7 @@ public class ref {
 	public int print_one_push_status(Object dest, int count, int porcelain, int summary_width) {
 		if (!count) {
 			byte url = ModernizedCProgram.transport_anonymize_url(dest);
-			.fprintf(porcelain ? (_iob[1]) : (_iob[2]), "To %s\n", ModernizedCProgram.url);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(porcelain ? (_iob[1]) : (_iob[2]), "To %s\n", ModernizedCProgram.url);
 			ModernizedCProgram.free(ModernizedCProgram.url);
 		} 
 		ref generatedPeer_ref = this.getPeer_ref();
@@ -1126,26 +1046,8 @@ public class ref {
 		Byte generatedRemote_status = this.getRemote_status();
 		 generatedStatus = this.getStatus();
 		switch (generatedStatus) {
-		case .REF_STATUS_REJECT_ALREADY_EXISTS:
-				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "already exists", porcelain, summary_width);
-				break;
-		case .REF_STATUS_REJECT_NEEDS_FORCE:
-				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "needs force", porcelain, summary_width);
-				break;
-		case .REF_STATUS_REJECT_STALE:
-				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "stale info", porcelain, summary_width);
-				break;
-		case .REF_STATUS_REJECT_SHALLOW:
-				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "new shallow roots not allowed", porcelain, summary_width);
-				break;
-		case .REF_STATUS_REJECT_FETCH_FIRST:
-				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "fetch first", porcelain, summary_width);
-				break;
-		case .REF_STATUS_NONE:
-				ref.print_ref_status((byte)'X', "[no match]", ((Object)0), ((Object)0), porcelain, summary_width);
-				break;
-		case .REF_STATUS_UPTODATE:
-				ref.print_ref_status((byte)'=', "[up to date]", generatedPeer_ref, ((Object)0), porcelain, summary_width);
+		case .REF_STATUS_OK:
+				ref.print_ok_ref_status(porcelain, summary_width);
 				break;
 		case .REF_STATUS_REJECT_NODELETE:
 				ref.print_ref_status((byte)'!', "[rejected]", ((Object)0), "remote does not support deleting refs", porcelain, summary_width);
@@ -1153,22 +1055,40 @@ public class ref {
 		case .REF_STATUS_EXPECTING_REPORT:
 				ref.print_ref_status((byte)'!', "[remote failure]", generatedDeletion ? ((Object)0) : generatedPeer_ref, "remote failed to report status", porcelain, summary_width);
 				break;
+		case .REF_STATUS_REJECT_NONFASTFORWARD:
+				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "non-fast-forward", porcelain, summary_width);
+				break;
+		case .REF_STATUS_REJECT_NEEDS_FORCE:
+				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "needs force", porcelain, summary_width);
+				break;
 		case .REF_STATUS_ATOMIC_PUSH_FAILED:
 				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "atomic push failed", porcelain, summary_width);
 				break;
-		case .REF_STATUS_OK:
-				ref.print_ok_ref_status(porcelain, summary_width);
+		case .REF_STATUS_NONE:
+				ref.print_ref_status((byte)'X', "[no match]", ((Object)0), ((Object)0), porcelain, summary_width);
 				break;
-		case .REF_STATUS_REJECT_NONFASTFORWARD:
-				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "non-fast-forward", porcelain, summary_width);
+		case .REF_STATUS_REJECT_ALREADY_EXISTS:
+				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "already exists", porcelain, summary_width);
+				break;
+		case .REF_STATUS_REJECT_SHALLOW:
+				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "new shallow roots not allowed", porcelain, summary_width);
+				break;
+		case .REF_STATUS_REJECT_FETCH_FIRST:
+				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "fetch first", porcelain, summary_width);
+				break;
+		case .REF_STATUS_UPTODATE:
+				ref.print_ref_status((byte)'=', "[up to date]", generatedPeer_ref, ((Object)0), porcelain, summary_width);
 				break;
 		case .REF_STATUS_REMOTE_REJECT:
 				ref.print_ref_status((byte)'!', "[remote rejected]", generatedDeletion ? ((Object)0) : generatedPeer_ref, generatedRemote_status, porcelain, summary_width);
 				break;
+		case .REF_STATUS_REJECT_STALE:
+				ref.print_ref_status((byte)'!', "[rejected]", generatedPeer_ref, "stale info", porcelain, summary_width);
+				break;
 		}
 		return 1;
 	}
-	public void transport_print_push_status(Object dest, int verbose, int porcelain, int reject_reasons) {
+	public void transport_print_push_status(Object dest, int verbose, int porcelain, Integer reject_reasons) {
 		ref ref = new ref();
 		int n = 0;
 		byte head;
@@ -1198,7 +1118,7 @@ public class ref {
 				n += ref.print_one_push_status(dest, n, porcelain, summary_width);
 			} 
 			if (generatedStatus == .REF_STATUS_REJECT_NONFASTFORWARD) {
-				if (head != ((Object)0) && !.strcmp(head, generatedName)) {
+				if (head != ((Object)0) && !/*Error: Function owner not recognized*/strcmp(head, generatedName)) {
 					reject_reasons |=  -1024;
 				} else {
 						reject_reasons |=  -1024;
@@ -1213,200 +1133,163 @@ public class ref {
 		}
 		ModernizedCProgram.free(head);
 	}
-	public ref find_remote_branch(Object refs, Object branch) {
-		ref ref = new ref();
-		strbuf head = new strbuf(, , );
-		head.strbuf_addstr("refs/heads/");
-		head.strbuf_addstr(branch);
-		byte generatedBuf = head.getBuf();
-		ref = .find_ref_by_name(refs, generatedBuf);
-		head.strbuf_release();
-		if (ref) {
-			return ref;
-		} 
-		head.strbuf_addstr("refs/tags/");
-		head.strbuf_addstr(branch);
-		ref = .find_ref_by_name(refs, generatedBuf);
-		head.strbuf_release();
-		return ref;
-	}
-	public ref wanted_peer_refs(Object refs, refspec refspec) {
-		ref head = .copy_ref(.find_ref_by_name(refs, "HEAD"));
-		ref local_refs = head;
-		ref generatedNext = head.getNext();
-		ref tail = head ? generatedNext : local_refs;
-		ref ref = new ref();
-		int generatedNr = refspec.getNr();
-		refspec_item generatedItems = refspec.getItems();
-		if (ModernizedCProgram.option_single_branch) {
-			ref remote_head = ((Object)0);
-			if (!ModernizedCProgram.option_branch) {
-				remote_head = .guess_remote_head(head, refs, 0);
-			} else {
-					local_refs = ((Object)0);
-					tail = local_refs;
-					remote_head = .copy_ref(ref.find_remote_branch(refs, ModernizedCProgram.option_branch));
-			} 
-			if (!remote_head && ModernizedCProgram.option_branch) {
-				ModernizedCProgram.warning(ModernizedCProgram._("Could not find remote branch %s to clone."), ModernizedCProgram.option_branch);
-			} else {
-					int i;
-					for (i = 0; i < generatedNr; i++) {
-						.get_fetch_map(remote_head, generatedItems[i], tail, 0);
-					}
-					.get_fetch_map(remote_head, ModernizedCProgram.tag_refspec, tail, /* if --branch=tag, pull the requested tag explicitly */0);
-			} 
-		} else {
-				int i;
-				for (i = 0; i < generatedNr; i++) {
-					.get_fetch_map(refs, generatedItems[i], tail, 0);
-				}
-		} 
-		if (!ModernizedCProgram.option_mirror && !ModernizedCProgram.option_single_branch && !ModernizedCProgram.option_no_tags) {
-			.get_fetch_map(refs, ModernizedCProgram.tag_refspec, tail, 0);
-		} 
-		return local_refs;
-	}
-	public void print_helper_status() {
-		strbuf buf = new strbuf(, , );
-		 generatedStatus = this.getStatus();
-		Object generatedName = this.getName();
-		Byte generatedRemote_status = this.getRemote_status();
-		byte generatedBuf = buf.getBuf();
-		Object generatedLen = buf.getLen();
-		ref generatedNext = this.getNext();
-		for (; ref; ref = generatedNext) {
-			byte msg = ((Object)0);
-			byte res;
-			switch (generatedStatus) {
-			case .REF_STATUS_REJECT_NONFASTFORWARD:
-					res = "error";
-					ModernizedCProgram.msg = "non-fast forward";
-					break;
-			case .REF_STATUS_REJECT_STALE:
-					res = "error";
-					ModernizedCProgram.msg = "stale info";
-					break;
-			case .REF_STATUS_NONE:
-					res = "error";
-					ModernizedCProgram.msg = "no match";
-					break;
-			case .REF_STATUS_REJECT_FETCH_FIRST:
-					res = "error";
-					ModernizedCProgram.msg = "fetch first";
-					break;
-			case .REF_STATUS_OK:
-					res = "ok";
-					break;
-			case .REF_STATUS_REJECT_NODELETE:
-			case .REF_STATUS_REJECT_NEEDS_FORCE:
-					res = "error";
-					ModernizedCProgram.msg = "needs force";
-					break;
-			case .REF_STATUS_EXPECTING_REPORT:
-			case .REF_STATUS_UPTODATE:
-					res = "ok";
-					ModernizedCProgram.msg = "up to date";
-					break;
-			case .REF_STATUS_REMOTE_REJECT:
-					res = "error";
-					break;
-			case .REF_STATUS_REJECT_ALREADY_EXISTS:
-					res = "error";
-					ModernizedCProgram.msg = "already exists";
-					break;
-			default:
-					continue;
-			}
-			buf.strbuf_setlen(0);
-			buf.strbuf_addf("%s %s", res, generatedName);
-			if (generatedRemote_status) {
-				ModernizedCProgram.msg = generatedRemote_status;
-			} 
-			if (ModernizedCProgram.msg) {
-				buf.strbuf_addch((byte)' ');
-				buf.quote_two_c_style("", ModernizedCProgram.msg, 0);
-			} 
-			buf.strbuf_addch((byte)'\n');
-			ModernizedCProgram.write_or_die(1, generatedBuf, generatedLen);
-		}
-		buf.strbuf_release();
-	}
-	public ref get_refs_list(transport transport, int for_push, Object ref_prefixes) {
-		child_process child_process = new child_process();
-		child_process.get_helper(transport);
-		if (transport.process_connect(for_push)) {
-			transport.do_take_over();
-			return .UNRECOGNIZEDFUNCTIONNAME(transport, for_push, ref_prefixes);
-		} 
-		ref ref = new ref();
-		return ref.get_refs_list_using_list(transport, for_push);
-	}
-	public ref get_refs_list_using_list(transport transport, int for_push) {
-		Object generatedData = transport.getData();
-		helper_data data = generatedData;
-		child_process helper = new child_process();
-		ref ret = ((Object)0);
-		ref tail = ret;
-		ref posn = new ref();
-		strbuf buf = new strbuf(, , );
-		data.setGet_refs_list_called(1);
-		child_process child_process = new child_process();
-		helper = child_process.get_helper(transport);
-		int generatedPush = data.getPush();
-		int generatedIn = helper.getIn();
-		if (generatedPush && for_push) {
-			ModernizedCProgram.write_str_in_full(generatedIn, "list for-push\n");
-		} else {
-				ModernizedCProgram.write_str_in_full(generatedIn, "list\n");
-		} 
-		byte generatedBuf = buf.getBuf();
-		object_id generatedOld_oid = (tail).getOld_oid();
-		 generatedStatus = (tail).getStatus();
-		Object generatedName = (tail).getName();
-		ref generatedNext = (tail).getNext();
-		while (1) {
-			byte eov;
-			byte eon;
-			if (ModernizedCProgram.recvline(data, buf)) {
-				.exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\transport-helper.c", 1111, (true)));
-			} 
-			if (!generatedBuf) {
+	public ref parse_git_refs(discovery heads, int for_push) {
+		ref list = ((Object)0);
+		packet_reader reader = new packet_reader();
+		Byte generatedBuf = heads.getBuf();
+		Object generatedLen = heads.getLen();
+		reader.packet_reader_init(-1, generatedBuf, generatedLen, (-1024 << 1) | (-1024 << 0) | (-1024 << 2));
+		heads.setVersion(reader.discover_version());
+		oid_array generatedShallow = heads.getShallow();
+		protocol_version generatedVersion = heads.getVersion();
+		switch (generatedVersion) {
+		case protocol_version.protocol_v2/*
+				 * Do nothing.  This isn't a list of refs but rather a
+				 * capability advertisement.  Client would have run
+				 * 'stateless-connect' so we'll dump this capability listing
+				 * and let them request the refs themselves.
+				 */:
 				break;
+		case protocol_version.protocol_unknown_version:
+				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\remote-curl.c", 236, "unknown protocol version");
+		case protocol_version.protocol_v1:
+		case protocol_version.protocol_v0:
+				list.get_remote_heads(reader, for_push ? (-1024 << 0) : 0, ((Object)0), generatedShallow);
+				break;
+		}
+		return list;
+	}
+	public ref parse_info_refs(discovery heads) {
+		byte data;
+		byte start;
+		byte mid;
+		byte ref_name;
+		int i = 0;
+		ref refs = ((Object)0);
+		ref ref = ((Object)0);
+		ref last_ref = ((Object)0);
+		Byte generatedBuf = heads.getBuf();
+		data = generatedBuf;
+		start = ((Object)0);
+		mid = data;
+		Object generatedLen = heads.getLen();
+		object_id generatedOld_oid = ref.getOld_oid();
+		while (i < generatedLen) {
+			if (!start) {
+				start = data[i];
 			} 
-			eov = .strchr(generatedBuf, (byte)' ');
-			if (!eov) {
-				ModernizedCProgram.die(ModernizedCProgram._("malformed response in ref list: %s"), generatedBuf);
+			if (data[i] == (byte)'\t') {
+				mid = data[i];
 			} 
-			eon = .strchr(eov + 1, (byte)' ');
-			eov = (byte)'\0';
-			if (eon) {
-				eon = (byte)'\0';
-			} 
-			tail = .alloc_ref(eov + 1);
-			if (generatedBuf[0] == (byte)'@') {
-				(tail).setSymref(ModernizedCProgram.xstrdup(generatedBuf + 1));
-			}  else if (generatedBuf[0] != (byte)'?') {
-				generatedOld_oid.get_oid_hex(generatedBuf);
-			} 
-			if (eon) {
-				if (ModernizedCProgram.has_attribute(eon + 1, "unchanged")) {
-					generatedStatus |=  .REF_STATUS_UPTODATE;
-					if (generatedOld_oid.read_ref(generatedName) < 0) {
-						ModernizedCProgram.die(ModernizedCProgram._("could not read ref %s"), generatedName);
-					} 
+			if (data[i] == (byte)'\n') {
+				if (mid - start != ModernizedCProgram.the_repository.getHash_algo().getHexsz()) {
+					ModernizedCProgram.die(ModernizedCProgram._("%sinfo/refs not valid: is this a git repository?"), ModernizedCProgram.transport_anonymize_url(generatedBuf));
 				} 
+				data[i] = 0;
+				ref_name = mid + 1;
+				ref = /*Error: Function owner not recognized*/alloc_ref(ref_name);
+				generatedOld_oid.get_oid_hex(start);
+				if (!refs) {
+					refs = ref;
+				} 
+				if (last_ref) {
+					last_ref.setNext(ref);
+				} 
+				last_ref = ref;
+				start = ((Object)0);
 			} 
-			tail = (generatedNext);
+			i++;
 		}
-		if (ModernizedCProgram.debug) {
-			.fprintf((_iob[2]), "Debug: Read ref listing.\n");
+		ref = /*Error: Function owner not recognized*/alloc_ref("HEAD");
+		if (!ref.http_fetch_ref(generatedBuf) && !/*Error: Function owner not recognized*/resolve_remote_symref(ref, refs)) {
+			ref.setNext(refs);
+			refs = ref;
+		} else {
+				ModernizedCProgram.free(ref);
 		} 
-		buf.strbuf_release();
-		for (posn = ret; posn; posn = generatedNext) {
-			.resolve_remote_symref(posn, ret);
+		return refs;
+	}
+	public ref get_refs(int for_push) {
+		discovery heads = new discovery();
+		discovery discovery = new discovery();
+		if (for_push) {
+			heads = discovery.discover_refs("git-receive-pack", for_push);
+		} else {
+				heads = discovery.discover_refs("git-upload-pack", for_push);
+		} 
+		ref generatedRefs = heads.getRefs();
+		return generatedRefs;
+	}
+	public void output_refs() {
+		ref posn = new ref();
+		Byte generatedSymref = posn.getSymref();
+		Object generatedName = posn.getName();
+		object_id generatedOld_oid = posn.getOld_oid();
+		ref generatedNext = posn.getNext();
+		for (posn = refs; posn; posn = generatedNext) {
+			if (generatedSymref) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("@%s %s\n", generatedSymref, generatedName);
+			} else {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s %s\n", ModernizedCProgram.oid_to_hex(generatedOld_oid), generatedName);
+			} 
 		}
-		return ret;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("\n");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fflush((_iob[1]));
+	}
+	public int fetch_dumb(int nr_heads) {
+		walker walker = new walker();
+		byte targets;
+		int ret;
+		int i;
+		(targets) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (nr_heads)));
+		if (ModernizedCProgram.options.getDepth() || ModernizedCProgram.options.getDeepen_since()) {
+			ModernizedCProgram.die(ModernizedCProgram._("dumb http transport does not support shallow capabilities"));
+		} 
+		for (i = 0; i < nr_heads; i++) {
+			targets[i] = ModernizedCProgram.xstrdup(ModernizedCProgram.oid_to_hex(to_fetch[i].getOld_oid()));
+		}
+		walker walker = new walker();
+		walker = walker.get_http_walker(ModernizedCProgram.url.getBuf());
+		walker.setGet_verbosely(ModernizedCProgram.options.getVerbosity() >= 3);
+		walker.setGet_recover(0);
+		ret = walker.walker_fetch(nr_heads, targets, ((Object)0), ((Object)0));
+		walker.walker_free();
+		for (i = 0; i < nr_heads; i++) {
+			ModernizedCProgram.free(targets[i]);
+		}
+		ModernizedCProgram.free(targets);
+		return ret ? () : 0;
+	}
+	public void add_sought_entry(Integer nr, Integer alloc, Object name) {
+		ref ref = new ref();
+		object_id oid = new object_id();
+		byte p;
+		if (!oid.parse_oid_hex(name, p)) {
+			if (p == (byte)' ') {
+				name = p + /* <oid> <ref>, find refname */1;
+			}  else if (p == (byte)'\0') {
+				;
+			} else {
+					/* <ref>, clear cruft from oid */oid.oidclr();
+			} 
+		} else {
+				/* <ref>, clear cruft from get_oid_hex */oid.oidclr();
+		} 
+		ref = /*Error: Function owner not recognized*/alloc_ref(name);
+		object_id generatedOld_oid = ref.getOld_oid();
+		generatedOld_oid.oidcpy(oid);
+		(nr)++;
+		do {
+			if ((nr) > alloc) {
+				if ((((alloc) + 16) * 3 / 2) < (nr)) {
+					alloc = (nr);
+				} else {
+						alloc = (((alloc) + 16) * 3 / 2);
+				} 
+				(sought) = ModernizedCProgram.xrealloc((sought), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (alloc)));
+			} 
+		} while (0);
+		(sought)[nr - 1] = ref;
 	}
 	public ref getNext() {
 		return next;

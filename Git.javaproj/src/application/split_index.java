@@ -5,13 +5,13 @@ public class split_index {
 	private index_state base;
 	private ewah_bitmap delete_bitmap;
 	private ewah_bitmap replace_bitmap;
-	private cache_entry saved_cache;
+	private cache_entry[][] saved_cache;
 	private int saved_cache_nr;
 	private int nr_deletions;
 	private int nr_replacements;
 	private int refcount;
 	
-	public split_index(object_id base_oid, index_state base, ewah_bitmap delete_bitmap, ewah_bitmap replace_bitmap, cache_entry saved_cache, int saved_cache_nr, int nr_deletions, int nr_replacements, int refcount) {
+	public split_index(object_id base_oid, index_state base, ewah_bitmap delete_bitmap, ewah_bitmap replace_bitmap, cache_entry[][] saved_cache, int saved_cache_nr, int nr_deletions, int nr_replacements, int refcount) {
 		setBase_oid(base_oid);
 		setBase(base);
 		setDelete_bitmap(delete_bitmap);
@@ -28,7 +28,7 @@ public class split_index {
 	public split_index init_split_index(index_state istate) {
 		split_index generatedSplit_index = istate.getSplit_index();
 		if (!generatedSplit_index) {
-			istate.setSplit_index(ModernizedCProgram.xcalloc(1, ));
+			istate.setSplit_index(ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/));
 			generatedSplit_index.setRefcount(1);
 		} 
 		return generatedSplit_index;
@@ -57,10 +57,10 @@ public class split_index {
 	public void setReplace_bitmap(ewah_bitmap newReplace_bitmap) {
 		replace_bitmap = newReplace_bitmap;
 	}
-	public cache_entry getSaved_cache() {
+	public cache_entry[][] getSaved_cache() {
 		return saved_cache;
 	}
-	public void setSaved_cache(cache_entry newSaved_cache) {
+	public void setSaved_cache(cache_entry[][] newSaved_cache) {
 		saved_cache = newSaved_cache;
 	}
 	public int getSaved_cache_nr() {

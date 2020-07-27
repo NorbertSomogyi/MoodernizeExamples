@@ -2,16 +2,16 @@ package application;
 
 public class expand {
 	private int xp_context;
-	private Object xp_pattern;
+	private Object[] xp_pattern;
 	private int xp_pattern_len;
 	private int xp_backslash;
 	private int xp_shell;
 	private int xp_numfiles;
-	private Object xp_files;
+	private Object[][] xp_files;
 	private Object xp_line;
 	private int xp_col;
 	
-	public expand(int xp_context, Object xp_pattern, int xp_pattern_len, int xp_backslash, int xp_shell, int xp_numfiles, Object xp_files, Object xp_line, int xp_col) {
+	public expand(int xp_context, Object[] xp_pattern, int xp_pattern_len, int xp_backslash, int xp_shell, int xp_numfiles, Object[][] xp_files, Object xp_line, int xp_col) {
 		setXp_context(xp_context);
 		setXp_pattern(xp_pattern);
 		setXp_pattern_len(xp_pattern_len);
@@ -25,7 +25,545 @@ public class expand {
 	public expand() {
 	}
 	
-	public void ExpandEscape(Object str, int numfiles, Object files, int options) {
+	/*
+	 * Function given to ExpandGeneric() to obtain an environment variable name.
+	 */
+	public Object get_env_name(int idx) {
+		char_u[] name = new char_u();
+		char_u str = new char_u();
+		int n;
+		str = (char_u)(/*Error: Function owner not recognized*/__p__environ())[idx];
+		if (str == ((Object)0)) {
+			return ((Object)0);
+		} 
+		for (n = 0; n < 100 - 1; ++n) {
+			if (str[n] == (byte)'=' || str[n] == (byte)'\000') {
+				break;
+			} 
+			name[n] = str[n];
+		}
+		name[n] = (byte)'\000';
+		return name/*
+		 * Add a user name to the list of users in ga_users.
+		 * Do nothing if user name is NULL or empty.
+		 */;
+	}
+	/*
+	     * No environ[] on the Amiga.
+	     */
+	// is a valid remote user name using getpwnam() and if it is, add it to
+	// the list of user names.
+	/*
+	 * Function given to ExpandGeneric() to obtain an user names.
+	 */
+	public Object get_users(int idx) {
+		ModernizedCProgram.init_users();
+		if (idx < ModernizedCProgram.ga_users.getGa_len()) {
+			return ((char_u)ModernizedCProgram.ga_users.getGa_data())[idx];
+		} 
+		return ((Object)0/*
+		 * Check whether name matches a user name. Return:
+		 * 0 if name does not match any user name.
+		 * 1 if name partially matches the beginning of a user name.
+		 * 2 is name fully matches a user name.
+		 */);
+	}
+	public Object get_sign_name(int idx) {
+		switch (.expand_what) {
+		case .EXP_LIST:
+				{ 
+					byte[] list_arg = new byte[]{"group=", "file=", "buffer=", ((Object)0)};
+					return (char_u)list_arg[idx];
+				}
+		case .EXP_UNPLACE:
+				{ 
+					byte[] unplace_arg = new byte[]{"group=", "file=", "buffer=", ((Object)0)};
+					return (char_u)unplace_arg[idx];
+				}
+		case .EXP_SIGN_NAMES:
+				return ModernizedCProgram.get_nth_sign_name(idx);
+		case .EXP_SIGN_GROUPS:
+				return ModernizedCProgram.get_nth_sign_group_name(idx);
+		case .EXP_SUBCMD:
+				return (char_u)ModernizedCProgram.cmds[idx];
+		case .EXP_DEFINE:
+				{ 
+					byte[] define_arg = new byte[]{"icon=", "linehl=", "text=", "texthl=", ((Object)0)};
+					return (char_u)define_arg[idx];
+				}
+		case .EXP_PLACE:
+				{ 
+					byte[] place_arg = new byte[]{"line=", "name=", "group=", "priority=", "file=", "buffer=", ((Object)0)};
+					return (char_u)place_arg[idx];
+				}
+		default:
+				return ((Object)0/*
+				 * Handle command line completion for :sign command.
+				 */);
+		}
+	}
+	public void set_context_in_sign_cmd(Object arg) {
+		char_u p = new char_u();
+		char_u end_subcmd = new char_u();
+		char_u last = new char_u();
+		int cmd_idx;
+		char_u begin_subcmd_args = new char_u();
+		// Default: expand subcommands.// Default: expand subcommands.this.setXp_context(34);
+		.expand_what = .EXP_SUBCMD;
+		this.setXp_pattern(arg);
+		end_subcmd = ModernizedCProgram.skiptowhite(arg);
+		if (end_subcmd == (byte)'\000') {
+			return /*Error: Unsupported expression*/;
+		} 
+		// expand subcmd name
+		cmd_idx = ModernizedCProgram.sign_cmd_idx(arg, end_subcmd)// :sign {subcmd} {subcmd_args};// :sign {subcmd} {subcmd_args}
+		//		      |//		      begin_subcmd_args//		      |//		      begin_subcmd_argsbegin_subcmd_args = ModernizedCProgram.skipwhite(end_subcmd)// expand last argument of subcmd// :sign define {name} {args}...;// expand last argument of subcmd// :sign define {name} {args}...
+		//		    |//		    p// Loop until reaching last argument.//		    |//		    p// Loop until reaching last argument.p = begin_subcmd_args;
+		do {
+			p = ModernizedCProgram.skipwhite(p);
+			last = p;
+			p = ModernizedCProgram.skiptowhite(p);
+		} while (p != (byte)'\000');
+		p = ModernizedCProgram.vim_strchr(last, (byte)'=')// :sign define {name} {args}... {last}=;// :sign define {name} {args}... {last}=
+		//				     |	   |//				  last	   pif (p == ((Object)0)) {
+			this.setXp_pattern(last);
+			switch (cmd_idx) {
+			case 2:
+			case 0:
+					.expand_what = .EXP_DEFINE;
+					break;
+			case 1:
+					.expand_what = .EXP_SIGN_NAMES;
+					break;
+			case 5:
+			case 3:
+					if (((int)(begin_subcmd_args) - (byte)'0' < 10)) {
+						.expand_what = .EXP_PLACE;
+					} else {
+							.expand_what = .EXP_LIST;
+					} 
+					break;
+			case 4:
+					.expand_what = .EXP_UNPLACE;
+					break;
+			default:
+					this.setXp_context(0);
+			}
+		} else {
+				this.setXp_pattern(p + 1);
+				switch (cmd_idx) {
+				case 5:
+						if (/*Error: Function owner not recognized*/strncmp((byte)(last), (byte)("group"), (size_t)(true)) == 0) {
+							.expand_what = .EXP_SIGN_GROUPS;
+						}  else if (/*Error: Function owner not recognized*/strncmp((byte)(last), (byte)("file"), (size_t)(true)) == 0) {
+							this.setXp_context(9);
+						} else {
+								this.setXp_context(0);
+						} 
+						break;
+				case 0:
+						if (/*Error: Function owner not recognized*/strncmp((byte)(last), (byte)("texthl"), (size_t)(true)) == 0 || /*Error: Function owner not recognized*/strncmp((byte)(last), (byte)("linehl"), (size_t)(true)) == 0) {
+							this.setXp_context(13);
+						}  else if (/*Error: Function owner not recognized*/strncmp((byte)(last), (byte)("icon"), (size_t)(true)) == 0) {
+							this.setXp_context(2);
+						} else {
+								this.setXp_context(0);
+						} 
+						break;
+				case 3:
+						if (/*Error: Function owner not recognized*/strncmp((byte)(last), (byte)("name"), (size_t)(true)) == 0) {
+							.expand_what = .EXP_SIGN_NAMES;
+						}  else if (/*Error: Function owner not recognized*/strncmp((byte)(last), (byte)("group"), (size_t)(true)) == 0) {
+							.expand_what = .EXP_SIGN_GROUPS;
+						}  else if (/*Error: Function owner not recognized*/strncmp((byte)(last), (byte)("file"), (size_t)(true)) == 0) {
+							this.setXp_context(9);
+						} else {
+								this.setXp_context(0);
+						} 
+						break;
+				case 4:
+				default:
+						this.setXp_context(0/*
+						 * Define a sign using the attributes in 'dict'. Returns 0 on success and -1 on
+						 * failure.
+						 */);
+				}
+		} 
+	}
+	public void set_context_for_expression(Object arg, CMD_index cmdidx) {
+		int got_eq = 0;
+		int c;
+		char_u p = new char_u();
+		if (cmdidx == CMD_index.CMD_let) {
+			this.setXp_context(15);
+			if (ModernizedCProgram.vim_strpbrk(arg, (char_u)"\"'+-*/%.=!?~|&$([<>,#") == ((Object)0)) {
+				for (p = arg + /*Error: Function owner not recognized*/strlen((byte)(arg)); p >= /* ":let var1 var2 ...": find last space. */arg; /*Error: Unsupported expression*/) {
+					this.setXp_pattern(p);
+					p -= has_mbyte ? (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(arg, p - 1) + 1) : 1;
+					if (((p) == (byte)' ' || (p) == (byte)'\t')) {
+						break;
+					} 
+				}
+				return /*Error: Unsupported expression*/;
+			} 
+		} else {
+				this.setXp_context(cmdidx == CMD_index.CMD_call ? 18 : 20);
+		} 
+		Object[] generatedXp_pattern = this.getXp_pattern();
+		int generatedXp_context = this.getXp_context();
+		while ((this.setXp_pattern(ModernizedCProgram.vim_strpbrk(arg, (char_u)"\"'+-*/%.=!?~|&$([<>,#"))) != ((Object)0)) {
+			c = generatedXp_pattern;
+			if (c == (byte)'&') {
+				c = generatedXp_pattern[1];
+				if (c == (byte)'&') {
+					++generatedXp_pattern;
+					this.setXp_context(cmdidx != CMD_index.CMD_let || got_eq ? 20 : 0);
+				}  else if (c != (byte)' ') {
+					this.setXp_context(4);
+					if ((c == (byte)'l' || c == (byte)'g') && generatedXp_pattern[2] == (byte)':') {
+						generatedXp_pattern += 2;
+					} 
+				} 
+			}  else if (c == (byte)'$') {
+				this.setXp_context(/* environment variable */26);
+			}  else if (c == (byte)'=') {
+				got_eq = 1;
+				this.setXp_context(20);
+			}  else if (c == (byte)'#' && generatedXp_context == 20) {
+				break;
+			}  else if ((c == (byte)'<' || c == (byte)'#') && generatedXp_context == 18 && ModernizedCProgram.vim_strchr(generatedXp_pattern, (byte)'(') == ((Object)0)) {
+				break;
+			}  else if (cmdidx != CMD_index.CMD_let || got_eq) {
+				if (c == /* string */(byte)'"') {
+					while ((c = ++generatedXp_pattern) != (byte)'\000' && c != (byte)'"') {
+						if (c == (byte)'\\' && generatedXp_pattern[1] != (byte)'\000') {
+							++generatedXp_pattern;
+						} 
+					}
+					this.setXp_context(0);
+				}  else if (c == /* literal string */(byte)'\'') {
+					while ((c = ++generatedXp_pattern) != (byte)'\000' && c != /* Trick: '' is like stopping and starting a literal string. */(byte)'\'') {
+						;
+					}
+					this.setXp_context(0);
+				}  else if (c == (byte)'|') {
+					if (generatedXp_pattern[1] == (byte)'|') {
+						++generatedXp_pattern;
+						this.setXp_context(20);
+					} else {
+							this.setXp_context(1);
+					} 
+				} else {
+						this.setXp_context(20);
+				} 
+			} else {
+					this.setXp_context(/* Doesn't look like something valid, expand as an expression
+						     * anyway. */20);
+			} 
+			arg = generatedXp_pattern;
+			if (arg != (byte)'\000') {
+				while ((c = ++arg) != (byte)'\000' && (c == (byte)' ' || c == (byte)'\t')) {
+					;
+				}
+			} 
+		}
+		this.setXp_pattern(arg/*
+		 * Return TRUE if "pat" matches "text".
+		 * Does not use 'cpo' and always uses 'magic'.
+		 */);
+	}
+	public void set_context_in_set_cmd(Object arg, int opt_flags) {
+		/* OPT_GLOBAL and/or OPT_LOCAL */int nextchar;
+		long_u flags = /* init for GCC */0;
+		int opt_idx = /* init for GCC */0;
+		char_u p = new char_u();
+		char_u s = new char_u();
+		int is_term_option = 0;
+		int key;
+		ModernizedCProgram.expand_option_flags = opt_flags;
+		this.setXp_context(4);
+		if (arg == (byte)'\000') {
+			this.setXp_pattern(arg);
+			return /*Error: Unsupported expression*/;
+		} 
+		p = arg + /*Error: Function owner not recognized*/strlen((byte)(arg)) - 1;
+		if (p == (byte)' ' && (p - 1) != (byte)'\\') {
+			this.setXp_pattern(p + 1);
+			return /*Error: Unsupported expression*/;
+		} 
+		while (p > arg) {
+			s = p;
+			if (p == (byte)' ' || p == /* count number of backslashes before ' ' or ',' */(byte)',') {
+				while (s > arg && (s - 1) == (byte)'\\') {
+					--s;
+				}
+			} 
+			if (p == (byte)' ' && ((p - s) & 1) == /* break at a space with an even number of backslashes */0) {
+				++p;
+				break;
+			} 
+			--p;
+		}
+		if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("no"), (size_t)(true)) == 0 && /*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("novice"), (size_t)(true)) != 0) {
+			this.setXp_context(5);
+			p += 2;
+		} 
+		if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("inv"), (size_t)(true)) == 0) {
+			this.setXp_context(5);
+			p += 3;
+		} 
+		this.setXp_pattern(arg = p);
+		if (arg == (byte)'<') {
+			while (p != (byte)'>') {
+				if (p++ == /* expand terminal option name */(byte)'\000') {
+					return /*Error: Unsupported expression*/;
+				} 
+			}
+			key = ModernizedCProgram.get_special_key_code(arg + 1);
+			if (key == /* unknown name */0) {
+				this.setXp_context(0);
+				return /*Error: Unsupported expression*/;
+			} 
+			nextchar = ++p;
+			is_term_option = 1;
+			ModernizedCProgram.expand_option_name[2] = ((-(key)) & -1024);
+			ModernizedCProgram.expand_option_name[3] = (((int)(-(key)) >> 8) & -1024);
+		} else {
+				if (p[0] == (byte)'t' && p[1] == (byte)'_') {
+					p += 2;
+					if (p != (byte)'\000') {
+						++p;
+					} 
+					if (p == (byte)'\000') {
+						return /*Error: Unsupported expression*/;
+					} 
+					nextchar = ++p;
+					is_term_option = 1;
+					ModernizedCProgram.expand_option_name[2] = p[-2];
+					ModernizedCProgram.expand_option_name[3] = p[-1];
+				} else {
+						while (((((int)(p) - (byte)'A' < 26) || ((int)(p) - (byte)'a' < 26)) || ((int)(p) - (byte)'0' < 10)) || p == (byte)'_' || p == /* Allow * wildcard */(byte)'*') {
+							p++;
+						}
+						if (p == (byte)'\000') {
+							return /*Error: Unsupported expression*/;
+						} 
+						nextchar = p;
+						p = (byte)'\000';
+						opt_idx = ModernizedCProgram.findoption(arg);
+						p = nextchar;
+						if (opt_idx == -1 || ModernizedCProgram.options[opt_idx].getVar() == ((Object)0)) {
+							this.setXp_context(0);
+							return /*Error: Unsupported expression*/;
+						} 
+						flags = ModernizedCProgram.options[opt_idx].getFlags();
+						if (flags & -1024) {
+							this.setXp_context(0);
+							return /*Error: Unsupported expression*/;
+						} 
+				} 
+		} 
+		if ((nextchar == (byte)'-' || nextchar == (byte)'+' || nextchar == (byte)'^') && p[1] == /* handle "-=" and "+=" */(byte)'=') {
+			++p;
+			nextchar = (byte)'=';
+		} 
+		int generatedXp_context = this.getXp_context();
+		if ((nextchar != (byte)'=' && nextchar != (byte)':') || generatedXp_context == 5) {
+			this.setXp_context((true));
+			return /*Error: Unsupported expression*/;
+		} 
+		if (generatedXp_context != 5 && p[1] == (byte)'\000') {
+			this.setXp_context(7);
+			if (is_term_option) {
+				ModernizedCProgram.expand_option_idx = -1;
+			} else {
+					ModernizedCProgram.expand_option_idx = opt_idx;
+			} 
+			this.setXp_pattern(p + 1);
+			return /*Error: Unsupported expression*/;
+		} 
+		this.setXp_context(0);
+		if (is_term_option || (flags & -1024)) {
+			return /*Error: Unsupported expression*/;
+		} 
+		this.setXp_pattern(p + 1);
+		if (flags & -1024) {
+			p = ModernizedCProgram.options[opt_idx].getVar();
+			if (p == (char_u)ModernizedCProgram.p_bdir || p == (char_u)ModernizedCProgram.p_dir || p == (char_u)ModernizedCProgram.p_path || p == (char_u)ModernizedCProgram.p_pp || p == (char_u)ModernizedCProgram.p_rtp || p == (char_u)p_cdpath || p == (char_u)p_vdir) {
+				this.setXp_context(3);
+				if (p == (char_u)ModernizedCProgram.p_path || p == (char_u)p_cdpath) {
+					this.setXp_backslash(2);
+				} else {
+						this.setXp_backslash(1);
+				} 
+			} else {
+					this.setXp_context(2);
+					if (p == (char_u)/* for 'tags' need three backslashes for a space */ModernizedCProgram.p_tags) {
+						this.setXp_backslash(2);
+					} else {
+							this.setXp_backslash(1);
+					} 
+			} 
+		} 
+		Object[] generatedXp_pattern = this.getXp_pattern();
+		int generatedXp_backslash = this.getXp_backslash();
+		for (p = arg + /*Error: Function owner not recognized*/strlen((byte)(arg)) - 1; p > generatedXp_pattern; --/* For an option that is a list of file names, find the start of the
+		     * last file name. */p) {
+			if (p == (byte)' ' || p == /* count number of backslashes before ' ' or ',' */(byte)',') {
+				s = p;
+				while (s > generatedXp_pattern && (s - 1) == (byte)'\\') {
+					--s;
+				}
+				if ((p == (byte)' ' && (generatedXp_backslash == 2 && (p - s) < 3)) || (p == (byte)',' && (flags & -1024) && ((p - s) & 1) == 0)) {
+					this.setXp_pattern(p + 1);
+					break;
+				} 
+			} 
+			if (ModernizedCProgram.options[opt_idx].getVar() == (char_u)/* for 'spellsuggest' start at "file:" */p_sps && /*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("file:"), (size_t)(true)) == 0) {
+				this.setXp_pattern(p + 5);
+				break;
+			} 
+		}
+		return /*Error: Unsupported expression*/;
+	}
+	public Object set_context_in_map_cmd(Object cmd, Object arg, int forceit, int isabbrev, int isunmap, CMD_index cmdidx) {
+		// TRUE if abbreviation// TRUE if unmap/unabbrev commandif (forceit && cmdidx != CMD_index.CMD_map && cmdidx != CMD_index.CMD_unmap) {
+			this.setXp_context(0);
+		} else {
+				if (isunmap) {
+					ModernizedCProgram.expand_mapmodes = ModernizedCProgram.get_map_mode(cmd, forceit || isabbrev);
+				} else {
+						ModernizedCProgram.expand_mapmodes = -1024 + -1024;
+						if (!isabbrev) {
+							ModernizedCProgram.expand_mapmodes += -1024 + -1024 + -1024 + -1024;
+						} 
+				} 
+				ModernizedCProgram.expand_isabbrev = isabbrev;
+				this.setXp_context(16);
+				ModernizedCProgram.expand_buffer = 0;
+				for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+					if (/*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("<buffer>"), (size_t)(true)) == 0) {
+						ModernizedCProgram.expand_buffer = 1;
+						arg = ModernizedCProgram.skipwhite(arg + 8);
+						continue;
+					} 
+					if (/*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("<unique>"), (size_t)(true)) == 0) {
+						arg = ModernizedCProgram.skipwhite(arg + 8);
+						continue;
+					} 
+					if (/*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("<nowait>"), (size_t)(true)) == 0) {
+						arg = ModernizedCProgram.skipwhite(arg + 8);
+						continue;
+					} 
+					if (/*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("<silent>"), (size_t)(true)) == 0) {
+						arg = ModernizedCProgram.skipwhite(arg + 8);
+						continue;
+					} 
+					if (/*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("<special>"), (size_t)(true)) == 0) {
+						arg = ModernizedCProgram.skipwhite(arg + 9);
+						continue;
+					} 
+					if (/*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("<script>"), (size_t)(true)) == 0) {
+						arg = ModernizedCProgram.skipwhite(arg + 8);
+						continue;
+					} 
+					if (/*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("<expr>"), (size_t)(true)) == 0) {
+						arg = ModernizedCProgram.skipwhite(arg + 6);
+						continue;
+					} 
+					break;
+				}
+				this.setXp_pattern(arg);
+		} 
+		return ((Object)0/*
+		 * Find all mapping/abbreviation names that match regexp "regmatch"'.
+		 * For command line expansion of ":[un]map" and ":[un]abbrev" in all modes.
+		 * Return OK if matches found, FAIL otherwise.
+		 */);
+	}
+	// TRUE if '!' given
+	public Object set_context_in_user_cmd(Object arg_in) {
+		char_u arg = arg_in;
+		char_u p = new char_u();
+		// Check for attributeswhile (arg == (byte)'-') {
+			arg++;
+			p = ModernizedCProgram.skiptowhite(arg);
+			if (p == (byte)'\000') {
+				p = ModernizedCProgram.vim_strchr(arg, (byte)'=');
+				if (p == ((Object)0)) {
+					this.setXp_context(23);
+					this.setXp_pattern(arg);
+					return ((Object)0);
+				} 
+				if (ModernizedCProgram.vim_strnicmp((byte)(arg), (byte)("complete"), (size_t)(p - arg)) == 0) {
+					this.setXp_context(25);
+					this.setXp_pattern(p + 1);
+					return ((Object)0);
+				}  else if (ModernizedCProgram.vim_strnicmp((byte)(arg), (byte)("nargs"), (size_t)(p - arg)) == 0) {
+					this.setXp_context(24);
+					this.setXp_pattern(p + 1);
+					return ((Object)0);
+				}  else if (ModernizedCProgram.vim_strnicmp((byte)(arg), (byte)("addr"), (size_t)(p - arg)) == 0) {
+					this.setXp_context(44);
+					this.setXp_pattern(p + 1);
+					return ((Object)0);
+				} 
+				return ((Object)0);
+			} 
+			arg = ModernizedCProgram.skipwhite(p);
+		}
+		// After the attributes comes the new command name// After the attributes comes the new command namep = ModernizedCProgram.skiptowhite(arg);
+		if (p == (byte)'\000') {
+			this.setXp_context(22);
+			this.setXp_pattern(arg);
+			return ((Object)0);
+		} 
+		// And finally comes a normal commandreturn ModernizedCProgram.skipwhite(p);
+	}
+	public Object get_user_commands(int idx) {
+		file_buffer generatedW_buffer = prevwin.getW_buffer();
+		// In cmdwin, the alternative buffer should be used.buf_T buf = (cmdwin_type != 0 && ModernizedCProgram.get_cmdline_type() == (byte)'\000') ? generatedW_buffer : curbuf;
+		growarray generatedB_ucmds = buf.getB_ucmds();
+		int generatedGa_len = generatedB_ucmds.getGa_len();
+		Object generatedGa_data = (generatedB_ucmds).getGa_data();
+		if (idx < generatedGa_len) {
+			return (((ucmd_T)(generatedGa_data))[idx]).getUc_name();
+		} 
+		idx -= generatedGa_len;
+		if (idx < generatedGa_len) {
+			return (((ucmd_T)(generatedGa_data))[idx]).getUc_name();
+		} 
+		return ((Object)0/*
+		 * Function given to ExpandGeneric() to obtain the list of user address type
+		 * names.
+		 */);
+	}
+	public Object get_user_cmd_addr_type(int idx) {
+		return (char_u)addr_type_complete[idx].getName();
+	}
+	public Object get_user_cmd_flags(int idx) {
+		byte[] user_cmd_flags = new byte[]{"addr", "bang", "bar", "buffer", "complete", "count", "nargs", "range", "register"};
+		if (idx >= (int)(/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/)) {
+			return ((Object)0);
+		} 
+		return (char_u)user_cmd_flags[idx/*
+		 * Function given to ExpandGeneric() to obtain the list of values for -nargs.
+		 */];
+	}
+	public Object get_user_cmd_nargs(int idx) {
+		byte[] user_cmd_nargs = new byte[]{"0", "1", "*", "?", "+"};
+		if (idx >= (int)(/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/)) {
+			return ((Object)0);
+		} 
+		return (char_u)user_cmd_nargs[idx/*
+		 * Function given to ExpandGeneric() to obtain the list of values for
+		 * -complete.
+		 */];
+	}
+	public Object get_user_cmd_complete(int idx) {
+		return (char_u)command_complete[idx].getName();
+	}
+	public void ExpandEscape(Object[] str, int numfiles, Object[][] files, int options) {
 		int i;
 		char_u p = new char_u();
 		// May change home directory back to "~"if (options & -1024) {
@@ -101,7 +639,7 @@ public class expand {
 		} 
 		// show that we are busy// show that we are busyModernizedCProgram.msg_puts("...");
 		ModernizedCProgram.out_flush();
-		Object generatedXp_pattern = this.getXp_pattern();
+		Object[] generatedXp_pattern = this.getXp_pattern();
 		Object generatedCmdbuff = ccline.getCmdbuff();
 		i = (int)(generatedXp_pattern - generatedCmdbuff);
 		Object generatedCmdpos = ccline.getCmdpos();
@@ -128,7 +666,7 @@ public class expand {
 									break;
 								} 
 							}
-							if ((int).strlen((byte)(p2)) < j) {
+							if ((int)/*Error: Function owner not recognized*/strlen((byte)(p2)) < j) {
 								do {
 									if ((p2) != ((Object)0)) {
 										ModernizedCProgram.vim_free(p2);
@@ -142,7 +680,7 @@ public class expand {
 		Object generatedCmdlen = ccline.getCmdlen();
 		Object generatedCmdbufflen = ccline.getCmdbufflen();
 		if (p2 != ((Object)0) && !got_int) {
-			difflen = (int).strlen((byte)(p2)) - generatedXp_pattern_len;
+			difflen = (int)/*Error: Function owner not recognized*/strlen((byte)(p2)) - generatedXp_pattern_len;
 			if (generatedCmdlen + difflen + 4 > generatedCmdbufflen) {
 				v = ModernizedCProgram.realloc_cmdbuff(generatedCmdlen + difflen + 4);
 				this.setXp_pattern(generatedCmdbuff + i);
@@ -150,8 +688,8 @@ public class expand {
 					v = 1;
 			} 
 			if (v == 1) {
-				.memmove((byte)(generatedCmdbuff[generatedCmdpos + difflen]), (byte)(generatedCmdbuff[generatedCmdpos]), (size_t)((size_t)(generatedCmdlen - generatedCmdpos + 1)));
-				.memmove((byte)(generatedCmdbuff[i]), (byte)(p2), (size_t)(.strlen((byte)(p2))));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(generatedCmdbuff[generatedCmdpos + difflen]), (byte)(generatedCmdbuff[generatedCmdpos]), (size_t)((size_t)(generatedCmdlen - generatedCmdpos + 1)));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(generatedCmdbuff[i]), (byte)(p2), (size_t)(/*Error: Function owner not recognized*/strlen((byte)(p2))));
 				generatedCmdlen += difflen;
 				generatedCmdpos += difflen;
 			} 
@@ -211,7 +749,7 @@ public class expand {
 		long_u len = new long_u();
 		// number without matching suffixint non_suf_match;
 		int generatedXp_numfiles = this.getXp_numfiles();
-		Object generatedXp_files = this.getXp_files();
+		Object[][] generatedXp_files = this.getXp_files();
 		// first handle the case of using an old matchif (mode == 4 || mode == 5) {
 			if (generatedXp_numfiles > 0) {
 				if (mode == 5) {
@@ -237,7 +775,7 @@ public class expand {
 					} 
 				} 
 				if (p_wmnu) {
-					.win_redr_status_matches(xp, generatedXp_numfiles, generatedXp_files, findex, ModernizedCProgram.cmd_showtail);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win_redr_status_matches(xp, generatedXp_numfiles, generatedXp_files, findex, ModernizedCProgram.cmd_showtail);
 				} 
 				if (findex == -1) {
 					return ModernizedCProgram.vim_strsave(orig_save);
@@ -309,14 +847,14 @@ public class expand {
 			int ci;
 			for (len = 0; generatedXp_files[0][len]; len += mb_len) {
 				if (has_mbyte) {
-					mb_len = .UNRECOGNIZEDFUNCTIONNAME(generatedXp_files[0][len]);
-					c0 = .UNRECOGNIZEDFUNCTIONNAME(generatedXp_files[0][len]);
+					mb_len = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedXp_files[0][len]);
+					c0 = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedXp_files[0][len]);
 				} else {
 						c0 = generatedXp_files[0][len];
 				} 
 				for (i = 1; i < generatedXp_numfiles; ++i) {
 					if (has_mbyte) {
-						ci = .UNRECOGNIZEDFUNCTIONNAME(generatedXp_files[i][len]);
+						ci = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedXp_files[i][len]);
 					} else {
 							ci = generatedXp_files[i][len];
 					} 
@@ -344,15 +882,15 @@ public class expand {
 		// Concatenate all matching namesif (mode == 6 && generatedXp_numfiles > 0) {
 			len = 0;
 			for (i = 0; i < generatedXp_numfiles; ++i) {
-				len += (long_u).strlen((byte)(generatedXp_files[i])) + 1;
+				len += (long_u)/*Error: Function owner not recognized*/strlen((byte)(generatedXp_files[i])) + 1;
 			}
 			ss = ModernizedCProgram.alloc(len);
 			if (ss != ((Object)0)) {
 				ss = (byte)'\000';
 				for (i = 0; i < generatedXp_numfiles; ++i) {
-					.strcat((byte)(ss), (byte)(generatedXp_files[i]));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(ss), (byte)(generatedXp_files[i]));
 					if (i != generatedXp_numfiles - 1) {
-						.strcat((byte)(ss), (byte)((options & -1024) ? "\n" : " "));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(ss), (byte)((options & -1024) ? "\n" : " "));
 					} 
 				}
 			} 
@@ -381,7 +919,7 @@ public class expand {
 	}
 	public void ExpandCleanup() {
 		int generatedXp_numfiles = this.getXp_numfiles();
-		Object generatedXp_files = this.getXp_files();
+		Object[][] generatedXp_files = this.getXp_files();
 		if (generatedXp_numfiles >= 0) {
 			ModernizedCProgram.FreeWild(generatedXp_numfiles, generatedXp_files);
 			this.setXp_numfiles(-1/*
@@ -408,7 +946,7 @@ public class expand {
 		int generatedXp_numfiles = this.getXp_numfiles();
 		Object generatedCmdbuff = ccline.getCmdbuff();
 		Object generatedCmdpos = ccline.getCmdpos();
-		Object generatedXp_files = this.getXp_files();
+		Object[][] generatedXp_files = this.getXp_files();
 		if (generatedXp_numfiles == -1) {
 			xp.set_expand_context();
 			i = xp.expand_cmdline(generatedCmdbuff, generatedCmdpos, num_files, files_found);
@@ -434,7 +972,7 @@ public class expand {
 		if (got_int) {
 			got_int = 0;
 		}  else if (wildmenu) {
-			.win_redr_status_matches(xp, num_files, files_found, -1, showtail);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win_redr_status_matches(xp, num_files, files_found, -1, showtail);
 		} else {
 				maxlen = 0;
 				for (i = 0; i < num_files; ++i) {
@@ -470,14 +1008,14 @@ public class expand {
 					for (k = i; k < num_files; k += lines) {
 						if (generatedXp_context == 17) {
 							ModernizedCProgram.msg_outtrans_attr(files_found[k], ModernizedCProgram.highlight_attr[(int)(.HLF_D)]);
-							p = files_found[k] + .strlen((byte)(files_found[k])) + 1;
+							p = files_found[k] + /*Error: Function owner not recognized*/strlen((byte)(files_found[k])) + 1;
 							ModernizedCProgram.msg_advance(maxlen + 1);
 							ModernizedCProgram.msg_puts((byte)p);
 							ModernizedCProgram.msg_advance(maxlen + 3);
 							ModernizedCProgram.msg_outtrans_long_attr(p + 2, ModernizedCProgram.highlight_attr[(int)(.HLF_D)]);
 							break;
 						} 
-						for (j = maxlen - lastlen; --j >= 0; ) {
+						for (j = maxlen - lastlen; --j >= 0; /*Error: Unsupported expression*/) {
 							ModernizedCProgram.msg_putchar((byte)' ');
 						}
 						if (generatedXp_context == 2 || generatedXp_context == 32 || generatedXp_context == 9) {
@@ -535,7 +1073,7 @@ public class expand {
 		// When not completing file names a "/" may mean something different.if (generatedXp_context != 2 && generatedXp_context != 32 && generatedXp_context != 3) {
 			return 0;
 		} 
-		Object generatedXp_pattern = this.getXp_pattern();
+		Object[] generatedXp_pattern = this.getXp_pattern();
 		end = ModernizedCProgram.gettail(generatedXp_pattern);
 		// there is no path separatorif (end == generatedXp_pattern) {
 			return 0;
@@ -573,7 +1111,7 @@ public class expand {
 		Object generatedInput_fn = ccline.getInput_fn();
 		// only expansion for ':', '>' and '=' command-linesif (generatedCmdfirstc != (byte)':' && generatedCmdfirstc != (byte)'>' && generatedCmdfirstc != (byte)'=' && !generatedInput_fn) {
 			this.setXp_context(0);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedCmdbuff = ccline.getCmdbuff();
 		Object generatedCmdlen = ccline.getCmdlen();
@@ -738,7 +1276,7 @@ public class expand {
 						return ((Object)0);
 					} 
 				} 
-				p += .UNRECOGNIZEDFUNCTIONNAME(p);
+				p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
 			}
 		} 
 		if (!(generatedArgt & -1024) && arg != (byte)'\000' && ModernizedCProgram.vim_strchr((char_u)"|\"", arg) == ((Object)0)) {
@@ -746,7 +1284,7 @@ public class expand {
 		} 
 		// Find start of last argument (argument just before cursor):// Find start of last argument (argument just before cursor):p = buff;
 		this.setXp_pattern(p);
-		len = (int).strlen((byte)(buff));
+		len = (int)/*Error: Function owner not recognized*/strlen((byte)(buff));
 		while (p && p < buff + len) {
 			if (p == (byte)' ' || p == (byte)'\011') {
 				this.setXp_pattern(++p);
@@ -754,10 +1292,10 @@ public class expand {
 					if (p == (byte)'\\' && (p + 1) != (byte)'\000') {
 						++p;
 					} 
-					p += .UNRECOGNIZEDFUNCTIONNAME(p);
+					p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
 			} 
 		}
-		Object generatedXp_pattern = this.getXp_pattern();
+		Object[] generatedXp_pattern = this.getXp_pattern();
 		if (generatedArgt & -1024) {
 			int c;
 			int in_quote = 0;
@@ -766,7 +1304,7 @@ public class expand {
 			p = generatedXp_pattern;
 			while (p != (byte)'\000') {
 				if (has_mbyte) {
-					c = .mb_ptr2char(p);
+					c = /*Error: Function owner not recognized*/mb_ptr2char(p);
 				} else {
 						c = p;
 				} 
@@ -782,7 +1320,7 @@ public class expand {
 					len = 0;
 					while (p != (byte)'\000') {
 						if (has_mbyte) {
-							c = .mb_ptr2char(p);
+							c = /*Error: Function owner not recognized*/mb_ptr2char(p);
 						} else {
 								c = p;
 						} 
@@ -790,11 +1328,11 @@ public class expand {
 							break;
 						} 
 						if (has_mbyte) {
-							len = .UNRECOGNIZEDFUNCTIONNAME(p);
+							len = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
 						} else {
 								len = 1;
 						} 
-						p += .UNRECOGNIZEDFUNCTIONNAME(p);
+						p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
 					}
 					if (in_quote) {
 						bow = p;
@@ -803,7 +1341,7 @@ public class expand {
 					} 
 					p -= len;
 				} 
-				p += .UNRECOGNIZEDFUNCTIONNAME(p);
+				p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
 			}
 			if (bow != ((Object)0) && in_quote) {
 				this.setXp_pattern(bow);
@@ -839,7 +1377,318 @@ public class expand {
 			} 
 		} 
 		// 6. Switch on command name.switch (generatedCmdidx) {
+		case CMD_index.CMD_keepalt:
+		case CMD_index.CMD_noremap:
+		case CMD_index.CMD_unmap:
+		case CMD_index.CMD_vmap:
+		case CMD_index.CMD_lgetexpr:
+				xp.set_context_for_expression(arg, generatedCmdidx);
+				break;
+		case CMD_index.CMD_bunload:
+				while ((this.setXp_pattern(ModernizedCProgram.vim_strchr(arg, (byte)' '))) != ((Object)0)) {
+					arg = generatedXp_pattern + 1;
+				}
+		case CMD_index.CMD_filter:
+				if (arg != (byte)'\000') {
+					arg = ModernizedCProgram.skip_vimgrep_pat(arg, ((Object)0), ((Object)0));
+				} 
+				if (arg == ((Object)0) || arg == (byte)'\000') {
+					this.setXp_context(0);
+					return ((Object)0);
+				} 
+				return ModernizedCProgram.skipwhite(arg);
+		case CMD_index.CMD_dsearch:
+		case CMD_index.CMD_menu:
+		case CMD_index.CMD_tlunmenu:
+		case CMD_index.CMD_lmap:
+		case CMD_index.CMD_setlocal:
+				xp.set_context_in_set_cmd(arg, 4);
+				break;
+		case CMD_index.CMD_syntax:
+				xp.set_context_in_syntax_cmd(arg);
+				break;
+		case CMD_index.CMD_USER_BUF:
+				if (compl != 0) {
+					if (!(generatedArgt & -1024)) {
+						if (compl == 11) {
+							return xp.set_context_in_menu_cmd(cmd, arg, forceit);
+						} 
+						if (compl == 1) {
+							return arg;
+						} 
+						if (compl == 16) {
+							return xp.set_context_in_map_cmd((char_u)"map", arg, forceit, 0, 0, CMD_index.CMD_map);
+						} 
+						p = arg;
+						while (p) {
+							if (p == (byte)' ') {
+								arg = p + 1;
+							}  else if (p == (byte)'\\' && (p + 1) != (byte)'\000') {
+								++p;
+							} 
+							p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
+						}
+						this.setXp_pattern(arg);
+					} 
+					this.setXp_context(compl);
+				} 
+				break;
+		case CMD_index.CMD_smap:
+		case CMD_index.CMD_noremenu:
+		case CMD_index.CMD_lfdo:
+		case CMD_index.CMD_language:
+				p = ModernizedCProgram.skiptowhite(arg);
+				if (p == (byte)'\000') {
+					this.setXp_context(27);
+					this.setXp_pattern(arg);
+				} else {
+						if (/*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("messages"), (size_t)(p - arg)) == 0 || /*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("ctype"), (size_t)(p - arg)) == 0 || /*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("time"), (size_t)(p - arg)) == 0) {
+							this.setXp_context(40);
+							this.setXp_pattern(ModernizedCProgram.skipwhite(p));
+						} else {
+								this.setXp_context(0);
+						} 
+				} 
+				break;
+		case CMD_index.CMD_nmenu:
+		case CMD_index.CMD_iunabbrev:
+				return xp.set_context_in_map_cmd(cmd, arg, forceit, 1, 1, generatedCmdidx);
+		case CMD_index.CMD_topleft:
+		case CMD_index.CMD_keeppatterns:
+		case CMD_index.CMD_keepmarks:
+		case CMD_index.CMD_djump:
+		case CMD_index.CMD_noswapfile:
+		case CMD_index.CMD_return:
+		case CMD_index.CMD_sign:
+				xp.set_context_in_sign_cmd(arg);
+				break;
 		case CMD_index.CMD_while:
+		case CMD_index.CMD_setglobal:
+				xp.set_context_in_set_cmd(arg, 2);
+				break;
+		case CMD_index.CMD_echoerr:
+		case CMD_index.CMD_bwipeout:
+		case CMD_index.CMD_vmapclear:
+		case CMD_index.CMD_aboveleft:
+		case CMD_index.CMD_windo:
+				return arg;
+		case CMD_index.CMD_xmapclear:
+				this.setXp_context(47);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_tselect:
+		case CMD_index.CMD_tchdir:
+		case CMD_index.CMD_stag:
+		case CMD_index.CMD_and:
+		case CMD_index.CMD_checktime:
+				this.setXp_context(9);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_inoremap:
+		case CMD_index.CMD_sfind:
+		case CMD_index.CMD_cd:
+		case CMD_index.CMD_lmapclear:
+		case CMD_index.CMD_chdir:
+		case CMD_index.CMD_tlnoremenu:
+		case CMD_index.CMD_ilist:
+		case CMD_index.CMD_cmap:
+		case CMD_index.CMD_cmapclear:
+		case CMD_index.CMD_debug:
+		case CMD_index.CMD_inoreabbrev:
+				return xp.set_context_in_map_cmd(cmd, arg, forceit, 1, 0, generatedCmdidx);
+		case CMD_index.CMD_ltag:
+		case CMD_index.CMD_tab:
+		case CMD_index.CMD_omenu:
+		case CMD_index.CMD_bufdo:
+		case CMD_index.CMD_map:
+		case CMD_index.CMD_echomsg:
+		case CMD_index.CMD_nmap:
+		case CMD_index.CMD_messages:
+				this.setXp_context(46);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_iabbrev:
+		case CMD_index.CMD_echohl:
+				xp.set_context_in_echohl_cmd(arg);
+				break;
+		case CMD_index.CMD_cnoreabbrev:
+		case CMD_index.CMD_tunmenu:
+		case CMD_index.CMD_ldo:
+		case CMD_index.CMD_nnoremap:
+		case CMD_index.CMD_for:
+		case CMD_index.CMD_botright:
+		case CMD_index.CMD_nunmenu:
+		case CMD_index.CMD_tabfind:
+				if (generatedXp_context == 2) {
+					this.setXp_context(38);
+				} 
+				break;
+		case CMD_index.CMD_echo:
+		case CMD_index.CMD_laddexpr:
+		case CMD_index.CMD_lcd:
+		case CMD_index.CMD_ptselect:
+		case CMD_index.CMD_anoremenu:
+		case CMD_index.CMD_imap:
+		case CMD_index.CMD_unlet:
+				while ((this.setXp_pattern(ModernizedCProgram.vim_strchr(arg, (byte)' '))) != ((Object)0)) {
+					arg = generatedXp_pattern + 1;
+				}
+				this.setXp_context(15);
+				this.setXp_pattern(arg);
+				if (generatedXp_pattern == (byte)'$') {
+					this.setXp_context(26);
+					++generatedXp_pattern;
+				} 
+				break;
+		case CMD_index.CMD_ounmap:
+		case CMD_index.CMD_hide:
+		case CMD_index.CMD_lunmap:
+		case CMD_index.CMD_caddexpr:
+		case CMD_index.CMD_ownsyntax:
+				this.setXp_context(39);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_tmapclear:
+		case CMD_index.CMD_leftabove:
+		case CMD_index.CMD_cnoremap:
+		case CMD_index.CMD_behave:
+				this.setXp_context(36);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_autocmd:
+				return xp.set_context_in_autocmd(arg, 0);
+		case CMD_index.CMD_packadd:
+				this.setXp_context(45);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_nunmap:
+		case CMD_index.CMD_unabbreviate:
+		case CMD_index.CMD_delcommand:
+				this.setXp_context(22);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_cunmenu:
+		case CMD_index.CMD_emenu:
+				return xp.set_context_in_menu_cmd(cmd, arg, forceit);
+		case CMD_index.CMD_xunmap:
+				return xp.set_context_in_map_cmd(cmd, arg, forceit, 0, 1, generatedCmdidx);
+		case CMD_index.CMD_lchdir:
+				if (generatedXp_context == 2) {
+					this.setXp_context(3);
+				} 
+				break;
+		case CMD_index.CMD_isplit:
+		case CMD_index.CMD_highlight:
+				xp.set_context_in_highlight_cmd(arg);
+				break;
+		case CMD_index.CMD_let:
+		case CMD_index.CMD_vunmenu:
+		case CMD_index.CMD_argdo:
+		case CMD_index.CMD_cabbrev:
+		case CMD_index.CMD_imenu:
+		case CMD_index.CMD_tag:
+		case CMD_index.CMD_doautocmd:
+		case CMD_index.CMD_echon:
+		case CMD_index.CMD_function:
+		case CMD_index.CMD_cgetexpr:
+		case CMD_index.CMD_sandbox:
+		case CMD_index.CMD_if:
+		case CMD_index.CMD_nmapclear:
+		case CMD_index.CMD_browse:
+		case CMD_index.CMD_set:
+				xp.set_context_in_set_cmd(arg, 0);
+				break;
+		case CMD_index.CMD_vnoremenu:
+		case CMD_index.CMD_profile:
+				xp.set_context_in_profile_cmd(arg);
+				break;
+		case CMD_index.CMD_xnoremap:
+				return xp.set_context_in_map_cmd(cmd, arg, forceit, 0, 0, generatedCmdidx);
+		case CMD_index.CMD_vnoremap:
+		case CMD_index.CMD_psearch:
+		case CMD_index.CMD_delfunction:
+				this.setXp_context(19);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_cmenu:
+		case CMD_index.CMD_tjump:
+		case CMD_index.CMD_inoremenu:
+		case CMD_index.CMD_tunmap:
+		case CMD_index.CMD_global:
+		case CMD_index.CMD_ounmenu:
+		case CMD_index.CMD_cnoremenu:
+		case CMD_index.CMD_xmap:
+		case CMD_index.CMD_ijump:
+		case CMD_index.CMD_imapclear:
+		case CMD_index.CMD_iunmap:
+		case CMD_index.CMD_USER:
+		case CMD_index.CMD_augroup:
+				this.setXp_context(14);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_dlist:
+		case CMD_index.CMD_isearch:
+		case CMD_index.CMD_tnoremap:
+		case CMD_index.CMD_popup:
+		case CMD_index.CMD_setfiletype:
+				this.setXp_context(37);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_tcd:
+		case CMD_index.CMD_verbose:
+		case CMD_index.CMD_call:
+		case CMD_index.CMD_tmap:
+		case CMD_index.CMD_command:
+				return xp.set_context_in_user_cmd(arg);
+		case CMD_index.CMD_elseif:
+		case CMD_index.CMD_find:
+		case CMD_index.CMD_amenu:
+		case CMD_index.CMD_vertical:
+		case CMD_index.CMD_nnoremenu:
+		case CMD_index.CMD_iunmenu:
+		case CMD_index.CMD_folddoclosed:
+		case CMD_index.CMD_belowright:
+		case CMD_index.CMD_confirm:
+		case CMD_index.CMD_omapclear:
+		case CMD_index.CMD_syntime:
+				this.setXp_context(43);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_cfdo:
+		case CMD_index.CMD_lnoremap:
+		case CMD_index.CMD_stjump:
+		case CMD_index.CMD_colorscheme:
+				this.setXp_context(28);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_sbuffer:
+		case CMD_index.CMD_lexpr:
+		case CMD_index.CMD_buffer:
+		case CMD_index.CMD_aunmenu:
+		case CMD_index.CMD_help:
+				this.setXp_context(8);
+				this.setXp_pattern(arg);
+				break;
+		case CMD_index.CMD_cunmap:
+		case CMD_index.CMD_execute:
+		case CMD_index.CMD_abbreviate:
+		case CMD_index.CMD_ptag:
+		case CMD_index.CMD_tabdo:
+		case CMD_index.CMD_match:
+				if (arg == (byte)'\000' || !ModernizedCProgram.ends_excmd(arg)) {
+					xp.set_context_in_echohl_cmd(arg);
+					arg = ModernizedCProgram.skipwhite(ModernizedCProgram.skiptowhite(arg));
+					if (arg != (byte)'\000') {
+						this.setXp_context(0);
+						arg = ModernizedCProgram.skip_regexp(arg + 1, arg, ModernizedCProgram.p_magic, ((Object)0));
+					} 
+				} 
+				return ModernizedCProgram.find_nextcmd(arg);
+		case CMD_index.CMD_silent:
+		case CMD_index.CMD_history:
+				this.setXp_context(41);
+				this.setXp_pattern(arg);
+				break;
 		case CMD_index.CMD_substitute:
 				delim = arg;
 				if (delim) {
@@ -862,155 +1711,6 @@ public class expand {
 					return arg;
 				} 
 				break;
-		case CMD_index.CMD_isearch:
-		case CMD_index.CMD_cunmenu:
-		case CMD_index.CMD_omenu:
-		case CMD_index.CMD_xunmap:
-				return xp.set_context_in_map_cmd(cmd, arg, forceit, 0, 1, generatedCmdidx);
-		case CMD_index.CMD_cnoreabbrev:
-		case CMD_index.CMD_stjump:
-		case CMD_index.CMD_cdo:
-		case CMD_index.CMD_lockmarks:
-		case CMD_index.CMD_cfdo:
-		case CMD_index.CMD_psearch:
-		case CMD_index.CMD_laddexpr:
-		case CMD_index.CMD_nnoremenu:
-		case CMD_index.CMD_nunmap:
-		case CMD_index.CMD_chdir:
-		case CMD_index.CMD_delfunction:
-				this.setXp_context(19);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_vmenu:
-		case CMD_index.CMD_USER_BUF:
-				if (compl != 0) {
-					if (!(generatedArgt & -1024)) {
-						if (compl == 11) {
-							return xp.set_context_in_menu_cmd(cmd, arg, forceit);
-						} 
-						if (compl == 1) {
-							return arg;
-						} 
-						if (compl == 16) {
-							return xp.set_context_in_map_cmd((char_u)"map", arg, forceit, 0, 0, CMD_index.CMD_map);
-						} 
-						p = arg;
-						while (p) {
-							if (p == (byte)' ') {
-								arg = p + 1;
-							}  else if (p == (byte)'\\' && (p + 1) != (byte)'\000') {
-								++p;
-							} 
-							p += .UNRECOGNIZEDFUNCTIONNAME(p);
-						}
-						this.setXp_pattern(arg);
-					} 
-					this.setXp_context(compl);
-				} 
-				break;
-		case CMD_index.CMD_if:
-		case CMD_index.CMD_delcommand:
-				this.setXp_context(22);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_noreabbrev:
-		case CMD_index.CMD_ownsyntax:
-				this.setXp_context(39);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_folddoclosed:
-		case CMD_index.CMD_USER:
-		case CMD_index.CMD_cunmap:
-		case CMD_index.CMD_echohl:
-				xp.set_context_in_echohl_cmd(arg);
-				break;
-		case CMD_index.CMD_nmapclear:
-		case CMD_index.CMD_global:
-		case CMD_index.CMD_tunmenu:
-		case CMD_index.CMD_lcd:
-		case CMD_index.CMD_noremap:
-		case CMD_index.CMD_ijump:
-		case CMD_index.CMD_setlocal:
-				xp.set_context_in_set_cmd(arg, 4);
-				break;
-		case CMD_index.CMD_sandbox:
-		case CMD_index.CMD_ptselect:
-		case CMD_index.CMD_unmenu:
-		case CMD_index.CMD_doautoall:
-				return xp.set_context_in_autocmd(arg, 1);
-		case CMD_index.CMD_nmap:
-		case CMD_index.CMD_vnoremenu:
-		case CMD_index.CMD_tnoremap:
-		case CMD_index.CMD_packadd:
-				this.setXp_context(45);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_lnoremap:
-		case CMD_index.CMD_cmapclear:
-		case CMD_index.CMD_dlist:
-		case CMD_index.CMD_xmap:
-		case CMD_index.CMD_echomsg:
-		case CMD_index.CMD_vmapclear:
-		case CMD_index.CMD_ilist:
-		case CMD_index.CMD_cd:
-		case CMD_index.CMD_tabfind:
-				if (generatedXp_context == 2) {
-					this.setXp_context(38);
-				} 
-				break;
-		case CMD_index.CMD_hide:
-		case CMD_index.CMD_tchdir:
-		case CMD_index.CMD_tmenu:
-		case CMD_index.CMD_tag:
-		case CMD_index.CMD_xmapclear:
-				this.setXp_context(47);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_bunload:
-				while ((this.setXp_pattern(ModernizedCProgram.vim_strchr(arg, (byte)' '))) != ((Object)0)) {
-					arg = generatedXp_pattern + 1;
-				}
-		case CMD_index.CMD_vunmap:
-		case CMD_index.CMD_verbose:
-		case CMD_index.CMD_ounmenu:
-		case CMD_index.CMD_vertical:
-		case CMD_index.CMD_tmap:
-		case CMD_index.CMD_windo:
-				return arg;
-		case CMD_index.CMD_find:
-		case CMD_index.CMD_folddoopen:
-		case CMD_index.CMD_snoremap:
-		case CMD_index.CMD_tab:
-		case CMD_index.CMD_bdelete:
-		case CMD_index.CMD_nmenu:
-		case CMD_index.CMD_sfind:
-		case CMD_index.CMD_cabbrev:
-		case CMD_index.CMD_belowright:
-		case CMD_index.CMD_ptag:
-		case CMD_index.CMD_let:
-		case CMD_index.CMD_omap:
-		case CMD_index.CMD_syntax:
-				xp.set_context_in_syntax_cmd(arg);
-				break;
-		case CMD_index.CMD_cexpr:
-		case CMD_index.CMD_lchdir:
-				if (generatedXp_context == 2) {
-					this.setXp_context(3);
-				} 
-				break;
-		case CMD_index.CMD_imap:
-		case CMD_index.CMD_onoremap:
-		case CMD_index.CMD_buffer:
-		case CMD_index.CMD_nunmenu:
-		case CMD_index.CMD_iabbrev:
-		case CMD_index.CMD_augroup:
-				this.setXp_context(14);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_tlnoremenu:
-		case CMD_index.CMD_djump:
-		case CMD_index.CMD_silent:
-		case CMD_index.CMD_tlmenu:
 		case CMD_index.CMD_dsplit:
 				arg = ModernizedCProgram.skipwhite(ModernizedCProgram.skipdigits(arg));
 				if (arg == (byte)'/') {
@@ -1029,51 +1729,16 @@ public class expand {
 					} 
 				} 
 				break;
-		case CMD_index.CMD_imenu:
-		case CMD_index.CMD_xnoremap:
-				return xp.set_context_in_map_cmd(cmd, arg, forceit, 0, 0, generatedCmdidx);
-		case CMD_index.CMD_checktime:
-				this.setXp_context(9);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_tlunmenu:
-		case CMD_index.CMD_botright:
-		case CMD_index.CMD_vnoremap:
-		case CMD_index.CMD_compiler:
-				this.setXp_context(29);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_help:
-				this.setXp_context(8);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_lmapclear:
-		case CMD_index.CMD_omapclear:
-		case CMD_index.CMD_unabbreviate:
-		case CMD_index.CMD_tearoff:
-		case CMD_index.CMD_tcd:
-		case CMD_index.CMD_set:
-				xp.set_context_in_set_cmd(arg, 0);
-				break;
-		case CMD_index.CMD_cnoremap:
-		case CMD_index.CMD_syntime:
-				this.setXp_context(43);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_sign:
-				xp.set_context_in_sign_cmd(arg);
-				break;
-		case CMD_index.CMD_unlet:
+		case CMD_index.CMD_argdelete:
 				while ((this.setXp_pattern(ModernizedCProgram.vim_strchr(arg, (byte)' '))) != ((Object)0)) {
 					arg = generatedXp_pattern + 1;
 				}
-				this.setXp_context(15);
+				this.setXp_context(48);
 				this.setXp_pattern(arg);
-				if (generatedXp_pattern == (byte)'$') {
-					this.setXp_context(26);
-					++generatedXp_pattern;
-				} 
 				break;
+		case CMD_index.CMD_sunmap:
+		case CMD_index.CMD_cunabbrev:
+		case CMD_index.CMD_omap:
 		case CMD_index.CMD_ptjump:
 				if (ModernizedCProgram.p_wop != (byte)'\000') {
 					this.setXp_context(17);
@@ -1082,121 +1747,20 @@ public class expand {
 				} 
 				this.setXp_pattern(arg);
 				break;
-		case CMD_index.CMD_inoremenu:
-		case CMD_index.CMD_keeppatterns:
-		case CMD_index.CMD_popup:
-		case CMD_index.CMD_profile:
-				xp.set_context_in_profile_cmd(arg);
-				break;
-		case CMD_index.CMD_echon:
-		case CMD_index.CMD_echo:
-		case CMD_index.CMD_cgetexpr:
-		case CMD_index.CMD_emenu:
-				return xp.set_context_in_menu_cmd(cmd, arg, forceit);
-		case CMD_index.CMD_messages:
-				this.setXp_context(46);
+		case CMD_index.CMD_cexpr:
+		case CMD_index.CMD_vunmap:
+		case CMD_index.CMD_onoremenu:
+		case CMD_index.CMD_compiler:
+				this.setXp_context(29);
 				this.setXp_pattern(arg);
 				break;
-		case CMD_index.CMD_setfiletype:
-				this.setXp_context(37);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_cmenu:
-		case CMD_index.CMD_cnoremenu:
-		case CMD_index.CMD_stselect:
-		case CMD_index.CMD_autocmd:
-				return xp.set_context_in_autocmd(arg, 0);
-		case CMD_index.CMD_iunmap:
-		case CMD_index.CMD_browse:
-		case CMD_index.CMD_inoremap:
-		case CMD_index.CMD_topleft:
-		case CMD_index.CMD_aunmenu:
-		case CMD_index.CMD_ldo:
-		case CMD_index.CMD_setglobal:
-				xp.set_context_in_set_cmd(arg, 2);
-				break;
-		case CMD_index.CMD_argdelete:
-				while ((this.setXp_pattern(ModernizedCProgram.vim_strchr(arg, (byte)' '))) != ((Object)0)) {
-					arg = generatedXp_pattern + 1;
-				}
-				this.setXp_context(48);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_caddexpr:
-		case CMD_index.CMD_lunmap:
-		case CMD_index.CMD_doautocmd:
-		case CMD_index.CMD_abbreviate:
-		case CMD_index.CMD_elseif:
-		case CMD_index.CMD_imapclear:
-		case CMD_index.CMD_lexpr:
-		case CMD_index.CMD_debug:
-		case CMD_index.CMD_and:
-		case CMD_index.CMD_tmapclear:
-		case CMD_index.CMD_noautocmd:
-		case CMD_index.CMD_stag:
-		case CMD_index.CMD_match:
-				if (arg == (byte)'\000' || !ModernizedCProgram.ends_excmd(arg)) {
-					xp.set_context_in_echohl_cmd(arg);
-					arg = ModernizedCProgram.skipwhite(ModernizedCProgram.skiptowhite(arg));
-					if (arg != (byte)'\000') {
-						this.setXp_context(0);
-						arg = ModernizedCProgram.skip_regexp(arg + 1, arg, ModernizedCProgram.p_magic, ((Object)0));
-					} 
-				} 
-				return ModernizedCProgram.find_nextcmd(arg);
-		case CMD_index.CMD_highlight:
-				xp.set_context_in_highlight_cmd(arg);
-				break;
-		case CMD_index.CMD_tselect:
-		case CMD_index.CMD_smap:
-		case CMD_index.CMD_isplit:
-		case CMD_index.CMD_call:
-		case CMD_index.CMD_amenu:
-		case CMD_index.CMD_menu:
 		case CMD_index.CMD_mapclear:
-		case CMD_index.CMD_bwipeout:
-		case CMD_index.CMD_ounmap:
-		case CMD_index.CMD_function:
-		case CMD_index.CMD_keepalt:
-		case CMD_index.CMD_leftabove:
-		case CMD_index.CMD_lmap:
-		case CMD_index.CMD_unmap:
-		case CMD_index.CMD_language:
-				p = ModernizedCProgram.skiptowhite(arg);
-				if (p == (byte)'\000') {
-					this.setXp_context(27);
-					this.setXp_pattern(arg);
-				} else {
-						if (.strncmp((byte)(arg), (byte)("messages"), (size_t)(p - arg)) == 0 || .strncmp((byte)(arg), (byte)("ctype"), (size_t)(p - arg)) == 0 || .strncmp((byte)(arg), (byte)("time"), (size_t)(p - arg)) == 0) {
-							this.setXp_context(40);
-							this.setXp_pattern(ModernizedCProgram.skipwhite(p));
-						} else {
-								this.setXp_context(0);
-						} 
-				} 
-				break;
-		case CMD_index.CMD_behave:
-				this.setXp_context(36);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_tabdo:
-		case CMD_index.CMD_return:
-		case CMD_index.CMD_for:
-		case CMD_index.CMD_filter:
-				if (arg != (byte)'\000') {
-					arg = ModernizedCProgram.skip_vimgrep_pat(arg, ((Object)0), ((Object)0));
-				} 
-				if (arg == ((Object)0) || arg == (byte)'\000') {
-					this.setXp_context(0);
-					return ((Object)0);
-				} 
-				return ModernizedCProgram.skipwhite(arg);
-		case CMD_index.CMD_cunabbrev:
-		case CMD_index.CMD_anoremenu:
-		case CMD_index.CMD_execute:
-		case CMD_index.CMD_sbuffer:
-		case CMD_index.CMD_aboveleft:
-		case CMD_index.CMD_sunmap:
+		case CMD_index.CMD_noreabbrev:
+		case CMD_index.CMD_stselect:
+		case CMD_index.CMD_smapclear:
+		case CMD_index.CMD_snoremap:
+		case CMD_index.CMD_tmenu:
+		case CMD_index.CMD_noautocmd:
 		case CMD_index.CMD_vglobal:
 				delim = arg;
 				if (delim) {
@@ -1212,51 +1776,25 @@ public class expand {
 					return arg + 1;
 				} 
 				break;
-		case CMD_index.CMD_keepjumps:
-		case CMD_index.CMD_tjump:
-		case CMD_index.CMD_bufdo:
-		case CMD_index.CMD_vmap:
-		case CMD_index.CMD_noswapfile:
-		case CMD_index.CMD_lgetexpr:
-				xp.set_context_for_expression(arg, generatedCmdidx);
-				break;
-		case CMD_index.CMD_smapclear:
-		case CMD_index.CMD_colorscheme:
-				this.setXp_context(28);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_command:
-				return xp.set_context_in_user_cmd(arg);
+		case CMD_index.CMD_cdo:
+		case CMD_index.CMD_bdelete:
+		case CMD_index.CMD_vmenu:
+		case CMD_index.CMD_unmenu:
 		case CMD_index.CMD_rightbelow:
-		case CMD_index.CMD_inoreabbrev:
-				return xp.set_context_in_map_cmd(cmd, arg, forceit, 1, 0, generatedCmdidx);
-		case CMD_index.CMD_ltag:
-		case CMD_index.CMD_noremenu:
-		case CMD_index.CMD_echoerr:
-		case CMD_index.CMD_map:
-		case CMD_index.CMD_confirm:
-		case CMD_index.CMD_keepmarks:
-		case CMD_index.CMD_history:
-				this.setXp_context(41);
-				this.setXp_pattern(arg);
-				break;
-		case CMD_index.CMD_nnoremap:
-		case CMD_index.CMD_iunabbrev:
-				return xp.set_context_in_map_cmd(cmd, arg, forceit, 1, 1, generatedCmdidx);
-		case CMD_index.CMD_argdo:
-		case CMD_index.CMD_vunmenu:
-		case CMD_index.CMD_cmap:
-		case CMD_index.CMD_iunmenu:
-		case CMD_index.CMD_onoremenu:
-		case CMD_index.CMD_tunmap:
-		case CMD_index.CMD_lfdo:
-		case CMD_index.CMD_dsearch:
+		case CMD_index.CMD_tearoff:
+		case CMD_index.CMD_lockmarks:
+		case CMD_index.CMD_doautoall:
+				return xp.set_context_in_autocmd(arg, 1);
+		case CMD_index.CMD_onoremap:
+		case CMD_index.CMD_tlmenu:
+		case CMD_index.CMD_keepjumps:
+		case CMD_index.CMD_folddoopen:
 		default:
 				break;
 		}
 		return ((Object)0);
 	}
-	public void set_cmd_context(Object str, int len, int col, int use_ccline) {
+	public void set_cmd_context(Object[] str, int len, int col, int use_ccline) {
 		// position of cursor// use ccline for infocmdline_info_T ccline = ModernizedCProgram.get_cmdline_info();
 		int old_char = (byte)'\000';
 		char_u nextcomm = new char_u();
@@ -1298,7 +1836,7 @@ public class expand {
 	}
 	// start of command line
 	// length of command line (excl. NUL)
-	public int expand_cmdline(Object str, int col, int matchcount, Object matches) {
+	public int expand_cmdline(Object str, int col, Integer matchcount, Object matches) {
 		// return: nr of matches// return: array of pointers to matcheschar_u file_str = ((Object)0);
 		int options = -1024 | -1024;
 		int generatedXp_context = this.getXp_context();
@@ -1309,7 +1847,7 @@ public class expand {
 		if (generatedXp_context == 0) {
 			return 0;
 		} 
-		Object generatedXp_pattern = this.getXp_pattern();
+		Object[] generatedXp_pattern = this.getXp_pattern();
 		// add star to file name, or convert to regexp if not exp. files.// add star to file name, or convert to regexp if not exp. files.this.setXp_pattern_len((int)(str + col - generatedXp_pattern));
 		int generatedXp_pattern_len = this.getXp_pattern_len();
 		file_str = ModernizedCProgram.addstar(generatedXp_pattern, generatedXp_pattern_len, generatedXp_context);
@@ -1362,7 +1900,7 @@ public class expand {
 		 * Do the expansion based on xp->xp_context and "pat".
 		 */);
 	}
-	public int ExpandFromContext(Object pat, int num_file, Object file, int options) {
+	public int ExpandFromContext(Object[] pat, Integer num_file, Object file, int options) {
 		// WILD_ flagsregmatch_T regmatch = new regmatch_T();
 		int ret;
 		int flags;
@@ -1396,10 +1934,10 @@ public class expand {
 				for (i = 0; pat[i]; ++i) {
 					if (pat[i] == (byte)'\\') {
 						if (generatedXp_backslash == 2 && pat[i + 1] == (byte)'\\' && pat[i + 2] == (byte)'\\' && pat[i + 3] == (byte)' ') {
-							.memmove((byte)((pat + i)), (byte)((pat + i + 3)), (size_t)(.strlen((byte)(pat + i + 3)) + 1));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)((pat + i)), (byte)((pat + i + 3)), (size_t)(/*Error: Function owner not recognized*/strlen((byte)(pat + i + 3)) + 1));
 						} 
 						if (generatedXp_backslash == 1 && pat[i + 1] == (byte)' ') {
-							.memmove((byte)((pat + i)), (byte)((pat + i + 1)), (size_t)(.strlen((byte)(pat + i + 1)) + 1));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)((pat + i)), (byte)((pat + i + 1)), (size_t)(/*Error: Function owner not recognized*/strlen((byte)(pat + i + 1)) + 1));
 						} 
 					} 
 				}
@@ -1428,7 +1966,7 @@ public class expand {
 						}  else if (p_csl[0] == (byte)'b' && ptr == (byte)'/') {
 							ptr = (byte)'\\';
 						} 
-						ptr += .UNRECOGNIZEDFUNCTIONNAME(ptr);
+						ptr += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ptr);
 					}
 				}
 			} 
@@ -1495,7 +2033,7 @@ public class expand {
 				Object[] tab = new Object[]{{1, get_command_name, 0, 1}, {36, get_behave_arg, 1, 1}, {47, get_mapclear_arg, 1, 1}, {46, get_messages_arg, 1, 1}, {41, get_history_arg, 1, 1}, {22, get_user_commands, 0, 1}, {44, get_user_cmd_addr_type, 0, 1}, {23, get_user_cmd_flags, 0, 1}, {24, get_user_cmd_nargs, 0, 1}, {25, get_user_cmd_complete, 0, 1}, {15, get_user_var_name, 0, 1}, {18, get_function_name, 0, 1}, {19, get_user_func_name, 0, 1}, {20, get_expr_name, 0, 1}, {11, get_menu_name, 0, 1}, {21, get_menu_names, 0, 1}, {12, get_syntax_name, 1, 1}, {43, get_syntime_arg, 1, 1}, {13, get_highlight_name, 1, 1}, {10, get_event_name, 1, 1}, {14, get_augroup_name, 1, 1}, {34, get_sign_name, 1, 1}, {35, get_profile_name, 1, 1}, {27, get_lang_arg, 1, 0}, {40, get_locales, 1, 0}, {26, get_env_name, 1, 1}, {42, get_users, 1, 0}, {48, get_arglist_name, 1, 0}};
 				int i;
 				ret = 0;
-				for (i = 0; i < (int)( / ); ++i) {
+				for (i = 0; i < (int)(/*Error: sizeof expression not supported yet*/ / /*Error: Unsupported expression*/); ++i) {
 					if (generatedXp_context == tab[i].getContext()) {
 						if (tab[i].getIc()) {
 							regmatch.setRm_ic(1);
@@ -1516,7 +2054,7 @@ public class expand {
 		 * Returns OK when no problems encountered, FAIL for error (out of memory).
 		 */;
 	}
-	public Object call_user_expand_func(Object user_expand_func, int num_file, Object file) {
+	public Object call_user_expand_func(Object user_expand_func, Integer num_file, Object file) {
 		cmdline_info_T ccline = ModernizedCProgram.get_cmdline_info();
 		int keep = 0;
 		typval_T[] args = new typval_T();
@@ -1536,7 +2074,7 @@ public class expand {
 			keep = generatedCmdbuff[generatedCmdlen];
 			generatedCmdbuff[generatedCmdlen] = 0;
 		} 
-		Object generatedXp_pattern = this.getXp_pattern();
+		Object[] generatedXp_pattern = this.getXp_pattern();
 		int generatedXp_pattern_len = this.getXp_pattern_len();
 		pat = ModernizedCProgram.vim_strnsave(generatedXp_pattern, generatedXp_pattern_len);
 		args[0].setV_type(.VAR_STRING);
@@ -1549,7 +2087,7 @@ public class expand {
 		args[3].setV_type(.VAR_UNKNOWN);
 		Object generatedXp_script_ctx = this.getXp_script_ctx();
 		current_sctx = generatedXp_script_ctx;
-		ret = .user_expand_func(generatedXp_arg, 3, args);
+		ret = /*Error: Function owner not recognized*/user_expand_func(generatedXp_arg, 3, args);
 		current_sctx = save_current_sctx;
 		if (generatedCmdbuff != ((Object)0)) {
 			generatedCmdbuff[generatedCmdlen] = keep;
@@ -1559,7 +2097,7 @@ public class expand {
 		 * Expand names with a function defined by the user.
 		 */;
 	}
-	public int ExpandUserList(int num_file, Object file) {
+	public int ExpandUserList(Integer num_file, Object file) {
 		list_T retlist = new list_T();
 		listitem_T li = new listitem_T();
 		garray_T ga = new garray_T();
@@ -1567,7 +2105,7 @@ public class expand {
 		if (retlist == ((Object)0)) {
 			return 0;
 		} 
-		ga.ga_init2((int), 3)// Loop over the items in the list.;// Loop over the items in the list.
+		ga.ga_init2((int)/*Error: Unsupported expression*/, 3)// Loop over the items in the list.;// Loop over the items in the list.
 		 generatedLi_tv = li.getLi_tv();
 		Object generatedV_type = generatedLi_tv.getV_type();
 		Object generatedVval = generatedLi_tv.getVval();
@@ -1593,49 +2131,6 @@ public class expand {
 		 * Adds the matches to "ga".  Caller must init "ga".
 		 */;
 	}
-	/*
-	 * Function given to ExpandGeneric() to obtain an environment variable name.
-	 */
-	public Object get_env_name(int idx) {
-		char_u[] name = new char_u();
-		char_u str = new char_u();
-		int n;
-		str = (char_u)(.__p__environ())[idx];
-		if (str == ((Object)0)) {
-			return ((Object)0);
-		} 
-		for (n = 0; n < 100 - 1; ++n) {
-			if (str[n] == (byte)'=' || str[n] == (byte)'\000') {
-				break;
-			} 
-			name[n] = str[n];
-		}
-		name[n] = (byte)'\000';
-		return name/*
-		 * Add a user name to the list of users in ga_users.
-		 * Do nothing if user name is NULL or empty.
-		 */;
-	}
-	/*
-	     * No environ[] on the Amiga.
-	     */
-	// is a valid remote user name using getpwnam() and if it is, add it to
-	// the list of user names.
-	/*
-	 * Function given to ExpandGeneric() to obtain an user names.
-	 */
-	public Object get_users(int idx) {
-		ModernizedCProgram.init_users();
-		if (idx < ModernizedCProgram.ga_users.getGa_len()) {
-			return ((char_u)ModernizedCProgram.ga_users.getGa_data())[idx];
-		} 
-		return ((Object)0/*
-		 * Check whether name matches a user name. Return:
-		 * 0 if name does not match any user name.
-		 * 1 if name partially matches the beginning of a user name.
-		 * 2 is name fully matches a user name.
-		 */);
-	}
 	// expand :profile sub-commands
 	// expand :profile func {funcname}
 	public Object get_profile_name(int idx) {
@@ -1655,199 +2150,27 @@ public class expand {
 		this.setXp_pattern(arg);
 		end_subcmd = ModernizedCProgram.skiptowhite(arg);
 		if (end_subcmd == (byte)'\000') {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		if (end_subcmd - arg == 5 && .strncmp((byte)(arg), (byte)("start"), (size_t)(true)) == 0) {
+		if (end_subcmd - arg == 5 && /*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("start"), (size_t)(true)) == 0) {
 			this.setXp_context(2);
 			this.setXp_pattern(ModernizedCProgram.skipwhite(end_subcmd));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		// TODO: expand function names after "func"// TODO: expand function names after "func"this.setXp_context(0);
 	}
-	public Object get_command_name(int idx) {
-		if (idx >= (int)CMD_index.CMD_SIZE) {
-			return ModernizedCProgram.get_user_command_name(idx);
-		} 
-		return cmdnames[idx].getCmd_name();
-	}
-	public Object get_history_arg(int idx) {
-		char_u[] compl = new char_u[]{(byte)'\000', (byte)'\000'};
-		byte short_names = ":=@>?/";
-		int short_names_count = (int).strlen((byte)(short_names));
-		int history_name_count =  /  - 1;
-		if (idx < short_names_count) {
-			compl[0] = (char_u)short_names[idx];
-			return compl;
-		} 
-		if (idx < short_names_count + history_name_count) {
-			return (char_u)ModernizedCProgram.history_names[idx - short_names_count];
-		} 
-		if (idx == short_names_count + history_name_count) {
-			return (char_u)"all";
-		} 
-		return ((Object)0/*
-		 * init_history() - Initialize the command line history.
-		 * Also used to re-allocate the history when the size changes.
-		 */);
-	}
-	public Object set_context_in_map_cmd(Object cmd, Object arg, int forceit, int isabbrev, int isunmap, CMD_index cmdidx) {
-		// TRUE if abbreviation// TRUE if unmap/unabbrev commandif (forceit && cmdidx != CMD_index.CMD_map && cmdidx != CMD_index.CMD_unmap) {
-			this.setXp_context(0);
-		} else {
-				if (isunmap) {
-					ModernizedCProgram.expand_mapmodes = ModernizedCProgram.get_map_mode(cmd, forceit || isabbrev);
-				} else {
-						ModernizedCProgram.expand_mapmodes = -1024 + -1024;
-						if (!isabbrev) {
-							ModernizedCProgram.expand_mapmodes += -1024 + -1024 + -1024 + -1024;
-						} 
-				} 
-				ModernizedCProgram.expand_isabbrev = isabbrev;
-				this.setXp_context(16);
-				ModernizedCProgram.expand_buffer = 0;
-				for (; ; ) {
-					if (.strncmp((byte)(arg), (byte)("<buffer>"), (size_t)(true)) == 0) {
-						ModernizedCProgram.expand_buffer = 1;
-						arg = ModernizedCProgram.skipwhite(arg + 8);
-						continue;
-					} 
-					if (.strncmp((byte)(arg), (byte)("<unique>"), (size_t)(true)) == 0) {
-						arg = ModernizedCProgram.skipwhite(arg + 8);
-						continue;
-					} 
-					if (.strncmp((byte)(arg), (byte)("<nowait>"), (size_t)(true)) == 0) {
-						arg = ModernizedCProgram.skipwhite(arg + 8);
-						continue;
-					} 
-					if (.strncmp((byte)(arg), (byte)("<silent>"), (size_t)(true)) == 0) {
-						arg = ModernizedCProgram.skipwhite(arg + 8);
-						continue;
-					} 
-					if (.strncmp((byte)(arg), (byte)("<special>"), (size_t)(true)) == 0) {
-						arg = ModernizedCProgram.skipwhite(arg + 9);
-						continue;
-					} 
-					if (.strncmp((byte)(arg), (byte)("<script>"), (size_t)(true)) == 0) {
-						arg = ModernizedCProgram.skipwhite(arg + 8);
-						continue;
-					} 
-					if (.strncmp((byte)(arg), (byte)("<expr>"), (size_t)(true)) == 0) {
-						arg = ModernizedCProgram.skipwhite(arg + 6);
-						continue;
-					} 
-					break;
-				}
-				this.setXp_pattern(arg);
-		} 
-		return ((Object)0/*
-		 * Find all mapping/abbreviation names that match regexp "regmatch"'.
-		 * For command line expansion of ":[un]map" and ":[un]abbrev" in all modes.
-		 * Return OK if matches found, FAIL otherwise.
-		 */);
-	}
-	// TRUE if '!' given
-	public Object get_arglist_name(int idx) {
-		if (idx >= ((ModernizedCProgram.curwin).getW_alist().getAl_ga().getGa_len())) {
-			return ((Object)0);
-		} 
-		return ((aentry_T)(ModernizedCProgram.curwin).getW_alist().getAl_ga().getGa_data())[idx/*
-		 * Get the file name for an argument list entry.
-		 */].alist_name();
-	}
-	public void set_context_for_expression(Object arg, CMD_index cmdidx) {
-		int got_eq = 0;
-		int c;
-		char_u p = new char_u();
-		if (cmdidx == CMD_index.CMD_let) {
-			this.setXp_context(15);
-			if (ModernizedCProgram.vim_strpbrk(arg, (char_u)"\"'+-*/%.=!?~|&$([<>,#") == ((Object)0)) {
-				for (p = arg + .strlen((byte)(arg)); p >= /* ":let var1 var2 ...": find last space. */arg; ) {
-					this.setXp_pattern(p);
-					p -= has_mbyte ? (.UNRECOGNIZEDFUNCTIONNAME(arg, p - 1) + 1) : 1;
-					if (((p) == (byte)' ' || (p) == (byte)'\t')) {
-						break;
-					} 
-				}
-				return ;
-			} 
-		} else {
-				this.setXp_context(cmdidx == CMD_index.CMD_call ? 18 : 20);
-		} 
-		Object generatedXp_pattern = this.getXp_pattern();
-		int generatedXp_context = this.getXp_context();
-		while ((this.setXp_pattern(ModernizedCProgram.vim_strpbrk(arg, (char_u)"\"'+-*/%.=!?~|&$([<>,#"))) != ((Object)0)) {
-			c = generatedXp_pattern;
-			if (c == (byte)'&') {
-				c = generatedXp_pattern[1];
-				if (c == (byte)'&') {
-					++generatedXp_pattern;
-					this.setXp_context(cmdidx != CMD_index.CMD_let || got_eq ? 20 : 0);
-				}  else if (c != (byte)' ') {
-					this.setXp_context(4);
-					if ((c == (byte)'l' || c == (byte)'g') && generatedXp_pattern[2] == (byte)':') {
-						generatedXp_pattern += 2;
-					} 
-				} 
-			}  else if (c == (byte)'$') {
-				this.setXp_context(/* environment variable */26);
-			}  else if (c == (byte)'=') {
-				got_eq = 1;
-				this.setXp_context(20);
-			}  else if (c == (byte)'#' && generatedXp_context == 20) {
-				break;
-			}  else if ((c == (byte)'<' || c == (byte)'#') && generatedXp_context == 18 && ModernizedCProgram.vim_strchr(generatedXp_pattern, (byte)'(') == ((Object)0)) {
-				break;
-			}  else if (cmdidx != CMD_index.CMD_let || got_eq) {
-				if (c == /* string */(byte)'"') {
-					while ((c = ++generatedXp_pattern) != (byte)'\000' && c != (byte)'"') {
-						if (c == (byte)'\\' && generatedXp_pattern[1] != (byte)'\000') {
-							++generatedXp_pattern;
-						} 
-					}
-					this.setXp_context(0);
-				}  else if (c == /* literal string */(byte)'\'') {
-					while ((c = ++generatedXp_pattern) != (byte)'\000' && c != /* Trick: '' is like stopping and starting a literal string. */(byte)'\'') {
-						;
-					}
-					this.setXp_context(0);
-				}  else if (c == (byte)'|') {
-					if (generatedXp_pattern[1] == (byte)'|') {
-						++generatedXp_pattern;
-						this.setXp_context(20);
-					} else {
-							this.setXp_context(1);
-					} 
-				} else {
-						this.setXp_context(20);
-				} 
-			} else {
-					this.setXp_context(/* Doesn't look like something valid, expand as an expression
-						     * anyway. */20);
-			} 
-			arg = generatedXp_pattern;
-			if (arg != (byte)'\000') {
-				while ((c = ++arg) != (byte)'\000' && (c == (byte)' ' || c == (byte)'\t')) {
-					;
-				}
-			} 
-		}
-		this.setXp_pattern(arg/*
-		 * Return TRUE if "pat" matches "text".
-		 * Does not use 'cpo' and always uses 'magic'.
-		 */);
-	}
-	public void set_context_in_highlight_cmd(Object arg) {
+	public void set_context_in_highlight_cmd(Object[] arg) {
 		char_u p = new char_u();
 		// Default: expand group names// Default: expand group namesthis.setXp_context(13);
 		this.setXp_pattern(arg);
 		include_link = 2;
 		include_default = 1;
-		Object generatedXp_pattern = this.getXp_pattern();
+		Object[] generatedXp_pattern = this.getXp_pattern();
 		// (part of) subcommand already typedif (arg != (byte)'\000') {
 			p = ModernizedCProgram.skiptowhite(arg);
 			if (p != (byte)'\000') {
 				include_default = 0;
-				if (.strncmp((byte)("default"), (byte)(arg), (size_t)(p - arg)) == 0) {
+				if (/*Error: Function owner not recognized*/strncmp((byte)("default"), (byte)(arg), (size_t)(p - arg)) == 0) {
 					arg = ModernizedCProgram.skipwhite(p);
 					this.setXp_pattern(arg);
 					p = ModernizedCProgram.skiptowhite(arg);
@@ -1857,7 +2180,7 @@ public class expand {
 					if (arg[1] == (byte)'i' && arg[0] == (byte)'N') {
 						ModernizedCProgram.highlight_list();
 					} 
-					if (.strncmp((byte)("link"), (byte)(arg), (size_t)(p - arg)) == 0 || .strncmp((byte)("clear"), (byte)(arg), (size_t)(p - arg)) == 0) {
+					if (/*Error: Function owner not recognized*/strncmp((byte)("link"), (byte)(arg), (size_t)(p - arg)) == 0 || /*Error: Function owner not recognized*/strncmp((byte)("clear"), (byte)(arg), (size_t)(p - arg)) == 0) {
 						this.setXp_pattern(ModernizedCProgram.skipwhite(p));
 						p = ModernizedCProgram.skiptowhite(generatedXp_pattern);
 						if (p != (byte)'\000') {
@@ -1915,7 +2238,7 @@ public class expand {
 		// skip deleted entries
 		// return a namereturn (((char_u)ModernizedCProgram.augroups.getGa_data())[idx]);
 	}
-	public Object set_context_in_autocmd(Object arg, int doautocmd) {
+	public Object set_context_in_autocmd(Object[] arg, int doautocmd) {
 		// TRUE for :doauto*, FALSE for :autocmdchar_u p = new char_u();
 		int group;
 		// check for a group name, skip it if present// check for a group name, skip it if presentModernizedCProgram.include_groups = 0;
@@ -1966,436 +2289,6 @@ public class expand {
 		} 
 		return (char_u)event_names[idx - ModernizedCProgram.augroups.getGa_len()].getName();
 	}
-	/*
-	 * Function given to ExpandGeneric() to obtain the possible arguments of the
-	 * ":language" command.
-	 */
-	public Object get_lang_arg(int idx) {
-		if (idx == 0) {
-			return (char_u)"messages";
-		} 
-		if (idx == 1) {
-			return (char_u)"ctype";
-		} 
-		if (idx == 2) {
-			return (char_u)"time";
-		} 
-		ModernizedCProgram.init_locales();
-		if (ModernizedCProgram.locales == ((Object)0)) {
-			return ((Object)0);
-		} 
-		return ModernizedCProgram.locales[idx - 3/*
-		 * Function given to ExpandGeneric() to obtain the available locales.
-		 */];
-	}
-	public Object get_locales(int idx) {
-		ModernizedCProgram.init_locales();
-		if (ModernizedCProgram.locales == ((Object)0)) {
-			return ((Object)0);
-		} 
-		return ModernizedCProgram.locales[idx];
-	}
-	public void set_context_in_set_cmd(Object arg, int opt_flags) {
-		/* OPT_GLOBAL and/or OPT_LOCAL */int nextchar;
-		long_u flags = /* init for GCC */0;
-		int opt_idx = /* init for GCC */0;
-		char_u p = new char_u();
-		char_u s = new char_u();
-		int is_term_option = 0;
-		int key;
-		ModernizedCProgram.expand_option_flags = opt_flags;
-		this.setXp_context(4);
-		if (arg == (byte)'\000') {
-			this.setXp_pattern(arg);
-			return ;
-		} 
-		p = arg + .strlen((byte)(arg)) - 1;
-		if (p == (byte)' ' && (p - 1) != (byte)'\\') {
-			this.setXp_pattern(p + 1);
-			return ;
-		} 
-		while (p > arg) {
-			s = p;
-			if (p == (byte)' ' || p == /* count number of backslashes before ' ' or ',' */(byte)',') {
-				while (s > arg && (s - 1) == (byte)'\\') {
-					--s;
-				}
-			} 
-			if (p == (byte)' ' && ((p - s) & 1) == /* break at a space with an even number of backslashes */0) {
-				++p;
-				break;
-			} 
-			--p;
-		}
-		if (.strncmp((byte)(p), (byte)("no"), (size_t)(true)) == 0 && .strncmp((byte)(p), (byte)("novice"), (size_t)(true)) != 0) {
-			this.setXp_context(5);
-			p += 2;
-		} 
-		if (.strncmp((byte)(p), (byte)("inv"), (size_t)(true)) == 0) {
-			this.setXp_context(5);
-			p += 3;
-		} 
-		this.setXp_pattern(arg = p);
-		if (arg == (byte)'<') {
-			while (p != (byte)'>') {
-				if (p++ == /* expand terminal option name */(byte)'\000') {
-					return ;
-				} 
-			}
-			key = ModernizedCProgram.get_special_key_code(arg + 1);
-			if (key == /* unknown name */0) {
-				this.setXp_context(0);
-				return ;
-			} 
-			nextchar = ++p;
-			is_term_option = 1;
-			ModernizedCProgram.expand_option_name[2] = ((-(key)) & -1024);
-			ModernizedCProgram.expand_option_name[3] = (((int)(-(key)) >> 8) & -1024);
-		} else {
-				if (p[0] == (byte)'t' && p[1] == (byte)'_') {
-					p += 2;
-					if (p != (byte)'\000') {
-						++p;
-					} 
-					if (p == (byte)'\000') {
-						return ;
-					} 
-					nextchar = ++p;
-					is_term_option = 1;
-					ModernizedCProgram.expand_option_name[2] = p[-2];
-					ModernizedCProgram.expand_option_name[3] = p[-1];
-				} else {
-						while (((((int)(p) - (byte)'A' < 26) || ((int)(p) - (byte)'a' < 26)) || ((int)(p) - (byte)'0' < 10)) || p == (byte)'_' || p == /* Allow * wildcard */(byte)'*') {
-							p++;
-						}
-						if (p == (byte)'\000') {
-							return ;
-						} 
-						nextchar = p;
-						p = (byte)'\000';
-						opt_idx = ModernizedCProgram.findoption(arg);
-						p = nextchar;
-						if (opt_idx == -1 || ModernizedCProgram.options[opt_idx].getVar() == ((Object)0)) {
-							this.setXp_context(0);
-							return ;
-						} 
-						flags = ModernizedCProgram.options[opt_idx].getFlags();
-						if (flags & -1024) {
-							this.setXp_context(0);
-							return ;
-						} 
-				} 
-		} 
-		if ((nextchar == (byte)'-' || nextchar == (byte)'+' || nextchar == (byte)'^') && p[1] == /* handle "-=" and "+=" */(byte)'=') {
-			++p;
-			nextchar = (byte)'=';
-		} 
-		int generatedXp_context = this.getXp_context();
-		if ((nextchar != (byte)'=' && nextchar != (byte)':') || generatedXp_context == 5) {
-			this.setXp_context((true));
-			return ;
-		} 
-		if (generatedXp_context != 5 && p[1] == (byte)'\000') {
-			this.setXp_context(7);
-			if (is_term_option) {
-				ModernizedCProgram.expand_option_idx = -1;
-			} else {
-					ModernizedCProgram.expand_option_idx = opt_idx;
-			} 
-			this.setXp_pattern(p + 1);
-			return ;
-		} 
-		this.setXp_context(0);
-		if (is_term_option || (flags & -1024)) {
-			return ;
-		} 
-		this.setXp_pattern(p + 1);
-		if (flags & -1024) {
-			p = ModernizedCProgram.options[opt_idx].getVar();
-			if (p == (char_u)ModernizedCProgram.p_bdir || p == (char_u)ModernizedCProgram.p_dir || p == (char_u)ModernizedCProgram.p_path || p == (char_u)ModernizedCProgram.p_pp || p == (char_u)ModernizedCProgram.p_rtp || p == (char_u)p_cdpath || p == (char_u)p_vdir) {
-				this.setXp_context(3);
-				if (p == (char_u)ModernizedCProgram.p_path || p == (char_u)p_cdpath) {
-					this.setXp_backslash(2);
-				} else {
-						this.setXp_backslash(1);
-				} 
-			} else {
-					this.setXp_context(2);
-					if (p == (char_u)/* for 'tags' need three backslashes for a space */ModernizedCProgram.p_tags) {
-						this.setXp_backslash(2);
-					} else {
-							this.setXp_backslash(1);
-					} 
-			} 
-		} 
-		Object generatedXp_pattern = this.getXp_pattern();
-		int generatedXp_backslash = this.getXp_backslash();
-		for (p = arg + .strlen((byte)(arg)) - 1; p > generatedXp_pattern; --/* For an option that is a list of file names, find the start of the
-		     * last file name. */p) {
-			if (p == (byte)' ' || p == /* count number of backslashes before ' ' or ',' */(byte)',') {
-				s = p;
-				while (s > generatedXp_pattern && (s - 1) == (byte)'\\') {
-					--s;
-				}
-				if ((p == (byte)' ' && (generatedXp_backslash == 2 && (p - s) < 3)) || (p == (byte)',' && (flags & -1024) && ((p - s) & 1) == 0)) {
-					this.setXp_pattern(p + 1);
-					break;
-				} 
-			} 
-			if (ModernizedCProgram.options[opt_idx].getVar() == (char_u)/* for 'spellsuggest' start at "file:" */p_sps && .strncmp((byte)(p), (byte)("file:"), (size_t)(true)) == 0) {
-				this.setXp_pattern(p + 5);
-				break;
-			} 
-		}
-		return ;
-	}
-	public Object get_function_name(int idx) {
-		int intidx = -1;
-		char_u name = new char_u();
-		if (idx == 0) {
-			intidx = -1;
-		} 
-		if (intidx < 0) {
-			name = xp.get_user_func_name(idx);
-			if (name != ((Object)0)) {
-				return name;
-			} 
-		} 
-		if (++intidx < (int)( / )) {
-			.strcpy((byte)(ModernizedCProgram.IObuff), (byte)(ModernizedCProgram.global_functions[intidx].getF_name()));
-			.strcat((byte)(ModernizedCProgram.IObuff), (byte)("("));
-			if (ModernizedCProgram.global_functions[intidx].getF_max_argc() == 0) {
-				.strcat((byte)(ModernizedCProgram.IObuff), (byte)(")"));
-			} 
-			return ModernizedCProgram.IObuff;
-		} 
-		return ((Object)0/*
-		 * Function given to ExpandGeneric() to obtain the list of internal or
-		 * user defined variable or function names.
-		 */);
-	}
-	public Object get_expr_name(int idx) {
-		int intidx = -1;
-		char_u name = new char_u();
-		if (idx == 0) {
-			intidx = -1;
-		} 
-		if (intidx < 0) {
-			name = xp.get_function_name(idx);
-			if (name != ((Object)0)) {
-				return name;
-			} 
-		} 
-		return xp.get_user_var_name(++intidx/*
-		 * Find internal function "name" in table "global_functions".
-		 * Return index, or -1 if not found
-		 */);
-	}
-	/*
-	 * Function given to ExpandGeneric() to obtain the list of user defined
-	 * function names.
-	 */
-	public Object get_user_func_name(int idx) {
-		long_u done = new long_u();
-		hashitem_T hi = new hashitem_T();
-		ufunc_T fp = new ufunc_T();
-		if (idx == 0) {
-			done = 0;
-			hi = ModernizedCProgram.func_hashtab.getHt_array();
-		} 
-		Object generatedHi_key = (hi).getHi_key();
-		Object generatedUf_flags = fp.getUf_flags();
-		Object generatedUf_name = fp.getUf_name();
-		int generatedXp_context = this.getXp_context();
-		Object generatedUf_varargs = fp.getUf_varargs();
-		Object generatedUf_args = fp.getUf_args();
-		if (done < ModernizedCProgram.func_hashtab.getHt_used()) {
-			if (done++ > 0) {
-				++hi;
-			} 
-			while ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-				++hi;
-			}
-			fp = ((ufunc_T)((generatedHi_key) - ((size_t)((ufunc_T)0).getUf_name())));
-			if ((generatedUf_flags & -1024) || .strncmp((byte)(generatedUf_name), (byte)("<lambda>"), (size_t)(true)) == 0) {
-				return (char_u)/* don't show dict and lambda functions */"";
-			} 
-			if (.strlen((byte)(generatedUf_name)) + 4 >= (1024 + 1)) {
-				return generatedUf_name;
-			} 
-			fp.cat_func_name(ModernizedCProgram.IObuff);
-			if (generatedXp_context != 19) {
-				.strcat((byte)(ModernizedCProgram.IObuff), (byte)("("));
-				if (!generatedUf_varargs && generatedUf_args.getGa_len() == 0) {
-					.strcat((byte)(ModernizedCProgram.IObuff), (byte)(")"));
-				} 
-			} 
-			return ModernizedCProgram.IObuff;
-		} 
-		return ((Object)0/*
-		 * ":delfunction {name}"
-		 */);
-	}
-	public Object get_user_var_name(int idx) {
-		long_u gdone = new long_u();
-		long_u bdone = new long_u();
-		long_u wdone = new long_u();
-		long_u tdone = new long_u();
-		int vidx;
-		hashitem_T hi = new hashitem_T();
-		hashtab_T ht = new hashtab_T();
-		if (idx == 0) {
-			gdone = bdone = wdone = vidx = 0;
-			tdone = 0;
-		} 
-		Object generatedHi_key = (hi).getHi_key();
-		Object generatedXp_pattern = this.getXp_pattern();
-		// Global variablesif (gdone < ModernizedCProgram.globvardict.getDv_hashtab().getHt_used()) {
-			if (gdone++ == 0) {
-				hi = ModernizedCProgram.globvardict.getDv_hashtab().getHt_array();
-			} else {
-					++hi;
-			} 
-			while ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-				++hi;
-			}
-			if (.strncmp((byte)("g:"), (byte)(generatedXp_pattern), (size_t)(true)) == 0) {
-				return ModernizedCProgram.cat_prefix_varname((byte)'g', generatedHi_key);
-			} 
-			return generatedHi_key;
-		} 
-		Object generatedB_vars = curbuf.getB_vars();
-		// b: variables// b: variablesht = generatedB_vars.getDv_hashtab();
-		Object generatedHt_used = ht.getHt_used();
-		hashitem_S generatedHt_array = ht.getHt_array();
-		if (bdone < generatedHt_used) {
-			if (bdone++ == 0) {
-				hi = generatedHt_array;
-			} else {
-					++hi;
-			} 
-			while ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-				++hi;
-			}
-			return ModernizedCProgram.cat_prefix_varname((byte)'b', generatedHi_key);
-		} 
-		// w: variables// w: variablesht = ModernizedCProgram.curwin.getW_vars().getDv_hashtab();
-		if (wdone < generatedHt_used) {
-			if (wdone++ == 0) {
-				hi = generatedHt_array;
-			} else {
-					++hi;
-			} 
-			while ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-				++hi;
-			}
-			return ModernizedCProgram.cat_prefix_varname((byte)'w', generatedHi_key);
-		} 
-		// t: variables// t: variablesht = ModernizedCProgram.curtab.getTp_vars().getDv_hashtab();
-		if (tdone < generatedHt_used) {
-			if (tdone++ == 0) {
-				hi = generatedHt_array;
-			} else {
-					++hi;
-			} 
-			while ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-				++hi;
-			}
-			return ModernizedCProgram.cat_prefix_varname((byte)'t', generatedHi_key);
-		} 
-		// v: variablesif (vidx < 93) {
-			return ModernizedCProgram.cat_prefix_varname((byte)'v', (char_u)vimvars[vidx++].getVv_name());
-		} 
-		do {
-			if ((ModernizedCProgram.varnamebuf) != ((Object)0)) {
-				ModernizedCProgram.vim_free(ModernizedCProgram.varnamebuf);
-				(ModernizedCProgram.varnamebuf) = ((Object)0);
-			} 
-		} while (0);
-		ModernizedCProgram.varnamebuflen = 0;
-		return ((Object)0);
-	}
-	public Object set_context_in_user_cmd(Object arg_in) {
-		char_u arg = arg_in;
-		char_u p = new char_u();
-		// Check for attributeswhile (arg == (byte)'-') {
-			arg++;
-			p = ModernizedCProgram.skiptowhite(arg);
-			if (p == (byte)'\000') {
-				p = ModernizedCProgram.vim_strchr(arg, (byte)'=');
-				if (p == ((Object)0)) {
-					this.setXp_context(23);
-					this.setXp_pattern(arg);
-					return ((Object)0);
-				} 
-				if (ModernizedCProgram.vim_strnicmp((byte)(arg), (byte)("complete"), (size_t)(p - arg)) == 0) {
-					this.setXp_context(25);
-					this.setXp_pattern(p + 1);
-					return ((Object)0);
-				}  else if (ModernizedCProgram.vim_strnicmp((byte)(arg), (byte)("nargs"), (size_t)(p - arg)) == 0) {
-					this.setXp_context(24);
-					this.setXp_pattern(p + 1);
-					return ((Object)0);
-				}  else if (ModernizedCProgram.vim_strnicmp((byte)(arg), (byte)("addr"), (size_t)(p - arg)) == 0) {
-					this.setXp_context(44);
-					this.setXp_pattern(p + 1);
-					return ((Object)0);
-				} 
-				return ((Object)0);
-			} 
-			arg = ModernizedCProgram.skipwhite(p);
-		}
-		// After the attributes comes the new command name// After the attributes comes the new command namep = ModernizedCProgram.skiptowhite(arg);
-		if (p == (byte)'\000') {
-			this.setXp_context(22);
-			this.setXp_pattern(arg);
-			return ((Object)0);
-		} 
-		// And finally comes a normal commandreturn ModernizedCProgram.skipwhite(p);
-	}
-	public Object get_user_commands(int idx) {
-		file_buffer generatedW_buffer = prevwin.getW_buffer();
-		// In cmdwin, the alternative buffer should be used.buf_T buf = (cmdwin_type != 0 && ModernizedCProgram.get_cmdline_type() == (byte)'\000') ? generatedW_buffer : curbuf;
-		growarray generatedB_ucmds = buf.getB_ucmds();
-		int generatedGa_len = generatedB_ucmds.getGa_len();
-		Object generatedGa_data = (generatedB_ucmds).getGa_data();
-		if (idx < generatedGa_len) {
-			return (((ucmd_T)(generatedGa_data))[idx]).getUc_name();
-		} 
-		idx -= generatedGa_len;
-		if (idx < generatedGa_len) {
-			return (((ucmd_T)(generatedGa_data))[idx]).getUc_name();
-		} 
-		return ((Object)0/*
-		 * Function given to ExpandGeneric() to obtain the list of user address type
-		 * names.
-		 */);
-	}
-	public Object get_user_cmd_addr_type(int idx) {
-		return (char_u)addr_type_complete[idx].getName();
-	}
-	public Object get_user_cmd_flags(int idx) {
-		byte[] user_cmd_flags = new byte[]{"addr", "bang", "bar", "buffer", "complete", "count", "nargs", "range", "register"};
-		if (idx >= (int)( / )) {
-			return ((Object)0);
-		} 
-		return (char_u)user_cmd_flags[idx/*
-		 * Function given to ExpandGeneric() to obtain the list of values for -nargs.
-		 */];
-	}
-	public Object get_user_cmd_nargs(int idx) {
-		byte[] user_cmd_nargs = new byte[]{"0", "1", "*", "?", "+"};
-		if (idx >= (int)( / )) {
-			return ((Object)0);
-		} 
-		return (char_u)user_cmd_nargs[idx/*
-		 * Function given to ExpandGeneric() to obtain the list of values for
-		 * -complete.
-		 */];
-	}
-	public Object get_user_cmd_complete(int idx) {
-		return (char_u)command_complete[idx].getName();
-	}
 	public void set_context_in_echohl_cmd(Object arg) {
 		this.setXp_context(13);
 		this.setXp_pattern(arg);
@@ -2410,7 +2303,7 @@ public class expand {
 		this.setXp_pattern(arg);
 		include_link = 0;
 		include_default = 0;
-		Object generatedXp_pattern = this.getXp_pattern();
+		Object[] generatedXp_pattern = this.getXp_pattern();
 		if (arg != /* (part of) subcommand already typed */(byte)'\000') {
 			p = ModernizedCProgram.skiptowhite(arg);
 			if (p != /* past first word */(byte)'\000') {
@@ -2441,18 +2334,18 @@ public class expand {
 					byte[] spell_args = new byte[]{"toplevel", "notoplevel", "default", ((Object)0)};
 					return (char_u)spell_args[idx];
 				}
-		case .EXP_CASE:
-				{ 
-					byte[] case_args = new byte[]{"match", "ignore", ((Object)0)};
-					return (char_u)case_args[idx];
-				}
+		case .EXP_SUBCMD:
+				return (char_u)ModernizedCProgram.subcommands[idx].getName();
 		case .EXP_SYNC:
 				{ 
 					byte[] sync_args = new byte[]{"ccomment", "clear", "fromstart", "linebreaks=", "linecont", "lines=", "match", "maxlines=", "minlines=", "region", ((Object)0)};
 					return (char_u)sync_args[idx];
 				}
-		case .EXP_SUBCMD:
-				return (char_u)ModernizedCProgram.subcommands[idx].getName();
+		case .EXP_CASE:
+				{ 
+					byte[] case_args = new byte[]{"match", "ignore", ((Object)0)};
+					return (char_u)case_args[idx];
+				}
 		}
 		return ((Object)0/*
 		 * Function called for expression evaluation: get syntax ID at file position.
@@ -2462,138 +2355,16 @@ public class expand {
 		switch (idx) {
 		case 2:
 				return (char_u)"clear";
-		case 3:
-				return (char_u)"report";
 		case 0:
 				return (char_u)"on";
+		case 3:
+				return (char_u)"report";
 		case 1:
 				return (char_u)"off";
 		}
 		return ((Object)0);
 	}
-	public Object get_sign_name(int idx) {
-		switch (.expand_what) {
-		case .EXP_UNPLACE:
-				{ 
-					byte[] unplace_arg = new byte[]{"group=", "file=", "buffer=", ((Object)0)};
-					return (char_u)unplace_arg[idx];
-				}
-		case .EXP_PLACE:
-				{ 
-					byte[] place_arg = new byte[]{"line=", "name=", "group=", "priority=", "file=", "buffer=", ((Object)0)};
-					return (char_u)place_arg[idx];
-				}
-		case .EXP_LIST:
-				{ 
-					byte[] list_arg = new byte[]{"group=", "file=", "buffer=", ((Object)0)};
-					return (char_u)list_arg[idx];
-				}
-		case .EXP_SUBCMD:
-				return (char_u)ModernizedCProgram.cmds[idx];
-		case .EXP_DEFINE:
-				{ 
-					byte[] define_arg = new byte[]{"icon=", "linehl=", "text=", "texthl=", ((Object)0)};
-					return (char_u)define_arg[idx];
-				}
-		case .EXP_SIGN_GROUPS:
-				return ModernizedCProgram.get_nth_sign_group_name(idx);
-		case .EXP_SIGN_NAMES:
-				return ModernizedCProgram.get_nth_sign_name(idx);
-		default:
-				return ((Object)0/*
-				 * Handle command line completion for :sign command.
-				 */);
-		}
-	}
-	public void set_context_in_sign_cmd(Object arg) {
-		char_u p = new char_u();
-		char_u end_subcmd = new char_u();
-		char_u last = new char_u();
-		int cmd_idx;
-		char_u begin_subcmd_args = new char_u();
-		// Default: expand subcommands.// Default: expand subcommands.this.setXp_context(34);
-		.expand_what = .EXP_SUBCMD;
-		this.setXp_pattern(arg);
-		end_subcmd = ModernizedCProgram.skiptowhite(arg);
-		if (end_subcmd == (byte)'\000') {
-			return ;
-		} 
-		// expand subcmd name
-		cmd_idx = ModernizedCProgram.sign_cmd_idx(arg, end_subcmd)// :sign {subcmd} {subcmd_args};// :sign {subcmd} {subcmd_args}
-		//		      |//		      begin_subcmd_args//		      |//		      begin_subcmd_argsbegin_subcmd_args = ModernizedCProgram.skipwhite(end_subcmd)// expand last argument of subcmd// :sign define {name} {args}...;// expand last argument of subcmd// :sign define {name} {args}...
-		//		    |//		    p// Loop until reaching last argument.//		    |//		    p// Loop until reaching last argument.p = begin_subcmd_args;
-		do {
-			p = ModernizedCProgram.skipwhite(p);
-			last = p;
-			p = ModernizedCProgram.skiptowhite(p);
-		} while (p != (byte)'\000');
-		p = ModernizedCProgram.vim_strchr(last, (byte)'=')// :sign define {name} {args}... {last}=;// :sign define {name} {args}... {last}=
-		//				     |	   |//				  last	   pif (p == ((Object)0)) {
-			this.setXp_pattern(last);
-			switch (cmd_idx) {
-			case 2:
-			case 1:
-					.expand_what = .EXP_SIGN_NAMES;
-					break;
-			case 3:
-					if (((int)(begin_subcmd_args) - (byte)'0' < 10)) {
-						.expand_what = .EXP_PLACE;
-					} else {
-							.expand_what = .EXP_LIST;
-					} 
-					break;
-			case 0:
-					.expand_what = .EXP_DEFINE;
-					break;
-			case 5:
-			case 4:
-					.expand_what = .EXP_UNPLACE;
-					break;
-			default:
-					this.setXp_context(0);
-			}
-		} else {
-				this.setXp_pattern(p + 1);
-				switch (cmd_idx) {
-				case 4:
-				case 5:
-						if (.strncmp((byte)(last), (byte)("group"), (size_t)(true)) == 0) {
-							.expand_what = .EXP_SIGN_GROUPS;
-						}  else if (.strncmp((byte)(last), (byte)("file"), (size_t)(true)) == 0) {
-							this.setXp_context(9);
-						} else {
-								this.setXp_context(0);
-						} 
-						break;
-				case 3:
-						if (.strncmp((byte)(last), (byte)("name"), (size_t)(true)) == 0) {
-							.expand_what = .EXP_SIGN_NAMES;
-						}  else if (.strncmp((byte)(last), (byte)("group"), (size_t)(true)) == 0) {
-							.expand_what = .EXP_SIGN_GROUPS;
-						}  else if (.strncmp((byte)(last), (byte)("file"), (size_t)(true)) == 0) {
-							this.setXp_context(9);
-						} else {
-								this.setXp_context(0);
-						} 
-						break;
-				case 0:
-						if (.strncmp((byte)(last), (byte)("texthl"), (size_t)(true)) == 0 || .strncmp((byte)(last), (byte)("linehl"), (size_t)(true)) == 0) {
-							this.setXp_context(13);
-						}  else if (.strncmp((byte)(last), (byte)("icon"), (size_t)(true)) == 0) {
-							this.setXp_context(2);
-						} else {
-								this.setXp_context(0);
-						} 
-						break;
-				default:
-						this.setXp_context(0/*
-						 * Define a sign using the attributes in 'dict'. Returns 0 on success and -1 on
-						 * failure.
-						 */);
-				}
-		} 
-	}
-	public Object set_context_in_menu_cmd(Object cmd, Object arg, int forceit) {
+	public Object set_context_in_menu_cmd(Object[] cmd, Object[] arg, int forceit) {
 		char_u after_dot = new char_u();
 		char_u p = new char_u();
 		char_u path_name = ((Object)0);
@@ -2608,9 +2379,9 @@ public class expand {
 			} 
 		}
 		if (!((p) == (byte)' ' || (p) == (byte)'\t')) {
-			if (.strncmp((byte)(arg), (byte)("enable"), (size_t)(true)) == 0 && (arg[6] == (byte)'\000' || ((arg[6]) == (byte)' ' || (arg[6]) == (byte)'\t'))) {
+			if (/*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("enable"), (size_t)(true)) == 0 && (arg[6] == (byte)'\000' || ((arg[6]) == (byte)' ' || (arg[6]) == (byte)'\t'))) {
 				p = arg + 6;
-			}  else if (.strncmp((byte)(arg), (byte)("disable"), (size_t)(true)) == 0 && (arg[7] == (byte)'\000' || ((arg[7]) == (byte)' ' || (arg[7]) == (byte)'\t'))) {
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("disable"), (size_t)(true)) == 0 && (arg[7] == (byte)'\000' || ((arg[7]) == (byte)' ' || (arg[7]) == (byte)'\t'))) {
 				p = arg + 7;
 			} else {
 					p = arg;
@@ -2761,7 +2532,7 @@ public class expand {
 		} 
 		Object generatedDname = menu.getDname();
 		Object generatedNext = menu.getNext();
-		while (menu != ((Object)/* Skip Browse-style entries, popup menus and separators. */0) && (ModernizedCProgram.menu_is_hidden(generatedDname) || (ModernizedCProgram.expand_emenu && ModernizedCProgram.menu_is_separator(generatedDname)) || ModernizedCProgram.menu_is_tearoff(generatedDname) || generatedDname[.strlen((byte)(generatedDname)) - 1] == (byte)'.')) {
+		while (menu != ((Object)/* Skip Browse-style entries, popup menus and separators. */0) && (ModernizedCProgram.menu_is_hidden(generatedDname) || (ModernizedCProgram.expand_emenu && ModernizedCProgram.menu_is_separator(generatedDname)) || ModernizedCProgram.menu_is_tearoff(generatedDname) || generatedDname[/*Error: Function owner not recognized*/strlen((byte)(generatedDname)) - 1] == (byte)'.')) {
 			menu = generatedNext;
 			if (menu == ((Object)0) && !did_alt_menu) {
 				menu = ModernizedCProgram.expand_menu_alt;
@@ -2784,7 +2555,7 @@ public class expand {
 							should_advance = 1;
 						} 
 				} 
-				.strcat((byte)(tbuffer), (byte)(/* hack on menu separators:  use a 'magic' char for the separator
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(tbuffer), (byte)(/* hack on menu separators:  use a 'magic' char for the separator
 					     * so that '.' in names gets escaped properly */"\001"));
 				str = tbuffer;
 			} else {
@@ -2814,16 +2585,245 @@ public class expand {
 		 * "name" may be modified.
 		 */;
 	}
+	public Object get_user_var_name(int idx) {
+		long_u gdone = new long_u();
+		long_u bdone = new long_u();
+		long_u wdone = new long_u();
+		long_u tdone = new long_u();
+		int vidx;
+		hashitem_T hi = new hashitem_T();
+		hashtab_T ht = new hashtab_T();
+		if (idx == 0) {
+			gdone = bdone = wdone = vidx = 0;
+			tdone = 0;
+		} 
+		Object generatedHi_key = (hi).getHi_key();
+		Object[] generatedXp_pattern = this.getXp_pattern();
+		// Global variablesif (gdone < ModernizedCProgram.globvardict.getDv_hashtab().getHt_used()) {
+			if (gdone++ == 0) {
+				hi = ModernizedCProgram.globvardict.getDv_hashtab().getHt_array();
+			} else {
+					++hi;
+			} 
+			while ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
+				++hi;
+			}
+			if (/*Error: Function owner not recognized*/strncmp((byte)("g:"), (byte)(generatedXp_pattern), (size_t)(true)) == 0) {
+				return ModernizedCProgram.cat_prefix_varname((byte)'g', generatedHi_key);
+			} 
+			return generatedHi_key;
+		} 
+		Object generatedB_vars = curbuf.getB_vars();
+		// b: variables// b: variablesht = generatedB_vars.getDv_hashtab();
+		Object generatedHt_used = ht.getHt_used();
+		hashitem_S[] generatedHt_array = ht.getHt_array();
+		if (bdone < generatedHt_used) {
+			if (bdone++ == 0) {
+				hi = generatedHt_array;
+			} else {
+					++hi;
+			} 
+			while ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
+				++hi;
+			}
+			return ModernizedCProgram.cat_prefix_varname((byte)'b', generatedHi_key);
+		} 
+		// w: variables// w: variablesht = ModernizedCProgram.curwin.getW_vars().getDv_hashtab();
+		if (wdone < generatedHt_used) {
+			if (wdone++ == 0) {
+				hi = generatedHt_array;
+			} else {
+					++hi;
+			} 
+			while ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
+				++hi;
+			}
+			return ModernizedCProgram.cat_prefix_varname((byte)'w', generatedHi_key);
+		} 
+		// t: variables// t: variablesht = ModernizedCProgram.curtab.getTp_vars().getDv_hashtab();
+		if (tdone < generatedHt_used) {
+			if (tdone++ == 0) {
+				hi = generatedHt_array;
+			} else {
+					++hi;
+			} 
+			while ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
+				++hi;
+			}
+			return ModernizedCProgram.cat_prefix_varname((byte)'t', generatedHi_key);
+		} 
+		// v: variablesif (vidx < 93) {
+			return ModernizedCProgram.cat_prefix_varname((byte)'v', (char_u)vimvars[vidx++].getVv_name());
+		} 
+		do {
+			if ((ModernizedCProgram.varnamebuf) != ((Object)0)) {
+				ModernizedCProgram.vim_free(ModernizedCProgram.varnamebuf);
+				(ModernizedCProgram.varnamebuf) = ((Object)0);
+			} 
+		} while (0);
+		ModernizedCProgram.varnamebuflen = 0;
+		return ((Object)0);
+	}
+	public Object get_command_name(int idx) {
+		if (idx >= (int)CMD_index.CMD_SIZE) {
+			return ModernizedCProgram.get_user_command_name(idx);
+		} 
+		return cmdnames[idx].getCmd_name();
+	}
+	public Object get_arglist_name(int idx) {
+		if (idx >= ((ModernizedCProgram.curwin).getW_alist().getAl_ga().getGa_len())) {
+			return ((Object)0);
+		} 
+		return ((aentry_T)(ModernizedCProgram.curwin).getW_alist().getAl_ga().getGa_data())[idx/*
+		 * Get the file name for an argument list entry.
+		 */].alist_name();
+	}
+	public Object get_history_arg(int idx) {
+		char_u[] compl = new char_u[]{(byte)'\000', (byte)'\000'};
+		byte short_names = ":=@>?/";
+		int short_names_count = (int)/*Error: Function owner not recognized*/strlen((byte)(short_names));
+		int history_name_count = /*Error: sizeof expression not supported yet*/ / /*Error: Unsupported expression*/ - 1;
+		if (idx < short_names_count) {
+			compl[0] = (char_u)short_names[idx];
+			return compl;
+		} 
+		if (idx < short_names_count + history_name_count) {
+			return (char_u)ModernizedCProgram.history_names[idx - short_names_count];
+		} 
+		if (idx == short_names_count + history_name_count) {
+			return (char_u)"all";
+		} 
+		return ((Object)0/*
+		 * init_history() - Initialize the command line history.
+		 * Also used to re-allocate the history when the size changes.
+		 */);
+	}
+	/*
+	 * Function given to ExpandGeneric() to obtain the list of user defined
+	 * function names.
+	 */
+	public Object get_user_func_name(int idx) {
+		long_u done = new long_u();
+		hashitem_T hi = new hashitem_T();
+		ufunc_T fp = new ufunc_T();
+		if (idx == 0) {
+			done = 0;
+			hi = ModernizedCProgram.func_hashtab.getHt_array();
+		} 
+		Object generatedHi_key = (hi).getHi_key();
+		Object generatedUf_flags = fp.getUf_flags();
+		Object generatedUf_name = fp.getUf_name();
+		int generatedXp_context = this.getXp_context();
+		Object generatedUf_varargs = fp.getUf_varargs();
+		Object generatedUf_args = fp.getUf_args();
+		if (done < ModernizedCProgram.func_hashtab.getHt_used()) {
+			if (done++ > 0) {
+				++hi;
+			} 
+			while ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
+				++hi;
+			}
+			fp = ((ufunc_T)((generatedHi_key) - ((size_t)((ufunc_T)0).getUf_name())));
+			if ((generatedUf_flags & -1024) || /*Error: Function owner not recognized*/strncmp((byte)(generatedUf_name), (byte)("<lambda>"), (size_t)(true)) == 0) {
+				return (char_u)/* don't show dict and lambda functions */"";
+			} 
+			if (/*Error: Function owner not recognized*/strlen((byte)(generatedUf_name)) + 4 >= (1024 + 1)) {
+				return generatedUf_name;
+			} 
+			fp.cat_func_name(ModernizedCProgram.IObuff);
+			if (generatedXp_context != 19) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(ModernizedCProgram.IObuff), (byte)("("));
+				if (!generatedUf_varargs && generatedUf_args.getGa_len() == 0) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(ModernizedCProgram.IObuff), (byte)(")"));
+				} 
+			} 
+			return ModernizedCProgram.IObuff;
+		} 
+		return ((Object)0/*
+		 * ":delfunction {name}"
+		 */);
+	}
+	/*
+	 * Function given to ExpandGeneric() to obtain the possible arguments of the
+	 * ":language" command.
+	 */
+	public Object get_lang_arg(int idx) {
+		if (idx == 0) {
+			return (char_u)"messages";
+		} 
+		if (idx == 1) {
+			return (char_u)"ctype";
+		} 
+		if (idx == 2) {
+			return (char_u)"time";
+		} 
+		ModernizedCProgram.init_locales();
+		if (ModernizedCProgram.locales == ((Object)0)) {
+			return ((Object)0);
+		} 
+		return ModernizedCProgram.locales[idx - 3/*
+		 * Function given to ExpandGeneric() to obtain the available locales.
+		 */];
+	}
+	public Object get_locales(int idx) {
+		ModernizedCProgram.init_locales();
+		if (ModernizedCProgram.locales == ((Object)0)) {
+			return ((Object)0);
+		} 
+		return ModernizedCProgram.locales[idx];
+	}
+	public Object get_function_name(int idx) {
+		int intidx = -1;
+		char_u name = new char_u();
+		if (idx == 0) {
+			intidx = -1;
+		} 
+		if (intidx < 0) {
+			name = xp.get_user_func_name(idx);
+			if (name != ((Object)0)) {
+				return name;
+			} 
+		} 
+		if (++intidx < (int)(/*Error: sizeof expression not supported yet*/ / /*Error: Unsupported expression*/)) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(ModernizedCProgram.IObuff), (byte)(ModernizedCProgram.global_functions[intidx].getF_name()));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(ModernizedCProgram.IObuff), (byte)("("));
+			if (ModernizedCProgram.global_functions[intidx].getF_max_argc() == 0) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(ModernizedCProgram.IObuff), (byte)(")"));
+			} 
+			return ModernizedCProgram.IObuff;
+		} 
+		return ((Object)0/*
+		 * Function given to ExpandGeneric() to obtain the list of internal or
+		 * user defined variable or function names.
+		 */);
+	}
+	public Object get_expr_name(int idx) {
+		int intidx = -1;
+		char_u name = new char_u();
+		if (idx == 0) {
+			intidx = -1;
+		} 
+		if (intidx < 0) {
+			name = xp.get_function_name(idx);
+			if (name != ((Object)0)) {
+				return name;
+			} 
+		} 
+		return xp.get_user_var_name(++intidx/*
+		 * Find internal function "name" in table "global_functions".
+		 * Return index, or -1 if not found
+		 */);
+	}
 	public int getXp_context() {
 		return xp_context;
 	}
 	public void setXp_context(int newXp_context) {
 		xp_context = newXp_context;
 	}
-	public Object getXp_pattern() {
+	public Object[] getXp_pattern() {
 		return xp_pattern;
 	}
-	public void setXp_pattern(Object newXp_pattern) {
+	public void setXp_pattern(Object[] newXp_pattern) {
 		xp_pattern = newXp_pattern;
 	}
 	public int getXp_pattern_len() {
@@ -2850,10 +2850,10 @@ public class expand {
 	public void setXp_numfiles(int newXp_numfiles) {
 		xp_numfiles = newXp_numfiles;
 	}
-	public Object getXp_files() {
+	public Object[][] getXp_files() {
 		return xp_files;
 	}
-	public void setXp_files(Object newXp_files) {
+	public void setXp_files(Object[][] newXp_files) {
 		xp_files = newXp_files;
 	}
 	public Object getXp_line() {

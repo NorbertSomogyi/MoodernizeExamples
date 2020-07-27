@@ -19,7 +19,7 @@ public class protocol_capability {
 			return ((Object)0);
 		} 
 		Object generatedName = c.getName();
-		for (i = 0; i < ( /  + ( - 1)); i++) {
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
 			protocol_capability c = ModernizedCProgram.capabilities[i];
 			byte out;
 			if (ModernizedCProgram.skip_prefix(key, generatedName, out) && (!out || out == (byte)'=')) {

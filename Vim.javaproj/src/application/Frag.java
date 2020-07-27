@@ -25,7 +25,7 @@ public class Frag {
 	public void st_push(Frag p, Frag stack_end) {
 		Frag_T stackp = p;
 		if (stackp >= stack_end) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		stackp = s;
 		p = p + 1/*

@@ -12,7 +12,7 @@ public class os_proc_memory_usage {
 	}
 	
 	public boolean os_get_proc_memory_usage() {
-		PROCESS_MEMORY_COUNTERS pmc = new PROCESS_MEMORY_COUNTERS();
+		PROCESS_MEMORY_COUNTERS pmc = new PROCESS_MEMORY_COUNTERS(/*Error: Unsupported expression*/);
 		if (!pmc.os_get_proc_memory_usage_internal()) {
 			return 0;
 		} 

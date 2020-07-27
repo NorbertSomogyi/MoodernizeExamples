@@ -30,65 +30,6 @@ public class all_attrs_item {
 		}
 		return rem;
 	}
-	public int fill(Object path, int pathlen, int basename_offset, Object stack, int rem) {
-		for (; rem > 0 && stack; stack = stack.getPrev()) {
-			int i;
-			byte base = stack.getOrigin() ? stack.getOrigin() : "";
-			for (i = stack.getNum_matches() - 1; 0 < rem && 0 <= i; i--) {
-				match_attr a = stack.getAttrs()[i];
-				if (a.getIs_macro()) {
-					continue;
-				} 
-				if (ModernizedCProgram.path_matches(path, pathlen, basename_offset, a.getU().getPat(), base, stack.getOriginlen())) {
-					rem = ModernizedCProgram.all_attrs.fill_one("fill", a, rem);
-				} 
-			}
-		}
-		return rem;
-		if (min <= ModernizedCProgram.len) {
-			return ModernizedCProgram.buffer + ModernizedCProgram.offset;
-		} 
-		if (min > ) {
-			ModernizedCProgram.die("cannot fill %d bytes", min);
-		} 
-		if (ModernizedCProgram.offset) {
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.ctx, ModernizedCProgram.buffer, ModernizedCProgram.offset);
-			.memmove(ModernizedCProgram.buffer, ModernizedCProgram.buffer + ModernizedCProgram.offset, ModernizedCProgram.len);
-			ModernizedCProgram.offset = 0;
-		} 
-		do {
-			ssize_t ret = ModernizedCProgram.xread(0, ModernizedCProgram.buffer + ModernizedCProgram.len,  - ModernizedCProgram.len);
-			if (ret <= 0) {
-				if (!ret) {
-					ModernizedCProgram.die("early EOF");
-				} 
-				ModernizedCProgram.die_errno("read error on input");
-			} 
-			ModernizedCProgram.len += ret;
-		} while (ModernizedCProgram.len < min);
-		return ModernizedCProgram.buffer;
-		if (min <= ModernizedCProgram.input_len) {
-			return ModernizedCProgram.input_buffer + ModernizedCProgram.input_offset;
-		} 
-		if (min > ) {
-			ModernizedCProgram.die(ModernizedCProgram.Q_("cannot fill %d byte", "cannot fill %d bytes", min), min);
-		} 
-		ModernizedCProgram.flush();
-		do {
-			ssize_t ret = ModernizedCProgram.xread(ModernizedCProgram.input_fd, ModernizedCProgram.input_buffer + ModernizedCProgram.input_len,  - ModernizedCProgram.input_len);
-			if (ret <= 0) {
-				if (!ret) {
-					ModernizedCProgram.die(ModernizedCProgram._("early EOF"));
-				} 
-				ModernizedCProgram.die_errno(ModernizedCProgram._("read error on input"));
-			} 
-			ModernizedCProgram.input_len += ret;
-			if (ModernizedCProgram.from_stdin) {
-				ModernizedCProgram.progress.display_throughput(ModernizedCProgram.consumed_bytes + ModernizedCProgram.input_len);
-			} 
-		} while (ModernizedCProgram.input_len < min);
-		return ModernizedCProgram.input_buffer;
-	}
 	public int macroexpand_one(int nr, int rem) {
 		all_attrs_item item = ModernizedCProgram.all_attrs[nr];
 		if (item.getMacro() && item.getValue() == ModernizedCProgram.git_attr__true) {

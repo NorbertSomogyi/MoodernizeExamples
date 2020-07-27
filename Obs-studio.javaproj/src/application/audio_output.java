@@ -50,13 +50,13 @@ public class audio_output {
 			data.setFrames(frames);
 			data.setTimestamp(timestamp);
 			if (ModernizedCProgram.resample_audio_output(input, data)) {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedParam, mix_idx, data);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedParam, mix_idx, data);
 			} 
 		}
 		ModernizedCProgram.pthread_mutex_unlock(generatedInput_mutex);
 	}
 	public void clamp_audio_output(Object bytes) {
-		 float_size = bytes / ;
+		 float_size = bytes / /*Error: Unsupported expression*/;
 		Object generatedMixes = this.getMixes();
 		Object generatedInputs = mix.getInputs();
 		Object generatedPlanes = this.getPlanes();
@@ -87,7 +87,7 @@ public class audio_output {
 		uint32_t active_mixes = 0;
 		uint64_t new_ts = 0;
 		 success = new ();
-		.memset(data, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(data, 0, /*Error: sizeof expression not supported yet*/);
 		Object generatedInput_mutex = this.getInput_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedInput_mutex);
 		Object generatedMixes = this.getMixes();
@@ -103,16 +103,16 @@ public class audio_output {
 		for ( mix_idx = 0;
 		 mix_idx < 6; /* clear mix buffers */mix_idx++) {
 			audio_mix mix = generatedMixes[mix_idx];
-			.memset(generatedBuffer[0], 0, 1024 * 8 * );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedBuffer[0], 0, 1024 * 8 * /*Error: Unsupported expression*/);
 			for ( i = 0;
 			 i < generatedPlanes; i++) {
 				data[mix_idx].getData()[i] = generatedBuffer[i];
 			}
 		}
 		Object generatedInput_param = this.getInput_param();
-		success = .UNRECOGNIZEDFUNCTIONNAME(generatedInput_param, prev_time, /* get new audio data */audio_time, new_ts, active_mixes, data);
+		success = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedInput_param, prev_time, /* get new audio data */audio_time, new_ts, active_mixes, data);
 		if (!success) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		audio.clamp_audio_output(/* clamps audio data to -1.0..1.0 */bytes);
 		for ( i = 0;
@@ -157,7 +157,7 @@ public class audio_output {
 			} 
 			success = ModernizedCProgram.audio_input_init(input, audio);
 			if (success) {
-				.da_push_back(generatedInputs, input);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedInputs, input);
 			} 
 		} 
 		ModernizedCProgram.pthread_mutex_unlock(generatedInput_mutex);
@@ -165,7 +165,7 @@ public class audio_output {
 	}
 	public void audio_output_disconnect(Object mix_idx, Object callback, Object param) {
 		if (!audio || mix_idx >= 6) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedInput_mutex = this.getInput_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedInput_mutex);
@@ -175,14 +175,14 @@ public class audio_output {
 		if (idx != DARRAY_INVALID) {
 			audio_mix mix = generatedMixes[mix_idx];
 			generatedInputs.getArray() + idx.audio_input_free();
-			.da_erase(generatedInputs, idx);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase(generatedInputs, idx);
 		} 
 		ModernizedCProgram.pthread_mutex_unlock(generatedInput_mutex);
 	}
 	public void audio_output_close() {
 		Object thread_ret;
 		if (!audio) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedInitialized = this.getInitialized();
 		Object generatedStop_event = this.getStop_event();
@@ -200,7 +200,7 @@ public class audio_output {
 			 i < generatedInputs.getNum(); i++) {
 				generatedInputs.getArray() + i.audio_input_free();
 			}
-			.da_free(generatedInputs);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedInputs);
 		}
 		generatedStop_event.os_event_destroy();
 		ModernizedCProgram.bfree(audio);

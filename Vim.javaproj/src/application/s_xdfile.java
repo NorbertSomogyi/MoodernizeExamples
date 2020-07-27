@@ -7,13 +7,13 @@ public class s_xdfile {
 	private s_xrecord rhash;
 	private long dstart;
 	private long dend;
-	private s_xrecord recs;
-	private Byte rchg;
-	private Long rindex;
+	private s_xrecord[][] recs;
+	private byte[] rchg;
+	private long[] rindex;
 	private long nreff;
 	private Long ha;
 	
-	public s_xdfile(s_chastore rcha, long nrec, int hbits, s_xrecord rhash, long dstart, long dend, s_xrecord recs, Byte rchg, Long rindex, long nreff, Long ha) {
+	public s_xdfile(s_chastore rcha, long nrec, int hbits, s_xrecord rhash, long dstart, long dend, s_xrecord[][] recs, byte[] rchg, long[] rindex, long nreff, Long ha) {
 		setRcha(rcha);
 		setNrec(nrec);
 		setHbits(hbits);
@@ -29,67 +29,6 @@ public class s_xdfile {
 	public s_xdfile() {
 	}
 	
-	public void xdl_free_ctx() {
-		s_xrecord generatedRhash = this.getRhash();
-		ModernizedCProgram.vim_free(generatedRhash);
-		Long generatedRindex = this.getRindex();
-		ModernizedCProgram.vim_free(generatedRindex);
-		Byte generatedRchg = this.getRchg();
-		ModernizedCProgram.vim_free(generatedRchg - 1);
-		Long generatedHa = this.getHa();
-		ModernizedCProgram.vim_free(generatedHa);
-		s_xrecord generatedRecs = this.getRecs();
-		ModernizedCProgram.vim_free(generatedRecs);
-		s_chastore generatedRcha = this.getRcha();
-		generatedRcha.xdl_cha_free();
-	}
-	/*
-	 * Early trim initial and terminal matching records.
-	 */
-	public int xdl_trim_ends(s_xdfile xdf2) {
-		long i;
-		long lim;
-		xrecord_t recs1 = new xrecord_t();
-		xrecord_t recs2 = new xrecord_t();
-		s_xrecord generatedRecs = this.getRecs();
-		recs1 = generatedRecs;
-		recs2 = generatedRecs;
-		long generatedHa = (recs1).getHa();
-		for (; i < lim; ) {
-			if (generatedHa != generatedHa) {
-				break;
-			} 
-		}
-		this.setDstart(xdf2.setDstart(i));
-		long generatedNrec = this.getNrec();
-		recs1 = generatedRecs + generatedNrec - 1;
-		recs2 = generatedRecs + generatedNrec - 1;
-		for (; i < lim; ) {
-			if (generatedHa != generatedHa) {
-				break;
-			} 
-		}
-		this.setDend(generatedNrec - i - 1);
-		xdf2.setDend(generatedNrec - i - 1);
-		return 0;
-	}
-	public int xdl_change_compact(s_xdfile xdfo, long flags) {
-		xdlgroup g = new xdlgroup();
-		xdlgroup go = new xdlgroup();
-		long earliest_end;
-		long end_matching_other;
-		long groupsize;
-		ModernizedCProgram.group_init(xdf, g);
-		ModernizedCProgram.group_init(xdfo, go);
-		long generatedEnd = g.getEnd();
-		long generatedStart = g.getStart();
-		int generatedEffective_indent = score.getEffective_indent();
-		int generatedPenalty = score.getPenalty();
-		if (!ModernizedCProgram.group_next(xdfo, go)) {
-			ModernizedCProgram.xdl_bug("group sync broken at end of file");
-		} 
-		return 0;
-	}
 	/*
 	 *  LibXDiff by Davide Libenzi ( File Differential Library )
 	 *  Copyright (C) 2003	Davide Libenzi
@@ -112,9 +51,70 @@ public class s_xdfile {
 	 *
 	 */
 	public long xdl_get_rec(long ri, Object rec) {
-		s_xrecord generatedRecs = this.getRecs();
+		s_xrecord[][] generatedRecs = this.getRecs();
 		rec = generatedRecs[ri].getPtr();
 		return generatedRecs[ri].getSize();
+	}
+	public int xdl_change_compact(s_xdfile xdfo, long flags) {
+		xdlgroup g = new xdlgroup();
+		xdlgroup go = new xdlgroup();
+		long earliest_end;
+		long end_matching_other;
+		long groupsize;
+		ModernizedCProgram.group_init(xdf, g);
+		ModernizedCProgram.group_init(xdfo, go);
+		long generatedEnd = g.getEnd();
+		long generatedStart = g.getStart();
+		int generatedEffective_indent = score.getEffective_indent();
+		int generatedPenalty = score.getPenalty();
+		if (!ModernizedCProgram.group_next(xdfo, go)) {
+			ModernizedCProgram.xdl_bug("group sync broken at end of file");
+		} 
+		return 0;
+	}
+	public void xdl_free_ctx() {
+		s_xrecord generatedRhash = this.getRhash();
+		ModernizedCProgram.vim_free(generatedRhash);
+		long[] generatedRindex = this.getRindex();
+		ModernizedCProgram.vim_free(generatedRindex);
+		byte[] generatedRchg = this.getRchg();
+		ModernizedCProgram.vim_free(generatedRchg - 1);
+		Long generatedHa = this.getHa();
+		ModernizedCProgram.vim_free(generatedHa);
+		s_xrecord[][] generatedRecs = this.getRecs();
+		ModernizedCProgram.vim_free(generatedRecs);
+		s_chastore generatedRcha = this.getRcha();
+		generatedRcha.xdl_cha_free();
+	}
+	/*
+	 * Early trim initial and terminal matching records.
+	 */
+	public int xdl_trim_ends(s_xdfile xdf2) {
+		long i;
+		long lim;
+		xrecord_t recs1 = new xrecord_t();
+		xrecord_t recs2 = new xrecord_t();
+		s_xrecord[][] generatedRecs = this.getRecs();
+		recs1 = generatedRecs;
+		recs2 = generatedRecs;
+		long generatedHa = (recs1).getHa();
+		for (; i < lim; ) {
+			if (generatedHa != generatedHa) {
+				break;
+			} 
+		}
+		this.setDstart(xdf2.setDstart(i));
+		long generatedNrec = this.getNrec();
+		recs1 = generatedRecs + generatedNrec - 1;
+		recs2 = generatedRecs + generatedNrec - 1;
+		for (; i < lim; ) {
+			if (generatedHa != generatedHa) {
+				break;
+			} 
+		}
+		this.setDend(generatedNrec - i - 1);
+		xdf2.setDend(generatedNrec - i - 1);
+		return 0;
 	}
 	public s_chastore getRcha() {
 		return rcha;
@@ -152,22 +152,22 @@ public class s_xdfile {
 	public void setDend(long newDend) {
 		dend = newDend;
 	}
-	public s_xrecord getRecs() {
+	public s_xrecord[][] getRecs() {
 		return recs;
 	}
-	public void setRecs(s_xrecord newRecs) {
+	public void setRecs(s_xrecord[][] newRecs) {
 		recs = newRecs;
 	}
-	public Byte getRchg() {
+	public byte[] getRchg() {
 		return rchg;
 	}
-	public void setRchg(Byte newRchg) {
+	public void setRchg(byte[] newRchg) {
 		rchg = newRchg;
 	}
-	public Long getRindex() {
+	public long[] getRindex() {
 		return rindex;
 	}
-	public void setRindex(Long newRindex) {
+	public void setRindex(long[] newRindex) {
 		rindex = newRindex;
 	}
 	public long getNreff() {

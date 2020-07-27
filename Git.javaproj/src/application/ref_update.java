@@ -39,9 +39,9 @@ public class ref_update {
 		} 
 		Object generatedRef_update = ((update)).getRef_update();
 		do {
-			size_t flex_array_len_ = (.strlen(refname));
-			((update)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedRef_update, ((refname)), flex_array_len_);
+			size_t flex_array_len_ = (/*Error: Function owner not recognized*/strlen(refname));
+			((update)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedRef_update, ((refname)), flex_array_len_);
 		} while (0);
 		do {
 			if ((generatedRef_transaction + 1) > generatedRef_transaction) {
@@ -50,7 +50,7 @@ public class ref_update {
 				} else {
 						transaction.setRef_transaction((((generatedRef_transaction) + 16) * 3 / 2));
 				} 
-				(generatedRef_transaction) = ModernizedCProgram.xrealloc((generatedRef_transaction), ModernizedCProgram.st_mult(, (generatedRef_transaction)));
+				(generatedRef_transaction) = ModernizedCProgram.xrealloc((generatedRef_transaction), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedRef_transaction)));
 			} 
 		} while (0);
 		generatedRef_transaction[generatedRef_transaction++] = update;

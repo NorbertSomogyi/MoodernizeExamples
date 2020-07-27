@@ -21,13 +21,9 @@ public class _vtt_t {
 	public _vtt_t() {
 	}
 	
-	public _vtt_t srt_parse(Object data, Object size) {
-		_vtt_t _vtt_t = new _vtt_t();
-		return _vtt_t._vtt_parse(data, size, 1);
-	}
 	public _vtt_t vtt_new() {
-		vtt_t vtt = .malloc();
-		.memset(vtt, 0, );
+		vtt_t vtt = /*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(vtt, 0, /*Error: Unsupported expression*/);
 		return vtt;
 	}
 	public void vtt_free() {
@@ -43,7 +39,7 @@ public class _vtt_t {
 		while (generatedCue_head != ((Object)0)) {
 			this.setCue_head(generatedCue_head.vtt_block_free_head());
 		}
-		.free(vtt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(vtt);
 	}
 	public void vtt_cue_free_head() {
 		_vtt_block_t generatedCue_head = this.getCue_head();
@@ -83,8 +79,8 @@ public class _vtt_t {
 		if (!data || !size || size < 6) {
 			return ((Object)0);
 		} 
-		// TODO: Support UTF-8 BOM?if (!srt_mode && .strncmp(data, "WEBVTT", 6) != 0) {
-			.fprintf((_iob[2]), "Invalid webvtt header: %.*s\n", 6, data);
+		// TODO: Support UTF-8 BOM?if (!srt_mode && /*Error: Function owner not recognized*/strncmp(data, "WEBVTT", 6) != 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Invalid webvtt header: %.*s\n", 6, data);
 			return ((Object)0);
 		} 
 		// WebVTT files must start with WEBVTT
@@ -93,8 +89,8 @@ public class _vtt_t {
 		_vtt_t _vtt_t = new _vtt_t();
 		vtt = _vtt_t.vtt_new();
 		_vtt_block_t _vtt_block_t = new _vtt_block_t();
-		Byte generatedCue_id = block.getCue_id();
-		for (; ; ) {
+		byte[] generatedCue_id = block.getCue_id();
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			line_length = 0;
 			do {
 				data += line_length;
@@ -115,12 +111,12 @@ public class _vtt_t {
 				VTT_BLOCK_TYPE.block_type = VTT_BLOCK_TYPE.VTT_CUE;
 				ModernizedCProgram.parse_timestamps(data, str_pts, end_pts, cue_settings);
 				if (str_pts == -1) {
-					.fprintf((_iob[2]), "Bad timestamp: %.*s\n", (int)line_length, data);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Bad timestamp: %.*s\n", (int)line_length, data);
 					return ((Object)0);
 				} 
 			} else {
 					if (cue_id != ((Object)0)) {
-						.fprintf((_iob[2]), "ERR: Unrecognized block\n");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "ERR: Unrecognized block\n");
 						return ((Object)0);
 					} 
 					cue_id = data;
@@ -147,8 +143,8 @@ public class _vtt_t {
 				block.setDuration(end_pts - str_pts);
 				block.setCue_settings(cue_settings);
 				if (cue_id != ((Object)0)) {
-					block.setCue_id(.malloc(cue_id_length + 1));
-					.memcpy(generatedCue_id, cue_id, cue_id_length);
+					block.setCue_id(/*Error: Function owner not recognized*/malloc(cue_id_length + 1));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedCue_id, cue_id, cue_id_length);
 					generatedCue_id[cue_id_length] = (byte)'\0';
 				} 
 			} 
@@ -158,25 +154,25 @@ public class _vtt_t {
 	}
 	public void _dump() {
 		vtt_block_t block = new vtt_block_t();
-		.printf("WEBVTT\r\n\r\n");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("WEBVTT\r\n\r\n");
 		_vtt_block_t generatedRegion_head = this.getRegion_head();
 		block = generatedRegion_head;
 		_vtt_block_t generatedNext = block.getNext();
 		while (block != ((Object)0)) {
-			.printf("REGION\r\n%s\r\n", block.vtt_block_data());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("REGION\r\n%s\r\n", block.vtt_block_data());
 			block = generatedNext;
 		}
 		_vtt_block_t generatedStyle_head = this.getStyle_head();
 		block = generatedStyle_head;
 		while (block != ((Object)0)) {
-			.printf("STYLE\r\n%s\r\n", block.vtt_block_data());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("STYLE\r\n%s\r\n", block.vtt_block_data());
 			block = generatedNext;
 		}
 		_vtt_block_t generatedCue_head = this.getCue_head();
 		block = generatedCue_head;
 		double generatedTimestamp = block.getTimestamp();
 		double generatedDuration = block.getDuration();
-		Byte generatedCue_id = block.getCue_id();
+		byte[] generatedCue_id = block.getCue_id();
 		Byte generatedCue_settings = block.getCue_settings();
 		while (block != ((Object)0)) {
 			int hh1;
@@ -190,17 +186,21 @@ public class _vtt_t {
 			ModernizedCProgram.vtt_crack_time(generatedTimestamp, hh1, mm1, ss1, ms1);
 			ModernizedCProgram.vtt_crack_time(generatedTimestamp + generatedDuration, hh2, mm2, ss2, ms2);
 			if (generatedCue_id != ((Object)0)) {
-				.printf("%s\n", generatedCue_id);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s\n", generatedCue_id);
 			} 
-			.printf("%02d:%02d:%02d.%03d --> %02d:%02d:%02d.%03d", hh1, mm1, ss1, ms1, hh2, mm2, ss2, ms2);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%02d:%02d:%02d.%03d --> %02d:%02d:%02d.%03d", hh1, mm1, ss1, ms1, hh2, mm2, ss2, ms2);
 			if (generatedCue_settings != ((Object)0)) {
-				.printf(" %s", generatedCue_settings);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(" %s", generatedCue_settings);
 			} 
-			.printf("\r\n%s\r\n", block.vtt_block_data());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("\r\n%s\r\n", block.vtt_block_data());
 		}
 	}
 	public void vtt_dump() {
 		head._dump();
+	}
+	public _vtt_t srt_parse(Object data, Object size) {
+		_vtt_t _vtt_t = new _vtt_t();
+		return _vtt_t._vtt_parse(data, size, 1);
 	}
 	public _vtt_block_t getRegion_head() {
 		return region_head;

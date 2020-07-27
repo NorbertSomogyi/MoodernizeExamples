@@ -23,14 +23,14 @@ public class path_pattern {
 	public path_pattern() {
 	}
 	
-	public path_pattern last_matching_pattern_from_list(Object pathname, int pathlen, Object basename, int dtype, pattern_list pl, index_state istate) {
+	public path_pattern last_matching_pattern_from_list(Object pathname, int pathlen, Object basename, Integer dtype, pattern_list pl, index_state istate) {
 		path_pattern res = ((Object)/* undecided */0);
 		int i;
 		int generatedNr = pl.getNr();
 		if (!generatedNr) {
 			return ((Object)/* undefined */0);
 		} 
-		path_pattern generatedPatterns = pl.getPatterns();
+		path_pattern[][] generatedPatterns = pl.getPatterns();
 		for (i = generatedNr - 1; 0 <= i; i--) {
 			path_pattern pattern = generatedPatterns[i];
 			byte exclude = ModernizedCProgram.pattern.getPattern();
@@ -50,7 +50,7 @@ public class path_pattern {
 				} 
 				continue;
 			} 
-			((ModernizedCProgram.pattern.getBaselen() == 0 || ModernizedCProgram.pattern.getBase()[ModernizedCProgram.pattern.getBaselen() - 1] == (byte)'/') ? (Object)0 : ._assert("pattern->baselen == 0 || pattern->base[pattern->baselen - 1] == '/'", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\dir.c", 1073));
+			((ModernizedCProgram.pattern.getBaselen() == 0 || ModernizedCProgram.pattern.getBase()[ModernizedCProgram.pattern.getBaselen() - 1] == (byte)'/') ? (Object)0 : /*Error: Function owner not recognized*/_assert("pattern->baselen == 0 || pattern->base[pattern->baselen - 1] == '/'", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\dir.c", 1073));
 			if (ModernizedCProgram.match_pathname(pathname, pathlen, ModernizedCProgram.pattern.getBase(), ModernizedCProgram.pattern.getBaselen() ? ModernizedCProgram.pattern.getBaselen() - 1 : 0, exclude, ModernizedCProgram.prefix, ModernizedCProgram.pattern.getPatternlen(), ModernizedCProgram.pattern.getFlags())) {
 				res = ModernizedCProgram.pattern;
 				break;
@@ -69,7 +69,7 @@ public class path_pattern {
 		exclude_list_group group = new exclude_list_group();
 		path_pattern pattern = new path_pattern();
 		Object generatedExclude_list_group = dir.getExclude_list_group();
-		pattern_list generatedPl = group.getPl();
+		pattern_list[] generatedPl = group.getPl();
 		path_pattern path_pattern = new path_pattern();
 		int generatedNr = group.getNr();
 		for (i = 0; i <= 2; i++) {
@@ -87,8 +87,8 @@ public class path_pattern {
 		 */);
 	}
 	public path_pattern last_matching_pattern(dir_struct dir, index_state istate, Object pathname, Integer dtype_p) {
-		int pathlen = .strlen(pathname);
-		byte basename = .strrchr(pathname, (byte)'/');
+		int pathlen = /*Error: Function owner not recognized*/strlen(pathname);
+		byte basename = /*Error: Function owner not recognized*/strrchr(pathname, (byte)'/');
 		basename = (basename) ? basename + 1 : pathname;
 		ModernizedCProgram.prep_exclude(dir, istate, pathname, basename - pathname);
 		path_pattern generatedPattern = dir.getPattern();
@@ -111,21 +111,21 @@ public class path_pattern {
 			} else {
 					if (ModernizedCProgram.pattern) {
 						ModernizedCProgram.quote_c_style(ModernizedCProgram.pattern.getPl().getPattern_list(), ((Object)0), (_iob[1]), 0);
-						.printf(":%d:%s%s%s\t", ModernizedCProgram.pattern.getSrcpos(), bang, ModernizedCProgram.pattern.getPattern(), slash);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(":%d:%s%s%s\t", ModernizedCProgram.pattern.getSrcpos(), bang, ModernizedCProgram.pattern.getPattern(), slash);
 					} else {
-							.printf("::\t");
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("::\t");
 					} 
 					ModernizedCProgram.quote_c_style(path, ((Object)0), (_iob[1]), 0);
-					.fputc((byte)'\n', (_iob[1]));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\n', (_iob[1]));
 			} 
 		} else {
 				if (!ModernizedCProgram.verbose) {
-					.printf("%s%c", path, (byte)'\0');
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s%c", path, (byte)'\0');
 				} else {
 						if (ModernizedCProgram.pattern) {
-							.printf("%s%c%d%c%s%s%s%c%s%c", ModernizedCProgram.pattern.getPl().getPattern_list(), (byte)'\0', ModernizedCProgram.pattern.getSrcpos(), (byte)'\0', bang, ModernizedCProgram.pattern.getPattern(), slash, (byte)'\0', path, (byte)'\0');
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s%c%d%c%s%s%s%c%s%c", ModernizedCProgram.pattern.getPl().getPattern_list(), (byte)'\0', ModernizedCProgram.pattern.getSrcpos(), (byte)'\0', bang, ModernizedCProgram.pattern.getPattern(), slash, (byte)'\0', path, (byte)'\0');
 						} else {
-								.printf("%c%c%c%s%c", (byte)'\0', (byte)'\0', (byte)'\0', path, (byte)'\0');
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%c%c%c%s%c", (byte)'\0', (byte)'\0', (byte)'\0', path, (byte)'\0');
 						} 
 				} 
 		} 

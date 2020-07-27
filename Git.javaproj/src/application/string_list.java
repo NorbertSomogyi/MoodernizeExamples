@@ -1,13 +1,13 @@
 package application;
 
 public class string_list {
-	private string_list_item items;
+	private string_list_item[] items;
 	private int nr;
 	private int alloc;
 	private int strdup_strings;
 	private Object cmp;
 	
-	public string_list(string_list_item items, int nr, int alloc, int strdup_strings, Object cmp) {
+	public string_list(string_list_item[] items, int nr, int alloc, int strdup_strings, Object cmp) {
 		setItems(items);
 		setNr(nr);
 		setAlloc(alloc);
@@ -17,469 +17,12 @@ public class string_list {
 	public string_list() {
 	}
 	
-	/*
-	 * Parse an argument into a string list.  arg should either be a
-	 * ':'-separated list of strings, or "-" to indicate an empty string
-	 * list (as opposed to "", which indicates a string list containing a
-	 * single empty string).  list->strdup_strings must be set.
-	 */
-	public void parse_string_list(Object arg) {
-		if (!.strcmp(arg, "-")) {
-			return ;
-		} 
-		(Object)ModernizedCProgram.list.string_list_split(arg, (byte)':', -1);
-	}
-	public void handle_tags_and_duplicates() {
-		commit commit = new commit();
-		int i;
-		string_list_item generatedItems = this.getItems();
-		object generatedObject = commit.getObject();
-		object_id generatedOid = generatedObject.getOid();
-		int generatedType = object.getType();
-		int generatedNr = this.getNr();
-		for (i = generatedNr - 1; i >= 0; i--) {
-			byte name = generatedItems[i].getString();
-			object object = generatedItems[i].getUtil();
-			int mark;
-			switch (generatedType) {
-			case object_type.OBJ_COMMIT:
-					if (ModernizedCProgram.anonymize) {
-						name = ModernizedCProgram.anonymize_refname(name);
-					} 
-					commit = (commit)/* create refs pointing to already seen commits */object.rewrite_commit();
-					if (!commit/*
-									 * Neither this object nor any of its
-									 * ancestors touch any relevant paths, so
-									 * it has been filtered to nothing.  Delete
-									 * it.
-									 */) {
-						.printf("reset %s\nfrom %s\n\n", name, ModernizedCProgram.oid_to_hex(ModernizedCProgram.null_oid));
-						continue;
-					} 
-					mark = generatedObject.get_object_mark();
-					if (!mark/*
-									 * Getting here means we have a commit which
-									 * was excluded by a negative refspec (e.g.
-									 * fast-export ^master master).  If we are
-									 * referencing excluded commits, set the ref
-									 * to the exact commit.  Otherwise, the user
-									 * wants the branch exported but every commit
-									 * in its history to be deleted, which basically
-									 * just means deletion of the ref.
-									 */) {
-						if (!ModernizedCProgram.reference_excluded_commits) {
-							.printf(/* delete the ref */"reset %s\nfrom %s\n\n", name, ModernizedCProgram.oid_to_hex(ModernizedCProgram.null_oid));
-							continue;
-						} 
-						.printf("reset %s\nfrom %s\n\n", /* set ref to commit using oid, not mark */name, ModernizedCProgram.oid_to_hex(generatedOid));
-						continue;
-					} 
-					.printf("reset %s\nfrom :%d\n\n", name, mark);
-					ModernizedCProgram.show_progress();
-					break;
-			case object_type.OBJ_TAG:
-					(tag)object.handle_tag(name);
-					break;
-			}
-		}
-	}
-	public void list_config_item(Object prefix, Object str) {
-		string_list_item string_list_item = new string_list_item();
-		string_list_item.string_list_append_nodup(ModernizedCProgram.list, ModernizedCProgram.xstrfmt("%s.%s", prefix, str));
-	}
-	public string_list resolve_undo_read(Object data, long size) {
-		string_list resolve_undo = new string_list();
-		size_t len = new size_t();
-		byte endptr;
-		int i;
-		int rawsz = ModernizedCProgram.the_repository.getHash_algo().getRawsz();
-		resolve_undo = ModernizedCProgram.xcalloc(1, );
-		resolve_undo.setStrdup_strings(1);
-		string_list_item string_list_item = new string_list_item();
-		Object generatedUtil = lost.getUtil();
-		Object generatedMode = ui.getMode();
-		Object generatedOid = ui.getOid();
-		while (size) {
-			string_list_item lost = new string_list_item();
-			resolve_undo_info ui = new resolve_undo_info();
-			len = .strlen(data) + 1;
-			if (size <= len) {
-				;
-			} 
-			lost = string_list_item.string_list_insert(resolve_undo, data);
-			if (!generatedUtil) {
-				lost.setUtil(ModernizedCProgram.xcalloc(1, ));
-			} 
-			ui = generatedUtil;
-			size -= len;
-			data += len;
-			for (i = 0; i < 3; i++) {
-				generatedMode[i] = .strtoul(data, endptr, 8);
-				if (!endptr || endptr == data || endptr) {
-					;
-				} 
-				len = (endptr + 1) - (byte)data;
-				if (size <= len) {
-					;
-				} 
-				size -= len;
-				data += len;
-			}
-			for (i = 0; i < 3; i++) {
-				if (!generatedMode[i]) {
-					continue;
-				} 
-				if (size < rawsz) {
-					;
-				} 
-				generatedOid[i].oidread((byte)data);
-				size -= rawsz;
-				data += rawsz;
-			}
-		}
-		return resolve_undo;
-		();
-		return ((Object)0);
-	}
-	public void free_submodules_oids() {
-		string_list_item item = new string_list_item();
-		string_list_item generatedItems = (submodules).getItems();
-		int generatedNr = (submodules).getNr();
-		Object generatedUtil = item.getUtil();
-		for (item = generatedItems; item && item < generatedItems + generatedNr; ++item) {
-			(oid_array)generatedUtil.oid_array_clear();
-		}
-		submodules.string_list_clear(1);
-	}
-	public void parse_one_symref_info(Object val, int len) {
-		byte sym;
-		byte target;
-		string_list_item item = new string_list_item();
-		if (!len) {
-			return ;
-		} 
-		sym = ModernizedCProgram.xmemdupz(val, /* e.g. "symref=HEAD:refs/heads/master" */len);
-		target = .strchr(sym, (byte)':');
-		if (!target/* just "symref=something" */) {
-			;
-		} 
-		(target++) = (byte)'\0';
-		if (ModernizedCProgram.check_refname_format(sym, 1) || ModernizedCProgram.check_refname_format(target, 1/* "symref=bogus:pair */)) {
-			;
-		} 
-		string_list_item string_list_item = new string_list_item();
-		item = string_list_item.string_list_append_nodup(symref, sym);
-		item.setUtil(target);
-		return ;
-		return ;
-	}
-	public int add_exec_commands() {
-		byte todo_file = ModernizedCProgram.rebase_path_todo();
-		todo_list todo_list = new todo_list(new todo_list(, , ));
-		int res;
-		strbuf generatedBuf = todo_list.getBuf();
-		if (generatedBuf.strbuf_read_file(todo_file, 0) < 0) {
-			return ();
-		} 
-		if (ModernizedCProgram.todo_list_parse_insn_buffer(ModernizedCProgram.the_repository, generatedBuf, todo_list)) {
-			todo_list.todo_list_release();
-			return ();
-		} 
-		ModernizedCProgram.todo_list_add_exec_commands(todo_list, ModernizedCProgram.commands);
-		res = ModernizedCProgram.todo_list_write_to_file(ModernizedCProgram.the_repository, todo_list, todo_file, ((Object)0), ((Object)0), -1, 0);
-		todo_list.todo_list_release();
-		if (res) {
-			return ();
-		} 
-		return 0;
-	}
-	public void split_exec_commands(Object cmd) {
-		if (cmd && cmd) {
-			ModernizedCProgram.commands.string_list_split(cmd, (byte)'\n', -1);
-			ModernizedCProgram.commands.string_list_remove_empty_items(/* rebase.c adds a new line to cmd after every command,
-					 * so here the last command is always empty */0);
-		} 
-	}
-	public int list_paths(Object with_tree, Object pattern) {
-		int i;
-		int ret;
-		byte m;
-		if (!pattern.getNr()) {
-			return 0;
-		} 
-		m = ModernizedCProgram.xcalloc(1, pattern.getNr());
-		if (with_tree) {
-			byte max_prefix = ModernizedCProgram.common_prefix(pattern);
-			ModernizedCProgram.the_index.overlay_tree_on_index(with_tree, max_prefix);
-			ModernizedCProgram.free(max_prefix);
-		} 
-		string_list_item string_list_item = new string_list_item();
-		for (i = 0; i < (ModernizedCProgram.the_index.getCache_nr()); i++) {
-			cache_entry ce = (ModernizedCProgram.the_index.getCache())[i];
-			string_list_item item = new string_list_item();
-			if (ce.getCe_flags() & (1 << 16)) {
-				continue;
-			} 
-			if (!ModernizedCProgram.ce_path_match(ModernizedCProgram.the_index, ce, pattern, m)) {
-				continue;
-			} 
-			item = string_list_item.string_list_insert(ModernizedCProgram.list, ce.getName());
-			if (((ce).getCe_flags() & (1 << 30))) {
-				item.setUtil(/* better a valid pointer than a fake one */item);
-			} 
-		}
-		ret = ModernizedCProgram.report_path_error(m, pattern);
-		ModernizedCProgram.free(m);
-		return ret;
-	}
-	public void add_remove_files() {
-		int i;
-		Object generatedUtil = p.getUtil();
-		byte generatedString = p.getString();
-		for (i = 0; i < ModernizedCProgram.list.getNr(); i++) {
-			stat st = new stat();
-			string_list_item p = (ModernizedCProgram.list.getItems()[i]);
-			if (generatedUtil) {
-				continue;
-			} 
-			if (!.lstat(generatedString, st)) {
-				if (ModernizedCProgram.add_to_index(ModernizedCProgram.the_index, (generatedString), (st), (false))) {
-					ModernizedCProgram.die(ModernizedCProgram._("updating files failed"));
-				} 
-			} else {
-					ModernizedCProgram.the_index.remove_file_from_index((generatedString));
-			} 
-		}
-	}
-	public void list_config_color_status_slots(Object prefix) {
-		int i;
-		byte[] extra = new byte[]{"added"};
-		for (i = 0; i < ( /  + ( - 1)); i++) {
-			ModernizedCProgram.list.list_config_item(prefix, extra[i]);
-		}
-		for (i = 0; i < ( /  + ( - 1)); i++) {
-			if (ModernizedCProgram.color_status_slots[i]) {
-				ModernizedCProgram.list.list_config_item(prefix, ModernizedCProgram.color_status_slots[i]);
-			} 
-		}
-	}
-	public void list_config_color_sideband_slots(Object prefix) {
-		int i;
-		for (i = 0; i < ( /  + ( - 1)); i++) {
-			ModernizedCProgram.list.list_config_item(prefix, ModernizedCProgram.keywords[i].getKeyword());
-		}
-	}
-	public int populate_maildir_list(Object path) {
-		DIR dir = new DIR();
-		dirent dent = new dirent();
-		byte name = ((Object)0);
-		byte[] subs = new byte[]{"cur", "new", ((Object)0)};
-		byte sub;
-		int ret = -1;
-		dirent dirent = new dirent();
-		Object generatedD_name = dent.getD_name();
-		string_list_item string_list_item = new string_list_item();
-		for (sub = subs; sub; ++sub) {
-			ModernizedCProgram.free(name);
-			name = ModernizedCProgram.xstrfmt("%s/%s", path, sub);
-			if ((dir = ModernizedCProgram.opendir(name)) == ((Object)0)) {
-				if ((._errno()) == 2) {
-					continue;
-				} 
-				();
-				;
-			} 
-			while ((dent = dirent.readdir(dir)) != ((Object)0)) {
-				if (generatedD_name[0] == (byte)'.') {
-					continue;
-				} 
-				ModernizedCProgram.free(name);
-				name = ModernizedCProgram.xstrfmt("%s/%s", sub, generatedD_name);
-				string_list_item.string_list_insert(ModernizedCProgram.list, name);
-			}
-			dir.closedir();
-		}
-		ret = 0;
-		return ret;
-	}
-	public void report_pack_garbage() {
-		int i;
-		int baselen = -1;
-		int first = 0;
-		int seen_bits = 0;
-		if (!ModernizedCProgram.report_garbage) {
-			return ;
-		} 
-		ModernizedCProgram.list.string_list_sort();
-		for (i = 0; i < ModernizedCProgram.list.getNr(); i++) {
-			byte path = ModernizedCProgram.list.getItems()[i].getString();
-			if (baselen != -1 && .strncmp(ModernizedCProgram.path, ModernizedCProgram.list.getItems()[first].getString(), baselen)) {
-				ModernizedCProgram.report_helper(ModernizedCProgram.list, seen_bits, first, i);
-				baselen = -1;
-				seen_bits = 0;
-			} 
-			if (baselen == -1) {
-				byte dot = .strrchr(ModernizedCProgram.path, (byte)'.');
-				if (!dot) {
-					.report_garbage(4, ModernizedCProgram.path);
-					continue;
-				} 
-				baselen = dot - ModernizedCProgram.path + 1;
-				first = i;
-			} 
-			if (!.strcmp(ModernizedCProgram.path + baselen, "pack")) {
-				seen_bits |=  1;
-			}  else if (!.strcmp(ModernizedCProgram.path + baselen, "idx")) {
-				seen_bits |=  2;
-			} 
-		}
-		ModernizedCProgram.report_helper(ModernizedCProgram.list, seen_bits, first, ModernizedCProgram.list.getNr());
-		if (seen_bits == 2) {
-			ModernizedCProgram.pack_garbage.string_list_append(ModernizedCProgram.path);
-		} 
-	}
-	public int read_rebase_todolist(Object fname) {
-		strbuf line = new strbuf(, , );
-		FILE f = .fopen(ModernizedCProgram.git_path("%s", fname), "r");
-		if (!f) {
-			if ((._errno()) == 2) {
-				return -1;
-			} 
-			ModernizedCProgram.die_errno("Could not open file %s for reading", ModernizedCProgram.git_path("%s", fname));
-		} 
-		Object generatedLen = line.getLen();
-		byte generatedBuf = line.getBuf();
-		while (!ModernizedCProgram.strbuf_getline_lf(line, f)) {
-			if (generatedLen && generatedBuf[0] == ModernizedCProgram.comment_line_char) {
-				continue;
-			} 
-			line.strbuf_trim();
-			if (!generatedLen) {
-				continue;
-			} 
-			line.abbrev_sha1_in_line();
-			lines.string_list_append(generatedBuf);
-		}
-		.fclose(f);
-		line.strbuf_release();
-		return 0;
-	}
-	public void get_non_kept_pack_filenames(Object extra_keep) {
-		DIR dir = new DIR();
-		dirent e = new dirent();
-		byte fname;
-		if (!(dir = ModernizedCProgram.opendir(ModernizedCProgram.packdir))) {
-			return ;
-		} 
-		dirent dirent = new dirent();
-		Object generatedD_name = e.getD_name();
-		string_list_item string_list_item = new string_list_item();
-		while ((e = dirent.readdir(dir)) != ((Object)0)) {
-			size_t len = new size_t();
-			int i;
-			for (i = 0; i < extra_keep.getNr(); i++) {
-				if (!ModernizedCProgram.fspathcmp(generatedD_name, extra_keep.getItems()[i].getString())) {
-					break;
-				} 
-			}
-			if (extra_keep.getNr() > 0 && i < extra_keep.getNr()) {
-				continue;
-			} 
-			if (!ModernizedCProgram.strip_suffix(generatedD_name, ".pack", ModernizedCProgram.len)) {
-				continue;
-			} 
-			fname = ModernizedCProgram.xmemdupz(generatedD_name, ModernizedCProgram.len);
-			if (!ModernizedCProgram.file_exists(ModernizedCProgram.mkpath("%s/%s.keep", ModernizedCProgram.packdir, fname))) {
-				string_list_item.string_list_append_nodup(fname_list, fname);
-			} else {
-					ModernizedCProgram.free(fname);
-			} 
-		}
-		dir.closedir();
-	}
-	public void repack_promisor_objects(Object args) {
-		child_process cmd = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		FILE out = new FILE();
-		strbuf line = new strbuf(, , );
-		cmd.prepare_pack_objects(args);
-		cmd.setIn(-1/*
-			 * NEEDSWORK: Giving pack-objects only the OIDs without any ordering
-			 * hints may result in suboptimal deltas in the resulting pack. See if
-			 * the OIDs can be sent with fake paths such that pack-objects can use a
-			 * {type -> existing pack order} ordering when computing deltas instead
-			 * of a {type -> size} ordering, which may produce better deltas.
-			 */);
-		ModernizedCProgram.for_each_packed_object(write_oid, cmd, for_each_object_flags.FOR_EACH_OBJECT_PROMISOR_ONLY);
-		int generatedIn = cmd.getIn();
-		if (generatedIn == -1/* No packed objects; cmd was never started */) {
-			return ;
-		} 
-		.close(generatedIn);
-		int generatedOut = cmd.getOut();
-		out = ModernizedCProgram.xfdopen(generatedOut, "r");
-		Object generatedLen = line.getLen();
-		byte generatedBuf = line.getBuf();
-		while (ModernizedCProgram.strbuf_getline_lf(line, out) != (true)) {
-			byte promisor_name;
-			int fd;
-			if (generatedLen != ModernizedCProgram.the_repository.getHash_algo().getHexsz()) {
-				ModernizedCProgram.die(ModernizedCProgram._("repack: Expecting full hex object ID lines only from pack-objects."));
-			} 
-			ModernizedCProgram.names.string_list_append(generatedBuf);
-			promisor_name = ModernizedCProgram.mkpathdup("%s-%s.promisor", ModernizedCProgram.packtmp, generatedBuf);
-			fd = .open(promisor_name, -1024 | -1024 | 1, 600);
-			if (fd < 0) {
-				ModernizedCProgram.die_errno(ModernizedCProgram._("unable to create '%s'"), promisor_name);
-			} 
-			.close(fd);
-			ModernizedCProgram.free(promisor_name);
-		}
-		.fclose(out);
-		if (cmd.finish_command()) {
-			ModernizedCProgram.die(ModernizedCProgram._("could not finish pack-objects to repack promisor objects"));
-		} 
-	}
-	public void find_longest_prefixes(Object patterns) {
-		argv_array sorted = new argv_array(ModernizedCProgram.empty_argv, 0, 0);
-		strbuf prefix = new strbuf(, , );
-		sorted.argv_array_pushv(patterns);
-		Object generatedArgv = sorted.getArgv();
-		int generatedArgc = sorted.getArgc();
-		ModernizedCProgram.sane_qsort((generatedArgv), (generatedArgc), , qsort_strcmp);
-		ModernizedCProgram.find_longest_prefixes_1(out, prefix, generatedArgv, generatedArgc);
-		sorted.argv_array_clear();
-		prefix/*
-		 * This is the same as for_each_fullref_in(), but it tries to iterate
-		 * only over the patterns we'll care about. Note that it _doesn't_ do a full
-		 * pattern match, so the callback still has to match each ref individually.
-		 */.strbuf_release();
-	}
-	public void list_config_color_decorate_slots(Object prefix) {
-		int i;
-		for (i = 0; i < ( /  + ( - 1)); i++) {
-			if (ModernizedCProgram.color_decorate_slots[i]) {
-				ModernizedCProgram.list.list_config_item(prefix, ModernizedCProgram.color_decorate_slots[i]);
-			} 
-		}
-	}
-	public void exclude_helpers_from_list() {
-		int i = 0;
-		while (i < ModernizedCProgram.list.getNr()) {
-			if (.strstr(ModernizedCProgram.list.getItems()[i].getString(), "--")) {
-				ModernizedCProgram.list.unsorted_string_list_delete_item(i, 0);
-			} else {
-					i++;
-			} 
-		}
-	}
-	public void list_builtins(int exclude_option) {
-		int i;
-		for (i = 0; i < ( /  + ( - 1)); i++) {
-			if (exclude_option && (ModernizedCProgram.commands[i].getOption() & exclude_option)) {
-				continue;
-			} 
-			out.string_list_append(ModernizedCProgram.commands[i].getCmd());
-		}
+	public void string_list_init(int strdup_strings) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.list, 0, /*Error: sizeof expression not supported yet*/);
+		ModernizedCProgram.list.setStrdup_strings(strdup_strings);
+		slp.setItem(((Object)0));
+		slp.setNitems(0);
+		slp.setNitems_max(0);
 	}
 	/* returns -1-index if already exists */
 	public int add_entry(int insert_at, Object string) {
@@ -495,11 +38,11 @@ public class string_list {
 				} else {
 						ModernizedCProgram.list.setAlloc((((ModernizedCProgram.list.getAlloc()) + 16) * 3 / 2));
 				} 
-				(ModernizedCProgram.list.getItems()) = ModernizedCProgram.xrealloc((ModernizedCProgram.list.getItems()), ModernizedCProgram.st_mult(, (ModernizedCProgram.list.getAlloc())));
+				(ModernizedCProgram.list.getItems()) = ModernizedCProgram.xrealloc((ModernizedCProgram.list.getItems()), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (ModernizedCProgram.list.getAlloc())));
 			} 
 		} while (0);
 		if (index < ModernizedCProgram.list.getNr()) {
-			ModernizedCProgram.move_array((ModernizedCProgram.list.getItems() + index + 1), (ModernizedCProgram.list.getItems() + index), (ModernizedCProgram.list.getNr() - index),  + ( - 1));
+			ModernizedCProgram.move_array((ModernizedCProgram.list.getItems() + index + 1), (ModernizedCProgram.list.getItems() + index), (ModernizedCProgram.list.getNr() - index), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		} 
 		ModernizedCProgram.list.getItems()[index].setString(ModernizedCProgram.list.getStrdup_strings() ? ModernizedCProgram.xstrdup(string) : (byte)string);
 		ModernizedCProgram.list.getItems()[index].setUtil(((Object)0));
@@ -524,7 +67,7 @@ public class string_list {
 				ModernizedCProgram.free(ModernizedCProgram.list.getItems()[i].getUtil());
 			} 
 			ModernizedCProgram.list.getNr()--;
-			ModernizedCProgram.move_array((ModernizedCProgram.list.getItems() + i), (ModernizedCProgram.list.getItems() + i + 1), (ModernizedCProgram.list.getNr() - i),  + ( - 1));
+			ModernizedCProgram.move_array((ModernizedCProgram.list.getItems() + i), (ModernizedCProgram.list.getItems() + i + 1), (ModernizedCProgram.list.getNr() - i), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		} 
 	}
 	public void string_list_remove_duplicates(int free_util) {
@@ -551,7 +94,7 @@ public class string_list {
 		int i;
 		int ret = 0;
 		for (i = 0; i < ModernizedCProgram.list.getNr(); i++) {
-			if ((ret = .fn(ModernizedCProgram.list.getItems()[i], cb_data))) {
+			if ((ret = /*Error: Function owner not recognized*/fn(ModernizedCProgram.list.getItems()[i], cb_data))) {
 				break;
 			} 
 		}
@@ -561,7 +104,7 @@ public class string_list {
 		int src;
 		int dst = 0;
 		for (src = 0; src < ModernizedCProgram.list.getNr(); src++) {
-			if (.want(ModernizedCProgram.list.getItems()[src], cb_data)) {
+			if (/*Error: Function owner not recognized*/want(ModernizedCProgram.list.getItems()[src], cb_data)) {
 				ModernizedCProgram.list.getItems()[dst++] = ModernizedCProgram.list.getItems()[src];
 			} else {
 					if (ModernizedCProgram.list.getStrdup_strings()) {
@@ -600,7 +143,7 @@ public class string_list {
 			int i;
 			if (clearfunc) {
 				for (i = 0; i < ModernizedCProgram.list.getNr(); i++) {
-					.clearfunc(ModernizedCProgram.list.getItems()[i].getUtil(), ModernizedCProgram.list.getItems()[i].getString());
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/clearfunc(ModernizedCProgram.list.getItems()[i].getUtil(), ModernizedCProgram.list.getItems()[i].getString());
 				}
 			} 
 			if (ModernizedCProgram.list.getStrdup_strings()) {
@@ -612,6 +155,17 @@ public class string_list {
 		} 
 		ModernizedCProgram.list.setItems(((Object)0));
 		ModernizedCProgram.list.setNr(ModernizedCProgram.list.setAlloc(0));
+	}
+	public void string_list_sort() {
+		string_list_sort_ctx sort_ctx = new string_list_sort_ctx(ModernizedCProgram.list.getCmp() ? ModernizedCProgram.list.getCmp() : strcmp);
+		do {
+			if (ModernizedCProgram.git_qsort_s((ModernizedCProgram.list.getItems()), (ModernizedCProgram.list.getNr()), /*Error: sizeof expression not supported yet*/, cmp_items, sort_ctx)) {
+				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\string-list.c", 239, "qsort_s() failed");
+			} 
+		} while (0);
+		Object[][] generatedItem = slp.getItem();
+		Object generatedNitems = slp.getNitems();
+		ModernizedCProgram.sane_qsort((generatedItem), (generatedNitems), /*Error: sizeof expression not supported yet*/, cmp_string);
 	}
 	public int unsorted_string_list_has_string(Object string) {
 		string_list_item string_list_item = new string_list_item();
@@ -635,18 +189,19 @@ public class string_list {
 			ModernizedCProgram.die("internal error in string_list_split(): list->strdup_strings must be set");
 		} 
 		string_list_item string_list_item = new string_list_item();
-		for (; ; ) {
+		string_list_item string_list_item = new string_list_item();
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			count++;
 			if (maxsplit >= 0 && count > maxsplit) {
-				ModernizedCProgram.list.string_list_append(p);
+				string_list_item.string_list_append(ModernizedCProgram.list, p);
 				return count;
 			} 
-			end = .strchr(p, delim);
+			end = /*Error: Function owner not recognized*/strchr(p, delim);
 			if (end) {
 				string_list_item.string_list_append_nodup(ModernizedCProgram.list, ModernizedCProgram.xmemdupz(p, end - p));
 				p = end + 1;
 			} else {
-					ModernizedCProgram.list.string_list_append(p);
+					string_list_item.string_list_append(ModernizedCProgram.list, p);
 					return count;
 			} 
 		}
@@ -658,58 +213,669 @@ public class string_list {
 		if (ModernizedCProgram.list.getStrdup_strings()) {
 			ModernizedCProgram.die("internal error in string_list_split_in_place(): list->strdup_strings must not be set");
 		} 
-		for (; ; ) {
+		string_list_item string_list_item = new string_list_item();
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			count++;
 			if (maxsplit >= 0 && count > maxsplit) {
-				ModernizedCProgram.list.string_list_append(p);
+				string_list_item.string_list_append(ModernizedCProgram.list, p);
 				return count;
 			} 
-			end = .strchr(p, delim);
+			end = /*Error: Function owner not recognized*/strchr(p, delim);
 			if (end) {
 				end = (byte)'\0';
-				ModernizedCProgram.list.string_list_append(p);
+				string_list_item.string_list_append(ModernizedCProgram.list, p);
 				p = end + 1;
 			} else {
-					ModernizedCProgram.list.string_list_append(p);
+					string_list_item.string_list_append(ModernizedCProgram.list, p);
 					return count;
 			} 
 		}
 	}
-	public void check_mailmap(Object contact) {
-		byte name;
-		byte mail;
-		size_t namelen = new size_t();
-		size_t maillen = new size_t();
-		ident_split ident = new ident_split();
-		if (ident.split_ident_line(contact, .strlen(contact))) {
-			ModernizedCProgram.die(ModernizedCProgram._("unable to parse contact: %s"), contact);
+	/*
+	 * "diff --no-index" support
+	 * Copyright (c) 2007 by Johannes Schindelin
+	 * Copyright (c) 2008 by Junio C Hamano
+	 */
+	public int read_directory_contents(Object path) {
+		DIR dir = new DIR();
+		dirent e = new dirent();
+		if (!(dir = ModernizedCProgram.opendir(path))) {
+			return ();
 		} 
-		Object generatedName_begin = ident.getName_begin();
-		name = generatedName_begin;
-		Object generatedName_end = ident.getName_end();
-		namelen = generatedName_end - generatedName_begin;
-		Object generatedMail_begin = ident.getMail_begin();
-		mail = generatedMail_begin;
-		Object generatedMail_end = ident.getMail_end();
-		maillen = generatedMail_end - generatedMail_begin;
-		mailmap.map_user(mail, maillen, name, namelen);
-		if (namelen) {
-			.printf("%.*s ", (int)namelen, name);
-		} 
-		.printf("<%.*s>\n", (int)maillen, mail);
+		dirent dirent = new dirent();
+		Object generatedD_name = e.getD_name();
+		string_list_item string_list_item = new string_list_item();
+		while ((e = dirent.readdir(dir))) {
+			if (!ModernizedCProgram.is_dot_or_dotdot(generatedD_name)) {
+				string_list_item.string_list_insert(ModernizedCProgram.list, generatedD_name);
+			} 
+		}
+		dir.closedir();
+		return 0/*
+		 * This should be "(standard input)" or something, but it will
+		 * probably expose many more breakages in the way no-index code
+		 * is bolted onto the diff callchain.
+		 */;
 	}
-	public int parse_key_value_squoted(byte buf) {
+	public void exclude_helpers_from_list() {
+		int i = 0;
+		while (i < ModernizedCProgram.list.getNr()) {
+			if (/*Error: Function owner not recognized*/strstr(ModernizedCProgram.list.getItems()[i].getString(), "--")) {
+				ModernizedCProgram.list.unsorted_string_list_delete_item(i, 0);
+			} else {
+					i++;
+			} 
+		}
+	}
+	public void list_builtins(int exclude_option) {
+		int i;
+		string_list_item string_list_item = new string_list_item();
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
+			if (exclude_option && (ModernizedCProgram.commands[i].getOption() & exclude_option)) {
+				continue;
+			} 
+			string_list_item.string_list_append(out, ModernizedCProgram.commands[i].getCmd());
+		}
+	}
+	public void handle_tags_and_duplicates() {
+		commit commit = new commit();
+		int i;
+		string_list_item[] generatedItems = this.getItems();
+		object generatedObject = commit.getObject();
+		object_id generatedOid = generatedObject.getOid();
+		int generatedType = object.getType();
+		int generatedNr = this.getNr();
+		for (i = generatedNr - 1; i >= 0; i--) {
+			byte name = generatedItems[i].getString();
+			object object = generatedItems[i].getUtil();
+			int mark;
+			switch (generatedType) {
+			case object_type.OBJ_COMMIT:
+					if (ModernizedCProgram.anonymize) {
+						name = ModernizedCProgram.anonymize_refname(name);
+					} 
+					commit = (commit)/* create refs pointing to already seen commits */object.rewrite_commit();
+					if (!commit/*
+									 * Neither this object nor any of its
+									 * ancestors touch any relevant paths, so
+									 * it has been filtered to nothing.  Delete
+									 * it.
+									 */) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("reset %s\nfrom %s\n\n", name, ModernizedCProgram.oid_to_hex(ModernizedCProgram.null_oid));
+						continue;
+					} 
+					mark = generatedObject.get_object_mark();
+					if (!mark/*
+									 * Getting here means we have a commit which
+									 * was excluded by a negative refspec (e.g.
+									 * fast-export ^master master).  If we are
+									 * referencing excluded commits, set the ref
+									 * to the exact commit.  Otherwise, the user
+									 * wants the branch exported but every commit
+									 * in its history to be deleted, which basically
+									 * just means deletion of the ref.
+									 */) {
+						if (!ModernizedCProgram.reference_excluded_commits) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(/* delete the ref */"reset %s\nfrom %s\n\n", name, ModernizedCProgram.oid_to_hex(ModernizedCProgram.null_oid));
+							continue;
+						} 
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("reset %s\nfrom %s\n\n", /* set ref to commit using oid, not mark */name, ModernizedCProgram.oid_to_hex(generatedOid));
+						continue;
+					} 
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("reset %s\nfrom :%d\n\n", name, mark);
+					ModernizedCProgram.show_progress();
+					break;
+			case object_type.OBJ_TAG:
+					(tag)object.handle_tag(name);
+					break;
+			}
+		}
+	}
+	public int populate_maildir_list(Object path) {
+		DIR dir = new DIR();
+		dirent dent = new dirent();
+		byte name = ((Object)0);
+		byte[] subs = new byte[]{"cur", "new", ((Object)0)};
+		byte sub;
+		int ret = -1;
+		dirent dirent = new dirent();
+		Object generatedD_name = dent.getD_name();
+		string_list_item string_list_item = new string_list_item();
+		for (sub = subs; sub; ++sub) {
+			ModernizedCProgram.free(name);
+			name = ModernizedCProgram.xstrfmt("%s/%s", path, sub);
+			if ((dir = ModernizedCProgram.opendir(name)) == ((Object)0)) {
+				if ((/*Error: Function owner not recognized*/_errno()) == 2) {
+					continue;
+				} 
+				();
+				;
+			} 
+			while ((dent = dirent.readdir(dir)) != ((Object)0)) {
+				if (generatedD_name[0] == (byte)'.') {
+					continue;
+				} 
+				ModernizedCProgram.free(name);
+				name = ModernizedCProgram.xstrfmt("%s/%s", sub, generatedD_name);
+				string_list_item.string_list_insert(ModernizedCProgram.list, name);
+			}
+			dir.closedir();
+		}
+		ret = 0;
+		return ret;
+	}
+	public void parse_one_symref_info(Object val, int len) {
+		byte sym;
+		byte target;
+		string_list_item item = new string_list_item();
+		if (!len) {
+			return /*Error: Unsupported expression*/;
+		} 
+		sym = ModernizedCProgram.xmemdupz(val, /* e.g. "symref=HEAD:refs/heads/master" */len);
+		target = /*Error: Function owner not recognized*/strchr(sym, (byte)':');
+		if (!target/* just "symref=something" */) {
+			;
+		} 
+		(target++) = (byte)'\0';
+		if (ModernizedCProgram.check_refname_format(sym, 1) || ModernizedCProgram.check_refname_format(target, 1/* "symref=bogus:pair */)) {
+			;
+		} 
+		string_list_item string_list_item = new string_list_item();
+		item = string_list_item.string_list_append_nodup(symref, sym);
+		item.setUtil(target);
+		return /*Error: Unsupported expression*/;
+		return /*Error: Unsupported expression*/;
+	}
+	public void print_error_files(Object main_msg, Object hints_msg, Integer errs) {
+		int generatedNr = this.getNr();
+		string_list_item[] generatedItems = this.getItems();
+		if (generatedNr) {
+			int i;
+			strbuf err_msg = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+			err_msg.strbuf_addstr(main_msg);
+			for (i = 0; i < generatedNr; i++) {
+				err_msg.strbuf_addf("\n    %s", generatedItems[i].getString());
+			}
+			if (ModernizedCProgram.advice_rm_hints) {
+				err_msg.strbuf_addstr(hints_msg);
+			} 
+			errs = ();
+			err_msg.strbuf_release();
+		} 
+	}
+	public int async_query_available_blobs(Object cmd) {
+		int err;
+		byte line;
+		cmd2process entry = new cmd2process();
+		child_process process = new child_process();
+		strbuf filter_status = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		((ModernizedCProgram.subprocess_map_initialized) ? (Object)0 : /*Error: Function owner not recognized*/_assert("subprocess_map_initialized", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\convert.c", 927));
+		subprocess_entry subprocess_entry = new subprocess_entry();
+		entry = (cmd2process)subprocess_entry.subprocess_find_entry(ModernizedCProgram.subprocess_map, cmd);
+		if (!entry) {
+			();
+			return 0;
+		} 
+		subprocess_entry generatedSubprocess = entry.getSubprocess();
+		child_process generatedProcess = generatedSubprocess.getProcess();
+		process = generatedProcess;
+		ModernizedCProgram.sigchain_push(SIGPIPE, ((__p_sig_fn_t)1));
+		int generatedIn = process.getIn();
+		err = ModernizedCProgram.packet_write_fmt_gently(generatedIn, "command=list_available_blobs\n");
+		if (err) {
+			;
+		} 
+		err = ModernizedCProgram.packet_flush_gently(generatedIn);
+		if (err) {
+			;
+		} 
+		int generatedOut = process.getOut();
+		string_list_item string_list_item = new string_list_item();
+		while ((line = ModernizedCProgram.packet_read_line(generatedOut, ((Object)0)))) {
+			byte path;
+			if (ModernizedCProgram.skip_prefix(line, "pathname=", ModernizedCProgram.path)) {
+				string_list_item.string_list_insert(available_paths, ModernizedCProgram.xstrdup(ModernizedCProgram.path));
+			} else {
+					;
+			} 
+		}
+		err = filter_status.subprocess_read_status(generatedOut);
+		if (err) {
+			;
+		} 
+		byte[] generatedBuf = filter_status.getBuf();
+		err = /*Error: Function owner not recognized*/strcmp(generatedBuf, "success");
+		if (err) {
+			entry.handle_filter_error(filter_status, 0);
+		} 
+		return !err;
+	}
+	public int read_dir_paths(Object path) {
+		DIR dh = new DIR();
+		dirent de = new dirent();
+		dh = ModernizedCProgram.opendir(path);
+		if (!dh) {
+			return -1;
+		} 
+		dirent dirent = new dirent();
+		Object generatedD_name = de.getD_name();
+		string_list_item string_list_item = new string_list_item();
+		while ((de = dirent.readdir(dh))) {
+			if (generatedD_name[0] != (byte)'.') {
+				string_list_item.string_list_append(out, generatedD_name);
+			} 
+		}
+		dh.closedir();
+		return 0;
+	}
+	public int add_remote_or_group(Object name) {
+		int prev_nr = ModernizedCProgram.list.getNr();
+		remote_group_data g = new remote_group_data();
+		g.setName(name);
+		g.setList(ModernizedCProgram.list);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config(get_remote_group, g);
+		string_list_item string_list_item = new string_list_item();
+		if (ModernizedCProgram.list.getNr() == prev_nr) {
+			remote remote = /*Error: Function owner not recognized*/remote_get(name);
+			if (!/*Error: Function owner not recognized*/remote_is_configured(ModernizedCProgram.remote, 0)) {
+				return 0;
+			} 
+			string_list_item.string_list_append(ModernizedCProgram.list, ModernizedCProgram.remote.getName());
+		} 
+		return 1;
+	}
+	public int fetch_multiple(int max_children) {
+		int i;
+		int result = 0;
+		argv_array argv = new argv_array(ModernizedCProgram.empty_argv, 0, 0);
+		if (!ModernizedCProgram.append && !ModernizedCProgram.dry_run) {
+			int errcode = ModernizedCProgram.truncate_fetch_head();
+			if (errcode) {
+				return errcode;
+			} 
+		} 
+		argv.argv_array_pushl("fetch", "--append", "--no-auto-gc", ((Object)0));
+		argv.add_options_to_argv();
+		Object[][] generatedArgv = argv.getArgv();
+		if (max_children != 1 && ModernizedCProgram.list.getNr() != 1) {
+			parallel_fetch_state state = new parallel_fetch_state(generatedArgv, ModernizedCProgram.list, 0, 0);
+			argv.argv_array_push("--end-of-options");
+			result = ModernizedCProgram.run_processes_parallel_tr2(max_children, fetch_next_remote, fetch_failed_to_start, fetch_finished, ModernizedCProgram.state, "fetch", "parallel/fetch");
+			if (!result) {
+				result = ModernizedCProgram.state.getResult();
+			} 
+		} else {
+				for (i = 0; i < ModernizedCProgram.list.getNr(); i++) {
+					byte name = ModernizedCProgram.list.getItems()[i].getString();
+					argv.argv_array_push(name);
+					if (ModernizedCProgram.verbosity >= 0) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("Fetching %s\n"), name);
+					} 
+					if (ModernizedCProgram.run_command_v_opt(generatedArgv, 2)) {
+						();
+						result = 1;
+					} 
+					argv.argv_array_pop();
+				}
+		} 
+		argv.argv_array_clear();
+		return !!result/*
+		 * Fetching from the promisor remote should use the given filter-spec
+		 * or inherit the default filter-spec from the config.
+		 */;
+	}
+	public void add_repack_all_option() {
+		if (ModernizedCProgram.prune_expire && !/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.prune_expire, "now")) {
+			ModernizedCProgram.repack.argv_array_push("-a");
+		} else {
+				ModernizedCProgram.repack.argv_array_push("-A");
+				if (ModernizedCProgram.prune_expire) {
+					ModernizedCProgram.repack.argv_array_pushf("--unpack-unreachable=%s", ModernizedCProgram.prune_expire);
+				} 
+		} 
+		if (keep_pack) {
+			keep_pack.for_each_string_list(keep_one_pack, ((Object)0));
+		} 
+	}
+	public int delete_refs(Object msg, int flags) {
+		ref_store ref_store = new ref_store();
+		return ModernizedCProgram.refs_delete_refs(ref_store.get_main_ref_store(ModernizedCProgram.the_repository), msg, refnames, flags);
+	}
+	public void free_submodules_oids() {
+		string_list_item item = new string_list_item();
+		string_list_item[] generatedItems = (submodules).getItems();
+		int generatedNr = (submodules).getNr();
+		Object generatedUtil = item.getUtil();
+		for (item = generatedItems; item && item < generatedItems + generatedNr; ++item) {
+			(oid_array)generatedUtil.oid_array_clear();
+		}
+		submodules.string_list_clear(1);
+	}
+	public void list_aliases() {
+		config_alias_data data = new config_alias_data(((Object)0), ((Object)0), ModernizedCProgram.list);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/read_early_config(config_alias_cb, data);
+	}
+	public int clone_submodule(Object path, Object gitdir, Object url, Object depth, int dissociate, int quiet, int progress) {
+		child_process cp = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
+		argv_array generatedArgs = cp.getArgs();
+		generatedArgs.argv_array_push("clone");
+		generatedArgs.argv_array_push("--no-checkout");
+		if (quiet) {
+			generatedArgs.argv_array_push("--quiet");
+		} 
+		if (progress) {
+			generatedArgs.argv_array_push("--progress");
+		} 
+		if (depth && depth) {
+			generatedArgs.argv_array_pushl("--depth", depth, ((Object)0));
+		} 
+		int generatedNr = this.getNr();
+		string_list_item[] generatedItems = (reference).getItems();
+		byte[] generatedString = item.getString();
+		if (generatedNr) {
+			string_list_item item = new string_list_item();
+			for (item = generatedItems; item && item < generatedItems + generatedNr; ++item) {
+				generatedArgs.argv_array_pushl("--reference", generatedString, ((Object)0));
+			}
+		} 
+		if (dissociate) {
+			generatedArgs.argv_array_push("--dissociate");
+		} 
+		if (gitdir && gitdir) {
+			generatedArgs.argv_array_pushl("--separate-git-dir", gitdir, ((Object)0));
+		} 
+		generatedArgs.argv_array_push("--");
+		generatedArgs.argv_array_push(url);
+		generatedArgs.argv_array_push(path);
+		cp.setGit_cmd(1);
+		argv_array generatedEnv_array = cp.getEnv_array();
+		generatedEnv_array.prepare_submodule_repo_env();
+		cp.setNo_stdin(1);
+		return cp.run_command();
+	}
+	public void prepare_possible_alternates(Object sm_name) {
+		byte sm_alternate = ((Object)0);
+		byte error_strategy = ((Object)0);
+		submodule_alternate_setup sas = new submodule_alternate_setup(((Object)0), SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_IGNORE, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_get_string("submodule.alternateLocation", sm_alternate);
+		if (!sm_alternate) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_get_string("submodule.alternateErrorStrategy", error_strategy);
+		if (!error_strategy) {
+			error_strategy = ModernizedCProgram.xstrdup("die");
+		} 
+		sas.setSubmodule_name(sm_name);
+		sas.setReference(reference);
+		if (!/*Error: Function owner not recognized*/strcmp(error_strategy, "die")) {
+			sas.setError_mode(SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_DIE);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(error_strategy, "info")) {
+			sas.setError_mode(SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_INFO);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(error_strategy, "ignore")) {
+			sas.setError_mode(SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_IGNORE);
+		} else {
+				ModernizedCProgram.die(ModernizedCProgram._("Value '%s' for submodule.alternateErrorStrategy is not recognized"), error_strategy);
+		} 
+		if (!/*Error: Function owner not recognized*/strcmp(sm_alternate, "superproject")) {
+			ModernizedCProgram.foreach_alt_odb(add_possible_reference_from_superproject, sas);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(sm_alternate, "no")) {
+			;
+		} else {
+				ModernizedCProgram.die(ModernizedCProgram._("Value '%s' for submodule.alternateLocation is not recognized"), sm_alternate);
+		} 
+		ModernizedCProgram.free(sm_alternate);
+		ModernizedCProgram.free(error_strategy);
+	}
+	public void list_config_item(Object prefix, Object str) {
+		string_list_item string_list_item = new string_list_item();
+		string_list_item.string_list_append_nodup(ModernizedCProgram.list, ModernizedCProgram.xstrfmt("%s.%s", prefix, str));
+	}
+	/*
+	 * Parse an argument into a string list.  arg should either be a
+	 * ':'-separated list of strings, or "-" to indicate an empty string
+	 * list (as opposed to "", which indicates a string list containing a
+	 * single empty string).  list->strdup_strings must be set.
+	 */
+	public void parse_string_list(Object arg) {
+		if (!/*Error: Function owner not recognized*/strcmp(arg, "-")) {
+			return /*Error: Unsupported expression*/;
+		} 
+		(Object)ModernizedCProgram.list.string_list_split(arg, (byte)':', -1);
+	}
+	public string_list get_parameters() {
+		string_list_item string_list_item = new string_list_item();
+		string_list_item string_list_item = new string_list_item();
+		Object generatedUtil = i.getUtil();
+		if (!ModernizedCProgram.query_params) {
+			byte query = /*Error: Function owner not recognized*/getenv("QUERY_STRING");
+			ModernizedCProgram.query_params = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+			while (query && query) {
+				byte name = ModernizedCProgram.url_decode_parameter_name(query);
+				byte value = ModernizedCProgram.url_decode_parameter_value(query);
+				string_list_item i = new string_list_item();
+				i = string_list_item.string_list_lookup(ModernizedCProgram.query_params, name);
+				if (!i) {
+					i = string_list_item.string_list_insert(ModernizedCProgram.query_params, name);
+				} else {
+						ModernizedCProgram.free(generatedUtil);
+				} 
+				i.setUtil(value);
+			}
+		} 
+		return ModernizedCProgram.query_params;
+	}
+	public string_list resolve_undo_read(Object data, long size) {
+		string_list resolve_undo = new string_list();
+		size_t len = new size_t();
+		byte endptr;
+		int i;
+		int rawsz = ModernizedCProgram.the_repository.getHash_algo().getRawsz();
+		resolve_undo = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+		resolve_undo.setStrdup_strings(1);
+		string_list_item string_list_item = new string_list_item();
+		Object generatedUtil = lost.getUtil();
+		Object generatedMode = ui.getMode();
+		Object generatedOid = ui.getOid();
+		while (size) {
+			string_list_item lost = new string_list_item();
+			resolve_undo_info ui = new resolve_undo_info();
+			len = /*Error: Function owner not recognized*/strlen(data) + 1;
+			if (size <= len) {
+				;
+			} 
+			lost = string_list_item.string_list_insert(resolve_undo, data);
+			if (!generatedUtil) {
+				lost.setUtil(ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/));
+			} 
+			ui = generatedUtil;
+			size -= len;
+			data += len;
+			for (i = 0; i < 3; i++) {
+				generatedMode[i] = /*Error: Function owner not recognized*/strtoul(data, endptr, 8);
+				if (!endptr || endptr == data || endptr) {
+					;
+				} 
+				len = (endptr + 1) - (byte)data;
+				if (size <= len) {
+					;
+				} 
+				size -= len;
+				data += len;
+			}
+			for (i = 0; i < 3; i++) {
+				if (!generatedMode[i]) {
+					continue;
+				} 
+				if (size < rawsz) {
+					;
+				} 
+				generatedOid[i].oidread((byte)data);
+				size -= rawsz;
+				data += rawsz;
+			}
+		}
+		return resolve_undo;
+		();
+		return ((Object)0);
+	}
+	public void write_config() {
+		int i;
+		int generatedNr = this.getNr();
+		string_list_item[] generatedItems = this.getItems();
+		for (i = 0; i < generatedNr; i++) {
+			if (/*Error: Function owner not recognized*/git_config_parse_parameter(generatedItems[i].getString(), write_one_config, ((Object)0)) < 0) {
+				ModernizedCProgram.die(ModernizedCProgram._("unable to write parameters to config file"));
+			} 
+		}
+	}
+	public void list_config_advices(Object prefix) {
+		int i;
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
+			ModernizedCProgram.list.list_config_item(prefix, advice_config[i].getName());
+		}
+	}
+	public int longest_ancestor_length(Object[] path) {
+		int i;
+		int max_len = -1;
+		if (!/*Error: Function owner not recognized*/strcmp(path, "/")) {
+			return -1;
+		} 
+		int generatedNr = this.getNr();
+		string_list_item[] generatedItems = this.getItems();
+		for (i = 0; i < generatedNr; i++) {
+			byte ceil = generatedItems[i].getString();
+			int len = /*Error: Function owner not recognized*/strlen(ceil);
+			if (ModernizedCProgram.len == 1 && ceil[0] == (byte)'/') {
+				ModernizedCProgram.len = /* root matches anything, with length 0 */0;
+			}  else if (!/*Error: Function owner not recognized*/strncmp(path, ceil, ModernizedCProgram.len) && path[ModernizedCProgram.len] == (byte)'/') {
+				;
+			} else {
+					continue;
+			} 
+			if (ModernizedCProgram.len > max_len) {
+				max_len = ModernizedCProgram.len;
+			} 
+		}
+		return max_len;
+	}
+	public int list_paths(Object with_tree, Object pattern) {
+		int i;
+		int ret;
+		byte m;
+		if (!pattern.getNr()) {
+			return 0;
+		} 
+		m = ModernizedCProgram.xcalloc(1, pattern.getNr());
+		if (with_tree) {
+			byte max_prefix = ModernizedCProgram.common_prefix(pattern);
+			ModernizedCProgram.the_index.overlay_tree_on_index(with_tree, max_prefix);
+			ModernizedCProgram.free(max_prefix);
+		} 
+		string_list_item string_list_item = new string_list_item();
+		for (i = 0; i < (ModernizedCProgram.the_index.getCache_nr()); i++) {
+			cache_entry ce = (ModernizedCProgram.the_index.getCache())[i];
+			string_list_item item = new string_list_item();
+			if (ce.getCe_flags() & (1 << 16)) {
+				continue;
+			} 
+			if (!ModernizedCProgram.ce_path_match(ModernizedCProgram.the_index, ce, pattern, m)) {
+				continue;
+			} 
+			item = string_list_item.string_list_insert(ModernizedCProgram.list, ce.getName());
+			if (((ce).getCe_flags() & (1 << 30))) {
+				item.setUtil(/* better a valid pointer than a fake one */item);
+			} 
+		}
+		ret = ModernizedCProgram.report_path_error(m, pattern);
+		ModernizedCProgram.free(m);
+		return ret;
+	}
+	public void add_remove_files() {
+		int i;
+		Object generatedUtil = p.getUtil();
+		byte[] generatedString = p.getString();
+		for (i = 0; i < ModernizedCProgram.list.getNr(); i++) {
+			stat st = new stat();
+			string_list_item p = (ModernizedCProgram.list.getItems()[i]);
+			if (generatedUtil) {
+				continue;
+			} 
+			if (!/*Error: Function owner not recognized*/lstat(generatedString, st)) {
+				if (ModernizedCProgram.add_to_index(ModernizedCProgram.the_index, (generatedString), (st), (false))) {
+					ModernizedCProgram.die(ModernizedCProgram._("updating files failed"));
+				} 
+			} else {
+					ModernizedCProgram.the_index.remove_file_from_index((generatedString));
+			} 
+		}
+	}
+	public void list_config_color_status_slots(Object prefix) {
+		int i;
+		byte[] extra = new byte[]{"added"};
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
+			ModernizedCProgram.list.list_config_item(prefix, extra[i]);
+		}
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
+			if (ModernizedCProgram.color_status_slots[i]) {
+				ModernizedCProgram.list.list_config_item(prefix, ModernizedCProgram.color_status_slots[i]);
+			} 
+		}
+	}
+	public int read_rebase_todolist(Object fname) {
+		strbuf line = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		FILE f = /*Error: Function owner not recognized*/fopen(ModernizedCProgram.git_path("%s", fname), "r");
+		if (!f) {
+			if ((/*Error: Function owner not recognized*/_errno()) == 2) {
+				return -1;
+			} 
+			ModernizedCProgram.die_errno("Could not open file %s for reading", ModernizedCProgram.git_path("%s", fname));
+		} 
+		Object generatedLen = line.getLen();
+		byte[] generatedBuf = line.getBuf();
+		string_list_item string_list_item = new string_list_item();
+		while (!ModernizedCProgram.strbuf_getline_lf(line, f)) {
+			if (generatedLen && generatedBuf[0] == ModernizedCProgram.comment_line_char) {
+				continue;
+			} 
+			line.strbuf_trim();
+			if (!generatedLen) {
+				continue;
+			} 
+			line.abbrev_sha1_in_line();
+			string_list_item.string_list_append(lines, generatedBuf);
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(f);
+		line.strbuf_release();
+		return 0;
+	}
+	public void find_longest_prefixes(Object patterns) {
+		argv_array sorted = new argv_array(ModernizedCProgram.empty_argv, 0, 0);
+		strbuf prefix = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		sorted.argv_array_pushv(patterns);
+		Object[][] generatedArgv = sorted.getArgv();
+		int generatedArgc = sorted.getArgc();
+		ModernizedCProgram.sane_qsort((generatedArgv), (generatedArgc), /*Error: sizeof expression not supported yet*/, qsort_strcmp);
+		ModernizedCProgram.find_longest_prefixes_1(out, prefix, generatedArgv, generatedArgc);
+		sorted.argv_array_clear();
+		prefix/*
+		 * This is the same as for_each_fullref_in(), but it tries to iterate
+		 * only over the patterns we'll care about. Note that it _doesn't_ do a full
+		 * pattern match, so the callback still has to match each ref individually.
+		 */.strbuf_release();
+	}
+	public int parse_key_value_squoted(Byte buf) {
+		string_list_item string_list_item = new string_list_item();
 		while (buf) {
 			string_list_item item = new string_list_item();
 			byte np;
-			byte cp = .strchr(buf, (byte)'=');
+			byte cp = /*Error: Function owner not recognized*/strchr(buf, (byte)'=');
 			if (!cp) {
 				np = ModernizedCProgram.gitstrchrnul(buf, (byte)'\n');
 				return ();
 			} 
 			np = ModernizedCProgram.gitstrchrnul(cp, (byte)'\n');
 			cp++ = (byte)'\0';
-			item = ModernizedCProgram.list.string_list_append(buf);
+			item = string_list_item.string_list_append(ModernizedCProgram.list, buf);
 			buf = np + (np == (byte)'\n');
 			np = (byte)'\0';
 			cp = ModernizedCProgram.sq_dequote(cp);
@@ -736,153 +902,86 @@ public class string_list {
 		 * something that the user does not expect.
 		 */;
 	}
-	public int clone_submodule(Object path, Object gitdir, Object url, Object depth, int dissociate, int quiet, int progress) {
-		child_process cp = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		argv_array generatedArgs = cp.getArgs();
-		generatedArgs.argv_array_push("clone");
-		generatedArgs.argv_array_push("--no-checkout");
-		if (quiet) {
-			generatedArgs.argv_array_push("--quiet");
+	public int add_exec_commands() {
+		byte todo_file = ModernizedCProgram.rebase_path_todo();
+		todo_list todo_list = new todo_list(new todo_list(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/));
+		int res;
+		strbuf generatedBuf = todo_list.getBuf();
+		if (generatedBuf.strbuf_read_file(todo_file, 0) < 0) {
+			return ();
 		} 
-		if (progress) {
-			generatedArgs.argv_array_push("--progress");
+		if (ModernizedCProgram.todo_list_parse_insn_buffer(ModernizedCProgram.the_repository, generatedBuf, todo_list)) {
+			todo_list.todo_list_release();
+			return ();
 		} 
-		if (depth && depth) {
-			generatedArgs.argv_array_pushl("--depth", depth, ((Object)0));
+		ModernizedCProgram.todo_list_add_exec_commands(todo_list, ModernizedCProgram.commands);
+		res = ModernizedCProgram.todo_list_write_to_file(ModernizedCProgram.the_repository, todo_list, todo_file, ((Object)0), ((Object)0), -1, 0);
+		todo_list.todo_list_release();
+		if (res) {
+			return ();
 		} 
-		int generatedNr = this.getNr();
-		string_list_item generatedItems = (reference).getItems();
-		byte generatedString = item.getString();
-		if (generatedNr) {
-			string_list_item item = new string_list_item();
-			for (item = generatedItems; item && item < generatedItems + generatedNr; ++item) {
-				generatedArgs.argv_array_pushl("--reference", generatedString, ((Object)0));
-			}
-		} 
-		if (dissociate) {
-			generatedArgs.argv_array_push("--dissociate");
-		} 
-		if (gitdir && gitdir) {
-			generatedArgs.argv_array_pushl("--separate-git-dir", gitdir, ((Object)0));
-		} 
-		generatedArgs.argv_array_push("--");
-		generatedArgs.argv_array_push(url);
-		generatedArgs.argv_array_push(path);
-		cp.setGit_cmd(1);
-		argv_array generatedEnv_array = cp.getEnv_array();
-		generatedEnv_array.prepare_submodule_repo_env();
-		cp.setNo_stdin(1);
-		return cp.run_command();
+		return 0;
 	}
-	public void prepare_possible_alternates(Object sm_name) {
-		byte sm_alternate = ((Object)0);
-		byte error_strategy = ((Object)0);
-		submodule_alternate_setup sas = new submodule_alternate_setup(((Object)0), SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_IGNORE, ((Object)0));
-		.git_config_get_string("submodule.alternateLocation", sm_alternate);
-		if (!sm_alternate) {
-			return ;
+	public void split_exec_commands(Object cmd) {
+		if (cmd && cmd) {
+			ModernizedCProgram.commands.string_list_split(cmd, (byte)'\n', -1);
+			ModernizedCProgram.commands.string_list_remove_empty_items(/* rebase.c adds a new line to cmd after every command,
+					 * so here the last command is always empty */0);
 		} 
-		.git_config_get_string("submodule.alternateErrorStrategy", error_strategy);
-		if (!error_strategy) {
-			error_strategy = ModernizedCProgram.xstrdup("die");
-		} 
-		sas.setSubmodule_name(sm_name);
-		sas.setReference(reference);
-		if (!.strcmp(error_strategy, "die")) {
-			sas.setError_mode(SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_DIE);
-		}  else if (!.strcmp(error_strategy, "info")) {
-			sas.setError_mode(SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_INFO);
-		}  else if (!.strcmp(error_strategy, "ignore")) {
-			sas.setError_mode(SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_IGNORE);
-		} else {
-				ModernizedCProgram.die(ModernizedCProgram._("Value '%s' for submodule.alternateErrorStrategy is not recognized"), error_strategy);
-		} 
-		if (!.strcmp(sm_alternate, "superproject")) {
-			ModernizedCProgram.foreach_alt_odb(add_possible_reference_from_superproject, sas);
-		}  else if (!.strcmp(sm_alternate, "no")) {
-			;
-		} else {
-				ModernizedCProgram.die(ModernizedCProgram._("Value '%s' for submodule.alternateLocation is not recognized"), sm_alternate);
-		} 
-		ModernizedCProgram.free(sm_alternate);
-		ModernizedCProgram.free(error_strategy);
 	}
-	public string_list get_parameters() {
-		string_list_item string_list_item = new string_list_item();
-		string_list_item string_list_item = new string_list_item();
-		Object generatedUtil = i.getUtil();
-		if (!ModernizedCProgram.query_params) {
-			byte query = .getenv("QUERY_STRING");
-			ModernizedCProgram.query_params = ModernizedCProgram.xcalloc(1, );
-			while (query && query) {
-				byte name = ModernizedCProgram.url_decode_parameter_name(query);
-				byte value = ModernizedCProgram.url_decode_parameter_value(query);
-				string_list_item i = new string_list_item();
-				i = string_list_item.string_list_lookup(ModernizedCProgram.query_params, name);
-				if (!i) {
-					i = string_list_item.string_list_insert(ModernizedCProgram.query_params, name);
-				} else {
-						ModernizedCProgram.free(generatedUtil);
-				} 
-				i.setUtil(value);
-			}
-		} 
-		return ModernizedCProgram.query_params;
-	}
-	public int add_remote_or_group(Object name) {
-		int prev_nr = ModernizedCProgram.list.getNr();
-		remote_group_data g = new remote_group_data();
-		g.setName(name);
-		g.setList(ModernizedCProgram.list);
-		.git_config(get_remote_group, g);
-		if (ModernizedCProgram.list.getNr() == prev_nr) {
-			remote remote = .remote_get(name);
-			if (!.remote_is_configured(ModernizedCProgram.remote, 0)) {
-				return 0;
-			} 
-			ModernizedCProgram.list.string_list_append(ModernizedCProgram.remote.getName());
-		} 
-		return 1;
-	}
-	public int fetch_multiple(int max_children) {
+	public void list_config_color_sideband_slots(Object prefix) {
 		int i;
-		int result = 0;
-		argv_array argv = new argv_array(ModernizedCProgram.empty_argv, 0, 0);
-		if (!ModernizedCProgram.append && !ModernizedCProgram.dry_run) {
-			int errcode = ModernizedCProgram.truncate_fetch_head();
-			if (errcode) {
-				return errcode;
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
+			ModernizedCProgram.list.list_config_item(prefix, ModernizedCProgram.keywords[i].getKeyword());
+		}
+	}
+	public void list_config_color_decorate_slots(Object prefix) {
+		int i;
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
+			if (ModernizedCProgram.color_decorate_slots[i]) {
+				ModernizedCProgram.list.list_config_item(prefix, ModernizedCProgram.color_decorate_slots[i]);
 			} 
+		}
+	}
+	public void die_with_unpushed_submodules() {
+		int i;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("The following submodule paths contain changes that can\nnot be found on any remote:\n"));
+		int generatedNr = this.getNr();
+		string_list_item[] generatedItems = this.getItems();
+		for (i = 0; i < generatedNr; i++) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "  %s\n", generatedItems[i].getString());
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("\nPlease try\n\n	git push --recurse-submodules=on-demand\n\nor cd to the path and use\n\n	git push\n\nto push them to a remote.\n\n"));
+		needs_pushing.string_list_clear(0);
+		ModernizedCProgram.die(ModernizedCProgram._("Aborting."));
+	}
+	public int ref_excluded(Object path) {
+		string_list_item item = new string_list_item();
+		if (!ModernizedCProgram.ref_excludes) {
+			return 0;
 		} 
-		argv.argv_array_pushl("fetch", "--append", "--no-auto-gc", ((Object)0));
-		argv.add_options_to_argv();
-		Object generatedArgv = argv.getArgv();
-		if (max_children != 1 && ModernizedCProgram.list.getNr() != 1) {
-			parallel_fetch_state state = new parallel_fetch_state(generatedArgv, ModernizedCProgram.list, 0, 0);
-			argv.argv_array_push("--end-of-options");
-			result = ModernizedCProgram.run_processes_parallel_tr2(max_children, fetch_next_remote, fetch_failed_to_start, fetch_finished, ModernizedCProgram.state, "fetch", "parallel/fetch");
-			if (!result) {
-				result = ModernizedCProgram.state.getResult();
+		byte[] generatedString = item.getString();
+		for (item = (ModernizedCProgram.ref_excludes).getItems(); item && item < (ModernizedCProgram.ref_excludes).getItems() + (ModernizedCProgram.ref_excludes).getNr(); ++item) {
+			if (!ModernizedCProgram.wildmatch(generatedString, path, 0)) {
+				return 1;
 			} 
-		} else {
-				for (i = 0; i < ModernizedCProgram.list.getNr(); i++) {
-					byte name = ModernizedCProgram.list.getItems()[i].getString();
-					argv.argv_array_push(name);
-					if (ModernizedCProgram.verbosity >= 0) {
-						.printf(ModernizedCProgram._("Fetching %s\n"), name);
-					} 
-					if (ModernizedCProgram.run_command_v_opt(generatedArgv, 2)) {
-						();
-						result = 1;
-					} 
-					argv.argv_array_pop();
-				}
+		}
+		return 0;
+	}
+	public void clear_ref_exclusion() {
+		if (ref_excludes_p) {
+			ref_excludes_p.string_list_clear(0);
+			ModernizedCProgram.free(ref_excludes_p);
 		} 
-		argv.argv_array_clear();
-		return !!result/*
-		 * Fetching from the promisor remote should use the given filter-spec
-		 * or inherit the default filter-spec from the config.
-		 */;
+		ref_excludes_p = ((Object)0);
+	}
+	public void add_ref_exclusion(Object exclude) {
+		if (!ref_excludes_p) {
+			ref_excludes_p = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+			(ref_excludes_p).setStrdup_strings(1);
+		} 
+		string_list_item string_list_item = new string_list_item();
+		string_list_item.string_list_append(ref_excludes_p, exclude);
 	}
 	public void add_mapping(Byte new_name, Byte new_email, Byte old_name, Byte old_email) {
 		mailmap_entry me = new mailmap_entry();
@@ -898,7 +997,7 @@ public class string_list {
 		if (generatedUtil) {
 			me = (mailmap_entry)generatedUtil;
 		} else {
-				me = ModernizedCProgram.xcalloc(1, );
+				me = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 				generatedNamemap.setStrdup_strings(1);
 				generatedNamemap.setCmp(namemap_cmp);
 				item.setUtil(me);
@@ -916,7 +1015,7 @@ public class string_list {
 				me.setEmail(ModernizedCProgram.xstrdup(new_email));
 			} 
 		} else {
-				mailmap_info mi = ModernizedCProgram.xcalloc(1, );
+				mailmap_info mi = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 				ModernizedCProgram.debug_mm("mailmap: adding (complex) entry for '%s'\n", old_email);
 				mi.setName(ModernizedCProgram.xstrdup_or_null(new_name));
 				mi.setEmail(ModernizedCProgram.xstrdup_or_null(new_email));
@@ -924,22 +1023,22 @@ public class string_list {
 		} 
 		ModernizedCProgram.debug_mm("mailmap:  '%s' <%s> -> '%s' <%s>\n", ModernizedCProgram.debug_str(old_name), old_email, ModernizedCProgram.debug_str(new_name), ModernizedCProgram.debug_str(new_email));
 	}
-	public void read_mailmap_line(Byte buffer, byte repo_abbrev) {
+	public void read_mailmap_line(byte[] buffer, Byte repo_abbrev) {
 		byte name1 = ((Object)0);
 		byte email1 = ((Object)0);
 		byte name2 = ((Object)0);
 		byte email2 = ((Object)0);
 		if (buffer[0] == (byte)'#') {
 			byte[] abbrev = "# repo-abbrev:";
-			int abblen =  - 1;
-			int len = .strlen(buffer);
+			int abblen = /*Error: sizeof expression not supported yet*/ - 1;
+			int len = /*Error: Function owner not recognized*/strlen(buffer);
 			if (!repo_abbrev) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (ModernizedCProgram.len && buffer[ModernizedCProgram.len - 1] == (byte)'\n') {
 				buffer[--ModernizedCProgram.len] = 0;
 			} 
-			if (!.strncmp(buffer, ModernizedCProgram.abbrev, abblen)) {
+			if (!/*Error: Function owner not recognized*/strncmp(buffer, ModernizedCProgram.abbrev, abblen)) {
 				byte cp;
 				ModernizedCProgram.free(repo_abbrev);
 				for (cp = buffer + abblen; ((ModernizedCProgram.sane_ctype[(byte)(cp)] & (true)) != 0); cp++) {
@@ -947,7 +1046,7 @@ public class string_list {
 				}
 				repo_abbrev = ModernizedCProgram.xstrdup(cp);
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if ((name2 = ModernizedCProgram.parse_name_and_email(buffer, name1, email1, 0)) != ((Object)0)) {
 			ModernizedCProgram.parse_name_and_email(name2, name2, email2, 1);
@@ -962,20 +1061,20 @@ public class string_list {
 		if (!filename) {
 			return 0;
 		} 
-		f = .fopen(filename, "r");
+		f = /*Error: Function owner not recognized*/fopen(filename, "r");
 		if (!f) {
-			if ((._errno()) == 2) {
+			if ((/*Error: Function owner not recognized*/_errno()) == 2) {
 				return 0;
 			} 
 			return ();
 		} 
-		while (.fgets(buffer, , f) != ((Object)0)) {
+		while (/*Error: Function owner not recognized*/fgets(buffer, /*Error: sizeof expression not supported yet*/, f) != ((Object)0)) {
 			map.read_mailmap_line(buffer, repo_abbrev);
 		}
-		.fclose(f);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(f);
 		return 0;
 	}
-	public void read_mailmap_string(byte buf, Byte repo_abbrev) {
+	public void read_mailmap_string(Byte buf, Byte repo_abbrev) {
 		while (buf) {
 			byte end = ModernizedCProgram.gitstrchrnul(buf, (byte)'\n');
 			if (end) {
@@ -1060,81 +1159,17 @@ public class string_list {
 			} 
 			if (generatedEmail) {
 				email = generatedEmail;
-				emaillen = .strlen(email);
+				emaillen = /*Error: Function owner not recognized*/strlen(email);
 			} 
 			if (generatedName) {
 				name = generatedName;
-				namelen = .strlen(name);
+				namelen = /*Error: Function owner not recognized*/strlen(name);
 			} 
 			ModernizedCProgram.debug_mm("map_user:  to '%.*s' <%.*s>\n", (int)namelen, ModernizedCProgram.debug_str(name), (int)emaillen, ModernizedCProgram.debug_str(email));
 			return 1;
 		} 
 		ModernizedCProgram.debug_mm("map_user:  --\n");
 		return 0;
-	}
-	public void list_config_color_interactive_slots(Object prefix) {
-		int i;
-		for (i = 0; i < ( /  + ( - 1)); i++) {
-			if (ModernizedCProgram.color_interactive_slots[i]) {
-				ModernizedCProgram.list.list_config_item(prefix, ModernizedCProgram.color_interactive_slots[i]);
-			} 
-		}
-	}
-	public void pretty_print_menus() {
-		int local_colopts = 0;
-		column_options copts = new column_options();
-		local_colopts = -1024 | 1;
-		.memset(copts, 0, );
-		copts.setIndent("  ");
-		copts.setPadding(2);
-		.print_columns(menu_list, local_colopts, copts);
-	}
-	public int async_query_available_blobs(Object cmd) {
-		int err;
-		byte line;
-		cmd2process entry = new cmd2process();
-		child_process process = new child_process();
-		strbuf filter_status = new strbuf(, , );
-		((ModernizedCProgram.subprocess_map_initialized) ? (Object)0 : ._assert("subprocess_map_initialized", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\convert.c", 927));
-		subprocess_entry subprocess_entry = new subprocess_entry();
-		entry = (cmd2process)subprocess_entry.subprocess_find_entry(ModernizedCProgram.subprocess_map, cmd);
-		if (!entry) {
-			();
-			return 0;
-		} 
-		subprocess_entry generatedSubprocess = entry.getSubprocess();
-		child_process generatedProcess = generatedSubprocess.getProcess();
-		process = generatedProcess;
-		ModernizedCProgram.sigchain_push(SIGPIPE, ((__p_sig_fn_t)1));
-		int generatedIn = process.getIn();
-		err = ModernizedCProgram.packet_write_fmt_gently(generatedIn, "command=list_available_blobs\n");
-		if (err) {
-			;
-		} 
-		err = ModernizedCProgram.packet_flush_gently(generatedIn);
-		if (err) {
-			;
-		} 
-		int generatedOut = process.getOut();
-		string_list_item string_list_item = new string_list_item();
-		while ((line = ModernizedCProgram.packet_read_line(generatedOut, ((Object)0)))) {
-			byte path;
-			if (ModernizedCProgram.skip_prefix(line, "pathname=", ModernizedCProgram.path)) {
-				string_list_item.string_list_insert(available_paths, ModernizedCProgram.xstrdup(ModernizedCProgram.path));
-			} else {
-					;
-			} 
-		}
-		err = filter_status.subprocess_read_status(generatedOut);
-		if (err) {
-			;
-		} 
-		byte generatedBuf = filter_status.getBuf();
-		err = .strcmp(generatedBuf, "success");
-		if (err) {
-			entry.handle_filter_error(filter_status, 0);
-		} 
-		return !err;
 	}
 	public void record_person_from_buf(int which, Object buffer) {
 		byte name_buf;
@@ -1143,11 +1178,11 @@ public class string_list {
 		string_list_item elem = new string_list_item();
 		byte field;
 		field = (which == (byte)'a') ? "\nauthor " : "\ncommitter ";
-		name = .strstr(buffer, field);
+		name = /*Error: Function owner not recognized*/strstr(buffer, field);
 		if (!name) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		name += .strlen(field);
+		name += /*Error: Function owner not recognized*/strlen(field);
 		name_end = ModernizedCProgram.gitstrchrnul(name, (byte)'<');
 		if (name_end) {
 			name_end--;
@@ -1156,7 +1191,7 @@ public class string_list {
 			name_end--;
 		}
 		if (name_end < name) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		name_buf = ModernizedCProgram.xmemdupz(name, name_end - name + 1);
 		string_list_item string_list_item = new string_list_item();
@@ -1170,170 +1205,126 @@ public class string_list {
 		elem.setUtil((Object)(((intptr_t)(generatedUtil)) + 1));
 		ModernizedCProgram.free(name_buf);
 	}
-	public int longest_ancestor_length(Object path) {
-		int i;
-		int max_len = -1;
-		if (!.strcmp(path, "/")) {
-			return -1;
-		} 
-		int generatedNr = this.getNr();
-		string_list_item generatedItems = this.getItems();
-		for (i = 0; i < generatedNr; i++) {
-			byte ceil = generatedItems[i].getString();
-			int len = .strlen(ceil);
-			if (ModernizedCProgram.len == 1 && ceil[0] == (byte)'/') {
-				ModernizedCProgram.len = /* root matches anything, with length 0 */0;
-			}  else if (!.strncmp(path, ceil, ModernizedCProgram.len) && path[ModernizedCProgram.len] == (byte)'/') {
-				;
-			} else {
-					continue;
-			} 
-			if (ModernizedCProgram.len > max_len) {
-				max_len = ModernizedCProgram.len;
-			} 
-		}
-		return max_len;
-	}
-	public void die_with_unpushed_submodules() {
-		int i;
-		.fprintf((_iob[2]), ModernizedCProgram._("The following submodule paths contain changes that can\nnot be found on any remote:\n"));
-		int generatedNr = this.getNr();
-		string_list_item generatedItems = this.getItems();
-		for (i = 0; i < generatedNr; i++) {
-			.fprintf((_iob[2]), "  %s\n", generatedItems[i].getString());
-		}
-		.fprintf((_iob[2]), ModernizedCProgram._("\nPlease try\n\n	git push --recurse-submodules=on-demand\n\nor cd to the path and use\n\n	git push\n\nto push them to a remote.\n\n"));
-		needs_pushing.string_list_clear(0);
-		ModernizedCProgram.die(ModernizedCProgram._("Aborting."));
-	}
-	public void print_error_files(Object main_msg, Object hints_msg, int errs) {
-		int generatedNr = this.getNr();
-		string_list_item generatedItems = this.getItems();
-		if (generatedNr) {
-			int i;
-			strbuf err_msg = new strbuf(, , );
-			err_msg.strbuf_addstr(main_msg);
-			for (i = 0; i < generatedNr; i++) {
-				err_msg.strbuf_addf("\n    %s", generatedItems[i].getString());
-			}
-			if (ModernizedCProgram.advice_rm_hints) {
-				err_msg.strbuf_addstr(hints_msg);
-			} 
-			errs = ();
-			err_msg.strbuf_release();
-		} 
-	}
-	public void add_repack_all_option() {
-		if (ModernizedCProgram.prune_expire && !.strcmp(ModernizedCProgram.prune_expire, "now")) {
-			ModernizedCProgram.repack.argv_array_push("-a");
-		} else {
-				ModernizedCProgram.repack.argv_array_push("-A");
-				if (ModernizedCProgram.prune_expire) {
-					ModernizedCProgram.repack.argv_array_pushf("--unpack-unreachable=%s", ModernizedCProgram.prune_expire);
-				} 
-		} 
-		if (keep_pack) {
-			keep_pack.for_each_string_list(keep_one_pack, ((Object)0));
-		} 
-	}
-	public int read_dir_paths(Object path) {
-		DIR dh = new DIR();
-		dirent de = new dirent();
-		dh = ModernizedCProgram.opendir(path);
-		if (!dh) {
-			return -1;
-		} 
-		dirent dirent = new dirent();
-		Object generatedD_name = de.getD_name();
-		while ((de = dirent.readdir(dh))) {
-			if (generatedD_name[0] != (byte)'.') {
-				out.string_list_append(generatedD_name);
-			} 
-		}
-		dh.closedir();
-		return 0;
-	}
-	public void list_aliases() {
-		config_alias_data data = new config_alias_data(((Object)0), ((Object)0), ModernizedCProgram.list);
-		.read_early_config(config_alias_cb, data);
-	}
-	public void write_config() {
-		int i;
-		int generatedNr = this.getNr();
-		string_list_item generatedItems = this.getItems();
-		for (i = 0; i < generatedNr; i++) {
-			if (.git_config_parse_parameter(generatedItems[i].getString(), write_one_config, ((Object)0)) < 0) {
-				ModernizedCProgram.die(ModernizedCProgram._("unable to write parameters to config file"));
-			} 
-		}
-	}
-	public int ref_excluded(Object path) {
-		string_list_item item = new string_list_item();
-		if (!ModernizedCProgram.ref_excludes) {
-			return 0;
-		} 
-		byte generatedString = item.getString();
-		for (item = (ModernizedCProgram.ref_excludes).getItems(); item && item < (ModernizedCProgram.ref_excludes).getItems() + (ModernizedCProgram.ref_excludes).getNr(); ++item) {
-			if (!ModernizedCProgram.wildmatch(generatedString, path, 0)) {
-				return 1;
-			} 
-		}
-		return 0;
-	}
-	public void clear_ref_exclusion() {
-		if (ref_excludes_p) {
-			ref_excludes_p.string_list_clear(0);
-			ModernizedCProgram.free(ref_excludes_p);
-		} 
-		ref_excludes_p = ((Object)0);
-	}
-	public void add_ref_exclusion(Object exclude) {
-		if (!ref_excludes_p) {
-			ref_excludes_p = ModernizedCProgram.xcalloc(1, );
-			(ref_excludes_p).setStrdup_strings(1);
-		} 
-		ref_excludes_p.string_list_append(exclude);
-	}
-	public void list_config_advices(Object prefix) {
-		int i;
-		for (i = 0; i < ( /  + ( - 1)); i++) {
-			ModernizedCProgram.list.list_config_item(prefix, advice_config[i].getName());
-		}
-	}
-	public int delete_refs(Object msg, int flags) {
-		ref_store ref_store = new ref_store();
-		return ModernizedCProgram.refs_delete_refs(ref_store.get_main_ref_store(ModernizedCProgram.the_repository), msg, refnames, flags);
-	}
-	/*
-	 * "diff --no-index" support
-	 * Copyright (c) 2007 by Johannes Schindelin
-	 * Copyright (c) 2008 by Junio C Hamano
-	 */
-	public int read_directory_contents(Object path) {
+	public void get_non_kept_pack_filenames(Object extra_keep) {
 		DIR dir = new DIR();
 		dirent e = new dirent();
-		if (!(dir = ModernizedCProgram.opendir(path))) {
-			return ();
+		byte fname;
+		if (!(dir = ModernizedCProgram.opendir(ModernizedCProgram.packdir))) {
+			return /*Error: Unsupported expression*/;
 		} 
 		dirent dirent = new dirent();
 		Object generatedD_name = e.getD_name();
 		string_list_item string_list_item = new string_list_item();
-		while ((e = dirent.readdir(dir))) {
-			if (!ModernizedCProgram.is_dot_or_dotdot(generatedD_name)) {
-				string_list_item.string_list_insert(ModernizedCProgram.list, generatedD_name);
+		while ((e = dirent.readdir(dir)) != ((Object)0)) {
+			size_t len = new size_t();
+			int i;
+			for (i = 0; i < extra_keep.getNr(); i++) {
+				if (!ModernizedCProgram.fspathcmp(generatedD_name, extra_keep.getItems()[i].getString())) {
+					break;
+				} 
+			}
+			if (extra_keep.getNr() > 0 && i < extra_keep.getNr()) {
+				continue;
+			} 
+			if (!ModernizedCProgram.strip_suffix(generatedD_name, ".pack", ModernizedCProgram.len)) {
+				continue;
+			} 
+			fname = ModernizedCProgram.xmemdupz(generatedD_name, ModernizedCProgram.len);
+			if (!ModernizedCProgram.file_exists(ModernizedCProgram.mkpath("%s/%s.keep", ModernizedCProgram.packdir, fname))) {
+				string_list_item.string_list_append_nodup(fname_list, fname);
+			} else {
+					ModernizedCProgram.free(fname);
 			} 
 		}
 		dir.closedir();
-		return 0/*
-		 * This should be "(standard input)" or something, but it will
-		 * probably expose many more breakages in the way no-index code
-		 * is bolted onto the diff callchain.
-		 */;
 	}
-	public string_list_item getItems() {
+	public void repack_promisor_objects(Object args) {
+		child_process cmd = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
+		FILE out = new FILE();
+		strbuf line = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		cmd.prepare_pack_objects(args);
+		cmd.setIn(-1/*
+			 * NEEDSWORK: Giving pack-objects only the OIDs without any ordering
+			 * hints may result in suboptimal deltas in the resulting pack. See if
+			 * the OIDs can be sent with fake paths such that pack-objects can use a
+			 * {type -> existing pack order} ordering when computing deltas instead
+			 * of a {type -> size} ordering, which may produce better deltas.
+			 */);
+		ModernizedCProgram.for_each_packed_object(write_oid, cmd, for_each_object_flags.FOR_EACH_OBJECT_PROMISOR_ONLY);
+		int generatedIn = cmd.getIn();
+		if (generatedIn == -1/* No packed objects; cmd was never started */) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedIn);
+		int generatedOut = cmd.getOut();
+		out = ModernizedCProgram.xfdopen(generatedOut, "r");
+		Object generatedLen = line.getLen();
+		byte[] generatedBuf = line.getBuf();
+		string_list_item string_list_item = new string_list_item();
+		while (ModernizedCProgram.strbuf_getline_lf(line, out) != (true)) {
+			byte promisor_name;
+			int fd;
+			if (generatedLen != ModernizedCProgram.the_repository.getHash_algo().getHexsz()) {
+				ModernizedCProgram.die(ModernizedCProgram._("repack: Expecting full hex object ID lines only from pack-objects."));
+			} 
+			string_list_item.string_list_append(ModernizedCProgram.names, generatedBuf);
+			promisor_name = ModernizedCProgram.mkpathdup("%s-%s.promisor", ModernizedCProgram.packtmp, generatedBuf);
+			fd = /*Error: Function owner not recognized*/open(promisor_name, -1024 | -1024 | 1, 600);
+			if (fd < 0) {
+				ModernizedCProgram.die_errno(ModernizedCProgram._("unable to create '%s'"), promisor_name);
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
+			ModernizedCProgram.free(promisor_name);
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(out);
+		if (cmd.finish_command()) {
+			ModernizedCProgram.die(ModernizedCProgram._("could not finish pack-objects to repack promisor objects"));
+		} 
+	}
+	public void check_mailmap(Object contact) {
+		byte name;
+		byte mail;
+		size_t namelen = new size_t();
+		size_t maillen = new size_t();
+		ident_split ident = new ident_split();
+		if (ident.split_ident_line(contact, /*Error: Function owner not recognized*/strlen(contact))) {
+			ModernizedCProgram.die(ModernizedCProgram._("unable to parse contact: %s"), contact);
+		} 
+		Object generatedName_begin = ident.getName_begin();
+		name = generatedName_begin;
+		Object generatedName_end = ident.getName_end();
+		namelen = generatedName_end - generatedName_begin;
+		Object generatedMail_begin = ident.getMail_begin();
+		mail = generatedMail_begin;
+		Object generatedMail_end = ident.getMail_end();
+		maillen = generatedMail_end - generatedMail_begin;
+		mailmap.map_user(mail, maillen, name, namelen);
+		if (namelen) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%.*s ", (int)namelen, name);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("<%.*s>\n", (int)maillen, mail);
+	}
+	public void list_config_color_interactive_slots(Object prefix) {
+		int i;
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
+			if (ModernizedCProgram.color_interactive_slots[i]) {
+				ModernizedCProgram.list.list_config_item(prefix, ModernizedCProgram.color_interactive_slots[i]);
+			} 
+		}
+	}
+	public void pretty_print_menus() {
+		int local_colopts = 0;
+		column_options copts = new column_options();
+		local_colopts = -1024 | 1;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(copts, 0, /*Error: sizeof expression not supported yet*/);
+		copts.setIndent("  ");
+		copts.setPadding(2);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/print_columns(menu_list, local_colopts, copts);
+	}
+	public string_list_item[] getItems() {
 		return items;
 	}
-	public void setItems(string_list_item newItems) {
+	public void setItems(string_list_item[] newItems) {
 		items = newItems;
 	}
 	public int getNr() {

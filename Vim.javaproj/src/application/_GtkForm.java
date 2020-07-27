@@ -24,10 +24,10 @@ public class _GtkForm {
 	
 	public void gtk_form_put(Object child_widget, Object x, Object y) {
 		GtkFormChild child = new GtkFormChild();
-		.g_return_if_fail((.GTK_CHECK_TYPE((form), (ModernizedCProgram.gtk_form_get_type()))));
-		child = .g_new(, /* LINTED: avoid warning: conversion to 'unsigned long' */1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/g_return_if_fail((/*Error: Function owner not recognized*/GTK_CHECK_TYPE((form), (ModernizedCProgram.gtk_form_get_type()))));
+		child = /*Error: Function owner not recognized*/g_new(, /* LINTED: avoid warning: conversion to 'unsigned long' */1);
 		if (child == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		child.setWidget(child_widget);
 		child.setWindow(((Object)0));
@@ -38,16 +38,16 @@ public class _GtkForm {
 		generatedWidget.getRequisition().setHeight(0);
 		child.setMapped(0);
 		Object generatedChildren = this.getChildren();
-		this.setChildren(.g_list_append(generatedChildren, child/* child->window must be created and attached to the widget _before_
+		this.setChildren(/*Error: Function owner not recognized*/g_list_append(generatedChildren, child/* child->window must be created and attached to the widget _before_
 		     * it has been realized, or else things will break with GTK2.  Note
 		     * that gtk_widget_set_parent() realizes the widget if it's visible
 		     * and its parent is mapped.
 		     */));
-		if (.gtk_widget_get_realized(.GTK_WIDGET(form))) {
+		if (/*Error: Function owner not recognized*/gtk_widget_get_realized(/*Error: Function owner not recognized*/GTK_WIDGET(form))) {
 			ModernizedCProgram.gtk_form_attach_child_window(form, child);
 		} 
-		.gtk_widget_set_parent(child_widget, .GTK_WIDGET(form));
-		if (.gtk_widget_get_realized(.GTK_WIDGET(form)) && !.gtk_widget_get_realized(child_widget)) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/gtk_widget_set_parent(child_widget, /*Error: Function owner not recognized*/GTK_WIDGET(form));
+		if (/*Error: Function owner not recognized*/gtk_widget_get_realized(/*Error: Function owner not recognized*/GTK_WIDGET(form)) && !/*Error: Function owner not recognized*/gtk_widget_get_realized(child_widget)) {
 			ModernizedCProgram.gtk_form_realize_child(form, child);
 		} 
 		ModernizedCProgram.gtk_form_position_child(form, child, 1);
@@ -55,7 +55,7 @@ public class _GtkForm {
 	public void gtk_form_move(Object child_widget, Object x, Object y) {
 		 tmp_list = new ();
 		GtkFormChild child = new GtkFormChild();
-		.g_return_if_fail((.GTK_CHECK_TYPE((form), (ModernizedCProgram.gtk_form_get_type()))));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/g_return_if_fail((/*Error: Function owner not recognized*/GTK_CHECK_TYPE((form), (ModernizedCProgram.gtk_form_get_type()))));
 		Object generatedWidget = child.getWidget();
 		Object generatedChildren = this.getChildren();
 		for (tmp_list = generatedChildren; tmp_list; tmp_list = tmp_list.getNext()) {
@@ -64,22 +64,22 @@ public class _GtkForm {
 				child.setX(x);
 				child.setY(y);
 				ModernizedCProgram.gtk_form_position_child(form, child, 1);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		}
 	}
 	public void gtk_form_freeze() {
-		.g_return_if_fail((.GTK_CHECK_TYPE((form), (ModernizedCProgram.gtk_form_get_type()))));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/g_return_if_fail((/*Error: Function owner not recognized*/GTK_CHECK_TYPE((form), (ModernizedCProgram.gtk_form_get_type()))));
 		Object generatedFreeze_count = this.getFreeze_count();
 		++generatedFreeze_count;
 	}
 	public void gtk_form_thaw() {
-		.g_return_if_fail((.GTK_CHECK_TYPE((form), (ModernizedCProgram.gtk_form_get_type()))));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/g_return_if_fail((/*Error: Function owner not recognized*/GTK_CHECK_TYPE((form), (ModernizedCProgram.gtk_form_get_type()))));
 		Object generatedFreeze_count = this.getFreeze_count();
 		if (generatedFreeze_count) {
 			if (!(--generatedFreeze_count)) {
 				form.gtk_form_position_children();
-				.gtk_widget_queue_draw(.GTK_WIDGET(form/* Basic Object handling procedures
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/gtk_widget_queue_draw(/*Error: Function owner not recognized*/GTK_WIDGET(form/* Basic Object handling procedures
 				 */));
 			} 
 		} 
@@ -107,15 +107,15 @@ public class _GtkForm {
 		 widget = new ();
 		 event = new ();
 		 allocation = new ();
-		widget = .GTK_WIDGET(form);
-		.gtk_widget_get_allocation(widget, allocation);
+		widget = /*Error: Function owner not recognized*/GTK_WIDGET(form);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/gtk_widget_get_allocation(widget, allocation);
 		event.setType(GDK_CONFIGURE);
-		event.setWindow(.gtk_widget_get_window(widget));
+		event.setWindow(/*Error: Function owner not recognized*/gtk_widget_get_window(widget));
 		event.setX(allocation.getX());
 		event.setY(allocation.getY());
 		event.setWidth(allocation.getWidth());
 		event.setHeight(allocation.getHeight());
-		.gtk_main_do_event((int)event);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/gtk_main_do_event((int)event);
 	}
 	public Object getContainer() {
 		return container;

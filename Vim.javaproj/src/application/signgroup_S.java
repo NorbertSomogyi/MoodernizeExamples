@@ -26,11 +26,11 @@ public class signgroup_S {
 		Object generatedSg_name = group.getSg_name();
 		Object generatedRefcount = group.getRefcount();
 		if ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-			group = ModernizedCProgram.alloc(((size_t)((signgroup_T)0).getSg_name()) + .strlen((byte)(groupname)) + 1);
+			group = ModernizedCProgram.alloc(((size_t)((signgroup_T)0).getSg_name()) + /*Error: Function owner not recognized*/strlen((byte)(groupname)) + 1);
 			if (group == ((Object)0)) {
 				return ((Object)0);
 			} 
-			.strcpy((byte)(generatedSg_name), (byte)(groupname));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(generatedSg_name), (byte)(groupname));
 			group.setRefcount(1);
 			group.setNext_sign_id(1);
 			ModernizedCProgram.hash_add_item(ModernizedCProgram.sg_table, hi, generatedSg_name, hash);

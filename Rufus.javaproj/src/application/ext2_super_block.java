@@ -275,404 +275,6 @@ public class ext2_super_block {
 		 * do the swap there.
 		 */);
 	}
-	public Object ext2fs_initialize(Object name, int flags, Object manager, Object ret_fs) {
-		ext2_filsys fs = new ext2_filsys();
-		 retval = new ();
-		ext2_super_block super = new ext2_super_block();
-		int rem;
-		int overhead = 0;
-		int ipg;
-		 i = new ();
-		 free_blocks = new ();
-		 numblocks = new ();
-		int rsv_gdt;
-		int csum_flag;
-		int bigalloc_flag;
-		int io_flags;
-		int has_bg;
-		int reserved_inos;
-		byte buf = 0;
-		byte c;
-		double reserved_ratio;
-		byte time_env;
-		if (!param || !param.ext2fs_blocks_count()) {
-			return EXT2_ET_INVALID_ARGUMENT;
-		} 
-		retval = ModernizedCProgram.ext2fs_get_mem(, fs);
-		if (retval) {
-			return retval;
-		} 
-		.memset(fs, 0, );
-		fs.setMagic(EXT2_ET_MAGIC_EXT2FS_FILSYS);
-		fs.setFlags(flags | -1024);
-		fs.setUmask(22);
-		fs.setDefault_bitmap_type(2);
-		time_env = .getenv("E2FSPROGS_FAKE_TIME");
-		if (time_env) {
-			fs.setNow(.strtoul(time_env, ((Object)0), 0));
-		} 
-		io_flags = IO_FLAG_RW;
-		if (flags & -1024) {
-			io_flags |=  IO_FLAG_EXCLUSIVE;
-		} 
-		if (flags & -1024) {
-			io_flags |=  IO_FLAG_DIRECT_IO;
-		} 
-		io_flags |=  -1024;
-		retval = .UNRECOGNIZEDFUNCTIONNAME(name, io_flags, fs.getIo());
-		if (retval) {
-			;
-		} 
-		fs.setImage_io(fs.getIo());
-		fs.getIo().setApp_data(fs);
-		retval = ModernizedCProgram.ext2fs_get_mem(.strlen(name) + 1, fs.getDevice_name());
-		if (retval) {
-			;
-		} 
-		.strcpy(fs.getDevice_name(), name);
-		retval = ModernizedCProgram.ext2fs_get_mem(1024, super);
-		if (retval) {
-			;
-		} 
-		fs.setSuper(super);
-		.memset(super, 0, 1024);
-		super.setS_magic(-1024);
-		super.setS_state(-1024);
-		bigalloc_flag = param.ext2fs_has_feature_bigalloc();
-		Object generatedS_log_block_size = this.getS_log_block_size();
-		(super.setS_log_block_size(generatedS_log_block_size));
-		Object generatedS_log_cluster_size = this.getS_log_cluster_size();
-		if (bigalloc_flag) {
-			(super.setS_log_cluster_size(generatedS_log_cluster_size ? generatedS_log_cluster_size : (generatedS_log_block_size + 4)));
-			if (generatedS_log_block_size > generatedS_log_cluster_size) {
-				retval = EXT2_ET_INVALID_ARGUMENT;
-				;
-			} 
-		} else {
-				super.setS_log_cluster_size(generatedS_log_block_size);
-		} 
-		Object generatedS_first_data_block = this.getS_first_data_block();
-		(super.setS_first_data_block(generatedS_first_data_block ? generatedS_first_data_block : (generatedS_log_cluster_size ? 0 : 1)));
-		Object generatedS_max_mnt_count = this.getS_max_mnt_count();
-		(super.setS_max_mnt_count(generatedS_max_mnt_count ? generatedS_max_mnt_count : (false)));
-		Object generatedS_errors = this.getS_errors();
-		(super.setS_errors(generatedS_errors ? generatedS_errors : (true)));
-		Object generatedS_feature_compat = this.getS_feature_compat();
-		(super.setS_feature_compat(generatedS_feature_compat ? generatedS_feature_compat : (false)));
-		Object generatedS_feature_incompat = this.getS_feature_incompat();
-		(super.setS_feature_incompat(generatedS_feature_incompat ? generatedS_feature_incompat : (false)));
-		Object generatedS_feature_ro_compat = this.getS_feature_ro_compat();
-		(super.setS_feature_ro_compat(generatedS_feature_ro_compat ? generatedS_feature_ro_compat : (false)));
-		Object generatedS_default_mount_opts = this.getS_default_mount_opts();
-		(super.setS_default_mount_opts(generatedS_default_mount_opts ? generatedS_default_mount_opts : (false)));
-		Object generatedS_first_meta_bg = this.getS_first_meta_bg();
-		(super.setS_first_meta_bg(generatedS_first_meta_bg ? generatedS_first_meta_bg : (false)));
-		Object generatedS_raid_stride = this.getS_raid_stride();
-		(super.setS_raid_stride(generatedS_raid_stride ? generatedS_raid_stride : (/* default stride size: 0 */false)));
-		Object generatedS_raid_stripe_width = this.getS_raid_stripe_width();
-		(super.setS_raid_stripe_width(generatedS_raid_stripe_width ? generatedS_raid_stripe_width : (/* default stripe width: 0 */false)));
-		Object generatedS_log_groups_per_flex = this.getS_log_groups_per_flex();
-		(super.setS_log_groups_per_flex(generatedS_log_groups_per_flex ? generatedS_log_groups_per_flex : (false)));
-		Object generatedS_flags = this.getS_flags();
-		(super.setS_flags(generatedS_flags ? generatedS_flags : (false)));
-		Object generatedS_backup_bgs = super.getS_backup_bgs();
-		(generatedS_backup_bgs[0] = generatedS_backup_bgs[0]);
-		(generatedS_backup_bgs[1] = generatedS_backup_bgs[1]);
-		Object generatedS_encoding = this.getS_encoding();
-		(super.setS_encoding(generatedS_encoding));
-		Object generatedS_encoding_flags = this.getS_encoding_flags();
-		(super.setS_encoding_flags(generatedS_encoding_flags));
-		if (generatedS_feature_incompat & ~(-1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | (false) | -1024 | -1024 | -1024 | -1024 | -1024 | -1024)) {
-			retval = EXT2_ET_UNSUPP_FEATURE;
-			;
-		} 
-		if (generatedS_feature_ro_compat & ~(-1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024)) {
-			retval = EXT2_ET_RO_UNSUPP_FEATURE;
-			;
-		} 
-		Object generatedS_rev_level = this.getS_rev_level();
-		(super.setS_rev_level(generatedS_rev_level ? generatedS_rev_level : (false)));
-		Object generatedS_first_ino = this.getS_first_ino();
-		Object generatedS_inode_size = this.getS_inode_size();
-		Object generatedS_min_extra_isize = this.getS_min_extra_isize();
-		Object generatedS_want_extra_isize = this.getS_want_extra_isize();
-		if (generatedS_rev_level >= 1) {
-			(super.setS_first_ino(generatedS_first_ino ? generatedS_first_ino : (true)));
-			(super.setS_inode_size(generatedS_inode_size ? generatedS_inode_size : (true)));
-			if (generatedS_inode_size >= ) {
-				int extra_isize =  - 128;
-				(super.setS_min_extra_isize(generatedS_min_extra_isize ? generatedS_min_extra_isize : (extra_isize)));
-				(super.setS_want_extra_isize(generatedS_want_extra_isize ? generatedS_want_extra_isize : (extra_isize)));
-			} 
-		} else {
-				super.setS_first_ino(11);
-				super.setS_inode_size(128);
-		} 
-		Object generatedS_checkinterval = this.getS_checkinterval();
-		(super.setS_checkinterval(generatedS_checkinterval ? generatedS_checkinterval : (false)));
-		super.setS_mkfs_time(super.setS_lastcheck(fs.getNow() ? fs.getNow() : .time(((Object)0))));
-		super.setS_creator_os(0);
-		fs.setFragsize(fs.setBlocksize(((1 << 10) << generatedS_log_block_size)));
-		fs.setCluster_ratio_bits(generatedS_log_cluster_size - generatedS_log_block_size);
-		Object generatedS_blocks_per_group = this.getS_blocks_per_group();
-		Object generatedS_clusters_per_group = this.getS_clusters_per_group();
-		if (bigalloc_flag) {
-			long bpg;
-			if (generatedS_blocks_per_group && generatedS_clusters_per_group && ((generatedS_clusters_per_group * (-1024 << (fs).getCluster_ratio_bits())) != generatedS_blocks_per_group)) {
-				retval = EXT2_ET_INVALID_ARGUMENT;
-				;
-			} 
-			if (generatedS_clusters_per_group) {
-				(super.setS_clusters_per_group(generatedS_clusters_per_group));
-			}  else if (generatedS_blocks_per_group) {
-				super.setS_clusters_per_group(generatedS_blocks_per_group / (-1024 << (fs).getCluster_ratio_bits()));
-			}  else if (generatedS_log_cluster_size + 15 < 32) {
-				super.setS_clusters_per_group(fs.getBlocksize() * 8);
-			} else {
-					super.setS_clusters_per_group((fs.getBlocksize() - 1) * 8);
-			} 
-			if (generatedS_clusters_per_group > (((int)1 << 16) - 8)) {
-				super.setS_clusters_per_group((((int)1 << 16) - 8));
-			} 
-			bpg = (((long)generatedS_clusters_per_group) << (fs).getCluster_ratio_bits());
-			if (bpg >= (((long)1) << 32)) {
-				retval = EXT2_ET_INVALID_ARGUMENT;
-				;
-			} 
-			super.setS_blocks_per_group(bpg);
-		} else {
-				(super.setS_blocks_per_group(generatedS_blocks_per_group ? generatedS_blocks_per_group : (fs.getBlocksize() * 8)));
-				if (generatedS_blocks_per_group > ((((int)1 << 16) - 8) * (((1 << 10) << generatedS_log_cluster_size) / ((1 << 10) << generatedS_log_block_size)))) {
-					super.setS_blocks_per_group(((((int)1 << 16) - 8) * (((1 << 10) << generatedS_log_cluster_size) / ((1 << 10) << generatedS_log_block_size))));
-				} 
-				super.setS_clusters_per_group(generatedS_blocks_per_group);
-		} 
-		super.ext2fs_blocks_count_set(param.ext2fs_blocks_count() & ~(.UNRECOGNIZEDFUNCTIONNAME((-1024 << (fs).getCluster_ratio_bits()) - 1)));
-		super.ext2fs_r_blocks_count_set(param.ext2fs_r_blocks_count());
-		if (super.ext2fs_r_blocks_count() >= param.ext2fs_blocks_count()) {
-			retval = EXT2_ET_INVALID_ARGUMENT;
-			;
-		} 
-		Object generatedS_mmp_update_interval = this.getS_mmp_update_interval();
-		(super.setS_mmp_update_interval(generatedS_mmp_update_interval ? generatedS_mmp_update_interval : (false/*
-			 * If we're creating an external journal device, we don't need
-			 * to bother with the rest.
-			 */)));
-		if (super.ext2fs_has_feature_journal_dev()) {
-			fs.setGroup_desc_count(0);
-			ModernizedCProgram.ext2fs_mark_super_dirty(fs);
-			ret_fs = fs;
-			return 0;
-		} 
-		if (fs.getGroup_desc_count() == 0) {
-			retval = EXT2_ET_TOOSMALL;
-			;
-		} 
-		Object generatedS_desc_size = this.getS_desc_size();
-		(super.setS_desc_size(generatedS_desc_size ? generatedS_desc_size : (super.ext2fs_has_feature_64bit() ? 64 : 0)));
-		if (((generatedS_feature_incompat & -1024) ? generatedS_desc_size : 32) == 0) {
-			retval = EXT2_ET_UNEXPECTED_BLOCK_SIZE;
-			;
-		} 
-		fs.setDesc_blocks(ModernizedCProgram.ext2fs_div_ceil(fs.getGroup_desc_count(), (((1 << 10) << generatedS_log_block_size) / ((generatedS_feature_incompat & -1024) ? generatedS_desc_size : 32))));
-		i = fs.getBlocksize() >= 4096 ? 1 : 4096 / fs.getBlocksize();
-		Object generatedS_inodes_count = this.getS_inodes_count();
-		if (super.ext2fs_has_feature_64bit() && (super.ext2fs_blocks_count() / i) >= (-1024 << 32)) {
-			(super.setS_inodes_count(generatedS_inodes_count ? generatedS_inodes_count : (~-1024)));
-		} else {
-				(super.setS_inodes_count(generatedS_inodes_count ? generatedS_inodes_count : (super.ext2fs_blocks_count() / i/*
-					 * Make sure we have at least EXT2_FIRST_INO + 1 inodes, so
-					 * that we have enough inodes for the filesystem(!)
-					 */)));
-		} 
-		if (generatedS_inodes_count < ((generatedS_rev_level == 0) ? 11 : generatedS_first_ino) + 1) {
-			super.setS_inodes_count(((generatedS_rev_level == 0) ? 11 : generatedS_first_ino) + 1/*
-				 * There should be at least as many inodes as the user
-				 * requested.  Figure out how many inodes per group that
-				 * should be.  But make sure that we don't allocate more than
-				 * one bitmap's worth of inodes each group.
-				 */);
-		} 
-		ipg = ModernizedCProgram.ext2fs_div_ceil(generatedS_inodes_count, fs.getGroup_desc_count());
-		if (ipg > fs.getBlocksize() * 8) {
-			if (!bigalloc_flag && generatedS_blocks_per_group >= 256) {
-				generatedS_blocks_per_group -= /* Try again with slightly different parameters */8;
-				super.ext2fs_blocks_count_set(param.ext2fs_blocks_count());
-				super.setS_clusters_per_group(generatedS_blocks_per_group);
-				;
-			} else {
-					retval = EXT2_ET_TOO_MANY_INODES;
-					;
-			} 
-		} 
-		if (ipg > (int)(((int)1 << 16) - (((1 << 10) << generatedS_log_block_size) / ((generatedS_rev_level == 0) ? 128 : generatedS_inode_size)))) {
-			ipg = (((int)1 << 16) - (((1 << 10) << generatedS_log_block_size) / ((generatedS_rev_level == 0) ? 128 : generatedS_inode_size)));
-		} 
-		Object generatedS_inodes_per_group = super.getS_inodes_per_group();
-		fs.setInode_blocks_per_group((((generatedS_inodes_per_group * ((generatedS_rev_level == 0) ? 128 : generatedS_inode_size)) + ((1 << 10) << generatedS_log_block_size) - 1) / ((1 << 10) << generatedS_log_block_size)));
-		super.setS_inodes_per_group(((fs.getInode_blocks_per_group() * ((1 << 10) << generatedS_log_block_size)) / ((generatedS_rev_level == 0) ? 128 : generatedS_inode_size)));
-		if (generatedS_inodes_per_group < 8) {
-			super.setS_inodes_per_group(8);
-		} 
-		generatedS_inodes_per_group &=  ~7;
-		fs.setInode_blocks_per_group((((generatedS_inodes_per_group * ((generatedS_rev_level == 0) ? 128 : generatedS_inode_size)) + ((1 << 10) << generatedS_log_block_size) - 1) / ((1 << 10) << generatedS_log_block_size)));
-		if (()generatedS_inodes_per_group * fs.getGroup_desc_count() > ~-1024) {
-			ipg--;
-			;
-		} 
-		super.setS_inodes_count(generatedS_inodes_per_group * fs.getGroup_desc_count());
-		super.setS_free_inodes_count(generatedS_inodes_count);
-		if (super.ext2fs_has_feature_resize_inode()) {
-			rsv_gdt = ModernizedCProgram.calc_reserved_gdt_blocks(fs);
-		} else {
-				rsv_gdt = 0;
-		} 
-		Object generatedS_reserved_gdt_blocks = this.getS_reserved_gdt_blocks();
-		(super.setS_reserved_gdt_blocks(generatedS_reserved_gdt_blocks ? generatedS_reserved_gdt_blocks : (rsv_gdt)));
-		if (generatedS_reserved_gdt_blocks > (((1 << 10) << generatedS_log_block_size) / )) {
-			retval = EXT2_ET_RES_GDT_BLOCKS;
-			;
-		} 
-		if (generatedS_reserved_gdt_blocks + fs.getDesc_blocks() > generatedS_blocks_per_group * 3 / 4) {
-			fs.getSuper().ext2fs_set_feature_meta_bg();
-			fs.getSuper().ext2fs_clear_feature_resize_inode();
-			(super.setS_reserved_gdt_blocks(generatedS_reserved_gdt_blocks ? generatedS_reserved_gdt_blocks : (false/*
-				 * Calculate the maximum number of bookkeeping blocks per
-				 * group.  It includes the superblock, the block group
-				 * descriptors, the block bitmap, the inode bitmap, the inode
-				 * table, and the reserved gdt blocks.
-				 */)));
-		} 
-		overhead = (int)(3 + fs.getInode_blocks_per_group() + generatedS_reserved_gdt_blocks);
-		if (fs.getSuper().ext2fs_has_feature_meta_bg()) {
-			overhead++;
-		} else {
-				overhead += fs.getDesc_blocks();
-		} 
-		if (overhead > generatedS_blocks_per_group) {
-			retval = EXT2_ET_TOO_MANY_INODES;
-			;
-		} 
-		overhead = (int)(2 + fs.getInode_blocks_per_group());
-		has_bg = 0;
-		if (super/*
-				 * We have to do this manually since
-				 * super->s_backup_bgs hasn't been set up yet.
-				 */.ext2fs_has_feature_sparse_super2()) {
-			if (fs.getGroup_desc_count() == 2) {
-				has_bg = generatedS_backup_bgs[0] != 0;
-			} else {
-					has_bg = generatedS_backup_bgs[1] != 0;
-			} 
-		} else {
-				has_bg = ModernizedCProgram.ext2fs_bg_has_super(fs, fs.getGroup_desc_count() - 1);
-		} 
-		if (has_bg) {
-			overhead += 1 + fs.getDesc_blocks() + generatedS_reserved_gdt_blocks;
-		} 
-		rem = ((super.ext2fs_blocks_count() - generatedS_first_data_block) % generatedS_blocks_per_group);
-		if ((fs.getGroup_desc_count() == 1) && rem && (rem < overhead)) {
-			retval = EXT2_ET_TOOSMALL;
-			;
-		} 
-		if (rem && (rem < overhead + 50)) {
-			super.ext2fs_blocks_count_set(super.ext2fs_blocks_count() - rem/*
-					 * If blocks count is changed, we need to recalculate
-					 * reserved blocks count not to exceed 50%.
-					 */);
-			reserved_ratio = 100.0 * param.ext2fs_r_blocks_count() / param.ext2fs_blocks_count();
-			super.ext2fs_r_blocks_count_set(reserved_ratio * super.ext2fs_blocks_count() / 100.0);
-			;
-		} 
-		if (/* Set up the locations of the backup superblocks */super.ext2fs_has_feature_sparse_super2()) {
-			if (generatedS_backup_bgs[0] >= fs.getGroup_desc_count()) {
-				generatedS_backup_bgs[0] = fs.getGroup_desc_count() - 1;
-			} 
-			if (generatedS_backup_bgs[1] >= fs.getGroup_desc_count()) {
-				generatedS_backup_bgs[1] = fs.getGroup_desc_count() - 1;
-			} 
-			if (generatedS_backup_bgs[0] == generatedS_backup_bgs[1]) {
-				generatedS_backup_bgs[1] = 0;
-			} 
-			if (generatedS_backup_bgs[0] > generatedS_backup_bgs[1]) {
-				 t = generatedS_backup_bgs[0];
-				generatedS_backup_bgs[0] = generatedS_backup_bgs[1];
-				generatedS_backup_bgs[1] = t;
-			} 
-		} 
-		retval = ModernizedCProgram.ext2fs_get_mem(.strlen(fs.getDevice_name()) + 80, buf);
-		if (retval) {
-			;
-		} 
-		.strcpy(buf, "block bitmap for ");
-		.strcat(buf, fs.getDevice_name());
-		retval = ModernizedCProgram.ext2fs_allocate_subcluster_bitmap(fs, buf, fs.getBlock_map());
-		if (retval) {
-			;
-		} 
-		.strcpy(buf, "inode bitmap for ");
-		.strcat(buf, fs.getDevice_name());
-		retval = ModernizedCProgram.ext2fs_allocate_inode_bitmap(fs, buf, fs.getInode_map());
-		if (retval) {
-			;
-		} 
-		ModernizedCProgram.ext2fs_free_mem(buf);
-		retval = ModernizedCProgram.ext2fs_get_array(fs.getDesc_blocks(), fs.getBlocksize(), fs.getGroup_desc());
-		if (retval) {
-			;
-		} 
-		.memset(fs.getGroup_desc(), 0, (size_t)fs.getDesc_blocks() * fs.getBlocksize());
-		free_blocks = 0;
-		csum_flag = ModernizedCProgram.ext2fs_has_group_desc_csum(fs);
-		reserved_inos = generatedS_first_ino;
-		for (i = 0; i < fs.getGroup_desc_count(); i/*
-				 * Don't set the BLOCK_UNINIT group for the last group
-				 * because the block bitmap needs to be padded.
-				 */++) {
-			if (csum_flag) {
-				if (i != fs.getGroup_desc_count() - 1) {
-					ModernizedCProgram.ext2fs_bg_flags_set(fs, i, -1024);
-				} 
-				ModernizedCProgram.ext2fs_bg_flags_set(fs, i, -1024);
-				numblocks = generatedS_inodes_per_group;
-				if (reserved_inos) {
-					if (numblocks > reserved_inos) {
-						numblocks -= reserved_inos;
-						reserved_inos = 0;
-					} else {
-							reserved_inos -= numblocks;
-							numblocks = 0;
-					} 
-				} 
-				ModernizedCProgram.ext2fs_bg_itable_unused_set(fs, i, numblocks);
-			} 
-			numblocks = ModernizedCProgram.ext2fs_reserve_super_and_bgd(fs, i, fs.getBlock_map());
-			if (generatedS_log_groups_per_flex) {
-				numblocks += 2 + fs.getInode_blocks_per_group();
-			} 
-			free_blocks += numblocks;
-			ModernizedCProgram.ext2fs_bg_free_blocks_count_set(fs, i, numblocks);
-			ModernizedCProgram.ext2fs_bg_free_inodes_count_set(fs, i, generatedS_inodes_per_group);
-			ModernizedCProgram.ext2fs_bg_used_dirs_count_set(fs, i, 0);
-			ModernizedCProgram.ext2fs_group_desc_csum_set(fs, i);
-		}
-		free_blocks &=  ~((-1024 << (fs).getCluster_ratio_bits()) - 1);
-		super.ext2fs_free_blocks_count_set(free_blocks);
-		c = (byte)255// coverity[dead_error_condition];// coverity[dead_error_condition]
-		if (((int)c) == -1) {
-			generatedS_flags |=  -1024;
-		} else {
-				generatedS_flags |=  -1024;
-		} 
-		ModernizedCProgram.ext2fs_mark_super_dirty(fs);
-		ModernizedCProgram.ext2fs_mark_bb_dirty(fs);
-		ModernizedCProgram.ext2fs_mark_ib_dirty(fs);
-		.io_channel_set_blksize(fs.getIo(), fs.getBlocksize());
-		ret_fs = fs;
-		return 0;
-		ModernizedCProgram.ext2fs_free(fs);
-		return retval;
-	}
 	/* Project quota */
 	/* Needs recovery */
 	/* Journal device */
@@ -1192,7 +794,7 @@ public class ext2_super_block {
 				return retval;
 			} 
 		}
-		.memcpy(fs.getOrig_super(), super, 1024);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(fs.getOrig_super(), super, 1024);
 		return 0;
 	}
 	public Object write_backup_super(Object fs, Object group, Object group_block) {
@@ -1201,7 +803,7 @@ public class ext2_super_block {
 		if (sgrp > ((1 << 16) - 1)) {
 			sgrp = (1 << 16) - 1;
 		} 
-		this.setS_block_group_nr(.ext2fs_cpu_to_le16(sgrp));
+		this.setS_block_group_nr(/*Error: Function owner not recognized*/ext2fs_cpu_to_le16(sgrp));
 		retval = super_shadow.ext2fs_superblock_csum_set(fs);
 		if (retval) {
 			return retval;
@@ -1226,14 +828,14 @@ public class ext2_super_block {
 		if (fs.getFlags() & -1024) {
 			flag = -1024;
 		} else {
-				flag = .ext2fs_cpu_to_le32(-1024);
+				flag = /*Error: Function owner not recognized*/ext2fs_cpu_to_le32(-1024);
 		} 
 		if (!((fs.getSuper()).getS_feature_ro_compat() & (flag))) {
 			return 1;
 		} 
 		calculated = sb.ext2fs_superblock_csum(fs);
 		Object generatedS_checksum = this.getS_checksum();
-		return .ext2fs_le32_to_cpu(generatedS_checksum) == calculated;
+		return /*Error: Function owner not recognized*/ext2fs_le32_to_cpu(generatedS_checksum) == calculated;
 	}
 	/* NOTE: The input to this function MUST be in LE order */
 	public Object ext2fs_superblock_csum_set(Object fs) {
@@ -1242,14 +844,412 @@ public class ext2_super_block {
 		if (fs.getFlags() & -1024) {
 			flag = -1024;
 		} else {
-				flag = .ext2fs_cpu_to_le32(-1024);
+				flag = /*Error: Function owner not recognized*/ext2fs_cpu_to_le32(-1024);
 		} 
 		if (!((fs.getSuper()).getS_feature_ro_compat() & (flag))) {
 			return 0;
 		} 
 		crc = sb.ext2fs_superblock_csum(fs);
-		this.setS_checksum(.ext2fs_cpu_to_le32(crc));
+		this.setS_checksum(/*Error: Function owner not recognized*/ext2fs_cpu_to_le32(crc));
 		return 0;
+	}
+	public Object ext2fs_initialize(Object name, int flags, Object manager, Object ret_fs) {
+		ext2_filsys fs = new ext2_filsys();
+		 retval = new ();
+		ext2_super_block super = new ext2_super_block();
+		int rem;
+		int overhead = 0;
+		int ipg;
+		 i = new ();
+		 free_blocks = new ();
+		 numblocks = new ();
+		int rsv_gdt;
+		int csum_flag;
+		int bigalloc_flag;
+		int io_flags;
+		int has_bg;
+		int reserved_inos;
+		byte buf = 0;
+		byte c;
+		double reserved_ratio;
+		byte time_env;
+		if (!param || !param.ext2fs_blocks_count()) {
+			return EXT2_ET_INVALID_ARGUMENT;
+		} 
+		retval = ModernizedCProgram.ext2fs_get_mem(/*Error: Unsupported expression*/, fs);
+		if (retval) {
+			return retval;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(fs, 0, /*Error: Unsupported expression*/);
+		fs.setMagic(EXT2_ET_MAGIC_EXT2FS_FILSYS);
+		fs.setFlags(flags | -1024);
+		fs.setUmask(22);
+		fs.setDefault_bitmap_type(2);
+		time_env = /*Error: Function owner not recognized*/getenv("E2FSPROGS_FAKE_TIME");
+		if (time_env) {
+			fs.setNow(/*Error: Function owner not recognized*/strtoul(time_env, ((Object)0), 0));
+		} 
+		io_flags = IO_FLAG_RW;
+		if (flags & -1024) {
+			io_flags |=  IO_FLAG_EXCLUSIVE;
+		} 
+		if (flags & -1024) {
+			io_flags |=  IO_FLAG_DIRECT_IO;
+		} 
+		io_flags |=  -1024;
+		retval = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(name, io_flags, fs.getIo());
+		if (retval) {
+			;
+		} 
+		fs.setImage_io(fs.getIo());
+		fs.getIo().setApp_data(fs);
+		retval = ModernizedCProgram.ext2fs_get_mem(/*Error: Function owner not recognized*/strlen(name) + 1, fs.getDevice_name());
+		if (retval) {
+			;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(fs.getDevice_name(), name);
+		retval = ModernizedCProgram.ext2fs_get_mem(1024, super);
+		if (retval) {
+			;
+		} 
+		fs.setSuper(super);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(super, 0, 1024);
+		super.setS_magic(-1024);
+		super.setS_state(-1024);
+		bigalloc_flag = param.ext2fs_has_feature_bigalloc();
+		Object generatedS_log_block_size = this.getS_log_block_size();
+		(super.setS_log_block_size(generatedS_log_block_size));
+		Object generatedS_log_cluster_size = this.getS_log_cluster_size();
+		if (bigalloc_flag) {
+			(super.setS_log_cluster_size(generatedS_log_cluster_size ? generatedS_log_cluster_size : (generatedS_log_block_size + 4)));
+			if (generatedS_log_block_size > generatedS_log_cluster_size) {
+				retval = EXT2_ET_INVALID_ARGUMENT;
+				;
+			} 
+		} else {
+				super.setS_log_cluster_size(generatedS_log_block_size);
+		} 
+		Object generatedS_first_data_block = this.getS_first_data_block();
+		(super.setS_first_data_block(generatedS_first_data_block ? generatedS_first_data_block : (generatedS_log_cluster_size ? 0 : 1)));
+		Object generatedS_max_mnt_count = this.getS_max_mnt_count();
+		(super.setS_max_mnt_count(generatedS_max_mnt_count ? generatedS_max_mnt_count : (false)));
+		Object generatedS_errors = this.getS_errors();
+		(super.setS_errors(generatedS_errors ? generatedS_errors : (true)));
+		Object generatedS_feature_compat = this.getS_feature_compat();
+		(super.setS_feature_compat(generatedS_feature_compat ? generatedS_feature_compat : (false)));
+		Object generatedS_feature_incompat = this.getS_feature_incompat();
+		(super.setS_feature_incompat(generatedS_feature_incompat ? generatedS_feature_incompat : (false)));
+		Object generatedS_feature_ro_compat = this.getS_feature_ro_compat();
+		(super.setS_feature_ro_compat(generatedS_feature_ro_compat ? generatedS_feature_ro_compat : (false)));
+		Object generatedS_default_mount_opts = this.getS_default_mount_opts();
+		(super.setS_default_mount_opts(generatedS_default_mount_opts ? generatedS_default_mount_opts : (false)));
+		Object generatedS_first_meta_bg = this.getS_first_meta_bg();
+		(super.setS_first_meta_bg(generatedS_first_meta_bg ? generatedS_first_meta_bg : (false)));
+		Object generatedS_raid_stride = this.getS_raid_stride();
+		(super.setS_raid_stride(generatedS_raid_stride ? generatedS_raid_stride : (/* default stride size: 0 */false)));
+		Object generatedS_raid_stripe_width = this.getS_raid_stripe_width();
+		(super.setS_raid_stripe_width(generatedS_raid_stripe_width ? generatedS_raid_stripe_width : (/* default stripe width: 0 */false)));
+		Object generatedS_log_groups_per_flex = this.getS_log_groups_per_flex();
+		(super.setS_log_groups_per_flex(generatedS_log_groups_per_flex ? generatedS_log_groups_per_flex : (false)));
+		Object generatedS_flags = this.getS_flags();
+		(super.setS_flags(generatedS_flags ? generatedS_flags : (false)));
+		Object generatedS_backup_bgs = super.getS_backup_bgs();
+		(generatedS_backup_bgs[0] = generatedS_backup_bgs[0]);
+		(generatedS_backup_bgs[1] = generatedS_backup_bgs[1]);
+		Object generatedS_encoding = this.getS_encoding();
+		(super.setS_encoding(generatedS_encoding));
+		Object generatedS_encoding_flags = this.getS_encoding_flags();
+		(super.setS_encoding_flags(generatedS_encoding_flags));
+		if (generatedS_feature_incompat & ~(-1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | (false) | -1024 | -1024 | -1024 | -1024 | -1024 | -1024)) {
+			retval = EXT2_ET_UNSUPP_FEATURE;
+			;
+		} 
+		if (generatedS_feature_ro_compat & ~(-1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024 | -1024)) {
+			retval = EXT2_ET_RO_UNSUPP_FEATURE;
+			;
+		} 
+		Object generatedS_rev_level = this.getS_rev_level();
+		(super.setS_rev_level(generatedS_rev_level ? generatedS_rev_level : (false)));
+		Object generatedS_first_ino = this.getS_first_ino();
+		Object generatedS_inode_size = this.getS_inode_size();
+		Object generatedS_min_extra_isize = this.getS_min_extra_isize();
+		Object generatedS_want_extra_isize = this.getS_want_extra_isize();
+		if (generatedS_rev_level >= 1) {
+			(super.setS_first_ino(generatedS_first_ino ? generatedS_first_ino : (true)));
+			(super.setS_inode_size(generatedS_inode_size ? generatedS_inode_size : (true)));
+			if (generatedS_inode_size >= /*Error: Unsupported expression*/) {
+				int extra_isize = /*Error: Unsupported expression*/ - 128;
+				(super.setS_min_extra_isize(generatedS_min_extra_isize ? generatedS_min_extra_isize : (extra_isize)));
+				(super.setS_want_extra_isize(generatedS_want_extra_isize ? generatedS_want_extra_isize : (extra_isize)));
+			} 
+		} else {
+				super.setS_first_ino(11);
+				super.setS_inode_size(128);
+		} 
+		Object generatedS_checkinterval = this.getS_checkinterval();
+		(super.setS_checkinterval(generatedS_checkinterval ? generatedS_checkinterval : (false)));
+		super.setS_mkfs_time(super.setS_lastcheck(fs.getNow() ? fs.getNow() : /*Error: Function owner not recognized*/time(((Object)0))));
+		super.setS_creator_os(0);
+		fs.setFragsize(fs.setBlocksize(((1 << 10) << generatedS_log_block_size)));
+		fs.setCluster_ratio_bits(generatedS_log_cluster_size - generatedS_log_block_size);
+		Object generatedS_blocks_per_group = this.getS_blocks_per_group();
+		Object generatedS_clusters_per_group = this.getS_clusters_per_group();
+		if (bigalloc_flag) {
+			long bpg;
+			if (generatedS_blocks_per_group && generatedS_clusters_per_group && ((generatedS_clusters_per_group * (-1024 << (fs).getCluster_ratio_bits())) != generatedS_blocks_per_group)) {
+				retval = EXT2_ET_INVALID_ARGUMENT;
+				;
+			} 
+			if (generatedS_clusters_per_group) {
+				(super.setS_clusters_per_group(generatedS_clusters_per_group));
+			}  else if (generatedS_blocks_per_group) {
+				super.setS_clusters_per_group(generatedS_blocks_per_group / (-1024 << (fs).getCluster_ratio_bits()));
+			}  else if (generatedS_log_cluster_size + 15 < 32) {
+				super.setS_clusters_per_group(fs.getBlocksize() * 8);
+			} else {
+					super.setS_clusters_per_group((fs.getBlocksize() - 1) * 8);
+			} 
+			if (generatedS_clusters_per_group > (((int)1 << 16) - 8)) {
+				super.setS_clusters_per_group((((int)1 << 16) - 8));
+			} 
+			bpg = (((long)generatedS_clusters_per_group) << (fs).getCluster_ratio_bits());
+			if (bpg >= (((long)1) << 32)) {
+				retval = EXT2_ET_INVALID_ARGUMENT;
+				;
+			} 
+			super.setS_blocks_per_group(bpg);
+		} else {
+				(super.setS_blocks_per_group(generatedS_blocks_per_group ? generatedS_blocks_per_group : (fs.getBlocksize() * 8)));
+				if (generatedS_blocks_per_group > ((((int)1 << 16) - 8) * (((1 << 10) << generatedS_log_cluster_size) / ((1 << 10) << generatedS_log_block_size)))) {
+					super.setS_blocks_per_group(((((int)1 << 16) - 8) * (((1 << 10) << generatedS_log_cluster_size) / ((1 << 10) << generatedS_log_block_size))));
+				} 
+				super.setS_clusters_per_group(generatedS_blocks_per_group);
+		} 
+		super.ext2fs_blocks_count_set(param.ext2fs_blocks_count() & ~(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((-1024 << (fs).getCluster_ratio_bits()) - 1)));
+		super.ext2fs_r_blocks_count_set(param.ext2fs_r_blocks_count());
+		if (super.ext2fs_r_blocks_count() >= param.ext2fs_blocks_count()) {
+			retval = EXT2_ET_INVALID_ARGUMENT;
+			;
+		} 
+		Object generatedS_mmp_update_interval = this.getS_mmp_update_interval();
+		(super.setS_mmp_update_interval(generatedS_mmp_update_interval ? generatedS_mmp_update_interval : (false/*
+			 * If we're creating an external journal device, we don't need
+			 * to bother with the rest.
+			 */)));
+		if (super.ext2fs_has_feature_journal_dev()) {
+			fs.setGroup_desc_count(0);
+			ModernizedCProgram.ext2fs_mark_super_dirty(fs);
+			ret_fs = fs;
+			return 0;
+		} 
+		if (fs.getGroup_desc_count() == 0) {
+			retval = EXT2_ET_TOOSMALL;
+			;
+		} 
+		Object generatedS_desc_size = this.getS_desc_size();
+		(super.setS_desc_size(generatedS_desc_size ? generatedS_desc_size : (super.ext2fs_has_feature_64bit() ? 64 : 0)));
+		if (((generatedS_feature_incompat & -1024) ? generatedS_desc_size : 32) == 0) {
+			retval = EXT2_ET_UNEXPECTED_BLOCK_SIZE;
+			;
+		} 
+		fs.setDesc_blocks(ModernizedCProgram.ext2fs_div_ceil(fs.getGroup_desc_count(), (((1 << 10) << generatedS_log_block_size) / ((generatedS_feature_incompat & -1024) ? generatedS_desc_size : 32))));
+		i = fs.getBlocksize() >= 4096 ? 1 : 4096 / fs.getBlocksize();
+		Object generatedS_inodes_count = this.getS_inodes_count();
+		if (super.ext2fs_has_feature_64bit() && (super.ext2fs_blocks_count() / i) >= (-1024 << 32)) {
+			(super.setS_inodes_count(generatedS_inodes_count ? generatedS_inodes_count : (~-1024)));
+		} else {
+				(super.setS_inodes_count(generatedS_inodes_count ? generatedS_inodes_count : (super.ext2fs_blocks_count() / i/*
+					 * Make sure we have at least EXT2_FIRST_INO + 1 inodes, so
+					 * that we have enough inodes for the filesystem(!)
+					 */)));
+		} 
+		if (generatedS_inodes_count < ((generatedS_rev_level == 0) ? 11 : generatedS_first_ino) + 1) {
+			super.setS_inodes_count(((generatedS_rev_level == 0) ? 11 : generatedS_first_ino) + 1/*
+				 * There should be at least as many inodes as the user
+				 * requested.  Figure out how many inodes per group that
+				 * should be.  But make sure that we don't allocate more than
+				 * one bitmap's worth of inodes each group.
+				 */);
+		} 
+		ipg = ModernizedCProgram.ext2fs_div_ceil(generatedS_inodes_count, fs.getGroup_desc_count());
+		if (ipg > fs.getBlocksize() * 8) {
+			if (!bigalloc_flag && generatedS_blocks_per_group >= 256) {
+				generatedS_blocks_per_group -= /* Try again with slightly different parameters */8;
+				super.ext2fs_blocks_count_set(param.ext2fs_blocks_count());
+				super.setS_clusters_per_group(generatedS_blocks_per_group);
+				;
+			} else {
+					retval = EXT2_ET_TOO_MANY_INODES;
+					;
+			} 
+		} 
+		if (ipg > (int)(((int)1 << 16) - (((1 << 10) << generatedS_log_block_size) / ((generatedS_rev_level == 0) ? 128 : generatedS_inode_size)))) {
+			ipg = (((int)1 << 16) - (((1 << 10) << generatedS_log_block_size) / ((generatedS_rev_level == 0) ? 128 : generatedS_inode_size)));
+		} 
+		Object generatedS_inodes_per_group = super.getS_inodes_per_group();
+		fs.setInode_blocks_per_group((((generatedS_inodes_per_group * ((generatedS_rev_level == 0) ? 128 : generatedS_inode_size)) + ((1 << 10) << generatedS_log_block_size) - 1) / ((1 << 10) << generatedS_log_block_size)));
+		super.setS_inodes_per_group(((fs.getInode_blocks_per_group() * ((1 << 10) << generatedS_log_block_size)) / ((generatedS_rev_level == 0) ? 128 : generatedS_inode_size)));
+		if (generatedS_inodes_per_group < 8) {
+			super.setS_inodes_per_group(8);
+		} 
+		generatedS_inodes_per_group &=  ~7;
+		fs.setInode_blocks_per_group((((generatedS_inodes_per_group * ((generatedS_rev_level == 0) ? 128 : generatedS_inode_size)) + ((1 << 10) << generatedS_log_block_size) - 1) / ((1 << 10) << generatedS_log_block_size)));
+		if (()generatedS_inodes_per_group * fs.getGroup_desc_count() > ~-1024) {
+			ipg--;
+			;
+		} 
+		super.setS_inodes_count(generatedS_inodes_per_group * fs.getGroup_desc_count());
+		super.setS_free_inodes_count(generatedS_inodes_count);
+		if (super.ext2fs_has_feature_resize_inode()) {
+			rsv_gdt = ModernizedCProgram.calc_reserved_gdt_blocks(fs);
+		} else {
+				rsv_gdt = 0;
+		} 
+		Object generatedS_reserved_gdt_blocks = this.getS_reserved_gdt_blocks();
+		(super.setS_reserved_gdt_blocks(generatedS_reserved_gdt_blocks ? generatedS_reserved_gdt_blocks : (rsv_gdt)));
+		if (generatedS_reserved_gdt_blocks > (((1 << 10) << generatedS_log_block_size) / /*Error: Unsupported expression*/)) {
+			retval = EXT2_ET_RES_GDT_BLOCKS;
+			;
+		} 
+		if (generatedS_reserved_gdt_blocks + fs.getDesc_blocks() > generatedS_blocks_per_group * 3 / 4) {
+			fs.getSuper().ext2fs_set_feature_meta_bg();
+			fs.getSuper().ext2fs_clear_feature_resize_inode();
+			(super.setS_reserved_gdt_blocks(generatedS_reserved_gdt_blocks ? generatedS_reserved_gdt_blocks : (false/*
+				 * Calculate the maximum number of bookkeeping blocks per
+				 * group.  It includes the superblock, the block group
+				 * descriptors, the block bitmap, the inode bitmap, the inode
+				 * table, and the reserved gdt blocks.
+				 */)));
+		} 
+		overhead = (int)(3 + fs.getInode_blocks_per_group() + generatedS_reserved_gdt_blocks);
+		if (fs.getSuper().ext2fs_has_feature_meta_bg()) {
+			overhead++;
+		} else {
+				overhead += fs.getDesc_blocks();
+		} 
+		if (overhead > generatedS_blocks_per_group) {
+			retval = EXT2_ET_TOO_MANY_INODES;
+			;
+		} 
+		overhead = (int)(2 + fs.getInode_blocks_per_group());
+		has_bg = 0;
+		if (super/*
+				 * We have to do this manually since
+				 * super->s_backup_bgs hasn't been set up yet.
+				 */.ext2fs_has_feature_sparse_super2()) {
+			if (fs.getGroup_desc_count() == 2) {
+				has_bg = generatedS_backup_bgs[0] != 0;
+			} else {
+					has_bg = generatedS_backup_bgs[1] != 0;
+			} 
+		} else {
+				has_bg = ModernizedCProgram.ext2fs_bg_has_super(fs, fs.getGroup_desc_count() - 1);
+		} 
+		if (has_bg) {
+			overhead += 1 + fs.getDesc_blocks() + generatedS_reserved_gdt_blocks;
+		} 
+		rem = ((super.ext2fs_blocks_count() - generatedS_first_data_block) % generatedS_blocks_per_group);
+		if ((fs.getGroup_desc_count() == 1) && rem && (rem < overhead)) {
+			retval = EXT2_ET_TOOSMALL;
+			;
+		} 
+		if (rem && (rem < overhead + 50)) {
+			super.ext2fs_blocks_count_set(super.ext2fs_blocks_count() - rem/*
+					 * If blocks count is changed, we need to recalculate
+					 * reserved blocks count not to exceed 50%.
+					 */);
+			reserved_ratio = 100.0 * param.ext2fs_r_blocks_count() / param.ext2fs_blocks_count();
+			super.ext2fs_r_blocks_count_set(reserved_ratio * super.ext2fs_blocks_count() / 100.0);
+			;
+		} 
+		if (/* Set up the locations of the backup superblocks */super.ext2fs_has_feature_sparse_super2()) {
+			if (generatedS_backup_bgs[0] >= fs.getGroup_desc_count()) {
+				generatedS_backup_bgs[0] = fs.getGroup_desc_count() - 1;
+			} 
+			if (generatedS_backup_bgs[1] >= fs.getGroup_desc_count()) {
+				generatedS_backup_bgs[1] = fs.getGroup_desc_count() - 1;
+			} 
+			if (generatedS_backup_bgs[0] == generatedS_backup_bgs[1]) {
+				generatedS_backup_bgs[1] = 0;
+			} 
+			if (generatedS_backup_bgs[0] > generatedS_backup_bgs[1]) {
+				 t = generatedS_backup_bgs[0];
+				generatedS_backup_bgs[0] = generatedS_backup_bgs[1];
+				generatedS_backup_bgs[1] = t;
+			} 
+		} 
+		retval = ModernizedCProgram.ext2fs_get_mem(/*Error: Function owner not recognized*/strlen(fs.getDevice_name()) + 80, buf);
+		if (retval) {
+			;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(buf, "block bitmap for ");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat(buf, fs.getDevice_name());
+		retval = ModernizedCProgram.ext2fs_allocate_subcluster_bitmap(fs, buf, fs.getBlock_map());
+		if (retval) {
+			;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(buf, "inode bitmap for ");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat(buf, fs.getDevice_name());
+		retval = ModernizedCProgram.ext2fs_allocate_inode_bitmap(fs, buf, fs.getInode_map());
+		if (retval) {
+			;
+		} 
+		ModernizedCProgram.ext2fs_free_mem(buf);
+		retval = ModernizedCProgram.ext2fs_get_array(fs.getDesc_blocks(), fs.getBlocksize(), fs.getGroup_desc());
+		if (retval) {
+			;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(fs.getGroup_desc(), 0, (size_t)fs.getDesc_blocks() * fs.getBlocksize());
+		free_blocks = 0;
+		csum_flag = ModernizedCProgram.ext2fs_has_group_desc_csum(fs);
+		reserved_inos = generatedS_first_ino;
+		for (i = 0; i < fs.getGroup_desc_count(); i/*
+				 * Don't set the BLOCK_UNINIT group for the last group
+				 * because the block bitmap needs to be padded.
+				 */++) {
+			if (csum_flag) {
+				if (i != fs.getGroup_desc_count() - 1) {
+					ModernizedCProgram.ext2fs_bg_flags_set(fs, i, -1024);
+				} 
+				ModernizedCProgram.ext2fs_bg_flags_set(fs, i, -1024);
+				numblocks = generatedS_inodes_per_group;
+				if (reserved_inos) {
+					if (numblocks > reserved_inos) {
+						numblocks -= reserved_inos;
+						reserved_inos = 0;
+					} else {
+							reserved_inos -= numblocks;
+							numblocks = 0;
+					} 
+				} 
+				ModernizedCProgram.ext2fs_bg_itable_unused_set(fs, i, numblocks);
+			} 
+			numblocks = ModernizedCProgram.ext2fs_reserve_super_and_bgd(fs, i, fs.getBlock_map());
+			if (generatedS_log_groups_per_flex) {
+				numblocks += 2 + fs.getInode_blocks_per_group();
+			} 
+			free_blocks += numblocks;
+			ModernizedCProgram.ext2fs_bg_free_blocks_count_set(fs, i, numblocks);
+			ModernizedCProgram.ext2fs_bg_free_inodes_count_set(fs, i, generatedS_inodes_per_group);
+			ModernizedCProgram.ext2fs_bg_used_dirs_count_set(fs, i, 0);
+			ModernizedCProgram.ext2fs_group_desc_csum_set(fs, i);
+		}
+		free_blocks &=  ~((-1024 << (fs).getCluster_ratio_bits()) - 1);
+		super.ext2fs_free_blocks_count_set(free_blocks);
+		c = (byte)255// coverity[dead_error_condition];// coverity[dead_error_condition]
+		if (((int)c) == -1) {
+			generatedS_flags |=  -1024;
+		} else {
+				generatedS_flags |=  -1024;
+		} 
+		ModernizedCProgram.ext2fs_mark_super_dirty(fs);
+		ModernizedCProgram.ext2fs_mark_bb_dirty(fs);
+		ModernizedCProgram.ext2fs_mark_ib_dirty(fs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/io_channel_set_blksize(fs.getIo(), fs.getBlocksize());
+		ret_fs = fs;
+		return 0;
+		ModernizedCProgram.ext2fs_free(fs);
+		return retval;
 	}
 	public Object getS_inodes_count() {
 		return s_inodes_count;

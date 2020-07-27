@@ -4,10 +4,10 @@ package application;
 public class check_vector {
 	private Object nr;
 	private Object alloc;
-	private attr_check checks;
+	private attr_check[][] checks;
 	private Object mutex;
 	
-	public check_vector(Object nr, Object alloc, attr_check checks, Object mutex) {
+	public check_vector(Object nr, Object alloc, attr_check[][] checks, Object mutex) {
 		setNr(nr);
 		setAlloc(alloc);
 		setChecks(checks);
@@ -28,10 +28,10 @@ public class check_vector {
 	public void setAlloc(Object newAlloc) {
 		alloc = newAlloc;
 	}
-	public attr_check getChecks() {
+	public attr_check[][] getChecks() {
 		return checks;
 	}
-	public void setChecks(attr_check newChecks) {
+	public void setChecks(attr_check[][] newChecks) {
 		checks = newChecks;
 	}
 	public Object getMutex() {

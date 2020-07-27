@@ -37,8 +37,8 @@ public class python_obs_callback {
 	}
 	public python_obs_callback add_python_obs_callback_extra(obs_python_script script, Object func, Object extra_size) {
 		script_callback generatedFirst_callback = script.getFirst_callback();
-		python_obs_callback cb = ModernizedCProgram.add_script_callback(generatedFirst_callback, (obs_script_t)script,  + extra_size);
-		.Py_XINCREF(func);
+		python_obs_callback cb = ModernizedCProgram.add_script_callback(generatedFirst_callback, (obs_script_t)script, /*Error: sizeof expression not supported yet*/ + extra_size);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XINCREF(func);
 		cb.setFunc(func);
 		return cb;
 	}
@@ -65,7 +65,7 @@ public class python_obs_callback {
 	}
 	public void remove_python_obs_callback() {
 		ModernizedCProgram.cb.getBase().remove_script_callback();
-		.Py_XDECREF(ModernizedCProgram.cb.getFunc());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(ModernizedCProgram.cb.getFunc());
 		ModernizedCProgram.cb.setFunc(NULL);
 	}
 	public void just_free_python_obs_callback() {

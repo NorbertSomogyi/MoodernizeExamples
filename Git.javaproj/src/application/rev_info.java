@@ -280,14 +280,172 @@ public class rev_info {
 	public rev_info() {
 	}
 	
-	public void bisect_common() {
-		if (revs.prepare_revision_walk()) {
-			ModernizedCProgram.die("revision walk setup failed");
+	public void mark_edges_uninteresting(Object show_edge, int sparse) {
+		commit_list list = new commit_list();
+		int i;
+		commit generatedItem = list.getItem();
+		object generatedObject = commit.getObject();
+		int generatedFlags = generatedObject.getFlags();
+		object_id generatedOid = generatedObject.getOid();
+		commit_list generatedNext = list.getNext();
+		commit_list generatedCommits = this.getCommits();
+		repository generatedRepo = this.getRepo();
+		int generatedEdge_hint_aggressive = this.getEdge_hint_aggressive();
+		if (sparse) {
+			oidset set = new oidset();
+			set.oidset_init(16);
+			for (list = generatedCommits; list; list = generatedNext) {
+				commit commit = generatedItem;
+				tree tree = /*Error: Function owner not recognized*/repo_get_commit_tree(ModernizedCProgram.the_repository, commit);
+				if (generatedFlags & (-1024 << 1)) {
+					generatedFlags |=  (-1024 << 1);
+				} 
+				set.oidset_insert(generatedOid);
+				ModernizedCProgram.add_edge_parents(commit, revs, show_edge, set);
+			}
+			ModernizedCProgram.mark_trees_uninteresting_sparse(generatedRepo, set);
+			set.oidset_clear();
+		} else {
+				for (list = generatedCommits; list; list = generatedNext) {
+					commit commit = generatedItem;
+					if (generatedFlags & (-1024 << 1)) {
+						ModernizedCProgram.mark_tree_uninteresting(generatedRepo, /*Error: Function owner not recognized*/repo_get_commit_tree(ModernizedCProgram.the_repository, commit));
+						if (generatedEdge_hint_aggressive && !(generatedFlags & (-1024 << 3))) {
+							generatedFlags |=  (-1024 << 3);
+							commit.show_edge();
+						} 
+						continue;
+					} 
+					ModernizedCProgram.mark_edge_parents_uninteresting(commit, revs, show_edge);
+				}
 		} 
-		int generatedTree_objects = this.getTree_objects();
-		if (generatedTree_objects) {
-			revs.mark_edges_uninteresting(((Object)0), 0);
+		rev_cmdline_info generatedCmdline = this.getCmdline();
+		int generatedNr = generatedCmdline.getNr();
+		int generatedType = obj.getType();
+		if (generatedEdge_hint_aggressive) {
+			for (i = 0; i < generatedNr; i++) {
+				object obj = generatedItem;
+				commit commit = (commit)obj;
+				if (generatedType != object_type.OBJ_COMMIT || !(generatedFlags & (-1024 << 1))) {
+					continue;
+				} 
+				ModernizedCProgram.mark_tree_uninteresting(generatedRepo, /*Error: Function owner not recognized*/repo_get_commit_tree(ModernizedCProgram.the_repository, commit));
+				if (!(generatedFlags & (-1024 << 3))) {
+					generatedFlags |=  (-1024 << 3);
+					commit.show_edge();
+				} 
+			}
 		} 
+	}
+	public void traverse_commit_list(Object show_commit, Object show_object, Object show_data) {
+		traversal_context ctx = new traversal_context();
+		ctx.setRevs(revs);
+		ctx.setShow_commit(show_commit);
+		ctx.setShow_object(show_object);
+		ctx.setShow_data(show_data);
+		ctx.setFilter(((Object)0));
+		ctx.do_traverse();
+	}
+	public int line_log_filter() {
+		commit commit = new commit();
+		commit_list generatedCommits = this.getCommits();
+		commit_list list = generatedCommits;
+		commit_list out = ((Object)0);
+		commit_list pp = out;
+		commit generatedItem = list.getItem();
+		commit_list generatedNext = list.getNext();
+		while (list) {
+			commit_list to_free = ((Object)0);
+			commit = generatedItem;
+			if (ModernizedCProgram.process_ranges_arbitrary_commit(rev, commit)) {
+				pp = list;
+				pp = generatedNext;
+			} else {
+					to_free = list;
+			} 
+			list = generatedNext;
+			ModernizedCProgram.free(to_free);
+		}
+		pp = ((Object)0);
+		for (list = out; list; list = generatedNext) {
+			ModernizedCProgram.rewrite_parents(rev, generatedItem, line_log_rewrite_one);
+		}
+		this.setCommits(out);
+		return 0;
+	}
+	public int get_object_list_from_bitmap() {
+		bitmap_index bitmap_index = new bitmap_index();
+		if (!(ModernizedCProgram.bitmap_git = bitmap_index.prepare_bitmap_walk(revs))) {
+			return -1;
+		} 
+		if (ModernizedCProgram.pack_options_allow_reuse() && !ModernizedCProgram.reuse_partial_packfile_from_bitmap(ModernizedCProgram.bitmap_git, ModernizedCProgram.reuse_packfile, ModernizedCProgram.reuse_packfile_objects, ModernizedCProgram.reuse_packfile_offset)) {
+			((ModernizedCProgram.reuse_packfile_objects) ? (Object)0 : /*Error: Function owner not recognized*/_assert("reuse_packfile_objects", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\pack-objects.c", 3052));
+			ModernizedCProgram.nr_result += ModernizedCProgram.reuse_packfile_objects;
+			ModernizedCProgram.progress_state.display_progress(ModernizedCProgram.nr_result);
+		} 
+		ModernizedCProgram.bitmap_git.traverse_bitmap_commit_list(add_object_entry_from_bitmap);
+		return 0;
+	}
+	public int diff_no_index(int implicit_no_index, int argc, Object[][] argv) {
+		int i;
+		int no_index;
+		byte[] paths = new byte[2];
+		strbuf replacement = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		Object generatedPrefix = this.getPrefix();
+		byte prefix = generatedPrefix;
+		option[] no_index_options = new option[]{new option(parse_opt_type.OPTION_SET_INT, (false), ("no-index"), (no_index), ((Object)0), (""), parse_opt_option_flags.PARSE_OPT_NOARG | (parse_opt_option_flags.PARSE_OPT_NONEG | parse_opt_option_flags.PARSE_OPT_HIDDEN), ((Object)0), (true)), new option(parse_opt_type.OPTION_END)};
+		option options = new option();
+		diff_options generatedDiffopt = this.getDiffopt();
+		option generatedParseopts = generatedDiffopt.getParseopts();
+		options = no_index_options.parse_options_concat(generatedParseopts);
+		argc = ModernizedCProgram.parse_options(argc, argv, generatedPrefix, options, ModernizedCProgram.diff_no_index_usage, 0);
+		if (argc != 2) {
+			if (implicit_no_index) {
+				ModernizedCProgram.warning(ModernizedCProgram._("Not a git repository. Use --no-index to compare two paths outside a working tree"));
+			} 
+			ModernizedCProgram.usage_with_options(ModernizedCProgram.diff_no_index_usage, options);
+		} 
+		do {
+			ModernizedCProgram.free(options);
+			(options) = ((Object)0);
+		} while (0);
+		for (i = 0; i < 2; i++) {
+			byte p = argv[argc - 2 + i];
+			if (!/*Error: Function owner not recognized*/strcmp(p, "-"/*
+						 * stdin should be spelled as "-"; if you have
+						 * path that is "-", spell it as "./-".
+						 */)) {
+				p = ModernizedCProgram.file_from_standard_input;
+			}  else if (prefix) {
+				p = ModernizedCProgram.prefix_filename(prefix, p);
+			} 
+			paths[i] = p;
+		}
+		replacement.fixup_paths(paths);
+		generatedDiffopt.setSkip_stat_unmatch(1);
+		int generatedOutput_format = generatedDiffopt.getOutput_format();
+		if (!generatedOutput_format) {
+			generatedDiffopt.setOutput_format(-1024);
+		} 
+		diff_flags generatedFlags = generatedDiffopt.getFlags();
+		generatedFlags.setNo_index(1);
+		generatedFlags.setRelative_name(1);
+		generatedDiffopt.setPrefix(prefix);
+		this.setMax_count(-2);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_setup_done(generatedDiffopt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setup_diff_pager(generatedDiffopt);
+		generatedFlags.setExit_with_status(1);
+		if (generatedDiffopt.queue_diff(paths[0], paths[1])) {
+			return 1;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_set_mnemonic_prefix(generatedDiffopt, "1/", "2/");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diffcore_std(generatedDiffopt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_flush(generatedDiffopt);
+		replacement/*
+			 * The return code for --no-index imitates diff(1):
+			 * 0 = no changes, 1 = changes, else error
+			 */.strbuf_release();
+		return /*Error: Function owner not recognized*/diff_result_code(generatedDiffopt, 0);
 	}
 	public int run_diff_files(int option) {
 		int entries;
@@ -300,18 +458,18 @@ public class rev_info {
 		repository generatedRepo = generatedDiffopt.getRepo();
 		index_state generatedIndex = generatedRepo.getIndex();
 		index_state istate = generatedIndex;
-		.diff_set_mnemonic_prefix(generatedDiffopt, "i/", "w/");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_set_mnemonic_prefix(generatedDiffopt, "i/", "w/");
 		if (diff_unmerged_stage < 0) {
 			diff_unmerged_stage = 2;
 		} 
 		int generatedCache_nr = istate.getCache_nr();
 		entries = generatedCache_nr;
-		cache_entry generatedCache = istate.getCache();
+		cache_entry[][] generatedCache = istate.getCache();
 		pathspec generatedPrune_data = this.getPrune_data();
 		int generatedCe_flags = (ce).getCe_flags();
 		int generatedCe_namelen = (ce).getCe_namelen();
 		Object generatedParent = dpath.getParent();
-		Byte generatedPath = dpath.getPath();
+		byte[] generatedPath = dpath.getPath();
 		Object generatedName = ce.getName();
 		object_id generatedOid = dpath.getOid();
 		Object generatedSt_mode = st.getSt_mode();
@@ -330,7 +488,7 @@ public class rev_info {
 			int dirty_submodule = 0;
 			object_id old_oid = new object_id();
 			object_id new_oid = new object_id();
-			if (.diff_can_quit_early(generatedDiffopt)) {
+			if (/*Error: Function owner not recognized*/diff_can_quit_early(generatedDiffopt)) {
 				break;
 			} 
 			if (!ModernizedCProgram.ce_path_match(istate, ce, generatedPrune_data, ((Object)0))) {
@@ -344,19 +502,19 @@ public class rev_info {
 				size_t path_len = new size_t();
 				stat st = new stat();
 				path_len = (generatedCe_namelen);
-				dpath = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(ModernizedCProgram.st_add(ModernizedCProgram.st_add((()), (((path_len)))), ((true))), (ModernizedCProgram.st_mult(, (true)))));
+				dpath = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(ModernizedCProgram.st_add(ModernizedCProgram.st_add(((/*Error: Unsupported expression*/)), (((path_len)))), ((true))), (ModernizedCProgram.st_mult(/*Error: Unsupported expression*/, (true)))));
 				dpath.setPath((byte)(generatedParent[5]));
 				dpath.setNext(((Object)0));
-				.memcpy(generatedPath, generatedName, path_len);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPath, generatedName, path_len);
 				generatedPath[path_len] = (byte)'\0';
 				generatedOid.oidclr();
-				.memset((generatedParent[0]), 0,  * 5);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((generatedParent[0]), 0, /*Error: Unsupported expression*/ * 5);
 				changed = st.check_removed(ce);
 				if (!changed) {
 					wt_mode = ModernizedCProgram.ce_mode_from_stat(ce, generatedSt_mode);
 				} else {
 						if (changed < 0) {
-							.perror(generatedName);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/perror(generatedName);
 							continue;
 						} 
 						wt_mode = 0;
@@ -365,7 +523,7 @@ public class rev_info {
 				while (i < entries) {
 					cache_entry nce = generatedCache[i];
 					int stage;
-					if (.strcmp(generatedName, generatedName)) {
+					if (/*Error: Function owner not recognized*/strcmp(generatedName, generatedName)) {
 						break;
 					} 
 					stage = (((true) & generatedCe_flags) >> 12);
@@ -396,7 +554,7 @@ public class rev_info {
 							 * Show the diff for the 'ce' if we found the one
 							 * from the desired stage.
 							 */);
-				pair = .diff_unmerge(generatedDiffopt, generatedName);
+				pair = /*Error: Function owner not recognized*/diff_unmerge(generatedDiffopt, generatedName);
 				if (wt_mode) {
 					generatedTwo.setMode(wt_mode);
 				} 
@@ -415,13 +573,13 @@ public class rev_info {
 					changed = st.check_removed(ce);
 					if (changed) {
 						if (changed < 0) {
-							.perror(generatedName);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/perror(generatedName);
 							continue;
 						} 
-						.diff_addremove(generatedDiffopt, (byte)'-', generatedCe_mode, generatedOid, !ModernizedCProgram.is_null_oid(generatedOid), generatedName, 0);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_addremove(generatedDiffopt, (byte)'-', generatedCe_mode, generatedOid, !ModernizedCProgram.is_null_oid(generatedOid), generatedName, 0);
 						continue;
 					}  else if (generatedIta_invisible_in_index && (generatedCe_flags & (1 << 29))) {
-						.diff_addremove(generatedDiffopt, (byte)'+', generatedCe_mode, ModernizedCProgram.the_repository.getHash_algo().getEmpty_tree(), 0, generatedName, 0);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_addremove(generatedDiffopt, (byte)'+', generatedCe_mode, ModernizedCProgram.the_repository.getHash_algo().getEmpty_tree(), 0, generatedName, 0);
 						continue;
 					} 
 					changed = ModernizedCProgram.match_stat_with_submodule(generatedDiffopt, ce, st, ce_option, dirty_submodule);
@@ -437,10 +595,10 @@ public class rev_info {
 			oldmode = generatedCe_mode;
 			old_oid = generatedOid;
 			new_oid = changed ? ModernizedCProgram.null_oid : generatedOid;
-			.diff_change(generatedDiffopt, oldmode, newmode, old_oid, new_oid, !ModernizedCProgram.is_null_oid(old_oid), !ModernizedCProgram.is_null_oid(new_oid), generatedName, 0, dirty_submodule);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_change(generatedDiffopt, oldmode, newmode, old_oid, new_oid, !ModernizedCProgram.is_null_oid(old_oid), !ModernizedCProgram.is_null_oid(new_oid), generatedName, 0, dirty_submodule);
 		}
-		.diffcore_std(generatedDiffopt);
-		.diff_flush(generatedDiffopt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diffcore_std(generatedDiffopt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_flush(generatedDiffopt);
 		do {
 			if (ModernizedCProgram.trace_perf_key.trace_pass_fl()) {
 				ModernizedCProgram.trace_performance_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\diff-lib.c", 251, ModernizedCProgram.getnanotime() - (start), "diff-files");
@@ -451,9 +609,9 @@ public class rev_info {
 		 */;
 	}
 	/* A file entry went away or appeared */
-	public void diff_index_show_file(Object prefix, Object ce, Object oid, int oid_valid, int mode, int dirty_submodule) {
+	public void diff_index_show_file(Object[] prefix, Object ce, Object oid, int oid_valid, int mode, int dirty_submodule) {
 		diff_options generatedDiffopt = this.getDiffopt();
-		.diff_addremove(generatedDiffopt, prefix[0], mode, oid, oid_valid, ce.getName(), dirty_submodule);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_addremove(generatedDiffopt, prefix[0], mode, oid, oid_valid, ce.getName(), dirty_submodule);
 	}
 	public void show_new_file(Object new_file, int cached, int match_missing) {
 		object_id oid = new object_id();
@@ -464,7 +622,7 @@ public class rev_info {
 			 */;
 		diff_options generatedDiffopt = this.getDiffopt();
 		if (generatedDiffopt.get_stat_data(new_file, oid, mode, cached, match_missing, dirty_submodule) < 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		revs.diff_index_show_file("+", new_file, oid, !ModernizedCProgram.is_null_oid(oid), mode, dirty_submodule);
 	}
@@ -482,20 +640,20 @@ public class rev_info {
 		} 
 		int generatedCombine_merges = this.getCombine_merges();
 		Object generatedParent = p.getParent();
-		Byte generatedPath = p.getPath();
+		byte[] generatedPath = p.getPath();
 		object_id generatedOid = p.getOid();
 		int generatedDense_combined_merges = this.getDense_combined_merges();
 		if (generatedCombine_merges && !cached && (!ModernizedCProgram.oideq(oid, old_entry.getOid()) || !ModernizedCProgram.oideq(old_entry.getOid(), new_entry.getOid()))) {
 			combine_diff_path p = new combine_diff_path();
 			int pathlen = ((new_entry).getCe_namelen());
-			p = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(ModernizedCProgram.st_add(ModernizedCProgram.st_add((()), (((pathlen)))), ((true))), (ModernizedCProgram.st_mult(, (true)))));
+			p = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(ModernizedCProgram.st_add(ModernizedCProgram.st_add(((/*Error: Unsupported expression*/)), (((pathlen)))), ((true))), (ModernizedCProgram.st_mult(/*Error: Unsupported expression*/, (true)))));
 			p.setPath((byte)generatedParent[2]);
 			p.setNext(((Object)0));
-			.memcpy(generatedPath, new_entry.getName(), pathlen);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPath, new_entry.getName(), pathlen);
 			generatedPath[pathlen] = 0;
 			p.setMode(mode);
 			generatedOid.oidclr();
-			.memset(generatedParent, 0, 2 * );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedParent, 0, 2 * /*Error: Unsupported expression*/);
 			generatedParent[0].setStatus((byte)'M');
 			generatedParent[0].setMode(new_entry.getCe_mode());
 			generatedOid.oidcpy(generatedOid);
@@ -512,7 +670,7 @@ public class rev_info {
 		if (mode == oldmode && ModernizedCProgram.oideq(oid, generatedOid) && !dirty_submodule && !generatedFind_copies_harder) {
 			return 0;
 		} 
-		.diff_change(generatedDiffopt, oldmode, mode, generatedOid, oid, 1, !ModernizedCProgram.is_null_oid(oid), old_entry.getName(), 0, dirty_submodule);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_change(generatedDiffopt, oldmode, mode, generatedOid, oid, 1, !ModernizedCProgram.is_null_oid(oid), old_entry.getName(), 0, dirty_submodule);
 		return 0/*
 		 * This gets a mix of an existing index and a tree, one pathname entry
 		 * at a time. The index entry may be a single stage-0 one, but it could
@@ -529,7 +687,7 @@ public class rev_info {
 		if (!tree) {
 			return ();
 		} 
-		.memset(opts, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(opts, 0, /*Error: sizeof expression not supported yet*/);
 		opts.setHead_idx(1);
 		opts.setIndex_only(cached);
 		diff_options generatedDiffopt = this.getDiffopt();
@@ -547,7 +705,7 @@ public class rev_info {
 		opts.setPathspec(generatedPathspec);
 		generatedPathspec.setRecursive(1);
 		Object generatedBuffer = tree.getBuffer();
-		Object generatedSize = tree.getSize();
+		long generatedSize = tree.getSize();
 		t.init_tree_desc(generatedBuffer, generatedSize);
 		return ModernizedCProgram.unpack_trees(1, t, opts);
 	}
@@ -559,686 +717,25 @@ public class rev_info {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\diff-lib.c", 526, "run_diff_index must be passed exactly one tree");
 		} 
 		ModernizedCProgram.trace_performance_enter();
-		object_array_entry generatedObjects = generatedPending.getObjects();
+		object_array_entry[] generatedObjects = generatedPending.getObjects();
 		ent = generatedObjects;
 		object generatedItem = ent.getItem();
 		object_id generatedOid = generatedItem.getOid();
 		Byte generatedName = ent.getName();
 		if (revs.diff_cache(generatedOid, generatedName, cached)) {
-			.exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\diff-lib.c", 531, (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\diff-lib.c", 531, (true)));
 		} 
 		diff_options generatedDiffopt = this.getDiffopt();
-		.diff_set_mnemonic_prefix(generatedDiffopt, "c/", cached ? "i/" : "w/");
-		.diffcore_fix_diff_index();
-		.diffcore_std(generatedDiffopt);
-		.diff_flush(generatedDiffopt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_set_mnemonic_prefix(generatedDiffopt, "c/", cached ? "i/" : "w/");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diffcore_fix_diff_index();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diffcore_std(generatedDiffopt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_flush(generatedDiffopt);
 		do {
 			if (ModernizedCProgram.trace_perf_key.trace_pass_fl()) {
 				ModernizedCProgram.trace_performance_leave_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\diff-lib.c", 537, ModernizedCProgram.getnanotime(), "diff-index");
 			} 
 		} while (0);
 		return 0;
-	}
-	public void show_interdiff(int indent) {
-		diff_options opts = new diff_options();
-		strbuf prefix = new strbuf(, , );
-		diff_options generatedDiffopt = this.getDiffopt();
-		.memcpy(opts, generatedDiffopt, );
-		opts.setOutput_format(-1024);
-		opts.setOutput_prefix(idiff_prefix_cb);
-		prefix.strbuf_addchars((byte)' ', indent);
-		opts.setOutput_prefix_data(prefix);
-		.diff_setup_done(opts);
-		Object generatedIdiff_oid1 = this.getIdiff_oid1();
-		Object generatedIdiff_oid2 = this.getIdiff_oid2();
-		opts.diff_tree_oid(generatedIdiff_oid1, generatedIdiff_oid2, "");
-		.diffcore_std(opts);
-		.diff_flush(opts);
-		prefix.strbuf_release();
-	}
-	public void show_sig_lines(int status, Object bol) {
-		byte color;
-		byte reset;
-		byte eol;
-		diff_options generatedDiffopt = this.getDiffopt();
-		int generatedUse_color = (generatedDiffopt).getUse_color();
-		color = .diff_get_color(generatedUse_color, status ? color_diff.DIFF_WHITESPACE : color_diff.DIFF_FRAGINFO);
-		reset = .diff_get_color(generatedUse_color, color_diff.DIFF_RESET);
-		_iobuf generatedFile = generatedDiffopt.getFile();
-		git_graph generatedGraph = this.getGraph();
-		while (bol) {
-			eol = ModernizedCProgram.gitstrchrnul(bol, (byte)'\n');
-			.fprintf(generatedFile, "%s%.*s%s%s", color, (int)(eol - bol), bol, reset, eol ? "\n" : "");
-			generatedGraph.graph_show_oneline();
-			bol = (eol) ? (eol + 1) : eol;
-		}
-	}
-	public void show_log() {
-		strbuf msgbuf = new strbuf(, , );
-		log_info generatedLoginfo = this.getLoginfo();
-		log_info log = generatedLoginfo;
-		commit generatedCommit = log.getCommit();
-		commit generatedParent = log.getParent();
-		commit commit = generatedCommit;
-		commit parent = generatedParent;
-		int generatedAbbrev_commit = this.getAbbrev_commit();
-		int generatedAbbrev = this.getAbbrev();
-		int abbrev_commit = generatedAbbrev_commit ? generatedAbbrev : ModernizedCProgram.the_repository.getHash_algo().getHexsz();
-		Object generatedExtra_headers = this.getExtra_headers();
-		byte extra_headers = generatedExtra_headers;
-		pretty_print_context ctx = new pretty_print_context(0);
-		this.setLoginfo(((Object)0));
-		int generatedVerbose_header = this.getVerbose_header();
-		git_graph generatedGraph = this.getGraph();
-		object generatedObject = commit.getObject();
-		object_id generatedOid = generatedObject.getOid();
-		diff_options generatedDiffopt = this.getDiffopt();
-		_iobuf generatedFile = generatedDiffopt.getFile();
-		int generatedPrint_parents = this.getPrint_parents();
-		decoration generatedChildren = this.getChildren();
-		Object generatedName = generatedChildren.getName();
-		int generatedLine_termination = generatedDiffopt.getLine_termination();
-		if (!generatedVerbose_header) {
-			generatedGraph.graph_show_commit();
-			if (!generatedGraph) {
-				ModernizedCProgram.put_revision_mark(opt, commit);
-			} 
-			.fputs(ModernizedCProgram.the_repository.repo_find_unique_abbrev(generatedOid, abbrev_commit), generatedFile);
-			if (generatedPrint_parents) {
-				ModernizedCProgram.show_parents(commit, abbrev_commit, generatedFile);
-			} 
-			if (generatedName) {
-				ModernizedCProgram.show_children(opt, commit, abbrev_commit);
-			} 
-			ModernizedCProgram.show_decorations(opt, commit);
-			if (generatedGraph && !ModernizedCProgram.graph_is_commit_finished(generatedGraph)) {
-				.putc((byte)'\n', generatedFile);
-				generatedGraph.graph_show_remainder();
-			} 
-			.putc(generatedLine_termination, generatedFile);
-			return ;
-		} 
-		int generatedShown_one = this.getShown_one();
-		int generatedUse_terminator = this.getUse_terminator();
-		int generatedMissing_newline = this.getMissing_newline();
-		if (generatedShown_one && !generatedUse_terminator) {
-			if (generatedLine_termination == (byte)'\n' && !generatedMissing_newline) {
-				generatedGraph.graph_show_padding();
-			} 
-			.putc(generatedLine_termination, generatedFile);
-		} 
-		this.setShown_one(1/*
-			 * If the history graph was requested,
-			 * print the graph, up to this commit's line
-			 */);
-		generatedGraph.graph_show_commit();
-		cmit_fmt generatedCommit_format = this.getCommit_format();
-		int generatedNeed_8bit_cte = ctx.getNeed_8bit_cte();
-		int generatedUse_color = (generatedDiffopt).getUse_color();
-		reflog_walk_info generatedReflog_info = this.getReflog_info();
-		date_mode generatedDate_mode = this.getDate_mode();
-		int generatedDate_mode_explicit = this.getDate_mode_explicit();
-		if (ModernizedCProgram.cmit_fmt_is_mail(generatedCommit_format)) {
-			ModernizedCProgram.log_write_email_headers(opt, commit, extra_headers, generatedNeed_8bit_cte, 1);
-			ctx.setRev(opt);
-			ctx.setPrint_email_subject(1);
-		}  else if (generatedCommit_format != cmit_fmt.CMIT_FMT_USERFORMAT) {
-			.fputs(.diff_get_color(generatedUse_color, color_diff.DIFF_COMMIT), generatedFile);
-			if (generatedCommit_format != cmit_fmt.CMIT_FMT_ONELINE) {
-				.fputs("commit ", generatedFile);
-			} 
-			if (!generatedGraph) {
-				ModernizedCProgram.put_revision_mark(opt, commit);
-			} 
-			.fputs(ModernizedCProgram.the_repository.repo_find_unique_abbrev(generatedOid, abbrev_commit), generatedFile);
-			if (generatedPrint_parents) {
-				ModernizedCProgram.show_parents(commit, abbrev_commit, generatedFile);
-			} 
-			if (generatedName) {
-				ModernizedCProgram.show_children(opt, commit, abbrev_commit);
-			} 
-			if (parent) {
-				.fprintf(generatedFile, " (from %s)", ModernizedCProgram.the_repository.repo_find_unique_abbrev(generatedOid, abbrev_commit));
-			} 
-			.fputs(.diff_get_color(generatedUse_color, color_diff.DIFF_RESET), generatedFile);
-			ModernizedCProgram.show_decorations(opt, commit);
-			if (generatedCommit_format == cmit_fmt.CMIT_FMT_ONELINE) {
-				.putc((byte)' ', generatedFile);
-			} else {
-					.putc((byte)'\n', generatedFile);
-					generatedGraph.graph_show_oneline();
-			} 
-			if (generatedReflog_info) {
-				generatedReflog_info.show_reflog_message(generatedCommit_format == cmit_fmt.CMIT_FMT_ONELINE, generatedDate_mode, generatedDate_mode_explicit);
-				if (generatedCommit_format == cmit_fmt.CMIT_FMT_ONELINE) {
-					return ;
-				} 
-			} 
-		} 
-		int generatedShow_signature = this.getShow_signature();
-		if (generatedShow_signature) {
-			ModernizedCProgram.show_signature(opt, commit);
-			ModernizedCProgram.show_mergetag(opt, commit);
-		} 
-		int generatedShow_notes = this.getShow_notes();
-		if (generatedShow_notes) {
-			int raw;
-			strbuf notebuf = new strbuf(, , );
-			raw = (generatedCommit_format == cmit_fmt.CMIT_FMT_USERFORMAT);
-			.format_display_notes(generatedOid, notebuf, ModernizedCProgram.get_log_output_encoding(), raw);
-			ctx.setNotes_message(notebuf.strbuf_detach(((Object)0)));
-		} 
-		int generatedAdd_signoff = this.getAdd_signoff();
-		if (generatedNeed_8bit_cte >= 0 && generatedAdd_signoff) {
-			ctx.setNeed_8bit_cte(ModernizedCProgram.has_non_ascii(ModernizedCProgram.fmt_name(want_ident.WANT_COMMITTER_IDENT)));
-		} 
-		ctx.setDate_mode(generatedDate_mode);
-		ctx.setDate_mode_explicit(generatedDate_mode_explicit);
-		ctx.setAbbrev(generatedAbbrev);
-		ctx.setAfter_subject(extra_headers);
-		int generatedPreserve_subject = this.getPreserve_subject();
-		ctx.setPreserve_subject(generatedPreserve_subject);
-		ctx.setReflog_info(generatedReflog_info);
-		ctx.setFmt(generatedCommit_format);
-		string_list generatedMailmap = this.getMailmap();
-		ctx.setMailmap(generatedMailmap);
-		ctx.setColor(generatedUse_color);
-		int generatedExpand_tabs_in_log = this.getExpand_tabs_in_log();
-		ctx.setExpand_tabs_in_log(generatedExpand_tabs_in_log);
-		ctx.setOutput_encoding(ModernizedCProgram.get_log_output_encoding());
-		ctx.setRev(opt);
-		ident_split generatedFrom_ident = this.getFrom_ident();
-		Object generatedMail_begin = generatedFrom_ident.getMail_begin();
-		Object generatedName_begin = generatedFrom_ident.getName_begin();
-		if (generatedMail_begin && generatedName_begin) {
-			ctx.setFrom_ident(generatedFrom_ident);
-		} 
-		if (generatedGraph) {
-			ctx.setGraph_width(generatedGraph.graph_width());
-		} 
-		ModernizedCProgram.pretty_print_commit(ctx, commit, msgbuf);
-		if (generatedAdd_signoff) {
-			msgbuf.append_signoff(0, (-1024 << 0));
-		} 
-		cmit_fmt generatedFmt = ctx.getFmt();
-		byte generatedNotes_message = ctx.getNotes_message();
-		if ((generatedFmt != cmit_fmt.CMIT_FMT_USERFORMAT) && generatedNotes_message && generatedNotes_message) {
-			if (ModernizedCProgram.cmit_fmt_is_mail(generatedFmt)) {
-				ModernizedCProgram.next_commentary_block(opt, msgbuf);
-			} 
-			msgbuf.strbuf_addstr(generatedNotes_message);
-		} 
-		int generatedShow_log_size = this.getShow_log_size();
-		Object generatedLen = msgbuf.getLen();
-		if (generatedShow_log_size) {
-			.fprintf(generatedFile, "log size %i\n", (int)generatedLen);
-			generatedGraph.graph_show_oneline();
-		} 
-		byte generatedBuf = msgbuf.getBuf();
-		if (!generatedLen || generatedBuf[generatedLen - 1] != (byte)'\n') {
-			this.setMissing_newline(1);
-		} else {
-				this.setMissing_newline(0);
-		} 
-		ModernizedCProgram.graph_show_commit_msg(generatedGraph, generatedFile, msgbuf);
-		if (generatedUse_terminator && !ModernizedCProgram.commit_format_is_empty(generatedCommit_format)) {
-			if (!generatedMissing_newline) {
-				generatedGraph.graph_show_padding();
-			} 
-			.putc(generatedLine_termination, generatedFile);
-		} 
-		msgbuf.strbuf_release();
-		ModernizedCProgram.free(generatedNotes_message);
-		Object generatedIdiff_oid1 = this.getIdiff_oid1();
-		Object generatedIdiff_title = this.getIdiff_title();
-		if (ModernizedCProgram.cmit_fmt_is_mail(generatedFmt) && generatedIdiff_oid1) {
-			diff_queue_struct dq = new diff_queue_struct();
-			.memcpy(dq, ModernizedCProgram.diff_queued_diff, );
-			do {
-				(ModernizedCProgram.diff_queued_diff).setQueue(((Object)0));
-				(ModernizedCProgram.diff_queued_diff).setNr((ModernizedCProgram.diff_queued_diff).setAlloc(0));
-			} while (0);
-			ModernizedCProgram.next_commentary_block(opt, ((Object)0));
-			generatedFile.fprintf_ln("%s", generatedIdiff_title);
-			opt.show_interdiff(2);
-			.memcpy(ModernizedCProgram.diff_queued_diff, dq, );
-		} 
-		Object generatedRdiff1 = this.getRdiff1();
-		Object generatedRdiff_title = this.getRdiff_title();
-		Object generatedRdiff2 = this.getRdiff2();
-		int generatedCreation_factor = this.getCreation_factor();
-		if (ModernizedCProgram.cmit_fmt_is_mail(generatedFmt) && generatedRdiff1) {
-			diff_queue_struct dq = new diff_queue_struct();
-			diff_options opts = new diff_options();
-			.memcpy(dq, ModernizedCProgram.diff_queued_diff, );
-			do {
-				(ModernizedCProgram.diff_queued_diff).setQueue(((Object)0));
-				(ModernizedCProgram.diff_queued_diff).setNr((ModernizedCProgram.diff_queued_diff).setAlloc(0));
-			} while (0);
-			ModernizedCProgram.next_commentary_block(opt, ((Object)0));
-			generatedFile.fprintf_ln("%s", generatedRdiff_title);
-			.repo_diff_setup(ModernizedCProgram.the_repository, opts);
-			opts.setFile(generatedFile);
-			opts.setUse_color(generatedUse_color);
-			.diff_setup_done(opts);
-			.show_range_diff(generatedRdiff1, generatedRdiff2, generatedCreation_factor, 1, opts);
-			.memcpy(ModernizedCProgram.diff_queued_diff, dq, );
-		} 
-	}
-	public int log_tree_diff_flush() {
-		this.setShown_dashes(0);
-		diff_options generatedDiffopt = this.getDiffopt();
-		.diffcore_std(generatedDiffopt);
-		int generatedOutput_format = generatedDiffopt.getOutput_format();
-		if (.diff_queue_is_empty()) {
-			int saved_fmt = generatedOutput_format;
-			generatedDiffopt.setOutput_format(-1024);
-			.diff_flush(generatedDiffopt);
-			generatedDiffopt.setOutput_format(saved_fmt);
-			return 0;
-		} 
-		log_info generatedLoginfo = this.getLoginfo();
-		int generatedNo_commit_id = this.getNo_commit_id();
-		int generatedVerbose_header = this.getVerbose_header();
-		cmit_fmt generatedCommit_format = this.getCommit_format();
-		Object generatedOutput_prefix = generatedDiffopt.getOutput_prefix();
-		Object generatedOutput_prefix_data = generatedDiffopt.getOutput_prefix_data();
-		_iobuf generatedFile = generatedDiffopt.getFile();
-		int generatedShown_dashes = this.getShown_dashes();
-		if (generatedLoginfo && !generatedNo_commit_id) {
-			opt.show_log();
-			if ((generatedOutput_format & ~-1024) && generatedVerbose_header && generatedCommit_format != cmit_fmt.CMIT_FMT_ONELINE && !ModernizedCProgram.commit_format_is_empty(generatedCommit_format)) {
-				int pch = -1024 | -1024;
-				if (generatedOutput_prefix) {
-					strbuf msg = ((Object)0);
-					ModernizedCProgram.msg = .UNRECOGNIZEDFUNCTIONNAME(generatedDiffopt, generatedOutput_prefix_data);
-					.fwrite(ModernizedCProgram.msg.getBuf(), ModernizedCProgram.msg.getLen(), 1, generatedFile);
-				} 
-				if (!generatedShown_dashes && (pch & generatedOutput_format) == pch) {
-					.fprintf(generatedFile, "---");
-				} 
-				.putc((byte)'\n', generatedFile);
-			} 
-		} 
-		.diff_flush(generatedDiffopt);
-		return 1;
-	}
-	public int builtin_diff_index(int argc, Object argv) {
-		int cached = 0;
-		while (1 < argc) {
-			byte arg = argv[1];
-			if (!.strcmp(arg, "--cached") || !.strcmp(arg, "--staged")) {
-				cached = 1;
-			} else {
-					ModernizedCProgram.usage(ModernizedCProgram.builtin_diff_usage);
-			} 
-			argv++;
-			argc/*
-				 * Make sure there is one revision (i.e. pending object),
-				 * and there is no revision filtering parameters.
-				 */--;
-		}
-		object_array generatedPending = this.getPending();
-		int generatedNr = generatedPending.getNr();
-		int generatedMax_count = this.getMax_count();
-		Object generatedMin_age = this.getMin_age();
-		Object generatedMax_age = this.getMax_age();
-		if (generatedNr != 1 || generatedMax_count != -1 || generatedMin_age != -1 || generatedMax_age != -1) {
-			ModernizedCProgram.usage(ModernizedCProgram.builtin_diff_usage);
-		} 
-		diff_options generatedDiffopt = this.getDiffopt();
-		pathspec generatedPathspec = generatedDiffopt.getPathspec();
-		if (!cached) {
-			ModernizedCProgram.setup_work_tree();
-			if (ModernizedCProgram.the_repository.repo_read_index_preload((generatedPathspec), 0) < 0) {
-				.perror("read_cache_preload");
-				return -1;
-			} 
-		}  else if (ModernizedCProgram.the_repository.repo_read_index() < 0) {
-			.perror("read_cache");
-			return -1;
-		} 
-		return revs.run_diff_index(cached);
-	}
-	public int builtin_diff_files(int argc, Object argv) {
-		int options = 0;
-		while (1 < argc && argv[1][0] == (byte)'-') {
-			if (!.strcmp(argv[1], "--base")) {
-				this.setMax_count(1);
-			}  else if (!.strcmp(argv[1], "--ours")) {
-				this.setMax_count(2);
-			}  else if (!.strcmp(argv[1], "--theirs")) {
-				this.setMax_count(3);
-			}  else if (!.strcmp(argv[1], "-q")) {
-				options |=  1;
-			}  else if (!.strcmp(argv[1], "-h")) {
-				ModernizedCProgram.usage(ModernizedCProgram.builtin_diff_usage);
-			} else {
-					return ();
-			} 
-			argv++;
-			argc/*
-				 * "diff --base" should not combine merges because it was not
-				 * asked to.  "diff -c" should not densify (if the user wants
-				 * dense one, --cc can be explicitly asked for, or just rely
-				 * on the default).
-				 */--;
-		}
-		int generatedMax_count = this.getMax_count();
-		int generatedCombine_merges = this.getCombine_merges();
-		diff_options generatedDiffopt = this.getDiffopt();
-		int generatedOutput_format = generatedDiffopt.getOutput_format();
-		if (generatedMax_count == -1 && !generatedCombine_merges && (generatedOutput_format & -1024)) {
-			this.setCombine_merges(this.setDense_combined_merges(1));
-		} 
-		ModernizedCProgram.setup_work_tree();
-		pathspec generatedPathspec = generatedDiffopt.getPathspec();
-		if (ModernizedCProgram.the_repository.repo_read_index_preload((generatedPathspec), 0) < 0) {
-			.perror("read_cache_preload");
-			return -1;
-		} 
-		return revs.run_diff_files(options);
-	}
-	public int get_object_list_from_bitmap() {
-		bitmap_index bitmap_index = new bitmap_index();
-		if (!(ModernizedCProgram.bitmap_git = bitmap_index.prepare_bitmap_walk(revs))) {
-			return -1;
-		} 
-		if (ModernizedCProgram.pack_options_allow_reuse() && !ModernizedCProgram.reuse_partial_packfile_from_bitmap(ModernizedCProgram.bitmap_git, ModernizedCProgram.reuse_packfile, ModernizedCProgram.reuse_packfile_objects, ModernizedCProgram.reuse_packfile_offset)) {
-			((ModernizedCProgram.reuse_packfile_objects) ? (Object)0 : ._assert("reuse_packfile_objects", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\pack-objects.c", 3052));
-			ModernizedCProgram.nr_result += ModernizedCProgram.reuse_packfile_objects;
-			ModernizedCProgram.progress_state.display_progress(ModernizedCProgram.nr_result);
-		} 
-		ModernizedCProgram.bitmap_git.traverse_bitmap_commit_list(add_object_entry_from_bitmap);
-		return 0;
-	}
-	public int line_log_filter() {
-		commit commit = new commit();
-		commit_list generatedCommits = this.getCommits();
-		commit_list list = generatedCommits;
-		commit_list out = ((Object)0);
-		commit_list pp = out;
-		commit generatedItem = list.getItem();
-		commit_list generatedNext = list.getNext();
-		while (list) {
-			commit_list to_free = ((Object)0);
-			commit = generatedItem;
-			if (ModernizedCProgram.process_ranges_arbitrary_commit(rev, commit)) {
-				pp = list;
-				pp = generatedNext;
-			} else {
-					to_free = list;
-			} 
-			list = generatedNext;
-			ModernizedCProgram.free(to_free);
-		}
-		pp = ((Object)0);
-		for (list = out; list; list = generatedNext) {
-			ModernizedCProgram.rewrite_parents(rev, generatedItem, line_log_rewrite_one);
-		}
-		this.setCommits(out);
-		return 0;
-	}
-	public void cmd_log_init_defaults() {
-		if (ModernizedCProgram.fmt_pretty) {
-			rev.get_commit_format(ModernizedCProgram.fmt_pretty);
-		} 
-		diff_options generatedDiffopt = this.getDiffopt();
-		diff_flags generatedFlags = generatedDiffopt.getFlags();
-		if (ModernizedCProgram.default_follow) {
-			generatedFlags.setDefault_follow_renames(1);
-		} 
-		this.setVerbose_header(1);
-		generatedFlags.setRecursive(1);
-		generatedDiffopt.setStat_width(-/* use full terminal width */1);
-		generatedDiffopt.setStat_graph_width(-/* respect statGraphWidth config */1);
-		this.setAbbrev_commit(ModernizedCProgram.default_abbrev_commit);
-		this.setShow_root_diff(ModernizedCProgram.default_show_root);
-		this.setSubject_prefix(ModernizedCProgram.fmt_patch_subject_prefix);
-		this.setShow_signature(ModernizedCProgram.default_show_signature);
-		generatedFlags.setAllow_textconv(1);
-		date_mode generatedDate_mode = this.getDate_mode();
-		if (ModernizedCProgram.default_date_mode) {
-			generatedDate_mode.parse_date_format(ModernizedCProgram.default_date_mode);
-		} 
-	}
-	public void show_early_header(Object stage, int nr) {
-		int generatedShown_one = this.getShown_one();
-		cmit_fmt generatedCommit_format = this.getCommit_format();
-		diff_options generatedDiffopt = this.getDiffopt();
-		int generatedLine_termination = generatedDiffopt.getLine_termination();
-		if (generatedShown_one) {
-			this.setShown_one(0);
-			if (generatedCommit_format != cmit_fmt.CMIT_FMT_ONELINE) {
-				.putchar(generatedLine_termination);
-			} 
-		} 
-		_iobuf generatedFile = generatedDiffopt.getFile();
-		.fprintf(generatedFile, ModernizedCProgram._("Final output: %d %s\n"), nr, stage);
-	}
-	public void finish_early_output() {
-		commit_list generatedCommits = this.getCommits();
-		int n = generatedCommits.estimate_commit_count();
-		.signal(SIGALRM, ((__p_sig_fn_t)1));
-		rev.show_early_header("done", n);
-	}
-	public int cmd_log_walk() {
-		commit commit = new commit();
-		int saved_nrl = 0;
-		diff_options generatedDiffopt = this.getDiffopt();
-		int generatedClose_file = generatedDiffopt.getClose_file();
-		int saved_dcctc = 0;
-		int close_file = generatedClose_file;
-		int generatedEarly_output = this.getEarly_output();
-		if (generatedEarly_output) {
-			ModernizedCProgram.setup_early_output();
-		} 
-		if (rev.prepare_revision_walk()) {
-			ModernizedCProgram.die(ModernizedCProgram._("revision walk setup failed"));
-		} 
-		if (generatedEarly_output) {
-			rev/*
-				 * For --check and --exit-code, the exit code is based on CHECK_FAILED
-				 * and HAS_CHANGES being accumulated in rev->diffopt, so be careful to
-				 * retain that state information if replacing rev->diffopt in this loop
-				 */.finish_early_output();
-		} 
-		generatedDiffopt.setClose_file(0);
-		commit commit = new commit();
-		int generatedMax_count = this.getMax_count();
-		reflog_walk_info generatedReflog_info = this.getReflog_info();
-		commit_list generatedParents = commit.getParents();
-		int generatedNeeded_rename_limit = generatedDiffopt.getNeeded_rename_limit();
-		int generatedDegraded_cc_to_c = generatedDiffopt.getDegraded_cc_to_c();
-		while ((commit = commit.get_revision(rev)) != ((Object)0)) {
-			if (!ModernizedCProgram.log_tree_commit(rev, commit) && generatedMax_count >= 0/*
-						 * We decremented max_count in get_revision,
-						 * but we didn't actually show the commit.
-						 */) {
-				generatedMax_count++;
-			} 
-			if (!generatedReflog_info) {
-				.free_commit_buffer(ModernizedCProgram.the_repository.getParsed_objects(), commit);
-				.free_commit_list(generatedParents);
-				commit.setParents(((Object)0));
-			} 
-			if (saved_nrl < generatedNeeded_rename_limit) {
-				saved_nrl = generatedNeeded_rename_limit;
-			} 
-			if (generatedDegraded_cc_to_c) {
-				saved_dcctc = 1;
-			} 
-		}
-		generatedDiffopt.setDegraded_cc_to_c(saved_dcctc);
-		generatedDiffopt.setNeeded_rename_limit(saved_nrl);
-		_iobuf generatedFile = generatedDiffopt.getFile();
-		if (close_file) {
-			.fclose(generatedFile);
-		} 
-		int generatedOutput_format = generatedDiffopt.getOutput_format();
-		diff_flags generatedFlags = generatedDiffopt.getFlags();
-		int generatedCheck_failed = generatedFlags.getCheck_failed();
-		if (generatedOutput_format & -1024 && generatedCheck_failed) {
-			return 2;
-		} 
-		return .diff_result_code(generatedDiffopt, 0);
-	}
-	public void show_tagger(Object buf) {
-		strbuf out = new strbuf(, , );
-		pretty_print_context pp = new pretty_print_context(0);
-		cmit_fmt generatedCommit_format = this.getCommit_format();
-		pp.setFmt(generatedCommit_format);
-		date_mode generatedDate_mode = this.getDate_mode();
-		pp.setDate_mode(generatedDate_mode);
-		ModernizedCProgram.pp_user_info(pp, "Tagger", out, buf, ModernizedCProgram.get_log_output_encoding());
-		diff_options generatedDiffopt = this.getDiffopt();
-		_iobuf generatedFile = generatedDiffopt.getFile();
-		byte generatedBuf = out.getBuf();
-		.fprintf(generatedFile, "%s", generatedBuf);
-		out.strbuf_release();
-	}
-	public int show_blob_object(Object oid, Object obj_name) {
-		object_id oidc = new object_id();
-		object_context obj_context = new object_context();
-		byte buf;
-		long size;
-		diff_options generatedDiffopt = this.getDiffopt();
-		_iobuf generatedFile = generatedDiffopt.getFile();
-		.fflush(generatedFile);
-		diff_flags generatedFlags = generatedDiffopt.getFlags();
-		int generatedTextconv_set_via_cmdline = generatedFlags.getTextconv_set_via_cmdline();
-		int generatedAllow_textconv = generatedFlags.getAllow_textconv();
-		if (!generatedTextconv_set_via_cmdline || !generatedAllow_textconv) {
-			return ((Object)0).stream_blob_to_fd(1, oid, 0);
-		} 
-		if (ModernizedCProgram.get_oid_with_context(ModernizedCProgram.the_repository, obj_name, 200, oidc, obj_context)) {
-			ModernizedCProgram.die(ModernizedCProgram._("not a valid object name %s"), obj_name);
-		} 
-		Byte generatedPath = obj_context.getPath();
-		int generatedMode = obj_context.getMode();
-		if (!generatedPath || !.textconv_object(ModernizedCProgram.the_repository, generatedPath, generatedMode, oidc, 1, buf, size)) {
-			ModernizedCProgram.free(generatedPath);
-			return ((Object)0).stream_blob_to_fd(1, oid, 0);
-		} 
-		if (!buf) {
-			ModernizedCProgram.die(ModernizedCProgram._("git show %s: bad file"), obj_name);
-		} 
-		ModernizedCProgram.write_or_die(1, buf, size);
-		ModernizedCProgram.free(generatedPath);
-		return 0;
-	}
-	public int show_tag_object(Object oid) {
-		long size;
-		object_type type;
-		byte buf = ModernizedCProgram.the_repository.repo_read_object_file(oid, object_type.type, size);
-		int offset = 0;
-		if (!buf) {
-			return ();
-		} 
-		((object_type.type == object_type.OBJ_TAG) ? (Object)0 : ._assert("type == OBJ_TAG", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\log.c", 551));
-		while (offset < size && buf[offset] != (byte)'\n') {
-			int new_offset = offset + 1;
-			byte ident;
-			while (new_offset < size && buf[new_offset++] != (byte)'\n') {
-				;
-			}
-			if (ModernizedCProgram.skip_prefix(buf + offset, "tagger ", ident)) {
-				rev.show_tagger(ident);
-			} 
-			offset = new_offset;
-		}
-		diff_options generatedDiffopt = this.getDiffopt();
-		_iobuf generatedFile = generatedDiffopt.getFile();
-		if (offset < size) {
-			.fwrite(buf + offset, size - offset, 1, generatedFile);
-		} 
-		ModernizedCProgram.free(buf);
-		return 0;
-	}
-	public void gen_message_id(Byte base) {
-		strbuf buf = new strbuf(, , );
-		buf.strbuf_addf("%s.%llu.git.%s", base, (timestamp_t).time(((Object)0)), ModernizedCProgram.git_committer_info(4 | 2 | 1));
-		this.setMessage_id(buf.strbuf_detach(((Object)0)));
-	}
-	public Byte find_branch_name() {
-		int i;
-		int positive = -1;
-		object_id branch_oid = new object_id();
-		object_id tip_oid = new object_id();
-		byte ref;
-		byte v;
-		byte full_ref;
-		byte branch = ((Object)0);
-		rev_cmdline_info generatedCmdline = this.getCmdline();
-		int generatedNr = generatedCmdline.getNr();
-		rev_cmdline_entry generatedRev = generatedCmdline.getRev();
-		for (i = 0; i < generatedNr; i++) {
-			if (generatedRev[i].getFlags() & (-1024 << 1)) {
-				continue;
-			} 
-			if (positive < 0) {
-				positive = i;
-			} else {
-					return ((Object)0);
-			} 
-		}
-		if (positive < 0) {
-			return ((Object)0);
-		} 
-		ref = generatedRev[positive].getName();
-		tip_oid = generatedRev[positive].getItem().getOid();
-		if (branch_oid.dwim_ref(ref, .strlen(ref), full_ref) && ModernizedCProgram.skip_prefix(full_ref, "refs/heads/", v) && ModernizedCProgram.oideq(tip_oid, branch_oid)) {
-			branch = ModernizedCProgram.xstrdup(v);
-		} 
-		ModernizedCProgram.free(full_ref);
-		return branch;
-	}
-	public int add_pending_commit(Object arg, int flags) {
-		object_id oid = new object_id();
-		object generatedObject = commit.getObject();
-		int generatedFlags = generatedObject.getFlags();
-		if (ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, arg, oid) == 0) {
-			commit commit = .lookup_commit_reference(ModernizedCProgram.the_repository, oid);
-			if (commit) {
-				generatedFlags |=  flags;
-				ModernizedCProgram.add_pending_object(revs, generatedObject, arg);
-				return 0;
-			} 
-		} 
-		return -1;
-	}
-	public void perform_reachability_traversal() {
-		int initialized;
-		progress progress = ((Object)0);
-		if (initialized) {
-			return ;
-		} 
-		progress progress = new progress();
-		if (ModernizedCProgram.show_progress) {
-			progress = progress.start_delayed_progress(ModernizedCProgram._("Checking connectivity"), 0);
-		} 
-		ModernizedCProgram.mark_reachable_objects(revs, 1, ModernizedCProgram.expire, progress);
-		progress.stop_progress();
-		initialized = 1;
-	}
-	public int is_object_reachable(Object oid) {
-		object obj = new object();
-		revs.perform_reachability_traversal();
-		object object = new object();
-		obj = object.lookup_object(ModernizedCProgram.the_repository, oid);
-		int generatedFlags = obj.getFlags();
-		return obj && (generatedFlags & (-1024 << 0));
-	}
-	public int add_unseen_recent_objects_to_traversal(Object timestamp) {
-		recent_data data = new recent_data();
-		int r;
-		data.setRevs(revs);
-		data.setTimestamp(timestamp);
-		r = ModernizedCProgram.for_each_loose_object(add_recent_loose, data, for_each_object_flags.FOR_EACH_OBJECT_LOCAL_ONLY);
-		if (r) {
-			return r;
-		} 
-		return ModernizedCProgram.for_each_packed_object(add_recent_packed, data, for_each_object_flags.FOR_EACH_OBJECT_LOCAL_ONLY);
 	}
 	public void test_bitmap_walk() {
 		object root = new object();
@@ -1259,8 +756,8 @@ public class rev_info {
 		} 
 		int generatedVersion = bitmap_git.getVersion();
 		Object generatedEntry_count = bitmap_git.getEntry_count();
-		.fprintf((_iob[2]), "Bitmap v%d test (%d entries loaded)\n", generatedVersion, generatedEntry_count);
-		object_array_entry generatedObjects = generatedPending.getObjects();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Bitmap v%d test (%d entries loaded)\n", generatedVersion, generatedEntry_count);
+		object_array_entry[] generatedObjects = generatedPending.getObjects();
 		root = generatedObjects[0].getItem();
 		 generatedBitmaps = bitmap_git.getBitmaps();
 		object_id generatedOid = root.getOid();
@@ -1273,7 +770,7 @@ public class rev_info {
 		if (pos < (generatedN_buckets)) {
 			stored_bitmap st = (generatedVals[pos]);
 			ewah_bitmap bm = ewah_bitmap.lookup_stored_bitmap(st);
-			.fprintf((_iob[2]), "Found bitmap for %s. %d bits / %08x checksum\n", ModernizedCProgram.oid_to_hex(generatedOid), (int)generatedEwah_bitmap, bm.ewah_checksum());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Found bitmap for %s. %d bits / %08x checksum\n", ModernizedCProgram.oid_to_hex(generatedOid), (int)generatedEwah_bitmap, bm.ewah_checksum());
 			result = bitmap.ewah_to_bitmap(bm);
 		} 
 		if (result == ((Object)0)) {
@@ -1297,1299 +794,11 @@ public class rev_info {
 		generatedPrg.stop_progress();
 		bitmap generatedBase = tdata.getBase();
 		if (result.bitmap_equals(generatedBase)) {
-			.fprintf((_iob[2]), "OK!\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "OK!\n");
 		} else {
-				.fprintf((_iob[2]), "Mismatch!\n");
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Mismatch!\n");
 		} 
 		bitmap_git.free_bitmap_index();
-	}
-	public void save_user_format(Object cp, int is_tformat) {
-		ModernizedCProgram.free(ModernizedCProgram.user_format);
-		ModernizedCProgram.user_format = ModernizedCProgram.xstrdup(cp);
-		if (is_tformat) {
-			this.setRev_info(1);
-		} 
-		this.setRev_info(cmit_fmt.CMIT_FMT_USERFORMAT);
-	}
-	public void get_commit_format(Object arg) {
-		cmt_fmt_map commit_format = new cmt_fmt_map();
-		this.setRev_info(0);
-		if (!arg) {
-			this.setRev_info(cmit_fmt.CMIT_FMT_DEFAULT);
-			return ;
-		} 
-		if (ModernizedCProgram.skip_prefix(arg, "format:", arg)) {
-			rev.save_user_format(arg, 0);
-			return ;
-		} 
-		if (!arg || ModernizedCProgram.skip_prefix(arg, "tformat:", arg) || .strchr(arg, (byte)'%')) {
-			rev.save_user_format(arg, 1);
-			return ;
-		} 
-		cmt_fmt_map cmt_fmt_map = new cmt_fmt_map();
-		commit_format = cmt_fmt_map.find_commit_format(arg);
-		if (!commit_format) {
-			ModernizedCProgram.die("invalid --pretty format: %s", arg);
-		} 
-		cmit_fmt generatedFormat = commit_format.getFormat();
-		this.setRev_info(generatedFormat);
-		int generatedIs_tformat = commit_format.getIs_tformat();
-		this.setRev_info(generatedIs_tformat);
-		int generatedExpand_tabs_in_log = commit_format.getExpand_tabs_in_log();
-		this.setRev_info(generatedExpand_tabs_in_log);
-		Object generatedUser_format = commit_format.getUser_format();
-		if (generatedFormat == cmit_fmt.CMIT_FMT_USERFORMAT) {
-			rev.save_user_format(generatedUser_format, generatedIs_tformat);
-		} 
-	}
-	public void mark_edges_uninteresting(Object show_edge, int sparse) {
-		commit_list list = new commit_list();
-		int i;
-		commit generatedItem = list.getItem();
-		object generatedObject = commit.getObject();
-		int generatedFlags = generatedObject.getFlags();
-		object_id generatedOid = generatedObject.getOid();
-		commit_list generatedNext = list.getNext();
-		commit_list generatedCommits = this.getCommits();
-		repository generatedRepo = this.getRepo();
-		int generatedEdge_hint_aggressive = this.getEdge_hint_aggressive();
-		if (sparse) {
-			oidset set = new oidset();
-			set.oidset_init(16);
-			for (list = generatedCommits; list; list = generatedNext) {
-				commit commit = generatedItem;
-				tree tree = .repo_get_commit_tree(ModernizedCProgram.the_repository, commit);
-				if (generatedFlags & (-1024 << 1)) {
-					generatedFlags |=  (-1024 << 1);
-				} 
-				set.oidset_insert(generatedOid);
-				ModernizedCProgram.add_edge_parents(commit, revs, show_edge, set);
-			}
-			ModernizedCProgram.mark_trees_uninteresting_sparse(generatedRepo, set);
-			set.oidset_clear();
-		} else {
-				for (list = generatedCommits; list; list = generatedNext) {
-					commit commit = generatedItem;
-					if (generatedFlags & (-1024 << 1)) {
-						ModernizedCProgram.mark_tree_uninteresting(generatedRepo, .repo_get_commit_tree(ModernizedCProgram.the_repository, commit));
-						if (generatedEdge_hint_aggressive && !(generatedFlags & (-1024 << 3))) {
-							generatedFlags |=  (-1024 << 3);
-							commit.show_edge();
-						} 
-						continue;
-					} 
-					ModernizedCProgram.mark_edge_parents_uninteresting(commit, revs, show_edge);
-				}
-		} 
-		rev_cmdline_info generatedCmdline = this.getCmdline();
-		int generatedNr = generatedCmdline.getNr();
-		int generatedType = obj.getType();
-		if (generatedEdge_hint_aggressive) {
-			for (i = 0; i < generatedNr; i++) {
-				object obj = generatedItem;
-				commit commit = (commit)obj;
-				if (generatedType != object_type.OBJ_COMMIT || !(generatedFlags & (-1024 << 1))) {
-					continue;
-				} 
-				ModernizedCProgram.mark_tree_uninteresting(generatedRepo, .repo_get_commit_tree(ModernizedCProgram.the_repository, commit));
-				if (!(generatedFlags & (-1024 << 3))) {
-					generatedFlags |=  (-1024 << 3);
-					commit.show_edge();
-				} 
-			}
-		} 
-	}
-	public void traverse_commit_list(Object show_commit, Object show_object, Object show_data) {
-		traversal_context ctx = new traversal_context();
-		ctx.setRevs(revs);
-		ctx.setShow_commit(show_commit);
-		ctx.setShow_object(show_object);
-		ctx.setShow_data(show_data);
-		ctx.setFilter(((Object)0));
-		ctx.do_traverse();
-	}
-	public void add_head_to_pending() {
-		object_id oid = new object_id();
-		object obj = new object();
-		if (ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, "HEAD", oid)) {
-			return ;
-		} 
-		repository generatedRepo = this.getRepo();
-		object object = new object();
-		obj = object.parse_object(generatedRepo, oid);
-		if (!obj) {
-			return ;
-		} 
-		ModernizedCProgram.add_pending_object(revs, obj, "HEAD");
-	}
-	public void add_pending_oid(Object name, Object oid, int flags) {
-		object object = new object();
-		object object = object.get_reference(revs, name, oid, flags);
-		ModernizedCProgram.add_pending_object(revs, object, name);
-	}
-	public int limit_list() {
-		int slop = 5;
-		timestamp_t date = -1024;
-		commit_list generatedCommits = this.getCommits();
-		commit_list list = generatedCommits;
-		commit_list newlist = ((Object)0);
-		commit_list p = newlist;
-		commit_list bottom = ((Object)0);
-		commit interesting_cache = ((Object)0);
-		int generatedAncestry_path = this.getAncestry_path();
-		if (generatedAncestry_path) {
-			bottom = list.collect_bottom_commits();
-			if (!bottom) {
-				ModernizedCProgram.die("--ancestry-path given but there are no bottom commits");
-			} 
-		} 
-		object generatedObject = commit.getObject();
-		Object generatedMax_age = this.getMax_age();
-		Object generatedDate = commit.getDate();
-		int generatedFlags = obj.getFlags();
-		Object generatedMin_age = this.getMin_age();
-		while (list) {
-			commit commit = .pop_commit(list);
-			object obj = generatedObject;
-			show_early_output_fn_t show = new show_early_output_fn_t();
-			if (commit == interesting_cache) {
-				interesting_cache = ((Object)0);
-			} 
-			if (generatedMax_age != -1 && (generatedDate < generatedMax_age)) {
-				generatedFlags |=  (-1024 << 1);
-			} 
-			if (ModernizedCProgram.process_parents(revs, commit, list, ((Object)0)) < 0) {
-				return -1;
-			} 
-			if (generatedFlags & (-1024 << 1)) {
-				commit.mark_parents_uninteresting();
-				slop = ModernizedCProgram.still_interesting(list, date, slop, interesting_cache);
-				if (slop) {
-					continue;
-				} 
-				break;
-			} 
-			if (generatedMin_age != -1 && (generatedDate > generatedMin_age)) {
-				continue;
-			} 
-			date = generatedDate;
-			p = .commit_list_insert(commit, p).getNext();
-			show = ModernizedCProgram.show_early_output;
-			if (!show) {
-				continue;
-			} 
-			ModernizedCProgram.show(revs, newlist);
-			ModernizedCProgram.show_early_output = ((Object)0);
-		}
-		int generatedCherry_pick = this.getCherry_pick();
-		int generatedCherry_mark = this.getCherry_mark();
-		if (generatedCherry_pick || generatedCherry_mark) {
-			ModernizedCProgram.cherry_pick_list(newlist, revs);
-		} 
-		int generatedLeft_only = this.getLeft_only();
-		int generatedRight_only = this.getRight_only();
-		if (generatedLeft_only || generatedRight_only) {
-			ModernizedCProgram.limit_left_right(newlist, revs);
-		} 
-		if (bottom) {
-			bottom.limit_to_ancestry(newlist);
-			.free_commit_list(bottom/*
-				 * Check if any commits have become TREESAME by some of their parents
-				 * becoming UNINTERESTING.
-				 */);
-		} 
-		commit generatedItem = list.getItem();
-		commit_list generatedNext = list.getNext();
-		if (ModernizedCProgram.limiting_can_increase_treesame(revs)) {
-			for (list = newlist; list; list = generatedNext) {
-				commit c = generatedItem;
-				if (generatedFlags & ((-1024 << 1) | (-1024 << 2))) {
-					continue;
-				} 
-				ModernizedCProgram.update_treesame(revs, c);
-			}
-		} 
-		this.setCommits(newlist);
-		return 0/*
-		 * Add an entry to refs->cmdline with the specified information.
-		 * *name is copied.
-		 */;
-	}
-	public void add_reflogs_to_pending(int flags) {
-		all_refs_cb cb = new all_refs_cb();
-		cb.setAll_revs(revs);
-		cb.setAll_flags(flags);
-		cb.setWt(((Object)0));
-		ModernizedCProgram.for_each_reflog(handle_one_reflog, cb);
-		int generatedSingle_worktree = this.getSingle_worktree();
-		if (!generatedSingle_worktree) {
-			cb.add_other_reflogs_to_pending();
-		} 
-	}
-	public void add_index_objects_to_pending(int flags) {
-		worktree worktrees = new worktree();
-		worktree p = new worktree();
-		repository generatedRepo = this.getRepo();
-		generatedRepo.repo_read_index();
-		index_state generatedIndex = generatedRepo.getIndex();
-		ModernizedCProgram.do_add_index_objects_to_pending(revs, generatedIndex, flags);
-		int generatedSingle_worktree = this.getSingle_worktree();
-		if (generatedSingle_worktree) {
-			return ;
-		} 
-		worktrees = .get_worktrees(0);
-		int generatedIs_current = wt.getIs_current();
-		for (p = worktrees; p; p++) {
-			worktree wt = p;
-			index_state istate = new index_state(((Object)0));
-			if (generatedIs_current) {
-				continue;
-			} 
-			if (istate.read_index_from(ModernizedCProgram.worktree_git_path(wt, "index"), .get_worktree_git_dir(wt)) > 0) {
-				ModernizedCProgram.do_add_index_objects_to_pending(revs, istate, flags);
-			} 
-			istate.discard_index();
-		}
-		.free_worktrees(worktrees);
-	}
-	public void add_alternate_refs_to_pending(int flags) {
-		add_alternate_refs_data data = new add_alternate_refs_data();
-		data.setRevs(revs);
-		data.setFlags(flags);
-		ModernizedCProgram.for_each_alternate_ref(add_one_alternate_ref, data);
-	}
-	public int add_parents_only(Object arg_, int flags, int exclude_parent) {
-		object_id oid = new object_id();
-		object it = new object();
-		commit commit = new commit();
-		commit_list parents = new commit_list();
-		int parent_number;
-		byte arg = arg_;
-		if (arg == (byte)'^') {
-			flags ^=  (-1024 << 1) | (-1024 << 10);
-			arg++;
-		} 
-		if (ModernizedCProgram.repo_get_oid_committish(ModernizedCProgram.the_repository, arg, oid)) {
-			return 0;
-		} 
-		object object = new object();
-		int generatedIgnore_missing = this.getIgnore_missing();
-		int generatedType = it.getType();
-		while (1) {
-			it = object.get_reference(revs, arg, oid, 0);
-			if (!it && generatedIgnore_missing) {
-				return 0;
-			} 
-			if (generatedType != object_type.OBJ_TAG) {
-				break;
-			} 
-			if (!((tag)it).getTagged()) {
-				return 0;
-			} 
-			oid.oidcpy(((tag)it).getTagged().getOid());
-		}
-		if (generatedType != object_type.OBJ_COMMIT) {
-			return 0;
-		} 
-		commit = (commit)it;
-		commit_list generatedParents = commit.getParents();
-		if (exclude_parent && exclude_parent > .commit_list_count(generatedParents)) {
-			return 0;
-		} 
-		commit generatedItem = parents.getItem();
-		object generatedObject = generatedItem.getObject();
-		int generatedFlags = it.getFlags();
-		for (; parents; ) {
-			if (exclude_parent && parent_number != exclude_parent) {
-				continue;
-			} 
-			it = generatedObject;
-			generatedFlags |=  flags;
-			ModernizedCProgram.add_rev_cmdline(revs, it, arg_, .REV_CMD_PARENTS_ONLY, flags);
-			ModernizedCProgram.add_pending_object(revs, it, arg);
-		}
-		return 1;
-	}
-	public void prepare_show_merge() {
-		commit_list bases = new commit_list();
-		commit head = new commit();
-		commit other = new commit();
-		object_id oid = new object_id();
-		byte prune = ((Object)0);
-		int i;
-		int prune_num = /* counting terminating NULL */1;
-		repository generatedRepo = this.getRepo();
-		index_state generatedIndex = generatedRepo.getIndex();
-		index_state istate = generatedIndex;
-		if (ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, "HEAD", oid)) {
-			ModernizedCProgram.die("--merge without HEAD?");
-		} 
-		head = .lookup_commit_or_die(oid, "HEAD");
-		if (ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, "MERGE_HEAD", oid)) {
-			ModernizedCProgram.die("--merge without MERGE_HEAD?");
-		} 
-		other = .lookup_commit_or_die(oid, "MERGE_HEAD");
-		object generatedObject = head.getObject();
-		ModernizedCProgram.add_pending_object(revs, generatedObject, "HEAD");
-		ModernizedCProgram.add_pending_object(revs, generatedObject, "MERGE_HEAD");
-		commit_list commit_list = new commit_list();
-		bases = commit_list.repo_get_merge_bases(ModernizedCProgram.the_repository, head, other);
-		ModernizedCProgram.add_rev_cmdline_list(revs, bases, .REV_CMD_MERGE_BASE, (-1024 << 1) | (-1024 << 10));
-		ModernizedCProgram.add_pending_commit_list(revs, bases, (-1024 << 1) | (-1024 << 10));
-		.free_commit_list(bases);
-		int generatedFlags = generatedObject.getFlags();
-		generatedFlags |=  (-1024 << 8);
-		int generatedCache_nr = istate.getCache_nr();
-		if (!generatedCache_nr) {
-			generatedRepo.repo_read_index();
-		} 
-		cache_entry generatedCache = istate.getCache();
-		pathspec generatedPrune_data = this.getPrune_data();
-		for (i = 0; i < generatedCache_nr; i++) {
-			cache_entry ce = generatedCache[i];
-			if (!(((true) & (ce).getCe_flags()) >> 12)) {
-				continue;
-			} 
-			if (ModernizedCProgram.ce_path_match(istate, ce, generatedPrune_data, ((Object)0))) {
-				prune_num++;
-				(prune) = ModernizedCProgram.xrealloc((prune), ModernizedCProgram.st_mult(, (prune_num)));
-				prune[prune_num - 2] = ce.getName();
-				prune[prune_num - 1] = ((Object)0);
-			} 
-			while ((i + 1 < generatedCache_nr) && ModernizedCProgram.ce_same_name(ce, generatedCache[i + 1])) {
-				i++;
-			}
-		}
-		generatedPrune_data.clear_pathspec();
-		generatedPrune_data.parse_pathspec(((1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6)) & ~(1 << 2), (1 << 1) | (1 << 6), "", prune);
-		this.setLimited(1);
-	}
-	public int dotdot_missing(Object arg, byte dotdot, int symmetric) {
-		int generatedIgnore_missing = this.getIgnore_missing();
-		if (generatedIgnore_missing) {
-			return 0;
-		} 
-		dotdot = /* de-munge so we report the full argument */(byte)'.';
-		ModernizedCProgram.die(symmetric ? "Invalid symmetric difference expression %s" : "Invalid revision range %s", arg);
-	}
-	public int handle_dotdot(Object arg, int flags, int cant_be_filename) {
-		object_context a_oc = new object_context();
-		object_context b_oc = new object_context();
-		byte dotdot = .strstr(arg, "..");
-		int ret;
-		if (!dotdot) {
-			return -1;
-		} 
-		.memset(a_oc, 0, );
-		.memset(b_oc, 0, );
-		dotdot = (byte)'\0';
-		ret = ModernizedCProgram.handle_dotdot_1(arg, dotdot, revs, flags, cant_be_filename, a_oc, b_oc);
-		dotdot = (byte)'.';
-		Byte generatedPath = a_oc.getPath();
-		ModernizedCProgram.free(generatedPath);
-		ModernizedCProgram.free(generatedPath);
-		return ret;
-	}
-	public int handle_revision_arg(Object arg_, int flags, int revarg_opt) {
-		object_context oc = new object_context();
-		byte mark;
-		object object = new object();
-		object_id oid = new object_id();
-		int local_flags;
-		byte arg = arg_;
-		int cant_be_filename = revarg_opt & 1;
-		int get_sha1_flags = 200;
-		flags = flags & (-1024 << 1) ? flags | (-1024 << 10) : flags & ~(-1024 << 10);
-		if (!cant_be_filename && !.strcmp(arg, ".."/*
-				 * Just ".."?  That is not a range but the
-				 * pathspec for the parent directory.
-				 */)) {
-			return -1;
-		} 
-		if (!revs.handle_dotdot(arg, flags, revarg_opt)) {
-			return 0;
-		} 
-		mark = .strstr(arg, "^@");
-		if (mark && !mark[2]) {
-			mark = 0;
-			if (revs.add_parents_only(arg, flags, 0)) {
-				return 0;
-			} 
-			mark = (byte)'^';
-		} 
-		mark = .strstr(arg, "^!");
-		if (mark && !mark[2]) {
-			mark = 0;
-			if (!revs.add_parents_only(arg, flags ^ ((-1024 << 1) | (-1024 << 10)), 0)) {
-				mark = (byte)'^';
-			} 
-		} 
-		mark = .strstr(arg, "^-");
-		if (mark) {
-			int exclude_parent = 1;
-			if (mark[2]) {
-				byte end;
-				exclude_parent = .strtoul(mark + 2, end, 10);
-				if (end != (byte)'\0' || !exclude_parent) {
-					return -1;
-				} 
-			} 
-			mark = 0;
-			if (!revs.add_parents_only(arg, flags ^ ((-1024 << 1) | (-1024 << 10)), exclude_parent)) {
-				mark = (byte)'^';
-			} 
-		} 
-		local_flags = 0;
-		if (arg == (byte)'^') {
-			local_flags = (-1024 << 1) | (-1024 << 10);
-			arg++;
-		} 
-		if (revarg_opt & 2) {
-			get_sha1_flags |=  4;
-		} 
-		repository generatedRepo = this.getRepo();
-		int generatedIgnore_missing = this.getIgnore_missing();
-		if (ModernizedCProgram.get_oid_with_context(generatedRepo, arg, get_sha1_flags, oid, oc)) {
-			return generatedIgnore_missing ? 0 : -1;
-		} 
-		Object generatedPrefix = this.getPrefix();
-		if (!cant_be_filename) {
-			ModernizedCProgram.verify_non_filename(generatedPrefix, arg);
-		} 
-		object object = new object();
-		object = object.get_reference(revs, arg, oid, flags ^ local_flags);
-		if (!object) {
-			return generatedIgnore_missing ? 0 : -1;
-		} 
-		ModernizedCProgram.add_rev_cmdline(revs, object, arg_, .REV_CMD_REV, flags ^ local_flags);
-		int generatedMode = oc.getMode();
-		Byte generatedPath = oc.getPath();
-		ModernizedCProgram.add_pending_object_with_path(revs, object, arg, generatedMode, generatedPath);
-		ModernizedCProgram.free(generatedPath);
-		return 0;
-	}
-	public void add_grep(Object ptn, grep_pat_token what) {
-		grep_opt generatedGrep_filter = this.getGrep_filter();
-		.append_grep_pattern(generatedGrep_filter, ptn, "command line", 0, grep_pat_token.what);
-	}
-	public void add_header_grep(grep_header_field field, Object pattern) {
-		grep_opt generatedGrep_filter = this.getGrep_filter();
-		.append_header_grep_pattern(generatedGrep_filter, grep_header_field.field, pattern);
-	}
-	public void add_message_grep(Object pattern) {
-		revs.add_grep(pattern, grep_pat_token.GREP_PATTERN_BODY);
-	}
-	public int handle_revision_opt(int argc, Object argv, int unkc, Object unkv, Object opt) {
-		byte arg = argv[0];
-		byte optarg;
-		int argcount;
-		int hexsz = ModernizedCProgram.the_repository.getHash_algo().getHexsz();
-		if (!.strcmp(arg, "--all") || !.strcmp(arg, /* pseudo revision arguments */"--branches") || !.strcmp(arg, "--tags") || !.strcmp(arg, "--remotes") || !.strcmp(arg, "--reflog") || !.strcmp(arg, "--not") || !.strcmp(arg, "--no-walk") || !.strcmp(arg, "--do-walk") || !.strcmp(arg, "--bisect") || ModernizedCProgram.starts_with(arg, "--glob=") || !.strcmp(arg, "--indexed-objects") || !.strcmp(arg, "--alternate-refs") || ModernizedCProgram.starts_with(arg, "--exclude=") || ModernizedCProgram.starts_with(arg, "--branches=") || ModernizedCProgram.starts_with(arg, "--tags=") || ModernizedCProgram.starts_with(arg, "--remotes=") || ModernizedCProgram.starts_with(arg, "--no-walk=")) {
-			unkv[(unkc)++] = arg;
-			return 1;
-		} 
-		int generatedMax_count = this.getMax_count();
-		reflog_walk_info generatedReflog_info = this.getReflog_info();
-		int generatedEarly_output = this.getEarly_output();
-		int generatedRight_only = this.getRight_only();
-		int generatedLeft_only = this.getLeft_only();
-		int generatedCherry_pick = this.getCherry_pick();
-		int generatedCherry_mark = this.getCherry_mark();
-		diff_options generatedDiffopt = this.getDiffopt();
-		diff_flags generatedFlags = generatedDiffopt.getFlags();
-		display_notes_opt generatedNotes_opt = this.getNotes_opt();
-		int generatedUse_default_notes = generatedNotes_opt.getUse_default_notes();
-		string_list generatedExtra_notes_refs = generatedNotes_opt.getExtra_notes_refs();
-		git_graph git_graph = new git_graph();
-		int generatedAbbrev = this.getAbbrev();
-		date_mode generatedDate_mode = this.getDate_mode();
-		grep_opt generatedGrep_filter = this.getGrep_filter();
-		int generatedPickaxe_opts = generatedDiffopt.getPickaxe_opts();
-		int generatedReverse = this.getReverse();
-		decoration generatedChildren = this.getChildren();
-		Object generatedPrefix = this.getPrefix();
-		if ((argcount = "max-count".parse_long_opt(argv, optarg))) {
-			this.setMax_count(.atoi(optarg));
-			this.setNo_walk(0);
-			return argcount;
-		}  else if ((argcount = "skip".parse_long_opt(argv, optarg))) {
-			this.setSkip_count(.atoi(optarg));
-			return argcount;
-		}  else if ((arg == (byte)'-') && ((ModernizedCProgram.sane_ctype[(byte)(arg[1])] & (true)) != 0)) {
-			if (ModernizedCProgram.strtol_i(arg + 1, 10, generatedMax_count) < /* accept -<digit>, like traditional "head" */0 || generatedMax_count < 0) {
-				ModernizedCProgram.die("'%s': not a non-negative integer", arg + 1);
-			} 
-			this.setNo_walk(0);
-		}  else if (!.strcmp(arg, "-n")) {
-			if (argc <= 1) {
-				return ();
-			} 
-			this.setMax_count(.atoi(argv[1]));
-			this.setNo_walk(0);
-			return 2;
-		}  else if (ModernizedCProgram.skip_prefix(arg, "-n", optarg)) {
-			this.setMax_count(.atoi(optarg));
-			this.setNo_walk(0);
-		}  else if ((argcount = "max-age".parse_long_opt(argv, optarg))) {
-			this.setMax_age(.atoi(optarg));
-			return argcount;
-		}  else if ((argcount = "since".parse_long_opt(argv, optarg))) {
-			this.setMax_age(ModernizedCProgram.approxidate_careful((optarg), ((Object)0)));
-			return argcount;
-		}  else if ((argcount = "after".parse_long_opt(argv, optarg))) {
-			this.setMax_age(ModernizedCProgram.approxidate_careful((optarg), ((Object)0)));
-			return argcount;
-		}  else if ((argcount = "min-age".parse_long_opt(argv, optarg))) {
-			this.setMin_age(.atoi(optarg));
-			return argcount;
-		}  else if ((argcount = "before".parse_long_opt(argv, optarg))) {
-			this.setMin_age(ModernizedCProgram.approxidate_careful((optarg), ((Object)0)));
-			return argcount;
-		}  else if ((argcount = "until".parse_long_opt(argv, optarg))) {
-			this.setMin_age(ModernizedCProgram.approxidate_careful((optarg), ((Object)0)));
-			return argcount;
-		}  else if (!.strcmp(arg, "--first-parent")) {
-			this.setFirst_parent_only(1);
-		}  else if (!.strcmp(arg, "--ancestry-path")) {
-			this.setAncestry_path(1);
-			this.setSimplify_history(0);
-			this.setLimited(1);
-		}  else if (!.strcmp(arg, "-g") || !.strcmp(arg, "--walk-reflogs")) {
-			generatedReflog_info.init_reflog_walk();
-		}  else if (!.strcmp(arg, "--default")) {
-			if (argc <= 1) {
-				return ();
-			} 
-			this.setDef(argv[1]);
-			return 2;
-		}  else if (!.strcmp(arg, "--merge")) {
-			this.setShow_merge(1);
-		}  else if (!.strcmp(arg, "--topo-order")) {
-			this.setSort_order(rev_sort_order.REV_SORT_IN_GRAPH_ORDER);
-			this.setTopo_order(1);
-		}  else if (!.strcmp(arg, "--simplify-merges")) {
-			this.setSimplify_merges(1);
-			this.setTopo_order(1);
-			this.setRewrite_parents(1);
-			this.setSimplify_history(0);
-			this.setLimited(1);
-		}  else if (!.strcmp(arg, "--simplify-by-decoration")) {
-			this.setSimplify_merges(1);
-			this.setTopo_order(1);
-			this.setRewrite_parents(1);
-			this.setSimplify_history(0);
-			this.setSimplify_by_decoration(1);
-			this.setLimited(1);
-			this.setPrune(1);
-		}  else if (!.strcmp(arg, "--date-order")) {
-			this.setSort_order(rev_sort_order.REV_SORT_BY_COMMIT_DATE);
-			this.setTopo_order(1);
-		}  else if (!.strcmp(arg, "--author-date-order")) {
-			this.setSort_order(rev_sort_order.REV_SORT_BY_AUTHOR_DATE);
-			this.setTopo_order(1);
-		}  else if (!.strcmp(arg, "--early-output")) {
-			this.setEarly_output(100);
-			this.setTopo_order(1);
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--early-output=", optarg)) {
-			if (ModernizedCProgram.strtoul_ui(optarg, 10, generatedEarly_output) < 0) {
-				ModernizedCProgram.die("'%s': not a non-negative integer", optarg);
-			} 
-			this.setTopo_order(1);
-		}  else if (!.strcmp(arg, "--parents")) {
-			this.setRewrite_parents(1);
-			this.setPrint_parents(1);
-		}  else if (!.strcmp(arg, "--dense")) {
-			this.setDense(1);
-		}  else if (!.strcmp(arg, "--sparse")) {
-			this.setDense(0);
-		}  else if (!.strcmp(arg, "--in-commit-order")) {
-			this.setTree_blobs_in_commit_order(1);
-		}  else if (!.strcmp(arg, "--remove-empty")) {
-			this.setRemove_empty_trees(1);
-		}  else if (!.strcmp(arg, "--merges")) {
-			this.setMin_parents(2);
-		}  else if (!.strcmp(arg, "--no-merges")) {
-			this.setMax_parents(1);
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--min-parents=", optarg)) {
-			this.setMin_parents(.atoi(optarg));
-		}  else if (!.strcmp(arg, "--no-min-parents")) {
-			this.setMin_parents(0);
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--max-parents=", optarg)) {
-			this.setMax_parents(.atoi(optarg));
-		}  else if (!.strcmp(arg, "--no-max-parents")) {
-			this.setMax_parents(-1);
-		}  else if (!.strcmp(arg, "--boundary")) {
-			this.setBoundary(1);
-		}  else if (!.strcmp(arg, "--left-right")) {
-			this.setLeft_right(1);
-		}  else if (!.strcmp(arg, "--left-only")) {
-			if (generatedRight_only) {
-				ModernizedCProgram.die("--left-only is incompatible with --right-only or --cherry");
-			} 
-			this.setLeft_only(1);
-		}  else if (!.strcmp(arg, "--right-only")) {
-			if (generatedLeft_only) {
-				ModernizedCProgram.die("--right-only is incompatible with --left-only");
-			} 
-			this.setRight_only(1);
-		}  else if (!.strcmp(arg, "--cherry")) {
-			if (generatedLeft_only) {
-				ModernizedCProgram.die("--cherry is incompatible with --left-only");
-			} 
-			this.setCherry_mark(1);
-			this.setRight_only(1);
-			this.setMax_parents(1);
-			this.setLimited(1);
-		}  else if (!.strcmp(arg, "--count")) {
-			this.setCount(1);
-		}  else if (!.strcmp(arg, "--cherry-mark")) {
-			if (generatedCherry_pick) {
-				ModernizedCProgram.die("--cherry-mark is incompatible with --cherry-pick");
-			} 
-			this.setCherry_mark(1);
-			this.setLimited(/* needs limit_list() */1);
-		}  else if (!.strcmp(arg, "--cherry-pick")) {
-			if (generatedCherry_mark) {
-				ModernizedCProgram.die("--cherry-pick is incompatible with --cherry-mark");
-			} 
-			this.setCherry_pick(1);
-			this.setLimited(1);
-		}  else if (!.strcmp(arg, "--objects")) {
-			this.setTag_objects(1);
-			this.setTree_objects(1);
-			this.setBlob_objects(1);
-		}  else if (!.strcmp(arg, "--objects-edge")) {
-			this.setTag_objects(1);
-			this.setTree_objects(1);
-			this.setBlob_objects(1);
-			this.setEdge_hint(1);
-		}  else if (!.strcmp(arg, "--objects-edge-aggressive")) {
-			this.setTag_objects(1);
-			this.setTree_objects(1);
-			this.setBlob_objects(1);
-			this.setEdge_hint(1);
-			this.setEdge_hint_aggressive(1);
-		}  else if (!.strcmp(arg, "--verify-objects")) {
-			this.setTag_objects(1);
-			this.setTree_objects(1);
-			this.setBlob_objects(1);
-			this.setVerify_objects(1);
-		}  else if (!.strcmp(arg, "--unpacked")) {
-			this.setUnpacked(1);
-		}  else if (ModernizedCProgram.starts_with(arg, "--unpacked=")) {
-			ModernizedCProgram.die("--unpacked=<packfile> no longer supported.");
-		}  else if (!.strcmp(arg, "-r")) {
-			this.setDiff(1);
-			generatedFlags.setRecursive(1);
-		}  else if (!.strcmp(arg, "-t")) {
-			this.setDiff(1);
-			generatedFlags.setRecursive(1);
-			generatedFlags.setTree_in_recursive(1);
-		}  else if (!.strcmp(arg, "-m")) {
-			this.setIgnore_merges(0);
-		}  else if (!.strcmp(arg, "-c")) {
-			this.setDiff(1);
-			this.setDense_combined_merges(0);
-			this.setCombine_merges(1);
-		}  else if (!.strcmp(arg, "--combined-all-paths")) {
-			this.setDiff(1);
-			this.setCombined_all_paths(1);
-		}  else if (!.strcmp(arg, "--cc")) {
-			this.setDiff(1);
-			this.setDense_combined_merges(1);
-			this.setCombine_merges(1);
-		}  else if (!.strcmp(arg, "-v")) {
-			this.setVerbose_header(1);
-		}  else if (!.strcmp(arg, "--pretty")) {
-			this.setVerbose_header(1);
-			this.setPretty_given(1);
-			revs.get_commit_format(((Object)0));
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--pretty=", optarg) || ModernizedCProgram.skip_prefix(arg, "--format=", optarg/*
-				 * Detached form ("--pretty X" as opposed to "--pretty=X")
-				 * not allowed, since the argument is optional.
-				 */)) {
-			this.setVerbose_header(1);
-			this.setPretty_given(1);
-			revs.get_commit_format(optarg);
-		}  else if (!.strcmp(arg, "--expand-tabs")) {
-			this.setExpand_tabs_in_log(8);
-		}  else if (!.strcmp(arg, "--no-expand-tabs")) {
-			this.setExpand_tabs_in_log(0);
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--expand-tabs=", arg)) {
-			int val;
-			if (ModernizedCProgram.strtol_i(arg, 10, val) < 0 || val < 0) {
-				ModernizedCProgram.die("'%s': not a non-negative integer", arg);
-			} 
-			this.setExpand_tabs_in_log(val);
-		}  else if (!.strcmp(arg, "--show-notes") || !.strcmp(arg, "--notes")) {
-			this.setShow_notes(1);
-			this.setShow_notes_given(1);
-			generatedNotes_opt.setUse_default_notes(1);
-		}  else if (!.strcmp(arg, "--show-signature")) {
-			this.setShow_signature(1);
-		}  else if (!.strcmp(arg, "--no-show-signature")) {
-			this.setShow_signature(0);
-		}  else if (!.strcmp(arg, "--show-linear-break")) {
-			this.setBreak_bar("                    ..........");
-			this.setTrack_linear(1);
-			this.setTrack_first_time(1);
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--show-linear-break=", optarg)) {
-			this.setBreak_bar(ModernizedCProgram.xstrdup(optarg));
-			this.setTrack_linear(1);
-			this.setTrack_first_time(1);
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--show-notes=", optarg) || ModernizedCProgram.skip_prefix(arg, "--notes=", optarg)) {
-			strbuf buf = new strbuf(, , );
-			this.setShow_notes(1);
-			this.setShow_notes_given(1);
-			if (ModernizedCProgram.starts_with(arg, "--show-notes=") && generatedUse_default_notes < 0) {
-				generatedNotes_opt.setUse_default_notes(1);
-			} 
-			ModernizedCProgram.buf.strbuf_addstr(optarg);
-			.expand_notes_ref(ModernizedCProgram.buf);
-			generatedExtra_notes_refs.string_list_append(ModernizedCProgram.buf.strbuf_detach(((Object)0)));
-		}  else if (!.strcmp(arg, "--no-notes")) {
-			this.setShow_notes(0);
-			this.setShow_notes_given(1);
-			generatedNotes_opt.setUse_default_notes(-1/* we have been strdup'ing ourselves, so trick
-					 * string_list into free()ing strings */);
-			generatedExtra_notes_refs.setStrdup_strings(1);
-			generatedExtra_notes_refs.string_list_clear(0);
-			generatedExtra_notes_refs.setStrdup_strings(0);
-		}  else if (!.strcmp(arg, "--standard-notes")) {
-			this.setShow_notes_given(1);
-			generatedNotes_opt.setUse_default_notes(1);
-		}  else if (!.strcmp(arg, "--no-standard-notes")) {
-			generatedNotes_opt.setUse_default_notes(0);
-		}  else if (!.strcmp(arg, "--oneline")) {
-			this.setVerbose_header(1);
-			revs.get_commit_format("oneline");
-			this.setPretty_given(1);
-			this.setAbbrev_commit(1);
-		}  else if (!.strcmp(arg, "--graph")) {
-			this.setTopo_order(1);
-			this.setRewrite_parents(1);
-			this.setGraph(git_graph.graph_init(revs));
-		}  else if (!.strcmp(arg, "--root")) {
-			this.setShow_root_diff(1);
-		}  else if (!.strcmp(arg, "--no-commit-id")) {
-			this.setNo_commit_id(1);
-		}  else if (!.strcmp(arg, "--always")) {
-			this.setAlways_show_header(1);
-		}  else if (!.strcmp(arg, "--no-abbrev")) {
-			this.setAbbrev(0);
-		}  else if (!.strcmp(arg, "--abbrev")) {
-			this.setAbbrev(ModernizedCProgram.default_abbrev);
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--abbrev=", optarg)) {
-			this.setAbbrev(.strtoul(optarg, ((Object)0), 10));
-			if (generatedAbbrev < ModernizedCProgram.minimum_abbrev) {
-				this.setAbbrev(ModernizedCProgram.minimum_abbrev);
-			}  else if (generatedAbbrev > hexsz) {
-				this.setAbbrev(hexsz);
-			} 
-		}  else if (!.strcmp(arg, "--abbrev-commit")) {
-			this.setAbbrev_commit(1);
-			this.setAbbrev_commit_given(1);
-		}  else if (!.strcmp(arg, "--no-abbrev-commit")) {
-			this.setAbbrev_commit(0);
-		}  else if (!.strcmp(arg, "--full-diff")) {
-			this.setDiff(1);
-			this.setFull_diff(1);
-		}  else if (!.strcmp(arg, "--full-history")) {
-			this.setSimplify_history(0);
-		}  else if (!.strcmp(arg, "--relative-date")) {
-			generatedDate_mode.setType(date_mode_type.DATE_RELATIVE);
-			this.setDate_mode_explicit(1);
-		}  else if ((argcount = "date".parse_long_opt(argv, optarg))) {
-			generatedDate_mode.parse_date_format(optarg);
-			this.setDate_mode_explicit(1);
-			return argcount;
-		}  else if (!.strcmp(arg, "--log-size")) {
-			this.setShow_log_size(1/*
-				 * Grepping the commit log
-				 */);
-		}  else if ((argcount = "author".parse_long_opt(argv, optarg))) {
-			revs.add_header_grep(grep_header_field.GREP_HEADER_AUTHOR, optarg);
-			return argcount;
-		}  else if ((argcount = "committer".parse_long_opt(argv, optarg))) {
-			revs.add_header_grep(grep_header_field.GREP_HEADER_COMMITTER, optarg);
-			return argcount;
-		}  else if ((argcount = "grep-reflog".parse_long_opt(argv, optarg))) {
-			revs.add_header_grep(grep_header_field.GREP_HEADER_REFLOG, optarg);
-			return argcount;
-		}  else if ((argcount = "grep".parse_long_opt(argv, optarg))) {
-			revs.add_message_grep(optarg);
-			return argcount;
-		}  else if (!.strcmp(arg, "--grep-debug")) {
-			generatedGrep_filter.setDebug(1);
-		}  else if (!.strcmp(arg, "--basic-regexp")) {
-			generatedGrep_filter.setPattern_type_option(grep_pattern_type.GREP_PATTERN_TYPE_BRE);
-		}  else if (!.strcmp(arg, "--extended-regexp") || !.strcmp(arg, "-E")) {
-			generatedGrep_filter.setPattern_type_option(grep_pattern_type.GREP_PATTERN_TYPE_ERE);
-		}  else if (!.strcmp(arg, "--regexp-ignore-case") || !.strcmp(arg, "-i")) {
-			generatedGrep_filter.setIgnore_case(1);
-			generatedPickaxe_opts |=  32;
-		}  else if (!.strcmp(arg, "--fixed-strings") || !.strcmp(arg, "-F")) {
-			generatedGrep_filter.setPattern_type_option(grep_pattern_type.GREP_PATTERN_TYPE_FIXED);
-		}  else if (!.strcmp(arg, "--perl-regexp") || !.strcmp(arg, "-P")) {
-			generatedGrep_filter.setPattern_type_option(grep_pattern_type.GREP_PATTERN_TYPE_PCRE);
-		}  else if (!.strcmp(arg, "--all-match")) {
-			generatedGrep_filter.setAll_match(1);
-		}  else if (!.strcmp(arg, "--invert-grep")) {
-			this.setInvert_grep(1);
-		}  else if ((argcount = "encoding".parse_long_opt(argv, optarg))) {
-			if (.strcmp(optarg, "none")) {
-				ModernizedCProgram.git_log_output_encoding = ModernizedCProgram.xstrdup(optarg);
-			} else {
-					ModernizedCProgram.git_log_output_encoding = "";
-			} 
-			return argcount;
-		}  else if (!.strcmp(arg, "--reverse")) {
-			generatedReverse ^=  1;
-		}  else if (!.strcmp(arg, "--children")) {
-			generatedChildren.setName("children");
-			this.setLimited(1);
-		}  else if (!.strcmp(arg, "--ignore-missing")) {
-			this.setIgnore_missing(1);
-		}  else if (opt && opt.getAllow_exclude_promisor_objects() && !.strcmp(arg, "--exclude-promisor-objects")) {
-			if (ModernizedCProgram.fetch_if_missing) {
-				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\revision.c", 2340, "exclude_promisor_objects can only be used when fetch_if_missing is 0");
-			} 
-			this.setExclude_promisor_objects(1);
-		} else {
-				int opts = .diff_opt_parse(generatedDiffopt, argv, argc, generatedPrefix);
-				if (!opts) {
-					unkv[(unkc)++] = arg;
-				} 
-				return opts;
-		} 
-		git_graph generatedGraph = this.getGraph();
-		int generatedTrack_linear = this.getTrack_linear();
-		if (generatedGraph && generatedTrack_linear) {
-			ModernizedCProgram.die("--show-linear-break and --graph are incompatible");
-		} 
-		return 1;
-	}
-	public int handle_revision_pseudo_opt(Object submodule, int argc, Object argv, int flags) {
-		byte arg = argv[0];
-		byte optarg;
-		ref_store refs = new ref_store();
-		int argcount;
-		int generatedSingle_worktree = this.getSingle_worktree();
-		ref_store ref_store = new ref_store();
-		repository generatedRepo = this.getRepo();
-		ref_store ref_store = new ref_store();
-		if (submodule/*
-				 * We need some something like get_submodule_worktrees()
-				 * before we can go through all worktrees of a submodule,
-				 * .e.g with adding all HEADs from --all, which is not
-				 * supported right now, so stick to single worktree.
-				 */) {
-			if (!generatedSingle_worktree) {
-				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\revision.c", 2406, "--single-worktree cannot be used together with submodule");
-			} 
-			refs = ref_store.get_submodule_ref_store(submodule);
-		} else {
-				refs = ref_store.get_main_ref_store(generatedRepo);
-		} 
-		string_list generatedRef_excludes = this.getRef_excludes();
-		if (!.strcmp(arg, "--all")) {
-			ModernizedCProgram.handle_refs(refs, revs, flags, ModernizedCProgram.refs_for_each_ref);
-			ModernizedCProgram.handle_refs(refs, revs, flags, ModernizedCProgram.refs_head_ref);
-			if (!generatedSingle_worktree) {
-				all_refs_cb cb = new all_refs_cb();
-				ModernizedCProgram.init_all_refs_cb(cb, revs, flags);
-				.other_head_refs(handle_one_ref, cb);
-			} 
-			generatedRef_excludes.clear_ref_exclusion();
-		}  else if (!.strcmp(arg, "--branches")) {
-			ModernizedCProgram.handle_refs(refs, revs, flags, ModernizedCProgram.refs_for_each_branch_ref);
-			generatedRef_excludes.clear_ref_exclusion();
-		}  else if (!.strcmp(arg, "--bisect")) {
-			ModernizedCProgram.read_bisect_terms(ModernizedCProgram.term_bad, ModernizedCProgram.term_good);
-			ModernizedCProgram.handle_refs(refs, revs, flags, for_each_bad_bisect_ref);
-			ModernizedCProgram.handle_refs(refs, revs, flags ^ ((-1024 << 1) | (-1024 << 10)), for_each_good_bisect_ref);
-			this.setBisect(1);
-		}  else if (!.strcmp(arg, "--tags")) {
-			ModernizedCProgram.handle_refs(refs, revs, flags, ModernizedCProgram.refs_for_each_tag_ref);
-			generatedRef_excludes.clear_ref_exclusion();
-		}  else if (!.strcmp(arg, "--remotes")) {
-			ModernizedCProgram.handle_refs(refs, revs, flags, ModernizedCProgram.refs_for_each_remote_ref);
-			generatedRef_excludes.clear_ref_exclusion();
-		}  else if ((argcount = "glob".parse_long_opt(argv, optarg))) {
-			all_refs_cb cb = new all_refs_cb();
-			ModernizedCProgram.init_all_refs_cb(cb, revs, flags);
-			ModernizedCProgram.for_each_glob_ref(handle_one_ref, optarg, cb);
-			generatedRef_excludes.clear_ref_exclusion();
-			return argcount;
-		}  else if ((argcount = "exclude".parse_long_opt(argv, optarg))) {
-			generatedRef_excludes.add_ref_exclusion(optarg);
-			return argcount;
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--branches=", optarg)) {
-			all_refs_cb cb = new all_refs_cb();
-			ModernizedCProgram.init_all_refs_cb(cb, revs, flags);
-			ModernizedCProgram.for_each_glob_ref_in(handle_one_ref, optarg, "refs/heads/", cb);
-			generatedRef_excludes.clear_ref_exclusion();
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--tags=", optarg)) {
-			all_refs_cb cb = new all_refs_cb();
-			ModernizedCProgram.init_all_refs_cb(cb, revs, flags);
-			ModernizedCProgram.for_each_glob_ref_in(handle_one_ref, optarg, "refs/tags/", cb);
-			generatedRef_excludes.clear_ref_exclusion();
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--remotes=", optarg)) {
-			all_refs_cb cb = new all_refs_cb();
-			ModernizedCProgram.init_all_refs_cb(cb, revs, flags);
-			ModernizedCProgram.for_each_glob_ref_in(handle_one_ref, optarg, "refs/remotes/", cb);
-			generatedRef_excludes.clear_ref_exclusion();
-		}  else if (!.strcmp(arg, "--reflog")) {
-			revs.add_reflogs_to_pending(flags);
-		}  else if (!.strcmp(arg, "--indexed-objects")) {
-			revs.add_index_objects_to_pending(flags);
-		}  else if (!.strcmp(arg, "--alternate-refs")) {
-			revs.add_alternate_refs_to_pending(flags);
-		}  else if (!.strcmp(arg, "--not")) {
-			flags ^=  (-1024 << 1) | (-1024 << 10);
-		}  else if (!.strcmp(arg, "--no-walk")) {
-			this.setNo_walk(1);
-		}  else if (ModernizedCProgram.skip_prefix(arg, "--no-walk=", optarg/*
-				 * Detached form ("--no-walk X" as opposed to "--no-walk=X")
-				 * not allowed, since the argument is optional.
-				 */)) {
-			if (!.strcmp(optarg, "sorted")) {
-				this.setNo_walk(1);
-			}  else if (!.strcmp(optarg, "unsorted")) {
-				this.setNo_walk(2);
-			} else {
-					return ();
-			} 
-		}  else if (!.strcmp(arg, "--do-walk")) {
-			this.setNo_walk(0);
-		}  else if (!.strcmp(arg, "--single-worktree")) {
-			this.setSingle_worktree(1);
-		} else {
-				return 0;
-		} 
-		return 1;
-	}
-	public void simplify_merges() {
-		commit_list list = new commit_list();
-		commit_list next = new commit_list();
-		commit_list yet_to_do = new commit_list();
-		commit_list tail = new commit_list();
-		commit commit = new commit();
-		int generatedPrune = this.getPrune();
-		if (!generatedPrune) {
-			return ;
-		} 
-		yet_to_do = ((Object)/* feed the list reversed */0);
-		commit generatedItem = list.getItem();
-		commit_list generatedNext = list.getNext();
-		commit_list generatedCommits = this.getCommits();
-		for (list = generatedCommits; list; list = next) {
-			commit = generatedItem;
-			next = generatedNext;
-			.commit_list_insert(commit, yet_to_do);
-		}
-		while (yet_to_do) {
-			list = yet_to_do;
-			yet_to_do = ((Object)0);
-			tail = yet_to_do;
-			while (list) {
-				commit = .pop_commit(list);
-				tail = tail.simplify_one(revs, commit);
-			}
-		}
-		list = generatedCommits;
-		this.setCommits(((Object)0));
-		tail = generatedCommits;
-		merge_simplify_state merge_simplify_state = new merge_simplify_state();
-		commit generatedSimplified = st.getSimplified();
-		while (list) {
-			merge_simplify_state st = new merge_simplify_state();
-			commit = .pop_commit(list);
-			st = merge_simplify_state.locate_simplify_state(revs, commit);
-			if (generatedSimplified == commit) {
-				tail = generatedNext;
-			} 
-		}
-	}
-	public void set_children() {
-		commit_list l = new commit_list();
-		commit generatedItem = l.getItem();
-		commit_list generatedNext = p.getNext();
-		commit_list generatedParents = commit.getParents();
-		commit_list generatedCommits = this.getCommits();
-		for (l = generatedCommits; l; l = generatedNext) {
-			commit commit = generatedItem;
-			commit_list p = new commit_list();
-			for (p = generatedParents; p; p = generatedNext) {
-				ModernizedCProgram.add_child(revs, generatedItem, commit);
-			}
-		}
-	}
-	public void explore_walk_step() {
-		topo_walk_info generatedTopo_walk_info = this.getTopo_walk_info();
-		topo_walk_info info = generatedTopo_walk_info;
-		commit_list p = new commit_list();
-		prio_queue generatedExplore_queue = info.getExplore_queue();
-		commit c = generatedExplore_queue.prio_queue_get();
-		if (!c) {
-			return ;
-		} 
-		if (.repo_parse_commit_gently(ModernizedCProgram.the_repository, c, 1) < 0) {
-			return ;
-		} 
-		rev_sort_order generatedSort_order = this.getSort_order();
-		author_date_slab generatedAuthor_date = info.getAuthor_date();
-		if (generatedSort_order == rev_sort_order.REV_SORT_BY_AUTHOR_DATE) {
-			.record_author_date(generatedAuthor_date, c);
-		} 
-		Object generatedMax_age = this.getMax_age();
-		Object generatedDate = c.getDate();
-		object generatedObject = c.getObject();
-		int generatedFlags = generatedObject.getFlags();
-		if (generatedMax_age != -1 && (generatedDate < generatedMax_age)) {
-			generatedFlags |=  (-1024 << 1);
-		} 
-		if (ModernizedCProgram.process_parents(revs, c, ((Object)0), ((Object)0)) < 0) {
-			return ;
-		} 
-		if (generatedFlags & (-1024 << 1)) {
-			c.mark_parents_uninteresting();
-		} 
-		commit generatedItem = p.getItem();
-		commit_list generatedNext = p.getNext();
-		commit_list generatedParents = c.getParents();
-		for (p = generatedParents; p; p = generatedNext) {
-			ModernizedCProgram.test_flag_and_insert(generatedExplore_queue, generatedItem, (-1024 << 27));
-		}
-	}
-	public void explore_to_depth(Object gen_cutoff) {
-		topo_walk_info generatedTopo_walk_info = this.getTopo_walk_info();
-		topo_walk_info info = generatedTopo_walk_info;
-		commit c = new commit();
-		prio_queue generatedExplore_queue = info.getExplore_queue();
-		Object generatedGeneration = c.getGeneration();
-		while ((c = generatedExplore_queue.prio_queue_peek()) && generatedGeneration >= gen_cutoff) {
-			revs.explore_walk_step();
-		}
-	}
-	public void indegree_walk_step() {
-		commit_list p = new commit_list();
-		topo_walk_info generatedTopo_walk_info = this.getTopo_walk_info();
-		topo_walk_info info = generatedTopo_walk_info;
-		prio_queue generatedIndegree_queue = info.getIndegree_queue();
-		commit c = generatedIndegree_queue.prio_queue_get();
-		if (!c) {
-			return ;
-		} 
-		if (.repo_parse_commit_gently(ModernizedCProgram.the_repository, c, 1) < 0) {
-			return ;
-		} 
-		Object generatedGeneration = c.getGeneration();
-		revs.explore_to_depth(generatedGeneration);
-		commit generatedItem = p.getItem();
-		indegree_slab generatedIndegree = info.getIndegree();
-		int generatedFirst_parent_only = this.getFirst_parent_only();
-		commit_list generatedNext = p.getNext();
-		commit_list generatedParents = c.getParents();
-		for (p = generatedParents; p; p = generatedNext) {
-			commit parent = generatedItem;
-			int pi = generatedIndegree.indegree_slab_at(parent);
-			if (pi) {
-				(pi)++;
-			} else {
-					pi = 2;
-			} 
-			ModernizedCProgram.test_flag_and_insert(generatedIndegree_queue, parent, (-1024 << 28));
-			if (generatedFirst_parent_only) {
-				return ;
-			} 
-		}
-	}
-	public void compute_indegrees_to_depth(Object gen_cutoff) {
-		topo_walk_info generatedTopo_walk_info = this.getTopo_walk_info();
-		topo_walk_info info = generatedTopo_walk_info;
-		commit c = new commit();
-		prio_queue generatedIndegree_queue = info.getIndegree_queue();
-		Object generatedGeneration = c.getGeneration();
-		while ((c = generatedIndegree_queue.prio_queue_peek()) && generatedGeneration >= gen_cutoff) {
-			revs.indegree_walk_step();
-		}
-	}
-	public void init_topo_walk() {
-		topo_walk_info info = new topo_walk_info();
-		commit_list list = new commit_list();
-		this.setTopo_walk_info(ModernizedCProgram.xmalloc());
-		topo_walk_info generatedTopo_walk_info = this.getTopo_walk_info();
-		info = generatedTopo_walk_info;
-		.memset(info, 0, );
-		indegree_slab generatedIndegree = info.getIndegree();
-		generatedIndegree.init_indegree_slab();
-		prio_queue generatedExplore_queue = info.getExplore_queue();
-		.memset(generatedExplore_queue, 0, );
-		prio_queue generatedIndegree_queue = info.getIndegree_queue();
-		.memset(generatedIndegree_queue, 0, );
-		prio_queue generatedTopo_queue = info.getTopo_queue();
-		.memset(generatedTopo_queue, 0, );
-		author_date_slab generatedAuthor_date = info.getAuthor_date();
-		rev_sort_order generatedSort_order = this.getSort_order();
-		switch (generatedSort_order) {
-		case rev_sort_order.REV_SORT_BY_COMMIT_DATE:
-				generatedTopo_queue.setCompare(ModernizedCProgram.compare_commits_by_commit_date);
-				break;
-		case rev_sort_order.REV_SORT_BY_AUTHOR_DATE:
-				generatedAuthor_date.init_author_date_slab();
-				generatedTopo_queue.setCompare(ModernizedCProgram.compare_commits_by_author_date);
-				generatedTopo_queue.setCb_data(generatedAuthor_date);
-				break;
-		default:
-				generatedTopo_queue.setCompare(((Object)0));
-				break;
-		}
-		generatedExplore_queue.setCompare(ModernizedCProgram.compare_commits_by_gen_then_commit_date);
-		generatedIndegree_queue.setCompare(ModernizedCProgram.compare_commits_by_gen_then_commit_date);
-		info.setMin_generation(-1024);
-		commit generatedItem = list.getItem();
-		Object generatedGeneration = c.getGeneration();
-		Object generatedMin_generation = info.getMin_generation();
-		commit_list generatedNext = list.getNext();
-		commit_list generatedCommits = this.getCommits();
-		for (list = generatedCommits; list; list = generatedNext) {
-			commit c = generatedItem;
-			if (.repo_parse_commit_gently(ModernizedCProgram.the_repository, c, 1)) {
-				continue;
-			} 
-			ModernizedCProgram.test_flag_and_insert(generatedExplore_queue, c, (-1024 << 27));
-			ModernizedCProgram.test_flag_and_insert(generatedIndegree_queue, c, (-1024 << 28));
-			if (generatedGeneration < generatedMin_generation) {
-				info.setMin_generation(generatedGeneration);
-			} 
-			(generatedIndegree.indegree_slab_at(c)) = 1;
-			if (generatedSort_order == rev_sort_order.REV_SORT_BY_AUTHOR_DATE) {
-				.record_author_date(generatedAuthor_date, c);
-			} 
-		}
-		revs.compute_indegrees_to_depth(generatedMin_generation);
-		for (list = generatedCommits; list; list = generatedNext) {
-			commit c = generatedItem;
-			if ((generatedIndegree.indegree_slab_at(c)) == 1) {
-				generatedTopo_queue.prio_queue_put(c/*
-					 * This is unfortunate; the initial tips need to be shown
-					 * in the order given from the revision traversal machinery.
-					 */);
-			} 
-		}
-		if (generatedSort_order == rev_sort_order.REV_SORT_IN_GRAPH_ORDER) {
-			generatedTopo_queue.prio_queue_reverse();
-		} 
-	}
-	public int prepare_revision_walk() {
-		int i;
-		object_array old_pending = new object_array();
-		commit_list generatedCommits = this.getCommits();
-		commit_list next = generatedCommits;
-		object_array generatedPending = this.getPending();
-		.memcpy(old_pending, generatedPending, );
-		generatedPending.setNr(0);
-		generatedPending.setAlloc(0);
-		generatedPending.setObjects(((Object)0));
-		int generatedNr = old_pending.getNr();
-		object_array_entry generatedObjects = old_pending.getObjects();
-		object generatedObject = commit.getObject();
-		int generatedFlags = generatedObject.getFlags();
-		for (i = 0; i < generatedNr; i++) {
-			object_array_entry e = generatedObjects + i;
-			commit commit = ModernizedCProgram.handle_commit(revs, e);
-			if (commit) {
-				if (!(generatedFlags & (-1024 << 0))) {
-					generatedFlags |=  (-1024 << 0);
-					next = .commit_list_append(commit, next);
-				} 
-			} 
-		}
-		old_pending.object_array_clear();
-		int generatedSimplify_merges = this.getSimplify_merges();
-		int generatedLimited = this.getLimited();
-		decoration generatedTreesame = this.getTreesame();
-		if (generatedSimplify_merges || (generatedLimited && ModernizedCProgram.limiting_can_increase_treesame(revs))) {
-			generatedTreesame.setName("treesame");
-		} 
-		int generatedExclude_promisor_objects = this.getExclude_promisor_objects();
-		if (generatedExclude_promisor_objects) {
-			ModernizedCProgram.for_each_packed_object(mark_uninteresting, revs, for_each_object_flags.FOR_EACH_OBJECT_PROMISOR_ONLY);
-		} 
-		int generatedNo_walk = this.getNo_walk();
-		if (generatedNo_walk != 2) {
-			.commit_list_sort_by_date(generatedCommits);
-		} 
-		if (generatedNo_walk) {
-			return 0;
-		} 
-		int generatedTopo_order = this.getTopo_order();
-		rev_sort_order generatedSort_order = this.getSort_order();
-		if (generatedLimited) {
-			if (revs.limit_list() < 0) {
-				return -1;
-			} 
-			if (generatedTopo_order) {
-				.sort_in_topological_order(generatedCommits, generatedSort_order);
-			} 
-		}  else if (generatedTopo_order) {
-			revs.init_topo_walk();
-		} 
-		int generatedLine_level_traverse = this.getLine_level_traverse();
-		if (generatedLine_level_traverse) {
-			revs.line_log_filter();
-		} 
-		if (generatedSimplify_merges) {
-			revs.simplify_merges();
-		} 
-		decoration generatedChildren = this.getChildren();
-		Object generatedName = generatedChildren.getName();
-		if (generatedName) {
-			revs.set_children();
-		} 
-		return 0;
-	}
-	public void free_saved_parents() {
-		saved_parents generatedSaved_parents_slab = this.getSaved_parents_slab();
-		if (generatedSaved_parents_slab) {
-			generatedSaved_parents_slab.clear_saved_parents();
-		} 
-	}
-	public void create_boundary_commit_list() {
-		int i;
-		commit c = new commit();
-		object_array generatedBoundary_commits = this.getBoundary_commits();
-		object_array array = generatedBoundary_commits;
-		object_array_entry generatedObjects = array.getObjects();
-		object_array_entry objects = generatedObjects;
-		commit_list generatedCommits = this.getCommits();
-		if (generatedCommits) {
-			.free_commit_list(generatedCommits);
-			this.setCommits(((Object)0/*
-				 * Put all of the actual boundary commits from revs->boundary_commits
-				 * into revs->commits
-				 */));
-		} 
-		int generatedNr = array.getNr();
-		object generatedObject = c.getObject();
-		int generatedFlags = generatedObject.getFlags();
-		for (i = 0; i < generatedNr; i++) {
-			c = (commit)(objects[i].getItem());
-			if (!c) {
-				continue;
-			} 
-			if (!(generatedFlags & (-1024 << 6))) {
-				continue;
-			} 
-			if (generatedFlags & ((-1024 << 3) | (-1024 << 5))) {
-				continue;
-			} 
-			generatedFlags |=  (-1024 << 5);
-			.commit_list_insert(c, generatedCommits);
-		}
-		rev_sort_order generatedSort_order = this.getSort_order();
-		.sort_in_topological_order(generatedCommits, generatedSort_order);
 	}
 	public void diff_tree_combined(Object oid, Object parents, int dense) {
 		diff_options generatedDiffopt = this.getDiffopt();
@@ -2604,7 +813,7 @@ public class rev_info {
 		int num_parent = parents.getNr();
 		int need_generic_pathscan;
 		if (!/* nothing to do, if no parents */num_parent) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		log_info generatedLoginfo = this.getLoginfo();
 		int generatedNo_commit_id = this.getNo_commit_id();
@@ -2617,7 +826,7 @@ public class rev_info {
 		if (show_log_first) {
 			rev.show_log();
 			if (generatedVerbose_header && generatedOutput_format && generatedOutput_format != -1024 && !ModernizedCProgram.commit_format_is_empty(generatedCommit_format)) {
-				.printf("%s%c", .diff_line_prefix(opt), generatedLine_termination);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s%c", /*Error: Function owner not recognized*/diff_line_prefix(opt), generatedLine_termination);
 			} 
 		} 
 		diffopts = opt;
@@ -2670,11 +879,11 @@ public class rev_info {
 				if (stat_opt) {
 					diffopts.setOutput_format(stat_opt);
 					diffopts.diff_tree_oid(parents.getOid()[0], oid, "");
-					.diffcore_std(diffopts);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diffcore_std(diffopts);
 					if (generatedOrderfile) {
 						ModernizedCProgram.diffcore_order(generatedOrderfile);
 					} 
-					.diff_flush(diffopts);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_flush(diffopts);
 				} 
 		} 
 		combine_diff_path generatedNext = p.getNext();
@@ -2683,7 +892,7 @@ public class rev_info {
 		}
 		if (generatedOrderfile && /* order paths according to diffcore_order */num_paths) {
 			obj_order o = new obj_order();
-			(o) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (num_paths)));
+			(o) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (num_paths)));
 			for (; p; ) {
 				o[i].setObj(p);
 			}
@@ -2710,7 +919,7 @@ public class rev_info {
 			} 
 			if (generatedOutput_format & -1024) {
 				if (needsep) {
-					.printf("%s%c", .diff_line_prefix(opt), generatedLine_termination);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s%c", /*Error: Function owner not recognized*/diff_line_prefix(opt), generatedLine_termination);
 				} 
 				for (p = paths; p; p = generatedNext) {
 					ModernizedCProgram.show_patch_diff(p, num_parent, dense, 0, rev);
@@ -2745,66 +954,1858 @@ public class rev_info {
 		rev.diff_tree_combined(generatedOid, parents, dense);
 		parents.oid_array_clear();
 	}
-	public int diff_no_index(int implicit_no_index, int argc, Object argv) {
-		int i;
-		int no_index;
-		byte[] paths = new byte[2];
-		strbuf replacement = new strbuf(, , );
-		Object generatedPrefix = this.getPrefix();
-		byte prefix = generatedPrefix;
-		option[] no_index_options = new option[]{new option(parse_opt_type.OPTION_SET_INT, (false), ("no-index"), (no_index), ((Object)0), (""), parse_opt_option_flags.PARSE_OPT_NOARG | (parse_opt_option_flags.PARSE_OPT_NONEG | parse_opt_option_flags.PARSE_OPT_HIDDEN), ((Object)0), (true)), new option(parse_opt_type.OPTION_END)};
-		option options = new option();
+	public void bisect_common() {
+		if (revs.prepare_revision_walk()) {
+			ModernizedCProgram.die("revision walk setup failed");
+		} 
+		int generatedTree_objects = this.getTree_objects();
+		if (generatedTree_objects) {
+			revs.mark_edges_uninteresting(((Object)0), 0);
+		} 
+	}
+	public int add_unseen_recent_objects_to_traversal(Object timestamp) {
+		recent_data data = new recent_data();
+		int r;
+		data.setRevs(revs);
+		data.setTimestamp(timestamp);
+		r = ModernizedCProgram.for_each_loose_object(add_recent_loose, data, for_each_object_flags.FOR_EACH_OBJECT_LOCAL_ONLY);
+		if (r) {
+			return r;
+		} 
+		return ModernizedCProgram.for_each_packed_object(add_recent_packed, data, for_each_object_flags.FOR_EACH_OBJECT_LOCAL_ONLY);
+	}
+	public void cmd_log_init_defaults() {
+		if (ModernizedCProgram.fmt_pretty) {
+			rev.get_commit_format(ModernizedCProgram.fmt_pretty);
+		} 
 		diff_options generatedDiffopt = this.getDiffopt();
-		option generatedParseopts = generatedDiffopt.getParseopts();
-		options = no_index_options.parse_options_concat(generatedParseopts);
-		argc = ModernizedCProgram.parse_options(argc, argv, generatedPrefix, options, ModernizedCProgram.diff_no_index_usage, 0);
-		if (argc != 2) {
-			if (implicit_no_index) {
-				ModernizedCProgram.warning(ModernizedCProgram._("Not a git repository. Use --no-index to compare two paths outside a working tree"));
-			} 
-			ModernizedCProgram.usage_with_options(ModernizedCProgram.diff_no_index_usage, options);
-		} 
-		do {
-			ModernizedCProgram.free(options);
-			(options) = ((Object)0);
-		} while (0);
-		for (i = 0; i < 2; i++) {
-			byte p = argv[argc - 2 + i];
-			if (!.strcmp(p, "-"/*
-						 * stdin should be spelled as "-"; if you have
-						 * path that is "-", spell it as "./-".
-						 */)) {
-				p = ModernizedCProgram.file_from_standard_input;
-			}  else if (prefix) {
-				p = ModernizedCProgram.prefix_filename(prefix, p);
-			} 
-			paths[i] = p;
-		}
-		replacement.fixup_paths(paths);
-		generatedDiffopt.setSkip_stat_unmatch(1);
-		int generatedOutput_format = generatedDiffopt.getOutput_format();
-		if (!generatedOutput_format) {
-			generatedDiffopt.setOutput_format(-1024);
-		} 
 		diff_flags generatedFlags = generatedDiffopt.getFlags();
-		generatedFlags.setNo_index(1);
-		generatedFlags.setRelative_name(1);
-		generatedDiffopt.setPrefix(prefix);
-		this.setMax_count(-2);
-		.diff_setup_done(generatedDiffopt);
-		.setup_diff_pager(generatedDiffopt);
-		generatedFlags.setExit_with_status(1);
-		if (generatedDiffopt.queue_diff(paths[0], paths[1])) {
+		if (ModernizedCProgram.default_follow) {
+			generatedFlags.setDefault_follow_renames(1);
+		} 
+		this.setVerbose_header(1);
+		generatedFlags.setRecursive(1);
+		generatedDiffopt.setStat_width(-/* use full terminal width */1);
+		generatedDiffopt.setStat_graph_width(-/* respect statGraphWidth config */1);
+		this.setAbbrev_commit(ModernizedCProgram.default_abbrev_commit);
+		this.setShow_root_diff(ModernizedCProgram.default_show_root);
+		this.setSubject_prefix(ModernizedCProgram.fmt_patch_subject_prefix);
+		this.setShow_signature(ModernizedCProgram.default_show_signature);
+		generatedFlags.setAllow_textconv(1);
+		date_mode generatedDate_mode = this.getDate_mode();
+		if (ModernizedCProgram.default_date_mode) {
+			generatedDate_mode.parse_date_format(ModernizedCProgram.default_date_mode);
+		} 
+	}
+	public void show_early_header(Object stage, int nr) {
+		int generatedShown_one = this.getShown_one();
+		cmit_fmt generatedCommit_format = this.getCommit_format();
+		diff_options generatedDiffopt = this.getDiffopt();
+		int generatedLine_termination = generatedDiffopt.getLine_termination();
+		if (generatedShown_one) {
+			this.setShown_one(0);
+			if (generatedCommit_format != cmit_fmt.CMIT_FMT_ONELINE) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar(generatedLine_termination);
+			} 
+		} 
+		_iobuf generatedFile = generatedDiffopt.getFile();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFile, ModernizedCProgram._("Final output: %d %s\n"), nr, stage);
+	}
+	public void finish_early_output() {
+		commit_list generatedCommits = this.getCommits();
+		int n = generatedCommits.estimate_commit_count();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal(SIGALRM, ((__p_sig_fn_t)1));
+		rev.show_early_header("done", n);
+	}
+	public int cmd_log_walk() {
+		commit commit = new commit();
+		int saved_nrl = 0;
+		diff_options generatedDiffopt = this.getDiffopt();
+		int generatedClose_file = generatedDiffopt.getClose_file();
+		int saved_dcctc = 0;
+		int close_file = generatedClose_file;
+		int generatedEarly_output = this.getEarly_output();
+		if (generatedEarly_output) {
+			ModernizedCProgram.setup_early_output();
+		} 
+		if (rev.prepare_revision_walk()) {
+			ModernizedCProgram.die(ModernizedCProgram._("revision walk setup failed"));
+		} 
+		if (generatedEarly_output) {
+			rev/*
+				 * For --check and --exit-code, the exit code is based on CHECK_FAILED
+				 * and HAS_CHANGES being accumulated in rev->diffopt, so be careful to
+				 * retain that state information if replacing rev->diffopt in this loop
+				 */.finish_early_output();
+		} 
+		generatedDiffopt.setClose_file(0);
+		commit commit = new commit();
+		int generatedMax_count = this.getMax_count();
+		reflog_walk_info generatedReflog_info = this.getReflog_info();
+		commit_list generatedParents = commit.getParents();
+		int generatedNeeded_rename_limit = generatedDiffopt.getNeeded_rename_limit();
+		int generatedDegraded_cc_to_c = generatedDiffopt.getDegraded_cc_to_c();
+		while ((commit = commit.get_revision(rev)) != ((Object)0)) {
+			if (!ModernizedCProgram.log_tree_commit(rev, commit) && generatedMax_count >= 0/*
+						 * We decremented max_count in get_revision,
+						 * but we didn't actually show the commit.
+						 */) {
+				generatedMax_count++;
+			} 
+			if (!generatedReflog_info) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_commit_buffer(ModernizedCProgram.the_repository.getParsed_objects(), commit);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_commit_list(generatedParents);
+				commit.setParents(((Object)0));
+			} 
+			if (saved_nrl < generatedNeeded_rename_limit) {
+				saved_nrl = generatedNeeded_rename_limit;
+			} 
+			if (generatedDegraded_cc_to_c) {
+				saved_dcctc = 1;
+			} 
+		}
+		generatedDiffopt.setDegraded_cc_to_c(saved_dcctc);
+		generatedDiffopt.setNeeded_rename_limit(saved_nrl);
+		_iobuf generatedFile = generatedDiffopt.getFile();
+		if (close_file) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(generatedFile);
+		} 
+		int generatedOutput_format = generatedDiffopt.getOutput_format();
+		diff_flags generatedFlags = generatedDiffopt.getFlags();
+		int generatedCheck_failed = generatedFlags.getCheck_failed();
+		if (generatedOutput_format & -1024 && generatedCheck_failed) {
+			return 2;
+		} 
+		return /*Error: Function owner not recognized*/diff_result_code(generatedDiffopt, 0);
+	}
+	public void show_tagger(Object buf) {
+		strbuf out = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		pretty_print_context pp = new pretty_print_context(0);
+		cmit_fmt generatedCommit_format = this.getCommit_format();
+		pp.setFmt(generatedCommit_format);
+		date_mode generatedDate_mode = this.getDate_mode();
+		pp.setDate_mode(generatedDate_mode);
+		ModernizedCProgram.pp_user_info(pp, "Tagger", out, buf, ModernizedCProgram.get_log_output_encoding());
+		diff_options generatedDiffopt = this.getDiffopt();
+		_iobuf generatedFile = generatedDiffopt.getFile();
+		byte[] generatedBuf = out.getBuf();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFile, "%s", generatedBuf);
+		out.strbuf_release();
+	}
+	public int show_blob_object(Object oid, Object obj_name) {
+		object_id oidc = new object_id();
+		object_context obj_context = new object_context();
+		byte buf;
+		long size;
+		diff_options generatedDiffopt = this.getDiffopt();
+		_iobuf generatedFile = generatedDiffopt.getFile();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fflush(generatedFile);
+		diff_flags generatedFlags = generatedDiffopt.getFlags();
+		int generatedTextconv_set_via_cmdline = generatedFlags.getTextconv_set_via_cmdline();
+		int generatedAllow_textconv = generatedFlags.getAllow_textconv();
+		if (!generatedTextconv_set_via_cmdline || !generatedAllow_textconv) {
+			return ((Object)0).stream_blob_to_fd(1, oid, 0);
+		} 
+		if (ModernizedCProgram.get_oid_with_context(ModernizedCProgram.the_repository, obj_name, 200, oidc, obj_context)) {
+			ModernizedCProgram.die(ModernizedCProgram._("not a valid object name %s"), obj_name);
+		} 
+		Byte generatedPath = obj_context.getPath();
+		int generatedMode = obj_context.getMode();
+		if (!generatedPath || !/*Error: Function owner not recognized*/textconv_object(ModernizedCProgram.the_repository, generatedPath, generatedMode, oidc, 1, buf, size)) {
+			ModernizedCProgram.free(generatedPath);
+			return ((Object)0).stream_blob_to_fd(1, oid, 0);
+		} 
+		if (!buf) {
+			ModernizedCProgram.die(ModernizedCProgram._("git show %s: bad file"), obj_name);
+		} 
+		ModernizedCProgram.write_or_die(1, buf, size);
+		ModernizedCProgram.free(generatedPath);
+		return 0;
+	}
+	public int show_tag_object(Object oid) {
+		long size;
+		object_type type;
+		byte buf = ModernizedCProgram.the_repository.repo_read_object_file(oid, object_type.type, size);
+		int offset = 0;
+		if (!buf) {
+			return ();
+		} 
+		((object_type.type == object_type.OBJ_TAG) ? (Object)0 : /*Error: Function owner not recognized*/_assert("type == OBJ_TAG", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\log.c", 551));
+		while (offset < size && buf[offset] != (byte)'\n') {
+			int new_offset = offset + 1;
+			byte ident;
+			while (new_offset < size && buf[new_offset++] != (byte)'\n') {
+				;
+			}
+			if (ModernizedCProgram.skip_prefix(buf + offset, "tagger ", ident)) {
+				rev.show_tagger(ident);
+			} 
+			offset = new_offset;
+		}
+		diff_options generatedDiffopt = this.getDiffopt();
+		_iobuf generatedFile = generatedDiffopt.getFile();
+		if (offset < size) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fwrite(buf + offset, size - offset, 1, generatedFile);
+		} 
+		ModernizedCProgram.free(buf);
+		return 0;
+	}
+	public void gen_message_id(Byte base) {
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		buf.strbuf_addf("%s.%llu.git.%s", base, (timestamp_t)/*Error: Function owner not recognized*/time(((Object)0)), ModernizedCProgram.git_committer_info(4 | 2 | 1));
+		this.setMessage_id(buf.strbuf_detach(((Object)0)));
+	}
+	public Byte find_branch_name() {
+		int i;
+		int positive = -1;
+		object_id branch_oid = new object_id();
+		object_id tip_oid = new object_id();
+		byte ref;
+		byte v;
+		byte full_ref;
+		byte branch = ((Object)0);
+		rev_cmdline_info generatedCmdline = this.getCmdline();
+		int generatedNr = generatedCmdline.getNr();
+		rev_cmdline_entry[] generatedRev = generatedCmdline.getRev();
+		for (i = 0; i < generatedNr; i++) {
+			if (generatedRev[i].getFlags() & (-1024 << 1)) {
+				continue;
+			} 
+			if (positive < 0) {
+				positive = i;
+			} else {
+					return ((Object)0);
+			} 
+		}
+		if (positive < 0) {
+			return ((Object)0);
+		} 
+		ref = generatedRev[positive].getName();
+		tip_oid = generatedRev[positive].getItem().getOid();
+		if (branch_oid.dwim_ref(ref, /*Error: Function owner not recognized*/strlen(ref), full_ref) && ModernizedCProgram.skip_prefix(full_ref, "refs/heads/", v) && ModernizedCProgram.oideq(tip_oid, branch_oid)) {
+			branch = ModernizedCProgram.xstrdup(v);
+		} 
+		ModernizedCProgram.free(full_ref);
+		return branch;
+	}
+	public int add_pending_commit(Object arg, int flags) {
+		object_id oid = new object_id();
+		object generatedObject = commit.getObject();
+		int generatedFlags = generatedObject.getFlags();
+		if (ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, arg, oid) == 0) {
+			commit commit = /*Error: Function owner not recognized*/lookup_commit_reference(ModernizedCProgram.the_repository, oid);
+			if (commit) {
+				generatedFlags |=  flags;
+				ModernizedCProgram.add_pending_object(revs, generatedObject, arg);
+				return 0;
+			} 
+		} 
+		return -1;
+	}
+	public int builtin_diff_index(int argc, Object[][] argv) {
+		int cached = 0;
+		while (1 < argc) {
+			byte arg = argv[1];
+			if (!/*Error: Function owner not recognized*/strcmp(arg, "--cached") || !/*Error: Function owner not recognized*/strcmp(arg, "--staged")) {
+				cached = 1;
+			} else {
+					ModernizedCProgram.usage(ModernizedCProgram.builtin_diff_usage);
+			} 
+			argv++;
+			argc/*
+				 * Make sure there is one revision (i.e. pending object),
+				 * and there is no revision filtering parameters.
+				 */--;
+		}
+		object_array generatedPending = this.getPending();
+		int generatedNr = generatedPending.getNr();
+		int generatedMax_count = this.getMax_count();
+		Object generatedMin_age = this.getMin_age();
+		Object generatedMax_age = this.getMax_age();
+		if (generatedNr != 1 || generatedMax_count != -1 || generatedMin_age != -1 || generatedMax_age != -1) {
+			ModernizedCProgram.usage(ModernizedCProgram.builtin_diff_usage);
+		} 
+		diff_options generatedDiffopt = this.getDiffopt();
+		pathspec generatedPathspec = generatedDiffopt.getPathspec();
+		if (!cached) {
+			ModernizedCProgram.setup_work_tree();
+			if (ModernizedCProgram.the_repository.repo_read_index_preload((generatedPathspec), 0) < 0) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/perror("read_cache_preload");
+				return -1;
+			} 
+		}  else if (ModernizedCProgram.the_repository.repo_read_index() < 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/perror("read_cache");
+			return -1;
+		} 
+		return revs.run_diff_index(cached);
+	}
+	public int builtin_diff_files(int argc, Object[][] argv) {
+		int options = 0;
+		while (1 < argc && argv[1][0] == (byte)'-') {
+			if (!/*Error: Function owner not recognized*/strcmp(argv[1], "--base")) {
+				this.setMax_count(1);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(argv[1], "--ours")) {
+				this.setMax_count(2);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(argv[1], "--theirs")) {
+				this.setMax_count(3);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(argv[1], "-q")) {
+				options |=  1;
+			}  else if (!/*Error: Function owner not recognized*/strcmp(argv[1], "-h")) {
+				ModernizedCProgram.usage(ModernizedCProgram.builtin_diff_usage);
+			} else {
+					return ();
+			} 
+			argv++;
+			argc/*
+				 * "diff --base" should not combine merges because it was not
+				 * asked to.  "diff -c" should not densify (if the user wants
+				 * dense one, --cc can be explicitly asked for, or just rely
+				 * on the default).
+				 */--;
+		}
+		int generatedMax_count = this.getMax_count();
+		int generatedCombine_merges = this.getCombine_merges();
+		diff_options generatedDiffopt = this.getDiffopt();
+		int generatedOutput_format = generatedDiffopt.getOutput_format();
+		if (generatedMax_count == -1 && !generatedCombine_merges && (generatedOutput_format & -1024)) {
+			this.setCombine_merges(this.setDense_combined_merges(1));
+		} 
+		ModernizedCProgram.setup_work_tree();
+		pathspec generatedPathspec = generatedDiffopt.getPathspec();
+		if (ModernizedCProgram.the_repository.repo_read_index_preload((generatedPathspec), 0) < 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/perror("read_cache_preload");
+			return -1;
+		} 
+		return revs.run_diff_files(options);
+	}
+	public void save_user_format(Object cp, int is_tformat) {
+		ModernizedCProgram.free(ModernizedCProgram.user_format);
+		ModernizedCProgram.user_format = ModernizedCProgram.xstrdup(cp);
+		if (is_tformat) {
+			this.setRev_info(1);
+		} 
+		this.setRev_info(cmit_fmt.CMIT_FMT_USERFORMAT);
+	}
+	public void get_commit_format(Object arg) {
+		cmt_fmt_map commit_format = new cmt_fmt_map();
+		this.setRev_info(0);
+		if (!arg) {
+			this.setRev_info(cmit_fmt.CMIT_FMT_DEFAULT);
+			return /*Error: Unsupported expression*/;
+		} 
+		if (ModernizedCProgram.skip_prefix(arg, "format:", arg)) {
+			rev.save_user_format(arg, 0);
+			return /*Error: Unsupported expression*/;
+		} 
+		if (!arg || ModernizedCProgram.skip_prefix(arg, "tformat:", arg) || /*Error: Function owner not recognized*/strchr(arg, (byte)'%')) {
+			rev.save_user_format(arg, 1);
+			return /*Error: Unsupported expression*/;
+		} 
+		cmt_fmt_map cmt_fmt_map = new cmt_fmt_map();
+		commit_format = cmt_fmt_map.find_commit_format(arg);
+		if (!commit_format) {
+			ModernizedCProgram.die("invalid --pretty format: %s", arg);
+		} 
+		cmit_fmt generatedFormat = commit_format.getFormat();
+		this.setRev_info(generatedFormat);
+		int generatedIs_tformat = commit_format.getIs_tformat();
+		this.setRev_info(generatedIs_tformat);
+		int generatedExpand_tabs_in_log = commit_format.getExpand_tabs_in_log();
+		this.setRev_info(generatedExpand_tabs_in_log);
+		Object generatedUser_format = commit_format.getUser_format();
+		if (generatedFormat == cmit_fmt.CMIT_FMT_USERFORMAT) {
+			rev.save_user_format(generatedUser_format, generatedIs_tformat);
+		} 
+	}
+	public void perform_reachability_traversal() {
+		int initialized;
+		progress progress = ((Object)0);
+		if (initialized) {
+			return /*Error: Unsupported expression*/;
+		} 
+		progress progress = new progress();
+		if (ModernizedCProgram.show_progress) {
+			progress = progress.start_delayed_progress(ModernizedCProgram._("Checking connectivity"), 0);
+		} 
+		ModernizedCProgram.mark_reachable_objects(revs, 1, ModernizedCProgram.expire, progress);
+		progress.stop_progress();
+		initialized = 1;
+	}
+	public int is_object_reachable(Object oid) {
+		object obj = new object();
+		revs.perform_reachability_traversal();
+		object object = new object();
+		obj = object.lookup_object(ModernizedCProgram.the_repository, oid);
+		int generatedFlags = obj.getFlags();
+		return obj && (generatedFlags & (-1024 << 0));
+	}
+	public void show_sig_lines(int status, Object bol) {
+		byte color;
+		byte reset;
+		byte eol;
+		diff_options generatedDiffopt = this.getDiffopt();
+		int generatedUse_color = (generatedDiffopt).getUse_color();
+		color = /*Error: Function owner not recognized*/diff_get_color(generatedUse_color, status ? color_diff.DIFF_WHITESPACE : color_diff.DIFF_FRAGINFO);
+		reset = /*Error: Function owner not recognized*/diff_get_color(generatedUse_color, color_diff.DIFF_RESET);
+		_iobuf generatedFile = generatedDiffopt.getFile();
+		git_graph generatedGraph = this.getGraph();
+		while (bol) {
+			eol = ModernizedCProgram.gitstrchrnul(bol, (byte)'\n');
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFile, "%s%.*s%s%s", color, (int)(eol - bol), bol, reset, eol ? "\n" : "");
+			generatedGraph.graph_show_oneline();
+			bol = (eol) ? (eol + 1) : eol;
+		}
+	}
+	public void show_log() {
+		strbuf msgbuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		log_info generatedLoginfo = this.getLoginfo();
+		log_info log = generatedLoginfo;
+		commit generatedCommit = log.getCommit();
+		commit generatedParent = log.getParent();
+		commit commit = generatedCommit;
+		commit parent = generatedParent;
+		int generatedAbbrev_commit = this.getAbbrev_commit();
+		int generatedAbbrev = this.getAbbrev();
+		int abbrev_commit = generatedAbbrev_commit ? generatedAbbrev : ModernizedCProgram.the_repository.getHash_algo().getHexsz();
+		Object generatedExtra_headers = this.getExtra_headers();
+		byte extra_headers = generatedExtra_headers;
+		pretty_print_context ctx = new pretty_print_context(0);
+		this.setLoginfo(((Object)0));
+		int generatedVerbose_header = this.getVerbose_header();
+		git_graph generatedGraph = this.getGraph();
+		object generatedObject = commit.getObject();
+		object_id generatedOid = generatedObject.getOid();
+		diff_options generatedDiffopt = this.getDiffopt();
+		_iobuf generatedFile = generatedDiffopt.getFile();
+		int generatedPrint_parents = this.getPrint_parents();
+		decoration generatedChildren = this.getChildren();
+		Object generatedName = generatedChildren.getName();
+		int generatedLine_termination = generatedDiffopt.getLine_termination();
+		if (!generatedVerbose_header) {
+			generatedGraph.graph_show_commit();
+			if (!generatedGraph) {
+				ModernizedCProgram.put_revision_mark(opt, commit);
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(ModernizedCProgram.the_repository.repo_find_unique_abbrev(generatedOid, abbrev_commit), generatedFile);
+			if (generatedPrint_parents) {
+				ModernizedCProgram.show_parents(commit, abbrev_commit, generatedFile);
+			} 
+			if (generatedName) {
+				ModernizedCProgram.show_children(opt, commit, abbrev_commit);
+			} 
+			ModernizedCProgram.show_decorations(opt, commit);
+			if (generatedGraph && !ModernizedCProgram.graph_is_commit_finished(generatedGraph)) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc((byte)'\n', generatedFile);
+				generatedGraph.graph_show_remainder();
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(generatedLine_termination, generatedFile);
+			return /*Error: Unsupported expression*/;
+		} 
+		int generatedShown_one = this.getShown_one();
+		int generatedUse_terminator = this.getUse_terminator();
+		int generatedMissing_newline = this.getMissing_newline();
+		if (generatedShown_one && !generatedUse_terminator) {
+			if (generatedLine_termination == (byte)'\n' && !generatedMissing_newline) {
+				generatedGraph.graph_show_padding();
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(generatedLine_termination, generatedFile);
+		} 
+		this.setShown_one(1/*
+			 * If the history graph was requested,
+			 * print the graph, up to this commit's line
+			 */);
+		generatedGraph.graph_show_commit();
+		cmit_fmt generatedCommit_format = this.getCommit_format();
+		int generatedNeed_8bit_cte = ctx.getNeed_8bit_cte();
+		int generatedUse_color = (generatedDiffopt).getUse_color();
+		reflog_walk_info generatedReflog_info = this.getReflog_info();
+		date_mode generatedDate_mode = this.getDate_mode();
+		int generatedDate_mode_explicit = this.getDate_mode_explicit();
+		if (ModernizedCProgram.cmit_fmt_is_mail(generatedCommit_format)) {
+			ModernizedCProgram.log_write_email_headers(opt, commit, extra_headers, generatedNeed_8bit_cte, 1);
+			ctx.setRev(opt);
+			ctx.setPrint_email_subject(1);
+		}  else if (generatedCommit_format != cmit_fmt.CMIT_FMT_USERFORMAT) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(/*Error: Function owner not recognized*/diff_get_color(generatedUse_color, color_diff.DIFF_COMMIT), generatedFile);
+			if (generatedCommit_format != cmit_fmt.CMIT_FMT_ONELINE) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs("commit ", generatedFile);
+			} 
+			if (!generatedGraph) {
+				ModernizedCProgram.put_revision_mark(opt, commit);
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(ModernizedCProgram.the_repository.repo_find_unique_abbrev(generatedOid, abbrev_commit), generatedFile);
+			if (generatedPrint_parents) {
+				ModernizedCProgram.show_parents(commit, abbrev_commit, generatedFile);
+			} 
+			if (generatedName) {
+				ModernizedCProgram.show_children(opt, commit, abbrev_commit);
+			} 
+			if (parent) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFile, " (from %s)", ModernizedCProgram.the_repository.repo_find_unique_abbrev(generatedOid, abbrev_commit));
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(/*Error: Function owner not recognized*/diff_get_color(generatedUse_color, color_diff.DIFF_RESET), generatedFile);
+			ModernizedCProgram.show_decorations(opt, commit);
+			if (generatedCommit_format == cmit_fmt.CMIT_FMT_ONELINE) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc((byte)' ', generatedFile);
+			} else {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc((byte)'\n', generatedFile);
+					generatedGraph.graph_show_oneline();
+			} 
+			if (generatedReflog_info) {
+				generatedReflog_info.show_reflog_message(generatedCommit_format == cmit_fmt.CMIT_FMT_ONELINE, generatedDate_mode, generatedDate_mode_explicit);
+				if (generatedCommit_format == cmit_fmt.CMIT_FMT_ONELINE) {
+					return /*Error: Unsupported expression*/;
+				} 
+			} 
+		} 
+		int generatedShow_signature = this.getShow_signature();
+		if (generatedShow_signature) {
+			ModernizedCProgram.show_signature(opt, commit);
+			ModernizedCProgram.show_mergetag(opt, commit);
+		} 
+		int generatedShow_notes = this.getShow_notes();
+		if (generatedShow_notes) {
+			int raw;
+			strbuf notebuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+			raw = (generatedCommit_format == cmit_fmt.CMIT_FMT_USERFORMAT);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/format_display_notes(generatedOid, notebuf, ModernizedCProgram.get_log_output_encoding(), raw);
+			ctx.setNotes_message(notebuf.strbuf_detach(((Object)0)));
+		} 
+		int generatedAdd_signoff = this.getAdd_signoff();
+		if (generatedNeed_8bit_cte >= 0 && generatedAdd_signoff) {
+			ctx.setNeed_8bit_cte(ModernizedCProgram.has_non_ascii(ModernizedCProgram.fmt_name(want_ident.WANT_COMMITTER_IDENT)));
+		} 
+		ctx.setDate_mode(generatedDate_mode);
+		ctx.setDate_mode_explicit(generatedDate_mode_explicit);
+		ctx.setAbbrev(generatedAbbrev);
+		ctx.setAfter_subject(extra_headers);
+		int generatedPreserve_subject = this.getPreserve_subject();
+		ctx.setPreserve_subject(generatedPreserve_subject);
+		ctx.setReflog_info(generatedReflog_info);
+		ctx.setFmt(generatedCommit_format);
+		string_list generatedMailmap = this.getMailmap();
+		ctx.setMailmap(generatedMailmap);
+		ctx.setColor(generatedUse_color);
+		int generatedExpand_tabs_in_log = this.getExpand_tabs_in_log();
+		ctx.setExpand_tabs_in_log(generatedExpand_tabs_in_log);
+		ctx.setOutput_encoding(ModernizedCProgram.get_log_output_encoding());
+		ctx.setRev(opt);
+		ident_split generatedFrom_ident = this.getFrom_ident();
+		Object generatedMail_begin = generatedFrom_ident.getMail_begin();
+		Object generatedName_begin = generatedFrom_ident.getName_begin();
+		if (generatedMail_begin && generatedName_begin) {
+			ctx.setFrom_ident(generatedFrom_ident);
+		} 
+		if (generatedGraph) {
+			ctx.setGraph_width(generatedGraph.graph_width());
+		} 
+		ModernizedCProgram.pretty_print_commit(ctx, commit, msgbuf);
+		if (generatedAdd_signoff) {
+			msgbuf.append_signoff(0, (-1024 << 0));
+		} 
+		cmit_fmt generatedFmt = ctx.getFmt();
+		Byte generatedNotes_message = ctx.getNotes_message();
+		if ((generatedFmt != cmit_fmt.CMIT_FMT_USERFORMAT) && generatedNotes_message && generatedNotes_message) {
+			if (ModernizedCProgram.cmit_fmt_is_mail(generatedFmt)) {
+				ModernizedCProgram.next_commentary_block(opt, msgbuf);
+			} 
+			msgbuf.strbuf_addstr(generatedNotes_message);
+		} 
+		int generatedShow_log_size = this.getShow_log_size();
+		Object generatedLen = msgbuf.getLen();
+		if (generatedShow_log_size) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFile, "log size %i\n", (int)generatedLen);
+			generatedGraph.graph_show_oneline();
+		} 
+		byte[] generatedBuf = msgbuf.getBuf();
+		if (!generatedLen || generatedBuf[generatedLen - 1] != (byte)'\n') {
+			this.setMissing_newline(1);
+		} else {
+				this.setMissing_newline(0);
+		} 
+		ModernizedCProgram.graph_show_commit_msg(generatedGraph, generatedFile, msgbuf);
+		if (generatedUse_terminator && !ModernizedCProgram.commit_format_is_empty(generatedCommit_format)) {
+			if (!generatedMissing_newline) {
+				generatedGraph.graph_show_padding();
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(generatedLine_termination, generatedFile);
+		} 
+		msgbuf.strbuf_release();
+		ModernizedCProgram.free(generatedNotes_message);
+		Object generatedIdiff_oid1 = this.getIdiff_oid1();
+		Object generatedIdiff_title = this.getIdiff_title();
+		if (ModernizedCProgram.cmit_fmt_is_mail(generatedFmt) && generatedIdiff_oid1) {
+			diff_queue_struct dq = new diff_queue_struct();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dq, ModernizedCProgram.diff_queued_diff, /*Error: sizeof expression not supported yet*/);
+			do {
+				(ModernizedCProgram.diff_queued_diff).setQueue(((Object)0));
+				(ModernizedCProgram.diff_queued_diff).setNr((ModernizedCProgram.diff_queued_diff).setAlloc(0));
+			} while (0);
+			ModernizedCProgram.next_commentary_block(opt, ((Object)0));
+			generatedFile.fprintf_ln("%s", generatedIdiff_title);
+			opt.show_interdiff(2);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.diff_queued_diff, dq, /*Error: sizeof expression not supported yet*/);
+		} 
+		Object generatedRdiff1 = this.getRdiff1();
+		Object generatedRdiff_title = this.getRdiff_title();
+		Object generatedRdiff2 = this.getRdiff2();
+		int generatedCreation_factor = this.getCreation_factor();
+		if (ModernizedCProgram.cmit_fmt_is_mail(generatedFmt) && generatedRdiff1) {
+			diff_queue_struct dq = new diff_queue_struct();
+			diff_options opts = new diff_options();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dq, ModernizedCProgram.diff_queued_diff, /*Error: sizeof expression not supported yet*/);
+			do {
+				(ModernizedCProgram.diff_queued_diff).setQueue(((Object)0));
+				(ModernizedCProgram.diff_queued_diff).setNr((ModernizedCProgram.diff_queued_diff).setAlloc(0));
+			} while (0);
+			ModernizedCProgram.next_commentary_block(opt, ((Object)0));
+			generatedFile.fprintf_ln("%s", generatedRdiff_title);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/repo_diff_setup(ModernizedCProgram.the_repository, opts);
+			opts.setFile(generatedFile);
+			opts.setUse_color(generatedUse_color);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_setup_done(opts);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/show_range_diff(generatedRdiff1, generatedRdiff2, generatedCreation_factor, 1, opts);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.diff_queued_diff, dq, /*Error: sizeof expression not supported yet*/);
+		} 
+	}
+	public int log_tree_diff_flush() {
+		this.setShown_dashes(0);
+		diff_options generatedDiffopt = this.getDiffopt();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diffcore_std(generatedDiffopt);
+		int generatedOutput_format = generatedDiffopt.getOutput_format();
+		if (/*Error: Function owner not recognized*/diff_queue_is_empty()) {
+			int saved_fmt = generatedOutput_format;
+			generatedDiffopt.setOutput_format(-1024);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_flush(generatedDiffopt);
+			generatedDiffopt.setOutput_format(saved_fmt);
+			return 0;
+		} 
+		log_info generatedLoginfo = this.getLoginfo();
+		int generatedNo_commit_id = this.getNo_commit_id();
+		int generatedVerbose_header = this.getVerbose_header();
+		cmit_fmt generatedCommit_format = this.getCommit_format();
+		Object generatedOutput_prefix = generatedDiffopt.getOutput_prefix();
+		Object generatedOutput_prefix_data = generatedDiffopt.getOutput_prefix_data();
+		_iobuf generatedFile = generatedDiffopt.getFile();
+		int generatedShown_dashes = this.getShown_dashes();
+		if (generatedLoginfo && !generatedNo_commit_id) {
+			opt.show_log();
+			if ((generatedOutput_format & ~-1024) && generatedVerbose_header && generatedCommit_format != cmit_fmt.CMIT_FMT_ONELINE && !ModernizedCProgram.commit_format_is_empty(generatedCommit_format)) {
+				int pch = -1024 | -1024;
+				if (generatedOutput_prefix) {
+					strbuf msg = ((Object)0);
+					ModernizedCProgram.msg = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDiffopt, generatedOutput_prefix_data);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fwrite(ModernizedCProgram.msg.getBuf(), ModernizedCProgram.msg.getLen(), 1, generatedFile);
+				} 
+				if (!generatedShown_dashes && (pch & generatedOutput_format) == pch) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFile, "---");
+				} 
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc((byte)'\n', generatedFile);
+			} 
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_flush(generatedDiffopt);
+		return 1;
+	}
+	public void add_head_to_pending() {
+		object_id oid = new object_id();
+		object obj = new object();
+		if (ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, "HEAD", oid)) {
+			return /*Error: Unsupported expression*/;
+		} 
+		repository generatedRepo = this.getRepo();
+		object object = new object();
+		obj = object.parse_object(generatedRepo, oid);
+		if (!obj) {
+			return /*Error: Unsupported expression*/;
+		} 
+		ModernizedCProgram.add_pending_object(revs, obj, "HEAD");
+	}
+	public void add_pending_oid(Object name, Object oid, int flags) {
+		object object = new object();
+		object object = object.get_reference(revs, name, oid, flags);
+		ModernizedCProgram.add_pending_object(revs, object, name);
+	}
+	public int limit_list() {
+		int slop = 5;
+		timestamp_t date = -1024;
+		commit_list generatedCommits = this.getCommits();
+		commit_list list = generatedCommits;
+		commit_list newlist = ((Object)0);
+		commit_list p = newlist;
+		commit_list bottom = ((Object)0);
+		commit interesting_cache = ((Object)0);
+		int generatedAncestry_path = this.getAncestry_path();
+		if (generatedAncestry_path) {
+			bottom = list.collect_bottom_commits();
+			if (!bottom) {
+				ModernizedCProgram.die("--ancestry-path given but there are no bottom commits");
+			} 
+		} 
+		object generatedObject = commit.getObject();
+		Object generatedMax_age = this.getMax_age();
+		Object generatedDate = commit.getDate();
+		int generatedFlags = obj.getFlags();
+		Object generatedMin_age = this.getMin_age();
+		while (list) {
+			commit commit = /*Error: Function owner not recognized*/pop_commit(list);
+			object obj = generatedObject;
+			show_early_output_fn_t show = new show_early_output_fn_t();
+			if (commit == interesting_cache) {
+				interesting_cache = ((Object)0);
+			} 
+			if (generatedMax_age != -1 && (generatedDate < generatedMax_age)) {
+				generatedFlags |=  (-1024 << 1);
+			} 
+			if (ModernizedCProgram.process_parents(revs, commit, list, ((Object)0)) < 0) {
+				return -1;
+			} 
+			if (generatedFlags & (-1024 << 1)) {
+				commit.mark_parents_uninteresting();
+				slop = ModernizedCProgram.still_interesting(list, date, slop, interesting_cache);
+				if (slop) {
+					continue;
+				} 
+				break;
+			} 
+			if (generatedMin_age != -1 && (generatedDate > generatedMin_age)) {
+				continue;
+			} 
+			date = generatedDate;
+			p = /*Error: Function owner not recognized*/commit_list_insert(commit, p).getNext();
+			show = ModernizedCProgram.show_early_output;
+			if (!show) {
+				continue;
+			} 
+			ModernizedCProgram.show(revs, newlist);
+			ModernizedCProgram.show_early_output = ((Object)0);
+		}
+		int generatedCherry_pick = this.getCherry_pick();
+		int generatedCherry_mark = this.getCherry_mark();
+		if (generatedCherry_pick || generatedCherry_mark) {
+			ModernizedCProgram.cherry_pick_list(newlist, revs);
+		} 
+		int generatedLeft_only = this.getLeft_only();
+		int generatedRight_only = this.getRight_only();
+		if (generatedLeft_only || generatedRight_only) {
+			ModernizedCProgram.limit_left_right(newlist, revs);
+		} 
+		if (bottom) {
+			bottom.limit_to_ancestry(newlist);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_commit_list(bottom/*
+				 * Check if any commits have become TREESAME by some of their parents
+				 * becoming UNINTERESTING.
+				 */);
+		} 
+		commit generatedItem = list.getItem();
+		commit_list generatedNext = list.getNext();
+		if (ModernizedCProgram.limiting_can_increase_treesame(revs)) {
+			for (list = newlist; list; list = generatedNext) {
+				commit c = generatedItem;
+				if (generatedFlags & ((-1024 << 1) | (-1024 << 2))) {
+					continue;
+				} 
+				ModernizedCProgram.update_treesame(revs, c);
+			}
+		} 
+		this.setCommits(newlist);
+		return 0/*
+		 * Add an entry to refs->cmdline with the specified information.
+		 * *name is copied.
+		 */;
+	}
+	public void add_reflogs_to_pending(int flags) {
+		all_refs_cb cb = new all_refs_cb();
+		cb.setAll_revs(revs);
+		cb.setAll_flags(flags);
+		cb.setWt(((Object)0));
+		ModernizedCProgram.for_each_reflog(handle_one_reflog, cb);
+		int generatedSingle_worktree = this.getSingle_worktree();
+		if (!generatedSingle_worktree) {
+			cb.add_other_reflogs_to_pending();
+		} 
+	}
+	public void add_index_objects_to_pending(int flags) {
+		worktree worktrees = new worktree();
+		worktree p = new worktree();
+		repository generatedRepo = this.getRepo();
+		generatedRepo.repo_read_index();
+		index_state generatedIndex = generatedRepo.getIndex();
+		ModernizedCProgram.do_add_index_objects_to_pending(revs, generatedIndex, flags);
+		int generatedSingle_worktree = this.getSingle_worktree();
+		if (generatedSingle_worktree) {
+			return /*Error: Unsupported expression*/;
+		} 
+		worktrees = /*Error: Function owner not recognized*/get_worktrees(0);
+		int generatedIs_current = wt.getIs_current();
+		for (p = worktrees; p; p++) {
+			worktree wt = p;
+			index_state istate = new index_state(((Object)0));
+			if (generatedIs_current) {
+				continue;
+			} 
+			if (istate.read_index_from(ModernizedCProgram.worktree_git_path(wt, "index"), /*Error: Function owner not recognized*/get_worktree_git_dir(wt)) > 0) {
+				ModernizedCProgram.do_add_index_objects_to_pending(revs, istate, flags);
+			} 
+			istate.discard_index();
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_worktrees(worktrees);
+	}
+	public void add_alternate_refs_to_pending(int flags) {
+		add_alternate_refs_data data = new add_alternate_refs_data();
+		data.setRevs(revs);
+		data.setFlags(flags);
+		ModernizedCProgram.for_each_alternate_ref(add_one_alternate_ref, data);
+	}
+	public int add_parents_only(Object arg_, int flags, int exclude_parent) {
+		object_id oid = new object_id();
+		object it = new object();
+		commit commit = new commit();
+		commit_list parents = new commit_list();
+		int parent_number;
+		byte arg = arg_;
+		if (arg == (byte)'^') {
+			flags ^=  (-1024 << 1) | (-1024 << 10);
+			arg++;
+		} 
+		if (ModernizedCProgram.repo_get_oid_committish(ModernizedCProgram.the_repository, arg, oid)) {
+			return 0;
+		} 
+		object object = new object();
+		int generatedIgnore_missing = this.getIgnore_missing();
+		int generatedType = it.getType();
+		while (1) {
+			it = object.get_reference(revs, arg, oid, 0);
+			if (!it && generatedIgnore_missing) {
+				return 0;
+			} 
+			if (generatedType != object_type.OBJ_TAG) {
+				break;
+			} 
+			if (!((tag)it).getTagged()) {
+				return 0;
+			} 
+			oid.oidcpy(((tag)it).getTagged().getOid());
+		}
+		if (generatedType != object_type.OBJ_COMMIT) {
+			return 0;
+		} 
+		commit = (commit)it;
+		commit_list generatedParents = commit.getParents();
+		if (exclude_parent && exclude_parent > /*Error: Function owner not recognized*/commit_list_count(generatedParents)) {
+			return 0;
+		} 
+		commit generatedItem = parents.getItem();
+		object generatedObject = generatedItem.getObject();
+		int generatedFlags = it.getFlags();
+		for (; parents; ) {
+			if (exclude_parent && parent_number != exclude_parent) {
+				continue;
+			} 
+			it = generatedObject;
+			generatedFlags |=  flags;
+			ModernizedCProgram.add_rev_cmdline(revs, it, arg_, .REV_CMD_PARENTS_ONLY, flags);
+			ModernizedCProgram.add_pending_object(revs, it, arg);
+		}
+		return 1;
+	}
+	public void prepare_show_merge() {
+		commit_list bases = new commit_list();
+		commit head = new commit();
+		commit other = new commit();
+		object_id oid = new object_id();
+		byte prune = ((Object)0);
+		int i;
+		int prune_num = /* counting terminating NULL */1;
+		repository generatedRepo = this.getRepo();
+		index_state generatedIndex = generatedRepo.getIndex();
+		index_state istate = generatedIndex;
+		if (ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, "HEAD", oid)) {
+			ModernizedCProgram.die("--merge without HEAD?");
+		} 
+		head = /*Error: Function owner not recognized*/lookup_commit_or_die(oid, "HEAD");
+		if (ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, "MERGE_HEAD", oid)) {
+			ModernizedCProgram.die("--merge without MERGE_HEAD?");
+		} 
+		other = /*Error: Function owner not recognized*/lookup_commit_or_die(oid, "MERGE_HEAD");
+		object generatedObject = head.getObject();
+		ModernizedCProgram.add_pending_object(revs, generatedObject, "HEAD");
+		ModernizedCProgram.add_pending_object(revs, generatedObject, "MERGE_HEAD");
+		commit_list commit_list = new commit_list();
+		bases = commit_list.repo_get_merge_bases(ModernizedCProgram.the_repository, head, other);
+		ModernizedCProgram.add_rev_cmdline_list(revs, bases, .REV_CMD_MERGE_BASE, (-1024 << 1) | (-1024 << 10));
+		ModernizedCProgram.add_pending_commit_list(revs, bases, (-1024 << 1) | (-1024 << 10));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_commit_list(bases);
+		int generatedFlags = generatedObject.getFlags();
+		generatedFlags |=  (-1024 << 8);
+		int generatedCache_nr = istate.getCache_nr();
+		if (!generatedCache_nr) {
+			generatedRepo.repo_read_index();
+		} 
+		cache_entry[][] generatedCache = istate.getCache();
+		pathspec generatedPrune_data = this.getPrune_data();
+		for (i = 0; i < generatedCache_nr; i++) {
+			cache_entry ce = generatedCache[i];
+			if (!(((true) & (ce).getCe_flags()) >> 12)) {
+				continue;
+			} 
+			if (ModernizedCProgram.ce_path_match(istate, ce, generatedPrune_data, ((Object)0))) {
+				prune_num++;
+				(prune) = ModernizedCProgram.xrealloc((prune), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (prune_num)));
+				prune[prune_num - 2] = ce.getName();
+				prune[prune_num - 1] = ((Object)0);
+			} 
+			while ((i + 1 < generatedCache_nr) && ModernizedCProgram.ce_same_name(ce, generatedCache[i + 1])) {
+				i++;
+			}
+		}
+		generatedPrune_data.clear_pathspec();
+		generatedPrune_data.parse_pathspec(((1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6)) & ~(1 << 2), (1 << 1) | (1 << 6), "", prune);
+		this.setLimited(1);
+	}
+	public int dotdot_missing(Object arg, Byte dotdot, int symmetric) {
+		int generatedIgnore_missing = this.getIgnore_missing();
+		if (generatedIgnore_missing) {
+			return 0;
+		} 
+		dotdot = /* de-munge so we report the full argument */(byte)'.';
+		ModernizedCProgram.die(symmetric ? "Invalid symmetric difference expression %s" : "Invalid revision range %s", arg);
+	}
+	public int handle_dotdot(Object arg, int flags, int cant_be_filename) {
+		object_context a_oc = new object_context();
+		object_context b_oc = new object_context();
+		byte dotdot = /*Error: Function owner not recognized*/strstr(arg, "..");
+		int ret;
+		if (!dotdot) {
+			return -1;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(a_oc, 0, /*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(b_oc, 0, /*Error: sizeof expression not supported yet*/);
+		dotdot = (byte)'\0';
+		ret = ModernizedCProgram.handle_dotdot_1(arg, dotdot, revs, flags, cant_be_filename, a_oc, b_oc);
+		dotdot = (byte)'.';
+		Byte generatedPath = a_oc.getPath();
+		ModernizedCProgram.free(generatedPath);
+		ModernizedCProgram.free(generatedPath);
+		return ret;
+	}
+	public int handle_revision_arg(Object arg_, int flags, int revarg_opt) {
+		object_context oc = new object_context();
+		byte mark;
+		object object = new object();
+		object_id oid = new object_id();
+		int local_flags;
+		byte arg = arg_;
+		int cant_be_filename = revarg_opt & 1;
+		int get_sha1_flags = 200;
+		flags = flags & (-1024 << 1) ? flags | (-1024 << 10) : flags & ~(-1024 << 10);
+		if (!cant_be_filename && !/*Error: Function owner not recognized*/strcmp(arg, ".."/*
+				 * Just ".."?  That is not a range but the
+				 * pathspec for the parent directory.
+				 */)) {
+			return -1;
+		} 
+		if (!revs.handle_dotdot(arg, flags, revarg_opt)) {
+			return 0;
+		} 
+		mark = /*Error: Function owner not recognized*/strstr(arg, "^@");
+		if (mark && !mark[2]) {
+			mark = 0;
+			if (revs.add_parents_only(arg, flags, 0)) {
+				return 0;
+			} 
+			mark = (byte)'^';
+		} 
+		mark = /*Error: Function owner not recognized*/strstr(arg, "^!");
+		if (mark && !mark[2]) {
+			mark = 0;
+			if (!revs.add_parents_only(arg, flags ^ ((-1024 << 1) | (-1024 << 10)), 0)) {
+				mark = (byte)'^';
+			} 
+		} 
+		mark = /*Error: Function owner not recognized*/strstr(arg, "^-");
+		if (mark) {
+			int exclude_parent = 1;
+			if (mark[2]) {
+				byte end;
+				exclude_parent = /*Error: Function owner not recognized*/strtoul(mark + 2, end, 10);
+				if (end != (byte)'\0' || !exclude_parent) {
+					return -1;
+				} 
+			} 
+			mark = 0;
+			if (!revs.add_parents_only(arg, flags ^ ((-1024 << 1) | (-1024 << 10)), exclude_parent)) {
+				mark = (byte)'^';
+			} 
+		} 
+		local_flags = 0;
+		if (arg == (byte)'^') {
+			local_flags = (-1024 << 1) | (-1024 << 10);
+			arg++;
+		} 
+		if (revarg_opt & 2) {
+			get_sha1_flags |=  4;
+		} 
+		repository generatedRepo = this.getRepo();
+		int generatedIgnore_missing = this.getIgnore_missing();
+		if (ModernizedCProgram.get_oid_with_context(generatedRepo, arg, get_sha1_flags, oid, oc)) {
+			return generatedIgnore_missing ? 0 : -1;
+		} 
+		Object generatedPrefix = this.getPrefix();
+		if (!cant_be_filename) {
+			ModernizedCProgram.verify_non_filename(generatedPrefix, arg);
+		} 
+		object object = new object();
+		object = object.get_reference(revs, arg, oid, flags ^ local_flags);
+		if (!object) {
+			return generatedIgnore_missing ? 0 : -1;
+		} 
+		ModernizedCProgram.add_rev_cmdline(revs, object, arg_, .REV_CMD_REV, flags ^ local_flags);
+		int generatedMode = oc.getMode();
+		Byte generatedPath = oc.getPath();
+		ModernizedCProgram.add_pending_object_with_path(revs, object, arg, generatedMode, generatedPath);
+		ModernizedCProgram.free(generatedPath);
+		return 0;
+	}
+	public void add_grep(Object ptn, grep_pat_token what) {
+		grep_opt generatedGrep_filter = this.getGrep_filter();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/append_grep_pattern(generatedGrep_filter, ptn, "command line", 0, grep_pat_token.what);
+	}
+	public void add_header_grep(grep_header_field field, Object pattern) {
+		grep_opt generatedGrep_filter = this.getGrep_filter();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/append_header_grep_pattern(generatedGrep_filter, grep_header_field.field, pattern);
+	}
+	public void add_message_grep(Object pattern) {
+		revs.add_grep(pattern, grep_pat_token.GREP_PATTERN_BODY);
+	}
+	public int handle_revision_opt(int argc, Object[][] argv, Integer unkc, Object[][] unkv, Object opt) {
+		byte arg = argv[0];
+		byte optarg;
+		int argcount;
+		int hexsz = ModernizedCProgram.the_repository.getHash_algo().getHexsz();
+		if (!/*Error: Function owner not recognized*/strcmp(arg, "--all") || !/*Error: Function owner not recognized*/strcmp(arg, /* pseudo revision arguments */"--branches") || !/*Error: Function owner not recognized*/strcmp(arg, "--tags") || !/*Error: Function owner not recognized*/strcmp(arg, "--remotes") || !/*Error: Function owner not recognized*/strcmp(arg, "--reflog") || !/*Error: Function owner not recognized*/strcmp(arg, "--not") || !/*Error: Function owner not recognized*/strcmp(arg, "--no-walk") || !/*Error: Function owner not recognized*/strcmp(arg, "--do-walk") || !/*Error: Function owner not recognized*/strcmp(arg, "--bisect") || ModernizedCProgram.starts_with(arg, "--glob=") || !/*Error: Function owner not recognized*/strcmp(arg, "--indexed-objects") || !/*Error: Function owner not recognized*/strcmp(arg, "--alternate-refs") || ModernizedCProgram.starts_with(arg, "--exclude=") || ModernizedCProgram.starts_with(arg, "--branches=") || ModernizedCProgram.starts_with(arg, "--tags=") || ModernizedCProgram.starts_with(arg, "--remotes=") || ModernizedCProgram.starts_with(arg, "--no-walk=")) {
+			unkv[(unkc)++] = arg;
 			return 1;
 		} 
-		.diff_set_mnemonic_prefix(generatedDiffopt, "1/", "2/");
-		.diffcore_std(generatedDiffopt);
-		.diff_flush(generatedDiffopt);
-		replacement/*
-			 * The return code for --no-index imitates diff(1):
-			 * 0 = no changes, 1 = changes, else error
-			 */.strbuf_release();
-		return .diff_result_code(generatedDiffopt, 0);
+		int generatedMax_count = this.getMax_count();
+		reflog_walk_info generatedReflog_info = this.getReflog_info();
+		int generatedEarly_output = this.getEarly_output();
+		int generatedRight_only = this.getRight_only();
+		int generatedLeft_only = this.getLeft_only();
+		int generatedCherry_pick = this.getCherry_pick();
+		int generatedCherry_mark = this.getCherry_mark();
+		diff_options generatedDiffopt = this.getDiffopt();
+		diff_flags generatedFlags = generatedDiffopt.getFlags();
+		display_notes_opt generatedNotes_opt = this.getNotes_opt();
+		int generatedUse_default_notes = generatedNotes_opt.getUse_default_notes();
+		string_list generatedExtra_notes_refs = generatedNotes_opt.getExtra_notes_refs();
+		string_list_item string_list_item = new string_list_item();
+		git_graph git_graph = new git_graph();
+		int generatedAbbrev = this.getAbbrev();
+		date_mode generatedDate_mode = this.getDate_mode();
+		grep_opt generatedGrep_filter = this.getGrep_filter();
+		int generatedPickaxe_opts = generatedDiffopt.getPickaxe_opts();
+		int generatedReverse = this.getReverse();
+		decoration generatedChildren = this.getChildren();
+		Object generatedPrefix = this.getPrefix();
+		if ((argcount = "max-count".parse_long_opt(argv, optarg))) {
+			this.setMax_count(/*Error: Function owner not recognized*/atoi(optarg));
+			this.setNo_walk(0);
+			return argcount;
+		}  else if ((argcount = "skip".parse_long_opt(argv, optarg))) {
+			this.setSkip_count(/*Error: Function owner not recognized*/atoi(optarg));
+			return argcount;
+		}  else if ((arg == (byte)'-') && ((ModernizedCProgram.sane_ctype[(byte)(arg[1])] & (true)) != 0)) {
+			if (ModernizedCProgram.strtol_i(arg + 1, 10, generatedMax_count) < /* accept -<digit>, like traditional "head" */0 || generatedMax_count < 0) {
+				ModernizedCProgram.die("'%s': not a non-negative integer", arg + 1);
+			} 
+			this.setNo_walk(0);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "-n")) {
+			if (argc <= 1) {
+				return ();
+			} 
+			this.setMax_count(/*Error: Function owner not recognized*/atoi(argv[1]));
+			this.setNo_walk(0);
+			return 2;
+		}  else if (ModernizedCProgram.skip_prefix(arg, "-n", optarg)) {
+			this.setMax_count(/*Error: Function owner not recognized*/atoi(optarg));
+			this.setNo_walk(0);
+		}  else if ((argcount = "max-age".parse_long_opt(argv, optarg))) {
+			this.setMax_age(/*Error: Function owner not recognized*/atoi(optarg));
+			return argcount;
+		}  else if ((argcount = "since".parse_long_opt(argv, optarg))) {
+			this.setMax_age(ModernizedCProgram.approxidate_careful((optarg), ((Object)0)));
+			return argcount;
+		}  else if ((argcount = "after".parse_long_opt(argv, optarg))) {
+			this.setMax_age(ModernizedCProgram.approxidate_careful((optarg), ((Object)0)));
+			return argcount;
+		}  else if ((argcount = "min-age".parse_long_opt(argv, optarg))) {
+			this.setMin_age(/*Error: Function owner not recognized*/atoi(optarg));
+			return argcount;
+		}  else if ((argcount = "before".parse_long_opt(argv, optarg))) {
+			this.setMin_age(ModernizedCProgram.approxidate_careful((optarg), ((Object)0)));
+			return argcount;
+		}  else if ((argcount = "until".parse_long_opt(argv, optarg))) {
+			this.setMin_age(ModernizedCProgram.approxidate_careful((optarg), ((Object)0)));
+			return argcount;
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--first-parent")) {
+			this.setFirst_parent_only(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--ancestry-path")) {
+			this.setAncestry_path(1);
+			this.setSimplify_history(0);
+			this.setLimited(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "-g") || !/*Error: Function owner not recognized*/strcmp(arg, "--walk-reflogs")) {
+			generatedReflog_info.init_reflog_walk();
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--default")) {
+			if (argc <= 1) {
+				return ();
+			} 
+			this.setDef(argv[1]);
+			return 2;
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--merge")) {
+			this.setShow_merge(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--topo-order")) {
+			this.setSort_order(rev_sort_order.REV_SORT_IN_GRAPH_ORDER);
+			this.setTopo_order(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--simplify-merges")) {
+			this.setSimplify_merges(1);
+			this.setTopo_order(1);
+			this.setRewrite_parents(1);
+			this.setSimplify_history(0);
+			this.setLimited(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--simplify-by-decoration")) {
+			this.setSimplify_merges(1);
+			this.setTopo_order(1);
+			this.setRewrite_parents(1);
+			this.setSimplify_history(0);
+			this.setSimplify_by_decoration(1);
+			this.setLimited(1);
+			this.setPrune(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--date-order")) {
+			this.setSort_order(rev_sort_order.REV_SORT_BY_COMMIT_DATE);
+			this.setTopo_order(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--author-date-order")) {
+			this.setSort_order(rev_sort_order.REV_SORT_BY_AUTHOR_DATE);
+			this.setTopo_order(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--early-output")) {
+			this.setEarly_output(100);
+			this.setTopo_order(1);
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--early-output=", optarg)) {
+			if (ModernizedCProgram.strtoul_ui(optarg, 10, generatedEarly_output) < 0) {
+				ModernizedCProgram.die("'%s': not a non-negative integer", optarg);
+			} 
+			this.setTopo_order(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--parents")) {
+			this.setRewrite_parents(1);
+			this.setPrint_parents(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--dense")) {
+			this.setDense(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--sparse")) {
+			this.setDense(0);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--in-commit-order")) {
+			this.setTree_blobs_in_commit_order(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--remove-empty")) {
+			this.setRemove_empty_trees(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--merges")) {
+			this.setMin_parents(2);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-merges")) {
+			this.setMax_parents(1);
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--min-parents=", optarg)) {
+			this.setMin_parents(/*Error: Function owner not recognized*/atoi(optarg));
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-min-parents")) {
+			this.setMin_parents(0);
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--max-parents=", optarg)) {
+			this.setMax_parents(/*Error: Function owner not recognized*/atoi(optarg));
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-max-parents")) {
+			this.setMax_parents(-1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--boundary")) {
+			this.setBoundary(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--left-right")) {
+			this.setLeft_right(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--left-only")) {
+			if (generatedRight_only) {
+				ModernizedCProgram.die("--left-only is incompatible with --right-only or --cherry");
+			} 
+			this.setLeft_only(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--right-only")) {
+			if (generatedLeft_only) {
+				ModernizedCProgram.die("--right-only is incompatible with --left-only");
+			} 
+			this.setRight_only(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--cherry")) {
+			if (generatedLeft_only) {
+				ModernizedCProgram.die("--cherry is incompatible with --left-only");
+			} 
+			this.setCherry_mark(1);
+			this.setRight_only(1);
+			this.setMax_parents(1);
+			this.setLimited(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--count")) {
+			this.setCount(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--cherry-mark")) {
+			if (generatedCherry_pick) {
+				ModernizedCProgram.die("--cherry-mark is incompatible with --cherry-pick");
+			} 
+			this.setCherry_mark(1);
+			this.setLimited(/* needs limit_list() */1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--cherry-pick")) {
+			if (generatedCherry_mark) {
+				ModernizedCProgram.die("--cherry-pick is incompatible with --cherry-mark");
+			} 
+			this.setCherry_pick(1);
+			this.setLimited(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--objects")) {
+			this.setTag_objects(1);
+			this.setTree_objects(1);
+			this.setBlob_objects(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--objects-edge")) {
+			this.setTag_objects(1);
+			this.setTree_objects(1);
+			this.setBlob_objects(1);
+			this.setEdge_hint(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--objects-edge-aggressive")) {
+			this.setTag_objects(1);
+			this.setTree_objects(1);
+			this.setBlob_objects(1);
+			this.setEdge_hint(1);
+			this.setEdge_hint_aggressive(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--verify-objects")) {
+			this.setTag_objects(1);
+			this.setTree_objects(1);
+			this.setBlob_objects(1);
+			this.setVerify_objects(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--unpacked")) {
+			this.setUnpacked(1);
+		}  else if (ModernizedCProgram.starts_with(arg, "--unpacked=")) {
+			ModernizedCProgram.die("--unpacked=<packfile> no longer supported.");
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "-r")) {
+			this.setDiff(1);
+			generatedFlags.setRecursive(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "-t")) {
+			this.setDiff(1);
+			generatedFlags.setRecursive(1);
+			generatedFlags.setTree_in_recursive(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "-m")) {
+			this.setIgnore_merges(0);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "-c")) {
+			this.setDiff(1);
+			this.setDense_combined_merges(0);
+			this.setCombine_merges(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--combined-all-paths")) {
+			this.setDiff(1);
+			this.setCombined_all_paths(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--cc")) {
+			this.setDiff(1);
+			this.setDense_combined_merges(1);
+			this.setCombine_merges(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "-v")) {
+			this.setVerbose_header(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--pretty")) {
+			this.setVerbose_header(1);
+			this.setPretty_given(1);
+			revs.get_commit_format(((Object)0));
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--pretty=", optarg) || ModernizedCProgram.skip_prefix(arg, "--format=", optarg/*
+				 * Detached form ("--pretty X" as opposed to "--pretty=X")
+				 * not allowed, since the argument is optional.
+				 */)) {
+			this.setVerbose_header(1);
+			this.setPretty_given(1);
+			revs.get_commit_format(optarg);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--expand-tabs")) {
+			this.setExpand_tabs_in_log(8);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-expand-tabs")) {
+			this.setExpand_tabs_in_log(0);
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--expand-tabs=", arg)) {
+			int val;
+			if (ModernizedCProgram.strtol_i(arg, 10, val) < 0 || val < 0) {
+				ModernizedCProgram.die("'%s': not a non-negative integer", arg);
+			} 
+			this.setExpand_tabs_in_log(val);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--show-notes") || !/*Error: Function owner not recognized*/strcmp(arg, "--notes")) {
+			this.setShow_notes(1);
+			this.setShow_notes_given(1);
+			generatedNotes_opt.setUse_default_notes(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--show-signature")) {
+			this.setShow_signature(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-show-signature")) {
+			this.setShow_signature(0);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--show-linear-break")) {
+			this.setBreak_bar("                    ..........");
+			this.setTrack_linear(1);
+			this.setTrack_first_time(1);
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--show-linear-break=", optarg)) {
+			this.setBreak_bar(ModernizedCProgram.xstrdup(optarg));
+			this.setTrack_linear(1);
+			this.setTrack_first_time(1);
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--show-notes=", optarg) || ModernizedCProgram.skip_prefix(arg, "--notes=", optarg)) {
+			strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+			this.setShow_notes(1);
+			this.setShow_notes_given(1);
+			if (ModernizedCProgram.starts_with(arg, "--show-notes=") && generatedUse_default_notes < 0) {
+				generatedNotes_opt.setUse_default_notes(1);
+			} 
+			ModernizedCProgram.buf.strbuf_addstr(optarg);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/expand_notes_ref(ModernizedCProgram.buf);
+			string_list_item.string_list_append(generatedExtra_notes_refs, ModernizedCProgram.buf.strbuf_detach(((Object)0)));
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-notes")) {
+			this.setShow_notes(0);
+			this.setShow_notes_given(1);
+			generatedNotes_opt.setUse_default_notes(-1/* we have been strdup'ing ourselves, so trick
+					 * string_list into free()ing strings */);
+			generatedExtra_notes_refs.setStrdup_strings(1);
+			generatedExtra_notes_refs.string_list_clear(0);
+			generatedExtra_notes_refs.setStrdup_strings(0);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--standard-notes")) {
+			this.setShow_notes_given(1);
+			generatedNotes_opt.setUse_default_notes(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-standard-notes")) {
+			generatedNotes_opt.setUse_default_notes(0);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--oneline")) {
+			this.setVerbose_header(1);
+			revs.get_commit_format("oneline");
+			this.setPretty_given(1);
+			this.setAbbrev_commit(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--graph")) {
+			this.setTopo_order(1);
+			this.setRewrite_parents(1);
+			this.setGraph(git_graph.graph_init(revs));
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--root")) {
+			this.setShow_root_diff(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-commit-id")) {
+			this.setNo_commit_id(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--always")) {
+			this.setAlways_show_header(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-abbrev")) {
+			this.setAbbrev(0);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--abbrev")) {
+			this.setAbbrev(ModernizedCProgram.default_abbrev);
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--abbrev=", optarg)) {
+			this.setAbbrev(/*Error: Function owner not recognized*/strtoul(optarg, ((Object)0), 10));
+			if (generatedAbbrev < ModernizedCProgram.minimum_abbrev) {
+				this.setAbbrev(ModernizedCProgram.minimum_abbrev);
+			}  else if (generatedAbbrev > hexsz) {
+				this.setAbbrev(hexsz);
+			} 
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--abbrev-commit")) {
+			this.setAbbrev_commit(1);
+			this.setAbbrev_commit_given(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-abbrev-commit")) {
+			this.setAbbrev_commit(0);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--full-diff")) {
+			this.setDiff(1);
+			this.setFull_diff(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--full-history")) {
+			this.setSimplify_history(0);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--relative-date")) {
+			generatedDate_mode.setType(date_mode_type.DATE_RELATIVE);
+			this.setDate_mode_explicit(1);
+		}  else if ((argcount = "date".parse_long_opt(argv, optarg))) {
+			generatedDate_mode.parse_date_format(optarg);
+			this.setDate_mode_explicit(1);
+			return argcount;
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--log-size")) {
+			this.setShow_log_size(1/*
+				 * Grepping the commit log
+				 */);
+		}  else if ((argcount = "author".parse_long_opt(argv, optarg))) {
+			revs.add_header_grep(grep_header_field.GREP_HEADER_AUTHOR, optarg);
+			return argcount;
+		}  else if ((argcount = "committer".parse_long_opt(argv, optarg))) {
+			revs.add_header_grep(grep_header_field.GREP_HEADER_COMMITTER, optarg);
+			return argcount;
+		}  else if ((argcount = "grep-reflog".parse_long_opt(argv, optarg))) {
+			revs.add_header_grep(grep_header_field.GREP_HEADER_REFLOG, optarg);
+			return argcount;
+		}  else if ((argcount = "grep".parse_long_opt(argv, optarg))) {
+			revs.add_message_grep(optarg);
+			return argcount;
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--grep-debug")) {
+			generatedGrep_filter.setDebug(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--basic-regexp")) {
+			generatedGrep_filter.setPattern_type_option(grep_pattern_type.GREP_PATTERN_TYPE_BRE);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--extended-regexp") || !/*Error: Function owner not recognized*/strcmp(arg, "-E")) {
+			generatedGrep_filter.setPattern_type_option(grep_pattern_type.GREP_PATTERN_TYPE_ERE);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--regexp-ignore-case") || !/*Error: Function owner not recognized*/strcmp(arg, "-i")) {
+			generatedGrep_filter.setIgnore_case(1);
+			generatedPickaxe_opts |=  32;
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--fixed-strings") || !/*Error: Function owner not recognized*/strcmp(arg, "-F")) {
+			generatedGrep_filter.setPattern_type_option(grep_pattern_type.GREP_PATTERN_TYPE_FIXED);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--perl-regexp") || !/*Error: Function owner not recognized*/strcmp(arg, "-P")) {
+			generatedGrep_filter.setPattern_type_option(grep_pattern_type.GREP_PATTERN_TYPE_PCRE);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--all-match")) {
+			generatedGrep_filter.setAll_match(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--invert-grep")) {
+			this.setInvert_grep(1);
+		}  else if ((argcount = "encoding".parse_long_opt(argv, optarg))) {
+			if (/*Error: Function owner not recognized*/strcmp(optarg, "none")) {
+				ModernizedCProgram.git_log_output_encoding = ModernizedCProgram.xstrdup(optarg);
+			} else {
+					ModernizedCProgram.git_log_output_encoding = "";
+			} 
+			return argcount;
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--reverse")) {
+			generatedReverse ^=  1;
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--children")) {
+			generatedChildren.setName("children");
+			this.setLimited(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--ignore-missing")) {
+			this.setIgnore_missing(1);
+		}  else if (opt && opt.getAllow_exclude_promisor_objects() && !/*Error: Function owner not recognized*/strcmp(arg, "--exclude-promisor-objects")) {
+			if (ModernizedCProgram.fetch_if_missing) {
+				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\revision.c", 2340, "exclude_promisor_objects can only be used when fetch_if_missing is 0");
+			} 
+			this.setExclude_promisor_objects(1);
+		} else {
+				int opts = /*Error: Function owner not recognized*/diff_opt_parse(generatedDiffopt, argv, argc, generatedPrefix);
+				if (!opts) {
+					unkv[(unkc)++] = arg;
+				} 
+				return opts;
+		} 
+		git_graph generatedGraph = this.getGraph();
+		int generatedTrack_linear = this.getTrack_linear();
+		if (generatedGraph && generatedTrack_linear) {
+			ModernizedCProgram.die("--show-linear-break and --graph are incompatible");
+		} 
+		return 1;
+	}
+	public int handle_revision_pseudo_opt(Object submodule, int argc, Object[][] argv, Integer flags) {
+		byte arg = argv[0];
+		byte optarg;
+		ref_store refs = new ref_store();
+		int argcount;
+		int generatedSingle_worktree = this.getSingle_worktree();
+		ref_store ref_store = new ref_store();
+		repository generatedRepo = this.getRepo();
+		ref_store ref_store = new ref_store();
+		if (submodule/*
+				 * We need some something like get_submodule_worktrees()
+				 * before we can go through all worktrees of a submodule,
+				 * .e.g with adding all HEADs from --all, which is not
+				 * supported right now, so stick to single worktree.
+				 */) {
+			if (!generatedSingle_worktree) {
+				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\revision.c", 2406, "--single-worktree cannot be used together with submodule");
+			} 
+			refs = ref_store.get_submodule_ref_store(submodule);
+		} else {
+				refs = ref_store.get_main_ref_store(generatedRepo);
+		} 
+		string_list generatedRef_excludes = this.getRef_excludes();
+		if (!/*Error: Function owner not recognized*/strcmp(arg, "--all")) {
+			ModernizedCProgram.handle_refs(refs, revs, flags, ModernizedCProgram.refs_for_each_ref);
+			ModernizedCProgram.handle_refs(refs, revs, flags, ModernizedCProgram.refs_head_ref);
+			if (!generatedSingle_worktree) {
+				all_refs_cb cb = new all_refs_cb();
+				ModernizedCProgram.init_all_refs_cb(cb, revs, flags);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/other_head_refs(handle_one_ref, cb);
+			} 
+			generatedRef_excludes.clear_ref_exclusion();
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--branches")) {
+			ModernizedCProgram.handle_refs(refs, revs, flags, ModernizedCProgram.refs_for_each_branch_ref);
+			generatedRef_excludes.clear_ref_exclusion();
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--bisect")) {
+			ModernizedCProgram.read_bisect_terms(ModernizedCProgram.term_bad, ModernizedCProgram.term_good);
+			ModernizedCProgram.handle_refs(refs, revs, flags, for_each_bad_bisect_ref);
+			ModernizedCProgram.handle_refs(refs, revs, flags ^ ((-1024 << 1) | (-1024 << 10)), for_each_good_bisect_ref);
+			this.setBisect(1);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--tags")) {
+			ModernizedCProgram.handle_refs(refs, revs, flags, ModernizedCProgram.refs_for_each_tag_ref);
+			generatedRef_excludes.clear_ref_exclusion();
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--remotes")) {
+			ModernizedCProgram.handle_refs(refs, revs, flags, ModernizedCProgram.refs_for_each_remote_ref);
+			generatedRef_excludes.clear_ref_exclusion();
+		}  else if ((argcount = "glob".parse_long_opt(argv, optarg))) {
+			all_refs_cb cb = new all_refs_cb();
+			ModernizedCProgram.init_all_refs_cb(cb, revs, flags);
+			ModernizedCProgram.for_each_glob_ref(handle_one_ref, optarg, cb);
+			generatedRef_excludes.clear_ref_exclusion();
+			return argcount;
+		}  else if ((argcount = "exclude".parse_long_opt(argv, optarg))) {
+			generatedRef_excludes.add_ref_exclusion(optarg);
+			return argcount;
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--branches=", optarg)) {
+			all_refs_cb cb = new all_refs_cb();
+			ModernizedCProgram.init_all_refs_cb(cb, revs, flags);
+			ModernizedCProgram.for_each_glob_ref_in(handle_one_ref, optarg, "refs/heads/", cb);
+			generatedRef_excludes.clear_ref_exclusion();
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--tags=", optarg)) {
+			all_refs_cb cb = new all_refs_cb();
+			ModernizedCProgram.init_all_refs_cb(cb, revs, flags);
+			ModernizedCProgram.for_each_glob_ref_in(handle_one_ref, optarg, "refs/tags/", cb);
+			generatedRef_excludes.clear_ref_exclusion();
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--remotes=", optarg)) {
+			all_refs_cb cb = new all_refs_cb();
+			ModernizedCProgram.init_all_refs_cb(cb, revs, flags);
+			ModernizedCProgram.for_each_glob_ref_in(handle_one_ref, optarg, "refs/remotes/", cb);
+			generatedRef_excludes.clear_ref_exclusion();
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--reflog")) {
+			revs.add_reflogs_to_pending(flags);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--indexed-objects")) {
+			revs.add_index_objects_to_pending(flags);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--alternate-refs")) {
+			revs.add_alternate_refs_to_pending(flags);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--not")) {
+			flags ^=  (-1024 << 1) | (-1024 << 10);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-walk")) {
+			this.setNo_walk(1);
+		}  else if (ModernizedCProgram.skip_prefix(arg, "--no-walk=", optarg/*
+				 * Detached form ("--no-walk X" as opposed to "--no-walk=X")
+				 * not allowed, since the argument is optional.
+				 */)) {
+			if (!/*Error: Function owner not recognized*/strcmp(optarg, "sorted")) {
+				this.setNo_walk(1);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(optarg, "unsorted")) {
+				this.setNo_walk(2);
+			} else {
+					return ();
+			} 
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--do-walk")) {
+			this.setNo_walk(0);
+		}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--single-worktree")) {
+			this.setSingle_worktree(1);
+		} else {
+				return 0;
+		} 
+		return 1;
+	}
+	public void simplify_merges() {
+		commit_list list = new commit_list();
+		commit_list next = new commit_list();
+		commit_list yet_to_do = new commit_list();
+		commit_list tail = new commit_list();
+		commit commit = new commit();
+		int generatedPrune = this.getPrune();
+		if (!generatedPrune) {
+			return /*Error: Unsupported expression*/;
+		} 
+		yet_to_do = ((Object)/* feed the list reversed */0);
+		commit generatedItem = list.getItem();
+		commit_list generatedNext = list.getNext();
+		commit_list generatedCommits = this.getCommits();
+		for (list = generatedCommits; list; list = next) {
+			commit = generatedItem;
+			next = generatedNext;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/commit_list_insert(commit, yet_to_do);
+		}
+		while (yet_to_do) {
+			list = yet_to_do;
+			yet_to_do = ((Object)0);
+			tail = yet_to_do;
+			while (list) {
+				commit = /*Error: Function owner not recognized*/pop_commit(list);
+				tail = tail.simplify_one(revs, commit);
+			}
+		}
+		list = generatedCommits;
+		this.setCommits(((Object)0));
+		tail = generatedCommits;
+		merge_simplify_state merge_simplify_state = new merge_simplify_state();
+		commit generatedSimplified = st.getSimplified();
+		while (list) {
+			merge_simplify_state st = new merge_simplify_state();
+			commit = /*Error: Function owner not recognized*/pop_commit(list);
+			st = merge_simplify_state.locate_simplify_state(revs, commit);
+			if (generatedSimplified == commit) {
+				tail = generatedNext;
+			} 
+		}
+	}
+	public void set_children() {
+		commit_list l = new commit_list();
+		commit generatedItem = l.getItem();
+		commit_list generatedNext = p.getNext();
+		commit_list generatedParents = commit.getParents();
+		commit_list generatedCommits = this.getCommits();
+		for (l = generatedCommits; l; l = generatedNext) {
+			commit commit = generatedItem;
+			commit_list p = new commit_list();
+			for (p = generatedParents; p; p = generatedNext) {
+				ModernizedCProgram.add_child(revs, generatedItem, commit);
+			}
+		}
+	}
+	public void explore_walk_step() {
+		topo_walk_info generatedTopo_walk_info = this.getTopo_walk_info();
+		topo_walk_info info = generatedTopo_walk_info;
+		commit_list p = new commit_list();
+		prio_queue generatedExplore_queue = info.getExplore_queue();
+		commit c = generatedExplore_queue.prio_queue_get();
+		if (!c) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (/*Error: Function owner not recognized*/repo_parse_commit_gently(ModernizedCProgram.the_repository, c, 1) < 0) {
+			return /*Error: Unsupported expression*/;
+		} 
+		rev_sort_order generatedSort_order = this.getSort_order();
+		author_date_slab generatedAuthor_date = info.getAuthor_date();
+		if (generatedSort_order == rev_sort_order.REV_SORT_BY_AUTHOR_DATE) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/record_author_date(generatedAuthor_date, c);
+		} 
+		Object generatedMax_age = this.getMax_age();
+		Object generatedDate = c.getDate();
+		object generatedObject = c.getObject();
+		int generatedFlags = generatedObject.getFlags();
+		if (generatedMax_age != -1 && (generatedDate < generatedMax_age)) {
+			generatedFlags |=  (-1024 << 1);
+		} 
+		if (ModernizedCProgram.process_parents(revs, c, ((Object)0), ((Object)0)) < 0) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (generatedFlags & (-1024 << 1)) {
+			c.mark_parents_uninteresting();
+		} 
+		commit generatedItem = p.getItem();
+		commit_list generatedNext = p.getNext();
+		commit_list generatedParents = c.getParents();
+		for (p = generatedParents; p; p = generatedNext) {
+			ModernizedCProgram.test_flag_and_insert(generatedExplore_queue, generatedItem, (-1024 << 27));
+		}
+	}
+	public void explore_to_depth(Object gen_cutoff) {
+		topo_walk_info generatedTopo_walk_info = this.getTopo_walk_info();
+		topo_walk_info info = generatedTopo_walk_info;
+		commit c = new commit();
+		prio_queue generatedExplore_queue = info.getExplore_queue();
+		Object generatedGeneration = c.getGeneration();
+		while ((c = generatedExplore_queue.prio_queue_peek()) && generatedGeneration >= gen_cutoff) {
+			revs.explore_walk_step();
+		}
+	}
+	public void indegree_walk_step() {
+		commit_list p = new commit_list();
+		topo_walk_info generatedTopo_walk_info = this.getTopo_walk_info();
+		topo_walk_info info = generatedTopo_walk_info;
+		prio_queue generatedIndegree_queue = info.getIndegree_queue();
+		commit c = generatedIndegree_queue.prio_queue_get();
+		if (!c) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (/*Error: Function owner not recognized*/repo_parse_commit_gently(ModernizedCProgram.the_repository, c, 1) < 0) {
+			return /*Error: Unsupported expression*/;
+		} 
+		Object generatedGeneration = c.getGeneration();
+		revs.explore_to_depth(generatedGeneration);
+		commit generatedItem = p.getItem();
+		indegree_slab generatedIndegree = info.getIndegree();
+		int generatedFirst_parent_only = this.getFirst_parent_only();
+		commit_list generatedNext = p.getNext();
+		commit_list generatedParents = c.getParents();
+		for (p = generatedParents; p; p = generatedNext) {
+			commit parent = generatedItem;
+			int pi = generatedIndegree.indegree_slab_at(parent);
+			if (pi) {
+				(pi)++;
+			} else {
+					pi = 2;
+			} 
+			ModernizedCProgram.test_flag_and_insert(generatedIndegree_queue, parent, (-1024 << 28));
+			if (generatedFirst_parent_only) {
+				return /*Error: Unsupported expression*/;
+			} 
+		}
+	}
+	public void compute_indegrees_to_depth(Object gen_cutoff) {
+		topo_walk_info generatedTopo_walk_info = this.getTopo_walk_info();
+		topo_walk_info info = generatedTopo_walk_info;
+		commit c = new commit();
+		prio_queue generatedIndegree_queue = info.getIndegree_queue();
+		Object generatedGeneration = c.getGeneration();
+		while ((c = generatedIndegree_queue.prio_queue_peek()) && generatedGeneration >= gen_cutoff) {
+			revs.indegree_walk_step();
+		}
+	}
+	public void init_topo_walk() {
+		topo_walk_info info = new topo_walk_info();
+		commit_list list = new commit_list();
+		this.setTopo_walk_info(ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/));
+		topo_walk_info generatedTopo_walk_info = this.getTopo_walk_info();
+		info = generatedTopo_walk_info;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(info, 0, /*Error: Unsupported expression*/);
+		indegree_slab generatedIndegree = info.getIndegree();
+		generatedIndegree.init_indegree_slab();
+		prio_queue generatedExplore_queue = info.getExplore_queue();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedExplore_queue, 0, /*Error: sizeof expression not supported yet*/);
+		prio_queue generatedIndegree_queue = info.getIndegree_queue();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedIndegree_queue, 0, /*Error: sizeof expression not supported yet*/);
+		prio_queue generatedTopo_queue = info.getTopo_queue();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedTopo_queue, 0, /*Error: sizeof expression not supported yet*/);
+		author_date_slab generatedAuthor_date = info.getAuthor_date();
+		rev_sort_order generatedSort_order = this.getSort_order();
+		switch (generatedSort_order) {
+		case rev_sort_order.REV_SORT_BY_COMMIT_DATE:
+				generatedTopo_queue.setCompare(ModernizedCProgram.compare_commits_by_commit_date);
+				break;
+		case rev_sort_order.REV_SORT_BY_AUTHOR_DATE:
+				generatedAuthor_date.init_author_date_slab();
+				generatedTopo_queue.setCompare(ModernizedCProgram.compare_commits_by_author_date);
+				generatedTopo_queue.setCb_data(generatedAuthor_date);
+				break;
+		default:
+				generatedTopo_queue.setCompare(((Object)0));
+				break;
+		}
+		generatedExplore_queue.setCompare(ModernizedCProgram.compare_commits_by_gen_then_commit_date);
+		generatedIndegree_queue.setCompare(ModernizedCProgram.compare_commits_by_gen_then_commit_date);
+		info.setMin_generation(-1024);
+		commit generatedItem = list.getItem();
+		Object generatedGeneration = c.getGeneration();
+		Object generatedMin_generation = info.getMin_generation();
+		commit_list generatedNext = list.getNext();
+		commit_list generatedCommits = this.getCommits();
+		for (list = generatedCommits; list; list = generatedNext) {
+			commit c = generatedItem;
+			if (/*Error: Function owner not recognized*/repo_parse_commit_gently(ModernizedCProgram.the_repository, c, 1)) {
+				continue;
+			} 
+			ModernizedCProgram.test_flag_and_insert(generatedExplore_queue, c, (-1024 << 27));
+			ModernizedCProgram.test_flag_and_insert(generatedIndegree_queue, c, (-1024 << 28));
+			if (generatedGeneration < generatedMin_generation) {
+				info.setMin_generation(generatedGeneration);
+			} 
+			(generatedIndegree.indegree_slab_at(c)) = 1;
+			if (generatedSort_order == rev_sort_order.REV_SORT_BY_AUTHOR_DATE) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/record_author_date(generatedAuthor_date, c);
+			} 
+		}
+		revs.compute_indegrees_to_depth(generatedMin_generation);
+		for (list = generatedCommits; list; list = generatedNext) {
+			commit c = generatedItem;
+			if ((generatedIndegree.indegree_slab_at(c)) == 1) {
+				generatedTopo_queue.prio_queue_put(c/*
+					 * This is unfortunate; the initial tips need to be shown
+					 * in the order given from the revision traversal machinery.
+					 */);
+			} 
+		}
+		if (generatedSort_order == rev_sort_order.REV_SORT_IN_GRAPH_ORDER) {
+			generatedTopo_queue.prio_queue_reverse();
+		} 
+	}
+	public int prepare_revision_walk() {
+		int i;
+		object_array old_pending = new object_array();
+		commit_list generatedCommits = this.getCommits();
+		commit_list next = generatedCommits;
+		object_array generatedPending = this.getPending();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(old_pending, generatedPending, /*Error: sizeof expression not supported yet*/);
+		generatedPending.setNr(0);
+		generatedPending.setAlloc(0);
+		generatedPending.setObjects(((Object)0));
+		int generatedNr = old_pending.getNr();
+		object_array_entry[] generatedObjects = old_pending.getObjects();
+		object generatedObject = commit.getObject();
+		int generatedFlags = generatedObject.getFlags();
+		for (i = 0; i < generatedNr; i++) {
+			object_array_entry e = generatedObjects + i;
+			commit commit = ModernizedCProgram.handle_commit(revs, e);
+			if (commit) {
+				if (!(generatedFlags & (-1024 << 0))) {
+					generatedFlags |=  (-1024 << 0);
+					next = /*Error: Function owner not recognized*/commit_list_append(commit, next);
+				} 
+			} 
+		}
+		old_pending.object_array_clear();
+		int generatedSimplify_merges = this.getSimplify_merges();
+		int generatedLimited = this.getLimited();
+		decoration generatedTreesame = this.getTreesame();
+		if (generatedSimplify_merges || (generatedLimited && ModernizedCProgram.limiting_can_increase_treesame(revs))) {
+			generatedTreesame.setName("treesame");
+		} 
+		int generatedExclude_promisor_objects = this.getExclude_promisor_objects();
+		if (generatedExclude_promisor_objects) {
+			ModernizedCProgram.for_each_packed_object(mark_uninteresting, revs, for_each_object_flags.FOR_EACH_OBJECT_PROMISOR_ONLY);
+		} 
+		int generatedNo_walk = this.getNo_walk();
+		if (generatedNo_walk != 2) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/commit_list_sort_by_date(generatedCommits);
+		} 
+		if (generatedNo_walk) {
+			return 0;
+		} 
+		int generatedTopo_order = this.getTopo_order();
+		rev_sort_order generatedSort_order = this.getSort_order();
+		if (generatedLimited) {
+			if (revs.limit_list() < 0) {
+				return -1;
+			} 
+			if (generatedTopo_order) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sort_in_topological_order(generatedCommits, generatedSort_order);
+			} 
+		}  else if (generatedTopo_order) {
+			revs.init_topo_walk();
+		} 
+		int generatedLine_level_traverse = this.getLine_level_traverse();
+		if (generatedLine_level_traverse) {
+			revs.line_log_filter();
+		} 
+		if (generatedSimplify_merges) {
+			revs.simplify_merges();
+		} 
+		decoration generatedChildren = this.getChildren();
+		Object generatedName = generatedChildren.getName();
+		if (generatedName) {
+			revs.set_children();
+		} 
+		return 0;
+	}
+	public void free_saved_parents() {
+		saved_parents generatedSaved_parents_slab = this.getSaved_parents_slab();
+		if (generatedSaved_parents_slab) {
+			generatedSaved_parents_slab.clear_saved_parents();
+		} 
+	}
+	public void create_boundary_commit_list() {
+		int i;
+		commit c = new commit();
+		object_array generatedBoundary_commits = this.getBoundary_commits();
+		object_array array = generatedBoundary_commits;
+		object_array_entry[] generatedObjects = array.getObjects();
+		object_array_entry objects = generatedObjects;
+		commit_list generatedCommits = this.getCommits();
+		if (generatedCommits) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_commit_list(generatedCommits);
+			this.setCommits(((Object)0/*
+				 * Put all of the actual boundary commits from revs->boundary_commits
+				 * into revs->commits
+				 */));
+		} 
+		int generatedNr = array.getNr();
+		object generatedObject = c.getObject();
+		int generatedFlags = generatedObject.getFlags();
+		for (i = 0; i < generatedNr; i++) {
+			c = (commit)(objects[i].getItem());
+			if (!c) {
+				continue;
+			} 
+			if (!(generatedFlags & (-1024 << 6))) {
+				continue;
+			} 
+			if (generatedFlags & ((-1024 << 3) | (-1024 << 5))) {
+				continue;
+			} 
+			generatedFlags |=  (-1024 << 5);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/commit_list_insert(c, generatedCommits);
+		}
+		rev_sort_order generatedSort_order = this.getSort_order();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sort_in_topological_order(generatedCommits, generatedSort_order);
+	}
+	public void show_interdiff(int indent) {
+		diff_options opts = new diff_options();
+		strbuf prefix = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		diff_options generatedDiffopt = this.getDiffopt();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(opts, generatedDiffopt, /*Error: sizeof expression not supported yet*/);
+		opts.setOutput_format(-1024);
+		opts.setOutput_prefix(idiff_prefix_cb);
+		prefix.strbuf_addchars((byte)' ', indent);
+		opts.setOutput_prefix_data(prefix);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_setup_done(opts);
+		Object generatedIdiff_oid1 = this.getIdiff_oid1();
+		Object generatedIdiff_oid2 = this.getIdiff_oid2();
+		opts.diff_tree_oid(generatedIdiff_oid1, generatedIdiff_oid2, "");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diffcore_std(opts);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_flush(opts);
+		prefix.strbuf_release();
 	}
 	public commit_list getCommits() {
 		return commits;

@@ -38,7 +38,7 @@ public class _SharedFindReplace {
 		} 
 		Object generatedDialog = this.getDialog();
 		if (event.getKeyval() == /* the Escape key synthesizes a cancellation action */GDK_Escape) {
-			.gtk_widget_hide(generatedDialog);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/gtk_widget_hide(generatedDialog);
 			return 1/* It would be delightful if it where possible to do search history
 			     * operations on the K_UP and K_DOWN keys here.
 			     */;
@@ -48,12 +48,12 @@ public class _SharedFindReplace {
 	public void find_replace_keypress(int w, Object event) {
 		 keysym = new ();
 		if (frdp == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		keysym = .XLookupKeysym(event, 0);
+		keysym = /*Error: Function owner not recognized*/XLookupKeysym(event, 0);
 		Object generatedDialog = this.getDialog();
 		if (keysym == /* the scape key pops the whole dialog down */XK_Escape) {
-			.XtUnmanageChild(generatedDialog);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtUnmanageChild(generatedDialog);
 		} 
 	}
 	public Object getDialog() {

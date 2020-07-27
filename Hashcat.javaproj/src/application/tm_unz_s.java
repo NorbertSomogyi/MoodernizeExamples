@@ -63,18 +63,6 @@ public class tm_unz_s {
 	public tm_unz_s() {
 	}
 	
-	public void unz64local_DosDateToTmuDate(Object ulDosDate) {
-		ZPOS64_T uDate = new ZPOS64_T();
-		uDate = (ZPOS64_T)(ulDosDate >> 16);
-		this.setTm_mday((uInt)(uDate & -1024));
-		this.setTm_mon((uInt)((((uDate) & -1024) / -1024) - 1));
-		this.setTm_year((uInt)(((uDate & -1024) / -1024) + 1980));
-		this.setTm_hour((uInt)((ulDosDate & -1024) / -1024));
-		this.setTm_min((uInt)((ulDosDate & -1024) / -1024));
-		this.setTm_sec((uInt)(2 * (ulDosDate & -1024/*
-		  Get Info about the current file in the zipfile, with internal only info
-		*/)));
-	}
 	/*
 	   miniunz.c
 	   Version 1.1, February 14h, 2010
@@ -109,12 +97,24 @@ public class tm_unz_s {
 		FILETIME ftCreate = new FILETIME();
 		FILETIME ftLastAcc = new FILETIME();
 		FILETIME ftLastWrite = new FILETIME();
-		hFile = .CreateFileA(filename, -1024 | -1024, 0, ((Object)0), 3, 0, ((Object)0));
-		.GetFileTime(hFile, ftCreate, ftLastAcc, ftLastWrite);
-		.DosDateTimeToFileTime((WORD)(dosdate >> 16), (WORD)dosdate, ftLocal);
-		.LocalFileTimeToFileTime(ftLocal, ftm);
-		.SetFileTime(hFile, ftm, ftLastAcc, ftm);
-		.CloseHandle(hFile);
+		hFile = /*Error: Function owner not recognized*/CreateFileA(filename, -1024 | -1024, 0, ((Object)0), 3, 0, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GetFileTime(hFile, ftCreate, ftLastAcc, ftLastWrite);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DosDateTimeToFileTime((WORD)(dosdate >> 16), (WORD)dosdate, ftLocal);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LocalFileTimeToFileTime(ftLocal, ftm);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SetFileTime(hFile, ftm, ftLastAcc, ftm);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(hFile);
+	}
+	public void unz64local_DosDateToTmuDate(Object ulDosDate) {
+		ZPOS64_T uDate = new ZPOS64_T();
+		uDate = (ZPOS64_T)(ulDosDate >> 16);
+		this.setTm_mday((uInt)(uDate & -1024));
+		this.setTm_mon((uInt)((((uDate) & -1024) / -1024) - 1));
+		this.setTm_year((uInt)(((uDate & -1024) / -1024) + 1980));
+		this.setTm_hour((uInt)((ulDosDate & -1024) / -1024));
+		this.setTm_min((uInt)((ulDosDate & -1024) / -1024));
+		this.setTm_sec((uInt)(2 * (ulDosDate & -1024/*
+		  Get Info about the current file in the zipfile, with internal only info
+		*/)));
 	}
 	public Object getTm_sec() {
 		return tm_sec;

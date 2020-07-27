@@ -18,16 +18,16 @@ public class regitem_S {
 	public regitem_S regstack_push(regstate_E state, Object scan) {
 		regitem_T rp = new regitem_T();
 		if ((long)((int)ModernizedCProgram.regstack.getGa_len() >> 10) >= ModernizedCProgram.p_mmp) {
-			ModernizedCProgram.emsg(._(e_maxmempat));
+			ModernizedCProgram.emsg(/*Error: Function owner not recognized*/_(e_maxmempat));
 			return NULL;
 		} 
-		if (ModernizedCProgram.regstack.ga_grow() == FAIL) {
+		if (ModernizedCProgram.regstack.ga_grow(/*Error: Unsupported expression*/) == FAIL) {
 			return NULL;
 		} 
 		rp = (regitem_T)((byte)ModernizedCProgram.regstack.getGa_data() + ModernizedCProgram.regstack.getGa_len());
 		rp.setRs_state(state);
 		rp.setRs_scan(scan);
-		ModernizedCProgram.regstack.getGa_len() += ;
+		ModernizedCProgram.regstack.getGa_len() += /*Error: Unsupported expression*/;
 		return rp/*
 		 * Pop an item from the regstack.
 		 */;

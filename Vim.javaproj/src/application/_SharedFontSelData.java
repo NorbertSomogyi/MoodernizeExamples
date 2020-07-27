@@ -9,7 +9,7 @@ public class _SharedFontSelData {
 	private Object list;
 	private int name;
 	private int sample;
-	private Byte names;
+	private byte[][] names;
 	private int num;
 	private Object sel;
 	private Object in_pixels;
@@ -18,7 +18,7 @@ public class _SharedFontSelData {
 	private Object old_list;
 	private Object exit;
 	
-	public _SharedFontSelData(int dialog, int ok, int cancel, int encoding_pulldown, int encoding_menu, Object list, int name, int sample, Byte names, int num, Object sel, Object in_pixels, Byte font_name, Object old, Object old_list, Object exit) {
+	public _SharedFontSelData(int dialog, int ok, int cancel, int encoding_pulldown, int encoding_menu, Object list, int name, int sample, byte[][] names, int num, Object sel, Object in_pixels, Byte font_name, Object old, Object old_list, Object exit) {
 		setDialog(dialog);
 		setOk(ok);
 		setCancel(cancel);
@@ -42,7 +42,7 @@ public class _SharedFontSelData {
 	public Byte fn(int i) {
 		int generatedNum = this.getNum();
 		if (generatedNum < /* Assertion checks: */0) {
-			.abort();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 		} 
 		if (i >= generatedNum) {
 			i = generatedNum - 1;
@@ -50,7 +50,7 @@ public class _SharedFontSelData {
 		if (i < 0) {
 			i = 0;
 		} 
-		Byte generatedNames = this.getNames();
+		byte[][] generatedNames = this.getNames();
 		return generatedNames[i/*
 		 * Get a specific substring from a font name.
 		 */];
@@ -109,36 +109,36 @@ public class _SharedFontSelData {
 			 n_items = new ();
 			 children = new ();
 			int selected_button = 0;
-			.XtVaGetValues(generatedEncoding_pulldown, XmNchildren, children, XmNnumChildren, n_items, ((Object)0));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtVaGetValues(generatedEncoding_pulldown, XmNchildren, children, XmNnumChildren, n_items, ((Object)0));
 			for (i = 0; i < count[ListSpecifier.ENCODING]; ++i) {
 				int button;
-				items[i] = .XmStringCreateLocalized(list[ListSpecifier.ENCODING][i]);
+				items[i] = /*Error: Function owner not recognized*/XmStringCreateLocalized(list[ListSpecifier.ENCODING][i]);
 				if (i < (int)n_items) {
-					.XtVaSetValues(children[/* recycle old button */i], XmNlabelString, items[i], XmNuserData, i, ((Object)0));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtVaSetValues(children[/* recycle old button */i], XmNlabelString, items[i], XmNuserData, i, ((Object)0));
 					button = children[i];
 				} else {
-						button = .XtVaCreateManagedWidget(/* create a new button */"button", xmPushButtonGadgetClass, generatedEncoding_pulldown, XmNlabelString, items[i], XmNuserData, i, ((Object)0));
-						.XtAddCallback(button, XmNactivateCallback, ()ModernizedCProgram.encoding_callback, ()data);
-						.XtManageChild(button);
+						button = /*Error: Function owner not recognized*/XtVaCreateManagedWidget(/* create a new button */"button", xmPushButtonGadgetClass, generatedEncoding_pulldown, XmNlabelString, items[i], XmNuserData, i, ((Object)0));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtAddCallback(button, XmNactivateCallback, ()ModernizedCProgram.encoding_callback, ()data);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtManageChild(button);
 				} 
 				if (generatedSel[ListSpecifier.ENCODING]) {
-					if (!.strcmp(generatedSel[ListSpecifier.ENCODING], list[ListSpecifier.ENCODING][i])) {
+					if (!/*Error: Function owner not recognized*/strcmp(generatedSel[ListSpecifier.ENCODING], list[ListSpecifier.ENCODING][i])) {
 						selected_button = button;
 					} 
 				} 
-				.XtFree(list[ListSpecifier.ENCODING][i]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(list[ListSpecifier.ENCODING][i]);
 			}
 			for (i = count[ListSpecifier.ENCODING]; i < (int)n_items; ++/* Destroy all the outstanding menu items.
 				 */i) {
-				.XtUnmanageChild(children[i]);
-				.XtDestroyWidget(children[i]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtUnmanageChild(children[i]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtDestroyWidget(children[i]);
 			}
 			if (/* Preserve the current selection visually.
 				 */selected_button) {
-				.XtVaSetValues(generatedEncoding_menu, XmNmenuHistory, selected_button, ((Object)0));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtVaSetValues(generatedEncoding_menu, XmNmenuHistory, selected_button, ((Object)0));
 			} 
 			for (i = 0; i < count[ListSpecifier.ENCODING]; ++i) {
-				.XmStringFree(items[i]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmStringFree(items[i]);
 			}
 		} 
 		Object generatedList = this.getList();
@@ -150,32 +150,32 @@ public class _SharedFontSelData {
 				continue;
 			} 
 			switch ((ListSpecifier)idx) {
+			case ListSpecifier.NAME:
+					w = generatedList[ListSpecifier.NAME];
+					break;
 			case ListSpecifier.STYLE:
 					w = generatedList[ListSpecifier.STYLE];
 					break;
 			case :
 					w = generatedList[];
 					break;
-			case ListSpecifier.NAME:
-					w = generatedList[ListSpecifier.NAME];
-					break;
 			default:
 					w = (int)/* for lint */0;
 			}
 			for (i = 0; i < count[idx]; ++i) {
-				items[i] = .XmStringCreateLocalized(list[idx][i]);
-				.XtFree(list[idx][i]);
+				items[i] = /*Error: Function owner not recognized*/XmStringCreateLocalized(list[idx][i]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(list[idx][i]);
 			}
-			.XmListDeleteAllItems(w);
-			.XmListAddItems(w, items, count[idx], 1);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmListDeleteAllItems(w);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmListAddItems(w, items, count[idx], 1);
 			if (generatedSel[idx]) {
-				.XmStringFree(items[0]);
-				items[0] = .XmStringCreateLocalized(generatedSel[idx]);
-				.XmListSelectItem(w, items[0], False);
-				.XmListSetBottomItem(w, items[0]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmStringFree(items[0]);
+				items[0] = /*Error: Function owner not recognized*/XmStringCreateLocalized(generatedSel[idx]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmListSelectItem(w, items[0], False);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmListSetBottomItem(w, items[0]);
 			} 
 			for (i = 0; i < count[idx]; ++i) {
-				.XmStringFree(items[i]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmStringFree(items[i]);
 			}
 		}
 	}
@@ -185,10 +185,10 @@ public class _SharedFontSelData {
 		byte[] newSize = new byte[256];
 		 str = new ();
 		if (call_data.getReason() != (int)XmCR_VALUE_CHANGED) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedSel = this.getSel();
-		do_sel = (generatedSel[] != ((Object)0)) && .strcmp(generatedSel[], ModernizedCProgram.wild);
+		do_sel = (generatedSel[] != ((Object)0)) && /*Error: Function owner not recognized*/strcmp(generatedSel[], ModernizedCProgram.wild);
 		int generatedNum = this.getNum();
 		Object generatedIn_pixels = this.getIn_pixels();
 		for (i = 0; do_sel && (i < generatedNum); i++) {
@@ -199,16 +199,16 @@ public class _SharedFontSelData {
 		}
 		this.setIn_pixels(!generatedIn_pixels);
 		if (generatedSel[]) {
-			.XtFree(generatedSel[]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[]);
 		} 
 		generatedSel[] = ((Object)0);
 		data.fill_lists(ListSpecifier.NONE);
 		Object generatedList = this.getList();
 		if (do_sel) {
-			str = .XmStringCreateLocalized(newSize);
-			.XmListSelectItem(generatedList[], str, True);
-			.XmListSetBottomItem(generatedList[], str);
-			.XmStringFree(str/*
+			str = /*Error: Function owner not recognized*/XmStringCreateLocalized(newSize);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmListSelectItem(generatedList[], str, True);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmListSetBottomItem(generatedList[], str);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmStringFree(str/*
 			 * Show the currently selected font in the sample text label.
 			 */);
 		} 
@@ -221,66 +221,66 @@ public class _SharedFontSelData {
 		int display;
 		 str = new ();
 		int generatedDialog = this.getDialog();
-		display = .XtDisplay(generatedDialog);
+		display = /*Error: Function owner not recognized*/XtDisplay(generatedDialog);
 		Byte generatedFont_name = this.getFont_name();
-		font = .XLoadQueryFont(display, generatedFont_name);
+		font = /*Error: Function owner not recognized*/XLoadQueryFont(display, generatedFont_name);
 		font_list = ModernizedCProgram.gui_motif_create_fontlist(font);
 		n = 0;
-		str = .XmStringCreateLocalized("AaBbZzYy 0123456789");
-		.XtSetArg(args[n], XmNlabelString, str);
+		str = /*Error: Function owner not recognized*/XmStringCreateLocalized("AaBbZzYy 0123456789");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtSetArg(args[n], XmNlabelString, str);
 		n++;
-		.XtSetArg(args[n], XmNfontList, font_list);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtSetArg(args[n], XmNfontList, font_list);
 		n++;
 		int generatedSample = this.getSample();
-		.XtSetValues(generatedSample, args, n);
-		.XmStringFree(str);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtSetValues(generatedSample, args, n);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmStringFree(str);
 		Object generatedOld = this.getOld();
 		Object generatedOld_list = this.getOld_list();
 		if (generatedOld) {
-			.XFreeFont(display, generatedOld);
-			.XmFontListFree(generatedOld_list);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XFreeFont(display, generatedOld);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmFontListFree(generatedOld_list);
 		} 
 		this.setOld(font);
 		this.setOld_list(font_list);
 	}
 	public Object do_choice(int w, Object call_data, ListSpecifier which) {
 		byte sel;
-		.XmStringGetLtoR(call_data.getItem(), XmSTRING_DEFAULT_CHARSET, sel);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmStringGetLtoR(call_data.getItem(), XmSTRING_DEFAULT_CHARSET, sel);
 		Object generatedSel = this.getSel();
 		if (!generatedSel[ListSpecifier.which]) {
-			generatedSel[ListSpecifier.which] = .XtNewString(sel);
+			generatedSel[ListSpecifier.which] = /*Error: Function owner not recognized*/XtNewString(sel);
 		} else {
-				if (!.strcmp(generatedSel[ListSpecifier.which], sel)) {
-					.XtFree(generatedSel[/* unselecting current selection */ListSpecifier.which]);
+				if (!/*Error: Function owner not recognized*/strcmp(generatedSel[ListSpecifier.which], sel)) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[/* unselecting current selection */ListSpecifier.which]);
 					generatedSel[ListSpecifier.which] = ((Object)0);
 					if (w) {
-						.XmListDeselectItem(w, call_data.getItem());
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmListDeselectItem(w, call_data.getItem());
 					} 
 				} else {
-						.XtFree(generatedSel[ListSpecifier.which]);
-						generatedSel[ListSpecifier.which] = .XtNewString(sel);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[ListSpecifier.which]);
+						generatedSel[ListSpecifier.which] = /*Error: Function owner not recognized*/XtNewString(sel);
 				} 
 		} 
-		.XtFree(sel);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(sel);
 		data.fill_lists(ListSpecifier.which);
 		Byte generatedFont_name = this.getFont_name();
 		int generatedNum = this.getNum();
 		int generatedName = this.getName();
 		int generatedSample = this.getSample();
-		if (generatedSel[/* If there is a font selection, we display it. */ListSpecifier.ENCODING] && generatedSel[ListSpecifier.NAME] && generatedSel[ListSpecifier.STYLE] && generatedSel[] && .strcmp(generatedSel[ListSpecifier.ENCODING], ModernizedCProgram.wild) && .strcmp(generatedSel[ListSpecifier.NAME], ModernizedCProgram.wild) && .strcmp(generatedSel[ListSpecifier.STYLE], ModernizedCProgram.wild) && .strcmp(generatedSel[], ModernizedCProgram.wild)) {
+		if (generatedSel[/* If there is a font selection, we display it. */ListSpecifier.ENCODING] && generatedSel[ListSpecifier.NAME] && generatedSel[ListSpecifier.STYLE] && generatedSel[] && /*Error: Function owner not recognized*/strcmp(generatedSel[ListSpecifier.ENCODING], ModernizedCProgram.wild) && /*Error: Function owner not recognized*/strcmp(generatedSel[ListSpecifier.NAME], ModernizedCProgram.wild) && /*Error: Function owner not recognized*/strcmp(generatedSel[ListSpecifier.STYLE], ModernizedCProgram.wild) && /*Error: Function owner not recognized*/strcmp(generatedSel[], ModernizedCProgram.wild)) {
 			int i;
 			if (generatedFont_name) {
-				.XtFree(generatedFont_name);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedFont_name);
 			} 
 			this.setFont_name(((Object)0));
 			for (i = 0; i < generatedNum; i++) {
 				if (data.match(ListSpecifier.ENCODING, i) && data.match(ListSpecifier.NAME, i) && data.match(ListSpecifier.STYLE, i) && data.match(, i)) {
-					this.setFont_name(.XtNewString(data.fn(i)));
+					this.setFont_name(/*Error: Function owner not recognized*/XtNewString(data.fn(i)));
 					break;
 				} 
 			}
 			if (generatedFont_name) {
-				.XmTextSetString(generatedName, generatedFont_name);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmTextSetString(generatedName, generatedFont_name);
 				data.display_sample();
 			} else {
 					ModernizedCProgram.do_dialog(1, (char_u)((byte)("Error")), (char_u)((byte)("Invalid font specification")), (char_u)((byte)("&Dismiss")), 1, ((Object)0), 0);
@@ -292,22 +292,22 @@ public class _SharedFontSelData {
 				[] args = new ();
 				byte nomatch_msg = ((byte)("no specific match"));
 				n = 0;
-				str = .XmStringCreateLocalized(nomatch_msg);
-				.XtSetArg(args[n], XmNlabelString, str);
+				str = /*Error: Function owner not recognized*/XmStringCreateLocalized(nomatch_msg);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtSetArg(args[n], XmNlabelString, str);
 				++n;
-				.XtSetValues(generatedSample, args, n);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtSetValues(generatedSample, args, n);
 				ModernizedCProgram.gui_motif_menu_fontlist(generatedSample);
-				.XmTextSetString(generatedName, nomatch_msg);
-				.XmStringFree(str);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmTextSetString(generatedName, nomatch_msg);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XmStringFree(str);
 				return False;
 		} 
 	}
 	public void encoding_callback(int w, Object dummy) {
 		 str = new ();
 		 fake_data = new ();
-		.XtVaGetValues(w, XmNlabelString, str, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtVaGetValues(w, XmNlabelString, str, ((Object)0));
 		if (!str) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		fake_data.setItem(str);
 		data.do_choice(0, fake_data, ListSpecifier.ENCODING);
@@ -329,29 +329,29 @@ public class _SharedFontSelData {
 	public void cancel_callback(int w, Object call_data) {
 		Object generatedSel = this.getSel();
 		if (generatedSel[ListSpecifier.ENCODING]) {
-			.XtFree(generatedSel[ListSpecifier.ENCODING]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[ListSpecifier.ENCODING]);
 			generatedSel[ListSpecifier.ENCODING] = ((Object)0);
 		} 
 		if (generatedSel[ListSpecifier.NAME]) {
-			.XtFree(generatedSel[ListSpecifier.NAME]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[ListSpecifier.NAME]);
 			generatedSel[ListSpecifier.NAME] = ((Object)0);
 		} 
 		if (generatedSel[ListSpecifier.STYLE]) {
-			.XtFree(generatedSel[ListSpecifier.STYLE]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[ListSpecifier.STYLE]);
 			generatedSel[ListSpecifier.STYLE] = ((Object)0);
 		} 
 		if (generatedSel[]) {
-			.XtFree(generatedSel[]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[]);
 			generatedSel[] = ((Object)0);
 		} 
 		Byte generatedFont_name = this.getFont_name();
 		if (generatedFont_name) {
-			.XtFree(generatedFont_name);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedFont_name);
 		} 
 		this.setFont_name(((Object)0));
 		this.setNum(0);
-		Byte generatedNames = this.getNames();
-		.XFreeFontNames(generatedNames);
+		byte[][] generatedNames = this.getNames();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XFreeFontNames(generatedNames);
 		this.setNames(((Object)0));
 		this.setExit(True);
 	}
@@ -360,40 +360,40 @@ public class _SharedFontSelData {
 		byte name;
 		int i;
 		int generatedName = this.getName();
-		pattern = .XmTextGetString(generatedName);
+		pattern = /*Error: Function owner not recognized*/XmTextGetString(generatedName);
 		int generatedDialog = this.getDialog();
-		name = .XListFonts(.XtDisplay(generatedDialog), pattern, 1, i);
-		.XtFree(pattern);
+		name = /*Error: Function owner not recognized*/XListFonts(/*Error: Function owner not recognized*/XtDisplay(generatedDialog), pattern, 1, i);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(pattern);
 		Byte generatedFont_name = this.getFont_name();
 		Object generatedSel = this.getSel();
-		Byte generatedNames = this.getNames();
+		byte[][] generatedNames = this.getNames();
 		if (i != 1) {
 			ModernizedCProgram.do_dialog(1, (char_u)((byte)("Error")), (char_u)((byte)("Invalid font specification")), (char_u)((byte)("&Dismiss")), 1, ((Object)0), 0);
-			.XFreeFontNames(name);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XFreeFontNames(name);
 		} else {
 				if (generatedFont_name) {
-					.XtFree(generatedFont_name);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedFont_name);
 				} 
-				this.setFont_name(.XtNewString(name[0]));
+				this.setFont_name(/*Error: Function owner not recognized*/XtNewString(name[0]));
 				if (generatedSel[ListSpecifier.ENCODING]) {
-					.XtFree(generatedSel[ListSpecifier.ENCODING]);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[ListSpecifier.ENCODING]);
 					generatedSel[ListSpecifier.ENCODING] = ((Object)0);
 				} 
 				if (generatedSel[ListSpecifier.NAME]) {
-					.XtFree(generatedSel[ListSpecifier.NAME]);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[ListSpecifier.NAME]);
 					generatedSel[ListSpecifier.NAME] = ((Object)0);
 				} 
 				if (generatedSel[ListSpecifier.STYLE]) {
-					.XtFree(generatedSel[ListSpecifier.STYLE]);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[ListSpecifier.STYLE]);
 					generatedSel[ListSpecifier.STYLE] = ((Object)0);
 				} 
 				if (generatedSel[]) {
-					.XtFree(generatedSel[]);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XtFree(generatedSel[]);
 					generatedSel[] = ((Object)0);
 				} 
-				.XFreeFontNames(name);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XFreeFontNames(name);
 				this.setNum(0);
-				.XFreeFontNames(generatedNames);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XFreeFontNames(generatedNames);
 				this.setNames(((Object)0));
 				this.setExit(True/*
 				 * Returns pointer to an ASCII character string that contains the name of the
@@ -450,10 +450,10 @@ public class _SharedFontSelData {
 	public void setSample(int newSample) {
 		sample = newSample;
 	}
-	public Byte getNames() {
+	public byte[][] getNames() {
 		return names;
 	}
-	public void setNames(Byte newNames) {
+	public void setNames(byte[][] newNames) {
 		names = newNames;
 	}
 	public int getNum() {

@@ -15,8 +15,8 @@ public class name_ref_data {
 	public name_ref_data() {
 	}
 	
-	public void name_rev_line(byte p) {
-		strbuf buf = new strbuf(, , );
+	public void name_rev_line(Byte p) {
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int counter = 0;
 		byte p_start;
 		int hexsz = ModernizedCProgram.the_repository.getHash_algo().getHexsz();
@@ -43,15 +43,15 @@ public class name_ref_data {
 					continue;
 				} 
 				if (generatedName_only) {
-					.printf("%.*s%s", p_len - hexsz, p_start, name);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%.*s%s", p_len - hexsz, p_start, name);
 				} else {
-						.printf("%.*s (%s)", p_len, p_start, name);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%.*s (%s)", p_len, p_start, name);
 				} 
 				p_start = p + 1;
 			} 
 		}
 		if (p_start != /* flush */p) {
-			.fwrite(p_start, p - p_start, 1, (_iob[1]));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fwrite(p_start, p - p_start, 1, (_iob[1]));
 		} 
 		buf.strbuf_release();
 	}

@@ -21,6 +21,14 @@ public class cf_preprocessor {
 	public cf_preprocessor() {
 	}
 	
+	public void cf_preprocessor_add_sys_include_dir(Object include_dir) {
+		 generatedSys_include_dirs = this.getSys_include_dirs();
+		Object generatedArray = generatedSys_include_dirs.getArray();
+		Object generatedDa = generatedSys_include_dirs.getDa();
+		if (include_dir) {
+			generatedDa.darray_push_back(/*Error: sizeof expression not supported yet*/, ModernizedCProgram.bstrdup(include_dir));
+		} 
+	}
 	public void cf_gettokenoffset(Object token, Object row, Object col) {
 		cf_lexer generatedLex = this.getLex();
 		lexer generatedBase_lexer = generatedLex.getBase_lexer();
@@ -31,7 +39,7 @@ public class cf_preprocessor {
 		uint32_t col = new uint32_t();
 		pp.cf_gettokenoffset(token, row, col);
 		error_data generatedEd = this.getEd();
-		byte generatedArray = formatted.getArray();
+		byte[] generatedArray = formatted.getArray();
 		if (!val1 && !val2 && !val3) {
 			generatedEd.error_data_add(token.getLex().getFile(), row, col, message, error_level);
 		} else {
@@ -49,7 +57,7 @@ public class cf_preprocessor {
 		cf_token generatedCur_token = p.getCur_token();
 		Object generatedLex = generatedCur_token.getLex();
 		strref generatedUnmerged_str = generatedCur_token.getUnmerged_str();
-		Object generatedArray = generatedUnmerged_str.getArray();
+		Object[] generatedArray = generatedUnmerged_str.getArray();
 		ModernizedCProgram.lexer_getstroffset(generatedLex.getCf_lexer(), generatedArray, row, col);
 		error_data generatedError_list = p.getError_list();
 		if (!val1 && !val2 && !val3) {
@@ -65,19 +73,11 @@ public class cf_preprocessor {
 	public void cf_addwarning(Object token, Object warning, Object val1, Object val2, Object val3) {
 		pp.cf_addew(token, warning, 1, val1, val2, val3);
 	}
-	public void cf_adderror_expecting(Object token, Object expecting) {
-		pp.cf_adderror(token, "Expected $1", expecting, ((Object)0), ((Object)0));
-		p.cf_adderror("Expected '$1'", 0, expected, ((Object)0), ((Object)0));
-	}
 	public void cf_adderror_expected_newline(Object token) {
 		pp.cf_adderror(token, "Unexpected token after preprocessor, expected newline", ((Object)0), ((Object)0), ((Object)0));
 	}
 	public void cf_adderror_unexpected_endif_eof(Object token) {
 		pp.cf_adderror(token, "Unexpected end of file before #endif", ((Object)0), ((Object)0), ((Object)0));
-	}
-	public void cf_adderror_unexpected_eof(Object token) {
-		pp.cf_adderror(token, "Unexpected end of file", ((Object)0), ((Object)0), ((Object)0));
-		p.cf_adderror("Unexpected EOF", 0, ((Object)0), ((Object)0), ((Object)0));
 	}
 	public void cf_include_file(Object file_token) {
 		cf_lexer new_lex = new cf_lexer();
@@ -98,7 +98,7 @@ public class cf_preprocessor {
 		cf_token cf_token = new cf_token();
 		for (i = 0; i < generatedNum; /* if dependency already exists, run preprocessor on it */i++) {
 			cf_lexer dep = generatedArray + i;
-			if (.strcmp(generatedFile, generatedArray) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedFile, generatedArray) == 0) {
 				tokens = cf_token.cf_lexer_get_tokens(dep);
 				ModernizedCProgram.cf_preprocess_tokens(pp, 0, tokens);
 				;
@@ -110,14 +110,14 @@ public class cf_preprocessor {
 			;
 		} 
 		file.os_fread_utf8(file_data);
-		.fclose(file);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(file);
 		new_lex.cf_lexer_init();
 		new_lex.cf_lexer_lex(file_data, generatedArray);
 		tokens = cf_token.cf_lexer_get_tokens(new_lex);
 		ModernizedCProgram.cf_preprocess_tokens(pp, 0, tokens);
 		ModernizedCProgram.bfree(file_data);
 		Object generatedDa = generatedDependencies.getDa();
-		generatedDa.darray_push_back(, new_lex);
+		generatedDa.darray_push_back(/*Error: sizeof expression not supported yet*/, new_lex);
 	}
 	public Object cf_preprocess_get_def_idx(Object def_name) {
 		 generatedDefines = this.getDefines();
@@ -143,7 +143,7 @@ public class cf_preprocessor {
 		if (def_idx != ((size_t)-1)) {
 			cf_def array = generatedArray;
 			array + def_idx.cf_def_free();
-			generatedDa.darray_erase(, def_idx);
+			generatedDa.darray_erase(/*Error: sizeof expression not supported yet*/, def_idx);
 		} 
 	}
 	public void cf_preprocessor_init() {
@@ -187,16 +187,8 @@ public class cf_preprocessor {
 	public void cf_preprocessor_remove_def(Object def_name) {
 		strref ref = new strref();
 		ref.setArray(def_name);
-		ref.setLen(.strlen(def_name));
+		ref.setLen(/*Error: Function owner not recognized*/strlen(def_name));
 		pp.cf_preprocess_remove_def_strref(ref);
-	}
-	public void cf_preprocessor_add_sys_include_dir(Object include_dir) {
-		 generatedSys_include_dirs = this.getSys_include_dirs();
-		Object generatedArray = generatedSys_include_dirs.getArray();
-		Object generatedDa = generatedSys_include_dirs.getDa();
-		if (include_dir) {
-			generatedDa.darray_push_back(, ModernizedCProgram.bstrdup(include_dir));
-		} 
 	}
 	public cf_lexer getLex() {
 		return lex;

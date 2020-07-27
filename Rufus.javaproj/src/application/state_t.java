@@ -84,9 +84,9 @@ public class state_t {
 	public void abort_unzip() {
 		state.huft_free_all();
 		Object generatedError_jmp = this.getError_jmp();
-		.longjmp((generatedError_jmp), 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp((generatedError_jmp), 1);
 	}
-	public int fill_bitbuffer(int bitbuffer, int current, Object required) {
+	public int fill_bitbuffer(int bitbuffer, Integer current, Object required) {
 		int generatedBytebuffer_offset = this.getBytebuffer_offset();
 		int generatedBytebuffer_size = this.getBytebuffer_size();
 		Object generatedTo_read = this.getTo_read();
@@ -129,6 +129,7 @@ public class state_t {
 		 * m:	maximum lookup bits, returns actual
 		 */;
 	}
+	/* called once from inflate_block */
 	/* map formerly local static variables to globals */
 	public void inflate_codes_setup(int my_bl, int my_bd) {
 		int generatedInflate_codes_bl = this.getInflate_codes_bl();
@@ -286,6 +287,29 @@ public class state_t {
 					state.inflate_codes_setup(bl, /* set up data for inflate_codes() */bd);
 					return -/* huft_free code moved into inflate_codes */2;
 				}
+		case /* Inflate stored */0:
+				{ 
+					int n;
+					int b_stored;
+					int k_stored;
+					b_stored = (generatedGunzip_bb);
+					k_stored = (generatedGunzip_bk);
+					n = k_stored & /* go to byte boundary */7;
+					b_stored >>=  n;
+					k_stored -= n;
+					b_stored = state.fill_bitbuffer(b_stored, k_stored, /* get the length and its complement */16);
+					n = ((int)b_stored & -1024);
+					b_stored >>=  16;
+					k_stored -= 16;
+					b_stored = state.fill_bitbuffer(b_stored, k_stored, 16);
+					if (n != (int)((~b_stored) & -1024)) {
+						/* error in compressed data */state.abort_unzip();
+					} 
+					b_stored >>=  16;
+					k_stored -= 16;
+					state.inflate_stored_setup(n, b_stored, k_stored);
+					return -1;
+				}
 		case /* Inflate dynamic */2:
 				{ 
 					huft_t td = new huft_t();
@@ -397,29 +421,6 @@ public class state_t {
 					state.inflate_codes_setup(bl, /* set up data for inflate_codes() */bd);
 					return -/* huft_free code moved into inflate_codes */2;
 				}
-		case /* Inflate stored */0:
-				{ 
-					int n;
-					int b_stored;
-					int k_stored;
-					b_stored = (generatedGunzip_bb);
-					k_stored = (generatedGunzip_bk);
-					n = k_stored & /* go to byte boundary */7;
-					b_stored >>=  n;
-					k_stored -= n;
-					b_stored = state.fill_bitbuffer(b_stored, k_stored, /* get the length and its complement */16);
-					n = ((int)b_stored & -1024);
-					b_stored >>=  16;
-					k_stored -= 16;
-					b_stored = state.fill_bitbuffer(b_stored, k_stored, 16);
-					if (n != (int)((~b_stored) & -1024)) {
-						/* error in compressed data */state.abort_unzip();
-					} 
-					b_stored >>=  16;
-					k_stored -= 16;
-					state.inflate_stored_setup(n, b_stored, k_stored);
-					return -1;
-				}
 		default:
 				state.abort_unzip();
 				return 0;
@@ -479,16 +480,16 @@ public class state_t {
 		Byte generatedBytebuffer = this.getBytebuffer();
 		int generatedGunzip_src_fd = this.getGunzip_src_fd();
 		if (count < (int)n) {
-			.memmove((generatedBytebuffer), (generatedBytebuffer)[(generatedBytebuffer_offset)], count);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((generatedBytebuffer), (generatedBytebuffer)[(generatedBytebuffer_offset)], count);
 			(generatedBytebuffer_offset) = 0;
 			(generatedBytebuffer_size) = ModernizedCProgram.full_read((generatedGunzip_src_fd), (generatedBytebuffer)[count], -1024 - count);
 			if ((int)(generatedBytebuffer_size) < 0) {
 				do {
 					if (ModernizedCProgram.bled_printf != ((Object)0)) {
-						.bled_printf("Error: read error");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: read error");
 					} else {
-							.printf("Error: read error");
-							.putchar((byte)'\n');
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: read error");
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
 					} 
 				} while (0);
 				return 0;

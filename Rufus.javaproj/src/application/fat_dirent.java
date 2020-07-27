@@ -28,9 +28,9 @@ public class fat_dirent {
 	public fat_dirent() {
 	}
 	
-	public fat_dirent get_next_dirent(libfat_filesystem fs, Object sector, int offset) {
+	public fat_dirent get_next_dirent(libfat_filesystem fs, Object sector, Integer offset) {
 		fat_dirent dep = new fat_dirent();
-		offset += ;
+		offset += /*Error: Unsupported expression*/;
 		if (offset >= ModernizedCProgram.LIBFAT_SECTOR_SIZE) {
 			offset = 0;
 			sector = fs.libfat_nextsector(sector);

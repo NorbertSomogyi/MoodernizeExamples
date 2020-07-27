@@ -11,14 +11,6 @@ public class obs_module_path {
 	public obs_module_path() {
 	}
 	
-	public void free_module_path() {
-		Byte generatedBin = this.getBin();
-		Byte generatedData = this.getData();
-		if (omp) {
-			ModernizedCProgram.bfree(generatedBin);
-			ModernizedCProgram.bfree(generatedData);
-		} 
-	}
 	public void process_found_module(Object path, Object directory, Object callback, Object param) {
 		obs_module_info info = new obs_module_info();
 		dstr name = new dstr(0);
@@ -26,16 +18,16 @@ public class obs_module_path {
 		byte file;
 		byte parsed_data_dir;
 		 bin_found = true;
-		file = .strrchr(path, (byte)'/');
+		file = /*Error: Function owner not recognized*/strrchr(path, (byte)'/');
 		file = file ? (file + 1) : path;
-		if (.strcmp(file, ".") == 0 || .strcmp(file, "..") == 0) {
-			return ;
+		if (/*Error: Function owner not recognized*/strcmp(file, ".") == 0 || /*Error: Function owner not recognized*/strcmp(file, "..") == 0) {
+			return /*Error: Unsupported expression*/;
 		} 
 		name.dstr_copy(file);
 		Object generatedDstr = name.getDstr();
 		Byte generatedBin = this.getBin();
 		if (!directory) {
-			byte ext = .strrchr(generatedDstr, (byte)'.');
+			byte ext = /*Error: Function owner not recognized*/strrchr(generatedDstr, (byte)'.');
 			if (ext) {
 				name.dstr_resize(ext - generatedDstr);
 			} 
@@ -48,7 +40,7 @@ public class obs_module_path {
 		if (parsed_data_dir && bin_found) {
 			info.setBin_path(generatedDstr);
 			info.setData_path(parsed_data_dir);
-			.callback(param, info);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/callback(param, info);
 		} 
 		ModernizedCProgram.bfree(parsed_data_dir);
 		name.dstr_free();
@@ -62,7 +54,7 @@ public class obs_module_path {
 		Byte generatedBin = this.getBin();
 		search_path.dstr_copy(generatedBin);
 		Object generatedDstr = search_path.getDstr();
-		module_start = .strstr(generatedDstr, "%module%");
+		module_start = /*Error: Function owner not recognized*/strstr(generatedDstr, "%module%");
 		if (module_start) {
 			search_path.dstr_resize(module_start - generatedDstr);
 			search_directories = true;
@@ -84,6 +76,14 @@ public class obs_module_path {
 			gi.os_globfree();
 		} 
 		search_path.dstr_free();
+	}
+	public void free_module_path() {
+		Byte generatedBin = this.getBin();
+		Byte generatedData = this.getData();
+		if (omp) {
+			ModernizedCProgram.bfree(generatedBin);
+			ModernizedCProgram.bfree(generatedData);
+		} 
 	}
 	public Byte getBin() {
 		return bin;

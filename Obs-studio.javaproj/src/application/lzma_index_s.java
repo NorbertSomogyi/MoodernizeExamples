@@ -21,70 +21,8 @@ public class lzma_index_s {
 	public lzma_index_s() {
 	}
 	
-	public Object index_decoder_reset(Object coder, Object allocator, Object memlimit) {
-		// to point to the decoded Index only if decoding is successful.// Before that, keep it NULL so that applications can always safely// pass it to lzma_index_end() no matter did decoding succeed or not.// to point to the decoded Index only if decoding is successful.// Before that, keep it NULL so that applications can always safely// pass it to lzma_index_end() no matter did decoding succeed or not.coder.setIndex_ptr(i);
-		i = NULL;
-		lzma_index_s lzma_index_s = new lzma_index_s();
-		// We always allocate a new lzma_index.// We always allocate a new lzma_index.coder.setIndex(lzma_index_s.lzma_index_init(allocator));
-		if (coder.getIndex() == NULL) {
-			return LZMA_MEM_ERROR;
-		} 
-		// Initialize the rest.// Initialize the rest.coder.setSequence(.SEQ_INDICATOR);
-		coder.setMemlimit(memlimit);
-		// Needs to be initialized due to _memconfig().// Needs to be initialized due to _memconfig().coder.setCount(0);
-		coder.setPos(0);
-		coder.setCrc32(0);
-		return LZMA_OK;
-	}
-	// Remember the pointer given by the application. We will set it
-	public Object index_decoder_init(Object next, Object allocator, Object memlimit) {
-		.lzma_next_coder_init(index_decoder_init, next, allocator);
-		if (i == NULL || memlimit == 0) {
-			return LZMA_PROG_ERROR;
-		} 
-		if (next.getCoder() == NULL) {
-			next.setCoder(ModernizedCProgram.lzma_alloc(, allocator));
-			if (next.getCoder() == NULL) {
-				return LZMA_MEM_ERROR;
-			} 
-			next.setCode(index_decode);
-			next.setEnd(index_decoder_end);
-			next.setMemconfig(index_decoder_memconfig);
-			next.getCoder().setIndex(NULL);
-		} else {
-				next.getCoder().getIndex().lzma_index_end(allocator);
-		} 
-		return i.index_decoder_reset(next.getCoder(), allocator, memlimit);
-	}
-	public int lzma_index_decoder(Object strm, Object memlimit) {
-		.lzma_next_strm_init(index_decoder_init, strm, i, memlimit);
-		strm.getInternal().getSupported_actions()[LZMA_RUN] = true;
-		strm.getInternal().getSupported_actions()[LZMA_FINISH] = true;
-		return LZMA_OK;
-	}
-	public int lzma_index_buffer_decode(Object memlimit, Object allocator, Object in, Object in_pos, Object in_size) {
-		// Sanity checksif (i == NULL || memlimit == NULL || in == NULL || in_pos == NULL || in_pos > in_size) {
-			return LZMA_PROG_ERROR;
-		} 
-		// Initialize the decoder. coder = new ();
-		.return_if_error(i.index_decoder_reset(coder, allocator, memlimit))// Store the input start position so that we can restore it in case;// Store the input start position so that we can restore it in case
-		// of an error. in_start = in_pos;
-		// Do the actual decoding. ret = .index_decode(coder, allocator, in, in_pos, in_size, NULL, NULL, 0, LZMA_RUN);
-		if (ret == LZMA_STREAM_END) {
-			ret = LZMA_OK;
-		} else {
-				coder.getIndex().lzma_index_end(allocator);
-				in_pos = in_start;
-				if (ret == LZMA_OK) {
-					ret = LZMA_DATA_ERROR;
-				}  else if (ret == LZMA_MEMLIMIT_ERROR) {
-					memlimit = ModernizedCProgram.lzma_index_memusage(1, coder.getCount());
-				} 
-		} 
-		return ret;
-	}
 	public lzma_index_s index_init_plain(Object allocator) {
-		lzma_index i = ModernizedCProgram.lzma_alloc(, allocator);
+		lzma_index i = ModernizedCProgram.lzma_alloc(/*Error: Unsupported expression*/, allocator);
 		 generatedStreams = i.getStreams();
 		if (i != ((Object)0)) {
 			generatedStreams.index_tree_init();
@@ -119,14 +57,14 @@ public class lzma_index_s {
 			generatedStreams.index_tree_end(allocator, index_stream_end);
 			ModernizedCProgram.lzma_free(i, allocator);
 		} 
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public void lzma_index_prealloc(Object records) {
-		if (records > ((-1024 - ) / )) {
-			records = ((-1024 - ) / );
+		if (records > ((-1024 - /*Error: Unsupported expression*/) / /*Error: Unsupported expression*/)) {
+			records = ((-1024 - /*Error: Unsupported expression*/) / /*Error: Unsupported expression*/);
 		} 
 		this.setPrealloc((size_t)(records));
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public Object lzma_index_stream_flags(Object stream_flags) {
 		if (i == ((Object)0) || stream_flags == ((Object)0)) {
@@ -171,7 +109,7 @@ public class lzma_index_s {
 		index_group g = (index_group)(generatedRightmost);
 		Object generatedRecords = g.getRecords();
 		Object generatedLast = g.getLast();
-		 compressed_base = g == ((Object)0) ? 0 : .vli_ceil4(generatedRecords[generatedLast].getUnpadded_sum());
+		 compressed_base = g == ((Object)0) ? 0 : /*Error: Function owner not recognized*/vli_ceil4(generatedRecords[generatedLast].getUnpadded_sum());
 		 uncompressed_base = g == ((Object)0) ? 0 : generatedRecords[generatedLast].getUncompressed_sum();
 		uint32_t index_list_size_add = ModernizedCProgram.lzma_vli_size(unpadded_size) + ModernizedCProgram.lzma_vli_size(uncompressed_size);
 		Object generatedNode = s.getNode();
@@ -181,7 +119,7 @@ public class lzma_index_s {
 		// Check that the file size will stay within limits.if (ModernizedCProgram.index_file_size(generatedNode.getCompressed_base(), compressed_base + unpadded_size, generatedRecord_count + 1, generatedIndex_list_size + index_list_size_add, generatedStream_padding) == LZMA_VLI_UNKNOWN) {
 			return LZMA_DATA_ERROR;
 		} 
-		// that can be stored in the Backward Size field.if (.index_size(generatedRecord_count + 1, generatedIndex_list_size + index_list_size_add) > LZMA_BACKWARD_SIZE_MAX) {
+		// that can be stored in the Backward Size field.if (/*Error: Function owner not recognized*/index_size(generatedRecord_count + 1, generatedIndex_list_size + index_list_size_add) > LZMA_BACKWARD_SIZE_MAX) {
 			return LZMA_DATA_ERROR;
 		} 
 		Object generatedAllocated = g.getAllocated();
@@ -190,7 +128,7 @@ public class lzma_index_s {
 		if (g != ((Object)0) && generatedLast + 1 < generatedAllocated) {
 			++generatedLast;
 		} else {
-				g = ModernizedCProgram.lzma_alloc( + generatedPrealloc * , allocator);
+				g = ModernizedCProgram.lzma_alloc(/*Error: Unsupported expression*/ + generatedPrealloc * /*Error: Unsupported expression*/, allocator);
 				if (g == ((Object)0)) {
 					return LZMA_MEM_ERROR;
 				} 
@@ -208,7 +146,7 @@ public class lzma_index_s {
 		// Update the totals.// Update the totals.++generatedRecord_count;
 		generatedIndex_list_size += index_list_size_add;
 		Object generatedTotal_size = this.getTotal_size();
-		generatedTotal_size += .vli_ceil4(unpadded_size);
+		generatedTotal_size += /*Error: Function owner not recognized*/vli_ceil4(unpadded_size);
 		Object generatedUncompressed_size = this.getUncompressed_size();
 		generatedUncompressed_size += uncompressed_size;
 		++generatedRecord_count;
@@ -224,9 +162,9 @@ public class lzma_index_s {
 		Object generatedRecord_count = this.getRecord_count();
 		Object generatedIndex_list_size = this.getIndex_list_size();
 		{ 
-			 dest_size = .index_size_unpadded(generatedRecord_count, generatedIndex_list_size);
-			 src_size = .index_size_unpadded(generatedRecord_count, generatedIndex_list_size);
-			if (.vli_ceil4(dest_size + src_size) > LZMA_BACKWARD_SIZE_MAX) {
+			 dest_size = /*Error: Function owner not recognized*/index_size_unpadded(generatedRecord_count, generatedIndex_list_size);
+			 src_size = /*Error: Function owner not recognized*/index_size_unpadded(generatedRecord_count, generatedIndex_list_size);
+			if (/*Error: Function owner not recognized*/vli_ceil4(dest_size + src_size) > LZMA_BACKWARD_SIZE_MAX) {
 				return LZMA_DATA_ERROR;
 			} 
 		}
@@ -241,9 +179,9 @@ public class lzma_index_s {
 			index_stream s = (index_stream)(generatedRightmost);
 			index_group g = (index_group)(generatedRightmost);
 			if (g != ((Object)0) && generatedLast + 1 < generatedAllocated) {
-				((generatedNode.getLeft() == ((Object)0)) ? (Object)0 : ._assert("g->node.left == NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index.c", 799));
-				((generatedNode.getRight() == ((Object)0)) ? (Object)0 : ._assert("g->node.right == NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index.c", 800));
-				index_group newg = ModernizedCProgram.lzma_alloc( + (generatedLast + 1) * , allocator);
+				((generatedNode.getLeft() == ((Object)0)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("g->node.left == NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index.c", 799));
+				((generatedNode.getRight() == ((Object)0)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("g->node.right == NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index.c", 800));
+				index_group newg = ModernizedCProgram.lzma_alloc(/*Error: Unsupported expression*/ + (generatedLast + 1) * /*Error: Unsupported expression*/, allocator);
 				if (newg == ((Object)0)) {
 					return LZMA_MEM_ERROR;
 				} 
@@ -251,13 +189,13 @@ public class lzma_index_s {
 				newg.setAllocated(generatedLast + 1);
 				newg.setLast(generatedLast);
 				newg.setNumber_base(generatedNumber_base);
-				.memcpy(generatedRecords, generatedRecords, generatedAllocated * );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedRecords, generatedRecords, generatedAllocated * /*Error: Unsupported expression*/);
 				if (generatedNode.getParent() != ((Object)0)) {
-					((generatedNode.getParent().getRight() == generatedNode) ? (Object)0 : ._assert("g->node.parent->right == &g->node", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index.c", 818));
+					((generatedNode.getParent().getRight() == generatedNode) ? (Object)0 : /*Error: Function owner not recognized*/_assert("g->node.parent->right == &g->node", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index.c", 818));
 					generatedNode.getParent().setRight(generatedNode);
 				} 
 				if (ModernizedCProgram.s.getGroups().getLeftmost() == generatedNode) {
-					((ModernizedCProgram.s.getGroups().getRoot() == generatedNode) ? (Object)0 : ._assert("s->groups.root == &g->node", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index.c", 823));
+					((ModernizedCProgram.s.getGroups().getRoot() == generatedNode) ? (Object)0 : /*Error: Function owner not recognized*/_assert("s->groups.root == &g->node", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index.c", 823));
 					ModernizedCProgram.s.getGroups().setLeftmost(generatedNode);
 					ModernizedCProgram.s.getGroups().setRoot(generatedNode);
 				} 
@@ -267,7 +205,7 @@ public class lzma_index_s {
 				ModernizedCProgram.lzma_free(g, allocator);
 			} 
 		}
-		// Add all the Streams from src to dest. Update the base offsets// of each Stream from src.index_cat_info info = new index_cat_info(, , , , );
+		// Add all the Streams from src to dest. Update the base offsets// of each Stream from src.index_cat_info info = new index_cat_info(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		Object generatedRoot = generatedStreams.getRoot();
 		(index_stream)(generatedRoot).index_cat_helper(info);
 		// Update info about all the combined Streams.// Update info about all the combined Streams.generatedUncompressed_size += generatedUncompressed_size;
@@ -303,6 +241,68 @@ public class lzma_index_s {
 			srcstream = ModernizedCProgram.index_tree_next(generatedNode);
 		} while (srcstream != ((Object)0));
 		return dest;/// Indexing for lzma_index_iter.internal[]
+	}
+	public Object index_decoder_reset(Object coder, Object allocator, Object memlimit) {
+		// to point to the decoded Index only if decoding is successful.// Before that, keep it NULL so that applications can always safely// pass it to lzma_index_end() no matter did decoding succeed or not.// to point to the decoded Index only if decoding is successful.// Before that, keep it NULL so that applications can always safely// pass it to lzma_index_end() no matter did decoding succeed or not.coder.setIndex_ptr(i);
+		i = NULL;
+		lzma_index_s lzma_index_s = new lzma_index_s();
+		// We always allocate a new lzma_index.// We always allocate a new lzma_index.coder.setIndex(lzma_index_s.lzma_index_init(allocator));
+		if (coder.getIndex() == NULL) {
+			return LZMA_MEM_ERROR;
+		} 
+		// Initialize the rest.// Initialize the rest.coder.setSequence(.SEQ_INDICATOR);
+		coder.setMemlimit(memlimit);
+		// Needs to be initialized due to _memconfig().// Needs to be initialized due to _memconfig().coder.setCount(0);
+		coder.setPos(0);
+		coder.setCrc32(0);
+		return LZMA_OK;
+	}
+	// Remember the pointer given by the application. We will set it
+	public Object index_decoder_init(Object next, Object allocator, Object memlimit) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lzma_next_coder_init(index_decoder_init, next, allocator);
+		if (i == NULL || memlimit == 0) {
+			return LZMA_PROG_ERROR;
+		} 
+		if (next.getCoder() == NULL) {
+			next.setCoder(ModernizedCProgram.lzma_alloc(/*Error: Unsupported expression*/, allocator));
+			if (next.getCoder() == NULL) {
+				return LZMA_MEM_ERROR;
+			} 
+			next.setCode(index_decode);
+			next.setEnd(index_decoder_end);
+			next.setMemconfig(index_decoder_memconfig);
+			next.getCoder().setIndex(NULL);
+		} else {
+				next.getCoder().getIndex().lzma_index_end(allocator);
+		} 
+		return i.index_decoder_reset(next.getCoder(), allocator, memlimit);
+	}
+	public int lzma_index_decoder(Object strm, Object memlimit) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lzma_next_strm_init(index_decoder_init, strm, i, memlimit);
+		strm.getInternal().getSupported_actions()[LZMA_RUN] = true;
+		strm.getInternal().getSupported_actions()[LZMA_FINISH] = true;
+		return LZMA_OK;
+	}
+	public int lzma_index_buffer_decode(Object memlimit, Object allocator, Object in, Object in_pos, Object in_size) {
+		// Sanity checksif (i == NULL || memlimit == NULL || in == NULL || in_pos == NULL || in_pos > in_size) {
+			return LZMA_PROG_ERROR;
+		} 
+		// Initialize the decoder. coder = new ();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/return_if_error(i.index_decoder_reset(coder, allocator, memlimit))// Store the input start position so that we can restore it in case;// Store the input start position so that we can restore it in case
+		// of an error. in_start = in_pos;
+		// Do the actual decoding. ret = /*Error: Function owner not recognized*/index_decode(coder, allocator, in, in_pos, in_size, NULL, NULL, 0, LZMA_RUN);
+		if (ret == LZMA_STREAM_END) {
+			ret = LZMA_OK;
+		} else {
+				coder.getIndex().lzma_index_end(allocator);
+				in_pos = in_start;
+				if (ret == LZMA_OK) {
+					ret = LZMA_DATA_ERROR;
+				}  else if (ret == LZMA_MEMLIMIT_ERROR) {
+					memlimit = ModernizedCProgram.lzma_index_memusage(1, coder.getCount());
+				} 
+		} 
+		return ret;
 	}
 	public  getStreams() {
 		return streams;

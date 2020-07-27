@@ -30,6 +30,13 @@ public class subprocess_entry {
 	public subprocess_entry() {
 	}
 	
+	public int start_multi_file_filter_fn() {
+		int[] versions = new int[]{2, 0};
+		subprocess_capability[] capabilities = new subprocess_capability[]{new subprocess_capability("clean", (-1024 << 0)), new subprocess_capability("smudge", (-1024 << 1)), new subprocess_capability("delay", (-1024 << 2)), new subprocess_capability(((Object)0), 0)};
+		cmd2process entry = (cmd2process)subprocess;
+		int generatedSupported_capabilities = entry.getSupported_capabilities();
+		return ModernizedCProgram.subprocess_handshake(subprocess, "git-filter", versions, ((Object)0), capabilities, generatedSupported_capabilities);
+	}
 	public subprocess_entry subprocess_find_entry(hashmap hashmap, Object cmd) {
 		subprocess_entry key = new subprocess_entry();
 		hashmap_entry generatedEnt = key.getEnt();
@@ -37,13 +44,6 @@ public class subprocess_entry {
 		key.setCmd(cmd);
 		hashmap_entry hashmap_entry = new hashmap_entry();
 		return ModernizedCProgram.container_of_or_null_offset(hashmap_entry.hashmap_get(hashmap, generatedEnt, ((Object)0)), ((size_t)generatedEnt));
-	}
-	public int start_multi_file_filter_fn() {
-		int[] versions = new int[]{2, 0};
-		subprocess_capability[] capabilities = new subprocess_capability[]{new subprocess_capability("clean", (-1024 << 0)), new subprocess_capability("smudge", (-1024 << 1)), new subprocess_capability("delay", (-1024 << 2)), new subprocess_capability(((Object)0), 0)};
-		cmd2process entry = (cmd2process)subprocess;
-		int generatedSupported_capabilities = entry.getSupported_capabilities();
-		return ModernizedCProgram.subprocess_handshake(subprocess, "git-filter", versions, ((Object)0), capabilities, generatedSupported_capabilities);
 	}
 	public hashmap_entry getEnt() {
 		return ent;

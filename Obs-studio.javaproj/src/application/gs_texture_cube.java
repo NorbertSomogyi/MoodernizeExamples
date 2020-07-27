@@ -60,7 +60,7 @@ public class gs_texture_cube {
 				data++;
 			} 
 		}
-		.glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAX_LEVEL, num_levels);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAX_LEVEL, num_levels);
 		if (!ModernizedCProgram.gl_success("glTexParameteri")) {
 			success = false;
 		} 

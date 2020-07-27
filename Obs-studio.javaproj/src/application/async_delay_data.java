@@ -36,7 +36,7 @@ public class async_delay_data {
 		Object generatedCirclebuf = generatedAudio_frames.getCirclebuf();
 		while (generatedCirclebuf) {
 			obs_audio_data audio = new obs_audio_data();
-			generatedAudio_frames.circlebuf_pop_front(audio, );
+			generatedAudio_frames.circlebuf_pop_front(audio, /*Error: Unsupported expression*/);
 			audio.free_audio_packet();
 		}
 	}

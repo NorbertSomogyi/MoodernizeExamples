@@ -5,10 +5,10 @@ public class u_entry {
 	private Object ue_top;
 	private Object ue_bot;
 	private Object ue_lcount;
-	private  ue_array;
+	private [] ue_array;
 	private long ue_size;
 	
-	public u_entry(u_entry ue_next, Object ue_top, Object ue_bot, Object ue_lcount,  ue_array, long ue_size) {
+	public u_entry(u_entry ue_next, Object ue_top, Object ue_bot, Object ue_lcount, [] ue_array, long ue_size) {
 		setUe_next(ue_next);
 		setUe_top(ue_top);
 		setUe_bot(ue_bot);
@@ -19,31 +19,31 @@ public class u_entry {
 	public u_entry() {
 	}
 	
-	public u_entry unserialize_uep( bi, int error, Object file_name) {
+	public u_entry unserialize_uep( bi, Integer error, Object file_name) {
 		int i;
 		u_entry_T uep = new u_entry_T();
 		undoline_T array = ((Object)0);
 		char_u line = new char_u();
 		int line_len;
-		uep = ModernizedCProgram.lalloc(, 0);
+		uep = ModernizedCProgram.lalloc(/*Error: Unsupported expression*/, 0);
 		if (uep == ((Object)0)) {
 			return ((Object)0);
 		} 
-		.memset((uep), (false), ());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((uep), (false), (/*Error: Unsupported expression*/));
 		uep.setUe_top(bi.undo_read_4c());
 		uep.setUe_bot(bi.undo_read_4c());
 		uep.setUe_lcount(bi.undo_read_4c());
 		uep.setUe_size(bi.undo_read_4c());
 		long generatedUe_size = uep.getUe_size();
 		if (generatedUe_size > 0) {
-			if (generatedUe_size < LONG_MAX / (int)) {
-				array = ModernizedCProgram.lalloc( * generatedUe_size, 0);
+			if (generatedUe_size < LONG_MAX / (int)/*Error: Unsupported expression*/) {
+				array = ModernizedCProgram.lalloc(/*Error: Unsupported expression*/ * generatedUe_size, 0);
 			} 
 			if (array == ((Object)0)) {
 				error = 1;
 				return uep;
 			} 
-			.memset((array), (false), ( * generatedUe_size));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((array), (false), (/*Error: Unsupported expression*/ * generatedUe_size));
 		} 
 		uep.setUe_array(array);
 		for (i = 0; i < generatedUe_size; ++i) {
@@ -75,7 +75,7 @@ public class u_entry {
 		return generatedUh_entry;
 	}
 	public void u_freeentry(long n) {
-		 generatedUe_array = this.getUe_array();
+		[] generatedUe_array = this.getUe_array();
 		while (n > 0) {
 			ModernizedCProgram.vim_free(generatedUe_array[--n].getUl_line());
 		}
@@ -108,10 +108,10 @@ public class u_entry {
 	public void setUe_lcount(Object newUe_lcount) {
 		ue_lcount = newUe_lcount;
 	}
-	public  getUe_array() {
+	public [] getUe_array() {
 		return ue_array;
 	}
-	public void setUe_array( newUe_array) {
+	public void setUe_array([] newUe_array) {
 		ue_array = newUe_array;
 	}
 	public long getUe_size() {

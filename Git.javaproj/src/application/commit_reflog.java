@@ -15,7 +15,7 @@ public class commit_reflog {
 	
 	public Object log_timestamp() {
 		complete_reflogs generatedReflogs = this.getReflogs();
-		reflog_info generatedItems = generatedReflogs.getItems();
+		reflog_info[] generatedItems = generatedReflogs.getItems();
 		int generatedRecno = this.getRecno();
 		return generatedItems[generatedRecno].getTimestamp();
 	}

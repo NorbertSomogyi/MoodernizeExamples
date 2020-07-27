@@ -32,7 +32,7 @@ public class ext3_extent_tail {
 	}
 	
 	public ext3_extent_tail get_extent_tail(Object h) {
-		return (ext3_extent_tail)(((byte)h) + ( + ( * .ext2fs_le16_to_cpu((h).getEh_max()))));
+		return (ext3_extent_tail)(((byte)h) + (/*Error: Unsupported expression*/ + (/*Error: Unsupported expression*/ * /*Error: Function owner not recognized*/ext2fs_le16_to_cpu((h).getEh_max()))));
 	}
 	public Object getEt_checksum() {
 		return et_checksum;

@@ -54,8 +54,8 @@ public class audio_repack {
 		uint16_t dst = (uint16_t)generatedPacket_buffer;
 		if (squash > 0) {
 			while (src != esrc) {
-				__m128i target = ._mm_load_si128(src++);
-				._mm_storeu_si128((__m128i)dst, target);
+				__m128i target = /*Error: Function owner not recognized*/_mm_load_si128(src++);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_storeu_si128((__m128i)dst, target);
 				dst += 8 - squash;
 			}
 		} 
@@ -72,15 +72,15 @@ public class audio_repack {
 		Object generatedPacket_buffer = this.getPacket_buffer();
 		uint16_t dst = (uint16_t)generatedPacket_buffer;
 		while (src != esrc) {
-			__m128i target = ._mm_load_si128(src++);
-			__m128i buf = ((__m128i).__builtin_ia32_pshuflw((__v8hi)(__m128i)(target), (int)((((true) << 6) | ((true) << 4) | ((true) << 2) | (false)))));
-			._mm_storeu_si128((__m128i)dst, buf);
+			__m128i target = /*Error: Function owner not recognized*/_mm_load_si128(src++);
+			__m128i buf = ((__m128i)/*Error: Function owner not recognized*/__builtin_ia32_pshuflw((__v8hi)(__m128i)(target), (int)((((true) << 6) | ((true) << 4) | ((true) << 2) | (false)))));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_storeu_si128((__m128i)dst, buf);
 			dst += 8 - squash;
 		}
 		return 0;
 	}
 	public int audio_repack_init(_audio_repack_mode repack_mode, Object sample_bit) {
-		.memset(repack, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(repack, 0, /*Error: sizeof expression not supported yet*/);
 		if (sample_bit != 16) {
 			return -1;
 		} 
@@ -99,7 +99,7 @@ public class audio_repack {
 		if (generatedPacket_buffer) {
 			ModernizedCProgram.bfree(generatedPacket_buffer);
 		} 
-		.memset(repack, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(repack, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public Object getPacket_buffer() {
 		return packet_buffer;

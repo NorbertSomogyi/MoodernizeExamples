@@ -20,19 +20,19 @@ public class gs_effect_pass {
 	}
 	
 	public void effect_pass_init() {
-		.memset(pass, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(pass, 0, /*Error: Unsupported expression*/);
 	}
 	public void effect_pass_free() {
 		Byte generatedName = this.getName();
 		ModernizedCProgram.bfree(generatedName);
 		Object generatedVertshader_params = this.getVertshader_params();
-		.da_free(generatedVertshader_params);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedVertshader_params);
 		Object generatedPixelshader_params = this.getPixelshader_params();
-		.da_free(generatedPixelshader_params);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedPixelshader_params);
 		gs_shader generatedVertshader = this.getVertshader();
-		ModernizedCProgram.gs_shader_destroy(generatedVertshader);
+		generatedVertshader.gs_shader_destroy();
 		gs_shader generatedPixelshader = this.getPixelshader();
-		ModernizedCProgram.gs_shader_destroy(generatedPixelshader);
+		generatedPixelshader.gs_shader_destroy();
 	}
 	public gs_effect_pass gs_technique_get_pass_by_idx(Object technique, Object pass) {
 		if (!technique) {
@@ -53,7 +53,7 @@ public class gs_effect_pass {
 		for ( i = 0;
 		 i < technique.getPasses().getNum(); i++) {
 			gs_effect_pass g_pass = passes + i;
-			if (.strcmp(generatedName, name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, name) == 0) {
 				return g_pass;
 			} 
 		}

@@ -29,6 +29,128 @@ public class obs_property {
 	public obs_property() {
 	}
 	
+	public void add_strings(Object strings) {
+		while (strings) {
+			list.obs_property_list_add_string(strings, strings);
+			strings++;
+		}
+		while (strings) {
+			list.obs_property_list_add_string(strings, strings);
+			strings++;
+		}
+	}
+	public void add_rate_controls(Object rc) {
+		qsv_cpu_platform plat = /*Error: Function owner not recognized*/qsv_get_cpu_platform();
+		while (rc.getName()) {
+			if (!rc.getHaswell_or_greater() || qsv_cpu_platform.plat >= qsv_cpu_platform.QSV_CPU_PLATFORM_HSW) {
+				list.obs_property_list_add_string(rc.getName(), rc.getName());
+			} 
+			rc++;
+		}
+	}
+	public Object fill_twitch_servers_locked() {
+		size_t count = ModernizedCProgram.twitch_ingest_count();
+		servers_prop.obs_property_list_add_string(ModernizedCProgram.obs_module_text("Server.Auto"), "auto");
+		if (count <= 1) {
+			return false;
+		} 
+		twitch_ingest twitch_ingest = new twitch_ingest();
+		Object generatedName = ing.getName();
+		Object generatedUrl = ing.getUrl();
+		for (size_t i = 0;
+		 i < count; i++) {
+			twitch_ingest ing = twitch_ingest.twitch_ingest(i);
+			servers_prop.obs_property_list_add_string(generatedName, generatedUrl);
+		}
+		return true;
+	}
+	public Object fill_twitch_servers() {
+		 success = new ();
+		ModernizedCProgram.twitch_ingests_lock();
+		success = servers_prop.fill_twitch_servers_locked();
+		ModernizedCProgram.twitch_ingests_unlock();
+		return success;
+	}
+	public Object get_monitor_props(int monitor_idx) {
+		dstr monitor_desc = new dstr(0);
+		gs_monitor_info info = new gs_monitor_info();
+		if (!info.gs_get_duplicator_monitor_info(monitor_idx)) {
+			return false;
+		} 
+		Object generatedGs_monitor_info = info.getGs_monitor_info();
+		monitor_desc.dstr_catf("%s %d: %ldx%ld @ %ld,%ld", ModernizedCProgram.obs_module_text("Monitor"), monitor_idx + 1, generatedGs_monitor_info, generatedGs_monitor_info, generatedGs_monitor_info, generatedGs_monitor_info);
+		Object generatedDstr = monitor_desc.getDstr();
+		monitor_list.obs_property_list_add_int(generatedDstr, monitor_idx);
+		monitor_desc.dstr_free();
+		return true;
+	}
+	public void add_window(Object hwnd, Object callback) {
+		dstr class = new dstr(0);
+		dstr title = new dstr(0);
+		dstr exe = new dstr(0);
+		dstr encoded = new dstr(0);
+		dstr desc = new dstr(0);
+		if (!exe.get_window_exe(hwnd)) {
+			return /*Error: Unsupported expression*/;
+		} 
+		Object generatedDstr = exe.getDstr();
+		if (ModernizedCProgram.is_microsoft_internal_window_exe(generatedDstr)) {
+			exe.dstr_free();
+			return /*Error: Unsupported expression*/;
+		} 
+		title.get_window_title(hwnd);
+		if (ModernizedCProgram.dstr_cmp(exe, "explorer.exe") == 0 && ModernizedCProgram.dstr_is_empty(title)) {
+			exe.dstr_free();
+			title.dstr_free();
+			return /*Error: Unsupported expression*/;
+		} 
+		class.get_window_class(hwnd);
+		if (callback && !/*Error: Function owner not recognized*/callback(generatedDstr, generatedDstr, generatedDstr)) {
+			title.dstr_free();
+			class.dstr_free();
+			exe.dstr_free();
+			return /*Error: Unsupported expression*/;
+		} 
+		desc.dstr_printf("[%s]: %s", generatedDstr, generatedDstr);
+		title.encode_dstr();
+		class.encode_dstr();
+		exe.encode_dstr();
+		encoded.dstr_cat_dstr(title);
+		encoded.dstr_cat(":");
+		encoded.dstr_cat_dstr(class);
+		encoded.dstr_cat(":");
+		encoded.dstr_cat_dstr(exe);
+		p.obs_property_list_add_string(generatedDstr, generatedDstr);
+		encoded.dstr_free();
+		desc.dstr_free();
+		class.dstr_free();
+		title.dstr_free();
+		exe.dstr_free();
+	}
+	public void fill_window_list(window_search_mode mode, Object callback) {
+		HWND parent = new HWND();
+		 use_findwindowex = false;
+		HWND window = ModernizedCProgram.first_window(window_search_mode.mode, parent, use_findwindowex);
+		while (window) {
+			p.add_window(window, callback);
+			window = ModernizedCProgram.next_window(window, window_search_mode.mode, parent, use_findwindowex);
+		}
+	}
+	public void insert_preserved_val(Object val) {
+		byte class = ((Object)0);
+		byte title = ((Object)0);
+		byte executable = ((Object)0);
+		dstr desc = new dstr(0);
+		ModernizedCProgram.build_window_strings(val, class, title, executable);
+		desc.dstr_printf("[%s]: %s", executable, title);
+		Object generatedDstr = desc.getDstr();
+		p.obs_property_list_insert_string(1, generatedDstr, val);
+		p.obs_property_list_item_disable(1, 1);
+		desc.dstr_free();
+		ModernizedCProgram.bfree(class);
+		ModernizedCProgram.bfree(title);
+		ModernizedCProgram.bfree(executable);
+	}
 	public void obs_property_destroy() {
 		obs_property_type generatedType = this.getType();
 		if (generatedType == obs_property_type.OBS_PROPERTY_LIST) {
@@ -71,7 +193,7 @@ public class obs_property {
 		obs_property obs_property = new obs_property();
 		obs_property generatedNext = property.getNext();
 		while (property) {
-			if (.strcmp(generatedName, name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, name) == 0) {
 				return property;
 			} 
 			if (generatedType == obs_property_type.OBS_PROPERTY_GROUP) {
@@ -88,7 +210,7 @@ public class obs_property {
 	public obs_property new_prop(obs_properties props, Object name, Object desc, obs_property_type type) {
 		 data_size = ModernizedCProgram.get_property_size(obs_property_type.type);
 		obs_property p = new obs_property();
-		p = ModernizedCProgram.bzalloc( + data_size);
+		p = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/ + data_size);
 		p.setParent(props);
 		p.setEnabled(true);
 		p.setVisible(true);
@@ -115,7 +237,7 @@ public class obs_property {
 	    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	******************************************************************************/
 	public Object get_property_data() {
-		return ()prop + ;
+		return ()prop + /*Error: Unsupported expression*/;
 	}
 	/* ------------------------------------------------------------------------- */
 	public Object get_type_data(obs_property_type type) {
@@ -269,9 +391,9 @@ public class obs_property {
 		obs_property p = obs_property.new_prop(props, name, desc, obs_property_type.OBS_PROPERTY_FRAME_RATE);
 		frame_rate_data data = p.get_property_data();
 		Object generatedExtra_options = data.getExtra_options();
-		.da_init(generatedExtra_options);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedExtra_options);
 		Object generatedRanges = data.getRanges();
-		.da_init(generatedRanges);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedRanges);
 		return p;
 	}
 	public obs_property obs_properties_add_group(obs_properties props, Object name, Object desc, obs_group_type type, obs_properties group) {
@@ -327,15 +449,15 @@ public class obs_property {
 		obs_context_data context = obj;
 		obs_properties generatedParent = this.getParent();
 		Object generatedPriv = this.getPriv();
-		Object generatedData = context.getData();
+		Object[] generatedData = context.getData();
 		if (p) {
 			button_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_BUTTON);
 			if (ModernizedCProgram.data && ModernizedCProgram.data.getCallback()) {
 				obs_properties_t top = generatedParent.get_topmost_parent();
 				if (generatedPriv) {
-					return .UNRECOGNIZEDFUNCTIONNAME(top, p, generatedPriv);
+					return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(top, p, generatedPriv);
 				} 
-				return .UNRECOGNIZEDFUNCTIONNAME(top, p, (context ? generatedData : NULL));
+				return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(top, p, (context ? generatedData : NULL));
 			} 
 		} 
 		return false;
@@ -473,7 +595,7 @@ public class obs_property {
 	public void obs_property_int_set_limits(int min, int max, int step) {
 		int_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_INT);
 		if (!data) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		data.setMin(min);
 		data.setMax(max);
@@ -482,7 +604,7 @@ public class obs_property {
 	public void obs_property_float_set_limits(double min, double max, double step) {
 		float_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_FLOAT);
 		if (!data) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		data.setMin(min);
 		data.setMax(max);
@@ -491,7 +613,7 @@ public class obs_property {
 	public void obs_property_int_set_suffix(Object suffix) {
 		int_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_INT);
 		if (!data) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Byte generatedSuffix = data.getSuffix();
 		ModernizedCProgram.bfree(generatedSuffix);
@@ -500,7 +622,7 @@ public class obs_property {
 	public void obs_property_float_set_suffix(Object suffix) {
 		float_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_FLOAT);
 		if (!data) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Byte generatedSuffix = data.getSuffix();
 		ModernizedCProgram.bfree(generatedSuffix);
@@ -570,7 +692,7 @@ public class obs_property {
 		Object generatedItems = data.getItems();
 		if (data && idx < generatedItems.getNum()) {
 			ModernizedCProgram.list_item_free(data, generatedItems.getArray() + idx);
-			.da_erase(generatedItems, idx);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase(generatedItems, idx);
 		} 
 	}
 	public Object obs_property_list_item_count() {
@@ -590,7 +712,7 @@ public class obs_property {
 		list_data data = list_data.get_list_data(p);
 		Object generatedItems = data.getItems();
 		if (!data || idx >= generatedItems.getNum()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		generatedItems.getArray()[idx].setDisabled(disabled);
 	}
@@ -637,7 +759,7 @@ public class obs_property {
 	public void obs_property_frame_rate_clear() {
 		frame_rate_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_FRAME_RATE);
 		if (!data) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		data.frame_rate_data_options_free();
 		data.frame_rate_data_ranges_free();
@@ -645,14 +767,14 @@ public class obs_property {
 	public void obs_property_frame_rate_options_clear() {
 		frame_rate_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_FRAME_RATE);
 		if (!data) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		data.frame_rate_data_options_free();
 	}
 	public void obs_property_frame_rate_fps_ranges_clear() {
 		frame_rate_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_FRAME_RATE);
 		if (!data) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		data.frame_rate_data_ranges_free();
 	}
@@ -662,7 +784,7 @@ public class obs_property {
 			return DARRAY_INVALID;
 		} 
 		Object generatedExtra_options = data.getExtra_options();
-		frame_rate_option opt = .da_push_back_new(generatedExtra_options);
+		frame_rate_option opt = /*Error: Function owner not recognized*/da_push_back_new(generatedExtra_options);
 		opt.setName(ModernizedCProgram.bstrdup(name));
 		opt.setDescription(ModernizedCProgram.bstrdup(description));
 		return generatedExtra_options.getNum() - 1;
@@ -670,10 +792,10 @@ public class obs_property {
 	public void obs_property_frame_rate_option_insert(Object idx, Object name, Object description) {
 		frame_rate_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_FRAME_RATE);
 		if (!data) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedExtra_options = data.getExtra_options();
-		frame_rate_option opt = .da_insert_new(generatedExtra_options, idx);
+		frame_rate_option opt = /*Error: Function owner not recognized*/da_insert_new(generatedExtra_options, idx);
 		opt.setName(ModernizedCProgram.bstrdup(name));
 		opt.setDescription(ModernizedCProgram.bstrdup(description));
 	}
@@ -705,110 +827,12 @@ public class obs_property {
 		obs_group_type generatedType = data.getType();
 		return data ? generatedType : obs_group_type.OBS_COMBO_INVALID;
 	}
-	public void add_window(Object hwnd, Object callback) {
-		dstr class = new dstr(0);
-		dstr title = new dstr(0);
-		dstr exe = new dstr(0);
-		dstr encoded = new dstr(0);
-		dstr desc = new dstr(0);
-		if (!exe.get_window_exe(hwnd)) {
-			return ;
-		} 
-		Object generatedDstr = exe.getDstr();
-		if (ModernizedCProgram.is_microsoft_internal_window_exe(generatedDstr)) {
-			exe.dstr_free();
-			return ;
-		} 
-		title.get_window_title(hwnd);
-		if (ModernizedCProgram.dstr_cmp(exe, "explorer.exe") == 0 && ModernizedCProgram.dstr_is_empty(title)) {
-			exe.dstr_free();
-			title.dstr_free();
-			return ;
-		} 
-		class.get_window_class(hwnd);
-		if (callback && !.callback(generatedDstr, generatedDstr, generatedDstr)) {
-			title.dstr_free();
-			class.dstr_free();
-			exe.dstr_free();
-			return ;
-		} 
-		desc.dstr_printf("[%s]: %s", generatedDstr, generatedDstr);
-		title.encode_dstr();
-		class.encode_dstr();
-		exe.encode_dstr();
-		encoded.dstr_cat_dstr(title);
-		encoded.dstr_cat(":");
-		encoded.dstr_cat_dstr(class);
-		encoded.dstr_cat(":");
-		encoded.dstr_cat_dstr(exe);
-		p.obs_property_list_add_string(generatedDstr, generatedDstr);
-		encoded.dstr_free();
-		desc.dstr_free();
-		class.dstr_free();
-		title.dstr_free();
-		exe.dstr_free();
-	}
-	public void fill_window_list(window_search_mode mode, Object callback) {
-		HWND parent = new HWND();
-		 use_findwindowex = false;
-		HWND window = ModernizedCProgram.first_window(window_search_mode.mode, parent, use_findwindowex);
-		while (window) {
-			p.add_window(window, callback);
-			window = ModernizedCProgram.next_window(window, window_search_mode.mode, parent, use_findwindowex);
-		}
-	}
-	public Object get_monitor_props(int monitor_idx) {
-		dstr monitor_desc = new dstr(0);
-		gs_monitor_info info = new gs_monitor_info();
-		if (!info.gs_get_duplicator_monitor_info(monitor_idx)) {
-			return false;
-		} 
-		Object generatedGs_monitor_info = info.getGs_monitor_info();
-		monitor_desc.dstr_catf("%s %d: %ldx%ld @ %ld,%ld", ModernizedCProgram.obs_module_text("Monitor"), monitor_idx + 1, generatedGs_monitor_info, generatedGs_monitor_info, generatedGs_monitor_info, generatedGs_monitor_info);
-		Object generatedDstr = monitor_desc.getDstr();
-		monitor_list.obs_property_list_add_int(generatedDstr, monitor_idx);
-		monitor_desc.dstr_free();
-		return true;
-	}
-	public void add_strings(Object strings) {
-		while (strings) {
-			list.obs_property_list_add_string(strings, strings);
-			strings++;
-		}
-		while (strings) {
-			list.obs_property_list_add_string(strings, strings);
-			strings++;
-		}
-	}
-	public Object fill_twitch_servers_locked() {
-		size_t count = ModernizedCProgram.twitch_ingest_count();
-		servers_prop.obs_property_list_add_string(ModernizedCProgram.obs_module_text("Server.Auto"), "auto");
-		if (count <= 1) {
-			return false;
-		} 
-		twitch_ingest twitch_ingest = new twitch_ingest();
-		Object generatedName = ing.getName();
-		Object generatedUrl = ing.getUrl();
-		for (size_t i = 0;
-		 i < count; i++) {
-			twitch_ingest ing = twitch_ingest.twitch_ingest(i);
-			servers_prop.obs_property_list_add_string(generatedName, generatedUrl);
-		}
-		return true;
-	}
-	public Object fill_twitch_servers() {
-		 success = new ();
-		ModernizedCProgram.twitch_ingests_lock();
-		success = servers_prop.fill_twitch_servers_locked();
-		ModernizedCProgram.twitch_ingests_unlock();
-		return success;
-	}
 	public void v4l2_input_list(Object dev) {
 		v4l2_input in = new v4l2_input();
-		.memset(in, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(in, 0, /*Error: sizeof expression not supported yet*/);
 		prop.obs_property_list_clear();
 		Object generatedV4l2_input = in.getV4l2_input();
-		while (.v4l2_ioctl(dev, VIDIOC_ENUMINPUT, in) == 0) {
+		while (/*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_ENUMINPUT, in) == 0) {
 			prop.obs_property_list_add_int((byte)generatedV4l2_input, generatedV4l2_input);
 			ModernizedCProgram.blog(LOG_INFO, "v4l2-input: Found input '%s' (Index %d)", generatedV4l2_input, generatedV4l2_input);
 			generatedV4l2_input++;
@@ -826,7 +850,7 @@ public class obs_property {
 		prop.obs_property_list_clear();
 		Object generatedV4l2_fmtdesc = fmt.getV4l2_fmtdesc();
 		Object generatedDstr = buffer.getDstr();
-		while (.v4l2_ioctl(dev, VIDIOC_ENUM_FMT, fmt) == 0) {
+		while (/*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_ENUM_FMT, fmt) == 0) {
 			buffer.dstr_copy((byte)generatedV4l2_fmtdesc);
 			if (generatedV4l2_fmtdesc & V4L2_FMT_FLAG_EMULATED) {
 				buffer.dstr_cat(" (Emulated)");
@@ -849,7 +873,7 @@ public class obs_property {
 		prop.obs_property_list_clear();
 		prop.obs_property_list_add_int(ModernizedCProgram.obs_module_text("LeaveUnchanged"), -1);
 		Object generatedV4l2_standard = std.getV4l2_standard();
-		while (.v4l2_ioctl(dev, VIDIOC_ENUMSTD, std) == 0) {
+		while (/*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_ENUMSTD, std) == 0) {
 			prop.obs_property_list_add_int((byte)generatedV4l2_standard, generatedV4l2_standard);
 			generatedV4l2_standard++;
 		}
@@ -887,12 +911,12 @@ public class obs_property {
 		buffer.dstr_init();
 		prop.obs_property_list_clear();
 		prop.obs_property_list_add_int(ModernizedCProgram.obs_module_text("LeaveUnchanged"), -1);
-		.v4l2_ioctl(dev, VIDIOC_ENUM_FRAMESIZES, frmsize);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_ENUM_FRAMESIZES, frmsize);
 		Object generatedV4l2_frmsizeenum = frmsize.getV4l2_frmsizeenum();
 		Object generatedDstr = buffer.getDstr();
 		switch (generatedV4l2_frmsizeenum) {
 		case V4L2_FRMSIZE_TYPE_DISCRETE:
-				while (.v4l2_ioctl(dev, VIDIOC_ENUM_FRAMESIZES, frmsize) == 0) {
+				while (/*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_ENUM_FRAMESIZES, frmsize) == 0) {
 					buffer.dstr_printf("%dx%d", generatedV4l2_frmsizeenum.getWidth(), generatedV4l2_frmsizeenum.getHeight());
 					prop.obs_property_list_add_int(generatedDstr, ModernizedCProgram.v4l2_pack_tuple(generatedV4l2_frmsizeenum.getWidth(), generatedV4l2_frmsizeenum.getHeight()));
 					generatedV4l2_frmsizeenum++;
@@ -924,12 +948,12 @@ public class obs_property {
 		buffer.dstr_init();
 		prop.obs_property_list_clear();
 		prop.obs_property_list_add_int(ModernizedCProgram.obs_module_text("LeaveUnchanged"), -1);
-		.v4l2_ioctl(dev, VIDIOC_ENUM_FRAMEINTERVALS, frmival);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_ENUM_FRAMEINTERVALS, frmival);
 		Object generatedV4l2_frmivalenum = frmival.getV4l2_frmivalenum();
 		Object generatedDstr = buffer.getDstr();
 		switch (generatedV4l2_frmivalenum) {
 		case V4L2_FRMIVAL_TYPE_DISCRETE:
-				while (.v4l2_ioctl(dev, VIDIOC_ENUM_FRAMEINTERVALS, frmival) == 0) {
+				while (/*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_ENUM_FRAMEINTERVALS, frmival) == 0) {
 					double fps = (double)generatedV4l2_frmivalenum.getDenominator() / generatedV4l2_frmivalenum.getNumerator();
 					int pack = ModernizedCProgram.v4l2_pack_tuple(generatedV4l2_frmivalenum.getNumerator(), generatedV4l2_frmivalenum.getDenominator());
 					buffer.dstr_printf("%.2f", fps);
@@ -953,30 +977,6 @@ public class obs_property {
 		buffer/*
 		 * Device selected callback
 		 */.dstr_free();
-	}
-	public void insert_preserved_val(Object val) {
-		byte class = ((Object)0);
-		byte title = ((Object)0);
-		byte executable = ((Object)0);
-		dstr desc = new dstr(0);
-		ModernizedCProgram.build_window_strings(val, class, title, executable);
-		desc.dstr_printf("[%s]: %s", executable, title);
-		Object generatedDstr = desc.getDstr();
-		p.obs_property_list_insert_string(1, generatedDstr, val);
-		p.obs_property_list_item_disable(1, 1);
-		desc.dstr_free();
-		ModernizedCProgram.bfree(class);
-		ModernizedCProgram.bfree(title);
-		ModernizedCProgram.bfree(executable);
-	}
-	public void add_rate_controls(Object rc) {
-		qsv_cpu_platform plat = .qsv_get_cpu_platform();
-		while (rc.getName()) {
-			if (!rc.getHaswell_or_greater() || qsv_cpu_platform.plat >= qsv_cpu_platform.QSV_CPU_PLATFORM_HSW) {
-				list.obs_property_list_add_string(rc.getName(), rc.getName());
-			} 
-			rc++;
-		}
 	}
 	public Byte getName() {
 		return name;

@@ -9,10 +9,10 @@ public class combine_diff_state {
 	private long nmask;
 	private int num_parent;
 	private int n;
-	private sline sline;
+	private sline[] sline;
 	private sline lost_bucket;
 	
-	public combine_diff_state(int lno, int ob, int on, int nb, int nn, long nmask, int num_parent, int n, sline sline, sline lost_bucket) {
+	public combine_diff_state(int lno, int ob, int on, int nb, int nn, long nmask, int num_parent, int n, sline[] sline, sline lost_bucket) {
 		setLno(lno);
 		setOb(ob);
 		setOn(on);
@@ -75,10 +75,10 @@ public class combine_diff_state {
 	public void setN(int newN) {
 		n = newN;
 	}
-	public sline getSline() {
+	public sline[] getSline() {
 		return sline;
 	}
-	public void setSline(sline newSline) {
+	public void setSline(sline[] newSline) {
 		sline = newSline;
 	}
 	public sline getLost_bucket() {

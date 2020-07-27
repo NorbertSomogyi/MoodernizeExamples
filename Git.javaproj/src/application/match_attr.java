@@ -24,30 +24,30 @@ public class match_attr {
 		byte states;
 		match_attr res = ((Object)0);
 		int is_macro;
-		strbuf pattern = new strbuf(, , );
-		cp = line + .strspn(line, ModernizedCProgram.blank);
+		strbuf pattern = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		cp = line + /*Error: Function owner not recognized*/strspn(line, ModernizedCProgram.blank);
 		if (!cp || cp == (byte)'#') {
 			return ((Object)0);
 		} 
 		name = cp;
-		byte generatedBuf = pattern.getBuf();
+		byte[] generatedBuf = pattern.getBuf();
 		Object generatedLen = pattern.getLen();
 		if (cp == (byte)'"' && !pattern.unquote_c_style(name, states)) {
 			name = generatedBuf;
 			namelen = generatedLen;
 		} else {
-				namelen = .strcspn(name, ModernizedCProgram.blank);
+				namelen = /*Error: Function owner not recognized*/strcspn(name, ModernizedCProgram.blank);
 				states = name + namelen;
 		} 
-		if (.strlen("[attr]") < namelen && ModernizedCProgram.starts_with(name, "[attr]")) {
+		if (/*Error: Function owner not recognized*/strlen("[attr]") < namelen && ModernizedCProgram.starts_with(name, "[attr]")) {
 			if (!macro_ok) {
 				(_iob[2]).fprintf_ln(ModernizedCProgram._("%s not allowed: %s:%d"), name, src, lineno);
 				;
 			} 
 			is_macro = 1;
-			name += .strlen("[attr]");
-			name += .strspn(name, ModernizedCProgram.blank);
-			namelen = .strcspn(name, ModernizedCProgram.blank);
+			name += /*Error: Function owner not recognized*/strlen("[attr]");
+			name += /*Error: Function owner not recognized*/strspn(name, ModernizedCProgram.blank);
+			namelen = /*Error: Function owner not recognized*/strcspn(name, ModernizedCProgram.blank);
 			if (!ModernizedCProgram.attr_name_valid(name, namelen)) {
 				ModernizedCProgram.report_invalid_attr(name, namelen, src, lineno);
 				;
@@ -55,14 +55,14 @@ public class match_attr {
 		} else {
 				is_macro = 0;
 		} 
-		states += .strspn(states, ModernizedCProgram.blank);
+		states += /*Error: Function owner not recognized*/strspn(states, ModernizedCProgram.blank);
 		for (; cp; /* First pass to count the attr_states */num_attr++) {
 			cp = ModernizedCProgram.parse_attr(src, lineno, cp, ((Object)0));
 			if (!cp) {
 				;
 			} 
 		}
-		res = ModernizedCProgram.xcalloc(1,  +  * num_attr + (is_macro ? 0 : namelen + 1));
+		res = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/ + /*Error: Unsupported expression*/ * num_attr + (is_macro ? 0 : namelen + 1));
 		 generatedU = res.getU();
 		Object generatedState = res.getState();
 		Object generatedPat = generatedU.getPat();
@@ -70,7 +70,7 @@ public class match_attr {
 			generatedU.setAttr(ModernizedCProgram.git_attr_internal(name, namelen));
 		} else {
 				byte p = (byte)(generatedState[num_attr]);
-				.memcpy(p, name, namelen);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(p, name, namelen);
 				generatedPat.setPattern(p);
 				ModernizedCProgram.parse_path_pattern(generatedPat.getPattern(), generatedPat.getPatternlen(), generatedPat.getFlags(), generatedPat.getNowildcardlen());
 				if (generatedPat.getFlags() & 16) {

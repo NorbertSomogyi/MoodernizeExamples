@@ -45,13 +45,13 @@ public class blk_alloc_ctx {
 			if (fs.getGet_alloc_block2()) {
 				gab2 = fs.getGet_alloc_block2();
 				fs.setGet_alloc_block2(((Object)0));
-				retval = .gab2(fs, goal, b, ctx);
+				retval = /*Error: Function owner not recognized*/gab2(fs, goal, b, ctx);
 				fs.setGet_alloc_block2(gab2);
 				;
 			}  else if (fs.getGet_alloc_block()) {
 				gab = fs.getGet_alloc_block();
 				fs.setGet_alloc_block(((Object)0));
-				retval = .gab(fs, goal, b);
+				retval = /*Error: Function owner not recognized*/gab(fs, goal, b);
 				fs.setGet_alloc_block(gab);
 				;
 			} 
@@ -81,12 +81,12 @@ public class blk_alloc_ctx {
 		 retval = new ();
 		 block = new ();
 		if (fs.getGet_alloc_block2()) {
-			retval = .UNRECOGNIZEDFUNCTIONNAME(fs, goal, block, ctx);
+			retval = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(fs, goal, block, ctx);
 			if (retval) {
 				;
 			} 
 		}  else if (fs.getGet_alloc_block()) {
-			retval = .UNRECOGNIZEDFUNCTIONNAME(fs, goal, block);
+			retval = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(fs, goal, block);
 			if (retval) {
 				;
 			} 
@@ -103,7 +103,7 @@ public class blk_alloc_ctx {
 				} 
 		} 
 		if (block_buf) {
-			.memset(block_buf, 0, fs.getBlocksize());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(block_buf, 0, fs.getBlocksize());
 			retval = ModernizedCProgram.io_channel_write_blk64(fs.getIo(), block, 1, block_buf);
 		} else {
 				retval = ModernizedCProgram.ext2fs_zero_blocks2(fs, block, 1, ((Object)0), ((Object)0));

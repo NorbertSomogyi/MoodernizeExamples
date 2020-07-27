@@ -12,12 +12,12 @@ public class SingleRequest {
 	private curltime now;
 	private  badheader;
 	private int headerline;
-	private byte hbufp;
+	private Byte hbufp;
 	private Object hbuflen;
-	private byte str;
+	private byte[] str;
 	private Byte str_start;
 	private Byte end_ptr;
-	private byte p;
+	private byte[] p;
 	private Object offset;
 	private int httpcode;
 	private curltime start100;
@@ -26,12 +26,12 @@ public class SingleRequest {
 	private contenc_writer_s writer_stack;
 	private Object timeofdoc;
 	private long bodywrites;
-	private Byte buf;
+	private byte[] buf;
 	private int keepon;
 	private Byte location;
 	private Byte newurl;
 	private Object upload_present;
-	private Byte upload_fromhere;
+	private byte[] upload_fromhere;
 	private Object protop;
 	private dohdata doh;
 	private Object header;
@@ -44,7 +44,7 @@ public class SingleRequest {
 	private Object getheader;
 	private Object forbidchunk;
 	
-	public SingleRequest(Object size, Object maxdownload, Object bytecount, Object writebytecount, Object headerbytecount, Object deductheadercount, curltime start, curltime now,  badheader, int headerline, byte hbufp, Object hbuflen, byte str, Byte str_start, Byte end_ptr, byte p, Object offset, int httpcode, curltime start100, expect100 exp100, upgrade101 upgr101, contenc_writer_s writer_stack, Object timeofdoc, long bodywrites, Byte buf, int keepon, Byte location, Byte newurl, Object upload_present, Byte upload_fromhere, Object protop, dohdata doh, Object header, Object content_range, Object upload_done, Object ignorebody, Object http_bodyless, Object chunk, Object upload_chunky, Object getheader, Object forbidchunk) {
+	public SingleRequest(Object size, Object maxdownload, Object bytecount, Object writebytecount, Object headerbytecount, Object deductheadercount, curltime start, curltime now,  badheader, int headerline, Byte hbufp, Object hbuflen, byte[] str, Byte str_start, Byte end_ptr, byte[] p, Object offset, int httpcode, curltime start100, expect100 exp100, upgrade101 upgr101, contenc_writer_s writer_stack, Object timeofdoc, long bodywrites, byte[] buf, int keepon, Byte location, Byte newurl, Object upload_present, byte[] upload_fromhere, Object protop, dohdata doh, Object header, Object content_range, Object upload_done, Object ignorebody, Object http_bodyless, Object chunk, Object upload_chunky, Object getheader, Object forbidchunk) {
 		setSize(size);
 		setMaxdownload(maxdownload);
 		setBytecount(bytecount);
@@ -150,10 +150,10 @@ public class SingleRequest {
 	public void setHeaderline(int newHeaderline) {
 		headerline = newHeaderline;
 	}
-	public byte getHbufp() {
+	public Byte getHbufp() {
 		return hbufp;
 	}
-	public void setHbufp(byte newHbufp) {
+	public void setHbufp(Byte newHbufp) {
 		hbufp = newHbufp;
 	}
 	public Object getHbuflen() {
@@ -162,10 +162,10 @@ public class SingleRequest {
 	public void setHbuflen(Object newHbuflen) {
 		hbuflen = newHbuflen;
 	}
-	public byte getStr() {
+	public byte[] getStr() {
 		return str;
 	}
-	public void setStr(byte newStr) {
+	public void setStr(byte[] newStr) {
 		str = newStr;
 	}
 	public Byte getStr_start() {
@@ -180,10 +180,10 @@ public class SingleRequest {
 	public void setEnd_ptr(Byte newEnd_ptr) {
 		end_ptr = newEnd_ptr;
 	}
-	public byte getP() {
+	public byte[] getP() {
 		return p;
 	}
-	public void setP(byte newP) {
+	public void setP(byte[] newP) {
 		p = newP;
 	}
 	public Object getOffset() {
@@ -234,10 +234,10 @@ public class SingleRequest {
 	public void setBodywrites(long newBodywrites) {
 		bodywrites = newBodywrites;
 	}
-	public Byte getBuf() {
+	public byte[] getBuf() {
 		return buf;
 	}
-	public void setBuf(Byte newBuf) {
+	public void setBuf(byte[] newBuf) {
 		buf = newBuf;
 	}
 	public int getKeepon() {
@@ -264,10 +264,10 @@ public class SingleRequest {
 	public void setUpload_present(Object newUpload_present) {
 		upload_present = newUpload_present;
 	}
-	public Byte getUpload_fromhere() {
+	public byte[] getUpload_fromhere() {
 		return upload_fromhere;
 	}
-	public void setUpload_fromhere(Byte newUpload_fromhere) {
+	public void setUpload_fromhere(byte[] newUpload_fromhere) {
 		upload_fromhere = newUpload_fromhere;
 	}
 	public Object getProtop() {

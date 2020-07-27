@@ -25,7 +25,7 @@ public class dir_stack_T {
 	public Object qf_push_dir(Object dirbuf, int is_file_stack) {
 		dir_stack_T ds_new = new dir_stack_T();
 		dir_stack_T ds_ptr = new dir_stack_T();
-		// allocate new stack element and hook it in// allocate new stack element and hook it inds_new = (dir_stack_T)ModernizedCProgram.alloc();
+		// allocate new stack element and hook it in// allocate new stack element and hook it inds_new = (dir_stack_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*/);
 		if (ds_new == ((Object)0)) {
 			return ((Object)0);
 		} 

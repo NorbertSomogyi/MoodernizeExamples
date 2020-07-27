@@ -2,7 +2,7 @@ package application;
 
 public class image_source {
 	private obs_source source;
-	private byte file;
+	private Byte file;
 	private Object persistent;
 	private Object file_timestamp;
 	private double update_time_elapsed;
@@ -10,7 +10,7 @@ public class image_source {
 	private Object active;
 	private Object if2;
 	
-	public image_source(obs_source source, byte file, Object persistent, Object file_timestamp, double update_time_elapsed, Object last_time, Object active, Object if2) {
+	public image_source(obs_source source, Byte file, Object persistent, Object file_timestamp, double update_time_elapsed, Object last_time, Object active, Object if2) {
 		setSource(source);
 		setFile(file);
 		setPersistent(persistent);
@@ -24,7 +24,7 @@ public class image_source {
 	}
 	
 	public void image_source_load() {
-		byte generatedFile = this.getFile();
+		Byte generatedFile = this.getFile();
 		byte file = generatedFile;
 		ModernizedCProgram.obs_enter_graphics();
 		Object generatedIf2 = this.getIf2();
@@ -56,10 +56,10 @@ public class image_source {
 	public void setSource(obs_source newSource) {
 		source = newSource;
 	}
-	public byte getFile() {
+	public Byte getFile() {
 		return file;
 	}
-	public void setFile(byte newFile) {
+	public void setFile(Byte newFile) {
 		file = newFile;
 	}
 	public Object getPersistent() {

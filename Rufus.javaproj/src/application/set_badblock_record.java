@@ -17,14 +17,14 @@ package application;
 public class set_badblock_record {
 	private Object bb_iter;
 	private int bad_block_count;
-	private Object ind_blocks;
+	private Object[] ind_blocks;
 	private int max_ind_blocks;
 	private int ind_blocks_size;
 	private int ind_blocks_ptr;
 	private Byte block_buf;
 	private Object err;
 	
-	public set_badblock_record(Object bb_iter, int bad_block_count, Object ind_blocks, int max_ind_blocks, int ind_blocks_size, int ind_blocks_ptr, Byte block_buf, Object err) {
+	public set_badblock_record(Object bb_iter, int bad_block_count, Object[] ind_blocks, int max_ind_blocks, int ind_blocks_size, int ind_blocks_ptr, Byte block_buf, Object err) {
 		setBb_iter(bb_iter);
 		setBad_block_count(bad_block_count);
 		setInd_blocks(ind_blocks);
@@ -49,10 +49,10 @@ public class set_badblock_record {
 	public void setBad_block_count(int newBad_block_count) {
 		bad_block_count = newBad_block_count;
 	}
-	public Object getInd_blocks() {
+	public Object[] getInd_blocks() {
 		return ind_blocks;
 	}
-	public void setInd_blocks(Object newInd_blocks) {
+	public void setInd_blocks(Object[] newInd_blocks) {
 		ind_blocks = newInd_blocks;
 	}
 	public int getMax_ind_blocks() {

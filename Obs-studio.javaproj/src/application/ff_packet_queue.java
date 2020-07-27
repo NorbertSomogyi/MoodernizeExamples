@@ -39,7 +39,7 @@ public class ff_packet_queue {
 	 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 	 */
 	public boolean packet_queue_init() {
-		.memset(q, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(q, 0, /*Error: Unsupported expression*/);
 		Object generatedMutex = this.getMutex();
 		if (ModernizedCProgram.pthread_mutex_init(generatedMutex, ((Object)0)) != 0) {
 			;
@@ -50,7 +50,7 @@ public class ff_packet_queue {
 		} 
 		ff_packet generatedFlush_packet = this.getFlush_packet();
 		Object generatedBase = generatedFlush_packet.getBase();
-		.av_init_packet(generatedBase);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_init_packet(generatedBase);
 		generatedBase.setData((uint8_t)"FLUSH");
 		return 1;
 	}
@@ -70,7 +70,7 @@ public class ff_packet_queue {
 		ModernizedCProgram.pthread_cond_destroy(generatedCond);
 		ff_packet generatedFlush_packet = this.getFlush_packet();
 		Object generatedBase = generatedFlush_packet.getBase();
-		.av_free_packet(generatedBase);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free_packet(generatedBase);
 	}
 	public int packet_queue_put_flush_packet() {
 		ff_packet generatedFlush_packet = this.getFlush_packet();
@@ -87,11 +87,11 @@ public class ff_packet_queue {
 		ff_packet_list generatedFirst_packet = this.getFirst_packet();
 		for (packet = generatedFirst_packet; packet != ((Object)0); packet = generatedFirst_packet) {
 			this.setFirst_packet(generatedNext);
-			.av_free_packet(generatedBase);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free_packet(generatedBase);
 			if (generatedClock != ((Object)0)) {
 				generatedClock.ff_clock_release();
 			} 
-			.av_freep(packet);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_freep(packet);
 		}
 		this.setLast_packet(this.setFirst_packet(((Object)0)));
 		this.setCount(0);

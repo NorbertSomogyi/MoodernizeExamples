@@ -84,20 +84,20 @@ public class _CMtDec {
 		SRes res = new SRes();
 		 generatedMtProgress = this.getMtProgress();
 		Object generatedCs = generatedMtProgress.getCs();
-		.EnterCriticalSection(generatedCs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/EnterCriticalSection(generatedCs);
 		Object generatedNeedInterrupt = this.getNeedInterrupt();
 		Object generatedInterruptIndex = this.getInterruptIndex();
 		wasInterrupted = (generatedNeedInterrupt && interruptIndex > generatedInterruptIndex);
 		Object generatedRes = generatedMtProgress.getRes();
 		res = generatedRes;
-		.LeaveCriticalSection(generatedCs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LeaveCriticalSection(generatedCs);
 		return res;
 	}
 	public Object MtDec_Progress_GetError_Spec(Object inSize, Object outSize, Object interruptIndex, Object wasInterrupted) {
 		SRes res = new SRes();
 		 generatedMtProgress = this.getMtProgress();
 		Object generatedCs = generatedMtProgress.getCs();
-		.EnterCriticalSection(generatedCs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/EnterCriticalSection(generatedCs);
 		Object generatedTotalInSize = generatedMtProgress.getTotalInSize();
 		generatedTotalInSize += inSize;
 		Object generatedTotalOutSize = generatedMtProgress.getTotalOutSize();
@@ -105,7 +105,7 @@ public class _CMtDec {
 		Object generatedRes = generatedMtProgress.getRes();
 		Object generatedProgress = generatedMtProgress.getProgress();
 		if (generatedRes == 0 && generatedProgress) {
-			if (.UNRECOGNIZEDFUNCTIONNAME(generatedProgress, generatedTotalInSize, generatedTotalOutSize) != 0) {
+			if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedProgress, generatedTotalInSize, generatedTotalOutSize) != 0) {
 				generatedMtProgress.setRes(10);
 			} 
 		} 
@@ -113,20 +113,20 @@ public class _CMtDec {
 		Object generatedInterruptIndex = this.getInterruptIndex();
 		wasInterrupted = (generatedNeedInterrupt && interruptIndex > generatedInterruptIndex);
 		res = generatedRes;
-		.LeaveCriticalSection(generatedCs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LeaveCriticalSection(generatedCs);
 		return res;
 	}
 	public void MtDec_Interrupt(Object interruptIndex) {
 		 generatedMtProgress = this.getMtProgress();
 		Object generatedCs = generatedMtProgress.getCs();
-		.EnterCriticalSection(generatedCs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/EnterCriticalSection(generatedCs);
 		Object generatedNeedInterrupt = this.getNeedInterrupt();
 		Object generatedInterruptIndex = this.getInterruptIndex();
 		if (!generatedNeedInterrupt || interruptIndex < generatedInterruptIndex) {
 			this.setInterruptIndex(interruptIndex);
 			this.setNeedInterrupt(1);
 		} 
-		.LeaveCriticalSection(generatedCs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LeaveCriticalSection(generatedCs);
 	}
 	public Object MtDec_GetCrossBuff() {
 		Object generatedCrossBlock = this.getCrossBlock();
@@ -134,13 +134,13 @@ public class _CMtDec {
 		Object generatedAlloc = this.getAlloc();
 		Object generatedInBufSize = this.getInBufSize();
 		if (!cr) {
-			cr = (Byte).UNRECOGNIZEDFUNCTIONNAME(generatedAlloc,  + generatedInBufSize);
+			cr = (Byte)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, /*Error: Unsupported expression*/ + generatedInBufSize);
 			if (!cr) {
 				return ((Object)0);
 			} 
 			this.setCrossBlock(cr);
 		} 
-		return ((Byte)(cr) + /*
+		return ((Byte)(cr) + /*Error: Unsupported expression*//*
 		  ThreadFunc2() returns:
 		  0      - in all normal cases (even for stream error or memory allocation error)
 		  (!= 0) - WRes error return by system threading function
@@ -152,7 +152,7 @@ public class _CMtDec {
 		Object generatedCrossEnd = this.getCrossEnd();
 		Object generatedAlloc = this.getAlloc();
 		if (generatedCrossBlock && generatedCrossStart == generatedCrossEnd) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedAlloc, generatedCrossBlock);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, generatedCrossBlock);
 			this.setCrossBlock(((Object)0));
 		} 
 		int generatedNumStartedThreads = this.getNumStartedThreads();
@@ -185,7 +185,7 @@ public class _CMtDec {
 				{ 
 					Object link = generatedInBuf;
 					Object next = ((CMtDecBufLink)link).getNext();
-					.UNRECOGNIZEDFUNCTIONNAME(generatedAlloc, link);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, link);
 					t.setInBuf(next);
 				}
 				if (generatedInDataSize == 0) {
@@ -212,7 +212,7 @@ public class _CMtDec {
 				} 
 				generatedInDataSize -= lim;
 				inLim = lim;
-				return (Byte)((Byte)(generatedInBuf) + );
+				return (Byte)((Byte)(generatedInBuf) + /*Error: Unsupported expression*/);
 			}
 		}
 		Object generatedCrossEnd = this.getCrossEnd();
@@ -221,7 +221,7 @@ public class _CMtDec {
 		{ 
 			size_t crossSize = generatedCrossEnd - generatedCrossStart;
 			if (crossSize != 0) {
-				Byte data = ((Byte)(generatedCrossBlock) + ) + generatedCrossStart;
+				Byte data = ((Byte)(generatedCrossBlock) + /*Error: Unsupported expression*/) + generatedCrossStart;
 				inLim = crossSize;
 				this.setCrossStart(0);
 				this.setCrossEnd(0);
@@ -229,7 +229,7 @@ public class _CMtDec {
 			} 
 			inLim = 0;
 			if (generatedCrossBlock) {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedAlloc, generatedCrossBlock);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, generatedCrossBlock);
 				this.setCrossBlock(((Object)0));
 			} 
 			return ((Object)0);
@@ -276,7 +276,7 @@ public class _CMtDec {
 		Object generatedCrossBlock = this.getCrossBlock();
 		Object generatedAlloc = this.getAlloc();
 		if (generatedCrossBlock) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedAlloc, generatedCrossBlock);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, generatedCrossBlock);
 			this.setCrossBlock(((Object)0));
 		} 
 	}
@@ -284,7 +284,7 @@ public class _CMtDec {
 		p.MtDec_Free();
 		 generatedMtProgress = this.getMtProgress();
 		Object generatedCs = generatedMtProgress.getCs();
-		.DeleteCriticalSection(generatedCs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteCriticalSection(generatedCs);
 	}
 	public Object MtDec_Code() {
 		int i;
@@ -328,7 +328,7 @@ public class _CMtDec {
 				} 
 			}
 			if (generatedCrossBlock) {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedAlloc, generatedCrossBlock);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, generatedCrossBlock);
 				this.setCrossBlock(((Object)0));
 			} 
 			this.setAllocatedBufsSize(generatedInBufSize);

@@ -44,7 +44,7 @@ public class window_S {
 	private Object w_botline;
 	private int w_empty_rows;
 	private int w_lines_valid;
-	private w_line w_lines;
+	private w_line[] w_lines;
 	private int w_redr_type;
 	private int w_upd_rows;
 	private Object w_redraw_top;
@@ -68,7 +68,7 @@ public class window_S {
 	private int w_fraction;
 	private int w_prev_fraction_row;
 	
-	public window_S(int w_id, file_buffer w_buffer, window_S w_prev, window_S w_next, int w_closing, frame_S w_frame,  w_cursor, Object w_curswant, int w_set_curswant, byte w_old_visual_mode, Object w_old_cursor_lnum, Object w_old_cursor_fcol, Object w_old_cursor_lcol, Object w_old_visual_lnum, Object w_old_visual_col, Object w_old_curswant, Object w_topline, byte w_topline_was_set, Object w_leftcol, Object w_skipcol, int w_winrow, int w_height, int w_status_height, int w_wincol, int w_width, int w_vsep_width,  w_save_cursor, int w_valid,  w_valid_cursor, Object w_valid_leftcol, int w_cline_height, int w_cline_row, Object w_virtcol, int w_wrow, int w_wcol, Object w_botline, int w_empty_rows, int w_lines_valid, w_line w_lines, int w_redr_type, int w_upd_rows, Object w_redraw_top, Object w_redraw_bot, int w_redr_status, int w_alt_fnum, arglist w_alist, int w_arg_idx, int w_arg_idx_invalid, Object w_localdir,  w_onebuf_opt,  w_allbuf_opt, long w_p_siso, long w_p_so, long w_scbind_pos,  w_pcmark,  w_prev_pcmark, Object w_tagstack, int w_tagstackidx, int w_tagstacklen, int w_fraction, int w_prev_fraction_row) {
+	public window_S(int w_id, file_buffer w_buffer, window_S w_prev, window_S w_next, int w_closing, frame_S w_frame,  w_cursor, Object w_curswant, int w_set_curswant, byte w_old_visual_mode, Object w_old_cursor_lnum, Object w_old_cursor_fcol, Object w_old_cursor_lcol, Object w_old_visual_lnum, Object w_old_visual_col, Object w_old_curswant, Object w_topline, byte w_topline_was_set, Object w_leftcol, Object w_skipcol, int w_winrow, int w_height, int w_status_height, int w_wincol, int w_width, int w_vsep_width,  w_save_cursor, int w_valid,  w_valid_cursor, Object w_valid_leftcol, int w_cline_height, int w_cline_row, Object w_virtcol, int w_wrow, int w_wcol, Object w_botline, int w_empty_rows, int w_lines_valid, w_line[] w_lines, int w_redr_type, int w_upd_rows, Object w_redraw_top, Object w_redraw_bot, int w_redr_status, int w_alt_fnum, arglist w_alist, int w_arg_idx, int w_arg_idx_invalid, Object w_localdir,  w_onebuf_opt,  w_allbuf_opt, long w_p_siso, long w_p_so, long w_scbind_pos,  w_pcmark,  w_prev_pcmark, Object w_tagstack, int w_tagstackidx, int w_tagstacklen, int w_fraction, int w_prev_fraction_row) {
 		setW_id(w_id);
 		setW_buffer(w_buffer);
 		setW_prev(w_prev);
@@ -134,6 +134,105 @@ public class window_S {
 	public window_S() {
 	}
 	
+	/* vi:set ts=8 sts=4 sw=4 noet:
+	 *
+	 * VIM - Vi IMproved	by Bram Moolenaar
+	 *			Visual Workshop integration by Gordon Prieur
+	 *
+	 * Do ":help uganda"  in Vim to read copying and usage conditions.
+	 * Do ":help credits" in Vim to see a list of people who contributed.
+	 * See README.txt for an overview of the Vim source code.
+	 */
+	/*
+	 * Find text under the mouse position "row" / "col".
+	 * If "getword" is TRUE the returned text in "*textp" is not the whole line but
+	 * the relevant word in allocated memory.
+	 * Return OK if found.
+	 * Return FAIL if not found, no text at the mouse position.
+	 */
+	public int find_word_under_cursor(int mouserow, int mousecol, int getword, int flags, Object lnump, Object textp, Integer colp, Integer startcolp) {
+		// can be NULL// column where mouse hovers, can be NULL// column where text starts, can be NULLint row = mouserow;
+		int col = mousecol;
+		int scol;
+		win_T wp = new win_T();
+		char_u lbuf = new char_u();
+		linenr_T lnum = new linenr_T();
+		textp = ((Object)0);
+		wp = /*Error: Function owner not recognized*/mouse_find_win(row, col, .FAIL_POPUP);
+		int generatedW_height = wp.getW_height();
+		int generatedW_width = wp.getW_width();
+		file_buffer generatedW_buffer = wp.getW_buffer();
+		Object generatedLnum = spos.getLnum();
+		Object generatedCol = spos.getCol();
+		if (wp != ((Object)0) && row >= 0 && row < generatedW_height && col < generatedW_width) {
+			if (!/*Error: Function owner not recognized*/mouse_comp_pos(wp, row, col, lnum, ((Object)0))) {
+				lbuf = generatedW_buffer.ml_get_buf(lnum, 0);
+				if (col <= wp.win_linetabsize(lbuf, (colnr_T)INT_MAX)) {
+					if (getword) {
+						int len;
+						pos_T spos = ((Object)0);
+						pos_T epos = ((Object)0);
+						if (VIsual_active) {
+							if ((((ModernizedCProgram.VIsual).getLnum() != (ModernizedCProgram.curwin.getW_cursor()).getLnum()) ? (ModernizedCProgram.VIsual).getLnum() < (ModernizedCProgram.curwin.getW_cursor()).getLnum() : (ModernizedCProgram.VIsual).getCol() != (ModernizedCProgram.curwin.getW_cursor()).getCol() ? (ModernizedCProgram.VIsual).getCol() < (ModernizedCProgram.curwin.getW_cursor()).getCol() : (ModernizedCProgram.VIsual).getColadd() < (ModernizedCProgram.curwin.getW_cursor()).getColadd())) {
+								spos = ModernizedCProgram.VIsual;
+								epos = ModernizedCProgram.curwin.getW_cursor();
+							} else {
+									spos = ModernizedCProgram.curwin.getW_cursor();
+									epos = ModernizedCProgram.VIsual;
+							} 
+						} 
+						col = /*Error: Function owner not recognized*/vcol2col(wp, lnum, col);
+						scol = col;
+						if (VIsual_active && generatedW_buffer == generatedW_buffer && (lnum == generatedLnum ? col >= (int)generatedCol : lnum > generatedLnum) && (lnum == generatedLnum ? col <= (int)generatedCol : lnum < generatedLnum)) {
+							if (generatedLnum != generatedLnum || generatedCol == generatedCol) {
+								return 0;
+							} 
+							lbuf = generatedW_buffer.ml_get_buf(generatedLnum, 0);
+							len = generatedCol - generatedCol;
+							if (ModernizedCProgram.p_sel != (byte)'e') {
+								len += /*Error: Function owner not recognized*/mb_ptr2len(lbuf + generatedCol);
+							} 
+							lbuf = ModernizedCProgram.vim_strnsave(lbuf + generatedCol, len);
+							lnum = generatedLnum;
+							col = generatedCol;
+							scol = col;
+						} else {
+								++emsg_off;
+								len = wp.find_ident_at_pos(lnum, (colnr_T)col, lbuf, scol, flags);
+								--emsg_off;
+								if (len == 0) {
+									return 0;
+								} 
+								lbuf = ModernizedCProgram.vim_strnsave(lbuf, len);
+						} 
+					} 
+					if (winp != ((Object)0)) {
+						winp = wp;
+					} 
+					if (lnump != ((Object)0)) {
+						lnump = lnum;
+					} 
+					textp = lbuf;
+					if (colp != ((Object)0)) {
+						colp = col;
+					} 
+					if (startcolp != ((Object)0)) {
+						startcolp = scol;
+					} 
+					return 1;
+				} 
+			} 
+		} 
+		// Found a window and the cursor is in the text.  Now find the line
+		return 0;/*
+		 * Get the text and position to be evaluated for "beval".
+		 * If "getword" is TRUE the returned text is not the whole line but the
+		 * relevant word in allocated memory.
+		 * Returns OK or FAIL.
+		 */
+	}
+	// flags for find_ident_at_pos()
+	// can be NULL
 	/* Exported folding functions. {{{1 */
 	/* copyFoldingState() {{{2 */
 	/*
@@ -244,10 +343,10 @@ public class window_S {
 	public void foldUpdate(Object top, Object bot) {
 		fold_T fp = new fold_T();
 		if (disable_fold_update > 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (need_diff_redraw) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		// will update later
 		Object generatedW_folds = this.getW_folds();
@@ -279,7 +378,7 @@ public class window_S {
 	}
 	public void foldInitWin() {
 		Object generatedW_folds = this.getW_folds();
-		generatedW_folds.ga_init2((int), 10/* find_wl_entry() {{{2 *//*
+		generatedW_folds.ga_init2((int)/*Error: Unsupported expression*/, 10/* find_wl_entry() {{{2 *//*
 		 * Find an entry in the win->w_lines[] array for buffer line "lnum".
 		 * Only valid entries are considered (for entries where wl_valid is FALSE the
 		 * line number can be wrong).
@@ -289,7 +388,7 @@ public class window_S {
 	public int find_wl_entry(Object lnum) {
 		int i;
 		int generatedW_lines_valid = this.getW_lines_valid();
-		w_line generatedW_lines = this.getW_lines();
+		w_line[] generatedW_lines = this.getW_lines();
 		for (i = 0; i < generatedW_lines_valid; ++i) {
 			if (generatedW_lines[i].getWl_valid()) {
 				if (lnum < generatedW_lines[i].getWl_lnum()) {
@@ -313,7 +412,7 @@ public class window_S {
 		gap = generatedW_folds;
 		Object generatedFd_nested = fp.getFd_nested();
 		Object generatedFd_top = fp.getFd_top();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (!ModernizedCProgram.foldFind(gap, lnum_rel, fp)) {
 				break;
 			} 
@@ -335,7 +434,7 @@ public class window_S {
 			 */);
 		} 
 	}
-	public Object setManualFoldWin(Object lnum, int opening, int recurse, int donep) {
+	public Object setManualFoldWin(Object lnum, int opening, int recurse, Integer donep) {
 		/* TRUE when closing/opening recursive */fold_T fp = new fold_T();
 		fold_T fp2 = new fold_T();
 		fold_T found = ((Object)0);
@@ -359,7 +458,7 @@ public class window_S {
 		 generatedW_onebuf_opt = this.getW_onebuf_opt();
 		Object generatedWo_fdl = generatedW_onebuf_opt.getWo_fdl();
 		Object generatedFd_nested = fp.getFd_nested();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (!ModernizedCProgram.foldFind(gap, lnum, fp)) {
 				if (fp < (fold_T)generatedGa_data + generatedGa_len) {
 					next = generatedFd_top + off;
@@ -444,7 +543,7 @@ public class window_S {
 		int level;
 		fold_T fp = new fold_T();
 		if (ModernizedCProgram.invalid_top != (linenr_T)/* Avoid problems when being called recursively. */0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedW_foldinvalid = this.getW_foldinvalid();
 		file_buffer generatedW_buffer = this.getW_buffer();
@@ -489,7 +588,7 @@ public class window_S {
 				level = wp.foldLevelWin(top - /* Get the fold level at top - 1. */1);
 				fline.setLnum(top - /* The fold may end just above the top, check for that. */1);
 				fline.setLvl(level);
-				.getlevel(fline/* If a fold started here, we already had the level, if it stops
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/getlevel(fline/* If a fold started here, we already had the level, if it stops
 					     * here, we need to use lvl_next.  Could also start and end a fold
 					     * in the same line. */);
 				if (generatedLvl > level) {
@@ -499,7 +598,7 @@ public class window_S {
 				} 
 			} 
 			fline.setLnum(top);
-			.getlevel(fline);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/getlevel(fline);
 		} else {
 				fline.setLnum(top);
 				if (wp.foldmethodIsExpr()) {
@@ -520,7 +619,7 @@ public class window_S {
 				for (; !got_int; --generatedLnum) {
 					fline.setLvl_next(-/* Reset lvl_next each time, because it will be set to a value for
 						     * the next line, but we search backwards here. */1);
-					.getlevel(fline);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/getlevel(fline);
 					if (generatedLvl >= 0) {
 						break;
 					} 
@@ -585,7 +684,7 @@ public class window_S {
 					} 
 					++generatedLnum;
 					fline.setLvl(generatedLvl_next);
-					.getlevel(fline);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/getlevel(fline);
 			} 
 		}
 		generatedW_folds.foldRemove(start, /* There can't be any folds from start until end now. */end);
@@ -635,7 +734,7 @@ public class window_S {
 		Object generatedWo_fmr = generatedW_onebuf_opt.getWo_fmr();
 		ModernizedCProgram.foldendmarker = ModernizedCProgram.vim_strchr(generatedWo_fmr, (byte)',');
 		ModernizedCProgram.foldstartmarkerlen = (int)(ModernizedCProgram.foldendmarker++ - generatedWo_fmr);
-		ModernizedCProgram.foldendmarkerlen = (int).strlen((byte)(ModernizedCProgram.foldendmarker/* foldlevelMarker() {{{2 *//*
+		ModernizedCProgram.foldendmarkerlen = (int)/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.foldendmarker/* foldlevelMarker() {{{2 *//*
 		 * Low level function to get the foldlevel for the "marker" method.
 		 * "foldendmarker", "foldstartmarkerlen" and "foldendmarkerlen" must have been
 		 * set before calling this.
@@ -644,74 +743,6 @@ public class window_S {
 		 * Doesn't use any caching.
 		 * Sets flp->start when a start marker was found.
 		 */));
-	}
-	public void cleanup_jumplist(int loadfiles) {
-		int i;
-		int from;
-		int to;
-		Object generatedW_jumplistlen = this.getW_jumplistlen();
-		Object generatedW_jumplist = this.getW_jumplist();
-		if (loadfiles/* If specified, load all the files from the jump list. This is
-			 * needed to properly clean up duplicate entries, but will take some
-			 * time. */) {
-			for (i = 0; i < generatedW_jumplistlen; ++i) {
-				if ((generatedW_jumplist[i].getFmark().getFnum() == 0) && (generatedW_jumplist[i].getFmark().getMark().getLnum() != 0)) {
-					generatedW_jumplist[i].fname2fnum();
-				} 
-			}
-		} 
-		to = 0;
-		Object generatedW_jumplistidx = this.getW_jumplistidx();
-		for (from = 0; from < generatedW_jumplistlen; ++from) {
-			if (generatedW_jumplistidx == from) {
-				this.setW_jumplistidx(to);
-			} 
-			for (i = from + 1; i < generatedW_jumplistlen; ++i) {
-				if (generatedW_jumplist[i].getFmark().getFnum() == generatedW_jumplist[from].getFmark().getFnum() && generatedW_jumplist[from].getFmark().getFnum() != 0 && generatedW_jumplist[i].getFmark().getMark().getLnum() == generatedW_jumplist[from].getFmark().getMark().getLnum()) {
-					break;
-				} 
-			}
-			if (i >= generatedW_jumplistlen) {
-				generatedW_jumplist[to++] = generatedW_jumplist[from];
-			} else {
-					ModernizedCProgram.vim_free(generatedW_jumplist[from].getFname());
-			} 
-		}
-		if (generatedW_jumplistidx == generatedW_jumplistlen) {
-			this.setW_jumplistidx(to);
-		} 
-		this.setW_jumplistlen(to/*
-		 * Copy the jumplist from window "from" to window "to".
-		 */);
-	}
-	public void copy_jumplist(window_S to) {
-		int i;
-		Object generatedW_jumplistlen = this.getW_jumplistlen();
-		Object generatedW_jumplist = to.getW_jumplist();
-		for (i = 0; i < generatedW_jumplistlen; ++i) {
-			generatedW_jumplist[i] = generatedW_jumplist[i];
-			if (generatedW_jumplist[i].getFname() != ((Object)0)) {
-				generatedW_jumplist[i].setFname(ModernizedCProgram.vim_strsave(generatedW_jumplist[i].getFname()));
-			} 
-		}
-		to.setW_jumplistlen(generatedW_jumplistlen);
-		Object generatedW_jumplistidx = this.getW_jumplistidx();
-		to.setW_jumplistidx(generatedW_jumplistidx);
-	}
-	public void free_jumplist() {
-		int i;
-		Object generatedW_jumplistlen = this.getW_jumplistlen();
-		Object generatedW_jumplist = this.getW_jumplist();
-		for (i = 0; i < generatedW_jumplistlen; ++i) {
-			ModernizedCProgram.vim_free(generatedW_jumplist[i].getFname());
-		}
-	}
-	public void set_last_cursor() {
-		file_buffer generatedW_buffer = this.getW_buffer();
-		 generatedW_cursor = this.getW_cursor();
-		if (generatedW_buffer != ((Object)0)) {
-			generatedW_buffer.setB_last_cursor(generatedW_cursor);
-		} 
 	}
 	public int plines_win(Object lnum, int winheight) {
 		return wp.plines_win_nofill(lnum, winheight) + wp.diff_check_fill(/* Check for filler lines above this buffer line.  When folded the result
@@ -799,7 +830,7 @@ public class window_S {
 		col = 0;
 		while (s != (byte)'\000' && --column >= 0) {
 			col += wp.win_lbr_chartabsize(line, s, (colnr_T)col, ((Object)0));
-			s += .UNRECOGNIZEDFUNCTIONNAME(s/*
+			s += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s/*
 			     * If *s is a TAB, and the TAB is not displayed as ^I, and we're not in
 			     * INSERT mode, then col must be adjusted so that it represents the last
 			     * screen position of the TAB.  This only fixes an error when the TAB wraps
@@ -845,260 +876,34 @@ public class window_S {
 		}
 		return (count);
 	}
-	public int win_chartabsize(Object p, Object col) {
-		 generatedW_onebuf_opt = (wp).getW_onebuf_opt();
-		Object generatedWo_list = generatedW_onebuf_opt.getWo_list();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		long generatedB_p_ts = (generatedW_buffer).getB_p_ts();
-		Object generatedB_p_vts_array = (generatedW_buffer).getB_p_vts_array();
-		if ((p) == (byte)'\011' && (!generatedWo_list || lcs_tab1)) {
-			return ModernizedCProgram.tabstop_padding(col, generatedB_p_ts, generatedB_p_vts_array);
-		} else {
-				return ModernizedCProgram.ptr2cells(p/*
-				 * Return the number of characters the string 's' will take on the screen,
-				 * taking into account the size of a tab.
-				 */);
-		} 
-	}
-	public int win_linetabsize(Object line, Object len) {
-		colnr_T col = 0;
-		char_u s = new char_u();
-		for (s = line; s != (byte)'\000' && (len == INT_MAX || s < line + len); s += .UNRECOGNIZEDFUNCTIONNAME(s)) {
-			col += wp.win_lbr_chartabsize(line, s, col, ((Object)0));
+	public window_S tclfindwin(file_buffer buf) {
+		win_T win = new win_T();
+		file_buffer generatedW_buffer = win.getW_buffer();
+		window_S generatedW_next = win.getW_next();
+		for (win = ModernizedCProgram.firstwin; win != ((Object)0); win = generatedW_next) {
+			if (generatedW_buffer == buf) {
+				return win;
+			} 
 		}
-		return (int)col/*
-		 * Return TRUE if 'c' is a normal identifier character:
-		 * Letters and characters from the 'isident' option.
+		return /* keep current window context */ModernizedCProgram.curwin/*
+		 * Do-it-all function for "::vim::command", "$buf command" and "$win command".
 		 */;
 	}
-	public int win_lbr_chartabsize(Object line, Object s, Object col, int headp) {
-		int c;
-		int size;
-		colnr_T col2 = new colnr_T();
-		colnr_T col_adj = /* col + screen size of tab */0;
-		colnr_T colmax = new colnr_T();
-		int added;
-		int mb_added = 0;
-		int numberextra;
-		char_u ps = new char_u();
-		int tab_corr = (s == (byte)'\011');
-		int n;
-		/*
-		     * No 'linebreak', 'showbreak' and 'breakindent': return quickly.
-		     */
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_lbr = generatedW_onebuf_opt.getWo_lbr();
-		Object generatedWo_bri = generatedW_onebuf_opt.getWo_bri();
-		Object generatedWo_wrap = generatedW_onebuf_opt.getWo_wrap();
-		Object generatedWo_list = generatedW_onebuf_opt.getWo_list();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		long generatedB_p_ts = (generatedW_buffer).getB_p_ts();
-		Object generatedB_p_vts_array = (generatedW_buffer).getB_p_vts_array();
-		if (!generatedWo_lbr && !generatedWo_bri && p_sbr == (byte)'\000') {
-			if (generatedWo_wrap) {
-				return wp.win_nolbr_chartabsize(s, col, headp);
-			} 
-			if ((s) == (byte)'\011' && (!generatedWo_list || lcs_tab1)) {
-				return ModernizedCProgram.tabstop_padding(col, generatedB_p_ts, generatedB_p_vts_array);
-			} else {
-					return ModernizedCProgram.ptr2cells(s);
-			} 
-		} 
-		size = wp.win_chartabsize(s, /*
-		     * First get normal size, without 'linebreak'
-		     */col);
-		c = s;
-		if (tab_corr) {
-			col_adj = size - 1/*
-			     * If 'linebreak' set check at a blank before a non-blank if the line
-			     * needs a break here
-			     */;
-		} 
-		int generatedW_width = this.getW_width();
-		if (generatedWo_lbr && ((c) < 256 && breakat_flags[(char_u)(c)]) && !(((int)s[1]) < 256 && breakat_flags[(char_u)((int)s[1])]) && generatedWo_wrap && generatedW_width != 0/*
-			 * Count all characters from first non-blank after a blank up to next
-			 * non-blank after a blank.
-			 */) {
-			numberextra = wp.win_col_off();
-			col2 = col;
-			colmax = (colnr_T)(generatedW_width - numberextra - col_adj);
-			if (col >= colmax) {
-				colmax += col_adj;
-				n = colmax + wp.win_col_off2();
-				if (n > 0) {
-					colmax += (((col - colmax) / n) + 1) * n - col_adj;
-				} 
-			} 
-			for (; ; ) {
-				ps = s;
-				s += .UNRECOGNIZEDFUNCTIONNAME(s);
-				c = s;
-				if (!(c != (byte)'\000' && (((c) < 256 && breakat_flags[(char_u)(c)]) || (!((c) < 256 && breakat_flags[(char_u)(c)]) && (col2 == col || !(((int)ps) < 256 && breakat_flags[(char_u)((int)ps)])))))) {
-					break;
-				} 
-				col2 += wp.win_chartabsize(s, col2);
-				if (col2 >= /* doesn't fit */colmax) {
-					size = colmax - col + col_adj;
-					break;
-				} 
-			}
-		}  else if (has_mbyte && size == 2 && ModernizedCProgram.mb_bytelen_tab[s] > 1 && generatedWo_wrap && wp.in_win_border(col)) {
-			++/* Count the ">" in the last column. */size;
-			mb_added = 1/*
-			     * May have to add something for 'breakindent' and/or 'showbreak'
-			     * string at start of line.
-			     * Set *headp to the size of what we add.
-			     */;
-		} 
-		added = 0;
-		if ((p_sbr != (byte)'\000' || generatedWo_bri) && generatedWo_wrap && col != 0) {
-			colnr_T sbrlen = 0;
-			int numberwidth = wp.win_col_off();
-			numberextra = numberwidth;
-			col += numberextra + mb_added;
-			if (col >= (colnr_T)generatedW_width) {
-				col -= generatedW_width;
-				numberextra = generatedW_width - (numberextra - wp.win_col_off2());
-				if (col >= numberextra && numberextra > 0) {
-					col %= numberextra;
-				} 
-				if (p_sbr != (byte)'\000') {
-					sbrlen = (colnr_T)(has_mbyte ? ModernizedCProgram.mb_charlen(p_sbr) : (int).strlen((byte)(p_sbr)));
-					if (col >= sbrlen) {
-						col -= sbrlen;
-					} 
-				} 
-				if (col >= numberextra && numberextra > 0) {
-					col = col % numberextra;
-				}  else if (col > 0 && numberextra > 0) {
-					col += numberwidth - wp.win_col_off2();
-				} 
-				numberwidth -= wp.win_col_off2();
-			} 
-			if (col == 0 || col + size + sbrlen > (colnr_T)generatedW_width) {
-				added = 0;
-				if (p_sbr != (byte)'\000') {
-					if (size + sbrlen + numberwidth > (colnr_T)generatedW_width) {
-						int width = (colnr_T)generatedW_width - sbrlen - numberwidth;
-						int prev_width = col ? ((colnr_T)generatedW_width - (sbrlen + col)) : 0;
-						if (width <= 0) {
-							width = (colnr_T)1;
-						} 
-						added += ((size - prev_width) / width) * ModernizedCProgram.vim_strsize(p_sbr);
-						if ((size - prev_width) % width) {
-							added += ModernizedCProgram.vim_strsize(p_sbr);
-						} 
-					} else {
-							added += ModernizedCProgram.vim_strsize(p_sbr);
-					} 
-				} 
-				if (generatedWo_bri) {
-					added += wp.get_breakindent_win(line);
-				} 
-				size += added;
-				if (col != 0) {
-					added = 0;
-				} 
-			} 
-		} 
-		if (headp != ((Object)0)) {
-			headp = added + mb_added;
-		} 
-		return size/*
-		 * Like win_lbr_chartabsize(), except that we know 'linebreak' is off and
-		 * 'wrap' is on.  This means we need to check for a double-byte character that
-		 * doesn't fit at the end of the screen line.
-		 */;
+	public Byte tclgetwindow(Object interp) {
+		Object generatedW_tcl_ref = this.getW_tcl_ref();
+		return ModernizedCProgram.tclgetref(interp, (generatedW_tcl_ref), "win", (Object)win, winselfcmd);
 	}
-	/* start of the line */
-	/* vi:set ts=8 sts=4 sw=4 noet:
-	 *
-	 * VIM - Vi IMproved	by Bram Moolenaar
-	 *
-	 * Do ":help uganda"  in Vim to read copying and usage conditions.
-	 * Do ":help credits" in Vim to see a list of people who contributed.
-	 * See README.txt for an overview of the Vim source code.
-	 */
-	/* for towupper() and towlower() */
-	public int win_nolbr_chartabsize(Object s, Object col, int headp) {
-		int n;
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_list = generatedW_onebuf_opt.getWo_list();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		long generatedB_p_ts = generatedW_buffer.getB_p_ts();
-		Object generatedB_p_vts_array = generatedW_buffer.getB_p_vts_array();
-		if (s == (byte)'\011' && (!generatedWo_list || lcs_tab1)) {
-			return ModernizedCProgram.tabstop_padding(col, generatedB_p_ts, generatedB_p_vts_array);
+	public void tcl_window_free() {
+		ref reflist = new ref();
+		/* Not using Tcl, nothing to do. */
+		Object generatedW_tcl_ref = this.getW_tcl_ref();
+		reflist = (ref)(generatedW_tcl_ref);
+		if (reflist != ModernizedCProgram.refsdeleted) {
+			this.setW_tcl_ref((Object)ModernizedCProgram.refsdeleted);
+			reflist.tcldelallrefs();
+			this.setW_tcl_ref(((Object)0/* The End */));
 		} 
-		n = ModernizedCProgram.ptr2cells(s/* Add one cell for a double-width character in the last column of the
-		     * window, displayed with a ">". */);
-		if (n == 2 && ModernizedCProgram.mb_bytelen_tab[s] > 1 && wp.in_win_border(col)) {
-			if (headp != ((Object)0)) {
-				headp = 1;
-			} 
-			return 3;
-		} 
-		return n/*
-		 * Return TRUE if virtual column "vcol" is in the rightmost column of window
-		 * "wp".
-		 */;
 	}
-	/* flag: set for printable chars */
-	/* flag: set for ID chars */
-	/* flag: set for file name chars */
-	public int in_win_border(Object vcol) {
-		/* width of first line (after line number) */int width1;
-		/* width of further lines */int width2;
-		int generatedW_width = this.getW_width();
-		if (generatedW_width == /* there is no border */0) {
-			return 0;
-		} 
-		width1 = generatedW_width - wp.win_col_off();
-		if ((int)vcol < width1 - 1) {
-			return 0;
-		} 
-		if ((int)vcol == width1 - 1) {
-			return 1;
-		} 
-		width2 = width1 + wp.win_col_off2();
-		if (width2 <= 0) {
-			return 0;
-		} 
-		return ((vcol - width1) % width2 == width2 - 1/*
-		 * Get virtual column number of pos.
-		 *  start: on the first position of this character (TAB, ctrl)
-		 * cursor: where the cursor is on this character (first char, except for TAB)
-		 *    end: on the last position of this character (TAB, ctrl)
-		 *
-		 * This is used very often, keep it fast!
-		 */);
-	}
-	/*
-	 * Fill g_chartab[].  Also fills curbuf->b_chartab[] with flags for keyword
-	 * characters for current buffer.
-	 *
-	 * Depends on the option settings 'iskeyword', 'isident', 'isfname',
-	 * 'isprint' and 'encoding'.
-	 *
-	 * The index in g_chartab[] depends on 'encoding':
-	 * - For non-multi-byte index with the byte (same as the character).
-	 * - For DBCS index with the first byte.
-	 * - For UTF-8 index with the character (when first byte is up to 0x80 it is
-	 *   the same as the character, if the first byte is 0x80 and above it depends
-	 *   on further bytes).
-	 *
-	 * The contents of g_chartab[]:
-	 * - The lower two bits, masked by CT_CELL_MASK, give the number of display
-	 *   cells the character occupies (1 or 2).  Not valid for UTF-8 above 0x80.
-	 * - CT_PRINT_CHAR bit is set when the character is printable (no need to
-	 *   translate the character before displaying it).  Note that only DBCS
-	 *   characters can have 2 display cells and still be printable.
-	 * - CT_FNAME_CHAR bit is set when the character can be in a file name.
-	 * - CT_ID_CHAR bit is set when the character can be in an identifier.
-	 *
-	 * Return FAIL if 'iskeyword', 'isident', 'isfname' or 'isprint' option has an
-	 * error, OK otherwise.
-	 */
 	public int get_breakindent_win(Object line) {
 		// start of the line// cached indent valueint prev_indent = 0;
 		// cached tabstop valuelong prev_ts = -1024;
@@ -1111,7 +916,7 @@ public class window_S {
 		 generatedW_onebuf_opt = this.getW_onebuf_opt();
 		Object generatedWo_nu = generatedW_onebuf_opt.getWo_nu();
 		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
-		int eff_wwidth = generatedW_width - ((generatedWo_nu || generatedWo_rnu) && (ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'n') == ((Object)0)) ? .number_width(wp) + 1 : 0);
+		int eff_wwidth = generatedW_width - ((generatedWo_nu || generatedWo_rnu) && (ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'n') == ((Object)0)) ? /*Error: Function owner not recognized*/number_width(wp) + 1 : 0);
 		file_buffer generatedW_buffer = this.getW_buffer();
 		long generatedB_p_ts = generatedW_buffer.getB_p_ts();
 		dictitem16_S generatedB_ct_di = (generatedW_buffer).getB_ct_di();
@@ -1146,186 +951,7 @@ public class window_S {
 		 *		    the line.
 		 */;
 	}
-	public void ruby_window_free() {
-		Object generatedW_ruby_ref = this.getW_ruby_ref();
-		if (generatedW_ruby_ref) {
-			.rb_hash_aset(ModernizedCProgram.objtbl, .rb_obj_id(()generatedW_ruby_ref), Qnil);
-			.RDATA(generatedW_ruby_ref).setData(((Object)0));
-		} 
-	}
-	public Object window_new() {
-		Object generatedW_ruby_ref = this.getW_ruby_ref();
-		if (generatedW_ruby_ref) {
-			return ()generatedW_ruby_ref;
-		} else {
-				 obj = .Data_Wrap_Struct(ModernizedCProgram.cVimWindow, 0, 0, win);
-				this.setW_ruby_ref((Object)obj);
-				.rb_hash_aset(ModernizedCProgram.objtbl, .rb_obj_id(obj), obj);
-				return obj;
-		} 
-	}
-	public window_S get_win(Object obj) {
-		win_T win = new win_T();
-		.Data_Get_Struct(obj, , win);
-		if (win == ((Object)0)) {
-			.rb_raise(ModernizedCProgram.eDeletedWindowError, "attempt to refer to deleted window");
-		} 
-		return win;
-	}
-	public void python3_window_free() {
-		Object generatedW_python3_ref = this.getW_python3_ref();
-		if (generatedW_python3_ref != ((Object)0)) {
-			WindowObject wp = generatedW_python3_ref;
-			wp.setWin(((win_T)(true)));
-			this.setW_python3_ref(((Object)0));
-		} 
-	}
-	/* vi:set ts=8 sts=4 sw=4 noet:
-	 *
-	 * VIM - Vi IMproved	by Bram Moolenaar
-	 *			Visual Workshop integration by Gordon Prieur
-	 *
-	 * Do ":help uganda"  in Vim to read copying and usage conditions.
-	 * Do ":help credits" in Vim to see a list of people who contributed.
-	 * See README.txt for an overview of the Vim source code.
-	 */
-	/*
-	 * Find text under the mouse position "row" / "col".
-	 * If "getword" is TRUE the returned text in "*textp" is not the whole line but
-	 * the relevant word in allocated memory.
-	 * Return OK if found.
-	 * Return FAIL if not found, no text at the mouse position.
-	 */
-	public int find_word_under_cursor(int mouserow, int mousecol, int getword, int flags, Object lnump, Object textp, int colp, int startcolp) {
-		// can be NULL// column where mouse hovers, can be NULL// column where text starts, can be NULLint row = mouserow;
-		int col = mousecol;
-		int scol;
-		win_T wp = new win_T();
-		char_u lbuf = new char_u();
-		linenr_T lnum = new linenr_T();
-		textp = ((Object)0);
-		wp = .mouse_find_win(row, col, .FAIL_POPUP);
-		int generatedW_height = wp.getW_height();
-		int generatedW_width = wp.getW_width();
-		file_buffer generatedW_buffer = wp.getW_buffer();
-		Object generatedLnum = spos.getLnum();
-		Object generatedCol = spos.getCol();
-		if (wp != ((Object)0) && row >= 0 && row < generatedW_height && col < generatedW_width) {
-			if (!.mouse_comp_pos(wp, row, col, lnum, ((Object)0))) {
-				lbuf = generatedW_buffer.ml_get_buf(lnum, 0);
-				if (col <= wp.win_linetabsize(lbuf, (colnr_T)INT_MAX)) {
-					if (getword) {
-						int len;
-						pos_T spos = ((Object)0);
-						pos_T epos = ((Object)0);
-						if (VIsual_active) {
-							if ((((ModernizedCProgram.VIsual).getLnum() != (ModernizedCProgram.curwin.getW_cursor()).getLnum()) ? (ModernizedCProgram.VIsual).getLnum() < (ModernizedCProgram.curwin.getW_cursor()).getLnum() : (ModernizedCProgram.VIsual).getCol() != (ModernizedCProgram.curwin.getW_cursor()).getCol() ? (ModernizedCProgram.VIsual).getCol() < (ModernizedCProgram.curwin.getW_cursor()).getCol() : (ModernizedCProgram.VIsual).getColadd() < (ModernizedCProgram.curwin.getW_cursor()).getColadd())) {
-								spos = ModernizedCProgram.VIsual;
-								epos = ModernizedCProgram.curwin.getW_cursor();
-							} else {
-									spos = ModernizedCProgram.curwin.getW_cursor();
-									epos = ModernizedCProgram.VIsual;
-							} 
-						} 
-						col = .vcol2col(wp, lnum, col);
-						scol = col;
-						if (VIsual_active && generatedW_buffer == generatedW_buffer && (lnum == generatedLnum ? col >= (int)generatedCol : lnum > generatedLnum) && (lnum == generatedLnum ? col <= (int)generatedCol : lnum < generatedLnum)) {
-							if (generatedLnum != generatedLnum || generatedCol == generatedCol) {
-								return 0;
-							} 
-							lbuf = generatedW_buffer.ml_get_buf(generatedLnum, 0);
-							len = generatedCol - generatedCol;
-							if (ModernizedCProgram.p_sel != (byte)'e') {
-								len += .mb_ptr2len(lbuf + generatedCol);
-							} 
-							lbuf = ModernizedCProgram.vim_strnsave(lbuf + generatedCol, len);
-							lnum = generatedLnum;
-							col = generatedCol;
-							scol = col;
-						} else {
-								++emsg_off;
-								len = wp.find_ident_at_pos(lnum, (colnr_T)col, lbuf, scol, flags);
-								--emsg_off;
-								if (len == 0) {
-									return 0;
-								} 
-								lbuf = ModernizedCProgram.vim_strnsave(lbuf, len);
-						} 
-					} 
-					if (winp != ((Object)0)) {
-						winp = wp;
-					} 
-					if (lnump != ((Object)0)) {
-						lnump = lnum;
-					} 
-					textp = lbuf;
-					if (colp != ((Object)0)) {
-						colp = col;
-					} 
-					if (startcolp != ((Object)0)) {
-						startcolp = scol;
-					} 
-					return 1;
-				} 
-			} 
-		} 
-		// Found a window and the cursor is in the text.  Now find the line
-		return 0;/*
-		 * Get the text and position to be evaluated for "beval".
-		 * If "getword" is TRUE the returned text is not the whole line but the
-		 * relevant word in allocated memory.
-		 * Returns OK or FAIL.
-		 */
-	}
-	// flags for find_ident_at_pos()
-	// can be NULL
-	public int ses_do_win() {
-		file_buffer generatedW_buffer = this.getW_buffer();
-		Object generatedB_fname = generatedW_buffer.getB_fname();
-		if (generatedB_fname == ((Object)0) || generatedW_buffer.bt_nofilename()) {
-			return (ssop_flags & -1024);
-		} 
-		if (generatedW_buffer.bt_help()) {
-			return (ssop_flags & -1024);
-		} 
-		return 1/*
-		 * Return TRUE if frame "fr" has a window somewhere that we want to save in
-		 * the Session.
-		 */;
-	}
-	public int current_win_nr() {
-		win_T wp = new win_T();
-		int nr = 0;
-		window_S generatedW_next = wp.getW_next();
-		for (wp = ModernizedCProgram.firstwin; wp != ((Object)0); wp = generatedW_next) {
-			++nr;
-			if (wp == win) {
-				break;
-			} 
-		}
-		return nr;
-	}
-	public int before_quit_autocmds(int quit_all, int forceit) {
-		file_buffer generatedW_buffer = this.getW_buffer();
-		generatedW_buffer.apply_autocmds(auto_event.EVENT_QUITPRE, ((Object)0), ((Object)0), 0)// Bail out when autocommands closed the window.;// Bail out when autocommands closed the window.
-		int generatedB_nwindows = generatedW_buffer.getB_nwindows();
-		int generatedB_locked = generatedW_buffer.getB_locked();
-		// Refuse to quit when the buffer in the last window is being closed (can// only happen in autocommands).if (!wp.win_valid() || ModernizedCProgram.curbuf_locked() || (generatedB_nwindows == 1 && generatedB_locked > 0)) {
-			return 1;
-		} 
-		if (quit_all || (ModernizedCProgram.check_more(0, forceit) == 1 && ModernizedCProgram.only_one_window())) {
-			curbuf.apply_autocmds(auto_event.EVENT_EXITPRE, ((Object)0), ((Object)0), 0);
-			if (!wp.win_valid() || ModernizedCProgram.curbuf_locked() || (generatedB_nwindows == 1 && generatedB_locked > 0)) {
-				return 1;
-			} 
-		} 
-		return 0/*
-		 * ":quit": quit current window, quit Vim if the last window is closed.
-		 * ":{nr}quit": quit window {nr}
-		 * Also used when closing a terminal window that's the last one.
-		 */;
-	}
-	public void margin_columns_win(int left_col, int right_col) {
+	public void margin_columns_win(Integer left_col, Integer right_col) {
 		// cache previous calculations depending on w_virtcolint saved_w_virtcol;
 		win_T prev_wp = new win_T();
 		int prev_left_col;
@@ -1338,7 +964,7 @@ public class window_S {
 		if (saved_w_virtcol == generatedW_virtcol && prev_wp == wp && prev_col_off == cur_col_off) {
 			right_col = prev_right_col;
 			left_col = prev_left_col;
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedW_width = this.getW_width();
 		width1 = generatedW_width - cur_col_off;
@@ -1659,15 +1285,15 @@ public class window_S {
 				nextlinecol = INT_MAX;
 				nextline_idx = 0;
 			} else {
-					v = (long).strlen((byte)(line));
+					v = (long)/*Error: Function owner not recognized*/strlen((byte)(line));
 					if (v < 150) {
 						nextlinecol = 0;
-						.memmove((byte)(nextline), (byte)(line), (size_t)((size_t)v));
-						.memmove((byte)((nextline + v)), (byte)((nextline + 150)), (size_t)(.strlen((byte)(nextline + 150)) + 1));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(nextline), (byte)(line), (size_t)((size_t)v));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)((nextline + v)), (byte)((nextline + 150)), (size_t)(/*Error: Function owner not recognized*/strlen((byte)(nextline + 150)) + 1));
 						nextline_idx = v + 1;
 					} else {
 							nextlinecol = v - 150;
-							.memmove((byte)(nextline), (byte)(line + nextlinecol), (size_t)(true));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(nextline), (byte)(line + nextlinecol), (size_t)(true));
 							nextline_idx = 150 + 1;
 					} 
 			} 
@@ -1678,14 +1304,14 @@ public class window_S {
 				extra_check = 1;
 			} 
 			if (lcs_trail) {
-				trailcol = (colnr_T).strlen((byte)(ptr));
+				trailcol = (colnr_T)/*Error: Function owner not recognized*/strlen((byte)(ptr));
 				while (trailcol > (colnr_T)0 && ((ptr[trailcol - 1]) == (byte)' ' || (ptr[trailcol - 1]) == (byte)'\t')) {
 					--trailcol;
 				}
 				trailcol += (colnr_T)(ptr - line);
 			} 
 		} 
-		wcr_attr = .get_wcr_attr(wp);
+		wcr_attr = /*Error: Function owner not recognized*/get_wcr_attr(wp);
 		if (wcr_attr != 0) {
 			win_attr = wcr_attr;
 			area_highlighting = 1;
@@ -1713,7 +1339,7 @@ public class window_S {
 				c = wp.win_lbr_chartabsize(line, ptr, (colnr_T)vcol, ((Object)0));
 				vcol += c;
 				prev_ptr = ptr;
-				ptr += .UNRECOGNIZEDFUNCTIONNAME(ptr);
+				ptr += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ptr);
 			}
 			if (vcol < v && (generatedWo_cuc || draw_color_col || ModernizedCProgram.virtual_active() || (VIsual_active && generatedW_buffer == generatedW_buffer))) {
 				vcol = v;
@@ -1721,7 +1347,7 @@ public class window_S {
 			if (vcol > v) {
 				vcol -= c;
 				ptr = prev_ptr;
-				if ((.UNRECOGNIZEDFUNCTIONNAME(ptr) >= c || ptr == (byte)'\011') && col == 0) {
+				if ((/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ptr) >= c || ptr == (byte)'\011') && col == 0) {
 					n_skip = v - vcol;
 				} 
 			} 
@@ -1801,11 +1427,11 @@ public class window_S {
 			char_u prop_start = new char_u();
 			text_prop_count = generatedW_buffer.get_text_props(lnum, prop_start, 0);
 			if (text_prop_count > 0) {
-				text_props = (textprop_T)ModernizedCProgram.alloc( * (text_prop_count));
+				text_props = (textprop_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*/ * (text_prop_count));
 				if (text_props != ((Object)0)) {
-					.memmove((byte)(text_props), (byte)(prop_start), (size_t)(text_prop_count * ));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(text_props), (byte)(prop_start), (size_t)(text_prop_count * /*Error: Unsupported expression*/));
 				} 
-				text_prop_idxs = (int)ModernizedCProgram.alloc( * (text_prop_count));
+				text_prop_idxs = (int)ModernizedCProgram.alloc(/*Error: Unsupported expression*/ * (text_prop_count));
 				area_highlighting = 1;
 				extra_check = 1;
 			} 
@@ -1837,7 +1463,7 @@ public class window_S {
 		Object generatedWo_cole = generatedW_onebuf_opt.getWo_cole();
 		Object generatedWo_cocu = generatedW_onebuf_opt.getWo_cocu();
 		Object generatedW_botfill = this.getW_botfill();
-		// Repeat for the whole displayed line.for (; ; ) {
+		// Repeat for the whole displayed line.for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			int has_match_conc = 0;
 			int did_decrement_ptr = 0;
 			if (draw_state != 0 + 1 + 1 + 1 + 1 + 1 + 1 + 1) {
@@ -1851,13 +1477,13 @@ public class window_S {
 					} 
 				} 
 				if (draw_state == 0 + 1 + 1 - 1 && n_extra == 0) {
-					int fdc = .compute_foldcolumn(wp, 0);
+					int fdc = /*Error: Function owner not recognized*/compute_foldcolumn(wp, 0);
 					draw_state = 0 + 1 + 1;
 					if (fdc > 0) {
 						ModernizedCProgram.vim_free(p_extra_free);
 						p_extra_free = ModernizedCProgram.alloc(12 + 1);
 						if (p_extra_free != ((Object)0)) {
-							.fill_foldcolumn(p_extra_free, wp, 0, lnum);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fill_foldcolumn(p_extra_free, wp, 0, lnum);
 							n_extra = fdc;
 							p_extra_free[n_extra] = (byte)'\000';
 							p_extra = p_extra_free;
@@ -1885,13 +1511,13 @@ public class window_S {
 									if (generatedWo_nu && !generatedWo_rnu) {
 										num = (long)lnum;
 									} else {
-											num = .labs((long)wp.get_cursor_rel_lnum(lnum));
+											num = /*Error: Function owner not recognized*/labs((long)wp.get_cursor_rel_lnum(lnum));
 											if (num == 0 && generatedWo_nu && generatedWo_rnu) {
 												num = lnum;
 												fmt = "%-*ld ";
 											} 
 									} 
-									.sprintf((byte)extra, fmt, .number_width(wp), num);
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)extra, fmt, /*Error: Function owner not recognized*/number_width(wp), num);
 									if (generatedW_skipcol > 0) {
 										for (p_extra = extra; p_extra == (byte)' '; ++p_extra) {
 											p_extra = (byte)'-';
@@ -1915,7 +1541,7 @@ public class window_S {
 										c_extra = (byte)' ';
 										c_final = (byte)'\000';
 								} 
-								n_extra = .number_width(wp) + 1;
+								n_extra = /*Error: Function owner not recognized*/number_width(wp) + 1;
 								char_attr = ModernizedCProgram.hl_combine_attr(wcr_attr, ModernizedCProgram.highlight_attr[(int)(.HLF_N)]);
 								if (generatedWo_cul && lnum == generatedLnum && (generatedW_p_culopt_flags & -1024) && (row == startrow || generatedW_p_culopt_flags & -1024)) {
 									char_attr = ModernizedCProgram.hl_combine_attr(wcr_attr, ModernizedCProgram.highlight_attr[(int)(.HLF_CLN)]);
@@ -1967,10 +1593,10 @@ public class window_S {
 						p_extra = p_sbr;
 						c_extra = (byte)'\000';
 						c_final = (byte)'\000';
-						n_extra = (int).strlen((byte)(p_sbr));
+						n_extra = (int)/*Error: Function owner not recognized*/strlen((byte)(p_sbr));
 						char_attr = ModernizedCProgram.highlight_attr[(int)(.HLF_AT)];
 						need_showbreak = 0;
-						vcol_sbr = vcol + (has_mbyte ? ModernizedCProgram.mb_charlen(p_sbr) : (int).strlen((byte)(p_sbr)));
+						vcol_sbr = vcol + (has_mbyte ? ModernizedCProgram.mb_charlen(p_sbr) : (int)/*Error: Function owner not recognized*/strlen((byte)(p_sbr)));
 						if (tocol == vcol) {
 							tocol += n_extra;
 						} 
@@ -2005,7 +1631,7 @@ public class window_S {
 				} 
 			} 
 			if ((dollar_vcol >= 0 && wp == ModernizedCProgram.curwin && lnum == generatedLnum && vcol >= (long)generatedW_virtcol && filler_todo <= 0) || (number_only && draw_state > 0 + 1 + 1 + 1 + 1)) {
-				.screen_line(screen_row, generatedW_wincol, col, -(int)generatedW_width, screen_line_flags);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_line(screen_row, generatedW_wincol, col, -(int)generatedW_width, screen_line_flags);
 				if (generatedWo_cuc) {
 					row = generatedW_cline_row + generatedW_cline_height;
 				} else {
@@ -2014,7 +1640,7 @@ public class window_S {
 				break;
 			} 
 			if (draw_state == 0 + 1 + 1 + 1 + 1 + 1 + 1 + 1 && (area_highlighting || extra_check)) {
-				if (vcol == fromcol || (has_mbyte && vcol + 1 == fromcol && n_extra == 0 && .UNRECOGNIZEDFUNCTIONNAME(ptr) > 1) || ((int)vcol_prev == fromcol_prev && vcol_prev < vcol && vcol < tocol)) {
+				if (vcol == fromcol || (has_mbyte && vcol + 1 == fromcol && n_extra == 0 && /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ptr) > 1) || ((int)vcol_prev == fromcol_prev && vcol_prev < vcol && vcol < tocol)) {
 					area_attr = vi_attr;
 				}  else if (area_attr != 0 && (vcol == tocol || (noinvcur && (colnr_T)vcol == generatedW_virtcol))) {
 					area_attr = 0;
@@ -2046,7 +1672,7 @@ public class window_S {
 						int tpi = text_prop_idxs[pi];
 						if (bcol >= text_props[tpi].getTp_col() - 1 + text_props[tpi].getTp_len()) {
 							if (pi + 1 < text_props_active) {
-								.memmove((byte)(text_prop_idxs + pi), (byte)(text_prop_idxs + pi + 1), (size_t)( * (text_props_active - (pi + 1))));
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(text_prop_idxs + pi), (byte)(text_prop_idxs + pi + 1), (size_t)(/*Error: Unsupported expression*/ * (text_props_active - (pi + 1))));
 							} 
 							--text_props_active;
 							--pi;
@@ -2061,7 +1687,7 @@ public class window_S {
 					if (text_props_active > 0) {
 						ModernizedCProgram.current_text_props = text_props;
 						ModernizedCProgram.current_buf = generatedW_buffer;
-						.qsort((Object)text_prop_idxs, (size_t)text_props_active, , text_prop_compare);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/qsort((Object)text_prop_idxs, (size_t)text_props_active, /*Error: Unsupported expression*/, text_prop_compare);
 						for (pi = 0; pi < text_props_active; ++pi) {
 							int tpi = text_prop_idxs[pi];
 							proptype_T pt = proptype_S.text_prop_type_by_id(generatedW_buffer, text_props[tpi].getTp_type());
@@ -2182,7 +1808,7 @@ public class window_S {
 							if (mb_l == 0) {
 								mb_l = 1;
 							} 
-							if ((generatedWo_rl ? (col <= 0) : (col >= generatedW_width - 1)) && .UNRECOGNIZEDFUNCTIONNAME(mb_c) == 2) {
+							if ((generatedWo_rl ? (col <= 0) : (col >= generatedW_width - 1)) && /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(mb_c) == 2) {
 								c = (byte)'>';
 								mb_c = c;
 								mb_l = 1;
@@ -2237,13 +1863,13 @@ public class window_S {
 							if ((mb_l == 1 && c >= -1024) || (mb_l >= 1 && mb_c == 0) || (mb_l > 1 && (!ModernizedCProgram.vim_isprintc(mb_c)))) {
 								ModernizedCProgram.transchar_hex(extra, mb_c);
 								if (generatedWo_rl) {
-									.rl_mirror(extra);
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/rl_mirror(extra);
 								} 
 								p_extra = extra;
 								c = p_extra;
 								mb_c = ModernizedCProgram.mb_ptr2char_adv(p_extra);
 								mb_utf8 = (c >= -1024);
-								n_extra = (int).strlen((byte)(p_extra));
+								n_extra = (int)/*Error: Function owner not recognized*/strlen((byte)(p_extra));
 								c_extra = (byte)'\000';
 								c_final = (byte)'\000';
 								if (area_attr == 0 && search_attr == 0) {
@@ -2286,10 +1912,10 @@ public class window_S {
 												ModernizedCProgram.transchar_nonprint(extra, c);
 											} else {
 													mb_l = 2;
-													.strcpy((byte)(extra), (byte)("XX"));
+													/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(extra), (byte)("XX"));
 											} 
 											p_extra = extra;
-											n_extra = (int).strlen((byte)(extra)) - 1;
+											n_extra = (int)/*Error: Function owner not recognized*/strlen((byte)(extra)) - 1;
 											c_extra = (byte)'\000';
 											c_final = (byte)'\000';
 											c = p_extra++;
@@ -2302,7 +1928,7 @@ public class window_S {
 									} 
 								} 
 						} 
-						if ((generatedWo_rl ? (col <= 0) : (col >= generatedW_width - 1)) && .UNRECOGNIZEDFUNCTIONNAME(mb_c) == 2) {
+						if ((generatedWo_rl ? (col <= 0) : (col >= generatedW_width - 1)) && /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(mb_c) == 2) {
 							c = (byte)'>';
 							mb_c = c;
 							mb_utf8 = 0;
@@ -2381,7 +2007,7 @@ public class window_S {
 							} 
 						} 
 						if (generatedWo_lbr && c0 == c && ((c) < 256 && breakat_flags[(char_u)(c)]) && !(((int)ptr) < 256 && breakat_flags[(char_u)((int)ptr)])) {
-							int mb_off = has_mbyte ? .UNRECOGNIZEDFUNCTIONNAME(line, ptr - 1) : 0;
+							int mb_off = has_mbyte ? /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(line, ptr - 1) : 0;
 							char_u p = ptr - (mb_off + 1);
 							n_extra = wp.win_lbr_chartabsize(line, p, (colnr_T)vcol, ((Object)0)) - 1;
 							if (c == (byte)'\011' && n_extra + col > generatedW_width) {
@@ -2442,7 +2068,7 @@ public class window_S {
 							int tab_len = 0;
 							long vcol_adjusted = vcol;
 							if (p_sbr != (byte)'\000' && vcol == vcol_sbr && generatedWo_wrap) {
-								vcol_adjusted = vcol - (has_mbyte ? ModernizedCProgram.mb_charlen(p_sbr) : (int).strlen((byte)(p_sbr)));
+								vcol_adjusted = vcol - (has_mbyte ? ModernizedCProgram.mb_charlen(p_sbr) : (int)/*Error: Function owner not recognized*/strlen((byte)(p_sbr)));
 							} 
 							tab_len = ModernizedCProgram.tabstop_padding(vcol_adjusted, generatedB_p_ts, generatedB_p_vts_array) - 1;
 							if (!generatedWo_lbr || !generatedWo_list) {
@@ -2458,13 +2084,13 @@ public class window_S {
 									if (generatedWo_list && lcs_tab1 && old_boguscols > 0 && n_extra > tab_len) {
 										tab_len += n_extra - tab_len;
 									} 
-									len = (tab_len * .mb_char2len(lcs_tab2));
+									len = (tab_len * /*Error: Function owner not recognized*/mb_char2len(lcs_tab2));
 									if (n_extra > 0) {
 										len += n_extra - tab_len;
 									} 
 									c = lcs_tab1;
 									p = ModernizedCProgram.alloc(len + 1);
-									.memset((p), ((byte)' '), (len));
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((p), ((byte)' '), (len));
 									p[len] = (byte)'\000';
 									ModernizedCProgram.vim_free(p_extra_free);
 									p_extra_free = p;
@@ -2477,9 +2103,9 @@ public class window_S {
 										if (lcs_tab3 && i == tab_len - 1) {
 											lcs = lcs_tab3;
 										} 
-										.mb_char2bytes(lcs, p);
-										p += .mb_char2len(lcs);
-										n_extra += .mb_char2len(lcs) - (saved_nextra > 0 ? 1 : 0);
+										/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mb_char2bytes(lcs, p);
+										p += /*Error: Function owner not recognized*/mb_char2len(lcs);
+										n_extra += /*Error: Function owner not recognized*/mb_char2len(lcs) - (saved_nextra > 0 ? 1 : 0);
 									}
 									p_extra = p_extra_free;
 									if (vcol_off > 0) {
@@ -2560,7 +2186,7 @@ public class window_S {
 								n_extra = ModernizedCProgram.byte2cells(c) - 1;
 							} 
 							if ((ModernizedCProgram.dy_flags & -1024) && generatedWo_rl) {
-								.rl_mirror(p_extra);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/rl_mirror(p_extra);
 							} 
 							c_extra = (byte)'\000';
 							c_final = (byte)'\000';
@@ -2568,8 +2194,8 @@ public class window_S {
 								char_u p = new char_u();
 								c = p_extra;
 								p = ModernizedCProgram.alloc(n_extra + 1);
-								.memset((p), ((byte)' '), (n_extra));
-								.strncpy((byte)(p), (byte)(p_extra + 1), (size_t)(.strlen((byte)(p_extra)) - 1));
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((p), ((byte)' '), (n_extra));
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strncpy((byte)(p), (byte)(p_extra + 1), (size_t)(/*Error: Function owner not recognized*/strlen((byte)(p_extra)) - 1));
 								p[n_extra] = (byte)'\000';
 								ModernizedCProgram.vim_free(p_extra_free);
 								p_extra_free = p_extra = p;
@@ -2604,7 +2230,7 @@ public class window_S {
 							} 
 						} 
 					} 
-					if (generatedWo_cole > 0 && (wp != ModernizedCProgram.curwin || lnum != generatedLnum || .conceal_cursor_line(wp)) && ((syntax_flags & -1024) != 0 || has_match_conc > 0) && !(lnum_in_visual_area && ModernizedCProgram.vim_strchr(generatedWo_cocu, (byte)'v') == ((Object)0))) {
+					if (generatedWo_cole > 0 && (wp != ModernizedCProgram.curwin || lnum != generatedLnum || /*Error: Function owner not recognized*/conceal_cursor_line(wp)) && ((syntax_flags & -1024) != 0 || has_match_conc > 0) && !(lnum_in_visual_area && ModernizedCProgram.vim_strchr(generatedWo_cocu, (byte)'v') == ((Object)0))) {
 						char_attr = conceal_attr;
 						if ((prev_syntax_id != syntax_seqnr || has_match_conc > 1) && (ModernizedCProgram.syn_get_sub_char() != (byte)'\000' || match_conc || generatedWo_cole == 1) && generatedWo_cole != 3) {
 							if (match_conc) {
@@ -2652,7 +2278,7 @@ public class window_S {
 						++ptr;
 					} 
 			} 
-			if (!did_wcol && draw_state == 0 + 1 + 1 + 1 + 1 + 1 + 1 + 1 && wp == ModernizedCProgram.curwin && lnum == generatedLnum && .conceal_cursor_line(wp) && (int)generatedW_virtcol <= vcol + n_skip) {
+			if (!did_wcol && draw_state == 0 + 1 + 1 + 1 + 1 + 1 + 1 + 1 && wp == ModernizedCProgram.curwin && lnum == generatedLnum && /*Error: Function owner not recognized*/conceal_cursor_line(wp) && (int)generatedW_virtcol <= vcol + n_skip) {
 				if (generatedWo_rl) {
 					this.setW_wcol(generatedW_width - col + boguscols - 1);
 				} else {
@@ -2672,7 +2298,7 @@ public class window_S {
 			if (lcs_prec_todo != (byte)'\000' && generatedWo_list && (generatedWo_wrap ? (generatedW_skipcol > 0 && row == 0) : generatedW_leftcol > 0) && filler_todo <= 0 && draw_state > 0 + 1 + 1 + 1 + 1 && c != (byte)'\000') {
 				c = lcs_prec;
 				lcs_prec_todo = (byte)'\000';
-				if (has_mbyte && .UNRECOGNIZEDFUNCTIONNAME(mb_c) > 1) {
+				if (has_mbyte && /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(mb_c) > 1) {
 					c_extra = (byte)'<';
 					c_final = (byte)'\000';
 					n_extra = 1;
@@ -2779,7 +2405,7 @@ public class window_S {
 						++vcol;
 					}
 				} 
-				.screen_line(screen_row, generatedW_wincol, col, (int)generatedW_width, screen_line_flags);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_line(screen_row, generatedW_wincol, col, (int)generatedW_width, screen_line_flags);
 				row++;
 				if (wp == ModernizedCProgram.curwin && lnum == generatedLnum) {
 					ModernizedCProgram.curwin.setW_cline_row(startrow);
@@ -2816,7 +2442,7 @@ public class window_S {
 			} 
 			vcol_prev = vcol;
 			if (draw_state < 0 + 1 + 1 + 1 + 1 + 1 + 1 + 1 || n_skip <= 0) {
-				if (has_mbyte && generatedWo_rl && .UNRECOGNIZEDFUNCTIONNAME(mb_c) > 1) {
+				if (has_mbyte && generatedWo_rl && /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(mb_c) > 1) {
 					--off;
 					--col;
 				} 
@@ -2849,7 +2475,7 @@ public class window_S {
 				} else {
 						ScreenAttrs[off] = char_attr;
 				} 
-				if (has_mbyte && .UNRECOGNIZEDFUNCTIONNAME(mb_c) > 1) {
+				if (has_mbyte && /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(mb_c) > 1) {
 					++off;
 					++col;
 					if (enc_utf8) {
@@ -2894,7 +2520,7 @@ public class window_S {
 						n_extra = 0;
 						n_attr = 0;
 					} 
-					if (has_mbyte && .UNRECOGNIZEDFUNCTIONNAME(mb_c) > 1) {
+					if (has_mbyte && /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(mb_c) > 1) {
 						if (generatedWo_rl) {
 							--boguscols;
 							--col;
@@ -2933,7 +2559,7 @@ public class window_S {
 				char_attr = saved_attr2;
 			} 
 			if ((generatedWo_rl ? (col < 0) : (col >= generatedW_width)) && (ptr != (byte)'\000' || filler_todo > 0 || (generatedWo_list && lcs_eol != (byte)'\000' && p_extra != at_end_str) || (n_extra != 0 && (c_extra != (byte)'\000' || p_extra != (byte)'\000')))) {
-				.screen_line(screen_row, generatedW_wincol, col - boguscols, (int)generatedW_width, screen_line_flags);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_line(screen_row, generatedW_wincol, col - boguscols, (int)generatedW_width, screen_line_flags);
 				boguscols = 0;
 				++row;
 				++screen_row;
@@ -2941,8 +2567,8 @@ public class window_S {
 					break;
 				} 
 				if (draw_state != 0 + 1 + 1 + 1 + 1 + 1 + 1 + 1 && filler_todo <= 0) {
-					.win_draw_end(wp, (byte)'@', (byte)' ', 1, row, generatedW_height, .HLF_AT);
-					.draw_vsep_win(wp, row);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win_draw_end(wp, (byte)'@', (byte)' ', 1, row, generatedW_height, .HLF_AT);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/draw_vsep_win(wp, row);
 					row = endrow;
 				} 
 				if (row == endrow) {
@@ -2951,9 +2577,9 @@ public class window_S {
 				} 
 				if (screen_cur_row == screen_row - 1 && filler_todo <= 0 && generatedW_width == Columns) {
 					LineWraps[screen_row - 1] = 1;
-					if (ModernizedCProgram.p_tf && !(has_mbyte && (.UNRECOGNIZEDFUNCTIONNAME(LineOffset[screen_row], LineOffset[screen_row] + screen_Columns) == 2 || .UNRECOGNIZEDFUNCTIONNAME(LineOffset[screen_row - 1] + (int)Columns - 2, LineOffset[screen_row] + screen_Columns) == 2))) {
+					if (ModernizedCProgram.p_tf && !(has_mbyte && (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(LineOffset[screen_row], LineOffset[screen_row] + screen_Columns) == 2 || /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(LineOffset[screen_row - 1] + (int)Columns - 2, LineOffset[screen_row] + screen_Columns) == 2))) {
 						if (screen_cur_col != generatedW_width) {
-							.screen_char(LineOffset[screen_row - 1] + (int)Columns - 1, screen_row - 1, (int)(Columns - 1));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_char(LineOffset[screen_row - 1] + (int)Columns - 1, screen_row - 1, (int)(Columns - 1));
 						} 
 						if (has_mbyte && ModernizedCProgram.mb_bytelen_tab[ScreenLines[LineOffset[screen_row - 1] + (Columns - 1)]] > 1) {
 							ModernizedCProgram.out_char((byte)' ');
@@ -2961,7 +2587,7 @@ public class window_S {
 								ModernizedCProgram.out_char(ScreenLines[LineOffset[screen_row - 1] + (Columns - 1)]);
 						} 
 						ScreenAttrs[LineOffset[screen_row]] = (sattr_T)-1;
-						.screen_start();
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_start();
 					} 
 				} 
 				col = 0;
@@ -3000,798 +2626,162 @@ public class window_S {
 		ModernizedCProgram.vim_free(p_extra_free);
 		return row;
 	}
-	public void python_window_free() {
-		Object generatedW_python_ref = this.getW_python_ref();
-		if (generatedW_python_ref != ((Object)0)) {
-			WindowObject wp = generatedW_python_ref;
-			wp.setWin(((win_T)(true)));
-			this.setW_python_ref(((Object)0));
-		} 
-	}
-	public int spell_check(Object ptr,  attrp, int capcol, int docount) {
-		/* column to check for Capital *//* count good words *//* Most things are put in "mi" so that it can
-						   be passed to functions quickly. */matchinf_T mi = new matchinf_T();
-		int nrlen = /* found a number first */0;
-		int c;
-		int wrongcaplen = 0;
-		int lpi;
-		int count_word = docount;
-		if (ptr <= /* A word never starts at a space or a control character.  Return quickly
-		     * then, skipping over the character. */(byte)' ') {
-			return 1;
-		} 
-		Object generatedW_s = this.getW_s();
-		if (generatedW_s.getB_langp().getGa_len() == /* Return here when loading language files failed. */0) {
-			return 1;
-		} 
-		.memset((mi), (false), (/* A number is always OK.  Also skip hexadecimal numbers 0xFF99 and
-		     * 0X99FF.  But always do check spelling to find "3GPP" and "11
-		     * julifeest". */));
-		Object generatedMi_end = mi.getMi_end();
-		if (ptr >= (byte)'0' && ptr <= (byte)'9') {
-			if (ptr == (byte)'0' && (ptr[1] == (byte)'b' || ptr[1] == (byte)'B')) {
-				mi.setMi_end(ModernizedCProgram.skipbin(ptr + 2));
-			}  else if (ptr == (byte)'0' && (ptr[1] == (byte)'x' || ptr[1] == (byte)'X')) {
-				mi.setMi_end(ModernizedCProgram.skiphex(ptr + 2));
-			} else {
-					mi.setMi_end(ModernizedCProgram.skipdigits(ptr));
-			} 
-			nrlen = (int)(generatedMi_end - ptr);
-		} 
-		mi.setMi_word(/* Find the normal end of the word (until the next non-word character). */ptr);
-		mi.setMi_fend(ptr);
-		Object generatedMi_fend = mi.getMi_fend();
-		Object generatedSt_isu = spelltab.getSt_isu();
-		if (wp.spell_iswordp(generatedMi_fend)) {
-			do {
-				generatedMi_fend += .UNRECOGNIZEDFUNCTIONNAME(generatedMi_fend);
-			} while (generatedMi_fend != (byte)'\000' && wp.spell_iswordp(generatedMi_fend));
-			if (capcol != ((Object)0) && capcol == 0 && generatedW_s.getB_cap_prog() != ((Object)0)) {
-				c = (has_mbyte ? .mb_ptr2char(ptr) : (int)(/* Check word starting with capital letter. */ptr));
-				if (!(enc_utf8 && (c) >= 128 ? ModernizedCProgram.utf_isupper(c) : (c) < 256 ? generatedSt_isu[c] : (false))) {
-					wrongcaplen = (int)(generatedMi_fend - ptr);
-				} 
-			} 
-		} 
-		if (capcol != ((Object)0)) {
-			capcol = -1;
-		} 
-		mi.setMi_end(generatedMi_fend);
-		mi.setMi_capflags(/* Check caps type later. */0);
-		mi.setMi_cend(((Object)0));
-		mi.setMi_win(wp);
-		if (generatedMi_fend != /* case-fold the word with one non-word character, so that we can check
-		     * for the word end. */(byte)'\000') {
-			generatedMi_fend += .UNRECOGNIZEDFUNCTIONNAME(generatedMi_fend);
-		} 
-		Object generatedMi_fword = mi.getMi_fword();
-		(Object)ModernizedCProgram.spell_casefold(ptr, (int)(generatedMi_fend - ptr), generatedMi_fword, 254 + 1);
-		mi.setMi_fwordlen((int).strlen((byte)(generatedMi_fword)));
-		mi.setMi_result(/* The word is bad unless we recognize it. */3);
-		mi.setMi_result2(3/*
-		     * Loop over the languages specified in 'spelllang'.
-		     * We check them all, because a word may be matched longer in another
-		     * language.
-		     */);
-		langp_S generatedMi_lp = mi.getMi_lp();
-		slang_S generatedLp_slang = generatedMi_lp.getLp_slang();
-		Object generatedSl_fidxs = generatedLp_slang.getSl_fidxs();
-		Object generatedSl_nobreak = generatedLp_slang.getSl_nobreak();
-		int generatedMi_result = mi.getMi_result();
-		int generatedMi_result2 = mi.getMi_result2();
-		Object generatedMi_end2 = mi.getMi_end2();
-		for (lpi = 0; lpi < generatedW_s.getB_langp().getGa_len(); ++lpi) {
-			mi.setMi_lp((((langp_T)(generatedW_s.getB_langp()).getGa_data()) + (lpi)));
-			if (generatedSl_fidxs == ((Object)/* If reloading fails the language is still in the list but everything
-				 * has been cleared. */0)) {
-				continue;
-			} 
-			mi.find_word(/* Check for a matching word in case-folded words. */0);
-			mi.find_word(/* Check for a matching word in keep-case words. */1);
-			mi.find_prefix(/* Check for matching prefixes. */0);
-			if (generatedSl_nobreak && generatedMi_result == /* For a NOBREAK language, may want to use a word without a following
-				 * word as a backup. */3 && generatedMi_result2 != 3) {
-				mi.setMi_result(generatedMi_result2);
-				mi.setMi_end(generatedMi_end2);
-			} 
-			if (count_word && generatedMi_result == /* Count the word in the first language where it's found to be OK. */0) {
-				generatedLp_slang.count_common_word(ptr, (int)(generatedMi_end - ptr), 1);
-				count_word = 0;
-			} 
-		}
-		Object generatedRegprog = regmatch.getRegprog();
-		Object generatedEndp = regmatch.getEndp();
-		Object generatedMi_word = mi.getMi_word();
-		if (generatedMi_result != 0) {
-			if (nrlen > /* If we found a number skip over it.  Allows for "42nd".  Do flag
-				 * rare and local words, e.g., "3GPP". */0) {
-				if (generatedMi_result == 3 || generatedMi_result == -1) {
-					return nrlen;
-				} 
-			}  else if (!/* When we are at a non-word character there is no error, just
-				 * skip over the character (try looking for a word after it). */wp.spell_iswordp_nmw(ptr)) {
-				if (capcol != ((Object)0) && generatedW_s.getB_cap_prog() != ((Object)0)) {
-					regmatch_T regmatch = new regmatch_T();
-					int r;
-					regmatch.setRegprog(generatedW_s.getB_cap_prog());
-					regmatch.setRm_ic(0);
-					r = regmatch.vim_regexec(ptr, 0);
-					generatedW_s.setB_cap_prog(generatedRegprog);
-					if (r) {
-						capcol = (int)(generatedEndp[0] - ptr);
-					} 
-				} 
-				if (has_mbyte) {
-					return .UNRECOGNIZEDFUNCTIONNAME(ptr);
-				} 
-				return 1;
-			}  else if (generatedMi_end == ptr/* Always include at least one character.  Required for when there
-				     * is a mixup in "midword". */) {
-				generatedMi_end += .UNRECOGNIZEDFUNCTIONNAME(generatedMi_end);
-			}  else if (generatedMi_result == 3 && generatedSl_nobreak) {
-				char_u p = new char_u();
-				char_u fp = new char_u();
-				int save_result = generatedMi_result;
-				mi.setMi_lp((((langp_T)(generatedW_s.getB_langp()).getGa_data()) + (/* First language in 'spelllang' is NOBREAK.  Find first position
-					     * at which any word would be valid. */false)));
-				if (generatedSl_fidxs != ((Object)0)) {
-					p = generatedMi_word;
-					fp = generatedMi_fword;
-					for (; ; ) {
-						p += .UNRECOGNIZEDFUNCTIONNAME(p);
-						fp += .UNRECOGNIZEDFUNCTIONNAME(fp);
-						if (p >= generatedMi_end) {
-							break;
-						} 
-						mi.setMi_compoff((int)(fp - generatedMi_fword));
-						mi.find_word(3);
-						if (generatedMi_result != 3) {
-							mi.setMi_end(p);
-							break;
-						} 
-					}
-					mi.setMi_result(save_result);
-				} 
-			} 
-			if (generatedMi_result == 3 || generatedMi_result == -1) {
-				attrp = .HLF_SPB;
-			}  else if (generatedMi_result == 1) {
-				attrp = .HLF_SPR;
-			} else {
-					attrp = .HLF_SPL;
-			} 
-		} 
-		if (wrongcaplen > 0 && (generatedMi_result == 0 || generatedMi_result == 1)) {
-			attrp = /* Report SpellCap only when the word isn't badly spelled. */.HLF_SPC;
-			return wrongcaplen;
-		} 
-		return (int)(generatedMi_end - ptr/*
-		 * Check if the word at "mip->mi_word" is in the tree.
-		 * When "mode" is FIND_FOLDWORD check in fold-case word tree.
-		 * When "mode" is FIND_KEEPWORD check in keep-case word tree.
-		 * When "mode" is FIND_PREFIX check for word after prefix in fold-case word
-		 * tree.
-		 *
-		 * For a match mip->mi_result is updated.
-		 */);
-	}
-	/* current window */
-	public int no_spell_checking() {
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_spell = generatedW_onebuf_opt.getWo_spell();
-		Object generatedW_s = this.getW_s();
-		if (!generatedWo_spell || generatedW_s.getB_p_spl() == (byte)'\000' || generatedW_s.getB_langp().getGa_len() == 0) {
-			ModernizedCProgram.emsg(((byte)("E756: Spell checking is not enabled")));
-			return 1;
-		} 
-		return 0/*
-		 * Move to next spell error.
-		 * "curline" is FALSE for "[s", "]s", "[S" and "]S".
-		 * "curline" is TRUE to find word under/after cursor in the same line.
-		 * For Insert mode completion "dir" is BACKWARD and "curline" is TRUE: move
-		 * to after badly spelled word before the cursor.
-		 * Return 0 if not found, length of the badly spelled word otherwise.
-		 */;
-	}
-	public int spell_move_to(int dir, int allwords, int curline,  attrp) {
-		/* return: attributes of bad word or NULL
-						   (only when "dir" is FORWARD) */linenr_T lnum = new linenr_T();
-		pos_T found_pos = new pos_T();
-		int found_len = 0;
-		char_u line = new char_u();
-		char_u p = new char_u();
-		char_u endp = new char_u();
-		hlf_T attr = new hlf_T();
-		int len;
-		int has_syntax = wp.syntax_present();
-		int col;
-		int can_spell;
-		char_u buf = ((Object)0);
-		int buflen = 0;
-		int skip = 0;
-		int capcol = -1;
-		int found_one = 0;
-		int wrapped = 0;
-		if (wp.no_spell_checking()) {
-			return 0/*
-			     * Start looking for bad word at the start of the line, because we can't
-			     * start halfway a word, we don't know where it starts or ends.
-			     *
-			     * When searching backwards, we continue in the line to find the last
-			     * bad word (in the cursor line: before the cursor).
-			     *
-			     * We concatenate the start of the next line, so that wrapped words work
-			     * (e.g. "et<line-break>cetera").  Doesn't work when searching backwards
-			     * though...
-			     */;
-		} 
-		 generatedW_cursor = this.getW_cursor();
-		Object generatedLnum = generatedW_cursor.getLnum();
-		lnum = generatedLnum;
-		do {
-			(found_pos).setLnum(0);
-			(found_pos).setCol(0);
-			(found_pos).setColadd(0);
-		} while (0);
-		file_buffer generatedW_buffer = this.getW_buffer();
-		memline generatedB_ml = generatedW_buffer.getB_ml();
-		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
-		Object generatedCol = generatedW_cursor.getCol();
-		while (!got_int) {
-			line = generatedW_buffer.ml_get_buf(lnum, 0);
-			len = (int).strlen((byte)(line));
-			if (buflen < len + 254 + 2) {
-				ModernizedCProgram.vim_free(buf);
-				buflen = len + 254 + 2;
-				buf = ModernizedCProgram.alloc(buflen);
-				if (buf == ((Object)0)) {
-					break;
-				} 
-			} 
-			if (lnum == /* In first line check first word for Capital. */1) {
-				capcol = 0;
-			} 
-			if (capcol == /* For checking first word with a capital skip white space. */0) {
-				capcol = ModernizedCProgram.getwhitecols(line);
-			}  else if (curline && wp == ModernizedCProgram.curwin) {
-				col = ModernizedCProgram.getwhitecols(/* For spellbadword(): check if first word needs a capital. */line);
-				if (ModernizedCProgram.check_need_cap(lnum, col)) {
-					capcol = col;
-				} 
-				line = generatedW_buffer.ml_get_buf(lnum, /* Need to get the line again, may have looked at the previous
-					     * one. */0);
-			} 
-			.strcpy((byte)(buf), (byte)(/* Copy the line into "buf" and append the start of the next line if
-				 * possible. */line));
-			if (lnum < generatedMl_line_count) {
-				ModernizedCProgram.spell_cat_line(buf + .strlen((byte)(buf)), generatedW_buffer.ml_get_buf(lnum + 1, 0), 254);
-			} 
-			p = buf + skip;
-			endp = buf + len;
-			while (p < endp) {
-				if (dir == (/* When searching backward don't search after the cursor.  Unless
-					     * we wrapped around the end of the buffer. */true) && lnum == generatedLnum && !wrapped && (colnr_T)(p - buf) >= generatedCol) {
-					break;
-				} 
-				attr = /* start of word */.HLF_COUNT;
-				len = wp.spell_check(p, attr, capcol, 0);
-				if (attr != .HLF_COUNT) {
-					if (allwords || attr == /* We found a bad word.  Check the attribute. */.HLF_SPB) {
-						if (dir == (/* When searching forward only accept a bad word after
-								     * the cursor. */true) || lnum != generatedLnum || (lnum == generatedLnum && (wrapped || (colnr_T)(curline ? p - buf + len : p - buf) > generatedCol))) {
-							if (has_syntax) {
-								col = (int)(p - buf);
-								(Object)wp.syn_get_id(lnum, (colnr_T)col, 0, can_spell, 0);
-								if (!can_spell) {
-									attr = .HLF_COUNT;
-								} 
-							} else {
-									can_spell = 1;
-							} 
-							if (can_spell) {
-								found_one = 1;
-								found_pos.setLnum(lnum);
-								found_pos.setCol((int)(p - buf));
-								found_pos.setColadd(0);
-								if (dir == 1) {
-									this.setW_cursor(/* No need to search further. */found_pos);
-									ModernizedCProgram.vim_free(buf);
-									if (attrp != ((Object)0)) {
-										attrp = attr;
-									} 
-									return len;
-								}  else if (curline/* Insert mode completion: put cursor after
-												 * the bad word. */) {
-									generatedCol += len;
-								} 
-								found_len = len;
-							} 
-						} else {
-								found_one = 1;
-						} 
-					} 
-				} 
-				p += /* advance to character after the word */len;
-				capcol -= len;
-			}
-			if (dir == (true) && generatedLnum != 0) {
-				this.setW_cursor(/* Use the last match in the line (before the cursor). */found_pos);
-				ModernizedCProgram.vim_free(buf);
-				return found_len;
-			} 
-			if (curline) {
-				break;
-			} 
-			if (lnum == generatedLnum && /* If we are back at the starting line and searched it again there
-				 * is no match, give up. */wrapped) {
-				break;
-			} 
-			if (dir == (/* Advance to next line. */true)) {
-				if (lnum > 1) {
-					--lnum;
-				}  else if (!ModernizedCProgram.p_ws) {
-					break;
-				} else {
-						lnum = generatedMl_line_count;
-						wrapped = 1;
-						if (!ModernizedCProgram.shortmess((byte)'s')) {
-							ModernizedCProgram.give_warning((char_u)((byte)(top_bot_msg)), 1);
-						} 
-				} 
-				capcol = -1;
-			} else {
-					if (lnum < generatedMl_line_count) {
-						++lnum;
-					}  else if (!ModernizedCProgram.p_ws) {
-						break;
-					} else {
-							lnum = /* Wrap around to the start of the buffer.  May search the
-									 * starting line again and accept the first match. */1;
-							wrapped = 1;
-							if (!ModernizedCProgram.shortmess((byte)'s')) {
-								ModernizedCProgram.give_warning((char_u)((byte)(bot_top_msg)), 1);
-							} 
-					} 
-					if (lnum == generatedLnum && !/* If we are back at the starting line and there is no match then
-						     * give up. */found_one) {
-						break;
-					} 
-					if (attr == /* Skip the characters at the start of the next line that were
-						     * included in a match crossing line boundaries. */.HLF_COUNT) {
-						skip = (int)(p - endp);
-					} else {
-							skip = 0;
-					} 
-					--/* Capcol skips over the inserted space. */capcol;
-					if (ModernizedCProgram.skipwhite(line) == /* But after empty line check first word in next line */(byte)'\000') {
-						capcol = 0;
-					} 
-			} 
-			ModernizedCProgram.line_breakcheck();
-		}
-		ModernizedCProgram.vim_free(buf);
-		return 0/*
-		 * For spell checking: concatenate the start of the following line "line" into
-		 * "buf", blanking-out special characters.  Copy less then "maxlen" bytes.
-		 * Keep the blanks at the start of the next line, this is used in win_line()
-		 * to skip those bytes if the word was OK.
-		 */;
-	}
-	/* FORWARD or BACKWARD */
-	/* TRUE for "[s"/"]s", FALSE for "[S"/"]S" */
-	public Byte did_set_spelllang() {
-		garray_T ga = new garray_T();
-		char_u splp = new char_u();
-		char_u region = new char_u();
-		char_u[] region_cp = new char_u();
-		int filename;
-		int region_mask;
-		slang_T slang = new slang_T();
-		int c;
-		char_u[] lang = new char_u();
-		char_u[] spf_name = new char_u();
-		int len;
-		char_u p = new char_u();
-		int round;
-		char_u spf = new char_u();
-		char_u use_region = ((Object)0);
-		int dont_use_region = 0;
-		int nobreak = 0;
-		int i;
-		int j;
-		langp_T lp = new langp_T();
-		langp_T lp2 = new langp_T();
-		int recursive = 0;
-		byte ret_msg = ((Object)0);
-		char_u spl_copy = new char_u();
-		bufref_T bufref = new bufref_T();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		ModernizedCProgram.set_bufref(bufref, generatedW_buffer);
-		if (recursive) {
-			return ((Object)0);
-		} 
-		recursive = 1;
-		ga.ga_init2(, 2);
-		wp.clear_midword();
-		Object generatedW_s = this.getW_s();
-		spl_copy = ModernizedCProgram.vim_strsave(generatedW_s.getB_p_spl());
-		if (spl_copy == ((Object)0)) {
-			;
-		} 
-		generatedW_s.setB_cjk(0);
-		Object generatedSl_fname = slang.getSl_fname();
-		slang_S generatedSl_next = slang.getSl_next();
-		Object generatedSl_name = slang.getSl_name();
-		Object generatedSl_regions = slang.getSl_regions();
-		int generatedSl_add = slang.getSl_add();
-		Object generatedGa_data = (ga).getGa_data();
-		int generatedGa_len = ga.getGa_len();
-		Object generatedSl_nobreak = slang.getSl_nobreak();
-		for (splp = spl_copy; splp != /* Loop over comma separated language names. */(byte)'\000'; ) {
-			ModernizedCProgram.copy_option_part(splp, lang, 254, ",");
-			region = ((Object)0);
-			len = (int).strlen((byte)(lang));
-			if (!ModernizedCProgram.valid_spellang(lang)) {
-				continue;
-			} 
-			if (.strcmp((byte)(lang), (byte)("cjk")) == 0) {
-				generatedW_s.setB_cjk(1);
-				continue;
-			} 
-			if (len > 4 && ModernizedCProgram.vim_fnamecmp((char_u)(lang + len - 4), (char_u)(".spl")) == /* If the name ends in ".spl" use it as the name of the spell file.
-				 * If there is a region name let "region" point to it and remove it
-				 * from the name. */0) {
-				filename = 1;
-				p = ModernizedCProgram.vim_strchr(ModernizedCProgram.gettail(lang), /* Locate a region and remove it from the file name. */(byte)'_');
-				if (p != ((Object)0) && (((int)(p[1]) - (byte)'A' < 26) || ((int)(p[1]) - (byte)'a' < 26)) && (((int)(p[2]) - (byte)'A' < 26) || ((int)(p[2]) - (byte)'a' < 26)) && !(((int)(p[3]) - (byte)'A' < 26) || ((int)(p[3]) - (byte)'a' < 26))) {
-					ModernizedCProgram.vim_strncpy(region_cp, p + 1, 2);
-					.memmove((byte)(p), (byte)(p + 3), (size_t)(len - (p - lang) - 2));
-					region = region_cp;
-				} else {
-						dont_use_region = 1;
-				} 
-				for (slang = first_lang; slang != ((Object)0); slang = generatedSl_next) {
-					if (ModernizedCProgram.fullpathcmp(lang, generatedSl_fname, 0, 1) == 1) {
-						break;
-					} 
-				}
-			} else {
-					filename = 0;
-					if (len > 3 && lang[len - 3] == (byte)'_') {
-						region = lang + len - 2;
-						len -= 3;
-						lang[len] = (byte)'\000';
-					} else {
-							dont_use_region = 1;
-					} 
-					for (slang = first_lang; slang != ((Object)0); slang = generatedSl_next) {
-						if (ModernizedCProgram.vim_stricmp((byte)(lang), (byte)(generatedSl_name)) == 0) {
-							break;
-						} 
-					}
-			} 
-			if (region != ((Object)0)) {
-				if (use_region != ((Object)0) && .strcmp((byte)(region), (byte)(use_region)) != /* If the region differs from what was used before then don't
-					     * use it for 'spellfile'. */0) {
-					dont_use_region = 1;
-				} 
-				use_region = region;
-			} 
-			if (slang == ((Object)/* If not found try loading the language now. */0)) {
-				if (filename) {
-					(Object)((Object)0).spell_load_file(lang, lang, 0);
-				} else {
-						ModernizedCProgram.spell_load_lang(lang/* SpellFileMissing autocommands may do anything, including
-								 * destroying the buffer we are using... */);
-						if (!bufref.bufref_valid()) {
-							ret_msg = "E797: SpellFileMissing autocommand deleted buffer";
-							;
-						} 
-				} 
-			} 
-			for (slang = first_lang; slang != ((Object)0); slang = generatedSl_next) {
-				if (filename ? ModernizedCProgram.fullpathcmp(lang, generatedSl_fname, 0, 1) == 1 : ModernizedCProgram.vim_stricmp((byte)(lang), (byte)(generatedSl_name)) == 0) {
-					region_mask = -1024;
-					if (!filename && region != ((Object)0)) {
-						c = ModernizedCProgram.find_region(generatedSl_regions, /* find region in sl_regions */region);
-						if (c == -1024) {
-							if (generatedSl_add) {
-								if (generatedSl_regions != (byte)'\000') {
-									region_mask = /* This addition file is for other regions. */0;
-								} 
-							} else {
-									ModernizedCProgram.smsg(((byte)(/* This is probably an error.  Give a warning and
-												     * accept the words anyway. */"Warning: region %s not supported")), region);
-							} 
-						} else {
-								region_mask = 1 << c;
-						} 
-					} 
-					if (region_mask != 0) {
-						if (ga.ga_grow(1) == 0) {
-							ga.ga_clear();
-							ret_msg = e_outofmem;
-							;
-						} 
-						(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_slang(slang);
-						(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_region(region_mask);
-						++generatedGa_len;
-						ModernizedCProgram.use_midword(slang, wp);
-						if (generatedSl_nobreak) {
-							nobreak = 1;
-						} 
-					} 
-				} 
-			}
-		}
-		spf = generatedW_s.getB_p_spf();
-		for (round = 0; round == 0 || spf != (byte)'\000'; ++round) {
-			if (round == 0) {
-				if (int_wordlist == ((Object)/* Internal wordlist, if there is one. */0)) {
-					continue;
-				} 
-				ModernizedCProgram.int_wordlist_spl(spf_name);
-			} else {
-					ModernizedCProgram.copy_option_part(spf, spf_name, 1024 - 5, /* One entry in 'spellfile'. */",");
-					.strcat((byte)(spf_name), (byte)(".spl"));
-					for (c = 0; c < generatedGa_len; ++/* If it was already found above then skip it. */c) {
-						p = generatedSl_fname;
-						if (p != ((Object)0) && ModernizedCProgram.fullpathcmp(spf_name, p, 0, 1) == 1) {
-							break;
-						} 
-					}
-					if (c < generatedGa_len) {
-						continue;
-					} 
-			} 
-			for (slang = first_lang; slang != ((Object)0); slang = generatedSl_next) {
-				if (ModernizedCProgram.fullpathcmp(spf_name, generatedSl_fname, 0, 1) == 1) {
-					break;
-				} 
-			}
-			if (slang == ((Object)0/* Not loaded, try loading it now.  The language name includes the
-				     * region name, the region is ignored otherwise.  for int_wordlist
-				     * use an arbitrary name. */)) {
-				if (round == 0) {
-					.strcpy((byte)(lang), (byte)("internal wordlist"));
-				} else {
-						ModernizedCProgram.vim_strncpy(lang, ModernizedCProgram.gettail(spf_name), 254);
-						p = ModernizedCProgram.vim_strchr(lang, (byte)'.');
-						if (p != ((Object)0)) {
-							p = /* truncate at ".encoding.add" */(byte)'\000';
-						} 
-				} 
-				slang = ((Object)0).spell_load_file(spf_name, lang, 1);
-				if (slang != ((Object)0) && /* If one of the languages has NOBREAK we assume the addition
-					     * files also have this. */nobreak) {
-					slang.setSl_nobreak(1);
-				} 
-			} 
-			if (slang != ((Object)0) && ga.ga_grow(1) == 1) {
-				region_mask = -1024;
-				if (use_region != ((Object)0) && !dont_use_region) {
-					c = ModernizedCProgram.find_region(generatedSl_regions, /* find region in sl_regions */use_region);
-					if (c != -1024) {
-						region_mask = 1 << c;
-					}  else if (generatedSl_regions != (byte)'\000') {
-						region_mask = /* This spell file is for other regions. */0;
-					} 
-				} 
-				if (region_mask != 0) {
-					(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_slang(slang);
-					(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_sallang(((Object)0));
-					(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_replang(((Object)0));
-					(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_region(region_mask);
-					++generatedGa_len;
-					ModernizedCProgram.use_midword(slang, wp);
-				} 
-			} 
-		}
-		generatedW_s.getB_langp().ga_clear();
-		generatedW_s.setB_langp(ga/* For each language figure out what language to use for sound folding and
-		     * REP items.  If the language doesn't support it itself use another one
-		     * with the same name.  E.g. for "en-math" use "en". */);
-		slang_S generatedLp_slang = lp.getLp_slang();
-		for (i = 0; i < generatedGa_len; ++i) {
-			lp = (((langp_T)generatedGa_data) + (i));
-			if (generatedGa_len > /* sound folding */0) {
-				lp.setLp_sallang(generatedLp_slang);
-			} else {
-					for (j = 0; j < generatedGa_len; ++/* find first similar language that does sound folding */j) {
-						lp2 = (((langp_T)generatedGa_data) + (j));
-						if (generatedGa_len > 0 && .strncmp((byte)(generatedSl_name), (byte)(generatedSl_name), (size_t)(true)) == 0) {
-							lp.setLp_sallang(generatedLp_slang);
-							break;
-						} 
-					}
-			} 
-			if (generatedGa_len > /* REP items */0) {
-				lp.setLp_replang(generatedLp_slang);
-			} else {
-					for (j = 0; j < generatedGa_len; ++/* find first similar language that has REP items */j) {
-						lp2 = (((langp_T)generatedGa_data) + (j));
-						if (generatedGa_len > 0 && .strncmp((byte)(generatedSl_name), (byte)(generatedSl_name), (size_t)(true)) == 0) {
-							lp.setLp_replang(generatedLp_slang);
-							break;
-						} 
-					}
-			} 
-		}
-		recursive = 0;
-		wp.redraw_win_later(40);
-		return ret_msg/*
-		 * Clear the midword characters for buffer "buf".
-		 */;
-	}
-	public void clear_midword() {
-		Object generatedW_s = this.getW_s();
-		.memset((generatedW_s.getB_spell_ismw()), (false), (true));
-		do {
-			if ((generatedW_s.getB_spell_ismw_mb()) != ((Object)0)) {
-				ModernizedCProgram.vim_free(generatedW_s.getB_spell_ismw_mb());
-				(generatedW_s.getB_spell_ismw_mb()) = ((Object)0);
-			} 
-		} while (0/*
-		 * Use the "sl_midword" field of language "lp" for buffer "buf".
-		 * They add up to any currently used midword characters.
-		 */);
-	}
 	/*
-	 * Return TRUE if "p" points to a word character.
-	 * As a special case we see "midword" characters as word character when it is
-	 * followed by a word character.  This finds they'there but not 'they there'.
-	 * Thus this only works properly when past the first character of the word.
+	 * Like set_string_option_direct(), but for a window-local option in "wp".
+	 * Blocks autocommands to avoid the old curwin becoming invalid.
 	 */
-	public int spell_iswordp(Object p) {
-		/* buffer used */char_u s = new char_u();
-		int l;
-		int c;
-		Object generatedW_s = this.getW_s();
-		Object generatedSt_isw = spelltab.getSt_isw();
-		if (has_mbyte) {
-			l = .mb_ptr2len(p);
-			s = p;
-			if (l == 1) {
-				if (generatedW_s.getB_spell_ismw()[/* be quick for ASCII */p]) {
-					s = p + /* skip a mid-word character */1;
-				} 
-			} else {
-					c = .mb_ptr2char(p);
-					if (c < 256 ? generatedW_s.getB_spell_ismw()[c] : (generatedW_s.getB_spell_ismw_mb() != ((Object)0) && ModernizedCProgram.vim_strchr(generatedW_s.getB_spell_ismw_mb(), c) != ((Object)0))) {
-						s = p + l;
-					} 
-			} 
-			c = .mb_ptr2char(s);
-			if (c > 255) {
-				return wp.spell_mb_isword_class(ModernizedCProgram.mb_get_class(s));
-			} 
-			return generatedSt_isw[c];
-		} 
-		return generatedSt_isw[generatedW_s.getB_spell_ismw()[p] ? p[1] : p[0/*
-		 * Return TRUE if "p" points to a word character.
-		 * Unlike spell_iswordp() this doesn't check for "midword" characters.
-		 */]];
+	public void set_string_option_direct_in_win(Object name, int opt_idx, Object val, int opt_flags, int set_sid) {
+		win_T save_curwin = ModernizedCProgram.curwin;
+		ModernizedCProgram.block_autocmds();
+		ModernizedCProgram.curwin = wp;
+		curbuf = ModernizedCProgram.curwin.getW_buffer();
+		ModernizedCProgram.set_string_option_direct(name, opt_idx, val, opt_flags, set_sid);
+		ModernizedCProgram.curwin = save_curwin;
+		curbuf = ModernizedCProgram.curwin.getW_buffer();
+		ModernizedCProgram.unblock_autocmds();
 	}
-	public int spell_iswordp_nmw(Object p) {
-		int c;
-		Object generatedSt_isw = spelltab.getSt_isw();
-		if (has_mbyte) {
-			c = .mb_ptr2char(p);
-			if (c > 255) {
-				return wp.spell_mb_isword_class(ModernizedCProgram.mb_get_class(p));
-			} 
-			return generatedSt_isw[c];
+	public void python3_window_free() {
+		Object generatedW_python3_ref = this.getW_python3_ref();
+		if (generatedW_python3_ref != ((Object)0)) {
+			WindowObject wp = generatedW_python3_ref;
+			wp.setWin(((win_T)(true)));
+			this.setW_python3_ref(((Object)0));
 		} 
-		return generatedSt_isw[p/*
-		 * Return TRUE if word class indicates a word character.
-		 * Only for characters above 255.
-		 * Unicode subscript and superscript are not considered word characters.
-		 * See also dbcs_class() and utf_class() in mbyte.c.
-		 */];
 	}
-	public int spell_mb_isword_class(int cl) {
-		Object generatedW_s = this.getW_s();
-		if (generatedW_s.getB_cjk()) {
-			return cl == 2 || cl == /* East Asian characters are not considered word characters. */-1024;
-		} 
-		return cl >= 2 && cl != -1024 && cl != -1024 && cl != 3/*
-		 * Return TRUE if "p" points to a word character.
-		 * Wide version of spell_iswordp().
+	public void set_local_options_default(int do_buffer) {
+		win_T save_curwin = ModernizedCProgram.curwin;
+		int i;
+		ModernizedCProgram.curwin = wp;
+		curbuf = ModernizedCProgram.curwin.getW_buffer();
+		ModernizedCProgram.block_autocmds();
+		 generatedIndir = p.getIndir();
+		for (i = 0; !ModernizedCProgram.istermoption_idx(i); i++) {
+			vimoption p = (ModernizedCProgram.options[i]);
+			char_u varp = p.get_varp_scope(4);
+			if (generatedIndir != .PV_NONE && (do_buffer || (generatedIndir & -1024) == 0) && !(ModernizedCProgram.options[i].getFlags() & -1024) && !p.optval_default(varp, 0)) {
+				ModernizedCProgram.set_option_default(i, 1 | 4, 0);
+			} 
+		}
+		ModernizedCProgram.unblock_autocmds();
+		ModernizedCProgram.curwin = save_curwin;
+		curbuf = ModernizedCProgram.curwin.getW_buffer();
+	}
+	public void win_copy_options(window_S wp_to) {
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		generatedW_onebuf_opt.copy_winopt(generatedW_onebuf_opt);
+		 generatedW_allbuf_opt = this.getW_allbuf_opt();
+		generatedW_allbuf_opt.copy_winopt(generatedW_allbuf_opt);
+		wp_to/*
+		 * After copying window options: update variables depending on options.
+		 */.after_copy_winopt();
+	}
+	public void after_copy_winopt() {
+		wp.briopt_check();
+		wp.fill_culopt_flags(((Object)0));
+		wp/*
+		 * Copy the options from one winopt_T to another.
+		 * Doesn't free the old option values in "to", use clear_winopt() for that.
+		 * The 'scroll' option is not copied, because it depends on the window height.
+		 * The 'previewwindow' option is reset, there can be only one preview window.
+		 */.check_colorcolumn();
+	}
+	public void check_win_options() {
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		generatedW_onebuf_opt.check_winopt();
+		 generatedW_allbuf_opt = this.getW_allbuf_opt();
+		generatedW_allbuf_opt.check_winopt();
+	}
+	public int briopt_check() {
+		char_u p = new char_u();
+		int bri_shift = 0;
+		long bri_min = 20;
+		int bri_sbr = 0;
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_briopt = generatedW_onebuf_opt.getWo_briopt();
+		p = generatedWo_briopt;
+		while (p != (byte)'\000') {
+			if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("shift:"), (size_t)(true)) == 0 && ((p[6] == (byte)'-' && ((int)(p[7]) - (byte)'0' < 10)) || ((int)(p[6]) - (byte)'0' < 10))) {
+				p += 6;
+				bri_shift = ModernizedCProgram.getdigits(p);
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("min:"), (size_t)(true)) == 0 && ((int)(p[4]) - (byte)'0' < 10)) {
+				p += 4;
+				bri_min = ModernizedCProgram.getdigits(p);
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("sbr"), (size_t)(true)) == 0) {
+				p += 3;
+				bri_sbr = 1;
+			} 
+			if (p != (byte)',' && p != (byte)'\000') {
+				return 0;
+			} 
+			if (p == (byte)',') {
+				++p;
+			} 
+		}
+		this.setW_p_brishift(bri_shift);
+		this.setW_p_brimin(bri_min);
+		this.setW_p_brisbr(bri_sbr);
+		return 1/*
+		 * Get the local or global value of 'backupcopy'.
 		 */;
 	}
-	/* mode values for find_word */
-	/* find word case-folded */
-	/* find keep-case word */
-	public int spell_iswordp_w(int p) {
-		int s;
-		Object generatedW_s = this.getW_s();
-		if (p < 256 ? generatedW_s.getB_spell_ismw()[p] : (generatedW_s.getB_spell_ismw_mb() != ((Object)0) && ModernizedCProgram.vim_strchr(generatedW_s.getB_spell_ismw_mb(), p) != ((Object)0))) {
-			s = p + 1;
-		} else {
-				s = p;
+	public int signcolumn_on() {
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_scl = generatedW_onebuf_opt.getWo_scl();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		Object generatedB_signlist = generatedW_buffer.getB_signlist();
+		Object generatedWo_nu = generatedW_onebuf_opt.getWo_nu();
+		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
+		// column (if present). Otherwise signs are to be displayed in the sign// column.if (generatedWo_scl == (byte)'n' && (generatedWo_scl + 1) == (byte)'u') {
+			return generatedB_signlist != ((Object)0) && !generatedWo_nu && !generatedWo_rnu;
 		} 
-		if (s > 255) {
-			if (enc_utf8) {
-				return wp.spell_mb_isword_class(ModernizedCProgram.utf_class(s));
-			} 
-			if (enc_dbcs) {
-				return wp.spell_mb_isword_class(ModernizedCProgram.dbcs_class((int)s >> 8, s & -1024));
-			} 
+		if (generatedWo_scl == (byte)'n') {
 			return 0;
 		} 
-		Object generatedSt_isw = spelltab.getSt_isw();
-		return generatedSt_isw[s/*
-		 * Case-fold "str[len]" into "buf[buflen]".  The result is NUL terminated.
-		 * Uses the character definitions from the .spl file.
-		 * When using a multi-byte 'encoding' the length may change!
-		 * Returns FAIL when something wrong.
-		 */];
-	}
-	public Object spell_to_word_end(Object start) {
-		char_u p = start;
-		while (p != (byte)'\000' && win.spell_iswordp(p)) {
-			p += .UNRECOGNIZEDFUNCTIONNAME(p);
-		}
-		return p/*
-		 * For Insert mode completion CTRL-X s:
-		 * Find start of the word in front of column "startcol".
-		 * We don't check if it is badly spelled, with completion we can only change
-		 * the word in front of the cursor.
-		 * Returns the column number of the word.
-		 */;
-	}
-	public void scroll_region_set(int off) {
-		int generatedW_winrow = this.getW_winrow();
-		Object generatedW_winbar_height = this.getW_winbar_height();
-		int generatedW_height = this.getW_height();
-		ModernizedCProgram.out_str((char_u)(ModernizedCProgram.tgoto((byte)(ModernizedCProgram.term_strings[(int)(SpecialKey.KS_CS)]), (generatedW_winrow + generatedW_winbar_height) + generatedW_height - 1, (generatedW_winrow + generatedW_winbar_height) + off)));
-		int generatedW_width = this.getW_width();
-		int generatedW_wincol = this.getW_wincol();
-		if ((ModernizedCProgram.term_strings[(int)(SpecialKey.KS_CSV)]) != (byte)'\000' && generatedW_width != Columns) {
-			ModernizedCProgram.out_str((char_u)(ModernizedCProgram.tgoto((byte)(ModernizedCProgram.term_strings[(int)(SpecialKey.KS_CSV)]), generatedW_wincol + generatedW_width - 1, generatedW_wincol)));
+		if (generatedWo_scl == (byte)'y') {
+			return 1;
 		} 
-		.screen_start();
+		return (generatedB_signlist != ((Object)0));
 	}
+	// If 'signcolumn' is set to 'number', signs are displayed in the 'number'
 	/*
-	 * Position the info popup relative to the popup menu item.
+	 * This is called when 'culopt' is changed
 	 */
-	public void pum_position_info_popup() {
-		int col = ModernizedCProgram.pum_col + ModernizedCProgram.pum_width + 1;
-		int row = ModernizedCProgram.pum_row;
-		int botpos = .POPPOS_BOTLEFT;
-		this.setW_popup_pos(.POPPOS_TOPLEFT);
-		if (Columns - col < 20 && Columns - col < ModernizedCProgram.pum_col) {
-			col = ModernizedCProgram.pum_col - 1;
-			this.setW_popup_pos(.POPPOS_TOPRIGHT);
-			botpos = .POPPOS_BOTRIGHT;
-			this.setW_maxwidth(ModernizedCProgram.pum_col - 1);
+	public int fill_culopt_flags(Object val) {
+		char_u p = new char_u();
+		char_u culopt_flags_new = 0;
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_culopt = generatedW_onebuf_opt.getWo_culopt();
+		if (val == ((Object)0)) {
+			p = generatedWo_culopt;
 		} else {
-				this.setW_maxwidth(Columns - col + 1);
+				p = val;
 		} 
-		Object generatedW_maxwidth = this.getW_maxwidth();
-		generatedW_maxwidth -= wp.popup_extra_width();
-		row -= wp.popup_top_extra();
-		Object generatedW_popup_flags = this.getW_popup_flags();
-		if (generatedW_popup_flags & -1024) {
-			if (ModernizedCProgram.pum_row < ModernizedCProgram.pum_win_row) {
-				row += ModernizedCProgram.pum_height;
-				this.setW_popup_pos(botpos);
-			} else {
-					row += 1;
+		while (p != (byte)'\000') {
+			if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("line"), (size_t)(true)) == 0) {
+				p += 4;
+				culopt_flags_new |=  -1024;
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("both"), (size_t)(true)) == 0) {
+				p += 4;
+				culopt_flags_new |=  -1024 | -1024;
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("number"), (size_t)(true)) == 0) {
+				p += 6;
+				culopt_flags_new |=  -1024;
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("screenline"), (size_t)(true)) == 0) {
+				p += 10;
+				culopt_flags_new |=  -1024;
 			} 
-		} else {
-				row += ModernizedCProgram.pum_selected - ModernizedCProgram.pum_first + 1;
+			if (p != (byte)',' && p != (byte)'\000') {
+				return 0;
+			} 
+			if (p == (byte)',') {
+				++p;
+			} 
+		}
+		// Can't have both "line" and "screenline".if ((culopt_flags_new & -1024) && (culopt_flags_new & -1024)) {
+			return 0;
 		} 
-		wp.popup_set_wantpos_rowcol(row, col/*
-		 * Set the index of the currently selected item.  The menu will scroll when
-		 * necessary.  When "n" is out of range don't scroll.
-		 * This may be repeated when the preview window is used:
-		 * "repeat" == 0: open preview window normally
-		 * "repeat" == 1: open preview window but don't set the size
-		 * "repeat" == 2: don't open preview window
-		 * Returns TRUE when the window was resized and the location of the popup menu
-		 * must be recomputed.
-		 */);
+		this.setW_p_culopt_flags(culopt_flags_new);
+		return 1;
 	}
 	/*
 	 * Used when popup options contain "moved": set default moved values.
@@ -3832,7 +2822,7 @@ public class window_S {
 			pos.setColadd(0);
 			ModernizedCProgram.getvcol(textwp, pos, mcol, ((Object)0), ((Object)0));
 			this.setW_popup_mouse_mincol(mcol);
-			pos.setCol(col + (colnr_T).strlen((byte)(text)) - 1);
+			pos.setCol(col + (colnr_T)/*Error: Function owner not recognized*/strlen((byte)(text)) - 1);
 			ModernizedCProgram.getvcol(textwp, pos, ((Object)0), ((Object)0), mcol);
 			this.setW_popup_mouse_maxcol(mcol);
 			ModernizedCProgram.vim_free(text/*
@@ -3901,7 +2891,7 @@ public class window_S {
 	}
 	public void popup_drag() {
 		// The popup may be closed before dragging stops.if (!wp.win_valid_popup()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedW_popup_flags = this.getW_popup_flags();
 		int generatedW_width = this.getW_width();
@@ -3928,10 +2918,10 @@ public class window_S {
 				ModernizedCProgram.drag_start_row = ModernizedCProgram.mouse_row;
 			} 
 			wp.popup_adjust_position();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!(generatedW_popup_flags & -1024)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setW_wantline(ModernizedCProgram.drag_start_wantline + (ModernizedCProgram.mouse_row - ModernizedCProgram.drag_start_row));
 		Object generatedW_wantline = this.getW_wantline();
@@ -4000,7 +2990,7 @@ public class window_S {
 		char_u ptr = cbbuf;
 		typval_T tv = new typval_T();
 		int generatedW_id = this.getW_id();
-		ModernizedCProgram.vim_snprintf((byte)cbbuf, , "{_ -> popup_close(%d)}", generatedW_id);
+		ModernizedCProgram.vim_snprintf((byte)cbbuf, /*Error: sizeof expression not supported yet*/, "{_ -> popup_close(%d)}", generatedW_id);
 		timer_S timer_S = new timer_S();
 		Object generatedW_popup_timer = this.getW_popup_timer();
 		if (tv.get_lambda_tv(ptr, 1) == 1) {
@@ -4042,7 +3032,7 @@ public class window_S {
 	public Object popup_get_sign_name() {
 		byte[] buf = new byte[30];
 		int generatedW_id = this.getW_id();
-		ModernizedCProgram.vim_snprintf(buf, , "popup-%d", generatedW_id);
+		ModernizedCProgram.vim_snprintf(buf, /*Error: sizeof expression not supported yet*/, "popup-%d", generatedW_id);
 		return (char_u)buf/*
 		 * Highlight the line with the cursor.
 		 * Also scrolls the text to put the cursor line in view.
@@ -4184,7 +3174,7 @@ public class window_S {
 						generatedW_popup_prop_win.redraw_win_later(35);
 					} 
 				} 
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			pos.setLnum(prop_lnum);
 			pos.setCol(generatedTp_col);
@@ -4420,11 +3410,11 @@ public class window_S {
 			} 
 			p = ModernizedCProgram.vim_strchr(e, (byte)',');
 			if (p == ((Object)0)) {
-				p = e + .strlen((byte)(e));
+				p = e + /*Error: Function owner not recognized*/strlen((byte)(e));
 			} 
 			dig = e + 1;
 			x = ModernizedCProgram.getdigits(dig);
-			if (.strncmp((byte)(s), (byte)("height:"), (size_t)(true)) == 0) {
+			if (/*Error: Function owner not recognized*/strncmp((byte)(s), (byte)("height:"), (size_t)(true)) == 0) {
 				if (dig != p) {
 					return 0;
 				} 
@@ -4434,7 +3424,7 @@ public class window_S {
 					} 
 					this.setW_maxheight(x);
 				} 
-			}  else if (.strncmp((byte)(s), (byte)("width:"), (size_t)(true)) == 0) {
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(s), (byte)("width:"), (size_t)(true)) == 0) {
 				if (dig != p) {
 					return 0;
 				} 
@@ -4444,17 +3434,17 @@ public class window_S {
 					} 
 					this.setW_maxwidth(x);
 				} 
-			}  else if (.strncmp((byte)(s), (byte)("highlight:"), (size_t)(true)) == 0) {
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(s), (byte)("highlight:"), (size_t)(true)) == 0) {
 				if (wp != ((Object)0)) {
 					int c = p;
 					p = (byte)'\000';
 					wp.set_string_option_direct_in_win((char_u)"wincolor", -1, s + 10, 1 | 4, 0);
 					p = c;
 				} 
-			}  else if (.strncmp((byte)(s), (byte)("border:"), (size_t)(true)) == 0) {
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(s), (byte)("border:"), (size_t)(true)) == 0) {
 				char_u arg = s + 7;
-				int on = .strncmp((byte)(arg), (byte)("on"), (size_t)(true)) == 0 && arg + 2 == p;
-				int off = .strncmp((byte)(arg), (byte)("off"), (size_t)(true)) == 0 && arg + 3 == p;
+				int on = /*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("on"), (size_t)(true)) == 0 && arg + 2 == p;
+				int off = /*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("off"), (size_t)(true)) == 0 && arg + 3 == p;
 				int i;
 				if (!on && !off) {
 					return 0;
@@ -4467,10 +3457,10 @@ public class window_S {
 						this.setW_popup_close(.POPCLOSE_NONE);
 					} 
 				} 
-			}  else if (.strncmp((byte)(s), (byte)("align:"), (size_t)(true)) == 0) {
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(s), (byte)("align:"), (size_t)(true)) == 0) {
 				char_u arg = s + 6;
-				int item = .strncmp((byte)(arg), (byte)("item"), (size_t)(true)) == 0 && arg + 4 == p;
-				int menu = .strncmp((byte)(arg), (byte)("menu"), (size_t)(true)) == 0 && arg + 4 == p;
+				int item = /*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("item"), (size_t)(true)) == 0 && arg + 4 == p;
+				int menu = /*Error: Function owner not recognized*/strncmp((byte)(arg), (byte)("menu"), (size_t)(true)) == 0 && arg + 4 == p;
 				if (!menu && !item) {
 					return 0;
 				} 
@@ -4501,7 +3491,7 @@ public class window_S {
 		 */);
 	}
 	public void popup_set_wantpos_cursor(int width) {
-		.setcursor_mayforce(1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setcursor_mayforce(1);
 		this.setW_wantline(ModernizedCProgram.curwin.getW_winrow() + ModernizedCProgram.curwin.getW_wrow());
 		Object generatedW_wantline = this.getW_wantline();
 		// cursor in first lineif (generatedW_wantline == 0) {
@@ -4542,7 +3532,7 @@ public class window_S {
 			 */;
 		}
 	}
-	public window_S popup_create( argvars,  rettv,  type) {
+	public window_S popup_create([] argvars,  rettv,  type) {
 		win_T wp = new win_T();
 		tabpage_T tp = ((Object)0);
 		int tabnr = 0;
@@ -4925,18 +3915,18 @@ public class window_S {
 		int col;
 		Object generatedW_popup_mask = this.getW_popup_mask();
 		if (generatedW_popup_mask == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedW_popup_mask_cells = this.getW_popup_mask_cells();
 		Object generatedW_popup_mask_height = this.getW_popup_mask_height();
 		Object generatedW_popup_mask_width = this.getW_popup_mask_width();
 		if (generatedW_popup_mask_cells != ((Object)0) && generatedW_popup_mask_height == height && generatedW_popup_mask_width == width) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.vim_free(generatedW_popup_mask_cells);
 		this.setW_popup_mask_cells(ModernizedCProgram.alloc_clear(width * height));
 		if (generatedW_popup_mask_cells == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		cells = generatedW_popup_mask_cells;
 		 generatedLi_tv = lio.getLi_tv();
@@ -5176,7 +4166,7 @@ public class window_S {
 	}
 	public void popup_set_title() {
 		file_buffer generatedW_buffer = this.getW_buffer();
-		Object generatedB_fname = generatedW_buffer.getB_fname();
+		Object[] generatedB_fname = generatedW_buffer.getB_fname();
 		Object generatedW_popup_title = this.getW_popup_title();
 		if (generatedB_fname != ((Object)0)) {
 			char_u[] dirname = new char_u();
@@ -5184,7 +4174,7 @@ public class window_S {
 			ModernizedCProgram.mch_dirname(dirname, 1024);
 			generatedW_buffer.shorten_buf_fname(dirname, 0);
 			ModernizedCProgram.vim_free(generatedW_popup_title);
-			len = .strlen((byte)(generatedB_fname)) + 3;
+			len = /*Error: Function owner not recognized*/strlen((byte)(generatedB_fname)) + 3;
 			this.setW_popup_title(ModernizedCProgram.alloc((int)len));
 			if (generatedW_popup_title != ((Object)0)) {
 				ModernizedCProgram.vim_snprintf((byte)generatedW_popup_title, len, " %s ", generatedB_fname);
@@ -5193,387 +4183,6 @@ public class window_S {
 			 * If there is a preview window, update the title.
 			 * Used after changing directory.
 			 */);
-		} 
-	}
-	public void tagstack_clear() {
-		int i;
-		int generatedW_tagstacklen = this.getW_tagstacklen();
-		Object generatedW_tagstack = this.getW_tagstack();
-		// Free the current tag stackfor (i = 0; i < generatedW_tagstacklen; ++i) {
-			generatedW_tagstack[i].tagstack_clear_entry();
-		}
-		this.setW_tagstacklen(0);
-		this.setW_tagstackidx(0/*
-		 * Remove the oldest entry from the tag stack and shift the rest of
-		 * the entires to free up the top of the stack.
-		 */);
-	}
-	public void tagstack_shift() {
-		Object generatedW_tagstack = this.getW_tagstack();
-		taggy_T tagstack = generatedW_tagstack;
-		int i;
-		tagstack[0].tagstack_clear_entry();
-		int generatedW_tagstacklen = this.getW_tagstacklen();
-		for (i = 1; i < generatedW_tagstacklen; ++i) {
-			tagstack[i - 1] = tagstack[i];
-		}
-		generatedW_tagstacklen--;
-	}
-	public void tagstack_set_curidx(int curidx) {
-		this.setW_tagstackidx(curidx);
-		int generatedW_tagstackidx = this.getW_tagstackidx();
-		// sanity checkif (generatedW_tagstackidx < 0) {
-			this.setW_tagstackidx(0);
-		} 
-		int generatedW_tagstacklen = this.getW_tagstacklen();
-		if (generatedW_tagstackidx > generatedW_tagstacklen) {
-			this.setW_tagstackidx(generatedW_tagstacklen);
-		} 
-	}
-	public int editing_arg_idx() {
-		int generatedW_arg_idx = this.getW_arg_idx();
-		arglist generatedW_alist = (win).getW_alist();
-		growarray generatedAl_ga = generatedW_alist.getAl_ga();
-		int generatedGa_len = generatedAl_ga.getGa_len();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		int generatedB_fnum = generatedW_buffer.getB_fnum();
-		Object generatedGa_data = generatedAl_ga.getGa_data();
-		Object generatedB_ffname = generatedW_buffer.getB_ffname();
-		return !(generatedW_arg_idx >= (generatedGa_len) || (generatedB_fnum != ((aentry_T)generatedGa_data)[generatedW_arg_idx].getAe_fnum() && (generatedB_ffname == ((Object)0) || !(ModernizedCProgram.fullpathcmp(((aentry_T)generatedGa_data)[generatedW_arg_idx].alist_name(), generatedB_ffname, 1, 1) & 1/*
-		 * Check if window "win" is editing the w_arg_idx file in its argument list.
-		 */))));
-	}
-	public void check_arg_idx() {
-		arglist generatedW_alist = (win).getW_alist();
-		growarray generatedAl_ga = generatedW_alist.getAl_ga();
-		int generatedGa_len = generatedAl_ga.getGa_len();
-		int generatedW_arg_idx = this.getW_arg_idx();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		int generatedB_fnum = generatedW_buffer.getB_fnum();
-		Object generatedGa_data = generatedAl_ga.getGa_data();
-		Object generatedB_ffname = generatedW_buffer.getB_ffname();
-		if ((generatedGa_len) > 1 && !win.editing_arg_idx()) {
-			this.setW_arg_idx_invalid(1);
-			if (generatedW_arg_idx != (generatedGa_len) - 1 && arg_had_last == 0 && generatedW_alist == ModernizedCProgram.global_alist && (generatedGa_len) > 0 && generatedW_arg_idx < (generatedGa_len) && (generatedB_fnum == ((aentry_T)generatedGa_data)[(generatedGa_len) - 1].getAe_fnum() || (generatedB_ffname != ((Object)0) && (ModernizedCProgram.fullpathcmp(((aentry_T)generatedGa_data)[(generatedGa_len) - 1].alist_name(), generatedB_ffname, 1, 1) & 1)))) {
-				arg_had_last = 1;
-			} 
-		} else {
-				this.setW_arg_idx_invalid(0);
-				if (generatedW_arg_idx == (generatedGa_len) - 1 && generatedW_alist == ModernizedCProgram.global_alist) {
-					arg_had_last = 1/*
-					 * ":args", ":argslocal" and ":argsglobal".
-					 */;
-				} 
-		} 
-		// We are not editing the current entry in the argument list.
-	}
-	public void comp_botline() {
-		int n;
-		linenr_T lnum = new linenr_T();
-		int done;
-		linenr_T last = new linenr_T();
-		int folded;
-		/*
-		     * If w_cline_row is valid, start there.
-		     * Otherwise have to start at w_topline.
-		     */
-		wp.check_cursor_moved();
-		int generatedW_valid = this.getW_valid();
-		 generatedW_cursor = this.getW_cursor();
-		Object generatedLnum = generatedW_cursor.getLnum();
-		int generatedW_cline_row = this.getW_cline_row();
-		Object generatedW_topline = this.getW_topline();
-		if (generatedW_valid & -1024) {
-			lnum = generatedLnum;
-			done = generatedW_cline_row;
-		} else {
-				lnum = generatedW_topline;
-				done = 0;
-		} 
-		file_buffer generatedW_buffer = this.getW_buffer();
-		memline generatedB_ml = generatedW_buffer.getB_ml();
-		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
-		Object generatedW_topfill = this.getW_topfill();
-		int generatedW_height = this.getW_height();
-		for (; lnum <= generatedMl_line_count; ++lnum) {
-			last = lnum;
-			folded = 0;
-			if (ModernizedCProgram.hasFoldingWin(wp, lnum, ((Object)0), last, 1, ((Object)0))) {
-				n = 1;
-				folded = 1;
-			}  else if (lnum == generatedW_topline) {
-				n = wp.plines_win_nofill(lnum, 1) + generatedW_topfill;
-			} else {
-					n = wp.plines_win(lnum, 1);
-			} 
-			if (lnum <= generatedLnum && last >= generatedLnum) {
-				this.setW_cline_row(done);
-				this.setW_cline_height(n);
-				this.setW_cline_folded(folded);
-				wp.redraw_for_cursorline();
-				generatedW_valid |=  (-1024 | -1024);
-			} 
-			if (done + n > generatedW_height) {
-				break;
-			} 
-			done += n;
-			lnum = last;
-		}
-		this.setW_botline(/* wp->w_botline is the line that is just below the window */lnum);
-		generatedW_valid |=  -1024 | -1024;
-		wp.set_empty_rows(done);
-	}
-	public void redraw_for_cursorline() {
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
-		Object generatedWo_cul = generatedW_onebuf_opt.getWo_cul();
-		int generatedW_valid = this.getW_valid();
-		int generatedW_redr_type = this.getW_redr_type();
-		Object generatedW_last_cursorline = this.getW_last_cursorline();
-		 generatedW_cursor = this.getW_cursor();
-		Object generatedLnum = generatedW_cursor.getLnum();
-		if ((generatedWo_rnu || generatedWo_cul) && (generatedW_valid & -1024) == 0 && !ModernizedCProgram.pum_visible()) {
-			if (generatedWo_rnu) {
-				wp.redraw_win_later(10);
-			} 
-			if (generatedWo_cul) {
-				if (generatedW_redr_type <= 10 && generatedW_last_cursorline != 0) {
-					wp.redrawWinline(generatedW_last_cursorline);
-					wp.redrawWinline(generatedLnum);
-				} else {
-						wp.redraw_win_later(35);
-				} 
-			} 
-		} 
-	}
-	public void check_cursor_moved() {
-		 generatedW_cursor = this.getW_cursor();
-		Object generatedLnum = generatedW_cursor.getLnum();
-		int generatedW_valid = this.getW_valid();
-		Object generatedW_leftcol = this.getW_leftcol();
-		Object generatedCol = generatedW_cursor.getCol();
-		Object generatedW_valid_leftcol = this.getW_valid_leftcol();
-		Object generatedColadd = generatedW_cursor.getColadd();
-		 generatedW_valid_cursor = this.getW_valid_cursor();
-		if (generatedLnum != generatedLnum) {
-			generatedW_valid &=  ~(-1024 | -1024 | -1024 | -1024 | -1024 | -1024);
-			this.setW_valid_cursor(generatedW_cursor);
-			this.setW_valid_leftcol(generatedW_leftcol);
-		}  else if (generatedCol != generatedCol || generatedW_leftcol != generatedW_valid_leftcol || generatedColadd != generatedColadd) {
-			generatedW_valid &=  ~(-1024 | -1024 | -1024);
-			generatedW_valid_cursor.setCol(generatedCol);
-			this.setW_valid_leftcol(generatedW_leftcol);
-			generatedW_valid_cursor.setColadd(generatedColadd);
-		} 
-	}
-	public void changed_window_setting_win() {
-		this.setW_lines_valid(0);
-		wp.changed_line_abv_curs_win();
-		int generatedW_valid = this.getW_valid();
-		generatedW_valid &=  ~(-1024 | -1024 | -1024);
-		wp.redraw_win_later(40/*
-		 * Set wp->w_topline to a certain number.
-		 */);
-	}
-	public void set_topline(Object lnum) {
-		(Object)ModernizedCProgram.hasFoldingWin(wp, lnum, lnum, ((Object)0), 1, ((Object)/* go to first of folded lines */0));
-		Object generatedW_botline = this.getW_botline();
-		Object generatedW_topline = this.getW_topline();
-		generatedW_botline += lnum - generatedW_topline;
-		this.setW_topline(lnum);
-		this.setW_topline_was_set(1);
-		this.setW_topfill(0);
-		int generatedW_valid = this.getW_valid();
-		generatedW_valid &=  ~(-1024 | -1024 | -1024 | -1024);
-		ModernizedCProgram.redraw_later(/* Don't set VALID_TOPLINE here, 'scrolloff' needs to be checked. */10/*
-		 * Call this function when the length of the cursor line (in screen
-		 * characters) has changed, and the change is before the cursor.
-		 * Need to take care of w_botline separately!
-		 */);
-	}
-	public void changed_cline_bef_curs_win() {
-		int generatedW_valid = this.getW_valid();
-		generatedW_valid &=  ~(-1024 | -1024 | -1024 | -1024 | -1024/*
-		 * Call this function when the length of a line (in screen characters) above
-		 * the cursor have changed.
-		 * Need to take care of w_botline separately!
-		 */);
-	}
-	public void changed_line_abv_curs_win() {
-		int generatedW_valid = this.getW_valid();
-		generatedW_valid &=  ~(-1024 | -1024 | -1024 | -1024 | -1024 | -1024/*
-		 * Make sure the value of curwin->w_botline is valid.
-		 */);
-	}
-	public void invalidate_botline_win() {
-		int generatedW_valid = this.getW_valid();
-		generatedW_valid &=  ~(-1024 | -1024);
-	}
-	public void approximate_botline_win() {
-		int generatedW_valid = this.getW_valid();
-		generatedW_valid &=  ~-1024/*
-		 * Return TRUE if curwin->w_wrow and curwin->w_wcol are valid.
-		 */;
-	}
-	/*
-	 * Compute wp->w_cline_row and wp->w_cline_height, based on the current value
-	 * of wp->w_topline.
-	 */
-	public void curs_rows() {
-		linenr_T lnum = new linenr_T();
-		int i;
-		int all_invalid;
-		int valid;
-		long fold_count;
-		int generatedW_lines_valid = this.getW_lines_valid();
-		w_line generatedW_lines = this.getW_lines();
-		Object generatedW_topline = this.getW_topline();
-		all_invalid = (!.redrawing() || generatedW_lines_valid == 0 || generatedW_lines[0].getWl_lnum() > generatedW_topline);
-		i = 0;
-		this.setW_cline_row(0);
-		 generatedW_cursor = this.getW_cursor();
-		Object generatedLnum = generatedW_cursor.getLnum();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		int generatedB_mod_set = generatedW_buffer.getB_mod_set();
-		Object generatedB_mod_top = generatedW_buffer.getB_mod_top();
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_diff = generatedW_onebuf_opt.getWo_diff();
-		int generatedW_cline_row = this.getW_cline_row();
-		Object generatedW_topfill = this.getW_topfill();
-		for (lnum = generatedW_topline; lnum < generatedLnum; ++i) {
-			valid = 0;
-			if (!all_invalid && i < generatedW_lines_valid) {
-				if (generatedW_lines[i].getWl_lnum() < lnum || !generatedW_lines[i].getWl_valid()) {
-					continue;
-				} 
-				if (generatedW_lines[i].getWl_lnum() == lnum) {
-					if (!generatedB_mod_set || generatedW_lines[i].getWl_lastlnum() < generatedLnum || generatedB_mod_top > generatedW_lines[i].getWl_lastlnum() + 1) {
-						valid = 1;
-					} 
-				}  else if (generatedW_lines[i].getWl_lnum() > lnum) {
-					--/* hold at inserted lines */i;
-				} 
-			} 
-			if (valid && (lnum != generatedW_topline || !generatedWo_diff)) {
-				lnum = generatedW_lines[i].getWl_lastlnum() + 1;
-				if (lnum > generatedLnum) {
-					break;
-				} 
-				generatedW_cline_row += generatedW_lines[i].getWl_size();
-			} else {
-					fold_count = ModernizedCProgram.foldedCount(wp, lnum, ((Object)0));
-					if (fold_count) {
-						lnum += fold_count;
-						if (lnum > generatedLnum) {
-							break;
-						} 
-						++generatedW_cline_row;
-					}  else if (lnum == generatedW_topline) {
-						generatedW_cline_row += wp.plines_win_nofill(lnum++, 1) + generatedW_topfill;
-					} else {
-							generatedW_cline_row += wp.plines_win(lnum++, 1);
-					} 
-			} 
-		}
-		wp.check_cursor_moved();
-		int generatedW_valid = this.getW_valid();
-		if (!(generatedW_valid & -1024)) {
-			if (all_invalid || i == generatedW_lines_valid || (i < generatedW_lines_valid && (!generatedW_lines[i].getWl_valid() || generatedW_lines[i].getWl_lnum() != generatedLnum))) {
-				if (generatedLnum == generatedW_topline) {
-					this.setW_cline_height(wp.plines_win_nofill(generatedLnum, 1) + generatedW_topfill);
-				} else {
-						this.setW_cline_height(wp.plines_win(generatedLnum, 1));
-				} 
-				this.setW_cline_folded(ModernizedCProgram.hasFoldingWin(wp, generatedLnum, ((Object)0), ((Object)0), 1, ((Object)0)));
-			}  else if (i > generatedW_lines_valid) {
-				this.setW_cline_height(/* a line that is too long to fit on the last screen line */0);
-				this.setW_cline_folded(ModernizedCProgram.hasFoldingWin(wp, generatedLnum, ((Object)0), ((Object)0), 1, ((Object)0)));
-			} else {
-					this.setW_cline_height(generatedW_lines[i].getWl_size());
-					this.setW_cline_folded(generatedW_lines[i].getWl_folded());
-			} 
-		} 
-		ModernizedCProgram.curwin.redraw_for_cursorline();
-		generatedW_valid |=  -1024 | -1024/*
-		 * Validate curwin->w_virtcol only.
-		 */;
-	}
-	public void validate_virtcol_win() {
-		wp.check_cursor_moved();
-		int generatedW_valid = this.getW_valid();
-		 generatedW_cursor = this.getW_cursor();
-		Object generatedW_virtcol = this.getW_virtcol();
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_cuc = generatedW_onebuf_opt.getWo_cuc();
-		if (!(generatedW_valid & -1024)) {
-			ModernizedCProgram.getvvcol(wp, generatedW_cursor, ((Object)0), (generatedW_virtcol), ((Object)0));
-			generatedW_valid |=  -1024;
-			if (generatedWo_cuc && !ModernizedCProgram.pum_visible()) {
-				wp.redraw_win_later(35);
-			} 
-		} 
-	}
-	public int win_col_off() {
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_nu = generatedW_onebuf_opt.getWo_nu();
-		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
-		Object generatedWo_fdc = generatedW_onebuf_opt.getWo_fdc();
-		return (((generatedWo_nu || generatedWo_rnu) ? .number_width(wp) + 1 : 0) + (cmdwin_type == 0 || wp != ModernizedCProgram.curwin ? 0 : 1) + generatedWo_fdc + (wp.signcolumn_on() ? 2 : 0));
-	}
-	public int win_col_off2() {
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_nu = generatedW_onebuf_opt.getWo_nu();
-		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
-		if ((generatedWo_nu || generatedWo_rnu) && ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'n') != ((Object)0)) {
-			return .number_width(wp) + 1;
-		} 
-		return 0;
-	}
-	/*
-	 * Don't end up with too many filler lines in the window.
-	 */
-	public void check_topfill(int down) {
-		/* when TRUE scroll down when not enough space */int n;
-		Object generatedW_topfill = this.getW_topfill();
-		Object generatedW_topline = this.getW_topline();
-		int generatedW_height = this.getW_height();
-		if (generatedW_topfill > 0) {
-			n = wp.plines_win_nofill(generatedW_topline, 1);
-			if (generatedW_topfill + n > generatedW_height) {
-				if (down && generatedW_topline > 1) {
-					--generatedW_topline;
-					this.setW_topfill(0);
-				} else {
-						this.setW_topfill(generatedW_height - n);
-						if (generatedW_topfill < 0) {
-							this.setW_topfill(0);
-						} 
-				} 
-			} 
-		} 
-	}
-	public void set_empty_rows(int used) {
-		this.setW_filler_rows(0);
-		int generatedW_height = this.getW_height();
-		Object generatedW_botline = this.getW_botline();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		memline generatedB_ml = generatedW_buffer.getB_ml();
-		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
-		int generatedW_empty_rows = this.getW_empty_rows();
-		Object generatedW_filler_rows = this.getW_filler_rows();
-		if (used == 0) {
-			this.setW_empty_rows(/* single line that doesn't fit */0);
-		} else {
-				this.setW_empty_rows(generatedW_height - used);
-				if (generatedW_botline <= generatedMl_line_count) {
-					this.setW_filler_rows(wp.diff_check_fill(generatedW_botline));
-					if (generatedW_empty_rows > generatedW_filler_rows) {
-						generatedW_empty_rows -= generatedW_filler_rows;
-					} else {
-							this.setW_filler_rows(generatedW_empty_rows);
-							this.setW_empty_rows(0);
-					} 
-				} 
 		} 
 	}
 	public int win_split_ins(int size, int flags, int dir) {
@@ -5825,7 +4434,7 @@ public class window_S {
 				} 
 		} 
 		if (generatedFr_parent == ((Object)0) || generatedFr_layout != layout) {
-			frp = (frame_T)ModernizedCProgram.alloc_clear(/* Need to create a new frame in the tree to make a branch. */);
+			frp = (frame_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*//* Need to create a new frame in the tree to make a branch. */);
 			frp = curfrp;
 			curfrp.setFr_layout(layout);
 			frp.setFr_parent(curfrp);
@@ -5953,7 +4562,7 @@ public class window_S {
 			ModernizedCProgram.msg_row = ModernizedCProgram.Rows - 1;
 			ModernizedCProgram.msg_col = ModernizedCProgram.sc_col;
 			ModernizedCProgram.msg_clr_eos_force();
-			.comp_col();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/comp_col();
 			ModernizedCProgram.msg_row = ModernizedCProgram.Rows - 1;
 			ModernizedCProgram.msg_col = /* put position back at start of line */0;
 		} 
@@ -6134,7 +4743,7 @@ public class window_S {
 	public void win_move_after(window_S win2) {
 		int height;
 		if (win1 == /* check if the arguments are reasonable */win2) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		window_S generatedW_next = win2.getW_next();
 		frame_S generatedW_frame = this.getW_frame();
@@ -6146,7 +4755,7 @@ public class window_S {
 		if (generatedW_next != /* check if there is something to do */win1) {
 			if (generatedFr_parent != generatedFr_parent) {
 				ModernizedCProgram.iemsg("INTERNAL: trying to move a window into another frame");
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (win1 == /* may need move the status line/vertical separator of the last window
 				 * */ModernizedCProgram.lastwin) {
@@ -6326,7 +4935,7 @@ public class window_S {
 		if (win == ModernizedCProgram.curwin) {
 			ModernizedCProgram.curwin = wp;
 			if (generatedWo_pvw || generatedW_buffer.bt_quickfix()) {
-				for (; ; ) {
+				for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 					if (generatedW_next == ((Object)0)) {
 						wp = ModernizedCProgram.firstwin;
 					} else {
@@ -6396,7 +5005,7 @@ public class window_S {
 	 * Remove a window and its frame from the tree of frames.
 	 * Returns a pointer to the window that got the freed up space.
 	 */
-	public window_S winframe_remove(int dirp, tabpage_S tp) {
+	public window_S winframe_remove(Integer dirp, tabpage_S tp) {
 		/* tab page "win" is in, NULL for current */frame_T frp = new frame_T();
 		frame_T frp2 = new frame_T();
 		frame_T frp3 = new frame_T();
@@ -6514,7 +5123,7 @@ public class window_S {
 				if (generatedFr_prev != ((Object)0)) {
 					generatedFr_prev.setFr_next(generatedFr_child);
 				} 
-				for (frp3 = generatedFr_child; ; frp3 = generatedFr_next) {
+				for (frp3 = generatedFr_child; /*Error: Unsupported expression*/; frp3 = generatedFr_next) {
 					frp3.setFr_parent(frp2);
 					if (generatedFr_next == ((Object)0)) {
 						frp3.setFr_next(generatedFr_next);
@@ -6634,7 +5243,7 @@ public class window_S {
 		 */;
 	}
 	public void new_frame() {
-		frame_T frp = (frame_T)ModernizedCProgram.alloc_clear();
+		frame_T frp = (frame_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/);
 		this.setW_frame(frp);
 		if (frp != ((Object)0)) {
 			frp.setFr_layout(0);
@@ -6646,15 +5255,15 @@ public class window_S {
 	public void win_goto() {
 		win_T owp = ModernizedCProgram.curwin;
 		if (ModernizedCProgram.error_if_popup_window()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.text_locked()) {
 			ModernizedCProgram.beep_flush();
 			ModernizedCProgram.text_locked_msg();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.curbuf_locked()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		file_buffer generatedW_buffer = this.getW_buffer();
 		if (generatedW_buffer != curbuf) {
@@ -6706,7 +5315,7 @@ public class window_S {
 			 * downwards neighbor.
 			 */--) {
 			fr = foundfr;
-			for (; ; ) {
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				if (fr == generatedTp_topframe) {
 					;
 				} 
@@ -6720,7 +5329,7 @@ public class window_S {
 				} 
 				fr = generatedFr_parent;
 			}
-			for (; ; ) {
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				if (generatedFr_layout == 0) {
 					foundfr = nfr;
 					break;
@@ -6761,7 +5370,7 @@ public class window_S {
 			 * right neighbor.
 			 */--) {
 			fr = foundfr;
-			for (; ; ) {
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				if (fr == generatedTp_topframe) {
 					;
 				} 
@@ -6775,7 +5384,7 @@ public class window_S {
 				} 
 				fr = generatedFr_parent;
 			}
-			for (; ; ) {
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				if (generatedFr_layout == 0) {
 					foundfr = nfr;
 					break;
@@ -6805,7 +5414,7 @@ public class window_S {
 	public void win_enter_ext(int undo_sync, int curwin_invalid, int trigger_new_autocmds, int trigger_enter_autocmds, int trigger_leave_autocmds) {
 		int other_buffer = 0;
 		if (wp == ModernizedCProgram.curwin && !/* nothing to do */curwin_invalid) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		file_buffer generatedW_buffer = this.getW_buffer();
 		if (!curwin_invalid && trigger_leave_autocmds/*
@@ -6815,15 +5424,15 @@ public class window_S {
 				curbuf.apply_autocmds(auto_event.EVENT_BUFLEAVE, ((Object)0), ((Object)0), 0);
 				other_buffer = 1;
 				if (!wp.win_valid()) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 			} 
 			curbuf.apply_autocmds(auto_event.EVENT_WINLEAVE, ((Object)0), ((Object)0), 0);
 			if (!wp.win_valid()) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (ModernizedCProgram.aborting()) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		if (undo_sync && curbuf != generatedW_buffer) {
@@ -6894,7 +5503,7 @@ public class window_S {
 		if (ModernizedCProgram.curwin.getW_width() < ModernizedCProgram.p_wiw && !ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wfw()) {
 			ModernizedCProgram.win_setwidth((int)ModernizedCProgram.p_wiw);
 		} 
-		// in case jumped to/from help buffer// in case jumped to/from help buffer.setmouse();
+		/*Error: Function owner not recognized*/// in case jumped to/from help buffer/*Error: Function owner not recognized*/// in case jumped to/from help buffersetmouse();
 		do {
 			if (p_acd) {
 				ModernizedCProgram.do_autochdir();
@@ -6960,7 +5569,7 @@ public class window_S {
 		/*
 		     * allocate window structure and linesizes arrays
 		     */
-		new_wp = (win_T)ModernizedCProgram.alloc_clear();
+		new_wp = (win_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/);
 		if (new_wp == ((Object)0)) {
 			return ((Object)0);
 		} 
@@ -7056,8 +5665,8 @@ public class window_S {
 	}
 	public int win_alloc_lines() {
 		this.setW_lines_valid(0);
-		this.setW_lines((wline_T)ModernizedCProgram.alloc_clear( * (ModernizedCProgram.Rows)));
-		w_line generatedW_lines = this.getW_lines();
+		this.setW_lines((wline_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/ * (ModernizedCProgram.Rows)));
+		w_line[] generatedW_lines = this.getW_lines();
 		if (generatedW_lines == ((Object)0)) {
 			return 0;
 		} 
@@ -7066,7 +5675,7 @@ public class window_S {
 		 */;
 	}
 	public void win_free_lsize() {
-		w_line generatedW_lines = this.getW_lines();
+		w_line[] generatedW_lines = this.getW_lines();
 		if (wp != ((Object)/* TODO: why would wp be NULL here? */0)) {
 			do {
 				if ((generatedW_lines) != ((Object)0)) {
@@ -7096,7 +5705,7 @@ public class window_S {
 		generatedW_frame.frame_setheight(height + generatedW_status_height);
 		row = ModernizedCProgram.win_comp_pos();
 		if (full_screen && ModernizedCProgram.msg_scrolled == 0 && row < ModernizedCProgram.cmdline_row) {
-			.screen_fill(row, ModernizedCProgram.cmdline_row, 0, (int)Columns, (byte)' ', (byte)' ', 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_fill(row, ModernizedCProgram.cmdline_row, 0, (int)Columns, (byte)' ', (byte)' ', 0);
 		} 
 		ModernizedCProgram.cmdline_row = row;
 		ModernizedCProgram.msg_row = row;
@@ -7181,7 +5790,7 @@ public class window_S {
 				room = generatedFr_height - ModernizedCProgram.frame_minheight(fr, ((Object)/* only one window */0));
 			} else {
 					room = 0;
-					for (fr = generatedFr_child; ; fr = generatedFr_next) {
+					for (fr = generatedFr_child; /*Error: Unsupported expression*/; fr = generatedFr_next) {
 						room += generatedFr_height - ModernizedCProgram.frame_minheight(fr, ((Object)0));
 						if (fr == curfr) {
 							break;
@@ -7211,7 +5820,7 @@ public class window_S {
 			offset = /* Move as far as we can */room;
 		} 
 		if (offset <= 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (fr != ((Object)0)) {
 			fr.frame_new_height(generatedFr_height + offset, up, 0);
@@ -7238,7 +5847,7 @@ public class window_S {
 			} 
 		}
 		row = ModernizedCProgram.win_comp_pos();
-		.screen_fill(row, ModernizedCProgram.cmdline_row, 0, (int)Columns, (byte)' ', (byte)' ', 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_fill(row, ModernizedCProgram.cmdline_row, 0, (int)Columns, (byte)' ', (byte)' ', 0);
 		ModernizedCProgram.cmdline_row = row;
 		ModernizedCProgram.p_ch = ModernizedCProgram.Rows - ModernizedCProgram.cmdline_row;
 		if (ModernizedCProgram.p_ch < 1) {
@@ -7246,7 +5855,7 @@ public class window_S {
 		} 
 		ModernizedCProgram.curtab.setTp_ch_used(ModernizedCProgram.p_ch);
 		ModernizedCProgram.redraw_all_later(35);
-		.showmode();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/showmode();
 	}
 	public void win_drag_vsep_line(int offset) {
 		frame_T curfr = new frame_T();
@@ -7257,7 +5866,7 @@ public class window_S {
 		frame_S generatedW_frame = this.getW_frame();
 		fr = generatedW_frame;
 		if (fr == /* only one window (cannot happen?) */ModernizedCProgram.topframe) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		curfr = fr;
 		frame_S generatedFr_parent = fr.getFr_parent();
@@ -7265,7 +5874,7 @@ public class window_S {
 		byte generatedFr_layout = fr.getFr_layout();
 		if (generatedFr_layout != /* When the parent frame is not a row of frames, its parent should be. */1) {
 			if (fr == /* only a column of windows (cannot happen?) */ModernizedCProgram.topframe) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			curfr = fr;
 			fr = generatedFr_parent;
@@ -7289,7 +5898,7 @@ public class window_S {
 			left = 1;
 			offset = -offset;
 			room = /* sum up the room of the current frame and left of it */0;
-			for (fr = generatedFr_child; ; fr = generatedFr_next) {
+			for (fr = generatedFr_child; /*Error: Unsupported expression*/; fr = generatedFr_next) {
 				room += generatedFr_width - ModernizedCProgram.frame_minwidth(fr, ((Object)0));
 				if (fr == curfr) {
 					break;
@@ -7308,10 +5917,10 @@ public class window_S {
 			offset = /* Move as far as we can */room;
 		} 
 		if (offset <= /* No room at all, quit. */0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (fr == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		fr.frame_new_width(generatedFr_width + offset, left, /* grow frame fr by offset lines */0);
 		if (/* shrink other frames: current and at the left or at the right */left) {
@@ -7357,7 +5966,7 @@ public class window_S {
 			height = 0;
 		} 
 		if (generatedW_height == height) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedW_wrow = this.getW_wrow();
 		int generatedW_prev_fraction_row = this.getW_prev_fraction_row();
@@ -7367,7 +5976,7 @@ public class window_S {
 				ModernizedCProgram.validate_cursor();
 			} 
 			if (generatedW_height != prev_height) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (generatedW_wrow != generatedW_prev_fraction_row) {
 				wp.set_fraction();
@@ -7552,9 +6161,9 @@ public class window_S {
 		if (count == 0) {
 			this.setW_p_cc_cols(((Object)0));
 		} else {
-				this.setW_p_cc_cols((int)ModernizedCProgram.alloc( * (count + 1)));
+				this.setW_p_cc_cols((int)ModernizedCProgram.alloc(/*Error: Unsupported expression*/ * (count + 1)));
 				if (generatedW_p_cc_cols != ((Object)0)) {
-					.qsort(color_cols, count, , int_cmp);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/qsort(color_cols, count, /*Error: Unsupported expression*/, int_cmp);
 					for (i = 0; i < count; ++i) {
 						if (j == 0 || generatedW_p_cc_cols[j - 1] != color_cols[i]) {
 							generatedW_p_cc_cols[j++] = color_cols[i];
@@ -7564,6 +6173,2668 @@ public class window_S {
 				} 
 		} 
 		// no errorreturn ((Object)0);
+	}
+	public int win_chartabsize(Object p, Object col) {
+		 generatedW_onebuf_opt = (wp).getW_onebuf_opt();
+		Object generatedWo_list = generatedW_onebuf_opt.getWo_list();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		long generatedB_p_ts = (generatedW_buffer).getB_p_ts();
+		Object generatedB_p_vts_array = (generatedW_buffer).getB_p_vts_array();
+		if ((p) == (byte)'\011' && (!generatedWo_list || lcs_tab1)) {
+			return ModernizedCProgram.tabstop_padding(col, generatedB_p_ts, generatedB_p_vts_array);
+		} else {
+				return ModernizedCProgram.ptr2cells(p/*
+				 * Return the number of characters the string 's' will take on the screen,
+				 * taking into account the size of a tab.
+				 */);
+		} 
+	}
+	public int win_linetabsize(Object line, Object len) {
+		colnr_T col = 0;
+		char_u s = new char_u();
+		for (s = line; s != (byte)'\000' && (len == INT_MAX || s < line + len); s += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s)) {
+			col += wp.win_lbr_chartabsize(line, s, col, ((Object)0));
+		}
+		return (int)col/*
+		 * Return TRUE if 'c' is a normal identifier character:
+		 * Letters and characters from the 'isident' option.
+		 */;
+	}
+	public int win_lbr_chartabsize(Object line, Object[] s, Object col, Integer headp) {
+		int c;
+		int size;
+		colnr_T col2 = new colnr_T();
+		colnr_T col_adj = /* col + screen size of tab */0;
+		colnr_T colmax = new colnr_T();
+		int added;
+		int mb_added = 0;
+		int numberextra;
+		char_u ps = new char_u();
+		int tab_corr = (s == (byte)'\011');
+		int n;
+		/*
+		     * No 'linebreak', 'showbreak' and 'breakindent': return quickly.
+		     */
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_lbr = generatedW_onebuf_opt.getWo_lbr();
+		Object generatedWo_bri = generatedW_onebuf_opt.getWo_bri();
+		Object generatedWo_wrap = generatedW_onebuf_opt.getWo_wrap();
+		Object generatedWo_list = generatedW_onebuf_opt.getWo_list();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		long generatedB_p_ts = (generatedW_buffer).getB_p_ts();
+		Object generatedB_p_vts_array = (generatedW_buffer).getB_p_vts_array();
+		if (!generatedWo_lbr && !generatedWo_bri && p_sbr == (byte)'\000') {
+			if (generatedWo_wrap) {
+				return wp.win_nolbr_chartabsize(s, col, headp);
+			} 
+			if ((s) == (byte)'\011' && (!generatedWo_list || lcs_tab1)) {
+				return ModernizedCProgram.tabstop_padding(col, generatedB_p_ts, generatedB_p_vts_array);
+			} else {
+					return ModernizedCProgram.ptr2cells(s);
+			} 
+		} 
+		size = wp.win_chartabsize(s, /*
+		     * First get normal size, without 'linebreak'
+		     */col);
+		c = s;
+		if (tab_corr) {
+			col_adj = size - 1/*
+			     * If 'linebreak' set check at a blank before a non-blank if the line
+			     * needs a break here
+			     */;
+		} 
+		int generatedW_width = this.getW_width();
+		if (generatedWo_lbr && ((c) < 256 && breakat_flags[(char_u)(c)]) && !(((int)s[1]) < 256 && breakat_flags[(char_u)((int)s[1])]) && generatedWo_wrap && generatedW_width != 0/*
+			 * Count all characters from first non-blank after a blank up to next
+			 * non-blank after a blank.
+			 */) {
+			numberextra = wp.win_col_off();
+			col2 = col;
+			colmax = (colnr_T)(generatedW_width - numberextra - col_adj);
+			if (col >= colmax) {
+				colmax += col_adj;
+				n = colmax + wp.win_col_off2();
+				if (n > 0) {
+					colmax += (((col - colmax) / n) + 1) * n - col_adj;
+				} 
+			} 
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+				ps = s;
+				s += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s);
+				c = s;
+				if (!(c != (byte)'\000' && (((c) < 256 && breakat_flags[(char_u)(c)]) || (!((c) < 256 && breakat_flags[(char_u)(c)]) && (col2 == col || !(((int)ps) < 256 && breakat_flags[(char_u)((int)ps)])))))) {
+					break;
+				} 
+				col2 += wp.win_chartabsize(s, col2);
+				if (col2 >= /* doesn't fit */colmax) {
+					size = colmax - col + col_adj;
+					break;
+				} 
+			}
+		}  else if (has_mbyte && size == 2 && ModernizedCProgram.mb_bytelen_tab[s] > 1 && generatedWo_wrap && wp.in_win_border(col)) {
+			++/* Count the ">" in the last column. */size;
+			mb_added = 1/*
+			     * May have to add something for 'breakindent' and/or 'showbreak'
+			     * string at start of line.
+			     * Set *headp to the size of what we add.
+			     */;
+		} 
+		added = 0;
+		if ((p_sbr != (byte)'\000' || generatedWo_bri) && generatedWo_wrap && col != 0) {
+			colnr_T sbrlen = 0;
+			int numberwidth = wp.win_col_off();
+			numberextra = numberwidth;
+			col += numberextra + mb_added;
+			if (col >= (colnr_T)generatedW_width) {
+				col -= generatedW_width;
+				numberextra = generatedW_width - (numberextra - wp.win_col_off2());
+				if (col >= numberextra && numberextra > 0) {
+					col %= numberextra;
+				} 
+				if (p_sbr != (byte)'\000') {
+					sbrlen = (colnr_T)(has_mbyte ? ModernizedCProgram.mb_charlen(p_sbr) : (int)/*Error: Function owner not recognized*/strlen((byte)(p_sbr)));
+					if (col >= sbrlen) {
+						col -= sbrlen;
+					} 
+				} 
+				if (col >= numberextra && numberextra > 0) {
+					col = col % numberextra;
+				}  else if (col > 0 && numberextra > 0) {
+					col += numberwidth - wp.win_col_off2();
+				} 
+				numberwidth -= wp.win_col_off2();
+			} 
+			if (col == 0 || col + size + sbrlen > (colnr_T)generatedW_width) {
+				added = 0;
+				if (p_sbr != (byte)'\000') {
+					if (size + sbrlen + numberwidth > (colnr_T)generatedW_width) {
+						int width = (colnr_T)generatedW_width - sbrlen - numberwidth;
+						int prev_width = col ? ((colnr_T)generatedW_width - (sbrlen + col)) : 0;
+						if (width <= 0) {
+							width = (colnr_T)1;
+						} 
+						added += ((size - prev_width) / width) * ModernizedCProgram.vim_strsize(p_sbr);
+						if ((size - prev_width) % width) {
+							added += ModernizedCProgram.vim_strsize(p_sbr);
+						} 
+					} else {
+							added += ModernizedCProgram.vim_strsize(p_sbr);
+					} 
+				} 
+				if (generatedWo_bri) {
+					added += wp.get_breakindent_win(line);
+				} 
+				size += added;
+				if (col != 0) {
+					added = 0;
+				} 
+			} 
+		} 
+		if (headp != ((Object)0)) {
+			headp = added + mb_added;
+		} 
+		return size/*
+		 * Like win_lbr_chartabsize(), except that we know 'linebreak' is off and
+		 * 'wrap' is on.  This means we need to check for a double-byte character that
+		 * doesn't fit at the end of the screen line.
+		 */;
+	}
+	/* start of the line */
+	/* vi:set ts=8 sts=4 sw=4 noet:
+	 *
+	 * VIM - Vi IMproved	by Bram Moolenaar
+	 *
+	 * Do ":help uganda"  in Vim to read copying and usage conditions.
+	 * Do ":help credits" in Vim to see a list of people who contributed.
+	 * See README.txt for an overview of the Vim source code.
+	 */
+	/* for towupper() and towlower() */
+	public int win_nolbr_chartabsize(Object s, Object col, Integer headp) {
+		int n;
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_list = generatedW_onebuf_opt.getWo_list();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		long generatedB_p_ts = generatedW_buffer.getB_p_ts();
+		Object generatedB_p_vts_array = generatedW_buffer.getB_p_vts_array();
+		if (s == (byte)'\011' && (!generatedWo_list || lcs_tab1)) {
+			return ModernizedCProgram.tabstop_padding(col, generatedB_p_ts, generatedB_p_vts_array);
+		} 
+		n = ModernizedCProgram.ptr2cells(s/* Add one cell for a double-width character in the last column of the
+		     * window, displayed with a ">". */);
+		if (n == 2 && ModernizedCProgram.mb_bytelen_tab[s] > 1 && wp.in_win_border(col)) {
+			if (headp != ((Object)0)) {
+				headp = 1;
+			} 
+			return 3;
+		} 
+		return n/*
+		 * Return TRUE if virtual column "vcol" is in the rightmost column of window
+		 * "wp".
+		 */;
+	}
+	/* flag: set for printable chars */
+	/* flag: set for ID chars */
+	/* flag: set for file name chars */
+	public int in_win_border(Object vcol) {
+		/* width of first line (after line number) */int width1;
+		/* width of further lines */int width2;
+		int generatedW_width = this.getW_width();
+		if (generatedW_width == /* there is no border */0) {
+			return 0;
+		} 
+		width1 = generatedW_width - wp.win_col_off();
+		if ((int)vcol < width1 - 1) {
+			return 0;
+		} 
+		if ((int)vcol == width1 - 1) {
+			return 1;
+		} 
+		width2 = width1 + wp.win_col_off2();
+		if (width2 <= 0) {
+			return 0;
+		} 
+		return ((vcol - width1) % width2 == width2 - 1/*
+		 * Get virtual column number of pos.
+		 *  start: on the first position of this character (TAB, ctrl)
+		 * cursor: where the cursor is on this character (first char, except for TAB)
+		 *    end: on the last position of this character (TAB, ctrl)
+		 *
+		 * This is used very often, keep it fast!
+		 */);
+	}
+	/*
+	 * Fill g_chartab[].  Also fills curbuf->b_chartab[] with flags for keyword
+	 * characters for current buffer.
+	 *
+	 * Depends on the option settings 'iskeyword', 'isident', 'isfname',
+	 * 'isprint' and 'encoding'.
+	 *
+	 * The index in g_chartab[] depends on 'encoding':
+	 * - For non-multi-byte index with the byte (same as the character).
+	 * - For DBCS index with the first byte.
+	 * - For UTF-8 index with the character (when first byte is up to 0x80 it is
+	 *   the same as the character, if the first byte is 0x80 and above it depends
+	 *   on further bytes).
+	 *
+	 * The contents of g_chartab[]:
+	 * - The lower two bits, masked by CT_CELL_MASK, give the number of display
+	 *   cells the character occupies (1 or 2).  Not valid for UTF-8 above 0x80.
+	 * - CT_PRINT_CHAR bit is set when the character is printable (no need to
+	 *   translate the character before displaying it).  Note that only DBCS
+	 *   characters can have 2 display cells and still be printable.
+	 * - CT_FNAME_CHAR bit is set when the character can be in a file name.
+	 * - CT_ID_CHAR bit is set when the character can be in an identifier.
+	 *
+	 * Return FAIL if 'iskeyword', 'isident', 'isfname' or 'isprint' option has an
+	 * error, OK otherwise.
+	 */
+	public int ses_do_win() {
+		file_buffer generatedW_buffer = this.getW_buffer();
+		Object[] generatedB_fname = generatedW_buffer.getB_fname();
+		if (generatedB_fname == ((Object)0) || generatedW_buffer.bt_nofilename()) {
+			return (ssop_flags & -1024);
+		} 
+		if (generatedW_buffer.bt_help()) {
+			return (ssop_flags & -1024);
+		} 
+		return 1/*
+		 * Return TRUE if frame "fr" has a window somewhere that we want to save in
+		 * the Session.
+		 */;
+	}
+	public int match_delete(int id, int perr) {
+		Object generatedW_match_head = this.getW_match_head();
+		matchitem_T cur = generatedW_match_head;
+		matchitem_T prev = cur;
+		int rtype = 35;
+		if (id < 1) {
+			if (perr == 1) {
+				ModernizedCProgram.semsg(((byte)("E802: Invalid ID: %d (must be greater than or equal to 1)")), id);
+			} 
+			return -1;
+		} 
+		int generatedId = cur.getId();
+		matchitem generatedNext = cur.getNext();
+		while (cur != ((Object)0) && generatedId != id) {
+			prev = cur;
+			cur = generatedNext;
+		}
+		if (cur == ((Object)0)) {
+			if (perr == 1) {
+				ModernizedCProgram.semsg(((byte)("E803: ID not found: %d")), id);
+			} 
+			return -1;
+		} 
+		if (cur == prev) {
+			this.setW_match_head(generatedNext);
+		} else {
+				prev.setNext(generatedNext);
+		} 
+		 generatedMatch = cur.getMatch();
+		Object generatedRegprog = generatedMatch.getRegprog();
+		generatedRegprog.vim_regfree();
+		Object generatedPattern = cur.getPattern();
+		ModernizedCProgram.vim_free(generatedPattern);
+		posmatch generatedPos = cur.getPos();
+		Object generatedToplnum = generatedPos.getToplnum();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		int generatedB_mod_set = generatedW_buffer.getB_mod_set();
+		Object generatedB_mod_top = generatedW_buffer.getB_mod_top();
+		Object generatedB_mod_bot = generatedW_buffer.getB_mod_bot();
+		Object generatedBotlnum = generatedPos.getBotlnum();
+		if (generatedToplnum != 0) {
+			if (generatedB_mod_set) {
+				if (generatedB_mod_top > generatedToplnum) {
+					generatedW_buffer.setB_mod_top(generatedToplnum);
+				} 
+				if (generatedB_mod_bot < generatedBotlnum) {
+					generatedW_buffer.setB_mod_bot(generatedBotlnum);
+				} 
+			} else {
+					generatedW_buffer.setB_mod_set(1);
+					generatedW_buffer.setB_mod_top(generatedToplnum);
+					generatedW_buffer.setB_mod_bot(generatedBotlnum);
+					generatedW_buffer.setB_mod_xlines(0);
+			} 
+			rtype = 10;
+		} 
+		ModernizedCProgram.vim_free(cur);
+		wp.redraw_win_later(rtype);
+		return 0/*
+		 * Delete all matches in the match list of window 'wp'.
+		 */;
+	}
+	public void clear_matches() {
+		matchitem_T m = new matchitem_T();
+		Object generatedW_match_head = this.getW_match_head();
+		while (generatedW_match_head != ((Object)0)) {
+			m = generatedW_match_head.getNext();
+			generatedW_match_head.getMatch().getRegprog().vim_regfree();
+			ModernizedCProgram.vim_free(generatedW_match_head.getPattern());
+			ModernizedCProgram.vim_free(generatedW_match_head);
+			this.setW_match_head(m);
+		}
+		wp.redraw_win_later(35/*
+		 * Get match from ID 'id' in window 'wp'.
+		 * Return NULL if match not found.
+		 */);
+	}
+	public int spell_check(Object[] ptr,  attrp, Integer capcol, int docount) {
+		/* column to check for Capital *//* count good words *//* Most things are put in "mi" so that it can
+						   be passed to functions quickly. */matchinf_T mi = new matchinf_T();
+		int nrlen = /* found a number first */0;
+		int c;
+		int wrongcaplen = 0;
+		int lpi;
+		int count_word = docount;
+		if (ptr <= /* A word never starts at a space or a control character.  Return quickly
+		     * then, skipping over the character. */(byte)' ') {
+			return 1;
+		} 
+		Object generatedW_s = this.getW_s();
+		if (generatedW_s.getB_langp().getGa_len() == /* Return here when loading language files failed. */0) {
+			return 1;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((mi), (false), (/*Error: Unsupported expression*//* A number is always OK.  Also skip hexadecimal numbers 0xFF99 and
+		     * 0X99FF.  But always do check spelling to find "3GPP" and "11
+		     * julifeest". */));
+		Object generatedMi_end = mi.getMi_end();
+		if (ptr >= (byte)'0' && ptr <= (byte)'9') {
+			if (ptr == (byte)'0' && (ptr[1] == (byte)'b' || ptr[1] == (byte)'B')) {
+				mi.setMi_end(ModernizedCProgram.skipbin(ptr + 2));
+			}  else if (ptr == (byte)'0' && (ptr[1] == (byte)'x' || ptr[1] == (byte)'X')) {
+				mi.setMi_end(ModernizedCProgram.skiphex(ptr + 2));
+			} else {
+					mi.setMi_end(ModernizedCProgram.skipdigits(ptr));
+			} 
+			nrlen = (int)(generatedMi_end - ptr);
+		} 
+		mi.setMi_word(/* Find the normal end of the word (until the next non-word character). */ptr);
+		mi.setMi_fend(ptr);
+		Object generatedMi_fend = mi.getMi_fend();
+		Object generatedSt_isu = spelltab.getSt_isu();
+		if (wp.spell_iswordp(generatedMi_fend)) {
+			do {
+				generatedMi_fend += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedMi_fend);
+			} while (generatedMi_fend != (byte)'\000' && wp.spell_iswordp(generatedMi_fend));
+			if (capcol != ((Object)0) && capcol == 0 && generatedW_s.getB_cap_prog() != ((Object)0)) {
+				c = (has_mbyte ? /*Error: Function owner not recognized*/mb_ptr2char(ptr) : (int)(/* Check word starting with capital letter. */ptr));
+				if (!(enc_utf8 && (c) >= 128 ? ModernizedCProgram.utf_isupper(c) : (c) < 256 ? generatedSt_isu[c] : (false))) {
+					wrongcaplen = (int)(generatedMi_fend - ptr);
+				} 
+			} 
+		} 
+		if (capcol != ((Object)0)) {
+			capcol = -1;
+		} 
+		mi.setMi_end(generatedMi_fend);
+		mi.setMi_capflags(/* Check caps type later. */0);
+		mi.setMi_cend(((Object)0));
+		mi.setMi_win(wp);
+		if (generatedMi_fend != /* case-fold the word with one non-word character, so that we can check
+		     * for the word end. */(byte)'\000') {
+			generatedMi_fend += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedMi_fend);
+		} 
+		Object generatedMi_fword = mi.getMi_fword();
+		(Object)ModernizedCProgram.spell_casefold(ptr, (int)(generatedMi_fend - ptr), generatedMi_fword, 254 + 1);
+		mi.setMi_fwordlen((int)/*Error: Function owner not recognized*/strlen((byte)(generatedMi_fword)));
+		mi.setMi_result(/* The word is bad unless we recognize it. */3);
+		mi.setMi_result2(3/*
+		     * Loop over the languages specified in 'spelllang'.
+		     * We check them all, because a word may be matched longer in another
+		     * language.
+		     */);
+		langp_S generatedMi_lp = mi.getMi_lp();
+		slang_S generatedLp_slang = generatedMi_lp.getLp_slang();
+		Object generatedSl_fidxs = generatedLp_slang.getSl_fidxs();
+		Object generatedSl_nobreak = generatedLp_slang.getSl_nobreak();
+		int generatedMi_result = mi.getMi_result();
+		int generatedMi_result2 = mi.getMi_result2();
+		Object generatedMi_end2 = mi.getMi_end2();
+		for (lpi = 0; lpi < generatedW_s.getB_langp().getGa_len(); ++lpi) {
+			mi.setMi_lp((((langp_T)(generatedW_s.getB_langp()).getGa_data()) + (lpi)));
+			if (generatedSl_fidxs == ((Object)/* If reloading fails the language is still in the list but everything
+				 * has been cleared. */0)) {
+				continue;
+			} 
+			mi.find_word(/* Check for a matching word in case-folded words. */0);
+			mi.find_word(/* Check for a matching word in keep-case words. */1);
+			mi.find_prefix(/* Check for matching prefixes. */0);
+			if (generatedSl_nobreak && generatedMi_result == /* For a NOBREAK language, may want to use a word without a following
+				 * word as a backup. */3 && generatedMi_result2 != 3) {
+				mi.setMi_result(generatedMi_result2);
+				mi.setMi_end(generatedMi_end2);
+			} 
+			if (count_word && generatedMi_result == /* Count the word in the first language where it's found to be OK. */0) {
+				generatedLp_slang.count_common_word(ptr, (int)(generatedMi_end - ptr), 1);
+				count_word = 0;
+			} 
+		}
+		Object generatedRegprog = regmatch.getRegprog();
+		Object generatedEndp = regmatch.getEndp();
+		Object generatedMi_word = mi.getMi_word();
+		if (generatedMi_result != 0) {
+			if (nrlen > /* If we found a number skip over it.  Allows for "42nd".  Do flag
+				 * rare and local words, e.g., "3GPP". */0) {
+				if (generatedMi_result == 3 || generatedMi_result == -1) {
+					return nrlen;
+				} 
+			}  else if (!/* When we are at a non-word character there is no error, just
+				 * skip over the character (try looking for a word after it). */wp.spell_iswordp_nmw(ptr)) {
+				if (capcol != ((Object)0) && generatedW_s.getB_cap_prog() != ((Object)0)) {
+					regmatch_T regmatch = new regmatch_T();
+					int r;
+					regmatch.setRegprog(generatedW_s.getB_cap_prog());
+					regmatch.setRm_ic(0);
+					r = regmatch.vim_regexec(ptr, 0);
+					generatedW_s.setB_cap_prog(generatedRegprog);
+					if (r) {
+						capcol = (int)(generatedEndp[0] - ptr);
+					} 
+				} 
+				if (has_mbyte) {
+					return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ptr);
+				} 
+				return 1;
+			}  else if (generatedMi_end == ptr/* Always include at least one character.  Required for when there
+				     * is a mixup in "midword". */) {
+				generatedMi_end += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedMi_end);
+			}  else if (generatedMi_result == 3 && generatedSl_nobreak) {
+				char_u p = new char_u();
+				char_u fp = new char_u();
+				int save_result = generatedMi_result;
+				mi.setMi_lp((((langp_T)(generatedW_s.getB_langp()).getGa_data()) + (/* First language in 'spelllang' is NOBREAK.  Find first position
+					     * at which any word would be valid. */false)));
+				if (generatedSl_fidxs != ((Object)0)) {
+					p = generatedMi_word;
+					fp = generatedMi_fword;
+					for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+						p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
+						fp += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(fp);
+						if (p >= generatedMi_end) {
+							break;
+						} 
+						mi.setMi_compoff((int)(fp - generatedMi_fword));
+						mi.find_word(3);
+						if (generatedMi_result != 3) {
+							mi.setMi_end(p);
+							break;
+						} 
+					}
+					mi.setMi_result(save_result);
+				} 
+			} 
+			if (generatedMi_result == 3 || generatedMi_result == -1) {
+				attrp = .HLF_SPB;
+			}  else if (generatedMi_result == 1) {
+				attrp = .HLF_SPR;
+			} else {
+					attrp = .HLF_SPL;
+			} 
+		} 
+		if (wrongcaplen > 0 && (generatedMi_result == 0 || generatedMi_result == 1)) {
+			attrp = /* Report SpellCap only when the word isn't badly spelled. */.HLF_SPC;
+			return wrongcaplen;
+		} 
+		return (int)(generatedMi_end - ptr/*
+		 * Check if the word at "mip->mi_word" is in the tree.
+		 * When "mode" is FIND_FOLDWORD check in fold-case word tree.
+		 * When "mode" is FIND_KEEPWORD check in keep-case word tree.
+		 * When "mode" is FIND_PREFIX check for word after prefix in fold-case word
+		 * tree.
+		 *
+		 * For a match mip->mi_result is updated.
+		 */);
+	}
+	/* current window */
+	public int no_spell_checking() {
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_spell = generatedW_onebuf_opt.getWo_spell();
+		Object generatedW_s = this.getW_s();
+		if (!generatedWo_spell || generatedW_s.getB_p_spl() == (byte)'\000' || generatedW_s.getB_langp().getGa_len() == 0) {
+			ModernizedCProgram.emsg(((byte)("E756: Spell checking is not enabled")));
+			return 1;
+		} 
+		return 0/*
+		 * Move to next spell error.
+		 * "curline" is FALSE for "[s", "]s", "[S" and "]S".
+		 * "curline" is TRUE to find word under/after cursor in the same line.
+		 * For Insert mode completion "dir" is BACKWARD and "curline" is TRUE: move
+		 * to after badly spelled word before the cursor.
+		 * Return 0 if not found, length of the badly spelled word otherwise.
+		 */;
+	}
+	public int spell_move_to(int dir, int allwords, int curline,  attrp) {
+		/* return: attributes of bad word or NULL
+						   (only when "dir" is FORWARD) */linenr_T lnum = new linenr_T();
+		pos_T found_pos = new pos_T();
+		int found_len = 0;
+		char_u line = new char_u();
+		char_u p = new char_u();
+		char_u endp = new char_u();
+		hlf_T attr = new hlf_T();
+		int len;
+		int has_syntax = wp.syntax_present();
+		int col;
+		int can_spell;
+		char_u buf = ((Object)0);
+		int buflen = 0;
+		int skip = 0;
+		int capcol = -1;
+		int found_one = 0;
+		int wrapped = 0;
+		if (wp.no_spell_checking()) {
+			return 0/*
+			     * Start looking for bad word at the start of the line, because we can't
+			     * start halfway a word, we don't know where it starts or ends.
+			     *
+			     * When searching backwards, we continue in the line to find the last
+			     * bad word (in the cursor line: before the cursor).
+			     *
+			     * We concatenate the start of the next line, so that wrapped words work
+			     * (e.g. "et<line-break>cetera").  Doesn't work when searching backwards
+			     * though...
+			     */;
+		} 
+		 generatedW_cursor = this.getW_cursor();
+		Object generatedLnum = generatedW_cursor.getLnum();
+		lnum = generatedLnum;
+		do {
+			(found_pos).setLnum(0);
+			(found_pos).setCol(0);
+			(found_pos).setColadd(0);
+		} while (0);
+		file_buffer generatedW_buffer = this.getW_buffer();
+		memline generatedB_ml = generatedW_buffer.getB_ml();
+		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
+		Object generatedCol = generatedW_cursor.getCol();
+		while (!got_int) {
+			line = generatedW_buffer.ml_get_buf(lnum, 0);
+			len = (int)/*Error: Function owner not recognized*/strlen((byte)(line));
+			if (buflen < len + 254 + 2) {
+				ModernizedCProgram.vim_free(buf);
+				buflen = len + 254 + 2;
+				buf = ModernizedCProgram.alloc(buflen);
+				if (buf == ((Object)0)) {
+					break;
+				} 
+			} 
+			if (lnum == /* In first line check first word for Capital. */1) {
+				capcol = 0;
+			} 
+			if (capcol == /* For checking first word with a capital skip white space. */0) {
+				capcol = ModernizedCProgram.getwhitecols(line);
+			}  else if (curline && wp == ModernizedCProgram.curwin) {
+				col = ModernizedCProgram.getwhitecols(/* For spellbadword(): check if first word needs a capital. */line);
+				if (ModernizedCProgram.check_need_cap(lnum, col)) {
+					capcol = col;
+				} 
+				line = generatedW_buffer.ml_get_buf(lnum, /* Need to get the line again, may have looked at the previous
+					     * one. */0);
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(buf), (byte)(/* Copy the line into "buf" and append the start of the next line if
+				 * possible. */line));
+			if (lnum < generatedMl_line_count) {
+				ModernizedCProgram.spell_cat_line(buf + /*Error: Function owner not recognized*/strlen((byte)(buf)), generatedW_buffer.ml_get_buf(lnum + 1, 0), 254);
+			} 
+			p = buf + skip;
+			endp = buf + len;
+			while (p < endp) {
+				if (dir == (/* When searching backward don't search after the cursor.  Unless
+					     * we wrapped around the end of the buffer. */true) && lnum == generatedLnum && !wrapped && (colnr_T)(p - buf) >= generatedCol) {
+					break;
+				} 
+				attr = /* start of word */.HLF_COUNT;
+				len = wp.spell_check(p, attr, capcol, 0);
+				if (attr != .HLF_COUNT) {
+					if (allwords || attr == /* We found a bad word.  Check the attribute. */.HLF_SPB) {
+						if (dir == (/* When searching forward only accept a bad word after
+								     * the cursor. */true) || lnum != generatedLnum || (lnum == generatedLnum && (wrapped || (colnr_T)(curline ? p - buf + len : p - buf) > generatedCol))) {
+							if (has_syntax) {
+								col = (int)(p - buf);
+								(Object)wp.syn_get_id(lnum, (colnr_T)col, 0, can_spell, 0);
+								if (!can_spell) {
+									attr = .HLF_COUNT;
+								} 
+							} else {
+									can_spell = 1;
+							} 
+							if (can_spell) {
+								found_one = 1;
+								found_pos.setLnum(lnum);
+								found_pos.setCol((int)(p - buf));
+								found_pos.setColadd(0);
+								if (dir == 1) {
+									this.setW_cursor(/* No need to search further. */found_pos);
+									ModernizedCProgram.vim_free(buf);
+									if (attrp != ((Object)0)) {
+										attrp = attr;
+									} 
+									return len;
+								}  else if (curline/* Insert mode completion: put cursor after
+												 * the bad word. */) {
+									generatedCol += len;
+								} 
+								found_len = len;
+							} 
+						} else {
+								found_one = 1;
+						} 
+					} 
+				} 
+				p += /* advance to character after the word */len;
+				capcol -= len;
+			}
+			if (dir == (true) && generatedLnum != 0) {
+				this.setW_cursor(/* Use the last match in the line (before the cursor). */found_pos);
+				ModernizedCProgram.vim_free(buf);
+				return found_len;
+			} 
+			if (curline) {
+				break;
+			} 
+			if (lnum == generatedLnum && /* If we are back at the starting line and searched it again there
+				 * is no match, give up. */wrapped) {
+				break;
+			} 
+			if (dir == (/* Advance to next line. */true)) {
+				if (lnum > 1) {
+					--lnum;
+				}  else if (!ModernizedCProgram.p_ws) {
+					break;
+				} else {
+						lnum = generatedMl_line_count;
+						wrapped = 1;
+						if (!ModernizedCProgram.shortmess((byte)'s')) {
+							ModernizedCProgram.give_warning((char_u)((byte)(top_bot_msg)), 1);
+						} 
+				} 
+				capcol = -1;
+			} else {
+					if (lnum < generatedMl_line_count) {
+						++lnum;
+					}  else if (!ModernizedCProgram.p_ws) {
+						break;
+					} else {
+							lnum = /* Wrap around to the start of the buffer.  May search the
+									 * starting line again and accept the first match. */1;
+							wrapped = 1;
+							if (!ModernizedCProgram.shortmess((byte)'s')) {
+								ModernizedCProgram.give_warning((char_u)((byte)(bot_top_msg)), 1);
+							} 
+					} 
+					if (lnum == generatedLnum && !/* If we are back at the starting line and there is no match then
+						     * give up. */found_one) {
+						break;
+					} 
+					if (attr == /* Skip the characters at the start of the next line that were
+						     * included in a match crossing line boundaries. */.HLF_COUNT) {
+						skip = (int)(p - endp);
+					} else {
+							skip = 0;
+					} 
+					--/* Capcol skips over the inserted space. */capcol;
+					if (ModernizedCProgram.skipwhite(line) == /* But after empty line check first word in next line */(byte)'\000') {
+						capcol = 0;
+					} 
+			} 
+			ModernizedCProgram.line_breakcheck();
+		}
+		ModernizedCProgram.vim_free(buf);
+		return 0/*
+		 * For spell checking: concatenate the start of the following line "line" into
+		 * "buf", blanking-out special characters.  Copy less then "maxlen" bytes.
+		 * Keep the blanks at the start of the next line, this is used in win_line()
+		 * to skip those bytes if the word was OK.
+		 */;
+	}
+	/* FORWARD or BACKWARD */
+	/* TRUE for "[s"/"]s", FALSE for "[S"/"]S" */
+	public Byte did_set_spelllang() {
+		garray_T ga = new garray_T();
+		char_u splp = new char_u();
+		char_u region = new char_u();
+		char_u[] region_cp = new char_u();
+		int filename;
+		int region_mask;
+		slang_T slang = new slang_T();
+		int c;
+		char_u[] lang = new char_u();
+		char_u[] spf_name = new char_u();
+		int len;
+		char_u p = new char_u();
+		int round;
+		char_u spf = new char_u();
+		char_u use_region = ((Object)0);
+		int dont_use_region = 0;
+		int nobreak = 0;
+		int i;
+		int j;
+		langp_T lp = new langp_T();
+		langp_T lp2 = new langp_T();
+		int recursive = 0;
+		byte ret_msg = ((Object)0);
+		char_u spl_copy = new char_u();
+		bufref_T bufref = new bufref_T();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		ModernizedCProgram.set_bufref(bufref, generatedW_buffer);
+		if (recursive) {
+			return ((Object)0);
+		} 
+		recursive = 1;
+		ga.ga_init2(/*Error: Unsupported expression*/, 2);
+		wp.clear_midword();
+		Object generatedW_s = this.getW_s();
+		spl_copy = ModernizedCProgram.vim_strsave(generatedW_s.getB_p_spl());
+		if (spl_copy == ((Object)0)) {
+			;
+		} 
+		generatedW_s.setB_cjk(0);
+		Object generatedSl_fname = slang.getSl_fname();
+		slang_S generatedSl_next = slang.getSl_next();
+		Object generatedSl_name = slang.getSl_name();
+		Object generatedSl_regions = slang.getSl_regions();
+		int generatedSl_add = slang.getSl_add();
+		Object generatedGa_data = (ga).getGa_data();
+		int generatedGa_len = ga.getGa_len();
+		Object generatedSl_nobreak = slang.getSl_nobreak();
+		for (splp = spl_copy; splp != /* Loop over comma separated language names. */(byte)'\000'; /*Error: Unsupported expression*/) {
+			ModernizedCProgram.copy_option_part(splp, lang, 254, ",");
+			region = ((Object)0);
+			len = (int)/*Error: Function owner not recognized*/strlen((byte)(lang));
+			if (!ModernizedCProgram.valid_spellang(lang)) {
+				continue;
+			} 
+			if (/*Error: Function owner not recognized*/strcmp((byte)(lang), (byte)("cjk")) == 0) {
+				generatedW_s.setB_cjk(1);
+				continue;
+			} 
+			if (len > 4 && ModernizedCProgram.vim_fnamecmp((char_u)(lang + len - 4), (char_u)(".spl")) == /* If the name ends in ".spl" use it as the name of the spell file.
+				 * If there is a region name let "region" point to it and remove it
+				 * from the name. */0) {
+				filename = 1;
+				p = ModernizedCProgram.vim_strchr(ModernizedCProgram.gettail(lang), /* Locate a region and remove it from the file name. */(byte)'_');
+				if (p != ((Object)0) && (((int)(p[1]) - (byte)'A' < 26) || ((int)(p[1]) - (byte)'a' < 26)) && (((int)(p[2]) - (byte)'A' < 26) || ((int)(p[2]) - (byte)'a' < 26)) && !(((int)(p[3]) - (byte)'A' < 26) || ((int)(p[3]) - (byte)'a' < 26))) {
+					ModernizedCProgram.vim_strncpy(region_cp, p + 1, 2);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(p), (byte)(p + 3), (size_t)(len - (p - lang) - 2));
+					region = region_cp;
+				} else {
+						dont_use_region = 1;
+				} 
+				for (slang = first_lang; slang != ((Object)0); slang = generatedSl_next) {
+					if (ModernizedCProgram.fullpathcmp(lang, generatedSl_fname, 0, 1) == 1) {
+						break;
+					} 
+				}
+			} else {
+					filename = 0;
+					if (len > 3 && lang[len - 3] == (byte)'_') {
+						region = lang + len - 2;
+						len -= 3;
+						lang[len] = (byte)'\000';
+					} else {
+							dont_use_region = 1;
+					} 
+					for (slang = first_lang; slang != ((Object)0); slang = generatedSl_next) {
+						if (ModernizedCProgram.vim_stricmp((byte)(lang), (byte)(generatedSl_name)) == 0) {
+							break;
+						} 
+					}
+			} 
+			if (region != ((Object)0)) {
+				if (use_region != ((Object)0) && /*Error: Function owner not recognized*/strcmp((byte)(region), (byte)(use_region)) != /* If the region differs from what was used before then don't
+					     * use it for 'spellfile'. */0) {
+					dont_use_region = 1;
+				} 
+				use_region = region;
+			} 
+			if (slang == ((Object)/* If not found try loading the language now. */0)) {
+				if (filename) {
+					(Object)((Object)0).spell_load_file(lang, lang, 0);
+				} else {
+						ModernizedCProgram.spell_load_lang(lang/* SpellFileMissing autocommands may do anything, including
+								 * destroying the buffer we are using... */);
+						if (!bufref.bufref_valid()) {
+							ret_msg = "E797: SpellFileMissing autocommand deleted buffer";
+							;
+						} 
+				} 
+			} 
+			for (slang = first_lang; slang != ((Object)0); slang = generatedSl_next) {
+				if (filename ? ModernizedCProgram.fullpathcmp(lang, generatedSl_fname, 0, 1) == 1 : ModernizedCProgram.vim_stricmp((byte)(lang), (byte)(generatedSl_name)) == 0) {
+					region_mask = -1024;
+					if (!filename && region != ((Object)0)) {
+						c = ModernizedCProgram.find_region(generatedSl_regions, /* find region in sl_regions */region);
+						if (c == -1024) {
+							if (generatedSl_add) {
+								if (generatedSl_regions != (byte)'\000') {
+									region_mask = /* This addition file is for other regions. */0;
+								} 
+							} else {
+									ModernizedCProgram.smsg(((byte)(/* This is probably an error.  Give a warning and
+												     * accept the words anyway. */"Warning: region %s not supported")), region);
+							} 
+						} else {
+								region_mask = 1 << c;
+						} 
+					} 
+					if (region_mask != 0) {
+						if (ga.ga_grow(1) == 0) {
+							ga.ga_clear();
+							ret_msg = e_outofmem;
+							;
+						} 
+						(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_slang(slang);
+						(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_region(region_mask);
+						++generatedGa_len;
+						ModernizedCProgram.use_midword(slang, wp);
+						if (generatedSl_nobreak) {
+							nobreak = 1;
+						} 
+					} 
+				} 
+			}
+		}
+		spf = generatedW_s.getB_p_spf();
+		for (round = 0; round == 0 || spf != (byte)'\000'; ++round) {
+			if (round == 0) {
+				if (int_wordlist == ((Object)/* Internal wordlist, if there is one. */0)) {
+					continue;
+				} 
+				ModernizedCProgram.int_wordlist_spl(spf_name);
+			} else {
+					ModernizedCProgram.copy_option_part(spf, spf_name, 1024 - 5, /* One entry in 'spellfile'. */",");
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(spf_name), (byte)(".spl"));
+					for (c = 0; c < generatedGa_len; ++/* If it was already found above then skip it. */c) {
+						p = generatedSl_fname;
+						if (p != ((Object)0) && ModernizedCProgram.fullpathcmp(spf_name, p, 0, 1) == 1) {
+							break;
+						} 
+					}
+					if (c < generatedGa_len) {
+						continue;
+					} 
+			} 
+			for (slang = first_lang; slang != ((Object)0); slang = generatedSl_next) {
+				if (ModernizedCProgram.fullpathcmp(spf_name, generatedSl_fname, 0, 1) == 1) {
+					break;
+				} 
+			}
+			if (slang == ((Object)0/* Not loaded, try loading it now.  The language name includes the
+				     * region name, the region is ignored otherwise.  for int_wordlist
+				     * use an arbitrary name. */)) {
+				if (round == 0) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(lang), (byte)("internal wordlist"));
+				} else {
+						ModernizedCProgram.vim_strncpy(lang, ModernizedCProgram.gettail(spf_name), 254);
+						p = ModernizedCProgram.vim_strchr(lang, (byte)'.');
+						if (p != ((Object)0)) {
+							p = /* truncate at ".encoding.add" */(byte)'\000';
+						} 
+				} 
+				slang = ((Object)0).spell_load_file(spf_name, lang, 1);
+				if (slang != ((Object)0) && /* If one of the languages has NOBREAK we assume the addition
+					     * files also have this. */nobreak) {
+					slang.setSl_nobreak(1);
+				} 
+			} 
+			if (slang != ((Object)0) && ga.ga_grow(1) == 1) {
+				region_mask = -1024;
+				if (use_region != ((Object)0) && !dont_use_region) {
+					c = ModernizedCProgram.find_region(generatedSl_regions, /* find region in sl_regions */use_region);
+					if (c != -1024) {
+						region_mask = 1 << c;
+					}  else if (generatedSl_regions != (byte)'\000') {
+						region_mask = /* This spell file is for other regions. */0;
+					} 
+				} 
+				if (region_mask != 0) {
+					(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_slang(slang);
+					(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_sallang(((Object)0));
+					(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_replang(((Object)0));
+					(((langp_T)generatedGa_data) + (generatedGa_len)).setLp_region(region_mask);
+					++generatedGa_len;
+					ModernizedCProgram.use_midword(slang, wp);
+				} 
+			} 
+		}
+		generatedW_s.getB_langp().ga_clear();
+		generatedW_s.setB_langp(ga/* For each language figure out what language to use for sound folding and
+		     * REP items.  If the language doesn't support it itself use another one
+		     * with the same name.  E.g. for "en-math" use "en". */);
+		slang_S generatedLp_slang = lp.getLp_slang();
+		for (i = 0; i < generatedGa_len; ++i) {
+			lp = (((langp_T)generatedGa_data) + (i));
+			if (generatedGa_len > /* sound folding */0) {
+				lp.setLp_sallang(generatedLp_slang);
+			} else {
+					for (j = 0; j < generatedGa_len; ++/* find first similar language that does sound folding */j) {
+						lp2 = (((langp_T)generatedGa_data) + (j));
+						if (generatedGa_len > 0 && /*Error: Function owner not recognized*/strncmp((byte)(generatedSl_name), (byte)(generatedSl_name), (size_t)(true)) == 0) {
+							lp.setLp_sallang(generatedLp_slang);
+							break;
+						} 
+					}
+			} 
+			if (generatedGa_len > /* REP items */0) {
+				lp.setLp_replang(generatedLp_slang);
+			} else {
+					for (j = 0; j < generatedGa_len; ++/* find first similar language that has REP items */j) {
+						lp2 = (((langp_T)generatedGa_data) + (j));
+						if (generatedGa_len > 0 && /*Error: Function owner not recognized*/strncmp((byte)(generatedSl_name), (byte)(generatedSl_name), (size_t)(true)) == 0) {
+							lp.setLp_replang(generatedLp_slang);
+							break;
+						} 
+					}
+			} 
+		}
+		recursive = 0;
+		wp.redraw_win_later(40);
+		return ret_msg/*
+		 * Clear the midword characters for buffer "buf".
+		 */;
+	}
+	public void clear_midword() {
+		Object generatedW_s = this.getW_s();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((generatedW_s.getB_spell_ismw()), (false), (true));
+		do {
+			if ((generatedW_s.getB_spell_ismw_mb()) != ((Object)0)) {
+				ModernizedCProgram.vim_free(generatedW_s.getB_spell_ismw_mb());
+				(generatedW_s.getB_spell_ismw_mb()) = ((Object)0);
+			} 
+		} while (0/*
+		 * Use the "sl_midword" field of language "lp" for buffer "buf".
+		 * They add up to any currently used midword characters.
+		 */);
+	}
+	/*
+	 * Return TRUE if "p" points to a word character.
+	 * As a special case we see "midword" characters as word character when it is
+	 * followed by a word character.  This finds they'there but not 'they there'.
+	 * Thus this only works properly when past the first character of the word.
+	 */
+	public int spell_iswordp(Object[] p) {
+		/* buffer used */char_u s = new char_u();
+		int l;
+		int c;
+		Object generatedW_s = this.getW_s();
+		Object generatedSt_isw = spelltab.getSt_isw();
+		if (has_mbyte) {
+			l = /*Error: Function owner not recognized*/mb_ptr2len(p);
+			s = p;
+			if (l == 1) {
+				if (generatedW_s.getB_spell_ismw()[/* be quick for ASCII */p]) {
+					s = p + /* skip a mid-word character */1;
+				} 
+			} else {
+					c = /*Error: Function owner not recognized*/mb_ptr2char(p);
+					if (c < 256 ? generatedW_s.getB_spell_ismw()[c] : (generatedW_s.getB_spell_ismw_mb() != ((Object)0) && ModernizedCProgram.vim_strchr(generatedW_s.getB_spell_ismw_mb(), c) != ((Object)0))) {
+						s = p + l;
+					} 
+			} 
+			c = /*Error: Function owner not recognized*/mb_ptr2char(s);
+			if (c > 255) {
+				return wp.spell_mb_isword_class(ModernizedCProgram.mb_get_class(s));
+			} 
+			return generatedSt_isw[c];
+		} 
+		return generatedSt_isw[generatedW_s.getB_spell_ismw()[p] ? p[1] : p[0/*
+		 * Return TRUE if "p" points to a word character.
+		 * Unlike spell_iswordp() this doesn't check for "midword" characters.
+		 */]];
+	}
+	public int spell_iswordp_nmw(Object p) {
+		int c;
+		Object generatedSt_isw = spelltab.getSt_isw();
+		if (has_mbyte) {
+			c = /*Error: Function owner not recognized*/mb_ptr2char(p);
+			if (c > 255) {
+				return wp.spell_mb_isword_class(ModernizedCProgram.mb_get_class(p));
+			} 
+			return generatedSt_isw[c];
+		} 
+		return generatedSt_isw[p/*
+		 * Return TRUE if word class indicates a word character.
+		 * Only for characters above 255.
+		 * Unicode subscript and superscript are not considered word characters.
+		 * See also dbcs_class() and utf_class() in mbyte.c.
+		 */];
+	}
+	public int spell_mb_isword_class(int cl) {
+		Object generatedW_s = this.getW_s();
+		if (generatedW_s.getB_cjk()) {
+			return cl == 2 || cl == /* East Asian characters are not considered word characters. */-1024;
+		} 
+		return cl >= 2 && cl != -1024 && cl != -1024 && cl != 3/*
+		 * Return TRUE if "p" points to a word character.
+		 * Wide version of spell_iswordp().
+		 */;
+	}
+	/* mode values for find_word */
+	/* find word case-folded */
+	/* find keep-case word */
+	public int spell_iswordp_w(Integer p) {
+		int s;
+		Object generatedW_s = this.getW_s();
+		if (p < 256 ? generatedW_s.getB_spell_ismw()[p] : (generatedW_s.getB_spell_ismw_mb() != ((Object)0) && ModernizedCProgram.vim_strchr(generatedW_s.getB_spell_ismw_mb(), p) != ((Object)0))) {
+			s = p + 1;
+		} else {
+				s = p;
+		} 
+		if (s > 255) {
+			if (enc_utf8) {
+				return wp.spell_mb_isword_class(ModernizedCProgram.utf_class(s));
+			} 
+			if (enc_dbcs) {
+				return wp.spell_mb_isword_class(ModernizedCProgram.dbcs_class((int)s >> 8, s & -1024));
+			} 
+			return 0;
+		} 
+		Object generatedSt_isw = spelltab.getSt_isw();
+		return generatedSt_isw[s/*
+		 * Case-fold "str[len]" into "buf[buflen]".  The result is NUL terminated.
+		 * Uses the character definitions from the .spl file.
+		 * When using a multi-byte 'encoding' the length may change!
+		 * Returns FAIL when something wrong.
+		 */];
+	}
+	public Object spell_to_word_end(Object start) {
+		char_u p = start;
+		while (p != (byte)'\000' && win.spell_iswordp(p)) {
+			p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
+		}
+		return p/*
+		 * For Insert mode completion CTRL-X s:
+		 * Find start of the word in front of column "startcol".
+		 * We don't check if it is badly spelled, with completion we can only change
+		 * the word in front of the cursor.
+		 * Returns the column number of the word.
+		 */;
+	}
+	public int find_ident_at_pos(Object lnum, Object startcol, Object text, Integer textcol, int find_type) {
+		// column where "text" starts, can be NULLchar_u ptr = new char_u();
+		// init to shut up GCCint col = 0;
+		int i;
+		int this_class = 0;
+		int prev_class;
+		int prevcol;
+		// bracket nestingint bn = 0/*
+		     * if i == 0: try to find an identifier
+		     * if i == 1: try to find any non-white text
+		     */;
+		file_buffer generatedW_buffer = this.getW_buffer();
+		ptr = generatedW_buffer.ml_get_buf(lnum, 0);
+		for (i = (find_type & 1) ? 0 : 1; i < 2; ++i/*
+			 * 1. skip to start of identifier/text
+			 */) {
+			col = startcol;
+			if (has_mbyte) {
+				while (ptr[col] != (byte)'\000') {
+					if ((find_type & 4) && ptr[col] == (byte)']') {
+						break;
+					} 
+					this_class = ModernizedCProgram.mb_get_class(ptr + col);
+					if (this_class != 0 && (i == 1 || this_class != 1)) {
+						break;
+					} 
+					col += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ptr + col);
+				}
+			} else {
+					while (ptr[col] != (byte)'\000' && (i == 0 ? !ModernizedCProgram.vim_iswordc(ptr[col]) : ((ptr[col]) == (byte)' ' || (ptr[col]) == (byte)'\t')) && (!(find_type & 4) || ptr[col] != (byte)']')) {
+						++col;
+					}
+			} 
+			bn = ptr[col] == (byte)']'/*
+				 * 2. Back up to start of identifier/text.
+				 */;
+			if (has_mbyte) {
+				if ((find_type & 4) && ptr[col] == /* Remember class of character under cursor. */(byte)']') {
+					this_class = ModernizedCProgram.mb_get_class((char_u)"a");
+				} else {
+						this_class = ModernizedCProgram.mb_get_class(ptr + col);
+				} 
+				while (col > 0 && this_class != 0) {
+					prevcol = col - 1 - /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ptr, ptr + col - 1);
+					prev_class = ModernizedCProgram.mb_get_class(ptr + prevcol);
+					if (this_class != prev_class && (i == 0 || prev_class == 0 || (find_type & 1)) && (!(find_type & 4) || prevcol == 0 || !ModernizedCProgram.find_is_eval_item(ptr + prevcol, prevcol, bn, (true)))) {
+						break;
+					} 
+					col = prevcol;
+				}
+				if (this_class > 2) {
+					this_class = 2;
+				} 
+				if (!(find_type & 2) || this_class == 2) {
+					break;
+				} 
+			} else {
+					while (col > 0 && ((i == 0 ? ModernizedCProgram.vim_iswordc(ptr[col - 1]) : (!((ptr[col - 1]) == (byte)' ' || (ptr[col - 1]) == (byte)'\t') && (!(find_type & 1) || !ModernizedCProgram.vim_iswordc(ptr[col - 1])))) || ((find_type & 4) && col > 1 && ModernizedCProgram.find_is_eval_item(ptr + col - 1, col, bn, (true))))) {
+						--col;
+					}
+					if (!(find_type & 2) || ModernizedCProgram.vim_iswordc(ptr[col])) {
+						break;
+					} 
+			} 
+		}
+		if (ptr[col] == (byte)'\000' || (i == 0 && (has_mbyte ? this_class != 2 : !ModernizedCProgram.vim_iswordc(ptr[col])))) {
+			if ((find_type & 8) == 0) {
+				if (find_type & 2) {
+					ModernizedCProgram.emsg(((byte)("E348: No string under cursor")));
+				} else {
+						ModernizedCProgram.emsg(((byte)(ModernizedCProgram.e_noident)));
+				} 
+			} 
+			return 0;
+		} 
+		ptr += col;
+		text = ptr;
+		if (textcol != ((Object)0)) {
+			textcol = col/*
+			     * 3. Find the end if the identifier/text.
+			     */;
+		} 
+		bn = 0;
+		startcol -= col;
+		col = 0;
+		if (has_mbyte) {
+			this_class = ModernizedCProgram.mb_get_class(ptr);
+			while (ptr[col] != (byte)'\000' && ((i == 0 ? ModernizedCProgram.mb_get_class(ptr + col) == this_class : ModernizedCProgram.mb_get_class(ptr + col) != 0) || ((find_type & 4) && col <= (int)startcol && ModernizedCProgram.find_is_eval_item(ptr + col, col, bn, 1)))) {
+				col += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ptr + col);
+			}
+		} else {
+				while ((i == 0 ? ModernizedCProgram.vim_iswordc(ptr[col]) : (ptr[col] != (byte)'\000' && !((ptr[col]) == (byte)' ' || (ptr[col]) == (byte)'\t'))) || ((find_type & 4) && col <= (int)startcol && ModernizedCProgram.find_is_eval_item(ptr + col, col, bn, 1))) {
+					++col;
+				}
+		} 
+		return col/*
+		 * Prepare for redo of a normal command.
+		 */;
+	}
+	public void ruby_window_free() {
+		Object generatedW_ruby_ref = this.getW_ruby_ref();
+		if (generatedW_ruby_ref) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/rb_hash_aset(ModernizedCProgram.objtbl, /*Error: Function owner not recognized*/rb_obj_id(()generatedW_ruby_ref), Qnil);
+			/*Error: Function owner not recognized*/RDATA(generatedW_ruby_ref).setData(((Object)0));
+		} 
+	}
+	public Object window_new() {
+		Object generatedW_ruby_ref = this.getW_ruby_ref();
+		if (generatedW_ruby_ref) {
+			return ()generatedW_ruby_ref;
+		} else {
+				 obj = /*Error: Function owner not recognized*/Data_Wrap_Struct(ModernizedCProgram.cVimWindow, 0, 0, win);
+				this.setW_ruby_ref((Object)obj);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/rb_hash_aset(ModernizedCProgram.objtbl, /*Error: Function owner not recognized*/rb_obj_id(obj), obj);
+				return obj;
+		} 
+	}
+	public window_S get_win(Object obj) {
+		win_T win = new win_T();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Data_Get_Struct(obj, , win);
+		if (win == ((Object)0)) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/rb_raise(ModernizedCProgram.eDeletedWindowError, "attempt to refer to deleted window");
+		} 
+		return win;
+	}
+	public void syntax_start(Object lnum) {
+		synstate_T p = new synstate_T();
+		synstate_T last_valid = ((Object)0);
+		synstate_T last_min_valid = ((Object)0);
+		synstate_T sp = new synstate_T();
+		synstate_T prev = ((Object)0);
+		linenr_T parsed_lnum = new linenr_T();
+		linenr_T first_stored = new linenr_T();
+		int dist;
+		varnumber_T changedtick = /* remember the last change ID */0;
+		ModernizedCProgram.current_sub_char = (byte)'\000'/*
+		     * After switching buffers, invalidate current_state.
+		     * Also do this when a change was made, the current state may be invalid
+		     * then.
+		     */;
+		Object generatedW_s = this.getW_s();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		if (ModernizedCProgram.syn_block != generatedW_s || ModernizedCProgram.syn_buf != generatedW_buffer || changedtick != ((ModernizedCProgram.syn_buf).getB_ct_di().getDi_tv().getVval().getV_number())) {
+			ModernizedCProgram.invalidate_current_state();
+			ModernizedCProgram.syn_buf = generatedW_buffer;
+			ModernizedCProgram.syn_block = generatedW_s;
+		} 
+		changedtick = ((ModernizedCProgram.syn_buf).getB_ct_di().getDi_tv().getVval().getV_number());
+		ModernizedCProgram.syn_win = wp/*
+		     * Allocate syntax stack when needed.
+		     */;
+		ModernizedCProgram.syn_stack_alloc();
+		if (ModernizedCProgram.syn_block.getB_sst_array() == ((Object)0)) {
+			return /*Error: Unsupported expression*/;
+		} 
+		ModernizedCProgram.syn_block.setB_sst_lasttick(display_tick/*
+		     * If the state of the end of the previous line is useful, store it.
+		     */);
+		if (((ModernizedCProgram.current_state).getGa_itemsize() != 0) && ModernizedCProgram.current_lnum < lnum && ModernizedCProgram.current_lnum < ModernizedCProgram.syn_buf.getB_ml().getMl_line_count()) {
+			(Object)ModernizedCProgram.syn_finish_line(0);
+			if (!ModernizedCProgram.current_state_stored) {
+				++ModernizedCProgram.current_lnum;
+				(Object)ModernizedCProgram.store_current_state();
+			} 
+			if (ModernizedCProgram.current_lnum != lnum) {
+				ModernizedCProgram.invalidate_current_state();
+			} 
+		} else {
+				ModernizedCProgram.invalidate_current_state();
+		} 
+		Object generatedSst_lnum = p.getSst_lnum();
+		Object generatedSst_change_lnum = p.getSst_change_lnum();
+		Object generatedSst_next = p.getSst_next();
+		if (((ModernizedCProgram.current_state).getGa_itemsize() == 0) && ModernizedCProgram.syn_block.getB_sst_array() != ((Object)0)) {
+			for (p = ModernizedCProgram.syn_block.getB_sst_first(); p != ((Object)0); p = generatedSst_next) {
+				if (generatedSst_lnum > lnum) {
+					break;
+				} 
+				if (generatedSst_lnum <= lnum && generatedSst_change_lnum == 0) {
+					last_valid = p;
+					if (generatedSst_lnum >= lnum - ModernizedCProgram.syn_block.getB_syn_sync_minlines()) {
+						last_min_valid = p;
+					} 
+				} 
+			}
+			if (last_min_valid != ((Object)0)) {
+				last_min_valid/*
+				     * If "lnum" is before or far beyond a line with a saved state, need to
+				     * re-synchronize.
+				     */.load_current_state();
+			} 
+		} 
+		if (((ModernizedCProgram.current_state).getGa_itemsize() == 0)) {
+			ModernizedCProgram.syn_sync(wp, lnum, last_valid);
+			if (ModernizedCProgram.current_lnum == 1) {
+				first_stored = /* First line is always valid, no matter "minlines". */1;
+			} else {
+					first_stored = ModernizedCProgram.current_lnum + ModernizedCProgram.syn_block.getB_syn_sync_minlines();
+			} 
+		} else {
+				first_stored = ModernizedCProgram.current_lnum/*
+				     * Advance from the sync point or saved state until the current line.
+				     * Save some entries for syncing with later on.
+				     */;
+		} 
+		if (ModernizedCProgram.syn_block.getB_sst_len() <= ModernizedCProgram.Rows) {
+			dist = 999999;
+		} else {
+				dist = ModernizedCProgram.syn_buf.getB_ml().getMl_line_count() / (ModernizedCProgram.syn_block.getB_sst_len() - ModernizedCProgram.Rows) + 1;
+		} 
+		while (ModernizedCProgram.current_lnum < lnum) {
+			ModernizedCProgram.syn_start_line();
+			(Object)ModernizedCProgram.syn_finish_line(0);
+			++ModernizedCProgram.current_lnum;
+			if (ModernizedCProgram.current_lnum >= /* If we parsed at least "minlines" lines or started at a valid
+				 * state, the current state is considered valid. */first_stored/* Check if the saved state entry is for the current line and is
+				     * equal to the current state.  If so, then validate all saved
+				     * states that depended on a change before the parsed line. */) {
+				if (prev == ((Object)0)) {
+					prev = ModernizedCProgram.syn_stack_find_entry(ModernizedCProgram.current_lnum - 1);
+				} 
+				if (prev == ((Object)0)) {
+					sp = ModernizedCProgram.syn_block.getB_sst_first();
+				} else {
+						sp = prev;
+				} 
+				while (sp != ((Object)0) && generatedSst_lnum < ModernizedCProgram.current_lnum) {
+					sp = generatedSst_next;
+				}
+				if (sp != ((Object)0) && generatedSst_lnum == ModernizedCProgram.current_lnum && sp.syn_stack_equal()) {
+					parsed_lnum = ModernizedCProgram.current_lnum;
+					prev = sp;
+					while (sp != ((Object)0) && generatedSst_change_lnum <= parsed_lnum) {
+						if (generatedSst_lnum <= lnum) {
+							prev = /* valid state before desired line, use this one */sp;
+						}  else if (generatedSst_change_lnum == 0/* past saved states depending on change, break here. */) {
+							break;
+						} 
+						sp.setSst_change_lnum(0);
+						sp = generatedSst_next;
+					}
+					prev/* Store the state at this line when it's the first one, the line
+						     * where we start parsing, or some distance from the previously
+						     * saved state.  But only when parsed at least 'minlines'. */.load_current_state();
+				}  else if (prev == ((Object)0) || ModernizedCProgram.current_lnum == lnum || ModernizedCProgram.current_lnum >= generatedSst_lnum + dist) {
+					prev = ModernizedCProgram.store_current_state();
+				} 
+			} 
+			ModernizedCProgram.line_breakcheck();
+			if (got_int) {
+				ModernizedCProgram.current_lnum = lnum;
+				break;
+			} 
+		}
+		ModernizedCProgram.syn_start_line();
+	}
+	public void reset_synblock() {
+		Object generatedW_s = this.getW_s();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		Object generatedB_s = generatedW_buffer.getB_s();
+		if (generatedW_s != generatedB_s) {
+			generatedW_s.syntax_clear();
+			ModernizedCProgram.vim_free(generatedW_s);
+			this.setW_s(generatedB_s);
+		} 
+	}
+	public int syntax_present() {
+		Object generatedW_s = this.getW_s();
+		return (generatedW_s.getB_syn_patterns().getGa_len() != 0 || generatedW_s.getB_syn_clusters().getGa_len() != 0 || generatedW_s.getB_keywtab().getHt_used() > 0 || generatedW_s.getB_keywtab_ic().getHt_used() > 0);/* expand ":syn" sub-commands */
+	}
+	public int syn_get_id(long lnum, Object col, int trans, Integer spellp, int keep_state) {
+		file_buffer generatedW_buffer = this.getW_buffer();
+		if (generatedW_buffer != /* return: can do spell checking *//* keep state of char at "col" *//* When the position is not after the current position and in the same
+		     * line of the same buffer, need to restart parsing. */ModernizedCProgram.syn_buf || lnum != ModernizedCProgram.current_lnum || col < ModernizedCProgram.current_col) {
+			wp.syntax_start(lnum);
+		}  else if (generatedW_buffer == ModernizedCProgram.syn_buf && lnum == ModernizedCProgram.current_lnum && col > ModernizedCProgram.current_col/* next_match may not be correct when moving around, e.g. with the
+			 * "skip" expression in searchpair() */) {
+			ModernizedCProgram.next_match_idx = -1;
+		} 
+		(Object)ModernizedCProgram.get_syntax_attr(col, spellp, keep_state);
+		return (trans ? ModernizedCProgram.current_trans_id : ModernizedCProgram.current_id/*
+		 * Get extra information about the syntax item.  Must be called right after
+		 * get_syntax_attr().
+		 * Stores the current item sequence nr in "*seqnrp".
+		 * Returns the current flags.
+		 */);
+	}
+	/* remove transparency */
+	/*
+	 * Function called to get folding level for line "lnum" in window "wp".
+	 */
+	public int syn_get_foldlevel(long lnum) {
+		int level = 0;
+		int i;
+		Object generatedW_s = this.getW_s();
+		if (generatedW_s.getB_syn_folditems() != /* Return quickly when there are no fold items at all. */0 && !generatedW_s.getB_syn_error() && !generatedW_s.getB_syn_slow()) {
+			wp.syntax_start(lnum);
+			for (i = 0; i < ModernizedCProgram.current_state.getGa_len(); ++i) {
+				if (((stateitem_T)(ModernizedCProgram.current_state.getGa_data()))[i].getSi_flags() & -1024) {
+					++level;
+				} 
+			}
+		} 
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_fdn = generatedW_onebuf_opt.getWo_fdn();
+		if (level > generatedWo_fdn) {
+			level = generatedWo_fdn;
+			if (level < 0) {
+				level = 0;
+			} 
+		} 
+		return level;
+	}
+	public void win_redr_status(int ignore_pum) {
+		int row;
+		char_u p = new char_u();
+		int len;
+		int fillchar;
+		int attr;
+		int this_ru_col;
+		int busy = 0;
+		// It's possible to get here recursively when 'statusline' (indirectly)
+		// invokes ":redrawstatus".  Simply ignore the call then.if (busy) {
+			return /*Error: Unsupported expression*/;
+		} 
+		busy = 1;
+		this.setW_redr_status(0);
+		int generatedW_status_height = this.getW_status_height();
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_stl = generatedW_onebuf_opt.getWo_stl();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		Object generatedWo_pvw = generatedW_onebuf_opt.getWo_pvw();
+		int generatedB_p_ro = generatedW_buffer.getB_p_ro();
+		int generatedW_width = this.getW_width();
+		int generatedW_winrow = this.getW_winrow();
+		Object generatedW_winbar_height = this.getW_winbar_height();
+		int generatedW_height = this.getW_height();
+		int generatedW_wincol = this.getW_wincol();
+		if (generatedW_status_height == 0) {
+			redraw_cmdline = 1;
+		}  else if (!/*Error: Function owner not recognized*/redrawing() || (!ignore_pum && ModernizedCProgram.pum_visible())) {
+			this.setW_redr_status(1);
+		}  else if (p_stl != (byte)'\000' || generatedWo_stl != (byte)'\000') {
+			wp.redraw_custom_statusline();
+		} else {
+				fillchar = /*Error: Function owner not recognized*/fillchar_status(attr, wp);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/get_trans_bufname(generatedW_buffer);
+				p = ModernizedCProgram.NameBuff;
+				len = (int)/*Error: Function owner not recognized*/strlen((byte)(p));
+				if (generatedW_buffer.bt_help() || generatedWo_pvw || generatedW_buffer.bufIsChanged() || generatedB_p_ro) {
+					(p + len++) = (byte)' ';
+				} 
+				if (generatedW_buffer.bt_help()) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(p + len), (byte)(((byte)("[Help]"))));
+					len += (int)/*Error: Function owner not recognized*/strlen((byte)(p + len));
+				} 
+				if (generatedWo_pvw) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(p + len), (byte)(((byte)("[Preview]"))));
+					len += (int)/*Error: Function owner not recognized*/strlen((byte)(p + len));
+				} 
+				if (generatedW_buffer.bufIsChanged()) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(p + len), (byte)("[+]"));
+					len += 3;
+				} 
+				if (generatedB_p_ro) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(p + len), (byte)(((byte)("[RO]"))));
+					len += (int)/*Error: Function owner not recognized*/strlen((byte)(p + len));
+				} 
+				this_ru_col = ModernizedCProgram.ru_col - (Columns - generatedW_width);
+				if (this_ru_col < (generatedW_width + 1) / 2) {
+					this_ru_col = (generatedW_width + 1) / 2;
+				} 
+				if (this_ru_col <= 1) {
+					p = (char_u)"<";
+					len = 1;
+				}  else if (has_mbyte) {
+					int clen = 0;
+					int i;
+					clen = ModernizedCProgram.mb_string2cells(p, -1);
+					for (i = 0; p[i] != (byte)'\000' && clen >= this_ru_col - 1; i += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p + i)) {
+						clen -= /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p + i);
+					}
+					len = clen;
+					if (i > 0) {
+						p = p + i - 1;
+						p = (byte)'<';
+						++len;
+					} 
+				}  else if (len > this_ru_col - 1) {
+					p += len - (this_ru_col - 1);
+					p = (byte)'<';
+					len = this_ru_col - 1;
+				} 
+				row = (generatedW_winrow + generatedW_winbar_height) + generatedW_height;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_puts(p, row, generatedW_wincol, attr);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_fill(row, row + 1, len + generatedW_wincol, this_ru_col + generatedW_wincol, fillchar, fillchar, attr);
+				if (/*Error: Function owner not recognized*/get_keymap_str(wp, (char_u)"<%s>", ModernizedCProgram.NameBuff, 1024) && (int)(this_ru_col - len) > (int)(/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.NameBuff)) + 1)) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_puts(ModernizedCProgram.NameBuff, row, (int)(this_ru_col - /*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.NameBuff)) - 1 + generatedW_wincol), attr);
+				} 
+				wp.win_redr_ruler(1, ignore_pum);
+		} 
+		int generatedW_vsep_width = this.getW_vsep_width();
+		if (generatedW_vsep_width != 0 && generatedW_status_height != 0 && /*Error: Function owner not recognized*/redrawing()) {
+			if (/*Error: Function owner not recognized*/stl_connected(wp)) {
+				fillchar = /*Error: Function owner not recognized*/fillchar_status(attr, wp);
+			} else {
+					fillchar = /*Error: Function owner not recognized*/fillchar_vsep(attr);
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_putchar(fillchar, (generatedW_winrow + generatedW_winbar_height) + generatedW_height, (generatedW_wincol + generatedW_width), attr);
+		} 
+		busy = 0/*
+		 * Redraw the status line according to 'statusline' and take care of any
+		 * errors encountered.
+		 */;
+	}
+	public void redraw_custom_statusline() {
+		int entered = 0;
+		int saved_did_emsg = ModernizedCProgram.did_emsg;
+		// When called recursively return.  This can happen when the statusline
+		// contains an expression that triggers a redraw.if (entered) {
+			return /*Error: Unsupported expression*/;
+		} 
+		entered = 1;
+		ModernizedCProgram.did_emsg = 0;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win_redr_custom(wp, 0);
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_stl = generatedW_onebuf_opt.getWo_stl();
+		if (ModernizedCProgram.did_emsg) {
+			ModernizedCProgram.set_string_option_direct((char_u)"statusline", -1, (char_u)"", 1 | (generatedWo_stl != (byte)'\000' ? 4 : 2), -5);
+		} 
+		// When there is an error disable the statusline, otherwise the
+		ModernizedCProgram.did_emsg |=  saved_did_emsg;
+		entered = 0/*
+		 * Show current status info in ruler and various other places
+		 * If always is FALSE, only show ruler if position has changed.
+		 */;
+	}
+	/*
+	 * Based on the current value of curwin->w_topline, transfer a screenfull
+	 * of stuff from Filemem to ScreenLines[], and update curwin->w_botline.
+	 * Return OK when the screen was updated, FAIL if it was not done.
+	 */
+	public void win_redr_ruler(int always, int ignore_pum) {
+		char_u[] buffer = new char_u();
+		int row;
+		int fillchar;
+		int attr;
+		int empty_line = 0;
+		colnr_T virtcol = new colnr_T();
+		int i;
+		size_t len = new size_t();
+		int o;
+		int this_ru_col;
+		int off = 0;
+		int width;
+		// If 'ruler' off or redrawing disabled, don't do anythingif (!p_ru) {
+			return /*Error: Unsupported expression*/;
+		} 
+		 generatedW_cursor = this.getW_cursor();
+		Object generatedLnum = generatedW_cursor.getLnum();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		memline generatedB_ml = generatedW_buffer.getB_ml();
+		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
+		if (generatedLnum > generatedMl_line_count) {
+			return /*Error: Unsupported expression*/;
+		} 
+		// the (long) mode message.if (wp == ModernizedCProgram.lastwin && ModernizedCProgram.lastwin.getW_status_height() == 0) {
+			if (edit_submode != ((Object)0)) {
+				return /*Error: Unsupported expression*/;
+			} 
+		} 
+		// Except when the popup menu will be redrawn anyway.if (!ignore_pum && ModernizedCProgram.pum_visible()) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (p_ruf) {
+			int save_called_emsg = ModernizedCProgram.called_emsg;
+			ModernizedCProgram.called_emsg = 0;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win_redr_custom(wp, 1);
+			if (ModernizedCProgram.called_emsg) {
+				ModernizedCProgram.set_string_option_direct((char_u)"rulerformat", -1, (char_u)"", 1, -5);
+			} 
+			ModernizedCProgram.called_emsg |=  save_called_emsg;
+			return /*Error: Unsupported expression*/;
+		} 
+		if (!(State & /*
+		     * Check if not in Insert mode and the line is empty (will show "0-1").
+		     */-1024) && generatedW_buffer.ml_get_buf(generatedLnum, 0) == (byte)'\000') {
+			empty_line = 1/*
+			     * Only draw the ruler when something changed.
+			     */;
+		} 
+		wp.validate_virtcol_win();
+		Object generatedCol = generatedW_cursor.getCol();
+		Object generatedW_virtcol = this.getW_virtcol();
+		Object generatedW_ru_virtcol = this.getW_ru_virtcol();
+		Object generatedColadd = generatedW_cursor.getColadd();
+		Object generatedW_topline = this.getW_topline();
+		Object generatedW_ru_topline = this.getW_ru_topline();
+		Object generatedW_ru_line_count = this.getW_ru_line_count();
+		Object generatedW_topfill = this.getW_topfill();
+		Object generatedW_ru_topfill = this.getW_ru_topfill();
+		Object generatedW_ru_empty = this.getW_ru_empty();
+		int generatedW_status_height = this.getW_status_height();
+		int generatedW_winrow = this.getW_winrow();
+		Object generatedW_winbar_height = this.getW_winbar_height();
+		int generatedW_height = this.getW_height();
+		int generatedW_wincol = this.getW_wincol();
+		int generatedW_width = this.getW_width();
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_list = generatedW_onebuf_opt.getWo_list();
+		int generatedMl_flags = generatedB_ml.getMl_flags();
+		if (redraw_cmdline || always || generatedLnum != generatedLnum || generatedCol != generatedCol || generatedW_virtcol != generatedW_ru_virtcol || generatedColadd != generatedColadd || generatedW_topline != generatedW_ru_topline || generatedMl_line_count != generatedW_ru_line_count || generatedW_topfill != generatedW_ru_topfill || empty_line != generatedW_ru_empty) {
+			ModernizedCProgram.cursor_off();
+			if (generatedW_status_height) {
+				row = (generatedW_winrow + generatedW_winbar_height) + generatedW_height;
+				fillchar = /*Error: Function owner not recognized*/fillchar_status(attr, wp);
+				off = generatedW_wincol;
+				width = generatedW_width;
+			} else {
+					row = ModernizedCProgram.Rows - 1;
+					fillchar = (byte)' ';
+					attr = 0;
+					width = Columns;
+					off = 0;
+			} 
+			virtcol = generatedW_virtcol;
+			if (generatedWo_list && lcs_tab1 == (byte)'\000') {
+				generatedW_onebuf_opt.setWo_list(0);
+				ModernizedCProgram.getvvcol(wp, generatedW_cursor, ((Object)0), virtcol, ((Object)0));
+				generatedW_onebuf_opt.setWo_list(1/*
+					 * Some sprintfs return the length, some return a pointer.
+					 * To avoid portability problems we use strlen() here.
+					 */);
+			} 
+			ModernizedCProgram.vim_snprintf((byte)buffer, 70, "%ld,", (generatedMl_flags & 1) ? -1024 : (long)(generatedLnum));
+			len = /*Error: Function owner not recognized*/strlen((byte)(buffer));
+			ModernizedCProgram.col_print(buffer + len, 70 - len, empty_line ? 0 : (int)generatedCol + 1, (int)virtcol + 1/*
+				 * Add a "50%" if there is room for it.
+				 * On the last line, don't print in the last column (scrolls the
+				 * screen up on some terminals).
+				 */);
+			i = (int)/*Error: Function owner not recognized*/strlen((byte)(buffer));
+			wp.get_rel_pos(buffer + i + 1, 70 - i - 1);
+			o = i + ModernizedCProgram.vim_strsize(buffer + i + 1);
+			if (generatedW_status_height == 0) {
+				++o;
+			} 
+			this_ru_col = ModernizedCProgram.ru_col - (Columns - width);
+			if (this_ru_col < 0) {
+				this_ru_col = 0;
+			} 
+			if (this_ru_col < (width + 1) / 2) {
+				this_ru_col = (width + 1) / 2;
+			} 
+			if (this_ru_col + o < width) {
+				while (this_ru_col + o < width && 70 > i + 4) {
+					if (has_mbyte) {
+						i += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(fillchar, buffer + i);
+					} else {
+							buffer[i++] = fillchar;
+					} 
+					++o;
+				}
+				wp.get_rel_pos(buffer + i, 70 - i);
+			} 
+			if (has_mbyte) {
+				o = 0;
+				for (i = 0; buffer[i] != (byte)'\000'; i += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(buffer + i)) {
+					o += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(buffer + i);
+					if (this_ru_col + o > width) {
+						buffer[i] = (byte)'\000';
+						break;
+					} 
+				}
+			}  else if (this_ru_col + (int)/*Error: Function owner not recognized*/strlen((byte)(buffer)) > width) {
+				buffer[width - this_ru_col] = (byte)'\000';
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_puts(buffer, row, this_ru_col + off, attr);
+			i = redraw_cmdline;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_fill(row, row + 1, this_ru_col + off + (int)/*Error: Function owner not recognized*/strlen((byte)(buffer)), (int)(off + width), fillchar, fillchar, attr);
+			redraw_cmdline = i;
+			this.setW_ru_cursor(generatedW_cursor);
+			this.setW_ru_virtcol(generatedW_virtcol);
+			this.setW_ru_empty(empty_line);
+			this.setW_ru_topline(generatedW_topline);
+			this.setW_ru_line_count(generatedMl_line_count);
+			this.setW_ru_topfill(generatedW_topfill);
+		} 
+	}
+	public int text_to_screenline(Object text, int col) {
+		int off = (int)(current_ScreenLine - ScreenLines);
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_rl = generatedW_onebuf_opt.getWo_rl();
+		int generatedW_width = this.getW_width();
+		if (has_mbyte) {
+			int cells;
+			int u8c;
+			int[] u8cc = new int[6];
+			int i;
+			int idx;
+			int c_len;
+			char_u p = new char_u();
+			int prev_c = 0;
+			int prev_c1 = 0;
+			if (generatedWo_rl) {
+				idx = off;
+			} else {
+					idx = off + col;
+			} 
+			for (p = text; p != (byte)'\000'; /*Error: Unsupported expression*/) {
+				cells = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
+				c_len = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
+				if (col + cells > generatedW_width - (generatedWo_rl ? col : 0)) {
+					break;
+				} 
+				ScreenLines[idx] = p;
+				if (enc_utf8) {
+					u8c = ModernizedCProgram.utfc_ptr2char(p, u8cc);
+					if (p < -1024 && u8cc[0] == 0) {
+						ScreenLinesUC[idx] = 0;
+						prev_c = u8c;
+					} else {
+							if (p_arshape && !p_tbidi && (((u8c) & -1024) == -1024)) {
+								int pc;
+								int pc1;
+								int nc;
+								int[] pcc = new int[6];
+								int firstbyte = p;
+								if (generatedWo_rl) {
+									pc = prev_c;
+									pc1 = prev_c1;
+									nc = ModernizedCProgram.utf_ptr2char(p + c_len);
+									prev_c1 = u8cc[0];
+								} else {
+										pc = ModernizedCProgram.utfc_ptr2char(p + c_len, pcc);
+										nc = prev_c;
+										pc1 = pcc[0];
+								} 
+								prev_c = u8c;
+								u8c = ModernizedCProgram.arabic_shape(u8c, firstbyte, u8cc[0], pc, pc1, nc);
+								ScreenLines[idx] = firstbyte;
+							} else {
+									prev_c = u8c;
+							} 
+							ScreenLinesUC[idx] = u8c;
+							for (i = 0; i < Screen_mco; ++i) {
+								ModernizedCProgram.ScreenLinesC[i][idx] = u8cc[i];
+								if (u8cc[i] == 0) {
+									break;
+								} 
+							}
+					} 
+					if (cells > 1) {
+						ScreenLines[idx + 1] = 0;
+					} 
+				}  else if (enc_dbcs == 9932 && p == -1024) {
+					ScreenLines2[idx] = p[1];
+				}  else if (cells > 1) {
+					ScreenLines[idx + 1] = p[1];
+				} 
+				col += cells;
+				idx += cells;
+				p += c_len;
+			}
+		} else {
+				int len = (int)/*Error: Function owner not recognized*/strlen((byte)(text));
+				if (len > generatedW_width - col) {
+					len = generatedW_width - col;
+				} 
+				if (len > 0) {
+					if (generatedWo_rl) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(current_ScreenLine), (byte)(text), (size_t)(len));
+					} else {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(current_ScreenLine + col), (byte)(text), (size_t)(len));
+					} 
+					col += len;
+				} 
+		} 
+		return col;
+	}
+	/*
+	 * Draw the window toolbar.
+	 */
+	public void redraw_win_toolbar() {
+		vimmenu_T menu = new vimmenu_T();
+		int item_idx = 0;
+		int item_count = 0;
+		int col = 0;
+		int next_col;
+		int off = (int)(current_ScreenLine - ScreenLines);
+		int fill_attr = ModernizedCProgram.syn_name2attr((char_u)"ToolbarLine");
+		int button_attr = ModernizedCProgram.syn_name2attr((char_u)"ToolbarButton");
+		Object generatedW_winbar_items = this.getW_winbar_items();
+		ModernizedCProgram.vim_free(generatedW_winbar_items);
+		Object generatedNext = menu.getNext();
+		Object generatedW_winbar = this.getW_winbar();
+		for (menu = generatedW_winbar.getChildren(); menu != ((Object)0); menu = generatedNext) {
+			++item_count;
+		}
+		this.setW_winbar_items((winbar_item_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/ * (item_count + 1)));
+		int generatedW_width = this.getW_width();
+		Object generatedName = menu.getName();
+		// TODO: use fewer spaces if there is not enough roomfor (menu = generatedW_winbar.getChildren(); menu != ((Object)0) && col < generatedW_width; menu = generatedNext) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/space_to_screenline(off + col, fill_attr);
+			if (++col >= generatedW_width) {
+				break;
+			} 
+			if (col > 1) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/space_to_screenline(off + col, fill_attr);
+				if (++col >= generatedW_width) {
+					break;
+				} 
+			} 
+			generatedW_winbar_items[item_idx].setWb_startcol(col);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/space_to_screenline(off + col, button_attr);
+			if (++col >= generatedW_width) {
+				break;
+			} 
+			next_col = wp.text_to_screenline(generatedName, col);
+			while (col < next_col) {
+				ScreenAttrs[off + col] = button_attr;
+				++col;
+			}
+			generatedW_winbar_items[item_idx].setWb_endcol(col);
+			generatedW_winbar_items[item_idx].setWb_menu(menu);
+			++item_idx;
+			if (col >= generatedW_width) {
+				break;
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/space_to_screenline(off + col, button_attr);
+			++col;
+		}
+		while (col < generatedW_width) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/space_to_screenline(off + col, fill_attr);
+			++col;
+		}
+		// end marker// end markergeneratedW_winbar_items[item_idx].setWb_menu(((Object)0));
+		int generatedW_winrow = this.getW_winrow();
+		int generatedW_wincol = this.getW_wincol();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_line(generatedW_winrow, generatedW_wincol, (int)generatedW_width, (int)generatedW_width, 0);
+	}
+	/* vi:set ts=8 sts=4 sw=4 noet:
+	 *
+	 * VIM - Vi IMproved	by Bram Moolenaar
+	 *
+	 * Do ":help uganda"  in Vim to read copying and usage conditions.
+	 * Do ":help credits" in Vim to see a list of people who contributed.
+	 * See README.txt for an overview of the Vim source code.
+	 */
+	/*
+	 * drawscreen.c: Code for updating all the windows on the screen.
+	 * This is the top level, drawline.c is the middle and screen.c the lower
+	 * level.
+	 *
+	 * update_screen() is the function that updates all windows and status lines.
+	 * It is called form the main loop when must_redraw is non-zero.  It may be
+	 * called from other places when an immediate screen update is needed.
+	 *
+	 * The part of the buffer that is displayed in a window is set with:
+	 * - w_topline (first buffer line in window)
+	 * - w_topfill (filler lines above the first line)
+	 * - w_leftcol (leftmost window cell in window),
+	 * - w_skipcol (skipped window cells of first line)
+	 *
+	 * Commands that only move the cursor around in a window, do not need to take
+	 * action to update the display.  The main loop will check if w_topline is
+	 * valid and update it (scroll the window) when needed.
+	 *
+	 * Commands that scroll a window change w_topline and must call
+	 * check_cursor() to move the cursor into the visible part of the window, and
+	 * call redraw_later(VALID) to have the window displayed by update_screen()
+	 * later.
+	 *
+	 * Commands that change text in the buffer must call changed_bytes() or
+	 * changed_lines() to mark the area that changed and will require updating
+	 * later.  The main loop will call update_screen(), which will update each
+	 * window that shows the changed buffer.  This assumes text above the change
+	 * can remain displayed as it is.  Text after the change may need updating for
+	 * scrolling, folding and syntax highlighting.
+	 *
+	 * Commands that change how a window is displayed (e.g., setting 'list') or
+	 * invalidate the contents of a window in another way (e.g., change fold
+	 * settings), must call redraw_later(NOT_VALID) to have the whole window
+	 * redisplayed by update_screen() later.
+	 *
+	 * Commands that change how a buffer is displayed (e.g., setting 'tabstop')
+	 * must call redraw_curbuf_later(NOT_VALID) to have all the windows for the
+	 * buffer redisplayed by update_screen() later.
+	 *
+	 * Commands that change highlighting and possibly cause a scroll too must call
+	 * redraw_later(SOME_VALID) to update the whole window but still use scrolling
+	 * to avoid redrawing everything.  But the length of displayed lines must not
+	 * change, use NOT_VALID then.
+	 *
+	 * Commands that move the window position must call redraw_later(NOT_VALID).
+	 * TODO: should minimize redrawing by scrolling when possible.
+	 *
+	 * Commands that change everything (e.g., resizing the screen) must call
+	 * redraw_all_later(NOT_VALID) or redraw_all_later(CLEAR).
+	 *
+	 * Things that are handled indirectly:
+	 * - When messages scroll the screen up, msg_scrolled will be set and
+	 *   update_screen() called to redraw.
+	 */
+	public void win_update() {
+		file_buffer generatedW_buffer = this.getW_buffer();
+		buf_T buf = generatedW_buffer;
+		int type;
+		// Below last row of the top area that needsint top_end = 0;
+		// updating.  0 when no top area updating.
+		// first row of the mid area that needsint mid_start = 999;
+		// updating.  999 when no mid area updating.
+		// Below last row of the mid area that needsint mid_end = 0;
+		// updating.  0 when no mid area updating.
+		// first row of the bot area that needsint bot_start = 999;
+		// updating.  999 when no bot area updating
+		// TRUE when scrolled down whenint scrolled_down = 0;
+		// w_topline got smaller a bit
+		// redraw above mod_topint top_to_mod = 0;
+		// current window row to displayint row;
+		// current buffer lnum to displaylinenr_T lnum = new linenr_T();
+		// current index in w_lines[]int idx;
+		// starting row of the current lineint srow;
+		// if TRUE, we hit the end of the fileint eof = 0;
+		// if TRUE, we finished the last lineint didline = 0;
+		int i;
+		long j;
+		// being called recursivelyint recursive = 0;
+		Object generatedW_botline = this.getW_botline();
+		int old_botline = generatedW_botline;
+		long fold_count;
+		// remember what happened to the previous line, to know if// check_visual_highlight() can be used
+		// didn't update a line// updated a normal line// updated a folded lineint did_update = 1;
+		// last parsed text linelinenr_T syntax_last_parsed = 0;
+		linenr_T mod_top = 0;
+		linenr_T mod_bot = 0;
+		int save_got_int;
+		proftime_T syntax_tm = new proftime_T();
+		int generatedW_redr_type = this.getW_redr_type();
+		type = generatedW_redr_type;
+		if (type == 40) {
+			this.setW_redr_status(1);
+			this.setW_lines_valid(0);
+		} 
+		int generatedW_height = this.getW_height();
+		Object generatedW_winbar_height = (wp).getW_winbar_height();
+		// Window is zero-height: nothing to draw.if (generatedW_height + generatedW_winbar_height == 0) {
+			this.setW_redr_type(0);
+			return /*Error: Unsupported expression*/;
+		} 
+		int generatedW_width = this.getW_width();
+		// Window is zero-width: Only need to draw the separator.if (generatedW_width == 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/draw_vsep_win(wp, 0);
+			this.setW_redr_type(0);
+			return /*Error: Unsupported expression*/;
+		} 
+		// Draw the window toolbar, if there is one.// Draw the window toolbar, if there is one.ModernizedCProgram.init_search_hl(wp, screen_search_hl);
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_nu = generatedW_onebuf_opt.getWo_nu();
+		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
+		// Force redraw when width of 'number' or 'relativenumber' column// changes.// Force redraw when width of 'number' or 'relativenumber' column// changes.i = (generatedWo_nu || generatedWo_rnu) ? /*Error: Function owner not recognized*/number_width(wp) : 0;
+		Object generatedW_nrwidth = this.getW_nrwidth();
+		int generatedB_mod_set = buf.getB_mod_set();
+		long generatedB_mod_xlines = buf.getB_mod_xlines();
+		Object generatedW_redraw_top = this.getW_redraw_top();
+		Object generatedW_redraw_bot = this.getW_redraw_bot();
+		Object generatedB_mod_top = buf.getB_mod_top();
+		Object generatedB_s = buf.getB_s();
+		Object generatedB_mod_bot = buf.getB_mod_bot();
+		Object generatedRm = screen_search_hl.getRm();
+		Object generatedW_match_head = this.getW_match_head();
+		 generatedMatch = cur.getMatch();
+		Object generatedRegprog = generatedMatch.getRegprog();
+		matchitem generatedNext = cur.getNext();
+		Object generatedW_topline = this.getW_topline();
+		int generatedW_lines_valid = this.getW_lines_valid();
+		w_line[] generatedW_lines = this.getW_lines();
+		if (generatedW_nrwidth != i) {
+			type = 40;
+			this.setW_nrwidth(i);
+		}  else if (generatedB_mod_set && generatedB_mod_xlines != 0 && generatedW_redraw_top != 0) {
+			type = 40;
+		} else {
+				mod_top = generatedW_redraw_top;
+				if (generatedW_redraw_bot != 0) {
+					mod_bot = generatedW_redraw_bot + 1;
+				} else {
+						mod_bot = 0;
+				} 
+				if (generatedB_mod_set) {
+					if (mod_top == 0 || mod_top > generatedB_mod_top) {
+						mod_top = generatedB_mod_top;
+						if (wp.syntax_present()) {
+							mod_top -= generatedB_s.getB_syn_sync_linebreaks();
+							if (mod_top < 1) {
+								mod_top = 1;
+							} 
+						} 
+					} 
+					if (mod_bot == 0 || mod_bot < generatedB_mod_bot) {
+						mod_bot = generatedB_mod_bot;
+					} 
+					if (generatedRm.getRegprog() != ((Object)0) && generatedRm.getRegprog().re_multiline()) {
+						top_to_mod = 1;
+					} else {
+							matchitem_T cur = generatedW_match_head;
+							while (cur != ((Object)0)) {
+								if (generatedRegprog != ((Object)0) && generatedRegprog.re_multiline()) {
+									top_to_mod = 1;
+									break;
+								} 
+								cur = generatedNext;
+							}
+					} 
+				} 
+				if (mod_top != 0 && wp.hasAnyFolding()) {
+					linenr_T lnumt = new linenr_T();
+					linenr_T lnumb = new linenr_T();
+					lnumt = generatedW_topline;
+					lnumb = LONG_MAX;
+					for (i = 0; i < generatedW_lines_valid; ++i) {
+						if (generatedW_lines[i].getWl_valid()) {
+							if (generatedW_lines[i].getWl_lastlnum() < mod_top) {
+								lnumt = generatedW_lines[i].getWl_lastlnum() + 1;
+							} 
+							if (lnumb == LONG_MAX && generatedW_lines[i].getWl_lnum() >= mod_bot) {
+								lnumb = generatedW_lines[i].getWl_lnum();
+								if (/*Error: Function owner not recognized*/compute_foldcolumn(wp, 0) > 0) {
+									++lnumb;
+								} 
+							} 
+						} 
+					}
+					(Object)ModernizedCProgram.hasFoldingWin(wp, mod_top, mod_top, ((Object)0), 1, ((Object)0));
+					if (mod_top > lnumt) {
+						mod_top = lnumt;
+					} 
+					--mod_bot;
+					(Object)ModernizedCProgram.hasFoldingWin(wp, mod_bot, ((Object)0), mod_bot, 1, ((Object)0));
+					++mod_bot;
+					if (mod_bot < lnumb) {
+						mod_bot = lnumb;
+					} 
+				} 
+				if (mod_top != 0 && mod_top < generatedW_topline) {
+					if (mod_bot > generatedW_topline) {
+						mod_top = generatedW_topline;
+					}  else if (wp.syntax_present()) {
+						top_end = 1;
+					} 
+				} 
+				if (mod_top != 0 && generatedB_mod_xlines != 0 && generatedWo_nu) {
+					mod_bot = LONG_MAX;
+				} 
+		} 
+		// reset for next time// reset for next timethis.setW_redraw_top(0);
+		this.setW_redraw_bot(0)// When only displaying the lines at the top, set top_end.  Used when;// When only displaying the lines at the top, set top_end.  Used when
+		int generatedW_upd_rows = this.getW_upd_rows();
+		// window has scrolled down for msg_scrolled.if (type == 30) {
+			j = 0;
+			for (i = 0; i < generatedW_lines_valid; ++i) {
+				j += generatedW_lines[i].getWl_size();
+				if (j >= generatedW_upd_rows) {
+					top_end = j;
+					break;
+				} 
+			}
+			if (top_end == 0) {
+				type = 40;
+			} else {
+					type = 10;
+			} 
+		} 
+		// set "screen_cleared" to TRUE.  The special value MAYBE (which is still// non-zero and thus not FALSE) will indicate that screenclear() was not// called.if (screen_cleared) {
+			screen_cleared = 2;
+		} 
+		Object generatedW_botfill = this.getW_botfill();
+		Object generatedW_old_botfill = this.getW_old_botfill();
+		Object generatedW_topfill = this.getW_topfill();
+		Object generatedW_old_topfill = this.getW_old_topfill();
+		Object generatedWo_diff = generatedW_onebuf_opt.getWo_diff();
+		Object generatedW_popup_flags = (wp).getW_popup_flags();
+		// 2: wp->w_topline is below wp->w_lines[0].wl_lnum: may scroll up// 3: wp->w_topline is wp->w_lines[0].wl_lnum: find first entry in//    w_lines[] that needs updating.if ((type == 10 || type == 35 || type == 20 || type == 25) && !generatedW_botfill && !generatedW_old_botfill) {
+			if (mod_top != 0 && generatedW_topline == mod_top) {
+			}  else if (generatedW_lines[0].getWl_valid() && (generatedW_topline < generatedW_lines[0].getWl_lnum() || (generatedW_topline == generatedW_lines[0].getWl_lnum() && generatedW_topfill > generatedW_old_topfill))) {
+				if (wp.hasAnyFolding()) {
+					linenr_T ln = new linenr_T();
+					j = 0;
+					for (ln = generatedW_topline; ln < generatedW_lines[0].getWl_lnum(); ++ln) {
+						++j;
+						if (j >= generatedW_height - 2) {
+							break;
+						} 
+						(Object)ModernizedCProgram.hasFoldingWin(wp, ln, ((Object)0), ln, 1, ((Object)0));
+					}
+				} else {
+						j = generatedW_lines[0].getWl_lnum() - generatedW_topline;
+				} 
+				if (j < generatedW_height - 2) {
+					i = wp.plines_m_win(generatedW_topline, generatedW_lines[0].getWl_lnum() - 1);
+					if (generatedW_lines[0].getWl_lnum() != generatedW_topline) {
+						i += wp.diff_check_fill(generatedW_lines[0].getWl_lnum()) - generatedW_old_topfill;
+					} 
+					if (i < generatedW_height - 2) {
+						if (i > 0) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/check_for_delay(0);
+						} 
+						if (/*Error: Function owner not recognized*/win_ins_lines(wp, 0, i, 0, wp == ModernizedCProgram.firstwin) == 1) {
+							if (generatedW_lines_valid != 0) {
+								top_end = i;
+								scrolled_down = 1;
+								if ((generatedW_lines_valid += j) > generatedW_height) {
+									this.setW_lines_valid(generatedW_height);
+								} 
+								for (idx = generatedW_lines_valid; idx - j >= 0; idx--) {
+									generatedW_lines[idx] = generatedW_lines[idx - j];
+								}
+								while (idx >= 0) {
+									generatedW_lines[idx--].setWl_valid(0);
+								}
+							} 
+						} else {
+								mid_start = 0;
+						} 
+					} else {
+							mid_start = 0;
+					} 
+				} else {
+						mid_start = 0;
+				} 
+			} else {
+					j = -1;
+					row = 0;
+					for (i = 0; i < generatedW_lines_valid; i++) {
+						if (generatedW_lines[i].getWl_valid() && generatedW_lines[i].getWl_lnum() == generatedW_topline) {
+							j = i;
+							break;
+						} 
+						row += generatedW_lines[i].getWl_size();
+					}
+					if (j == -1) {
+						mid_start = 0;
+					} else {
+							if (generatedW_lines[0].getWl_lnum() == generatedW_topline) {
+								row += generatedW_old_topfill;
+							} else {
+									row += wp.diff_check_fill(generatedW_topline);
+							} 
+							row -= generatedW_topfill;
+							if (row > 0) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/check_for_delay(0);
+								if (/*Error: Function owner not recognized*/win_del_lines(wp, 0, row, 0, wp == ModernizedCProgram.firstwin, 0) == 1) {
+									bot_start = generatedW_height - row;
+								} else {
+										mid_start = 0;
+								} 
+							} 
+							if ((row == 0 || bot_start < 999) && generatedW_lines_valid != 0) {
+								bot_start = 0;
+								idx = 0;
+								for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+									generatedW_lines[idx] = generatedW_lines[j];
+									if (row > 0 && bot_start + row + (int)generatedW_lines[j].getWl_size() > generatedW_height) {
+										this.setW_lines_valid(idx + 1);
+										break;
+									} 
+									bot_start += generatedW_lines[idx++].getWl_size();
+									if (++j >= generatedW_lines_valid) {
+										this.setW_lines_valid(idx);
+										break;
+									} 
+								}
+								if (generatedWo_diff && bot_start > 0) {
+									generatedW_lines[0].setWl_size(wp.plines_win_nofill(generatedW_topline, 1) + generatedW_topfill);
+								} 
+							} 
+					} 
+			} 
+			if (mid_start == 0) {
+				mid_end = generatedW_height;
+				if ((ModernizedCProgram.firstwin == ModernizedCProgram.lastwin) && !(generatedW_popup_flags != 0)) {
+					if (screen_cleared != 1) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screenclear();
+					} 
+					if (redraw_tabline) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/draw_tabline();
+					} 
+				} 
+			} 
+			if (screen_cleared == 1) {
+				must_redraw = 0;
+			} 
+		} else {
+				mid_start = 0;
+				mid_end = generatedW_height;
+		} 
+		if (type == 35) {
+			mid_start = 0;
+			mid_end = generatedW_height;
+			type = 40;
+		} 
+		Object generatedW_old_cursor_lnum = this.getW_old_cursor_lnum();
+		byte generatedW_old_visual_mode = this.getW_old_visual_mode();
+		Object generatedW_old_visual_lnum = this.getW_old_visual_lnum();
+		Object generatedW_old_visual_col = this.getW_old_visual_col();
+		Object generatedWo_lbr = generatedW_onebuf_opt.getWo_lbr();
+		Object generatedW_old_cursor_fcol = this.getW_old_cursor_fcol();
+		Object generatedW_old_cursor_lcol = this.getW_old_cursor_lcol();
+		int generatedW_valid = this.getW_valid();
+		// check if we are updating or removing the inverted partif ((VIsual_active && buf == generatedW_buffer) || (generatedW_old_cursor_lnum != 0 && type != 40)) {
+			linenr_T from = new linenr_T();
+			linenr_T to = new linenr_T();
+			if (VIsual_active) {
+				if (VIsual_active && (VIsual_mode != generatedW_old_visual_mode || type == 25)) {
+					if (ModernizedCProgram.curwin.getW_cursor().getLnum() < ModernizedCProgram.VIsual.getLnum()) {
+						from = ModernizedCProgram.curwin.getW_cursor().getLnum();
+						to = ModernizedCProgram.VIsual.getLnum();
+					} else {
+							from = ModernizedCProgram.VIsual.getLnum();
+							to = ModernizedCProgram.curwin.getW_cursor().getLnum();
+					} 
+					if (generatedW_old_cursor_lnum < from) {
+						from = generatedW_old_cursor_lnum;
+					} 
+					if (generatedW_old_cursor_lnum > to) {
+						to = generatedW_old_cursor_lnum;
+					} 
+					if (generatedW_old_visual_lnum < from) {
+						from = generatedW_old_visual_lnum;
+					} 
+					if (generatedW_old_visual_lnum > to) {
+						to = generatedW_old_visual_lnum;
+					} 
+				} else {
+						if (ModernizedCProgram.curwin.getW_cursor().getLnum() < generatedW_old_cursor_lnum) {
+							from = ModernizedCProgram.curwin.getW_cursor().getLnum();
+							to = generatedW_old_cursor_lnum;
+						} else {
+								from = generatedW_old_cursor_lnum;
+								to = ModernizedCProgram.curwin.getW_cursor().getLnum();
+								if (from == 0) {
+									from = to;
+								} 
+						} 
+						if (ModernizedCProgram.VIsual.getLnum() != generatedW_old_visual_lnum || ModernizedCProgram.VIsual.getCol() != generatedW_old_visual_col) {
+							if (generatedW_old_visual_lnum < from && generatedW_old_visual_lnum != 0) {
+								from = generatedW_old_visual_lnum;
+							} 
+							if (generatedW_old_visual_lnum > to) {
+								to = generatedW_old_visual_lnum;
+							} 
+							if (ModernizedCProgram.VIsual.getLnum() < from) {
+								from = ModernizedCProgram.VIsual.getLnum();
+							} 
+							if (ModernizedCProgram.VIsual.getLnum() > to) {
+								to = ModernizedCProgram.VIsual.getLnum();
+							} 
+						} 
+				} 
+				if (VIsual_mode == 22) {
+					colnr_T fromc = new colnr_T();
+					colnr_T toc = new colnr_T();
+					int save_ve_flags = ModernizedCProgram.ve_flags;
+					if (generatedWo_lbr) {
+						ModernizedCProgram.ve_flags = 4;
+					} 
+					ModernizedCProgram.getvcols(wp, ModernizedCProgram.VIsual, ModernizedCProgram.curwin.getW_cursor(), fromc, toc);
+					ModernizedCProgram.ve_flags = save_ve_flags;
+					++toc;
+					if (ModernizedCProgram.curwin.getW_curswant() == INT_MAX) {
+						toc = INT_MAX;
+					} 
+					if (fromc != generatedW_old_cursor_fcol || toc != generatedW_old_cursor_lcol) {
+						if (from > ModernizedCProgram.VIsual.getLnum()) {
+							from = ModernizedCProgram.VIsual.getLnum();
+						} 
+						if (to < ModernizedCProgram.VIsual.getLnum()) {
+							to = ModernizedCProgram.VIsual.getLnum();
+						} 
+					} 
+					this.setW_old_cursor_fcol(fromc);
+					this.setW_old_cursor_lcol(toc);
+				} 
+			} else {
+					if (generatedW_old_cursor_lnum < generatedW_old_visual_lnum) {
+						from = generatedW_old_cursor_lnum;
+						to = generatedW_old_visual_lnum;
+					} else {
+							from = generatedW_old_visual_lnum;
+							to = generatedW_old_cursor_lnum;
+					} 
+			} 
+			if (from < generatedW_topline) {
+				from = generatedW_topline;
+			} 
+			if (generatedW_valid & -1024) {
+				if (from >= generatedW_botline) {
+					from = generatedW_botline - 1;
+				} 
+				if (to >= generatedW_botline) {
+					to = generatedW_botline - 1;
+				} 
+			} 
+			if (mid_start > 0) {
+				lnum = generatedW_topline;
+				idx = 0;
+				srow = 0;
+				if (scrolled_down) {
+					mid_start = top_end;
+				} else {
+						mid_start = 0;
+				} 
+				while (lnum < from && idx < generatedW_lines_valid) {
+					if (generatedW_lines[idx].getWl_valid()) {
+						mid_start += generatedW_lines[idx].getWl_size();
+					}  else if (!scrolled_down) {
+						srow += generatedW_lines[idx].getWl_size();
+					} 
+					++idx;
+					if (idx < generatedW_lines_valid && generatedW_lines[idx].getWl_valid()) {
+						lnum = generatedW_lines[idx].getWl_lnum();
+					} else {
+							++lnum;
+					} 
+				}
+				srow += mid_start;
+				mid_end = generatedW_height;
+				for (; idx < generatedW_lines_valid; ++idx) {
+					if (generatedW_lines[idx].getWl_valid() && generatedW_lines[idx].getWl_lnum() >= to + 1) {
+						mid_end = srow;
+						break;
+					} 
+					srow += generatedW_lines[idx].getWl_size();
+				}
+			} 
+		} 
+		if (VIsual_active && buf == generatedW_buffer) {
+			this.setW_old_visual_mode(VIsual_mode);
+			this.setW_old_cursor_lnum(ModernizedCProgram.curwin.getW_cursor().getLnum());
+			this.setW_old_visual_lnum(ModernizedCProgram.VIsual.getLnum());
+			this.setW_old_visual_col(ModernizedCProgram.VIsual.getCol());
+			this.setW_old_curswant(ModernizedCProgram.curwin.getW_curswant());
+		} else {
+				this.setW_old_visual_mode(0);
+				this.setW_old_cursor_lnum(0);
+				this.setW_old_visual_lnum(0);
+				this.setW_old_visual_col(0);
+		} 
+		// reset got_int, otherwise regexp won't work// reset got_int, otherwise regexp won't worksave_got_int = got_int;
+		got_int = 0;
+		// Set the time limit to 'redrawtime'.// Set the time limit to 'redrawtime'.ModernizedCProgram.profile_setlimit(p_rdt, syntax_tm);
+		ModernizedCProgram.syn_set_timeout(syntax_tm);
+		win_foldinfo.setFi_level(0);
+		// Draw the window toolbar, if there is one.// TODO: only when needed.if (wp.winbar_height() > 0) {
+			wp.redraw_win_toolbar();
+		} 
+		// Update all the window rows.// first entry in w_lines[].wl_size// Update all the window rows.// first entry in w_lines[].wl_sizeidx = 0;
+		row = 0;
+		srow = 0;
+		// first line shown in window// first line shown in windowlnum = generatedW_topline;
+		memline generatedB_ml = buf.getB_ml();
+		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
+		int generatedW_winrow = this.getW_winrow();
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+			if (row == generatedW_height) {
+				didline = 1;
+				break;
+			} 
+			if (lnum > generatedMl_line_count) {
+				eof = 1;
+				break;
+			} 
+			srow = row;
+			if (row < top_end || (row >= mid_start && row < mid_end) || top_to_mod || idx >= generatedW_lines_valid || (row + generatedW_lines[idx].getWl_size() > bot_start) || (mod_top != 0 && (lnum == mod_top || (lnum >= mod_top && (lnum < mod_bot || did_update == 3 || (did_update == 2 && wp.syntax_present() && ((wp.foldmethodIsSyntax() && wp.hasAnyFolding()) || ModernizedCProgram.syntax_check_changed(lnum))) || (generatedW_match_head != ((Object)0) && generatedB_mod_xlines != 0)))))) {
+				if (lnum == mod_top) {
+					top_to_mod = 0;
+				} 
+				if (lnum == mod_top && mod_bot != LONG_MAX && !(dollar_vcol >= 0 && mod_bot == mod_top + 1)) {
+					int old_rows = 0;
+					int new_rows = 0;
+					int xtra_rows;
+					linenr_T l = new linenr_T();
+					for (i = idx; i < generatedW_lines_valid; ++i) {
+						if (generatedW_lines[i].getWl_valid() && generatedW_lines[i].getWl_lnum() == mod_bot) {
+							break;
+						} 
+						old_rows += generatedW_lines[i].getWl_size();
+						if (generatedW_lines[i].getWl_valid() && generatedW_lines[i].getWl_lastlnum() + 1 == mod_bot) {
+							++i;
+							while (i < generatedW_lines_valid && !generatedW_lines[i].getWl_valid()) {
+								old_rows += generatedW_lines[i++].getWl_size();
+							}
+							break;
+						} 
+					}
+					if (i >= generatedW_lines_valid) {
+						bot_start = 0;
+					} else {
+							j = idx;
+							for (ModernizedCProgram.l = lnum; ModernizedCProgram.l < mod_bot; ++ModernizedCProgram.l) {
+								if (ModernizedCProgram.hasFoldingWin(wp, ModernizedCProgram.l, ((Object)0), ModernizedCProgram.l, 1, ((Object)0))) {
+									++new_rows;
+								}  else if (ModernizedCProgram.l == generatedW_topline) {
+									new_rows += wp.plines_win_nofill(ModernizedCProgram.l, 1) + generatedW_topfill;
+								} else {
+										new_rows += wp.plines_win(ModernizedCProgram.l, 1);
+								} 
+								++j;
+								if (new_rows > generatedW_height - row - 2) {
+									new_rows = 9999;
+									break;
+								} 
+							}
+							xtra_rows = new_rows - old_rows;
+							if (xtra_rows < 0) {
+								if (row - xtra_rows >= generatedW_height - 2) {
+									mod_bot = LONG_MAX;
+								} else {
+										/*Error: Function owner not recognized*//*Error: Function owner not recognized*/check_for_delay(0);
+										if (/*Error: Function owner not recognized*/win_del_lines(wp, row, -xtra_rows, 0, 0, 0) == 0) {
+											mod_bot = LONG_MAX;
+										} else {
+												bot_start = generatedW_height + xtra_rows;
+										} 
+								} 
+							}  else if (xtra_rows > 0) {
+								if (row + xtra_rows >= generatedW_height - 2) {
+									mod_bot = LONG_MAX;
+								} else {
+										/*Error: Function owner not recognized*//*Error: Function owner not recognized*/check_for_delay(0);
+										if (/*Error: Function owner not recognized*/win_ins_lines(wp, row + old_rows, xtra_rows, 0, 0) == 0) {
+											mod_bot = LONG_MAX;
+										}  else if (top_end > row + old_rows) {
+											top_end += xtra_rows;
+										} 
+								} 
+							} 
+							if (mod_bot != LONG_MAX && i != j) {
+								if (j < i) {
+									int x = row + new_rows;
+									for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+										if (i >= generatedW_lines_valid) {
+											this.setW_lines_valid(j);
+											break;
+										} 
+										generatedW_lines[j] = generatedW_lines[i];
+										if (x + (int)generatedW_lines[j].getWl_size() > generatedW_height) {
+											this.setW_lines_valid(j + 1);
+											break;
+										} 
+										x += generatedW_lines[j++].getWl_size();
+										++i;
+									}
+									if (bot_start > x) {
+										bot_start = x;
+									} 
+								} else {
+										j -= i;
+										generatedW_lines_valid += j;
+										if (generatedW_lines_valid > generatedW_height) {
+											this.setW_lines_valid(generatedW_height);
+										} 
+										for (i = generatedW_lines_valid; i - j >= idx; --i) {
+											generatedW_lines[i] = generatedW_lines[i - j];
+										}
+										while (i >= idx) {
+											generatedW_lines[i].setWl_size(0);
+											generatedW_lines[i--].setWl_valid(0);
+										}
+								} 
+							} 
+					} 
+				} 
+				fold_count = ModernizedCProgram.foldedCount(wp, lnum, win_foldinfo);
+				if (fold_count != 0) {
+					ModernizedCProgram.fold_line(wp, fold_count, win_foldinfo, lnum, row);
+					++row;
+					--fold_count;
+					generatedW_lines[idx].setWl_folded(1);
+					generatedW_lines[idx].setWl_lastlnum(lnum + fold_count);
+					did_update = 3;
+				}  else if (idx < generatedW_lines_valid && generatedW_lines[idx].getWl_valid() && generatedW_lines[idx].getWl_lnum() == lnum && lnum > generatedW_topline && !(ModernizedCProgram.dy_flags & (-1024 | -1024)) && !(generatedW_popup_flags != 0) && srow + generatedW_lines[idx].getWl_size() > generatedW_height && wp.diff_check_fill(lnum) == 0) {
+					row = generatedW_height + 1;
+				} else {
+						ModernizedCProgram.prepare_search_hl(wp, screen_search_hl, lnum);
+						if (syntax_last_parsed != 0 && syntax_last_parsed + 1 < lnum && wp.syntax_present()) {
+							ModernizedCProgram.syntax_end_parsing(syntax_last_parsed + 1);
+						} 
+						row = wp.win_line(lnum, srow, generatedW_height, mod_top == 0, 0);
+						generatedW_lines[idx].setWl_folded(0);
+						generatedW_lines[idx].setWl_lastlnum(lnum);
+						did_update = 2;
+						syntax_last_parsed = lnum;
+				} 
+				generatedW_lines[idx].setWl_lnum(lnum);
+				generatedW_lines[idx].setWl_valid(1);
+				if (row > generatedW_height || row + generatedW_winrow >= ModernizedCProgram.Rows) {
+					if (dollar_vcol == -1) {
+						generatedW_lines[idx].setWl_size(wp.plines_win(lnum, 1));
+					} 
+					++idx;
+					break;
+				} 
+				if (dollar_vcol == -1) {
+					generatedW_lines[idx].setWl_size(row - srow);
+				} 
+				++idx;
+				lnum += fold_count + 1;
+			} else {
+					if (generatedWo_rnu) {
+						fold_count = ModernizedCProgram.foldedCount(wp, lnum, win_foldinfo);
+						if (fold_count != 0) {
+							ModernizedCProgram.fold_line(wp, fold_count, win_foldinfo, lnum, row);
+						} else {
+								(Object)wp.win_line(lnum, srow, generatedW_height, 1, 1);
+						} 
+					} 
+					row += generatedW_lines[idx++].getWl_size();
+					if (row > generatedW_height) {
+						break;
+					} 
+					lnum = generatedW_lines[idx - 1].getWl_lastlnum() + 1;
+					did_update = 1;
+			} 
+			if (lnum > generatedMl_line_count) {
+				eof = 1;
+				break;
+			} 
+		}// stop updating when reached the end of the window (check for _past_
+		// Rewrite the character at the end of the screen line.if (ModernizedCProgram.use_vtp()) {
+			int i;
+			for (i = 0; i < ModernizedCProgram.Rows; ++i) {
+				if (enc_utf8) {
+					if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(LineOffset[i] + Columns - 2, LineOffset[i] + screen_Columns) > 1) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_draw_rectangle(i, Columns - 2, 1, 2, 0);
+					} else {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_draw_rectangle(i, Columns - 1, 1, 1, 0);
+					} 
+				} else {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_char(LineOffset[i] + Columns - 1, i, Columns - 1);
+				} 
+			}
+		} 
+		if (idx > generatedW_lines_valid) {
+			this.setW_lines_valid(idx);
+		} 
+		// Let the syntax stuff know we stop parsing here.if (syntax_last_parsed != 0 && wp.syntax_present()) {
+			ModernizedCProgram.syntax_end_parsing(syntax_last_parsed + 1);
+		} 
+		// If we didn't hit the end of the file, and we didn't finish the last// line we were working on, then the line didn't fit.// If we didn't hit the end of the file, and we didn't finish the last// line we were working on, then the line didn't fit.this.setW_empty_rows(0);
+		this.setW_filler_rows(0);
+		int generatedW_wincol = this.getW_wincol();
+		if (!eof && !didline) {
+			if (lnum == generatedW_topline) {
+				this.setW_botline(lnum + 1);
+			}  else if (wp.diff_check_fill(lnum) >= generatedW_height - srow) {
+				this.setW_botline(lnum);
+				this.setW_filler_rows(generatedW_height - srow);
+			}  else if ((generatedW_popup_flags != 0)) {
+				this.setW_botline(lnum);
+			}  else if (ModernizedCProgram.dy_flags & -1024) {
+				int scr_row = (generatedW_winrow + generatedW_winbar_height) + generatedW_height - 1;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_puts_len((char_u)"@@", 2, scr_row, generatedW_wincol, ModernizedCProgram.highlight_attr[(int)(.HLF_AT)]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_fill(scr_row, scr_row + 1, (int)generatedW_wincol + 2, (int)(generatedW_wincol + generatedW_width), (byte)'@', (byte)' ', ModernizedCProgram.highlight_attr[(int)(.HLF_AT)]);
+				wp.set_empty_rows(srow);
+				this.setW_botline(lnum);
+			}  else if (ModernizedCProgram.dy_flags & -1024) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_fill((generatedW_winrow + generatedW_winbar_height) + generatedW_height - 1, (generatedW_winrow + generatedW_winbar_height) + generatedW_height, (int)(generatedW_wincol + generatedW_width) - 3, (int)(generatedW_wincol + generatedW_width), (byte)'@', (byte)'@', ModernizedCProgram.highlight_attr[(int)(.HLF_AT)]);
+				wp.set_empty_rows(srow);
+				this.setW_botline(lnum);
+			} else {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win_draw_end(wp, (byte)'@', (byte)' ', 1, srow, generatedW_height, .HLF_AT);
+					this.setW_botline(lnum);
+			} 
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/draw_vsep_win(wp, row);
+				if (eof) {
+					this.setW_botline(generatedMl_line_count + 1);
+					j = wp.diff_check_fill(generatedW_botline);
+					if (j > 0 && !generatedW_botfill) {
+						if (ModernizedCProgram.char2cells(fill_diff) > 1) {
+							i = (byte)'-';
+						} else {
+								i = fill_diff;
+						} 
+						if (row + j > generatedW_height) {
+							j = generatedW_height - row;
+						} 
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win_draw_end(wp, i, i, 1, row, row + (int)j, .HLF_DED);
+						row += j;
+					} 
+				}  else if (dollar_vcol == -1) {
+					this.setW_botline(lnum);
+				} 
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win_draw_end(wp, (generatedW_popup_flags != 0) ? (byte)' ' : (byte)'~', (byte)' ', 0, row, generatedW_height, .HLF_EOB);
+		} 
+		ModernizedCProgram.syn_set_timeout(((Object)0));
+		// Reset the type of redrawing required, the window has been updated.// Reset the type of redrawing required, the window has been updated.this.setW_redr_type(0);
+		this.setW_old_topfill(generatedW_topfill);
+		this.setW_old_botfill(generatedW_botfill);
+		if (dollar_vcol == -1) {
+			generatedW_valid |=  -1024;
+			if (wp == ModernizedCProgram.curwin && generatedW_botline != old_botline && !recursive) {
+				recursive = 1;
+				generatedW_valid &=  ~-1024;
+				ModernizedCProgram.update_topline();
+				if (must_redraw != 0) {
+					i = generatedB_mod_set;
+					curbuf.setB_mod_set(0);
+					ModernizedCProgram.curwin.win_update();
+					must_redraw = 0;
+					curbuf.setB_mod_set(i);
+				} 
+				recursive = 0;
+			} 
+		} 
+		// There is a trick with w_botline.  If we invalidate it on each// change that might modify it, this will cause a lot of expensive// calls to plines() in update_topline() each time.  Therefore the// value of w_botline is often approximated, and this value is used to// compute the value of w_topline.  If the value of w_botline was
+		// restore got_int, unless CTRL-C was hit while redrawingif (!got_int) {
+			got_int = save_got_int/*
+			 * Prepare for updating one or more windows.
+			 * Caller must check for "updating_screen" already set to avoid recursiveness.
+			 */;
+		} 
+	}
+	public void redraw_win_later(int type) {
+		int generatedW_redr_type = this.getW_redr_type();
+		if (!exiting && generatedW_redr_type < type) {
+			this.setW_redr_type(type);
+			if (type >= 40) {
+				this.setW_lines_valid(0);
+			} 
+			if (must_redraw < type) {
+				must_redraw = type/*
+				 * Force a complete redraw later.  Also resets the highlighting.  To be used
+				 * after executing a shell command that messes up the screen.
+				 */;
+			} 
+		} 
+	}
+	public void redrawWinline(Object lnum) {
+		Object generatedW_redraw_top = this.getW_redraw_top();
+		if (generatedW_redraw_top == 0 || generatedW_redraw_top > lnum) {
+			this.setW_redraw_top(lnum);
+		} 
+		Object generatedW_redraw_bot = this.getW_redraw_bot();
+		if (generatedW_redraw_bot == 0 || generatedW_redraw_bot < lnum) {
+			this.setW_redraw_bot(lnum);
+		} 
+		wp.redraw_win_later(10);
+	}
+	public void tagstack_clear() {
+		int i;
+		int generatedW_tagstacklen = this.getW_tagstacklen();
+		Object generatedW_tagstack = this.getW_tagstack();
+		// Free the current tag stackfor (i = 0; i < generatedW_tagstacklen; ++i) {
+			generatedW_tagstack[i].tagstack_clear_entry();
+		}
+		this.setW_tagstacklen(0);
+		this.setW_tagstackidx(0/*
+		 * Remove the oldest entry from the tag stack and shift the rest of
+		 * the entires to free up the top of the stack.
+		 */);
+	}
+	public void tagstack_shift() {
+		Object generatedW_tagstack = this.getW_tagstack();
+		taggy_T tagstack = generatedW_tagstack;
+		int i;
+		tagstack[0].tagstack_clear_entry();
+		int generatedW_tagstacklen = this.getW_tagstacklen();
+		for (i = 1; i < generatedW_tagstacklen; ++i) {
+			tagstack[i - 1] = tagstack[i];
+		}
+		generatedW_tagstacklen--;
+	}
+	public void tagstack_set_curidx(int curidx) {
+		this.setW_tagstackidx(curidx);
+		int generatedW_tagstackidx = this.getW_tagstackidx();
+		// sanity checkif (generatedW_tagstackidx < 0) {
+			this.setW_tagstackidx(0);
+		} 
+		int generatedW_tagstacklen = this.getW_tagstacklen();
+		if (generatedW_tagstackidx > generatedW_tagstacklen) {
+			this.setW_tagstackidx(generatedW_tagstacklen);
+		} 
 	}
 	public window_S win_id2wp(int id) {
 		window_S window_S = new window_S();
@@ -7703,7 +8974,7 @@ public class window_S {
 		int height = generatedW_height;
 		win_T oldwin = ModernizedCProgram.curwin;
 		if (wp == targetwin) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		// Jump to the target windowif (ModernizedCProgram.curwin != targetwin) {
 			targetwin.win_goto();
@@ -7723,6 +8994,262 @@ public class window_S {
 			oldwin/*
 			 * "win_splitmove()" function
 			 */.win_goto();
+		} 
+	}
+	public int winbar_height() {
+		Object generatedW_winbar = this.getW_winbar();
+		if (generatedW_winbar != ((Object)0) && generatedW_winbar.getChildren() != ((Object)0)) {
+			return 1;
+		} 
+		return 0;
+	}
+	public void remove_winbar() {
+		Object generatedW_winbar = this.getW_winbar();
+		generatedW_winbar.remove_menu((char_u)"", ((1 << 7) - 1), 1);
+		Object generatedW_winbar_items = this.getW_winbar_items();
+		ModernizedCProgram.vim_free(generatedW_winbar_items);
+	}
+	public void winbar_click(int col) {
+		int idx;
+		Object generatedW_winbar_items = this.getW_winbar_items();
+		if (generatedW_winbar_items == ((Object)0)) {
+			return /*Error: Unsupported expression*/;
+		} 
+		Object generatedWb_startcol = item.getWb_startcol();
+		Object generatedWb_endcol = item.getWb_endcol();
+		Object generatedWb_menu = item.getWb_menu();
+		for (idx = 0; generatedW_winbar_items[idx].getWb_menu() != ((Object)0); ++idx) {
+			winbar_item_T item = generatedW_winbar_items[idx];
+			if (col >= generatedWb_startcol && col <= generatedWb_endcol) {
+				win_T save_curwin = ((Object)0);
+				pos_T save_visual = ModernizedCProgram.VIsual;
+				int save_visual_active = VIsual_active;
+				int save_visual_select = VIsual_select;
+				int save_visual_reselect = ModernizedCProgram.VIsual_reselect;
+				int save_visual_mode = VIsual_mode;
+				if (wp != ModernizedCProgram.curwin) {
+					save_curwin = /* Clicking in the window toolbar of a not-current window.
+							 * Make that window the current one and save Visual mode. */ModernizedCProgram.curwin;
+					VIsual_active = 0;
+					ModernizedCProgram.curwin = wp;
+					curbuf = ModernizedCProgram.curwin.getW_buffer();
+					ModernizedCProgram.check_cursor();
+				} 
+				ModernizedCProgram.execute_menu(((Object)0), generatedWb_menu, -1);
+				if (save_curwin != ((Object)0) && save_curwin.win_valid()) {
+					ModernizedCProgram.curwin = save_curwin;
+					curbuf = ModernizedCProgram.curwin.getW_buffer();
+					ModernizedCProgram.VIsual = save_visual;
+					VIsual_active = save_visual_active;
+					VIsual_select = save_visual_select;
+					ModernizedCProgram.VIsual_reselect = save_visual_reselect;
+					VIsual_mode = save_visual_mode;
+				} 
+				if (!wp.win_valid()) {
+					break;
+				} 
+			} 
+		}
+	}
+	public Object get_cursor_rel_lnum(Object lnum) {
+		 generatedW_cursor = this.getW_cursor();
+		Object generatedLnum = generatedW_cursor.getLnum();
+		linenr_T cursor = generatedLnum;
+		linenr_T retval = 0;
+		if (wp.hasAnyFolding()) {
+			if (lnum > cursor) {
+				while (lnum > cursor) {
+					(Object)ModernizedCProgram.hasFoldingWin(wp, lnum, lnum, ((Object)0), 1, ((Object)0/* if lnum and cursor are in the same fold,
+							 * now lnum <= cursor */));
+					if (lnum > cursor) {
+						retval++;
+					} 
+					lnum--;
+				}
+			}  else if (lnum < cursor) {
+				while (lnum < cursor) {
+					(Object)ModernizedCProgram.hasFoldingWin(wp, lnum, ((Object)0), lnum, 1, ((Object)0/* if lnum and cursor are in the same fold,
+							 * now lnum >= cursor */));
+					if (lnum < cursor) {
+						retval--;
+					} 
+					lnum/* else if (lnum == cursor)
+						 *     retval = 0;
+						 */++;
+				}
+			} 
+		} else {
+				retval = lnum - cursor;
+		} 
+		return retval/*
+		 * Make sure "pos.lnum" and "pos.col" are valid in "buf".
+		 * This allows for the col to be on the NUL byte.
+		 */;
+	}
+	public void check_cursor_col_win() {
+		colnr_T len = new colnr_T();
+		 generatedW_cursor = this.getW_cursor();
+		Object generatedCol = generatedW_cursor.getCol();
+		colnr_T oldcol = generatedCol;
+		Object generatedColadd = generatedW_cursor.getColadd();
+		colnr_T oldcoladd = generatedCol + generatedColadd;
+		file_buffer generatedW_buffer = this.getW_buffer();
+		Object generatedLnum = generatedW_cursor.getLnum();
+		len = (colnr_T)/*Error: Function owner not recognized*/strlen((byte)(generatedW_buffer.ml_get_buf(generatedLnum, 0)));
+		if (len == 0) {
+			generatedW_cursor.setCol(0);
+		}  else if (generatedCol >= len/* Allow cursor past end-of-line when:
+			 * - in Insert mode or restarting Insert mode
+			 * - in Visual mode and 'selection' isn't "old"
+			 * - 'virtualedit' is set */) {
+			if ((State & -1024) || restart_edit || (VIsual_active && ModernizedCProgram.p_sel != (byte)'o') || (ModernizedCProgram.ve_flags & 8) || ModernizedCProgram.virtual_active()) {
+				generatedW_cursor.setCol(len);
+			} else {
+					generatedW_cursor.setCol(len - 1);
+					if (/* Move the cursor to the head byte. */has_mbyte) {
+						ModernizedCProgram.mb_adjustpos(generatedW_buffer, generatedW_cursor);
+					} 
+			} 
+		}  else if (generatedCol < 0) {
+			generatedW_cursor.setCol(0/* If virtual editing is on, we can leave the cursor on the old position,
+			     * only we must set it to virtual.  But don't do it when at the end of the
+			     * line. */);
+		} 
+		if (oldcol == INT_MAX) {
+			generatedW_cursor.setColadd(0);
+		}  else if (ModernizedCProgram.ve_flags == 4) {
+			if (oldcoladd > generatedCol) {
+				generatedW_cursor.setColadd(oldcoladd - generatedCol);
+				if (generatedCol + 1 < len && generatedColadd > 0) {
+					int cs;
+					int ce;
+					ModernizedCProgram.getvcol(win, generatedW_cursor, cs, ((Object)0), ce);
+					if (generatedColadd > ce - cs) {
+						generatedW_cursor.setColadd(ce - cs);
+					} 
+				} 
+			} else {
+					generatedW_cursor.setColadd(/* avoid weird number when there is a miscalculation or overflow */0/*
+					 * make sure curwin->w_cursor in on a valid character
+					 */);
+			} 
+		} 
+	}
+	public void gui_create_scrollbar(Object sb, int type) {
+		int sbar_ident = 0;
+		sb.setIdent(/* No check for too big, but would it happen? */sbar_ident++);
+		sb.setWp(wp);
+		sb.setType(type);
+		sb.setValue(0);
+		sb.setSize(1);
+		sb.setMax(1);
+		sb.setTop(0);
+		sb.setHeight(0);
+		sb.setWidth(0);
+		sb.setStatus_height(0);
+		ModernizedCProgram.gui_mch_create_scrollbar(sb, (wp == ((Object)0)) ? SBAR_HORIZ : SBAR_VERT/*
+		 * Find the scrollbar with the given index.
+		 */);
+	}
+	public void gui_do_scrollbar(int which, int enable) {
+		int midcol = ModernizedCProgram.curwin.getW_wincol() + ModernizedCProgram.curwin.getW_width() / /* TRUE to enable scrollbar */2;
+		int generatedW_wincol = this.getW_wincol();
+		int generatedW_width = this.getW_width();
+		int has_midcol = (generatedW_wincol <= midcol && generatedW_wincol + generatedW_width >= midcol);
+		if (ModernizedCProgram.gui.getWhich_scrollbars()[SBAR_RIGHT] != ModernizedCProgram.gui.getWhich_scrollbars()[/* Only enable scrollbars that contain the middle column of the current
+		     * window. */SBAR_LEFT]) {
+			if (!/* Scrollbars only on one side.  Don't enable scrollbars that don't
+				 * contain the middle column of the current window. */has_midcol) {
+				enable = 0;
+			} 
+		} else {
+				if (midcol > Columns / /* Scrollbars on both sides.  Don't enable scrollbars that neither
+					 * contain the middle column of the current window nor are on the far
+					 * side. */2) {
+					if (which == SBAR_LEFT ? generatedW_wincol != 0 : !has_midcol) {
+						enable = 0;
+					} 
+				} else {
+						if (which == SBAR_RIGHT ? generatedW_wincol + generatedW_width != Columns : !has_midcol) {
+							enable = 0;
+						} 
+				} 
+		} 
+		Object generatedW_scrollbars = this.getW_scrollbars();
+		ModernizedCProgram.gui_mch_enable_scrollbar(generatedW_scrollbars[which], enable/*
+		 * Scroll a window according to the values set in the globals current_scrollbar
+		 * and scrollbar_value.  Return TRUE if the cursor in the current window moved
+		 * or FALSE otherwise.
+		 */);
+	}
+	/* SBAR_LEFT or SBAR_RIGHT */
+	public window_S xy2win(int x, int y) {
+		int row;
+		int col;
+		win_T wp = new win_T();
+		row = /*Error: Function owner not recognized*/Y_2_ROW(y);
+		col = /*Error: Function owner not recognized*/X_2_COL(x);
+		if (row < 0 || col < /* before first window */0) {
+			return ((Object)0);
+		} 
+		wp = /*Error: Function owner not recognized*/mouse_find_win(row, col, 0);
+		if (wp == ((Object)0)) {
+			return ((Object)0);
+		} 
+		/* below status line */
+		return wp/*
+		 * ":gui" and ":gvim": Change from the terminal version to the GUI version.
+		 * File names may be given to redefine the args list.
+		 */;
+	}
+	/* Return values for gui_read_child_pipe */
+	/*
+	 * Position the info popup relative to the popup menu item.
+	 */
+	public void pum_position_info_popup() {
+		int col = ModernizedCProgram.pum_col + ModernizedCProgram.pum_width + 1;
+		int row = ModernizedCProgram.pum_row;
+		int botpos = .POPPOS_BOTLEFT;
+		this.setW_popup_pos(.POPPOS_TOPLEFT);
+		if (Columns - col < 20 && Columns - col < ModernizedCProgram.pum_col) {
+			col = ModernizedCProgram.pum_col - 1;
+			this.setW_popup_pos(.POPPOS_TOPRIGHT);
+			botpos = .POPPOS_BOTRIGHT;
+			this.setW_maxwidth(ModernizedCProgram.pum_col - 1);
+		} else {
+				this.setW_maxwidth(Columns - col + 1);
+		} 
+		Object generatedW_maxwidth = this.getW_maxwidth();
+		generatedW_maxwidth -= wp.popup_extra_width();
+		row -= wp.popup_top_extra();
+		Object generatedW_popup_flags = this.getW_popup_flags();
+		if (generatedW_popup_flags & -1024) {
+			if (ModernizedCProgram.pum_row < ModernizedCProgram.pum_win_row) {
+				row += ModernizedCProgram.pum_height;
+				this.setW_popup_pos(botpos);
+			} else {
+					row += 1;
+			} 
+		} else {
+				row += ModernizedCProgram.pum_selected - ModernizedCProgram.pum_first + 1;
+		} 
+		wp.popup_set_wantpos_rowcol(row, col/*
+		 * Set the index of the currently selected item.  The menu will scroll when
+		 * necessary.  When "n" is out of range don't scroll.
+		 * This may be repeated when the preview window is used:
+		 * "repeat" == 0: open preview window normally
+		 * "repeat" == 1: open preview window but don't set the size
+		 * "repeat" == 2: don't open preview window
+		 * Returns TRUE when the window was resized and the location of the popup menu
+		 * must be recomputed.
+		 */);
+	}
+	public void python_window_free() {
+		Object generatedW_python_ref = this.getW_python_ref();
+		if (generatedW_python_ref != ((Object)0)) {
+			WindowObject wp = generatedW_python_ref;
+			wp.setWin(((win_T)(true)));
+			this.setW_python_ref(((Object)0));
 		} 
 	}
 	public void diff_buf_adjust() {
@@ -7935,7 +9462,7 @@ public class window_S {
 		int i;
 		fromidx = frombuf.diff_buf_idx();
 		if (fromidx == 8) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.curtab.getTp_diff_invalid()) {
 			((Object)/* update after a big change */0).ex_diffupdate();
@@ -7957,7 +9484,7 @@ public class window_S {
 		} else {
 				toidx = generatedW_buffer.diff_buf_idx();
 				if (toidx == 8) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				towin.setW_topline(lnum + (generatedDf_lnum[toidx] - generatedDf_lnum[fromidx]));
 				if (lnum >= generatedDf_lnum[fromidx]) {
@@ -8009,7 +9536,7 @@ public class window_S {
 		 * This is called when 'diffopt' is changed.
 		 */));
 	}
-	public int diff_find_change(Object lnum, int startp, int endp) {
+	public int diff_find_change(Object lnum, Integer startp, Integer endp) {
 		/* first char of the change *//* last char of the change */char_u line_org = new char_u();
 		char_u line_new = new char_u();
 		int i;
@@ -8068,16 +9595,16 @@ public class window_S {
 					} 
 				}
 				if (has_mbyte) {
-					si_org -= .UNRECOGNIZEDFUNCTIONNAME(line_org, line_org + /* Move back to first byte of character in both lines (may
+					si_org -= /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(line_org, line_org + /* Move back to first byte of character in both lines (may
 							 * have "nn^" in line_org and "n^ in line_new). */si_org);
-					si_new -= .UNRECOGNIZEDFUNCTIONNAME(line_new, line_new + si_new);
+					si_new -= /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(line_new, line_new + si_new);
 				} 
 				if (startp > si_org) {
 					startp = si_org;
 				} 
 				if (line_org[si_org] != (byte)'\000' || line_new[si_new] != /* Search for end of difference, if any. */(byte)'\000') {
-					ei_org = (int).strlen((byte)(line_org));
-					ei_new = (int).strlen((byte)(line_new));
+					ei_org = (int)/*Error: Function owner not recognized*/strlen((byte)(line_org));
+					ei_new = (int)/*Error: Function owner not recognized*/strlen((byte)(line_new));
 					while (ei_org >= startp && ei_new >= si_new && ei_org >= 0 && ei_new >= 0) {
 						if (((ModernizedCProgram.diff_flags & -1024) && ((line_org[ei_org]) == (byte)' ' || (line_org[ei_org]) == (byte)'\t') && ((line_new[ei_new]) == (byte)' ' || (line_new[ei_new]) == (byte)'\t')) || ((ModernizedCProgram.diff_flags & -1024) && (((line_org[ei_org]) == (byte)' ' || (line_org[ei_org]) == (byte)'\t') || ((line_new[ei_new]) == (byte)' ' || (line_new[ei_new]) == (byte)'\t')))) {
 							while (ei_org >= startp && ((line_org[ei_org]) == (byte)' ' || (line_org[ei_org]) == (byte)'\t')) {
@@ -8089,8 +9616,8 @@ public class window_S {
 						} else {
 								p1 = line_org + ei_org;
 								p2 = line_new + ei_new;
-								p1 -= .UNRECOGNIZEDFUNCTIONNAME(line_org, p1);
-								p2 -= .UNRECOGNIZEDFUNCTIONNAME(line_new, p2);
+								p1 -= /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(line_org, p1);
+								p2 -= /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(line_new, p2);
 								if (!ModernizedCProgram.diff_equal_char(p1, p2, l)) {
 									break;
 								} 
@@ -8192,1319 +9719,141 @@ public class window_S {
 		 * Return FAIL if the line does not contain diff info.
 		 */;
 	}
-	public int match_delete(int id, int perr) {
-		Object generatedW_match_head = this.getW_match_head();
-		matchitem_T cur = generatedW_match_head;
-		matchitem_T prev = cur;
-		int rtype = 35;
-		if (id < 1) {
-			if (perr == 1) {
-				ModernizedCProgram.semsg(((byte)("E802: Invalid ID: %d (must be greater than or equal to 1)")), id);
+	public int current_win_nr() {
+		win_T wp = new win_T();
+		int nr = 0;
+		window_S generatedW_next = wp.getW_next();
+		for (wp = ModernizedCProgram.firstwin; wp != ((Object)0); wp = generatedW_next) {
+			++nr;
+			if (wp == win) {
+				break;
 			} 
-			return -1;
-		} 
-		int generatedId = cur.getId();
-		matchitem generatedNext = cur.getNext();
-		while (cur != ((Object)0) && generatedId != id) {
-			prev = cur;
-			cur = generatedNext;
 		}
-		if (cur == ((Object)0)) {
-			if (perr == 1) {
-				ModernizedCProgram.semsg(((byte)("E803: ID not found: %d")), id);
-			} 
-			return -1;
-		} 
-		if (cur == prev) {
-			this.setW_match_head(generatedNext);
-		} else {
-				prev.setNext(generatedNext);
-		} 
-		 generatedMatch = cur.getMatch();
-		Object generatedRegprog = generatedMatch.getRegprog();
-		generatedRegprog.vim_regfree();
-		Object generatedPattern = cur.getPattern();
-		ModernizedCProgram.vim_free(generatedPattern);
-		posmatch generatedPos = cur.getPos();
-		Object generatedToplnum = generatedPos.getToplnum();
+		return nr;
+	}
+	public int before_quit_autocmds(int quit_all, int forceit) {
 		file_buffer generatedW_buffer = this.getW_buffer();
-		int generatedB_mod_set = generatedW_buffer.getB_mod_set();
-		Object generatedB_mod_top = generatedW_buffer.getB_mod_top();
-		Object generatedB_mod_bot = generatedW_buffer.getB_mod_bot();
-		Object generatedBotlnum = generatedPos.getBotlnum();
-		if (generatedToplnum != 0) {
-			if (generatedB_mod_set) {
-				if (generatedB_mod_top > generatedToplnum) {
-					generatedW_buffer.setB_mod_top(generatedToplnum);
-				} 
-				if (generatedB_mod_bot < generatedBotlnum) {
-					generatedW_buffer.setB_mod_bot(generatedBotlnum);
-				} 
-			} else {
-					generatedW_buffer.setB_mod_set(1);
-					generatedW_buffer.setB_mod_top(generatedToplnum);
-					generatedW_buffer.setB_mod_bot(generatedBotlnum);
-					generatedW_buffer.setB_mod_xlines(0);
-			} 
-			rtype = 10;
+		generatedW_buffer.apply_autocmds(auto_event.EVENT_QUITPRE, ((Object)0), ((Object)0), 0)// Bail out when autocommands closed the window.;// Bail out when autocommands closed the window.
+		int generatedB_nwindows = generatedW_buffer.getB_nwindows();
+		int generatedB_locked = generatedW_buffer.getB_locked();
+		// Refuse to quit when the buffer in the last window is being closed (can// only happen in autocommands).if (!wp.win_valid() || ModernizedCProgram.curbuf_locked() || (generatedB_nwindows == 1 && generatedB_locked > 0)) {
+			return 1;
 		} 
-		ModernizedCProgram.vim_free(cur);
-		wp.redraw_win_later(rtype);
+		if (quit_all || (ModernizedCProgram.check_more(0, forceit) == 1 && ModernizedCProgram.only_one_window())) {
+			curbuf.apply_autocmds(auto_event.EVENT_EXITPRE, ((Object)0), ((Object)0), 0);
+			if (!wp.win_valid() || ModernizedCProgram.curbuf_locked() || (generatedB_nwindows == 1 && generatedB_locked > 0)) {
+				return 1;
+			} 
+		} 
 		return 0/*
-		 * Delete all matches in the match list of window 'wp'.
+		 * ":quit": quit current window, quit Vim if the last window is closed.
+		 * ":{nr}quit": quit window {nr}
+		 * Also used when closing a terminal window that's the last one.
 		 */;
 	}
-	public void clear_matches() {
-		matchitem_T m = new matchitem_T();
-		Object generatedW_match_head = this.getW_match_head();
-		while (generatedW_match_head != ((Object)0)) {
-			m = generatedW_match_head.getNext();
-			generatedW_match_head.getMatch().getRegprog().vim_regfree();
-			ModernizedCProgram.vim_free(generatedW_match_head.getPattern());
-			ModernizedCProgram.vim_free(generatedW_match_head);
-			this.setW_match_head(m);
-		}
-		wp.redraw_win_later(35/*
-		 * Get match from ID 'id' in window 'wp'.
-		 * Return NULL if match not found.
-		 */);
-	}
-	public void win_redr_status(int ignore_pum) {
-		int row;
-		char_u p = new char_u();
-		int len;
-		int fillchar;
-		int attr;
-		int this_ru_col;
-		int busy = 0;
-		// It's possible to get here recursively when 'statusline' (indirectly)
-		// invokes ":redrawstatus".  Simply ignore the call then.if (busy) {
-			return ;
-		} 
-		busy = 1;
-		this.setW_redr_status(0);
-		int generatedW_status_height = this.getW_status_height();
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_stl = generatedW_onebuf_opt.getWo_stl();
+	public int editing_arg_idx() {
+		int generatedW_arg_idx = this.getW_arg_idx();
+		arglist generatedW_alist = (win).getW_alist();
+		growarray generatedAl_ga = generatedW_alist.getAl_ga();
+		int generatedGa_len = generatedAl_ga.getGa_len();
 		file_buffer generatedW_buffer = this.getW_buffer();
-		Object generatedWo_pvw = generatedW_onebuf_opt.getWo_pvw();
-		int generatedB_p_ro = generatedW_buffer.getB_p_ro();
-		int generatedW_width = this.getW_width();
-		int generatedW_winrow = this.getW_winrow();
-		Object generatedW_winbar_height = this.getW_winbar_height();
-		int generatedW_height = this.getW_height();
-		int generatedW_wincol = this.getW_wincol();
-		if (generatedW_status_height == 0) {
-			redraw_cmdline = 1;
-		}  else if (!.redrawing() || (!ignore_pum && ModernizedCProgram.pum_visible())) {
-			this.setW_redr_status(1);
-		}  else if (p_stl != (byte)'\000' || generatedWo_stl != (byte)'\000') {
-			wp.redraw_custom_statusline();
-		} else {
-				fillchar = .fillchar_status(attr, wp);
-				.get_trans_bufname(generatedW_buffer);
-				p = ModernizedCProgram.NameBuff;
-				len = (int).strlen((byte)(p));
-				if (generatedW_buffer.bt_help() || generatedWo_pvw || generatedW_buffer.bufIsChanged() || generatedB_p_ro) {
-					(p + len++) = (byte)' ';
-				} 
-				if (generatedW_buffer.bt_help()) {
-					.strcpy((byte)(p + len), (byte)(((byte)("[Help]"))));
-					len += (int).strlen((byte)(p + len));
-				} 
-				if (generatedWo_pvw) {
-					.strcpy((byte)(p + len), (byte)(((byte)("[Preview]"))));
-					len += (int).strlen((byte)(p + len));
-				} 
-				if (generatedW_buffer.bufIsChanged()) {
-					.strcpy((byte)(p + len), (byte)("[+]"));
-					len += 3;
-				} 
-				if (generatedB_p_ro) {
-					.strcpy((byte)(p + len), (byte)(((byte)("[RO]"))));
-					len += (int).strlen((byte)(p + len));
-				} 
-				this_ru_col = ModernizedCProgram.ru_col - (Columns - generatedW_width);
-				if (this_ru_col < (generatedW_width + 1) / 2) {
-					this_ru_col = (generatedW_width + 1) / 2;
-				} 
-				if (this_ru_col <= 1) {
-					p = (char_u)"<";
-					len = 1;
-				}  else if (has_mbyte) {
-					int clen = 0;
-					int i;
-					clen = ModernizedCProgram.mb_string2cells(p, -1);
-					for (i = 0; p[i] != (byte)'\000' && clen >= this_ru_col - 1; i += .UNRECOGNIZEDFUNCTIONNAME(p + i)) {
-						clen -= .UNRECOGNIZEDFUNCTIONNAME(p + i);
-					}
-					len = clen;
-					if (i > 0) {
-						p = p + i - 1;
-						p = (byte)'<';
-						++len;
-					} 
-				}  else if (len > this_ru_col - 1) {
-					p += len - (this_ru_col - 1);
-					p = (byte)'<';
-					len = this_ru_col - 1;
-				} 
-				row = (generatedW_winrow + generatedW_winbar_height) + generatedW_height;
-				.screen_puts(p, row, generatedW_wincol, attr);
-				.screen_fill(row, row + 1, len + generatedW_wincol, this_ru_col + generatedW_wincol, fillchar, fillchar, attr);
-				if (.get_keymap_str(wp, (char_u)"<%s>", ModernizedCProgram.NameBuff, 1024) && (int)(this_ru_col - len) > (int)(.strlen((byte)(ModernizedCProgram.NameBuff)) + 1)) {
-					.screen_puts(ModernizedCProgram.NameBuff, row, (int)(this_ru_col - .strlen((byte)(ModernizedCProgram.NameBuff)) - 1 + generatedW_wincol), attr);
-				} 
-				wp.win_redr_ruler(1, ignore_pum);
-		} 
-		int generatedW_vsep_width = this.getW_vsep_width();
-		if (generatedW_vsep_width != 0 && generatedW_status_height != 0 && .redrawing()) {
-			if (.stl_connected(wp)) {
-				fillchar = .fillchar_status(attr, wp);
-			} else {
-					fillchar = .fillchar_vsep(attr);
+		int generatedB_fnum = generatedW_buffer.getB_fnum();
+		Object generatedGa_data = generatedAl_ga.getGa_data();
+		Object[] generatedB_ffname = generatedW_buffer.getB_ffname();
+		return !(generatedW_arg_idx >= (generatedGa_len) || (generatedB_fnum != ((aentry_T)generatedGa_data)[generatedW_arg_idx].getAe_fnum() && (generatedB_ffname == ((Object)0) || !(ModernizedCProgram.fullpathcmp(((aentry_T)generatedGa_data)[generatedW_arg_idx].alist_name(), generatedB_ffname, 1, 1) & 1/*
+		 * Check if window "win" is editing the w_arg_idx file in its argument list.
+		 */))));
+	}
+	public void check_arg_idx() {
+		arglist generatedW_alist = (win).getW_alist();
+		growarray generatedAl_ga = generatedW_alist.getAl_ga();
+		int generatedGa_len = generatedAl_ga.getGa_len();
+		int generatedW_arg_idx = this.getW_arg_idx();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		int generatedB_fnum = generatedW_buffer.getB_fnum();
+		Object generatedGa_data = generatedAl_ga.getGa_data();
+		Object[] generatedB_ffname = generatedW_buffer.getB_ffname();
+		if ((generatedGa_len) > 1 && !win.editing_arg_idx()) {
+			this.setW_arg_idx_invalid(1);
+			if (generatedW_arg_idx != (generatedGa_len) - 1 && arg_had_last == 0 && generatedW_alist == ModernizedCProgram.global_alist && (generatedGa_len) > 0 && generatedW_arg_idx < (generatedGa_len) && (generatedB_fnum == ((aentry_T)generatedGa_data)[(generatedGa_len) - 1].getAe_fnum() || (generatedB_ffname != ((Object)0) && (ModernizedCProgram.fullpathcmp(((aentry_T)generatedGa_data)[(generatedGa_len) - 1].alist_name(), generatedB_ffname, 1, 1) & 1)))) {
+				arg_had_last = 1;
 			} 
-			.screen_putchar(fillchar, (generatedW_winrow + generatedW_winbar_height) + generatedW_height, (generatedW_wincol + generatedW_width), attr);
+		} else {
+				this.setW_arg_idx_invalid(0);
+				if (generatedW_arg_idx == (generatedGa_len) - 1 && generatedW_alist == ModernizedCProgram.global_alist) {
+					arg_had_last = 1/*
+					 * ":args", ":argslocal" and ":argsglobal".
+					 */;
+				} 
 		} 
-		busy = 0/*
-		 * Redraw the status line according to 'statusline' and take care of any
-		 * errors encountered.
-		 */;
+		// We are not editing the current entry in the argument list.
 	}
-	public void redraw_custom_statusline() {
-		int entered = 0;
-		int saved_did_emsg = ModernizedCProgram.did_emsg;
-		// When called recursively return.  This can happen when the statusline
-		// contains an expression that triggers a redraw.if (entered) {
-			return ;
-		} 
-		entered = 1;
-		ModernizedCProgram.did_emsg = 0;
-		.win_redr_custom(wp, 0);
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_stl = generatedW_onebuf_opt.getWo_stl();
-		if (ModernizedCProgram.did_emsg) {
-			ModernizedCProgram.set_string_option_direct((char_u)"statusline", -1, (char_u)"", 1 | (generatedWo_stl != (byte)'\000' ? 4 : 2), -5);
-		} 
-		// When there is an error disable the statusline, otherwise the
-		ModernizedCProgram.did_emsg |=  saved_did_emsg;
-		entered = 0/*
-		 * Show current status info in ruler and various other places
-		 * If always is FALSE, only show ruler if position has changed.
-		 */;
-	}
-	/*
-	 * Based on the current value of curwin->w_topline, transfer a screenfull
-	 * of stuff from Filemem to ScreenLines[], and update curwin->w_botline.
-	 * Return OK when the screen was updated, FAIL if it was not done.
-	 */
-	public void win_redr_ruler(int always, int ignore_pum) {
-		char_u[] buffer = new char_u();
-		int row;
-		int fillchar;
-		int attr;
-		int empty_line = 0;
-		colnr_T virtcol = new colnr_T();
-		int i;
-		size_t len = new size_t();
-		int o;
-		int this_ru_col;
-		int off = 0;
-		int width;
-		// If 'ruler' off or redrawing disabled, don't do anythingif (!p_ru) {
-			return ;
-		} 
+	public void buflist_altfpos() {
 		 generatedW_cursor = this.getW_cursor();
 		Object generatedLnum = generatedW_cursor.getLnum();
+		Object generatedCol = generatedW_cursor.getCol();
+		ModernizedCProgram.buflist_setfpos(curbuf, win, generatedLnum, generatedCol, 1/*
+		 * Return TRUE if 'ffname' is not the same file as current file.
+		 * Fname must have a full path (expanded by mch_FullName()).
+		 */);
+	}
+	/*
+	 * Get relative cursor position in window into "buf[buflen]", in the form 99%,
+	 * using "Top", "Bot" or "All" when appropriate.
+	 */
+	public void get_rel_pos(Object buf, int buflen) {
+		/* number of lines above window */long above;
+		/* number of lines below window */long below;
+		if (buflen < /* need at least 3 chars for writing */3) {
+			return /*Error: Unsupported expression*/;
+		} 
+		Object generatedW_topline = this.getW_topline();
+		above = generatedW_topline - 1;
+		Object generatedW_topfill = this.getW_topfill();
+		above += wp.diff_check_fill(generatedW_topline) - generatedW_topfill;
+		if (generatedW_topline == 1 && generatedW_topfill >= 1) {
+			above = /* All buffer lines are displayed and there is an
+					     * indication of filler lines, that can be considered
+					     * seeing all lines. */0;
+		} 
 		file_buffer generatedW_buffer = this.getW_buffer();
 		memline generatedB_ml = generatedW_buffer.getB_ml();
 		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
-		if (generatedLnum > generatedMl_line_count) {
-			return ;
-		} 
-		// the (long) mode message.if (wp == ModernizedCProgram.lastwin && ModernizedCProgram.lastwin.getW_status_height() == 0) {
-			if (edit_submode != ((Object)0)) {
-				return ;
-			} 
-		} 
-		// Except when the popup menu will be redrawn anyway.if (!ignore_pum && ModernizedCProgram.pum_visible()) {
-			return ;
-		} 
-		if (p_ruf) {
-			int save_called_emsg = ModernizedCProgram.called_emsg;
-			ModernizedCProgram.called_emsg = 0;
-			.win_redr_custom(wp, 1);
-			if (ModernizedCProgram.called_emsg) {
-				ModernizedCProgram.set_string_option_direct((char_u)"rulerformat", -1, (char_u)"", 1, -5);
-			} 
-			ModernizedCProgram.called_emsg |=  save_called_emsg;
-			return ;
-		} 
-		if (!(State & /*
-		     * Check if not in Insert mode and the line is empty (will show "0-1").
-		     */-1024) && generatedW_buffer.ml_get_buf(generatedLnum, 0) == (byte)'\000') {
-			empty_line = 1/*
-			     * Only draw the ruler when something changed.
-			     */;
-		} 
-		wp.validate_virtcol_win();
-		Object generatedCol = generatedW_cursor.getCol();
-		Object generatedW_virtcol = this.getW_virtcol();
-		Object generatedW_ru_virtcol = this.getW_ru_virtcol();
-		Object generatedColadd = generatedW_cursor.getColadd();
-		Object generatedW_topline = this.getW_topline();
-		Object generatedW_ru_topline = this.getW_ru_topline();
-		Object generatedW_ru_line_count = this.getW_ru_line_count();
-		Object generatedW_topfill = this.getW_topfill();
-		Object generatedW_ru_topfill = this.getW_ru_topfill();
-		Object generatedW_ru_empty = this.getW_ru_empty();
-		int generatedW_status_height = this.getW_status_height();
-		int generatedW_winrow = this.getW_winrow();
-		Object generatedW_winbar_height = this.getW_winbar_height();
-		int generatedW_height = this.getW_height();
-		int generatedW_wincol = this.getW_wincol();
-		int generatedW_width = this.getW_width();
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_list = generatedW_onebuf_opt.getWo_list();
-		int generatedMl_flags = generatedB_ml.getMl_flags();
-		if (redraw_cmdline || always || generatedLnum != generatedLnum || generatedCol != generatedCol || generatedW_virtcol != generatedW_ru_virtcol || generatedColadd != generatedColadd || generatedW_topline != generatedW_ru_topline || generatedMl_line_count != generatedW_ru_line_count || generatedW_topfill != generatedW_ru_topfill || empty_line != generatedW_ru_empty) {
-			ModernizedCProgram.cursor_off();
-			if (generatedW_status_height) {
-				row = (generatedW_winrow + generatedW_winbar_height) + generatedW_height;
-				fillchar = .fillchar_status(attr, wp);
-				off = generatedW_wincol;
-				width = generatedW_width;
-			} else {
-					row = ModernizedCProgram.Rows - 1;
-					fillchar = (byte)' ';
-					attr = 0;
-					width = Columns;
-					off = 0;
-			} 
-			virtcol = generatedW_virtcol;
-			if (generatedWo_list && lcs_tab1 == (byte)'\000') {
-				generatedW_onebuf_opt.setWo_list(0);
-				ModernizedCProgram.getvvcol(wp, generatedW_cursor, ((Object)0), virtcol, ((Object)0));
-				generatedW_onebuf_opt.setWo_list(1/*
-					 * Some sprintfs return the length, some return a pointer.
-					 * To avoid portability problems we use strlen() here.
-					 */);
-			} 
-			ModernizedCProgram.vim_snprintf((byte)buffer, 70, "%ld,", (generatedMl_flags & 1) ? -1024 : (long)(generatedLnum));
-			len = .strlen((byte)(buffer));
-			ModernizedCProgram.col_print(buffer + len, 70 - len, empty_line ? 0 : (int)generatedCol + 1, (int)virtcol + 1/*
-				 * Add a "50%" if there is room for it.
-				 * On the last line, don't print in the last column (scrolls the
-				 * screen up on some terminals).
-				 */);
-			i = (int).strlen((byte)(buffer));
-			wp.get_rel_pos(buffer + i + 1, 70 - i - 1);
-			o = i + ModernizedCProgram.vim_strsize(buffer + i + 1);
-			if (generatedW_status_height == 0) {
-				++o;
-			} 
-			this_ru_col = ModernizedCProgram.ru_col - (Columns - width);
-			if (this_ru_col < 0) {
-				this_ru_col = 0;
-			} 
-			if (this_ru_col < (width + 1) / 2) {
-				this_ru_col = (width + 1) / 2;
-			} 
-			if (this_ru_col + o < width) {
-				while (this_ru_col + o < width && 70 > i + 4) {
-					if (has_mbyte) {
-						i += .UNRECOGNIZEDFUNCTIONNAME(fillchar, buffer + i);
-					} else {
-							buffer[i++] = fillchar;
-					} 
-					++o;
-				}
-				wp.get_rel_pos(buffer + i, 70 - i);
-			} 
-			if (has_mbyte) {
-				o = 0;
-				for (i = 0; buffer[i] != (byte)'\000'; i += .UNRECOGNIZEDFUNCTIONNAME(buffer + i)) {
-					o += .UNRECOGNIZEDFUNCTIONNAME(buffer + i);
-					if (this_ru_col + o > width) {
-						buffer[i] = (byte)'\000';
-						break;
-					} 
-				}
-			}  else if (this_ru_col + (int).strlen((byte)(buffer)) > width) {
-				buffer[width - this_ru_col] = (byte)'\000';
-			} 
-			.screen_puts(buffer, row, this_ru_col + off, attr);
-			i = redraw_cmdline;
-			.screen_fill(row, row + 1, this_ru_col + off + (int).strlen((byte)(buffer)), (int)(off + width), fillchar, fillchar, attr);
-			redraw_cmdline = i;
-			this.setW_ru_cursor(generatedW_cursor);
-			this.setW_ru_virtcol(generatedW_virtcol);
-			this.setW_ru_empty(empty_line);
-			this.setW_ru_topline(generatedW_topline);
-			this.setW_ru_line_count(generatedMl_line_count);
-			this.setW_ru_topfill(generatedW_topfill);
-		} 
-	}
-	public int text_to_screenline(Object text, int col) {
-		int off = (int)(current_ScreenLine - ScreenLines);
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_rl = generatedW_onebuf_opt.getWo_rl();
-		int generatedW_width = this.getW_width();
-		if (has_mbyte) {
-			int cells;
-			int u8c;
-			int[] u8cc = new int[6];
-			int i;
-			int idx;
-			int c_len;
-			char_u p = new char_u();
-			int prev_c = 0;
-			int prev_c1 = 0;
-			if (generatedWo_rl) {
-				idx = off;
-			} else {
-					idx = off + col;
-			} 
-			for (p = text; p != (byte)'\000'; ) {
-				cells = .UNRECOGNIZEDFUNCTIONNAME(p);
-				c_len = .UNRECOGNIZEDFUNCTIONNAME(p);
-				if (col + cells > generatedW_width - (generatedWo_rl ? col : 0)) {
-					break;
-				} 
-				ScreenLines[idx] = p;
-				if (enc_utf8) {
-					u8c = ModernizedCProgram.utfc_ptr2char(p, u8cc);
-					if (p < -1024 && u8cc[0] == 0) {
-						ScreenLinesUC[idx] = 0;
-						prev_c = u8c;
-					} else {
-							if (p_arshape && !p_tbidi && (((u8c) & -1024) == -1024)) {
-								int pc;
-								int pc1;
-								int nc;
-								int[] pcc = new int[6];
-								int firstbyte = p;
-								if (generatedWo_rl) {
-									pc = prev_c;
-									pc1 = prev_c1;
-									nc = ModernizedCProgram.utf_ptr2char(p + c_len);
-									prev_c1 = u8cc[0];
-								} else {
-										pc = ModernizedCProgram.utfc_ptr2char(p + c_len, pcc);
-										nc = prev_c;
-										pc1 = pcc[0];
-								} 
-								prev_c = u8c;
-								u8c = ModernizedCProgram.arabic_shape(u8c, firstbyte, u8cc[0], pc, pc1, nc);
-								ScreenLines[idx] = firstbyte;
-							} else {
-									prev_c = u8c;
-							} 
-							ScreenLinesUC[idx] = u8c;
-							for (i = 0; i < Screen_mco; ++i) {
-								ModernizedCProgram.ScreenLinesC[i][idx] = u8cc[i];
-								if (u8cc[i] == 0) {
-									break;
-								} 
-							}
-					} 
-					if (cells > 1) {
-						ScreenLines[idx + 1] = 0;
-					} 
-				}  else if (enc_dbcs == 9932 && p == -1024) {
-					ScreenLines2[idx] = p[1];
-				}  else if (cells > 1) {
-					ScreenLines[idx + 1] = p[1];
-				} 
-				col += cells;
-				idx += cells;
-				p += c_len;
-			}
-		} else {
-				int len = (int).strlen((byte)(text));
-				if (len > generatedW_width - col) {
-					len = generatedW_width - col;
-				} 
-				if (len > 0) {
-					if (generatedWo_rl) {
-						.memmove((byte)(current_ScreenLine), (byte)(text), (size_t)(len));
-					} else {
-							.memmove((byte)(current_ScreenLine + col), (byte)(text), (size_t)(len));
-					} 
-					col += len;
-				} 
-		} 
-		return col;
-	}
-	/*
-	 * Draw the window toolbar.
-	 */
-	public void redraw_win_toolbar() {
-		vimmenu_T menu = new vimmenu_T();
-		int item_idx = 0;
-		int item_count = 0;
-		int col = 0;
-		int next_col;
-		int off = (int)(current_ScreenLine - ScreenLines);
-		int fill_attr = ModernizedCProgram.syn_name2attr((char_u)"ToolbarLine");
-		int button_attr = ModernizedCProgram.syn_name2attr((char_u)"ToolbarButton");
-		Object generatedW_winbar_items = this.getW_winbar_items();
-		ModernizedCProgram.vim_free(generatedW_winbar_items);
-		Object generatedNext = menu.getNext();
-		Object generatedW_winbar = this.getW_winbar();
-		for (menu = generatedW_winbar.getChildren(); menu != ((Object)0); menu = generatedNext) {
-			++item_count;
-		}
-		this.setW_winbar_items((winbar_item_T)ModernizedCProgram.alloc_clear( * (item_count + 1)));
-		int generatedW_width = this.getW_width();
-		Object generatedName = menu.getName();
-		// TODO: use fewer spaces if there is not enough roomfor (menu = generatedW_winbar.getChildren(); menu != ((Object)0) && col < generatedW_width; menu = generatedNext) {
-			.space_to_screenline(off + col, fill_attr);
-			if (++col >= generatedW_width) {
-				break;
-			} 
-			if (col > 1) {
-				.space_to_screenline(off + col, fill_attr);
-				if (++col >= generatedW_width) {
-					break;
-				} 
-			} 
-			generatedW_winbar_items[item_idx].setWb_startcol(col);
-			.space_to_screenline(off + col, button_attr);
-			if (++col >= generatedW_width) {
-				break;
-			} 
-			next_col = wp.text_to_screenline(generatedName, col);
-			while (col < next_col) {
-				ScreenAttrs[off + col] = button_attr;
-				++col;
-			}
-			generatedW_winbar_items[item_idx].setWb_endcol(col);
-			generatedW_winbar_items[item_idx].setWb_menu(menu);
-			++item_idx;
-			if (col >= generatedW_width) {
-				break;
-			} 
-			.space_to_screenline(off + col, button_attr);
-			++col;
-		}
-		while (col < generatedW_width) {
-			.space_to_screenline(off + col, fill_attr);
-			++col;
-		}
-		// end marker// end markergeneratedW_winbar_items[item_idx].setWb_menu(((Object)0));
-		int generatedW_winrow = this.getW_winrow();
-		int generatedW_wincol = this.getW_wincol();
-		.screen_line(generatedW_winrow, generatedW_wincol, (int)generatedW_width, (int)generatedW_width, 0);
-	}
-	/* vi:set ts=8 sts=4 sw=4 noet:
-	 *
-	 * VIM - Vi IMproved	by Bram Moolenaar
-	 *
-	 * Do ":help uganda"  in Vim to read copying and usage conditions.
-	 * Do ":help credits" in Vim to see a list of people who contributed.
-	 * See README.txt for an overview of the Vim source code.
-	 */
-	/*
-	 * drawscreen.c: Code for updating all the windows on the screen.
-	 * This is the top level, drawline.c is the middle and screen.c the lower
-	 * level.
-	 *
-	 * update_screen() is the function that updates all windows and status lines.
-	 * It is called form the main loop when must_redraw is non-zero.  It may be
-	 * called from other places when an immediate screen update is needed.
-	 *
-	 * The part of the buffer that is displayed in a window is set with:
-	 * - w_topline (first buffer line in window)
-	 * - w_topfill (filler lines above the first line)
-	 * - w_leftcol (leftmost window cell in window),
-	 * - w_skipcol (skipped window cells of first line)
-	 *
-	 * Commands that only move the cursor around in a window, do not need to take
-	 * action to update the display.  The main loop will check if w_topline is
-	 * valid and update it (scroll the window) when needed.
-	 *
-	 * Commands that scroll a window change w_topline and must call
-	 * check_cursor() to move the cursor into the visible part of the window, and
-	 * call redraw_later(VALID) to have the window displayed by update_screen()
-	 * later.
-	 *
-	 * Commands that change text in the buffer must call changed_bytes() or
-	 * changed_lines() to mark the area that changed and will require updating
-	 * later.  The main loop will call update_screen(), which will update each
-	 * window that shows the changed buffer.  This assumes text above the change
-	 * can remain displayed as it is.  Text after the change may need updating for
-	 * scrolling, folding and syntax highlighting.
-	 *
-	 * Commands that change how a window is displayed (e.g., setting 'list') or
-	 * invalidate the contents of a window in another way (e.g., change fold
-	 * settings), must call redraw_later(NOT_VALID) to have the whole window
-	 * redisplayed by update_screen() later.
-	 *
-	 * Commands that change how a buffer is displayed (e.g., setting 'tabstop')
-	 * must call redraw_curbuf_later(NOT_VALID) to have all the windows for the
-	 * buffer redisplayed by update_screen() later.
-	 *
-	 * Commands that change highlighting and possibly cause a scroll too must call
-	 * redraw_later(SOME_VALID) to update the whole window but still use scrolling
-	 * to avoid redrawing everything.  But the length of displayed lines must not
-	 * change, use NOT_VALID then.
-	 *
-	 * Commands that move the window position must call redraw_later(NOT_VALID).
-	 * TODO: should minimize redrawing by scrolling when possible.
-	 *
-	 * Commands that change everything (e.g., resizing the screen) must call
-	 * redraw_all_later(NOT_VALID) or redraw_all_later(CLEAR).
-	 *
-	 * Things that are handled indirectly:
-	 * - When messages scroll the screen up, msg_scrolled will be set and
-	 *   update_screen() called to redraw.
-	 */
-	public void win_update() {
-		file_buffer generatedW_buffer = this.getW_buffer();
-		buf_T buf = generatedW_buffer;
-		int type;
-		// Below last row of the top area that needsint top_end = 0;
-		// updating.  0 when no top area updating.
-		// first row of the mid area that needsint mid_start = 999;
-		// updating.  999 when no mid area updating.
-		// Below last row of the mid area that needsint mid_end = 0;
-		// updating.  0 when no mid area updating.
-		// first row of the bot area that needsint bot_start = 999;
-		// updating.  999 when no bot area updating
-		// TRUE when scrolled down whenint scrolled_down = 0;
-		// w_topline got smaller a bit
-		// redraw above mod_topint top_to_mod = 0;
-		// current window row to displayint row;
-		// current buffer lnum to displaylinenr_T lnum = new linenr_T();
-		// current index in w_lines[]int idx;
-		// starting row of the current lineint srow;
-		// if TRUE, we hit the end of the fileint eof = 0;
-		// if TRUE, we finished the last lineint didline = 0;
-		int i;
-		long j;
-		// being called recursivelyint recursive = 0;
 		Object generatedW_botline = this.getW_botline();
-		int old_botline = generatedW_botline;
-		long fold_count;
-		// remember what happened to the previous line, to know if// check_visual_highlight() can be used
-		// didn't update a line// updated a normal line// updated a folded lineint did_update = 1;
-		// last parsed text linelinenr_T syntax_last_parsed = 0;
-		linenr_T mod_top = 0;
-		linenr_T mod_bot = 0;
-		int save_got_int;
-		proftime_T syntax_tm = new proftime_T();
-		int generatedW_redr_type = this.getW_redr_type();
-		type = generatedW_redr_type;
-		if (type == 40) {
-			this.setW_redr_status(1);
-			this.setW_lines_valid(0);
-		} 
-		int generatedW_height = this.getW_height();
-		Object generatedW_winbar_height = (wp).getW_winbar_height();
-		// Window is zero-height: nothing to draw.if (generatedW_height + generatedW_winbar_height == 0) {
-			this.setW_redr_type(0);
-			return ;
-		} 
-		int generatedW_width = this.getW_width();
-		// Window is zero-width: Only need to draw the separator.if (generatedW_width == 0) {
-			.draw_vsep_win(wp, 0);
-			this.setW_redr_type(0);
-			return ;
-		} 
-		// Draw the window toolbar, if there is one.// Draw the window toolbar, if there is one.ModernizedCProgram.init_search_hl(wp, screen_search_hl);
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_nu = generatedW_onebuf_opt.getWo_nu();
-		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
-		// Force redraw when width of 'number' or 'relativenumber' column// changes.// Force redraw when width of 'number' or 'relativenumber' column// changes.i = (generatedWo_nu || generatedWo_rnu) ? .number_width(wp) : 0;
-		Object generatedW_nrwidth = this.getW_nrwidth();
-		int generatedB_mod_set = buf.getB_mod_set();
-		long generatedB_mod_xlines = buf.getB_mod_xlines();
-		Object generatedW_redraw_top = this.getW_redraw_top();
-		Object generatedW_redraw_bot = this.getW_redraw_bot();
-		Object generatedB_mod_top = buf.getB_mod_top();
-		Object generatedB_s = buf.getB_s();
-		Object generatedB_mod_bot = buf.getB_mod_bot();
-		Object generatedRm = screen_search_hl.getRm();
-		Object generatedW_match_head = this.getW_match_head();
-		 generatedMatch = cur.getMatch();
-		Object generatedRegprog = generatedMatch.getRegprog();
-		matchitem generatedNext = cur.getNext();
-		Object generatedW_topline = this.getW_topline();
-		int generatedW_lines_valid = this.getW_lines_valid();
-		w_line generatedW_lines = this.getW_lines();
-		if (generatedW_nrwidth != i) {
-			type = 40;
-			this.setW_nrwidth(i);
-		}  else if (generatedB_mod_set && generatedB_mod_xlines != 0 && generatedW_redraw_top != 0) {
-			type = 40;
+		below = generatedMl_line_count - generatedW_botline + 1;
+		if (below <= 0) {
+			ModernizedCProgram.vim_strncpy(buf, (char_u)(above == 0 ? ((byte)("All")) : ((byte)("Bot"))), (size_t)(buflen - 1));
+		}  else if (above <= 0) {
+			ModernizedCProgram.vim_strncpy(buf, (char_u)((byte)("Top")), (size_t)(buflen - 1));
 		} else {
-				mod_top = generatedW_redraw_top;
-				if (generatedW_redraw_bot != 0) {
-					mod_bot = generatedW_redraw_bot + 1;
-				} else {
-						mod_bot = 0;
-				} 
-				if (generatedB_mod_set) {
-					if (mod_top == 0 || mod_top > generatedB_mod_top) {
-						mod_top = generatedB_mod_top;
-						if (wp.syntax_present()) {
-							mod_top -= generatedB_s.getB_syn_sync_linebreaks();
-							if (mod_top < 1) {
-								mod_top = 1;
-							} 
-						} 
-					} 
-					if (mod_bot == 0 || mod_bot < generatedB_mod_bot) {
-						mod_bot = generatedB_mod_bot;
-					} 
-					if (generatedRm.getRegprog() != ((Object)0) && generatedRm.getRegprog().re_multiline()) {
-						top_to_mod = 1;
-					} else {
-							matchitem_T cur = generatedW_match_head;
-							while (cur != ((Object)0)) {
-								if (generatedRegprog != ((Object)0) && generatedRegprog.re_multiline()) {
-									top_to_mod = 1;
-									break;
-								} 
-								cur = generatedNext;
-							}
-					} 
-				} 
-				if (mod_top != 0 && wp.hasAnyFolding()) {
-					linenr_T lnumt = new linenr_T();
-					linenr_T lnumb = new linenr_T();
-					lnumt = generatedW_topline;
-					lnumb = LONG_MAX;
-					for (i = 0; i < generatedW_lines_valid; ++i) {
-						if (generatedW_lines[i].getWl_valid()) {
-							if (generatedW_lines[i].getWl_lastlnum() < mod_top) {
-								lnumt = generatedW_lines[i].getWl_lastlnum() + 1;
-							} 
-							if (lnumb == LONG_MAX && generatedW_lines[i].getWl_lnum() >= mod_bot) {
-								lnumb = generatedW_lines[i].getWl_lnum();
-								if (.compute_foldcolumn(wp, 0) > 0) {
-									++lnumb;
-								} 
-							} 
-						} 
-					}
-					(Object)ModernizedCProgram.hasFoldingWin(wp, mod_top, mod_top, ((Object)0), 1, ((Object)0));
-					if (mod_top > lnumt) {
-						mod_top = lnumt;
-					} 
-					--mod_bot;
-					(Object)ModernizedCProgram.hasFoldingWin(wp, mod_bot, ((Object)0), mod_bot, 1, ((Object)0));
-					++mod_bot;
-					if (mod_bot < lnumb) {
-						mod_bot = lnumb;
-					} 
-				} 
-				if (mod_top != 0 && mod_top < generatedW_topline) {
-					if (mod_bot > generatedW_topline) {
-						mod_top = generatedW_topline;
-					}  else if (wp.syntax_present()) {
-						top_end = 1;
-					} 
-				} 
-				if (mod_top != 0 && generatedB_mod_xlines != 0 && generatedWo_nu) {
-					mod_bot = LONG_MAX;
-				} 
-		} 
-		// reset for next time// reset for next timethis.setW_redraw_top(0);
-		this.setW_redraw_bot(0)// When only displaying the lines at the top, set top_end.  Used when;// When only displaying the lines at the top, set top_end.  Used when
-		int generatedW_upd_rows = this.getW_upd_rows();
-		// window has scrolled down for msg_scrolled.if (type == 30) {
-			j = 0;
-			for (i = 0; i < generatedW_lines_valid; ++i) {
-				j += generatedW_lines[i].getWl_size();
-				if (j >= generatedW_upd_rows) {
-					top_end = j;
-					break;
-				} 
-			}
-			if (top_end == 0) {
-				type = 40;
-			} else {
-					type = 10;
-			} 
-		} 
-		// set "screen_cleared" to TRUE.  The special value MAYBE (which is still// non-zero and thus not FALSE) will indicate that screenclear() was not// called.if (screen_cleared) {
-			screen_cleared = 2;
-		} 
-		Object generatedW_botfill = this.getW_botfill();
-		Object generatedW_old_botfill = this.getW_old_botfill();
-		Object generatedW_topfill = this.getW_topfill();
-		Object generatedW_old_topfill = this.getW_old_topfill();
-		Object generatedWo_diff = generatedW_onebuf_opt.getWo_diff();
-		Object generatedW_popup_flags = (wp).getW_popup_flags();
-		// 2: wp->w_topline is below wp->w_lines[0].wl_lnum: may scroll up// 3: wp->w_topline is wp->w_lines[0].wl_lnum: find first entry in//    w_lines[] that needs updating.if ((type == 10 || type == 35 || type == 20 || type == 25) && !generatedW_botfill && !generatedW_old_botfill) {
-			if (mod_top != 0 && generatedW_topline == mod_top) {
-			}  else if (generatedW_lines[0].getWl_valid() && (generatedW_topline < generatedW_lines[0].getWl_lnum() || (generatedW_topline == generatedW_lines[0].getWl_lnum() && generatedW_topfill > generatedW_old_topfill))) {
-				if (wp.hasAnyFolding()) {
-					linenr_T ln = new linenr_T();
-					j = 0;
-					for (ln = generatedW_topline; ln < generatedW_lines[0].getWl_lnum(); ++ln) {
-						++j;
-						if (j >= generatedW_height - 2) {
-							break;
-						} 
-						(Object)ModernizedCProgram.hasFoldingWin(wp, ln, ((Object)0), ln, 1, ((Object)0));
-					}
-				} else {
-						j = generatedW_lines[0].getWl_lnum() - generatedW_topline;
-				} 
-				if (j < generatedW_height - 2) {
-					i = wp.plines_m_win(generatedW_topline, generatedW_lines[0].getWl_lnum() - 1);
-					if (generatedW_lines[0].getWl_lnum() != generatedW_topline) {
-						i += wp.diff_check_fill(generatedW_lines[0].getWl_lnum()) - generatedW_old_topfill;
-					} 
-					if (i < generatedW_height - 2) {
-						if (i > 0) {
-							.check_for_delay(0);
-						} 
-						if (.win_ins_lines(wp, 0, i, 0, wp == ModernizedCProgram.firstwin) == 1) {
-							if (generatedW_lines_valid != 0) {
-								top_end = i;
-								scrolled_down = 1;
-								if ((generatedW_lines_valid += j) > generatedW_height) {
-									this.setW_lines_valid(generatedW_height);
-								} 
-								for (idx = generatedW_lines_valid; idx - j >= 0; idx--) {
-									generatedW_lines[idx] = generatedW_lines[idx - j];
-								}
-								while (idx >= 0) {
-									generatedW_lines[idx--].setWl_valid(0);
-								}
-							} 
-						} else {
-								mid_start = 0;
-						} 
-					} else {
-							mid_start = 0;
-					} 
-				} else {
-						mid_start = 0;
-				} 
-			} else {
-					j = -1;
-					row = 0;
-					for (i = 0; i < generatedW_lines_valid; i++) {
-						if (generatedW_lines[i].getWl_valid() && generatedW_lines[i].getWl_lnum() == generatedW_topline) {
-							j = i;
-							break;
-						} 
-						row += generatedW_lines[i].getWl_size();
-					}
-					if (j == -1) {
-						mid_start = 0;
-					} else {
-							if (generatedW_lines[0].getWl_lnum() == generatedW_topline) {
-								row += generatedW_old_topfill;
-							} else {
-									row += wp.diff_check_fill(generatedW_topline);
-							} 
-							row -= generatedW_topfill;
-							if (row > 0) {
-								.check_for_delay(0);
-								if (.win_del_lines(wp, 0, row, 0, wp == ModernizedCProgram.firstwin, 0) == 1) {
-									bot_start = generatedW_height - row;
-								} else {
-										mid_start = 0;
-								} 
-							} 
-							if ((row == 0 || bot_start < 999) && generatedW_lines_valid != 0) {
-								bot_start = 0;
-								idx = 0;
-								for (; ; ) {
-									generatedW_lines[idx] = generatedW_lines[j];
-									if (row > 0 && bot_start + row + (int)generatedW_lines[j].getWl_size() > generatedW_height) {
-										this.setW_lines_valid(idx + 1);
-										break;
-									} 
-									bot_start += generatedW_lines[idx++].getWl_size();
-									if (++j >= generatedW_lines_valid) {
-										this.setW_lines_valid(idx);
-										break;
-									} 
-								}
-								if (generatedWo_diff && bot_start > 0) {
-									generatedW_lines[0].setWl_size(wp.plines_win_nofill(generatedW_topline, 1) + generatedW_topfill);
-								} 
-							} 
-					} 
-			} 
-			if (mid_start == 0) {
-				mid_end = generatedW_height;
-				if ((ModernizedCProgram.firstwin == ModernizedCProgram.lastwin) && !(generatedW_popup_flags != 0)) {
-					if (screen_cleared != 1) {
-						.screenclear();
-					} 
-					if (redraw_tabline) {
-						.draw_tabline();
-					} 
-				} 
-			} 
-			if (screen_cleared == 1) {
-				must_redraw = 0;
-			} 
-		} else {
-				mid_start = 0;
-				mid_end = generatedW_height;
-		} 
-		if (type == 35) {
-			mid_start = 0;
-			mid_end = generatedW_height;
-			type = 40;
-		} 
-		Object generatedW_old_cursor_lnum = this.getW_old_cursor_lnum();
-		byte generatedW_old_visual_mode = this.getW_old_visual_mode();
-		Object generatedW_old_visual_lnum = this.getW_old_visual_lnum();
-		Object generatedW_old_visual_col = this.getW_old_visual_col();
-		Object generatedWo_lbr = generatedW_onebuf_opt.getWo_lbr();
-		Object generatedW_old_cursor_fcol = this.getW_old_cursor_fcol();
-		Object generatedW_old_cursor_lcol = this.getW_old_cursor_lcol();
-		int generatedW_valid = this.getW_valid();
-		// check if we are updating or removing the inverted partif ((VIsual_active && buf == generatedW_buffer) || (generatedW_old_cursor_lnum != 0 && type != 40)) {
-			linenr_T from = new linenr_T();
-			linenr_T to = new linenr_T();
-			if (VIsual_active) {
-				if (VIsual_active && (VIsual_mode != generatedW_old_visual_mode || type == 25)) {
-					if (ModernizedCProgram.curwin.getW_cursor().getLnum() < ModernizedCProgram.VIsual.getLnum()) {
-						from = ModernizedCProgram.curwin.getW_cursor().getLnum();
-						to = ModernizedCProgram.VIsual.getLnum();
-					} else {
-							from = ModernizedCProgram.VIsual.getLnum();
-							to = ModernizedCProgram.curwin.getW_cursor().getLnum();
-					} 
-					if (generatedW_old_cursor_lnum < from) {
-						from = generatedW_old_cursor_lnum;
-					} 
-					if (generatedW_old_cursor_lnum > to) {
-						to = generatedW_old_cursor_lnum;
-					} 
-					if (generatedW_old_visual_lnum < from) {
-						from = generatedW_old_visual_lnum;
-					} 
-					if (generatedW_old_visual_lnum > to) {
-						to = generatedW_old_visual_lnum;
-					} 
-				} else {
-						if (ModernizedCProgram.curwin.getW_cursor().getLnum() < generatedW_old_cursor_lnum) {
-							from = ModernizedCProgram.curwin.getW_cursor().getLnum();
-							to = generatedW_old_cursor_lnum;
-						} else {
-								from = generatedW_old_cursor_lnum;
-								to = ModernizedCProgram.curwin.getW_cursor().getLnum();
-								if (from == 0) {
-									from = to;
-								} 
-						} 
-						if (ModernizedCProgram.VIsual.getLnum() != generatedW_old_visual_lnum || ModernizedCProgram.VIsual.getCol() != generatedW_old_visual_col) {
-							if (generatedW_old_visual_lnum < from && generatedW_old_visual_lnum != 0) {
-								from = generatedW_old_visual_lnum;
-							} 
-							if (generatedW_old_visual_lnum > to) {
-								to = generatedW_old_visual_lnum;
-							} 
-							if (ModernizedCProgram.VIsual.getLnum() < from) {
-								from = ModernizedCProgram.VIsual.getLnum();
-							} 
-							if (ModernizedCProgram.VIsual.getLnum() > to) {
-								to = ModernizedCProgram.VIsual.getLnum();
-							} 
-						} 
-				} 
-				if (VIsual_mode == 22) {
-					colnr_T fromc = new colnr_T();
-					colnr_T toc = new colnr_T();
-					int save_ve_flags = ModernizedCProgram.ve_flags;
-					if (generatedWo_lbr) {
-						ModernizedCProgram.ve_flags = 4;
-					} 
-					ModernizedCProgram.getvcols(wp, ModernizedCProgram.VIsual, ModernizedCProgram.curwin.getW_cursor(), fromc, toc);
-					ModernizedCProgram.ve_flags = save_ve_flags;
-					++toc;
-					if (ModernizedCProgram.curwin.getW_curswant() == INT_MAX) {
-						toc = INT_MAX;
-					} 
-					if (fromc != generatedW_old_cursor_fcol || toc != generatedW_old_cursor_lcol) {
-						if (from > ModernizedCProgram.VIsual.getLnum()) {
-							from = ModernizedCProgram.VIsual.getLnum();
-						} 
-						if (to < ModernizedCProgram.VIsual.getLnum()) {
-							to = ModernizedCProgram.VIsual.getLnum();
-						} 
-					} 
-					this.setW_old_cursor_fcol(fromc);
-					this.setW_old_cursor_lcol(toc);
-				} 
-			} else {
-					if (generatedW_old_cursor_lnum < generatedW_old_visual_lnum) {
-						from = generatedW_old_cursor_lnum;
-						to = generatedW_old_visual_lnum;
-					} else {
-							from = generatedW_old_visual_lnum;
-							to = generatedW_old_cursor_lnum;
-					} 
-			} 
-			if (from < generatedW_topline) {
-				from = generatedW_topline;
-			} 
-			if (generatedW_valid & -1024) {
-				if (from >= generatedW_botline) {
-					from = generatedW_botline - 1;
-				} 
-				if (to >= generatedW_botline) {
-					to = generatedW_botline - 1;
-				} 
-			} 
-			if (mid_start > 0) {
-				lnum = generatedW_topline;
-				idx = 0;
-				srow = 0;
-				if (scrolled_down) {
-					mid_start = top_end;
-				} else {
-						mid_start = 0;
-				} 
-				while (lnum < from && idx < generatedW_lines_valid) {
-					if (generatedW_lines[idx].getWl_valid()) {
-						mid_start += generatedW_lines[idx].getWl_size();
-					}  else if (!scrolled_down) {
-						srow += generatedW_lines[idx].getWl_size();
-					} 
-					++idx;
-					if (idx < generatedW_lines_valid && generatedW_lines[idx].getWl_valid()) {
-						lnum = generatedW_lines[idx].getWl_lnum();
-					} else {
-							++lnum;
-					} 
-				}
-				srow += mid_start;
-				mid_end = generatedW_height;
-				for (; idx < generatedW_lines_valid; ++idx) {
-					if (generatedW_lines[idx].getWl_valid() && generatedW_lines[idx].getWl_lnum() >= to + 1) {
-						mid_end = srow;
-						break;
-					} 
-					srow += generatedW_lines[idx].getWl_size();
-				}
-			} 
-		} 
-		if (VIsual_active && buf == generatedW_buffer) {
-			this.setW_old_visual_mode(VIsual_mode);
-			this.setW_old_cursor_lnum(ModernizedCProgram.curwin.getW_cursor().getLnum());
-			this.setW_old_visual_lnum(ModernizedCProgram.VIsual.getLnum());
-			this.setW_old_visual_col(ModernizedCProgram.VIsual.getCol());
-			this.setW_old_curswant(ModernizedCProgram.curwin.getW_curswant());
-		} else {
-				this.setW_old_visual_mode(0);
-				this.setW_old_cursor_lnum(0);
-				this.setW_old_visual_lnum(0);
-				this.setW_old_visual_col(0);
-		} 
-		// reset got_int, otherwise regexp won't work// reset got_int, otherwise regexp won't worksave_got_int = got_int;
-		got_int = 0;
-		// Set the time limit to 'redrawtime'.// Set the time limit to 'redrawtime'.ModernizedCProgram.profile_setlimit(p_rdt, syntax_tm);
-		ModernizedCProgram.syn_set_timeout(syntax_tm);
-		win_foldinfo.setFi_level(0);
-		// Draw the window toolbar, if there is one.// TODO: only when needed.if (wp.winbar_height() > 0) {
-			wp.redraw_win_toolbar();
-		} 
-		// Update all the window rows.// first entry in w_lines[].wl_size// Update all the window rows.// first entry in w_lines[].wl_sizeidx = 0;
-		row = 0;
-		srow = 0;
-		// first line shown in window// first line shown in windowlnum = generatedW_topline;
-		memline generatedB_ml = buf.getB_ml();
-		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
-		int generatedW_winrow = this.getW_winrow();
-		for (; ; ) {
-			if (row == generatedW_height) {
-				didline = 1;
-				break;
-			} 
-			if (lnum > generatedMl_line_count) {
-				eof = 1;
-				break;
-			} 
-			srow = row;
-			if (row < top_end || (row >= mid_start && row < mid_end) || top_to_mod || idx >= generatedW_lines_valid || (row + generatedW_lines[idx].getWl_size() > bot_start) || (mod_top != 0 && (lnum == mod_top || (lnum >= mod_top && (lnum < mod_bot || did_update == 3 || (did_update == 2 && wp.syntax_present() && ((wp.foldmethodIsSyntax() && wp.hasAnyFolding()) || ModernizedCProgram.syntax_check_changed(lnum))) || (generatedW_match_head != ((Object)0) && generatedB_mod_xlines != 0)))))) {
-				if (lnum == mod_top) {
-					top_to_mod = 0;
-				} 
-				if (lnum == mod_top && mod_bot != LONG_MAX && !(dollar_vcol >= 0 && mod_bot == mod_top + 1)) {
-					int old_rows = 0;
-					int new_rows = 0;
-					int xtra_rows;
-					linenr_T l = new linenr_T();
-					for (i = idx; i < generatedW_lines_valid; ++i) {
-						if (generatedW_lines[i].getWl_valid() && generatedW_lines[i].getWl_lnum() == mod_bot) {
-							break;
-						} 
-						old_rows += generatedW_lines[i].getWl_size();
-						if (generatedW_lines[i].getWl_valid() && generatedW_lines[i].getWl_lastlnum() + 1 == mod_bot) {
-							++i;
-							while (i < generatedW_lines_valid && !generatedW_lines[i].getWl_valid()) {
-								old_rows += generatedW_lines[i++].getWl_size();
-							}
-							break;
-						} 
-					}
-					if (i >= generatedW_lines_valid) {
-						bot_start = 0;
-					} else {
-							j = idx;
-							for (ModernizedCProgram.l = lnum; ModernizedCProgram.l < mod_bot; ++ModernizedCProgram.l) {
-								if (ModernizedCProgram.hasFoldingWin(wp, ModernizedCProgram.l, ((Object)0), ModernizedCProgram.l, 1, ((Object)0))) {
-									++new_rows;
-								}  else if (ModernizedCProgram.l == generatedW_topline) {
-									new_rows += wp.plines_win_nofill(ModernizedCProgram.l, 1) + generatedW_topfill;
-								} else {
-										new_rows += wp.plines_win(ModernizedCProgram.l, 1);
-								} 
-								++j;
-								if (new_rows > generatedW_height - row - 2) {
-									new_rows = 9999;
-									break;
-								} 
-							}
-							xtra_rows = new_rows - old_rows;
-							if (xtra_rows < 0) {
-								if (row - xtra_rows >= generatedW_height - 2) {
-									mod_bot = LONG_MAX;
-								} else {
-										.check_for_delay(0);
-										if (.win_del_lines(wp, row, -xtra_rows, 0, 0, 0) == 0) {
-											mod_bot = LONG_MAX;
-										} else {
-												bot_start = generatedW_height + xtra_rows;
-										} 
-								} 
-							}  else if (xtra_rows > 0) {
-								if (row + xtra_rows >= generatedW_height - 2) {
-									mod_bot = LONG_MAX;
-								} else {
-										.check_for_delay(0);
-										if (.win_ins_lines(wp, row + old_rows, xtra_rows, 0, 0) == 0) {
-											mod_bot = LONG_MAX;
-										}  else if (top_end > row + old_rows) {
-											top_end += xtra_rows;
-										} 
-								} 
-							} 
-							if (mod_bot != LONG_MAX && i != j) {
-								if (j < i) {
-									int x = row + new_rows;
-									for (; ; ) {
-										if (i >= generatedW_lines_valid) {
-											this.setW_lines_valid(j);
-											break;
-										} 
-										generatedW_lines[j] = generatedW_lines[i];
-										if (x + (int)generatedW_lines[j].getWl_size() > generatedW_height) {
-											this.setW_lines_valid(j + 1);
-											break;
-										} 
-										x += generatedW_lines[j++].getWl_size();
-										++i;
-									}
-									if (bot_start > x) {
-										bot_start = x;
-									} 
-								} else {
-										j -= i;
-										generatedW_lines_valid += j;
-										if (generatedW_lines_valid > generatedW_height) {
-											this.setW_lines_valid(generatedW_height);
-										} 
-										for (i = generatedW_lines_valid; i - j >= idx; --i) {
-											generatedW_lines[i] = generatedW_lines[i - j];
-										}
-										while (i >= idx) {
-											generatedW_lines[i].setWl_size(0);
-											generatedW_lines[i--].setWl_valid(0);
-										}
-								} 
-							} 
-					} 
-				} 
-				fold_count = ModernizedCProgram.foldedCount(wp, lnum, win_foldinfo);
-				if (fold_count != 0) {
-					ModernizedCProgram.fold_line(wp, fold_count, win_foldinfo, lnum, row);
-					++row;
-					--fold_count;
-					generatedW_lines[idx].setWl_folded(1);
-					generatedW_lines[idx].setWl_lastlnum(lnum + fold_count);
-					did_update = 3;
-				}  else if (idx < generatedW_lines_valid && generatedW_lines[idx].getWl_valid() && generatedW_lines[idx].getWl_lnum() == lnum && lnum > generatedW_topline && !(ModernizedCProgram.dy_flags & (-1024 | -1024)) && !(generatedW_popup_flags != 0) && srow + generatedW_lines[idx].getWl_size() > generatedW_height && wp.diff_check_fill(lnum) == 0) {
-					row = generatedW_height + 1;
-				} else {
-						ModernizedCProgram.prepare_search_hl(wp, screen_search_hl, lnum);
-						if (syntax_last_parsed != 0 && syntax_last_parsed + 1 < lnum && wp.syntax_present()) {
-							ModernizedCProgram.syntax_end_parsing(syntax_last_parsed + 1);
-						} 
-						row = wp.win_line(lnum, srow, generatedW_height, mod_top == 0, 0);
-						generatedW_lines[idx].setWl_folded(0);
-						generatedW_lines[idx].setWl_lastlnum(lnum);
-						did_update = 2;
-						syntax_last_parsed = lnum;
-				} 
-				generatedW_lines[idx].setWl_lnum(lnum);
-				generatedW_lines[idx].setWl_valid(1);
-				if (row > generatedW_height || row + generatedW_winrow >= ModernizedCProgram.Rows) {
-					if (dollar_vcol == -1) {
-						generatedW_lines[idx].setWl_size(wp.plines_win(lnum, 1));
-					} 
-					++idx;
-					break;
-				} 
-				if (dollar_vcol == -1) {
-					generatedW_lines[idx].setWl_size(row - srow);
-				} 
-				++idx;
-				lnum += fold_count + 1;
-			} else {
-					if (generatedWo_rnu) {
-						fold_count = ModernizedCProgram.foldedCount(wp, lnum, win_foldinfo);
-						if (fold_count != 0) {
-							ModernizedCProgram.fold_line(wp, fold_count, win_foldinfo, lnum, row);
-						} else {
-								(Object)wp.win_line(lnum, srow, generatedW_height, 1, 1);
-						} 
-					} 
-					row += generatedW_lines[idx++].getWl_size();
-					if (row > generatedW_height) {
-						break;
-					} 
-					lnum = generatedW_lines[idx - 1].getWl_lastlnum() + 1;
-					did_update = 1;
-			} 
-			if (lnum > generatedMl_line_count) {
-				eof = 1;
-				break;
-			} 
-		}// stop updating when reached the end of the window (check for _past_
-		// Rewrite the character at the end of the screen line.if (ModernizedCProgram.use_vtp()) {
-			int i;
-			for (i = 0; i < ModernizedCProgram.Rows; ++i) {
-				if (enc_utf8) {
-					if (.UNRECOGNIZEDFUNCTIONNAME(LineOffset[i] + Columns - 2, LineOffset[i] + screen_Columns) > 1) {
-						.screen_draw_rectangle(i, Columns - 2, 1, 2, 0);
-					} else {
-							.screen_draw_rectangle(i, Columns - 1, 1, 1, 0);
-					} 
-				} else {
-						.screen_char(LineOffset[i] + Columns - 1, i, Columns - 1);
-				} 
-			}
-		} 
-		if (idx > generatedW_lines_valid) {
-			this.setW_lines_valid(idx);
-		} 
-		// Let the syntax stuff know we stop parsing here.if (syntax_last_parsed != 0 && wp.syntax_present()) {
-			ModernizedCProgram.syntax_end_parsing(syntax_last_parsed + 1);
-		} 
-		// If we didn't hit the end of the file, and we didn't finish the last// line we were working on, then the line didn't fit.// If we didn't hit the end of the file, and we didn't finish the last// line we were working on, then the line didn't fit.this.setW_empty_rows(0);
-		this.setW_filler_rows(0);
-		int generatedW_wincol = this.getW_wincol();
-		if (!eof && !didline) {
-			if (lnum == generatedW_topline) {
-				this.setW_botline(lnum + 1);
-			}  else if (wp.diff_check_fill(lnum) >= generatedW_height - srow) {
-				this.setW_botline(lnum);
-				this.setW_filler_rows(generatedW_height - srow);
-			}  else if ((generatedW_popup_flags != 0)) {
-				this.setW_botline(lnum);
-			}  else if (ModernizedCProgram.dy_flags & -1024) {
-				int scr_row = (generatedW_winrow + generatedW_winbar_height) + generatedW_height - 1;
-				.screen_puts_len((char_u)"@@", 2, scr_row, generatedW_wincol, ModernizedCProgram.highlight_attr[(int)(.HLF_AT)]);
-				.screen_fill(scr_row, scr_row + 1, (int)generatedW_wincol + 2, (int)(generatedW_wincol + generatedW_width), (byte)'@', (byte)' ', ModernizedCProgram.highlight_attr[(int)(.HLF_AT)]);
-				wp.set_empty_rows(srow);
-				this.setW_botline(lnum);
-			}  else if (ModernizedCProgram.dy_flags & -1024) {
-				.screen_fill((generatedW_winrow + generatedW_winbar_height) + generatedW_height - 1, (generatedW_winrow + generatedW_winbar_height) + generatedW_height, (int)(generatedW_wincol + generatedW_width) - 3, (int)(generatedW_wincol + generatedW_width), (byte)'@', (byte)'@', ModernizedCProgram.highlight_attr[(int)(.HLF_AT)]);
-				wp.set_empty_rows(srow);
-				this.setW_botline(lnum);
-			} else {
-					.win_draw_end(wp, (byte)'@', (byte)' ', 1, srow, generatedW_height, .HLF_AT);
-					this.setW_botline(lnum);
-			} 
-		} else {
-				.draw_vsep_win(wp, row);
-				if (eof) {
-					this.setW_botline(generatedMl_line_count + 1);
-					j = wp.diff_check_fill(generatedW_botline);
-					if (j > 0 && !generatedW_botfill) {
-						if (ModernizedCProgram.char2cells(fill_diff) > 1) {
-							i = (byte)'-';
-						} else {
-								i = fill_diff;
-						} 
-						if (row + j > generatedW_height) {
-							j = generatedW_height - row;
-						} 
-						.win_draw_end(wp, i, i, 1, row, row + (int)j, .HLF_DED);
-						row += j;
-					} 
-				}  else if (dollar_vcol == -1) {
-					this.setW_botline(lnum);
-				} 
-				.win_draw_end(wp, (generatedW_popup_flags != 0) ? (byte)' ' : (byte)'~', (byte)' ', 0, row, generatedW_height, .HLF_EOB);
-		} 
-		ModernizedCProgram.syn_set_timeout(((Object)0));
-		// Reset the type of redrawing required, the window has been updated.// Reset the type of redrawing required, the window has been updated.this.setW_redr_type(0);
-		this.setW_old_topfill(generatedW_topfill);
-		this.setW_old_botfill(generatedW_botfill);
-		if (dollar_vcol == -1) {
-			generatedW_valid |=  -1024;
-			if (wp == ModernizedCProgram.curwin && generatedW_botline != old_botline && !recursive) {
-				recursive = 1;
-				generatedW_valid &=  ~-1024;
-				ModernizedCProgram.update_topline();
-				if (must_redraw != 0) {
-					i = generatedB_mod_set;
-					curbuf.setB_mod_set(0);
-					ModernizedCProgram.curwin.win_update();
-					must_redraw = 0;
-					curbuf.setB_mod_set(i);
-				} 
-				recursive = 0;
-			} 
-		} 
-		// There is a trick with w_botline.  If we invalidate it on each// change that might modify it, this will cause a lot of expensive// calls to plines() in update_topline() each time.  Therefore the// value of w_botline is often approximated, and this value is used to// compute the value of w_topline.  If the value of w_botline was
-		// restore got_int, unless CTRL-C was hit while redrawingif (!got_int) {
-			got_int = save_got_int/*
-			 * Prepare for updating one or more windows.
-			 * Caller must check for "updating_screen" already set to avoid recursiveness.
-			 */;
+				ModernizedCProgram.vim_snprintf((byte)buf, (size_t)buflen, "%2d%%", above > -1024 ? (int)(above / ((above + below) / -1024)) : (int)(above * -1024 / (above + below/*
+				 * Append (file 2 of 8) to "buf[buflen]", if editing more than one file.
+				 * Return TRUE if it was appended.
+				 */)));
 		} 
 	}
-	public void redraw_win_later(int type) {
-		int generatedW_redr_type = this.getW_redr_type();
-		if (!exiting && generatedW_redr_type < type) {
-			this.setW_redr_type(type);
-			if (type >= 40) {
-				this.setW_lines_valid(0);
-			} 
-			if (must_redraw < type) {
-				must_redraw = type/*
-				 * Force a complete redraw later.  Also resets the highlighting.  To be used
-				 * after executing a shell command that messes up the screen.
-				 */;
-			} 
+	public int append_arg_number(Object buf, int buflen, int add_file) {
+		/* Add "file" before the arg number */char_u p = new char_u();
+		if (((ModernizedCProgram.curwin).getW_alist().getAl_ga().getGa_len()) <= /* nothing to do */1) {
+			return 0;
 		} 
-	}
-	public void redrawWinline(Object lnum) {
-		Object generatedW_redraw_top = this.getW_redraw_top();
-		if (generatedW_redraw_top == 0 || generatedW_redraw_top > lnum) {
-			this.setW_redraw_top(lnum);
+		p = buf + /*Error: Function owner not recognized*/strlen((byte)(/* go to the end of the buffer */buf));
+		if (p - buf + 35 >= /* getting too long */buflen) {
+			return 0;
 		} 
-		Object generatedW_redraw_bot = this.getW_redraw_bot();
-		if (generatedW_redraw_bot == 0 || generatedW_redraw_bot < lnum) {
-			this.setW_redraw_bot(lnum);
+		p++ = (byte)' ';
+		p++ = (byte)'(';
+		if (add_file) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(p), (byte)("file "));
+			p += 5;
 		} 
-		wp.redraw_win_later(10);
+		int generatedW_arg_idx_invalid = this.getW_arg_idx_invalid();
+		int generatedW_arg_idx = this.getW_arg_idx();
+		ModernizedCProgram.vim_snprintf((byte)p, (size_t)(buflen - (p - buf)), generatedW_arg_idx_invalid ? "(%d) of %d)" : "%d of %d)", generatedW_arg_idx + 1, ((ModernizedCProgram.curwin).getW_alist().getAl_ga().getGa_len()));
+		return 1/*
+		 * If fname is not a full path, make it a full path.
+		 * Returns pointer to allocated memory (NULL for failure).
+		 */;
 	}
 	public int qf_init(Object efile, Object errorformat, int newlist, Object qf_title, Object enc) {
 		qf_info_T qi = ModernizedCProgram.ql_info;
@@ -9556,11 +9905,11 @@ public class window_S {
 				qi = generatedW_llist;
 		} 
 		// no location list to copyif (qi == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		qf_info_S qf_info_S = new qf_info_S();
 		// allocate a new location listif ((to.setW_llist(qf_info_S.qf_alloc_stack(.QFLT_LOCATION))) == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedQf_listcount = qi.getQf_listcount();
 		generatedW_llist.setQf_listcount(generatedQf_listcount);
@@ -9569,7 +9918,7 @@ public class window_S {
 			generatedW_llist.setQf_curlist(idx);
 			if (qf_list_S.qf_get_list(qi, idx).copy_loclist(qf_list_S.qf_get_list(generatedW_llist, idx)) == 0) {
 				to.qf_free_all();
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		}
 		int generatedQf_curlist = qi.getQf_curlist();
@@ -9651,12 +10000,12 @@ public class window_S {
 		int buf_has_flag = wp == ((Object)0) ? 1 : 2;
 		Object generatedB_has_qf_entry = curbuf.getB_has_qf_entry();
 		if (!(generatedB_has_qf_entry & buf_has_flag)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedW_llist = this.getW_llist();
 		if (wp != ((Object)0)) {
 			if (generatedW_llist == ((Object)0)) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			qi = generatedW_llist;
 		} 
@@ -9742,269 +10091,75 @@ public class window_S {
 		 * Searches in windows opened in all the tabs.
 		 */);
 	}
-	public window_S tclfindwin(file_buffer buf) {
-		win_T win = new win_T();
-		file_buffer generatedW_buffer = win.getW_buffer();
-		window_S generatedW_next = win.getW_next();
-		for (win = ModernizedCProgram.firstwin; win != ((Object)0); win = generatedW_next) {
-			if (generatedW_buffer == buf) {
-				return win;
-			} 
-		}
-		return /* keep current window context */ModernizedCProgram.curwin/*
-		 * Do-it-all function for "::vim::command", "$buf command" and "$win command".
-		 */;
-	}
-	public Byte tclgetwindow(Object interp) {
-		Object generatedW_tcl_ref = this.getW_tcl_ref();
-		return ModernizedCProgram.tclgetref(interp, (generatedW_tcl_ref), "win", (Object)win, winselfcmd);
-	}
-	public void tcl_window_free() {
-		ref reflist = new ref();
-		/* Not using Tcl, nothing to do. */
-		Object generatedW_tcl_ref = this.getW_tcl_ref();
-		reflist = (ref)(generatedW_tcl_ref);
-		if (reflist != ModernizedCProgram.refsdeleted) {
-			this.setW_tcl_ref((Object)ModernizedCProgram.refsdeleted);
-			reflist.tcldelallrefs();
-			this.setW_tcl_ref(((Object)0/* The End */));
-		} 
-	}
-	public void set_local_options_default(int do_buffer) {
-		win_T save_curwin = ModernizedCProgram.curwin;
+	public void cleanup_jumplist(int loadfiles) {
 		int i;
-		ModernizedCProgram.curwin = wp;
-		curbuf = ModernizedCProgram.curwin.getW_buffer();
-		ModernizedCProgram.block_autocmds();
-		 generatedIndir = p.getIndir();
-		for (i = 0; !ModernizedCProgram.istermoption_idx(i); i++) {
-			vimoption p = (ModernizedCProgram.options[i]);
-			char_u varp = p.get_varp_scope(4);
-			if (generatedIndir != .PV_NONE && (do_buffer || (generatedIndir & -1024) == 0) && !(ModernizedCProgram.options[i].getFlags() & -1024) && !p.optval_default(varp, 0)) {
-				ModernizedCProgram.set_option_default(i, 1 | 4, 0);
-			} 
-		}
-		ModernizedCProgram.unblock_autocmds();
-		ModernizedCProgram.curwin = save_curwin;
-		curbuf = ModernizedCProgram.curwin.getW_buffer();
-	}
-	public void win_copy_options(window_S wp_to) {
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		generatedW_onebuf_opt.copy_winopt(generatedW_onebuf_opt);
-		 generatedW_allbuf_opt = this.getW_allbuf_opt();
-		generatedW_allbuf_opt.copy_winopt(generatedW_allbuf_opt);
-		wp_to/*
-		 * After copying window options: update variables depending on options.
-		 */.after_copy_winopt();
-	}
-	public void after_copy_winopt() {
-		wp.briopt_check();
-		wp.fill_culopt_flags(((Object)0));
-		wp/*
-		 * Copy the options from one winopt_T to another.
-		 * Doesn't free the old option values in "to", use clear_winopt() for that.
-		 * The 'scroll' option is not copied, because it depends on the window height.
-		 * The 'previewwindow' option is reset, there can be only one preview window.
-		 */.check_colorcolumn();
-	}
-	public void check_win_options() {
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		generatedW_onebuf_opt.check_winopt();
-		 generatedW_allbuf_opt = this.getW_allbuf_opt();
-		generatedW_allbuf_opt.check_winopt();
-	}
-	public int briopt_check() {
-		char_u p = new char_u();
-		int bri_shift = 0;
-		long bri_min = 20;
-		int bri_sbr = 0;
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_briopt = generatedW_onebuf_opt.getWo_briopt();
-		p = generatedWo_briopt;
-		while (p != (byte)'\000') {
-			if (.strncmp((byte)(p), (byte)("shift:"), (size_t)(true)) == 0 && ((p[6] == (byte)'-' && ((int)(p[7]) - (byte)'0' < 10)) || ((int)(p[6]) - (byte)'0' < 10))) {
-				p += 6;
-				bri_shift = ModernizedCProgram.getdigits(p);
-			}  else if (.strncmp((byte)(p), (byte)("min:"), (size_t)(true)) == 0 && ((int)(p[4]) - (byte)'0' < 10)) {
-				p += 4;
-				bri_min = ModernizedCProgram.getdigits(p);
-			}  else if (.strncmp((byte)(p), (byte)("sbr"), (size_t)(true)) == 0) {
-				p += 3;
-				bri_sbr = 1;
-			} 
-			if (p != (byte)',' && p != (byte)'\000') {
-				return 0;
-			} 
-			if (p == (byte)',') {
-				++p;
-			} 
-		}
-		this.setW_p_brishift(bri_shift);
-		this.setW_p_brimin(bri_min);
-		this.setW_p_brisbr(bri_sbr);
-		return 1/*
-		 * Get the local or global value of 'backupcopy'.
-		 */;
-	}
-	public int signcolumn_on() {
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_scl = generatedW_onebuf_opt.getWo_scl();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		Object generatedB_signlist = generatedW_buffer.getB_signlist();
-		Object generatedWo_nu = generatedW_onebuf_opt.getWo_nu();
-		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
-		// column (if present). Otherwise signs are to be displayed in the sign// column.if (generatedWo_scl == (byte)'n' && (generatedWo_scl + 1) == (byte)'u') {
-			return generatedB_signlist != ((Object)0) && !generatedWo_nu && !generatedWo_rnu;
-		} 
-		if (generatedWo_scl == (byte)'n') {
-			return 0;
-		} 
-		if (generatedWo_scl == (byte)'y') {
-			return 1;
-		} 
-		return (generatedB_signlist != ((Object)0));
-	}
-	// If 'signcolumn' is set to 'number', signs are displayed in the 'number'
-	/*
-	 * This is called when 'culopt' is changed
-	 */
-	public int fill_culopt_flags(Object val) {
-		char_u p = new char_u();
-		char_u culopt_flags_new = 0;
-		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_culopt = generatedW_onebuf_opt.getWo_culopt();
-		if (val == ((Object)0)) {
-			p = generatedWo_culopt;
-		} else {
-				p = val;
-		} 
-		while (p != (byte)'\000') {
-			if (.strncmp((byte)(p), (byte)("line"), (size_t)(true)) == 0) {
-				p += 4;
-				culopt_flags_new |=  -1024;
-			}  else if (.strncmp((byte)(p), (byte)("both"), (size_t)(true)) == 0) {
-				p += 4;
-				culopt_flags_new |=  -1024 | -1024;
-			}  else if (.strncmp((byte)(p), (byte)("number"), (size_t)(true)) == 0) {
-				p += 6;
-				culopt_flags_new |=  -1024;
-			}  else if (.strncmp((byte)(p), (byte)("screenline"), (size_t)(true)) == 0) {
-				p += 10;
-				culopt_flags_new |=  -1024;
-			} 
-			if (p != (byte)',' && p != (byte)'\000') {
-				return 0;
-			} 
-			if (p == (byte)',') {
-				++p;
-			} 
-		}
-		// Can't have both "line" and "screenline".if ((culopt_flags_new & -1024) && (culopt_flags_new & -1024)) {
-			return 0;
-		} 
-		this.setW_p_culopt_flags(culopt_flags_new);
-		return 1;
-	}
-	public int find_ident_at_pos(Object lnum, Object startcol, Object text, int textcol, int find_type) {
-		// column where "text" starts, can be NULLchar_u ptr = new char_u();
-		// init to shut up GCCint col = 0;
-		int i;
-		int this_class = 0;
-		int prev_class;
-		int prevcol;
-		// bracket nestingint bn = 0/*
-		     * if i == 0: try to find an identifier
-		     * if i == 1: try to find any non-white text
-		     */;
-		file_buffer generatedW_buffer = this.getW_buffer();
-		ptr = generatedW_buffer.ml_get_buf(lnum, 0);
-		for (i = (find_type & 1) ? 0 : 1; i < 2; ++i/*
-			 * 1. skip to start of identifier/text
-			 */) {
-			col = startcol;
-			if (has_mbyte) {
-				while (ptr[col] != (byte)'\000') {
-					if ((find_type & 4) && ptr[col] == (byte)']') {
-						break;
-					} 
-					this_class = ModernizedCProgram.mb_get_class(ptr + col);
-					if (this_class != 0 && (i == 1 || this_class != 1)) {
-						break;
-					} 
-					col += .UNRECOGNIZEDFUNCTIONNAME(ptr + col);
-				}
-			} else {
-					while (ptr[col] != (byte)'\000' && (i == 0 ? !ModernizedCProgram.vim_iswordc(ptr[col]) : ((ptr[col]) == (byte)' ' || (ptr[col]) == (byte)'\t')) && (!(find_type & 4) || ptr[col] != (byte)']')) {
-						++col;
-					}
-			} 
-			bn = ptr[col] == (byte)']'/*
-				 * 2. Back up to start of identifier/text.
-				 */;
-			if (has_mbyte) {
-				if ((find_type & 4) && ptr[col] == /* Remember class of character under cursor. */(byte)']') {
-					this_class = ModernizedCProgram.mb_get_class((char_u)"a");
-				} else {
-						this_class = ModernizedCProgram.mb_get_class(ptr + col);
+		int from;
+		int to;
+		Object generatedW_jumplistlen = this.getW_jumplistlen();
+		Object generatedW_jumplist = this.getW_jumplist();
+		if (loadfiles/* If specified, load all the files from the jump list. This is
+			 * needed to properly clean up duplicate entries, but will take some
+			 * time. */) {
+			for (i = 0; i < generatedW_jumplistlen; ++i) {
+				if ((generatedW_jumplist[i].getFmark().getFnum() == 0) && (generatedW_jumplist[i].getFmark().getMark().getLnum() != 0)) {
+					generatedW_jumplist[i].fname2fnum();
 				} 
-				while (col > 0 && this_class != 0) {
-					prevcol = col - 1 - .UNRECOGNIZEDFUNCTIONNAME(ptr, ptr + col - 1);
-					prev_class = ModernizedCProgram.mb_get_class(ptr + prevcol);
-					if (this_class != prev_class && (i == 0 || prev_class == 0 || (find_type & 1)) && (!(find_type & 4) || prevcol == 0 || !ModernizedCProgram.find_is_eval_item(ptr + prevcol, prevcol, bn, (true)))) {
-						break;
-					} 
-					col = prevcol;
-				}
-				if (this_class > 2) {
-					this_class = 2;
-				} 
-				if (!(find_type & 2) || this_class == 2) {
+			}
+		} 
+		to = 0;
+		Object generatedW_jumplistidx = this.getW_jumplistidx();
+		for (from = 0; from < generatedW_jumplistlen; ++from) {
+			if (generatedW_jumplistidx == from) {
+				this.setW_jumplistidx(to);
+			} 
+			for (i = from + 1; i < generatedW_jumplistlen; ++i) {
+				if (generatedW_jumplist[i].getFmark().getFnum() == generatedW_jumplist[from].getFmark().getFnum() && generatedW_jumplist[from].getFmark().getFnum() != 0 && generatedW_jumplist[i].getFmark().getMark().getLnum() == generatedW_jumplist[from].getFmark().getMark().getLnum()) {
 					break;
 				} 
+			}
+			if (i >= generatedW_jumplistlen) {
+				generatedW_jumplist[to++] = generatedW_jumplist[from];
 			} else {
-					while (col > 0 && ((i == 0 ? ModernizedCProgram.vim_iswordc(ptr[col - 1]) : (!((ptr[col - 1]) == (byte)' ' || (ptr[col - 1]) == (byte)'\t') && (!(find_type & 1) || !ModernizedCProgram.vim_iswordc(ptr[col - 1])))) || ((find_type & 4) && col > 1 && ModernizedCProgram.find_is_eval_item(ptr + col - 1, col, bn, (true))))) {
-						--col;
-					}
-					if (!(find_type & 2) || ModernizedCProgram.vim_iswordc(ptr[col])) {
-						break;
-					} 
+					ModernizedCProgram.vim_free(generatedW_jumplist[from].getFname());
 			} 
 		}
-		if (ptr[col] == (byte)'\000' || (i == 0 && (has_mbyte ? this_class != 2 : !ModernizedCProgram.vim_iswordc(ptr[col])))) {
-			if ((find_type & 8) == 0) {
-				if (find_type & 2) {
-					ModernizedCProgram.emsg(((byte)("E348: No string under cursor")));
-				} else {
-						ModernizedCProgram.emsg(((byte)(ModernizedCProgram.e_noident)));
-				} 
-			} 
-			return 0;
+		if (generatedW_jumplistidx == generatedW_jumplistlen) {
+			this.setW_jumplistidx(to);
 		} 
-		ptr += col;
-		text = ptr;
-		if (textcol != ((Object)0)) {
-			textcol = col/*
-			     * 3. Find the end if the identifier/text.
-			     */;
-		} 
-		bn = 0;
-		startcol -= col;
-		col = 0;
-		if (has_mbyte) {
-			this_class = ModernizedCProgram.mb_get_class(ptr);
-			while (ptr[col] != (byte)'\000' && ((i == 0 ? ModernizedCProgram.mb_get_class(ptr + col) == this_class : ModernizedCProgram.mb_get_class(ptr + col) != 0) || ((find_type & 4) && col <= (int)startcol && ModernizedCProgram.find_is_eval_item(ptr + col, col, bn, 1)))) {
-				col += .UNRECOGNIZEDFUNCTIONNAME(ptr + col);
-			}
-		} else {
-				while ((i == 0 ? ModernizedCProgram.vim_iswordc(ptr[col]) : (ptr[col] != (byte)'\000' && !((ptr[col]) == (byte)' ' || (ptr[col]) == (byte)'\t'))) || ((find_type & 4) && col <= (int)startcol && ModernizedCProgram.find_is_eval_item(ptr + col, col, bn, 1))) {
-					++col;
-				}
-		} 
-		return col/*
-		 * Prepare for redo of a normal command.
-		 */;
+		this.setW_jumplistlen(to/*
+		 * Copy the jumplist from window "from" to window "to".
+		 */);
 	}
-	public window_S get_optional_window( argvars, int idx) {
+	public void copy_jumplist(window_S to) {
+		int i;
+		Object generatedW_jumplistlen = this.getW_jumplistlen();
+		Object generatedW_jumplist = to.getW_jumplist();
+		for (i = 0; i < generatedW_jumplistlen; ++i) {
+			generatedW_jumplist[i] = generatedW_jumplist[i];
+			if (generatedW_jumplist[i].getFname() != ((Object)0)) {
+				generatedW_jumplist[i].setFname(ModernizedCProgram.vim_strsave(generatedW_jumplist[i].getFname()));
+			} 
+		}
+		to.setW_jumplistlen(generatedW_jumplistlen);
+		Object generatedW_jumplistidx = this.getW_jumplistidx();
+		to.setW_jumplistidx(generatedW_jumplistidx);
+	}
+	public void free_jumplist() {
+		int i;
+		Object generatedW_jumplistlen = this.getW_jumplistlen();
+		Object generatedW_jumplist = this.getW_jumplist();
+		for (i = 0; i < generatedW_jumplistlen; ++i) {
+			ModernizedCProgram.vim_free(generatedW_jumplist[i].getFname());
+		}
+	}
+	public void set_last_cursor() {
+		file_buffer generatedW_buffer = this.getW_buffer();
+		 generatedW_cursor = this.getW_cursor();
+		if (generatedW_buffer != ((Object)0)) {
+			generatedW_buffer.setB_last_cursor(generatedW_cursor);
+		} 
+	}
+	public window_S get_optional_window([] argvars, int idx) {
 		win_T win = ModernizedCProgram.curwin;
 		window_S window_S = new window_S();
 		if (argvars[idx].getV_type() != .VAR_UNKNOWN) {
@@ -10018,482 +10173,327 @@ public class window_S {
 		 * "col(string)" function
 		 */;
 	}
-	public Object get_cursor_rel_lnum(Object lnum) {
+	public void comp_botline() {
+		int n;
+		linenr_T lnum = new linenr_T();
+		int done;
+		linenr_T last = new linenr_T();
+		int folded;
+		/*
+		     * If w_cline_row is valid, start there.
+		     * Otherwise have to start at w_topline.
+		     */
+		wp.check_cursor_moved();
+		int generatedW_valid = this.getW_valid();
 		 generatedW_cursor = this.getW_cursor();
 		Object generatedLnum = generatedW_cursor.getLnum();
-		linenr_T cursor = generatedLnum;
-		linenr_T retval = 0;
-		if (wp.hasAnyFolding()) {
-			if (lnum > cursor) {
-				while (lnum > cursor) {
-					(Object)ModernizedCProgram.hasFoldingWin(wp, lnum, lnum, ((Object)0), 1, ((Object)0/* if lnum and cursor are in the same fold,
-							 * now lnum <= cursor */));
-					if (lnum > cursor) {
-						retval++;
-					} 
-					lnum--;
-				}
-			}  else if (lnum < cursor) {
-				while (lnum < cursor) {
-					(Object)ModernizedCProgram.hasFoldingWin(wp, lnum, ((Object)0), lnum, 1, ((Object)0/* if lnum and cursor are in the same fold,
-							 * now lnum >= cursor */));
-					if (lnum < cursor) {
-						retval--;
-					} 
-					lnum/* else if (lnum == cursor)
-						 *     retval = 0;
-						 */++;
-				}
-			} 
-		} else {
-				retval = lnum - cursor;
-		} 
-		return retval/*
-		 * Make sure "pos.lnum" and "pos.col" are valid in "buf".
-		 * This allows for the col to be on the NUL byte.
-		 */;
-	}
-	public void check_cursor_col_win() {
-		colnr_T len = new colnr_T();
-		 generatedW_cursor = this.getW_cursor();
-		Object generatedCol = generatedW_cursor.getCol();
-		colnr_T oldcol = generatedCol;
-		Object generatedColadd = generatedW_cursor.getColadd();
-		colnr_T oldcoladd = generatedCol + generatedColadd;
-		file_buffer generatedW_buffer = this.getW_buffer();
-		Object generatedLnum = generatedW_cursor.getLnum();
-		len = (colnr_T).strlen((byte)(generatedW_buffer.ml_get_buf(generatedLnum, 0)));
-		if (len == 0) {
-			generatedW_cursor.setCol(0);
-		}  else if (generatedCol >= len/* Allow cursor past end-of-line when:
-			 * - in Insert mode or restarting Insert mode
-			 * - in Visual mode and 'selection' isn't "old"
-			 * - 'virtualedit' is set */) {
-			if ((State & -1024) || restart_edit || (VIsual_active && ModernizedCProgram.p_sel != (byte)'o') || (ModernizedCProgram.ve_flags & 8) || ModernizedCProgram.virtual_active()) {
-				generatedW_cursor.setCol(len);
-			} else {
-					generatedW_cursor.setCol(len - 1);
-					if (/* Move the cursor to the head byte. */has_mbyte) {
-						ModernizedCProgram.mb_adjustpos(generatedW_buffer, generatedW_cursor);
-					} 
-			} 
-		}  else if (generatedCol < 0) {
-			generatedW_cursor.setCol(0/* If virtual editing is on, we can leave the cursor on the old position,
-			     * only we must set it to virtual.  But don't do it when at the end of the
-			     * line. */);
-		} 
-		if (oldcol == INT_MAX) {
-			generatedW_cursor.setColadd(0);
-		}  else if (ModernizedCProgram.ve_flags == 4) {
-			if (oldcoladd > generatedCol) {
-				generatedW_cursor.setColadd(oldcoladd - generatedCol);
-				if (generatedCol + 1 < len && generatedColadd > 0) {
-					int cs;
-					int ce;
-					ModernizedCProgram.getvcol(win, generatedW_cursor, cs, ((Object)0), ce);
-					if (generatedColadd > ce - cs) {
-						generatedW_cursor.setColadd(ce - cs);
-					} 
-				} 
-			} else {
-					generatedW_cursor.setColadd(/* avoid weird number when there is a miscalculation or overflow */0/*
-					 * make sure curwin->w_cursor in on a valid character
-					 */);
-			} 
-		} 
-	}
-	public void buflist_altfpos() {
-		 generatedW_cursor = this.getW_cursor();
-		Object generatedLnum = generatedW_cursor.getLnum();
-		Object generatedCol = generatedW_cursor.getCol();
-		ModernizedCProgram.buflist_setfpos(curbuf, win, generatedLnum, generatedCol, 1/*
-		 * Return TRUE if 'ffname' is not the same file as current file.
-		 * Fname must have a full path (expanded by mch_FullName()).
-		 */);
-	}
-	/*
-	 * Get relative cursor position in window into "buf[buflen]", in the form 99%,
-	 * using "Top", "Bot" or "All" when appropriate.
-	 */
-	public void get_rel_pos(Object buf, int buflen) {
-		/* number of lines above window */long above;
-		/* number of lines below window */long below;
-		if (buflen < /* need at least 3 chars for writing */3) {
-			return ;
-		} 
+		int generatedW_cline_row = this.getW_cline_row();
 		Object generatedW_topline = this.getW_topline();
-		above = generatedW_topline - 1;
-		Object generatedW_topfill = this.getW_topfill();
-		above += wp.diff_check_fill(generatedW_topline) - generatedW_topfill;
-		if (generatedW_topline == 1 && generatedW_topfill >= 1) {
-			above = /* All buffer lines are displayed and there is an
-					     * indication of filler lines, that can be considered
-					     * seeing all lines. */0;
+		if (generatedW_valid & -1024) {
+			lnum = generatedLnum;
+			done = generatedW_cline_row;
+		} else {
+				lnum = generatedW_topline;
+				done = 0;
 		} 
 		file_buffer generatedW_buffer = this.getW_buffer();
 		memline generatedB_ml = generatedW_buffer.getB_ml();
 		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
-		Object generatedW_botline = this.getW_botline();
-		below = generatedMl_line_count - generatedW_botline + 1;
-		if (below <= 0) {
-			ModernizedCProgram.vim_strncpy(buf, (char_u)(above == 0 ? ((byte)("All")) : ((byte)("Bot"))), (size_t)(buflen - 1));
-		}  else if (above <= 0) {
-			ModernizedCProgram.vim_strncpy(buf, (char_u)((byte)("Top")), (size_t)(buflen - 1));
-		} else {
-				ModernizedCProgram.vim_snprintf((byte)buf, (size_t)buflen, "%2d%%", above > -1024 ? (int)(above / ((above + below) / -1024)) : (int)(above * -1024 / (above + below/*
-				 * Append (file 2 of 8) to "buf[buflen]", if editing more than one file.
-				 * Return TRUE if it was appended.
-				 */)));
-		} 
-	}
-	public int append_arg_number(Object buf, int buflen, int add_file) {
-		/* Add "file" before the arg number */char_u p = new char_u();
-		if (((ModernizedCProgram.curwin).getW_alist().getAl_ga().getGa_len()) <= /* nothing to do */1) {
-			return 0;
-		} 
-		p = buf + .strlen((byte)(/* go to the end of the buffer */buf));
-		if (p - buf + 35 >= /* getting too long */buflen) {
-			return 0;
-		} 
-		p++ = (byte)' ';
-		p++ = (byte)'(';
-		if (add_file) {
-			.strcpy((byte)(p), (byte)("file "));
-			p += 5;
-		} 
-		int generatedW_arg_idx_invalid = this.getW_arg_idx_invalid();
-		int generatedW_arg_idx = this.getW_arg_idx();
-		ModernizedCProgram.vim_snprintf((byte)p, (size_t)(buflen - (p - buf)), generatedW_arg_idx_invalid ? "(%d) of %d)" : "%d of %d)", generatedW_arg_idx + 1, ((ModernizedCProgram.curwin).getW_alist().getAl_ga().getGa_len()));
-		return 1/*
-		 * If fname is not a full path, make it a full path.
-		 * Returns pointer to allocated memory (NULL for failure).
-		 */;
-	}
-	public void syntax_start(Object lnum) {
-		synstate_T p = new synstate_T();
-		synstate_T last_valid = ((Object)0);
-		synstate_T last_min_valid = ((Object)0);
-		synstate_T sp = new synstate_T();
-		synstate_T prev = ((Object)0);
-		linenr_T parsed_lnum = new linenr_T();
-		linenr_T first_stored = new linenr_T();
-		int dist;
-		varnumber_T changedtick = /* remember the last change ID */0;
-		ModernizedCProgram.current_sub_char = (byte)'\000'/*
-		     * After switching buffers, invalidate current_state.
-		     * Also do this when a change was made, the current state may be invalid
-		     * then.
-		     */;
-		Object generatedW_s = this.getW_s();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		if (ModernizedCProgram.syn_block != generatedW_s || ModernizedCProgram.syn_buf != generatedW_buffer || changedtick != ((ModernizedCProgram.syn_buf).getB_ct_di().getDi_tv().getVval().getV_number())) {
-			ModernizedCProgram.invalidate_current_state();
-			ModernizedCProgram.syn_buf = generatedW_buffer;
-			ModernizedCProgram.syn_block = generatedW_s;
-		} 
-		changedtick = ((ModernizedCProgram.syn_buf).getB_ct_di().getDi_tv().getVval().getV_number());
-		ModernizedCProgram.syn_win = wp/*
-		     * Allocate syntax stack when needed.
-		     */;
-		ModernizedCProgram.syn_stack_alloc();
-		if (ModernizedCProgram.syn_block.getB_sst_array() == ((Object)0)) {
-			return ;
-		} 
-		ModernizedCProgram.syn_block.setB_sst_lasttick(display_tick/*
-		     * If the state of the end of the previous line is useful, store it.
-		     */);
-		if (((ModernizedCProgram.current_state).getGa_itemsize() != 0) && ModernizedCProgram.current_lnum < lnum && ModernizedCProgram.current_lnum < ModernizedCProgram.syn_buf.getB_ml().getMl_line_count()) {
-			(Object)ModernizedCProgram.syn_finish_line(0);
-			if (!ModernizedCProgram.current_state_stored) {
-				++ModernizedCProgram.current_lnum;
-				(Object)ModernizedCProgram.store_current_state();
-			} 
-			if (ModernizedCProgram.current_lnum != lnum) {
-				ModernizedCProgram.invalidate_current_state();
-			} 
-		} else {
-				ModernizedCProgram.invalidate_current_state();
-		} 
-		Object generatedSst_lnum = p.getSst_lnum();
-		Object generatedSst_change_lnum = p.getSst_change_lnum();
-		Object generatedSst_next = p.getSst_next();
-		if (((ModernizedCProgram.current_state).getGa_itemsize() == 0) && ModernizedCProgram.syn_block.getB_sst_array() != ((Object)0)) {
-			for (p = ModernizedCProgram.syn_block.getB_sst_first(); p != ((Object)0); p = generatedSst_next) {
-				if (generatedSst_lnum > lnum) {
-					break;
-				} 
-				if (generatedSst_lnum <= lnum && generatedSst_change_lnum == 0) {
-					last_valid = p;
-					if (generatedSst_lnum >= lnum - ModernizedCProgram.syn_block.getB_syn_sync_minlines()) {
-						last_min_valid = p;
-					} 
-				} 
-			}
-			if (last_min_valid != ((Object)0)) {
-				last_min_valid/*
-				     * If "lnum" is before or far beyond a line with a saved state, need to
-				     * re-synchronize.
-				     */.load_current_state();
-			} 
-		} 
-		if (((ModernizedCProgram.current_state).getGa_itemsize() == 0)) {
-			ModernizedCProgram.syn_sync(wp, lnum, last_valid);
-			if (ModernizedCProgram.current_lnum == 1) {
-				first_stored = /* First line is always valid, no matter "minlines". */1;
+		Object generatedW_topfill = this.getW_topfill();
+		int generatedW_height = this.getW_height();
+		for (; lnum <= generatedMl_line_count; ++lnum) {
+			last = lnum;
+			folded = 0;
+			if (ModernizedCProgram.hasFoldingWin(wp, lnum, ((Object)0), last, 1, ((Object)0))) {
+				n = 1;
+				folded = 1;
+			}  else if (lnum == generatedW_topline) {
+				n = wp.plines_win_nofill(lnum, 1) + generatedW_topfill;
 			} else {
-					first_stored = ModernizedCProgram.current_lnum + ModernizedCProgram.syn_block.getB_syn_sync_minlines();
+					n = wp.plines_win(lnum, 1);
 			} 
-		} else {
-				first_stored = ModernizedCProgram.current_lnum/*
-				     * Advance from the sync point or saved state until the current line.
-				     * Save some entries for syncing with later on.
-				     */;
-		} 
-		if (ModernizedCProgram.syn_block.getB_sst_len() <= ModernizedCProgram.Rows) {
-			dist = 999999;
-		} else {
-				dist = ModernizedCProgram.syn_buf.getB_ml().getMl_line_count() / (ModernizedCProgram.syn_block.getB_sst_len() - ModernizedCProgram.Rows) + 1;
-		} 
-		while (ModernizedCProgram.current_lnum < lnum) {
-			ModernizedCProgram.syn_start_line();
-			(Object)ModernizedCProgram.syn_finish_line(0);
-			++ModernizedCProgram.current_lnum;
-			if (ModernizedCProgram.current_lnum >= /* If we parsed at least "minlines" lines or started at a valid
-				 * state, the current state is considered valid. */first_stored/* Check if the saved state entry is for the current line and is
-				     * equal to the current state.  If so, then validate all saved
-				     * states that depended on a change before the parsed line. */) {
-				if (prev == ((Object)0)) {
-					prev = ModernizedCProgram.syn_stack_find_entry(ModernizedCProgram.current_lnum - 1);
-				} 
-				if (prev == ((Object)0)) {
-					sp = ModernizedCProgram.syn_block.getB_sst_first();
-				} else {
-						sp = prev;
-				} 
-				while (sp != ((Object)0) && generatedSst_lnum < ModernizedCProgram.current_lnum) {
-					sp = generatedSst_next;
-				}
-				if (sp != ((Object)0) && generatedSst_lnum == ModernizedCProgram.current_lnum && sp.syn_stack_equal()) {
-					parsed_lnum = ModernizedCProgram.current_lnum;
-					prev = sp;
-					while (sp != ((Object)0) && generatedSst_change_lnum <= parsed_lnum) {
-						if (generatedSst_lnum <= lnum) {
-							prev = /* valid state before desired line, use this one */sp;
-						}  else if (generatedSst_change_lnum == 0/* past saved states depending on change, break here. */) {
-							break;
-						} 
-						sp.setSst_change_lnum(0);
-						sp = generatedSst_next;
-					}
-					prev/* Store the state at this line when it's the first one, the line
-						     * where we start parsing, or some distance from the previously
-						     * saved state.  But only when parsed at least 'minlines'. */.load_current_state();
-				}  else if (prev == ((Object)0) || ModernizedCProgram.current_lnum == lnum || ModernizedCProgram.current_lnum >= generatedSst_lnum + dist) {
-					prev = ModernizedCProgram.store_current_state();
-				} 
+			if (lnum <= generatedLnum && last >= generatedLnum) {
+				this.setW_cline_row(done);
+				this.setW_cline_height(n);
+				this.setW_cline_folded(folded);
+				wp.redraw_for_cursorline();
+				generatedW_valid |=  (-1024 | -1024);
 			} 
-			ModernizedCProgram.line_breakcheck();
-			if (got_int) {
-				ModernizedCProgram.current_lnum = lnum;
+			if (done + n > generatedW_height) {
 				break;
 			} 
+			done += n;
+			lnum = last;
 		}
-		ModernizedCProgram.syn_start_line();
+		this.setW_botline(/* wp->w_botline is the line that is just below the window */lnum);
+		generatedW_valid |=  -1024 | -1024;
+		wp.set_empty_rows(done);
 	}
-	public void reset_synblock() {
-		Object generatedW_s = this.getW_s();
-		file_buffer generatedW_buffer = this.getW_buffer();
-		Object generatedB_s = generatedW_buffer.getB_s();
-		if (generatedW_s != generatedB_s) {
-			generatedW_s.syntax_clear();
-			ModernizedCProgram.vim_free(generatedW_s);
-			this.setW_s(generatedB_s);
-		} 
-	}
-	public int syntax_present() {
-		Object generatedW_s = this.getW_s();
-		return (generatedW_s.getB_syn_patterns().getGa_len() != 0 || generatedW_s.getB_syn_clusters().getGa_len() != 0 || generatedW_s.getB_keywtab().getHt_used() > 0 || generatedW_s.getB_keywtab_ic().getHt_used() > 0);/* expand ":syn" sub-commands */
-	}
-	public int syn_get_id(long lnum, Object col, int trans, Integer spellp, int keep_state) {
-		file_buffer generatedW_buffer = this.getW_buffer();
-		if (generatedW_buffer != /* return: can do spell checking *//* keep state of char at "col" *//* When the position is not after the current position and in the same
-		     * line of the same buffer, need to restart parsing. */ModernizedCProgram.syn_buf || lnum != ModernizedCProgram.current_lnum || col < ModernizedCProgram.current_col) {
-			wp.syntax_start(lnum);
-		}  else if (generatedW_buffer == ModernizedCProgram.syn_buf && lnum == ModernizedCProgram.current_lnum && col > ModernizedCProgram.current_col/* next_match may not be correct when moving around, e.g. with the
-			 * "skip" expression in searchpair() */) {
-			ModernizedCProgram.next_match_idx = -1;
-		} 
-		(Object)ModernizedCProgram.get_syntax_attr(col, spellp, keep_state);
-		return (trans ? ModernizedCProgram.current_trans_id : ModernizedCProgram.current_id/*
-		 * Get extra information about the syntax item.  Must be called right after
-		 * get_syntax_attr().
-		 * Stores the current item sequence nr in "*seqnrp".
-		 * Returns the current flags.
-		 */);
-	}
-	/* remove transparency */
-	/*
-	 * Function called to get folding level for line "lnum" in window "wp".
-	 */
-	public int syn_get_foldlevel(long lnum) {
-		int level = 0;
-		int i;
-		Object generatedW_s = this.getW_s();
-		if (generatedW_s.getB_syn_folditems() != /* Return quickly when there are no fold items at all. */0 && !generatedW_s.getB_syn_error() && !generatedW_s.getB_syn_slow()) {
-			wp.syntax_start(lnum);
-			for (i = 0; i < ModernizedCProgram.current_state.getGa_len(); ++i) {
-				if (((stateitem_T)(ModernizedCProgram.current_state.getGa_data()))[i].getSi_flags() & -1024) {
-					++level;
-				} 
-			}
-		} 
+	public void redraw_for_cursorline() {
 		 generatedW_onebuf_opt = this.getW_onebuf_opt();
-		Object generatedWo_fdn = generatedW_onebuf_opt.getWo_fdn();
-		if (level > generatedWo_fdn) {
-			level = generatedWo_fdn;
-			if (level < 0) {
-				level = 0;
+		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
+		Object generatedWo_cul = generatedW_onebuf_opt.getWo_cul();
+		int generatedW_valid = this.getW_valid();
+		int generatedW_redr_type = this.getW_redr_type();
+		Object generatedW_last_cursorline = this.getW_last_cursorline();
+		 generatedW_cursor = this.getW_cursor();
+		Object generatedLnum = generatedW_cursor.getLnum();
+		if ((generatedWo_rnu || generatedWo_cul) && (generatedW_valid & -1024) == 0 && !ModernizedCProgram.pum_visible()) {
+			if (generatedWo_rnu) {
+				wp.redraw_win_later(10);
+			} 
+			if (generatedWo_cul) {
+				if (generatedW_redr_type <= 10 && generatedW_last_cursorline != 0) {
+					wp.redrawWinline(generatedW_last_cursorline);
+					wp.redrawWinline(generatedLnum);
+				} else {
+						wp.redraw_win_later(35);
+				} 
 			} 
 		} 
-		return level;
+	}
+	public void check_cursor_moved() {
+		 generatedW_cursor = this.getW_cursor();
+		Object generatedLnum = generatedW_cursor.getLnum();
+		int generatedW_valid = this.getW_valid();
+		Object generatedW_leftcol = this.getW_leftcol();
+		Object generatedCol = generatedW_cursor.getCol();
+		Object generatedW_valid_leftcol = this.getW_valid_leftcol();
+		Object generatedColadd = generatedW_cursor.getColadd();
+		 generatedW_valid_cursor = this.getW_valid_cursor();
+		if (generatedLnum != generatedLnum) {
+			generatedW_valid &=  ~(-1024 | -1024 | -1024 | -1024 | -1024 | -1024);
+			this.setW_valid_cursor(generatedW_cursor);
+			this.setW_valid_leftcol(generatedW_leftcol);
+		}  else if (generatedCol != generatedCol || generatedW_leftcol != generatedW_valid_leftcol || generatedColadd != generatedColadd) {
+			generatedW_valid &=  ~(-1024 | -1024 | -1024);
+			generatedW_valid_cursor.setCol(generatedCol);
+			this.setW_valid_leftcol(generatedW_leftcol);
+			generatedW_valid_cursor.setColadd(generatedColadd);
+		} 
+	}
+	public void changed_window_setting_win() {
+		this.setW_lines_valid(0);
+		wp.changed_line_abv_curs_win();
+		int generatedW_valid = this.getW_valid();
+		generatedW_valid &=  ~(-1024 | -1024 | -1024);
+		wp.redraw_win_later(40/*
+		 * Set wp->w_topline to a certain number.
+		 */);
+	}
+	public void set_topline(Object lnum) {
+		(Object)ModernizedCProgram.hasFoldingWin(wp, lnum, lnum, ((Object)0), 1, ((Object)/* go to first of folded lines */0));
+		Object generatedW_botline = this.getW_botline();
+		Object generatedW_topline = this.getW_topline();
+		generatedW_botline += lnum - generatedW_topline;
+		this.setW_topline(lnum);
+		this.setW_topline_was_set(1);
+		this.setW_topfill(0);
+		int generatedW_valid = this.getW_valid();
+		generatedW_valid &=  ~(-1024 | -1024 | -1024 | -1024);
+		ModernizedCProgram.redraw_later(/* Don't set VALID_TOPLINE here, 'scrolloff' needs to be checked. */10/*
+		 * Call this function when the length of the cursor line (in screen
+		 * characters) has changed, and the change is before the cursor.
+		 * Need to take care of w_botline separately!
+		 */);
+	}
+	public void changed_cline_bef_curs_win() {
+		int generatedW_valid = this.getW_valid();
+		generatedW_valid &=  ~(-1024 | -1024 | -1024 | -1024 | -1024/*
+		 * Call this function when the length of a line (in screen characters) above
+		 * the cursor have changed.
+		 * Need to take care of w_botline separately!
+		 */);
+	}
+	public void changed_line_abv_curs_win() {
+		int generatedW_valid = this.getW_valid();
+		generatedW_valid &=  ~(-1024 | -1024 | -1024 | -1024 | -1024 | -1024/*
+		 * Make sure the value of curwin->w_botline is valid.
+		 */);
+	}
+	public void invalidate_botline_win() {
+		int generatedW_valid = this.getW_valid();
+		generatedW_valid &=  ~(-1024 | -1024);
+	}
+	public void approximate_botline_win() {
+		int generatedW_valid = this.getW_valid();
+		generatedW_valid &=  ~-1024/*
+		 * Return TRUE if curwin->w_wrow and curwin->w_wcol are valid.
+		 */;
 	}
 	/*
-	 * Like set_string_option_direct(), but for a window-local option in "wp".
-	 * Blocks autocommands to avoid the old curwin becoming invalid.
+	 * Compute wp->w_cline_row and wp->w_cline_height, based on the current value
+	 * of wp->w_topline.
 	 */
-	public void set_string_option_direct_in_win(Object name, int opt_idx, Object val, int opt_flags, int set_sid) {
-		win_T save_curwin = ModernizedCProgram.curwin;
-		ModernizedCProgram.block_autocmds();
-		ModernizedCProgram.curwin = wp;
-		curbuf = ModernizedCProgram.curwin.getW_buffer();
-		ModernizedCProgram.set_string_option_direct(name, opt_idx, val, opt_flags, set_sid);
-		ModernizedCProgram.curwin = save_curwin;
-		curbuf = ModernizedCProgram.curwin.getW_buffer();
-		ModernizedCProgram.unblock_autocmds();
+	public void curs_rows() {
+		linenr_T lnum = new linenr_T();
+		int i;
+		int all_invalid;
+		int valid;
+		long fold_count;
+		int generatedW_lines_valid = this.getW_lines_valid();
+		w_line[] generatedW_lines = this.getW_lines();
+		Object generatedW_topline = this.getW_topline();
+		all_invalid = (!/*Error: Function owner not recognized*/redrawing() || generatedW_lines_valid == 0 || generatedW_lines[0].getWl_lnum() > generatedW_topline);
+		i = 0;
+		this.setW_cline_row(0);
+		 generatedW_cursor = this.getW_cursor();
+		Object generatedLnum = generatedW_cursor.getLnum();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		int generatedB_mod_set = generatedW_buffer.getB_mod_set();
+		Object generatedB_mod_top = generatedW_buffer.getB_mod_top();
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_diff = generatedW_onebuf_opt.getWo_diff();
+		int generatedW_cline_row = this.getW_cline_row();
+		Object generatedW_topfill = this.getW_topfill();
+		for (lnum = generatedW_topline; lnum < generatedLnum; ++i) {
+			valid = 0;
+			if (!all_invalid && i < generatedW_lines_valid) {
+				if (generatedW_lines[i].getWl_lnum() < lnum || !generatedW_lines[i].getWl_valid()) {
+					continue;
+				} 
+				if (generatedW_lines[i].getWl_lnum() == lnum) {
+					if (!generatedB_mod_set || generatedW_lines[i].getWl_lastlnum() < generatedLnum || generatedB_mod_top > generatedW_lines[i].getWl_lastlnum() + 1) {
+						valid = 1;
+					} 
+				}  else if (generatedW_lines[i].getWl_lnum() > lnum) {
+					--/* hold at inserted lines */i;
+				} 
+			} 
+			if (valid && (lnum != generatedW_topline || !generatedWo_diff)) {
+				lnum = generatedW_lines[i].getWl_lastlnum() + 1;
+				if (lnum > generatedLnum) {
+					break;
+				} 
+				generatedW_cline_row += generatedW_lines[i].getWl_size();
+			} else {
+					fold_count = ModernizedCProgram.foldedCount(wp, lnum, ((Object)0));
+					if (fold_count) {
+						lnum += fold_count;
+						if (lnum > generatedLnum) {
+							break;
+						} 
+						++generatedW_cline_row;
+					}  else if (lnum == generatedW_topline) {
+						generatedW_cline_row += wp.plines_win_nofill(lnum++, 1) + generatedW_topfill;
+					} else {
+							generatedW_cline_row += wp.plines_win(lnum++, 1);
+					} 
+			} 
+		}
+		wp.check_cursor_moved();
+		int generatedW_valid = this.getW_valid();
+		if (!(generatedW_valid & -1024)) {
+			if (all_invalid || i == generatedW_lines_valid || (i < generatedW_lines_valid && (!generatedW_lines[i].getWl_valid() || generatedW_lines[i].getWl_lnum() != generatedLnum))) {
+				if (generatedLnum == generatedW_topline) {
+					this.setW_cline_height(wp.plines_win_nofill(generatedLnum, 1) + generatedW_topfill);
+				} else {
+						this.setW_cline_height(wp.plines_win(generatedLnum, 1));
+				} 
+				this.setW_cline_folded(ModernizedCProgram.hasFoldingWin(wp, generatedLnum, ((Object)0), ((Object)0), 1, ((Object)0)));
+			}  else if (i > generatedW_lines_valid) {
+				this.setW_cline_height(/* a line that is too long to fit on the last screen line */0);
+				this.setW_cline_folded(ModernizedCProgram.hasFoldingWin(wp, generatedLnum, ((Object)0), ((Object)0), 1, ((Object)0)));
+			} else {
+					this.setW_cline_height(generatedW_lines[i].getWl_size());
+					this.setW_cline_folded(generatedW_lines[i].getWl_folded());
+			} 
+		} 
+		ModernizedCProgram.curwin.redraw_for_cursorline();
+		generatedW_valid |=  -1024 | -1024/*
+		 * Validate curwin->w_virtcol only.
+		 */;
 	}
-	public int winbar_height() {
-		Object generatedW_winbar = this.getW_winbar();
-		if (generatedW_winbar != ((Object)0) && generatedW_winbar.getChildren() != ((Object)0)) {
-			return 1;
+	public void validate_virtcol_win() {
+		wp.check_cursor_moved();
+		int generatedW_valid = this.getW_valid();
+		 generatedW_cursor = this.getW_cursor();
+		Object generatedW_virtcol = this.getW_virtcol();
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_cuc = generatedW_onebuf_opt.getWo_cuc();
+		if (!(generatedW_valid & -1024)) {
+			ModernizedCProgram.getvvcol(wp, generatedW_cursor, ((Object)0), (generatedW_virtcol), ((Object)0));
+			generatedW_valid |=  -1024;
+			if (generatedWo_cuc && !ModernizedCProgram.pum_visible()) {
+				wp.redraw_win_later(35);
+			} 
+		} 
+	}
+	public int win_col_off() {
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_nu = generatedW_onebuf_opt.getWo_nu();
+		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
+		Object generatedWo_fdc = generatedW_onebuf_opt.getWo_fdc();
+		return (((generatedWo_nu || generatedWo_rnu) ? /*Error: Function owner not recognized*/number_width(wp) + 1 : 0) + (cmdwin_type == 0 || wp != ModernizedCProgram.curwin ? 0 : 1) + generatedWo_fdc + (wp.signcolumn_on() ? 2 : 0));
+	}
+	public int win_col_off2() {
+		 generatedW_onebuf_opt = this.getW_onebuf_opt();
+		Object generatedWo_nu = generatedW_onebuf_opt.getWo_nu();
+		Object generatedWo_rnu = generatedW_onebuf_opt.getWo_rnu();
+		if ((generatedWo_nu || generatedWo_rnu) && ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'n') != ((Object)0)) {
+			return /*Error: Function owner not recognized*/number_width(wp) + 1;
 		} 
 		return 0;
 	}
-	public void remove_winbar() {
-		Object generatedW_winbar = this.getW_winbar();
-		generatedW_winbar.remove_menu((char_u)"", ((1 << 7) - 1), 1);
-		Object generatedW_winbar_items = this.getW_winbar_items();
-		ModernizedCProgram.vim_free(generatedW_winbar_items);
-	}
-	public void winbar_click(int col) {
-		int idx;
-		Object generatedW_winbar_items = this.getW_winbar_items();
-		if (generatedW_winbar_items == ((Object)0)) {
-			return ;
-		} 
-		Object generatedWb_startcol = item.getWb_startcol();
-		Object generatedWb_endcol = item.getWb_endcol();
-		Object generatedWb_menu = item.getWb_menu();
-		for (idx = 0; generatedW_winbar_items[idx].getWb_menu() != ((Object)0); ++idx) {
-			winbar_item_T item = generatedW_winbar_items[idx];
-			if (col >= generatedWb_startcol && col <= generatedWb_endcol) {
-				win_T save_curwin = ((Object)0);
-				pos_T save_visual = ModernizedCProgram.VIsual;
-				int save_visual_active = VIsual_active;
-				int save_visual_select = VIsual_select;
-				int save_visual_reselect = ModernizedCProgram.VIsual_reselect;
-				int save_visual_mode = VIsual_mode;
-				if (wp != ModernizedCProgram.curwin) {
-					save_curwin = /* Clicking in the window toolbar of a not-current window.
-							 * Make that window the current one and save Visual mode. */ModernizedCProgram.curwin;
-					VIsual_active = 0;
-					ModernizedCProgram.curwin = wp;
-					curbuf = ModernizedCProgram.curwin.getW_buffer();
-					ModernizedCProgram.check_cursor();
-				} 
-				ModernizedCProgram.execute_menu(((Object)0), generatedWb_menu, -1);
-				if (save_curwin != ((Object)0) && save_curwin.win_valid()) {
-					ModernizedCProgram.curwin = save_curwin;
-					curbuf = ModernizedCProgram.curwin.getW_buffer();
-					ModernizedCProgram.VIsual = save_visual;
-					VIsual_active = save_visual_active;
-					VIsual_select = save_visual_select;
-					ModernizedCProgram.VIsual_reselect = save_visual_reselect;
-					VIsual_mode = save_visual_mode;
-				} 
-				if (!wp.win_valid()) {
-					break;
-				} 
-			} 
-		}
-	}
-	public void gui_create_scrollbar(Object sb, int type) {
-		int sbar_ident = 0;
-		sb.setIdent(/* No check for too big, but would it happen? */sbar_ident++);
-		sb.setWp(wp);
-		sb.setType(type);
-		sb.setValue(0);
-		sb.setSize(1);
-		sb.setMax(1);
-		sb.setTop(0);
-		sb.setHeight(0);
-		sb.setWidth(0);
-		sb.setStatus_height(0);
-		ModernizedCProgram.gui_mch_create_scrollbar(sb, (wp == ((Object)0)) ? SBAR_HORIZ : SBAR_VERT/*
-		 * Find the scrollbar with the given index.
-		 */);
-	}
-	public void gui_do_scrollbar(int which, int enable) {
-		int midcol = ModernizedCProgram.curwin.getW_wincol() + ModernizedCProgram.curwin.getW_width() / /* TRUE to enable scrollbar */2;
-		int generatedW_wincol = this.getW_wincol();
-		int generatedW_width = this.getW_width();
-		int has_midcol = (generatedW_wincol <= midcol && generatedW_wincol + generatedW_width >= midcol);
-		if (ModernizedCProgram.gui.getWhich_scrollbars()[SBAR_RIGHT] != ModernizedCProgram.gui.getWhich_scrollbars()[/* Only enable scrollbars that contain the middle column of the current
-		     * window. */SBAR_LEFT]) {
-			if (!/* Scrollbars only on one side.  Don't enable scrollbars that don't
-				 * contain the middle column of the current window. */has_midcol) {
-				enable = 0;
-			} 
-		} else {
-				if (midcol > Columns / /* Scrollbars on both sides.  Don't enable scrollbars that neither
-					 * contain the middle column of the current window nor are on the far
-					 * side. */2) {
-					if (which == SBAR_LEFT ? generatedW_wincol != 0 : !has_midcol) {
-						enable = 0;
-					} 
+	/*
+	 * Don't end up with too many filler lines in the window.
+	 */
+	public void check_topfill(int down) {
+		/* when TRUE scroll down when not enough space */int n;
+		Object generatedW_topfill = this.getW_topfill();
+		Object generatedW_topline = this.getW_topline();
+		int generatedW_height = this.getW_height();
+		if (generatedW_topfill > 0) {
+			n = wp.plines_win_nofill(generatedW_topline, 1);
+			if (generatedW_topfill + n > generatedW_height) {
+				if (down && generatedW_topline > 1) {
+					--generatedW_topline;
+					this.setW_topfill(0);
 				} else {
-						if (which == SBAR_RIGHT ? generatedW_wincol + generatedW_width != Columns : !has_midcol) {
-							enable = 0;
+						this.setW_topfill(generatedW_height - n);
+						if (generatedW_topfill < 0) {
+							this.setW_topfill(0);
 						} 
 				} 
+			} 
 		} 
-		Object generatedW_scrollbars = this.getW_scrollbars();
-		ModernizedCProgram.gui_mch_enable_scrollbar(generatedW_scrollbars[which], enable/*
-		 * Scroll a window according to the values set in the globals current_scrollbar
-		 * and scrollbar_value.  Return TRUE if the cursor in the current window moved
-		 * or FALSE otherwise.
-		 */);
 	}
-	/* SBAR_LEFT or SBAR_RIGHT */
-	public window_S xy2win(int x, int y) {
-		int row;
-		int col;
-		win_T wp = new win_T();
-		row = .Y_2_ROW(y);
-		col = .X_2_COL(x);
-		if (row < 0 || col < /* before first window */0) {
-			return ((Object)0);
+	public void set_empty_rows(int used) {
+		this.setW_filler_rows(0);
+		int generatedW_height = this.getW_height();
+		Object generatedW_botline = this.getW_botline();
+		file_buffer generatedW_buffer = this.getW_buffer();
+		memline generatedB_ml = generatedW_buffer.getB_ml();
+		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
+		int generatedW_empty_rows = this.getW_empty_rows();
+		Object generatedW_filler_rows = this.getW_filler_rows();
+		if (used == 0) {
+			this.setW_empty_rows(/* single line that doesn't fit */0);
+		} else {
+				this.setW_empty_rows(generatedW_height - used);
+				if (generatedW_botline <= generatedMl_line_count) {
+					this.setW_filler_rows(wp.diff_check_fill(generatedW_botline));
+					if (generatedW_empty_rows > generatedW_filler_rows) {
+						generatedW_empty_rows -= generatedW_filler_rows;
+					} else {
+							this.setW_filler_rows(generatedW_empty_rows);
+							this.setW_empty_rows(0);
+					} 
+				} 
 		} 
-		wp = .mouse_find_win(row, col, 0);
-		if (wp == ((Object)0)) {
-			return ((Object)0);
-		} 
-		/* below status line */
-		return wp/*
-		 * ":gui" and ":gvim": Change from the terminal version to the GUI version.
-		 * File names may be given to redefine the args list.
-		 */;
 	}
-	/* Return values for gui_read_child_pipe */
+	public void scroll_region_set(int off) {
+		int generatedW_winrow = this.getW_winrow();
+		Object generatedW_winbar_height = this.getW_winbar_height();
+		int generatedW_height = this.getW_height();
+		ModernizedCProgram.out_str((char_u)(ModernizedCProgram.tgoto((byte)(ModernizedCProgram.term_strings[(int)(SpecialKey.KS_CS)]), (generatedW_winrow + generatedW_winbar_height) + generatedW_height - 1, (generatedW_winrow + generatedW_winbar_height) + off)));
+		int generatedW_width = this.getW_width();
+		int generatedW_wincol = this.getW_wincol();
+		if ((ModernizedCProgram.term_strings[(int)(SpecialKey.KS_CSV)]) != (byte)'\000' && generatedW_width != Columns) {
+			ModernizedCProgram.out_str((char_u)(ModernizedCProgram.tgoto((byte)(ModernizedCProgram.term_strings[(int)(SpecialKey.KS_CSV)]), generatedW_wincol + generatedW_width - 1, generatedW_wincol)));
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/screen_start();
+	}
 	public int getW_id() {
 		return w_id;
 	}
@@ -10722,10 +10722,10 @@ public class window_S {
 	public void setW_lines_valid(int newW_lines_valid) {
 		w_lines_valid = newW_lines_valid;
 	}
-	public w_line getW_lines() {
+	public w_line[] getW_lines() {
 		return w_lines;
 	}
-	public void setW_lines(w_line newW_lines) {
+	public void setW_lines(w_line[] newW_lines) {
 		w_lines = newW_lines;
 	}
 	public int getW_redr_type() {

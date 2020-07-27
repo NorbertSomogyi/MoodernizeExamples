@@ -26,7 +26,7 @@ public class OperationConfig {
 	private  proto_redir_present;
 	private Byte proto_default;
 	private Object resume_from;
-	private Byte postfields;
+	private byte[] postfields;
 	private Object postfieldsize;
 	private Byte referer;
 	private double timeout;
@@ -208,7 +208,7 @@ public class OperationConfig {
 	private OperationConfig next;
 	private State state;
 	
-	public OperationConfig( remote_time, Byte random_file, Byte egd_file, Byte useragent, Byte cookie, Byte cookiejar, Byte cookiefile, Byte altsvc,  cookiesession,  encoding,  tr_encoding, long authtype,  use_resume,  resume_from_current,  disable_epsv,  disable_eprt,  ftp_pret, long proto,  proto_present, long proto_redir,  proto_redir_present, Byte proto_default, Object resume_from, Byte postfields, Object postfieldsize, Byte referer, double timeout, double connecttimeout, long maxredirs, Object max_filesize, Byte headerfile, Byte ftpport, Byte iface, long localport, long localportrange, int porttouse, Byte range, long low_speed_limit, long low_speed_time, Byte dns_servers, Byte dns_interface, Byte dns_ipv4_addr, Byte dns_ipv6_addr, Byte userpwd, Byte login_options, Byte tls_username, Byte tls_password, Byte tls_authtype, Byte proxy_tls_username, Byte proxy_tls_password, Byte proxy_tls_authtype, Byte proxyuserpwd, Byte proxy, int proxyver, Byte noproxy, Byte mail_from, curl_slist mail_rcpt, Byte mail_auth, Byte sasl_authzid,  sasl_ir,  proxytunnel,  ftp_append,  use_ascii,  autoreferer,  failonerror,  show_headers,  no_body,  dirlistonly,  followlocation,  unrestricted_auth,  netrc_opt,  netrc, Byte netrc_file, getout url_list, getout url_last, getout url_get, getout url_out, getout url_ul, Byte doh_url, Byte cipher_list, Byte proxy_cipher_list, Byte cipher13_list, Byte proxy_cipher13_list, Byte cert, Byte proxy_cert, Byte cert_type, Byte proxy_cert_type, Byte cacert, Byte proxy_cacert, Byte capath, Byte proxy_capath, Byte crlfile, Byte proxy_crlfile, Byte pinnedpubkey, Byte proxy_pinnedpubkey, Byte key, Byte proxy_key, Byte key_type, Byte proxy_key_type, Byte key_passwd, Byte proxy_key_passwd, Byte pubkey, Byte hostpubmd5, Byte engine,  crlf, Byte customrequest, Byte krblevel, Byte request_target, long httpversion,  http09_allowed,  nobuffer,  readbusy,  globoff,  use_httpget,  insecure_ok,  proxy_insecure_ok,  terminal_binary_ok,  verifystatus,  create_dirs,  ftp_create_dirs,  ftp_skip_ip,  proxynegotiate,  proxyntlm,  proxydigest,  proxybasic,  proxyanyauth, Byte writeout, curl_slist quote, curl_slist postquote, curl_slist prequote, long ssl_version, long ssl_version_max, long proxy_ssl_version, long ip_version, Object timecond, Object condtime, curl_slist headers, curl_slist proxyheaders, tool_mime mimeroot, tool_mime mimecurrent, Object mimepost, curl_slist telnet_options, curl_slist resolve, curl_slist connect_to,  httpreq, Object sendpersecond, Object recvpersecond,  ftp_ssl,  ftp_ssl_reqd,  ftp_ssl_control,  ftp_ssl_ccc, int ftp_ssl_ccc_mode, Byte preproxy, int socks5_gssapi_nec, long socks5_auth, Byte proxy_service_name, Byte service_name,  tcp_nodelay,  tcp_fastopen, long req_retry,  retry_connrefused, long retry_delay, long retry_maxtime, Byte ftp_account, Byte ftp_alternative_to_user, int ftp_filemethod, long tftp_blksize,  tftp_no_options,  ignorecl,  disable_sessionid,  raw,  post301,  post302,  post303,  nokeepalive, long alivetime,  content_disposition, int default_node_flags,  xattr, long gssapi_delegation,  ssl_allow_beast,  proxy_ssl_allow_beast,  ssl_no_revoke,  use_metalink, metalinkfile metalinkfile_list, metalinkfile metalinkfile_last, Byte oauth_bearer,  nonpn,  noalpn, Byte unix_socket_path,  abstract_unix_socket,  falsestart,  path_as_is, double expect100timeout,  suppress_connect_headers,  synthetic_error,  ssh_compression, long happy_eyeballs_timeout_ms,  haproxy_protocol,  disallow_username_in_url, GlobalConfig global, OperationConfig prev, OperationConfig next, State state) {
+	public OperationConfig( remote_time, Byte random_file, Byte egd_file, Byte useragent, Byte cookie, Byte cookiejar, Byte cookiefile, Byte altsvc,  cookiesession,  encoding,  tr_encoding, long authtype,  use_resume,  resume_from_current,  disable_epsv,  disable_eprt,  ftp_pret, long proto,  proto_present, long proto_redir,  proto_redir_present, Byte proto_default, Object resume_from, byte[] postfields, Object postfieldsize, Byte referer, double timeout, double connecttimeout, long maxredirs, Object max_filesize, Byte headerfile, Byte ftpport, Byte iface, long localport, long localportrange, int porttouse, Byte range, long low_speed_limit, long low_speed_time, Byte dns_servers, Byte dns_interface, Byte dns_ipv4_addr, Byte dns_ipv6_addr, Byte userpwd, Byte login_options, Byte tls_username, Byte tls_password, Byte tls_authtype, Byte proxy_tls_username, Byte proxy_tls_password, Byte proxy_tls_authtype, Byte proxyuserpwd, Byte proxy, int proxyver, Byte noproxy, Byte mail_from, curl_slist mail_rcpt, Byte mail_auth, Byte sasl_authzid,  sasl_ir,  proxytunnel,  ftp_append,  use_ascii,  autoreferer,  failonerror,  show_headers,  no_body,  dirlistonly,  followlocation,  unrestricted_auth,  netrc_opt,  netrc, Byte netrc_file, getout url_list, getout url_last, getout url_get, getout url_out, getout url_ul, Byte doh_url, Byte cipher_list, Byte proxy_cipher_list, Byte cipher13_list, Byte proxy_cipher13_list, Byte cert, Byte proxy_cert, Byte cert_type, Byte proxy_cert_type, Byte cacert, Byte proxy_cacert, Byte capath, Byte proxy_capath, Byte crlfile, Byte proxy_crlfile, Byte pinnedpubkey, Byte proxy_pinnedpubkey, Byte key, Byte proxy_key, Byte key_type, Byte proxy_key_type, Byte key_passwd, Byte proxy_key_passwd, Byte pubkey, Byte hostpubmd5, Byte engine,  crlf, Byte customrequest, Byte krblevel, Byte request_target, long httpversion,  http09_allowed,  nobuffer,  readbusy,  globoff,  use_httpget,  insecure_ok,  proxy_insecure_ok,  terminal_binary_ok,  verifystatus,  create_dirs,  ftp_create_dirs,  ftp_skip_ip,  proxynegotiate,  proxyntlm,  proxydigest,  proxybasic,  proxyanyauth, Byte writeout, curl_slist quote, curl_slist postquote, curl_slist prequote, long ssl_version, long ssl_version_max, long proxy_ssl_version, long ip_version, Object timecond, Object condtime, curl_slist headers, curl_slist proxyheaders, tool_mime mimeroot, tool_mime mimecurrent, Object mimepost, curl_slist telnet_options, curl_slist resolve, curl_slist connect_to,  httpreq, Object sendpersecond, Object recvpersecond,  ftp_ssl,  ftp_ssl_reqd,  ftp_ssl_control,  ftp_ssl_ccc, int ftp_ssl_ccc_mode, Byte preproxy, int socks5_gssapi_nec, long socks5_auth, Byte proxy_service_name, Byte service_name,  tcp_nodelay,  tcp_fastopen, long req_retry,  retry_connrefused, long retry_delay, long retry_maxtime, Byte ftp_account, Byte ftp_alternative_to_user, int ftp_filemethod, long tftp_blksize,  tftp_no_options,  ignorecl,  disable_sessionid,  raw,  post301,  post302,  post303,  nokeepalive, long alivetime,  content_disposition, int default_node_flags,  xattr, long gssapi_delegation,  ssl_allow_beast,  proxy_ssl_allow_beast,  ssl_no_revoke,  use_metalink, metalinkfile metalinkfile_list, metalinkfile metalinkfile_last, Byte oauth_bearer,  nonpn,  noalpn, Byte unix_socket_path,  abstract_unix_socket,  falsestart,  path_as_is, double expect100timeout,  suppress_connect_headers,  synthetic_error,  ssh_compression, long happy_eyeballs_timeout_ms,  haproxy_protocol,  disallow_username_in_url, GlobalConfig global, OperationConfig prev, OperationConfig next, State state) {
 		setRemote_time(remote_time);
 		setRandom_file(random_file);
 		setEgd_file(egd_file);
@@ -438,12 +438,373 @@ public class OperationConfig {
 	 * KIND, either express or implied.
 	 *
 	 ***************************************************************************/
+	/* keep this as LAST include */
+	public void config_init() {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.config, 0, /*Error: Unsupported expression*/);
+		ModernizedCProgram.config.setPostfieldsize(-1);
+		ModernizedCProgram.config.setUse_httpget(0);
+		ModernizedCProgram.config.setCreate_dirs(0);
+		ModernizedCProgram.config.setMaxredirs(-1024);
+		ModernizedCProgram.config.setProto(CURLPROTO_ALL);
+		ModernizedCProgram.config.setProto_present(0);
+		ModernizedCProgram.config.setProto_redir(/* All except FILE, SCP and SMB */CURLPROTO_ALL & ~(CURLPROTO_FILE | CURLPROTO_SCP | CURLPROTO_SMB | CURLPROTO_SMBS));
+		ModernizedCProgram.config.setProto_redir_present(0);
+		ModernizedCProgram.config.setProto_default(((Object)0));
+		ModernizedCProgram.config.setTcp_nodelay(/* enabled by default */1);
+		ModernizedCProgram.config.setHappy_eyeballs_timeout_ms(CURL_HET_DEFAULT);
+		ModernizedCProgram.config.setHttp09_allowed(0);
+	}
+	public void free_config_fields() {
+		getout urlnode = new getout();
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getRandom_file()));
+			(ModernizedCProgram.config.getRandom_file()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getEgd_file()));
+			(ModernizedCProgram.config.getEgd_file()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getUseragent()));
+			(ModernizedCProgram.config.getUseragent()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getAltsvc()));
+			(ModernizedCProgram.config.getAltsvc()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCookie()));
+			(ModernizedCProgram.config.getCookie()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCookiejar()));
+			(ModernizedCProgram.config.getCookiejar()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCookiefile()));
+			(ModernizedCProgram.config.getCookiefile()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getPostfields()));
+			(ModernizedCProgram.config.getPostfields()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getReferer()));
+			(ModernizedCProgram.config.getReferer()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getHeaderfile()));
+			(ModernizedCProgram.config.getHeaderfile()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getFtpport()));
+			(ModernizedCProgram.config.getFtpport()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getIface()));
+			(ModernizedCProgram.config.getIface()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getRange()));
+			(ModernizedCProgram.config.getRange()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getUserpwd()));
+			(ModernizedCProgram.config.getUserpwd()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getTls_username()));
+			(ModernizedCProgram.config.getTls_username()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getTls_password()));
+			(ModernizedCProgram.config.getTls_password()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getTls_authtype()));
+			(ModernizedCProgram.config.getTls_authtype()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_tls_username()));
+			(ModernizedCProgram.config.getProxy_tls_username()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_tls_password()));
+			(ModernizedCProgram.config.getProxy_tls_password()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_tls_authtype()));
+			(ModernizedCProgram.config.getProxy_tls_authtype()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxyuserpwd()));
+			(ModernizedCProgram.config.getProxyuserpwd()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy()));
+			(ModernizedCProgram.config.getProxy()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getDns_ipv6_addr()));
+			(ModernizedCProgram.config.getDns_ipv6_addr()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getDns_ipv4_addr()));
+			(ModernizedCProgram.config.getDns_ipv4_addr()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getDns_interface()));
+			(ModernizedCProgram.config.getDns_interface()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getDns_servers()));
+			(ModernizedCProgram.config.getDns_servers()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getNoproxy()));
+			(ModernizedCProgram.config.getNoproxy()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getMail_from()));
+			(ModernizedCProgram.config.getMail_from()) = ((Object)0);
+		} while (0);
+		ModernizedCProgram.config.getMail_rcpt().curl_slist_free_all();
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getMail_auth()));
+			(ModernizedCProgram.config.getMail_auth()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getNetrc_file()));
+			(ModernizedCProgram.config.getNetrc_file()) = ((Object)0);
+		} while (0);
+		urlnode = ModernizedCProgram.config.getUrl_list();
+		getout generatedNext = urlnode.getNext();
+		Byte generatedUrl = urlnode.getUrl();
+		Byte generatedOutfile = urlnode.getOutfile();
+		Byte generatedInfile = urlnode.getInfile();
+		while (urlnode) {
+			getout next = generatedNext;
+			do {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((generatedUrl));
+				(generatedUrl) = ((Object)0);
+			} while (0);
+			do {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((generatedOutfile));
+				(generatedOutfile) = ((Object)0);
+			} while (0);
+			do {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((generatedInfile));
+				(generatedInfile) = ((Object)0);
+			} while (0);
+			do {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((urlnode));
+				(urlnode) = ((Object)0);
+			} while (0);
+			urlnode = next;
+		}
+		ModernizedCProgram.config.setUrl_list(((Object)0));
+		ModernizedCProgram.config.setUrl_last(((Object)0));
+		ModernizedCProgram.config.setUrl_get(((Object)0));
+		ModernizedCProgram.config.setUrl_out(((Object)0));
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getDoh_url()));
+			(ModernizedCProgram.config.getDoh_url()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCipher_list()));
+			(ModernizedCProgram.config.getCipher_list()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_cipher_list()));
+			(ModernizedCProgram.config.getProxy_cipher_list()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCert()));
+			(ModernizedCProgram.config.getCert()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_cert()));
+			(ModernizedCProgram.config.getProxy_cert()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCert_type()));
+			(ModernizedCProgram.config.getCert_type()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_cert_type()));
+			(ModernizedCProgram.config.getProxy_cert_type()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCacert()));
+			(ModernizedCProgram.config.getCacert()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_cacert()));
+			(ModernizedCProgram.config.getProxy_cacert()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCapath()));
+			(ModernizedCProgram.config.getCapath()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_capath()));
+			(ModernizedCProgram.config.getProxy_capath()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCrlfile()));
+			(ModernizedCProgram.config.getCrlfile()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getPinnedpubkey()));
+			(ModernizedCProgram.config.getPinnedpubkey()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_pinnedpubkey()));
+			(ModernizedCProgram.config.getProxy_pinnedpubkey()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_crlfile()));
+			(ModernizedCProgram.config.getProxy_crlfile()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getKey()));
+			(ModernizedCProgram.config.getKey()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_key()));
+			(ModernizedCProgram.config.getProxy_key()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getKey_type()));
+			(ModernizedCProgram.config.getKey_type()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_key_type()));
+			(ModernizedCProgram.config.getProxy_key_type()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getKey_passwd()));
+			(ModernizedCProgram.config.getKey_passwd()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_key_passwd()));
+			(ModernizedCProgram.config.getProxy_key_passwd()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getPubkey()));
+			(ModernizedCProgram.config.getPubkey()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getHostpubmd5()));
+			(ModernizedCProgram.config.getHostpubmd5()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getEngine()));
+			(ModernizedCProgram.config.getEngine()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getRequest_target()));
+			(ModernizedCProgram.config.getRequest_target()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCustomrequest()));
+			(ModernizedCProgram.config.getCustomrequest()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getKrblevel()));
+			(ModernizedCProgram.config.getKrblevel()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getOauth_bearer()));
+			(ModernizedCProgram.config.getOauth_bearer()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getSasl_authzid()));
+			(ModernizedCProgram.config.getSasl_authzid()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getUnix_socket_path()));
+			(ModernizedCProgram.config.getUnix_socket_path()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getWriteout()));
+			(ModernizedCProgram.config.getWriteout()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProto_default()));
+			(ModernizedCProgram.config.getProto_default()) = ((Object)0);
+		} while (0);
+		ModernizedCProgram.config.getQuote().curl_slist_free_all();
+		ModernizedCProgram.config.getPostquote().curl_slist_free_all();
+		ModernizedCProgram.config.getPrequote().curl_slist_free_all();
+		ModernizedCProgram.config.getHeaders().curl_slist_free_all();
+		ModernizedCProgram.config.getProxyheaders().curl_slist_free_all();
+		ModernizedCProgram.curl_mime_free(ModernizedCProgram.config.getMimepost());
+		ModernizedCProgram.config.setMimepost(((Object)0));
+		ModernizedCProgram.config.getMimeroot().tool_mime_free();
+		ModernizedCProgram.config.setMimeroot(((Object)0));
+		ModernizedCProgram.config.setMimecurrent(((Object)0));
+		ModernizedCProgram.config.getTelnet_options().curl_slist_free_all();
+		ModernizedCProgram.config.getResolve().curl_slist_free_all();
+		ModernizedCProgram.config.getConnect_to().curl_slist_free_all();
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getPreproxy()));
+			(ModernizedCProgram.config.getPreproxy()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getProxy_service_name()));
+			(ModernizedCProgram.config.getProxy_service_name()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getService_name()));
+			(ModernizedCProgram.config.getService_name()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getFtp_account()));
+			(ModernizedCProgram.config.getFtp_account()) = ((Object)0);
+		} while (0);
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getFtp_alternative_to_user()));
+			(ModernizedCProgram.config.getFtp_alternative_to_user()) = ((Object)0);
+		} while (0);
+	}
+	public void config_free() {
+		OperationConfig last = ModernizedCProgram.config;
+		OperationConfig generatedPrev = last.getPrev();
+		while (/* Free each of the structures in reverse order */last) {
+			OperationConfig prev = generatedPrev;
+			last.free_config_fields();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(last);
+			last = prev;
+		}
+	}
+	/***************************************************************************
+	 *                                  _   _ ____  _
+	 *  Project                     ___| | | |  _ \| |
+	 *                             / __| | | | |_) | |
+	 *                            | (__| |_| |  _ <| |___
+	 *                             \___|\___/|_| \_\_____|
+	 *
+	 * Copyright (C) 1998 - 2019, Daniel Stenberg, <daniel@haxx.se>, et al.
+	 *
+	 * This software is licensed as described in the file COPYING, which
+	 * you should have received as part of this distribution. The terms
+	 * are also available at https://curl.haxx.se/docs/copyright.html.
+	 *
+	 * You may opt to use, copy, modify, merge, publish, distribute and/or sell
+	 * copies of the Software, and permit persons to whom the Software is
+	 * furnished to do so, under the terms of the COPYING file.
+	 *
+	 * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
+	 * KIND, either express or implied.
+	 *
+	 ***************************************************************************/
 	/* use our own printf() functions */
 	/* keep this as LAST include */
 	public void clean_getout() {
 		getout generatedNext = node.getNext();
 		Byte generatedUrl = node.getUrl();
-		byte generatedOutfile = node.getOutfile();
+		Byte generatedOutfile = node.getOutfile();
 		Byte generatedInfile = node.getInfile();
 		if (ModernizedCProgram.config) {
 			getout next = new getout();
@@ -451,25 +812,224 @@ public class OperationConfig {
 			while (node) {
 				next = generatedNext;
 				do {
-					.free((generatedUrl));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((generatedUrl));
 					(generatedUrl) = ((Object)0);
 				} while (0);
 				do {
-					.free((generatedOutfile));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((generatedOutfile));
 					(generatedOutfile) = ((Object)0);
 				} while (0);
 				do {
-					.free((generatedInfile));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((generatedInfile));
 					(generatedInfile) = ((Object)0);
 				} while (0);
 				do {
-					.free((node));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((node));
 					(node) = ((Object)0);
 				} while (0);
 				node = next;
 			}
 			ModernizedCProgram.config.setUrl_list(((Object)0));
 		} 
+	}
+	/* MSDOS && (__DJGPP__ || __GO32__) */
+	/*
+	 * Function to find CACert bundle on a Win32 platform using SearchPath.
+	 * (SearchPath is already declared via inclusions done in setup header file)
+	 * (Use the ASCII version instead of the unicode one!)
+	 * The order of the directories it searches is:
+	 *  1. application's directory
+	 *  2. current working directory
+	 *  3. Windows System directory (e.g. C:\windows\system32)
+	 *  4. Windows Directory (e.g. C:\windows)
+	 *  5. all directories along %PATH%
+	 *
+	 * For WinXP and later search order actually depends on registry value:
+	 * HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\SafeProcessSearchMode
+	 */
+	public Object FindWin32CACert(Object backend, Object bundle_file) {
+		 result = CURLE_OK/* Search and set cert file only if libcurl supports SSL.
+		   *
+		   * If Schannel is the selected SSL backend then these locations are
+		   * ignored. We allow setting CA location for schannel only when explicitly
+		   * specified by the user via CURLOPT_CAINFO / --cacert.
+		   */;
+		if ((ModernizedCProgram.curlinfo.getFeatures() & CURL_VERSION_SSL) && backend != CURLSSLBACKEND_SCHANNEL) {
+			DWORD res_len = new DWORD();
+			byte[] buf = new byte[260];
+			byte ptr = ((Object)0);
+			ModernizedCProgram.buf[0] = (byte)'\0';
+			res_len = /*Error: Function owner not recognized*/SearchPathA(((Object)0), bundle_file, ((Object)0), 260, ModernizedCProgram.buf, ptr);
+			if (res_len > 0) {
+				do {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getCacert()));
+					(ModernizedCProgram.config.getCacert()) = ((Object)0);
+				} while (0);
+				ModernizedCProgram.config.setCacert(/*Error: Function owner not recognized*/strdup(ModernizedCProgram.buf));
+				if (!ModernizedCProgram.config.getCacert()) {
+					result = CURLE_OUT_OF_MEMORY;
+				} 
+			} 
+		} 
+		return result;
+	}
+	public int SetHTTPrequest( req,  store) {
+		/* this mirrors the HttpReq enum in tool_sdecls.h */byte[] reqname = new byte[]{/* unspec */"", "GET (-G, --get)", "HEAD (-I, --head)", "multipart formpost (-F, --form)", "POST (-d, --data)"};
+		if ((store == .HTTPREQ_UNSPEC) || (store == req)) {
+			store = req;
+			return 0;
+		} 
+		ModernizedCProgram.config.getGlobal().warnf("You can only select one HTTP request method! You asked for both %s and %s.\n", reqname[req], reqname[store]);
+		return 1;
+	}
+	public void customrequest_helper( req, Byte method) {
+		/* this mirrors the HttpReq enum in tool_sdecls.h */byte[] dflt = new byte[]{"GET", "GET", "HEAD", "POST", "POST"};
+		if (!method) {
+			;
+		}  else if (ModernizedCProgram.curl_strequal(method, dflt[req])) {
+			ModernizedCProgram.config.getGlobal().notef("Unnecessary use of -X or --request, %s is already inferred.\n", dflt[req]);
+		}  else if (ModernizedCProgram.curl_strequal(method, "head")) {
+			ModernizedCProgram.config.getGlobal().warnf("Setting custom HTTP method to HEAD with -X/--request may not work the way you want. Consider using -I/--head instead.\n");
+		} 
+	}
+	public long proto2num(Long val, Object str) {
+		byte buffer;
+		byte sep = ",";
+		byte token;
+		Object[] protos = new Object[]{{"all", CURLPROTO_ALL}, {"http", CURLPROTO_HTTP}, {"https", CURLPROTO_HTTPS}, {"ftp", CURLPROTO_FTP}, {"ftps", CURLPROTO_FTPS}, {"scp", CURLPROTO_SCP}, {"sftp", CURLPROTO_SFTP}, {"telnet", CURLPROTO_TELNET}, {"ldap", CURLPROTO_LDAP}, {"ldaps", CURLPROTO_LDAPS}, {"dict", CURLPROTO_DICT}, {"file", CURLPROTO_FILE}, {"tftp", CURLPROTO_TFTP}, {"imap", CURLPROTO_IMAP}, {"imaps", CURLPROTO_IMAPS}, {"pop3", CURLPROTO_POP3}, {"pop3s", CURLPROTO_POP3S}, {"smtp", CURLPROTO_SMTP}, {"smtps", CURLPROTO_SMTPS}, {"rtsp", CURLPROTO_RTSP}, {"gopher", CURLPROTO_GOPHER}, {"smb", CURLPROTO_SMB}, {"smbs", CURLPROTO_SMBS}, {((Object)0), 0}};
+		if (!str) {
+			return 1;
+		} 
+		buffer = /*Error: Function owner not recognized*/strdup(/* because strtok corrupts it */str);
+		if (!buffer) {
+			return 1;
+		} 
+		for (token = /*Error: Function owner not recognized*/strtok(buffer, /* Allow strtok() here since this isn't used threaded *//* !checksrc! disable BANNEDFUNC 2 */sep); token; token = /*Error: Function owner not recognized*/strtok(((Object)0), sep)) {
+			Object action = e_action.allow;
+			sprotos pp = new sprotos();
+			while (!(ModernizedCProgram.Curl_isalnum((int)((byte)/* Process token modifiers *//* may be NULL if token is all modifiers */token)))) {
+				switch (token++) {
+				case (byte)'+':
+						e_action.action = e_action.allow;
+						break;
+				case (byte)'=':
+						e_action.action = e_action.set;
+						break;
+				case (byte)'-':
+						e_action.action = e_action.deny;
+						break;
+				default:
+						do {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((buffer));
+							(buffer) = ((Object)0);
+						} while (0);
+						return 1;
+				}
+			}
+			for (pp = protos; pp.getName(); pp++) {
+				if (ModernizedCProgram.curl_strequal(token, pp.getName())) {
+					switch (e_action.action) {
+					case e_action.allow:
+							val |=  pp.getBit();
+							break;
+					case e_action.set:
+							val = pp.getBit();
+							break;
+					case e_action.deny:
+							val &=  ~(pp.getBit());
+							break;
+					}
+					break;
+				} 
+			}
+			if (!(pp.getName())) {
+				if (e_action.action == e_action.set) {
+					val = 0;
+				} 
+				ModernizedCProgram.config.getGlobal().warnf("unrecognized protocol '%s'\n", token);
+			} 
+		}
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((buffer));
+			(buffer) = ((Object)0);
+		} while (0);
+		return 0/**
+		 * Check if the given string is a protocol supported by libcurl
+		 *
+		 * @param str  the protocol name
+		 * @return PARAM_OK  protocol supported
+		 * @return PARAM_LIBCURL_UNSUPPORTED_PROTOCOL  protocol not supported
+		 * @return PARAM_REQUIRES_PARAMETER   missing parameter
+		 */;
+	}
+	public int ftpfilemethod(Object str) {
+		if (ModernizedCProgram.curl_strequal("singlecwd", str)) {
+			return CURLFTPMETHOD_SINGLECWD;
+		} 
+		if (ModernizedCProgram.curl_strequal("nocwd", str)) {
+			return CURLFTPMETHOD_NOCWD;
+		} 
+		if (ModernizedCProgram.curl_strequal("multicwd", str)) {
+			return CURLFTPMETHOD_MULTICWD;
+		} 
+		ModernizedCProgram.config.getGlobal().warnf("unrecognized ftp file method '%s', using default\n", str);
+		return CURLFTPMETHOD_MULTICWD;
+	}
+	public int ftpcccmethod(Object str) {
+		if (ModernizedCProgram.curl_strequal("passive", str)) {
+			return CURLFTPSSL_CCC_PASSIVE;
+		} 
+		if (ModernizedCProgram.curl_strequal("active", str)) {
+			return CURLFTPSSL_CCC_ACTIVE;
+		} 
+		ModernizedCProgram.config.getGlobal().warnf("unrecognized ftp CCC method '%s', using default\n", str);
+		return CURLFTPSSL_CCC_PASSIVE;
+	}
+	public long delegation(Byte str) {
+		if (ModernizedCProgram.curl_strequal("none", str)) {
+			return CURLGSSAPI_DELEGATION_NONE;
+		} 
+		if (ModernizedCProgram.curl_strequal("policy", str)) {
+			return CURLGSSAPI_DELEGATION_POLICY_FLAG;
+		} 
+		if (ModernizedCProgram.curl_strequal("always", str)) {
+			return CURLGSSAPI_DELEGATION_FLAG;
+		} 
+		ModernizedCProgram.config.getGlobal().warnf("unrecognized delegation method '%s', using none\n", str);
+		return CURLGSSAPI_DELEGATION_NONE/*
+		 * my_useragent: returns allocated string with default user agent
+		 */;
+	}
+	public Object get_args(Object i) {
+		 result = CURLE_OK;
+		bool last = (ModernizedCProgram.config.getNext() ? 0 : 1);
+		if (ModernizedCProgram.config.getUserpwd() && !ModernizedCProgram.config.getOauth_bearer()) {
+			result = ModernizedCProgram.checkpasswd("host", i, last, ModernizedCProgram.config.getUserpwd());
+			if (result) {
+				return result;
+			} 
+		} 
+		if (ModernizedCProgram.config.getProxyuserpwd()) {
+			result = ModernizedCProgram.checkpasswd("proxy", i, last, ModernizedCProgram.config.getProxyuserpwd());
+			if (result) {
+				return result;
+			} 
+		} 
+		if (!ModernizedCProgram.config.getUseragent()) {
+			ModernizedCProgram.config.setUseragent(ModernizedCProgram.my_useragent());
+			if (!ModernizedCProgram.config.getUseragent()) {
+				ModernizedCProgram.config.getGlobal().getErrors().helpf("out of memory\n");
+				result = CURLE_OUT_OF_MEMORY;
+			} 
+		} 
+		return result/*
+		 * Parse the string and modify ssl_version in the val argument. Return PARAM_OK
+		 * on success, otherwise a parameter error enum. ONLY ACCEPTS POSITIVE NUMBERS!
+		 *
+		 * Since this function gets called with the 'nextarg' pointer from within the
+		 * getparameter a lot, we must check it for NULL before accessing the str
+		 * data.
+		 */;
 	}
 	public void single_transfer_cleanup() {
 		 generatedUrls = state.getUrls();
@@ -484,15 +1044,15 @@ public class OperationConfig {
 				state.setUrls(((Object)0));
 			} 
 			do {
-				.free((generatedOutfiles));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((generatedOutfiles));
 				(generatedOutfiles) = ((Object)0);
 			} while (0);
 			do {
-				.free((generatedHttpgetfields));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((generatedHttpgetfields));
 				(generatedHttpgetfields) = ((Object)0);
 			} while (0);
 			do {
-				.free((generatedUploadfile));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((generatedUploadfile));
 				(generatedUploadfile) = ((Object)0);
 			} while (0);
 			if (generatedInglob) {
@@ -501,7 +1061,7 @@ public class OperationConfig {
 			} 
 		} 
 	}
-	public int get_param_part(byte endchar, byte str, byte pdata, byte ptype, byte pfilename, byte pencoder, Object pheaders) {
+	public int get_param_part(byte endchar, Byte str, Byte pdata, Byte ptype, Byte pfilename, Byte pencoder, Object pheaders) {
 		byte p = str;
 		byte type = ((Object)0);
 		byte filename = ((Object)0);
@@ -541,24 +1101,24 @@ public class OperationConfig {
 			while ((ModernizedCProgram.Curl_isspace((int)((byte)++p)))) {
 				;
 			}
-			if (!endct && ModernizedCProgram.curl_strnequal("type=", p, .strlen("type="))) {
+			if (!endct && ModernizedCProgram.curl_strnequal("type=", p, /*Error: Function owner not recognized*/strlen("type="))) {
 				for (p += 5; (ModernizedCProgram.Curl_isspace((int)((byte)p))); p++) {
 					;
 				}
 				type = /* set type pointer */p;
-				if (2 != .sscanf(type, "%127[^/ ]/%127[^;, \n]", type_major, /* verify that this is a fine type specifier */type_minor)) {
+				if (2 != /*Error: Function owner not recognized*/sscanf(type, "%127[^/ ]/%127[^;, \n]", type_major, /* verify that this is a fine type specifier */type_minor)) {
 					ModernizedCProgram.config.getGlobal().warnf("Illegally formatted content-type field!\n");
 					headers.curl_slist_free_all();
 					return -/* illegal content-type syntax! */1;
 				} 
-				p = type + .strlen(type_major) + .strlen(type_minor) + /* now point beyond the content-type specifier */1;
+				p = type + /*Error: Function owner not recognized*/strlen(type_major) + /*Error: Function owner not recognized*/strlen(type_minor) + /* now point beyond the content-type specifier */1;
 				for (endct = p; p && p != (byte)';' && p != endchar; p++) {
 					if (!(ModernizedCProgram.Curl_isspace((int)((byte)p)))) {
 						endct = p + 1;
 					} 
 				}
 				sep = p;
-			}  else if (ModernizedCProgram.curl_strnequal("filename=", p, .strlen("filename="))) {
+			}  else if (ModernizedCProgram.curl_strnequal("filename=", p, /*Error: Function owner not recognized*/strlen("filename="))) {
 				if (endct) {
 					endct = (byte)'\0';
 					endct = ((Object)0);
@@ -575,7 +1135,7 @@ public class OperationConfig {
 				} 
 				sep = p;
 				endpos = (byte)'\0';
-			}  else if (ModernizedCProgram.curl_strnequal("headers=", p, .strlen("headers="))) {
+			}  else if (ModernizedCProgram.curl_strnequal("headers=", p, /*Error: Function owner not recognized*/strlen("headers="))) {
 				if (endct) {
 					endct = (byte)'\0';
 					endct = ((Object)0);
@@ -596,12 +1156,12 @@ public class OperationConfig {
 					} 
 					sep = p;
 					endpos = (byte)'\0';
-					fp = .fopen(hdrfile, "rt");
+					fp = /*Error: Function owner not recognized*/fopen(hdrfile, "rt");
 					if (!fp) {
-						ModernizedCProgram.config.getGlobal().warnf("Cannot read from %s: %s\n", hdrfile, .strerror((._errno())));
+						ModernizedCProgram.config.getGlobal().warnf("Cannot read from %s: %s\n", hdrfile, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 					} else {
 							int i = ModernizedCProgram.read_field_headers(ModernizedCProgram.config, hdrfile, fp, headers);
-							.fclose(fp);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fp);
 							if (i) {
 								headers.curl_slist_free_all();
 								return -1;
@@ -627,7 +1187,7 @@ public class OperationConfig {
 							return -1;
 						} 
 				} 
-			}  else if (ModernizedCProgram.curl_strnequal("encoder=", p, .strlen("encoder="))) {
+			}  else if (ModernizedCProgram.curl_strnequal("encoder=", p, /*Error: Function owner not recognized*/strlen("encoder="))) {
 				if (endct) {
 					endct = (byte)'\0';
 					endct = ((Object)0);
@@ -732,566 +1292,6 @@ public class OperationConfig {
 		 * tobe quoted contains '"' or '\', '"' and '\' must be escaped by backslash.
 		 *
 		 ***************************************************************************/;
-	}
-	public int SetHTTPrequest( req,  store) {
-		/* this mirrors the HttpReq enum in tool_sdecls.h */byte[] reqname = new byte[]{/* unspec */"", "GET (-G, --get)", "HEAD (-I, --head)", "multipart formpost (-F, --form)", "POST (-d, --data)"};
-		if ((store == .HTTPREQ_UNSPEC) || (store == req)) {
-			store = req;
-			return 0;
-		} 
-		ModernizedCProgram.config.getGlobal().warnf("You can only select one HTTP request method! You asked for both %s and %s.\n", reqname[req], reqname[store]);
-		return 1;
-	}
-	public void customrequest_helper( req, Byte method) {
-		/* this mirrors the HttpReq enum in tool_sdecls.h */byte[] dflt = new byte[]{"GET", "GET", "HEAD", "POST", "POST"};
-		if (!method) {
-			;
-		}  else if (ModernizedCProgram.curl_strequal(method, dflt[req])) {
-			ModernizedCProgram.config.getGlobal().notef("Unnecessary use of -X or --request, %s is already inferred.\n", dflt[req]);
-		}  else if (ModernizedCProgram.curl_strequal(method, "head")) {
-			ModernizedCProgram.config.getGlobal().warnf("Setting custom HTTP method to HEAD with -X/--request may not work the way you want. Consider using -I/--head instead.\n");
-		} 
-	}
-	/* MSDOS && (__DJGPP__ || __GO32__) */
-	/*
-	 * Function to find CACert bundle on a Win32 platform using SearchPath.
-	 * (SearchPath is already declared via inclusions done in setup header file)
-	 * (Use the ASCII version instead of the unicode one!)
-	 * The order of the directories it searches is:
-	 *  1. application's directory
-	 *  2. current working directory
-	 *  3. Windows System directory (e.g. C:\windows\system32)
-	 *  4. Windows Directory (e.g. C:\windows)
-	 *  5. all directories along %PATH%
-	 *
-	 * For WinXP and later search order actually depends on registry value:
-	 * HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\SafeProcessSearchMode
-	 */
-	public Object FindWin32CACert(Object backend, Object bundle_file) {
-		 result = CURLE_OK/* Search and set cert file only if libcurl supports SSL.
-		   *
-		   * If Schannel is the selected SSL backend then these locations are
-		   * ignored. We allow setting CA location for schannel only when explicitly
-		   * specified by the user via CURLOPT_CAINFO / --cacert.
-		   */;
-		if ((ModernizedCProgram.curlinfo.getFeatures() & CURL_VERSION_SSL) && backend != CURLSSLBACKEND_SCHANNEL) {
-			DWORD res_len = new DWORD();
-			byte[] buf = new byte[260];
-			byte ptr = ((Object)0);
-			ModernizedCProgram.buf[0] = (byte)'\0';
-			res_len = .SearchPathA(((Object)0), bundle_file, ((Object)0), 260, ModernizedCProgram.buf, ptr);
-			if (res_len > 0) {
-				do {
-					.free((ModernizedCProgram.config.getCacert()));
-					(ModernizedCProgram.config.getCacert()) = ((Object)0);
-				} while (0);
-				ModernizedCProgram.config.setCacert(.strdup(ModernizedCProgram.buf));
-				if (!ModernizedCProgram.config.getCacert()) {
-					result = CURLE_OUT_OF_MEMORY;
-				} 
-			} 
-		} 
-		return result;
-	}
-	public long proto2num(long val, Object str) {
-		byte buffer;
-		byte sep = ",";
-		byte token;
-		Object[] protos = new Object[]{{"all", CURLPROTO_ALL}, {"http", CURLPROTO_HTTP}, {"https", CURLPROTO_HTTPS}, {"ftp", CURLPROTO_FTP}, {"ftps", CURLPROTO_FTPS}, {"scp", CURLPROTO_SCP}, {"sftp", CURLPROTO_SFTP}, {"telnet", CURLPROTO_TELNET}, {"ldap", CURLPROTO_LDAP}, {"ldaps", CURLPROTO_LDAPS}, {"dict", CURLPROTO_DICT}, {"file", CURLPROTO_FILE}, {"tftp", CURLPROTO_TFTP}, {"imap", CURLPROTO_IMAP}, {"imaps", CURLPROTO_IMAPS}, {"pop3", CURLPROTO_POP3}, {"pop3s", CURLPROTO_POP3S}, {"smtp", CURLPROTO_SMTP}, {"smtps", CURLPROTO_SMTPS}, {"rtsp", CURLPROTO_RTSP}, {"gopher", CURLPROTO_GOPHER}, {"smb", CURLPROTO_SMB}, {"smbs", CURLPROTO_SMBS}, {((Object)0), 0}};
-		if (!str) {
-			return 1;
-		} 
-		buffer = .strdup(/* because strtok corrupts it */str);
-		if (!buffer) {
-			return 1;
-		} 
-		for (token = .strtok(buffer, /* Allow strtok() here since this isn't used threaded *//* !checksrc! disable BANNEDFUNC 2 */sep); token; token = .strtok(((Object)0), sep)) {
-			Object action = e_action.allow;
-			sprotos pp = new sprotos();
-			while (!(ModernizedCProgram.Curl_isalnum((int)((byte)/* Process token modifiers *//* may be NULL if token is all modifiers */token)))) {
-				switch (token++) {
-				case (byte)'-':
-						e_action.action = e_action.deny;
-						break;
-				case (byte)'+':
-						e_action.action = e_action.allow;
-						break;
-				case (byte)'=':
-						e_action.action = e_action.set;
-						break;
-				default:
-						do {
-							.free((buffer));
-							(buffer) = ((Object)0);
-						} while (0);
-						return 1;
-				}
-			}
-			for (pp = protos; pp.getName(); pp++) {
-				if (ModernizedCProgram.curl_strequal(token, pp.getName())) {
-					switch (e_action.action) {
-					case e_action.deny:
-							val &=  ~(pp.getBit());
-							break;
-					case e_action.allow:
-							val |=  pp.getBit();
-							break;
-					case e_action.set:
-							val = pp.getBit();
-							break;
-					}
-					break;
-				} 
-			}
-			if (!(pp.getName())) {
-				if (e_action.action == e_action.set) {
-					val = 0;
-				} 
-				ModernizedCProgram.config.getGlobal().warnf("unrecognized protocol '%s'\n", token);
-			} 
-		}
-		do {
-			.free((buffer));
-			(buffer) = ((Object)0);
-		} while (0);
-		return 0/**
-		 * Check if the given string is a protocol supported by libcurl
-		 *
-		 * @param str  the protocol name
-		 * @return PARAM_OK  protocol supported
-		 * @return PARAM_LIBCURL_UNSUPPORTED_PROTOCOL  protocol not supported
-		 * @return PARAM_REQUIRES_PARAMETER   missing parameter
-		 */;
-	}
-	public int ftpfilemethod(Object str) {
-		if (ModernizedCProgram.curl_strequal("singlecwd", str)) {
-			return CURLFTPMETHOD_SINGLECWD;
-		} 
-		if (ModernizedCProgram.curl_strequal("nocwd", str)) {
-			return CURLFTPMETHOD_NOCWD;
-		} 
-		if (ModernizedCProgram.curl_strequal("multicwd", str)) {
-			return CURLFTPMETHOD_MULTICWD;
-		} 
-		ModernizedCProgram.config.getGlobal().warnf("unrecognized ftp file method '%s', using default\n", str);
-		return CURLFTPMETHOD_MULTICWD;
-	}
-	public int ftpcccmethod(Object str) {
-		if (ModernizedCProgram.curl_strequal("passive", str)) {
-			return CURLFTPSSL_CCC_PASSIVE;
-		} 
-		if (ModernizedCProgram.curl_strequal("active", str)) {
-			return CURLFTPSSL_CCC_ACTIVE;
-		} 
-		ModernizedCProgram.config.getGlobal().warnf("unrecognized ftp CCC method '%s', using default\n", str);
-		return CURLFTPSSL_CCC_PASSIVE;
-	}
-	public long delegation(Byte str) {
-		if (ModernizedCProgram.curl_strequal("none", str)) {
-			return CURLGSSAPI_DELEGATION_NONE;
-		} 
-		if (ModernizedCProgram.curl_strequal("policy", str)) {
-			return CURLGSSAPI_DELEGATION_POLICY_FLAG;
-		} 
-		if (ModernizedCProgram.curl_strequal("always", str)) {
-			return CURLGSSAPI_DELEGATION_FLAG;
-		} 
-		ModernizedCProgram.config.getGlobal().warnf("unrecognized delegation method '%s', using none\n", str);
-		return CURLGSSAPI_DELEGATION_NONE/*
-		 * my_useragent: returns allocated string with default user agent
-		 */;
-	}
-	public Object get_args(Object i) {
-		 result = CURLE_OK;
-		bool last = (ModernizedCProgram.config.getNext() ? 0 : 1);
-		if (ModernizedCProgram.config.getUserpwd() && !ModernizedCProgram.config.getOauth_bearer()) {
-			result = ModernizedCProgram.checkpasswd("host", i, last, ModernizedCProgram.config.getUserpwd());
-			if (result) {
-				return result;
-			} 
-		} 
-		if (ModernizedCProgram.config.getProxyuserpwd()) {
-			result = ModernizedCProgram.checkpasswd("proxy", i, last, ModernizedCProgram.config.getProxyuserpwd());
-			if (result) {
-				return result;
-			} 
-		} 
-		if (!ModernizedCProgram.config.getUseragent()) {
-			ModernizedCProgram.config.setUseragent(ModernizedCProgram.my_useragent());
-			if (!ModernizedCProgram.config.getUseragent()) {
-				ModernizedCProgram.config.getGlobal().getErrors().helpf("out of memory\n");
-				result = CURLE_OUT_OF_MEMORY;
-			} 
-		} 
-		return result/*
-		 * Parse the string and modify ssl_version in the val argument. Return PARAM_OK
-		 * on success, otherwise a parameter error enum. ONLY ACCEPTS POSITIVE NUMBERS!
-		 *
-		 * Since this function gets called with the 'nextarg' pointer from within the
-		 * getparameter a lot, we must check it for NULL before accessing the str
-		 * data.
-		 */;
-	}
-	/***************************************************************************
-	 *                                  _   _ ____  _
-	 *  Project                     ___| | | |  _ \| |
-	 *                             / __| | | | |_) | |
-	 *                            | (__| |_| |  _ <| |___
-	 *                             \___|\___/|_| \_\_____|
-	 *
-	 * Copyright (C) 1998 - 2019, Daniel Stenberg, <daniel@haxx.se>, et al.
-	 *
-	 * This software is licensed as described in the file COPYING, which
-	 * you should have received as part of this distribution. The terms
-	 * are also available at https://curl.haxx.se/docs/copyright.html.
-	 *
-	 * You may opt to use, copy, modify, merge, publish, distribute and/or sell
-	 * copies of the Software, and permit persons to whom the Software is
-	 * furnished to do so, under the terms of the COPYING file.
-	 *
-	 * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
-	 * KIND, either express or implied.
-	 *
-	 ***************************************************************************/
-	/* keep this as LAST include */
-	public void config_init() {
-		.memset(ModernizedCProgram.config, 0, );
-		ModernizedCProgram.config.setPostfieldsize(-1);
-		ModernizedCProgram.config.setUse_httpget(0);
-		ModernizedCProgram.config.setCreate_dirs(0);
-		ModernizedCProgram.config.setMaxredirs(-1024);
-		ModernizedCProgram.config.setProto(CURLPROTO_ALL);
-		ModernizedCProgram.config.setProto_present(0);
-		ModernizedCProgram.config.setProto_redir(/* All except FILE, SCP and SMB */CURLPROTO_ALL & ~(CURLPROTO_FILE | CURLPROTO_SCP | CURLPROTO_SMB | CURLPROTO_SMBS));
-		ModernizedCProgram.config.setProto_redir_present(0);
-		ModernizedCProgram.config.setProto_default(((Object)0));
-		ModernizedCProgram.config.setTcp_nodelay(/* enabled by default */1);
-		ModernizedCProgram.config.setHappy_eyeballs_timeout_ms(CURL_HET_DEFAULT);
-		ModernizedCProgram.config.setHttp09_allowed(0);
-	}
-	public void free_config_fields() {
-		getout urlnode = new getout();
-		do {
-			.free((ModernizedCProgram.config.getRandom_file()));
-			(ModernizedCProgram.config.getRandom_file()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getEgd_file()));
-			(ModernizedCProgram.config.getEgd_file()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getUseragent()));
-			(ModernizedCProgram.config.getUseragent()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getAltsvc()));
-			(ModernizedCProgram.config.getAltsvc()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getCookie()));
-			(ModernizedCProgram.config.getCookie()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getCookiejar()));
-			(ModernizedCProgram.config.getCookiejar()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getCookiefile()));
-			(ModernizedCProgram.config.getCookiefile()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getPostfields()));
-			(ModernizedCProgram.config.getPostfields()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getReferer()));
-			(ModernizedCProgram.config.getReferer()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getHeaderfile()));
-			(ModernizedCProgram.config.getHeaderfile()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getFtpport()));
-			(ModernizedCProgram.config.getFtpport()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getIface()));
-			(ModernizedCProgram.config.getIface()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getRange()));
-			(ModernizedCProgram.config.getRange()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getUserpwd()));
-			(ModernizedCProgram.config.getUserpwd()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getTls_username()));
-			(ModernizedCProgram.config.getTls_username()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getTls_password()));
-			(ModernizedCProgram.config.getTls_password()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getTls_authtype()));
-			(ModernizedCProgram.config.getTls_authtype()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_tls_username()));
-			(ModernizedCProgram.config.getProxy_tls_username()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_tls_password()));
-			(ModernizedCProgram.config.getProxy_tls_password()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_tls_authtype()));
-			(ModernizedCProgram.config.getProxy_tls_authtype()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxyuserpwd()));
-			(ModernizedCProgram.config.getProxyuserpwd()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy()));
-			(ModernizedCProgram.config.getProxy()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getDns_ipv6_addr()));
-			(ModernizedCProgram.config.getDns_ipv6_addr()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getDns_ipv4_addr()));
-			(ModernizedCProgram.config.getDns_ipv4_addr()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getDns_interface()));
-			(ModernizedCProgram.config.getDns_interface()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getDns_servers()));
-			(ModernizedCProgram.config.getDns_servers()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getNoproxy()));
-			(ModernizedCProgram.config.getNoproxy()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getMail_from()));
-			(ModernizedCProgram.config.getMail_from()) = ((Object)0);
-		} while (0);
-		ModernizedCProgram.config.getMail_rcpt().curl_slist_free_all();
-		do {
-			.free((ModernizedCProgram.config.getMail_auth()));
-			(ModernizedCProgram.config.getMail_auth()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getNetrc_file()));
-			(ModernizedCProgram.config.getNetrc_file()) = ((Object)0);
-		} while (0);
-		urlnode = ModernizedCProgram.config.getUrl_list();
-		getout generatedNext = urlnode.getNext();
-		Byte generatedUrl = urlnode.getUrl();
-		byte generatedOutfile = urlnode.getOutfile();
-		Byte generatedInfile = urlnode.getInfile();
-		while (urlnode) {
-			getout next = generatedNext;
-			do {
-				.free((generatedUrl));
-				(generatedUrl) = ((Object)0);
-			} while (0);
-			do {
-				.free((generatedOutfile));
-				(generatedOutfile) = ((Object)0);
-			} while (0);
-			do {
-				.free((generatedInfile));
-				(generatedInfile) = ((Object)0);
-			} while (0);
-			do {
-				.free((urlnode));
-				(urlnode) = ((Object)0);
-			} while (0);
-			urlnode = next;
-		}
-		ModernizedCProgram.config.setUrl_list(((Object)0));
-		ModernizedCProgram.config.setUrl_last(((Object)0));
-		ModernizedCProgram.config.setUrl_get(((Object)0));
-		ModernizedCProgram.config.setUrl_out(((Object)0));
-		do {
-			.free((ModernizedCProgram.config.getDoh_url()));
-			(ModernizedCProgram.config.getDoh_url()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getCipher_list()));
-			(ModernizedCProgram.config.getCipher_list()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_cipher_list()));
-			(ModernizedCProgram.config.getProxy_cipher_list()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getCert()));
-			(ModernizedCProgram.config.getCert()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_cert()));
-			(ModernizedCProgram.config.getProxy_cert()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getCert_type()));
-			(ModernizedCProgram.config.getCert_type()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_cert_type()));
-			(ModernizedCProgram.config.getProxy_cert_type()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getCacert()));
-			(ModernizedCProgram.config.getCacert()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_cacert()));
-			(ModernizedCProgram.config.getProxy_cacert()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getCapath()));
-			(ModernizedCProgram.config.getCapath()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_capath()));
-			(ModernizedCProgram.config.getProxy_capath()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getCrlfile()));
-			(ModernizedCProgram.config.getCrlfile()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getPinnedpubkey()));
-			(ModernizedCProgram.config.getPinnedpubkey()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_pinnedpubkey()));
-			(ModernizedCProgram.config.getProxy_pinnedpubkey()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_crlfile()));
-			(ModernizedCProgram.config.getProxy_crlfile()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getKey()));
-			(ModernizedCProgram.config.getKey()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_key()));
-			(ModernizedCProgram.config.getProxy_key()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getKey_type()));
-			(ModernizedCProgram.config.getKey_type()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_key_type()));
-			(ModernizedCProgram.config.getProxy_key_type()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getKey_passwd()));
-			(ModernizedCProgram.config.getKey_passwd()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_key_passwd()));
-			(ModernizedCProgram.config.getProxy_key_passwd()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getPubkey()));
-			(ModernizedCProgram.config.getPubkey()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getHostpubmd5()));
-			(ModernizedCProgram.config.getHostpubmd5()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getEngine()));
-			(ModernizedCProgram.config.getEngine()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getRequest_target()));
-			(ModernizedCProgram.config.getRequest_target()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getCustomrequest()));
-			(ModernizedCProgram.config.getCustomrequest()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getKrblevel()));
-			(ModernizedCProgram.config.getKrblevel()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getOauth_bearer()));
-			(ModernizedCProgram.config.getOauth_bearer()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getSasl_authzid()));
-			(ModernizedCProgram.config.getSasl_authzid()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getUnix_socket_path()));
-			(ModernizedCProgram.config.getUnix_socket_path()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getWriteout()));
-			(ModernizedCProgram.config.getWriteout()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProto_default()));
-			(ModernizedCProgram.config.getProto_default()) = ((Object)0);
-		} while (0);
-		ModernizedCProgram.config.getQuote().curl_slist_free_all();
-		ModernizedCProgram.config.getPostquote().curl_slist_free_all();
-		ModernizedCProgram.config.getPrequote().curl_slist_free_all();
-		ModernizedCProgram.config.getHeaders().curl_slist_free_all();
-		ModernizedCProgram.config.getProxyheaders().curl_slist_free_all();
-		ModernizedCProgram.curl_mime_free(ModernizedCProgram.config.getMimepost());
-		ModernizedCProgram.config.setMimepost(((Object)0));
-		ModernizedCProgram.config.getMimeroot().tool_mime_free();
-		ModernizedCProgram.config.setMimeroot(((Object)0));
-		ModernizedCProgram.config.setMimecurrent(((Object)0));
-		ModernizedCProgram.config.getTelnet_options().curl_slist_free_all();
-		ModernizedCProgram.config.getResolve().curl_slist_free_all();
-		ModernizedCProgram.config.getConnect_to().curl_slist_free_all();
-		do {
-			.free((ModernizedCProgram.config.getPreproxy()));
-			(ModernizedCProgram.config.getPreproxy()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getProxy_service_name()));
-			(ModernizedCProgram.config.getProxy_service_name()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getService_name()));
-			(ModernizedCProgram.config.getService_name()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getFtp_account()));
-			(ModernizedCProgram.config.getFtp_account()) = ((Object)0);
-		} while (0);
-		do {
-			.free((ModernizedCProgram.config.getFtp_alternative_to_user()));
-			(ModernizedCProgram.config.getFtp_alternative_to_user()) = ((Object)0);
-		} while (0);
-	}
-	public void config_free() {
-		OperationConfig last = ModernizedCProgram.config;
-		OperationConfig generatedPrev = last.getPrev();
-		while (/* Free each of the structures in reverse order */last) {
-			OperationConfig prev = generatedPrev;
-			last.free_config_fields();
-			.free(last);
-			last = prev;
-		}
 	}
 	public  getRemote_time() {
 		return remote_time;
@@ -1431,10 +1431,10 @@ public class OperationConfig {
 	public void setResume_from(Object newResume_from) {
 		resume_from = newResume_from;
 	}
-	public Byte getPostfields() {
+	public byte[] getPostfields() {
 		return postfields;
 	}
-	public void setPostfields(Byte newPostfields) {
+	public void setPostfields(byte[] newPostfields) {
 		postfields = newPostfields;
 	}
 	public Object getPostfieldsize() {

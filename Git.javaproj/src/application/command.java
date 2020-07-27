@@ -1,24 +1,12 @@
 package application;
 
 public class command {
-	private command next;
-	private Object error_string;
-	private int skip_update;
-	private int did_not_exist;
-	private int index;
-	private object_id old_oid;
-	private object_id new_oid;
-	private Object ref_name;
+	private Object name;
+	private Object func;
 	
-	public command(command next, Object error_string, int skip_update, int did_not_exist, int index, object_id old_oid, object_id new_oid, Object ref_name) {
-		setNext(next);
-		setError_string(error_string);
-		setSkip_update(skip_update);
-		setDid_not_exist(did_not_exist);
-		setIndex(index);
-		setOld_oid(old_oid);
-		setNew_oid(new_oid);
-		setRef_name(ref_name);
+	public command(Object name, Object func) {
+		setName(name);
+		setFunc(func);
 	}
 	public command() {
 	}
@@ -49,9 +37,9 @@ public class command {
 		} 
 		Object generatedRef_name = this.getRef_name();
 		argv[1] = generatedRef_name;
-		object_id generatedOld_oid = this.getOld_oid();
+		Object generatedOld_oid = this.getOld_oid();
 		argv[2] = ModernizedCProgram.oid_to_hex(generatedOld_oid);
-		object_id generatedNew_oid = this.getNew_oid();
+		Object generatedNew_oid = this.getNew_oid();
 		argv[3] = ModernizedCProgram.oid_to_hex(generatedNew_oid);
 		argv[4] = ((Object)0);
 		proc.setNo_stdin(1);
@@ -75,14 +63,14 @@ public class command {
 		byte hook;
 		hook = ModernizedCProgram.find_hook("post-update");
 		if (!hook) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedError_string = cmd.getError_string();
-		int generatedDid_not_exist = cmd.getDid_not_exist();
+		Object generatedDid_not_exist = cmd.getDid_not_exist();
 		argv_array generatedArgs = proc.getArgs();
 		int generatedArgc = generatedArgs.getArgc();
 		Object generatedRef_name = cmd.getRef_name();
-		command generatedNext = cmd.getNext();
+		Object generatedNext = cmd.getNext();
 		for (cmd = ModernizedCProgram.commands; cmd; cmd = generatedNext) {
 			if (generatedError_string || generatedDid_not_exist) {
 				continue;
@@ -93,7 +81,7 @@ public class command {
 			generatedArgs.argv_array_push(generatedRef_name);
 		}
 		if (!generatedArgc) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		proc.setNo_stdin(1);
 		proc.setStdout_to_stderr(1);
@@ -111,9 +99,10 @@ public class command {
 		command cmd = new command();
 		string_list ref_list = new string_list(((Object)0), 0, 0, 0, ((Object)0));
 		Object generatedRef_name = cmd.getRef_name();
-		command generatedNext = cmd.getNext();
+		string_list_item string_list_item = new string_list_item();
+		Object generatedNext = cmd.getNext();
 		for (cmd = ModernizedCProgram.commands; cmd; cmd = generatedNext) {
-			string_list_item item = ref_list.string_list_append(generatedRef_name);
+			string_list_item item = string_list_item.string_list_append(ref_list, generatedRef_name);
 			item.setUtil((Object)cmd);
 		}
 		ref_list.string_list_sort();
@@ -126,7 +115,7 @@ public class command {
 		ref_list.string_list_clear(0);
 	}
 	public void reject_updates_to_hidden() {
-		strbuf refname_full = new strbuf(, , );
+		strbuf refname_full = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		size_t prefix_len = new size_t();
 		command cmd = new command();
 		refname_full.strbuf_addstr(ModernizedCProgram.get_git_namespace());
@@ -134,9 +123,9 @@ public class command {
 		prefix_len = generatedLen;
 		Object generatedError_string = cmd.getError_string();
 		Object generatedRef_name = cmd.getRef_name();
-		byte generatedBuf = refname_full.getBuf();
-		object_id generatedNew_oid = cmd.getNew_oid();
-		command generatedNext = cmd.getNext();
+		byte[] generatedBuf = refname_full.getBuf();
+		Object generatedNew_oid = cmd.getNew_oid();
+		Object generatedNext = cmd.getNext();
 		for (cmd = ModernizedCProgram.commands; cmd; cmd = generatedNext) {
 			if (generatedError_string) {
 				continue;
@@ -156,7 +145,7 @@ public class command {
 	}
 	public int should_process_cmd() {
 		Object generatedError_string = this.getError_string();
-		int generatedSkip_update = this.getSkip_update();
+		Object generatedSkip_update = this.getSkip_update();
 		return !generatedError_string && !generatedSkip_update;
 	}
 	public command queue_command(Object line, int linelen) {
@@ -174,25 +163,25 @@ public class command {
 		Object generatedRef_name = (cmd).getRef_name();
 		do {
 			size_t flex_array_len_ = (reflen);
-			(cmd) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedRef_name, (refname), flex_array_len_);
+			(cmd) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedRef_name, (refname), flex_array_len_);
 		} while (0);
-		object_id generatedOld_oid = cmd.getOld_oid();
+		Object generatedOld_oid = cmd.getOld_oid();
 		generatedOld_oid.oidcpy(old_oid);
-		object_id generatedNew_oid = cmd.getNew_oid();
+		Object generatedNew_oid = cmd.getNew_oid();
 		generatedNew_oid.oidcpy(new_oid);
 		tail = cmd;
-		command generatedNext = cmd.getNext();
+		Object generatedNext = cmd.getNext();
 		return generatedNext;
 	}
 	public command read_head_info(packet_reader reader, oid_array shallow) {
 		command commands = ((Object)0);
 		command p = commands;
 		int generatedPktlen = reader.getPktlen();
-		Object generatedLine = reader.getLine();
+		Object[] generatedLine = reader.getLine();
 		int generatedOptions = reader.getOptions();
 		packet_read_status generatedStatus = reader.getStatus();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			int linelen;
 			if (reader.packet_reader_read() != packet_read_status.PACKET_READ_NORMAL) {
 				break;
@@ -205,7 +194,7 @@ public class command {
 				shallow.oid_array_append(oid);
 				continue;
 			} 
-			linelen = .strlen(generatedLine);
+			linelen = /*Error: Function owner not recognized*/strlen(generatedLine);
 			if (linelen < generatedPktlen) {
 				byte feature_list = generatedLine + linelen + 1;
 				if (ModernizedCProgram.parse_feature_request(feature_list, "report-status")) {
@@ -224,11 +213,11 @@ public class command {
 					ModernizedCProgram.use_push_options = 1;
 				} 
 			} 
-			if (!.strcmp(generatedLine, "push-cert")) {
+			if (!/*Error: Function owner not recognized*/strcmp(generatedLine, "push-cert")) {
 				int true_flush = 0;
 				int saved_options = generatedOptions;
 				generatedOptions &=  ~(-1024 << 1);
-				for (; ; ) {
+				for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 					reader.packet_reader_read();
 					if (generatedStatus == packet_read_status.PACKET_READ_FLUSH) {
 						true_flush = 1;
@@ -237,7 +226,7 @@ public class command {
 					if (generatedStatus != packet_read_status.PACKET_READ_NORMAL) {
 						ModernizedCProgram.die("protocol error: got an unexpected packet");
 					} 
-					if (!.strcmp(generatedLine, "push-cert-end\n")) {
+					if (!/*Error: Function owner not recognized*/strcmp(generatedLine, "push-cert-end\n")) {
 						break;
 					} 
 					ModernizedCProgram.push_cert.strbuf_addstr(generatedLine);
@@ -255,10 +244,43 @@ public class command {
 		} 
 		return commands;
 	}
+	public void report(Object unpack_status) {
+		command cmd = new command();
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		buf.packet_buf_write("unpack %s\n", unpack_status ? unpack_status : "ok");
+		Object generatedError_string = cmd.getError_string();
+		Object generatedRef_name = cmd.getRef_name();
+		Object generatedNext = cmd.getNext();
+		for (cmd = ModernizedCProgram.commands; cmd; cmd = generatedNext) {
+			if (!generatedError_string) {
+				buf.packet_buf_write("ok %s\n", generatedRef_name);
+			} else {
+					buf.packet_buf_write("ng %s %s\n", generatedRef_name, generatedError_string);
+			} 
+		}
+		buf.packet_buf_flush();
+		byte[] generatedBuf = buf.getBuf();
+		Object generatedLen = buf.getLen();
+		if (ModernizedCProgram.use_sideband) {
+			ModernizedCProgram.send_sideband(1, 1, generatedBuf, generatedLen, ModernizedCProgram.use_sideband);
+		} else {
+				ModernizedCProgram.write_or_die(1, generatedBuf, generatedLen);
+		} 
+		buf.strbuf_release();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%10s: %8u (%llu kB)\n", name, ModernizedCProgram.count, (uintmax_t)size);
+		va_list vp = new va_list();
+		if (!ModernizedCProgram.verbose) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(vp, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/vprintf(fmt, vp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(vp);
+	}
 	public int delete_only() {
 		command cmd = new command();
-		object_id generatedNew_oid = cmd.getNew_oid();
-		command generatedNext = cmd.getNext();
+		Object generatedNew_oid = cmd.getNew_oid();
+		Object generatedNext = cmd.getNext();
 		for (cmd = ModernizedCProgram.commands; cmd; cmd = generatedNext) {
 			if (!ModernizedCProgram.is_null_oid(generatedNew_oid)) {
 				return 0;
@@ -266,52 +288,16 @@ public class command {
 		}
 		return 1;
 	}
-	public command getNext() {
-		return next;
+	public Object getName() {
+		return name;
 	}
-	public void setNext(command newNext) {
-		next = newNext;
+	public void setName(Object newName) {
+		name = newName;
 	}
-	public Object getError_string() {
-		return error_string;
+	public Object getFunc() {
+		return func;
 	}
-	public void setError_string(Object newError_string) {
-		error_string = newError_string;
-	}
-	public int getSkip_update() {
-		return skip_update;
-	}
-	public void setSkip_update(int newSkip_update) {
-		skip_update = newSkip_update;
-	}
-	public int getDid_not_exist() {
-		return did_not_exist;
-	}
-	public void setDid_not_exist(int newDid_not_exist) {
-		did_not_exist = newDid_not_exist;
-	}
-	public int getIndex() {
-		return index;
-	}
-	public void setIndex(int newIndex) {
-		index = newIndex;
-	}
-	public object_id getOld_oid() {
-		return old_oid;
-	}
-	public void setOld_oid(object_id newOld_oid) {
-		old_oid = newOld_oid;
-	}
-	public object_id getNew_oid() {
-		return new_oid;
-	}
-	public void setNew_oid(object_id newNew_oid) {
-		new_oid = newNew_oid;
-	}
-	public Object getRef_name() {
-		return ref_name;
-	}
-	public void setRef_name(Object newRef_name) {
-		ref_name = newRef_name;
+	public void setFunc(Object newFunc) {
+		func = newFunc;
 	}
 }

@@ -28,7 +28,7 @@ public class ptw32_mcs_node_t_ {
 		this.setNextFlag(0);
 		this.setReadyFlag(0);
 		this.setNext(/* initially, no successor */0);
-		pred = (ptw32_mcs_local_node_t);
+		pred = (ptw32_mcs_local_node_t)/*Error: Unsupported expression*/;
 		Object generatedNextFlag = pred.getNextFlag();
 		Object generatedReadyFlag = this.getReadyFlag();
 		if (0 != pred) {
@@ -41,14 +41,14 @@ public class ptw32_mcs_node_t_ {
 	public void ptw32_mcs_lock_release() {
 		ptw32_mcs_node_t_ generatedLock = this.getLock();
 		ptw32_mcs_lock_t lock = generatedLock;
-		ptw32_mcs_local_node_t next = (ptw32_mcs_local_node_t);
+		ptw32_mcs_local_node_t next = (ptw32_mcs_local_node_t)/*Error: Unsupported expression*/;
 		Object generatedNextFlag = this.getNextFlag();
 		if (0 == next) {
-			if (node == /* no known successor */(ptw32_mcs_local_node_t)) {
-				return ;
+			if (node == /* no known successor */(ptw32_mcs_local_node_t)/*Error: Unsupported expression*/) {
+				return /*Error: Unsupported expression*/;
 			} 
 			ModernizedCProgram.ptw32_mcs_flag_wait(generatedNextFlag);
-			next = (ptw32_mcs_local_node_t);
+			next = (ptw32_mcs_local_node_t)/*Error: Unsupported expression*/;
 		} 
 		Object generatedReadyFlag = next.getReadyFlag();
 		ModernizedCProgram.ptw32_mcs_flag_set(generatedReadyFlag);
@@ -59,7 +59,7 @@ public class ptw32_mcs_node_t_ {
 		this.setNextFlag(0);
 		this.setReadyFlag(0);
 		this.setNext(/* initially, no successor */0);
-		return ((PVOID) == (PVOID)0) ? 0 : 16/*
+		return ((PVOID)/*Error: Unsupported expression*/ == (PVOID)0) ? 0 : 16/*
 		 * ptw32_mcs_node_transfer -- move an MCS lock local node, usually from thread
 		 * space to, for example, global space so that another thread can release
 		 * the lock on behalf of the current lock owner.
@@ -79,7 +79,7 @@ public class ptw32_mcs_node_t_ {
 		this.setReadyFlag(/* Not needed - we were waiting on this */0);
 		this.setNext(0);
 		ptw32_mcs_node_t_ generatedNext = old_node.getNext();
-		if ((ptw32_mcs_local_node_t) != old_node/*
+		if ((ptw32_mcs_local_node_t)/*Error: Unsupported expression*/ != old_node/*
 		       * A successor has queued after us, so wait for them to link to us
 		       */) {
 			while (generatedNext == 0) {

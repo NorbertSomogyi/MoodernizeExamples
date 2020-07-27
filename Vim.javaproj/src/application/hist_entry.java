@@ -3,10 +3,10 @@ package application;
 public class hist_entry {
 	private int hisnum;
 	private int viminfo;
-	private Object hisstr;
+	private Object[] hisstr;
 	private Object time_set;
 	
-	public hist_entry(int hisnum, int viminfo, Object hisstr, Object time_set) {
+	public hist_entry(int hisnum, int viminfo, Object[] hisstr, Object time_set) {
 		setHisnum(hisnum);
 		setViminfo(viminfo);
 		setHisstr(hisstr);
@@ -42,10 +42,10 @@ public class hist_entry {
 	public void setViminfo(int newViminfo) {
 		viminfo = newViminfo;
 	}
-	public Object getHisstr() {
+	public Object[] getHisstr() {
 		return hisstr;
 	}
-	public void setHisstr(Object newHisstr) {
+	public void setHisstr(Object[] newHisstr) {
 		hisstr = newHisstr;
 	}
 	public Object getTime_set() {

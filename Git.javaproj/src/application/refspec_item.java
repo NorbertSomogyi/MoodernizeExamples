@@ -5,10 +5,10 @@ public class refspec_item {
 	private int pattern;
 	private int matching;
 	private int exact_sha1;
-	private byte src;
-	private byte dst;
+	private Byte src;
+	private Byte dst;
 	
-	public refspec_item(int force, int pattern, int matching, int exact_sha1, byte src, byte dst) {
+	public refspec_item(int force, int pattern, int matching, int exact_sha1, Byte src, Byte dst) {
 		setForce(force);
 		setPattern(pattern);
 		setMatching(matching);
@@ -31,7 +31,7 @@ public class refspec_item {
 			this.setForce(1);
 			lhs++;
 		} 
-		rhs = .strrchr(lhs, (byte)':'/*
+		rhs = /*Error: Function owner not recognized*/strrchr(lhs, (byte)':'/*
 			 * Before going on, special case ":" (or "+:") as a refspec
 			 * for pushing matching refs.
 			 */);
@@ -40,14 +40,14 @@ public class refspec_item {
 			return 1;
 		} 
 		if (rhs) {
-			size_t rlen = .strlen(++rhs);
-			is_glob = (1 <= rlen && .strchr(rhs, (byte)'*'));
+			size_t rlen = /*Error: Function owner not recognized*/strlen(++rhs);
+			is_glob = (1 <= rlen && /*Error: Function owner not recognized*/strchr(rhs, (byte)'*'));
 			this.setDst(ModernizedCProgram.xstrndup(rhs, rlen));
 		} else {
 				this.setDst(((Object)0));
 		} 
-		llen = (rhs ? (rhs - lhs - 1) : .strlen(lhs));
-		if (1 <= llen && .memchr(lhs, (byte)'*', llen)) {
+		llen = (rhs ? (rhs - lhs - 1) : /*Error: Function owner not recognized*/strlen(lhs));
+		if (1 <= llen && /*Error: Function owner not recognized*/memchr(lhs, (byte)'*', llen)) {
 			if ((rhs && !is_glob) || (!rhs && fetch)) {
 				return 0;
 			} 
@@ -58,8 +58,8 @@ public class refspec_item {
 		this.setPattern(is_glob);
 		this.setSrc(ModernizedCProgram.xstrndup(lhs, llen));
 		flags = 1 | (is_glob ? 2 : 0);
-		byte generatedSrc = this.getSrc();
-		byte generatedDst = this.getDst();
+		Byte generatedSrc = this.getSrc();
+		Byte generatedDst = this.getDst();
 		if (fetch) {
 			object_id unused = new object_id();
 			if (!generatedSrc) {
@@ -111,7 +111,7 @@ public class refspec_item {
 		return 1;
 	}
 	public int refspec_item_init(Object refspec, int fetch) {
-		.memset(item, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(item, 0, /*Error: sizeof expression not supported yet*/);
 		return item.parse_refspec(refspec, fetch);
 	}
 	public void refspec_item_init_or_die(Object refspec, int fetch) {
@@ -120,12 +120,12 @@ public class refspec_item {
 		} 
 	}
 	public void refspec_item_clear() {
-		byte generatedSrc = this.getSrc();
+		Byte generatedSrc = this.getSrc();
 		do {
 			ModernizedCProgram.free(generatedSrc);
 			(generatedSrc) = ((Object)0);
 		} while (0);
-		byte generatedDst = this.getDst();
+		Byte generatedDst = this.getDst();
 		do {
 			ModernizedCProgram.free(generatedDst);
 			(generatedDst) = ((Object)0);
@@ -159,16 +159,16 @@ public class refspec_item {
 	public void setExact_sha1(int newExact_sha1) {
 		exact_sha1 = newExact_sha1;
 	}
-	public byte getSrc() {
+	public Byte getSrc() {
 		return src;
 	}
-	public void setSrc(byte newSrc) {
+	public void setSrc(Byte newSrc) {
 		src = newSrc;
 	}
-	public byte getDst() {
+	public Byte getDst() {
 		return dst;
 	}
-	public void setDst(byte newDst) {
+	public void setDst(Byte newDst) {
 		dst = newDst;
 	}
 }

@@ -11,7 +11,7 @@ public class bf_key {
 	public bf_key() {
 	}
 	
-	public void bf_enc(Object x) {
+	public void bf_enc(Object[] x) {
 		 Xl = new ();
 		 Xr = new ();
 		 temp = new ();
@@ -30,14 +30,14 @@ public class bf_key {
 		x[0] = Xr;
 		x[1] = Xl;
 	}
-	public void bf_setkey(Object kp, int keybytes) {
+	public void bf_setkey(Object[] kp, int keybytes) {
 		int i;
 		int j;
 		int k;
 		 data = new ();
 		[] d = new ();
-		.memcpy(ModernizedCProgram.key.getP(), ModernizedCProgram.bf_pinit, );
-		.memcpy(ModernizedCProgram.key.getS(), ModernizedCProgram.bf_sinit, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.key.getP(), ModernizedCProgram.bf_pinit, /*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.key.getS(), ModernizedCProgram.bf_sinit, /*Error: sizeof expression not supported yet*/);
 		j = 0;
 		for (i = 0; i < 16 + 2; ++i) {
 			data = -1024;

@@ -22,8 +22,15 @@ package application;
  *
  ***************************************************************************/
 /* <DESC>
- * Get a single file from an FTP server.
+ * Gets a file using an SFTP URL.
  * </DESC>
+ */
+/* define this to switch off the use of ssh-agent in this program */
+/*
+ * This is an example showing how to get a single file from an SFTP server.
+ * It delays the actual destination file creation until the first write
+ * callback so that it won't create an empty file in case the remote file
+ * doesn't exist or something else fails.
  */
 public class FtpFile {
 	private Object filename;

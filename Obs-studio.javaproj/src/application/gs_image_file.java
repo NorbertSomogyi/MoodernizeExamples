@@ -26,7 +26,7 @@ public class gs_image_file {
 	private Object loaded;
 	private Object gif;
 	private Object gif_data;
-	private Object animation_frame_cache;
+	private Object[][] animation_frame_cache;
 	private Object animation_frame_data;
 	private Object cur_time;
 	private int cur_frame;
@@ -35,7 +35,7 @@ public class gs_image_file {
 	private Object texture_data;
 	private Object bitmap_callbacks;
 	
-	public gs_image_file(gs_texture texture, gs_color_format format, Object cx, Object cy, Object is_animated_gif, Object frame_updated, Object loaded, Object gif, Object gif_data, Object animation_frame_cache, Object animation_frame_data, Object cur_time, int cur_frame, int cur_loop, int last_decoded_frame, Object texture_data, Object bitmap_callbacks) {
+	public gs_image_file(gs_texture texture, gs_color_format format, Object cx, Object cy, Object is_animated_gif, Object frame_updated, Object loaded, Object gif, Object gif_data, Object[][] animation_frame_cache, Object animation_frame_data, Object cur_time, int cur_frame, int cur_loop, int last_decoded_frame, Object texture_data, Object bitmap_callbacks) {
 		setTexture(texture);
 		setFormat(format);
 		setCx(cx);
@@ -62,7 +62,7 @@ public class gs_image_file {
 		return generatedGif.getWidth() * generatedGif.getHeight() * 4 * generatedGif.getFrame_count();
 	}
 	public Object alloc_mem(Object mem_usage, Object size) {
-		.UNUSED_PARAMETER(image);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(image);
 		if (mem_usage) {
 			mem_usage += size;
 		} 
@@ -89,12 +89,12 @@ public class gs_image_file {
 			ModernizedCProgram.blog(LOG_WARNING, "%s: Failed to open file '%s'", __FUNCTION__, path);
 			;
 		} 
-		.fseek(file, 0, SEEK_END);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fseek(file, 0, SEEK_END);
 		size = ()file.os_ftelli64();
-		.fseek(file, 0, SEEK_SET);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fseek(file, 0, SEEK_SET);
 		this.setGif_data(ModernizedCProgram.bmalloc(size));
 		Object generatedGif_data = this.getGif_data();
-		size_read = .fread(generatedGif_data, 1, size, file);
+		size_read = /*Error: Function owner not recognized*/fread(generatedGif_data, 1, size, file);
 		if (size_read != size) {
 			ModernizedCProgram.blog(LOG_WARNING, "%s: Failed to fully read gif file '%s'.", __FUNCTION__, path);
 			;
@@ -121,7 +121,7 @@ public class gs_image_file {
 		Object generatedCy = this.getCy();
 		if (generatedIs_animated_gif) {
 			generatedGif.gif_decode_frame(0);
-			this.setAnimation_frame_cache(image.alloc_mem(mem_usage, generatedGif.getFrame_count() * ));
+			this.setAnimation_frame_cache(image.alloc_mem(mem_usage, generatedGif.getFrame_count() * /*Error: Unsupported expression*/));
 			this.setAnimation_frame_data(image.alloc_mem(mem_usage, image.get_full_decoded_gif_size()));
 			for (int i = 0;
 			 i < generatedGif.getFrame_count(); i++) {
@@ -150,16 +150,16 @@ public class gs_image_file {
 	public void gs_image_file_init_internal(Object file, Object mem_usage) {
 		 len = new ();
 		if (!image) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.memset(image, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(image, 0, /*Error: sizeof expression not supported yet*/);
 		if (!file) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		len = .strlen(file);
-		if (len > 4 && .strcmp(file + len - 4, ".gif") == 0) {
+		len = /*Error: Function owner not recognized*/strlen(file);
+		if (len > 4 && /*Error: Function owner not recognized*/strcmp(file + len - 4, ".gif") == 0) {
 			if (image.init_animated_gif(file, mem_usage)) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		gs_color_format generatedFormat = this.getFormat();
@@ -182,12 +182,12 @@ public class gs_image_file {
 	}
 	public void gs_image_file_free() {
 		if (!image) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedLoaded = this.getLoaded();
 		Object generatedIs_animated_gif = this.getIs_animated_gif();
 		Object generatedGif = this.getGif();
-		Object generatedAnimation_frame_cache = this.getAnimation_frame_cache();
+		Object[][] generatedAnimation_frame_cache = this.getAnimation_frame_cache();
 		Object generatedAnimation_frame_data = this.getAnimation_frame_data();
 		gs_texture generatedTexture = this.getTexture();
 		if (generatedLoaded) {
@@ -202,12 +202,12 @@ public class gs_image_file {
 		ModernizedCProgram.bfree(generatedTexture_data);
 		Object generatedGif_data = this.getGif_data();
 		ModernizedCProgram.bfree(generatedGif_data);
-		.memset(image, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(image, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public void gs_image_file_init_texture() {
 		Object generatedLoaded = this.getLoaded();
 		if (!generatedLoaded) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedIs_animated_gif = this.getIs_animated_gif();
 		Object generatedCx = this.getCx();
@@ -239,7 +239,7 @@ public class gs_image_file {
 		generatedCur_time += elapsed_time_ns;
 		Object generatedGif = this.getGif();
 		int generatedCur_loop = this.getCur_loop();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			 t = image.get_time(new_frame);
 			if (generatedCur_time <= t) {
 				break;
@@ -257,7 +257,7 @@ public class gs_image_file {
 		return new_frame;
 	}
 	public void decode_new_frame(int new_frame) {
-		Object generatedAnimation_frame_cache = this.getAnimation_frame_cache();
+		Object[][] generatedAnimation_frame_cache = this.getAnimation_frame_cache();
 		int generatedLast_decoded_frame = this.getLast_decoded_frame();
 		Object generatedGif = this.getGif();
 		Object generatedAnimation_frame_data = this.getAnimation_frame_data();
@@ -267,13 +267,13 @@ public class gs_image_file {
 			for (int i = ModernizedCProgram.last_frame;
 			 i < new_frame; /* decode missed frames */i++) {
 				if (generatedGif.gif_decode_frame(i) != GIF_OK) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 			}
 			if (generatedGif.gif_decode_frame(new_frame) == /* decode actual desired frame */GIF_OK) {
 				 pos = new_frame * generatedGif.getWidth() * generatedGif.getHeight() * 4;
 				generatedAnimation_frame_cache[new_frame] = generatedAnimation_frame_data + pos;
-				.memcpy(generatedAnimation_frame_cache[new_frame], generatedGif.getFrame_image(), generatedGif.getWidth() * generatedGif.getHeight() * 4);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedAnimation_frame_cache[new_frame], generatedGif.getFrame_image(), generatedGif.getWidth() * generatedGif.getHeight() * 4);
 				this.setLast_decoded_frame(new_frame);
 			} 
 		} 
@@ -306,9 +306,9 @@ public class gs_image_file {
 		Object generatedIs_animated_gif = this.getIs_animated_gif();
 		Object generatedLoaded = this.getLoaded();
 		if (!generatedIs_animated_gif || !generatedLoaded) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		Object generatedAnimation_frame_cache = this.getAnimation_frame_cache();
+		Object[][] generatedAnimation_frame_cache = this.getAnimation_frame_cache();
 		int generatedCur_frame = this.getCur_frame();
 		if (!generatedAnimation_frame_cache[generatedCur_frame]) {
 			image.decode_new_frame(generatedCur_frame);
@@ -371,10 +371,10 @@ public class gs_image_file {
 	public void setGif_data(Object newGif_data) {
 		gif_data = newGif_data;
 	}
-	public Object getAnimation_frame_cache() {
+	public Object[][] getAnimation_frame_cache() {
 		return animation_frame_cache;
 	}
-	public void setAnimation_frame_cache(Object newAnimation_frame_cache) {
+	public void setAnimation_frame_cache(Object[][] newAnimation_frame_cache) {
 		animation_frame_cache = newAnimation_frame_cache;
 	}
 	public Object getAnimation_frame_data() {

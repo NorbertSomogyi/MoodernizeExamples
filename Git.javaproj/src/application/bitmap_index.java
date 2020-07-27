@@ -43,15 +43,15 @@ public class bitmap_index {
 		Byte generatedMap = this.getMap();
 		bitmap_disk_header header = (Object)generatedMap;
 		Object generatedMap_size = this.getMap_size();
-		if (generatedMap_size <  + ModernizedCProgram.the_repository.getHash_algo().getRawsz()) {
+		if (generatedMap_size < /*Error: sizeof expression not supported yet*/ + ModernizedCProgram.the_repository.getHash_algo().getRawsz()) {
 			return ();
 		} 
 		Object generatedMagic = header.getMagic();
-		if (.memcmp(generatedMagic, ModernizedCProgram.BITMAP_IDX_SIGNATURE, ) != 0) {
+		if (/*Error: Function owner not recognized*/memcmp(generatedMagic, ModernizedCProgram.BITMAP_IDX_SIGNATURE, /*Error: sizeof expression not supported yet*/) != 0) {
 			return ();
 		} 
 		Object generatedVersion = header.getVersion();
-		this.setVersion(.ntohs(generatedVersion));
+		this.setVersion(/*Error: Function owner not recognized*/ntohs(generatedVersion));
 		if (generatedVersion != 1) {
 			return ();
 		} 
@@ -59,7 +59,7 @@ public class bitmap_index {
 		packed_git generatedPack = this.getPack();
 		Object generatedNum_objects = generatedPack.getNum_objects();
 		{ 
-			uint32_t flags = .ntohs(generatedOptions);
+			uint32_t flags = /*Error: Function owner not recognized*/ntohs(generatedOptions);
 			if ((flags & pack_bitmap_opts.BITMAP_OPT_FULL_DAG) == 0) {
 				return ();
 			} 
@@ -69,9 +69,9 @@ public class bitmap_index {
 			} 
 		}
 		Object generatedEntry_count = header.getEntry_count();
-		this.setEntry_count(.ntohl(generatedEntry_count));
+		this.setEntry_count(/*Error: Function owner not recognized*/ntohl(generatedEntry_count));
 		Object generatedMap_pos = this.getMap_pos();
-		generatedMap_pos +=  - 32 + ModernizedCProgram.the_repository.getHash_algo().getRawsz();
+		generatedMap_pos += /*Error: sizeof expression not supported yet*/ - 32 + ModernizedCProgram.the_repository.getHash_algo().getRawsz();
 		return 0;
 	}
 	public int load_bitmap_entries_v1() {
@@ -111,7 +111,7 @@ public class bitmap_index {
 		return 0;
 	}
 	public int load_pack_bitmap() {
-		((ModernizedCProgram.bitmap_git.getMap()) ? (Object)0 : ._assert("bitmap_git->map", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\pack-bitmap.c", 307));
+		((ModernizedCProgram.bitmap_git.getMap()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("bitmap_git->map", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\pack-bitmap.c", 307));
 		ModernizedCProgram.bitmap_git.setBitmaps(ModernizedCProgram.kh_init_oid_map());
 		ModernizedCProgram.bitmap_git.getExt_index().setPositions(ModernizedCProgram.kh_init_oid_pos());
 		if (ModernizedCProgram.bitmap_git.getPack().load_pack_revindex()) {
@@ -130,7 +130,7 @@ public class bitmap_index {
 		return -1;
 	}
 	public bitmap_index prepare_bitmap_git(repository r) {
-		bitmap_index bitmap_git = ModernizedCProgram.xcalloc(1, );
+		bitmap_index bitmap_git = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		if (!ModernizedCProgram.open_pack_bitmap(r, bitmap_git) && !bitmap_git.load_pack_bitmap()) {
 			return bitmap_git;
 		} 
@@ -164,17 +164,17 @@ public class bitmap_index {
 		eindex eindex = ModernizedCProgram.bitmap_git.getExt_index();
 		uint32_t i = new uint32_t();
 		Object generatedCount = eindex.getCount();
-		object generatedObjects = eindex.getObjects();
+		object[][] generatedObjects = eindex.getObjects();
 		object_id generatedOid = obj.getOid();
 		int generatedType = obj.getType();
-		Object generatedHashes = eindex.getHashes();
+		Object[] generatedHashes = eindex.getHashes();
 		for (i = 0; i < generatedCount; ++i) {
 			object obj = new object();
 			if (!objects.bitmap_get(ModernizedCProgram.bitmap_git.getPack().getNum_objects() + i)) {
 				continue;
 			} 
 			obj = generatedObjects[i];
-			.show_reach(generatedOid, generatedType, 0, generatedHashes[i], ((Object)0), 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/show_reach(generatedOid, generatedType, 0, generatedHashes[i], ((Object)0), 0);
 		}
 	}
 	public bitmap_index prepare_bitmap_walk(rev_info revs) {
@@ -183,14 +183,14 @@ public class bitmap_index {
 		object_list haves = ((Object)0);
 		bitmap wants_bitmap = ((Object)0);
 		bitmap haves_bitmap = ((Object)0);
-		bitmap_index bitmap_git = ModernizedCProgram.xcalloc(1, );
+		bitmap_index bitmap_git = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		repository generatedRepo = revs.getRepo();
 		if (ModernizedCProgram.open_pack_bitmap(generatedRepo, bitmap_git) < 0) {
 			;
 		} 
 		object_array generatedPending = revs.getPending();
 		int generatedNr = generatedPending.getNr();
-		object_array_entry generatedObjects = generatedPending.getObjects();
+		object_array_entry[] generatedObjects = generatedPending.getObjects();
 		int generatedType = object.getType();
 		object_id generatedOid = object.getOid();
 		object object = new object();
@@ -207,7 +207,7 @@ public class bitmap_index {
 				} else {
 						wants.object_list_insert(object);
 				} 
-				object = object.parse_object_or_die(.get_tagged_oid(tag), ((Object)0));
+				object = object.parse_object_or_die(/*Error: Function owner not recognized*/get_tagged_oid(tag), ((Object)0));
 			}
 			if (generatedFlags & (-1024 << 1)) {
 				haves.object_list_insert(object);
@@ -251,7 +251,7 @@ public class bitmap_index {
 		return ((Object)0);
 	}
 	public void traverse_bitmap_commit_list(Object show_reachable) {
-		((ModernizedCProgram.bitmap_git.getResult()) ? (Object)0 : ._assert("bitmap_git->result", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\pack-bitmap.c", 836));
+		((ModernizedCProgram.bitmap_git.getResult()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("bitmap_git->result", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\pack-bitmap.c", 836));
 		ModernizedCProgram.show_objects_for_type(ModernizedCProgram.bitmap_git, ModernizedCProgram.bitmap_git.getCommits(), object_type.OBJ_COMMIT, show_reachable);
 		ModernizedCProgram.show_objects_for_type(ModernizedCProgram.bitmap_git, ModernizedCProgram.bitmap_git.getTrees(), object_type.OBJ_TREE, show_reachable);
 		ModernizedCProgram.show_objects_for_type(ModernizedCProgram.bitmap_git, ModernizedCProgram.bitmap_git.getBlobs(), object_type.OBJ_BLOB, show_reachable);
@@ -266,9 +266,6 @@ public class bitmap_index {
 		ewah_iterator it = new ewah_iterator();
 		 filter = new ();
 		switch (object_type.type) {
-		case object_type.OBJ_TREE:
-				ModernizedCProgram.ewah_iterator_init(it, ModernizedCProgram.bitmap_git.getTrees());
-				break;
 		case object_type.OBJ_TAG:
 				ModernizedCProgram.ewah_iterator_init(it, ModernizedCProgram.bitmap_git.getTags());
 				break;
@@ -277,6 +274,9 @@ public class bitmap_index {
 				break;
 		case object_type.OBJ_COMMIT:
 				ModernizedCProgram.ewah_iterator_init(it, ModernizedCProgram.bitmap_git.getCommits());
+				break;
+		case object_type.OBJ_TREE:
+				ModernizedCProgram.ewah_iterator_init(it, ModernizedCProgram.bitmap_git.getTrees());
 				break;
 		default:
 				return 0;
@@ -287,7 +287,7 @@ public class bitmap_index {
 			count += ModernizedCProgram.ewah_bit_popcount64(word);
 		}
 		Object generatedCount = eindex.getCount();
-		object generatedObjects = eindex.getObjects();
+		object[][] generatedObjects = eindex.getObjects();
 		for (i = 0; i < generatedCount; ++i) {
 			if (generatedObjects[i].getType() == object_type.type && objects.bitmap_get(ModernizedCProgram.bitmap_git.getPack().getNum_objects() + i)) {
 				count++;
@@ -296,7 +296,7 @@ public class bitmap_index {
 		return count;
 	}
 	public void count_bitmap_commit_list(Object commits, Object trees, Object blobs, Object tags) {
-		((ModernizedCProgram.bitmap_git.getResult()) ? (Object)0 : ._assert("bitmap_git->result", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\pack-bitmap.c", 899));
+		((ModernizedCProgram.bitmap_git.getResult()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("bitmap_git->result", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\pack-bitmap.c", 899));
 		if (commits) {
 			commits = ModernizedCProgram.bitmap_git.count_object_type(object_type.OBJ_COMMIT);
 		} 
@@ -312,12 +312,12 @@ public class bitmap_index {
 	}
 	public void free_bitmap_index() {
 		if (!b) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Byte generatedMap = this.getMap();
 		Object generatedMap_size = this.getMap_size();
 		if (generatedMap) {
-			.munmap(generatedMap, generatedMap_size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/munmap(generatedMap, generatedMap_size);
 		} 
 		ewah_bitmap generatedCommits = this.getCommits();
 		generatedCommits.ewah_pool_free();
@@ -330,9 +330,9 @@ public class bitmap_index {
 		 generatedBitmaps = this.getBitmaps();
 		generatedBitmaps.kh_destroy_oid_map();
 		eindex generatedExt_index = this.getExt_index();
-		object generatedObjects = generatedExt_index.getObjects();
+		object[][] generatedObjects = generatedExt_index.getObjects();
 		ModernizedCProgram.free(generatedObjects);
-		Object generatedHashes = generatedExt_index.getHashes();
+		Object[] generatedHashes = generatedExt_index.getHashes();
 		ModernizedCProgram.free(generatedHashes);
 		bitmap generatedResult = this.getResult();
 		generatedResult.bitmap_free();

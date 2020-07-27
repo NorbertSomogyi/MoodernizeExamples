@@ -42,13 +42,13 @@ public class blame_origin {
 		nth_slab = c.getIndex() / generatedSlab_size;
 		nth_slot = c.getIndex() % generatedSlab_size;
 		int generatedSlab_count = s.getSlab_count();
-		blame_origin generatedSlab = s.getSlab();
+		blame_origin[][][] generatedSlab = s.getSlab();
 		if (generatedSlab_count <= nth_slab) {
 			int i;
 			if (!add_if_missing) {
 				return ((Object)0);
 			} 
-			(generatedSlab) = ModernizedCProgram.xrealloc((generatedSlab), ModernizedCProgram.st_mult(, (nth_slab + 1)));
+			(generatedSlab) = ModernizedCProgram.xrealloc((generatedSlab), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (nth_slab + 1)));
 			for (i = generatedSlab_count; i <= nth_slab; i++) {
 				generatedSlab[i] = ((Object)0);
 			}
@@ -59,7 +59,7 @@ public class blame_origin {
 			if (!add_if_missing) {
 				return ((Object)0);
 			} 
-			generatedSlab[nth_slab] = ModernizedCProgram.xcalloc(generatedSlab_size,  * generatedStride);
+			generatedSlab[nth_slab] = ModernizedCProgram.xcalloc(generatedSlab_size, /*Error: sizeof expression not supported yet*/ * generatedStride);
 		} 
 		return generatedSlab[nth_slab][nth_slot * generatedStride];
 	}
@@ -99,7 +99,7 @@ public class blame_origin {
 							ModernizedCProgram.set_blame_suspects(generatedCommit, generatedNext);
 					} 
 					ModernizedCProgram.free(o);
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 			}
 			ModernizedCProgram.die("internal error in blame_origin_decref"/*
@@ -114,9 +114,9 @@ public class blame_origin {
 		blame_origin o = new blame_origin();
 		Object generatedPath = ((o)).getPath();
 		do {
-			size_t flex_array_len_ = (.strlen(path));
-			((o)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedPath, ((path)), flex_array_len_);
+			size_t flex_array_len_ = (/*Error: Function owner not recognized*/strlen(path));
+			((o)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedPath, ((path)), flex_array_len_);
 		} while (0);
 		o.setCommit(commit);
 		o.setRefcnt(1);
@@ -135,7 +135,7 @@ public class blame_origin {
 		blame_origin generatedNext = o.getNext();
 		blame_origin blame_origin = new blame_origin();
 		for (; o; ) {
-			if (!.strcmp(generatedPath, path)) {
+			if (!/*Error: Function owner not recognized*/strcmp(generatedPath, path)) {
 				if (/* bump to front */l) {
 					l.setNext(generatedNext);
 					o.setNext(blame_origin.get_blame_suspects(commit));
@@ -182,11 +182,11 @@ public class blame_origin {
 			max_search_distance_a = length_a ? length_a - 1 : 0;
 		} 
 		max_search_distance_b = ((2 * max_search_distance_a + 1) * length_b - 1) / length_a;
-		result = ModernizedCProgram.xcalloc(, length_b);
-		second_best_result = ModernizedCProgram.xcalloc(, length_b);
-		certainties = ModernizedCProgram.xcalloc(, length_b);
+		result = ModernizedCProgram.xcalloc(/*Error: Unsupported expression*/, length_b);
+		second_best_result = ModernizedCProgram.xcalloc(/*Error: Unsupported expression*/, length_b);
+		certainties = ModernizedCProgram.xcalloc(/*Error: Unsupported expression*/, length_b);
 		similarity_count = length_b * (max_search_distance_a * 2 + /* See get_similarity() for details of similarities. */1);
-		similarities = ModernizedCProgram.xcalloc(, similarity_count);
+		similarities = ModernizedCProgram.xcalloc(/*Error: Unsupported expression*/, similarity_count);
 		for (i = 0; i < length_b; ++i) {
 			result[i] = -1;
 			second_best_result[i] = -1;
@@ -205,12 +205,12 @@ public class blame_origin {
 		int line_starts;
 		Object generatedFingerprints = this.getFingerprints();
 		if (generatedFingerprints) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedFile = this.getFile();
 		this.setNum_lines(ModernizedCProgram.find_line_starts(line_starts, generatedFile.getPtr(), generatedFile.getSize()));
 		int generatedNum_lines = this.getNum_lines();
-		this.setFingerprints(ModernizedCProgram.xcalloc(, generatedNum_lines));
+		this.setFingerprints(ModernizedCProgram.xcalloc(/*Error: Unsupported expression*/, generatedNum_lines));
 		generatedFingerprints.get_line_fingerprints(generatedFile.getPtr(), line_starts, 0, generatedNum_lines);
 		ModernizedCProgram.free(line_starts);
 	}
@@ -251,14 +251,14 @@ public class blame_origin {
 		blame_origin generatedNext = porigin.getNext();
 		blame_origin blame_origin = new blame_origin();
 		for (porigin = blame_origin.get_blame_suspects(parent); porigin; porigin = generatedNext) {
-			if (!.strcmp(generatedPath, generatedPath)) {
+			if (!/*Error: Function owner not recognized*/strcmp(generatedPath, generatedPath)) {
 				return porigin/* See if the origin->path is different between parent
 					 * and origin first.  Most of the time they are the
 					 * same and diff-tree is fairly efficient about this.
 					 */.blame_origin_incref();
 			} 
 		}
-		.repo_diff_setup(r, diff_opts);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/repo_diff_setup(r, diff_opts);
 		diff_flags generatedFlags = diff_opts.getFlags();
 		generatedFlags.setRecursive(1);
 		diff_opts.setDetect_rename(0);
@@ -267,16 +267,16 @@ public class blame_origin {
 		paths[1] = ((Object)0);
 		pathspec generatedPathspec = diff_opts.getPathspec();
 		generatedPathspec.parse_pathspec(((1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6)) & ~(1 << 2), (1 << 6), "", paths);
-		.diff_setup_done(diff_opts);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_setup_done(diff_opts);
 		commit generatedCommit = this.getCommit();
 		object generatedObject = generatedCommit.getObject();
 		object_id generatedOid = generatedObject.getOid();
 		if (ModernizedCProgram.is_null_oid(generatedOid)) {
-			diff_opts.do_diff_cache(.get_commit_tree_oid(parent));
+			diff_opts.do_diff_cache(/*Error: Function owner not recognized*/get_commit_tree_oid(parent));
 		} else {
-				diff_opts.diff_tree_oid(.get_commit_tree_oid(parent), .get_commit_tree_oid(generatedCommit), "");
+				diff_opts.diff_tree_oid(/*Error: Function owner not recognized*/get_commit_tree_oid(parent), /*Error: Function owner not recognized*/get_commit_tree_oid(generatedCommit), "");
 		} 
-		.diffcore_std(diff_opts);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diffcore_std(diff_opts);
 		blame_origin blame_origin = new blame_origin();
 		object_id generatedBlob_oid = porigin.getBlob_oid();
 		int generatedMode = this.getMode();
@@ -292,7 +292,7 @@ public class blame_origin {
 					byte name;
 					p = ModernizedCProgram.diff_queued_diff.getQueue()[i];
 					name = generatedPath ? generatedPath : generatedPath;
-					if (!.strcmp(name, generatedPath)) {
+					if (!/*Error: Function owner not recognized*/strcmp(name, generatedPath)) {
 						break;
 					} 
 				}
@@ -300,9 +300,9 @@ public class blame_origin {
 					ModernizedCProgram.die("internal error in blame::find_origin");
 				} 
 				switch (generatedStatus) {
+				case (byte)'A':
 				case (byte)'T'/* Did not exist in parent, or type changed */:
 						break;
-				case (byte)'A':
 				case (byte)'M':
 						porigin = blame_origin.get_origin(parent, generatedPath);
 						generatedBlob_oid.oidcpy(generatedOid);
@@ -312,7 +312,7 @@ public class blame_origin {
 						ModernizedCProgram.die("internal error in blame::find_origin (%c)", generatedStatus);
 				}
 		} 
-		.diff_flush(diff_opts);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_flush(diff_opts);
 		generatedPathspec.clear_pathspec();
 		return porigin/*
 		 * We have an origin -- find the path that corresponds to it in its
@@ -323,38 +323,38 @@ public class blame_origin {
 		blame_origin porigin = ((Object)0);
 		diff_options diff_opts = new diff_options();
 		int i;
-		.repo_diff_setup(r, diff_opts);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/repo_diff_setup(r, diff_opts);
 		diff_flags generatedFlags = diff_opts.getFlags();
 		generatedFlags.setRecursive(1);
 		diff_opts.setDetect_rename(1);
 		diff_opts.setOutput_format(-1024);
 		Object generatedPath = this.getPath();
 		diff_opts.setSingle_follow(generatedPath);
-		.diff_setup_done(diff_opts);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_setup_done(diff_opts);
 		commit generatedCommit = this.getCommit();
 		object generatedObject = generatedCommit.getObject();
 		object_id generatedOid = generatedObject.getOid();
 		if (ModernizedCProgram.is_null_oid(generatedOid)) {
-			diff_opts.do_diff_cache(.get_commit_tree_oid(parent));
+			diff_opts.do_diff_cache(/*Error: Function owner not recognized*/get_commit_tree_oid(parent));
 		} else {
-				diff_opts.diff_tree_oid(.get_commit_tree_oid(parent), .get_commit_tree_oid(generatedCommit), "");
+				diff_opts.diff_tree_oid(/*Error: Function owner not recognized*/get_commit_tree_oid(parent), /*Error: Function owner not recognized*/get_commit_tree_oid(generatedCommit), "");
 		} 
-		.diffcore_std(diff_opts);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diffcore_std(diff_opts);
 		byte generatedStatus = p.getStatus();
 		blame_origin blame_origin = new blame_origin();
 		object_id generatedBlob_oid = porigin.getBlob_oid();
-		diff_filespec generatedOne = p.getOne();
+		diff_filespec[] generatedOne = p.getOne();
 		int generatedMode = generatedOne.getMode();
 		for (i = 0; i < ModernizedCProgram.diff_queued_diff.getNr(); i++) {
 			diff_filepair p = ModernizedCProgram.diff_queued_diff.getQueue()[i];
-			if ((generatedStatus == (byte)'R' || generatedStatus == (byte)'C') && !.strcmp(generatedPath, generatedPath)) {
+			if ((generatedStatus == (byte)'R' || generatedStatus == (byte)'C') && !/*Error: Function owner not recognized*/strcmp(generatedPath, generatedPath)) {
 				porigin = blame_origin.get_origin(parent, generatedPath);
 				generatedBlob_oid.oidcpy(generatedOid);
 				porigin.setMode(generatedMode);
 				break;
 			} 
 		}
-		.diff_flush(diff_opts);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_flush(diff_opts);
 		pathspec generatedPathspec = diff_opts.getPathspec();
 		generatedPathspec.clear_pathspec();
 		return porigin/*

@@ -3,12 +3,12 @@ package application;
 public class attr_check {
 	private int nr;
 	private int alloc;
-	private attr_check_item items;
+	private attr_check_item[] items;
 	private int all_attrs_nr;
-	private all_attrs_item all_attrs;
+	private all_attrs_item[] all_attrs;
 	private attr_stack stack;
 	
-	public attr_check(int nr, int alloc, attr_check_item items, int all_attrs_nr, all_attrs_item all_attrs, attr_stack stack) {
+	public attr_check(int nr, int alloc, attr_check_item[] items, int all_attrs_nr, all_attrs_item[] all_attrs, attr_stack stack) {
 		setNr(nr);
 		setAlloc(alloc);
 		setItems(items);
@@ -19,61 +19,18 @@ public class attr_check {
 	public attr_check() {
 	}
 	
-	public void output_attr(Object file) {
-		int j;
-		int cnt = ModernizedCProgram.check.getNr();
-		for (j = 0; j < cnt; j++) {
-			byte value = ModernizedCProgram.check.getItems()[j].getValue();
-			if (((value) == ModernizedCProgram.git_attr__true)) {
-				value = "set";
-			}  else if (((value) == ModernizedCProgram.git_attr__false)) {
-				value = "unset";
-			}  else if (((value) == ((Object)0))) {
-				value = "unspecified";
-			} 
-			if (ModernizedCProgram.nul_term_line) {
-				.printf(/* path */"%s%c%s%c%s%c"/* attrname */, file, /* attrvalue */0, ModernizedCProgram.git_attr_name(ModernizedCProgram.check.getItems()[j].getAttr()), 0, value, 0);
-			} else {
-					ModernizedCProgram.quote_c_style(file, ((Object)0), (_iob[1]), 0);
-					.printf(": %s: %s\n", ModernizedCProgram.git_attr_name(ModernizedCProgram.check.getItems()[j].getAttr()), value);
-			} 
-		}
-	}
-	public void check_attr(Object prefix, int collect_all, Object file) {
-		byte full_path = ModernizedCProgram.prefix_path(prefix, prefix ? .strlen(prefix) : 0, file);
-		if (collect_all) {
-			ModernizedCProgram.check.git_all_attrs(ModernizedCProgram.the_index, full_path);
-		} else {
-				ModernizedCProgram.check.git_check_attr(ModernizedCProgram.the_index, full_path);
+	public attr_check load_merge_attributes() {
+		attr_check attr_check = new attr_check();
+		if (!ModernizedCProgram.merge_attributes) {
+			ModernizedCProgram.merge_attributes = attr_check.attr_check_initl("merge", "conflict-marker-size", ((Object)0));
 		} 
-		ModernizedCProgram.check.output_attr(file);
-		ModernizedCProgram.free(full_path);
-	}
-	public void check_attr_stdin_paths(Object prefix, int collect_all) {
-		strbuf buf = new strbuf(, , );
-		strbuf unquoted = new strbuf(, , );
-		strbuf_getline_fn getline_fn = new strbuf_getline_fn();
-		getline_fn = ModernizedCProgram.nul_term_line ? ModernizedCProgram.strbuf_getline_nul : ModernizedCProgram.strbuf_getline_lf;
-		byte generatedBuf = buf.getBuf();
-		while (.getline_fn(buf, (_iob[0])) != (true)) {
-			if (!ModernizedCProgram.nul_term_line && generatedBuf[0] == (byte)'"') {
-				unquoted.strbuf_setlen(0);
-				if (unquoted.unquote_c_style(generatedBuf, ((Object)0))) {
-					ModernizedCProgram.die("line is badly quoted");
-				} 
-				buf.strbuf_swap(unquoted);
-			} 
-			ModernizedCProgram.check.check_attr(prefix, collect_all, generatedBuf);
-			(_iob[1]).maybe_flush_or_die("attribute to stdout");
-		}
-		buf.strbuf_release();
-		unquoted.strbuf_release();
+		return ModernizedCProgram.merge_attributes;
 	}
 	public void check_vector_add() {
 		ModernizedCProgram.vector_lock();
 		Object generatedNr = check_vector.getNr();
 		Object generatedAlloc = check_vector.getAlloc();
-		attr_check generatedChecks = check_vector.getChecks();
+		attr_check[][] generatedChecks = check_vector.getChecks();
 		do {
 			if ((generatedNr + 1) > generatedAlloc) {
 				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNr + 1)) {
@@ -81,7 +38,7 @@ public class attr_check {
 				} else {
 						check_vector.setAlloc((((generatedAlloc) + 16) * 3 / 2));
 				} 
-				(generatedChecks) = ModernizedCProgram.xrealloc((generatedChecks), ModernizedCProgram.st_mult(, (generatedAlloc)));
+				(generatedChecks) = ModernizedCProgram.xrealloc((generatedChecks), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedAlloc)));
 			} 
 		} while (0);
 		generatedChecks[generatedNr++] = c;
@@ -91,7 +48,7 @@ public class attr_check {
 		int i;
 		ModernizedCProgram.vector_lock();
 		Object generatedNr = check_vector.getNr();
-		attr_check generatedChecks = check_vector.getChecks();
+		attr_check[][] generatedChecks = check_vector.getChecks();
 		for (i = 0; i < generatedNr; /* Find entry */i++) {
 			if (generatedChecks[i] == ModernizedCProgram.check) {
 				break;
@@ -107,7 +64,7 @@ public class attr_check {
 		ModernizedCProgram.vector_unlock();
 	}
 	public attr_check attr_check_alloc() {
-		attr_check c = ModernizedCProgram.xcalloc(1, );
+		attr_check c = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 		/* save pointer to the check struct */c.check_vector_add();
 		return c;
 	}
@@ -116,19 +73,19 @@ public class attr_check {
 		int cnt;
 		va_list params = new va_list();
 		byte param;
-		.__builtin_va_start(params, one);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(params, one);
 		for (cnt = 1; (param = (int)params) != ((Object)0); cnt++) {
 			;
 		}
-		.__builtin_va_end(params);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(params);
 		attr_check attr_check = new attr_check();
 		check = attr_check.attr_check_alloc();
 		check.setNr(cnt);
 		check.setAlloc(cnt);
-		check.setItems(ModernizedCProgram.xcalloc(cnt, ));
-		attr_check_item generatedItems = check.getItems();
+		check.setItems(ModernizedCProgram.xcalloc(cnt, /*Error: Unsupported expression*/));
+		attr_check_item[] generatedItems = check.getItems();
 		generatedItems[0].setAttr(ModernizedCProgram.git_attr(one));
-		.__builtin_va_start(params, one);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(params, one);
 		int generatedNr = check.getNr();
 		for (cnt = 1; cnt < generatedNr; cnt++) {
 			git_attr attr = new git_attr();
@@ -142,7 +99,7 @@ public class attr_check {
 			} 
 			generatedItems[cnt].setAttr(ModernizedCProgram.attr);
 		}
-		.__builtin_va_end(params);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(params);
 		return check;
 	}
 	public attr_check attr_check_dup(Object check) {
@@ -154,10 +111,10 @@ public class attr_check {
 		ret = attr_check.attr_check_alloc();
 		ret.setNr(check.getNr());
 		ret.setAlloc(check.getAlloc());
-		attr_check_item generatedItems = ret.getItems();
+		attr_check_item[] generatedItems = ret.getItems();
 		int generatedNr = ret.getNr();
-		(generatedItems) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (generatedNr)));
-		ModernizedCProgram.copy_array((generatedItems), (generatedItems), (generatedNr),  + ( - 1));
+		(generatedItems) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedNr)));
+		ModernizedCProgram.copy_array((generatedItems), (generatedItems), (generatedNr), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		return ret;
 	}
 	public void attr_check_reset() {
@@ -213,7 +170,7 @@ public class attr_check {
 		ModernizedCProgram.all_attrs_init(ModernizedCProgram.g_attr_hashmap, ModernizedCProgram.check);
 		ModernizedCProgram.check.getAll_attrs().determine_macros(ModernizedCProgram.check.getStack());
 		rem = ModernizedCProgram.check.getAll_attrs_nr();
-		ModernizedCProgram.check.getAll_attrs().fill(path, pathlen, basename_offset, ModernizedCProgram.check.getStack(), rem);
+		ModernizedCProgram.fill(path, pathlen, basename_offset, ModernizedCProgram.check.getStack(), ModernizedCProgram.check.getAll_attrs(), rem);
 	}
 	public void git_check_attr(Object istate, Object path) {
 		int i;
@@ -243,12 +200,55 @@ public class attr_check {
 			item.setValue(value);
 		}
 	}
-	public attr_check load_merge_attributes() {
-		attr_check attr_check = new attr_check();
-		if (!ModernizedCProgram.merge_attributes) {
-			ModernizedCProgram.merge_attributes = attr_check.attr_check_initl("merge", "conflict-marker-size", ((Object)0));
+	public void output_attr(Object file) {
+		int j;
+		int cnt = ModernizedCProgram.check.getNr();
+		for (j = 0; j < cnt; j++) {
+			byte value = ModernizedCProgram.check.getItems()[j].getValue();
+			if (((value) == ModernizedCProgram.git_attr__true)) {
+				value = "set";
+			}  else if (((value) == ModernizedCProgram.git_attr__false)) {
+				value = "unset";
+			}  else if (((value) == ((Object)0))) {
+				value = "unspecified";
+			} 
+			if (ModernizedCProgram.nul_term_line) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(/* path */"%s%c%s%c%s%c"/* attrname */, file, /* attrvalue */0, ModernizedCProgram.git_attr_name(ModernizedCProgram.check.getItems()[j].getAttr()), 0, value, 0);
+			} else {
+					ModernizedCProgram.quote_c_style(file, ((Object)0), (_iob[1]), 0);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(": %s: %s\n", ModernizedCProgram.git_attr_name(ModernizedCProgram.check.getItems()[j].getAttr()), value);
+			} 
+		}
+	}
+	public void check_attr(Object prefix, int collect_all, Object file) {
+		byte full_path = ModernizedCProgram.prefix_path(prefix, prefix ? /*Error: Function owner not recognized*/strlen(prefix) : 0, file);
+		if (collect_all) {
+			ModernizedCProgram.check.git_all_attrs(ModernizedCProgram.the_index, full_path);
+		} else {
+				ModernizedCProgram.check.git_check_attr(ModernizedCProgram.the_index, full_path);
 		} 
-		return ModernizedCProgram.merge_attributes;
+		ModernizedCProgram.check.output_attr(file);
+		ModernizedCProgram.free(full_path);
+	}
+	public void check_attr_stdin_paths(Object prefix, int collect_all) {
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf unquoted = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf_getline_fn getline_fn = new strbuf_getline_fn();
+		getline_fn = ModernizedCProgram.nul_term_line ? ModernizedCProgram.strbuf_getline_nul : ModernizedCProgram.strbuf_getline_lf;
+		byte[] generatedBuf = buf.getBuf();
+		while (/*Error: Function owner not recognized*/getline_fn(buf, (_iob[0])) != (true)) {
+			if (!ModernizedCProgram.nul_term_line && generatedBuf[0] == (byte)'"') {
+				unquoted.strbuf_setlen(0);
+				if (unquoted.unquote_c_style(generatedBuf, ((Object)0))) {
+					ModernizedCProgram.die("line is badly quoted");
+				} 
+				buf.strbuf_swap(unquoted);
+			} 
+			ModernizedCProgram.check.check_attr(prefix, collect_all, generatedBuf);
+			(_iob[1]).maybe_flush_or_die("attribute to stdout");
+		}
+		buf.strbuf_release();
+		unquoted.strbuf_release();
 	}
 	public int getNr() {
 		return nr;
@@ -262,10 +262,10 @@ public class attr_check {
 	public void setAlloc(int newAlloc) {
 		alloc = newAlloc;
 	}
-	public attr_check_item getItems() {
+	public attr_check_item[] getItems() {
 		return items;
 	}
-	public void setItems(attr_check_item newItems) {
+	public void setItems(attr_check_item[] newItems) {
 		items = newItems;
 	}
 	public int getAll_attrs_nr() {
@@ -274,10 +274,10 @@ public class attr_check {
 	public void setAll_attrs_nr(int newAll_attrs_nr) {
 		all_attrs_nr = newAll_attrs_nr;
 	}
-	public all_attrs_item getAll_attrs() {
+	public all_attrs_item[] getAll_attrs() {
 		return all_attrs;
 	}
-	public void setAll_attrs(all_attrs_item newAll_attrs) {
+	public void setAll_attrs(all_attrs_item[] newAll_attrs) {
 		all_attrs = newAll_attrs;
 	}
 	public attr_stack getStack() {

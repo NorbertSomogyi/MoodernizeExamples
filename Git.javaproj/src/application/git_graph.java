@@ -14,13 +14,13 @@ public class git_graph {
 	private int num_columns;
 	private int num_new_columns;
 	private int mapping_size;
-	private column columns;
-	private column new_columns;
-	private Integer mapping;
-	private Integer new_mapping;
+	private column[] columns;
+	private column[] new_columns;
+	private int[] mapping;
+	private int[] new_mapping;
 	private int default_column_color;
 	
-	public git_graph(commit commit, rev_info revs, int num_parents, int width, int expansion_row, graph_state state, graph_state prev_state, int commit_index, int prev_commit_index, int column_capacity, int num_columns, int num_new_columns, int mapping_size, column columns, column new_columns, Integer mapping, Integer new_mapping, int default_column_color) {
+	public git_graph(commit commit, rev_info revs, int num_parents, int width, int expansion_row, graph_state state, graph_state prev_state, int commit_index, int prev_commit_index, int column_capacity, int num_columns, int num_new_columns, int mapping_size, column[] columns, column[] new_columns, int[] mapping, int[] new_mapping, int default_column_color) {
 		setCommit(commit);
 		setRevs(revs);
 		setNum_parents(num_parents);
@@ -44,12 +44,12 @@ public class git_graph {
 	}
 	
 	public git_graph graph_init(rev_info opt) {
-		git_graph graph = ModernizedCProgram.xmalloc();
-		Object generatedArgv = custom_colors.getArgv();
+		git_graph graph = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
+		Object[][] generatedArgv = custom_colors.getArgv();
 		int generatedArgc = custom_colors.getArgc();
 		if (!ModernizedCProgram.column_colors) {
 			byte string;
-			if (.git_config_get_string("log.graphcolors", ModernizedCProgram.string)) {
+			if (/*Error: Function owner not recognized*/git_config_get_string("log.graphcolors", ModernizedCProgram.string)) {
 				ModernizedCProgram.graph_set_column_colors(/* not configured -- use default */ModernizedCProgram.column_colors_ansi, ModernizedCProgram.column_colors_ansi_max);
 			} else {
 					argv_array custom_colors = new argv_array(ModernizedCProgram.empty_argv, 0, 0);
@@ -79,15 +79,15 @@ public class git_graph {
 			 * We'll automatically grow columns later if we need more room.
 			 */);
 		graph.setColumn_capacity(30);
-		column generatedColumns = graph.getColumns();
+		column[] generatedColumns = graph.getColumns();
 		int generatedColumn_capacity = graph.getColumn_capacity();
-		(generatedColumns) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (generatedColumn_capacity)));
-		column generatedNew_columns = graph.getNew_columns();
-		(generatedNew_columns) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (generatedColumn_capacity)));
-		Integer generatedMapping = graph.getMapping();
-		(generatedMapping) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (2 * generatedColumn_capacity)));
-		Integer generatedNew_mapping = graph.getNew_mapping();
-		(generatedNew_mapping) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (2 * generatedColumn_capacity)));
+		(generatedColumns) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedColumn_capacity)));
+		column[] generatedNew_columns = graph.getNew_columns();
+		(generatedNew_columns) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedColumn_capacity)));
+		int[] generatedMapping = graph.getMapping();
+		(generatedMapping) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (2 * generatedColumn_capacity)));
+		int[] generatedNew_mapping = graph.getNew_mapping();
+		(generatedNew_mapping) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (2 * generatedColumn_capacity)));
 		diff_options generatedDiffopt = opt.getDiffopt();
 		generatedDiffopt.setOutput_prefix(diff_output_prefix_callback);
 		generatedDiffopt.setOutput_prefix_data(graph);
@@ -101,19 +101,19 @@ public class git_graph {
 	public void graph_ensure_capacity(int num_columns) {
 		int generatedColumn_capacity = this.getColumn_capacity();
 		if (generatedColumn_capacity >= num_columns) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		do {
 			generatedColumn_capacity *= 2;
 		} while (generatedColumn_capacity < num_columns);
-		column generatedColumns = this.getColumns();
-		(generatedColumns) = ModernizedCProgram.xrealloc((generatedColumns), ModernizedCProgram.st_mult(, (generatedColumn_capacity)));
-		column generatedNew_columns = this.getNew_columns();
-		(generatedNew_columns) = ModernizedCProgram.xrealloc((generatedNew_columns), ModernizedCProgram.st_mult(, (generatedColumn_capacity)));
-		Integer generatedMapping = this.getMapping();
-		(generatedMapping) = ModernizedCProgram.xrealloc((generatedMapping), ModernizedCProgram.st_mult(, (generatedColumn_capacity * 2)));
-		Integer generatedNew_mapping = this.getNew_mapping();
-		(generatedNew_mapping) = ModernizedCProgram.xrealloc((generatedNew_mapping), ModernizedCProgram.st_mult(, (generatedColumn_capacity * 2/*
+		column[] generatedColumns = this.getColumns();
+		(generatedColumns) = ModernizedCProgram.xrealloc((generatedColumns), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedColumn_capacity)));
+		column[] generatedNew_columns = this.getNew_columns();
+		(generatedNew_columns) = ModernizedCProgram.xrealloc((generatedNew_columns), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedColumn_capacity)));
+		int[] generatedMapping = this.getMapping();
+		(generatedMapping) = ModernizedCProgram.xrealloc((generatedMapping), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedColumn_capacity * 2)));
+		int[] generatedNew_mapping = this.getNew_mapping();
+		(generatedNew_mapping) = ModernizedCProgram.xrealloc((generatedNew_mapping), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedColumn_capacity * 2/*
 		 * Returns 1 if the commit will be printed in the graph output,
 		 * and 0 otherwise.
 		 */)));
@@ -164,15 +164,15 @@ public class git_graph {
 			 * We'll re-use the old columns array as storage to compute the new
 			 * columns list for the commit after this one.
 			 */
-		column generatedColumns = this.getColumns();
-		column generatedNew_columns = this.getNew_columns();
+		column[] generatedColumns = this.getColumns();
+		column[] generatedNew_columns = this.getNew_columns();
 		do {
 			Object _swap_a_ptr = (generatedColumns);
 			Object _swap_b_ptr = (generatedNew_columns);
-			byte[] _swap_buffer = new byte[];
-			.memcpy(_swap_buffer, _swap_a_ptr, );
-			.memcpy(_swap_a_ptr, _swap_b_ptr,  + ( - 1));
-			.memcpy(_swap_b_ptr, _swap_buffer, );
+			byte[] _swap_buffer = new byte[/*Error: sizeof expression not supported yet*/];
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_buffer, _swap_a_ptr, /*Error: sizeof expression not supported yet*/);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_a_ptr, _swap_b_ptr, /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_b_ptr, _swap_buffer, /*Error: sizeof expression not supported yet*/);
 		} while (0);
 		int generatedNum_new_columns = this.getNum_new_columns();
 		this.setNum_columns(generatedNum_new_columns);
@@ -192,7 +192,7 @@ public class git_graph {
 			 */);
 		this.setMapping_size(2 * max_new_columns);
 		int generatedMapping_size = this.getMapping_size();
-		Integer generatedMapping = this.getMapping();
+		int[] generatedMapping = this.getMapping();
 		for (i = 0; i < generatedMapping_size; i++) {
 			generatedMapping[i] = -1/*
 				 * Populate graph->new_columns and graph->mapping
@@ -263,7 +263,7 @@ public class git_graph {
 			 * will look correct on the next row.)
 			 */
 		int generatedMapping_size = this.getMapping_size();
-		Integer generatedMapping = this.getMapping();
+		int[] generatedMapping = this.getMapping();
 		for (i = 0; i < generatedMapping_size; i++) {
 			int target = generatedMapping[i];
 			if (ModernizedCProgram.target < 0) {
@@ -281,26 +281,26 @@ public class git_graph {
 		return generatedWidth;
 	}
 	public void graph_show_commit() {
-		strbuf msgbuf = new strbuf(, , );
+		strbuf msgbuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int shown_commit_line = 0;
 		ModernizedCProgram.graph_show_line_prefix(ModernizedCProgram.default_diffopt);
 		if (!graph) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.graph_is_commit_finished(graph)) {
 			graph.graph_show_padding();
 			shown_commit_line = 1;
 		} 
-		byte generatedBuf = msgbuf.getBuf();
+		byte[] generatedBuf = msgbuf.getBuf();
 		Object generatedLen = msgbuf.getLen();
 		rev_info generatedRevs = this.getRevs();
 		diff_options generatedDiffopt = generatedRevs.getDiffopt();
 		_iobuf generatedFile = generatedDiffopt.getFile();
 		while (!shown_commit_line && !ModernizedCProgram.graph_is_commit_finished(graph)) {
 			shown_commit_line = ModernizedCProgram.graph_next_line(graph, msgbuf);
-			.fwrite(generatedBuf, , generatedLen, generatedFile);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fwrite(generatedBuf, /*Error: Unsupported expression*/, generatedLen, generatedFile);
 			if (!shown_commit_line) {
-				.putc((byte)'\n', generatedFile);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc((byte)'\n', generatedFile);
 				ModernizedCProgram.graph_show_line_prefix(generatedDiffopt);
 			} 
 			msgbuf.strbuf_setlen(0);
@@ -308,37 +308,37 @@ public class git_graph {
 		msgbuf.strbuf_release();
 	}
 	public void graph_show_oneline() {
-		strbuf msgbuf = new strbuf(, , );
+		strbuf msgbuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		ModernizedCProgram.graph_show_line_prefix(ModernizedCProgram.default_diffopt);
 		if (!graph) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.graph_next_line(graph, msgbuf);
-		byte generatedBuf = msgbuf.getBuf();
+		byte[] generatedBuf = msgbuf.getBuf();
 		Object generatedLen = msgbuf.getLen();
 		rev_info generatedRevs = this.getRevs();
 		diff_options generatedDiffopt = generatedRevs.getDiffopt();
 		_iobuf generatedFile = generatedDiffopt.getFile();
-		.fwrite(generatedBuf, , generatedLen, generatedFile);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fwrite(generatedBuf, /*Error: Unsupported expression*/, generatedLen, generatedFile);
 		msgbuf.strbuf_release();
 	}
 	public void graph_show_padding() {
-		strbuf msgbuf = new strbuf(, , );
+		strbuf msgbuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		ModernizedCProgram.graph_show_line_prefix(ModernizedCProgram.default_diffopt);
 		if (!graph) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.graph_padding_line(graph, msgbuf);
-		byte generatedBuf = msgbuf.getBuf();
+		byte[] generatedBuf = msgbuf.getBuf();
 		Object generatedLen = msgbuf.getLen();
 		rev_info generatedRevs = this.getRevs();
 		diff_options generatedDiffopt = generatedRevs.getDiffopt();
 		_iobuf generatedFile = generatedDiffopt.getFile();
-		.fwrite(generatedBuf, , generatedLen, generatedFile);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fwrite(generatedBuf, /*Error: Unsupported expression*/, generatedLen, generatedFile);
 		msgbuf.strbuf_release();
 	}
 	public int graph_show_remainder() {
-		strbuf msgbuf = new strbuf(, , );
+		strbuf msgbuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int shown = 0;
 		ModernizedCProgram.graph_show_line_prefix(ModernizedCProgram.default_diffopt);
 		if (!graph) {
@@ -347,18 +347,18 @@ public class git_graph {
 		if (ModernizedCProgram.graph_is_commit_finished(graph)) {
 			return 0;
 		} 
-		byte generatedBuf = msgbuf.getBuf();
+		byte[] generatedBuf = msgbuf.getBuf();
 		Object generatedLen = msgbuf.getLen();
 		rev_info generatedRevs = this.getRevs();
 		diff_options generatedDiffopt = generatedRevs.getDiffopt();
 		_iobuf generatedFile = generatedDiffopt.getFile();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			ModernizedCProgram.graph_next_line(graph, msgbuf);
-			.fwrite(generatedBuf, , generatedLen, generatedFile);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fwrite(generatedBuf, /*Error: Unsupported expression*/, generatedLen, generatedFile);
 			msgbuf.strbuf_setlen(0);
 			shown = 1;
 			if (!ModernizedCProgram.graph_is_commit_finished(graph)) {
-				.putc((byte)'\n', generatedFile);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc((byte)'\n', generatedFile);
 				ModernizedCProgram.graph_show_line_prefix(generatedDiffopt);
 			} else {
 					break;
@@ -445,28 +445,28 @@ public class git_graph {
 	public void setMapping_size(int newMapping_size) {
 		mapping_size = newMapping_size;
 	}
-	public column getColumns() {
+	public column[] getColumns() {
 		return columns;
 	}
-	public void setColumns(column newColumns) {
+	public void setColumns(column[] newColumns) {
 		columns = newColumns;
 	}
-	public column getNew_columns() {
+	public column[] getNew_columns() {
 		return new_columns;
 	}
-	public void setNew_columns(column newNew_columns) {
+	public void setNew_columns(column[] newNew_columns) {
 		new_columns = newNew_columns;
 	}
-	public Integer getMapping() {
+	public int[] getMapping() {
 		return mapping;
 	}
-	public void setMapping(Integer newMapping) {
+	public void setMapping(int[] newMapping) {
 		mapping = newMapping;
 	}
-	public Integer getNew_mapping() {
+	public int[] getNew_mapping() {
 		return new_mapping;
 	}
-	public void setNew_mapping(Integer newNew_mapping) {
+	public void setNew_mapping(int[] newNew_mapping) {
 		new_mapping = newNew_mapping;
 	}
 	public int getDefault_column_color() {

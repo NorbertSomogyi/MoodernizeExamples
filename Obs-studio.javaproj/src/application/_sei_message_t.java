@@ -39,22 +39,22 @@ public class _sei_message_t {
 		return ((_sei_message_t)msg).getSize();
 	}
 	public Object sei_message_data() {
-		return ((uint8_t)msg) + ;
+		return ((uint8_t)msg) + /*Error: Unsupported expression*/;
 	}
 	public void sei_message_free() {
 		if (msg) {
-			.free(msg);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(msg);
 		} 
 	}
 	public _sei_message_t sei_message_new( type, Object data, Object size) {
-		_sei_message_t msg = (_sei_message_t).malloc( + size);
+		_sei_message_t msg = (_sei_message_t)/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/ + size);
 		msg.setNext(0);
 		msg.setType(type);
 		msg.setSize(size);
 		if (data) {
-			.memcpy(msg.sei_message_data(), data, size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(msg.sei_message_data(), data, size);
 		} else {
-				.memset(msg.sei_message_data(), 0, size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(msg.sei_message_data(), 0, size);
 		} 
 		return (sei_message_t)msg;
 	}
@@ -65,16 +65,16 @@ public class _sei_message_t {
 		for (msg = head; msg; msg = msg.sei_message_next()) {
 			uint8_t data = msg.sei_message_data();
 			size_t size = msg.sei_message_size();
-			.fprintf((_iob[2]), "-- Message %p\n-- Message Type: %d\n-- Message Size: %d\n", ModernizedCProgram.data, msg.sei_message_type(), (int)size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "-- Message %p\n-- Message Type: %d\n-- Message Size: %d\n", ModernizedCProgram.data, msg.sei_message_type(), (int)size);
 			while (size) {
-				.fprintf((_iob[2]), "%02X ", ModernizedCProgram.data);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%02X ", ModernizedCProgram.data);
 				++ModernizedCProgram.data;
 				--size;
 			}
-			.fprintf((_iob[2]), "\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "\n");
 			if (.sei_type_user_data_registered_itu_t_t35 == msg.sei_message_type()) {
 				if (.LIBCAPTION_OK != cea708.cea708_parse_h262(msg.sei_message_data(), msg.sei_message_size())) {
-					.fprintf((_iob[2]), "cea708_parse error\n");
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "cea708_parse error\n");
 				} else {
 						cea708.cea708_dump();
 				} 

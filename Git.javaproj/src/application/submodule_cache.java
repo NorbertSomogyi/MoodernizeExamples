@@ -24,7 +24,7 @@ public class submodule_cache {
 	}
 	
 	public submodule_cache submodule_cache_alloc() {
-		return ModernizedCProgram.xcalloc(1, );
+		return ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 	}
 	public void submodule_cache_init() {
 		hashmap generatedFor_path = this.getFor_path();
@@ -38,7 +38,7 @@ public class submodule_cache {
 		submodule_entry entry = new submodule_entry();
 		int generatedInitialized = this.getInitialized();
 		if (!generatedInitialized) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		hashmap_entry hashmap_entry = new hashmap_entry();
 		hashmap generatedFor_name = this.getFor_name();
@@ -79,7 +79,7 @@ public class submodule_cache {
 		return ((Object)0);
 	}
 	public Object config_from(Object treeish_name, Object key, lookup_type lookup_type) {
-		strbuf rev = new strbuf(, , );
+		strbuf rev = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		long config_size;
 		byte config = ((Object)0);
 		object_id oid = new object_id();
@@ -108,11 +108,11 @@ public class submodule_cache {
 		} 
 		submodule submodule = new submodule();
 		switch (lookup_type.lookup_type) {
-		case lookup_type.lookup_name:
-				submodule = submodule.cache_lookup_name(cache, oid, key);
-				break;
 		case lookup_type.lookup_path:
 				submodule = cache.cache_lookup_path(oid, key);
+				break;
+		case lookup_type.lookup_name:
+				submodule = submodule.cache_lookup_name(cache, oid, key);
 				break;
 		}
 		if (submodule) {
@@ -126,15 +126,15 @@ public class submodule_cache {
 		parameter.setTreeish_name(treeish_name);
 		parameter.setGitmodules_oid(oid);
 		parameter.setOverwrite(0);
-		byte generatedBuf = rev.getBuf();
-		.git_config_from_mem(parse_config, config_origin_type.CONFIG_ORIGIN_SUBMODULE_BLOB, generatedBuf, config, config_size, parameter, ((Object)0));
+		byte[] generatedBuf = rev.getBuf();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_from_mem(parse_config, config_origin_type.CONFIG_ORIGIN_SUBMODULE_BLOB, generatedBuf, config, config_size, parameter, ((Object)0));
 		rev.strbuf_release();
 		ModernizedCProgram.free(config);
 		switch (lookup_type.lookup_type) {
-		case lookup_type.lookup_name:
-				return submodule.cache_lookup_name(cache, oid, key);
 		case lookup_type.lookup_path:
 				return cache.cache_lookup_path(oid, key);
+		case lookup_type.lookup_name:
+				return submodule.cache_lookup_name(cache, oid, key);
 		default:
 				return ((Object)0);
 		}

@@ -52,13 +52,13 @@ public class vaapi_encoder {
 	public Object vaapi_init_codec(Object path) {
 		int ret;
 		Object generatedVadevice_ref = this.getVadevice_ref();
-		ret = .av_hwdevice_ctx_create(generatedVadevice_ref, AV_HWDEVICE_TYPE_VAAPI, path, NULL, 0);
+		ret = /*Error: Function owner not recognized*/av_hwdevice_ctx_create(generatedVadevice_ref, AV_HWDEVICE_TYPE_VAAPI, path, NULL, 0);
 		obs_encoder generatedEncoder = this.getEncoder();
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "[FFMPEG VAAPI encoder: '%s'] Failed to create VAAPI device context: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "[FFMPEG VAAPI encoder: '%s'] Failed to create VAAPI device context: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
-		this.setVaframes_ref(.av_hwframe_ctx_alloc(generatedVadevice_ref));
+		this.setVaframes_ref(/*Error: Function owner not recognized*/av_hwframe_ctx_alloc(generatedVadevice_ref));
 		Object generatedVaframes_ref = this.getVaframes_ref();
 		if (!generatedVaframes_ref) {
 			ModernizedCProgram.blog(LOG_WARNING, "[FFMPEG VAAPI encoder: '%s'] Failed to alloc HW frames context", ModernizedCProgram.obs_encoder_get_name(generatedEncoder));
@@ -71,12 +71,12 @@ public class vaapi_encoder {
 		frames_ctx.setWidth(generatedContext.getWidth());
 		frames_ctx.setHeight(generatedContext.getHeight());
 		frames_ctx.setInitial_pool_size(20);
-		ret = .av_hwframe_ctx_init(generatedVaframes_ref);
+		ret = /*Error: Function owner not recognized*/av_hwframe_ctx_init(generatedVaframes_ref);
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "[FFMPEG VAAPI encoder: '%s'] Failed to init HW frames context: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "[FFMPEG VAAPI encoder: '%s'] Failed to init HW frames context: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
-		this.setVframe(.av_frame_alloc());
+		this.setVframe(/*Error: Function owner not recognized*/av_frame_alloc());
 		Object generatedVframe = this.getVframe();
 		if (!generatedVframe) {
 			ModernizedCProgram.blog(LOG_WARNING, "[FFMPEG VAAPI encoder: '%s'] Failed to allocate video frame", ModernizedCProgram.obs_encoder_get_name(generatedEncoder));
@@ -87,17 +87,17 @@ public class vaapi_encoder {
 		generatedVframe.setHeight(generatedContext.getHeight());
 		generatedVframe.setColorspace(generatedContext.getColorspace());
 		generatedVframe.setColor_range(generatedContext.getColor_range());
-		ret = .av_frame_get_buffer(generatedVframe, ModernizedCProgram.base_get_alignment());
+		ret = /*Error: Function owner not recognized*/av_frame_get_buffer(generatedVframe, ModernizedCProgram.base_get_alignment());
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "[FFMPEG VAAPI encoder: '%s'] Failed to allocate vframe: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "[FFMPEG VAAPI encoder: '%s'] Failed to allocate vframe: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
 		generatedContext.setPix_fmt(/* 3. set up codec */AV_PIX_FMT_VAAPI);
-		generatedContext.setHw_frames_ctx(.av_buffer_ref(generatedVaframes_ref));
+		generatedContext.setHw_frames_ctx(/*Error: Function owner not recognized*/av_buffer_ref(generatedVaframes_ref));
 		Object generatedVaapi = this.getVaapi();
-		ret = .avcodec_open2(generatedContext, generatedVaapi, NULL);
+		ret = /*Error: Function owner not recognized*/avcodec_open2(generatedContext, generatedVaapi, NULL);
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "[FFMPEG VAAPI encoder: '%s'] Failed to open VAAPI codec: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "[FFMPEG VAAPI encoder: '%s'] Failed to open VAAPI codec: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
 		this.setInitialized(true);

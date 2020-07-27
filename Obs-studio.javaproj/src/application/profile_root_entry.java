@@ -30,11 +30,11 @@ public class profile_root_entry {
 		Object generatedMutex = r_entry.getMutex();
 		profile_entry generatedEntry = r_entry.getEntry();
 		if (!r_entry) {
-			r_entry = generatedDa.darray_push_back_new();
-			r_entry.setMutex(ModernizedCProgram.bmalloc());
+			r_entry = generatedDa.darray_push_back_new(/*Error: sizeof expression not supported yet*/);
+			r_entry.setMutex(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/));
 			ModernizedCProgram.pthread_mutex_init(generatedMutex, ((Object)0));
 			r_entry.setName(name);
-			r_entry.setEntry(ModernizedCProgram.bzalloc());
+			r_entry.setEntry(ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/));
 			generatedEntry.init_entry(name);
 		} 
 		return r_entry;

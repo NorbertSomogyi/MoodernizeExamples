@@ -5,14 +5,14 @@ package application;
  */
 public class cached_dir {
 	private  fdir;
-	private untracked_cache_dir untracked;
+	private untracked_cache_dir[] untracked;
 	private int nr_files;
 	private int nr_dirs;
 	private dirent de;
 	private Object file;
 	private untracked_cache_dir ucd;
 	
-	public cached_dir( fdir, untracked_cache_dir untracked, int nr_files, int nr_dirs, dirent de, Object file, untracked_cache_dir ucd) {
+	public cached_dir( fdir, untracked_cache_dir[] untracked, int nr_files, int nr_dirs, dirent de, Object file, untracked_cache_dir ucd) {
 		setFdir(fdir);
 		setUntracked(untracked);
 		setNr_files(nr_files);
@@ -36,9 +36,9 @@ public class cached_dir {
 			return 0;
 		} 
 		int generatedNr_dirs = this.getNr_dirs();
-		untracked_cache_dir generatedUntracked = this.getUntracked();
+		untracked_cache_dir[] generatedUntracked = this.getUntracked();
 		int generatedDirs_nr = generatedUntracked.getDirs_nr();
-		untracked_cache_dir generatedDirs = generatedUntracked.getDirs();
+		untracked_cache_dir[][] generatedDirs = generatedUntracked.getDirs();
 		int generatedRecurse = d.getRecurse();
 		while (generatedNr_dirs < generatedDirs_nr) {
 			untracked_cache_dir d = generatedDirs[generatedNr_dirs];
@@ -65,7 +65,7 @@ public class cached_dir {
 		if (generatedFdir) {
 			generatedFdir.closedir();
 		} 
-		untracked_cache_dir generatedUntracked = this.getUntracked();
+		untracked_cache_dir[] generatedUntracked = this.getUntracked();
 		if (generatedUntracked) {
 			generatedUntracked.setValid(1);
 			generatedUntracked.setRecurse(1/*
@@ -94,10 +94,10 @@ public class cached_dir {
 	public void setFdir( newFdir) {
 		fdir = newFdir;
 	}
-	public untracked_cache_dir getUntracked() {
+	public untracked_cache_dir[] getUntracked() {
 		return untracked;
 	}
-	public void setUntracked(untracked_cache_dir newUntracked) {
+	public void setUntracked(untracked_cache_dir[] newUntracked) {
 		untracked = newUntracked;
 	}
 	public int getNr_files() {

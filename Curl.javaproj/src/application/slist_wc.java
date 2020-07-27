@@ -34,13 +34,40 @@ public class slist_wc {
 	public slist_wc() {
 	}
 	
+	/* Add a source line to the main code or remarks */
+	public Object easysrc_add(Object line) {
+		 ret = CURLE_OK;
+		slist_wc list = plist.slist_wc_append(line);
+		if (!list) {
+			ModernizedCProgram.easysrc_free();
+			ret = CURLE_OUT_OF_MEMORY;
+		} else {
+				plist = list;
+		} 
+		return ret;
+	}
+	public Object easysrc_addf(Object fmt) {
+		 ret = new ();
+		byte bufp;
+		va_list ap = new va_list();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
+		bufp = ModernizedCProgram.curl_mvaprintf(fmt, ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
+		if (!bufp) {
+			ret = CURLE_OUT_OF_MEMORY;
+		} else {
+				ret = plist.easysrc_add(bufp);
+				ModernizedCProgram.curl_free(bufp);
+		} 
+		return ret;
+	}
 	public slist_wc slist_wc_append(Object data) {
 		curl_slist new_item = ((Object)0).curl_slist_append(data);
 		if (!new_item) {
 			return ((Object)0);
 		} 
 		if (!list) {
-			list = .malloc();
+			list = /*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
 			if (!list) {
 				new_item.curl_slist_free_all();
 				return ((Object)0);
@@ -58,38 +85,11 @@ public class slist_wc {
 	/* be nice and clean up resources */
 	public void slist_wc_free_all() {
 		if (!list) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		curl_slist generatedFirst = this.getFirst();
 		generatedFirst.curl_slist_free_all();
-		.free(list/* CURL_DISABLE_LIBCURL_OPTION */);
-	}
-	/* Add a source line to the main code or remarks */
-	public Object easysrc_add(Object line) {
-		 ret = CURLE_OK;
-		slist_wc list = plist.slist_wc_append(line);
-		if (!list) {
-			ModernizedCProgram.easysrc_free();
-			ret = CURLE_OUT_OF_MEMORY;
-		} else {
-				plist = list;
-		} 
-		return ret;
-	}
-	public Object easysrc_addf(Object fmt) {
-		 ret = new ();
-		byte bufp;
-		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
-		bufp = ModernizedCProgram.curl_mvaprintf(fmt, ap);
-		.__builtin_va_end(ap);
-		if (!bufp) {
-			ret = CURLE_OUT_OF_MEMORY;
-		} else {
-				ret = plist.easysrc_add(bufp);
-				ModernizedCProgram.curl_free(bufp);
-		} 
-		return ret;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(list/* CURL_DISABLE_LIBCURL_OPTION */);
 	}
 	public curl_slist getFirst() {
 		return first;

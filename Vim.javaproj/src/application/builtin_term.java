@@ -65,7 +65,7 @@ public class builtin_term {
 		int generatedBt_entry = p.getBt_entry();
 		while (generatedBt_string != ((Object)0)) {
 			if (generatedBt_entry == (int)SpecialKey.KS_NAME) {
-				if (.strcmp((byte)(term), (byte)(generatedBt_string)) == 0) {
+				if (/*Error: Function owner not recognized*/strcmp((byte)(term), (byte)(generatedBt_string)) == 0) {
 					return p;
 				} 
 			} 

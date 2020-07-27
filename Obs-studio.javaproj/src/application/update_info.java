@@ -47,7 +47,7 @@ public class update_info {
 	
 	public void update_info_destroy() {
 		if (!info) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedThread_created = this.getThread_created();
 		Object generatedThread = this.getThread();
@@ -55,7 +55,7 @@ public class update_info {
 			ModernizedCProgram.pthread_join(generatedThread, NULL);
 		} 
 		Object generatedFile_data = this.getFile_data();
-		.da_free(generatedFile_data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedFile_data);
 		Byte generatedLog_prefix = this.getLog_prefix();
 		ModernizedCProgram.bfree(generatedLog_prefix);
 		Byte generatedUser_agent = this.getUser_agent();
@@ -70,11 +70,11 @@ public class update_info {
 		ModernizedCProgram.bfree(generatedUrl);
 		curl_slist generatedHeader = this.getHeader();
 		if (generatedHeader) {
-			.curl_slist_free_all(generatedHeader);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_slist_free_all(generatedHeader);
 		} 
 		Object generatedCurl = this.getCurl();
 		if (generatedCurl) {
-			.curl_easy_cleanup(generatedCurl);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_cleanup(generatedCurl);
 		} 
 		obs_data generatedLocal_package = this.getLocal_package();
 		if (generatedLocal_package) {
@@ -94,22 +94,22 @@ public class update_info {
 		 total = size * nmemb;
 		Object generatedFile_data = this.getFile_data();
 		if (total) {
-			.da_push_back_array(generatedFile_data, ptr, total);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back_array(generatedFile_data, ptr, total);
 		} 
 		return total;
 	}
 	public Object http_header(Byte buffer, Object size, Object nitems) {
-		if (!.strncmp(buffer, "ETag: ", 6)) {
+		if (!/*Error: Function owner not recognized*/strncmp(buffer, "ETag: ", 6)) {
 			byte etag = buffer + 6;
 			if (etag) {
 				byte etag_clean;
 				byte p;
 				etag_clean = ModernizedCProgram.bstrdup(etag);
-				p = .strchr(etag_clean, (byte)'\r');
+				p = /*Error: Function owner not recognized*/strchr(etag_clean, (byte)'\r');
 				if (p) {
 					p = 0;
 				} 
-				p = .strchr(etag_clean, (byte)'\n');
+				p = /*Error: Function owner not recognized*/strchr(etag_clean, (byte)'\n');
 				if (p) {
 					p = 0;
 				} 
@@ -118,47 +118,47 @@ public class update_info {
 		} 
 		return nitems * size;
 	}
-	public Object do_http_request(Object url, long response_code) {
+	public Object do_http_request(Object url, Long response_code) {
 		 code = new ();
 		 null_terminator = 0;
 		Object generatedFile_data = this.getFile_data();
-		.da_resize(generatedFile_data, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_resize(generatedFile_data, 0);
 		Object generatedCurl = this.getCurl();
-		.curl_easy_setopt(generatedCurl, CURLOPT_URL, url);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_URL, url);
 		curl_slist generatedHeader = this.getHeader();
-		.curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, generatedHeader);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, generatedHeader);
 		Object generatedError = this.getError();
-		.curl_easy_setopt(generatedCurl, CURLOPT_ERRORBUFFER, generatedError);
-		.curl_easy_setopt(generatedCurl, CURLOPT_WRITEFUNCTION, http_write);
-		.curl_easy_setopt(generatedCurl, CURLOPT_WRITEDATA, info);
-		.curl_easy_setopt(generatedCurl, CURLOPT_FAILONERROR, true);
-		.curl_easy_setopt(generatedCurl, CURLOPT_NOSIGNAL, 1);
-		.curl_easy_setopt(generatedCurl, CURLOPT_ACCEPT_ENCODING, "");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_ERRORBUFFER, generatedError);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_WRITEFUNCTION, http_write);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_WRITEDATA, info);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_FAILONERROR, true);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_NOSIGNAL, 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_ACCEPT_ENCODING, "");
 		Object generatedRemote_url = this.getRemote_url();
 		if (!generatedRemote_url) {
-			.curl_easy_setopt(generatedCurl, CURLOPT_HEADERFUNCTION, http_header);
-			.curl_easy_setopt(generatedCurl, CURLOPT_HEADERDATA, info);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_HEADERFUNCTION, http_header);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_HEADERDATA, info);
 		} 
 		// We only care about headers from the main package file
-		code = .curl_easy_perform(generatedCurl);
+		code = /*Error: Function owner not recognized*/curl_easy_perform(generatedCurl);
 		Byte generatedLog_prefix = this.getLog_prefix();
 		if (code != CURLE_OK) {
 			ModernizedCProgram.blog(LOG_WARNING, "%sRemote update of URL \"%s\" failed: %s", generatedLog_prefix, url, generatedError);
 			return false;
 		} 
-		if (.curl_easy_getinfo(generatedCurl, CURLINFO_RESPONSE_CODE, response_code) != CURLE_OK) {
+		if (/*Error: Function owner not recognized*/curl_easy_getinfo(generatedCurl, CURLINFO_RESPONSE_CODE, response_code) != CURLE_OK) {
 			return false;
 		} 
 		if (response_code >= 400) {
 			ModernizedCProgram.blog(LOG_WARNING, "%sRemote update of URL \"%s\" failed: HTTP/%ld", generatedLog_prefix, url, response_code);
 			return false;
 		} 
-		.da_push_back(generatedFile_data, null_terminator);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedFile_data, null_terminator);
 		return true;
 	}
 	public Object init_update() {
 		dstr user_agent = new dstr(0);
-		this.setCurl(.curl_easy_init());
+		this.setCurl(/*Error: Function owner not recognized*/curl_easy_init());
 		Object generatedCurl = this.getCurl();
 		Byte generatedLog_prefix = this.getLog_prefix();
 		if (!generatedCurl) {
@@ -180,7 +180,7 @@ public class update_info {
 				if_none_match.dstr_copy("If-None-Match: ");
 				if_none_match.dstr_cat(etag);
 				this.setEtag_local(ModernizedCProgram.bstrdup(etag));
-				this.setHeader(.curl_slist_append(generatedHeader, generatedDstr));
+				this.setHeader(/*Error: Function owner not recognized*/curl_slist_append(generatedHeader, generatedDstr));
 				if_none_match.dstr_free();
 			} 
 			metadata.obs_data_release();
@@ -188,7 +188,7 @@ public class update_info {
 		user_agent.dstr_copy("User-Agent: ");
 		Byte generatedUser_agent = this.getUser_agent();
 		user_agent.dstr_cat(generatedUser_agent);
-		this.setHeader(.curl_slist_append(generatedHeader, generatedDstr));
+		this.setHeader(/*Error: Function owner not recognized*/curl_slist_append(generatedHeader, generatedDstr));
 		user_agent.dstr_free();
 		return true;
 	}
@@ -240,7 +240,7 @@ public class update_info {
 		dstr path = new dstr(0);
 		Byte generatedEtag_remote = this.getEtag_remote();
 		if (!generatedEtag_remote) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Byte generatedCache = this.getCache();
 		path.dstr_copy(generatedCache);
@@ -259,16 +259,16 @@ public class update_info {
 		long response_code;
 		Byte generatedUrl = this.getUrl();
 		if (!info.do_http_request(generatedUrl, response_code)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (response_code == 304) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedFile_data = this.getFile_data();
 		Byte generatedLog_prefix = this.getLog_prefix();
 		if (!generatedFile_data.getArray() || generatedFile_data.getArray()[0] != (byte)'{') {
 			ModernizedCProgram.blog(LOG_WARNING, "%sRemote package does not exist or is not valid json", generatedLog_prefix);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		info.update_save_metadata();
 		obs_data obs_data = new obs_data();
@@ -276,11 +276,11 @@ public class update_info {
 		obs_data generatedRemote_package = this.getRemote_package();
 		if (!generatedRemote_package) {
 			ModernizedCProgram.blog(LOG_WARNING, "%sFailed to initialize remote package json", generatedLog_prefix);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		remote_version = (int)generatedRemote_package.obs_data_get_int("version");
 		if (remote_version <= cur_version) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Byte generatedTemp = this.getTemp();
 		info.write_file_data(generatedTemp, "package.json");
@@ -288,13 +288,13 @@ public class update_info {
 		Object generatedRemote_url = this.getRemote_url();
 		if (!generatedRemote_url) {
 			ModernizedCProgram.blog(LOG_WARNING, "%sNo remote url in package file", generatedLog_prefix);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		generatedRemote_package.enum_files(update_remote_files, /* download new files */info);
 		Byte generatedCache = this.getCache();
 		ModernizedCProgram.replace_file(generatedTemp, generatedCache, "package.json");
 		ModernizedCProgram.blog(LOG_WARNING, "%sSuccessfully updated package (version %d)", generatedLog_prefix, remote_version);
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public update_info update_info_create(Object log_prefix, Object user_agent, Object update_url, Object local_dir, Object cache_dir, Object confirm_callback, Object param) {
 		update_info info = new update_info();
@@ -317,7 +317,7 @@ public class update_info {
 			dir.dstr_free();
 			return NULL;
 		} 
-		info = ModernizedCProgram.bzalloc();
+		info = ModernizedCProgram.bzalloc(/*Error: sizeof expression not supported yet*/);
 		info.setLog_prefix(ModernizedCProgram.bstrdup(log_prefix));
 		info.setUser_agent(ModernizedCProgram.bstrdup(user_agent));
 		info.setTemp(generatedDstr);
@@ -337,7 +337,7 @@ public class update_info {
 		if (!log_prefix) {
 			log_prefix = "";
 		} 
-		info = ModernizedCProgram.bzalloc();
+		info = ModernizedCProgram.bzalloc(/*Error: sizeof expression not supported yet*/);
 		info.setLog_prefix(ModernizedCProgram.bstrdup(log_prefix));
 		info.setUser_agent(ModernizedCProgram.bstrdup(user_agent));
 		info.setUrl(ModernizedCProgram.bstrdup(file_url));

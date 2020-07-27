@@ -52,15 +52,15 @@ public class exception_handler_data {
 	}
 	
 	public void exception_handler_data_free() {
-		.LocalFree(ModernizedCProgram.data.getSym_info());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LocalFree(ModernizedCProgram.data.getSym_info());
 		ModernizedCProgram.data.getStr().dstr_free();
 		ModernizedCProgram.data.getCpu_info().dstr_free();
 		ModernizedCProgram.data.getModule_name().dstr_free();
 		ModernizedCProgram.data.getModule_list().dstr_free();
-		.FreeLibrary(ModernizedCProgram.data.getDbghelp());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FreeLibrary(ModernizedCProgram.data.getDbghelp());
 	}
 	public Object get_dbghelp_imports() {
-		ModernizedCProgram.data.setDbghelp(.LoadLibraryW(L"DbgHelp"));
+		ModernizedCProgram.data.setDbghelp(/*Error: Function owner not recognized*/LoadLibraryW(L"DbgHelp"));
 		if (!ModernizedCProgram.data.getDbghelp()) {
 			return false;
 		} 
@@ -133,14 +133,14 @@ public class exception_handler_data {
 		return true;
 	}
 	public void init_sym_info() {
-		.UNRECOGNIZEDFUNCTIONNAME(SYMOPT_UNDNAME | SYMOPT_FAIL_CRITICAL_ERRORS | SYMOPT_LOAD_ANYTHING);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(SYMOPT_UNDNAME | SYMOPT_FAIL_CRITICAL_ERRORS | SYMOPT_LOAD_ANYTHING);
 		if (!ModernizedCProgram.sym_initialize_called) {
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.data.getProcess(), ((Object)0), true);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.data.getProcess(), ((Object)0), true);
 		} else {
-				.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.data.getProcess());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.data.getProcess());
 		} 
-		ModernizedCProgram.data.setSym_info(.LocalAlloc(64,  + 256));
-		ModernizedCProgram.data.getSym_info().setSizeOfStruct();
+		ModernizedCProgram.data.setSym_info(/*Error: Function owner not recognized*/LocalAlloc(64, /*Error: sizeof expression not supported yet*/ + 256));
+		ModernizedCProgram.data.getSym_info().setSizeOfStruct(/*Error: Unsupported expression*/);
 		ModernizedCProgram.data.getSym_info().setMaxNameLen(256);
 	}
 	public void init_version_info() {
@@ -149,11 +149,11 @@ public class exception_handler_data {
 	public void init_cpu_info() {
 		HKEY key = new HKEY();
 		 status = new ();
-		status = .RegOpenKeyW(((HKEY)-1024), L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", key);
+		status = /*Error: Function owner not recognized*/RegOpenKeyW(((HKEY)-1024), L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", key);
 		if (status == -1024) {
 			wchar_t[] str = new wchar_t();
 			DWORD size = 1024;
-			status = .RegQueryValueExW(key, L"ProcessorNameString", ((Object)0), ((Object)0), (LPBYTE)str, size);
+			status = /*Error: Function owner not recognized*/RegQueryValueExW(key, L"ProcessorNameString", ((Object)0), ((Object)0), (LPBYTE)str, size);
 			if (status == -1024) {
 				ModernizedCProgram.data.getCpu_info().dstr_from_wcs(str);
 			} else {
@@ -168,22 +168,22 @@ public class exception_handler_data {
 		ModernizedCProgram.os_wcs_to_utf8(module_name, 0, name_utf8, 260);
 		if (ModernizedCProgram.data.getMain_trace().getInstruction_ptr() >= module_base && ModernizedCProgram.data.getMain_trace().getInstruction_ptr() < module_base + module_size) {
 			ModernizedCProgram.data.getModule_name().dstr_copy(name_utf8);
-			.strlwr(ModernizedCProgram.data.getModule_name().getDstr());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strlwr(ModernizedCProgram.data.getModule_name().getDstr());
 		} 
 		ModernizedCProgram.data.getModule_list().dstr_catf("%08I64X-%08I64X %s\r\n", module_base, module_base + module_size, name_utf8);
 		return true;
 	}
 	public void init_module_info() {
-		.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.data.getProcess(), ()enum_all_modules, ModernizedCProgram.data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.data.getProcess(), ()enum_all_modules, ModernizedCProgram.data);
 	}
 	public void write_header() {
 		byte[] date_time = new byte[80];
-		time_t now = .time(0);
+		time_t now = /*Error: Function owner not recognized*/time(0);
 		tm ts = new tm();
-		ts = .localtime(now);
-		.strftime(date_time, , "%Y-%m-%d, %X", ts);
+		ts = /*Error: Function owner not recognized*/localtime(now);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strftime(date_time, /*Error: sizeof expression not supported yet*/, "%Y-%m-%d, %X", ts);
 		byte obs_bitness;
-		if ( == 8) {
+		if (/*Error: Unsupported expression*/ == 8) {
 			obs_bitness = "64";
 		} else {
 				obs_bitness = "32";
@@ -192,23 +192,23 @@ public class exception_handler_data {
 	}
 	public void write_thread_traces() {
 		THREADENTRY32 entry = new THREADENTRY32(0);
-		HANDLE snapshot = .CreateToolhelp32Snapshot(-1024, .GetCurrentProcessId());
+		HANDLE snapshot = /*Error: Function owner not recognized*/CreateToolhelp32Snapshot(-1024, /*Error: Function owner not recognized*/GetCurrentProcessId());
 		 success = new ();
 		if (snapshot == (HANDLE)(true)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		entry.setDwSize();
-		success = !!.Thread32First(snapshot, entry);
+		entry.setDwSize(/*Error: sizeof expression not supported yet*/);
+		success = !!/*Error: Function owner not recognized*/Thread32First(snapshot, entry);
 		while (success) {
 			ModernizedCProgram.write_thread_trace(ModernizedCProgram.data, entry, true);
-			success = !!.Thread32Next(snapshot, entry);
+			success = !!/*Error: Function owner not recognized*/Thread32Next(snapshot, entry);
 		}
-		success = !!.Thread32First(snapshot, entry);
+		success = !!/*Error: Function owner not recognized*/Thread32First(snapshot, entry);
 		while (success) {
 			ModernizedCProgram.write_thread_trace(ModernizedCProgram.data, entry, false);
-			success = !!.Thread32Next(snapshot, entry);
+			success = !!/*Error: Function owner not recognized*/Thread32Next(snapshot, entry);
 		}
-		.CloseHandle(snapshot);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(snapshot);
 	}
 	public void write_module_list() {
 		ModernizedCProgram.data.getStr().dstr_cat("\r\nLoaded modules:\r\n");
@@ -218,12 +218,12 @@ public class exception_handler_data {
 	/* ------------------------------------------------------------------------- */
 	public void handle_exception(Object exception) {
 		if (!ModernizedCProgram.data.get_dbghelp_imports()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.data.setException(exception);
-		ModernizedCProgram.data.setProcess(.GetCurrentProcess());
+		ModernizedCProgram.data.setProcess(/*Error: Function owner not recognized*/GetCurrentProcess());
 		ModernizedCProgram.data.getMain_trace().setContext(exception.getContextRecord());
-		.GetSystemTime(ModernizedCProgram.data.getTime_info());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GetSystemTime(ModernizedCProgram.data.getTime_info());
 		ModernizedCProgram.data.init_sym_info();
 		ModernizedCProgram.data.init_version_info();
 		ModernizedCProgram.data.init_cpu_info();

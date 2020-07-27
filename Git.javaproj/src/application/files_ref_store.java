@@ -32,7 +32,7 @@ public class files_ref_store {
 	public void files_assert_main_repository(Object caller) {
 		int generatedStore_flags = this.getStore_flags();
 		if (generatedStore_flags & (1 << 3)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\files-backend.c", 125, "operation %s only allowed for main ref store", caller/*
 		 * Downcast ref_store to files_ref_store. Die if ref_store is not a
@@ -55,13 +55,13 @@ public class files_ref_store {
 		return refs;
 	}
 	public void try_remove_empty_parents(Object refname, int flags) {
-		strbuf buf = new strbuf(, , );
-		strbuf sb = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte p;
 		byte q;
 		int i;
 		buf.strbuf_addstr(refname);
-		byte generatedBuf = buf.getBuf();
+		byte[] generatedBuf = buf.getBuf();
 		p = generatedBuf;
 		for (i = 0; i < 2; /* refs/{heads,tags,...}/ */i++) {
 			while (p && p != (byte)'/') {
@@ -86,12 +86,12 @@ public class files_ref_store {
 			buf.strbuf_setlen(q - generatedBuf);
 			sb.strbuf_setlen(0);
 			ModernizedCProgram.files_ref_path(refs, sb, generatedBuf);
-			if ((flags & .REMOVE_EMPTY_PARENTS_REF) && .rmdir(generatedBuf)) {
+			if ((flags & .REMOVE_EMPTY_PARENTS_REF) && /*Error: Function owner not recognized*/rmdir(generatedBuf)) {
 				flags &=  ~.REMOVE_EMPTY_PARENTS_REF;
 			} 
 			sb.strbuf_setlen(0);
 			ModernizedCProgram.files_reflog_path(refs, sb, generatedBuf);
-			if ((flags & .REMOVE_EMPTY_PARENTS_REFLOG) && .rmdir(generatedBuf)) {
+			if ((flags & .REMOVE_EMPTY_PARENTS_REFLOG) && /*Error: Function owner not recognized*/rmdir(generatedBuf)) {
 				flags &=  ~.REMOVE_EMPTY_PARENTS_REFLOG;
 			} 
 		}
@@ -99,17 +99,17 @@ public class files_ref_store {
 		sb.strbuf_release();
 	}
 	public int rename_tmp_log(Object newrefname) {
-		strbuf path = new strbuf(, , );
-		strbuf tmp = new strbuf(, , );
+		strbuf path = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf tmp = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		rename_cb cb = new rename_cb();
 		int ret;
 		ModernizedCProgram.files_reflog_path(refs, path, newrefname);
 		ModernizedCProgram.files_reflog_path(refs, tmp, "refs/.tmp-renamed-log");
-		byte generatedBuf = tmp.getBuf();
+		byte[] generatedBuf = tmp.getBuf();
 		cb.setTmp_renamed_log(generatedBuf);
 		ret = ModernizedCProgram.raceproof_create_file(generatedBuf, rename_tmp_log_callback, cb);
 		if (ret) {
-			if ((._errno()) == 21) {
+			if ((/*Error: Function owner not recognized*/_errno()) == 21) {
 				();
 			} else {
 					();

@@ -69,7 +69,7 @@ public class v4l2_data {
 		} 
 		ModernizedCProgram.data.getBuffers().v4l2_destroy_mmap();
 		if (ModernizedCProgram.data.getDev() != -1) {
-			.v4l2_close(ModernizedCProgram.data.getDev());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/v4l2_close(ModernizedCProgram.data.getDev());
 			ModernizedCProgram.data.setDev(-1);
 		} 
 	}
@@ -90,7 +90,7 @@ public class v4l2_data {
 		int fps_num;
 		int fps_denom;
 		ModernizedCProgram.blog(LOG_INFO, "v4l2-input: Start capture from %s", ModernizedCProgram.data.getDevice_id());
-		ModernizedCProgram.data.setDev(.v4l2_open(ModernizedCProgram.data.getDevice_id(), 2 | O_NONBLOCK));
+		ModernizedCProgram.data.setDev(/*Error: Function owner not recognized*/v4l2_open(ModernizedCProgram.data.getDevice_id(), 2 | O_NONBLOCK));
 		if (ModernizedCProgram.data.getDev() == -1) {
 			ModernizedCProgram.blog(LOG_ERROR, "v4l2-input: Unable to open device");
 			;
@@ -130,7 +130,7 @@ public class v4l2_data {
 		} 
 		ModernizedCProgram.v4l2_unpack_tuple(ModernizedCProgram.data.getWidth(), ModernizedCProgram.data.getHeight(), ModernizedCProgram.data.getResolution());
 		ModernizedCProgram.blog(LOG_INFO, "v4l2-input: Resolution: %dx%d", ModernizedCProgram.data.getWidth(), ModernizedCProgram.data.getHeight());
-		ModernizedCProgram.blog(LOG_INFO, "v4l2-input: Pixelformat: %s", );
+		ModernizedCProgram.blog(LOG_INFO, "v4l2-input: Pixelformat: %s", /*Error: Unsupported expression*/);
 		ModernizedCProgram.blog(LOG_INFO, "v4l2-input: Linesize: %d Bytes", ModernizedCProgram.data.getLinesize());
 		if (ModernizedCProgram.v4l2_set_framerate(ModernizedCProgram.data.getDev(), ModernizedCProgram.data.getFramerate()) < /* set framerate */0) {
 			ModernizedCProgram.blog(LOG_ERROR, "v4l2-input: Unable to set framerate");
@@ -148,7 +148,7 @@ public class v4l2_data {
 		if (ModernizedCProgram.pthread_create(ModernizedCProgram.data.getThread(), ((Object)0), v4l2_thread, ModernizedCProgram.data) != 0) {
 			;
 		} 
-		return ;
+		return /*Error: Unsupported expression*/;
 		ModernizedCProgram.data.v4l2_terminate();
 	}
 	public Byte getDevice_id() {

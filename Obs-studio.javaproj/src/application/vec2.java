@@ -29,6 +29,38 @@ public class vec2 {
 	public vec2() {
 	}
 	
+	/******************************************************************************
+	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
+	
+	    This program is free software: you can redistribute it and/or modify
+	    it under the terms of the GNU General Public License as published by
+	    the Free Software Foundation, either version 2 of the License, or
+	    (at your option) any later version.
+	
+	    This program is distributed in the hope that it will be useful,
+	    but WITHOUT ANY WARRANTY; without even the implied warranty of
+	    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	    GNU General Public License for more details.
+	
+	    You should have received a copy of the GNU General Public License
+	    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	******************************************************************************/
+	public void vec2_abs(Object v) {
+		dst.vec2_set(/*Error: Function owner not recognized*/fabsf(v.getX()), /*Error: Function owner not recognized*/fabsf(v.getY()));
+	}
+	public void vec2_floor(Object v) {
+		dst.vec2_set(/*Error: Function owner not recognized*/floorf(v.getX()), /*Error: Function owner not recognized*/floorf(v.getY()));
+	}
+	public void vec2_ceil(Object v) {
+		dst.vec2_set(/*Error: Function owner not recognized*/ceilf(v.getX()), /*Error: Function owner not recognized*/ceilf(v.getY()));
+	}
+	public void vec2_norm(Object v) {
+		double len = ModernizedCProgram.vec2_len(v);
+		if (len > 0.0) {
+			len = 1.0 / len;
+			dst.vec2_mulf(v, len);
+		} 
+	}
 	public void add_alignment(Object align, int cx, int cy) {
 		Object generatedVec2 = this.getVec2();
 		if (align & (1 << 1)) {
@@ -61,10 +93,6 @@ public class vec2 {
 		if (item) {
 			scale = item.getBox_scale();
 		} 
-	}
-	public void norm_to_polar(Object norm) {
-		this.setX(.atan2f(norm.getX(), norm.getZ()));
-		this.setY(.asinf(norm.getY()));
 	}
 	public void vec2_zero() {
 		this.setX(0.0);
@@ -137,37 +165,9 @@ public class vec2 {
 			this.setY(max_v.getY());
 		} 
 	}
-	/******************************************************************************
-	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
-	
-	    This program is free software: you can redistribute it and/or modify
-	    it under the terms of the GNU General Public License as published by
-	    the Free Software Foundation, either version 2 of the License, or
-	    (at your option) any later version.
-	
-	    This program is distributed in the hope that it will be useful,
-	    but WITHOUT ANY WARRANTY; without even the implied warranty of
-	    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	    GNU General Public License for more details.
-	
-	    You should have received a copy of the GNU General Public License
-	    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-	******************************************************************************/
-	public void vec2_abs(Object v) {
-		dst.vec2_set(.fabsf(v.getX()), .fabsf(v.getY()));
-	}
-	public void vec2_floor(Object v) {
-		dst.vec2_set(.floorf(v.getX()), .floorf(v.getY()));
-	}
-	public void vec2_ceil(Object v) {
-		dst.vec2_set(.ceilf(v.getX()), .ceilf(v.getY()));
-	}
-	public void vec2_norm(Object v) {
-		double len = ModernizedCProgram.vec2_len(v);
-		if (len > 0.0) {
-			len = 1.0 / len;
-			dst.vec2_mulf(v, len);
-		} 
+	public void norm_to_polar(Object norm) {
+		this.setX(/*Error: Function owner not recognized*/atan2f(norm.getX(), norm.getZ()));
+		this.setY(/*Error: Function owner not recognized*/asinf(norm.getY()));
 	}
 	public double getX() {
 		return x;

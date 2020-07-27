@@ -7,9 +7,9 @@ public class user_options_extra {
 	private Object wordlist_mode;
 	private Byte hc_hash;
 	private int hc_workc;
-	private Byte hc_workv;
+	private byte[][] hc_workv;
 	
-	public user_options_extra(Object attack_kern, Object rule_len_r, Object rule_len_l, Object wordlist_mode, Byte hc_hash, int hc_workc, Byte hc_workv) {
+	public user_options_extra(Object attack_kern, Object rule_len_r, Object rule_len_l, Object wordlist_mode, Byte hc_hash, int hc_workc, byte[][] hc_workv) {
 		setAttack_kern(attack_kern);
 		setRule_len_r(rule_len_r);
 		setRule_len_l(rule_len_l);
@@ -57,10 +57,10 @@ public class user_options_extra {
 	public void setHc_workc(int newHc_workc) {
 		hc_workc = newHc_workc;
 	}
-	public Byte getHc_workv() {
+	public byte[][] getHc_workv() {
 		return hc_workv;
 	}
-	public void setHc_workv(Byte newHc_workv) {
+	public void setHc_workv(byte[][] newHc_workv) {
 		hc_workv = newHc_workv;
 	}
 }

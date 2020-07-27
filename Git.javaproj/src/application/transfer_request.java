@@ -42,28 +42,28 @@ public class transfer_request {
 		Object generatedHash = generatedOid.getHash();
 		target = ModernizedCProgram.repo.getPacks().find_sha1_pack(generatedHash);
 		if (!target) {
-			.fprintf((_iob[2]), "Unable to fetch %s, will not be able to update server info refs\n", ModernizedCProgram.oid_to_hex(generatedOid));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Unable to fetch %s, will not be able to update server info refs\n", ModernizedCProgram.oid_to_hex(generatedOid));
 			ModernizedCProgram.repo.setCan_update_info_refs(0);
 			request.release_request();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.fprintf((_iob[2]), "Fetching pack %s\n", ModernizedCProgram.hash_to_hex(generatedHash));
-		.fprintf((_iob[2]), " which contains %s\n", ModernizedCProgram.oid_to_hex(generatedOid));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Fetching pack %s\n", ModernizedCProgram.hash_to_hex(generatedHash));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), " which contains %s\n", ModernizedCProgram.oid_to_hex(generatedOid));
 		http_pack_request http_pack_request = new http_pack_request();
 		preq = http_pack_request.new_http_pack_request(target, ModernizedCProgram.repo.getUrl());
 		if (preq == ((Object)0)) {
 			ModernizedCProgram.repo.setCan_update_info_refs(0);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		preq.setLst(ModernizedCProgram.repo.getPacks());
 		transfer_state generatedState = check_request.getState();
 		Byte generatedUrl = check_request.getUrl();
 		transfer_request generatedNext = check_request.getNext();
 		while (/* Make sure there isn't another open request for this pack */check_request) {
-			if (generatedState == transfer_state.RUN_FETCH_PACKED && !.strcmp(generatedUrl, generatedUrl)) {
+			if (generatedState == transfer_state.RUN_FETCH_PACKED && !/*Error: Function owner not recognized*/strcmp(generatedUrl, generatedUrl)) {
 				preq.release_http_pack_request();
 				request.release_request();
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			check_request = generatedNext;
 		}
@@ -74,7 +74,7 @@ public class transfer_request {
 		this.setUserData(preq);
 		this.setState(/* Try to get the request started, abort the request on error */transfer_state.RUN_FETCH_PACKED);
 		if (!generatedSlot.start_active_slot()) {
-			.fprintf((_iob[2]), "Unable to start GET request\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Unable to start GET request\n");
 			preq.release_http_pack_request();
 			ModernizedCProgram.repo.setCan_update_info_refs(0);
 			request.release_request();
@@ -85,7 +85,7 @@ public class transfer_request {
 		object_id generatedOid = generatedObj.getOid();
 		byte hex = ModernizedCProgram.oid_to_hex(generatedOid);
 		active_request_slot slot = new active_request_slot();
-		strbuf buf = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		object_type type;
 		byte[] hdr = new byte[50];
 		Object unpacked;
@@ -94,7 +94,7 @@ public class transfer_request {
 		ssize_t size = new ssize_t();
 		git_zstream stream = new git_zstream();
 		unpacked = ModernizedCProgram.the_repository.repo_read_object_file(generatedOid, object_type.type, len);
-		hdrlen = ModernizedCProgram.xsnprintf(hdr, , "%s %llu", ModernizedCProgram.type_name(object_type.type), (uintmax_t)len) + 1;
+		hdrlen = ModernizedCProgram.xsnprintf(hdr, /*Error: sizeof expression not supported yet*/, "%s %llu", ModernizedCProgram.type_name(object_type.type), (uintmax_t)len) + 1;
 		stream.git_deflate_init(/* Set it up */ModernizedCProgram.zlib_compression_level);
 		size = stream.git_deflate_bound(len + hdrlen);
 		buffer generatedBuffer = this.getBuffer();
@@ -154,9 +154,9 @@ public class transfer_request {
 		Byte generatedUrl = this.getUrl();
 		ModernizedCProgram.curl_setup_http_get(generatedCurl, generatedUrl, "MOVE");
 		Byte generatedDest = this.getDest();
-		dav_headers = .curl_slist_append(dav_headers, generatedDest);
-		dav_headers = .curl_slist_append(dav_headers, "Overwrite: T");
-		.curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, dav_headers);
+		dav_headers = /*Error: Function owner not recognized*/curl_slist_append(dav_headers, generatedDest);
+		dav_headers = /*Error: Function owner not recognized*/curl_slist_append(dav_headers, "Overwrite: T");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, dav_headers);
 		if (slot.start_active_slot()) {
 			this.setSlot(slot);
 			this.setState(transfer_state.RUN_MOVE);
@@ -197,7 +197,7 @@ public class transfer_request {
 		ModernizedCProgram.check_locks();
 		curl_slist generatedHeaders = this.getHeaders();
 		if (generatedHeaders != ((Object)0)) {
-			.curl_slist_free_all(generatedHeaders);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_slist_free_all(generatedHeaders);
 		} 
 		transfer_state generatedState = this.getState();
 		Byte generatedUrl = this.getUrl();
@@ -218,7 +218,7 @@ public class transfer_request {
 				ModernizedCProgram.remote_dir_exists[generatedHash[0]] = 1;
 				request.start_put();
 			} else {
-					.fprintf((_iob[2]), "MKCOL %s failed, aborting (%d/%ld)\n", ModernizedCProgram.oid_to_hex(generatedOid), generatedCurl_result, generatedHttp_code);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "MKCOL %s failed, aborting (%d/%ld)\n", ModernizedCProgram.oid_to_hex(generatedOid), generatedCurl_result, generatedHttp_code);
 					this.setState(transfer_state.ABORTED);
 					ModernizedCProgram.aborted = 1;
 			} 
@@ -226,19 +226,19 @@ public class transfer_request {
 			if (generatedCurl_result == CURLE_OK) {
 				request.start_move();
 			} else {
-					.fprintf((_iob[2]), "PUT %s failed, aborting (%d/%ld)\n", ModernizedCProgram.oid_to_hex(generatedOid), generatedCurl_result, generatedHttp_code);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "PUT %s failed, aborting (%d/%ld)\n", ModernizedCProgram.oid_to_hex(generatedOid), generatedCurl_result, generatedHttp_code);
 					this.setState(transfer_state.ABORTED);
 					ModernizedCProgram.aborted = 1;
 			} 
 		}  else if (generatedState == transfer_state.RUN_MOVE) {
 			if (generatedCurl_result == CURLE_OK) {
 				if (ModernizedCProgram.push_verbosely) {
-					.fprintf((_iob[2]), "    sent %s\n", ModernizedCProgram.oid_to_hex(generatedOid));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "    sent %s\n", ModernizedCProgram.oid_to_hex(generatedOid));
 				} 
 				generatedFlags |=  (-1024 << 17);
 				request.release_request();
 			} else {
-					.fprintf((_iob[2]), "MOVE %s failed, aborting (%d/%ld)\n", ModernizedCProgram.oid_to_hex(generatedOid), generatedCurl_result, generatedHttp_code);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "MOVE %s failed, aborting (%d/%ld)\n", ModernizedCProgram.oid_to_hex(generatedOid), generatedCurl_result, generatedHttp_code);
 					this.setState(transfer_state.ABORTED);
 					ModernizedCProgram.aborted = 1;
 			} 
@@ -258,7 +258,7 @@ public class transfer_request {
 		}  else if (generatedState == transfer_state.RUN_FETCH_PACKED) {
 			int fail = 1;
 			if (generatedCurl_result != CURLE_OK) {
-				.fprintf((_iob[2]), "Unable to get pack file %s\n%s", generatedUrl, ModernizedCProgram.curl_errorstr);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Unable to get pack file %s\n%s", generatedUrl, ModernizedCProgram.curl_errorstr);
 			} else {
 					preq = (http_pack_request)generatedUserData;
 					if (preq) {

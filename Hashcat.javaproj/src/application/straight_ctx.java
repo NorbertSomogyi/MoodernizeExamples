@@ -3,14 +3,14 @@ package application;
 public class straight_ctx {
 	private boolean enabled;
 	private Object kernel_rules_cnt;
-	private  kernel_rules_buf;
-	private Byte dicts;
+	private [] kernel_rules_buf;
+	private byte[][] dicts;
 	private Object dicts_pos;
 	private Object dicts_cnt;
 	private Object dicts_avail;
 	private Byte dict;
 	
-	public straight_ctx(boolean enabled, Object kernel_rules_cnt,  kernel_rules_buf, Byte dicts, Object dicts_pos, Object dicts_cnt, Object dicts_avail, Byte dict) {
+	public straight_ctx(boolean enabled, Object kernel_rules_cnt, [] kernel_rules_buf, byte[][] dicts, Object dicts_pos, Object dicts_cnt, Object dicts_avail, Byte dict) {
 		setEnabled(enabled);
 		setKernel_rules_cnt(kernel_rules_cnt);
 		setKernel_rules_buf(kernel_rules_buf);
@@ -35,16 +35,16 @@ public class straight_ctx {
 	public void setKernel_rules_cnt(Object newKernel_rules_cnt) {
 		kernel_rules_cnt = newKernel_rules_cnt;
 	}
-	public  getKernel_rules_buf() {
+	public [] getKernel_rules_buf() {
 		return kernel_rules_buf;
 	}
-	public void setKernel_rules_buf( newKernel_rules_buf) {
+	public void setKernel_rules_buf([] newKernel_rules_buf) {
 		kernel_rules_buf = newKernel_rules_buf;
 	}
-	public Byte getDicts() {
+	public byte[][] getDicts() {
 		return dicts;
 	}
-	public void setDicts(Byte newDicts) {
+	public void setDicts(byte[][] newDicts) {
 		dicts = newDicts;
 	}
 	public Object getDicts_pos() {

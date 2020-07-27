@@ -25,6 +25,78 @@ public class gs_stage_surface {
 	public gs_stage_surface() {
 	}
 	
+	public gs_stage_surface gs_stagesurface_create(Object width, Object height, gs_color_format color_format) {
+		graphics_t graphics = thread_graphics;
+		if (!ModernizedCProgram.gs_valid("gs_stagesurface_create")) {
+			return ((Object)0);
+		} 
+		gs_device generatedDevice = graphics.getDevice();
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, width, height, gs_color_format.color_format);
+	}
+	public void gs_stagesurface_destroy() {
+		graphics_t graphics = thread_graphics;
+		if (!ModernizedCProgram.gs_valid("gs_stagesurface_destroy")) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (!stagesurf) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(stagesurf);
+		if (stagesurf) {
+			if (this.getPack_buffer()) {
+				ModernizedCProgram.gl_delete_buffers(1, this.getPack_buffer());
+			} 
+			ModernizedCProgram.bfree(stagesurf);
+		} 
+	}
+	public Object gs_stagesurface_map(Object data, Object linesize) {
+		graphics_t graphics = thread_graphics;
+		if (!(ModernizedCProgram.gs_valid("gs_stagesurface_map") && ModernizedCProgram.gs_obj_valid(stagesurf, "gs_stagesurface_map", "stagesurf") && ModernizedCProgram.gs_obj_valid(data, "gs_stagesurface_map", "data") && ModernizedCProgram.gs_obj_valid(linesize, "gs_stagesurface_map", "linesize"))) {
+			return 0;
+		} 
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(stagesurf, data, linesize);
+		if (!ModernizedCProgram.gl_bind_buffer(GL_PIXEL_PACK_BUFFER, this.getPack_buffer())) {
+			;
+		} 
+		data = /*Error: Function owner not recognized*/glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
+		if (!ModernizedCProgram.gl_success("glMapBuffer")) {
+			;
+		} 
+		ModernizedCProgram.gl_bind_buffer(GL_PIXEL_PACK_BUFFER, 0);
+		linesize = this.getBytes_per_pixel() * this.getWidth();
+		return true;
+		return false;
+	}
+	public void gs_stagesurface_unmap() {
+		graphics_t graphics = thread_graphics;
+		if (!(ModernizedCProgram.gs_valid("gs_stagesurface_unmap") && ModernizedCProgram.gs_obj_valid(stagesurf, "gs_stagesurface_unmap", "stagesurf"))) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(stagesurf);
+		if (!ModernizedCProgram.gl_bind_buffer(GL_PIXEL_PACK_BUFFER, this.getPack_buffer())) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+		ModernizedCProgram.gl_success("glUnmapBuffer");
+		ModernizedCProgram.gl_bind_buffer(GL_PIXEL_PACK_BUFFER, 0);
+	}
+	public gs_stage_surface gs_stagesurface_create_nv12(Object width, Object height) {
+		graphics_t graphics = thread_graphics;
+		if (!ModernizedCProgram.gs_valid("gs_stagesurface_create_nv12")) {
+			return ((Object)0);
+		} 
+		if ((width & 1) == 1 || (height & 1) == 1) {
+			ModernizedCProgram.blog(LOG_ERROR, "NV12 textures must have dimensions divisible by 2.");
+			return ((Object)0);
+		} 
+		gs_exports generatedExports = graphics.getExports();
+		Object generatedDevice_stagesurface_create_nv12 = generatedExports.getDevice_stagesurface_create_nv12();
+		gs_device generatedDevice = graphics.getDevice();
+		if (generatedDevice_stagesurface_create_nv12) {
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, width, height);
+		} 
+		return ((Object)0);
+	}
 	/******************************************************************************
 	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
 	
@@ -57,7 +129,7 @@ public class gs_stage_surface {
 		size = (size + 3) & /* align width to 4-byte boundary */-1024;
 		Object generatedHeight = this.getHeight();
 		size *= generatedHeight;
-		.glBufferData(GL_PIXEL_PACK_BUFFER, size, 0, GL_DYNAMIC_READ);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glBufferData(GL_PIXEL_PACK_BUFFER, size, 0, GL_DYNAMIC_READ);
 		if (!ModernizedCProgram.gl_success("glBufferData")) {
 			success = false;
 		} 
@@ -65,31 +137,6 @@ public class gs_stage_surface {
 			success = false;
 		} 
 		return success;
-	}
-	public gs_stage_surface gs_stagesurface_create(Object width, Object height, gs_color_format color_format) {
-		graphics_t graphics = thread_graphics;
-		if (!ModernizedCProgram.gs_valid("gs_stagesurface_create")) {
-			return ((Object)0);
-		} 
-		gs_device generatedDevice = graphics.getDevice();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, width, height, gs_color_format.color_format);
-	}
-	public gs_stage_surface gs_stagesurface_create_nv12(Object width, Object height) {
-		graphics_t graphics = thread_graphics;
-		if (!ModernizedCProgram.gs_valid("gs_stagesurface_create_nv12")) {
-			return ((Object)0);
-		} 
-		if ((width & 1) == 1 || (height & 1) == 1) {
-			ModernizedCProgram.blog(LOG_ERROR, "NV12 textures must have dimensions divisible by 2.");
-			return ((Object)0);
-		} 
-		gs_exports generatedExports = graphics.getExports();
-		Object generatedDevice_stagesurface_create_nv12 = generatedExports.getDevice_stagesurface_create_nv12();
-		gs_device generatedDevice = graphics.getDevice();
-		if (generatedDevice_stagesurface_create_nv12) {
-			return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, width, height);
-		} 
-		return ((Object)0);
 	}
 	public Object getDevice() {
 		return device;

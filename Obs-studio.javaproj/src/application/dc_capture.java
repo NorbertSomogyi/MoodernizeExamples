@@ -39,8 +39,39 @@ public class dc_capture {
 	public dc_capture() {
 	}
 	
+	public void init_textures() {
+		Object generatedCompatibility = this.getCompatibility();
+		Object generatedWidth = this.getWidth();
+		Object generatedHeight = this.getHeight();
+		gs_texture gs_texture = new gs_texture();
+		gs_texture gs_texture = new gs_texture();
+		if (generatedCompatibility) {
+			this.setTexture(gs_texture.gs_texture_create(generatedWidth, generatedHeight, GS_BGRA, 1, ((Object)0), GS_DYNAMIC));
+		} else {
+				this.setTexture(gs_texture.gs_texture_create_gdi(generatedWidth, generatedHeight));
+		} 
+		Object generatedTexture = this.getTexture();
+		if (!generatedTexture) {
+			ModernizedCProgram.blog(LOG_WARNING, "[dc_capture_init] Failed to create textures");
+			return /*Error: Unsupported expression*/;
+		} 
+		this.setValid(true);
+		Object generatedBitstreams = enc.getBitstreams();
+		Object generatedBuf_count = enc.getBuf_count();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_reserve(generatedBitstreams, generatedBuf_count);
+		Object generatedTextures = enc.getTextures();
+		for (size_t i = 0;
+		 i < generatedBuf_count; i++) {
+			nv_texture texture = new nv_texture();
+			if (!ModernizedCProgram.nv_texture_init(enc, texture)) {
+				return false;
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedTextures, texture);
+		}
+		return true;
+	}
 	public void dc_capture_init(int x, int y, Object width, Object height, Object cursor, Object compatibility) {
-		.memset(capture, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(capture, 0, /*Error: Unsupported expression*/);
 		this.setX(x);
 		this.setY(y);
 		this.setWidth(width);
@@ -55,7 +86,7 @@ public class dc_capture {
 		ModernizedCProgram.obs_leave_graphics();
 		Object generatedValid = this.getValid();
 		if (!generatedValid) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedBmiHeader = bi.getBmiHeader();
 		Object generatedHdc = this.getHdc();
@@ -64,14 +95,14 @@ public class dc_capture {
 		if (compatibility) {
 			BITMAPINFO bi = new BITMAPINFO(0);
 			BITMAPINFOHEADER bih = generatedBmiHeader;
-			bih.setBiSize();
+			bih.setBiSize(/*Error: Unsupported expression*/);
 			bih.setBiBitCount(32);
 			bih.setBiWidth(width);
 			bih.setBiHeight(height);
 			bih.setBiPlanes(1);
-			this.setHdc(.CreateCompatibleDC(((Object)0)));
-			this.setBmp(.CreateDIBSection(generatedHdc, bi, 0, (Object)generatedBits, ((Object)0), 0));
-			this.setOld_bmp(.SelectObject(generatedHdc, generatedBmp));
+			this.setHdc(/*Error: Function owner not recognized*/CreateCompatibleDC(((Object)0)));
+			this.setBmp(/*Error: Function owner not recognized*/CreateDIBSection(generatedHdc, bi, 0, (Object)generatedBits, ((Object)0), 0));
+			this.setOld_bmp(/*Error: Function owner not recognized*/SelectObject(generatedHdc, generatedBmp));
 		} 
 	}
 	public void dc_capture_free() {
@@ -79,15 +110,15 @@ public class dc_capture {
 		Object generatedOld_bmp = this.getOld_bmp();
 		Object generatedBmp = this.getBmp();
 		if (generatedHdc) {
-			.SelectObject(generatedHdc, generatedOld_bmp);
-			.DeleteDC(generatedHdc);
-			.DeleteObject(generatedBmp);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SelectObject(generatedHdc, generatedOld_bmp);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteDC(generatedHdc);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteObject(generatedBmp);
 		} 
 		ModernizedCProgram.obs_enter_graphics();
 		Object generatedTexture = this.getTexture();
 		ModernizedCProgram.gs_texture_destroy(generatedTexture);
 		ModernizedCProgram.obs_leave_graphics();
-		.memset(capture, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(capture, 0, /*Error: Unsupported expression*/);
 	}
 	public Object dc_capture_get_dc() {
 		Object generatedValid = this.getValid();
@@ -120,22 +151,22 @@ public class dc_capture {
 		Object generatedCapture_cursor = this.getCapture_cursor();
 		tagCURSORINFO generatedCi = this.getCi();
 		if (generatedCapture_cursor) {
-			.memset(generatedCi, 0, );
-			generatedCi.setCbSize();
-			this.setCursor_captured(.GetCursorInfo(generatedCi));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedCi, 0, /*Error: Unsupported expression*/);
+			generatedCi.setCbSize(/*Error: Unsupported expression*/);
+			this.setCursor_captured(/*Error: Function owner not recognized*/GetCursorInfo(generatedCi));
 		} 
 		hdc = capture.dc_capture_get_dc();
 		if (!hdc) {
 			ModernizedCProgram.blog(LOG_WARNING, "[capture_screen] Failed to get texture DC");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		hdc_target = .GetDC(window);
+		hdc_target = /*Error: Function owner not recognized*/GetDC(window);
 		Object generatedWidth = this.getWidth();
 		Object generatedHeight = this.getHeight();
 		int generatedX = this.getX();
 		int generatedY = this.getY();
-		.BitBlt(hdc, 0, 0, generatedWidth, generatedHeight, hdc_target, generatedX, generatedY, -1024);
-		.ReleaseDC(((Object)0), hdc_target);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/BitBlt(hdc, 0, 0, generatedWidth, generatedHeight, hdc_target, generatedX, generatedY, -1024);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ReleaseDC(((Object)0), hdc_target);
 		Object generatedCursor_captured = this.getCursor_captured();
 		Object generatedCursor_hidden = this.getCursor_hidden();
 		if (generatedCursor_captured && !generatedCursor_hidden) {

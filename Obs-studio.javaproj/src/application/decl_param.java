@@ -32,7 +32,7 @@ public class decl_param {
 		if (ModernizedCProgram.param.getName()) {
 			ModernizedCProgram.bfree(ModernizedCProgram.param.getName());
 		} 
-		.memset(ModernizedCProgram.param, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.param, 0, /*Error: Unsupported expression*/);
 	}
 	public Byte getName() {
 		return name;

@@ -5,7 +5,7 @@ package application;
 public class ftp_conn {
 	private pingpong pp;
 	private Byte entrypath;
-	private Byte dirs;
+	private byte[][] dirs;
 	private int dirdepth;
 	private Byte file;
 	private  dont_check;
@@ -27,7 +27,7 @@ public class ftp_conn {
 	private Byte newhost;
 	private int newport;
 	
-	public ftp_conn(pingpong pp, Byte entrypath, Byte dirs, int dirdepth, Byte file,  dont_check,  ctl_valid,  cwddone, int cwdcount,  cwdfail,  wait_data_conn, Byte prevpath, byte transfertype, int count1, int count2, int count3,  state,  state_saved, Object retr_size_saved, Byte server_os, Object known_filesize, Byte newhost, int newport) {
+	public ftp_conn(pingpong pp, Byte entrypath, byte[][] dirs, int dirdepth, Byte file,  dont_check,  ctl_valid,  cwddone, int cwdcount,  cwdfail,  wait_data_conn, Byte prevpath, byte transfertype, int count1, int count2, int count3,  state,  state_saved, Object retr_size_saved, Byte server_os, Object known_filesize, Byte newhost, int newport) {
 		setPp(pp);
 		setEntrypath(entrypath);
 		setDirs(dirs);
@@ -56,26 +56,26 @@ public class ftp_conn {
 	}
 	
 	public void freedirs() {
-		Byte generatedDirs = this.getDirs();
+		byte[][] generatedDirs = this.getDirs();
 		int generatedDirdepth = this.getDirdepth();
 		if (generatedDirs) {
 			int i;
 			for (i = 0; i < generatedDirdepth; i++) {
-				.Curl_cfree(generatedDirs[i]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedDirs[i]);
 				generatedDirs[i] = ((Object)0);
 			}
-			.Curl_cfree(generatedDirs);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedDirs);
 			this.setDirs(((Object)0));
 			this.setDirdepth(0);
 		} 
 		Byte generatedFile = this.getFile();
 		do {
-			.Curl_cfree((generatedFile));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedFile));
 			(generatedFile) = ((Object)0);
 		} while (0);
 		Byte generatedNewhost = this.getNewhost();
 		do {
-			.Curl_cfree((generatedNewhost));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedNewhost));
 			(generatedNewhost) = ((Object)0);
 		} while (/* no longer of any use */0/* Returns non-zero if the given string contains CR (\r) or LF (\n),
 		   which are not allowed within RFC 959 <string>.
@@ -96,10 +96,10 @@ public class ftp_conn {
 	public void setEntrypath(Byte newEntrypath) {
 		entrypath = newEntrypath;
 	}
-	public Byte getDirs() {
+	public byte[][] getDirs() {
 		return dirs;
 	}
-	public void setDirs(Byte newDirs) {
+	public void setDirs(byte[][] newDirs) {
 		dirs = newDirs;
 	}
 	public int getDirdepth() {

@@ -11,7 +11,7 @@ public class blame_scoreboard {
 	private blame_entry ent;
 	private oidset ignore_list;
 	private int num_lines;
-	private Integer lineno;
+	private int[] lineno;
 	private int num_read_blob;
 	private int num_get_patch;
 	private int num_commits;
@@ -27,7 +27,7 @@ public class blame_scoreboard {
 	private Object found_guilty_entry;
 	private Object found_guilty_entry_data;
 	
-	public blame_scoreboard(commit final, prio_queue commits, repository repo, rev_info revs, Object path, Object final_buf, long final_buf_size, blame_entry ent, oidset ignore_list, int num_lines, Integer lineno, int num_read_blob, int num_get_patch, int num_commits, int move_score, int copy_score, Object contents_from, int reverse, int show_root, int xdl_opts, int no_whole_file_rename, int debug, Object on_sanity_fail, Object found_guilty_entry, Object found_guilty_entry_data) {
+	public blame_scoreboard(commit final, prio_queue commits, repository repo, rev_info revs, Object path, Object final_buf, long final_buf_size, blame_entry ent, oidset ignore_list, int num_lines, int[] lineno, int num_read_blob, int num_get_patch, int num_commits, int move_score, int copy_score, Object contents_from, int reverse, int show_root, int xdl_opts, int no_whole_file_rename, int debug, Object on_sanity_fail, Object found_guilty_entry, Object found_guilty_entry_data) {
 		setFinal(final);
 		setCommits(commits);
 		setRepo(repo);
@@ -74,12 +74,12 @@ public class blame_scoreboard {
 		blame_entry generatedEnt = this.getEnt();
 		for (ent = generatedEnt; ent; ent = generatedNext) {
 			if (generatedRefcnt <= /* Nobody should have zero or negative refcnt */0) {
-				.fprintf((_iob[2]), "%s in %s has negative refcnt %d\n", generatedPath, ModernizedCProgram.oid_to_hex(generatedOid), generatedRefcnt);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s in %s has negative refcnt %d\n", generatedPath, ModernizedCProgram.oid_to_hex(generatedOid), generatedRefcnt);
 				baa = 1;
 			} 
 		}
 		if (baa) {
-			.UNRECOGNIZEDFUNCTIONNAME(sb, baa/*
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(sb, baa/*
 			 * If two blame entries that are next to each other came from
 			 * contiguous lines in the same origin (i.e. <commit, path> pair),
 			 * merge them together.
@@ -117,7 +117,7 @@ public class blame_scoreboard {
 	}
 	public Object blame_nth_line(long lno) {
 		Object generatedFinal_buf = this.getFinal_buf();
-		Integer generatedLineno = this.getLineno();
+		int[] generatedLineno = this.getLineno();
 		return generatedFinal_buf + generatedLineno[lno/*
 		 * It is known that lines between tlno to same came from parent, and e
 		 * has an overlap with that range.  it also is known that parent's
@@ -164,7 +164,7 @@ public class blame_scoreboard {
 				commit = generatedCommits.prio_queue_get();
 				continue;
 			} 
-			((commit == generatedCommit) ? (Object)0 : ._assert("commit == suspect->commit", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\blame.c", 2526/*
+			((commit == generatedCommit) ? (Object)0 : /*Error: Function owner not recognized*/_assert("commit == suspect->commit", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\blame.c", 2526/*
 					 * We will use this suspect later in the loop,
 					 * so hold onto it in the meantime.
 					 */));
@@ -184,10 +184,10 @@ public class blame_scoreboard {
 			ent = generatedSuspects;
 			if (ent) {
 				suspect.setGuilty(1);
-				for (; ; ) {
+				for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 					blame_entry next = generatedNext;
 					if (generatedFound_guilty_entry) {
-						.UNRECOGNIZEDFUNCTIONNAME(ent, generatedFound_guilty_entry_data);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ent, generatedFound_guilty_entry_data);
 					} 
 					if (next) {
 						ent = next;
@@ -209,7 +209,7 @@ public class blame_scoreboard {
 		}
 	}
 	public int prepare_lines() {
-		Integer generatedLineno = this.getLineno();
+		int[] generatedLineno = this.getLineno();
 		Object generatedFinal_buf = this.getFinal_buf();
 		long generatedFinal_buf_size = this.getFinal_buf_size();
 		this.setNum_lines(ModernizedCProgram.find_line_starts(generatedLineno, generatedFinal_buf, generatedFinal_buf_size));
@@ -217,7 +217,7 @@ public class blame_scoreboard {
 		return generatedNum_lines;
 	}
 	public void init_scoreboard() {
-		.memset(sb, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(sb, 0, /*Error: Unsupported expression*/);
 		this.setMove_score(20);
 		this.setCopy_score(40);
 	}
@@ -281,10 +281,10 @@ public class blame_scoreboard {
 	public void setNum_lines(int newNum_lines) {
 		num_lines = newNum_lines;
 	}
-	public Integer getLineno() {
+	public int[] getLineno() {
 		return lineno;
 	}
-	public void setLineno(Integer newLineno) {
+	public void setLineno(int[] newLineno) {
 		lineno = newLineno;
 	}
 	public int getNum_read_blob() {

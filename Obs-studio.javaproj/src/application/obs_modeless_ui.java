@@ -25,7 +25,7 @@ public class obs_modeless_ui {
 		 i < ModernizedCProgram.obs.getModeless_ui_callbacks().getNum(); i++) {
 			obs_modeless_ui callback = new obs_modeless_ui();
 			ModernizedCProgram.callback = ModernizedCProgram.obs.getModeless_ui_callbacks().getArray() + i;
-			if (.strcmp(ModernizedCProgram.callback.getId(), id) == 0 && .strcmp(ModernizedCProgram.callback.getTask(), task) == 0 && .strcmp(ModernizedCProgram.callback.getTarget(), target) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.callback.getId(), id) == 0 && /*Error: Function owner not recognized*/strcmp(ModernizedCProgram.callback.getTask(), task) == 0 && /*Error: Function owner not recognized*/strcmp(ModernizedCProgram.callback.getTarget(), target) == 0) {
 				return ModernizedCProgram.callback;
 			} 
 		}

@@ -13,7 +13,7 @@ public class profiler_name_store {
 	}
 	
 	public profiler_name_store profiler_name_store_create() {
-		profiler_name_store_t store = ModernizedCProgram.bzalloc();
+		profiler_name_store_t store = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		Object generatedMutex = store.getMutex();
 		if (ModernizedCProgram.pthread_mutex_init(generatedMutex, ((Object)0))) {
 			;
@@ -23,7 +23,7 @@ public class profiler_name_store {
 	}
 	public void profiler_name_store_free() {
 		if (!store) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 generatedNames = this.getNames();
 		Object generatedNum = generatedNames.getNum();
@@ -38,17 +38,17 @@ public class profiler_name_store {
 	}
 	public Object profile_store_name(Object format) {
 		va_list args = new va_list();
-		.__builtin_va_start(args, format);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(args, format);
 		dstr str = new dstr(0);
 		str.dstr_vprintf(format, args);
-		.__builtin_va_end(args);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(args);
 		byte result = ((Object)0);
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedMutex);
 		 generatedNames = this.getNames();
 		Object generatedArray = generatedNames.getArray();
 		Object generatedDa = generatedNames.getDa();
-		size_t idx = generatedDa.darray_push_back(, generatedArray);
+		size_t idx = generatedDa.darray_push_back(/*Error: sizeof expression not supported yet*/, generatedArray);
 		result = generatedArray[idx];
 		ModernizedCProgram.pthread_mutex_unlock(generatedMutex);
 		return result/* ------------------------------------------------------------------------- */;

@@ -10,7 +10,7 @@ public class shtex_data {
 	}
 	
 	public boolean capture_init_shtex(Object window, Object base_cx, Object base_cy, Object cx, Object cy, Object format, boolean flip, Object handle) {
-		if (!ModernizedCProgram.init_shared_info()) {
+		if (!ModernizedCProgram.init_shared_info(/*Error: Unsupported expression*/)) {
 			ModernizedCProgram.hlog("capture_init_shtex: Failed to initialize memory");
 			return 0;
 		} 
@@ -21,13 +21,13 @@ public class shtex_data {
 		ModernizedCProgram.global_hook_info.setFormat(format);
 		ModernizedCProgram.global_hook_info.setFlip(flip);
 		ModernizedCProgram.global_hook_info.setMap_id(ModernizedCProgram.shmem_id_counter);
-		ModernizedCProgram.global_hook_info.setMap_size();
+		ModernizedCProgram.global_hook_info.setMap_size(/*Error: Unsupported expression*/);
 		ModernizedCProgram.global_hook_info.setCx(cx);
 		ModernizedCProgram.global_hook_info.setCy(cy);
 		ModernizedCProgram.global_hook_info.setBase_cx(base_cx);
 		ModernizedCProgram.global_hook_info.setBase_cy(base_cy);
-		if (!.SetEvent(ModernizedCProgram.signal_ready)) {
-			ModernizedCProgram.hlog("capture_init_shtex: Failed to signal ready: %d", .GetLastError());
+		if (!/*Error: Function owner not recognized*/SetEvent(ModernizedCProgram.signal_ready)) {
+			ModernizedCProgram.hlog("capture_init_shtex: Failed to signal ready: %d", /*Error: Function owner not recognized*/GetLastError());
 			return 0;
 		} 
 		ModernizedCProgram.active = 1;

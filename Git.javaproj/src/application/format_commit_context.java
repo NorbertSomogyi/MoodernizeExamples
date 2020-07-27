@@ -110,13 +110,13 @@ public class format_commit_context {
 		} 
 		if (ch == (byte)'(') {
 			byte start = ch + 1;
-			byte end = start + .strcspn(start, ",)");
+			byte end = start + /*Error: Function owner not recognized*/strcspn(start, ",)");
 			byte next;
 			int width;
 			if (!end || end == start) {
 				return 0;
 			} 
-			width = .strtol(start, next, 10);
+			width = /*Error: Function owner not recognized*/strtol(start, next, 10);
 			if (next == start || width == 0) {
 				return 0;
 			} 
@@ -132,7 +132,7 @@ public class format_commit_context {
 			this.setFlush_type(flush_type.flush_type);
 			if (end == (byte)',') {
 				start = end + 1;
-				end = .strchr(start, (byte)')');
+				end = /*Error: Function owner not recognized*/strchr(start, (byte)')');
 				if (!end || end == start) {
 					return 0;
 				} 

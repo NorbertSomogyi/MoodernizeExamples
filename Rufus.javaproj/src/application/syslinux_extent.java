@@ -41,7 +41,7 @@ public class syslinux_extent {
 		base = addr;
 		len = 0;
 		lba = 0;
-		ModernizedCProgram.memset_sl(ex, 0, nptrs * );
+		ModernizedCProgram.memset_sl(ex, 0, nptrs * /*Error: sizeof expression not supported yet*/);
 		Object generatedLba = this.getLba();
 		Object generatedLen = this.getLen();
 		if (len) {

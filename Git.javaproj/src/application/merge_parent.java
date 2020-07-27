@@ -16,7 +16,7 @@ public class merge_parent {
 	public merge_parent find_merge_parent(merge_parents table, object_id given, object_id commit) {
 		int i;
 		int generatedNr = table.getNr();
-		merge_parent generatedItem = table.getItem();
+		merge_parent[] generatedItem = table.getItem();
 		for (i = 0; i < generatedNr; i++) {
 			if (given && !ModernizedCProgram.oideq(generatedItem[i].getGiven(), given)) {
 				continue;

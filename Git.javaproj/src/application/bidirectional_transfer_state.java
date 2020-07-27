@@ -20,12 +20,12 @@ public class bidirectional_transfer_state {
 		unidirectional_transfer generatedGtp = this.getGtp();
 		err = gtp_thread.pthread_create(((Object)0), udt_copy_task_routine, generatedGtp);
 		if (err) {
-			ModernizedCProgram.die(ModernizedCProgram._("can't start thread for copying data: %s"), .strerror(err));
+			ModernizedCProgram.die(ModernizedCProgram._("can't start thread for copying data: %s"), /*Error: Function owner not recognized*/strerror(err));
 		} 
 		unidirectional_transfer generatedPtg = this.getPtg();
 		err = ptg_thread.pthread_create(((Object)0), udt_copy_task_routine, generatedPtg);
 		if (err) {
-			ModernizedCProgram.die(ModernizedCProgram._("can't start thread for copying data: %s"), .strerror(err));
+			ModernizedCProgram.die(ModernizedCProgram._("can't start thread for copying data: %s"), /*Error: Function owner not recognized*/strerror(err));
 		} 
 		ret |=  ModernizedCProgram.tloop_join(gtp_thread, "Git to program copy");
 		ret |=  ModernizedCProgram.tloop_join(ptg_thread, "Program to git copy");

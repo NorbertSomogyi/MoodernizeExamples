@@ -25,7 +25,7 @@ public class discovery {
 	
 	public void free_discovery() {
 		oid_array generatedShallow = this.getShallow();
-		object_id generatedOid = generatedShallow.getOid();
+		object_id[] generatedOid = generatedShallow.getOid();
 		Byte generatedBuf_alloc = this.getBuf_alloc();
 		ref generatedRefs = this.getRefs();
 		Byte generatedService = this.getService();
@@ -35,18 +35,18 @@ public class discovery {
 			} 
 			ModernizedCProgram.free(generatedOid);
 			ModernizedCProgram.free(generatedBuf_alloc);
-			.free_refs(generatedRefs);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_refs(generatedRefs);
 			ModernizedCProgram.free(generatedService);
 			ModernizedCProgram.free(d);
 		} 
 	}
 	public discovery discover_refs(Object service, int for_push) {
-		strbuf type = new strbuf(, , );
-		strbuf charset = new strbuf(, , );
-		strbuf buffer = new strbuf(, , );
-		strbuf refs_url = new strbuf(, , );
-		strbuf effective_url = new strbuf(, , );
-		strbuf protocol_header = new strbuf(, , );
+		strbuf type = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf charset = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf buffer = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf refs_url = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf effective_url = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf protocol_header = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		string_list extra_headers = new string_list(((Object)0), 0, 0, 1, ((Object)0));
 		discovery last = ModernizedCProgram.last_discovery;
 		int http_ret;
@@ -54,14 +54,14 @@ public class discovery {
 		http_get_options http_options = new http_get_options();
 		protocol_version version = ModernizedCProgram.get_protocol_version_config();
 		Byte generatedService = last.getService();
-		if (last && !.strcmp(service, generatedService)) {
+		if (last && !/*Error: Function owner not recognized*/strcmp(service, generatedService)) {
 			return last;
 		} 
 		last.free_discovery();
 		refs_url.strbuf_addf("%sinfo/refs", ModernizedCProgram.url.getBuf());
-		if ((ModernizedCProgram.starts_with(ModernizedCProgram.url.getBuf(), "http://") || ModernizedCProgram.starts_with(ModernizedCProgram.url.getBuf(), "https://")) && .git_env_bool("GIT_SMART_HTTP", 1)) {
+		if ((ModernizedCProgram.starts_with(ModernizedCProgram.url.getBuf(), "http://") || ModernizedCProgram.starts_with(ModernizedCProgram.url.getBuf(), "https://")) && /*Error: Function owner not recognized*/git_env_bool("GIT_SMART_HTTP", 1)) {
 			maybe_smart = 1;
-			if (!.strchr(ModernizedCProgram.url.getBuf(), (byte)'?')) {
+			if (!/*Error: Function owner not recognized*/strchr(ModernizedCProgram.url.getBuf(), (byte)'?')) {
 				refs_url.strbuf_addch((byte)'?');
 			} else {
 					refs_url.strbuf_addch((byte)'&');
@@ -72,14 +72,15 @@ public class discovery {
 				 * how to push yet using v2.
 				 */);
 		} 
-		if (protocol_version.version == protocol_version.protocol_v2 && !.strcmp("git-receive-pack", service)) {
+		if (protocol_version.version == protocol_version.protocol_v2 && !/*Error: Function owner not recognized*/strcmp("git-receive-pack", service)) {
 			protocol_version.version = protocol_version.protocol_v0;
 		} 
-		byte generatedBuf = protocol_header.getBuf();
+		byte[] generatedBuf = protocol_header.getBuf();
+		string_list_item string_list_item = new string_list_item();
 		if (/* Add the extra Git-Protocol header */protocol_header.get_protocol_http_header(protocol_version.version)) {
-			extra_headers.string_list_append(generatedBuf);
+			string_list_item.string_list_append(extra_headers, generatedBuf);
 		} 
-		.memset(http_options, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(http_options, 0, /*Error: sizeof expression not supported yet*/);
 		http_options.setContent_type(type);
 		http_options.setCharset(charset);
 		http_options.setEffective_url(effective_url);
@@ -89,14 +90,14 @@ public class discovery {
 		http_options.setNo_cache(1);
 		http_ret = ModernizedCProgram.http_get_strbuf(generatedBuf, buffer, http_options);
 		switch (http_ret) {
-		case 1:
-				type.show_http_message(charset, buffer);
-				ModernizedCProgram.die(ModernizedCProgram._("repository '%s' not found"), ModernizedCProgram.transport_anonymize_url(generatedBuf));
-		case 0:
-				break;
 		case 5:
 				type.show_http_message(charset, buffer);
 				ModernizedCProgram.die(ModernizedCProgram._("Authentication failed for '%s'"), ModernizedCProgram.transport_anonymize_url(generatedBuf));
+		case 0:
+				break;
+		case 1:
+				type.show_http_message(charset, buffer);
+				ModernizedCProgram.die(ModernizedCProgram._("repository '%s' not found"), ModernizedCProgram.transport_anonymize_url(generatedBuf));
 		default:
 				type.show_http_message(charset, buffer);
 				ModernizedCProgram.die(ModernizedCProgram._("unable to access '%s': %s"), ModernizedCProgram.transport_anonymize_url(generatedBuf), ModernizedCProgram.curl_errorstr);
@@ -106,7 +107,7 @@ public class discovery {
 			ModernizedCProgram.warning(ModernizedCProgram._("redirecting to %s"), u);
 			ModernizedCProgram.free(u);
 		} 
-		last = ModernizedCProgram.xcalloc(1, );
+		last = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		last.setService(ModernizedCProgram.xstrdup(service));
 		Object generatedLen = last.getLen();
 		last.setBuf_alloc(buffer.strbuf_detach(generatedLen));
@@ -133,14 +134,14 @@ public class discovery {
 		ModernizedCProgram.last_discovery = last;
 		return last;
 	}
-	public int push_git(int nr_spec, Object specs) {
+	public int push_git(int nr_spec, Object[][] specs) {
 		rpc_state rpc = new rpc_state();
 		int i;
 		int err;
 		argv_array args = new argv_array();
 		string_list_item cas_option = new string_list_item();
-		strbuf preamble = new strbuf(, , );
-		strbuf rpc_result = new strbuf(, , );
+		strbuf preamble = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf rpc_result = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		args.argv_array_init();
 		args.argv_array_pushl("send-pack", "--stateless-rpc", "--helper-status", ((Object)0));
 		if (ModernizedCProgram.options.getThin()) {
@@ -166,7 +167,7 @@ public class discovery {
 			args.argv_array_pushf("--push-option=%s", ModernizedCProgram.options.getPush_options().getItems()[i].getString());
 		}
 		args.argv_array_push(ModernizedCProgram.options.getProgress() ? "--progress" : "--no-progress");
-		byte generatedString = cas_option.getString();
+		byte[] generatedString = cas_option.getString();
 		for (cas_option = (ModernizedCProgram.cas_options).getItems(); cas_option && cas_option < (ModernizedCProgram.cas_options).getItems() + (ModernizedCProgram.cas_options).getNr(); ++cas_option) {
 			args.argv_array_push(generatedString);
 		}
@@ -176,10 +177,10 @@ public class discovery {
 			preamble.packet_buf_write("%s\n", specs[i]);
 		}
 		preamble.packet_buf_flush();
-		.memset(rpc, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(rpc, 0, /*Error: sizeof expression not supported yet*/);
 		;
 		Object generatedLen = rpc_result.getLen();
-		byte generatedBuf = rpc_result.getBuf();
+		byte[] generatedBuf = rpc_result.getBuf();
 		if (generatedLen) {
 			ModernizedCProgram.write_or_die(1, generatedBuf, generatedLen);
 		} 

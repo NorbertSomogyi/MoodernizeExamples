@@ -5,12 +5,12 @@ public class flickcurl_tag_s {
 	private Byte id;
 	private Byte author;
 	private Byte authorname;
-	private Byte raw;
-	private Byte cooked;
+	private byte[] raw;
+	private byte[] cooked;
 	private int machine_tag;
 	private int count;
 	
-	public flickcurl_tag_s(flickcurl_photo_s photo, Byte id, Byte author, Byte authorname, Byte raw, Byte cooked, int machine_tag, int count) {
+	public flickcurl_tag_s(flickcurl_photo_s photo, Byte id, Byte author, Byte authorname, byte[] raw, byte[] cooked, int machine_tag, int count) {
 		setPhoto(photo);
 		setId(id);
 		setAuthor(author);
@@ -23,66 +23,27 @@ public class flickcurl_tag_s {
 	public flickcurl_tag_s() {
 	}
 	
-	public flickcurl_tag_s flickcurl_places_tagsForPlace(flickcurl_s fc, int woe_id, Object place_id, int min_upload_date, int max_upload_date, int min_taken_date, int max_taken_date) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		byte[] woe_id_str = new byte[20];
-		byte[] min_upload_date_str = new byte[20];
-		byte[] max_upload_date_str = new byte[20];
-		byte[] min_taken_date_str = new byte[20];
-		byte[] max_taken_date_str = new byte[20];
-		flickcurl_tag tags = ((Object)0);
-		fc.flickcurl_init_params(0);
-		if (woe_id < 0 && !place_id) {
-			return ((Object)0);
+	public void command_print_tags(Object label, Object value) {
+		int i;
+		if (!tags) {
+			return /*Error: Unsupported expression*/;
 		} 
-		if (woe_id >= 0) {
-			.sprintf(woe_id_str, "%d", woe_id);
-			fc.flickcurl_add_param("woe_id", woe_id_str);
+		if (label) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%s: %s %s tags\n", ModernizedCProgram.program, label, (value ? value : "(none)"));
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "tags:\n");
 		} 
-		if (place_id) {
-			fc.flickcurl_add_param("place_id", place_id);
-		} 
-		if (min_upload_date) {
-			.sprintf(min_upload_date_str, "%d", min_upload_date);
-			fc.flickcurl_add_param("min_upload_date", min_upload_date_str);
-		} 
-		if (min_upload_date) {
-			.sprintf(min_upload_date_str, "%d", min_upload_date);
-			fc.flickcurl_add_param("max_upload_date", max_upload_date_str);
-		} 
-		if (max_upload_date) {
-			.sprintf(max_upload_date_str, "%d", max_upload_date);
-			fc.flickcurl_add_param("min_taken_date", min_taken_date_str);
-		} 
-		if (min_taken_date) {
-			.sprintf(min_taken_date_str, "%d", min_taken_date);
-			fc.flickcurl_add_param("max_taken_date", max_taken_date_str);
-		} 
-		fc.flickcurl_end_params();
-		if (fc.flickcurl_prepare("flickr.places.tagsForPlace")) {
-			;
-		} 
-		doc = fc.flickcurl_invoke();
-		if (!doc) {
-			;
-		} 
-		xpathCtx = .xmlXPathNewContext(doc);
-		if (!xpathCtx) {
-			fc.flickcurl_error("Failed to create XPath context for document");
-			fc.setFailed(1);
-			;
-		} 
-		flickcurl_tag_s flickcurl_tag_s = new flickcurl_tag_s();
-		tags = flickcurl_tag_s.flickcurl_build_tags(fc, ((Object)0), xpathCtx, ()"/rsp/tags/tag", ((Object)0));
-		int generatedFailed = fc.getFailed();
-		if (generatedFailed) {
-			if (tags) {
-				tags.flickcurl_free_tags();
-			} 
-			tags = ((Object)0);
-		} 
-		return tags;
+		int generatedMachine_tag = tag.getMachine_tag();
+		Byte generatedId = tag.getId();
+		Byte generatedAuthor = tag.getAuthor();
+		Byte generatedAuthorname = tag.getAuthorname();
+		byte[] generatedRaw = tag.getRaw();
+		byte[] generatedCooked = tag.getCooked();
+		int generatedCount = tag.getCount();
+		for (i = 0; tags[i]; i++) {
+			flickcurl_tag tag = tags[i];
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%d) %s tag: id %s author ID %s name %s raw '%s' cooked '%s' count %d\n", i, (generatedMachine_tag ? "machine" : "regular"), generatedId, generatedAuthor, (generatedAuthorname ? generatedAuthorname : "(Unknown)"), generatedRaw, generatedCooked, generatedCount);
+		}
 	}
 	/* -*- Mode: c; c-basic-offset: 2 -*-
 	 *
@@ -112,31 +73,31 @@ public class flickcurl_tag_s {
 	public void flickcurl_free_tag() {
 		do {
 			if (!t) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_tag is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\tags.c", 46, __func__);
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_tag is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\tags.c", 46, __func__);
+				return /*Error: Unsupported expression*/;
 			} 
 		} while (0);
 		Byte generatedId = this.getId();
 		if (generatedId) {
-			.free(generatedId);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedId);
 		} 
 		Byte generatedAuthor = this.getAuthor();
 		if (generatedAuthor) {
-			.free(generatedAuthor);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAuthor);
 		} 
 		Byte generatedAuthorname = this.getAuthorname();
 		if (generatedAuthorname) {
-			.free(generatedAuthorname);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAuthorname);
 		} 
-		Byte generatedRaw = this.getRaw();
+		byte[] generatedRaw = this.getRaw();
 		if (generatedRaw) {
-			.free(generatedRaw);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedRaw);
 		} 
-		Byte generatedCooked = this.getCooked();
+		byte[] generatedCooked = this.getCooked();
 		if (generatedCooked) {
-			.free(generatedCooked);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedCooked);
 		} 
-		.free(t/**
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(t/**
 		 * flickcurl_free_tags:
 		 * @tags: tag object array
 		 *
@@ -147,33 +108,33 @@ public class flickcurl_tag_s {
 		int i;
 		do {
 			if (!tags) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_tag_array is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\tags.c", 72, __func__);
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_tag_array is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\tags.c", 72, __func__);
+				return /*Error: Unsupported expression*/;
 			} 
 		} while (0);
 		for (i = 0; tags[i]; i++) {
 			tags[i].flickcurl_free_tag();
 		}
-		.free(tags);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(tags);
 	}
-	public flickcurl_tag_s flickcurl_build_tags(flickcurl_s fc, flickcurl_photo_s photo, Object xpathCtx, Object xpathExpr, int tag_count_p) {
+	public flickcurl_tag_s flickcurl_build_tags(flickcurl_s fc, flickcurl_photo_s photo, Object xpathCtx, Object xpathExpr, Integer tag_count_p) {
 		flickcurl_tag tags = ((Object)0);
 		int nodes_count;
 		int tag_count;
 		int i;
 		 xpathObj = ((Object)0);
 		 nodes = new ();
-		xpathObj = .xmlXPathEvalExpression(xpathExpr, /* Now do tags */xpathCtx);
+		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, /* Now do tags */xpathCtx);
 		if (!xpathObj) {
 			fc.flickcurl_error("Unable to evaluate XPath expression \"%s\"", xpathExpr);
 			fc.setFailed(1);
 			;
 		} 
 		nodes = xpathObj.getNodesetval();
-		nodes_count = .xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
-		tags = (flickcurl_tag).calloc(, nodes_count + 1);
-		Byte generatedRaw = t.getRaw();
-		Byte generatedCooked = t.getCooked();
+		nodes_count = /*Error: Function owner not recognized*/xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
+		tags = (flickcurl_tag)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, nodes_count + 1);
+		byte[] generatedRaw = t.getRaw();
+		byte[] generatedCooked = t.getCooked();
 		Object generatedTag_handler = fc.getTag_handler();
 		Object generatedTag_data = fc.getTag_data();
 		for (; i < nodes_count; i++) {
@@ -187,58 +148,58 @@ public class flickcurl_tag_s {
 				fc.setFailed(1);
 				break;
 			} 
-			t = (flickcurl_tag).calloc(, 1);
+			t = (flickcurl_tag)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 			t.setPhoto(photo);
 			for (attr = node.getProperties(); attr; attr = attr.getNext()) {
-				size_t attr_len = .strlen((byte)attr.getChildren().getContent());
+				size_t attr_len = /*Error: Function owner not recognized*/strlen((byte)attr.getChildren().getContent());
 				byte attr_name = (byte)attr.getName();
 				byte attr_value;
-				attr_value = (byte).malloc(attr_len + 1);
-				.memcpy(attr_value, attr.getChildren().getContent(), attr_len + 1);
-				if (!.strcmp(attr_name, "id")) {
+				attr_value = (byte)/*Error: Function owner not recognized*/malloc(attr_len + 1);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(attr_value, attr.getChildren().getContent(), attr_len + 1);
+				if (!/*Error: Function owner not recognized*/strcmp(attr_name, "id")) {
 					t.setId(attr_value);
-				}  else if (!.strcmp(attr_name, "author")) {
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "author")) {
 					t.setAuthor(attr_value);
-				}  else if (!.strcmp(attr_name, "authorname")) {
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "authorname")) {
 					t.setAuthorname(attr_value);
-				}  else if (!.strcmp(attr_name, "raw")) {
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "raw")) {
 					t.setRaw(attr_value);
-				}  else if (!.strcmp(attr_name, "clean")) {
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "clean")) {
 					t.setCooked(attr_value/* If we see @clean we are expecting
 					         * <tag clean = "cooked"><raw>raw</raw></tag>
 					         */);
 					saw_clean = 1;
-				}  else if (!.strcmp(attr_name, "machine_tag")) {
-					t.setMachine_tag(.atoi(attr_value));
-					.free(attr_value);
-				}  else if (!.strcmp(attr_name, "count")) {
-					t.setCount(.atoi(attr_value));
-					.free(attr_value);
-				}  else if (!.strcmp(attr_name, "score")) {
-					t.setCount(.atoi(/* from tags.getHotList <tag score = "NN">TAG</tag> */attr_value));
-					.free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "machine_tag")) {
+					t.setMachine_tag(/*Error: Function owner not recognized*/atoi(attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "count")) {
+					t.setCount(/*Error: Function owner not recognized*/atoi(attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "score")) {
+					t.setCount(/*Error: Function owner not recognized*/atoi(/* from tags.getHotList <tag score = "NN">TAG</tag> */attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
 				} else {
-						.free(attr_value);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
 				} 
 			}
 			for (chnode = node.getChildren(); chnode; chnode = chnode.getNext()) {
 				byte chnode_name = (byte)chnode.getName();
 				if (chnode.getType() == XML_ELEMENT_NODE) {
-					if (saw_clean && !.strcmp(chnode_name, "raw")) {
-						size_t len = .strlen((byte)chnode.getChildren().getContent());
-						t.setRaw((byte).malloc(len + 1));
-						.memcpy(generatedRaw, chnode.getChildren().getContent(), len + 1);
+					if (saw_clean && !/*Error: Function owner not recognized*/strcmp(chnode_name, "raw")) {
+						size_t len = /*Error: Function owner not recognized*/strlen((byte)chnode.getChildren().getContent());
+						t.setRaw((byte)/*Error: Function owner not recognized*/malloc(len + 1));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedRaw, chnode.getChildren().getContent(), len + 1);
 					} 
 				}  else if (chnode.getType() == XML_TEXT_NODE) {
 					if (!saw_clean) {
-						size_t len = .strlen((byte)chnode.getContent());
-						t.setCooked((byte).malloc(len + 1));
-						.memcpy(generatedCooked, chnode.getContent(), len + 1);
+						size_t len = /*Error: Function owner not recognized*/strlen((byte)chnode.getContent());
+						t.setCooked((byte)/*Error: Function owner not recognized*/malloc(len + 1));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedCooked, chnode.getContent(), len + 1);
 					} 
 				} 
 			}
 			if (generatedTag_handler) {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedTag_data, t);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedTag_data, t);
 			} 
 			tags[tag_count++] = t/* for nodes */;
 		}
@@ -247,7 +208,7 @@ public class flickcurl_tag_s {
 		} 
 		return tags;
 	}
-	public flickcurl_tag_s flickcurl_build_tags_from_string(flickcurl_s fc, flickcurl_photo_s photo, Object string, int tag_count_p) {
+	public flickcurl_tag_s flickcurl_build_tags_from_string(flickcurl_s fc, flickcurl_photo_s photo, Object[] string, Integer tag_count_p) {
 		flickcurl_tag tags = ((Object)0);
 		int nodes_count;
 		int tag_count;
@@ -258,25 +219,25 @@ public class flickcurl_tag_s {
 				nodes_count++;
 			} 
 		}
-		tags = (flickcurl_tag).calloc(, nodes_count + 1);
-		Byte generatedCooked = t.getCooked();
+		tags = (flickcurl_tag)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, nodes_count + 1);
+		byte[] generatedCooked = t.getCooked();
 		Object generatedTag_handler = fc.getTag_handler();
 		Object generatedTag_data = fc.getTag_data();
 		for (; i < nodes_count; i++) {
 			flickcurl_tag t = new flickcurl_tag();
 			byte p = string;
 			size_t len = new size_t();
-			t = (flickcurl_tag).calloc(, 1);
+			t = (flickcurl_tag)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 			t.setPhoto(photo);
 			while (p && p != (byte)' ') {
 				p++;
 			}
 			len = p - string;
-			t.setCooked((byte).malloc(len + 1));
-			.memcpy(generatedCooked, string, len);
+			t.setCooked((byte)/*Error: Function owner not recognized*/malloc(len + 1));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedCooked, string, len);
 			generatedCooked[len] = (byte)'\0';
 			if (generatedTag_handler) {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedTag_data, t);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedTag_data, t);
 			} 
 			tags[tag_count++] = t;
 			string = p + /* move past space */1;
@@ -298,14 +259,14 @@ public class flickcurl_tag_s {
 		byte[] tag_count_str = new byte[10];
 		fc.flickcurl_init_params(0);
 		if (period) {
-			if (!.strcmp(period, "day") || !.strcmp(period, "week")) {
+			if (!/*Error: Function owner not recognized*/strcmp(period, "day") || !/*Error: Function owner not recognized*/strcmp(period, "week")) {
 				fc.flickcurl_add_param("period", period);
 			} else {
 					return ((Object)0);
 			} 
 		} 
 		if (tag_count >= 0) {
-			.sprintf(tag_count_str, "%d", tag_count);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(tag_count_str, "%d", tag_count);
 			fc.flickcurl_add_param("count", tag_count_str);
 		} 
 		fc.flickcurl_end_params();
@@ -316,7 +277,7 @@ public class flickcurl_tag_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -357,7 +318,7 @@ public class flickcurl_tag_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -402,7 +363,7 @@ public class flickcurl_tag_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -440,7 +401,7 @@ public class flickcurl_tag_s {
 			fc.flickcurl_add_param("user_id", user_id);
 		} 
 		if (pop_count >= 0) {
-			.sprintf(pop_count_str, "%d", pop_count);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(pop_count_str, "%d", pop_count);
 			fc.flickcurl_add_param("count", pop_count_str);
 		} 
 		fc.flickcurl_end_params();
@@ -451,7 +412,7 @@ public class flickcurl_tag_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -494,7 +455,7 @@ public class flickcurl_tag_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -533,7 +494,7 @@ public class flickcurl_tag_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -577,7 +538,7 @@ public class flickcurl_tag_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -594,27 +555,66 @@ public class flickcurl_tag_s {
 		} 
 		return tags;
 	}
-	public void command_print_tags(Object label, Object value) {
-		int i;
-		if (!tags) {
-			return ;
+	public flickcurl_tag_s flickcurl_places_tagsForPlace(flickcurl_s fc, int woe_id, Object place_id, int min_upload_date, int max_upload_date, int min_taken_date, int max_taken_date) {
+		 doc = ((Object)0);
+		 xpathCtx = ((Object)0);
+		byte[] woe_id_str = new byte[20];
+		byte[] min_upload_date_str = new byte[20];
+		byte[] max_upload_date_str = new byte[20];
+		byte[] min_taken_date_str = new byte[20];
+		byte[] max_taken_date_str = new byte[20];
+		flickcurl_tag tags = ((Object)0);
+		fc.flickcurl_init_params(0);
+		if (woe_id < 0 && !place_id) {
+			return ((Object)0);
 		} 
-		if (label) {
-			.fprintf((_iob[1]), "%s: %s %s tags\n", ModernizedCProgram.program, label, (value ? value : "(none)"));
-		} else {
-				.fprintf((_iob[1]), "tags:\n");
+		if (woe_id >= 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(woe_id_str, "%d", woe_id);
+			fc.flickcurl_add_param("woe_id", woe_id_str);
 		} 
-		int generatedMachine_tag = tag.getMachine_tag();
-		Byte generatedId = tag.getId();
-		Byte generatedAuthor = tag.getAuthor();
-		Byte generatedAuthorname = tag.getAuthorname();
-		Byte generatedRaw = tag.getRaw();
-		Byte generatedCooked = tag.getCooked();
-		int generatedCount = tag.getCount();
-		for (i = 0; tags[i]; i++) {
-			flickcurl_tag tag = tags[i];
-			.fprintf((_iob[1]), "%d) %s tag: id %s author ID %s name %s raw '%s' cooked '%s' count %d\n", i, (generatedMachine_tag ? "machine" : "regular"), generatedId, generatedAuthor, (generatedAuthorname ? generatedAuthorname : "(Unknown)"), generatedRaw, generatedCooked, generatedCount);
-		}
+		if (place_id) {
+			fc.flickcurl_add_param("place_id", place_id);
+		} 
+		if (min_upload_date) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(min_upload_date_str, "%d", min_upload_date);
+			fc.flickcurl_add_param("min_upload_date", min_upload_date_str);
+		} 
+		if (min_upload_date) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(min_upload_date_str, "%d", min_upload_date);
+			fc.flickcurl_add_param("max_upload_date", max_upload_date_str);
+		} 
+		if (max_upload_date) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(max_upload_date_str, "%d", max_upload_date);
+			fc.flickcurl_add_param("min_taken_date", min_taken_date_str);
+		} 
+		if (min_taken_date) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(min_taken_date_str, "%d", min_taken_date);
+			fc.flickcurl_add_param("max_taken_date", max_taken_date_str);
+		} 
+		fc.flickcurl_end_params();
+		if (fc.flickcurl_prepare("flickr.places.tagsForPlace")) {
+			;
+		} 
+		doc = fc.flickcurl_invoke();
+		if (!doc) {
+			;
+		} 
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
+		if (!xpathCtx) {
+			fc.flickcurl_error("Failed to create XPath context for document");
+			fc.setFailed(1);
+			;
+		} 
+		flickcurl_tag_s flickcurl_tag_s = new flickcurl_tag_s();
+		tags = flickcurl_tag_s.flickcurl_build_tags(fc, ((Object)0), xpathCtx, ()"/rsp/tags/tag", ((Object)0));
+		int generatedFailed = fc.getFailed();
+		if (generatedFailed) {
+			if (tags) {
+				tags.flickcurl_free_tags();
+			} 
+			tags = ((Object)0);
+		} 
+		return tags;
 	}
 	public flickcurl_photo_s getPhoto() {
 		return photo;
@@ -640,16 +640,16 @@ public class flickcurl_tag_s {
 	public void setAuthorname(Byte newAuthorname) {
 		authorname = newAuthorname;
 	}
-	public Byte getRaw() {
+	public byte[] getRaw() {
 		return raw;
 	}
-	public void setRaw(Byte newRaw) {
+	public void setRaw(byte[] newRaw) {
 		raw = newRaw;
 	}
-	public Byte getCooked() {
+	public byte[] getCooked() {
 		return cooked;
 	}
-	public void setCooked(Byte newCooked) {
+	public void setCooked(byte[] newCooked) {
 		cooked = newCooked;
 	}
 	public int getMachine_tag() {

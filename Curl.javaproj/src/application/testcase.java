@@ -24,7 +24,7 @@ public class testcase {
 		b = ModernizedCProgram.bfs[/* look at "next" buffer */ModernizedCProgram.nextone];
 		int generatedCounter = b.getCounter();
 		if (generatedCounter != -/* nop if not free */2) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.nextone = !/* "incr" next buffer ptr */ModernizedCProgram.nextone;
 		 generatedBuf = b.getBuf();
@@ -34,11 +34,11 @@ public class testcase {
 		if (convert == 0/* The former file reading code did this:
 		       b->counter = read(fileno(file), dp->th_data, SEGSIZE); */) {
 			size_t copy_n = ((true) < (ModernizedCProgram.test.getRcount()) ? (true) : (ModernizedCProgram.test.getRcount()));
-			.memcpy(generatedTh_data, ModernizedCProgram.test.getRptr(), copy_n);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedTh_data, ModernizedCProgram.test.getRptr(), copy_n);
 			ModernizedCProgram.test.getRcount() -= /* decrease amount, advance pointer */copy_n;
 			ModernizedCProgram.test.getRptr() += copy_n;
 			b.setCounter((int)copy_n);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		p = generatedTh_data;
 		for (i = 0; i < 512; i++) {
@@ -83,8 +83,8 @@ public class testcase {
 		} 
 		if (!ModernizedCProgram.test.getOfile()) {
 			byte[] outfile = new byte[256];
-			ModernizedCProgram.curl_msnprintf(outfile, , "log/upload.%ld", ModernizedCProgram.test.getTestno());
-			ModernizedCProgram.test.setOfile(.open(outfile, -1024 | 2 | -1024, 777));
+			ModernizedCProgram.curl_msnprintf(outfile, /*Error: sizeof expression not supported yet*/, "log/upload.%ld", ModernizedCProgram.test.getTestno());
+			ModernizedCProgram.test.setOfile(/*Error: Function owner not recognized*/open(outfile, -1024 | 2 | -1024, 777));
 			if (ModernizedCProgram.test.getOfile() == -1) {
 				ModernizedCProgram.logmsg("Couldn't create and/or open file %s for upload!", outfile);
 				return -/* failure! */1;
@@ -124,10 +124,10 @@ public class testcase {
 		int error;
 		Object generatedTestno = this.getTestno();
 		filename = ModernizedCProgram.test2file(generatedTestno);
-		stream = .fopen(filename, "rb");
+		stream = /*Error: Function owner not recognized*/fopen(filename, "rb");
 		if (!stream) {
-			error = (._errno());
-			ModernizedCProgram.logmsg("fopen() failed with error: %d %s", error, .strerror(error));
+			error = (/*Error: Function owner not recognized*/_errno());
+			ModernizedCProgram.logmsg("fopen() failed with error: %d %s", error, /*Error: Function owner not recognized*/strerror(error));
 			ModernizedCProgram.logmsg("  [1] Error opening file: %s", filename);
 			ModernizedCProgram.logmsg("  Couldn't open test file %ld", generatedTestno);
 			return /* done */1;
@@ -137,7 +137,7 @@ public class testcase {
 				size_t cmdsize = 0;
 				int num = 0;
 				error = /* get the custom server control "commands" */stream.getpart(orgcmd, cmdsize, "reply", "servercmd");
-				.fclose(stream);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(stream);
 				if (error) {
 					ModernizedCProgram.logmsg("getpart() failed with error: %d", error);
 					return /* done */1;
@@ -145,15 +145,15 @@ public class testcase {
 				cmd = orgcmd;
 				while (cmd && cmdsize) {
 					byte check;
-					if (1 == .sscanf(cmd, "writedelay: %d", num)) {
+					if (1 == /*Error: Function owner not recognized*/sscanf(cmd, "writedelay: %d", num)) {
 						ModernizedCProgram.logmsg("instructed to delay %d secs between packets", num);
 						this.setWritedelay(num);
 					} else {
 							ModernizedCProgram.logmsg("Unknown <servercmd> instruction found: %s", cmd);
 					} 
-					check = .strchr(cmd, /* try to deal with CRLF or just LF */(byte)'\r');
+					check = /*Error: Function owner not recognized*/strchr(cmd, /* try to deal with CRLF or just LF */(byte)'\r');
 					if (!check) {
-						check = .strchr(cmd, (byte)'\n');
+						check = /*Error: Function owner not recognized*/strchr(cmd, (byte)'\n');
 					} 
 					if (check) {
 						while ((check == (byte)'\r') || (check == /* get to the letter following the newline */(byte)'\n')) {
@@ -167,7 +167,7 @@ public class testcase {
 							break;
 					} 
 				}
-				.free(orgcmd);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(orgcmd);
 		} 
 		return /* OK! */0;
 		FILE stream = new FILE();
@@ -176,10 +176,10 @@ public class testcase {
 		long generatedTestno = this.getTestno();
 		filename = ModernizedCProgram.test2file(generatedTestno);
 		this.setClose(0);
-		stream = .fopen(filename, "rb");
+		stream = /*Error: Function owner not recognized*/fopen(filename, "rb");
 		if (!stream) {
-			error = (._errno());
-			ModernizedCProgram.logmsg("fopen() failed with error: %d %s", error, .strerror(error));
+			error = (/*Error: Function owner not recognized*/_errno());
+			ModernizedCProgram.logmsg("fopen() failed with error: %d %s", error, /*Error: Function owner not recognized*/strerror(error));
 			ModernizedCProgram.logmsg("  [1] Error opening file: %s", filename);
 			ModernizedCProgram.logmsg("  Couldn't open test file %ld", generatedTestno);
 			this.setOpen(/* closes connection */0);
@@ -190,7 +190,7 @@ public class testcase {
 				size_t cmdsize = 0;
 				int num = 0;
 				error = /* get the custom server control "commands" */stream.getpart(orgcmd, cmdsize, "reply", "servercmd");
-				.fclose(stream);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(stream);
 				if (error) {
 					ModernizedCProgram.logmsg("getpart() failed with error: %d", error);
 					this.setOpen(/* closes connection */0);
@@ -200,37 +200,37 @@ public class testcase {
 				cmd = orgcmd;
 				while (cmd && cmdsize) {
 					byte check;
-					if (!.strncmp("auth_required", cmd, .strlen("auth_required"))) {
+					if (!/*Error: Function owner not recognized*/strncmp("auth_required", cmd, /*Error: Function owner not recognized*/strlen("auth_required"))) {
 						ModernizedCProgram.logmsg("instructed to require authorization header");
 						this.setAuth_req(1);
-					}  else if (!.strncmp("idle", cmd, .strlen("idle"))) {
+					}  else if (!/*Error: Function owner not recognized*/strncmp("idle", cmd, /*Error: Function owner not recognized*/strlen("idle"))) {
 						ModernizedCProgram.logmsg("instructed to idle");
 						this.setRcmd(1);
 						this.setOpen(1);
-					}  else if (!.strncmp("stream", cmd, .strlen("stream"))) {
+					}  else if (!/*Error: Function owner not recognized*/strncmp("stream", cmd, /*Error: Function owner not recognized*/strlen("stream"))) {
 						ModernizedCProgram.logmsg("instructed to stream");
 						this.setRcmd(2);
-					}  else if (!.strncmp("connection-monitor", cmd, .strlen("connection-monitor"))) {
+					}  else if (!/*Error: Function owner not recognized*/strncmp("connection-monitor", cmd, /*Error: Function owner not recognized*/strlen("connection-monitor"))) {
 						ModernizedCProgram.logmsg("enabled connection monitoring");
 						this.setConnmon(1);
-					}  else if (!.strncmp("upgrade", cmd, .strlen("upgrade"))) {
+					}  else if (!/*Error: Function owner not recognized*/strncmp("upgrade", cmd, /*Error: Function owner not recognized*/strlen("upgrade"))) {
 						ModernizedCProgram.logmsg("enabled upgrade to http2");
 						this.setUpgrade(1);
-					}  else if (!.strncmp("swsclose", cmd, .strlen("swsclose"))) {
+					}  else if (!/*Error: Function owner not recognized*/strncmp("swsclose", cmd, /*Error: Function owner not recognized*/strlen("swsclose"))) {
 						ModernizedCProgram.logmsg("swsclose: close this connection after response");
 						this.setClose(1);
-					}  else if (1 == .sscanf(cmd, "skip: %d", num)) {
+					}  else if (1 == /*Error: Function owner not recognized*/sscanf(cmd, "skip: %d", num)) {
 						ModernizedCProgram.logmsg("instructed to skip this number of bytes %d", num);
 						this.setSkip(num);
-					}  else if (1 == .sscanf(cmd, "writedelay: %d", num)) {
+					}  else if (1 == /*Error: Function owner not recognized*/sscanf(cmd, "writedelay: %d", num)) {
 						ModernizedCProgram.logmsg("instructed to delay %d secs between packets", num);
 						this.setWritedelay(num);
 					} else {
 							ModernizedCProgram.logmsg("Unknown <servercmd> instruction found: %s", cmd);
 					} 
-					check = .strchr(cmd, /* try to deal with CRLF or just LF */(byte)'\r');
+					check = /*Error: Function owner not recognized*/strchr(cmd, /* try to deal with CRLF or just LF */(byte)'\r');
 					if (!check) {
-						check = .strchr(cmd, (byte)'\n');
+						check = /*Error: Function owner not recognized*/strchr(cmd, (byte)'\n');
 					} 
 					if (check) {
 						while ((check == (byte)'\r') || (check == /* get to the letter following the newline */(byte)'\n')) {
@@ -244,7 +244,7 @@ public class testcase {
 							break;
 					} 
 				}
-				.free(orgcmd);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(orgcmd);
 		} 
 		return /* OK! */0;
 	}
@@ -254,17 +254,17 @@ public class testcase {
 	public int validate_access(Object filename, int mode) {
 		byte ptr;
 		ModernizedCProgram.logmsg("trying to get file: %s mode %x", filename, mode);
-		if (!.strncmp("verifiedserver", filename, 14)) {
+		if (!/*Error: Function owner not recognized*/strncmp("verifiedserver", filename, 14)) {
 			byte[] weare = new byte[128];
-			size_t count = ModernizedCProgram.curl_msnprintf(weare, , "WE ROOLZ: %ld\r\n", (long).getpid());
+			size_t count = ModernizedCProgram.curl_msnprintf(weare, /*Error: sizeof expression not supported yet*/, "WE ROOLZ: %ld\r\n", (long)/*Error: Function owner not recognized*/getpid());
 			ModernizedCProgram.logmsg("Are-we-friendly question received");
-			ModernizedCProgram.test.setBuffer(.strdup(weare));
+			ModernizedCProgram.test.setBuffer(/*Error: Function owner not recognized*/strdup(weare));
 			ModernizedCProgram.test.setRptr(ModernizedCProgram.test.getBuffer());
 			ModernizedCProgram.test.setBufsize(/* set total count */count);
 			ModernizedCProgram.test.setRcount(/* set data left to read */count);
 			return /* fine */0;
 		} 
-		ptr = .strrchr(filename, /* find the last slash */(byte)'/');
+		ptr = /*Error: Function owner not recognized*/strrchr(filename, /* find the last slash */(byte)'/');
 		if (ptr) {
 			byte[] partbuf = "data";
 			long partno;
@@ -274,7 +274,7 @@ public class testcase {
 			while (ptr && !(ModernizedCProgram.Curl_isdigit((int)((byte)/* skip all non-numericals following the slash */ptr)))) {
 				ptr++;
 			}
-			testno = .strtol(ptr, ptr, /* get the number */10);
+			testno = /*Error: Function owner not recognized*/strtol(ptr, ptr, /* get the number */10);
 			if (testno > 10000) {
 				partno = testno % 10000;
 				testno /= 10000;
@@ -286,20 +286,20 @@ public class testcase {
 			(Object)ModernizedCProgram.test.parse_servercmd();
 			file = ModernizedCProgram.test2file(testno);
 			if (0 != partno) {
-				ModernizedCProgram.curl_msnprintf(partbuf, , "data%ld", partno);
+				ModernizedCProgram.curl_msnprintf(partbuf, /*Error: sizeof expression not supported yet*/, "data%ld", partno);
 			} 
 			if (file) {
-				FILE stream = .fopen(file, "rb");
+				FILE stream = /*Error: Function owner not recognized*/fopen(file, "rb");
 				if (!stream) {
-					int error = (._errno());
-					ModernizedCProgram.logmsg("fopen() failed with error: %d %s", error, .strerror(error));
+					int error = (/*Error: Function owner not recognized*/_errno());
+					ModernizedCProgram.logmsg("fopen() failed with error: %d %s", error, /*Error: Function owner not recognized*/strerror(error));
 					ModernizedCProgram.logmsg("Error opening file: %s", file);
 					ModernizedCProgram.logmsg("Couldn't open test file: %s", file);
 					return 2;
 				} else {
 						size_t count = new size_t();
 						int error = stream.getpart(ModernizedCProgram.test.getBuffer(), count, "reply", partbuf);
-						.fclose(stream);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(stream);
 						if (error) {
 							ModernizedCProgram.logmsg("getpart() failed with error: %d", error);
 							return 2;

@@ -43,10 +43,10 @@ public class IMAP {
 	private Byte section;
 	private Byte partial;
 	private Byte query;
-	private Byte custom;
+	private byte[] custom;
 	private Byte custom_params;
 	
-	public IMAP( transfer, Byte mailbox, Byte uidvalidity, Byte uid, Byte mindex, Byte section, Byte partial, Byte query, Byte custom, Byte custom_params) {
+	public IMAP( transfer, Byte mailbox, Byte uidvalidity, Byte uid, Byte mindex, Byte section, Byte partial, Byte query, byte[] custom, Byte custom_params) {
 		setTransfer(transfer);
 		setMailbox(mailbox);
 		setUidvalidity(uidvalidity);
@@ -109,10 +109,10 @@ public class IMAP {
 	public void setQuery(Byte newQuery) {
 		query = newQuery;
 	}
-	public Byte getCustom() {
+	public byte[] getCustom() {
 		return custom;
 	}
-	public void setCustom(Byte newCustom) {
+	public void setCustom(byte[] newCustom) {
 		custom = newCustom;
 	}
 	public Byte getCustom_params() {

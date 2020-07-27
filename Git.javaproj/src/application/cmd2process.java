@@ -14,9 +14,9 @@ public class cmd2process {
 	public void handle_filter_error(Object filter_status, Object wanted_capability) {
 		int generatedSupported_capabilities = this.getSupported_capabilities();
 		subprocess_entry generatedSubprocess = this.getSubprocess();
-		if (!.strcmp(filter_status.getBuf(), "error")) {
+		if (!/*Error: Function owner not recognized*/strcmp(filter_status.getBuf(), "error")) {
 			;
-		}  else if (!.strcmp(filter_status.getBuf(), "abort") && wanted_capability/*
+		}  else if (!/*Error: Function owner not recognized*/strcmp(filter_status.getBuf(), "abort") && wanted_capability/*
 				 * The filter signaled a permanent problem. Don't try to filter
 				 * files with the same command for the lifetime of the current
 				 * Git process.

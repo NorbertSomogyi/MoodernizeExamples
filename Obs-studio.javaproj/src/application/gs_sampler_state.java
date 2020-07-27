@@ -23,6 +23,43 @@ public class gs_sampler_state {
 	public gs_sampler_state() {
 	}
 	
+	public gs_sampler_state gs_samplerstate_create(Object info) {
+		graphics_t graphics = thread_graphics;
+		if (!(ModernizedCProgram.gs_valid("gs_samplerstate_create") && ModernizedCProgram.gs_obj_valid(info, "gs_samplerstate_create", "info"))) {
+			return ((Object)0);
+		} 
+		gs_device generatedDevice = graphics.getDevice();
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, info);
+	}
+	public void gs_load_samplerstate(int unit) {
+		graphics_t graphics = thread_graphics;
+		if (!ModernizedCProgram.gs_valid("gs_load_samplerstate")) {
+			return /*Error: Unsupported expression*/;
+		} 
+		gs_device generatedDevice = graphics.getDevice();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, samplerstate, unit);
+	}
+	public void gs_samplerstate_destroy() {
+		if (!ModernizedCProgram.gs_valid("gs_samplerstate_destroy")) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (!samplerstate) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(samplerstate);
+		if (!samplerstate) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (this.getDevice()) {
+			for (int i = 0;
+			 i < GS_MAX_TEXTURES; i++) {
+				if (this.getDevice().getCur_samplers()[i] == samplerstate) {
+					this.getDevice().getCur_samplers()[i] = NULL;
+				} 
+			}
+		} 
+		ModernizedCProgram.samplerstate_release(samplerstate);
+	}
 	public void convert_sampler_info(Object info) {
 		 max_anisotropy_max = new ();
 		Object generatedMin_filter = this.getMin_filter();
@@ -34,12 +71,12 @@ public class gs_sampler_state {
 		this.setMax_anisotropy(info.getMax_anisotropy());
 		max_anisotropy_max = 1;
 		if (ModernizedCProgram.GLAD_GL_EXT_texture_filter_anisotropic) {
-			.glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, max_anisotropy_max);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, max_anisotropy_max);
 			ModernizedCProgram.gl_success("glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT)");
 		} 
 		Object generatedMax_anisotropy = this.getMax_anisotropy();
 		if (1 <= generatedMax_anisotropy && generatedMax_anisotropy <= max_anisotropy_max) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (generatedMax_anisotropy < 1) {
 			this.setMax_anisotropy(1);
@@ -47,22 +84,6 @@ public class gs_sampler_state {
 			this.setMax_anisotropy(max_anisotropy_max);
 		} 
 		ModernizedCProgram.blog(LOG_DEBUG, "convert_sampler_info: 1 <= max_anisotropy <= %d violated, selected: %d, set: %d", max_anisotropy_max, generatedMax_anisotropy, generatedMax_anisotropy);
-	}
-	public gs_sampler_state gs_samplerstate_create(Object info) {
-		graphics_t graphics = thread_graphics;
-		if (!(ModernizedCProgram.gs_valid("gs_samplerstate_create") && ModernizedCProgram.gs_obj_valid(info, "gs_samplerstate_create", "info"))) {
-			return ((Object)0);
-		} 
-		gs_device generatedDevice = graphics.getDevice();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, info);
-	}
-	public void gs_load_samplerstate(int unit) {
-		graphics_t graphics = thread_graphics;
-		if (!ModernizedCProgram.gs_valid("gs_load_samplerstate")) {
-			return ;
-		} 
-		gs_device generatedDevice = graphics.getDevice();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedDevice, samplerstate, unit);
 	}
 	public Object getDevice() {
 		return device;

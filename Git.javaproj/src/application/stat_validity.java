@@ -19,7 +19,7 @@ public class stat_validity {
 	public int stat_validity_check(Object path) {
 		stat st = new stat();
 		stat_data generatedSd = this.getSd();
-		if (.stat(path, st) < 0) {
+		if (/*Error: Function owner not recognized*/stat(path, st) < 0) {
 			return generatedSd == ((Object)0);
 		} 
 		if (!generatedSd) {
@@ -32,11 +32,11 @@ public class stat_validity {
 		stat st = new stat();
 		Object generatedSt_mode = st.getSt_mode();
 		stat_data generatedSd = this.getSd();
-		if (.fstat(fd, st) < 0 || !(((generatedSt_mode) & -1024) == -1024)) {
+		if (/*Error: Function owner not recognized*/fstat(fd, st) < 0 || !(((generatedSt_mode) & -1024) == -1024)) {
 			sv.stat_validity_clear();
 		} else {
 				if (!generatedSd) {
-					this.setSd(ModernizedCProgram.xcalloc(1, ));
+					this.setSd(ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/));
 				} 
 				ModernizedCProgram.fill_stat_data(generatedSd, st);
 		} 

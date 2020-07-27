@@ -19,7 +19,7 @@ public class flickcurl_serializer_s {
 		if (!factory || (factory && generatedVersion != 1)) {
 			return ((Object)0);
 		} 
-		serializer = (flickcurl_serializer).malloc();
+		serializer = (flickcurl_serializer)/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
 		if (!serializer) {
 			return ((Object)0);
 		} 
@@ -36,11 +36,11 @@ public class flickcurl_serializer_s {
 	public void flickcurl_free_serializer() {
 		do {
 			if (!serializer) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_serializer is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\serializer.c", 211, __func__);
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_serializer is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\serializer.c", 211, __func__);
+				return /*Error: Unsupported expression*/;
 			} 
 		} while (0);
-		.free(serializer);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(serializer);
 	}
 	public Object getFc() {
 		return fc;

@@ -57,35 +57,35 @@ public class flickrdf_nspace_s {
 	
 	public flickrdf_nspace_s nspace_add_new(Byte prefix, Byte uri) {
 		flickrdf_nspace ns = new flickrdf_nspace();
-		ns = (flickrdf_nspace).malloc();
-		ns.setPrefix_len(.strlen(prefix));
-		ns.setUri_len(.strlen(uri));
+		ns = (flickrdf_nspace)/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
+		ns.setPrefix_len(/*Error: Function owner not recognized*/strlen(prefix));
+		ns.setUri_len(/*Error: Function owner not recognized*/strlen(uri));
 		Object generatedPrefix_len = ns.getPrefix_len();
-		ns.setPrefix((byte).malloc(generatedPrefix_len + 1));
+		ns.setPrefix((byte)/*Error: Function owner not recognized*/malloc(generatedPrefix_len + 1));
 		Byte generatedPrefix = ns.getPrefix();
-		.memcpy(generatedPrefix, prefix, generatedPrefix_len + 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPrefix, prefix, generatedPrefix_len + 1);
 		Object generatedUri_len = ns.getUri_len();
-		ns.setUri((byte).malloc(generatedUri_len + 1));
+		ns.setUri((byte)/*Error: Function owner not recognized*/malloc(generatedUri_len + 1));
 		Byte generatedUri = ns.getUri();
-		.memcpy(generatedUri, uri, generatedUri_len + 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedUri, uri, generatedUri_len + 1);
 		ns.setNext(list);
 		return ns;
 	}
 	public flickrdf_nspace_s nspace_add_if_not_declared(Object prefix, Object nspace_uri) {
 		int n;
 		flickrdf_nspace ns = new flickrdf_nspace();
-		size_t prefix_len = prefix ? .strlen(prefix) : 0;
-		size_t uri_len = nspace_uri ? .strlen(nspace_uri) : 0;
+		size_t prefix_len = prefix ? /*Error: Function owner not recognized*/strlen(prefix) : 0;
+		size_t uri_len = nspace_uri ? /*Error: Function owner not recognized*/strlen(nspace_uri) : 0;
 		Object generatedUri_len = ns.getUri_len();
 		Byte generatedUri = ns.getUri();
 		Object generatedPrefix_len = ns.getPrefix_len();
 		Byte generatedPrefix = ns.getPrefix();
 		flickrdf_nspace_s generatedNext = ns.getNext();
 		for (ns = list; ns; ns = generatedNext) {
-			if (nspace_uri && generatedUri_len == uri_len && !.strcmp(generatedUri, nspace_uri)) {
+			if (nspace_uri && generatedUri_len == uri_len && !/*Error: Function owner not recognized*/strcmp(generatedUri, nspace_uri)) {
 				break;
 			} 
-			if (prefix && generatedPrefix_len == prefix_len && !.strcmp(generatedPrefix, prefix)) {
+			if (prefix && generatedPrefix_len == prefix_len && !/*Error: Function owner not recognized*/strcmp(generatedPrefix, prefix)) {
 				break;
 			} 
 		}
@@ -94,11 +94,11 @@ public class flickrdf_nspace_s {
 		} 
 		ns = ((Object)0);
 		for (n = 0; generatedUri; n++) {
-			if (prefix && generatedPrefix_len == prefix_len && !.strcmp(generatedPrefix, prefix)) {
+			if (prefix && generatedPrefix_len == prefix_len && !/*Error: Function owner not recognized*/strcmp(generatedPrefix, prefix)) {
 				ns = ModernizedCProgram.namespace_table[n];
 				break;
 			} 
-			if (nspace_uri && generatedUri_len == uri_len && !.strcmp(generatedUri, nspace_uri)) {
+			if (nspace_uri && generatedUri_len == uri_len && !/*Error: Function owner not recognized*/strcmp(generatedUri, nspace_uri)) {
 				ns = ModernizedCProgram.namespace_table[n];
 				break;
 			} 
@@ -110,12 +110,12 @@ public class flickrdf_nspace_s {
 	}
 	public flickrdf_nspace_s nspace_get_by_prefix(Object prefix) {
 		flickrdf_nspace ns = new flickrdf_nspace();
-		size_t prefix_len = .strlen(prefix);
+		size_t prefix_len = /*Error: Function owner not recognized*/strlen(prefix);
 		Object generatedPrefix_len = ns.getPrefix_len();
 		Byte generatedPrefix = ns.getPrefix();
 		flickrdf_nspace_s generatedNext = ns.getNext();
 		for (ns = list; ns; ns = generatedNext) {
-			if (generatedPrefix_len == prefix_len && !.strcmp(generatedPrefix, prefix)) {
+			if (generatedPrefix_len == prefix_len && !/*Error: Function owner not recognized*/strcmp(generatedPrefix, prefix)) {
 				break;
 			} 
 		}
@@ -129,10 +129,10 @@ public class flickrdf_nspace_s {
 		for (; list; list = next) {
 			next = generatedNext;
 			if (generatedPrefix) {
-				.free(generatedPrefix);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedPrefix);
 			} 
-			.free(generatedUri);
-			.free(list/**
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedUri);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(list/**
 			 * flickcurl_serialize_photo:
 			 * @fcs: flickcurl serializer object
 			 * @photo: photo object

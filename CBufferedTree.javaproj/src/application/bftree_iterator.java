@@ -15,14 +15,14 @@ public class bftree_iterator {
 	
 	public bftree_iterator bftree_get_iterator(bftree tree) {
 		bftree_iterator iter = new bftree_iterator();
-		iter = .malloc();
+		iter = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		iter.setTree(tree);
 		iter.setNext(((Object)0));
 		iter.setClosed(0);
 		return iter;
 	}
 	public void bftree_free_iterator() {
-		.free(iter);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(iter);
 	}
 	public bftree getTree() {
 		return tree;

@@ -109,7 +109,7 @@ public class ssl_primary_config {
 		dest.setSessionid(generatedSessionid);
 		Byte generatedCApath = this.getCApath();
 		if (generatedCApath) {
-			dest.setCApath(.Curl_cstrdup(generatedCApath));
+			dest.setCApath(/*Error: Function owner not recognized*/Curl_cstrdup(generatedCApath));
 			if (!generatedCApath) {
 				return 0;
 			} 
@@ -119,7 +119,7 @@ public class ssl_primary_config {
 		;
 		Byte generatedCAfile = this.getCAfile();
 		if (generatedCAfile) {
-			dest.setCAfile(.Curl_cstrdup(generatedCAfile));
+			dest.setCAfile(/*Error: Function owner not recognized*/Curl_cstrdup(generatedCAfile));
 			if (!generatedCAfile) {
 				return 0;
 			} 
@@ -129,7 +129,7 @@ public class ssl_primary_config {
 		;
 		Byte generatedClientcert = this.getClientcert();
 		if (generatedClientcert) {
-			dest.setClientcert(.Curl_cstrdup(generatedClientcert));
+			dest.setClientcert(/*Error: Function owner not recognized*/Curl_cstrdup(generatedClientcert));
 			if (!generatedClientcert) {
 				return 0;
 			} 
@@ -139,7 +139,7 @@ public class ssl_primary_config {
 		;
 		Byte generatedRandom_file = this.getRandom_file();
 		if (generatedRandom_file) {
-			dest.setRandom_file(.Curl_cstrdup(generatedRandom_file));
+			dest.setRandom_file(/*Error: Function owner not recognized*/Curl_cstrdup(generatedRandom_file));
 			if (!generatedRandom_file) {
 				return 0;
 			} 
@@ -149,7 +149,7 @@ public class ssl_primary_config {
 		;
 		Byte generatedEgdsocket = this.getEgdsocket();
 		if (generatedEgdsocket) {
-			dest.setEgdsocket(.Curl_cstrdup(generatedEgdsocket));
+			dest.setEgdsocket(/*Error: Function owner not recognized*/Curl_cstrdup(generatedEgdsocket));
 			if (!generatedEgdsocket) {
 				return 0;
 			} 
@@ -159,7 +159,7 @@ public class ssl_primary_config {
 		;
 		Byte generatedCipher_list = this.getCipher_list();
 		if (generatedCipher_list) {
-			dest.setCipher_list(.Curl_cstrdup(generatedCipher_list));
+			dest.setCipher_list(/*Error: Function owner not recognized*/Curl_cstrdup(generatedCipher_list));
 			if (!generatedCipher_list) {
 				return 0;
 			} 
@@ -169,7 +169,7 @@ public class ssl_primary_config {
 		;
 		Byte generatedCipher_list13 = this.getCipher_list13();
 		if (generatedCipher_list13) {
-			dest.setCipher_list13(.Curl_cstrdup(generatedCipher_list13));
+			dest.setCipher_list13(/*Error: Function owner not recognized*/Curl_cstrdup(generatedCipher_list13));
 			if (!generatedCipher_list13) {
 				return 0;
 			} 
@@ -179,7 +179,7 @@ public class ssl_primary_config {
 		;
 		Byte generatedPinned_key = this.getPinned_key();
 		if (generatedPinned_key) {
-			dest.setPinned_key(.Curl_cstrdup(generatedPinned_key));
+			dest.setPinned_key(/*Error: Function owner not recognized*/Curl_cstrdup(generatedPinned_key));
 			if (!generatedPinned_key) {
 				return 0;
 			} 
@@ -192,42 +192,42 @@ public class ssl_primary_config {
 	public void Curl_free_primary_ssl_config() {
 		Byte generatedCApath = this.getCApath();
 		do {
-			.Curl_cfree((generatedCApath));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedCApath));
 			(generatedCApath) = ((Object)0);
 		} while (0);
 		Byte generatedCAfile = this.getCAfile();
 		do {
-			.Curl_cfree((generatedCAfile));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedCAfile));
 			(generatedCAfile) = ((Object)0);
 		} while (0);
 		Byte generatedClientcert = this.getClientcert();
 		do {
-			.Curl_cfree((generatedClientcert));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedClientcert));
 			(generatedClientcert) = ((Object)0);
 		} while (0);
 		Byte generatedRandom_file = this.getRandom_file();
 		do {
-			.Curl_cfree((generatedRandom_file));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedRandom_file));
 			(generatedRandom_file) = ((Object)0);
 		} while (0);
 		Byte generatedEgdsocket = this.getEgdsocket();
 		do {
-			.Curl_cfree((generatedEgdsocket));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedEgdsocket));
 			(generatedEgdsocket) = ((Object)0);
 		} while (0);
 		Byte generatedCipher_list = this.getCipher_list();
 		do {
-			.Curl_cfree((generatedCipher_list));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedCipher_list));
 			(generatedCipher_list) = ((Object)0);
 		} while (0);
 		Byte generatedCipher_list13 = this.getCipher_list13();
 		do {
-			.Curl_cfree((generatedCipher_list13));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedCipher_list13));
 			(generatedCipher_list13) = ((Object)0);
 		} while (0);
 		Byte generatedPinned_key = this.getPinned_key();
 		do {
-			.Curl_cfree((generatedPinned_key));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedPinned_key));
 			(generatedPinned_key) = ((Object)0);
 		} while (0);
 	}

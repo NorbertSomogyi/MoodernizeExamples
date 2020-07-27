@@ -18,15 +18,15 @@ public class ep_pass {
 	}
 	
 	public void ep_pass_init() {
-		.memset(epp, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(epp, 0, /*Error: Unsupported expression*/);
 	}
 	public void ep_pass_free() {
 		Byte generatedName = this.getName();
 		ModernizedCProgram.bfree(generatedName);
 		Object generatedVertex_program = this.getVertex_program();
-		.da_free(generatedVertex_program);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedVertex_program);
 		Object generatedFragment_program = this.getFragment_program();
-		.da_free(generatedFragment_program);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedFragment_program);
 	}
 	public Byte getName() {
 		return name;

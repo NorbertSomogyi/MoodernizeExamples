@@ -17,21 +17,21 @@ public class update_info_ctx {
 	
 	public void uic_mark_stale() {
 		_iobuf generatedOld_fp = this.getOld_fp();
-		.fclose(generatedOld_fp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(generatedOld_fp);
 		this.setOld_fp(((Object)0));
 	}
 	public int uic_printf(Object fmt) {
 		va_list ap = new va_list();
 		int ret = -1;
-		.__builtin_va_start(ap, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
 		_iobuf generatedCur_fp = this.getCur_fp();
 		strbuf generatedCur_sb = this.getCur_sb();
 		strbuf generatedOld_sb = this.getOld_sb();
 		Object generatedLen = cur.getLen();
-		byte generatedBuf = old.getBuf();
+		byte[] generatedBuf = old.getBuf();
 		_iobuf generatedOld_fp = this.getOld_fp();
 		if (ModernizedCProgram.uic_is_stale(uic)) {
-			ret = .vfprintf(generatedCur_fp, fmt, ap);
+			ret = /*Error: Function owner not recognized*/vfprintf(generatedCur_fp, fmt, ap);
 		} else {
 				ssize_t r = new ssize_t();
 				strbuf cur = generatedCur_sb;
@@ -40,15 +40,15 @@ public class update_info_ctx {
 				cur.strbuf_vinsertf(0, fmt, ap);
 				old.strbuf_setlen(0);
 				old.strbuf_grow(generatedLen);
-				r = .fread(generatedBuf, 1, generatedLen, generatedOld_fp);
-				if (r != generatedLen || .memcmp(generatedBuf, generatedBuf, r)) {
+				r = /*Error: Function owner not recognized*/fread(generatedBuf, 1, generatedLen, generatedOld_fp);
+				if (r != generatedLen || /*Error: Function owner not recognized*/memcmp(generatedBuf, generatedBuf, r)) {
 					uic.uic_mark_stale();
 				} 
-				if (.fwrite(generatedBuf, 1, generatedLen, generatedCur_fp) == generatedLen) {
+				if (/*Error: Function owner not recognized*/fwrite(generatedBuf, 1, generatedLen, generatedCur_fp) == generatedLen) {
 					ret = 0;
 				} 
 		} 
-		.__builtin_va_end(ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
 		return ret/*
 		 * Create the file "path" by writing to a temporary file and renaming
 		 * it into place. The contents of the file come from "generate", which

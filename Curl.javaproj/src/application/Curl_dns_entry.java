@@ -19,26 +19,29 @@ public class Curl_dns_entry {
 		Curl_easy generatedData = conn.getData();
 		Curl_easy data = generatedData;
 		byte[] entry_id = new byte[(255 + 7)];
-		ModernizedCProgram.create_hostcache_id(hostname, port, entry_id, );
-		entry_len = .strlen(entry_id);
-		Object generatedDns = data.getDns();
-		dns = generatedDns.getHostcache().Curl_hash_pick(entry_id, entry_len + /* See if its already in our dns cache */1);
-		Object generatedChange = data.getChange();
-		if (!dns && generatedChange.getWildcard_resolve()) {
-			ModernizedCProgram.create_hostcache_id("*", port, entry_id, );
-			entry_len = .strlen(entry_id);
-			dns = generatedDns.getHostcache().Curl_hash_pick(entry_id, entry_len + /* See if it's already in our dns cache */1);
+		ModernizedCProgram.create_hostcache_id(hostname, port, entry_id, /*Error: sizeof expression not supported yet*/);
+		entry_len = /*Error: Function owner not recognized*/strlen(entry_id);
+		Names generatedDns = data.getDns();
+		curl_hash generatedHostcache = generatedDns.getHostcache();
+		dns = generatedHostcache.Curl_hash_pick(entry_id, entry_len + /* See if its already in our dns cache */1);
+		DynamicStatic generatedChange = data.getChange();
+		Object generatedWildcard_resolve = generatedChange.getWildcard_resolve();
+		if (!dns && generatedWildcard_resolve) {
+			ModernizedCProgram.create_hostcache_id("*", port, entry_id, /*Error: sizeof expression not supported yet*/);
+			entry_len = /*Error: Function owner not recognized*/strlen(entry_id);
+			dns = generatedHostcache.Curl_hash_pick(entry_id, entry_len + /* See if it's already in our dns cache */1);
 		} 
-		Object generatedSet = data.getSet();
+		UserDefined generatedSet = data.getSet();
+		long generatedDns_cache_timeout = generatedSet.getDns_cache_timeout();
 		Object generatedNow = user.getNow();
-		if (dns && (generatedSet.getDns_cache_timeout() != -1/* See whether the returned entry is stale. Done before we release lock */)) {
+		if (dns && (generatedDns_cache_timeout != -1/* See whether the returned entry is stale. Done before we release lock */)) {
 			hostcache_prune_data user = new hostcache_prune_data();
-			.time(generatedNow);
-			user.setCache_timeout(generatedSet.getDns_cache_timeout());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/time(generatedNow);
+			user.setCache_timeout(generatedDns_cache_timeout);
 			if (ModernizedCProgram.hostcache_timestamp_remove(user, dns)) {
 				data.Curl_infof("Hostname in DNS cache was stale, zapped\n");
 				dns = ((Object)/* the memory deallocation is being handled by the hash */0);
-				generatedDns.getHostcache().Curl_hash_delete(entry_id, entry_len + 1);
+				generatedHostcache.Curl_hash_delete(entry_id, entry_len + 1);
 			} 
 		} 
 		return dns/*
@@ -60,7 +63,7 @@ public class Curl_dns_entry {
 		Curl_easy generatedData = conn.getData();
 		Curl_easy data = generatedData;
 		Curl_dns_entry dns = ((Object)0);
-		Object generatedShare = data.getShare();
+		Curl_share generatedShare = data.getShare();
 		if (generatedShare) {
 			data.Curl_share_lock(CURL_LOCK_DATA_DNS, CURL_LOCK_ACCESS_SINGLE);
 		} 
@@ -80,30 +83,32 @@ public class Curl_dns_entry {
 		size_t entry_len = new size_t();
 		Curl_dns_entry dns = new Curl_dns_entry();
 		Curl_dns_entry dns2 = new Curl_dns_entry();
-		Object generatedSet = data.getSet();
-		if (generatedSet.getDns_shuffle_addresses()) {
+		UserDefined generatedSet = data.getSet();
+		Object generatedDns_shuffle_addresses = generatedSet.getDns_shuffle_addresses();
+		if (generatedDns_shuffle_addresses) {
 			 result = ModernizedCProgram.Curl_shuffle_addr(data, addr);
 			if (ModernizedCProgram.result) {
 				return ((Object)0);
 			} 
 		} 
-		dns = .Curl_ccalloc(1, /* Create a new cache entry */);
+		dns = /*Error: Function owner not recognized*/Curl_ccalloc(1, /*Error: Unsupported expression*//* Create a new cache entry */);
 		if (!dns) {
 			return ((Object)0);
 		} 
-		ModernizedCProgram.create_hostcache_id(hostname, port, entry_id, );
-		entry_len = .strlen(entry_id);
+		ModernizedCProgram.create_hostcache_id(hostname, port, entry_id, /*Error: sizeof expression not supported yet*/);
+		entry_len = /*Error: Function owner not recognized*/strlen(entry_id);
 		dns.setInuse(/* the cache has the first reference */1);
 		dns.setAddr(/* this is the address(es) */addr);
 		Object generatedTimestamp = dns.getTimestamp();
-		.time(generatedTimestamp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/time(generatedTimestamp);
 		if (generatedTimestamp == 0) {
 			dns.setTimestamp(/* zero indicates CURLOPT_RESOLVE entry */1);
 		} 
-		Object generatedDns = data.getDns();
-		dns2 = generatedDns.getHostcache().Curl_hash_add(entry_id, entry_len + /* Store the resolved data in our DNS cache. */1, (Object)dns);
+		Names generatedDns = data.getDns();
+		curl_hash generatedHostcache = generatedDns.getHostcache();
+		dns2 = generatedHostcache.Curl_hash_add(entry_id, entry_len + /* Store the resolved data in our DNS cache. */1, (Object)dns);
 		if (!dns2) {
-			.Curl_cfree(dns);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(dns);
 			return ((Object)0);
 		} 
 		dns = dns2;

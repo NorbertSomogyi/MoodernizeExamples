@@ -81,10 +81,10 @@ public class qf_list_S {
 			} 
 		} while (0);
 		if (title != ((Object)0)) {
-			char_u p = ModernizedCProgram.alloc(.strlen((byte)(title)) + 2);
+			char_u p = ModernizedCProgram.alloc(/*Error: Function owner not recognized*/strlen((byte)(title)) + 2);
 			this.setQf_title(p);
 			if (p != ((Object)0)) {
-				.strcpy((byte)(p), (byte)(title/*
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(p), (byte)(title/*
 				 * The title of a quickfix/location list is set, by default, to the command
 				 * that created the quickfix list with the ":" prefix.
 				 * Create a quickfix list title string by prepending ":" to a user command.
@@ -105,7 +105,7 @@ public class qf_list_S {
 	public int qf_add_entry(Object dir, Object fname, Object module, int bufnum, Object mesg, long lnum, int col, int vis_col, Object pattern, int nr, int type, int valid) {
 		// using visual column// search pattern// error number// type character// valid entryqfline_T qfp = new qfline_T();
 		// pointer to qf_last or NULLqfline_T lastp = new qfline_T();
-		if ((qfp = (qfline_T)ModernizedCProgram.alloc()) == ((Object)0)) {
+		if ((qfp = (qfline_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*/)) == ((Object)0)) {
 			return .QF_FAIL;
 		} 
 		file_buffer file_buffer = new file_buffer();
@@ -286,7 +286,7 @@ public class qf_list_S {
 				bufname = fname;
 		} 
 		file_buffer file_buffer = new file_buffer();
-		if (ModernizedCProgram.qf_last_bufname != ((Object)0) && .strcmp((byte)(bufname), (byte)(ModernizedCProgram.qf_last_bufname)) == 0 && ModernizedCProgram.qf_last_bufref.bufref_valid()) {
+		if (ModernizedCProgram.qf_last_bufname != ((Object)0) && /*Error: Function owner not recognized*/strcmp((byte)(bufname), (byte)(ModernizedCProgram.qf_last_bufname)) == 0 && ModernizedCProgram.qf_last_bufref.bufref_valid()) {
 			buf = ModernizedCProgram.qf_last_bufref.getBr_buf();
 			ModernizedCProgram.vim_free(ptr);
 		} else {

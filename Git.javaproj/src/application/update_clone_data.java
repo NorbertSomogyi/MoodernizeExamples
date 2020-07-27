@@ -18,7 +18,7 @@ public class update_clone_data {
 		object_id generatedOid = this.getOid();
 		int generatedJust_cloned = this.getJust_cloned();
 		Object generatedSub = this.getSub();
-		.fprintf((_iob[1]), "dummy %s %d\t%s\n", ModernizedCProgram.oid_to_hex(generatedOid), generatedJust_cloned, generatedSub.getPath());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "dummy %s %d\t%s\n", ModernizedCProgram.oid_to_hex(generatedOid), generatedJust_cloned, generatedSub.getPath());
 	}
 	public Object getSub() {
 		return sub;

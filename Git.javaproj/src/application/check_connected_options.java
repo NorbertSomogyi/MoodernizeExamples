@@ -50,20 +50,20 @@ public class check_connected_options {
 		transport generatedTransport = this.getTransport();
 		transport = generatedTransport;
 		int generatedErr_fd = this.getErr_fd();
-		if (.fn(cb_data, oid)) {
+		if (/*Error: Function owner not recognized*/fn(cb_data, oid)) {
 			if (generatedErr_fd) {
-				.close(generatedErr_fd);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedErr_fd);
 			} 
 			return err;
 		} 
 		git_transport_options generatedSmart_options = transport.getSmart_options();
 		int generatedSelf_contained_and_connected = generatedSmart_options.getSelf_contained_and_connected();
 		Byte generatedPack_lockfile = transport.getPack_lockfile();
-		byte generatedBuf = idx_file.getBuf();
+		byte[] generatedBuf = idx_file.getBuf();
 		Object generatedLen = idx_file.getLen();
 		packed_git packed_git = new packed_git();
 		if (transport && generatedSmart_options && generatedSelf_contained_and_connected && generatedPack_lockfile && ModernizedCProgram.strip_suffix(generatedPack_lockfile, ".keep", base_len)) {
-			strbuf idx_file = new strbuf(, , );
+			strbuf idx_file = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			idx_file.strbuf_add(generatedPack_lockfile, base_len);
 			idx_file.strbuf_addstr(".idx");
 			new_pack = packed_git.add_packed_git(generatedBuf, generatedLen, 1);
@@ -75,7 +75,7 @@ public class check_connected_options {
 				if (!ModernizedCProgram.the_repository.repo_has_object_file(oid)) {
 					return 1;
 				} 
-			} while (!.fn(cb_data, oid));
+			} while (!/*Error: Function owner not recognized*/fn(cb_data, oid));
 			return 0;
 		} 
 		Object generatedShallow_file = this.getShallow_file();
@@ -123,15 +123,15 @@ public class check_connected_options {
 			if (new_pack && new_pack.find_pack_entry_one(generatedHash)) {
 				continue;
 			} 
-			.memcpy(commit, ModernizedCProgram.oid_to_hex(oid), hexsz);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(commit, ModernizedCProgram.oid_to_hex(oid), hexsz);
 			if (ModernizedCProgram.write_in_full(generatedIn, commit, hexsz + 1) < 0) {
-				if ((._errno()) != 32 && (._errno()) != 22) {
+				if ((/*Error: Function owner not recognized*/_errno()) != 32 && (/*Error: Function owner not recognized*/_errno()) != 22) {
 					();
 				} 
 				err = -1;
 				break;
 			} 
-		} while (!.fn(cb_data, oid));/*
+		} while (!/*Error: Function owner not recognized*/fn(cb_data, oid));/*
 				 * If index-pack already checked that:
 				 * - there are no dangling pointers in the new pack
 				 * - the pack is self contained
@@ -139,7 +139,7 @@ public class check_connected_options {
 				 * are sure the ref is good and not sending it to
 				 * rev-list for verification.
 				 */
-		if (.close(generatedIn)) {
+		if (/*Error: Function owner not recognized*/close(generatedIn)) {
 			err = ();
 		} 
 		ModernizedCProgram.sigchain_pop(SIGPIPE);

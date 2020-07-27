@@ -51,13 +51,13 @@ public class submodule {
 	}
 	public submodule lookup_or_create_by_name(submodule_cache cache, Object gitmodules_oid, Object name) {
 		submodule submodule = new submodule();
-		strbuf name_buf = new strbuf(, , );
+		strbuf name_buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		submodule submodule = new submodule();
 		submodule = submodule.cache_lookup_name(cache, gitmodules_oid, name);
 		if (submodule) {
 			return submodule;
 		} 
-		submodule = ModernizedCProgram.xmalloc();
+		submodule = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		name_buf.strbuf_addstr(name);
 		submodule.setName(name_buf.strbuf_detach(((Object)0)));
 		submodule.setPath(((Object)0));

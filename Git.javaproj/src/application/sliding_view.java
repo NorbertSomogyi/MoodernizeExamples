@@ -19,13 +19,13 @@ public class sliding_view {
 	
 	public int move_window(Object off, Object width) {
 		off_t file_offset = new off_t();
-		((view) ? (Object)0 : ._assert("view", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\sliding_window.c", 49));
+		((view) ? (Object)0 : /*Error: Function owner not recognized*/_assert("view", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\sliding_window.c", 49));
 		Object generatedWidth = this.getWidth();
 		strbuf generatedBuf = this.getBuf();
 		Object generatedLen = generatedBuf.getLen();
-		((generatedWidth <= generatedLen) ? (Object)0 : ._assert("view->width <= view->buf.len", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\sliding_window.c", 50));
+		((generatedWidth <= generatedLen) ? (Object)0 : /*Error: Function owner not recognized*/_assert("view->width <= view->buf.len", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\sliding_window.c", 50));
 		Object generatedOff = this.getOff();
-		((!ModernizedCProgram.check_offset_overflow(generatedOff, generatedLen)) ? (Object)0 : ._assert("!check_offset_overflow(view->off, view->buf.len)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\sliding_window.c", 51));
+		((!ModernizedCProgram.check_offset_overflow(generatedOff, generatedLen)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!check_offset_overflow(view->off, view->buf.len)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\sliding_window.c", 51));
 		if (ModernizedCProgram.check_offset_overflow(off, width)) {
 			return -1;
 		} 

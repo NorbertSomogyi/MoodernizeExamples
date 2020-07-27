@@ -47,7 +47,7 @@ public class qf_info_S {
 		} 
 		qf_list_S qf_list_S = new qf_list_S();
 		qfl = qf_list_S.qf_get_curlist(qi);
-		.memset((qfl), (false), ((size_t)()));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((qfl), (false), ((size_t)(/*Error: Unsupported expression*/)));
 		qfl.qf_store_title(qf_title);
 		 generatedQfl_type = this.getQfl_type();
 		qfl.setQfl_type(generatedQfl_type);
@@ -57,7 +57,7 @@ public class qf_info_S {
 	}
 	public void locstack_queue_delreq() {
 		qf_delq_T q = new qf_delq_T();
-		q = (qf_delq_T)ModernizedCProgram.alloc();
+		q = (qf_delq_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*/);
 		if (q != ((Object)0)) {
 			q.setQi(qi);
 			q.setNext(ModernizedCProgram.qf_delq_head);
@@ -87,12 +87,12 @@ public class qf_info_S {
 		qf_info_T qi = new qf_info_T();
 		qi = pqi;
 		if (qi == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		// Remove reference to this list// Remove reference to this listpqi = ((Object)0)// If the location list is still in use, then queue the delete request;// If the location list is still in use, then queue the delete request
 		// to be processed later.if (ModernizedCProgram.quickfix_busy > 0) {
 			qi.locstack_queue_delreq();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedQf_refcount = qi.getQf_refcount();
 		generatedQf_refcount--;
@@ -111,7 +111,7 @@ public class qf_info_S {
 	}
 	public qf_info_S qf_alloc_stack( qfltype) {
 		qf_info_T qi = new qf_info_T();
-		qi = (qf_info_T)ModernizedCProgram.alloc_clear();
+		qi = (qf_info_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/);
 		int generatedQf_refcount = qi.getQf_refcount();
 		if (qi != ((Object)0)) {
 			generatedQf_refcount++;
@@ -178,7 +178,7 @@ public class qf_info_S {
 		 * Copy location list entries from 'from_qfl' to 'to_qfl'.
 		 */;
 	}
-	public int jump_to_help_window(int newwin, int opened_window) {
+	public int jump_to_help_window(int newwin, Integer opened_window) {
 		win_T wp = new win_T();
 		int flags;
 		window_S window_S = new window_S();
@@ -278,7 +278,7 @@ public class qf_info_S {
 		qf_list_S qf_list_S = new qf_list_S();
 		if (qi.qf_stack_empty() || qf_list_S.qf_get_curlist(qi).qf_list_empty()) {
 			ModernizedCProgram.emsg(((byte)(e_quickfix)));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.incr_quickfix_busy();
 		qfl = qf_list_S.qf_get_curlist(qi);
@@ -333,9 +333,9 @@ public class qf_info_S {
 		int generatedQf_listcount = this.getQf_listcount();
 		ModernizedCProgram.vim_snprintf((byte)buf, (1024 + 1), ((byte)("%serror list %d of %d; %d errors ")), lead, which + 1, generatedQf_listcount, count);
 		if (title != ((Object)0)) {
-			size_t len = .strlen((byte)(buf));
+			size_t len = /*Error: Function owner not recognized*/strlen((byte)(buf));
 			if (len < 34) {
-				.memset((buf + len), ((byte)' '), (34 - len));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((buf + len), ((byte)' '), (34 - len));
 				buf[34] = (byte)'\000';
 			} 
 			ModernizedCProgram.vim_strcat(buf, (char_u)title, (1024 + 1));
@@ -500,7 +500,7 @@ public class qf_info_S {
 	}
 	public void qf_jump_first(Object save_qfid, int forceit) {
 		if (qi.qf_restore_list(save_qfid) == 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		qf_list_S qf_list_S = new qf_list_S();
 		// Autocommands might have cleared the list, check for that.if (!qf_list_S.qf_get_curlist(qi).qf_list_empty()) {
@@ -546,7 +546,7 @@ public class qf_info_S {
 	/*
 	 * Get the location list for ":lhelpgrep"
 	 */
-	public qf_info_S hgr_get_ll(int new_ll) {
+	public qf_info_S hgr_get_ll(Integer new_ll) {
 		win_T wp = new win_T();
 		qf_info_T qi = new qf_info_T();
 		window_S window_S = new window_S();

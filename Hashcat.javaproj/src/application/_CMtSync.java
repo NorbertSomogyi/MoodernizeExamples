@@ -74,14 +74,14 @@ public class _CMtSync {
 			ModernizedCProgram.Event_Set(generatedCanStart);
 			ModernizedCProgram.Handle_WaitObject((generatedWasStarted));
 		} else {
-				.LeaveCriticalSection(generatedCs);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LeaveCriticalSection(generatedCs);
 				this.setCsWasEntered(0);
 				generatedNumProcessedBlocks++;
 				ModernizedCProgram.Semaphore_Release1(generatedFreeSemaphore);
 		} 
 		Object generatedFilledSemaphore = this.getFilledSemaphore();
 		ModernizedCProgram.Handle_WaitObject((generatedFilledSemaphore));
-		.EnterCriticalSection(generatedCs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/EnterCriticalSection(generatedCs);
 		this.setCsWasEntered(1);
 	}
 	/* MtSync_StopWriting must be called if Writing was started */
@@ -91,13 +91,13 @@ public class _CMtSync {
 		Object generatedThread = this.getThread();
 		Object generatedNeedStart = this.getNeedStart();
 		if (!((generatedThread) != ((Object)0)) || generatedNeedStart) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setStopWriting(1);
 		Object generatedCsWasEntered = this.getCsWasEntered();
 		Object generatedCs = this.getCs();
 		if (generatedCsWasEntered) {
-			.LeaveCriticalSection(generatedCs);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LeaveCriticalSection(generatedCs);
 			this.setCsWasEntered(0);
 		} 
 		Object generatedFreeSemaphore = this.getFreeSemaphore();
@@ -127,7 +127,7 @@ public class _CMtSync {
 		Object generatedCsWasInitialized = this.getCsWasInitialized();
 		Object generatedCs = this.getCs();
 		if (generatedCsWasInitialized) {
-			.DeleteCriticalSection(generatedCs);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteCriticalSection(generatedCs);
 			this.setCsWasInitialized(0);
 		} 
 		ModernizedCProgram.HandlePtr_Close(generatedCanStart);

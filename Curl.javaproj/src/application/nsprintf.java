@@ -1,11 +1,11 @@
 package application;
 
 public class nsprintf {
-	private byte buffer;
+	private byte[] buffer;
 	private Object length;
 	private Object max;
 	
-	public nsprintf(byte buffer, Object length, Object max) {
+	public nsprintf(byte[] buffer, Object length, Object max) {
 		setBuffer(buffer);
 		setLength(length);
 		setMax(max);
@@ -13,10 +13,10 @@ public class nsprintf {
 	public nsprintf() {
 	}
 	
-	public byte getBuffer() {
+	public byte[] getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(byte newBuffer) {
+	public void setBuffer(byte[] newBuffer) {
 		buffer = newBuffer;
 	}
 	public Object getLength() {

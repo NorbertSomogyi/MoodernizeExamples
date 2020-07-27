@@ -14,7 +14,7 @@ public class column {
 	public column find_new_column_by_commit(git_graph graph, commit commit) {
 		int i;
 		int generatedNum_new_columns = graph.getNum_new_columns();
-		column generatedNew_columns = graph.getNew_columns();
+		column[] generatedNew_columns = graph.getNew_columns();
 		for (i = 0; i < generatedNum_new_columns; i++) {
 			if (generatedNew_columns[i].getCommit() == commit) {
 				return generatedNew_columns[i];

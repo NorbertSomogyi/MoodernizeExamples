@@ -26,7 +26,7 @@ public class line_log_data {
 	}
 	
 	public void line_log_data_init() {
-		.memset(r, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(r, 0, /*Error: Unsupported expression*/);
 		range_set generatedRanges = this.getRanges();
 		generatedRanges.range_set_init(0);
 	}
@@ -35,7 +35,7 @@ public class line_log_data {
 		generatedRanges.range_set_release();
 		diff_filepair generatedPair = this.getPair();
 		if (generatedPair) {
-			.diff_free_filepair(generatedPair);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_free_filepair(generatedPair);
 		} 
 	}
 	public void free_line_log_data() {
@@ -55,7 +55,7 @@ public class line_log_data {
 		Byte generatedPath = p.getPath();
 		line_log_data generatedNext = p.getNext();
 		while (p) {
-			int cmp = .strcmp(generatedPath, path);
+			int cmp = /*Error: Function owner not recognized*/strcmp(generatedPath, path);
 			if (!cmp) {
 				return p;
 			} 
@@ -76,9 +76,9 @@ public class line_log_data {
 		if (p) {
 			generatedRanges.range_set_append_unsafe(begin, end);
 			ModernizedCProgram.free(path);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		p = ModernizedCProgram.xcalloc(1, );
+		p = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 		p.setPath(path);
 		generatedRanges.range_set_append(begin, end);
 		line_log_data generatedNext = ip.getNext();
@@ -97,12 +97,12 @@ public class line_log_data {
 		string_list_item item = new string_list_item();
 		line_log_data ranges = ((Object)0);
 		line_log_data p = new line_log_data();
-		string_list_item generatedItems = (args).getItems();
+		string_list_item[] generatedItems = (args).getItems();
 		int generatedNr = (args).getNr();
-		byte generatedString = item.getString();
+		byte[] generatedString = item.getString();
 		index_state generatedIndex = r.getIndex();
 		range_set generatedRanges = p.getRanges();
-		range generatedRanges = generatedRanges.getRanges();
+		range[] generatedRanges = generatedRanges.getRanges();
 		for (item = generatedItems; item && item < generatedItems + generatedNr; ++item) {
 			byte name_part;
 			byte range_part;
@@ -117,8 +117,8 @@ public class line_log_data {
 			} 
 			range_part = ModernizedCProgram.xstrndup(generatedString, name_part - generatedString);
 			name_part++;
-			full_name = ModernizedCProgram.prefix_path(prefix, prefix ? .strlen(prefix) : 0, name_part);
-			spec = .alloc_filespec(full_name);
+			full_name = ModernizedCProgram.prefix_path(prefix, prefix ? /*Error: Function owner not recognized*/strlen(prefix) : 0, name_part);
+			spec = /*Error: Function owner not recognized*/alloc_filespec(full_name);
 			ModernizedCProgram.fill_blob_sha1(r, commit, spec);
 			ModernizedCProgram.fill_line_ends(r, spec, lines, ends);
 			cb_data.setSpec(spec);
@@ -144,7 +144,7 @@ public class line_log_data {
 			} 
 			begin--;
 			ranges.line_log_data_insert(full_name, begin, end);
-			.free_filespec(spec);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_filespec(spec);
 			do {
 				ModernizedCProgram.free(ends);
 				(ends) = ((Object)0);
@@ -157,8 +157,8 @@ public class line_log_data {
 		return ranges;
 	}
 	public line_log_data line_log_data_copy_one() {
-		line_log_data ret = ModernizedCProgram.xmalloc();
-		((r) ? (Object)0 : ._assert("r", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 628));
+		line_log_data ret = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+		((r) ? (Object)0 : /*Error: Function owner not recognized*/_assert("r", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 628));
 		ret.line_log_data_init();
 		range_set generatedRanges = ret.getRanges();
 		generatedRanges.range_set_copy(generatedRanges);
@@ -170,7 +170,7 @@ public class line_log_data {
 		line_log_data ret = ((Object)0);
 		line_log_data tmp = ((Object)0);
 		line_log_data prev = ((Object)0);
-		((r) ? (Object)0 : ._assert("r", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 643));
+		((r) ? (Object)0 : /*Error: Function owner not recognized*/_assert("r", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 643));
 		ret = tmp = prev = r.line_log_data_copy_one();
 		line_log_data generatedNext = this.getNext();
 		r = generatedNext;
@@ -198,7 +198,7 @@ public class line_log_data {
 			}  else if (!b) {
 				cmp = -1;
 			} else {
-					cmp = .strcmp(generatedPath, generatedPath);
+					cmp = /*Error: Function owner not recognized*/strcmp(generatedPath, generatedPath);
 			} 
 			if (cmp < 0) {
 				src = a;
@@ -212,7 +212,7 @@ public class line_log_data {
 					src = b;
 					b = generatedNext;
 			} 
-			d = ModernizedCProgram.xmalloc();
+			d = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
 			d.line_log_data_init();
 			d.setPath(ModernizedCProgram.xstrdup(generatedPath));
 			pp = d;
@@ -254,21 +254,21 @@ public class line_log_data {
 			line_log_data rg = ((Object)0);
 			if (!((generatedMode) != 0)) {
 				if (keep_deletions) {
-					.diff_q(outq, p);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_q(outq, p);
 				} else {
-						.diff_free_filepair(p);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_free_filepair(p);
 				} 
 				continue;
 			} 
 			for (rg = range; rg; rg = generatedNext) {
-				if (!.strcmp(generatedPath, generatedPath)) {
+				if (!/*Error: Function owner not recognized*/strcmp(generatedPath, generatedPath)) {
 					break;
 				} 
 			}
 			if (rg) {
-				.diff_q(outq, p);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_q(outq, p);
 			} else {
-					.diff_free_filepair(p);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_free_filepair(p);
 			} 
 		}
 		ModernizedCProgram.free(ModernizedCProgram.diff_queued_diff.getQueue());

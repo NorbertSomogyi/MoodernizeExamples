@@ -15,59 +15,11 @@ public class calldata {
 	public calldata() {
 	}
 	
-	public void calldata_init() {
-		.memset(ModernizedCProgram.data, 0, );
-	}
-	public void calldata_init_fixed(Object stack, Object size) {
-		ModernizedCProgram.data.setStack(stack);
-		ModernizedCProgram.data.setCapacity(size);
-		ModernizedCProgram.data.setFixed(true);
-		ModernizedCProgram.data.setSize(0);
-		ModernizedCProgram.data.calldata_clear();
-	}
-	public void calldata_free() {
-		if (!ModernizedCProgram.data.getFixed()) {
-			ModernizedCProgram.bfree(ModernizedCProgram.data.getStack());
-		} 
-	}
-	public void calldata_clear() {
-		if (ModernizedCProgram.data.getStack()) {
-			ModernizedCProgram.data.setSize();
-			.memset(ModernizedCProgram.data.getStack(), 0, );
-		} 
-	}
-	public calldata calldata_create() {
-		return (calldata_t)ModernizedCProgram.bzalloc();
-	}
-	public void calldata_destroy() {
-		cd.calldata_free();
-		ModernizedCProgram.bfree(cd/* ------------------------------------------------------------------------- */);
-	}
-	/* ------------------------------------------------------------------------- */
-	public void calldata_set_int(Object name, int val) {
-		ModernizedCProgram.data.calldata_set_data(name, val, );
-	}
-	public void calldata_set_float(Object name, double val) {
-		ModernizedCProgram.data.calldata_set_data(name, val, );
-	}
-	public void calldata_set_bool(Object name, Object val) {
-		ModernizedCProgram.data.calldata_set_data(name, val, );
-	}
-	public void calldata_set_ptr(Object name, Object ptr) {
-		ModernizedCProgram.data.calldata_set_data(name, ptr, );
-	}
-	public void calldata_set_string(Object name, Object str) {
-		if (str) {
-			ModernizedCProgram.data.calldata_set_data(name, str, .strlen(str) + 1);
-		} else {
-				ModernizedCProgram.data.calldata_set_data(name, ((Object)0), 0);
-		} 
-	}
 	public void cd_set_first_param(Object name, Object in, Object size) {
 		 pos = new ();
 		size_t capacity = new size_t();
-		size_t name_len = .strlen(name) + 1;
-		capacity =  * 3 + name_len + size;
+		size_t name_len = /*Error: Function owner not recognized*/strlen(name) + 1;
+		capacity = /*Error: Unsupported expression*/ * 3 + name_len + size;
 		ModernizedCProgram.data.setSize(capacity);
 		if (capacity < 128) {
 			capacity = 128;
@@ -77,7 +29,7 @@ public class calldata {
 		pos = ModernizedCProgram.data.getStack();
 		ModernizedCProgram.cd_copy_string(pos, name, name_len);
 		ModernizedCProgram.cd_copy_data(pos, in, size);
-		.memset(pos, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(pos, 0, /*Error: Unsupported expression*/);
 	}
 	public Object cd_ensure_capacity(Object pos, Object new_size) {
 		size_t offset = new size_t();
@@ -102,40 +54,88 @@ public class calldata {
 	public void calldata_set_data(Object name, Object in, Object size) {
 		 pos = ((Object)0);
 		if (!ModernizedCProgram.data || !name || !name) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ModernizedCProgram.data.getFixed() && !ModernizedCProgram.data.getStack()) {
 			ModernizedCProgram.data.cd_set_first_param(name, in, size);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.cd_getparam(ModernizedCProgram.data, name, pos)) {
 			size_t cur_size = new size_t();
-			.memcpy(cur_size, pos, );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(cur_size, pos, /*Error: Unsupported expression*/);
 			if (cur_size < size) {
 				size_t offset = size - cur_size;
 				size_t bytes = ModernizedCProgram.data.getSize();
 				if (!ModernizedCProgram.data.cd_ensure_capacity(pos, bytes + offset)) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
-				.memmove(pos + offset, pos, bytes - (pos - ModernizedCProgram.data.getStack()));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(pos + offset, pos, bytes - (pos - ModernizedCProgram.data.getStack()));
 				ModernizedCProgram.data.getSize() += offset;
 			}  else if (cur_size > size) {
 				size_t offset = cur_size - size;
 				size_t bytes = ModernizedCProgram.data.getSize() - offset;
-				.memmove(pos, pos + offset, bytes - (pos - ModernizedCProgram.data.getStack()));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(pos, pos + offset, bytes - (pos - ModernizedCProgram.data.getStack()));
 				ModernizedCProgram.data.getSize() -= offset;
 			} 
 			ModernizedCProgram.cd_copy_data(pos, in, size);
 		} else {
-				size_t name_len = .strlen(name) + 1;
-				size_t offset = name_len + size +  * 2;
+				size_t name_len = /*Error: Function owner not recognized*/strlen(name) + 1;
+				size_t offset = name_len + size + /*Error: Unsupported expression*/ * 2;
 				if (!ModernizedCProgram.data.cd_ensure_capacity(pos, ModernizedCProgram.data.getSize() + offset)) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				ModernizedCProgram.data.getSize() += offset;
 				ModernizedCProgram.cd_copy_string(pos, name, 0);
 				ModernizedCProgram.cd_copy_data(pos, in, size);
-				.memset(pos, 0, );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(pos, 0, /*Error: Unsupported expression*/);
+		} 
+	}
+	public void calldata_init() {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.data, 0, /*Error: Unsupported expression*/);
+	}
+	public void calldata_init_fixed(Object stack, Object size) {
+		ModernizedCProgram.data.setStack(stack);
+		ModernizedCProgram.data.setCapacity(size);
+		ModernizedCProgram.data.setFixed(true);
+		ModernizedCProgram.data.setSize(0);
+		ModernizedCProgram.data.calldata_clear();
+	}
+	public void calldata_free() {
+		if (!ModernizedCProgram.data.getFixed()) {
+			ModernizedCProgram.bfree(ModernizedCProgram.data.getStack());
+		} 
+	}
+	public void calldata_clear() {
+		if (ModernizedCProgram.data.getStack()) {
+			ModernizedCProgram.data.setSize(/*Error: Unsupported expression*/);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.data.getStack(), 0, /*Error: Unsupported expression*/);
+		} 
+	}
+	public calldata calldata_create() {
+		return (calldata_t)ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
+	}
+	public void calldata_destroy() {
+		cd.calldata_free();
+		ModernizedCProgram.bfree(cd/* ------------------------------------------------------------------------- */);
+	}
+	/* ------------------------------------------------------------------------- */
+	public void calldata_set_int(Object name, int val) {
+		ModernizedCProgram.data.calldata_set_data(name, val, /*Error: sizeof expression not supported yet*/);
+	}
+	public void calldata_set_float(Object name, double val) {
+		ModernizedCProgram.data.calldata_set_data(name, val, /*Error: sizeof expression not supported yet*/);
+	}
+	public void calldata_set_bool(Object name, Object val) {
+		ModernizedCProgram.data.calldata_set_data(name, val, /*Error: sizeof expression not supported yet*/);
+	}
+	public void calldata_set_ptr(Object name, Object ptr) {
+		ModernizedCProgram.data.calldata_set_data(name, ptr, /*Error: sizeof expression not supported yet*/);
+	}
+	public void calldata_set_string(Object name, Object str) {
+		if (str) {
+			ModernizedCProgram.data.calldata_set_data(name, str, /*Error: Function owner not recognized*/strlen(str) + 1);
+		} else {
+				ModernizedCProgram.data.calldata_set_data(name, ((Object)0), 0);
 		} 
 	}
 	public Object getStack() {

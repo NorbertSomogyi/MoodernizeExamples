@@ -45,7 +45,7 @@ public class coreaudio_data {
 	
 	public Object get_default_output_device() {
 		device_list list = new device_list();
-		.memset(list, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list, 0, /*Error: Unsupported expression*/);
 		list.coreaudio_enum_devices(false);
 		Object generatedItems = list.getItems();
 		if (!generatedItems.getNum()) {
@@ -58,13 +58,13 @@ public class coreaudio_data {
 		return true;
 	}
 	public Object find_device_id_by_uid() {
-		 size = ;
+		 size = /*Error: Unsupported expression*/;
 		 cf_uid = NULL;
 		 qual = NULL;
 		 qual_size = 0;
 		 stat = new ();
 		 success = new ();
-		 addr = new (, );
+		 addr = new (/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		Byte generatedDevice_uid = this.getDevice_uid();
 		if (!generatedDevice_uid) {
 			this.setDevice_uid(ModernizedCProgram.bstrdup("default"));
@@ -82,32 +82,32 @@ public class coreaudio_data {
 					} 
 			} 
 		} 
-		cf_uid = .CFStringCreateWithCString(NULL, generatedDevice_uid, kCFStringEncodingUTF8);
+		cf_uid = /*Error: Function owner not recognized*/CFStringCreateWithCString(NULL, generatedDevice_uid, kCFStringEncodingUTF8);
 		Object generatedDefault_device = this.getDefault_device();
 		Object generatedDevice_id = this.getDevice_id();
 		if (generatedDefault_device) {
 			addr.setMSelector(kAudioHardwarePropertyDefaultInputDevice);
-			stat = .AudioObjectGetPropertyData(kAudioObjectSystemObject, addr, qual_size, qual, size, generatedDevice_id);
+			stat = /*Error: Function owner not recognized*/AudioObjectGetPropertyData(kAudioObjectSystemObject, addr, qual_size, qual, size, generatedDevice_id);
 			success = (stat == noErr);
 		} else {
 				success = ModernizedCProgram.coreaudio_get_device_id(cf_uid, generatedDevice_id);
 		} 
 		if (cf_uid) {
-			.CFRelease(cf_uid);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(cf_uid);
 		} 
 		return success;
 	}
 	public void ca_warn(Object func, Object format) {
 		 args = new ();
 		dstr str = new dstr(0);
-		.va_start(args, format);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/va_start(args, format);
 		Byte generatedDevice_name = this.getDevice_name();
 		str.dstr_printf("[%s]:[device '%s'] ", func, generatedDevice_name);
 		str.dstr_vcatf(format, args);
 		Object generatedDstr = str.getDstr();
 		ModernizedCProgram.blog(LOG_WARNING, "%s", generatedDstr);
 		str.dstr_free();
-		.va_end(args);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/va_end(args);
 	}
 	public Object ca_success(Object stat, Object func, Object action) {
 		Byte generatedDevice_name = this.getDevice_name();
@@ -120,12 +120,12 @@ public class coreaudio_data {
 	public Object enable_io(coreaudio_io_type type, Object enable) {
 		 enable_int = enable;
 		Object generatedUnit = this.getUnit();
-		return .AudioUnitSetProperty(generatedUnit, kAudioOutputUnitProperty_EnableIO, (coreaudio_io_type.type == coreaudio_io_type.IO_TYPE_INPUT) ? kAudioUnitScope_Input : kAudioUnitScope_Output, (coreaudio_io_type.type == coreaudio_io_type.IO_TYPE_INPUT) ? 1 : 0, enable_int, );
+		return /*Error: Function owner not recognized*/AudioUnitSetProperty(generatedUnit, kAudioOutputUnitProperty_EnableIO, (coreaudio_io_type.type == coreaudio_io_type.IO_TYPE_INPUT) ? kAudioUnitScope_Input : kAudioUnitScope_Output, (coreaudio_io_type.type == coreaudio_io_type.IO_TYPE_INPUT) ? 1 : 0, enable_int, /*Error: sizeof expression not supported yet*/);
 	}
 	public Object coreaudio_init_format() {
 		 desc = new ();
 		 stat = new ();
-		 size = ;
+		 size = /*Error: sizeof expression not supported yet*/;
 		obs_audio_info aoi = new obs_audio_info();
 		int channels;
 		if (!aoi.obs_get_audio_info()) {
@@ -135,7 +135,7 @@ public class coreaudio_data {
 		speaker_layout generatedSpeakers = aoi.getSpeakers();
 		channels = ModernizedCProgram.get_audio_channels(generatedSpeakers);
 		Object generatedUnit = this.getUnit();
-		stat = .AudioUnitGetProperty(generatedUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 1, desc, size);
+		stat = /*Error: Function owner not recognized*/AudioUnitGetProperty(generatedUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 1, desc, size);
 		if (!ca.ca_success(stat, "coreaudio_init_format", "get input format")) {
 			return false/* Certain types of devices have no limit on channel count, and
 				 * there's no way to know the actual number of channels it's using,
@@ -146,7 +146,7 @@ public class coreaudio_data {
 			desc.setMBytesPerFrame(channels * desc.getMBitsPerChannel() / 8);
 			desc.setMBytesPerPacket(desc.getMFramesPerPacket() * desc.getMBytesPerFrame());
 		} 
-		stat = .AudioUnitSetProperty(generatedUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, desc, size);
+		stat = /*Error: Function owner not recognized*/AudioUnitSetProperty(generatedUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 1, desc, size);
 		if (!ca.ca_success(stat, "coreaudio_init_format", "set output format")) {
 			return false;
 		} 
@@ -175,19 +175,19 @@ public class coreaudio_data {
 		 stat = new ();
 		 addr = new (kAudioDevicePropertyStreamConfiguration, kAudioDevicePropertyScopeInput, kAudioObjectPropertyElementMaster);
 		Object generatedDevice_id = this.getDevice_id();
-		stat = .AudioObjectGetPropertyDataSize(generatedDevice_id, addr, 0, NULL, buf_size);
+		stat = /*Error: Function owner not recognized*/AudioObjectGetPropertyDataSize(generatedDevice_id, addr, 0, NULL, buf_size);
 		if (!ca.ca_success(stat, "coreaudio_init_buffer", "get list size")) {
 			return false;
 		} 
-		size = ;
+		size = /*Error: sizeof expression not supported yet*/;
 		Object generatedUnit = this.getUnit();
-		stat = .AudioUnitGetProperty(generatedUnit, kAudioDevicePropertyBufferFrameSize, kAudioUnitScope_Global, 0, frames, size);
+		stat = /*Error: Function owner not recognized*/AudioUnitGetProperty(generatedUnit, kAudioDevicePropertyBufferFrameSize, kAudioUnitScope_Global, 0, frames, size);
 		if (!ca.ca_success(stat, "coreaudio_init_buffer", "get frame size")) {
 			return false;
 		} 
 		this.setBuf_list(ModernizedCProgram.bmalloc(/* ---------------------- */buf_size));
 		Object generatedBuf_list = this.getBuf_list();
-		stat = .AudioObjectGetPropertyData(generatedDevice_id, addr, 0, NULL, buf_size, generatedBuf_list);
+		stat = /*Error: Function owner not recognized*/AudioObjectGetPropertyData(generatedDevice_id, addr, 0, NULL, buf_size, generatedBuf_list);
 		if (!ca.ca_success(stat, "coreaudio_init_buffer", "allocate")) {
 			ModernizedCProgram.bfree(generatedBuf_list);
 			this.setBuf_list(NULL);
@@ -204,7 +204,7 @@ public class coreaudio_data {
 		int ret;
 		Object generatedReconnecting = this.getReconnecting();
 		if (generatedReconnecting) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedReconnect_thread = this.getReconnect_thread();
 		ret = ModernizedCProgram.pthread_create(generatedReconnect_thread, NULL, reconnect_thread, ca);
@@ -215,11 +215,11 @@ public class coreaudio_data {
 	public Object add_listener(Object property) {
 		 addr = new (property, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster);
 		Object generatedDevice_id = this.getDevice_id();
-		return .AudioObjectAddPropertyListener(generatedDevice_id, addr, notification_callback, ca);
+		return /*Error: Function owner not recognized*/AudioObjectAddPropertyListener(generatedDevice_id, addr, notification_callback, ca);
 	}
 	public Object coreaudio_init_hooks() {
 		 stat = new ();
-		 callback_info = new (, );
+		 callback_info = new (/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		stat = ca.add_listener(kAudioDevicePropertyDeviceIsAlive);
 		if (!ca.ca_success(stat, "coreaudio_init_hooks", "set disconnect callback")) {
 			return false;
@@ -231,45 +231,45 @@ public class coreaudio_data {
 		Object generatedDefault_device = this.getDefault_device();
 		if (generatedDefault_device) {
 			 addr = new (kAudioHardwarePropertyDefaultInputDevice, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster);
-			stat = .AudioObjectAddPropertyListener(kAudioObjectSystemObject, addr, notification_callback, ca);
+			stat = /*Error: Function owner not recognized*/AudioObjectAddPropertyListener(kAudioObjectSystemObject, addr, notification_callback, ca);
 			if (!ca.ca_success(stat, "coreaudio_init_hooks", "set device change callback")) {
 				return false;
 			} 
 		} 
 		Object generatedUnit = this.getUnit();
-		stat = .AudioUnitSetProperty(generatedUnit, kAudioOutputUnitProperty_SetInputCallback, kAudioUnitScope_Global, 0, callback_info, );
+		stat = /*Error: Function owner not recognized*/AudioUnitSetProperty(generatedUnit, kAudioOutputUnitProperty_SetInputCallback, kAudioUnitScope_Global, 0, callback_info, /*Error: sizeof expression not supported yet*/);
 		if (!ca.ca_success(stat, "coreaudio_init_hooks", "set input callback")) {
 			return false;
 		} 
 		return true;
 	}
 	public void coreaudio_remove_hooks() {
-		 callback_info = new (, );
+		 callback_info = new (/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		 addr = new (kAudioDevicePropertyDeviceIsAlive, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster);
 		Object generatedDevice_id = this.getDevice_id();
-		.AudioObjectRemovePropertyListener(generatedDevice_id, addr, notification_callback, ca);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/AudioObjectRemovePropertyListener(generatedDevice_id, addr, notification_callback, ca);
 		addr.setMSelector(kAudioStreamPropertyAvailablePhysicalFormats);
-		.AudioObjectRemovePropertyListener(generatedDevice_id, addr, notification_callback, ca);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/AudioObjectRemovePropertyListener(generatedDevice_id, addr, notification_callback, ca);
 		Object generatedDefault_device = this.getDefault_device();
 		if (generatedDefault_device) {
 			addr.setMSelector(kAudioHardwarePropertyDefaultInputDevice);
-			.AudioObjectRemovePropertyListener(kAudioObjectSystemObject, addr, notification_callback, ca);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/AudioObjectRemovePropertyListener(kAudioObjectSystemObject, addr, notification_callback, ca);
 		} 
 		Object generatedUnit = this.getUnit();
-		.AudioUnitSetProperty(generatedUnit, kAudioOutputUnitProperty_SetInputCallback, kAudioUnitScope_Global, 0, callback_info, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/AudioUnitSetProperty(generatedUnit, kAudioOutputUnitProperty_SetInputCallback, kAudioUnitScope_Global, 0, callback_info, /*Error: sizeof expression not supported yet*/);
 	}
 	public Object coreaudio_get_device_name() {
 		 cf_name = NULL;
-		 size = ;
+		 size = /*Error: Unsupported expression*/;
 		byte name = NULL;
 		 addr = new (kAudioDevicePropertyDeviceNameCFString, kAudioObjectPropertyScopeInput, kAudioObjectPropertyElementMaster);
 		Object generatedDevice_id = this.getDevice_id();
-		 stat = .AudioObjectGetPropertyData(generatedDevice_id, addr, 0, NULL, size, cf_name);
+		 stat = /*Error: Function owner not recognized*/AudioObjectGetPropertyData(generatedDevice_id, addr, 0, NULL, size, cf_name);
 		if (stat != noErr) {
 			ModernizedCProgram.blog(LOG_WARNING, "[coreaudio_get_device_name] failed to get name: %d", (int)stat);
 			return false;
 		} 
-		name = .cfstr_copy_cstr(cf_name, kCFStringEncodingUTF8);
+		name = /*Error: Function owner not recognized*/cfstr_copy_cstr(cf_name, kCFStringEncodingUTF8);
 		if (!name) {
 			ModernizedCProgram.blog(LOG_WARNING, "[coreaudio_get_device_name] failed to convert name to cstr for some reason");
 			return false;
@@ -278,7 +278,7 @@ public class coreaudio_data {
 		ModernizedCProgram.bfree(generatedDevice_name);
 		this.setDevice_name(name);
 		if (cf_name) {
-			.CFRelease(cf_name);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(cf_name);
 		} 
 		return true;
 	}
@@ -289,29 +289,29 @@ public class coreaudio_data {
 			return true;
 		} 
 		Object generatedUnit = this.getUnit();
-		stat = .AudioOutputUnitStart(generatedUnit);
+		stat = /*Error: Function owner not recognized*/AudioOutputUnitStart(generatedUnit);
 		return ca.ca_success(stat, "coreaudio_start", "start audio");
 	}
 	public void coreaudio_stop() {
 		 stat = new ();
 		Object generatedActive = this.getActive();
 		if (!generatedActive) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setActive(false);
 		Object generatedUnit = this.getUnit();
-		stat = .AudioOutputUnitStop(generatedUnit);
+		stat = /*Error: Function owner not recognized*/AudioOutputUnitStop(generatedUnit);
 		ca.ca_success(stat, "coreaudio_stop", "stop audio");
 	}
 	public Object coreaudio_init_unit() {
-		 desc = new (, );
-		 component = .AudioComponentFindNext(NULL, desc);
+		 desc = new (/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		 component = /*Error: Function owner not recognized*/AudioComponentFindNext(NULL, desc);
 		if (!component) {
 			ca.ca_warn("coreaudio_init_unit", "find component failed");
 			return false;
 		} 
 		Object generatedUnit = this.getUnit();
-		 stat = .AudioComponentInstanceNew(component, generatedUnit);
+		 stat = /*Error: Function owner not recognized*/AudioComponentInstanceNew(component, generatedUnit);
 		if (!ca.ca_success(stat, "coreaudio_init_unit", "instance unit")) {
 			return false;
 		} 
@@ -343,7 +343,7 @@ public class coreaudio_data {
 		} 
 		Object generatedUnit = this.getUnit();
 		Object generatedDevice_id = this.getDevice_id();
-		stat = .AudioUnitSetProperty(generatedUnit, kAudioOutputUnitProperty_CurrentDevice, kAudioUnitScope_Global, 0, generatedDevice_id, );
+		stat = /*Error: Function owner not recognized*/AudioUnitSetProperty(generatedUnit, kAudioOutputUnitProperty_CurrentDevice, kAudioUnitScope_Global, 0, generatedDevice_id, /*Error: sizeof expression not supported yet*/);
 		if (!ca.ca_success(stat, "coreaudio_init", "set current device")) {
 			;
 		} 
@@ -356,7 +356,7 @@ public class coreaudio_data {
 		if (!ca.coreaudio_init_hooks()) {
 			;
 		} 
-		stat = .AudioUnitInitialize(generatedUnit);
+		stat = /*Error: Function owner not recognized*/AudioUnitInitialize(generatedUnit);
 		if (!ca.ca_success(stat, "coreaudio_initialize", "initialize")) {
 			;
 		} 
@@ -384,15 +384,15 @@ public class coreaudio_data {
 	public void coreaudio_uninit() {
 		Object generatedAu_initialized = this.getAu_initialized();
 		if (!generatedAu_initialized) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedUnit = this.getUnit();
 		if (generatedUnit) {
 			ca.coreaudio_stop();
-			 stat = .AudioUnitUninitialize(generatedUnit);
+			 stat = /*Error: Function owner not recognized*/AudioUnitUninitialize(generatedUnit);
 			ca.ca_success(stat, "coreaudio_uninit", "uninitialize");
 			ca.coreaudio_remove_hooks();
-			stat = .AudioComponentInstanceDispose(generatedUnit);
+			stat = /*Error: Function owner not recognized*/AudioComponentInstanceDispose(generatedUnit);
 			ca.ca_success(stat, "coreaudio_uninit", "dispose");
 			this.setUnit(NULL);
 		} 
@@ -413,7 +413,7 @@ public class coreaudio_data {
 		ca.coreaudio_uninit();
 		Object generatedUnit = this.getUnit();
 		if (generatedUnit) {
-			.AudioComponentInstanceDispose(generatedUnit);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/AudioComponentInstanceDispose(generatedUnit);
 		} 
 	}
 	public Byte getDevice_name() {

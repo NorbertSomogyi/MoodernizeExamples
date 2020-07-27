@@ -30,7 +30,7 @@ public class _IStateCoder {
 		Object generatedP = this.getP();
 		decoder = (CBraState)generatedP;
 		if (!decoder) {
-			decoder = (CBraState).UNRECOGNIZEDFUNCTIONNAME(alloc, );
+			decoder = (CBraState)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, /*Error: Unsupported expression*/);
 			if (!decoder) {
 				return 2;
 			} 
@@ -50,7 +50,7 @@ public class _IStateCoder {
 		CLzma2Dec_Spec spec = (CLzma2Dec_Spec)generatedP;
 		Object generatedDecoder = spec.getDecoder();
 		if (!spec) {
-			spec = (CLzma2Dec_Spec).UNRECOGNIZEDFUNCTIONNAME(alloc, );
+			spec = (CLzma2Dec_Spec)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, /*Error: Unsupported expression*/);
 			if (!spec) {
 				return 2;
 			} 

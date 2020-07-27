@@ -6,9 +6,9 @@ public class ref_dir {
 	private int alloc;
 	private int sorted;
 	private ref_cache cache;
-	private ref_entry entries;
+	private ref_entry[][] entries;
 	
-	public ref_dir(int nr, int alloc, int sorted, ref_cache cache, ref_entry entries) {
+	public ref_dir(int nr, int alloc, int sorted, ref_cache cache, ref_entry[][] entries) {
 		setNr(nr);
 		setAlloc(alloc);
 		setSorted(sorted);
@@ -21,14 +21,14 @@ public class ref_dir {
 	public void add_per_worktree_entries_to_dir(Object dirname) {
 		byte[] prefixes = new byte[]{"refs/bisect/", "refs/worktree/", "refs/rewritten/"};
 		int ip;
-		if (.strcmp(dirname, "refs/")) {
-			return ;
+		if (/*Error: Function owner not recognized*/strcmp(dirname, "refs/")) {
+			return /*Error: Unsupported expression*/;
 		} 
 		ref_cache generatedCache = this.getCache();
 		ref_entry ref_entry = new ref_entry();
-		for (ip = 0; ip < ( /  + ( - 1)); ip++) {
+		for (ip = 0; ip < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); ip++) {
 			byte prefix = prefixes[ip];
-			int prefix_len = .strlen(ModernizedCProgram.prefix);
+			int prefix_len = /*Error: Function owner not recognized*/strlen(ModernizedCProgram.prefix);
 			ref_entry child_entry = new ref_entry();
 			int pos;
 			pos = dir.search_ref_dir(ModernizedCProgram.prefix, ModernizedCProgram.prefix_len);
@@ -46,7 +46,7 @@ public class ref_dir {
 	public ref_dir get_ref_dir(ref_entry entry) {
 		ref_dir dir = new ref_dir();
 		byte generatedFlag = entry.getFlag();
-		((generatedFlag & -1024) ? (Object)0 : ._assert("entry->flag & REF_DIR", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\ref-cache.c", 22));
+		((generatedFlag & -1024) ? (Object)0 : /*Error: Function owner not recognized*/_assert("entry->flag & REF_DIR", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\ref-cache.c", 22));
 		 generatedU = entry.getU();
 		Object generatedSubdir = generatedU.getSubdir();
 		dir = generatedSubdir;
@@ -58,7 +58,7 @@ public class ref_dir {
 			if (!generatedFill_ref_dir) {
 				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\ref-cache.c", 26, "incomplete ref_store without fill_ref_dir function");
 			} 
-			.UNRECOGNIZEDFUNCTIONNAME(generatedRef_store, dir, generatedName);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedRef_store, dir, generatedName);
 			generatedFlag &=  ~-1024;
 		} 
 		return dir;
@@ -66,7 +66,7 @@ public class ref_dir {
 	public void clear_ref_dir() {
 		int i;
 		int generatedNr = this.getNr();
-		ref_entry generatedEntries = this.getEntries();
+		ref_entry[][] generatedEntries = this.getEntries();
 		for (i = 0; i < generatedNr; i++) {
 			generatedEntries[i].free_ref_entry();
 		}
@@ -86,8 +86,8 @@ public class ref_dir {
 		dir.sort_ref_dir();
 		key.setLen(len);
 		key.setStr(refname);
-		ref_entry generatedEntries = this.getEntries();
-		r = .bsearch(key, generatedEntries, generatedNr, , ref_entry_cmp_sslice);
+		ref_entry[][] generatedEntries = this.getEntries();
+		r = /*Error: Function owner not recognized*/bsearch(key, generatedEntries, generatedNr, /*Error: sizeof expression not supported yet*/, ref_entry_cmp_sslice);
 		if (r == ((Object)0)) {
 			return -1;
 		} 
@@ -98,7 +98,7 @@ public class ref_dir {
 		ref_entry entry = new ref_entry();
 		ref_cache generatedCache = this.getCache();
 		ref_entry ref_entry = new ref_entry();
-		ref_entry generatedEntries = this.getEntries();
+		ref_entry[][] generatedEntries = this.getEntries();
 		if (entry_index == -1) {
 			if (!mkdir) {
 				return ((Object)0/*
@@ -126,7 +126,7 @@ public class ref_dir {
 	}
 	public ref_dir find_containing_dir(Object refname, int mkdir) {
 		byte slash;
-		for (slash = .strchr(refname, (byte)'/'); slash; slash = .strchr(slash + 1, (byte)'/')) {
+		for (slash = /*Error: Function owner not recognized*/strchr(refname, (byte)'/'); slash; slash = /*Error: Function owner not recognized*/strchr(slash + 1, (byte)'/')) {
 			size_t dirnamelen = slash - refname + 1;
 			ref_dir subdir = new ref_dir();
 			subdir = dir.search_for_subdir(refname, dirnamelen, mkdir);
@@ -138,8 +138,8 @@ public class ref_dir {
 		}
 		return dir;
 	}
-	public int remove_entry_from_dir(Object refname) {
-		int refname_len = .strlen(refname);
+	public int remove_entry_from_dir(Object[] refname) {
+		int refname_len = /*Error: Function owner not recognized*/strlen(refname);
 		int entry_index;
 		ref_entry entry = new ref_entry();
 		int is_dir = refname[refname_len - 1] == (byte)'/';
@@ -162,10 +162,10 @@ public class ref_dir {
 		if (entry_index == -1) {
 			return -1;
 		} 
-		ref_entry generatedEntries = this.getEntries();
+		ref_entry[][] generatedEntries = this.getEntries();
 		entry = generatedEntries[entry_index];
 		int generatedNr = this.getNr();
-		ModernizedCProgram.move_array((generatedEntries[entry_index]), (generatedEntries[entry_index + 1]), (generatedNr - entry_index - 1),  + ( - 1));
+		ModernizedCProgram.move_array((generatedEntries[entry_index]), (generatedEntries[entry_index + 1]), (generatedNr - entry_index - 1), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		generatedNr--;
 		int generatedSorted = this.getSorted();
 		if (generatedSorted > entry_index) {
@@ -184,10 +184,10 @@ public class ref_dir {
 		int generatedSorted = this.getSorted();
 		int generatedNr = this.getNr();
 		if (generatedSorted == generatedNr) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		ref_entry generatedEntries = this.getEntries();
-		ModernizedCProgram.sane_qsort((generatedEntries), (generatedNr), , ref_entry_cmp);
+		ref_entry[][] generatedEntries = this.getEntries();
+		ModernizedCProgram.sane_qsort((generatedEntries), (generatedNr), /*Error: sizeof expression not supported yet*/, ref_entry_cmp);
 		for (; j < generatedNr; /* Remove any duplicates: */j++) {
 			ref_entry entry = generatedEntries[j];
 			if (last && ModernizedCProgram.is_dup_ref(last, entry)) {
@@ -201,7 +201,7 @@ public class ref_dir {
 	public void prime_ref_dir(Object prefix) {
 		int i;
 		int generatedNr = this.getNr();
-		ref_entry generatedEntries = this.getEntries();
+		ref_entry[][] generatedEntries = this.getEntries();
 		byte generatedFlag = entry.getFlag();
 		ref_dir ref_dir = new ref_dir();
 		Object generatedName = entry.getName();
@@ -212,14 +212,14 @@ public class ref_dir {
 				ref_dir.get_ref_dir(entry).prime_ref_dir(((Object)/* Recurse in any case: */0));
 			} else {
 					switch (ModernizedCProgram.overlaps_prefix(generatedName, prefix)) {
+					case prefix_state.PREFIX_EXCLUDES_DIR/* No need to prime this directory. */:
+							break;
 					case prefix_state.PREFIX_CONTAINS_DIR/*
 									 * Recurse, and from here down we
 									 * don't have to check the prefix
 									 * anymore:
 									 */:
 							ref_dir.get_ref_dir(entry).prime_ref_dir(((Object)0));
-							break;
-					case prefix_state.PREFIX_EXCLUDES_DIR/* No need to prime this directory. */:
 							break;
 					case prefix_state.PREFIX_WITHIN_DIR:
 							ref_dir.get_ref_dir(entry).prime_ref_dir(prefix);
@@ -258,10 +258,10 @@ public class ref_dir {
 	public void setCache(ref_cache newCache) {
 		cache = newCache;
 	}
-	public ref_entry getEntries() {
+	public ref_entry[][] getEntries() {
 		return entries;
 	}
-	public void setEntries(ref_entry newEntries) {
+	public void setEntries(ref_entry[][] newEntries) {
 		entries = newEntries;
 	}
 }

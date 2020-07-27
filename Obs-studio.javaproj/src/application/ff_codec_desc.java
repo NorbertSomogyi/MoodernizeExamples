@@ -23,36 +23,36 @@ public class ff_codec_desc {
 	
 	public void add_codec_to_list(Object format_desc, ff_codec_desc current, AVCodecID id, Object codec, boolean ignore_compatability) {
 		if (codec == NULL) {
-			codec = .avcodec_find_encoder(AVCodecID.id);
+			codec = /*Error: Function owner not recognized*/avcodec_find_encoder(AVCodecID.id);
 		} 
 		// No codec, or invalid idif (codec == NULL) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		// Not an encoding codecif (!.av_codec_is_encoder(codec)) {
-			return ;
+		// Not an encoding codecif (!/*Error: Function owner not recognized*/av_codec_is_encoder(codec)) {
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ignore_compatability) {
-			int tag = .av_codec_get_tag(format_desc.getCodec_tags(), codec.getId());
+			int tag = /*Error: Function owner not recognized*/av_codec_get_tag(format_desc.getCodec_tags(), codec.getId());
 			if (tag == 0) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		// Format doesn't support this codec
-		ff_codec_desc d = .av_mallocz();
+		ff_codec_desc d = /*Error: Function owner not recognized*/av_mallocz(/*Error: Unsupported expression*/);
 		d.setName(codec.getName());
 		d.setLong_name(codec.getLong_name());
 		d.setId(codec.getId());
-		 base_codec = .avcodec_find_encoder(codec.getId());
-		if (.strcmp(base_codec.getName(), codec.getName()) != 0) {
+		 base_codec = /*Error: Function owner not recognized*/avcodec_find_encoder(codec.getId());
+		if (/*Error: Function owner not recognized*/strcmp(base_codec.getName(), codec.getName()) != 0) {
 			d.setAlias(1);
 			d.setBase_name(base_codec.getName());
 		} 
 		switch (codec.getType()) {
-		case AVMEDIA_TYPE_VIDEO:
-				d.setType(ff_codec_type.FF_CODEC_VIDEO);
-				break;
 		case AVMEDIA_TYPE_AUDIO:
 				d.setType(ff_codec_type.FF_CODEC_AUDIO);
+				break;
+		case AVMEDIA_TYPE_VIDEO:
+				d.setType(ff_codec_type.FF_CODEC_VIDEO);
 				break;
 		default:
 				d.setType(ff_codec_type.FF_CODEC_UNKNOWN);

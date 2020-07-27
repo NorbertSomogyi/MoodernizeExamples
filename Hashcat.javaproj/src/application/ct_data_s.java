@@ -45,7 +45,7 @@ public class ct_data_s {
 	public ct_data_s() {
 	}
 	
-	public void gen_codes(int max_code, Object bl_count) {
+	public void gen_codes(int max_code, Object[] bl_count) {
 		ush[] next_code = new ush();
 		int code = /* running code value */0;
 		/* bit index */int bits;

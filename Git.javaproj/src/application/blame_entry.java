@@ -45,7 +45,7 @@ public class blame_entry {
 				} 
 			} while (generatedS_lno <= generatedS_lno);
 		} 
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			tail = p2;
 			do {
 				tail = generatedNext;
@@ -65,8 +65,8 @@ public class blame_entry {
 		}
 	}
 	public void add_blame_entry(Object src) {
-		blame_entry e = ModernizedCProgram.xmalloc();
-		.memcpy(e, src, );
+		blame_entry e = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(e, src, /*Error: sizeof expression not supported yet*/);
 		blame_origin generatedSuspect = e.getSuspect();
 		generatedSuspect.blame_origin_incref();
 		e.setNext(queue);
@@ -78,13 +78,13 @@ public class blame_entry {
 		blame_origin generatedSuspect = src.getSuspect();
 		generatedSuspect.blame_origin_incref();
 		generatedSuspect.blame_origin_decref();
-		.memcpy(dst, src, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dst, src, /*Error: sizeof expression not supported yet*/);
 		dst.setNext(queue);
 		queue = dst;
 		blame_entry generatedNext = dst.getNext();
 		queue = generatedNext;
 	}
-	public void split_blame(blame_entry unblamed, blame_entry split, blame_entry e) {
+	public void split_blame(blame_entry unblamed, blame_entry[] split, blame_entry e) {
 		if (split[0].getSuspect() && split[2].getSuspect()) {
 			unblamed.dup_entry(e, split[/* The first part (reuse storage for the existing entry e) */0]);
 			unblamed.add_blame_entry(split[/* The last part -- me */2]);
@@ -125,7 +125,7 @@ public class blame_entry {
 		 */;
 	}
 	public blame_entry split_blame_at(int len, blame_origin new_suspect) {
-		blame_entry n = ModernizedCProgram.xcalloc(1, );
+		blame_entry n = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 		n.setSuspect(new_suspect);
 		int generatedIgnored = this.getIgnored();
 		n.setIgnored(generatedIgnored);
@@ -164,7 +164,7 @@ public class blame_entry {
 		 */;
 	}
 	public blame_entry blame_entry_prepend(long start, long end, blame_origin o) {
-		blame_entry new_head = ModernizedCProgram.xcalloc(1, );
+		blame_entry new_head = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 		new_head.setLno(start);
 		new_head.setNum_lines(end - start);
 		new_head.setSuspect(o);

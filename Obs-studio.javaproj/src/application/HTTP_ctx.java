@@ -30,12 +30,12 @@ package application;
 /* resource has been moved */
 /* connection lost while waiting for data */
 public class HTTP_ctx {
-	private Byte date;
+	private byte[] date;
 	private int size;
 	private int status;
 	private Object data;
 	
-	public HTTP_ctx(Byte date, int size, int status, Object data) {
+	public HTTP_ctx(byte[] date, int size, int status, Object data) {
 		setDate(date);
 		setSize(size);
 		setStatus(status);
@@ -44,7 +44,7 @@ public class HTTP_ctx {
 	public HTTP_ctx() {
 	}
 	
-	public  HTTP_get(Object url, Object cb) {
+	public  HTTP_get(Object[] url, Object cb) {
 		byte host;
 		byte path;
 		byte p1;
@@ -61,9 +61,9 @@ public class HTTP_ctx {
 		sockaddr_in sa = new sockaddr_in();
 		RTMPSockBuf sb = new RTMPSockBuf(0);
 		this.setStatus(-1);
-		.memset(sa, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(sa, 0, /*Error: Unsupported expression*/);
 		sa.setSin_family(2);
-		if (.strncasecmp(url, "http", /* we only handle http here */4)) {
+		if (/*Error: Function owner not recognized*/strncasecmp(url, "http", /* we only handle http here */4)) {
 			return .HTTPRES_BAD_REQUEST;
 		} 
 		if (url[4] == (byte)'s') {
@@ -73,53 +73,53 @@ public class HTTP_ctx {
 				ModernizedCProgram.RTMP_TLS_Init();
 			} 
 		} 
-		p1 = .strchr(url + 4, (byte)':');
-		if (!p1 || .strncmp(p1, "://", 3)) {
+		p1 = /*Error: Function owner not recognized*/strchr(url + 4, (byte)':');
+		if (!p1 || /*Error: Function owner not recognized*/strncmp(p1, "://", 3)) {
 			return .HTTPRES_BAD_REQUEST;
 		} 
 		host = p1 + 3;
-		path = .strchr(host, (byte)'/');
+		path = /*Error: Function owner not recognized*/strchr(host, (byte)'/');
 		hlen = path - host;
-		.strncpy(hbuf, host, hlen);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strncpy(hbuf, host, hlen);
 		hbuf[hlen] = (byte)'\0';
 		host = hbuf;
-		p1 = .strrchr(host, (byte)':');
+		p1 = /*Error: Function owner not recognized*/strrchr(host, (byte)':');
 		if (p1) {
 			p1++ = (byte)'\0';
-			port = .atoi(p1);
+			port = /*Error: Function owner not recognized*/atoi(p1);
 		} 
 		Object generatedSin_addr = sa.getSin_addr();
-		generatedSin_addr.getS_un().setS_addr(.inet_addr(host));
+		generatedSin_addr.getS_un().setS_addr(/*Error: Function owner not recognized*/inet_addr(host));
 		Object generatedH_addr_list = hp.getH_addr_list();
 		if (generatedSin_addr.getS_un().getS_addr() == -1024) {
-			hostent hp = .gethostbyname(host);
+			hostent hp = /*Error: Function owner not recognized*/gethostbyname(host);
 			if (!hp || !generatedH_addr_list[0]) {
 				return .HTTPRES_LOST_CONNECTION;
 			} 
 			sa.setSin_addr((in_addr)generatedH_addr_list[0]);
 		} 
-		sa.setSin_port(.htons(port));
-		sb.setSb_socket(.socket(2, 1, 6));
+		sa.setSin_port(/*Error: Function owner not recognized*/htons(port));
+		sb.setSb_socket(/*Error: Function owner not recognized*/socket(2, 1, 6));
 		Object generatedSb_socket = sb.getSb_socket();
 		if (generatedSb_socket == (SOCKET)(~0)) {
 			return .HTTPRES_LOST_CONNECTION;
 		} 
 		Object generatedSb_buf = sb.getSb_buf();
-		i = .sprintf(generatedSb_buf, "GET %s HTTP/1.0\r\nUser-Agent: %s\r\nHost: %s\r\nReferer: %.*s\r\n", path, "Mozilla/5.0", host, (int)(path - url + 1), url);
-		Byte generatedDate = this.getDate();
+		i = /*Error: Function owner not recognized*/sprintf(generatedSb_buf, "GET %s HTTP/1.0\r\nUser-Agent: %s\r\nHost: %s\r\nReferer: %.*s\r\n", path, "Mozilla/5.0", host, (int)(path - url + 1), url);
+		byte[] generatedDate = this.getDate();
 		if (generatedDate[0]) {
-			i += .sprintf(generatedSb_buf + i, "If-Modified-Since: %s\r\n", generatedDate);
+			i += /*Error: Function owner not recognized*/sprintf(generatedSb_buf + i, "If-Modified-Since: %s\r\n", generatedDate);
 		} 
-		i += .sprintf(generatedSb_buf + i, "\r\n");
-		if (ModernizedCProgram.connect(generatedSb_socket, (sockaddr)sa, ) < 0) {
+		i += /*Error: Function owner not recognized*/sprintf(generatedSb_buf + i, "\r\n");
+		if (ModernizedCProgram.connect(generatedSb_socket, (sockaddr)sa, /*Error: Unsupported expression*/) < 0) {
 			ret = .HTTPRES_LOST_CONNECTION;
 			;
 		} 
 		Object generatedSb_ssl = sb.getSb_ssl();
 		if (ssl) {
-			sb.setSb_ssl(.SSL_new(ModernizedCProgram.RTMP_TLS_ctx));
-			.SSL_set_fd(generatedSb_ssl, generatedSb_socket);
-			int connect_return = .SSL_connect(generatedSb_ssl);
+			sb.setSb_ssl(/*Error: Function owner not recognized*/SSL_new(ModernizedCProgram.RTMP_TLS_ctx));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SSL_set_fd(generatedSb_ssl, generatedSb_socket);
+			int connect_return = /*Error: Function owner not recognized*/SSL_connect(generatedSb_ssl);
 			if (connect_return < 0) {
 				ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "%s, TLS_Connect failed", __FUNCTION__);
 				ret = .HTTPRES_LOST_CONNECTION;
@@ -129,7 +129,7 @@ public class HTTP_ctx {
 		sb.RTMPSockBuf_Send(generatedSb_buf, i/* set timeout */);
 		{ 
 			int tv = 5 * 1000;
-			if (.UNRECOGNIZEDFUNCTIONNAME(generatedSb_socket, -1024, -1024, (byte)(byte)tv, (int))) {
+			if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSb_socket, -1024, -1024, (byte)(byte)tv, (int)/*Error: sizeof expression not supported yet*/)) {
 				ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "%s, Setting socket timeout to %ds failed!", __FUNCTION__, 5);
 			} 
 		}
@@ -139,12 +139,12 @@ public class HTTP_ctx {
 			ret = .HTTPRES_LOST_CONNECTION;
 			;
 		} 
-		if (.strncmp(generatedSb_buf, "HTTP/1", 6)) {
+		if (/*Error: Function owner not recognized*/strncmp(generatedSb_buf, "HTTP/1", 6)) {
 			ret = .HTTPRES_BAD_REQUEST;
 			;
 		} 
-		p1 = .strchr(generatedSb_buf, (byte)' ');
-		rc = .atoi(p1 + 1);
+		p1 = /*Error: Function owner not recognized*/strchr(generatedSb_buf, (byte)' ');
+		rc = /*Error: Function owner not recognized*/atoi(p1 + 1);
 		this.setStatus(rc);
 		if (rc >= 300) {
 			if (rc == 304) {
@@ -161,24 +161,24 @@ public class HTTP_ctx {
 			} 
 		} 
 		int generatedSb_size = sb.getSb_size();
-		p1 = .memchr(generatedSb_buf, (byte)'\n', generatedSb_size);
+		p1 = /*Error: Function owner not recognized*/memchr(generatedSb_buf, (byte)'\n', generatedSb_size);
 		if (!p1) {
 			ret = .HTTPRES_BAD_REQUEST;
 			;
 		} 
 		sb.setSb_start(p1 + 1);
-		byte generatedSb_start = sb.getSb_start();
+		byte[] generatedSb_start = sb.getSb_start();
 		generatedSb_size -= generatedSb_start - generatedSb_buf;
-		while ((p2 = .memchr(generatedSb_start, (byte)'\r', generatedSb_size))) {
+		while ((p2 = /*Error: Function owner not recognized*/memchr(generatedSb_start, (byte)'\r', generatedSb_size))) {
 			if (generatedSb_start == (byte)'\r') {
 				generatedSb_start += 2;
 				generatedSb_size -= 2;
 				break;
-			}  else if (!.strncasecmp(generatedSb_start, "Content-Length: ",  - 1)) {
-				flen = .atoi(generatedSb_start +  - 1);
-			}  else if (!.strncasecmp(generatedSb_start, "Last-Modified: ",  - 1)) {
+			}  else if (!/*Error: Function owner not recognized*/strncasecmp(generatedSb_start, "Content-Length: ", /*Error: sizeof expression not supported yet*/ - 1)) {
+				flen = /*Error: Function owner not recognized*/atoi(generatedSb_start + /*Error: sizeof expression not supported yet*/ - 1);
+			}  else if (!/*Error: Function owner not recognized*/strncasecmp(generatedSb_start, "Last-Modified: ", /*Error: sizeof expression not supported yet*/ - 1)) {
 				p2 = (byte)'\0';
-				.strcpy(generatedDate, generatedSb_start +  - 1);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedDate, generatedSb_start + /*Error: sizeof expression not supported yet*/ - 1);
 			} 
 			p2 += 2;
 			generatedSb_size -= p2 - generatedSb_start;
@@ -194,7 +194,7 @@ public class HTTP_ctx {
 		Object generatedData = this.getData();
 		int generatedSize = this.getSize();
 		while ((!len_known || flen > 0) && (generatedSb_size > 0 || sb.RTMPSockBuf_Fill() > 0)) {
-			.cb(generatedSb_start, 1, generatedSb_size, generatedData);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/cb(generatedSb_start, 1, generatedSb_size, generatedData);
 			if (len_known) {
 				flen -= generatedSb_size;
 			} 
@@ -206,10 +206,10 @@ public class HTTP_ctx {
 		} 
 		return ret;
 	}
-	public Byte getDate() {
+	public byte[] getDate() {
 		return date;
 	}
-	public void setDate(Byte newDate) {
+	public void setDate(byte[] newDate) {
 		date = newDate;
 	}
 	public int getSize() {

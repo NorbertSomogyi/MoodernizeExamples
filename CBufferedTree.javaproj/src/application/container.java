@@ -15,7 +15,7 @@ public class container {
 	
 	public container container_create() {
 		container container = new container();
-		container = .malloc();
+		container = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		container.setPayload_first(((Object)0));
 		container.setPayload_size(0);
 		container.setChild(((Object)0));
@@ -23,10 +23,10 @@ public class container {
 	}
 	public container remove_container(node node, Object idx) {
 		container removed = new container();
-		container generatedContainers = node.getContainers();
+		container[][] generatedContainers = node.getContainers();
 		removed = generatedContainers[idx];
 		Object generatedContainer_size = node.getContainer_size();
-		.memmove(generatedContainers[idx], generatedContainers[idx + 1], (generatedContainer_size - idx - 1) * );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(generatedContainers[idx], generatedContainers[idx + 1], (generatedContainer_size - idx - 1) * /*Error: Unsupported expression*/);
 		generatedContainer_size--;
 		return removed;
 	}
@@ -40,7 +40,7 @@ public class container {
 		compare = generatedKey_compare;
 		Object generatedContainer_size = node.getContainer_size();
 		container container = new container();
-		container generatedContainers = node.getContainers();
+		container[][] generatedContainers = node.getContainers();
 		if (container_idx >= generatedContainer_size) {
 			target = container.container_create();
 			ModernizedCProgram.insert_after_container(node, target, 0);

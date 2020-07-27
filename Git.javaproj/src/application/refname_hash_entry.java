@@ -17,12 +17,12 @@ public class refname_hash_entry {
 	
 	public refname_hash_entry refname_hash_add(hashmap map, Object refname, Object oid) {
 		refname_hash_entry ent = new refname_hash_entry();
-		size_t len = .strlen(refname);
+		size_t len = /*Error: Function owner not recognized*/strlen(refname);
 		Object generatedRefname = (ent).getRefname();
 		do {
 			size_t flex_array_len_ = (len);
-			(ent) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedRefname, (refname), flex_array_len_);
+			(ent) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedRefname, (refname), flex_array_len_);
 		} while (0);
 		hashmap_entry generatedEnt = ent.getEnt();
 		generatedEnt.hashmap_entry_init(ModernizedCProgram.strhash(refname));

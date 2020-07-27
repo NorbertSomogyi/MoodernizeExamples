@@ -50,7 +50,7 @@ public class fetch_negotiator {
 		this.setNext(next);
 		this.setAck(ack);
 		this.setRelease(release);
-		this.setData(ns = ModernizedCProgram.xcalloc(1, ));
+		this.setData(ns = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/));
 		prio_queue generatedRev_list = ns.getRev_list();
 		generatedRev_list.setCompare(ModernizedCProgram.compare_commits_by_commit_date);
 		if (ModernizedCProgram.marked) {
@@ -65,7 +65,7 @@ public class fetch_negotiator {
 		this.setNext(next);
 		this.setAck(ack);
 		this.setRelease(release);
-		this.setData(data = ModernizedCProgram.xcalloc(1, ));
+		this.setData(data = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/));
 		prio_queue generatedRev_list = data.getRev_list();
 		generatedRev_list.setCompare(compare);
 		if (ModernizedCProgram.marked) {

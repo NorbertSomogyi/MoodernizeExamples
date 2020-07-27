@@ -18,7 +18,7 @@ package application;
 public class ff_circular_queue {
 	private Object mutex;
 	private Object cond;
-	private Object slots;
+	private Object[][] slots;
 	private int item_size;
 	private int capacity;
 	private int size;
@@ -26,7 +26,7 @@ public class ff_circular_queue {
 	private int read_index;
 	private boolean abort;
 	
-	public ff_circular_queue(Object mutex, Object cond, Object slots, int item_size, int capacity, int size, int write_index, int read_index, boolean abort) {
+	public ff_circular_queue(Object mutex, Object cond, Object[][] slots, int item_size, int capacity, int size, int write_index, int read_index, boolean abort) {
 		setMutex(mutex);
 		setCond(cond);
 		setSlots(slots);
@@ -56,10 +56,10 @@ public class ff_circular_queue {
 	 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 	 */
 	public Object queue_fetch_or_alloc(int index) {
-		Object generatedSlots = this.getSlots();
+		Object[][] generatedSlots = this.getSlots();
 		int generatedItem_size = this.getItem_size();
 		if (generatedSlots[index] == ((Object)0)) {
-			generatedSlots[index] = .av_mallocz(generatedItem_size);
+			generatedSlots[index] = /*Error: Function owner not recognized*/av_mallocz(generatedItem_size);
 		} 
 		return generatedSlots[index];
 	}
@@ -81,12 +81,12 @@ public class ff_circular_queue {
 		ModernizedCProgram.pthread_cond_wait(generatedCond, generatedMutex);
 	}
 	public boolean ff_circular_queue_init(int item_size, int capacity) {
-		.memset(cq, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(cq, 0, /*Error: Unsupported expression*/);
 		this.setItem_size(item_size);
 		this.setCapacity(capacity);
 		this.setAbort(0);
-		this.setSlots(.av_mallocz(capacity * ));
-		Object generatedSlots = this.getSlots();
+		this.setSlots(/*Error: Function owner not recognized*/av_mallocz(capacity * /*Error: Unsupported expression*/));
+		Object[][] generatedSlots = this.getSlots();
 		if (generatedSlots == ((Object)0)) {
 			;
 		} 
@@ -111,9 +111,9 @@ public class ff_circular_queue {
 	}
 	public void ff_circular_queue_free() {
 		cq.ff_circular_queue_abort();
-		Object generatedSlots = this.getSlots();
+		Object[][] generatedSlots = this.getSlots();
 		if (generatedSlots != ((Object)0)) {
-			.av_free(generatedSlots);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(generatedSlots);
 		} 
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_destroy(generatedMutex);
@@ -135,7 +135,7 @@ public class ff_circular_queue {
 		return cq.queue_fetch_or_alloc(generatedWrite_index);
 	}
 	public void ff_circular_queue_advance_write(Object item) {
-		Object generatedSlots = this.getSlots();
+		Object[][] generatedSlots = this.getSlots();
 		int generatedWrite_index = this.getWrite_index();
 		generatedSlots[generatedWrite_index] = item;
 		int generatedCapacity = this.getCapacity();
@@ -171,10 +171,10 @@ public class ff_circular_queue {
 	public void setCond(Object newCond) {
 		cond = newCond;
 	}
-	public Object getSlots() {
+	public Object[][] getSlots() {
 		return slots;
 	}
-	public void setSlots(Object newSlots) {
+	public void setSlots(Object[][] newSlots) {
 		slots = newSlots;
 	}
 	public int getItem_size() {

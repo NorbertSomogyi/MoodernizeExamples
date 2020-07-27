@@ -48,7 +48,7 @@ public class audio_resampler {
 	}
 	
 	public audio_resampler audio_resampler_create(Object dst, Object src) {
-		audio_resampler rs = ModernizedCProgram.bzalloc();
+		audio_resampler rs = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		int errcode;
 		rs.setOpened(false);
 		rs.setInput_freq(src.getSamples_per_sec());
@@ -65,7 +65,7 @@ public class audio_resampler {
 		AVSampleFormat generatedOutput_format = rs.getOutput_format();
 		Object generatedInput_layout = rs.getInput_layout();
 		AVSampleFormat generatedInput_format = rs.getInput_format();
-		rs.setContext(.swr_alloc_set_opts(NULL, generatedOutput_layout, generatedOutput_format, dst.getSamples_per_sec(), generatedInput_layout, generatedInput_format, src.getSamples_per_sec(), 0, NULL));
+		rs.setContext(/*Error: Function owner not recognized*/swr_alloc_set_opts(NULL, generatedOutput_layout, generatedOutput_format, dst.getSamples_per_sec(), generatedInput_layout, generatedInput_format, src.getSamples_per_sec(), 0, NULL));
 		SwrContext generatedContext = rs.getContext();
 		if (!generatedContext) {
 			ModernizedCProgram.blog(LOG_ERROR, "swr_alloc_set_opts failed");
@@ -74,11 +74,11 @@ public class audio_resampler {
 		} 
 		if (generatedInput_layout == AV_CH_LAYOUT_MONO && generatedOutput_ch > 1) {
 			double[][] matrix = new double[][]{{1}, {1, 1}, {1, 1, 0}, {1, 1, 1, 1}, {1, 1, 1, 0, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 0, 1, 1, 1}, {1, 1, 1, 0, 1, 1, 1, 1}};
-			if (.swr_set_matrix(generatedContext, matrix[generatedOutput_ch - 1], 1) < 0) {
+			if (/*Error: Function owner not recognized*/swr_set_matrix(generatedContext, matrix[generatedOutput_ch - 1], 1) < 0) {
 				ModernizedCProgram.blog(LOG_DEBUG, "swr_set_matrix failed for mono upmix\n");
 			} 
 		} 
-		errcode = .swr_init(generatedContext);
+		errcode = /*Error: Function owner not recognized*/swr_init(generatedContext);
 		if (errcode != 0) {
 			ModernizedCProgram.blog(LOG_ERROR, "avresample_open failed: error code %d", errcode);
 			rs.audio_resampler_destroy();
@@ -91,15 +91,15 @@ public class audio_resampler {
 		Object generatedOutput_buffer = this.getOutput_buffer();
 		if (rs) {
 			if (generatedContext) {
-				.swr_free(generatedContext);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/swr_free(generatedContext);
 			} 
 			if (generatedOutput_buffer[0]) {
-				.av_freep(generatedOutput_buffer[0]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_freep(generatedOutput_buffer[0]);
 			} 
 			ModernizedCProgram.bfree(rs);
 		} 
 	}
-	public Object audio_resampler_resample(Object output, Object out_frames, Object ts_offset, Object input, Object in_frames) {
+	public Object audio_resampler_resample(Object[][] output, Object out_frames, Object ts_offset, Object input, Object in_frames) {
 		if (!rs) {
 			return false;
 		} 
@@ -107,22 +107,22 @@ public class audio_resampler {
 		SwrContext context = generatedContext;
 		int ret;
 		Object generatedInput_freq = this.getInput_freq();
-		 delay = .swr_get_delay(context, generatedInput_freq);
+		 delay = /*Error: Function owner not recognized*/swr_get_delay(context, generatedInput_freq);
 		Object generatedOutput_freq = this.getOutput_freq();
-		int estimated = (int).av_rescale_rnd(delay + ()in_frames, ()generatedOutput_freq, ()generatedInput_freq, AV_ROUND_UP);
-		ts_offset = ().swr_get_delay(context, 1000000000);
+		int estimated = (int)/*Error: Function owner not recognized*/av_rescale_rnd(delay + ()in_frames, ()generatedOutput_freq, ()generatedInput_freq, AV_ROUND_UP);
+		ts_offset = ()/*Error: Function owner not recognized*/swr_get_delay(context, 1000000000);
 		int generatedOutput_size = this.getOutput_size();
 		Object generatedOutput_buffer = this.getOutput_buffer();
 		Object generatedOutput_ch = this.getOutput_ch();
 		AVSampleFormat generatedOutput_format = this.getOutput_format();
 		if (estimated > generatedOutput_size) {
 			if (generatedOutput_buffer[0]) {
-				.av_freep(generatedOutput_buffer[0]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_freep(generatedOutput_buffer[0]);
 			} 
-			.av_samples_alloc(generatedOutput_buffer, NULL, generatedOutput_ch, estimated, generatedOutput_format, 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_samples_alloc(generatedOutput_buffer, NULL, generatedOutput_ch, estimated, generatedOutput_format, 0);
 			this.setOutput_size(estimated);
 		} 
-		ret = .swr_convert(context, generatedOutput_buffer, generatedOutput_size, ()input, in_frames);
+		ret = /*Error: Function owner not recognized*/swr_convert(context, generatedOutput_buffer, generatedOutput_size, ()input, in_frames);
 		if (ret < 0) {
 			ModernizedCProgram.blog(LOG_ERROR, "swr_convert failed: %d", ret);
 			return false;

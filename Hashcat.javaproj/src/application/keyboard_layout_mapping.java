@@ -15,7 +15,7 @@ public class keyboard_layout_mapping {
 	public keyboard_layout_mapping() {
 	}
 	
-	public boolean initialize_keyboard_layout_mapping(Object filename, int keyboard_layout_mapping_cnt) {
+	public boolean initialize_keyboard_layout_mapping(Object filename, Integer keyboard_layout_mapping_cnt) {
 		HCFILE fp = new HCFILE();
 		if (fp.hc_fopen(filename, "r") == 0) {
 			return 0;
@@ -48,8 +48,8 @@ public class keyboard_layout_mapping {
 				ModernizedCProgram.hcfree(line_buf);
 				return 0;
 			} 
-			.memcpy(keyboard_layout_mapping[maps_cnt].getSrc_char(), generatedBuf[0], generatedLen[0]);
-			.memcpy(keyboard_layout_mapping[maps_cnt].getDst_char(), generatedBuf[1], generatedLen[1]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(keyboard_layout_mapping[maps_cnt].getSrc_char(), generatedBuf[0], generatedLen[0]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(keyboard_layout_mapping[maps_cnt].getDst_char(), generatedBuf[1], generatedLen[1]);
 			keyboard_layout_mapping[maps_cnt].setSrc_len(generatedLen[0]);
 			keyboard_layout_mapping[maps_cnt].setDst_len(generatedLen[1]);
 			if (maps_cnt == 256) {
@@ -62,7 +62,7 @@ public class keyboard_layout_mapping {
 		keyboard_layout_mapping_cnt = maps_cnt;
 		fp.hc_fclose();
 		ModernizedCProgram.hcfree(line_buf)// we need to sort this by length to ensure the largest blocks come first in mapping;// we need to sort this by length to ensure the largest blocks come first in mapping
-		.qsort(keyboard_layout_mapping, maps_cnt, , sort_by_src_len);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/qsort(keyboard_layout_mapping, maps_cnt, /*Error: Unsupported expression*/, sort_by_src_len);
 		return 1;
 	}
 	public Object getSrc_char() {

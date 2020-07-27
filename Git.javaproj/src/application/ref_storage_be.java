@@ -55,7 +55,7 @@ public class ref_storage_be {
 		ref_storage_be be = new ref_storage_be();
 		Object generatedRef_storage_be = be.getRef_storage_be();
 		for (be = ModernizedCProgram.refs_backends; be; be = generatedRef_storage_be) {
-			if (!.strcmp(generatedRef_storage_be, name)) {
+			if (!/*Error: Function owner not recognized*/strcmp(generatedRef_storage_be, name)) {
 				return be;
 			} 
 		}

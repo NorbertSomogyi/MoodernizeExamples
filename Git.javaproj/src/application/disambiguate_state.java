@@ -38,26 +38,26 @@ public class disambiguate_state {
 		repository generatedRepo = this.getRepo();
 		Object generatedCb_data = this.getCb_data();
 		if (generatedAlways_call_fn) {
-			this.setAmbiguous(.UNRECOGNIZEDFUNCTIONNAME(generatedRepo, current, generatedCb_data) ? 1 : 0);
-			return ;
+			this.setAmbiguous(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedRepo, current, generatedCb_data) ? 1 : 0);
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedCandidate_exists = this.getCandidate_exists();
 		object_id generatedCandidate = this.getCandidate();
 		if (!generatedCandidate_exists) {
 			generatedCandidate.oidcpy(/* this is the first candidate */current);
 			this.setCandidate_exists(1);
-			return ;
+			return /*Error: Unsupported expression*/;
 		}  else if (ModernizedCProgram.oideq(generatedCandidate, current/* the same as what we already have seen */)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedFn = this.getFn();
 		if (!generatedFn) {
 			this.setAmbiguous(/* cannot disambiguate between ds->candidate and current */1);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedCandidate_checked = this.getCandidate_checked();
 		if (!generatedCandidate_checked) {
-			this.setCandidate_ok(.UNRECOGNIZEDFUNCTIONNAME(generatedRepo, generatedCandidate, generatedCb_data));
+			this.setCandidate_ok(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedRepo, generatedCandidate, generatedCb_data));
 			this.setDisambiguate_fn_used(1);
 			this.setCandidate_checked(1);
 		} 
@@ -65,9 +65,9 @@ public class disambiguate_state {
 		if (!generatedCandidate_ok) {
 			generatedCandidate.oidcpy(/* discard the candidate; we know it does not satisfy fn */current);
 			this.setCandidate_checked(0);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		if (.UNRECOGNIZEDFUNCTIONNAME(generatedRepo, current, generatedCb_data)) {
+		if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedRepo, current, generatedCb_data)) {
 			this.setCandidate_ok(0);
 			this.setAmbiguous(1/* otherwise, current can be discarded and candidate is still good */);
 		} 
@@ -78,7 +78,7 @@ public class disambiguate_state {
 		object_id generatedBin_pfx = this.getBin_pfx();
 		oid_array oid_array = new oid_array();
 		int generatedNr = loose_objects.getNr();
-		object_id generatedOid = loose_objects.getOid();
+		object_id[] generatedOid = loose_objects.getOid();
 		int generatedLen = this.getLen();
 		Object generatedHash = generatedBin_pfx.getHash();
 		object_directory generatedNext = odb.getNext();

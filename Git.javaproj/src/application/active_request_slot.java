@@ -6,13 +6,13 @@ public class active_request_slot {
 	private int in_use;
 	private Object curl_result;
 	private long http_code;
-	private int finished;
+	private Integer finished;
 	private slot_results results;
 	private Object callback_data;
 	private Object callback_func;
 	private active_request_slot next;
 	
-	public active_request_slot(Object curl, int in_use, Object curl_result, long http_code, int finished, slot_results results, Object callback_data, Object callback_func, active_request_slot next) {
+	public active_request_slot(Object curl, int in_use, Object curl_result, long http_code, Integer finished, slot_results results, Object callback_data, Object callback_func, active_request_slot next) {
 		setCurl(curl);
 		setIn_use(in_use);
 		setCurl_result(curl_result);
@@ -34,8 +34,8 @@ public class active_request_slot {
 		slot.closedown_active_slot();
 		Object generatedCurl = this.getCurl();
 		long generatedHttp_code = this.getHttp_code();
-		.curl_easy_getinfo(generatedCurl, CURLINFO_HTTP_CODE, generatedHttp_code);
-		int generatedFinished = this.getFinished();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_getinfo(generatedCurl, CURLINFO_HTTP_CODE, generatedHttp_code);
+		Integer generatedFinished = this.getFinished();
 		if (generatedFinished != ((Object)0)) {
 			(generatedFinished) = 1;
 		} 
@@ -46,12 +46,12 @@ public class active_request_slot {
 			generatedResults.setCurl_result(generatedCurl_result);
 			generatedResults.setHttp_code(generatedHttp_code);
 			generatedResults.setAuth_avail(0);
-			.curl_easy_getinfo(generatedCurl, CURLINFO_HTTP_CONNECTCODE, generatedHttp_connectcode);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_getinfo(generatedCurl, CURLINFO_HTTP_CONNECTCODE, generatedHttp_connectcode);
 		} 
 		Object generatedCallback_func = this.getCallback_func();
 		Object generatedCallback_data = this.getCallback_data();
 		if (generatedCallback_func != ((Object)/* Run callback if appropriate */0)) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedCallback_data);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCallback_data);
 		} 
 	}
 	public void xmulti_remove_handle() {
@@ -66,7 +66,7 @@ public class active_request_slot {
 			slot = generatedNext;
 		}
 		if (slot == ((Object)0)) {
-			newslot = ModernizedCProgram.xmalloc();
+			newslot = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 			newslot.setCurl(((Object)0));
 			newslot.setIn_use(0);
 			newslot.setNext(((Object)0));
@@ -92,28 +92,28 @@ public class active_request_slot {
 		slot.setFinished(((Object)0));
 		slot.setCallback_data(((Object)0));
 		slot.setCallback_func(((Object)0));
-		.curl_easy_setopt(generatedCurl, CURLOPT_COOKIEFILE, ModernizedCProgram.curl_cookie_file);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_COOKIEFILE, ModernizedCProgram.curl_cookie_file);
 		if (ModernizedCProgram.curl_save_cookies) {
-			.curl_easy_setopt(generatedCurl, CURLOPT_COOKIEJAR, ModernizedCProgram.curl_cookie_file);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_COOKIEJAR, ModernizedCProgram.curl_cookie_file);
 		} 
-		.curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, ModernizedCProgram.pragma_header);
-		.curl_easy_setopt(generatedCurl, CURLOPT_ERRORBUFFER, ModernizedCProgram.curl_errorstr);
-		.curl_easy_setopt(generatedCurl, CURLOPT_CUSTOMREQUEST, ((Object)0));
-		.curl_easy_setopt(generatedCurl, CURLOPT_READFUNCTION, ((Object)0));
-		.curl_easy_setopt(generatedCurl, CURLOPT_WRITEFUNCTION, ((Object)0));
-		.curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDS, ((Object)0));
-		.curl_easy_setopt(generatedCurl, CURLOPT_UPLOAD, 0);
-		.curl_easy_setopt(generatedCurl, CURLOPT_HTTPGET, 1);
-		.curl_easy_setopt(generatedCurl, CURLOPT_FAILONERROR, 1);
-		.curl_easy_setopt(generatedCurl, CURLOPT_RANGE, ((Object)0/*
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, ModernizedCProgram.pragma_header);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_ERRORBUFFER, ModernizedCProgram.curl_errorstr);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_CUSTOMREQUEST, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_READFUNCTION, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_WRITEFUNCTION, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDS, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_UPLOAD, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_HTTPGET, 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_FAILONERROR, 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_RANGE, ((Object)0/*
 			 * Default following to off unless "ALWAYS" is configured; this gives
 			 * callers a sane starting point, and they can tweak for individual
 			 * HTTP_FOLLOW_* cases themselves.
 			 */));
 		if (http_follow_config.http_follow_config == http_follow_config.HTTP_FOLLOW_ALWAYS) {
-			.curl_easy_setopt(generatedCurl, CURLOPT_FOLLOWLOCATION, 1);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_FOLLOWLOCATION, 1);
 		} else {
-				.curl_easy_setopt(generatedCurl, CURLOPT_FOLLOWLOCATION, 0);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_FOLLOWLOCATION, 0);
 		} 
 		if (ModernizedCProgram.http_auth.getPassword() || ModernizedCProgram.curl_empty_auth_enabled()) {
 			ModernizedCProgram.init_curl_http_auth(generatedCurl);
@@ -134,7 +134,7 @@ public class active_request_slot {
 					 * long timeout when curl_multi_fdset returns no file descriptors
 					 * to read.  See commit message for more details.
 					 */while (generatedIn_use) {
-			this.setCurl_result(.curl_easy_perform(generatedCurl));
+			this.setCurl_result(/*Error: Function owner not recognized*/curl_easy_perform(generatedCurl));
 			slot.finish_active_slot();
 		}
 	}
@@ -144,7 +144,7 @@ public class active_request_slot {
 		if (generatedCurl) {
 			slot.xmulti_remove_handle();
 			if (ModernizedCProgram.curl_session_count > ModernizedCProgram.min_curl_sessions) {
-				.curl_easy_cleanup(generatedCurl);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_cleanup(generatedCurl);
 				this.setCurl(((Object)0));
 				ModernizedCProgram.curl_session_count--;
 			} 
@@ -174,10 +174,10 @@ public class active_request_slot {
 	public void setHttp_code(long newHttp_code) {
 		http_code = newHttp_code;
 	}
-	public int getFinished() {
+	public Integer getFinished() {
 		return finished;
 	}
-	public void setFinished(int newFinished) {
+	public void setFinished(Integer newFinished) {
 		finished = newFinished;
 	}
 	public slot_results getResults() {

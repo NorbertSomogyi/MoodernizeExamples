@@ -23,9 +23,9 @@ public class rpc_service {
 			hdr.forbidden("Unsupported service: '%s'", name);
 		} 
 		Object generatedName = s.getName();
-		for (i = 0; i < ( /  + ( - 1)); i++) {
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
 			rpc_service s = ModernizedCProgram.rpc_service[i];
-			if (!.strcmp(generatedName, svc_name)) {
+			if (!/*Error: Function owner not recognized*/strcmp(generatedName, svc_name)) {
 				svc = s;
 				break;
 			} 
@@ -35,7 +35,7 @@ public class rpc_service {
 		} 
 		int generatedEnabled = svc.getEnabled();
 		if (generatedEnabled < 0) {
-			byte user = .getenv("REMOTE_USER");
+			byte user = /*Error: Function owner not recognized*/getenv("REMOTE_USER");
 			svc.setEnabled((user && user) ? 1 : 0);
 		} 
 		if (!generatedEnabled) {

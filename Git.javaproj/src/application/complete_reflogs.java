@@ -3,11 +3,11 @@ package application;
 public class complete_reflogs {
 	private Byte ref;
 	private Object short_ref;
-	private reflog_info items;
+	private reflog_info[] items;
 	private int nr;
 	private int alloc;
 	
-	public complete_reflogs(Byte ref, Object short_ref, reflog_info items, int nr, int alloc) {
+	public complete_reflogs(Byte ref, Object short_ref, reflog_info[] items, int nr, int alloc) {
 		setRef(ref);
 		setShort_ref(short_ref);
 		setItems(items);
@@ -20,10 +20,10 @@ public class complete_reflogs {
 	public void free_complete_reflog() {
 		int i;
 		if (!array) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedNr = this.getNr();
-		reflog_info generatedItems = this.getItems();
+		reflog_info[] generatedItems = this.getItems();
 		for (i = 0; i < generatedNr; i++) {
 			ModernizedCProgram.free(generatedItems[i].getEmail());
 			ModernizedCProgram.free(generatedItems[i].getMessage());
@@ -34,7 +34,7 @@ public class complete_reflogs {
 		ModernizedCProgram.free(array);
 	}
 	public complete_reflogs read_complete_reflog(Object ref) {
-		complete_reflogs reflogs = ModernizedCProgram.xcalloc(1, );
+		complete_reflogs reflogs = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 		reflogs.setRef(ModernizedCProgram.xstrdup(ref));
 		ModernizedCProgram.for_each_reflog_ent(ref, read_one_reflog, reflogs);
 		int generatedNr = reflogs.getNr();
@@ -61,7 +61,7 @@ public class complete_reflogs {
 	}
 	public int get_reflog_recno_by_time(Object timestamp) {
 		int i;
-		reflog_info generatedItems = this.getItems();
+		reflog_info[] generatedItems = this.getItems();
 		int generatedNr = this.getNr();
 		for (i = generatedNr - 1; i >= 0; i--) {
 			if (timestamp >= generatedItems[i].getTimestamp()) {
@@ -82,10 +82,10 @@ public class complete_reflogs {
 	public void setShort_ref(Object newShort_ref) {
 		short_ref = newShort_ref;
 	}
-	public reflog_info getItems() {
+	public reflog_info[] getItems() {
 		return items;
 	}
-	public void setItems(reflog_info newItems) {
+	public void setItems(reflog_info[] newItems) {
 		items = newItems;
 	}
 	public int getNr() {

@@ -4,9 +4,9 @@ public class decoration {
 	private Object name;
 	private int size;
 	private int nr;
-	private decoration_entry entries;
+	private decoration_entry[] entries;
 	
-	public decoration(Object name, int size, int nr, decoration_entry entries) {
+	public decoration(Object name, int size, int nr, decoration_entry[] entries) {
 		setName(name);
 		setSize(size);
 		setNr(nr);
@@ -18,7 +18,7 @@ public class decoration {
 	public Object insert_decoration(Object base, Object decoration) {
 		int generatedSize = this.getSize();
 		int size = generatedSize;
-		decoration_entry generatedEntries = this.getEntries();
+		decoration_entry[] generatedEntries = this.getEntries();
 		decoration_entry entries = generatedEntries;
 		int j = ModernizedCProgram.hash_obj(base, size);
 		while (entries[j].getBase()) {
@@ -41,10 +41,10 @@ public class decoration {
 		int i;
 		int generatedSize = this.getSize();
 		int old_size = generatedSize;
-		decoration_entry generatedEntries = this.getEntries();
+		decoration_entry[] generatedEntries = this.getEntries();
 		decoration_entry old_entries = generatedEntries;
 		this.setSize((old_size + 1000) * 3 / 2);
-		this.setEntries(ModernizedCProgram.xcalloc(generatedSize, ));
+		this.setEntries(ModernizedCProgram.xcalloc(generatedSize, /*Error: Unsupported expression*/));
 		this.setNr(0);
 		for (i = 0; i < old_size; i++) {
 			object base = old_entries[i].getBase();
@@ -72,10 +72,10 @@ public class decoration {
 			return ((Object)0);
 		} 
 		j = ModernizedCProgram.hash_obj(obj, generatedSize);
-		decoration_entry generatedEntries = this.getEntries();
+		decoration_entry[] generatedEntries = this.getEntries();
 		Object generatedBase = ref.getBase();
 		Object generatedDecoration = ref.getDecoration();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			decoration_entry ref = generatedEntries + j;
 			if (generatedBase == obj) {
 				return generatedDecoration;
@@ -106,10 +106,10 @@ public class decoration {
 	public void setNr(int newNr) {
 		nr = newNr;
 	}
-	public decoration_entry getEntries() {
+	public decoration_entry[] getEntries() {
 		return entries;
 	}
-	public void setEntries(decoration_entry newEntries) {
+	public void setEntries(decoration_entry[] newEntries) {
 		entries = newEntries;
 	}
 }

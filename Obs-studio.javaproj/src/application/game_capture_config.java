@@ -44,7 +44,7 @@ public class game_capture_config {
 		ModernizedCProgram.bfree(generatedClass);
 		Byte generatedExecutable = this.getExecutable();
 		ModernizedCProgram.bfree(generatedExecutable);
-		.memset(config, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(config, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public boolean capture_needs_reset(game_capture_config cfg2) {
 		capture_mode generatedMode = this.getMode();

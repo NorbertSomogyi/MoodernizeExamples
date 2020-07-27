@@ -5,9 +5,9 @@ public class cache_tree {
 	private object_id oid;
 	private int subtree_nr;
 	private int subtree_alloc;
-	private cache_tree_sub down;
+	private cache_tree_sub[][] down;
 	
-	public cache_tree(int entry_count, object_id oid, int subtree_nr, int subtree_alloc, cache_tree_sub down) {
+	public cache_tree(int entry_count, object_id oid, int subtree_nr, int subtree_alloc, cache_tree_sub[][] down) {
 		setEntry_count(entry_count);
 		setOid(oid);
 		setSubtree_nr(subtree_nr);
@@ -17,8 +17,88 @@ public class cache_tree {
 	public cache_tree() {
 	}
 	
+	public int fsck_cache_tree() {
+		int i;
+		int err = 0;
+		if (ModernizedCProgram.verbose) {
+			(_iob[2]).fprintf_ln(ModernizedCProgram._("Checking cache tree"));
+		} 
+		int generatedEntry_count = this.getEntry_count();
+		object_id generatedOid = this.getOid();
+		object object = new object();
+		int generatedFlags = obj.getFlags();
+		int generatedType = obj.getType();
+		if (0 <= generatedEntry_count) {
+			object obj = object.parse_object(ModernizedCProgram.the_repository, generatedOid);
+			if (!obj) {
+				();
+				ModernizedCProgram.errors_found |=  10;
+				return 1;
+			} 
+			generatedFlags |=  -1024;
+			if (ModernizedCProgram.name_objects) {
+				ModernizedCProgram.fsck_walk_options.getObject_names().add_decoration(obj, ModernizedCProgram.xstrdup(":"));
+			} 
+			obj.mark_object_reachable();
+			if (generatedType != object_type.OBJ_TREE) {
+				err |=  obj.objerror(ModernizedCProgram._("non-tree in cache-tree"));
+			} 
+		} 
+		int generatedSubtree_nr = this.getSubtree_nr();
+		cache_tree_sub[][] generatedDown = this.getDown();
+		for (i = 0; i < generatedSubtree_nr; i++) {
+			err |=  generatedDown[i].getCache_tree().fsck_cache_tree();
+		}
+		return err;
+	}
+	public void dump_one(Object pfx, Object x) {
+		int generatedEntry_count = this.getEntry_count();
+		int generatedSubtree_nr = this.getSubtree_nr();
+		object_id generatedOid = this.getOid();
+		if (generatedEntry_count < 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%-40s %s%s (%d subtrees)\n", "invalid", x, pfx, generatedSubtree_nr);
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s %s%s (%d entries, %d subtrees)\n", ModernizedCProgram.oid_to_hex(generatedOid), x, pfx, generatedEntry_count, generatedSubtree_nr);
+		} 
+	}
+	public int dump_cache_tree(cache_tree ref, Object pfx) {
+		int i;
+		int errs = 0;
+		if (!it || !ref) {
+			return /* missing in either */0;
+		} 
+		int generatedEntry_count = this.getEntry_count();
+		object_id generatedOid = this.getOid();
+		int generatedSubtree_nr = ref.getSubtree_nr();
+		if (generatedEntry_count < 0) {
+			it.dump_one(pfx, /* invalid */"");
+			ref.dump_one(pfx, "#(ref) ");
+		} else {
+				it.dump_one(pfx, "");
+				if (!ModernizedCProgram.oideq(generatedOid, generatedOid) || generatedEntry_count != generatedEntry_count || generatedSubtree_nr != generatedSubtree_nr) {
+					ref.dump_one(pfx, /* claims to be valid but is lying */"#(ref) ");
+					errs = 1;
+				} 
+		} 
+		cache_tree_sub[][] generatedDown = this.getDown();
+		Object generatedName = down.getName();
+		cache_tree_sub cache_tree_sub = new cache_tree_sub();
+		int generatedNamelen = down.getNamelen();
+		cache_tree generatedCache_tree = down.getCache_tree();
+		for (i = 0; i < generatedSubtree_nr; i++) {
+			byte[] path = new byte[260];
+			cache_tree_sub down = generatedDown[i];
+			cache_tree_sub rdwn = new cache_tree_sub();
+			rdwn = cache_tree_sub.cache_tree_sub(ref, generatedName);
+			ModernizedCProgram.xsnprintf(ModernizedCProgram.path, /*Error: sizeof expression not supported yet*/, "%s%.*s/", pfx, generatedNamelen, generatedName);
+			if (generatedCache_tree.dump_cache_tree(generatedCache_tree, ModernizedCProgram.path)) {
+				errs = 1;
+			} 
+		}
+		return errs;
+	}
 	public cache_tree cache_tree() {
-		cache_tree it = ModernizedCProgram.xcalloc(1, );
+		cache_tree it = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 		it.setEntry_count(-1);
 		return it;
 	}
@@ -26,10 +106,10 @@ public class cache_tree {
 		int i;
 		cache_tree it = it_p;
 		if (!it) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedSubtree_nr = it.getSubtree_nr();
-		cache_tree_sub generatedDown = it.getDown();
+		cache_tree_sub[][] generatedDown = it.getDown();
 		for (i = 0; i < generatedSubtree_nr; i++) {
 			if (generatedDown[i]) {
 				generatedDown[i].getCache_tree().cache_tree_free();
@@ -41,7 +121,7 @@ public class cache_tree {
 		it_p = ((Object)0);
 	}
 	public int subtree_pos(Object path, int pathlen) {
-		cache_tree_sub generatedDown = this.getDown();
+		cache_tree_sub[][] generatedDown = this.getDown();
 		cache_tree_sub down = generatedDown;
 		int lo;
 		int hi;
@@ -75,7 +155,7 @@ public class cache_tree {
 		slash = ModernizedCProgram.gitstrchrnul(path, (byte)'/');
 		namelen = slash - path;
 		this.setEntry_count(-1);
-		cache_tree_sub generatedDown = this.getDown();
+		cache_tree_sub[][] generatedDown = this.getDown();
 		int generatedSubtree_nr = this.getSubtree_nr();
 		if (!slash) {
 			int pos;
@@ -88,7 +168,7 @@ public class cache_tree {
 							 * move 4 and 5 up one place (2 entries)
 							 * 2 = 6 - 3 - 1 = subtree_nr - pos - 1
 							 */]);
-				ModernizedCProgram.move_array((generatedDown + pos), (generatedDown + pos + 1), (generatedSubtree_nr - pos - 1),  + ( - 1));
+				ModernizedCProgram.move_array((generatedDown + pos), (generatedDown + pos + 1), (generatedSubtree_nr - pos - 1), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 				generatedSubtree_nr--;
 			} 
 			return 1;
@@ -109,7 +189,7 @@ public class cache_tree {
 		 * ==> if "a" exists as a subtree, remove it.
 		 */
 	public void discard_unused_subtrees() {
-		cache_tree_sub generatedDown = this.getDown();
+		cache_tree_sub[][] generatedDown = this.getDown();
 		cache_tree_sub down = generatedDown;
 		int generatedSubtree_nr = this.getSubtree_nr();
 		int nr = generatedSubtree_nr;
@@ -139,7 +219,7 @@ public class cache_tree {
 			return 0;
 		} 
 		int generatedSubtree_nr = this.getSubtree_nr();
-		cache_tree_sub generatedDown = this.getDown();
+		cache_tree_sub[][] generatedDown = this.getDown();
 		for (i = 0; i < generatedSubtree_nr; i++) {
 			if (!generatedDown[i].getCache_tree().cache_tree_fully_valid()) {
 				return 0;
@@ -147,7 +227,7 @@ public class cache_tree {
 		}
 		return 1;
 	}
-	public cache_tree cache_tree_read(Object buffer, long size) {
+	public cache_tree cache_tree_read(Object[] buffer, long size) {
 		if (buffer[0]) {
 			return ((Object)/* not the whole tree */0);
 		} 
@@ -188,86 +268,6 @@ public class cache_tree {
 		Object generatedName = info.getName();
 		return our_parent.cache_tree_find(generatedName);
 	}
-	public void dump_one(Object pfx, Object x) {
-		int generatedEntry_count = this.getEntry_count();
-		int generatedSubtree_nr = this.getSubtree_nr();
-		object_id generatedOid = this.getOid();
-		if (generatedEntry_count < 0) {
-			.printf("%-40s %s%s (%d subtrees)\n", "invalid", x, pfx, generatedSubtree_nr);
-		} else {
-				.printf("%s %s%s (%d entries, %d subtrees)\n", ModernizedCProgram.oid_to_hex(generatedOid), x, pfx, generatedEntry_count, generatedSubtree_nr);
-		} 
-	}
-	public int dump_cache_tree(cache_tree ref, Object pfx) {
-		int i;
-		int errs = 0;
-		if (!it || !ref) {
-			return /* missing in either */0;
-		} 
-		int generatedEntry_count = this.getEntry_count();
-		object_id generatedOid = this.getOid();
-		int generatedSubtree_nr = ref.getSubtree_nr();
-		if (generatedEntry_count < 0) {
-			it.dump_one(pfx, /* invalid */"");
-			ref.dump_one(pfx, "#(ref) ");
-		} else {
-				it.dump_one(pfx, "");
-				if (!ModernizedCProgram.oideq(generatedOid, generatedOid) || generatedEntry_count != generatedEntry_count || generatedSubtree_nr != generatedSubtree_nr) {
-					ref.dump_one(pfx, /* claims to be valid but is lying */"#(ref) ");
-					errs = 1;
-				} 
-		} 
-		cache_tree_sub generatedDown = this.getDown();
-		Object generatedName = down.getName();
-		cache_tree_sub cache_tree_sub = new cache_tree_sub();
-		int generatedNamelen = down.getNamelen();
-		cache_tree generatedCache_tree = down.getCache_tree();
-		for (i = 0; i < generatedSubtree_nr; i++) {
-			byte[] path = new byte[260];
-			cache_tree_sub down = generatedDown[i];
-			cache_tree_sub rdwn = new cache_tree_sub();
-			rdwn = cache_tree_sub.cache_tree_sub(ref, generatedName);
-			ModernizedCProgram.xsnprintf(ModernizedCProgram.path, , "%s%.*s/", pfx, generatedNamelen, generatedName);
-			if (generatedCache_tree.dump_cache_tree(generatedCache_tree, ModernizedCProgram.path)) {
-				errs = 1;
-			} 
-		}
-		return errs;
-	}
-	public int fsck_cache_tree() {
-		int i;
-		int err = 0;
-		if (ModernizedCProgram.verbose) {
-			(_iob[2]).fprintf_ln(ModernizedCProgram._("Checking cache tree"));
-		} 
-		int generatedEntry_count = this.getEntry_count();
-		object_id generatedOid = this.getOid();
-		object object = new object();
-		int generatedFlags = obj.getFlags();
-		int generatedType = obj.getType();
-		if (0 <= generatedEntry_count) {
-			object obj = object.parse_object(ModernizedCProgram.the_repository, generatedOid);
-			if (!obj) {
-				();
-				ModernizedCProgram.errors_found |=  10;
-				return 1;
-			} 
-			generatedFlags |=  -1024;
-			if (ModernizedCProgram.name_objects) {
-				ModernizedCProgram.fsck_walk_options.getObject_names().add_decoration(obj, ModernizedCProgram.xstrdup(":"));
-			} 
-			obj.mark_object_reachable();
-			if (generatedType != object_type.OBJ_TREE) {
-				err |=  obj.objerror(ModernizedCProgram._("non-tree in cache-tree"));
-			} 
-		} 
-		int generatedSubtree_nr = this.getSubtree_nr();
-		cache_tree_sub generatedDown = this.getDown();
-		for (i = 0; i < generatedSubtree_nr; i++) {
-			err |=  generatedDown[i].getCache_tree().fsck_cache_tree();
-		}
-		return err;
-	}
 	public int getEntry_count() {
 		return entry_count;
 	}
@@ -292,10 +292,10 @@ public class cache_tree {
 	public void setSubtree_alloc(int newSubtree_alloc) {
 		subtree_alloc = newSubtree_alloc;
 	}
-	public cache_tree_sub getDown() {
+	public cache_tree_sub[][] getDown() {
 		return down;
 	}
-	public void setDown(cache_tree_sub newDown) {
+	public void setDown(cache_tree_sub[][] newDown) {
 		down = newDown;
 	}
 }

@@ -13,6 +13,176 @@ public class obs_audio_data {
 	public obs_audio_data() {
 	}
 	
+	public obs_audio_data limiter_filter_audio(Object data) {
+		limiter_data cd = data;
+		Object generatedFrames = this.getFrames();
+		uint32_t num_samples = generatedFrames;
+		if (num_samples == 0) {
+			return audio;
+		} 
+		Object generatedData = this.getData();
+		double samples = (double)generatedData;
+		cd.analyze_envelope(samples, num_samples);
+		ModernizedCProgram.process_compression(cd, samples, num_samples);
+		return audio;
+	}
+	public obs_audio_data gain_filter_audio(Object data) {
+		gain_data gf = data;
+		Object generatedChannels = gf.getChannels();
+		 channels = generatedChannels;
+		Object generatedData = this.getData();
+		double adata = (double)generatedData;
+		double generatedMultiple = gf.getMultiple();
+		double multiple = generatedMultiple;
+		Object generatedFrames = this.getFrames();
+		for ( c = 0;
+		 c < channels; c++) {
+			if (generatedData[c]) {
+				for ( i = 0;
+				 i < generatedFrames; i++) {
+					adata[c][i] *= multiple;
+				}
+			} 
+		}
+		return audio;
+	}
+	public obs_audio_data invert_polarity_filter_audio(Object unused) {
+		Object generatedData = this.getData();
+		double adata = (double)generatedData;
+		Object generatedFrames = this.getFrames();
+		for ( c = 0;
+		 c < MAX_AV_PLANES; c++) {
+			double channel_data = adata[c];
+			double channel_end = channel_data + generatedFrames;
+			if (!channel_data) {
+				break;
+			} 
+			while (channel_data < channel_end) {
+				(channel_data++) *= -1.0;
+			}
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(unused);
+		return audio;
+	}
+	public obs_audio_data filter_async_audio(obs_source source) {
+		 i = new ();
+		Object generatedFilters = source.getFilters();
+		Object generatedEnabled = filter.getEnabled();
+		obs_context_data generatedContext = filter.getContext();
+		Object[] generatedData = generatedContext.getData();
+		obs_source_info generatedInfo = filter.getInfo();
+		Object generatedFilter_audio = generatedInfo.getFilter_audio();
+		for (i = generatedFilters.getNum(); i > 0; i--) {
+			obs_source filter = generatedFilters.getArray()[i - 1];
+			if (!generatedEnabled) {
+				continue;
+			} 
+			if (generatedData && generatedFilter_audio) {
+				in = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData, in);
+				if (!in) {
+					return NULL;
+				} 
+			} 
+		}
+		return in;
+	}
+	public obs_audio_data noise_suppress_filter_audio(Object data) {
+		noise_suppress_data ng = data;
+		ng_audio_info info = new ng_audio_info();
+		Object generatedFrames = ng.getFrames();
+		 segment_size = generatedFrames * /*Error: Unsupported expression*/;
+		 out_size = new ();
+		Object generatedStates = ng.getStates();
+		if (!generatedStates[0]) {
+			return audio/* -----------------------------------------------
+				 * if timestamp has dramatically changed, consider it a new stream of
+				 * audio data.  clear all circular buffers to prevent old audio data
+				 * from being processed as part of the new data. */;
+		} 
+		Object generatedLast_timestamp = ng.getLast_timestamp();
+		Object generatedTimestamp = this.getTimestamp();
+		if (generatedLast_timestamp) {
+			int64_t diff = /*Error: Function owner not recognized*/llabs((int64_t)generatedLast_timestamp - (int64_t)generatedTimestamp);
+			if (diff > -1024) {
+				ng.reset_data();
+			} 
+		} 
+		ng.setLast_timestamp(generatedTimestamp);
+		info.setFrames(generatedFrames);
+		info.setTimestamp(generatedTimestamp);
+		circlebuf generatedInfo_buffer = ng.getInfo_buffer();
+		generatedInfo_buffer.circlebuf_push_back(info, /*Error: sizeof expression not supported yet*/);
+		Object generatedChannels = ng.getChannels();
+		Object generatedInput_buffers = ng.getInput_buffers();
+		Object generatedData = this.getData();
+		for ( i = 0;
+		 i < generatedChannels; /* -----------------------------------------------
+			 * push back current audio data to input circlebuf */i++) {
+			generatedInput_buffers[i].circlebuf_push_back(generatedData[i], generatedFrames * /*Error: Unsupported expression*/);
+		}
+		while (generatedInput_buffers[0].getCirclebuf() >= /* -----------------------------------------------
+			 * pop/process each 10ms segments, push back to output circlebuf */segment_size) {
+			ModernizedCProgram.process(ng/* -----------------------------------------------
+				 * peek front of info circlebuf, check to see if we have enough to
+				 * pop the expected packet size, if not, return null */);
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(info, 0, /*Error: sizeof expression not supported yet*/);
+		generatedInfo_buffer.circlebuf_peek_front(info, /*Error: sizeof expression not supported yet*/);
+		out_size = generatedFrames * /*Error: Unsupported expression*/;
+		Object generatedOutput_buffers = ng.getOutput_buffers();
+		if (generatedOutput_buffers[0].getCirclebuf() < out_size) {
+			return NULL/* -----------------------------------------------
+				 * if there's enough audio data buffered in the output circlebuf,
+				 * pop and return a packet */;
+		} 
+		generatedInfo_buffer.circlebuf_pop_front(NULL, /*Error: sizeof expression not supported yet*/);
+		Object generatedOutput_data = ng.getOutput_data();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_resize(generatedOutput_data, out_size * generatedChannels);
+		for ( i = 0;
+		 i < generatedChannels; i++) {
+			generatedData[i] = (uint8_t)generatedOutput_data.getArray()[i * out_size];
+			generatedOutput_buffers[i].circlebuf_pop_front(generatedData[i], out_size);
+		}
+		obs_audio_data generatedOutput_audio = ng.getOutput_audio();
+		generatedOutput_audio.setFrames(generatedFrames);
+		generatedOutput_audio.setTimestamp(generatedTimestamp);
+		return generatedOutput_audio;
+	}
+	public obs_audio_data compressor_filter_audio(Object data) {
+		compressor_data cd = data;
+		Object generatedFrames = this.getFrames();
+		uint32_t num_samples = generatedFrames;
+		if (num_samples == 0) {
+			return audio;
+		} 
+		Object generatedData = this.getData();
+		double samples = (double)generatedData;
+		Object generatedSidechain_update_mutex = cd.getSidechain_update_mutex();
+		ModernizedCProgram.pthread_mutex_lock(generatedSidechain_update_mutex);
+		obs_weak_source generatedWeak_sidechain = cd.getWeak_sidechain();
+		obs_weak_source_t weak_sidechain = generatedWeak_sidechain;
+		ModernizedCProgram.pthread_mutex_unlock(generatedSidechain_update_mutex);
+		if (weak_sidechain) {
+			cd.analyze_sidechain(num_samples);
+		} else {
+				cd.analyze_envelope(samples, num_samples);
+		} 
+		ModernizedCProgram.process_compression(cd, samples, num_samples);
+		return audio;
+	}
+	public obs_audio_data expander_filter_audio(Object data) {
+		expander_data cd = data;
+		Object generatedFrames = this.getFrames();
+		uint32_t num_samples = generatedFrames;
+		if (num_samples == 0) {
+			return audio;
+		} 
+		Object generatedData = this.getData();
+		double samples = (double)generatedData;
+		cd.analyze_envelope(samples, num_samples);
+		cd.process_expansion(samples, num_samples);
+		return audio;
+	}
 	public obs_audio_data noise_gate_filter_audio(Object data) {
 		noise_gate_data ng = data;
 		Object generatedData = this.getData();
@@ -40,10 +210,10 @@ public class obs_audio_data {
 		double generatedHeld_time = ng.getHeld_time();
 		for ( i = 0;
 		 i < generatedFrames; i++) {
-			double cur_level = .fabsf(adata[0][i]);
+			double cur_level = /*Error: Function owner not recognized*/fabsf(adata[0][i]);
 			for ( j = 0;
 			 j < channels; j++) {
-				cur_level = .fmaxf(cur_level, .fabsf(adata[j][i]));
+				cur_level = /*Error: Function owner not recognized*/fmaxf(cur_level, /*Error: Function owner not recognized*/fabsf(adata[j][i]));
 			}
 			if (cur_level > open_threshold && !generatedIs_open) {
 				ng.setIs_open(true);
@@ -52,13 +222,13 @@ public class obs_audio_data {
 				ng.setHeld_time(0.0);
 				ng.setIs_open(false);
 			} 
-			ng.setLevel(.fmaxf(generatedLevel, cur_level) - decay_rate);
+			ng.setLevel(/*Error: Function owner not recognized*/fmaxf(generatedLevel, cur_level) - decay_rate);
 			if (generatedIs_open) {
-				ng.setAttenuation(.fminf(1.0, generatedAttenuation + attack_rate));
+				ng.setAttenuation(/*Error: Function owner not recognized*/fminf(1.0, generatedAttenuation + attack_rate));
 			} else {
 					generatedHeld_time += sample_rate_i;
 					if (generatedHeld_time > hold_time) {
-						ng.setAttenuation(.fmaxf(0.0, generatedAttenuation - release_rate));
+						ng.setAttenuation(/*Error: Function owner not recognized*/fmaxf(0.0, generatedAttenuation - release_rate));
 					} 
 			} 
 			for ( c = 0;
@@ -68,183 +238,13 @@ public class obs_audio_data {
 		}
 		return audio;
 	}
-	public obs_audio_data compressor_filter_audio(Object data) {
-		compressor_data cd = data;
-		Object generatedFrames = this.getFrames();
-		uint32_t num_samples = generatedFrames;
-		if (num_samples == 0) {
-			return audio;
-		} 
-		Object generatedData = this.getData();
-		double samples = (double)generatedData;
-		Object generatedSidechain_update_mutex = cd.getSidechain_update_mutex();
-		ModernizedCProgram.pthread_mutex_lock(generatedSidechain_update_mutex);
-		obs_weak_source generatedWeak_sidechain = cd.getWeak_sidechain();
-		obs_weak_source_t weak_sidechain = generatedWeak_sidechain;
-		ModernizedCProgram.pthread_mutex_unlock(generatedSidechain_update_mutex);
-		if (weak_sidechain) {
-			cd.analyze_sidechain(num_samples);
-		} else {
-				cd.analyze_envelope(samples, num_samples);
-		} 
-		ModernizedCProgram.process_compression(cd, samples, num_samples);
-		return audio;
-	}
-	public obs_audio_data limiter_filter_audio(Object data) {
-		limiter_data cd = data;
-		Object generatedFrames = this.getFrames();
-		uint32_t num_samples = generatedFrames;
-		if (num_samples == 0) {
-			return audio;
-		} 
-		Object generatedData = this.getData();
-		double samples = (double)generatedData;
-		cd.analyze_envelope(samples, num_samples);
-		ModernizedCProgram.process_compression(cd, samples, num_samples);
-		return audio;
-	}
 	public void free_audio_packet() {
 		Object generatedData = this.getData();
 		for ( i = 0;
 		 i < MAX_AV_PLANES; i++) {
 			ModernizedCProgram.bfree(generatedData[i]);
 		}
-		.memset(audio, 0, );
-	}
-	public obs_audio_data expander_filter_audio(Object data) {
-		expander_data cd = data;
-		Object generatedFrames = this.getFrames();
-		uint32_t num_samples = generatedFrames;
-		if (num_samples == 0) {
-			return audio;
-		} 
-		Object generatedData = this.getData();
-		double samples = (double)generatedData;
-		cd.analyze_envelope(samples, num_samples);
-		cd.process_expansion(samples, num_samples);
-		return audio;
-	}
-	public obs_audio_data invert_polarity_filter_audio(Object unused) {
-		Object generatedData = this.getData();
-		double adata = (double)generatedData;
-		Object generatedFrames = this.getFrames();
-		for ( c = 0;
-		 c < MAX_AV_PLANES; c++) {
-			double channel_data = adata[c];
-			double channel_end = channel_data + generatedFrames;
-			if (!channel_data) {
-				break;
-			} 
-			while (channel_data < channel_end) {
-				(channel_data++) *= -1.0;
-			}
-		}
-		.UNUSED_PARAMETER(unused);
-		return audio;
-	}
-	public obs_audio_data noise_suppress_filter_audio(Object data) {
-		noise_suppress_data ng = data;
-		ng_audio_info info = new ng_audio_info();
-		Object generatedFrames = ng.getFrames();
-		 segment_size = generatedFrames * ;
-		 out_size = new ();
-		Object generatedStates = ng.getStates();
-		if (!generatedStates[0]) {
-			return audio/* -----------------------------------------------
-				 * if timestamp has dramatically changed, consider it a new stream of
-				 * audio data.  clear all circular buffers to prevent old audio data
-				 * from being processed as part of the new data. */;
-		} 
-		Object generatedLast_timestamp = ng.getLast_timestamp();
-		Object generatedTimestamp = this.getTimestamp();
-		if (generatedLast_timestamp) {
-			int64_t diff = .llabs((int64_t)generatedLast_timestamp - (int64_t)generatedTimestamp);
-			if (diff > -1024) {
-				ng.reset_data();
-			} 
-		} 
-		ng.setLast_timestamp(generatedTimestamp);
-		info.setFrames(generatedFrames);
-		info.setTimestamp(generatedTimestamp);
-		circlebuf generatedInfo_buffer = ng.getInfo_buffer();
-		generatedInfo_buffer.circlebuf_push_back(info, );
-		Object generatedChannels = ng.getChannels();
-		Object generatedInput_buffers = ng.getInput_buffers();
-		Object generatedData = this.getData();
-		for ( i = 0;
-		 i < generatedChannels; /* -----------------------------------------------
-			 * push back current audio data to input circlebuf */i++) {
-			generatedInput_buffers[i].circlebuf_push_back(generatedData[i], generatedFrames * );
-		}
-		while (generatedInput_buffers[0].getCirclebuf() >= /* -----------------------------------------------
-			 * pop/process each 10ms segments, push back to output circlebuf */segment_size) {
-			ModernizedCProgram.process(ng/* -----------------------------------------------
-				 * peek front of info circlebuf, check to see if we have enough to
-				 * pop the expected packet size, if not, return null */);
-		}
-		.memset(info, 0, );
-		generatedInfo_buffer.circlebuf_peek_front(info, );
-		out_size = generatedFrames * ;
-		Object generatedOutput_buffers = ng.getOutput_buffers();
-		if (generatedOutput_buffers[0].getCirclebuf() < out_size) {
-			return NULL/* -----------------------------------------------
-				 * if there's enough audio data buffered in the output circlebuf,
-				 * pop and return a packet */;
-		} 
-		generatedInfo_buffer.circlebuf_pop_front(NULL, );
-		Object generatedOutput_data = ng.getOutput_data();
-		.da_resize(generatedOutput_data, out_size * generatedChannels);
-		for ( i = 0;
-		 i < generatedChannels; i++) {
-			generatedData[i] = (uint8_t)generatedOutput_data.getArray()[i * out_size];
-			generatedOutput_buffers[i].circlebuf_pop_front(generatedData[i], out_size);
-		}
-		obs_audio_data generatedOutput_audio = ng.getOutput_audio();
-		generatedOutput_audio.setFrames(generatedFrames);
-		generatedOutput_audio.setTimestamp(generatedTimestamp);
-		return generatedOutput_audio;
-	}
-	public obs_audio_data filter_async_audio(obs_source source) {
-		 i = new ();
-		Object generatedFilters = source.getFilters();
-		Object generatedEnabled = filter.getEnabled();
-		obs_context_data generatedContext = filter.getContext();
-		Object generatedData = generatedContext.getData();
-		obs_source_info generatedInfo = filter.getInfo();
-		Object generatedFilter_audio = generatedInfo.getFilter_audio();
-		for (i = generatedFilters.getNum(); i > 0; i--) {
-			obs_source filter = generatedFilters.getArray()[i - 1];
-			if (!generatedEnabled) {
-				continue;
-			} 
-			if (generatedData && generatedFilter_audio) {
-				in = .UNRECOGNIZEDFUNCTIONNAME(generatedData, in);
-				if (!in) {
-					return NULL;
-				} 
-			} 
-		}
-		return in;
-	}
-	public obs_audio_data gain_filter_audio(Object data) {
-		gain_data gf = data;
-		Object generatedChannels = gf.getChannels();
-		 channels = generatedChannels;
-		Object generatedData = this.getData();
-		double adata = (double)generatedData;
-		double generatedMultiple = gf.getMultiple();
-		double multiple = generatedMultiple;
-		Object generatedFrames = this.getFrames();
-		for ( c = 0;
-		 c < channels; c++) {
-			if (generatedData[c]) {
-				for ( i = 0;
-				 i < generatedFrames; i++) {
-					adata[c][i] *= multiple;
-				}
-			} 
-		}
-		return audio;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(audio, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public Object getData() {
 		return data;

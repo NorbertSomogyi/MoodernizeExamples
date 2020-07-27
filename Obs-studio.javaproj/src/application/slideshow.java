@@ -65,7 +65,7 @@ public class slideshow {
 	
 	public Object random_file() {
 		Object generatedFiles = this.getFiles();
-		return ().rand() % generatedFiles.getNum();
+		return ()/*Error: Function owner not recognized*/rand() % generatedFiles.getNum();
 	}
 	public obs_source getSource() {
 		return source;

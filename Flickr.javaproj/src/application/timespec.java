@@ -21,7 +21,7 @@ public class timespec {
 		if (!msec) {
 			msec = 1;
 		} 
-		.Sleep(msec/* otherwise use sleep() (POSIX) and possibly usleep() (4.3BSD) */)/* 0 seconds so ensure msec is at least 1 */;/* 0 seconds so ensure msec is at least 1 */
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Sleep(msec/* otherwise use sleep() (POSIX) and possibly usleep() (4.3BSD) */)/* 0 seconds so ensure msec is at least 1 */;/* 0 seconds so ensure msec is at least 1 */
 		/* use usleep() for fractions of a second only (when available)
 		   * since some implementations won't let it sleep for more than a
 		   * second.

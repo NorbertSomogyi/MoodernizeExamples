@@ -58,113 +58,113 @@ public class journal_s {
 		int generatedJ_format_version = (j).getJ_format_version();
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_compat = generatedJ_superblock.getS_feature_compat();
-		return (generatedJ_format_version >= 2 && (generatedS_feature_compat & .ext2fs_cpu_to_be32(-1024)) != 0);
+		return (generatedJ_format_version >= 2 && (generatedS_feature_compat & /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024)) != 0);
 	}
 	public void jfs_set_feature_checksum() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_compat = generatedJ_superblock.getS_feature_compat();
-		generatedS_feature_compat |=  .ext2fs_cpu_to_be32(-1024);
+		generatedS_feature_compat |=  /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024);
 	}
 	public void jfs_clear_feature_checksum() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_compat = generatedJ_superblock.getS_feature_compat();
-		generatedS_feature_compat &=  ~.ext2fs_cpu_to_be32(/* (defined(E2FSCK_INCLUDE_INLINE_FUNCS) || !defined(NO_INLINE_FUNCS)) */-1024);
+		generatedS_feature_compat &=  ~/*Error: Function owner not recognized*/ext2fs_cpu_to_be32(/* (defined(E2FSCK_INCLUDE_INLINE_FUNCS) || !defined(NO_INLINE_FUNCS)) */-1024);
 	}
 	public int jfs_has_feature_revoke() {
 		int generatedJ_format_version = (j).getJ_format_version();
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		return (generatedJ_format_version >= 2 && (generatedS_feature_incompat & .ext2fs_cpu_to_be32(-1024)) != 0);
+		return (generatedJ_format_version >= 2 && (generatedS_feature_incompat & /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024)) != 0);
 	}
 	public void jfs_set_feature_revoke() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		generatedS_feature_incompat |=  .ext2fs_cpu_to_be32(-1024);
+		generatedS_feature_incompat |=  /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024);
 	}
 	public void jfs_clear_feature_revoke() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		generatedS_feature_incompat &=  ~.ext2fs_cpu_to_be32(-1024);
+		generatedS_feature_incompat &=  ~/*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024);
 	}
 	public int jfs_has_feature_64bit() {
 		int generatedJ_format_version = (j).getJ_format_version();
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		return (generatedJ_format_version >= 2 && (generatedS_feature_incompat & .ext2fs_cpu_to_be32(-1024)) != 0);
+		return (generatedJ_format_version >= 2 && (generatedS_feature_incompat & /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024)) != 0);
 	}
 	public void jfs_set_feature_64bit() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		generatedS_feature_incompat |=  .ext2fs_cpu_to_be32(-1024);
+		generatedS_feature_incompat |=  /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024);
 	}
 	public void jfs_clear_feature_64bit() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		generatedS_feature_incompat &=  ~.ext2fs_cpu_to_be32(-1024);
+		generatedS_feature_incompat &=  ~/*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024);
 	}
 	public int jfs_has_feature_async_commit() {
 		int generatedJ_format_version = (j).getJ_format_version();
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		return (generatedJ_format_version >= 2 && (generatedS_feature_incompat & .ext2fs_cpu_to_be32(-1024)) != 0);
+		return (generatedJ_format_version >= 2 && (generatedS_feature_incompat & /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024)) != 0);
 	}
 	public void jfs_set_feature_async_commit() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		generatedS_feature_incompat |=  .ext2fs_cpu_to_be32(-1024);
+		generatedS_feature_incompat |=  /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024);
 	}
 	public void jfs_clear_feature_async_commit() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		generatedS_feature_incompat &=  ~.ext2fs_cpu_to_be32(-1024);
+		generatedS_feature_incompat &=  ~/*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024);
 	}
 	public int jfs_has_feature_csum2() {
 		int generatedJ_format_version = (j).getJ_format_version();
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		return (generatedJ_format_version >= 2 && (generatedS_feature_incompat & .ext2fs_cpu_to_be32(-1024)) != 0);
+		return (generatedJ_format_version >= 2 && (generatedS_feature_incompat & /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024)) != 0);
 	}
 	public void jfs_set_feature_csum2() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		generatedS_feature_incompat |=  .ext2fs_cpu_to_be32(-1024);
+		generatedS_feature_incompat |=  /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024);
 	}
 	public void jfs_clear_feature_csum2() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		generatedS_feature_incompat &=  ~.ext2fs_cpu_to_be32(-1024);
+		generatedS_feature_incompat &=  ~/*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024);
 	}
 	public int jfs_has_feature_csum3() {
 		int generatedJ_format_version = (j).getJ_format_version();
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		return (generatedJ_format_version >= 2 && (generatedS_feature_incompat & .ext2fs_cpu_to_be32(-1024)) != 0);
+		return (generatedJ_format_version >= 2 && (generatedS_feature_incompat & /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024)) != 0);
 	}
 	public void jfs_set_feature_csum3() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		generatedS_feature_incompat |=  .ext2fs_cpu_to_be32(-1024);
+		generatedS_feature_incompat |=  /*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024);
 	}
 	public void jfs_clear_feature_csum3() {
 		journal_superblock_s generatedJ_superblock = (j).getJ_superblock();
 		Object generatedS_feature_incompat = generatedJ_superblock.getS_feature_incompat();
-		generatedS_feature_incompat &=  ~.ext2fs_cpu_to_be32(-1024/*
+		generatedS_feature_incompat &=  ~/*Error: Function owner not recognized*/ext2fs_cpu_to_be32(-1024/*
 		 * helper functions to deal with 32 or 64bit block numbers.
 		 */);
 	}
 	public Object journal_tag_bytes() {
 		 sz = new ();
 		if (journal.jfs_has_feature_csum3()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		sz = ;
+		sz = /*Error: Unsupported expression*/;
 		if (journal.jfs_has_feature_csum2()) {
-			sz += ;
+			sz += /*Error: Unsupported expression*/;
 		} 
 		if (journal.jfs_has_feature_64bit()) {
 			return sz;
 		} 
-		return sz - ;
+		return sz - /*Error: Unsupported expression*/;
 	}
 	public int journal_has_csum_v2or3() {
 		if (journal.jfs_has_feature_csum2() || journal.jfs_has_feature_csum3()) {

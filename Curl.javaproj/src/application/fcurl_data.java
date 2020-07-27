@@ -3,12 +3,12 @@ package application;
 public class fcurl_data {
 	private fcurl_type_e type;
 	private  handle;
-	private Byte buffer;
+	private byte[] buffer;
 	private Object buffer_len;
 	private Object buffer_pos;
 	private int still_running;
 	
-	public fcurl_data(fcurl_type_e type,  handle, Byte buffer, Object buffer_len, Object buffer_pos, int still_running) {
+	public fcurl_data(fcurl_type_e type,  handle, byte[] buffer, Object buffer_len, Object buffer_pos, int still_running) {
 		setType(type);
 		setHandle(handle);
 		setBuffer(buffer);
@@ -39,9 +39,9 @@ public class fcurl_data {
 		/* attempt to fill buffer */do {
 			int maxfd = -1;
 			long curl_timeo = -1;
-			.FD_ZERO(fdread);
-			.FD_ZERO(fdwrite);
-			.FD_ZERO(fdexcep);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FD_ZERO(fdread);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FD_ZERO(fdwrite);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FD_ZERO(fdexcep);
 			timeout.setTimeval(/* set a suitable timeout to fail on *//* 1 minute */60);
 			timeout.setTimeval(0);
 			ModernizedCProgram.multi_handle.curl_multi_timeout(curl_timeo);
@@ -55,14 +55,14 @@ public class fcurl_data {
 			} 
 			mc = ModernizedCProgram.curl_multi_fdset(ModernizedCProgram.multi_handle, fdread, fdwrite, fdexcep, /* get file descriptors from the transfers */maxfd);
 			if (mc != CURLM_OK) {
-				.fprintf((_iob[2]), "curl_multi_fdset() failed, code %d.\n", mc);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "curl_multi_fdset() failed, code %d.\n", mc);
 				break;
 			} 
 			if (maxfd == -1) {
-				.Sleep(100);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Sleep(100);
 				rc = 0/* Portable sleep for platforms other than Windows. *//* 100ms */;
 			} else {
-					rc = .select(maxfd + 1, fdread, fdwrite, fdexcep, /* Note that on some platforms 'timeout' may be modified by select().
+					rc = /*Error: Function owner not recognized*/select(maxfd + 1, fdread, fdwrite, fdexcep, /* Note that on some platforms 'timeout' may be modified by select().
 					         If you need access to the original value save a copy beforehand. */timeout);
 			} 
 			switch (rc) {
@@ -79,14 +79,14 @@ public class fcurl_data {
 	/* use to remove want bytes from the front of a files buffer */
 	public int use_buffer(Object want) {
 		Object generatedBuffer_pos = this.getBuffer_pos();
-		Byte generatedBuffer = this.getBuffer();
+		byte[] generatedBuffer = this.getBuffer();
 		if (generatedBuffer_pos <= /* sort out buffer */want) {
-			.free(generatedBuffer);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuffer);
 			this.setBuffer(((Object)0));
 			this.setBuffer_pos(0);
 			this.setBuffer_len(0);
 		} else {
-				.memmove(generatedBuffer, generatedBuffer[want], (generatedBuffer_pos - want));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(generatedBuffer, generatedBuffer[want], (generatedBuffer_pos - want));
 				generatedBuffer_pos -= want;
 		} 
 		return 0;
@@ -95,12 +95,12 @@ public class fcurl_data {
 	public fcurl_data url_fopen(Object url, Object operation) {
 		URL_FILE file = new URL_FILE();
 		(Object)operation;
-		file = .calloc(1, );
+		file = /*Error: Function owner not recognized*/calloc(1, /*Error: Unsupported expression*/);
 		if (!file) {
 			return ((Object)0);
 		} 
 		 generatedHandle = file.getHandle();
-		generatedHandle.setFile(.fopen(url, operation));
+		generatedHandle.setFile(/*Error: Function owner not recognized*/fopen(url, operation));
 		Object generatedFile = generatedHandle.getFile();
 		Curl_easy curl_easy = new Curl_easy();
 		Object generatedCurl = generatedHandle.getCurl();
@@ -124,7 +124,7 @@ public class fcurl_data {
 				if ((generatedBuffer_pos == 0) && (!generatedStill_running)) {
 					ModernizedCProgram.curl_multi_remove_handle(ModernizedCProgram.multi_handle, generatedCurl);
 					generatedCurl.curl_easy_cleanup();
-					.free(file);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(file);
 					file = ((Object)0);
 				} 
 		} 
@@ -144,16 +144,16 @@ public class fcurl_data {
 				generatedCurl.curl_easy_cleanup();
 				break;
 		case fcurl_type_e.CFTYPE_FILE:
-				ret = .fclose(generatedFile);
+				ret = /*Error: Function owner not recognized*/fclose(generatedFile);
 				break;
 		default:
 				ret = (true);
-				(._errno()) = 9;
+				(/*Error: Function owner not recognized*/_errno()) = 9;
 				break;
 		}
-		Byte generatedBuffer = this.getBuffer();
-		.free(generatedBuffer);
-		.free(file);
+		byte[] generatedBuffer = this.getBuffer();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuffer);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(file);
 		return ret;
 	}
 	public int url_feof() {
@@ -164,17 +164,17 @@ public class fcurl_data {
 		int generatedStill_running = this.getStill_running();
 		fcurl_type_e generatedType = this.getType();
 		switch (generatedType) {
-		case fcurl_type_e.CFTYPE_FILE:
-				ret = ((generatedFile).get_flag() & -1024);
-				break;
 		case fcurl_type_e.CFTYPE_CURL:
 				if ((generatedBuffer_pos == 0) && (!generatedStill_running)) {
 					ret = 1;
 				} 
 				break;
+		case fcurl_type_e.CFTYPE_FILE:
+				ret = ((generatedFile).get_flag() & -1024);
+				break;
 		default:
 				ret = -1;
-				(._errno()) = 9;
+				(/*Error: Function owner not recognized*/_errno()) = 9;
 				break;
 		}
 		return ret;
@@ -184,9 +184,12 @@ public class fcurl_data {
 		 generatedHandle = this.getHandle();
 		Object generatedFile = generatedHandle.getFile();
 		Object generatedBuffer_pos = this.getBuffer_pos();
-		Byte generatedBuffer = this.getBuffer();
+		byte[] generatedBuffer = this.getBuffer();
 		fcurl_type_e generatedType = this.getType();
 		switch (generatedType) {
+		case fcurl_type_e.CFTYPE_FILE:
+				want = /*Error: Function owner not recognized*/fread(ptr, size, nmemb, generatedFile);
+				break;
 		case fcurl_type_e.CFTYPE_CURL:
 				want = nmemb * size;
 				file.fill_buffer(want);
@@ -196,29 +199,29 @@ public class fcurl_data {
 				if (generatedBuffer_pos < /* ensure only available data is considered */want) {
 					want = generatedBuffer_pos;
 				} 
-				.memcpy(ptr, generatedBuffer, /* xfer data to caller */want);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr, generatedBuffer, /* xfer data to caller */want);
 				file.use_buffer(want);
 				want = want / /* number of items */size;
 				break;
-		case fcurl_type_e.CFTYPE_FILE:
-				want = .fread(ptr, size, nmemb, generatedFile);
-				break;
 		default:
 				want = 0;
-				(._errno()) = 9;
+				(/*Error: Function owner not recognized*/_errno()) = 9;
 				break;
 		}
 		return want;
 	}
-	public Byte url_fgets(Byte ptr, Object size) {
+	public Byte url_fgets(byte[] ptr, Object size) {
 		size_t want = size - /* always need to leave room for zero termination */1;
 		size_t loop = new size_t();
 		 generatedHandle = this.getHandle();
 		Object generatedFile = generatedHandle.getFile();
 		Object generatedBuffer_pos = this.getBuffer_pos();
-		Byte generatedBuffer = this.getBuffer();
+		byte[] generatedBuffer = this.getBuffer();
 		fcurl_type_e generatedType = this.getType();
 		switch (generatedType) {
+		case fcurl_type_e.CFTYPE_FILE:
+				ptr = /*Error: Function owner not recognized*/fgets(ptr, (int)size, generatedFile);
+				break;
 		case fcurl_type_e.CFTYPE_CURL:
 				file.fill_buffer(want);
 				if (!generatedBuffer_pos) {
@@ -233,16 +236,13 @@ public class fcurl_data {
 						break;
 					} 
 				}
-				.memcpy(ptr, generatedBuffer, /* xfer data to caller */want);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr, generatedBuffer, /* xfer data to caller */want);
 				ptr[want] = /* always null terminate */0;
 				file.use_buffer(want);
 				break;
-		case fcurl_type_e.CFTYPE_FILE:
-				ptr = .fgets(ptr, (int)size, generatedFile);
-				break;
 		default:
 				ptr = ((Object)0);
-				(._errno()) = 9;
+				(/*Error: Function owner not recognized*/_errno()) = 9;
 				break;
 		}
 		return /*success */ptr;
@@ -251,19 +251,19 @@ public class fcurl_data {
 		 generatedHandle = this.getHandle();
 		Object generatedFile = generatedHandle.getFile();
 		Object generatedCurl = generatedHandle.getCurl();
-		Byte generatedBuffer = this.getBuffer();
+		byte[] generatedBuffer = this.getBuffer();
 		fcurl_type_e generatedType = this.getType();
 		switch (generatedType) {
-		case fcurl_type_e.CFTYPE_FILE:
-				.rewind(generatedFile);
-				break;
 		case fcurl_type_e.CFTYPE_CURL:
 				ModernizedCProgram.curl_multi_remove_handle(ModernizedCProgram.multi_handle, generatedCurl);
 				ModernizedCProgram.curl_multi_add_handle(ModernizedCProgram.multi_handle, generatedCurl);
-				.free(generatedBuffer);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuffer);
 				this.setBuffer(((Object)0));
 				this.setBuffer_pos(0);
 				this.setBuffer_len(0);
+				break;
+		case fcurl_type_e.CFTYPE_FILE:
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/rewind(generatedFile);
 				break;
 		default:
 				break;
@@ -282,10 +282,10 @@ public class fcurl_data {
 	public void setHandle( newHandle) {
 		handle = newHandle;
 	}
-	public Byte getBuffer() {
+	public byte[] getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(Byte newBuffer) {
+	public void setBuffer(byte[] newBuffer) {
 		buffer = newBuffer;
 	}
 	public Object getBuffer_len() {

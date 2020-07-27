@@ -93,9 +93,15 @@ public class per_transfer {
 	public per_transfer() {
 	}
 	
+	public void progress_finalize() {
+		Object generatedDlnow = this.getDlnow();
+		ModernizedCProgram.all_dlalready += generatedDlnow;
+		Object generatedUlnow = this.getUlnow();
+		ModernizedCProgram.all_ulalready += generatedUlnow;
+	}
 	public Object add_per_transfer() {
 		per_transfer p = new per_transfer();
-		p = .calloc(, 1);
+		p = /*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 		if (!p) {
 			return CURLE_OUT_OF_MEMORY;
 		} 
@@ -133,14 +139,8 @@ public class per_transfer {
 		} else {
 				ModernizedCProgram.transfersl = p;
 		} 
-		.free(per);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(per);
 		return n;
-	}
-	public void progress_finalize() {
-		Object generatedDlnow = this.getDlnow();
-		ModernizedCProgram.all_dlalready += generatedDlnow;
-		Object generatedUlnow = this.getUlnow();
-		ModernizedCProgram.all_ulalready += generatedUlnow;
 	}
 	public per_transfer getNext() {
 		return next;

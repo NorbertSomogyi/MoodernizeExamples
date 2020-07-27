@@ -1,15 +1,15 @@
 package application;
 
 public class refspec {
-	private refspec_item items;
+	private refspec_item[] items;
 	private int alloc;
 	private int nr;
-	private Object raw;
+	private Object[][] raw;
 	private int raw_alloc;
 	private int raw_nr;
 	private int fetch;
 	
-	public refspec(refspec_item items, int alloc, int nr, Object raw, int raw_alloc, int raw_nr, int fetch) {
+	public refspec(refspec_item[] items, int alloc, int nr, Object[][] raw, int raw_alloc, int raw_nr, int fetch) {
 		setItems(items);
 		setAlloc(alloc);
 		setNr(nr);
@@ -22,7 +22,7 @@ public class refspec {
 	}
 	
 	public void refspec_init(int fetch) {
-		.memset(ModernizedCProgram.rs, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.rs, 0, /*Error: sizeof expression not supported yet*/);
 		ModernizedCProgram.rs.setFetch(fetch);
 	}
 	public void refspec_append(Object refspec) {
@@ -35,7 +35,7 @@ public class refspec {
 				} else {
 						ModernizedCProgram.rs.setAlloc((((ModernizedCProgram.rs.getAlloc()) + 16) * 3 / 2));
 				} 
-				(ModernizedCProgram.rs.getItems()) = ModernizedCProgram.xrealloc((ModernizedCProgram.rs.getItems()), ModernizedCProgram.st_mult(, (ModernizedCProgram.rs.getAlloc())));
+				(ModernizedCProgram.rs.getItems()) = ModernizedCProgram.xrealloc((ModernizedCProgram.rs.getItems()), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (ModernizedCProgram.rs.getAlloc())));
 			} 
 		} while (0);
 		ModernizedCProgram.rs.getItems()[ModernizedCProgram.rs.getNr()++] = item;
@@ -46,12 +46,12 @@ public class refspec {
 				} else {
 						ModernizedCProgram.rs.setRaw_alloc((((ModernizedCProgram.rs.getRaw_alloc()) + 16) * 3 / 2));
 				} 
-				(ModernizedCProgram.rs.getRaw()) = ModernizedCProgram.xrealloc((ModernizedCProgram.rs.getRaw()), ModernizedCProgram.st_mult(, (ModernizedCProgram.rs.getRaw_alloc())));
+				(ModernizedCProgram.rs.getRaw()) = ModernizedCProgram.xrealloc((ModernizedCProgram.rs.getRaw()), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (ModernizedCProgram.rs.getRaw_alloc())));
 			} 
 		} while (0);
 		ModernizedCProgram.rs.getRaw()[ModernizedCProgram.rs.getRaw_nr()++] = ModernizedCProgram.xstrdup(refspec);
 	}
-	public void refspec_appendn(Object refspecs, int nr) {
+	public void refspec_appendn(Object[][] refspecs, int nr) {
 		int i;
 		for (i = 0; i < nr; i++) {
 			ModernizedCProgram.rs.refspec_append(refspecs[i]);
@@ -79,10 +79,10 @@ public class refspec {
 		ModernizedCProgram.rs.setRaw_nr(0);
 		ModernizedCProgram.rs.setFetch(0);
 	}
-	public refspec_item getItems() {
+	public refspec_item[] getItems() {
 		return items;
 	}
-	public void setItems(refspec_item newItems) {
+	public void setItems(refspec_item[] newItems) {
 		items = newItems;
 	}
 	public int getAlloc() {
@@ -97,10 +97,10 @@ public class refspec {
 	public void setNr(int newNr) {
 		nr = newNr;
 	}
-	public Object getRaw() {
+	public Object[][] getRaw() {
 		return raw;
 	}
-	public void setRaw(Object newRaw) {
+	public void setRaw(Object[][] newRaw) {
 		raw = newRaw;
 	}
 	public int getRaw_alloc() {

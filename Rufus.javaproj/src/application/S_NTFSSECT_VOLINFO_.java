@@ -42,25 +42,25 @@ public class S_NTFSSECT_VOLINFO_ {
 	/* Internal use only */
 	public Object NtfsSectGetVolumeHandle(Object VolumeName) {
 		CHAR[] volname = "\\\\.\\";
-		CHAR volname_short = volname +  - 1;
+		CHAR volname_short = volname + /*Error: sizeof expression not supported yet*/ - 1;
 		CHAR c = new CHAR();
 		DWORD rc = new DWORD();
-		.strcpy(volname +  - 1, /* Prefix "\\.\" onto the passed volume name */VolumeName);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(volname + /*Error: sizeof expression not supported yet*/ - 1, /* Prefix "\\.\" onto the passed volume name */VolumeName);
 		for (c = volname_short; c; ++/* Find the last non-null character */c) {
 			;
 		}
 		if (c[-1] == /* Remove trailing back-slash */(byte)'\\') {
 			c[-1] = 0;
 		} 
-		this.setHandle(.CreateFileA(volname, -1024, -1024 | -1024, ((Object)0), 3, 0, ((Object)0)));
-		rc = .GetLastError();
+		this.setHandle(/*Error: Function owner not recognized*/CreateFileA(volname, -1024, -1024 | -1024, ((Object)0), 3, 0, ((Object)0)));
+		rc = /*Error: Function owner not recognized*/GetLastError();
 		Object generatedHandle = this.getHandle();
 		if (generatedHandle == (HANDLE)(true)) {
 			(ModernizedCProgram.NtfsSectLastErrorMessage = ("Unable to open volume handle!"));
 			;
 		} 
 		return -1024;
-		.CloseHandle(generatedHandle);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(generatedHandle);
 	}
 	public Object NtfsSectGetVolumeInfo(Object VolumeName) {
 		S_NTFSSECT_XPFUNCS xp_funcs = new S_NTFSSECT_XPFUNCS();
@@ -87,8 +87,8 @@ public class S_NTFSSECT_VOLINFO_ {
 		} 
 		Object generatedSectorsPerCluster = this.getSectorsPerCluster();
 		Object generatedBytesPerSector = this.getBytesPerSector();
-		ok = .UNRECOGNIZEDFUNCTIONNAME(VolumeName, generatedSectorsPerCluster, generatedBytesPerSector, free_clusts, total_clusts);
-		rc = .GetLastError();
+		ok = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(VolumeName, generatedSectorsPerCluster, generatedBytesPerSector, free_clusts, total_clusts);
+		rc = /*Error: Function owner not recognized*/GetLastError();
 		if (!ok) {
 			(ModernizedCProgram.NtfsSectLastErrorMessage = ("GetDiskFreeSpace() failed!"));
 			;
@@ -97,7 +97,7 @@ public class S_NTFSSECT_VOLINFO_ {
 		if (rc != -1024) {
 			;
 		} 
-		this.setSize();
+		this.setSize(/*Error: sizeof expression not supported yet*/);
 		rc = -1024;
 	}
 	public Object NtfsSectGetVolumeInfoFromFileName(Object FileName) {
@@ -112,8 +112,8 @@ public class S_NTFSSECT_VOLINFO_ {
 		if (rc != -1024) {
 			;
 		} 
-		ok = .UNRECOGNIZEDFUNCTIONNAME(FileName, volname, );
-		rc = .GetLastError();
+		ok = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(FileName, volname, /*Error: sizeof expression not supported yet*/);
+		rc = /*Error: Function owner not recognized*/GetLastError();
 		if (!ok) {
 			(ModernizedCProgram.NtfsSectLastErrorMessage = ("GetVolumePathName() failed!"));
 			;
@@ -127,8 +127,8 @@ public class S_NTFSSECT_VOLINFO_ {
 		DWORD output_size = new DWORD();
 		DWORD rc = new DWORD();
 		Object generatedHandle = this.getHandle();
-		ok = .DeviceIoControl(generatedHandle, (((((ULONG)(byte)'V')) << 16) | ((true) << 14) | ((false) << 2) | (false)), ((Object)0), 0, vol_disk_extents, , output_size, ((Object)0));
-		rc = .GetLastError();
+		ok = /*Error: Function owner not recognized*/DeviceIoControl(generatedHandle, (((((ULONG)(byte)'V')) << 16) | ((true) << 14) | ((false) << 2) | (false)), ((Object)0), 0, vol_disk_extents, /*Error: sizeof expression not supported yet*/, output_size, ((Object)0));
+		rc = /*Error: Function owner not recognized*/GetLastError();
 		if (!ok) {
 			(ModernizedCProgram.NtfsSectLastErrorMessage = ("Couldn't fetch volume disk extent(s)!"));
 			;

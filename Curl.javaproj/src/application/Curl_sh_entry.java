@@ -26,7 +26,7 @@ public class Curl_sh_entry {
 	
 	public Curl_sh_entry sh_getentry(curl_hash sh, Object s) {
 		if (s != CURL_SOCKET_BAD) {
-			return sh.Curl_hash_pick((byte)s, /* only look for proper sockets */);
+			return sh.Curl_hash_pick((byte)s, /*Error: Unsupported expression*//* only look for proper sockets */);
 		} 
 		return ((Object)0);
 	}
@@ -37,17 +37,17 @@ public class Curl_sh_entry {
 		if (there) {
 			return /* it is present, return fine */there;
 		} 
-		check = .Curl_ccalloc(1, /* not present, add it */);
+		check = /*Error: Function owner not recognized*/Curl_ccalloc(1, /*Error: Unsupported expression*//* not present, add it */);
 		if (!check) {
 			return ((Object)/* major failure */0);
 		} 
 		curl_hash generatedTransfers = check.getTransfers();
 		if (generatedTransfers.Curl_hash_init(13, trhash, trhash_compare, trhash_dtor)) {
-			.Curl_cfree(check);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(check);
 			return ((Object)0);
 		} 
-		if (!sh.Curl_hash_add((byte)s, , /* make/add new hash entry */check)) {
-			.Curl_cfree(check);
+		if (!sh.Curl_hash_add((byte)s, /*Error: Unsupported expression*/, /* make/add new hash entry */check)) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(check);
 			return ((Object)/* major failure */0);
 		} 
 		return /* things are good in sockhash land */check;

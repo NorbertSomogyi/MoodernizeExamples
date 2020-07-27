@@ -5,10 +5,10 @@ package application;
 public class hostname {
 	private Byte rawalloc;
 	private Byte encalloc;
-	private Byte name;
+	private byte[] name;
 	private Object dispname;
 	
-	public hostname(Byte rawalloc, Byte encalloc, Byte name, Object dispname) {
+	public hostname(Byte rawalloc, Byte encalloc, byte[] name, Object dispname) {
 		setRawalloc(rawalloc);
 		setEncalloc(encalloc);
 		setName(name);
@@ -19,11 +19,11 @@ public class hostname {
 	
 	public void strip_trailing_dot() {
 		size_t len = new size_t();
-		Byte generatedName = this.getName();
+		byte[] generatedName = this.getName();
 		if (!host || !generatedName) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		len = .strlen(generatedName);
+		len = /*Error: Function owner not recognized*/strlen(generatedName);
 		if (len && (generatedName[len - 1] == (byte)'.')) {
 			generatedName[len - 1] = 0/*
 			 * Perform any necessary IDN conversion of hostname
@@ -48,10 +48,10 @@ public class hostname {
 	public void setEncalloc(Byte newEncalloc) {
 		encalloc = newEncalloc;
 	}
-	public Byte getName() {
+	public byte[] getName() {
 		return name;
 	}
-	public void setName(Byte newName) {
+	public void setName(byte[] newName) {
 		name = newName;
 	}
 	public Object getDispname() {

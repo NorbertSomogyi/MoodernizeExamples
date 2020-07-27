@@ -34,18 +34,18 @@ public class salt {
 	}
 	
 	public salt module_benchmark_salt(Object hashconfig, Object user_options, Object user_options_extra) {
-		salt_t salt = (salt_t)ModernizedCProgram.hcmalloc();
+		salt_t salt = (salt_t)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
+		salt.setSalt_iter(1);
+		salt.setSalt_len(16);
+		return salt;
+		salt_t salt = (salt_t)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
 		salt.setSalt_iter(10000000 - 1);
 		salt.setSalt_iter2(10000 - 1);
 		salt.setSalt_len(16);
 		return salt;
-		salt_t salt = (salt_t)ModernizedCProgram.hcmalloc();
+		salt_t salt = (salt_t)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
 		// this equal to jtr -testint ROUNDS_LUKS = 163044;
 		salt.setSalt_iter(ROUNDS_LUKS);
-		return salt;
-		salt_t salt = (salt_t)ModernizedCProgram.hcmalloc();
-		salt.setSalt_iter(1);
-		salt.setSalt_len(16);
 		return salt;
 	}
 	public Object getSalt_buf() {

@@ -3,7 +3,7 @@ package application;
 public class user_options {
 	private Object hc_bin;
 	private int hc_argc;
-	private Byte hc_argv;
+	private byte[][] hc_argv;
 	private boolean attack_mode_chgd;
 	private boolean hash_mode_chgd;
 	private boolean hccapx_message_pair_chgd;
@@ -74,7 +74,7 @@ public class user_options {
 	private Byte outfile_check_dir;
 	private Byte potfile_path;
 	private Byte restore_file_path;
-	private Byte rp_files;
+	private byte[][] rp_files;
 	private byte separator;
 	private Byte truecrypt_keyfiles;
 	private Byte veracrypt_keyfiles;
@@ -122,7 +122,7 @@ public class user_options {
 	private Object limit;
 	private Object skip;
 	
-	public user_options(Object hc_bin, int hc_argc, Byte hc_argv, boolean attack_mode_chgd, boolean hash_mode_chgd, boolean hccapx_message_pair_chgd, boolean increment_max_chgd, boolean increment_min_chgd, boolean kernel_accel_chgd, boolean kernel_loops_chgd, boolean kernel_threads_chgd, boolean nonce_error_corrections_chgd, boolean spin_damp_chgd, boolean backend_vector_width_chgd, boolean outfile_format_chgd, boolean remove_timer_chgd, boolean rp_gen_seed_chgd, boolean runtime_chgd, boolean segment_size_chgd, boolean workload_profile_chgd, boolean skip_chgd, boolean limit_chgd, boolean advice_disable, boolean benchmark, boolean benchmark_all, boolean example_hashes, boolean force, boolean hwmon_disable, boolean hex_charset, boolean hex_salt, boolean hex_wordlist, boolean increment, boolean keep_guessing, boolean keyspace, boolean left, boolean logfile_disable, boolean loopback, boolean machine_readable, boolean markov_classic, boolean markov_disable, boolean backend_info, boolean optimized_kernel_enable, boolean outfile_autohex, boolean potfile_disable, boolean progress_only, boolean quiet, boolean remove, boolean restore, boolean restore_disable, boolean self_test_disable, boolean show, boolean slow_candidates, boolean speed_only, boolean status, boolean status_json, boolean stdout_flag, boolean stdin_timeout_abort_chgd, boolean usage, boolean username, boolean version, boolean wordlist_autohex_disable, Byte cpu_affinity, Byte custom_charset_4, Byte debug_file, Byte induction_dir, Byte keyboard_layout_mapping, Byte markov_hcstat2, Byte backend_devices, Byte opencl_device_types, Byte outfile, Byte outfile_check_dir, Byte potfile_path, Byte restore_file_path, Byte rp_files, byte separator, Byte truecrypt_keyfiles, Byte veracrypt_keyfiles, Object custom_charset_1, Object custom_charset_2, Object custom_charset_3, Object encoding_from, Object encoding_to, Object rule_buf_l, Object rule_buf_r, Object session, Object attack_mode, Object bitmap_max, Object bitmap_min, Object debug_mode, Object hwmon_temp_abort, int hash_mode, Object hccapx_message_pair, Object increment_max, Object increment_min, Object kernel_accel, Object kernel_loops, Object kernel_threads, Object markov_threshold, Object nonce_error_corrections, Object spin_damp, Object backend_vector_width, Object outfile_check_timer, Object outfile_format, Object remove_timer, Object restore_timer, Object rp_files_cnt, Object rp_gen, Object rp_gen_func_max, Object rp_gen_func_min, Object rp_gen_seed, Object runtime, Object scrypt_tmto, Object segment_size, Object status_timer, Object stdin_timeout_abort, Object veracrypt_pim_start, Object veracrypt_pim_stop, Object workload_profile, Object limit, Object skip) {
+	public user_options(Object hc_bin, int hc_argc, byte[][] hc_argv, boolean attack_mode_chgd, boolean hash_mode_chgd, boolean hccapx_message_pair_chgd, boolean increment_max_chgd, boolean increment_min_chgd, boolean kernel_accel_chgd, boolean kernel_loops_chgd, boolean kernel_threads_chgd, boolean nonce_error_corrections_chgd, boolean spin_damp_chgd, boolean backend_vector_width_chgd, boolean outfile_format_chgd, boolean remove_timer_chgd, boolean rp_gen_seed_chgd, boolean runtime_chgd, boolean segment_size_chgd, boolean workload_profile_chgd, boolean skip_chgd, boolean limit_chgd, boolean advice_disable, boolean benchmark, boolean benchmark_all, boolean example_hashes, boolean force, boolean hwmon_disable, boolean hex_charset, boolean hex_salt, boolean hex_wordlist, boolean increment, boolean keep_guessing, boolean keyspace, boolean left, boolean logfile_disable, boolean loopback, boolean machine_readable, boolean markov_classic, boolean markov_disable, boolean backend_info, boolean optimized_kernel_enable, boolean outfile_autohex, boolean potfile_disable, boolean progress_only, boolean quiet, boolean remove, boolean restore, boolean restore_disable, boolean self_test_disable, boolean show, boolean slow_candidates, boolean speed_only, boolean status, boolean status_json, boolean stdout_flag, boolean stdin_timeout_abort_chgd, boolean usage, boolean username, boolean version, boolean wordlist_autohex_disable, Byte cpu_affinity, Byte custom_charset_4, Byte debug_file, Byte induction_dir, Byte keyboard_layout_mapping, Byte markov_hcstat2, Byte backend_devices, Byte opencl_device_types, Byte outfile, Byte outfile_check_dir, Byte potfile_path, Byte restore_file_path, byte[][] rp_files, byte separator, Byte truecrypt_keyfiles, Byte veracrypt_keyfiles, Object custom_charset_1, Object custom_charset_2, Object custom_charset_3, Object encoding_from, Object encoding_to, Object rule_buf_l, Object rule_buf_r, Object session, Object attack_mode, Object bitmap_max, Object bitmap_min, Object debug_mode, Object hwmon_temp_abort, int hash_mode, Object hccapx_message_pair, Object increment_max, Object increment_min, Object kernel_accel, Object kernel_loops, Object kernel_threads, Object markov_threshold, Object nonce_error_corrections, Object spin_damp, Object backend_vector_width, Object outfile_check_timer, Object outfile_format, Object remove_timer, Object restore_timer, Object rp_files_cnt, Object rp_gen, Object rp_gen_func_max, Object rp_gen_func_min, Object rp_gen_seed, Object runtime, Object scrypt_tmto, Object segment_size, Object status_timer, Object stdin_timeout_abort, Object veracrypt_pim_start, Object veracrypt_pim_stop, Object workload_profile, Object limit, Object skip) {
 		setHc_bin(hc_bin);
 		setHc_argc(hc_argc);
 		setHc_argv(hc_argv);
@@ -259,10 +259,10 @@ public class user_options {
 	public void setHc_argc(int newHc_argc) {
 		hc_argc = newHc_argc;
 	}
-	public Byte getHc_argv() {
+	public byte[][] getHc_argv() {
 		return hc_argv;
 	}
-	public void setHc_argv(Byte newHc_argv) {
+	public void setHc_argv(byte[][] newHc_argv) {
 		hc_argv = newHc_argv;
 	}
 	public boolean getAttack_mode_chgd() {
@@ -685,10 +685,10 @@ public class user_options {
 	public void setRestore_file_path(Byte newRestore_file_path) {
 		restore_file_path = newRestore_file_path;
 	}
-	public Byte getRp_files() {
+	public byte[][] getRp_files() {
 		return rp_files;
 	}
-	public void setRp_files(Byte newRp_files) {
+	public void setRp_files(byte[][] newRp_files) {
 		rp_files = newRp_files;
 	}
 	public byte getSeparator() {

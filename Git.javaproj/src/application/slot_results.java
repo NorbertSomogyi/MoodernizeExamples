@@ -29,26 +29,26 @@ public class slot_results {
 	public int handle_curl_result() {
 		Object generatedCurl_result = this.getCurl_result();
 		long generatedHttp_code = this.getHttp_code();
-		ModernizedCProgram.normalize_curl_result(generatedCurl_result, generatedHttp_code, ModernizedCProgram.curl_errorstr, );
+		ModernizedCProgram.normalize_curl_result(generatedCurl_result, generatedHttp_code, ModernizedCProgram.curl_errorstr, /*Error: sizeof expression not supported yet*/);
 		long generatedHttp_connectcode = this.getHttp_connectcode();
 		if (generatedCurl_result == CURLE_OK) {
-			.credential_approve(ModernizedCProgram.http_auth);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/credential_approve(ModernizedCProgram.http_auth);
 			if (ModernizedCProgram.proxy_auth.getPassword()) {
-				.credential_approve(ModernizedCProgram.proxy_auth);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/credential_approve(ModernizedCProgram.proxy_auth);
 			} 
 			return 0;
 		}  else if (ModernizedCProgram.missing__target(generatedHttp_code, generatedCurl_result)) {
 			return 1;
 		}  else if (generatedHttp_code == 401) {
 			if (ModernizedCProgram.http_auth.getUsername() && ModernizedCProgram.http_auth.getPassword()) {
-				.credential_reject(ModernizedCProgram.http_auth);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/credential_reject(ModernizedCProgram.http_auth);
 				return 5;
 			} else {
 					return 4;
 			} 
 		} else {
 				if (generatedHttp_connectcode == 407) {
-					.credential_reject(ModernizedCProgram.proxy_auth);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/credential_reject(ModernizedCProgram.proxy_auth);
 				} 
 				return 2;
 		} 

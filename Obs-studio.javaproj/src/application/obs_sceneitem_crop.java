@@ -17,12 +17,12 @@ public class obs_sceneitem_crop {
 	
 	public void obs_sceneitem_get_crop(Object item) {
 		if (!ModernizedCProgram.obs_object_valid(item, "obs_sceneitem_get_crop", "item")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ModernizedCProgram.obs_object_valid(crop, "obs_sceneitem_get_crop", "crop")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.memcpy(crop, item.getCrop(), );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(crop, item.getCrop(), /*Error: sizeof expression not supported yet*/);
 	}
 	public int getLeft() {
 		return left;

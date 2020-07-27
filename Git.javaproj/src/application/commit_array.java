@@ -1,11 +1,11 @@
 package application;
 
 public class commit_array {
-	private commit commits;
+	private commit[][] commits;
 	private int nr;
 	private int alloc;
 	
-	public commit_array(commit commits, int nr, int alloc) {
+	public commit_array(commit[][] commits, int nr, int alloc) {
 		setCommits(commits);
 		setNr(nr);
 		setAlloc(alloc);
@@ -13,10 +13,10 @@ public class commit_array {
 	public commit_array() {
 	}
 	
-	public commit getCommits() {
+	public commit[][] getCommits() {
 		return commits;
 	}
-	public void setCommits(commit newCommits) {
+	public void setCommits(commit[][] newCommits) {
 		commits = newCommits;
 	}
 	public int getNr() {

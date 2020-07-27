@@ -47,12 +47,12 @@ public class block_def {
 			return 0;
 		} 
 		ModernizedCProgram.y_current.getY_array()[y_idx] = pnew;
-		.memset((pnew), ((byte)' '), ((size_t)generatedStartspaces));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((pnew), ((byte)' '), ((size_t)generatedStartspaces));
 		pnew += generatedStartspaces;
 		Object generatedTextstart = this.getTextstart();
-		.memmove((byte)(pnew), (byte)(generatedTextstart), (size_t)((size_t)generatedTextlen));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(pnew), (byte)(generatedTextstart), (size_t)((size_t)generatedTextlen));
 		pnew += generatedTextlen;
-		.memset((pnew), ((byte)' '), ((size_t)generatedEndspaces));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((pnew), ((byte)' '), ((size_t)generatedEndspaces));
 		pnew += generatedEndspaces;
 		pnew = (byte)'\000';
 		return 1/*

@@ -9,14 +9,6 @@ public class netif_saddr_data {
 	public netif_saddr_data() {
 	}
 	
-	public void netif_saddr_data_free() {
-		for (size_t i = 0;
-		 i < ModernizedCProgram.data.getAddrs().getNum(); i++) {
-			ModernizedCProgram.bfree(ModernizedCProgram.data.getAddrs().getArray()[i].getName());
-			ModernizedCProgram.bfree(ModernizedCProgram.data.getAddrs().getArray()[i].getAddr());
-		}
-		.da_free(ModernizedCProgram.data.getAddrs());
-	}
 	/******************************************************************************
 	    Copyright (C) 2016 B. Lee <bl4@postpile.net>
 	
@@ -46,7 +38,7 @@ public class netif_saddr_data {
 		item.setName(generatedDstr);
 		item.setAddr(ip_dup);
 		Object generatedAddrs = this.getAddrs();
-		.da_push_back(generatedAddrs, item);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedAddrs, item);
 	}
 	public void netif_log_saddrs() {
 		Object generatedAddrs = this.getAddrs();
@@ -62,7 +54,7 @@ public class netif_saddr_data {
 		SOCKET_ADDRESS socket_addr = new SOCKET_ADDRESS();
 		int family;
 		if (!adapter) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedLpSockaddr = socket_addr.getLpSockaddr();
 		for (cur_adap = adapter; !!cur_adap; cur_adap = cur_adap.getNext()) {
@@ -85,8 +77,16 @@ public class netif_saddr_data {
 	}
 	public void netif_get_addrs() {
 		Object generatedAddrs = this.getAddrs();
-		.da_init(generatedAddrs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedAddrs);
 		ifaddrs.netif_get_addrs_win32();
+	}
+	public void netif_saddr_data_free() {
+		for (size_t i = 0;
+		 i < ModernizedCProgram.data.getAddrs().getNum(); i++) {
+			ModernizedCProgram.bfree(ModernizedCProgram.data.getAddrs().getArray()[i].getName());
+			ModernizedCProgram.bfree(ModernizedCProgram.data.getAddrs().getArray()[i].getAddr());
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(ModernizedCProgram.data.getAddrs());
 	}
 	public Object get() {
 		return ;

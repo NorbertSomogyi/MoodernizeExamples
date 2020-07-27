@@ -33,7 +33,7 @@ public class cache_entry {
 		int ret;
 		int fstat_done = 0;
 		byte new_blob;
-		strbuf buf = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		long size;
 		ssize_t wrote = new ssize_t();
 		size_t newsize = 0;
@@ -51,8 +51,8 @@ public class cache_entry {
 		ce_delay_state generatedState = dco.getState();
 		string_list generatedPaths = dco.getPaths();
 	}
-	public int checkout_entry(Object state, Byte topath, int nr_checkouts) {
-		strbuf path = new strbuf(, , );
+	public int checkout_entry(Object state, Byte topath, Integer nr_checkouts) {
+		strbuf path = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		stat st = new stat();
 		int generatedCe_flags = this.getCe_flags();
 		if (generatedCe_flags & (1 << 22)) {
@@ -73,7 +73,7 @@ public class cache_entry {
 		Object generatedName = this.getName();
 		int generatedCe_namelen = (ce).getCe_namelen();
 		path.strbuf_add(generatedName, (generatedCe_namelen));
-		byte generatedBuf = path.getBuf();
+		byte[] generatedBuf = path.getBuf();
 		Object generatedLen = path.getLen();
 		Object generatedSt_mode = st.getSt_mode();
 		object_id generatedOid = this.getOid();
@@ -89,7 +89,7 @@ public class cache_entry {
 				int err;
 				if (!ModernizedCProgram.is_submodule_populated_gently(generatedName, ModernizedCProgram.err)) {
 					stat sb = new stat();
-					if (.lstat(generatedName, sb)) {
+					if (/*Error: Function owner not recognized*/lstat(generatedName, sb)) {
 						ModernizedCProgram.die(ModernizedCProgram._("could not stat file '%s'"), generatedName);
 					} 
 					if (!(generatedSt_mode & -1024)) {
@@ -105,7 +105,7 @@ public class cache_entry {
 			} 
 			if (!state.getForce()) {
 				if (!state.getQuiet()) {
-					.fprintf((_iob[2]), "%s already exists, no checkout\n", generatedBuf);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s already exists, no checkout\n", generatedBuf);
 				} 
 				return -1;
 			} 
@@ -125,7 +125,7 @@ public class cache_entry {
 					return ();
 				} 
 				path.remove_subtree();
-			}  else if (.unlink(generatedBuf)) {
+			}  else if (/*Error: Function owner not recognized*/unlink(generatedBuf)) {
 				return ();
 			} 
 		}  else if (state.getNot_new()) {
@@ -136,475 +136,6 @@ public class cache_entry {
 			(nr_checkouts)++;
 		} 
 		return ce.write_entry(generatedBuf, state, 0);
-	}
-	public int verify_cache(int entries, int flags) {
-		int i;
-		int funny;
-		int silent = flags & 8;
-		funny = /* Verify that the tree is merged */0;
-		for (i = 0; i < entries; i++) {
-			cache_entry ce = cache[i];
-			if ((((true) & (ce).getCe_flags()) >> 12)) {
-				if (silent) {
-					return -1;
-				} 
-				if (10 < ++funny) {
-					.fprintf((_iob[2]), "...\n");
-					break;
-				} 
-				.fprintf((_iob[2]), "%s: unmerged (%s)\n", ce.getName(), ModernizedCProgram.oid_to_hex(ce.getOid()));
-			} 
-		}
-		if (funny) {
-			return -1/* Also verify that the cache does not have path and path/file
-				 * at the same time.  At this point we know the cache has only
-				 * stage 0 entries.
-				 */;
-		} 
-		funny = 0;
-		for (i = 0; i < entries - 1; i/* path/file always comes after path because of the way
-				 * the cache is sorted.  Also path can appear only once,
-				 * which means conflicting one would immediately follow.
-				 */++) {
-			byte this_name = cache[i].getName();
-			byte next_name = cache[i + 1].getName();
-			int this_len = .strlen(this_name);
-			if (this_len < .strlen(next_name) && .strncmp(this_name, next_name, this_len) == 0 && next_name[this_len] == (byte)'/') {
-				if (10 < ++funny) {
-					.fprintf((_iob[2]), "...\n");
-					break;
-				} 
-				.fprintf((_iob[2]), "You have both %s and %s\n", this_name, next_name);
-			} 
-		}
-		if (funny) {
-			return -1;
-		} 
-		return 0;
-	}
-	public cache_entry read_one_ent(Object which, object_id ent, Object path, int namelen, int stage) {
-		int mode;
-		object_id oid = new object_id();
-		cache_entry ce = new cache_entry();
-		if (ModernizedCProgram.get_tree_entry(ModernizedCProgram.the_repository, ent, path, oid, mode)) {
-			if (which) {
-				();
-			} 
-			return ((Object)0);
-		} 
-		if (mode == -1024) {
-			if (which) {
-				();
-			} 
-			return ((Object)0);
-		} 
-		cache_entry cache_entry = new cache_entry();
-		ce = cache_entry.make_empty_cache_entry(ModernizedCProgram.the_index, namelen);
-		object_id generatedOid = ce.getOid();
-		generatedOid.oidcpy(oid);
-		Object generatedName = ce.getName();
-		.memcpy(generatedName, path, namelen);
-		ce.setCe_flags(ModernizedCProgram.create_ce_flags(stage));
-		ce.setCe_namelen(namelen);
-		ce.setCe_mode(ModernizedCProgram.create_ce_mode(mode));
-		return ce;
-	}
-	public cache_entry index_file_exists(index_state istate, Object name, int namelen, int icase) {
-		cache_entry ce = new cache_entry();
-		int hash = ModernizedCProgram.memihash(name, namelen);
-		istate.lazy_init_name_hash();
-		hashmap generatedName_hash = istate.getName_hash();
-		hashmap_entry hashmap_entry = new hashmap_entry();
-		ce = (cache_entry)ModernizedCProgram.container_of_or_null_offset(hashmap_entry.hashmap_get_from_hash(generatedName_hash, hash, ((Object)0)), ((size_t)((cache_entry)0).getEnt()));
-		hashmap_entry generatedEnt = (ce).getEnt();
-		hashmap_entry hashmap_entry = new hashmap_entry();
-		for (; ce; ce = ModernizedCProgram.container_of_or_null_offset(hashmap_entry.hashmap_get_next(generatedName_hash, generatedEnt), ((size_t)generatedEnt))) {
-			if (ModernizedCProgram.same_name(ce, name, namelen, icase)) {
-				return ce;
-			} 
-		}
-		return ((Object)0);
-	}
-	public int compare_ce_content(cache_entry b) {
-		int ondisk_flags = (true) | (true) | ((1 << 29) | (1 << 30));
-		int generatedCe_flags = this.getCe_flags();
-		int ce_flags = generatedCe_flags;
-		int base_flags = generatedCe_flags;
-		int ret;
-		generatedCe_flags &=  /* only on-disk flags matter */ondisk_flags;
-		generatedCe_flags &=  ondisk_flags;
-		stat_data generatedCe_stat_data = this.getCe_stat_data();
-		ret = .memcmp(generatedCe_stat_data, generatedCe_stat_data, ((size_t)((cache_entry)0).getName()) - ((size_t)generatedCe_stat_data));
-		this.setCe_flags(ce_flags);
-		b.setCe_flags(base_flags);
-		return ret;
-	}
-	public void mark_ce_for_checkout_overlay(Byte ps_matched, Object opts) {
-		int generatedCe_flags = this.getCe_flags();
-		generatedCe_flags &=  ~(1 << 26);
-		if (!opts.getIgnore_skipworktree() && (generatedCe_flags & (1 << 30))) {
-			return ;
-		} 
-		if (opts.getSource_tree() && !(generatedCe_flags & (1 << 16/*
-				 * "git checkout tree-ish -- path", but this entry
-				 * is in the original index but is not in tree-ish
-				 * or does not match the pathspec; it will not be
-				 * checked out to the working tree.  We will not do
-				 * anything to this entry at all.
-				 */))) {
-			return ;
-		} 
-		if (ModernizedCProgram.ce_path_match(ModernizedCProgram.the_index, ce, opts.getPathspec(), ps_matched)) {
-			generatedCe_flags |=  (1 << 26);
-		} 
-	}
-	public void mark_ce_for_checkout_no_overlay(Byte ps_matched, Object opts) {
-		int generatedCe_flags = this.getCe_flags();
-		generatedCe_flags &=  ~(1 << 26);
-		if (!opts.getIgnore_skipworktree() && (generatedCe_flags & (1 << 30))) {
-			return ;
-		} 
-		if (ModernizedCProgram.ce_path_match(ModernizedCProgram.the_index, ce, opts.getPathspec(), ps_matched)) {
-			generatedCe_flags |=  (1 << 26);
-			if (opts.getSource_tree() && !(generatedCe_flags & (1 << 16/*
-						 * In overlay mode, but the path is not in
-						 * tree-ish, which means we should remove it
-						 * from the index and the working tree.
-						 */))) {
-				generatedCe_flags |=  (1 << 17) | (1 << 22);
-			} 
-		} 
-	}
-	public cache_entry mem_pool__ce_alloc(mem_pool mem_pool, Object len) {
-		cache_entry ce = new cache_entry();
-		ce = mem_pool.mem_pool_alloc((((size_t)((cache_entry)0).getName()) + (len) + 1));
-		ce.setMem_pool_allocated(1);
-		return ce;
-	}
-	public cache_entry mem_pool__ce_calloc(mem_pool mem_pool, Object len) {
-		cache_entry ce = new cache_entry();
-		ce = mem_pool.mem_pool_calloc(1, (((size_t)((cache_entry)0).getName()) + (len) + 1));
-		ce.setMem_pool_allocated(1);
-		return ce;
-	}
-	public int compare_name(Object path, int namelen) {
-		int generatedCe_namelen = (ce).getCe_namelen();
-		Object generatedName = this.getName();
-		return namelen != (generatedCe_namelen) || .memcmp(path, generatedName, namelen);
-	}
-	public int different_name(cache_entry alias) {
-		int generatedCe_namelen = (ce).getCe_namelen();
-		int len = (generatedCe_namelen);
-		Object generatedName = this.getName();
-		return (generatedCe_namelen) != len || .memcmp(generatedName, generatedName, len/*
-		 * If we add a filename that aliases in the cache, we will use the
-		 * name that we already have - but we don't want to update the same
-		 * alias twice, because that implies that there were actually two
-		 * different files with aliasing names!
-		 *
-		 * So we use the CE_ADDED flag to verify that the alias was an old
-		 * one before we accept it as
-		 */);
-	}
-	public cache_entry create_alias_ce(index_state istate, cache_entry alias) {
-		int len;
-		cache_entry new_entry = new cache_entry();
-		int generatedCe_flags = alias.getCe_flags();
-		Object generatedName = this.getName();
-		if (generatedCe_flags & (1 << 19)) {
-			ModernizedCProgram.die(ModernizedCProgram._("will not add file alias '%s' ('%s' already exists in index)"), generatedName, generatedName);
-		} 
-		int generatedCe_namelen = (alias).getCe_namelen();
-		len = (generatedCe_namelen);
-		cache_entry cache_entry = new cache_entry();
-		new_entry = cache_entry.make_empty_cache_entry(istate, len);
-		.memcpy(generatedName, generatedName, len);
-		new_entry.copy_cache_entry(ce);
-		ModernizedCProgram.save_or_free_index_entry(istate, ce);
-		return new_entry;
-	}
-	public void set_object_name_for_intent_to_add_entry() {
-		object_id oid = new object_id();
-		if (oid.write_object_file("", 0, ModernizedCProgram.blob_type)) {
-			ModernizedCProgram.die(ModernizedCProgram._("cannot create an empty blob in the object database"));
-		} 
-		object_id generatedOid = this.getOid();
-		generatedOid.oidcpy(oid);
-	}
-	public cache_entry make_empty_cache_entry(index_state istate, Object len) {
-		mem_pool mem_pool = new mem_pool();
-		cache_entry cache_entry = new cache_entry();
-		return cache_entry.mem_pool__ce_calloc(mem_pool.find_mem_pool(istate), len);
-	}
-	public cache_entry make_empty_transient_cache_entry(Object len) {
-		return ModernizedCProgram.xcalloc(1, (((size_t)((cache_entry)0).getName()) + (len) + 1));
-	}
-	public cache_entry make_cache_entry(index_state istate, int mode, Object oid, Object path, int stage, int refresh_options) {
-		cache_entry ce = new cache_entry();
-		cache_entry ret = new cache_entry();
-		int len;
-		if (!ModernizedCProgram.verify_path(path, mode)) {
-			();
-			return ((Object)0);
-		} 
-		len = .strlen(path);
-		cache_entry cache_entry = new cache_entry();
-		ce = cache_entry.make_empty_cache_entry(istate, len);
-		object_id generatedOid = ce.getOid();
-		generatedOid.oidcpy(oid);
-		Object generatedName = ce.getName();
-		.memcpy(generatedName, path, len);
-		ce.setCe_flags(ModernizedCProgram.create_ce_flags(stage));
-		ce.setCe_namelen(len);
-		ce.setCe_mode(ModernizedCProgram.create_ce_mode(mode));
-		ret = ce.refresh_cache_entry(istate, refresh_options);
-		if (ret != ce) {
-			ce.discard_cache_entry();
-		} 
-		return ret;
-	}
-	public cache_entry make_transient_cache_entry(int mode, Object oid, Object path, int stage) {
-		cache_entry ce = new cache_entry();
-		int len;
-		if (!ModernizedCProgram.verify_path(path, mode)) {
-			();
-			return ((Object)0);
-		} 
-		len = .strlen(path);
-		cache_entry cache_entry = new cache_entry();
-		ce = cache_entry.make_empty_transient_cache_entry(len);
-		object_id generatedOid = ce.getOid();
-		generatedOid.oidcpy(oid);
-		Object generatedName = ce.getName();
-		.memcpy(generatedName, path, len);
-		ce.setCe_flags(ModernizedCProgram.create_ce_flags(stage));
-		ce.setCe_namelen(len);
-		ce.setCe_mode(ModernizedCProgram.create_ce_mode(mode));
-		return ce/*
-		 * Chmod an index entry with either +x or -x.
-		 *
-		 * Returns -1 if the chmod for the particular cache entry failed (if it's
-		 * not a regular file), -2 if an invalid flip argument is passed in, 0
-		 * otherwise.
-		 */;
-	}
-	public cache_entry refresh_cache_ent(index_state istate, int options, int err, int changed_ret) {
-		stat st = new stat();
-		cache_entry updated = new cache_entry();
-		int changed;
-		int refresh = options & -1024;
-		int ignore_valid = options & 1;
-		int ignore_skip_worktree = options & 4;
-		int ignore_missing = options & -1024;
-		int ignore_fsmonitor = options & -1024;
-		int generatedCe_flags = (ce).getCe_flags();
-		if (!refresh || (generatedCe_flags & (1 << 18))) {
-			return ce;
-		} 
-		if (!ignore_fsmonitor) {
-			istate/*
-				 * CE_VALID or CE_SKIP_WORKTREE means the user promised us
-				 * that the change to the work tree does not matter and told
-				 * us not to worry.
-				 */.refresh_fsmonitor();
-		} 
-		if (!ignore_skip_worktree && (generatedCe_flags & (1 << 30))) {
-			(generatedCe_flags |=  (1 << 18));
-			return ce;
-		} 
-		if (!ignore_valid && (generatedCe_flags & (true))) {
-			(generatedCe_flags |=  (1 << 18));
-			return ce;
-		} 
-		if (!ignore_fsmonitor && (generatedCe_flags & (1 << 21))) {
-			(generatedCe_flags |=  (1 << 18));
-			return ce;
-		} 
-		Object generatedName = this.getName();
-		int generatedCe_namelen = (ce).getCe_namelen();
-		if (ModernizedCProgram.has_symlink_leading_path(generatedName, (generatedCe_namelen))) {
-			if (ignore_missing) {
-				return ce;
-			} 
-			if (err) {
-				err = 2;
-			} 
-			return ((Object)0);
-		} 
-		if (.lstat(generatedName, st) < 0) {
-			if (ignore_missing && (._errno()) == 2) {
-				return ce;
-			} 
-			if (err) {
-				err = (._errno());
-			} 
-			return ((Object)0);
-		} 
-		changed = ModernizedCProgram.ie_match_stat(istate, ce, st, options);
-		if (changed_ret) {
-			changed_ret = changed;
-		} 
-		int generatedCe_mode = this.getCe_mode();
-		if (!changed/*
-				 * The path is unchanged.  If we were told to ignore
-				 * valid bit, then we did the actual stat check and
-				 * found that the entry is unmodified.  If the entry
-				 * is not marked VALID, this is the place to mark it
-				 * valid again, under "assume unchanged" mode.
-				 */) {
-			if (ignore_valid && ModernizedCProgram.assume_unchanged && !(generatedCe_flags & (true))) {
-				;
-			} else {
-					if (!(((generatedCe_mode) & -1024) == 160000)) {
-						(generatedCe_flags |=  (1 << 18));
-						ModernizedCProgram.mark_fsmonitor_valid(istate, ce);
-					} 
-					return ce;
-			} 
-		} 
-		if (ModernizedCProgram.ie_modified(istate, ce, st, options)) {
-			if (err) {
-				err = 22;
-			} 
-			return ((Object)0);
-		} 
-		cache_entry cache_entry = new cache_entry();
-		updated = cache_entry.make_empty_cache_entry(istate, (generatedCe_namelen));
-		updated.copy_cache_entry(ce);
-		.memcpy(generatedName, generatedName, generatedCe_namelen + 1);
-		ModernizedCProgram.fill_stat_cache_info(istate, updated, st/*
-			 * If ignore_valid is not set, we should leave CE_VALID bit
-			 * alone.  Otherwise, paths marked with --no-assume-unchanged
-			 * (i.e. things to be edited) will reacquire CE_VALID bit
-			 * automatically, which is not really what we want.
-			 */);
-		if (!ignore_valid && ModernizedCProgram.assume_unchanged && !(generatedCe_flags & (true))) {
-			generatedCe_flags &=  ~(true);
-		} 
-		return /* istate->cache_changed is updated in the caller */updated;
-	}
-	public cache_entry refresh_cache_entry(index_state istate, int options) {
-		return ce.refresh_cache_ent(istate, options, ((Object)0), ((Object)0/*****************************************************************
-		 * Index File I/O
-		 *****************************************************************/));
-	}
-	public cache_entry create_from_disk(mem_pool ce_mem_pool, int version, ondisk_cache_entry ondisk, long ent_size, Object previous_ce) {
-		cache_entry ce = new cache_entry();
-		size_t len = new size_t();
-		byte name;
-		int hashsz = ModernizedCProgram.the_repository.getHash_algo().getRawsz();
-		Object generatedData = ondisk.getData();
-		uint16_t flagsp = (uint16_t)(generatedData + hashsz);
-		int flags;
-		size_t copy_len = 0/*
-			 * Adjacent cache entries tend to share the leading paths, so it makes
-			 * sense to only store the differences in later entries.  In the v4
-			 * on-disk format of the index, each on-disk cache entry stores the
-			 * number of bytes to be stripped from the end of the previous name,
-			 * and the bytes to append to the result, to come up with its name.
-			 */;
-		int expand_name_field = version == 4;
-		flags = .get_be16(/* On-disk flags are just 16 bits */flagsp);
-		len = flags & (true);
-		if (flags & (true)) {
-			int extended_flags;
-			extended_flags = .get_be16(flagsp + 1) << 16;
-			if (extended_flags & ~((1 << 29) | (1 << /* We do not yet understand any bit out of CE_EXTENDED_FLAGS */30))) {
-				ModernizedCProgram.die(ModernizedCProgram._("unknown index entry format 0x%08x"), extended_flags);
-			} 
-			flags |=  extended_flags;
-			name = (byte)(flagsp + 2);
-		} else {
-				name = (byte)(flagsp + 1);
-		} 
-		if (expand_name_field) {
-			byte cp = (byte)name;
-			size_t strip_len = new size_t();
-			size_t previous_len = new size_t();
-			strip_len = ModernizedCProgram.decode_varint(/* If we're at the begining of a block, ignore the previous name */cp);
-			if (previous_ce) {
-				previous_len = previous_ce.getCe_namelen();
-				if (previous_len < strip_len) {
-					ModernizedCProgram.die(ModernizedCProgram._("malformed name field in the index, near path '%s'"), previous_ce.getName());
-				} 
-				copy_len = previous_len - strip_len;
-			} 
-			name = (byte)cp;
-		} 
-		if (len == (true)) {
-			len = .strlen(name);
-			if (expand_name_field) {
-				len += copy_len;
-			} 
-		} 
-		cache_entry cache_entry = new cache_entry();
-		ce = cache_entry.mem_pool__ce_alloc(ce_mem_pool, len);
-		cache_time generatedCtime = ondisk.getCtime();
-		Object generatedSec = generatedCtime.getSec();
-		stat_data generatedCe_stat_data = ce.getCe_stat_data();
-		cache_time generatedSd_ctime = generatedCe_stat_data.getSd_ctime();
-		generatedSd_ctime.setSec(.get_be32(generatedSec));
-		cache_time generatedSd_mtime = generatedCe_stat_data.getSd_mtime();
-		generatedSd_mtime.setSec(.get_be32(generatedSec));
-		Object generatedNsec = generatedCtime.getNsec();
-		generatedSd_ctime.setNsec(.get_be32(generatedNsec));
-		generatedSd_mtime.setNsec(.get_be32(generatedNsec));
-		Object generatedDev = ondisk.getDev();
-		generatedCe_stat_data.setSd_dev(.get_be32(generatedDev));
-		Object generatedIno = ondisk.getIno();
-		generatedCe_stat_data.setSd_ino(.get_be32(generatedIno));
-		Object generatedMode = ondisk.getMode();
-		ce.setCe_mode(.get_be32(generatedMode));
-		Object generatedUid = ondisk.getUid();
-		generatedCe_stat_data.setSd_uid(.get_be32(generatedUid));
-		Object generatedGid = ondisk.getGid();
-		generatedCe_stat_data.setSd_gid(.get_be32(generatedGid));
-		Object generatedSize = ondisk.getSize();
-		generatedCe_stat_data.setSd_size(.get_be32(generatedSize));
-		ce.setCe_flags(flags & ~(true));
-		ce.setCe_namelen(len);
-		ce.setIndex(0);
-		object_id generatedOid = ce.getOid();
-		Object generatedHash = generatedOid.getHash();
-		ModernizedCProgram.hashcpy(generatedHash, generatedData);
-		Object generatedName = ce.getName();
-		.memcpy(generatedName, name, len);
-		generatedName[len] = (byte)'\0';
-		int generatedCe_flags = (ce).getCe_flags();
-		int generatedCe_namelen = (ce).getCe_namelen();
-		if (expand_name_field) {
-			if (copy_len) {
-				.memcpy(generatedName, generatedName, copy_len);
-			} 
-			.memcpy(generatedName + copy_len, name, len + 1 - copy_len);
-			ent_size = (name - ((byte)ondisk)) + len + 1 - copy_len;
-		} else {
-				.memcpy(generatedName, name, len + 1);
-				ent_size = (((((size_t)generatedData) + ((ModernizedCProgram.the_repository.getHash_algo().getRawsz() + ((generatedCe_flags & (true)) ? 2 : 1) *  + (generatedCe_namelen))) + 8) & ~7));
-		} 
-		return ce;
-	}
-	public cache_entry dup_cache_entry(Object ce, index_state istate) {
-		int size = (((size_t)((cache_entry)0).getName()) + (((ce).getCe_namelen())) + 1);
-		int mem_pool_allocated;
-		cache_entry cache_entry = new cache_entry();
-		cache_entry new_entry = cache_entry.make_empty_cache_entry(istate, ((ce).getCe_namelen()));
-		int generatedMem_pool_allocated = new_entry.getMem_pool_allocated();
-		mem_pool_allocated = generatedMem_pool_allocated;
-		.memcpy(new_entry, ce, size);
-		new_entry.setMem_pool_allocated(mem_pool_allocated);
-		return new_entry;
-	}
-	public void discard_cache_entry() {
-		int generatedCe_namelen = this.getCe_namelen();
-		if (ce && ModernizedCProgram.should_validate_cache_entries()) {
-			.memset(ce, -1024, (((size_t)((cache_entry)0).getName()) + (generatedCe_namelen) + 1));
-		} 
-		int generatedMem_pool_allocated = this.getMem_pool_allocated();
-		if (ce && generatedMem_pool_allocated) {
-			return ;
-		} 
-		ModernizedCProgram.free(ce);
 	}
 	public cache_entry next_cache_entry(unpack_trees_options o) {
 		index_state generatedSrc_index = o.getSrc_index();
@@ -705,12 +236,359 @@ public class cache_entry {
 		Object generatedData = info.getData();
 		unpack_trees_options o = generatedData;
 		index_state generatedSrc_index = o.getSrc_index();
-		cache_entry generatedCache = generatedSrc_index.getCache();
+		cache_entry[][] generatedCache = generatedSrc_index.getCache();
 		if (0 <= pos) {
 			return generatedCache[pos];
 		} else {
 				return ((Object)0);
 		} 
+	}
+	public cache_entry index_file_exists(index_state istate, Object name, int namelen, int icase) {
+		cache_entry ce = new cache_entry();
+		int hash = ModernizedCProgram.memihash(name, namelen);
+		istate.lazy_init_name_hash();
+		hashmap generatedName_hash = istate.getName_hash();
+		hashmap_entry hashmap_entry = new hashmap_entry();
+		ce = (cache_entry)ModernizedCProgram.container_of_or_null_offset(hashmap_entry.hashmap_get_from_hash(generatedName_hash, hash, ((Object)0)), ((size_t)((cache_entry)0).getEnt()));
+		hashmap_entry generatedEnt = (ce).getEnt();
+		hashmap_entry hashmap_entry = new hashmap_entry();
+		for (; ce; ce = ModernizedCProgram.container_of_or_null_offset(hashmap_entry.hashmap_get_next(generatedName_hash, generatedEnt), ((size_t)generatedEnt))) {
+			if (ModernizedCProgram.same_name(ce, name, namelen, icase)) {
+				return ce;
+			} 
+		}
+		return ((Object)0);
+	}
+	public cache_entry mem_pool__ce_alloc(mem_pool mem_pool, Object len) {
+		cache_entry ce = new cache_entry();
+		ce = mem_pool.mem_pool_alloc((((size_t)((cache_entry)0).getName()) + (len) + 1));
+		ce.setMem_pool_allocated(1);
+		return ce;
+	}
+	public cache_entry mem_pool__ce_calloc(mem_pool mem_pool, Object len) {
+		cache_entry ce = new cache_entry();
+		ce = mem_pool.mem_pool_calloc(1, (((size_t)((cache_entry)0).getName()) + (len) + 1));
+		ce.setMem_pool_allocated(1);
+		return ce;
+	}
+	public int compare_name(Object path, int namelen) {
+		int generatedCe_namelen = (ce).getCe_namelen();
+		Object generatedName = this.getName();
+		return namelen != (generatedCe_namelen) || /*Error: Function owner not recognized*/memcmp(path, generatedName, namelen);
+	}
+	public int different_name(cache_entry alias) {
+		int generatedCe_namelen = (ce).getCe_namelen();
+		int len = (generatedCe_namelen);
+		Object generatedName = this.getName();
+		return (generatedCe_namelen) != len || /*Error: Function owner not recognized*/memcmp(generatedName, generatedName, len/*
+		 * If we add a filename that aliases in the cache, we will use the
+		 * name that we already have - but we don't want to update the same
+		 * alias twice, because that implies that there were actually two
+		 * different files with aliasing names!
+		 *
+		 * So we use the CE_ADDED flag to verify that the alias was an old
+		 * one before we accept it as
+		 */);
+	}
+	public cache_entry create_alias_ce(index_state istate, cache_entry alias) {
+		int len;
+		cache_entry new_entry = new cache_entry();
+		int generatedCe_flags = alias.getCe_flags();
+		Object generatedName = this.getName();
+		if (generatedCe_flags & (1 << 19)) {
+			ModernizedCProgram.die(ModernizedCProgram._("will not add file alias '%s' ('%s' already exists in index)"), generatedName, generatedName);
+		} 
+		int generatedCe_namelen = (alias).getCe_namelen();
+		len = (generatedCe_namelen);
+		cache_entry cache_entry = new cache_entry();
+		new_entry = cache_entry.make_empty_cache_entry(istate, len);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, generatedName, len);
+		new_entry.copy_cache_entry(ce);
+		ModernizedCProgram.save_or_free_index_entry(istate, ce);
+		return new_entry;
+	}
+	public void set_object_name_for_intent_to_add_entry() {
+		object_id oid = new object_id();
+		if (oid.write_object_file("", 0, ModernizedCProgram.blob_type)) {
+			ModernizedCProgram.die(ModernizedCProgram._("cannot create an empty blob in the object database"));
+		} 
+		object_id generatedOid = this.getOid();
+		generatedOid.oidcpy(oid);
+	}
+	public cache_entry make_empty_cache_entry(index_state istate, Object len) {
+		mem_pool mem_pool = new mem_pool();
+		cache_entry cache_entry = new cache_entry();
+		return cache_entry.mem_pool__ce_calloc(mem_pool.find_mem_pool(istate), len);
+	}
+	public cache_entry make_empty_transient_cache_entry(Object len) {
+		return ModernizedCProgram.xcalloc(1, (((size_t)((cache_entry)0).getName()) + (len) + 1));
+	}
+	public cache_entry make_cache_entry(index_state istate, int mode, Object oid, Object path, int stage, int refresh_options) {
+		cache_entry ce = new cache_entry();
+		cache_entry ret = new cache_entry();
+		int len;
+		if (!ModernizedCProgram.verify_path(path, mode)) {
+			();
+			return ((Object)0);
+		} 
+		len = /*Error: Function owner not recognized*/strlen(path);
+		cache_entry cache_entry = new cache_entry();
+		ce = cache_entry.make_empty_cache_entry(istate, len);
+		object_id generatedOid = ce.getOid();
+		generatedOid.oidcpy(oid);
+		Object generatedName = ce.getName();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, path, len);
+		ce.setCe_flags(ModernizedCProgram.create_ce_flags(stage));
+		ce.setCe_namelen(len);
+		ce.setCe_mode(ModernizedCProgram.create_ce_mode(mode));
+		ret = ce.refresh_cache_entry(istate, refresh_options);
+		if (ret != ce) {
+			ce.discard_cache_entry();
+		} 
+		return ret;
+	}
+	public cache_entry make_transient_cache_entry(int mode, Object oid, Object path, int stage) {
+		cache_entry ce = new cache_entry();
+		int len;
+		if (!ModernizedCProgram.verify_path(path, mode)) {
+			();
+			return ((Object)0);
+		} 
+		len = /*Error: Function owner not recognized*/strlen(path);
+		cache_entry cache_entry = new cache_entry();
+		ce = cache_entry.make_empty_transient_cache_entry(len);
+		object_id generatedOid = ce.getOid();
+		generatedOid.oidcpy(oid);
+		Object generatedName = ce.getName();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, path, len);
+		ce.setCe_flags(ModernizedCProgram.create_ce_flags(stage));
+		ce.setCe_namelen(len);
+		ce.setCe_mode(ModernizedCProgram.create_ce_mode(mode));
+		return ce/*
+		 * Chmod an index entry with either +x or -x.
+		 *
+		 * Returns -1 if the chmod for the particular cache entry failed (if it's
+		 * not a regular file), -2 if an invalid flip argument is passed in, 0
+		 * otherwise.
+		 */;
+	}
+	public cache_entry refresh_cache_ent(index_state istate, int options, Integer err, Integer changed_ret) {
+		stat st = new stat();
+		cache_entry updated = new cache_entry();
+		int changed;
+		int refresh = options & -1024;
+		int ignore_valid = options & 1;
+		int ignore_skip_worktree = options & 4;
+		int ignore_missing = options & -1024;
+		int ignore_fsmonitor = options & -1024;
+		int generatedCe_flags = (ce).getCe_flags();
+		if (!refresh || (generatedCe_flags & (1 << 18))) {
+			return ce;
+		} 
+		if (!ignore_fsmonitor) {
+			istate/*
+				 * CE_VALID or CE_SKIP_WORKTREE means the user promised us
+				 * that the change to the work tree does not matter and told
+				 * us not to worry.
+				 */.refresh_fsmonitor();
+		} 
+		if (!ignore_skip_worktree && (generatedCe_flags & (1 << 30))) {
+			(generatedCe_flags |=  (1 << 18));
+			return ce;
+		} 
+		if (!ignore_valid && (generatedCe_flags & (true))) {
+			(generatedCe_flags |=  (1 << 18));
+			return ce;
+		} 
+		if (!ignore_fsmonitor && (generatedCe_flags & (1 << 21))) {
+			(generatedCe_flags |=  (1 << 18));
+			return ce;
+		} 
+		Object generatedName = this.getName();
+		int generatedCe_namelen = (ce).getCe_namelen();
+		if (ModernizedCProgram.has_symlink_leading_path(generatedName, (generatedCe_namelen))) {
+			if (ignore_missing) {
+				return ce;
+			} 
+			if (err) {
+				err = 2;
+			} 
+			return ((Object)0);
+		} 
+		if (/*Error: Function owner not recognized*/lstat(generatedName, st) < 0) {
+			if (ignore_missing && (/*Error: Function owner not recognized*/_errno()) == 2) {
+				return ce;
+			} 
+			if (err) {
+				err = (/*Error: Function owner not recognized*/_errno());
+			} 
+			return ((Object)0);
+		} 
+		changed = ModernizedCProgram.ie_match_stat(istate, ce, st, options);
+		if (changed_ret) {
+			changed_ret = changed;
+		} 
+		int generatedCe_mode = this.getCe_mode();
+		if (!changed/*
+				 * The path is unchanged.  If we were told to ignore
+				 * valid bit, then we did the actual stat check and
+				 * found that the entry is unmodified.  If the entry
+				 * is not marked VALID, this is the place to mark it
+				 * valid again, under "assume unchanged" mode.
+				 */) {
+			if (ignore_valid && ModernizedCProgram.assume_unchanged && !(generatedCe_flags & (true))) {
+				;
+			} else {
+					if (!(((generatedCe_mode) & -1024) == 160000)) {
+						(generatedCe_flags |=  (1 << 18));
+						ModernizedCProgram.mark_fsmonitor_valid(istate, ce);
+					} 
+					return ce;
+			} 
+		} 
+		if (ModernizedCProgram.ie_modified(istate, ce, st, options)) {
+			if (err) {
+				err = 22;
+			} 
+			return ((Object)0);
+		} 
+		cache_entry cache_entry = new cache_entry();
+		updated = cache_entry.make_empty_cache_entry(istate, (generatedCe_namelen));
+		updated.copy_cache_entry(ce);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, generatedName, generatedCe_namelen + 1);
+		ModernizedCProgram.fill_stat_cache_info(istate, updated, st/*
+			 * If ignore_valid is not set, we should leave CE_VALID bit
+			 * alone.  Otherwise, paths marked with --no-assume-unchanged
+			 * (i.e. things to be edited) will reacquire CE_VALID bit
+			 * automatically, which is not really what we want.
+			 */);
+		if (!ignore_valid && ModernizedCProgram.assume_unchanged && !(generatedCe_flags & (true))) {
+			generatedCe_flags &=  ~(true);
+		} 
+		return /* istate->cache_changed is updated in the caller */updated;
+	}
+	public cache_entry refresh_cache_entry(index_state istate, int options) {
+		return ce.refresh_cache_ent(istate, options, ((Object)0), ((Object)0/*****************************************************************
+		 * Index File I/O
+		 *****************************************************************/));
+	}
+	public cache_entry create_from_disk(mem_pool ce_mem_pool, int version, ondisk_cache_entry ondisk, Long ent_size, Object previous_ce) {
+		cache_entry ce = new cache_entry();
+		size_t len = new size_t();
+		byte name;
+		int hashsz = ModernizedCProgram.the_repository.getHash_algo().getRawsz();
+		Object generatedData = ondisk.getData();
+		uint16_t flagsp = (uint16_t)(generatedData + hashsz);
+		int flags;
+		size_t copy_len = 0/*
+			 * Adjacent cache entries tend to share the leading paths, so it makes
+			 * sense to only store the differences in later entries.  In the v4
+			 * on-disk format of the index, each on-disk cache entry stores the
+			 * number of bytes to be stripped from the end of the previous name,
+			 * and the bytes to append to the result, to come up with its name.
+			 */;
+		int expand_name_field = version == 4;
+		flags = /*Error: Function owner not recognized*/get_be16(/* On-disk flags are just 16 bits */flagsp);
+		len = flags & (true);
+		if (flags & (true)) {
+			int extended_flags;
+			extended_flags = /*Error: Function owner not recognized*/get_be16(flagsp + 1) << 16;
+			if (extended_flags & ~((1 << 29) | (1 << /* We do not yet understand any bit out of CE_EXTENDED_FLAGS */30))) {
+				ModernizedCProgram.die(ModernizedCProgram._("unknown index entry format 0x%08x"), extended_flags);
+			} 
+			flags |=  extended_flags;
+			name = (byte)(flagsp + 2);
+		} else {
+				name = (byte)(flagsp + 1);
+		} 
+		if (expand_name_field) {
+			byte cp = (byte)name;
+			size_t strip_len = new size_t();
+			size_t previous_len = new size_t();
+			strip_len = ModernizedCProgram.decode_varint(/* If we're at the begining of a block, ignore the previous name */cp);
+			if (previous_ce) {
+				previous_len = previous_ce.getCe_namelen();
+				if (previous_len < strip_len) {
+					ModernizedCProgram.die(ModernizedCProgram._("malformed name field in the index, near path '%s'"), previous_ce.getName());
+				} 
+				copy_len = previous_len - strip_len;
+			} 
+			name = (byte)cp;
+		} 
+		if (len == (true)) {
+			len = /*Error: Function owner not recognized*/strlen(name);
+			if (expand_name_field) {
+				len += copy_len;
+			} 
+		} 
+		cache_entry cache_entry = new cache_entry();
+		ce = cache_entry.mem_pool__ce_alloc(ce_mem_pool, len);
+		cache_time generatedCtime = ondisk.getCtime();
+		Object generatedSec = generatedCtime.getSec();
+		stat_data generatedCe_stat_data = ce.getCe_stat_data();
+		cache_time generatedSd_ctime = generatedCe_stat_data.getSd_ctime();
+		generatedSd_ctime.setSec(/*Error: Function owner not recognized*/get_be32(generatedSec));
+		cache_time generatedSd_mtime = generatedCe_stat_data.getSd_mtime();
+		generatedSd_mtime.setSec(/*Error: Function owner not recognized*/get_be32(generatedSec));
+		Object generatedNsec = generatedCtime.getNsec();
+		generatedSd_ctime.setNsec(/*Error: Function owner not recognized*/get_be32(generatedNsec));
+		generatedSd_mtime.setNsec(/*Error: Function owner not recognized*/get_be32(generatedNsec));
+		Object generatedDev = ondisk.getDev();
+		generatedCe_stat_data.setSd_dev(/*Error: Function owner not recognized*/get_be32(generatedDev));
+		Object generatedIno = ondisk.getIno();
+		generatedCe_stat_data.setSd_ino(/*Error: Function owner not recognized*/get_be32(generatedIno));
+		Object generatedMode = ondisk.getMode();
+		ce.setCe_mode(/*Error: Function owner not recognized*/get_be32(generatedMode));
+		Object generatedUid = ondisk.getUid();
+		generatedCe_stat_data.setSd_uid(/*Error: Function owner not recognized*/get_be32(generatedUid));
+		Object generatedGid = ondisk.getGid();
+		generatedCe_stat_data.setSd_gid(/*Error: Function owner not recognized*/get_be32(generatedGid));
+		Object generatedSize = ondisk.getSize();
+		generatedCe_stat_data.setSd_size(/*Error: Function owner not recognized*/get_be32(generatedSize));
+		ce.setCe_flags(flags & ~(true));
+		ce.setCe_namelen(len);
+		ce.setIndex(0);
+		object_id generatedOid = ce.getOid();
+		Object generatedHash = generatedOid.getHash();
+		ModernizedCProgram.hashcpy(generatedHash, generatedData);
+		Object generatedName = ce.getName();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, name, len);
+		generatedName[len] = (byte)'\0';
+		int generatedCe_flags = (ce).getCe_flags();
+		int generatedCe_namelen = (ce).getCe_namelen();
+		if (expand_name_field) {
+			if (copy_len) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, generatedName, copy_len);
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName + copy_len, name, len + 1 - copy_len);
+			ent_size = (name - ((byte)ondisk)) + len + 1 - copy_len;
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, name, len + 1);
+				ent_size = (((((size_t)generatedData) + ((ModernizedCProgram.the_repository.getHash_algo().getRawsz() + ((generatedCe_flags & (true)) ? 2 : 1) * /*Error: Unsupported expression*/ + (generatedCe_namelen))) + 8) & ~7));
+		} 
+		return ce;
+	}
+	public cache_entry dup_cache_entry(Object ce, index_state istate) {
+		int size = (((size_t)((cache_entry)0).getName()) + (((ce).getCe_namelen())) + 1);
+		int mem_pool_allocated;
+		cache_entry cache_entry = new cache_entry();
+		cache_entry new_entry = cache_entry.make_empty_cache_entry(istate, ((ce).getCe_namelen()));
+		int generatedMem_pool_allocated = new_entry.getMem_pool_allocated();
+		mem_pool_allocated = generatedMem_pool_allocated;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(new_entry, ce, size);
+		new_entry.setMem_pool_allocated(mem_pool_allocated);
+		return new_entry;
+	}
+	public void discard_cache_entry() {
+		int generatedCe_namelen = this.getCe_namelen();
+		if (ce && ModernizedCProgram.should_validate_cache_entries()) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ce, -1024, (((size_t)((cache_entry)0).getName()) + (generatedCe_namelen) + 1));
+		} 
+		int generatedMem_pool_allocated = this.getMem_pool_allocated();
+		if (ce && generatedMem_pool_allocated) {
+			return /*Error: Unsupported expression*/;
+		} 
+		ModernizedCProgram.free(ce);
 	}
 	public void copy_cache_entry(Object src) {
 		int generatedCe_flags = this.getCe_flags();
@@ -718,9 +596,131 @@ public class cache_entry {
 		int generatedMem_pool_allocated = this.getMem_pool_allocated();
 		int mem_pool_allocated = generatedMem_pool_allocated;
 		stat_data generatedCe_stat_data = this.getCe_stat_data();
-		.memcpy(generatedCe_stat_data, generatedCe_stat_data, ((size_t)((cache_entry)0).getName()) - ((size_t)generatedCe_stat_data));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedCe_stat_data, generatedCe_stat_data, ((size_t)((cache_entry)0).getName()) - ((size_t)generatedCe_stat_data));
 		this.setCe_flags((generatedCe_flags & ~(1 << 20)) | /* Restore the hash state */state);
 		this.setMem_pool_allocated(/* Restore the mem_pool_allocated flag */mem_pool_allocated);
+	}
+	public void mark_ce_for_checkout_overlay(Byte ps_matched, Object opts) {
+		int generatedCe_flags = this.getCe_flags();
+		generatedCe_flags &=  ~(1 << 26);
+		if (!opts.getIgnore_skipworktree() && (generatedCe_flags & (1 << 30))) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (opts.getSource_tree() && !(generatedCe_flags & (1 << 16/*
+				 * "git checkout tree-ish -- path", but this entry
+				 * is in the original index but is not in tree-ish
+				 * or does not match the pathspec; it will not be
+				 * checked out to the working tree.  We will not do
+				 * anything to this entry at all.
+				 */))) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (ModernizedCProgram.ce_path_match(ModernizedCProgram.the_index, ce, opts.getPathspec(), ps_matched)) {
+			generatedCe_flags |=  (1 << 26);
+		} 
+	}
+	public void mark_ce_for_checkout_no_overlay(Byte ps_matched, Object opts) {
+		int generatedCe_flags = this.getCe_flags();
+		generatedCe_flags &=  ~(1 << 26);
+		if (!opts.getIgnore_skipworktree() && (generatedCe_flags & (1 << 30))) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (ModernizedCProgram.ce_path_match(ModernizedCProgram.the_index, ce, opts.getPathspec(), ps_matched)) {
+			generatedCe_flags |=  (1 << 26);
+			if (opts.getSource_tree() && !(generatedCe_flags & (1 << 16/*
+						 * In overlay mode, but the path is not in
+						 * tree-ish, which means we should remove it
+						 * from the index and the working tree.
+						 */))) {
+				generatedCe_flags |=  (1 << 17) | (1 << 22);
+			} 
+		} 
+	}
+	public int verify_cache(int entries, int flags) {
+		int i;
+		int funny;
+		int silent = flags & 8;
+		funny = /* Verify that the tree is merged */0;
+		for (i = 0; i < entries; i++) {
+			cache_entry ce = cache[i];
+			if ((((true) & (ce).getCe_flags()) >> 12)) {
+				if (silent) {
+					return -1;
+				} 
+				if (10 < ++funny) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "...\n");
+					break;
+				} 
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s: unmerged (%s)\n", ce.getName(), ModernizedCProgram.oid_to_hex(ce.getOid()));
+			} 
+		}
+		if (funny) {
+			return -1/* Also verify that the cache does not have path and path/file
+				 * at the same time.  At this point we know the cache has only
+				 * stage 0 entries.
+				 */;
+		} 
+		funny = 0;
+		for (i = 0; i < entries - 1; i/* path/file always comes after path because of the way
+				 * the cache is sorted.  Also path can appear only once,
+				 * which means conflicting one would immediately follow.
+				 */++) {
+			byte this_name = cache[i].getName();
+			byte next_name = cache[i + 1].getName();
+			int this_len = /*Error: Function owner not recognized*/strlen(this_name);
+			if (this_len < /*Error: Function owner not recognized*/strlen(next_name) && /*Error: Function owner not recognized*/strncmp(this_name, next_name, this_len) == 0 && next_name[this_len] == (byte)'/') {
+				if (10 < ++funny) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "...\n");
+					break;
+				} 
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "You have both %s and %s\n", this_name, next_name);
+			} 
+		}
+		if (funny) {
+			return -1;
+		} 
+		return 0;
+	}
+	public cache_entry read_one_ent(Object which, object_id ent, Object path, int namelen, int stage) {
+		int mode;
+		object_id oid = new object_id();
+		cache_entry ce = new cache_entry();
+		if (ModernizedCProgram.get_tree_entry(ModernizedCProgram.the_repository, ent, path, oid, mode)) {
+			if (which) {
+				();
+			} 
+			return ((Object)0);
+		} 
+		if (mode == -1024) {
+			if (which) {
+				();
+			} 
+			return ((Object)0);
+		} 
+		cache_entry cache_entry = new cache_entry();
+		ce = cache_entry.make_empty_cache_entry(ModernizedCProgram.the_index, namelen);
+		object_id generatedOid = ce.getOid();
+		generatedOid.oidcpy(oid);
+		Object generatedName = ce.getName();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, path, namelen);
+		ce.setCe_flags(ModernizedCProgram.create_ce_flags(stage));
+		ce.setCe_namelen(namelen);
+		ce.setCe_mode(ModernizedCProgram.create_ce_mode(mode));
+		return ce;
+	}
+	public int compare_ce_content(cache_entry b) {
+		int ondisk_flags = (true) | (true) | ((1 << 29) | (1 << 30));
+		int generatedCe_flags = this.getCe_flags();
+		int ce_flags = generatedCe_flags;
+		int base_flags = generatedCe_flags;
+		int ret;
+		generatedCe_flags &=  /* only on-disk flags matter */ondisk_flags;
+		generatedCe_flags &=  ondisk_flags;
+		stat_data generatedCe_stat_data = this.getCe_stat_data();
+		ret = /*Error: Function owner not recognized*/memcmp(generatedCe_stat_data, generatedCe_stat_data, ((size_t)((cache_entry)0).getName()) - ((size_t)generatedCe_stat_data));
+		this.setCe_flags(ce_flags);
+		b.setCe_flags(base_flags);
+		return ret;
 	}
 	public hashmap_entry getEnt() {
 		return ent;

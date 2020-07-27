@@ -1,14 +1,14 @@
 package application;
 
 public class xz_buf {
-	private Object in;
+	private Object[] in;
 	private Object in_pos;
 	private Object in_size;
 	private Object out;
 	private Object out_pos;
 	private Object out_size;
 	
-	public xz_buf(Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size) {
+	public xz_buf(Object[] in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size) {
 		setIn(in);
 		setIn_pos(in_pos);
 		setIn_size(in_size);
@@ -19,10 +19,10 @@ public class xz_buf {
 	public xz_buf() {
 	}
 	
-	public Object getIn() {
+	public Object[] getIn() {
 		return in;
 	}
-	public void setIn(Object newIn) {
+	public void setIn(Object[] newIn) {
 		in = newIn;
 	}
 	public Object getIn_pos() {

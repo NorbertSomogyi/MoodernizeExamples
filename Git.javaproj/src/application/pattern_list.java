@@ -5,9 +5,9 @@ public class pattern_list {
 	private int alloc;
 	private Byte filebuf;
 	private Object src;
-	private path_pattern patterns;
+	private path_pattern[][] patterns;
 	
-	public pattern_list(int nr, int alloc, Byte filebuf, Object src, path_pattern patterns) {
+	public pattern_list(int nr, int alloc, Byte filebuf, Object src, path_pattern[][] patterns) {
 		setNr(nr);
 		setAlloc(alloc);
 		setFilebuf(filebuf);
@@ -26,12 +26,12 @@ public class pattern_list {
 		if (flags & 8) {
 			do {
 				size_t flex_array_len_ = (patternlen);
-				(pattern) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-				.memcpy((pattern) + 1, (string), flex_array_len_);
+				(pattern) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((pattern) + 1, (string), flex_array_len_);
 				(pattern).setPattern((Object)((pattern) + 1));
 			} while (0);
 		} else {
-				pattern = ModernizedCProgram.xmalloc();
+				pattern = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 				pattern.setPattern(string);
 		} 
 		pattern.setPatternlen(patternlen);
@@ -42,7 +42,7 @@ public class pattern_list {
 		pattern.setSrcpos(srcpos);
 		int generatedNr = this.getNr();
 		int generatedAlloc = this.getAlloc();
-		path_pattern generatedPatterns = this.getPatterns();
+		path_pattern[][] generatedPatterns = this.getPatterns();
 		do {
 			if ((generatedNr + 1) > generatedAlloc) {
 				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNr + 1)) {
@@ -50,7 +50,7 @@ public class pattern_list {
 				} else {
 						this.setAlloc((((generatedAlloc) + 16) * 3 / 2));
 				} 
-				(generatedPatterns) = ModernizedCProgram.xrealloc((generatedPatterns), ModernizedCProgram.st_mult(, (generatedAlloc)));
+				(generatedPatterns) = ModernizedCProgram.xrealloc((generatedPatterns), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedAlloc)));
 			} 
 		} while (0);
 		generatedPatterns[generatedNr++] = pattern;
@@ -59,16 +59,16 @@ public class pattern_list {
 	public void clear_pattern_list() {
 		int i;
 		int generatedNr = this.getNr();
-		path_pattern generatedPatterns = this.getPatterns();
+		path_pattern[][] generatedPatterns = this.getPatterns();
 		for (i = 0; i < generatedNr; i++) {
 			ModernizedCProgram.free(generatedPatterns[i]);
 		}
 		ModernizedCProgram.free(generatedPatterns);
 		Byte generatedFilebuf = this.getFilebuf();
 		ModernizedCProgram.free(generatedFilebuf);
-		.memset(pl, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(pl, 0, /*Error: sizeof expression not supported yet*/);
 	}
-	public int add_patterns_from_buffer(Byte buf, Object size, Object base, int baselen) {
+	public int add_patterns_from_buffer(byte[] buf, Object size, Object base, int baselen) {
 		int i;
 		int lineno = 1;
 		byte entry;
@@ -98,7 +98,7 @@ public class pattern_list {
 		group = generatedExclude_list_group[group_type];
 		int generatedNr = group.getNr();
 		int generatedAlloc = group.getAlloc();
-		pattern_list generatedPl = group.getPl();
+		pattern_list[] generatedPl = group.getPl();
 		do {
 			if ((generatedNr + 1) > generatedAlloc) {
 				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNr + 1)) {
@@ -106,11 +106,11 @@ public class pattern_list {
 				} else {
 						group.setAlloc((((generatedAlloc) + 16) * 3 / 2));
 				} 
-				(generatedPl) = ModernizedCProgram.xrealloc((generatedPl), ModernizedCProgram.st_mult(, (generatedAlloc)));
+				(generatedPl) = ModernizedCProgram.xrealloc((generatedPl), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedAlloc)));
 			} 
 		} while (0);
 		pl = generatedPl[generatedNr++];
-		.memset(pl, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(pl, 0, /*Error: sizeof expression not supported yet*/);
 		pl.setSrc(src);
 		return pl/*
 		 * Used to set up core.excludesfile and .git/info/exclude lists.
@@ -140,10 +140,10 @@ public class pattern_list {
 	public void setSrc(Object newSrc) {
 		src = newSrc;
 	}
-	public path_pattern getPatterns() {
+	public path_pattern[][] getPatterns() {
 		return patterns;
 	}
-	public void setPatterns(path_pattern newPatterns) {
+	public void setPatterns(path_pattern[][] newPatterns) {
 		patterns = newPatterns;
 	}
 }

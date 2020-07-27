@@ -45,37 +45,13 @@ public class flv_output {
 	public flv_output() {
 	}
 	
-	public Object stopping() {
-		Object generatedStopping = this.getStopping();
-		return ModernizedCProgram.os_atomic_load_bool(generatedStopping);
-		Object generatedStopping = output.getStopping();
-		return ModernizedCProgram.os_atomic_load_bool(generatedStopping);
-		Object generatedStop_event = this.getStop_event();
-		return generatedStop_event.os_event_try() != EAGAIN;
-		Object generatedStopping = this.getStopping();
-		return ModernizedCProgram.os_atomic_load_bool(generatedStopping);
-		return output.getStopping_event().os_event_try() == EAGAIN;
-		Object generatedStop_event = this.getStop_event();
-		return generatedStop_event.os_event_try() != EAGAIN;
-	}
-	public Object active() {
-		Object generatedActive = this.getActive();
-		return ModernizedCProgram.os_atomic_load_bool(generatedActive);
-		Object generatedActive = this.getActive();
-		return ModernizedCProgram.os_atomic_load_bool(generatedActive);
-		Object generatedActive = this.getActive();
-		return ModernizedCProgram.os_atomic_load_bool(generatedActive);
-		return ModernizedCProgram.os_atomic_load_bool(output.getActive());
-		Object generatedActive = this.getActive();
-		return ModernizedCProgram.os_atomic_load_bool(generatedActive);
-	}
 	public void write_meta_data() {
 		uint8_t meta_data = new uint8_t();
 		size_t meta_data_size = new size_t();
 		obs_output generatedOutput = this.getOutput();
 		generatedOutput.flv_meta_data(meta_data, meta_data_size, true, 0);
 		_iobuf generatedFile = this.getFile();
-		.fwrite(meta_data, 1, meta_data_size, generatedFile);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fwrite(meta_data, 1, meta_data_size, generatedFile);
 		ModernizedCProgram.bfree(meta_data);
 	}
 	public void write_audio_header() {
@@ -83,7 +59,7 @@ public class flv_output {
 		obs_output_t context = generatedOutput;
 		obs_encoder obs_encoder = new obs_encoder();
 		obs_encoder_t aencoder = obs_encoder.obs_output_get_audio_encoder(context, 0);
-		encoder_packet packet = new encoder_packet(, );
+		encoder_packet packet = new encoder_packet(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		Object generatedData = packet.getData();
 		Object generatedSize = packet.getSize();
 		ModernizedCProgram.obs_encoder_get_extra_data(aencoder, generatedData, generatedSize);
@@ -96,7 +72,7 @@ public class flv_output {
 		obs_encoder_t vencoder = obs_encoder.obs_output_get_video_encoder(context);
 		uint8_t header = new uint8_t();
 		size_t size = new size_t();
-		encoder_packet packet = new encoder_packet(, , );
+		encoder_packet packet = new encoder_packet(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		ModernizedCProgram.obs_encoder_get_extra_data(vencoder, header, size);
 		Object generatedData = packet.getData();
 		packet.setSize(ModernizedCProgram.obs_parse_avc_header(generatedData, header, size));
@@ -115,7 +91,7 @@ public class flv_output {
 		Object generatedLast_packet_ts = this.getLast_packet_ts();
 		if (generatedFile) {
 			generatedFile.write_file_info(generatedLast_packet_ts, generatedFile.os_ftelli64());
-			.fclose(generatedFile);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(generatedFile);
 		} 
 		obs_output generatedOutput = this.getOutput();
 		if (code) {

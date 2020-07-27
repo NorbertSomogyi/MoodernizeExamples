@@ -61,7 +61,7 @@ public class tool_mime {
 	/* Macros to free const pointers. */
 	/* tool_mime functions. */
 	public tool_mime tool_mime_new( kind) {
-		tool_mime m = (tool_mime).calloc(1, );
+		tool_mime m = (tool_mime)/*Error: Function owner not recognized*/calloc(1, /*Error: sizeof expression not supported yet*/);
 		tool_mime generatedSubparts = this.getSubparts();
 		if (m) {
 			m.setKind(kind);
@@ -78,11 +78,11 @@ public class tool_mime {
 	}
 	public tool_mime tool_mime_new_data(Object data) {
 		tool_mime m = ((Object)0);
-		data = .strdup(data);
+		data = /*Error: Function owner not recognized*/strdup(data);
 		if (data) {
 			m = parent.tool_mime_new(.TOOLMIME_DATA);
 			if (!m) {
-				.free((Object)(data));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)(data));
 			} else {
 					m.setData(data);
 			} 
@@ -95,12 +95,12 @@ public class tool_mime {
 		errcode = CURLE_OUT_OF_MEMORY;
 		Object generatedSt_mode = sbuf.getSt_mode();
 		Object generatedSt_size = sbuf.getSt_size();
-		if (.strcmp(filename, "-")) {
-			filename = .strdup(/* This is a normal file. */filename);
+		if (/*Error: Function owner not recognized*/strcmp(filename, "-")) {
+			filename = /*Error: Function owner not recognized*/strdup(/* This is a normal file. */filename);
 			if (filename) {
 				m = parent.tool_mime_new(.TOOLMIME_FILE);
 				if (!m) {
-					.free((Object)(filename));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)(filename));
 				} else {
 						m.setData(filename);
 						if (!isremotefile) {
@@ -116,9 +116,9 @@ public class tool_mime {
 				 origin = new ();
 				_stati64 sbuf = new _stati64();
 				(_iob[0]).set_binmode();
-				origin = .ftell((_iob[0/* If stdin is a regular file, do not buffer data but read it
+				origin = /*Error: Function owner not recognized*/ftell((_iob[0/* If stdin is a regular file, do not buffer data but read it
 				       when needed. */]));
-				if (fd >= 0 && origin >= 0 && !._fstati64(fd, sbuf) && (((generatedSt_mode) & -1024) == -1024)) {
+				if (fd >= 0 && origin >= 0 && !/*Error: Function owner not recognized*/_fstati64(fd, sbuf) && (((generatedSt_mode) & -1024) == -1024)) {
 					size = generatedSt_size - origin;
 					if (size < 0) {
 						size = 0;
@@ -131,12 +131,12 @@ public class tool_mime {
 						if ((((_iob[0])).get_flag() & -1024)) {
 							result = CURLE_READ_ERROR;
 							do {
-								.free((ModernizedCProgram.data));
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.data));
 								(ModernizedCProgram.data) = ((Object)0);
 							} while (0);
 							ModernizedCProgram.data = ((Object)0);
 						}  else if (!stdinsize) {
-							ModernizedCProgram.data = .strdup(/* Zero-length data has been freed. Re-create it. */"");
+							ModernizedCProgram.data = /*Error: Function owner not recognized*/strdup(/* Zero-length data has been freed. Re-create it. */"");
 							if (!ModernizedCProgram.data) {
 								return m;
 							} 
@@ -147,7 +147,7 @@ public class tool_mime {
 				m = parent.tool_mime_new(.TOOLMIME_STDIN);
 				if (!m) {
 					do {
-						.free((ModernizedCProgram.data));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.data));
 						(ModernizedCProgram.data) = ((Object)0);
 					} while (0);
 				} else {
@@ -180,27 +180,27 @@ public class tool_mime {
 				generatedPrev.tool_mime_free();
 			} 
 			do {
-				.free((((Object)(generatedName))));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((((Object)(generatedName))));
 				(((Object)(generatedName))) = ((Object)0);
 			} while (0);
 			do {
-				.free((((Object)(generatedFilename))));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((((Object)(generatedFilename))));
 				(((Object)(generatedFilename))) = ((Object)0);
 			} while (0);
 			do {
-				.free((((Object)(generatedType))));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((((Object)(generatedType))));
 				(((Object)(generatedType))) = ((Object)0);
 			} while (0);
 			do {
-				.free((((Object)(generatedEncoder))));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((((Object)(generatedEncoder))));
 				(((Object)(generatedEncoder))) = ((Object)0);
 			} while (0);
 			do {
-				.free((((Object)(generatedData))));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((((Object)(generatedData))));
 				(((Object)(generatedData))) = ((Object)0);
 			} while (0);
 			generatedHeaders.curl_slist_free_all();
-			.free(mime);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(mime);
 		} 
 	}
 	/* Translate an internal mime tree into a libcurl mime tree. */
@@ -229,23 +229,7 @@ public class tool_mime {
 			if (!ret) {
 				filename = generatedFilename;
 				switch (generatedKind) {
-				case .TOOLMIME_DATA/* Our data is always textual: convert it to ASCII. */:
-						ret = ModernizedCProgram.curl_mime_data(part, generatedData, CURL_ZERO_TERMINATED);
-						break;
-				case .TOOLMIME_FILEDATA:
-						ret = ModernizedCProgram.curl_mime_filedata(part, generatedData);
-						if (!ret && generatedKind == .TOOLMIME_FILEDATA && !filename) {
-							ret = ModernizedCProgram.curl_mime_filename(part, ((Object)0));
-						} 
-						break;
-				case .TOOLMIME_STDIN:
-						if (!filename) {
-							filename = "-";
-						} 
 				case .TOOLMIME_FILE:
-				case /* FALLTHROUGH */.TOOLMIME_STDINDATA:
-						ret = ModernizedCProgram.curl_mime_data_cb(part, generatedSize, ()ModernizedCProgram.tool_mime_stdin_read, ()ModernizedCProgram.tool_mime_stdin_seek, ((Object)0), m);
-						break;
 				case .TOOLMIME_PARTS:
 						ret = m.tool2curlmime(curl, submime);
 						if (!ret) {
@@ -255,6 +239,22 @@ public class tool_mime {
 							} 
 						} 
 						break;
+				case .TOOLMIME_FILEDATA:
+						ret = ModernizedCProgram.curl_mime_filedata(part, generatedData);
+						if (!ret && generatedKind == .TOOLMIME_FILEDATA && !filename) {
+							ret = ModernizedCProgram.curl_mime_filename(part, ((Object)0));
+						} 
+						break;
+				case /* FALLTHROUGH */.TOOLMIME_STDINDATA:
+						ret = ModernizedCProgram.curl_mime_data_cb(part, generatedSize, ()ModernizedCProgram.tool_mime_stdin_read, ()ModernizedCProgram.tool_mime_stdin_seek, ((Object)0), m);
+						break;
+				case .TOOLMIME_DATA/* Our data is always textual: convert it to ASCII. */:
+						ret = ModernizedCProgram.curl_mime_data(part, generatedData, CURL_ZERO_TERMINATED);
+						break;
+				case .TOOLMIME_STDIN:
+						if (!filename) {
+							filename = "-";
+						} 
 				default:
 						break;
 				}

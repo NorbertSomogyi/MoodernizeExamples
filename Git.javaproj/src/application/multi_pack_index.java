@@ -3,7 +3,7 @@ package application;
 public class multi_pack_index {
 	private multi_pack_index next;
 	private int fd;
-	private Object data;
+	private Object[] data;
 	private Object data_len;
 	private Object signature;
 	private byte version;
@@ -13,15 +13,15 @@ public class multi_pack_index {
 	private Object num_objects;
 	private int local;
 	private Object chunk_pack_names;
-	private Object chunk_oid_fanout;
+	private Object[] chunk_oid_fanout;
 	private Object chunk_oid_lookup;
 	private Object chunk_object_offsets;
 	private Object chunk_large_offsets;
-	private Object pack_names;
-	private packed_git packs;
+	private Object[][] pack_names;
+	private packed_git[][] packs;
 	private Object object_dir;
 	
-	public multi_pack_index(multi_pack_index next, int fd, Object data, Object data_len, Object signature, byte version, byte hash_len, byte num_chunks, Object num_packs, Object num_objects, int local, Object chunk_pack_names, Object chunk_oid_fanout, Object chunk_oid_lookup, Object chunk_object_offsets, Object chunk_large_offsets, Object pack_names, packed_git packs, Object object_dir) {
+	public multi_pack_index(multi_pack_index next, int fd, Object[] data, Object data_len, Object signature, byte version, byte hash_len, byte num_chunks, Object num_packs, Object num_objects, int local, Object chunk_pack_names, Object[] chunk_oid_fanout, Object chunk_oid_lookup, Object chunk_object_offsets, Object chunk_large_offsets, Object[][] pack_names, packed_git[][] packs, Object object_dir) {
 		setNext(next);
 		setFd(fd);
 		setData(data);
@@ -45,12 +45,6 @@ public class multi_pack_index {
 	public multi_pack_index() {
 	}
 	
-	public multi_pack_index get_multi_pack_index(repository r) {
-		r.prepare_packed_git();
-		raw_object_store generatedObjects = r.getObjects();
-		multi_pack_index generatedMulti_pack_index = generatedObjects.getMulti_pack_index();
-		return generatedMulti_pack_index;
-	}
 	public multi_pack_index load_multi_pack_index(Object object_dir, int local) {
 		multi_pack_index m = ((Object)0);
 		int fd;
@@ -65,7 +59,7 @@ public class multi_pack_index {
 		if (fd < 0) {
 			;
 		} 
-		if (.fstat(fd, st)) {
+		if (/*Error: Function owner not recognized*/fstat(fd, st)) {
 			();
 			;
 		} 
@@ -82,16 +76,16 @@ public class multi_pack_index {
 		midx_map = ModernizedCProgram.xmmap(((Object)0), midx_size, PROT_READ, MAP_PRIVATE, fd, 0);
 		Object generatedObject_dir = ((m)).getObject_dir();
 		do {
-			size_t flex_array_len_ = (.strlen(object_dir));
-			((m)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedObject_dir, ((object_dir)), flex_array_len_);
+			size_t flex_array_len_ = (/*Error: Function owner not recognized*/strlen(object_dir));
+			((m)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedObject_dir, ((object_dir)), flex_array_len_);
 		} while (0);
 		m.setFd(fd);
 		m.setData(midx_map);
 		m.setData_len(midx_size);
 		m.setLocal(local);
-		Object generatedData = m.getData();
-		m.setSignature(.get_be32(generatedData));
+		Object[] generatedData = m.getData();
+		m.setSignature(/*Error: Function owner not recognized*/get_be32(generatedData));
 		Object generatedSignature = m.getSignature();
 		if (generatedSignature != -1024) {
 			ModernizedCProgram.die(ModernizedCProgram._("multi-pack-index signature 0x%08x does not match signature 0x%08x"), generatedSignature, -1024);
@@ -107,33 +101,33 @@ public class multi_pack_index {
 		} 
 		m.setHash_len(ModernizedCProgram.the_repository.getHash_algo().getRawsz());
 		m.setNum_chunks(generatedData[6]);
-		m.setNum_packs(.get_be32(generatedData + 8));
+		m.setNum_packs(/*Error: Function owner not recognized*/get_be32(generatedData + 8));
 		byte generatedNum_chunks = m.getNum_chunks();
 		Object generatedData_len = m.getData_len();
 		for (i = 0; i < generatedNum_chunks; i++) {
-			uint32_t chunk_id = .get_be32(generatedData + 12 + ( + ) * i);
-			uint64_t chunk_offset = .get_be64(generatedData + 12 + 4 + ( + ) * i);
+			uint32_t chunk_id = /*Error: Function owner not recognized*/get_be32(generatedData + 12 + (/*Error: Unsupported expression*/ + /*Error: Unsupported expression*/) * i);
+			uint64_t chunk_offset = /*Error: Function owner not recognized*/get_be64(generatedData + 12 + 4 + (/*Error: Unsupported expression*/ + /*Error: Unsupported expression*/) * i);
 			if (chunk_offset >= generatedData_len) {
 				ModernizedCProgram.die(ModernizedCProgram._("invalid chunk offset (too large)"));
 			} 
 			switch (chunk_id) {
-			case 0:
-					ModernizedCProgram.die(ModernizedCProgram._("terminating multi-pack-index chunk id appears earlier than expected"));
-					break;
-			case -1024:
-					m.setChunk_oid_fanout((uint32_t)(generatedData + chunk_offset));
-					break;
-			case -1024:
-					m.setChunk_object_offsets(generatedData + chunk_offset);
-					break;
-			case -1024:
-					m.setChunk_large_offsets(generatedData + chunk_offset);
-					break;
 			case -1024:
 					m.setChunk_pack_names(generatedData + chunk_offset);
 					break;
 			case -1024:
 					m.setChunk_oid_lookup(generatedData + chunk_offset);
+					break;
+			case 0:
+					ModernizedCProgram.die(ModernizedCProgram._("terminating multi-pack-index chunk id appears earlier than expected"));
+					break;
+			case -1024:
+					m.setChunk_large_offsets(generatedData + chunk_offset);
+					break;
+			case -1024:
+					m.setChunk_object_offsets(generatedData + chunk_offset);
+					break;
+			case -1024:
+					m.setChunk_oid_fanout((uint32_t)(generatedData + chunk_offset));
 					break;
 			default:
 					break;
@@ -143,7 +137,7 @@ public class multi_pack_index {
 		if (!generatedChunk_pack_names) {
 			ModernizedCProgram.die(ModernizedCProgram._("multi-pack-index missing required pack-name chunk"));
 		} 
-		Object generatedChunk_oid_fanout = m.getChunk_oid_fanout();
+		Object[] generatedChunk_oid_fanout = m.getChunk_oid_fanout();
 		if (!generatedChunk_oid_fanout) {
 			ModernizedCProgram.die(ModernizedCProgram._("multi-pack-index missing required OID fanout chunk"));
 		} 
@@ -155,17 +149,17 @@ public class multi_pack_index {
 		if (!generatedChunk_object_offsets) {
 			ModernizedCProgram.die(ModernizedCProgram._("multi-pack-index missing required object offsets chunk"));
 		} 
-		m.setNum_objects(.ntohl(generatedChunk_oid_fanout[255]));
+		m.setNum_objects(/*Error: Function owner not recognized*/ntohl(generatedChunk_oid_fanout[255]));
 		Object generatedNum_packs = m.getNum_packs();
-		Object generatedPack_names = m.getPack_names();
-		m.setPack_names(ModernizedCProgram.xcalloc(generatedNum_packs, ));
-		packed_git generatedPacks = m.getPacks();
-		m.setPacks(ModernizedCProgram.xcalloc(generatedNum_packs, ));
+		Object[][] generatedPack_names = m.getPack_names();
+		m.setPack_names(ModernizedCProgram.xcalloc(generatedNum_packs, /*Error: sizeof expression not supported yet*/));
+		packed_git[][] generatedPacks = m.getPacks();
+		m.setPacks(ModernizedCProgram.xcalloc(generatedNum_packs, /*Error: sizeof expression not supported yet*/));
 		cur_pack_name = (byte)generatedChunk_pack_names;
 		for (i = 0; i < generatedNum_packs; i++) {
 			generatedPack_names[i] = cur_pack_name;
-			cur_pack_name += .strlen(cur_pack_name) + 1;
-			if (i && .strcmp(generatedPack_names[i], generatedPack_names[i - 1]) <= 0) {
+			cur_pack_name += /*Error: Function owner not recognized*/strlen(cur_pack_name) + 1;
+			if (i && /*Error: Function owner not recognized*/strcmp(generatedPack_names[i], generatedPack_names[i - 1]) <= 0) {
 				ModernizedCProgram.die(ModernizedCProgram._("multi-pack-index pack names out of order: '%s' before '%s'"), generatedPack_names[i - 1], generatedPack_names[i]);
 			} 
 		}
@@ -175,26 +169,26 @@ public class multi_pack_index {
 		return m;
 		ModernizedCProgram.free(midx_name);
 		if (midx_map) {
-			.munmap(midx_map, midx_size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/munmap(midx_map, midx_size);
 		} 
 		if (0 <= fd) {
-			.close(fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
 		} 
 		return ((Object)0);
 	}
 	public void close_midx() {
 		uint32_t i = new uint32_t();
 		if (!m) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		Object generatedData = this.getData();
+		Object[] generatedData = this.getData();
 		Object generatedData_len = this.getData_len();
-		.munmap((byte)generatedData, generatedData_len);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/munmap((byte)generatedData, generatedData_len);
 		int generatedFd = this.getFd();
-		.close(generatedFd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd);
 		this.setFd(-1);
 		Object generatedNum_packs = this.getNum_packs();
-		packed_git generatedPacks = this.getPacks();
+		packed_git[][] generatedPacks = this.getPacks();
 		for (i = 0; i < generatedNum_packs; i++) {
 			if (generatedPacks[i]) {
 				generatedPacks[i].setMulti_pack_index(0);
@@ -204,14 +198,14 @@ public class multi_pack_index {
 			ModernizedCProgram.free(generatedPacks);
 			(generatedPacks) = ((Object)0);
 		} while (0);
-		Object generatedPack_names = this.getPack_names();
+		Object[][] generatedPack_names = this.getPack_names();
 		do {
 			ModernizedCProgram.free(generatedPack_names);
 			(generatedPack_names) = ((Object)0);
 		} while (0);
 	}
 	public int bsearch_midx(Object oid, Object result) {
-		Object generatedChunk_oid_fanout = this.getChunk_oid_fanout();
+		Object[] generatedChunk_oid_fanout = this.getChunk_oid_fanout();
 		Object generatedChunk_oid_lookup = this.getChunk_oid_lookup();
 		return ModernizedCProgram.bsearch_hash(oid.getHash(), generatedChunk_oid_fanout, generatedChunk_oid_lookup, ModernizedCProgram.the_repository.getHash_algo().getRawsz(), result);
 	}
@@ -219,27 +213,27 @@ public class multi_pack_index {
 		byte offset_data;
 		uint32_t offset32 = new uint32_t();
 		Object generatedChunk_object_offsets = this.getChunk_object_offsets();
-		offset_data = generatedChunk_object_offsets + pos * (2 * );
-		offset32 = .get_be32(offset_data + );
+		offset_data = generatedChunk_object_offsets + pos * (2 * /*Error: Unsupported expression*/);
+		offset32 = /*Error: Function owner not recognized*/get_be32(offset_data + /*Error: Unsupported expression*/);
 		Object generatedChunk_large_offsets = this.getChunk_large_offsets();
 		if (generatedChunk_large_offsets && offset32 & -1024) {
-			if ( < ) {
+			if (/*Error: Unsupported expression*/ < /*Error: Unsupported expression*/) {
 				ModernizedCProgram.die(ModernizedCProgram._("multi-pack-index stores a 64-bit offset, but off_t is too small"));
 			} 
 			offset32 ^=  -1024;
-			return .get_be64(generatedChunk_large_offsets +  * offset32);
+			return /*Error: Function owner not recognized*/get_be64(generatedChunk_large_offsets + /*Error: Unsupported expression*/ * offset32);
 		} 
 		return offset32;
 	}
 	public Object nth_midxed_pack_int_id(Object pos) {
 		Object generatedChunk_object_offsets = this.getChunk_object_offsets();
-		return .get_be32(generatedChunk_object_offsets + pos * (2 * ));
+		return /*Error: Function owner not recognized*/get_be32(generatedChunk_object_offsets + pos * (2 * /*Error: Unsupported expression*/));
 	}
 	public int midx_contains_pack(Object idx_or_pack_name) {
 		Object generatedNum_packs = this.getNum_packs();
 		uint32_t first = 0;
 		uint32_t last = generatedNum_packs;
-		Object generatedPack_names = this.getPack_names();
+		Object[][] generatedPack_names = this.getPack_names();
 		while (first < last) {
 			uint32_t mid = first + (last - first) / 2;
 			byte current;
@@ -257,13 +251,19 @@ public class multi_pack_index {
 		}
 		return 0;
 	}
-	public int fill_included_packs_all(Byte include_pack) {
+	public int fill_included_packs_all(byte[] include_pack) {
 		uint32_t i = new uint32_t();
 		Object generatedNum_packs = this.getNum_packs();
 		for (i = 0; i < generatedNum_packs; i++) {
 			include_pack[i] = 1;
 		}
 		return generatedNum_packs < 2;
+	}
+	public multi_pack_index get_multi_pack_index(repository r) {
+		r.prepare_packed_git();
+		raw_object_store generatedObjects = r.getObjects();
+		multi_pack_index generatedMulti_pack_index = generatedObjects.getMulti_pack_index();
+		return generatedMulti_pack_index;
 	}
 	public multi_pack_index getNext() {
 		return next;
@@ -277,10 +277,10 @@ public class multi_pack_index {
 	public void setFd(int newFd) {
 		fd = newFd;
 	}
-	public Object getData() {
+	public Object[] getData() {
 		return data;
 	}
-	public void setData(Object newData) {
+	public void setData(Object[] newData) {
 		data = newData;
 	}
 	public Object getData_len() {
@@ -337,10 +337,10 @@ public class multi_pack_index {
 	public void setChunk_pack_names(Object newChunk_pack_names) {
 		chunk_pack_names = newChunk_pack_names;
 	}
-	public Object getChunk_oid_fanout() {
+	public Object[] getChunk_oid_fanout() {
 		return chunk_oid_fanout;
 	}
-	public void setChunk_oid_fanout(Object newChunk_oid_fanout) {
+	public void setChunk_oid_fanout(Object[] newChunk_oid_fanout) {
 		chunk_oid_fanout = newChunk_oid_fanout;
 	}
 	public Object getChunk_oid_lookup() {
@@ -361,16 +361,16 @@ public class multi_pack_index {
 	public void setChunk_large_offsets(Object newChunk_large_offsets) {
 		chunk_large_offsets = newChunk_large_offsets;
 	}
-	public Object getPack_names() {
+	public Object[][] getPack_names() {
 		return pack_names;
 	}
-	public void setPack_names(Object newPack_names) {
+	public void setPack_names(Object[][] newPack_names) {
 		pack_names = newPack_names;
 	}
-	public packed_git getPacks() {
+	public packed_git[][] getPacks() {
 		return packs;
 	}
-	public void setPacks(packed_git newPacks) {
+	public void setPacks(packed_git[][] newPacks) {
 		packs = newPacks;
 	}
 	public Object getObject_dir() {

@@ -17,7 +17,7 @@ public class ep_sampler {
 	}
 	
 	public void ep_sampler_init() {
-		.memset(eps, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(eps, 0, /*Error: Unsupported expression*/);
 	}
 	public void ep_sampler_free() {
 		 i = new ();
@@ -31,14 +31,14 @@ public class ep_sampler {
 		}
 		Byte generatedName = this.getName();
 		ModernizedCProgram.bfree(generatedName);
-		.da_free(generatedStates);
-		.da_free(generatedValues);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedStates);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedValues);
 	}
 	public ep_sampler ep_getsampler(effect_parser ep, Object name) {
 		 i = new ();
 		Object generatedSamplers = ep.getSamplers();
 		for (i = 0; i < generatedSamplers.getNum(); i++) {
-			if (.strcmp(name, generatedSamplers.getArray()[i].getName()) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(name, generatedSamplers.getArray()[i].getName()) == 0) {
 				return generatedSamplers.getArray() + i;
 			} 
 		}

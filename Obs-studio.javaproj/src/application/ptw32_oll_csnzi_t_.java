@@ -43,7 +43,7 @@ public class ptw32_oll_csnzi_t_ {
 			} 
 			newProxy = oldProxy;
 			generatedInternal.setState(.ptw32_oll_snziRoot_closed);
-		} while ( != (size_t)generatedWord);
+		} while (/*Error: Unsupported expression*/ != (size_t)generatedWord);
 		return (generatedWord == generatedWord);
 	}
 	public Object ptw32_oll_CloseIfEmpty() {
@@ -58,7 +58,7 @@ public class ptw32_oll_csnzi_t_ {
 				return .PTW32_FALSE;
 			} 
 			newProxy = ModernizedCProgram.ptw32_oll_snziRoot_closedAndZero;
-		} while ( != (size_t)generatedWord);
+		} while (/*Error: Unsupported expression*/ != (size_t)generatedWord);
 		return .PTW32_TRUE/*
 		 * Returns whether the C-SNZI has a nonzero surplus and
 		 * whether the C-SNZI is open.

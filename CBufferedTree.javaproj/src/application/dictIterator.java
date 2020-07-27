@@ -20,7 +20,7 @@ public class dictIterator {
 	}
 	
 	public dictIterator dictGetIterator(dict d) {
-		dictIterator iter = .malloc();
+		dictIterator iter = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		iter.setD(d);
 		iter.setTable(0);
 		iter.setIndex(-1);
@@ -44,7 +44,7 @@ public class dictIterator {
 		if (generatedSafe && !(generatedIndex == -1 && generatedTable == 0)) {
 			generatedIterators--;
 		} 
-		.free(iter);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(iter);
 	}
 	public dict getD() {
 		return d;

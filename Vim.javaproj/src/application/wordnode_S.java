@@ -26,7 +26,7 @@ public class wordnode_S {
 	}
 	
 	public wordnode_S wordtree_alloc(spellinfo_S spin) {
-		return (wordnode_T)spin.getroom(, 1/*
+		return (wordnode_T)spin.getroom(/*Error: Unsupported expression*/, 1/*
 		 * Store a word in the tree(s).
 		 * Always store it in the case-folded tree.  For a keep-case word this is
 		 * useful when the word can also be used with all caps (no WF_FIXCAP flag) and
@@ -42,11 +42,11 @@ public class wordnode_S {
 		wordnode_S generatedWn_child = n.getWn_child();
 		long generatedSi_free_count = spin.getSi_free_count();
 		if (generatedSi_first_free == ((Object)0)) {
-			n = (wordnode_T)spin.getroom(, 1);
+			n = (wordnode_T)spin.getroom(/*Error: Unsupported expression*/, 1);
 		} else {
 				n = generatedSi_first_free;
 				spin.setSi_first_free(generatedWn_child);
-				.memset((n), (false), ());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((n), (false), (/*Error: Unsupported expression*/));
 				--generatedSi_free_count;
 		} 
 		return n/*

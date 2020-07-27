@@ -15,10 +15,10 @@ public class os_sem_data {
 		if (ret != 0) {
 			return ret;
 		} 
-		sem = ModernizedCProgram.bzalloc();
+		sem = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		(sem).setSem(new_sem);
 		return 0;
-		HANDLE handle = .CreateSemaphoreA(((Object)0), (LONG)value, -1024, ((Object)0));
+		HANDLE handle = /*Error: Function owner not recognized*/CreateSemaphoreA(((Object)0), (LONG)value, -1024, ((Object)0));
 		if (!handle) {
 			return -1;
 		} 
@@ -32,7 +32,7 @@ public class os_sem_data {
 			ModernizedCProgram.bfree(sem);
 		} 
 		if (sem) {
-			.CloseHandle((HANDLE)sem);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle((HANDLE)sem);
 		} 
 	}
 	public int os_sem_post() {
@@ -44,7 +44,7 @@ public class os_sem_data {
 		if (!sem) {
 			return -1;
 		} 
-		return .ReleaseSemaphore((HANDLE)sem, 1, ((Object)0)) ? 0 : -1;
+		return /*Error: Function owner not recognized*/ReleaseSemaphore((HANDLE)sem, 1, ((Object)0)) ? 0 : -1;
 	}
 	public int os_sem_wait() {
 		if (!sem) {
@@ -56,7 +56,7 @@ public class os_sem_data {
 		if (!sem) {
 			return -1;
 		} 
-		ret = .WaitForSingleObject((HANDLE)sem, -1024);
+		ret = /*Error: Function owner not recognized*/WaitForSingleObject((HANDLE)sem, -1024);
 		return (ret == 0) ? 0 : -1;
 	}
 	public Object getSem() {

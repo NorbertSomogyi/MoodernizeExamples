@@ -24,7 +24,7 @@ public class obs_hotkey_pair {
 			ModernizedCProgram.blog(LOG_WARNING, "obs-hotkey: Available hotkey pair ids exhausted");
 		} 
 		obs_hotkey_pair_t base_addr = ModernizedCProgram.obs.getHotkeys().getHotkey_pairs().getArray();
-		obs_hotkey_pair_t pair = .da_push_back_new(ModernizedCProgram.obs.getHotkeys().getHotkey_pairs());
+		obs_hotkey_pair_t pair = /*Error: Function owner not recognized*/da_push_back_new(ModernizedCProgram.obs.getHotkeys().getHotkey_pairs());
 		pair.setPair_id(ModernizedCProgram.obs.getHotkeys().getNext_pair_id()++);
 		Object generatedFunc = pair.getFunc();
 		generatedFunc[0] = func0;
@@ -38,7 +38,7 @@ public class obs_hotkey_pair {
 		Object generatedHotkey_pairs = context.getHotkey_pairs();
 		Object generatedPair_id = pair.getPair_id();
 		if (context) {
-			.da_push_back(generatedHotkey_pairs, generatedPair_id);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedHotkey_pairs, generatedPair_id);
 		} 
 		if (base_addr != generatedHotkey_pairs.getArray()) {
 			ModernizedCProgram.fixup_pair_pointers();
@@ -57,8 +57,8 @@ public class obs_hotkey_pair {
 		return false;
 	}
 	public Object pair_pointer_fixup_func(Object idx, Object data) {
-		.UNUSED_PARAMETER(idx);
-		.UNUSED_PARAMETER(data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(idx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(data);
 		Object generatedId = this.getId();
 		if (ModernizedCProgram.find_id(generatedId[0], idx)) {
 			ModernizedCProgram.obs.getHotkeys().getHotkeys().getArray()[idx].setData(pair);

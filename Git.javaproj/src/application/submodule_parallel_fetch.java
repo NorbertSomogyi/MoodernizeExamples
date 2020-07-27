@@ -10,11 +10,11 @@ public class submodule_parallel_fetch {
 	private int quiet;
 	private int result;
 	private string_list changed_submodule_names;
-	private fetch_task oid_fetch_tasks;
+	private fetch_task[][] oid_fetch_tasks;
 	private int oid_fetch_tasks_nr;
 	private int oid_fetch_tasks_alloc;
 	
-	public submodule_parallel_fetch(int count, argv_array args, repository r, Object prefix, int command_line_option, int default_option, int quiet, int result, string_list changed_submodule_names, fetch_task oid_fetch_tasks, int oid_fetch_tasks_nr, int oid_fetch_tasks_alloc) {
+	public submodule_parallel_fetch(int count, argv_array args, repository r, Object prefix, int command_line_option, int default_option, int quiet, int result, string_list changed_submodule_names, fetch_task[][] oid_fetch_tasks, int oid_fetch_tasks_nr, int oid_fetch_tasks_alloc) {
 		setCount(count);
 		setArgs(args);
 		setR(r);
@@ -42,7 +42,7 @@ public class submodule_parallel_fetch {
 			byte value;
 			int fetch_recurse = submodule.getFetch_recurse();
 			ModernizedCProgram.key = ModernizedCProgram.xstrfmt("submodule.%s.fetchRecurseSubmodules", submodule.getName());
-			if (!.repo_config_get_string_const(generatedR, ModernizedCProgram.key, value)) {
+			if (!/*Error: Function owner not recognized*/repo_config_get_string_const(generatedR, ModernizedCProgram.key, value)) {
 				fetch_recurse = ModernizedCProgram.parse_fetch_recurse_submodules_arg(ModernizedCProgram.key, value);
 			} 
 			ModernizedCProgram.free(ModernizedCProgram.key);
@@ -107,10 +107,10 @@ public class submodule_parallel_fetch {
 	public void setChanged_submodule_names(string_list newChanged_submodule_names) {
 		changed_submodule_names = newChanged_submodule_names;
 	}
-	public fetch_task getOid_fetch_tasks() {
+	public fetch_task[][] getOid_fetch_tasks() {
 		return oid_fetch_tasks;
 	}
-	public void setOid_fetch_tasks(fetch_task newOid_fetch_tasks) {
+	public void setOid_fetch_tasks(fetch_task[][] newOid_fetch_tasks) {
 		oid_fetch_tasks = newOid_fetch_tasks;
 	}
 	public int getOid_fetch_tasks_nr() {

@@ -64,12 +64,12 @@ public class pulse_data {
 		spec.setFormat(ModernizedCProgram.data.getFormat());
 		spec.setRate(ModernizedCProgram.data.getSamples_per_sec());
 		spec.setChannels(ModernizedCProgram.data.getChannels());
-		if (!.pa_sample_spec_valid(spec)) {
+		if (!/*Error: Function owner not recognized*/pa_sample_spec_valid(spec)) {
 			ModernizedCProgram.blog(LOG_ERROR, "pulse-input: Sample spec is not valid");
 			return -1;
 		} 
 		ModernizedCProgram.data.setSpeakers(ModernizedCProgram.pulse_channels_to_obs_speakers(spec.getChannels()));
-		ModernizedCProgram.data.setBytes_per_frame(.pa_frame_size(spec));
+		ModernizedCProgram.data.setBytes_per_frame(/*Error: Function owner not recognized*/pa_frame_size(spec));
 		 channel_map = ModernizedCProgram.pulse_channel_map(ModernizedCProgram.data.getSpeakers());
 		ModernizedCProgram.data.setStream(ModernizedCProgram.pulse_stream_new(ModernizedCProgram.obs_source_get_name(ModernizedCProgram.data.getSource()), spec, channel_map));
 		if (!ModernizedCProgram.data.getStream()) {
@@ -77,17 +77,17 @@ public class pulse_data {
 			return -1;
 		} 
 		ModernizedCProgram.pulse_lock();
-		.pa_stream_set_read_callback(ModernizedCProgram.data.getStream(), pulse_stream_read, (Object)ModernizedCProgram.data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pa_stream_set_read_callback(ModernizedCProgram.data.getStream(), pulse_stream_read, (Object)ModernizedCProgram.data);
 		ModernizedCProgram.pulse_unlock();
 		 attr = new ();
-		attr.setFragsize(.pa_usec_to_bytes(25000, spec));
+		attr.setFragsize(/*Error: Function owner not recognized*/pa_usec_to_bytes(25000, spec));
 		attr.setMaxlength((uint32_t)-1);
 		attr.setMinreq((uint32_t)-1);
 		attr.setPrebuf((uint32_t)-1);
 		attr.setTlength((uint32_t)-1);
 		 flags = PA_STREAM_ADJUST_LATENCY;
 		ModernizedCProgram.pulse_lock();
-		int_fast32_t ret = .pa_stream_connect_record(ModernizedCProgram.data.getStream(), ModernizedCProgram.data.getDevice(), attr, flags);
+		int_fast32_t ret = /*Error: Function owner not recognized*/pa_stream_connect_record(ModernizedCProgram.data.getStream(), ModernizedCProgram.data.getDevice(), attr, flags);
 		ModernizedCProgram.pulse_unlock();
 		if (ret < 0) {
 			ModernizedCProgram.data.pulse_stop_recording();
@@ -102,8 +102,8 @@ public class pulse_data {
 	public void pulse_stop_recording() {
 		if (ModernizedCProgram.data.getStream()) {
 			ModernizedCProgram.pulse_lock();
-			.pa_stream_disconnect(ModernizedCProgram.data.getStream());
-			.pa_stream_unref(ModernizedCProgram.data.getStream());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pa_stream_disconnect(ModernizedCProgram.data.getStream());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pa_stream_unref(ModernizedCProgram.data.getStream());
 			ModernizedCProgram.data.setStream(NULL);
 			ModernizedCProgram.pulse_unlock();
 		} 

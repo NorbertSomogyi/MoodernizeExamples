@@ -25,6 +25,57 @@ public class gs_index_buffer {
 	public gs_index_buffer() {
 	}
 	
+	public gs_index_buffer gs_indexbuffer_create(gs_index_type type, Object indices, Object num, Object flags) {
+		graphics_t graphics = thread_graphics;
+		if (!ModernizedCProgram.gs_valid("gs_indexbuffer_create")) {
+			return ((Object)0);
+		} 
+		if (indices && num && (flags & (1 << 4)) != 0) {
+			size_t size = gs_index_type.type == gs_index_type.GS_UNSIGNED_SHORT ? 2 : 4;
+			indices = ModernizedCProgram.bmemdup(indices, size * num);
+		} 
+		gs_device generatedDevice = graphics.getDevice();
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, gs_index_type.type, indices, num, flags);
+	}
+	public void gs_load_indexbuffer() {
+		graphics_t graphics = thread_graphics;
+		if (!ModernizedCProgram.gs_valid("gs_load_indexbuffer")) {
+			return /*Error: Unsupported expression*/;
+		} 
+		gs_device generatedDevice = graphics.getDevice();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, indexbuffer);
+	}
+	public void gs_indexbuffer_destroy() {
+		graphics_t graphics = thread_graphics;
+		if (!ModernizedCProgram.gs_valid("gs_indexbuffer_destroy")) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (!indexbuffer) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(indexbuffer);
+		if (ib) {
+			if (ib.getBuffer()) {
+				ModernizedCProgram.gl_delete_buffers(1, ib.getBuffer());
+			} 
+			ModernizedCProgram.bfree(ib.getData());
+			ModernizedCProgram.bfree(ib);
+		} 
+	}
+	public void gs_indexbuffer_flush() {
+		if (!(ModernizedCProgram.gs_valid("gs_indexbuffer_flush") && ModernizedCProgram.gs_obj_valid(indexbuffer, "gs_indexbuffer_flush", "indexbuffer"))) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(indexbuffer);
+		ModernizedCProgram.gs_indexbuffer_flush_internal(ib, ib.getData());
+	}
+	public void gs_indexbuffer_flush_direct(Object data) {
+		if (!(ModernizedCProgram.gs_valid("gs_indexbuffer_flush_direct") && ModernizedCProgram.gs_obj_valid(indexbuffer, "gs_indexbuffer_flush_direct", "indexbuffer") && ModernizedCProgram.gs_obj_valid(data, "gs_indexbuffer_flush_direct", "data"))) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(indexbuffer, data);
+		ModernizedCProgram.gs_indexbuffer_flush_internal(ib, data);
+	}
 	/******************************************************************************
 	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
 	
@@ -54,26 +105,6 @@ public class gs_index_buffer {
 			this.setData(NULL);
 		} 
 		return success;
-	}
-	public gs_index_buffer gs_indexbuffer_create(gs_index_type type, Object indices, Object num, Object flags) {
-		graphics_t graphics = thread_graphics;
-		if (!ModernizedCProgram.gs_valid("gs_indexbuffer_create")) {
-			return ((Object)0);
-		} 
-		if (indices && num && (flags & (1 << 4)) != 0) {
-			size_t size = gs_index_type.type == gs_index_type.GS_UNSIGNED_SHORT ? 2 : 4;
-			indices = ModernizedCProgram.bmemdup(indices, size * num);
-		} 
-		gs_device generatedDevice = graphics.getDevice();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, gs_index_type.type, indices, num, flags);
-	}
-	public void gs_load_indexbuffer() {
-		graphics_t graphics = thread_graphics;
-		if (!ModernizedCProgram.gs_valid("gs_load_indexbuffer")) {
-			return ;
-		} 
-		gs_device generatedDevice = graphics.getDevice();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedDevice, indexbuffer);
 	}
 	public Object getBuffer() {
 		return buffer;

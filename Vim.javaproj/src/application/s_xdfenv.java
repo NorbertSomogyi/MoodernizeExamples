@@ -37,7 +37,7 @@ public class s_xdfenv {
 			return -1;
 		} 
 		s_xdfile generatedXdf2 = this.getXdf2();
-		Byte generatedRchg = generatedXdf2.getRchg();
+		byte[] generatedRchg = generatedXdf2.getRchg();
 		if (!count1) {
 			while (count2--) {
 				generatedRchg[line2++ - 1] = 1;
@@ -49,7 +49,7 @@ public class s_xdfenv {
 			}
 			return 0;
 		} 
-		.memset(lcs, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(lcs, 0, /*Error: sizeof expression not supported yet*/);
 		lcs_found = ModernizedCProgram.find_lcs(xpp, env, lcs, line1, count1, line2, count2);
 		int generatedBegin1 = lcs.getBegin1();
 		int generatedBegin2 = lcs.getBegin2();
@@ -81,18 +81,12 @@ public class s_xdfenv {
 				} 
 		} 
 	}
-	public void xdl_free_env() {
-		s_xdfile generatedXdf2 = this.getXdf2();
-		generatedXdf2.xdl_free_ctx();
-		s_xdfile generatedXdf1 = this.getXdf1();
-		generatedXdf1.xdl_free_ctx();
-	}
 	public int xdl_fall_back_diff(Object xpp, int line1, int count1, int line2, int count2) {
 		mmfile_t subfile1 = new mmfile_t();
 		mmfile_t subfile2 = new mmfile_t();
 		xdfenv_t env = new xdfenv_t();
 		s_xdfile generatedXdf1 = this.getXdf1();
-		s_xrecord generatedRecs = generatedXdf1.getRecs();
+		s_xrecord[][] generatedRecs = generatedXdf1.getRecs();
 		subfile1.setPtr((byte)generatedRecs[line1 - 1].getPtr());
 		Byte generatedPtr = subfile1.getPtr();
 		subfile1.setSize(generatedRecs[line1 + count1 - 2].getPtr() + generatedRecs[line1 + count1 - 2].getSize() - generatedPtr);
@@ -101,9 +95,9 @@ public class s_xdfenv {
 		if (ModernizedCProgram.xdl_do_diff(subfile1, subfile2, xpp, env) < 0) {
 			return -1;
 		} 
-		Byte generatedRchg = generatedXdf1.getRchg();
-		.memcpy(generatedRchg + line1 - 1, generatedRchg, count1);
-		.memcpy(generatedRchg + line2 - 1, generatedRchg, count2);
+		byte[] generatedRchg = generatedXdf1.getRchg();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedRchg + line1 - 1, generatedRchg, count1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedRchg + line2 - 1, generatedRchg, count2);
 		env.xdl_free_env();
 		return 0;
 	}
@@ -115,6 +109,12 @@ public class s_xdfenv {
 		 * the libxdiff interface does not (yet) allow for diffing only
 		 * ranges of lines instead of the whole files.
 		 */
+	public void xdl_free_env() {
+		s_xdfile generatedXdf2 = this.getXdf2();
+		generatedXdf2.xdl_free_ctx();
+		s_xdfile generatedXdf1 = this.getXdf1();
+		generatedXdf1.xdl_free_ctx();
+	}
 	public s_xdfile getXdf1() {
 		return xdf1;
 	}

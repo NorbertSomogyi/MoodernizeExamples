@@ -29,7 +29,7 @@ public class ep_func {
 	}
 	
 	public void ep_func_init(Byte ret_type, Byte name) {
-		.memset(epf, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(epf, 0, /*Error: Unsupported expression*/);
 		this.setName(name);
 		this.setRet_type(ret_type);
 	}
@@ -47,21 +47,21 @@ public class ep_func {
 		ModernizedCProgram.bfree(generatedMapping);
 		dstr generatedContents = this.getContents();
 		generatedContents.dstr_free();
-		.da_free(generatedParam_vars);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedParam_vars);
 		Object generatedFunc_deps = this.getFunc_deps();
-		.da_free(generatedFunc_deps);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedFunc_deps);
 		Object generatedStruct_deps = this.getStruct_deps();
-		.da_free(generatedStruct_deps);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedStruct_deps);
 		Object generatedParam_deps = this.getParam_deps();
-		.da_free(generatedParam_deps);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedParam_deps);
 		Object generatedSampler_deps = this.getSampler_deps();
-		.da_free(generatedSampler_deps);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedSampler_deps);
 	}
 	public ep_func ep_getfunc(effect_parser ep, Object name) {
 		 i = new ();
 		Object generatedFuncs = ep.getFuncs();
 		for (i = 0; i < generatedFuncs.getNum(); i++) {
-			if (.strcmp(name, generatedFuncs.getArray()[i].getName()) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(name, generatedFuncs.getArray()[i].getName()) == 0) {
 				return generatedFuncs.getArray() + i;
 			} 
 		}

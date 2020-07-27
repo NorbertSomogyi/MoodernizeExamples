@@ -24,9 +24,9 @@ public class ref_filter_cbdata {
 		ref_array generatedArray = this.getArray();
 		ref_array array = generatedArray;
 		int generatedNr = array.getNr();
-		commit to_clear = ModernizedCProgram.xcalloc(, generatedNr);
+		commit to_clear = ModernizedCProgram.xcalloc(/*Error: Unsupported expression*/, generatedNr);
 		ModernizedCProgram.repo_init_revisions(ModernizedCProgram.the_repository, revs, ((Object)0));
-		ref_array_item generatedItems = array.getItems();
+		ref_array_item[][] generatedItems = array.getItems();
 		commit generatedCommit = item.getCommit();
 		object generatedObject = generatedCommit.getObject();
 		Object generatedRefname = item.getRefname();
@@ -55,9 +55,9 @@ public class ref_filter_cbdata {
 					item.free_array_item();
 			} 
 		}
-		.clear_commit_marks_many(old_nr, to_clear, (((-1024 << 11) - 1) | (-1024 << 25) | (-1024 << 26)));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/clear_commit_marks_many(old_nr, to_clear, (((-1024 << 11) - 1) | (-1024 << 25) | (-1024 << 26)));
 		commit generatedMerge_commit = filter.getMerge_commit();
-		.clear_commit_marks(generatedMerge_commit, (((-1024 << 11) - 1) | (-1024 << 25) | (-1024 << 26)));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/clear_commit_marks(generatedMerge_commit, (((-1024 << 11) - 1) | (-1024 << 25) | (-1024 << 26)));
 		ModernizedCProgram.free(to_clear/*
 		 * API for filtering a set of refs. Based on the type of refs the user
 		 * has requested, we iterate through those refs and apply filters

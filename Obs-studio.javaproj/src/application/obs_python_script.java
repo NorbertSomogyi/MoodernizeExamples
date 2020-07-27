@@ -32,41 +32,41 @@ public class obs_python_script {
 	public void get_defaults(Object get_defs) {
 		ModernizedCProgram.PyObject * py_settings;
 		if (!ModernizedCProgram.libobs_to_py_("obs_data_t *", ModernizedCProgram.data.getBase().getSettings(), false, py_settings, NULL, __FUNCTION__, 157)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		 args = .Import_Py_BuildValue("(O)", py_settings);
-		 py_ret = .Import_PyObject_CallObject(get_defs, args);
+		 args = /*Error: Function owner not recognized*/Import_Py_BuildValue("(O)", py_settings);
+		 py_ret = /*Error: Function owner not recognized*/Import_PyObject_CallObject(get_defs, args);
 		ModernizedCProgram.py_error_(__FUNCTION__, 162);
-		.Py_XDECREF(py_ret);
-		.Py_XDECREF(args);
-		.Py_XDECREF(py_settings);
-		obs_data obs_data = new obs_data();
-		obs_data_t settings = obs_data.obs_data_create();
-		if (info.getGet_defaults()) {
-			.UNRECOGNIZEDFUNCTIONNAME(settings);
-		} 
-		if (info.getGet_defaults2()) {
-			.UNRECOGNIZEDFUNCTIONNAME(settings, info.getType_data());
-		} 
-		return settings;
-		obs_data obs_data = new obs_data();
-		obs_data_t settings = obs_data.obs_data_create();
-		if (info.getGet_defaults()) {
-			.UNRECOGNIZEDFUNCTIONNAME(settings);
-		} 
-		return settings;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_ret);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(args);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_settings);
 		obs_data obs_data = new obs_data();
 		obs_data_t settings = obs_data.obs_data_create();
 		if (info.getGet_defaults2()) {
-			.UNRECOGNIZEDFUNCTIONNAME(info.getType_data(), settings);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(info.getType_data(), settings);
 		}  else if (info.getGet_defaults()) {
-			.UNRECOGNIZEDFUNCTIONNAME(settings);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(settings);
 		} 
 		return settings;
 		obs_data obs_data = new obs_data();
 		obs_data_t settings = obs_data.obs_data_create();
 		if (info.getGet_defaults()) {
-			.UNRECOGNIZEDFUNCTIONNAME(settings);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(settings);
+		} 
+		return settings;
+		obs_data obs_data = new obs_data();
+		obs_data_t settings = obs_data.obs_data_create();
+		if (info.getGet_defaults()) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(settings);
+		} 
+		if (info.getGet_defaults2()) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(settings, info.getType_data());
+		} 
+		return settings;
+		obs_data obs_data = new obs_data();
+		obs_data_t settings = obs_data.obs_data_create();
+		if (info.getGet_defaults()) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(settings);
 		} 
 		return settings;
 	}
@@ -81,68 +81,68 @@ public class obs_python_script {
 		int ret;
 		ModernizedCProgram.cur_python_script = ModernizedCProgram.data;
 		if (!ModernizedCProgram.data.getModule()) {
-			py_file = .Import_PyUnicode_FromString(ModernizedCProgram.data.getName().getDstr());
-			py_module = .Import_PyImport_Import(py_file);
+			py_file = /*Error: Function owner not recognized*/Import_PyUnicode_FromString(ModernizedCProgram.data.getName().getDstr());
+			py_module = /*Error: Function owner not recognized*/Import_PyImport_Import(py_file);
 		} else {
-				py_module = .Import_PyImport_ReloadModule(ModernizedCProgram.data.getModule());
+				py_module = /*Error: Function owner not recognized*/Import_PyImport_ReloadModule(ModernizedCProgram.data.getModule());
 		} 
 		if (!py_module) {
 			ModernizedCProgram.py_error_(__FUNCTION__, 189);
 			;
 		} 
-		.Py_XINCREF(ModernizedCProgram.py_obspython);
-		ret = .Import_PyModule_AddObject(py_module, "obspython", ModernizedCProgram.py_obspython);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XINCREF(ModernizedCProgram.py_obspython);
+		ret = /*Error: Function owner not recognized*/Import_PyModule_AddObject(py_module, "obspython", ModernizedCProgram.py_obspython);
 		if (ModernizedCProgram.py_error_(__FUNCTION__, 195) || ret != 0) {
 			;
 		} 
-		ret = .Import_PyModule_AddStringConstant(py_module, "__script_dir__", ModernizedCProgram.data.getDir().getDstr());
+		ret = /*Error: Function owner not recognized*/Import_PyModule_AddStringConstant(py_module, "__script_dir__", ModernizedCProgram.data.getDir().getDstr());
 		if (ModernizedCProgram.py_error_(__FUNCTION__, 200) || ret != 0) {
 			;
 		} 
-		 py_data = .Import_PyCapsule_New(ModernizedCProgram.data, NULL, NULL);
-		ret = .Import_PyModule_AddObject(py_module, "__script_data__", py_data);
+		 py_data = /*Error: Function owner not recognized*/Import_PyCapsule_New(ModernizedCProgram.data, NULL, NULL);
+		ret = /*Error: Function owner not recognized*/Import_PyModule_AddObject(py_module, "__script_data__", py_data);
 		if (ModernizedCProgram.py_error_(__FUNCTION__, 205) || ret != 0) {
 			;
 		} 
 		[] global_funcs = new []{new ("script_path", py_get_current_script_path, METH_NOARGS, "Gets the script path"), new (0)};
 		ModernizedCProgram.add_functions_to_py_module(py_module, global_funcs);
-		ModernizedCProgram.data.setUpdate(.Import_PyObject_GetAttrString(py_module, "script_update"));
+		ModernizedCProgram.data.setUpdate(/*Error: Function owner not recognized*/Import_PyObject_GetAttrString(py_module, "script_update"));
 		if (!ModernizedCProgram.data.getUpdate()) {
-			.Import_PyErr_Clear();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyErr_Clear();
 		} 
-		ModernizedCProgram.data.setSave(.Import_PyObject_GetAttrString(py_module, "script_save"));
+		ModernizedCProgram.data.setSave(/*Error: Function owner not recognized*/Import_PyObject_GetAttrString(py_module, "script_save"));
 		if (!ModernizedCProgram.data.getSave()) {
-			.Import_PyErr_Clear();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyErr_Clear();
 		} 
-		ModernizedCProgram.data.setGet_properties(.Import_PyObject_GetAttrString(py_module, "script_properties"));
+		ModernizedCProgram.data.setGet_properties(/*Error: Function owner not recognized*/Import_PyObject_GetAttrString(py_module, "script_properties"));
 		if (!ModernizedCProgram.data.getGet_properties()) {
-			.Import_PyErr_Clear();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyErr_Clear();
 		} 
-		 func = .Import_PyObject_GetAttrString(py_module, "script_defaults");
+		 func = /*Error: Function owner not recognized*/Import_PyObject_GetAttrString(py_module, "script_defaults");
 		if (func) {
 			ModernizedCProgram.data.get_defaults(func);
-			.Py_DECREF(func);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_DECREF(func);
 		} else {
-				.Import_PyErr_Clear();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyErr_Clear();
 		} 
-		func = .Import_PyObject_GetAttrString(py_module, "script_description");
+		func = /*Error: Function owner not recognized*/Import_PyObject_GetAttrString(py_module, "script_description");
 		if (func) {
-			 py_ret = .Import_PyObject_CallObject(func, NULL);
+			 py_ret = /*Error: Function owner not recognized*/Import_PyObject_CallObject(func, NULL);
 			ModernizedCProgram.py_error_(__FUNCTION__, 239);
-			 py_desc = .Import_PyUnicode_AsUTF8String(py_ret);
+			 py_desc = /*Error: Function owner not recognized*/Import_PyUnicode_AsUTF8String(py_ret);
 			if (py_desc) {
-				byte desc = .PyBytes_AS_STRING(py_desc);
+				byte desc = /*Error: Function owner not recognized*/PyBytes_AS_STRING(py_desc);
 				if (desc) {
 					ModernizedCProgram.data.getBase().getDesc().dstr_copy(desc);
 				} 
-				.Py_DECREF(py_desc);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_DECREF(py_desc);
 			} 
-			.Py_XDECREF(py_ret);
-			.Py_DECREF(func);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_ret);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_DECREF(func);
 		} else {
-				.Import_PyErr_Clear();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyErr_Clear();
 		} 
-		py_tick = .Import_PyObject_GetAttrString(py_module, "script_tick");
+		py_tick = /*Error: Function owner not recognized*/Import_PyObject_GetAttrString(py_module, "script_tick");
 		if (py_tick) {
 			ModernizedCProgram.pthread_mutex_lock(ModernizedCProgram.tick_mutex);
 			obs_python_script next = ModernizedCProgram.first_tick_script;
@@ -156,33 +156,33 @@ public class obs_python_script {
 			py_tick = NULL;
 			ModernizedCProgram.pthread_mutex_unlock(ModernizedCProgram.tick_mutex);
 		} else {
-				.Import_PyErr_Clear();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyErr_Clear();
 		} 
-		py_load = .Import_PyObject_GetAttrString(py_module, "script_load");
+		py_load = /*Error: Function owner not recognized*/Import_PyObject_GetAttrString(py_module, "script_load");
 		if (py_load) {
 			ModernizedCProgram.PyObject * py_s;
 			ModernizedCProgram.libobs_to_py_("obs_data_t *", ModernizedCProgram.data.getBase().getSettings(), false, py_s, NULL, __FUNCTION__, 275);
-			 args = .Import_Py_BuildValue("(O)", py_s);
-			 py_ret = .Import_PyObject_CallObject(py_load, args);
+			 args = /*Error: Function owner not recognized*/Import_Py_BuildValue("(O)", py_s);
+			 py_ret = /*Error: Function owner not recognized*/Import_PyObject_CallObject(py_load, args);
 			ModernizedCProgram.py_error_(__FUNCTION__, 278);
-			.Py_XDECREF(py_ret);
-			.Py_XDECREF(args);
-			.Py_XDECREF(py_s);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_ret);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(args);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_s);
 		} else {
-				.Import_PyErr_Clear();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyErr_Clear();
 		} 
 		if (ModernizedCProgram.data.getModule()) {
-			.Py_XDECREF(ModernizedCProgram.data.getModule());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(ModernizedCProgram.data.getModule());
 		} 
 		ModernizedCProgram.data.setModule(py_module);
 		py_module = NULL;
 		success = true;
-		.Py_XDECREF(py_tick);
-		.Py_XDECREF(py_defaults);
-		.Py_XDECREF(py_success);
-		.Py_XDECREF(py_file);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_tick);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_defaults);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_success);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_file);
 		if (!success) {
-			.Py_XDECREF(py_module);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_module);
 		} 
 		ModernizedCProgram.cur_python_script = NULL;
 		return success;
@@ -192,16 +192,16 @@ public class obs_python_script {
 		 py_func = NULL;
 		 py_ret = NULL;
 		ModernizedCProgram.cur_python_script = ModernizedCProgram.data;
-		py_func = .Import_PyObject_GetAttrString(py_module, "script_unload");
-		if (.Import_PyErr_Occurred() || !py_func) {
-			.Import_PyErr_Clear();
+		py_func = /*Error: Function owner not recognized*/Import_PyObject_GetAttrString(py_module, "script_unload");
+		if (/*Error: Function owner not recognized*/Import_PyErr_Occurred() || !py_func) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyErr_Clear();
 			;
 		} 
-		py_ret = .Import_PyObject_CallObject(py_func, NULL);
+		py_ret = /*Error: Function owner not recognized*/Import_PyObject_CallObject(py_func, NULL);
 		if (ModernizedCProgram.py_error_(__FUNCTION__, 320)) {
 			;
 		} 
-		.Py_XDECREF(py_func);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_func);
 		ModernizedCProgram.cur_python_script = NULL;
 	}
 	public obs_python_script python_obs_callback_script(python_obs_callback cb) {

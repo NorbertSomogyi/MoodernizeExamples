@@ -23,7 +23,7 @@ public class llist_item {
 			ModernizedCProgram.free_nodes = ModernizedCProgram.free_nodes.getNext();
 		} else {
 				int i = 1;
-				(new_item) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (true)));
+				(new_item) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (true)));
 				for (; i < 512; i++) {
 					new_item[i].llist_item_put();
 				}

@@ -93,17 +93,17 @@ package application;
 /* number of fixed literal/length codes */
 /* input and output state */
 public class state {
-	private Byte out;
+	private byte[] out;
 	private long outlen;
 	private long outcnt;
-	private Object in;
+	private Object[] in;
 	private long inlen;
 	private long incnt;
 	private int bitbuf;
 	private int bitcnt;
 	private Object env;
 	
-	public state(Byte out, long outlen, long outcnt, Object in, long inlen, long incnt, int bitbuf, int bitcnt, Object env) {
+	public state(byte[] out, long outlen, long outcnt, Object[] in, long inlen, long incnt, int bitbuf, int bitcnt, Object env) {
 		setOut(out);
 		setOutlen(outlen);
 		setOutcnt(outcnt);
@@ -125,10 +125,10 @@ public class state {
 		long generatedIncnt = this.getIncnt();
 		long generatedInlen = this.getInlen();
 		Object generatedEnv = this.getEnv();
-		Object generatedIn = this.getIn();
+		Object[] generatedIn = this.getIn();
 		while (generatedBitcnt < need) {
 			if (generatedIncnt == generatedInlen) {
-				.longjmp(generatedEnv, /* out of input */1);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(generatedEnv, /* out of input */1);
 			} 
 			val |=  (long)(generatedIn[generatedIncnt++]) << generatedBitcnt;
 			generatedBitcnt += 8;
@@ -158,13 +158,13 @@ public class state {
 		int generatedBitcnt = this.getBitcnt();
 		Object generatedLeft = this.getLeft();
 		Object generatedInhow = this.getInhow();
-		Object generatedIn = this.getIn();
+		Object[] generatedIn = this.getIn();
 		Object generatedEnv = this.getEnv();
 		while (generatedBitcnt < need) {
 			if (generatedLeft == 0) {
-				this.setLeft(.UNRECOGNIZEDFUNCTIONNAME(generatedInhow, (generatedIn)));
+				this.setLeft(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedInhow, (generatedIn)));
 				if (generatedLeft == 0) {
-					.longjmp(generatedEnv, /* out of input */1);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(generatedEnv, /* out of input */1);
 				} 
 			} 
 			val |=  (int)((generatedIn)++) << generatedBitcnt;
@@ -190,7 +190,7 @@ public class state {
 		if (generatedIncnt + 4 > generatedInlen) {
 			return /* not enough input */2;
 		} 
-		Object generatedIn = this.getIn();
+		Object[] generatedIn = this.getIn();
 		len = generatedIn[generatedIncnt++];
 		len |=  generatedIn[generatedIncnt++] << 8;
 		if (generatedIn[generatedIncnt++] != (~len & -1024) || generatedIn[generatedIncnt++] != ((~len >> 8) & -1024)) {
@@ -199,7 +199,7 @@ public class state {
 		if (generatedIncnt + len > generatedInlen) {
 			return /* not enough input */2;
 		} 
-		Byte generatedOut = this.getOut();
+		byte[] generatedOut = this.getOut();
 		long generatedOutcnt = this.getOutcnt();
 		long generatedOutlen = this.getOutlen();
 		if (generatedOut != ((byte)0)) {
@@ -229,11 +229,11 @@ public class state {
 		int[] lext = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0};
 		int[] dists = new int[]{1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145, 8193, 12289, 16385, 24577};
 		int[] dext = new int[]{0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13};
-		Byte generatedOut = this.getOut();
+		byte[] generatedOut = this.getOut();
 		long generatedOutcnt = this.getOutcnt();
 		long generatedOutlen = this.getOutlen();
 		/* decode literals and length/distance pairs */do {
-			symbol = .decode(s, lencode);
+			symbol = /*Error: Function owner not recognized*/decode(s, lencode);
 			if (symbol < 0) {
 				return /* invalid symbol */symbol;
 			} 
@@ -251,7 +251,7 @@ public class state {
 					return -/* invalid fixed code */10;
 				} 
 				len = lens[symbol] + s.bits(lext[symbol]);
-				symbol = .decode(s, /* get and check distance */distcode);
+				symbol = /*Error: Function owner not recognized*/decode(s, /* get and check distance */distcode);
 				if (symbol < 0) {
 					return /* invalid symbol */symbol;
 				} 
@@ -457,7 +457,7 @@ public class state {
 		while (index < nlen + ndist) {
 			int symbol;
 			int len;
-			symbol = .decode(s, lencode);
+			symbol = /*Error: Function owner not recognized*/decode(s, lencode);
 			if (symbol < 0) {
 				return /* invalid symbol */symbol;
 			} 
@@ -488,7 +488,7 @@ public class state {
 			return -9;
 		} 
 		err = lencode.construct(lengths, /* build huffman table for literal/length codes */nlen);
-		Integer generatedCount = lencode.getCount();
+		int[] generatedCount = lencode.getCount();
 		if (err && (err < 0 || nlen != generatedCount[0] + generatedCount[1])) {
 			return -/* incomplete code ok only for single length 1 code */7;
 		} 
@@ -566,9 +566,9 @@ public class state {
 		int[] base = new int[]{3, 2, 4, 5, 6, 7, 8, 9, 10, 12, 16, 24, 40, 72, 136, 264};
 		byte[] extra = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8};
 		if (/* set up decoding tables (once--might not be thread-safe) */virgin) {
-			litcode.construct(litlen, );
-			lencode.construct(lenlen, );
-			distcode.construct(distlen, );
+			litcode.construct(litlen, /*Error: sizeof expression not supported yet*/);
+			lencode.construct(lenlen, /*Error: sizeof expression not supported yet*/);
+			distcode.construct(distlen, /*Error: sizeof expression not supported yet*/);
 			virgin = 0;
 		} 
 		lit = s.bits(/* read header */8);
@@ -581,17 +581,17 @@ public class state {
 		} 
 		Object generatedFirst = this.getFirst();
 		Object generatedNext = this.getNext();
-		Byte generatedOut = this.getOut();
+		byte[] generatedOut = this.getOut();
 		Object generatedOuthow = this.getOuthow();
 		/* decode literals and length/distance pairs */do {
 			if (s.bits(1)) {
-				symbol = .decode(s, /* get length */lencode);
+				symbol = /*Error: Function owner not recognized*/decode(s, /* get length */lencode);
 				len = base[symbol] + s.bits(extra[symbol]);
 				if (len == /* end code */519) {
 					break;
 				} 
 				symbol = len == 2 ? 2 : /* get distance */dict;
-				dist = .decode(s, distcode) << symbol;
+				dist = /*Error: Function owner not recognized*/decode(s, distcode) << symbol;
 				dist += s.bits(symbol);
 				dist++;
 				if (generatedFirst && dist > generatedNext) {
@@ -615,7 +615,7 @@ public class state {
 						to++ = from++;
 					} while (--copy);
 					if (generatedNext == 4096) {
-						if (.UNRECOGNIZEDFUNCTIONNAME(generatedOuthow, generatedOut, generatedNext)) {
+						if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOuthow, generatedOut, generatedNext)) {
 							return 1;
 						} 
 						this.setNext(0);
@@ -623,10 +623,10 @@ public class state {
 					} 
 				} while (len != 0);
 			} else {
-					symbol = lit ? .decode(s, litcode) : s.bits(/* get literal and write it */8);
+					symbol = lit ? /*Error: Function owner not recognized*/decode(s, litcode) : s.bits(/* get literal and write it */8);
 					generatedOut[generatedNext++] = symbol;
 					if (generatedNext == 4096) {
-						if (.UNRECOGNIZEDFUNCTIONNAME(generatedOuthow, generatedOut, generatedNext)) {
+						if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOuthow, generatedOut, generatedNext)) {
 							return 1;
 						} 
 						this.setNext(0);
@@ -636,10 +636,10 @@ public class state {
 		} while (1);
 		return 0;
 	}
-	public Byte getOut() {
+	public byte[] getOut() {
 		return out;
 	}
-	public void setOut(Byte newOut) {
+	public void setOut(byte[] newOut) {
 		out = newOut;
 	}
 	public long getOutlen() {
@@ -654,10 +654,10 @@ public class state {
 	public void setOutcnt(long newOutcnt) {
 		outcnt = newOutcnt;
 	}
-	public Object getIn() {
+	public Object[] getIn() {
 		return in;
 	}
-	public void setIn(Object newIn) {
+	public void setIn(Object[] newIn) {
 		in = newIn;
 	}
 	public long getInlen() {

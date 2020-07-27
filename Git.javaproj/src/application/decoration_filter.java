@@ -12,7 +12,7 @@ public class decoration_filter {
 	}
 	
 	public void load_ref_decorations(int flags) {
-		byte generatedString = item.getString();
+		byte[] generatedString = item.getString();
 		if (!ModernizedCProgram.decoration_loaded) {
 			if (ModernizedCProgram.filter) {
 				string_list_item item = new string_list_item();
@@ -27,7 +27,7 @@ public class decoration_filter {
 			ModernizedCProgram.decoration_flags = flags;
 			ModernizedCProgram.for_each_ref(add_ref_decoration, ModernizedCProgram.filter);
 			ModernizedCProgram.head_ref(add_ref_decoration, ModernizedCProgram.filter);
-			.for_each_commit_graft(add_graft_decoration, ModernizedCProgram.filter);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/for_each_commit_graft(add_graft_decoration, ModernizedCProgram.filter);
 		} 
 	}
 	public string_list getInclude_ref_pattern() {

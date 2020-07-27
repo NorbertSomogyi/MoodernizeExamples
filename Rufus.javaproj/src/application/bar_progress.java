@@ -45,15 +45,15 @@ public class bar_progress {
 		Object generatedRecent_bytes = this.getRecent_bytes();
 		// Update the download count.// Update the download count.generatedRecent_bytes += howmuch// For very small time intervals, we return after having updated the;// For very small time intervals, we return after having updated the
 		// "recent" download count. When its age reaches or exceeds minimum// sample time, it will be recorded in the history ring.if (recent_age < 150) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (howmuch == 0) {
 			if (recent_age >= 5000) {
 				this.setStalled(1);
-				.memset(hist, 0, );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(hist, 0, /*Error: Unsupported expression*/);
 				this.setRecent_bytes(0);
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		// If we're not downloading anything, we might be stalling,// i.e. not downloading anything for an extended period of time.
 		Object generatedStalled = this.getStalled();

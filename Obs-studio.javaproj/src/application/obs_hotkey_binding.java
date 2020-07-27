@@ -22,8 +22,8 @@ public class obs_hotkey_binding {
 		return generatedHotkey_id;
 	}
 	public Object pointer_fixup_func(Object data, Object idx) {
-		.UNUSED_PARAMETER(idx);
-		.UNUSED_PARAMETER(data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(idx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(data);
 		 idx_ = new ();
 		Object generatedHotkey_id = this.getHotkey_id();
 		obs_key_combination generatedKey = this.getKey();
@@ -38,7 +38,7 @@ public class obs_hotkey_binding {
 		return true;
 	}
 	public Object save_bindings_helper(Object data, Object idx) {
-		.UNUSED_PARAMETER(idx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(idx);
 		save_bindings_helper_t h = data;
 		obs_hotkey generatedHotkey = h.getHotkey();
 		Object generatedId = generatedHotkey.getId();
@@ -85,14 +85,14 @@ public class obs_hotkey_binding {
 		obs_hotkey_t hotkey = generatedHotkey;
 		int generatedPressed = hotkey.getPressed();
 		if (generatedPressed++) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedData = hotkey.getData();
 		Object generatedId = hotkey.getId();
 		if (!ModernizedCProgram.obs.getHotkeys().getReroute_hotkeys()) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedData, generatedId, hotkey, true);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData, generatedId, hotkey, true);
 		}  else if (ModernizedCProgram.obs.getHotkeys().getRouter_func()) {
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.obs.getHotkeys().getRouter_func_data(), generatedId, true);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.obs.getHotkeys().getRouter_func_data(), generatedId, true);
 		} 
 	}
 	public void release_pressed_binding() {
@@ -101,14 +101,14 @@ public class obs_hotkey_binding {
 		obs_hotkey_t hotkey = generatedHotkey;
 		int generatedPressed = hotkey.getPressed();
 		if (--generatedPressed) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedData = hotkey.getData();
 		Object generatedId = hotkey.getId();
 		if (!ModernizedCProgram.obs.getHotkeys().getReroute_hotkeys()) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedData, generatedId, hotkey, false);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData, generatedId, hotkey, false);
 		}  else if (ModernizedCProgram.obs.getHotkeys().getRouter_func()) {
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.obs.getHotkeys().getRouter_func_data(), generatedId, false);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.obs.getHotkeys().getRouter_func_data(), generatedId, false);
 		} 
 	}
 	public void handle_binding(Object modifiers, Object no_press, Object strict_modifiers, Object pressed) {
@@ -135,17 +135,17 @@ public class obs_hotkey_binding {
 		} 
 		Object generatedPressed = this.getPressed();
 		if (generatedPressed || no_press) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		binding.press_released_binding();
-		return ;
+		return /*Error: Unsupported expression*/;
 		if (!generatedPressed) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		binding.release_pressed_binding();
 	}
 	public Object inject_hotkey(Object data, Object idx) {
-		.UNUSED_PARAMETER(idx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(idx);
 		obs_hotkey_internal_inject event = data;
 		obs_key_combination generatedHotkey = event.getHotkey();
 		Object generatedModifiers = generatedHotkey.getModifiers();
@@ -160,7 +160,7 @@ public class obs_hotkey_binding {
 		return true;
 	}
 	public Object query_hotkey(Object data, Object idx) {
-		.UNUSED_PARAMETER(idx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(idx);
 		obs_query_hotkeys_helper param = (obs_query_hotkeys_helper)data;
 		Object generatedModifiers = param.getModifiers();
 		Object generatedNo_press = param.getNo_press();

@@ -4,7 +4,7 @@ package application;
 /* flags are numbers, comma separated */
 public class affentry_S {
 	private affentry_S ae_next;
-	private Object ae_chop;
+	private Object[] ae_chop;
 	private Object ae_add;
 	private Object ae_flags;
 	private Object ae_cond;
@@ -12,7 +12,7 @@ public class affentry_S {
 	private byte ae_compforbid;
 	private byte ae_comppermit;
 	
-	public affentry_S(affentry_S ae_next, Object ae_chop, Object ae_add, Object ae_flags, Object ae_cond, regprog ae_prog, byte ae_compforbid, byte ae_comppermit) {
+	public affentry_S(affentry_S ae_next, Object[] ae_chop, Object ae_add, Object ae_flags, Object ae_cond, regprog ae_prog, byte ae_compforbid, byte ae_comppermit) {
 		setAe_next(ae_next);
 		setAe_chop(ae_chop);
 		setAe_add(ae_add);
@@ -31,10 +31,10 @@ public class affentry_S {
 	public void setAe_next(affentry_S newAe_next) {
 		ae_next = newAe_next;
 	}
-	public Object getAe_chop() {
+	public Object[] getAe_chop() {
 		return ae_chop;
 	}
-	public void setAe_chop(Object newAe_chop) {
+	public void setAe_chop(Object[] newAe_chop) {
 		ae_chop = newAe_chop;
 	}
 	public Object getAe_add() {

@@ -24,16 +24,16 @@ public class dummy_context {
 		if (!generatedHwnd) {
 			return false;
 		} 
-		this.setHdc(.GetDC(generatedHwnd));
+		this.setHdc(/*Error: Function owner not recognized*/GetDC(generatedHwnd));
 		pfd.init_dummy_pixel_format();
 		Object generatedHdc = this.getHdc();
-		format_index = .ChoosePixelFormat(generatedHdc, pfd);
+		format_index = /*Error: Function owner not recognized*/ChoosePixelFormat(generatedHdc, pfd);
 		if (!format_index) {
-			ModernizedCProgram.blog(LOG_ERROR, "Dummy ChoosePixelFormat failed, %lu", .GetLastError());
+			ModernizedCProgram.blog(LOG_ERROR, "Dummy ChoosePixelFormat failed, %lu", /*Error: Function owner not recognized*/GetLastError());
 			return false;
 		} 
-		if (!.SetPixelFormat(generatedHdc, format_index, pfd)) {
-			ModernizedCProgram.blog(LOG_ERROR, "Dummy SetPixelFormat failed, %lu", .GetLastError());
+		if (!/*Error: Function owner not recognized*/SetPixelFormat(generatedHdc, format_index, pfd)) {
+			ModernizedCProgram.blog(LOG_ERROR, "Dummy SetPixelFormat failed, %lu", /*Error: Function owner not recognized*/GetLastError());
 			return false;
 		} 
 		this.setHrc(ModernizedCProgram.gl_init_basic_context(generatedHdc));
@@ -45,12 +45,12 @@ public class dummy_context {
 		return true;
 	}
 	public void gl_dummy_context_free() {
-		.wglMakeCurrent(((Object)0), ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/wglMakeCurrent(((Object)0), ((Object)0));
 		Object generatedHrc = this.getHrc();
-		.wglDeleteContext(generatedHrc);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/wglDeleteContext(generatedHrc);
 		Object generatedHwnd = this.getHwnd();
-		.DestroyWindow(generatedHwnd);
-		.memset(dummy, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DestroyWindow(generatedHwnd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(dummy, 0, /*Error: Unsupported expression*/);
 	}
 	public Object getHwnd() {
 		return hwnd;

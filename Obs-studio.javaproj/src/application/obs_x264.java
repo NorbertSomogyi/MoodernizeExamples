@@ -41,35 +41,12 @@ public class obs_x264 {
 	public obs_x264() {
 	}
 	
-	public void clear_data() {
-		Object generatedContext = this.getContext();
-		Object generatedSei = this.getSei();
-		Object generatedExtra_data = this.getExtra_data();
-		if (generatedContext) {
-			.x264_encoder_close(generatedContext);
-			ModernizedCProgram.bfree(generatedSei);
-			ModernizedCProgram.bfree(generatedExtra_data);
-			this.setContext(((Object)0));
-			this.setSei(((Object)0));
-			this.setExtra_data(((Object)0));
-		} 
-		qsv_t generatedContext = obsqsv.getContext();
-		Object generatedExtra_data = obsqsv.getExtra_data();
-		if (generatedContext) {
-			.EnterCriticalSection(ModernizedCProgram.g_QsvCs);
-			.qsv_encoder_close(generatedContext);
-			obsqsv.setContext(((Object)0));
-			.LeaveCriticalSection(ModernizedCProgram.g_QsvCs);
-			ModernizedCProgram.bfree(generatedExtra_data);
-			obsqsv.setExtra_data(((Object)0));
-		} 
-	}
 	public Object validate(Object val, Object name, Object list) {
 		if (!val || !val) {
 			return val;
 		} 
 		while (list) {
-			if (.strcmp(val, list) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(val, list) == 0) {
 				return val;
 			} 
 			list++;
@@ -78,7 +55,7 @@ public class obs_x264 {
 		ModernizedCProgram.blog(LOG_WARNING, "[x264 encoder: '%s'] Invalid %s: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), name, val);
 		return ((Object)0);
 	}
-	public void override_base_param(Object param, byte preset, byte profile, byte tune) {
+	public void override_base_param(Object param, Byte preset, Byte profile, Byte tune) {
 		byte name;
 		byte val;
 		if (ModernizedCProgram.getparam(param, name, val)) {
@@ -104,7 +81,7 @@ public class obs_x264 {
 			ModernizedCProgram.bfree(name);
 		} 
 	}
-	public void override_base_params(byte params, Byte preset, Byte profile, Byte tune) {
+	public void override_base_params(Byte params, Byte preset, Byte profile, Byte tune) {
 		while (params) {
 			obsx264.override_base_param((params++), preset, profile, tune);
 		}
@@ -115,11 +92,11 @@ public class obs_x264 {
 		Object generatedParams = this.getParams();
 		obs_encoder generatedEncoder = this.getEncoder();
 		if (ModernizedCProgram.getparam(param, name, val)) {
-			if (.strcmp(name, "preset") != 0 && .strcmp(name, "profile") != 0 && .strcmp(name, "tune") != 0 && .strcmp(name, "fps") != 0 && .strcmp(name, "force-cfr") != 0 && .strcmp(name, "width") != 0 && .strcmp(name, "height") != 0 && .strcmp(name, "opencl") != 0) {
-				if (.strcmp(name, "opencl_is_experimental_and_potentially_unstable") == 0) {
-					.strcpy(name, "opencl");
+			if (/*Error: Function owner not recognized*/strcmp(name, "preset") != 0 && /*Error: Function owner not recognized*/strcmp(name, "profile") != 0 && /*Error: Function owner not recognized*/strcmp(name, "tune") != 0 && /*Error: Function owner not recognized*/strcmp(name, "fps") != 0 && /*Error: Function owner not recognized*/strcmp(name, "force-cfr") != 0 && /*Error: Function owner not recognized*/strcmp(name, "width") != 0 && /*Error: Function owner not recognized*/strcmp(name, "height") != 0 && /*Error: Function owner not recognized*/strcmp(name, "opencl") != 0) {
+				if (/*Error: Function owner not recognized*/strcmp(name, "opencl_is_experimental_and_potentially_unstable") == 0) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(name, "opencl");
 				} 
-				if (.x264_param_parse(generatedParams, name, val) != 0) {
+				if (/*Error: Function owner not recognized*/x264_param_parse(generatedParams, name, val) != 0) {
 					ModernizedCProgram.blog(LOG_WARNING, "[x264 encoder: '%s'] x264 param: %s failed", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), param);
 				} 
 			} 
@@ -131,7 +108,7 @@ public class obs_x264 {
 		Object generatedParams = this.getParams();
 		obs_encoder generatedEncoder = this.getEncoder();
 		if (!generatedContext && profile && profile) {
-			int ret = .x264_param_apply_profile(generatedParams, profile);
+			int ret = /*Error: Function owner not recognized*/x264_param_apply_profile(generatedParams, profile);
 			if (ret != 0) {
 				ModernizedCProgram.blog(LOG_WARNING, "[x264 encoder: '%s'] Failed to set x264 profile '%s'", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), profile);
 			} 
@@ -143,50 +120,8 @@ public class obs_x264 {
 	}
 	public Object reset_x264_params(Object preset, Object tune) {
 		Object generatedParams = this.getParams();
-		int ret = .x264_param_default_preset(generatedParams, obsx264.validate_preset(preset), obsx264.validate(tune, "tune", x264_tune_names));
+		int ret = /*Error: Function owner not recognized*/x264_param_default_preset(generatedParams, obsx264.validate_preset(preset), obsx264.validate(tune, "tune", x264_tune_names));
 		return ret == 0;
-	}
-	public void load_headers() {
-		 nals = new ();
-		int nal_count;
-		 uint8_t = new ();
-		header;
-		 uint8_t = new ();
-		sei;
-		.da_init(header);
-		.da_init(sei);
-		Object generatedContext = this.getContext();
-		.x264_encoder_headers(generatedContext, nals, nal_count);
-		for (int i = 0;
-		 i < nal_count; i++) {
-			 nal = nals + i;
-			if (nal.getI_type() == NAL_SEI) {
-				.da_push_back_array(sei, nal.getP_payload(), nal.getI_payload());
-			} else {
-					.da_push_back_array(header, nal.getP_payload(), nal.getI_payload());
-			} 
-		}
-		this.setExtra_data(header.getArray());
-		this.setExtra_data_size(header.getNum());
-		this.setSei(sei.getArray());
-		this.setSei_size(sei.getNum());
-		 uint8_t = new ();
-		header;
-		 sei = 0;
-		// Not sure if SEI is needed.// Just filling in empty meaningless SEI message.
-		// Seems to work fine.// DARRAY(uint8_t) sei;// Seems to work fine.// DARRAY(uint8_t) sei;.da_init(header)// da_init(sei);;// da_init(sei);
-		 pSPS = new ();
-		 pPPS = new ();
-		uint16_t nSPS = new uint16_t();
-		uint16_t nPPS = new uint16_t();
-		qsv_t generatedContext = obsqsv.getContext();
-		.qsv_encoder_headers(generatedContext, pSPS, pPPS, nSPS, nPPS);
-		.da_push_back_array(header, pSPS, nSPS);
-		.da_push_back_array(header, pPPS, nPPS);
-		obsqsv.setExtra_data(header.getArray());
-		obsqsv.setExtra_data_size(header.getNum());
-		obsqsv.setSei(sei);
-		obsqsv.setSei_size(1);
 	}
 	public obs_encoder getEncoder() {
 		return encoder;

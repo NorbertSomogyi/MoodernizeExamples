@@ -2,7 +2,7 @@ package application;
 
 public class object_info {
 	private object_type typep;
-	private long sizep;
+	private Long sizep;
 	private Object disk_sizep;
 	private Byte delta_base_sha1;
 	private strbuf type_name;
@@ -10,7 +10,7 @@ public class object_info {
 	private  whence;
 	private  u;
 	
-	public object_info(object_type typep, long sizep, Object disk_sizep, Byte delta_base_sha1, strbuf type_name, Object contentp,  whence,  u) {
+	public object_info(object_type typep, Long sizep, Object disk_sizep, Byte delta_base_sha1, strbuf type_name, Object contentp,  whence,  u) {
 		setTypep(typep);
 		setSizep(sizep);
 		setDisk_sizep(disk_sizep);
@@ -23,29 +23,6 @@ public class object_info {
 	public object_info() {
 	}
 	
-	public input_source istream_source(Object oid, object_type type) {
-		long size;
-		int status;
-		this.setTypep(type);
-		this.setSizep(size);
-		status = ModernizedCProgram.oid_object_info_extended(ModernizedCProgram.the_repository, oid, oi, 0);
-		if (status < 0) {
-			return input_source.stream_error;
-		} 
-		 generatedU = this.getU();
-		Object generatedPacked = generatedU.getPacked();
-		 generatedWhence = this.getWhence();
-		switch (generatedWhence) {
-		case .OI_PACKED:
-				if (!generatedPacked.getIs_delta() && ModernizedCProgram.big_file_threshold < size) {
-					return input_source.pack_non_delta/* fallthru */;
-				} 
-		case .OI_LOOSE:
-				return input_source.loose;
-		default:
-				return input_source.incore;
-		}
-	}
 	public int parse_loose_header_extended(Object hdr, int flags) {
 		byte type_buf = hdr;
 		long size;
@@ -54,7 +31,7 @@ public class object_info {
 			 * The type can be of any size but is followed by
 			 * a space.
 			 */;
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			byte c = hdr++;
 			if (!c) {
 				return -1;
@@ -90,7 +67,7 @@ public class object_info {
 			return -1;
 		} 
 		if (size) {
-			for (; ; ) {
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				long c = hdr - (byte)'0';
 				if (c > 9) {
 					break;
@@ -99,7 +76,7 @@ public class object_info {
 				size = size * 10 + c;
 			}
 		} 
-		long generatedSizep = this.getSizep();
+		Long generatedSizep = this.getSizep();
 		if (generatedSizep) {
 			generatedSizep = size/*
 				 * The length must be followed by a zero byte
@@ -107,16 +84,39 @@ public class object_info {
 		} 
 		return hdr ? -1 : type;
 	}
+	public input_source istream_source(Object oid, object_type type) {
+		long size;
+		int status;
+		this.setTypep(type);
+		this.setSizep(size);
+		status = ModernizedCProgram.oid_object_info_extended(ModernizedCProgram.the_repository, oid, oi, 0);
+		if (status < 0) {
+			return input_source.stream_error;
+		} 
+		 generatedU = this.getU();
+		Object generatedPacked = generatedU.getPacked();
+		 generatedWhence = this.getWhence();
+		switch (generatedWhence) {
+		case .OI_PACKED:
+				if (!generatedPacked.getIs_delta() && ModernizedCProgram.big_file_threshold < size) {
+					return input_source.pack_non_delta/* fallthru */;
+				} 
+		case .OI_LOOSE:
+				return input_source.loose;
+		default:
+				return input_source.incore;
+		}
+	}
 	public object_type getTypep() {
 		return typep;
 	}
 	public void setTypep(object_type newTypep) {
 		typep = newTypep;
 	}
-	public long getSizep() {
+	public Long getSizep() {
 		return sizep;
 	}
-	public void setSizep(long newSizep) {
+	public void setSizep(Long newSizep) {
 		sizep = newSizep;
 	}
 	public Object getDisk_sizep() {

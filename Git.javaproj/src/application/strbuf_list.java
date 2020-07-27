@@ -1,11 +1,11 @@
 package application;
 
 public class strbuf_list {
-	private strbuf items;
+	private strbuf[] items;
 	private int nr;
 	private int alloc;
 	
-	public strbuf_list(strbuf items, int nr, int alloc) {
+	public strbuf_list(strbuf[] items, int nr, int alloc) {
 		setItems(items);
 		setNr(nr);
 		setAlloc(alloc);
@@ -13,10 +13,10 @@ public class strbuf_list {
 	public strbuf_list() {
 	}
 	
-	public strbuf getItems() {
+	public strbuf[] getItems() {
 		return items;
 	}
-	public void setItems(strbuf newItems) {
+	public void setItems(strbuf[] newItems) {
 		items = newItems;
 	}
 	public int getNr() {

@@ -131,14 +131,14 @@ public class rb_node {
 		Object generatedRb_parent_color = (node).getRb_parent_color();
 		parent = ((rb_node)(generatedRb_parent_color & ~3));
 		if (!parent) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		rb_node generatedRb_left = parent.getRb_left();
 		rb_node generatedRb_right = parent.getRb_right();
 		if (node == generatedRb_left && generatedRb_right) {
-			.func(generatedRb_right, data);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/func(generatedRb_right, data);
 		}  else if (generatedRb_left) {
-			.func(generatedRb_left, data);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/func(generatedRb_left, data);
 		} 
 		node = parent;
 		/*

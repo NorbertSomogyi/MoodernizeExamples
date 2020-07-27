@@ -12,24 +12,8 @@ public class lexer {
 	public lexer() {
 	}
 	
-	public boolean lookup_goto_nextline() {
-		strref val = new strref();
-		boolean success = true;
-		val.strref_clear();
-		Object generatedArray = val.getArray();
-		while (1) {
-			if (!ModernizedCProgram.lookup_gettoken(p, val)) {
-				success = false;
-				break;
-			} 
-			if (generatedArray == (byte)'\n') {
-				break;
-			} 
-		}
-		return success;
-	}
 	public void lexer_init() {
-		.memset(lex, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(lex, 0, /*Error: Unsupported expression*/);
 	}
 	public void lexer_free() {
 		Byte generatedText = this.getText();
@@ -51,6 +35,22 @@ public class lexer {
 	public void lexer_reset() {
 		Byte generatedText = this.getText();
 		this.setOffset(generatedText);
+	}
+	public boolean lookup_goto_nextline() {
+		strref val = new strref();
+		boolean success = true;
+		val.strref_clear();
+		Object[] generatedArray = val.getArray();
+		while (1) {
+			if (!ModernizedCProgram.lookup_gettoken(p, val)) {
+				success = false;
+				break;
+			} 
+			if (generatedArray == (byte)'\n') {
+				break;
+			} 
+		}
+		return success;
 	}
 	public Byte getText() {
 		return text;

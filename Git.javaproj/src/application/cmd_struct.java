@@ -18,13 +18,13 @@ public class cmd_struct {
 	public cmd_struct() {
 	}
 	
-	public int run_builtin(int argc, Object argv) {
+	public int run_builtin(int argc, Object[][] argv) {
 		int status;
 		int help;
 		stat st = new stat();
 		byte prefix;
 		prefix = ((Object)0);
-		help = argc == 2 && !.strcmp(argv[1], "-h");
+		help = argc == 2 && !/*Error: Function owner not recognized*/strcmp(argv[1], "-h");
 		int generatedOption = this.getOption();
 		Object generatedCmd = this.getCmd();
 		if (!help) {
@@ -61,25 +61,25 @@ public class cmd_struct {
 		ModernizedCProgram.trace2_cmd_name_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\git.c", 440, (generatedCmd));
 		ModernizedCProgram.trace2_cmd_list_config_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\git.c", 441);
 		ModernizedCProgram.validate_cache_entries(ModernizedCProgram.the_repository.getIndex());
-		status = .UNRECOGNIZEDFUNCTIONNAME(argc, argv, prefix);
+		status = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(argc, argv, prefix);
 		ModernizedCProgram.validate_cache_entries(ModernizedCProgram.the_repository.getIndex());
 		if (status) {
 			return status;
 		} 
-		if (.fstat((((_iob[1])).get_file()), /* Somebody closed stdout? */st)) {
+		if (/*Error: Function owner not recognized*/fstat((((_iob[1])).get_file()), /* Somebody closed stdout? */st)) {
 			return 0;
 		} 
 		Object generatedSt_mode = st.getSt_mode();
-		if ((((generatedSt_mode) & -1024) == -1024) || .S_ISSOCK(generatedSt_mode)) {
+		if ((((generatedSt_mode) & -1024) == -1024) || /*Error: Function owner not recognized*/S_ISSOCK(generatedSt_mode)) {
 			return 0;
 		} 
-		if (.fflush((_iob[/* Check for ENOSPC and EIO errors.. */1]))) {
+		if (/*Error: Function owner not recognized*/fflush((_iob[/* Check for ENOSPC and EIO errors.. */1]))) {
 			ModernizedCProgram.die_errno(ModernizedCProgram._("write failure on standard output"));
 		} 
 		if ((((_iob[1])).get_flag() & -1024)) {
 			ModernizedCProgram.die(ModernizedCProgram._("unknown write failure on standard output"));
 		} 
-		if (.fclose((_iob[1]))) {
+		if (/*Error: Function owner not recognized*/fclose((_iob[1]))) {
 			ModernizedCProgram.die_errno(ModernizedCProgram._("close failed on standard output"));
 		} 
 		return 0;
@@ -87,9 +87,9 @@ public class cmd_struct {
 	public cmd_struct get_builtin(Object s) {
 		int i;
 		Object generatedCmd = p.getCmd();
-		for (i = 0; i < ( /  + ( - 1)); i++) {
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
 			cmd_struct p = ModernizedCProgram.commands + i;
-			if (!.strcmp(s, generatedCmd)) {
+			if (!/*Error: Function owner not recognized*/strcmp(s, generatedCmd)) {
 				return p;
 			} 
 		}

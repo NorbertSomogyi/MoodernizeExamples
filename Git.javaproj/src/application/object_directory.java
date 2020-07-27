@@ -15,6 +15,13 @@ public class object_directory {
 	public object_directory() {
 	}
 	
+	public int print_alternate(Object data) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("alternate: ");
+		Byte generatedPath = this.getPath();
+		ModernizedCProgram.quote_c_style(generatedPath, ((Object)0), (_iob[1]), 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+		return 0;
+	}
 	public int add_possible_reference_from_superproject(Object sas_cb) {
 		submodule_alternate_setup sas = sas_cb;
 		size_t len = new size_t();
@@ -24,13 +31,14 @@ public class object_directory {
 			 */
 		Byte generatedPath = this.getPath();
 		Object generatedSubmodule_name = sas.getSubmodule_name();
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		string_list generatedReference = sas.getReference();
+		string_list_item string_list_item = new string_list_item();
 		SUBMODULE_ALTERNATE_ERROR_MODE generatedError_mode = sas.getError_mode();
 		if (ModernizedCProgram.strip_suffix(generatedPath, "/objects", len)) {
 			byte sm_alternate;
-			strbuf sb = new strbuf(, , );
-			strbuf err = new strbuf(, , );
+			strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+			strbuf err = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			sb.strbuf_add(generatedPath, len/*
 					 * We need to end the new path with '/' to mark it as a dir,
 					 * otherwise a submodule name containing '/' will be broken
@@ -40,27 +48,20 @@ public class object_directory {
 			sb.strbuf_addf("/modules/%s/", generatedSubmodule_name);
 			sm_alternate = ModernizedCProgram.err.compute_alternate_path(generatedBuf);
 			if (sm_alternate) {
-				generatedReference.string_list_append(ModernizedCProgram.xstrdup(generatedBuf));
+				string_list_item.string_list_append(generatedReference, ModernizedCProgram.xstrdup(generatedBuf));
 				ModernizedCProgram.free(sm_alternate);
 			} else {
 					switch (generatedError_mode) {
-					case SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_IGNORE:
-							;
 					case SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_DIE:
 							ModernizedCProgram.die(ModernizedCProgram._("submodule '%s' cannot add alternate: %s"), generatedSubmodule_name, generatedBuf);
+					case SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_IGNORE:
+							;
 					case SUBMODULE_ALTERNATE_ERROR_MODE.SUBMODULE_ALTERNATE_ERROR_INFO:
 							(_iob[2]).fprintf_ln(ModernizedCProgram._("submodule '%s' cannot add alternate: %s"), generatedSubmodule_name, generatedBuf);
 					}
 			} 
 			sb.strbuf_release();
 		} 
-		return 0;
-	}
-	public int print_alternate(Object data) {
-		.printf("alternate: ");
-		Byte generatedPath = this.getPath();
-		ModernizedCProgram.quote_c_style(generatedPath, ((Object)0), (_iob[1]), 0);
-		.putchar((byte)'\n');
 		return 0;
 	}
 	public void free_object_directory() {
@@ -70,7 +71,7 @@ public class object_directory {
 		ModernizedCProgram.free(odb);
 	}
 	public int refs_from_alternate_cb(Object data) {
-		strbuf path = new strbuf(, , );
+		strbuf path = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		size_t base_len = new size_t();
 		alternate_refs_data cb = data;
 		Byte generatedPath = this.getPath();
@@ -83,7 +84,7 @@ public class object_directory {
 		Object generatedLen = path.getLen();
 		base_len = generatedLen;
 		path.strbuf_addstr(/* Is this a git repository with refs? */"/refs");
-		byte generatedBuf = path.getBuf();
+		byte[] generatedBuf = path.getBuf();
 		if (!ModernizedCProgram.is_directory(generatedBuf)) {
 			;
 		} 
@@ -94,19 +95,19 @@ public class object_directory {
 		return 0;
 	}
 	public int check_and_freshen_odb(Object oid, int freshen) {
-		strbuf path = new strbuf(, , );
+		strbuf path = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		ModernizedCProgram.odb_loose_path(odb, path, oid);
-		byte generatedBuf = path.getBuf();
+		byte[] generatedBuf = path.getBuf();
 		return ModernizedCProgram.check_and_freshen_file(generatedBuf, freshen);
 	}
 	public void odb_clear_loose_cache() {
 		int i;
 		Object generatedLoose_objects_cache = this.getLoose_objects_cache();
-		for (i = 0; i < ( /  + ( - 1)); i++) {
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
 			generatedLoose_objects_cache[i].oid_array_clear();
 		}
 		Object generatedLoose_objects_subdir_seen = this.getLoose_objects_subdir_seen();
-		.memset(generatedLoose_objects_subdir_seen, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedLoose_objects_subdir_seen, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public object_directory getNext() {
 		return next;

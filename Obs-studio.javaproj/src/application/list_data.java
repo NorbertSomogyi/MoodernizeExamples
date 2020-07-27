@@ -18,7 +18,7 @@ public class list_data {
 		 i < ModernizedCProgram.data.getItems().getNum(); i++) {
 			ModernizedCProgram.list_item_free(ModernizedCProgram.data, ModernizedCProgram.data.getItems().getArray() + i);
 		}
-		.da_free(ModernizedCProgram.data.getItems());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(ModernizedCProgram.data.getItems());
 	}
 	public list_data get_list_data(obs_property p) {
 		if (!p || !p.is_combo()) {
@@ -42,7 +42,7 @@ public class list_data {
 		} else {
 				item.setStr(ModernizedCProgram.bstrdup(val));
 		} 
-		return .da_push_back(ModernizedCProgram.data.getItems(), item);
+		return /*Error: Function owner not recognized*/da_push_back(ModernizedCProgram.data.getItems(), item);
 	}
 	public void insert_item(Object idx, Object name, Object val) {
 		list_item item = new list_item(NULL);
@@ -54,7 +54,7 @@ public class list_data {
 		} else {
 				item.setStr(ModernizedCProgram.bstrdup(val));
 		} 
-		.da_insert(ModernizedCProgram.data.getItems(), idx, item);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_insert(ModernizedCProgram.data.getItems(), idx, item);
 	}
 	public Object get() {
 		return ;

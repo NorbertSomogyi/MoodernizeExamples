@@ -40,7 +40,7 @@ public class profile_entry {
 			} 
 		}
 		Object generatedDa = generatedChildren.getDa();
-		return generatedDa.darray_push_back_new().init_entry(name);
+		return generatedDa.darray_push_back_new(/*Error: sizeof expression not supported yet*/).init_entry(name);
 	}
 	public void free_profile_entry() {
 		 generatedChildren = this.getChildren();

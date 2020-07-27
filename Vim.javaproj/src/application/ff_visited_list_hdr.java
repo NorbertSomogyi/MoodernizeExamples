@@ -40,7 +40,7 @@ public class ff_visited_list_hdr {
 				retptr = generatedFfvl_next;
 			}
 		} 
-		// don't overwrite this either// don't overwrite this eitherretptr = (ff_visited_list_hdr_T)ModernizedCProgram.alloc(/*
+		// don't overwrite this either// don't overwrite this eitherretptr = (ff_visited_list_hdr_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*//*
 		     * if we reach this we didn't find a list and we have to allocate new list
 		     */);
 		if (retptr == ((Object)0)) {

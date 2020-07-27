@@ -30,14 +30,14 @@ public class AutoPat {
 		AutoCmd ac = new AutoCmd();
 		// Check for "got_int" (here and at various places below), which is set
 		// when "q" has been hit for the "--more--" promptif (got_int) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		// pattern has been removedif (ModernizedCProgram.ap.getPat() == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.msg_putchar((byte)'\n');
 		if (got_int) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (event != ModernizedCProgram.last_event || ModernizedCProgram.ap.getGroup() != ModernizedCProgram.last_group) {
 			if (ModernizedCProgram.ap.getGroup() != -1) {
@@ -53,7 +53,7 @@ public class AutoPat {
 			ModernizedCProgram.last_group = ModernizedCProgram.ap.getGroup();
 			ModernizedCProgram.msg_putchar((byte)'\n');
 			if (got_int) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		ModernizedCProgram.msg_col = 4;
@@ -68,19 +68,19 @@ public class AutoPat {
 				} 
 				ModernizedCProgram.msg_col = 14;
 				if (got_int) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				ModernizedCProgram.msg_outtrans(generatedCmd);
 				if (ModernizedCProgram.p_verbose > 0) {
 					generatedScript_ctx.last_set_msg();
 				} 
 				if (got_int) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				if (generatedNext != ((Object)0)) {
 					ModernizedCProgram.msg_putchar((byte)'\n');
 					if (got_int) {
-						return ;
+						return /*Error: Unsupported expression*/;
 					} 
 				} 
 			} 

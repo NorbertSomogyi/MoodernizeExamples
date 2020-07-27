@@ -23,18 +23,18 @@ public class gs_effect_param {
 	}
 	
 	public void effect_param_init() {
-		.memset(ModernizedCProgram.param, 0, );
-		.da_init(ModernizedCProgram.param.getAnnotations());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.param, 0, /*Error: Unsupported expression*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(ModernizedCProgram.param.getAnnotations());
 	}
 	public void effect_param_free() {
 		ModernizedCProgram.bfree(ModernizedCProgram.param.getName())//bfree(param->full_name);;//bfree(param->full_name);
-		.da_free(ModernizedCProgram.param.getCur_val());
-		.da_free(ModernizedCProgram.param.getDefault_val());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(ModernizedCProgram.param.getCur_val());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(ModernizedCProgram.param.getDefault_val());
 		 i = new ();
 		for (i = 0; i < ModernizedCProgram.param.getAnnotations().getNum(); i++) {
 			ModernizedCProgram.param.getAnnotations().getArray() + i.effect_param_free();
 		}
-		.da_free(ModernizedCProgram.param.getAnnotations());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(ModernizedCProgram.param.getAnnotations());
 	}
 	public gs_effect_param gs_effect_get_param_by_idx(Object effect, Object param) {
 		if (!effect) {
@@ -54,7 +54,7 @@ public class gs_effect_param {
 		for ( i = 0;
 		 i < effect.getParams().getNum(); i++) {
 			gs_effect_param param = params + i;
-			if (.strcmp(ModernizedCProgram.param.getName(), name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.param.getName(), name) == 0) {
 				return ModernizedCProgram.param;
 			} 
 		}
@@ -79,7 +79,7 @@ public class gs_effect_param {
 		for ( i = 0;
 		 i < param.getAnnotations().getNum(); i++) {
 			gs_effect_param g_param = params + i;
-			if (.strcmp(generatedName, name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, name) == 0) {
 				return g_param;
 			} 
 		}
@@ -95,71 +95,71 @@ public class gs_effect_param {
 		 size_changed = new ();
 		if (!ModernizedCProgram.param) {
 			ModernizedCProgram.blog(LOG_ERROR, "effect_setval_inline: invalid param");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!data) {
 			ModernizedCProgram.blog(LOG_ERROR, "effect_setval_inline: invalid data");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		size_changed = ModernizedCProgram.param.getCur_val().getNum() != size;
 		if (size_changed) {
-			.da_resize(ModernizedCProgram.param.getCur_val(), size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_resize(ModernizedCProgram.param.getCur_val(), size);
 		} 
-		if (size_changed || .memcmp(ModernizedCProgram.param.getCur_val().getArray(), data, size) != 0) {
-			.memcpy(ModernizedCProgram.param.getCur_val().getArray(), data, size);
+		if (size_changed || /*Error: Function owner not recognized*/memcmp(ModernizedCProgram.param.getCur_val().getArray(), data, size) != 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.param.getCur_val().getArray(), data, size);
 			ModernizedCProgram.param.setChanged(true);
 		} 
 	}
 	public void effect_getval_inline(Object data, Object size) {
 		if (!ModernizedCProgram.param) {
 			ModernizedCProgram.blog(LOG_ERROR, "effect_getval_inline: invalid param");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!data) {
 			ModernizedCProgram.blog(LOG_ERROR, "effect_getval_inline: invalid data");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 bytes = (((size) < (ModernizedCProgram.param.getCur_val().getNum())) ? (size) : (ModernizedCProgram.param.getCur_val().getNum()));
-		.memcpy(data, ModernizedCProgram.param.getCur_val().getArray(), bytes);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(data, ModernizedCProgram.param.getCur_val().getArray(), bytes);
 	}
 	public void effect_getdefaultval_inline(Object data, Object size) {
 		if (!ModernizedCProgram.param) {
 			ModernizedCProgram.blog(LOG_ERROR, "effect_getdefaultval_inline: invalid param");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!data) {
 			ModernizedCProgram.blog(LOG_ERROR, "effect_getdefaultval_inline: invalid data");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 bytes = (((size) < (ModernizedCProgram.param.getDefault_val().getNum())) ? (size) : (ModernizedCProgram.param.getDefault_val().getNum()));
-		.memcpy(data, ModernizedCProgram.param.getDefault_val().getArray(), bytes);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(data, ModernizedCProgram.param.getDefault_val().getArray(), bytes);
 	}
 	public void gs_effect_set_bool(Object val) {
 		int b_val = (int)val;
-		ModernizedCProgram.param.effect_setval_inline(b_val, );
+		ModernizedCProgram.param.effect_setval_inline(b_val, /*Error: Unsupported expression*/);
 	}
 	public void gs_effect_set_float(double val) {
-		ModernizedCProgram.param.effect_setval_inline(val, );
+		ModernizedCProgram.param.effect_setval_inline(val, /*Error: Unsupported expression*/);
 	}
 	public void gs_effect_set_int(int val) {
-		ModernizedCProgram.param.effect_setval_inline(val, );
+		ModernizedCProgram.param.effect_setval_inline(val, /*Error: Unsupported expression*/);
 	}
 	public void gs_effect_set_matrix4(Object val) {
-		ModernizedCProgram.param.effect_setval_inline(val, );
+		ModernizedCProgram.param.effect_setval_inline(val, /*Error: Unsupported expression*/);
 	}
 	public void gs_effect_set_vec2(Object val) {
-		ModernizedCProgram.param.effect_setval_inline(val, );
+		ModernizedCProgram.param.effect_setval_inline(val, /*Error: Unsupported expression*/);
 	}
 	public void gs_effect_set_vec3(Object val) {
-		ModernizedCProgram.param.effect_setval_inline(val,  * 3);
+		ModernizedCProgram.param.effect_setval_inline(val, /*Error: Unsupported expression*/ * 3);
 	}
 	public void gs_effect_set_vec4(Object val) {
-		ModernizedCProgram.param.effect_setval_inline(val, );
+		ModernizedCProgram.param.effect_setval_inline(val, /*Error: Unsupported expression*/);
 	}
 	public void gs_effect_set_color(Object argb) {
 		vec4 v_color = new vec4();
 		v_color.vec4_from_bgra(argb);
-		ModernizedCProgram.param.effect_setval_inline(v_color, );
+		ModernizedCProgram.param.effect_setval_inline(v_color, /*Error: Unsupported expression*/);
 	}
 	public void gs_effect_set_val(Object val, Object size) {
 		ModernizedCProgram.param.effect_setval_inline(val, size);

@@ -19,20 +19,8 @@ public class shader_var {
 	public shader_var() {
 	}
 	
-	public shader_var sp_getparam(gl_shader_parser glsp, Object token) {
-		 i = new ();
-		shader_parser generatedParser = glsp.getParser();
-		Object generatedShader_parser = generatedParser.getShader_parser();
-		for (i = 0; i < generatedShader_parser.getNum(); i++) {
-			shader_var param = generatedShader_parser.getArray() + i;
-			if (ModernizedCProgram.strref_cmp(token.getStr(), ModernizedCProgram.param.getShader_var()) == 0) {
-				return ModernizedCProgram.param;
-			} 
-		}
-		return NULL;
-	}
 	public void shader_var_init() {
-		.memset(sv, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(sv, 0, /*Error: Unsupported expression*/);
 	}
 	public void shader_var_init_param(Byte type, Byte name, Object is_uniform, Object is_const) {
 		if (is_uniform) {
@@ -48,7 +36,7 @@ public class shader_var {
 		this.setArray_count(0);
 		this.setGl_sampler_id((ModernizedCProgram.size_t) - 1);
 		Object generatedDefault_val = this.getDefault_val();
-		.da_init(generatedDefault_val);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedDefault_val);
 	}
 	public void shader_var_free() {
 		Byte generatedType = this.getType();
@@ -58,14 +46,26 @@ public class shader_var {
 		Byte generatedMapping = this.getMapping();
 		ModernizedCProgram.bfree(generatedMapping);
 		Object generatedDefault_val = this.getDefault_val();
-		.da_free(generatedDefault_val);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedDefault_val);
 	}
 	public shader_var shader_parser_getparam(shader_parser sp, Object param_name) {
 		 i = new ();
 		Object generatedParams = sp.getParams();
 		for (i = 0; i < generatedParams.getNum(); i++) {
 			shader_var param = generatedParams.getArray() + i;
-			if (.strcmp(ModernizedCProgram.param.getName(), param_name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.param.getName(), param_name) == 0) {
+				return ModernizedCProgram.param;
+			} 
+		}
+		return NULL;
+	}
+	public shader_var sp_getparam(gl_shader_parser glsp, Object token) {
+		 i = new ();
+		shader_parser generatedParser = glsp.getParser();
+		Object generatedShader_parser = generatedParser.getShader_parser();
+		for (i = 0; i < generatedShader_parser.getNum(); i++) {
+			shader_var param = generatedShader_parser.getArray() + i;
+			if (ModernizedCProgram.strref_cmp(token.getStr(), ModernizedCProgram.param.getShader_var()) == 0) {
 				return ModernizedCProgram.param;
 			} 
 		}

@@ -4,9 +4,9 @@ public class commit_rev_name {
 	private int slab_size;
 	private int stride;
 	private int slab_count;
-	private rev_name slab;
+	private rev_name[][][] slab;
 	
-	public commit_rev_name(int slab_size, int stride, int slab_count, rev_name slab) {
+	public commit_rev_name(int slab_size, int stride, int slab_count, rev_name[][][] slab) {
 		setSlab_size(slab_size);
 		setStride(stride);
 		setSlab_count(slab_count);
@@ -21,7 +21,7 @@ public class commit_rev_name {
 			stride = 1;
 		} 
 		this.setStride(stride);
-		elem_size =  * stride;
+		elem_size = /*Error: Unsupported expression*/ * stride;
 		this.setSlab_size((512 * 1024 - 32) / elem_size);
 		this.setSlab_count(0);
 		this.setSlab(((Object)0));
@@ -32,7 +32,7 @@ public class commit_rev_name {
 	public void clear_commit_rev_name() {
 		int i;
 		int generatedSlab_count = this.getSlab_count();
-		rev_name generatedSlab = this.getSlab();
+		rev_name[][][] generatedSlab = this.getSlab();
 		for (i = 0; i < generatedSlab_count; i++) {
 			ModernizedCProgram.free(generatedSlab[i]);
 		}
@@ -60,10 +60,10 @@ public class commit_rev_name {
 	public void setSlab_count(int newSlab_count) {
 		slab_count = newSlab_count;
 	}
-	public rev_name getSlab() {
+	public rev_name[][][] getSlab() {
 		return slab;
 	}
-	public void setSlab(rev_name newSlab) {
+	public void setSlab(rev_name[][][] newSlab) {
 		slab = newSlab;
 	}
 }

@@ -43,23 +43,24 @@ public class shortlog {
 		int generatedSummary = this.getSummary();
 		Object generatedUtil = (item).getUtil();
 		Byte generatedCommon_repo_prefix = this.getCommon_repo_prefix();
+		string_list_item string_list_item = new string_list_item();
 		if (generatedSummary) {
 			item.setUtil((Object)(((intptr_t)generatedUtil) + 1));
 		} else {
 				byte dot3 = generatedCommon_repo_prefix;
 				byte buffer;
 				byte p;
-				strbuf subject = new strbuf(, , );
+				strbuf subject = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 				byte eol;
 				while (oneline && ((ModernizedCProgram.sane_ctype[(byte)(oneline)] & (true)) != /* Skip any leading whitespace, including any blank lines. */0)) {
 					oneline++;
 				}
-				eol = .strchr(oneline, (byte)'\n');
+				eol = /*Error: Function owner not recognized*/strchr(oneline, (byte)'\n');
 				if (!eol) {
-					eol = oneline + .strlen(oneline);
+					eol = oneline + /*Error: Function owner not recognized*/strlen(oneline);
 				} 
 				if (ModernizedCProgram.starts_with(oneline, "[PATCH")) {
-					byte eob = .strchr(oneline, (byte)']');
+					byte eob = /*Error: Function owner not recognized*/strchr(oneline, (byte)']');
 					if (eob && (!eol || eob < eol)) {
 						oneline = eob + 1;
 					} 
@@ -70,31 +71,31 @@ public class shortlog {
 				subject.format_subject(oneline, " ");
 				ModernizedCProgram.buffer = subject.strbuf_detach(((Object)0));
 				if (dot3) {
-					int dot3len = .strlen(dot3);
+					int dot3len = /*Error: Function owner not recognized*/strlen(dot3);
 					if (dot3len > 5) {
-						while ((p = .strstr(ModernizedCProgram.buffer, dot3)) != ((Object)0)) {
-							int taillen = .strlen(p) - dot3len;
-							.memcpy(p, "/.../", 5);
-							.memmove(p + 5, p + dot3len, taillen + 1);
+						while ((p = /*Error: Function owner not recognized*/strstr(ModernizedCProgram.buffer, dot3)) != ((Object)0)) {
+							int taillen = /*Error: Function owner not recognized*/strlen(p) - dot3len;
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(p, "/.../", 5);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(p + 5, p + dot3len, taillen + 1);
 						}
 					} 
 				} 
 				if (generatedUtil == ((Object)0)) {
-					item.setUtil(ModernizedCProgram.xcalloc(1, ));
+					item.setUtil(ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/));
 				} 
-				generatedUtil.string_list_append(ModernizedCProgram.buffer);
+				string_list_item.string_list_append(generatedUtil, ModernizedCProgram.buffer);
 		} 
 	}
 	public void read_from_stdin() {
-		strbuf author = new strbuf(, , );
-		strbuf mapped_author = new strbuf(, , );
-		strbuf oneline = new strbuf(, , );
+		strbuf author = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf mapped_author = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf oneline = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte[] author_match = new byte[]{"Author: ", "author "};
 		byte[] committer_match = new byte[]{"Commit: ", "committer "};
 		byte match;
 		int generatedCommitter = this.getCommitter();
 		match = generatedCommitter ? committer_match : author_match;
-		byte generatedBuf = author.getBuf();
+		byte[] generatedBuf = author.getBuf();
 		Object generatedLen = oneline.getLen();
 		while (ModernizedCProgram.strbuf_getline_lf(author, (_iob[0])) != (true)) {
 			byte v;
@@ -118,7 +119,7 @@ public class shortlog {
 		oneline.strbuf_release();
 	}
 	public void shortlog_init() {
-		.memset(log, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(log, 0, /*Error: sizeof expression not supported yet*/);
 		string_list generatedMailmap = this.getMailmap();
 		Byte generatedCommon_repo_prefix = this.getCommon_repo_prefix();
 		generatedMailmap.read_mailmap(generatedCommon_repo_prefix);
@@ -131,37 +132,37 @@ public class shortlog {
 	public void shortlog_output() {
 		int i;
 		int j;
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int generatedSort_by_number = this.getSort_by_number();
 		string_list generatedList = this.getList();
-		string_list_item generatedItems = generatedList.getItems();
+		string_list_item[] generatedItems = generatedList.getItems();
 		int generatedNr = generatedList.getNr();
 		int generatedSummary = this.getSummary();
 		if (generatedSort_by_number) {
-			ModernizedCProgram.sane_qsort((generatedItems), (generatedNr), , generatedSummary ? compare_by_counter : compare_by_list);
+			ModernizedCProgram.sane_qsort((generatedItems), (generatedNr), /*Error: sizeof expression not supported yet*/, generatedSummary ? compare_by_counter : compare_by_list);
 		} 
 		Object generatedFile = this.getFile();
 		int generatedWrap_lines = this.getWrap_lines();
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		Object generatedLen = sb.getLen();
 		for (i = 0; i < generatedNr; i++) {
 			string_list_item item = generatedItems[i];
 			if (generatedSummary) {
-				.fprintf(generatedFile, "%6d\t%s\n", (int)((intptr_t)(item).getUtil()), item.getString());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFile, "%6d\t%s\n", (int)((intptr_t)(item).getUtil()), item.getString());
 			} else {
 					string_list onelines = item.getUtil();
-					.fprintf(generatedFile, "%s (%d):\n", item.getString(), generatedNr);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFile, "%s (%d):\n", item.getString(), generatedNr);
 					for (j = generatedNr - 1; j >= 0; j--) {
 						byte msg = generatedItems[j].getString();
 						if (generatedWrap_lines) {
 							sb.strbuf_setlen(0);
 							sb.add_wrapped_shortlog_msg(ModernizedCProgram.msg, log);
-							.fwrite(generatedBuf, generatedLen, 1, generatedFile);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fwrite(generatedBuf, generatedLen, 1, generatedFile);
 						} else {
-								.fprintf(generatedFile, "      %s\n", ModernizedCProgram.msg);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFile, "      %s\n", ModernizedCProgram.msg);
 						} 
 					}
-					.putc((byte)'\n', generatedFile);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc((byte)'\n', generatedFile);
 					onelines.setStrdup_strings(1);
 					onelines.string_list_clear(0);
 					ModernizedCProgram.free(onelines);

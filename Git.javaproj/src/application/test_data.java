@@ -20,17 +20,17 @@ public class test_data {
 		byte to;
 		for (i = 0; data[i].getTo(); i++) {
 			if (!data[i].getFrom()) {
-				to = .func(((Object)0));
+				to = /*Error: Function owner not recognized*/func(((Object)0));
 			} else {
-					ModernizedCProgram.xsnprintf(buffer, , "%s", data[i].getFrom());
-					to = .func(buffer);
+					ModernizedCProgram.xsnprintf(buffer, /*Error: sizeof expression not supported yet*/, "%s", data[i].getFrom());
+					to = /*Error: Function owner not recognized*/func(buffer);
 			} 
-			if (!.strcmp(to, data[i].getTo())) {
+			if (!/*Error: Function owner not recognized*/strcmp(to, data[i].getTo())) {
 				continue;
 			} 
 			if (!data[i].getAlternative()) {
 				();
-			}  else if (!.strcmp(to, data[i].getAlternative())) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(to, data[i].getAlternative())) {
 				continue;
 			} else {
 					();

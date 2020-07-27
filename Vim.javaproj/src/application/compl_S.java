@@ -20,13 +20,13 @@ package application;
 public class compl_S {
 	private compl_S cp_next;
 	private compl_S cp_prev;
-	private Object cp_str;
+	private Object[] cp_str;
 	private Object cp_text;
 	private Object cp_fname;
 	private int cp_flags;
 	private int cp_number;
 	
-	public compl_S(compl_S cp_next, compl_S cp_prev, Object cp_str, Object cp_text, Object cp_fname, int cp_flags, int cp_number) {
+	public compl_S(compl_S cp_next, compl_S cp_prev, Object[] cp_str, Object cp_text, Object cp_fname, int cp_flags, int cp_number) {
 		setCp_next(cp_next);
 		setCp_prev(cp_prev);
 		setCp_str(cp_str);
@@ -43,11 +43,11 @@ public class compl_S {
 		if (generatedCp_flags & 8) {
 			return 1;
 		} 
-		Object generatedCp_str = this.getCp_str();
+		Object[] generatedCp_str = this.getCp_str();
 		if (generatedCp_flags & 16) {
 			return ModernizedCProgram.vim_strnicmp((byte)(generatedCp_str), (byte)(str), (size_t)((size_t)len)) == 0;
 		} 
-		return .strncmp((byte)(generatedCp_str), (byte)(str), (size_t)((size_t)len)) == 0/*
+		return /*Error: Function owner not recognized*/strncmp((byte)(generatedCp_str), (byte)(str), (size_t)((size_t)len)) == 0/*
 		 * Reduce the longest common string for match "match".
 		 */;
 	}
@@ -57,7 +57,7 @@ public class compl_S {
 		int c1;
 		int c2;
 		int had_match;
-		Object generatedCp_str = this.getCp_str();
+		Object[] generatedCp_str = this.getCp_str();
 		int generatedCp_flags = this.getCp_flags();
 		if (ModernizedCProgram.compl_leader == ((Object)0)) {
 			ModernizedCProgram.compl_leader = ModernizedCProgram.vim_strsave(generatedCp_str);
@@ -76,8 +76,8 @@ public class compl_S {
 				s = generatedCp_str;
 				while (p != (byte)'\000') {
 					if (has_mbyte) {
-						c1 = .mb_ptr2char(p);
-						c2 = .mb_ptr2char(s);
+						c1 = /*Error: Function owner not recognized*/mb_ptr2char(p);
+						c2 = /*Error: Function owner not recognized*/mb_ptr2char(s);
 					} else {
 							c1 = p;
 							c2 = s;
@@ -86,8 +86,8 @@ public class compl_S {
 						break;
 					} 
 					if (has_mbyte) {
-						p += .UNRECOGNIZEDFUNCTIONNAME(p);
-						s += .UNRECOGNIZEDFUNCTIONNAME(s);
+						p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
+						s += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s);
 					} else {
 							++p;
 							++s;
@@ -121,10 +121,10 @@ public class compl_S {
 	public void setCp_prev(compl_S newCp_prev) {
 		cp_prev = newCp_prev;
 	}
-	public Object getCp_str() {
+	public Object[] getCp_str() {
 		return cp_str;
 	}
-	public void setCp_str(Object newCp_str) {
+	public void setCp_str(Object[] newCp_str) {
 		cp_str = newCp_str;
 	}
 	public Object getCp_text() {

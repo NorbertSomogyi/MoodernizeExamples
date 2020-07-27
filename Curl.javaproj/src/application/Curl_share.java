@@ -54,13 +54,13 @@ public class Curl_share {
 	}
 	
 	public Curl_share curl_share_init() {
-		Curl_share share = .Curl_ccalloc(1, );
+		Curl_share share = /*Error: Function owner not recognized*/Curl_ccalloc(1, /*Error: Unsupported expression*/);
 		int generatedSpecifier = share.getSpecifier();
 		curl_hash generatedHostcache = share.getHostcache();
 		if (share) {
 			generatedSpecifier |=  (1 << CURL_LOCK_DATA_SHARE);
 			if (generatedHostcache.Curl_mk_dnscache()) {
-				.Curl_cfree(share);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(share);
 				return ((Object)0);
 			} 
 		} 
@@ -77,24 +77,49 @@ public class Curl_share {
 		if (generatedDirty) {
 			return CURLSHE_IN_USE;
 		} 
-		.__builtin_va_start(param, option);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(param, option);
 		int generatedSpecifier = this.getSpecifier();
 		CookieInfo generatedCookies = this.getCookies();
 		conncache generatedConn_cache = this.getConn_cache();
 		switch (option) {
-		case CURLSHOPT_SHARE:
-				type = (int)/* this is a type this share will share */param;
-				generatedSpecifier |=  (1 << type);
+		case CURLSHOPT_UNSHARE:
+				type = (int)/* this is a type this share will no longer share */param;
+				generatedSpecifier &=  ~(1 << type);
 				switch (type) {
-				case CURL_LOCK_DATA_DNS:
+				case CURL_LOCK_DATA_COOKIE:
+						if (generatedCookies) {
+							generatedCookies.Curl_cookie_cleanup();
+							this.setCookies(((Object)0/* CURL_DISABLE_HTTP */));
+						} 
+						break;
+				case CURL_LOCK_DATA_CONNECT:
 						break;
 				case CURL_LOCK_DATA_SSL_SESSION:
 						res = CURLSHE_NOT_BUILT_IN;
 						break;
-				case /* not supported (yet) */CURL_LOCK_DATA_CONNECT:
-						if (generatedConn_cache.Curl_conncache_init(103)) {
-							res = CURLSHE_NOMEM;
-						} 
+				case CURL_LOCK_DATA_DNS:
+						break;
+				default:
+						res = CURLSHE_BAD_OPTION;
+						break;
+				}
+				break;
+		case CURLSHOPT_USERDATA:
+				ptr = (int)param;
+				this.setClientdata(ptr);
+				break;
+		case CURLSHOPT_UNLOCKFUNC:
+				unlockfunc = (int)param;
+				this.setUnlockfunc(unlockfunc);
+				break;
+		case CURLSHOPT_SHARE:
+				type = (int)/* this is a type this share will share */param;
+				generatedSpecifier |=  (1 << type);
+				switch (type) {
+				case CURL_LOCK_DATA_SSL_SESSION:
+						res = CURLSHE_NOT_BUILT_IN;
+						break;
+				case CURL_LOCK_DATA_DNS:
 						break;
 				case CURL_LOCK_DATA_PSL:
 						res = CURLSHE_NOT_BUILT_IN;
@@ -107,38 +132,13 @@ public class Curl_share {
 							} 
 						} 
 						break;
-				default:
-						res = CURLSHE_BAD_OPTION;
-				}
-				break;
-		case CURLSHOPT_UNLOCKFUNC:
-				unlockfunc = (int)param;
-				this.setUnlockfunc(unlockfunc);
-				break;
-		case CURLSHOPT_USERDATA:
-				ptr = (int)param;
-				this.setClientdata(ptr);
-				break;
-		case CURLSHOPT_UNSHARE:
-				type = (int)/* this is a type this share will no longer share */param;
-				generatedSpecifier &=  ~(1 << type);
-				switch (type) {
-				case CURL_LOCK_DATA_COOKIE:
-						if (generatedCookies) {
-							generatedCookies.Curl_cookie_cleanup();
-							this.setCookies(((Object)0/* CURL_DISABLE_HTTP */));
+				case /* not supported (yet) */CURL_LOCK_DATA_CONNECT:
+						if (generatedConn_cache.Curl_conncache_init(103)) {
+							res = CURLSHE_NOMEM;
 						} 
 						break;
-				case CURL_LOCK_DATA_DNS:
-						break;
-				case CURL_LOCK_DATA_CONNECT:
-						break;
-				case CURL_LOCK_DATA_SSL_SESSION:
-						res = CURLSHE_NOT_BUILT_IN;
-						break;
 				default:
 						res = CURLSHE_BAD_OPTION;
-						break;
 				}
 				break;
 		case CURLSHOPT_LOCKFUNC:
@@ -149,7 +149,7 @@ public class Curl_share {
 				res = CURLSHE_BAD_OPTION;
 				break;
 		}
-		.__builtin_va_end(param);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(param);
 		return res;
 	}
 	public Object curl_share_cleanup() {
@@ -159,13 +159,13 @@ public class Curl_share {
 		Object generatedLockfunc = this.getLockfunc();
 		Object generatedClientdata = this.getClientdata();
 		if (generatedLockfunc) {
-			.UNRECOGNIZEDFUNCTIONNAME(((Object)0), CURL_LOCK_DATA_SHARE, CURL_LOCK_ACCESS_SINGLE, generatedClientdata);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(((Object)0), CURL_LOCK_DATA_SHARE, CURL_LOCK_ACCESS_SINGLE, generatedClientdata);
 		} 
 		Object generatedDirty = this.getDirty();
 		Object generatedUnlockfunc = this.getUnlockfunc();
 		if (generatedDirty) {
 			if (generatedUnlockfunc) {
-				.UNRECOGNIZEDFUNCTIONNAME(((Object)0), CURL_LOCK_DATA_SHARE, generatedClientdata);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(((Object)0), CURL_LOCK_DATA_SHARE, generatedClientdata);
 			} 
 			return CURLSHE_IN_USE;
 		} 
@@ -178,9 +178,9 @@ public class Curl_share {
 		generatedCookies.Curl_cookie_cleanup();
 		;
 		if (generatedUnlockfunc) {
-			.UNRECOGNIZEDFUNCTIONNAME(((Object)0), CURL_LOCK_DATA_SHARE, generatedClientdata);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(((Object)0), CURL_LOCK_DATA_SHARE, generatedClientdata);
 		} 
-		.Curl_cfree(share);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(share);
 		return CURLSHE_OK;
 	}
 	public int getSpecifier() {

@@ -10,9 +10,9 @@ public class RTMPPacket {
 	private Object m_nBodySize;
 	private Object m_nBytesRead;
 	private RTMPChunk m_chunk;
-	private Byte m_body;
+	private byte[] m_body;
 	
-	public RTMPPacket(Object m_headerType, Object m_packetType, Object m_hasAbsTimestamp, int m_nChannel, Object m_nTimeStamp, Object m_nInfoField2, Object m_nBodySize, Object m_nBytesRead, RTMPChunk m_chunk, Byte m_body) {
+	public RTMPPacket(Object m_headerType, Object m_packetType, Object m_hasAbsTimestamp, int m_nChannel, Object m_nTimeStamp, Object m_nInfoField2, Object m_nBodySize, Object m_nBytesRead, RTMPChunk m_chunk, byte[] m_body) {
 		setM_headerType(m_headerType);
 		setM_packetType(m_packetType);
 		setM_hasAbsTimestamp(m_hasAbsTimestamp);
@@ -39,7 +39,7 @@ public class RTMPPacket {
 	}
 	public int RTMPPacket_Alloc(Object nSize) {
 		byte ptr;
-		ptr = .calloc(1, nSize + 18);
+		ptr = /*Error: Function owner not recognized*/calloc(1, nSize + 18);
 		if (!ptr) {
 			return 0;
 		} 
@@ -48,9 +48,9 @@ public class RTMPPacket {
 		return 1;
 	}
 	public void RTMPPacket_Free() {
-		Byte generatedM_body = this.getM_body();
+		byte[] generatedM_body = this.getM_body();
 		if (generatedM_body) {
-			.free(generatedM_body - 18);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedM_body - 18);
 			this.setM_body(((Object)0));
 		} 
 	}
@@ -60,7 +60,7 @@ public class RTMPPacket {
 		Object generatedM_nTimeStamp = this.getM_nTimeStamp();
 		Object generatedM_nInfoField2 = this.getM_nInfoField2();
 		Object generatedM_nBodySize = this.getM_nBodySize();
-		Byte generatedM_body = this.getM_body();
+		byte[] generatedM_body = this.getM_body();
 		ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "RTMP PACKET: packet type: 0x%02x. channel: 0x%02x. info 1: %d info 2: %d. Body size: %u. body: 0x%02x", generatedM_packetType, generatedM_nChannel, generatedM_nTimeStamp, generatedM_nInfoField2, generatedM_nBodySize, generatedM_body ? (byte)generatedM_body[0] : 0);
 	}
 	public Object getM_headerType() {
@@ -117,10 +117,10 @@ public class RTMPPacket {
 	public void setM_chunk(RTMPChunk newM_chunk) {
 		m_chunk = newM_chunk;
 	}
-	public Byte getM_body() {
+	public byte[] getM_body() {
 		return m_body;
 	}
-	public void setM_body(Byte newM_body) {
+	public void setM_body(byte[] newM_body) {
 		m_body = newM_body;
 	}
 }

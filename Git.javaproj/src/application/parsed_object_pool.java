@@ -1,7 +1,7 @@
 package application;
 
 public class parsed_object_pool {
-	private object obj_hash;
+	private object[][] obj_hash;
 	private int nr_objs;
 	private int obj_hash_size;
 	private alloc_state blob_state;
@@ -19,7 +19,7 @@ public class parsed_object_pool {
 	private int commit_graft_prepared;
 	private buffer_slab buffer_slab;
 	
-	public parsed_object_pool(object obj_hash, int nr_objs, int obj_hash_size, alloc_state blob_state, alloc_state tree_state, alloc_state commit_state, alloc_state tag_state, alloc_state object_state, int commit_count, commit_graft grafts, int grafts_alloc, int grafts_nr, int is_shallow, stat_validity shallow_stat, Byte alternate_shallow_file, int commit_graft_prepared, buffer_slab buffer_slab) {
+	public parsed_object_pool(object[][] obj_hash, int nr_objs, int obj_hash_size, alloc_state blob_state, alloc_state tree_state, alloc_state commit_state, alloc_state tag_state, alloc_state object_state, int commit_count, commit_graft grafts, int grafts_alloc, int grafts_nr, int is_shallow, stat_validity shallow_stat, Byte alternate_shallow_file, int commit_graft_prepared, buffer_slab buffer_slab) {
 		setObj_hash(obj_hash);
 		setNr_objs(nr_objs);
 		setObj_hash_size(obj_hash_size);
@@ -42,8 +42,8 @@ public class parsed_object_pool {
 	}
 	
 	public parsed_object_pool parsed_object_pool_new() {
-		parsed_object_pool o = ModernizedCProgram.xmalloc();
-		.memset(o, 0, );
+		parsed_object_pool o = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(o, 0, /*Error: sizeof expression not supported yet*/);
 		alloc_state alloc_state = new alloc_state();
 		o.setBlob_state(alloc_state.allocate_alloc_state());
 		o.setTree_state(alloc_state.allocate_alloc_state());
@@ -52,14 +52,14 @@ public class parsed_object_pool {
 		o.setObject_state(alloc_state.allocate_alloc_state());
 		o.setIs_shallow(-1);
 		stat_validity generatedShallow_stat = o.getShallow_stat();
-		o.setShallow_stat(ModernizedCProgram.xcalloc(1, ));
-		o.setBuffer_slab(.allocate_commit_buffer_slab());
+		o.setShallow_stat(ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/));
+		o.setBuffer_slab(/*Error: Function owner not recognized*/allocate_commit_buffer_slab());
 		return o;
 	}
 	public void parsed_object_pool_clear() {
 		int i;
 		int generatedObj_hash_size = this.getObj_hash_size();
-		object generatedObj_hash = this.getObj_hash();
+		object[][] generatedObj_hash = this.getObj_hash();
 		int generatedType = obj.getType();
 		for (i = 0; i < generatedObj_hash_size; i++) {
 			object obj = generatedObj_hash[i];
@@ -69,9 +69,9 @@ public class parsed_object_pool {
 			if (generatedType == object_type.OBJ_TREE) {
 				(tree)obj.free_tree_buffer();
 			}  else if (generatedType == object_type.OBJ_COMMIT) {
-				.release_commit_memory(o, (commit)obj);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/release_commit_memory(o, (commit)obj);
 			}  else if (generatedType == object_type.OBJ_TAG) {
-				.release_tag_memory((tag)obj);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/release_tag_memory((tag)obj);
 			} 
 		}
 		do {
@@ -80,7 +80,7 @@ public class parsed_object_pool {
 		} while (0);
 		this.setObj_hash_size(0);
 		buffer_slab generatedBuffer_slab = this.getBuffer_slab();
-		.free_commit_buffer_slab(generatedBuffer_slab);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_commit_buffer_slab(generatedBuffer_slab);
 		this.setBuffer_slab(((Object)0));
 		alloc_state generatedBlob_state = this.getBlob_state();
 		generatedBlob_state.clear_alloc_state();
@@ -126,10 +126,10 @@ public class parsed_object_pool {
 		 * Before doing so, we need to free any additional memory
 		 * the objects may hold.
 		 */
-	public object getObj_hash() {
+	public object[][] getObj_hash() {
 		return obj_hash;
 	}
-	public void setObj_hash(object newObj_hash) {
+	public void setObj_hash(object[][] newObj_hash) {
 		obj_hash = newObj_hash;
 	}
 	public int getNr_objs() {

@@ -5,9 +5,9 @@ public class AMF3ClassDef {
 	private byte cd_externalizable;
 	private byte cd_dynamic;
 	private int cd_num;
-	private AVal cd_props;
+	private AVal[] cd_props;
 	
-	public AMF3ClassDef(AVal cd_name, byte cd_externalizable, byte cd_dynamic, int cd_num, AVal cd_props) {
+	public AMF3ClassDef(AVal cd_name, byte cd_externalizable, byte cd_dynamic, int cd_num, AVal[] cd_props) {
 		setCd_name(cd_name);
 		setCd_externalizable(cd_externalizable);
 		setCd_dynamic(cd_dynamic);
@@ -41,10 +41,10 @@ public class AMF3ClassDef {
 	public void setCd_num(int newCd_num) {
 		cd_num = newCd_num;
 	}
-	public AVal getCd_props() {
+	public AVal[] getCd_props() {
 		return cd_props;
 	}
-	public void setCd_props(AVal newCd_props) {
+	public void setCd_props(AVal[] newCd_props) {
 		cd_props = newCd_props;
 	}
 }

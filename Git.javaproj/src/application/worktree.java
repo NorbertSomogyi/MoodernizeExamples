@@ -27,27 +27,27 @@ public class worktree {
 	
 	public void show_worktree_porcelain() {
 		Byte generatedPath = this.getPath();
-		.printf("worktree %s\n", generatedPath);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("worktree %s\n", generatedPath);
 		int generatedIs_bare = this.getIs_bare();
 		object_id generatedHead_oid = this.getHead_oid();
 		int generatedIs_detached = this.getIs_detached();
 		Byte generatedHead_ref = this.getHead_ref();
 		if (generatedIs_bare) {
-			.printf("bare\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("bare\n");
 		} else {
-				.printf("HEAD %s\n", ModernizedCProgram.oid_to_hex(generatedHead_oid));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("HEAD %s\n", ModernizedCProgram.oid_to_hex(generatedHead_oid));
 				if (generatedIs_detached) {
-					.printf("detached\n");
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("detached\n");
 				}  else if (generatedHead_ref) {
-					.printf("branch %s\n", generatedHead_ref);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("branch %s\n", generatedHead_ref);
 				} 
 		} 
-		.printf("\n");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("\n");
 	}
 	public void show_worktree(int path_maxlen, int abbrev_len) {
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		Byte generatedPath = this.getPath();
-		int cur_path_len = .strlen(generatedPath);
+		int cur_path_len = /*Error: Function owner not recognized*/strlen(generatedPath);
 		int path_adj = cur_path_len - ModernizedCProgram.utf8_strwidth(generatedPath);
 		sb.strbuf_addf("%-*s ", 1 + path_maxlen + path_adj, generatedPath);
 		int generatedIs_bare = this.getIs_bare();
@@ -68,19 +68,19 @@ public class worktree {
 						sb.strbuf_addstr("(error)");
 				} 
 		} 
-		byte generatedBuf = sb.getBuf();
-		.printf("%s\n", generatedBuf);
+		byte[] generatedBuf = sb.getBuf();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s\n", generatedBuf);
 		sb.strbuf_release();
 	}
-	public void measure_widths(int abbrev, int maxlen) {
+	public void measure_widths(Integer abbrev, Integer maxlen) {
 		int i;
 		for (i = 0; wt[i]; i++) {
 			int sha1_len;
-			int path_len = .strlen(wt[i].getPath());
+			int path_len = /*Error: Function owner not recognized*/strlen(wt[i].getPath());
 			if (path_len > maxlen) {
 				maxlen = path_len;
 			} 
-			sha1_len = .strlen(ModernizedCProgram.the_repository.repo_find_unique_abbrev(wt[i].getHead_oid(), abbrev));
+			sha1_len = /*Error: Function owner not recognized*/strlen(ModernizedCProgram.the_repository.repo_find_unique_abbrev(wt[i].getHead_oid(), abbrev));
 			if (sha1_len > abbrev) {
 				abbrev = sha1_len;
 			} 
@@ -99,10 +99,10 @@ public class worktree {
 		Byte generatedPath = this.getPath();
 		child_env.argv_array_pushf("%s=%s/.git", "GIT_DIR", generatedPath);
 		child_env.argv_array_pushf("%s=%s", "GIT_WORK_TREE", generatedPath);
-		.memset(cp, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(cp, 0, /*Error: sizeof expression not supported yet*/);
 		argv_array generatedArgs = cp.getArgs();
 		generatedArgs.argv_array_pushl("status", "--porcelain", "--ignore-submodules=none", ((Object)0));
-		Object generatedArgv = child_env.getArgv();
+		Object[][] generatedArgv = child_env.getArgv();
 		cp.setEnv(generatedArgv);
 		cp.setGit_cmd(1);
 		cp.setDir(generatedPath);
@@ -112,18 +112,18 @@ public class worktree {
 			ModernizedCProgram.die_errno(ModernizedCProgram._("failed to run 'git status' on '%s'"), original_path);
 		} 
 		int generatedOut = cp.getOut();
-		ret = ModernizedCProgram.xread(generatedOut, buf, );
+		ret = ModernizedCProgram.xread(generatedOut, buf, /*Error: sizeof expression not supported yet*/);
 		if (ret) {
 			ModernizedCProgram.die(ModernizedCProgram._("'%s' contains modified or untracked files, use --force to delete it"), original_path);
 		} 
-		.close(generatedOut);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedOut);
 		ret = cp.finish_command();
 		if (ret) {
 			ModernizedCProgram.die_errno(ModernizedCProgram._("failed to run 'git status' on '%s', code %d"), original_path, ret);
 		} 
 	}
 	public int delete_git_work_tree() {
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int ret = 0;
 		Byte generatedPath = this.getPath();
 		sb.strbuf_addstr(generatedPath);

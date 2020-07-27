@@ -3,16 +3,16 @@ package application;
 public class flickcurl_photo_s {
 	private Byte id;
 	private Byte uri;
-	private flickcurl_tag_s tags;
+	private flickcurl_tag_s[][] tags;
 	private int tags_count;
 	private Object fields;
 	private  place;
 	private  video;
 	private Byte media_type;
-	private flickcurl_note_s notes;
+	private flickcurl_note_s[][] notes;
 	private int notes_count;
 	
-	public flickcurl_photo_s(Byte id, Byte uri, flickcurl_tag_s tags, int tags_count, Object fields,  place,  video, Byte media_type, flickcurl_note_s notes, int notes_count) {
+	public flickcurl_photo_s(Byte id, Byte uri, flickcurl_tag_s[][] tags, int tags_count, Object fields,  place,  video, Byte media_type, flickcurl_note_s[][] notes, int notes_count) {
 		setId(id);
 		setUri(uri);
 		setTags(tags);
@@ -31,7 +31,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -78,7 +78,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -103,36 +103,383 @@ public class flickcurl_photo_s {
 		 * Return value: non-0 on failure
 		 **/;
 	}
-	public flickcurl_photo_s flickcurl_panda_getPhotos(flickcurl_s fc, Object panda_name) {
-		flickcurl_photo photos = ((Object)0);
-		flickcurl_photos_list photos_list = ((Object)0);
-		byte format = ((Object)0);
-		fc.flickcurl_init_params(0);
-		if (!panda_name) {
-			return ((Object)0);
+	public void flickcurl_free_photo() {
+		int i;
+		do {
+			if (!photo) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_photo is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\photo.c", 130, __func__);
+				return /*Error: Unsupported expression*/;
+			} 
+		} while (0);
+		Object generatedFields = this.getFields();
+		for (i = 0; i <= .PHOTO_FIELD_LAST; i++) {
+			if (generatedFields[i].getString()) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedFields[i].getString());
+			} 
+		}
+		flickcurl_tag_s[][] generatedTags = this.getTags();
+		generatedTags.flickcurl_free_tags();
+		int generatedNotes_count = this.getNotes_count();
+		flickcurl_note_s[][] generatedNotes = this.getNotes();
+		for (i = 0; i < generatedNotes_count; i++) {
+			generatedNotes[i].flickcurl_free_note();
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedNotes);
+		Byte generatedId = this.getId();
+		if (generatedId) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedId);
 		} 
-		fc.flickcurl_add_param("panda_name", panda_name);
-		fc.flickcurl_end_params();
-		if (fc.flickcurl_prepare("flickr.panda.getPhotos")) {
+		Byte generatedUri = this.getUri();
+		if (generatedUri) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedUri);
+		} 
+		Byte generatedMedia_type = this.getMedia_type();
+		if (generatedMedia_type) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedMedia_type);
+		} 
+		 generatedPlace = this.getPlace();
+		if (generatedPlace) {
+			generatedPlace.flickcurl_free_place();
+		} 
+		 generatedVideo = this.getVideo();
+		if (generatedVideo) {
+			generatedVideo.flickcurl_free_video();
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(photo/**
+		 * flickcurl_photo_as_source_uri:
+		 * @photo: photo object
+		 * @c: size s, m, t or b
+		 *
+		 * Get a photo's image source URIs
+		 *
+		 * @c can be s,m,t,b for sizes, o for original, otherwise default
+		 * https://www.flickr.com/services/api/misc.urls.html
+		 *
+		 * Return value: new source URI string or NULL on failure
+		 */);
+	}
+	public Byte flickcurl_photo_as_source_uri(Object c) {
+		byte[] buf = new byte[512];
+		byte result;
+		size_t len = new size_t();
+		Object generatedFields = this.getFields();
+		Byte generatedId = this.getId();
+		if (c == (byte)'o') {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(buf, /* https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{o-secret}_o.(jpg|gif|png) */"https://farm%s.staticflickr.com/%s/%s_%s_o.%s", generatedFields[.PHOTO_FIELD_farm].getString(), generatedFields[.PHOTO_FIELD_server].getString(), generatedId, generatedFields[.PHOTO_FIELD_originalsecret].getString(), generatedFields[.PHOTO_FIELD_originalformat].getString());
+		}  else if (c == (byte)'m' || c == (byte)'s' || c == (byte)'t' || c == (byte)'b') {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(buf, /* https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstb].jpg */"https://farm%s.staticflickr.com/%s/%s_%s_%c.jpg", generatedFields[.PHOTO_FIELD_farm].getString(), generatedFields[.PHOTO_FIELD_server].getString(), generatedId, generatedFields[.PHOTO_FIELD_secret].getString(), c);
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(buf, /* https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg */"https://farm%s.staticflickr.com/%s/%s_%s.jpg", generatedFields[.PHOTO_FIELD_farm].getString(), generatedFields[.PHOTO_FIELD_server].getString(), generatedId, generatedFields[.PHOTO_FIELD_secret].getString());
+		} 
+		len = /*Error: Function owner not recognized*/strlen(buf);
+		result = (byte)/*Error: Function owner not recognized*/malloc(len + 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(result, buf, len + 1);
+		return result/**
+		 * flickcurl_photo_as_page_uri:
+		 * @photo: photo object
+		 *
+		 * Get a photo's page URI
+		 *
+		 * Return value: new source URI string or NULL on failure
+		 */;
+	}
+	public Byte flickcurl_photo_as_page_uri() {
+		byte[] buf = new byte[512];
+		byte result;
+		size_t len = new size_t();
+		Object generatedFields = this.getFields();
+		Byte generatedId = this.getId();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(buf, /* https://www.flickr.com/photos/{owner}/{photo id}/ */"https://www.flickr.com/photos/%s/%s", generatedFields[.PHOTO_FIELD_owner_nsid].getString(), generatedId);
+		len = /*Error: Function owner not recognized*/strlen(buf);
+		result = (byte)/*Error: Function owner not recognized*/malloc(len + 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(result, buf, len + 1);
+		return result;
+	}
+	public Byte flickcurl_photo_as_short_uri() {
+		Byte generatedId = this.getId();
+		return ModernizedCProgram.flickcurl_photo_id_as_short_uri(generatedId);
+	}
+	public Byte flickcurl_photo_as_user_icon_uri() {
+		Object generatedFields = this.getFields();
+		return ModernizedCProgram.flickcurl_user_icon_uri(generatedFields[.PHOTO_FIELD_owner_iconfarm].getInteger(), generatedFields[.PHOTO_FIELD_owner_iconserver].getInteger(), generatedFields[.PHOTO_FIELD_owner_nsid].getString());
+	}
+	public flickcurl_photo_s flickcurl_build_photos(flickcurl_s fc, Object xpathCtx, Object xpathExpr, Integer photo_count_p) {
+		flickcurl_photo photos = ((Object)0);
+		int nodes_count;
+		int photo_count;
+		 xpathObj = ((Object)0);
+		 nodes = new ();
+		[] full_xpath = new ();
+		size_t xpathExpr_len = new size_t();
+		int i;
+		xpathExpr_len = /*Error: Function owner not recognized*/strlen((byte)xpathExpr);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(full_xpath, xpathExpr, xpathExpr_len + 1);
+		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, xpathCtx);
+		if (!xpathObj) {
+			fc.flickcurl_error("Unable to evaluate XPath expression \"%s\"", xpathExpr);
+			fc.setFailed(1);
 			;
 		} 
-		photos_list = fc.flickcurl_invoke_photos_list(()"/rsp/photos", format);
+		nodes = xpathObj.getNodesetval();
+		nodes_count = /*Error: Function owner not recognized*/xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
+		photos = (flickcurl_photo)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, nodes_count + 1);
+		Object generatedFields = photo.getFields();
+		int generatedTags_count = photo.getTags_count();
+		flickcurl_tag_s flickcurl_tag_s = new flickcurl_tag_s();
+		int generatedFailed = fc.getFailed();
+		flickcurl_tag_s[][] generatedTags = photo.getTags();
+		flickcurl_tag_s flickcurl_tag_s = new flickcurl_tag_s();
+		 generatedPlace = photo.getPlace();
+		int generatedNotes_count = photo.getNotes_count();
+		flickcurl_note_s flickcurl_note_s = new flickcurl_note_s();
+		Byte generatedMedia_type = photo.getMedia_type();
+		for (; i < nodes_count; i++) {
+			 node = nodes.getNodeTab()[i];
+			flickcurl_photo photo = new flickcurl_photo();
+			int expri;
+			 xpathNodeCtx = ((Object)0);
+			if (node.getType() != XML_ELEMENT_NODE) {
+				fc.flickcurl_error("Got unexpected node type %d", node.getType());
+				fc.setFailed(1);
+				break;
+			} 
+			photo = (flickcurl_photo)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
+			xpathNodeCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(xpathCtx.getDoc());
+			xpathNodeCtx.setNode(node);
+			for (expri = 0; expri <= .PHOTO_FIELD_LAST; expri++) {
+				if (generatedFields[expri].getString()) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedFields[expri].getString());
+				} 
+				generatedFields[expri].setString(((Object)0));
+				generatedFields[expri].setInteger((flickcurl_photo_field_type)-1);
+				generatedFields[expri].setType(.VALUE_TYPE_NONE);
+			}
+			for (expri = 0; photo_fields_table[expri].getXpath(); expri++) {
+				byte string_value;
+				flickcurl_field_value_type datatype = photo_fields_table[expri].getType();
+				int int_value = -1;
+				flickcurl_photo_field_type field = photo_fields_table[expri].getField();
+				time_t unix_time = new time_t();
+				int special = 0;
+				string_value = fc.flickcurl_xpath_eval(xpathNodeCtx, photo_fields_table[expri].getXpath());
+				if (!string_value) {
+					continue;
+				} 
+				switch (datatype) {
+				case .VALUE_TYPE_BOOLEAN:
+						if (!string_value && datatype == .VALUE_TYPE_BOOLEAN) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(/* skip setting field with a boolean value '' */string_value);
+							special = 1;
+							break;
+						} 
+						int_value = /*Error: Function owner not recognized*/atoi(string_value);
+						break;
+				case .VALUE_TYPE_NONE:
+				case .VALUE_TYPE_INTEGER:
+				case .VALUE_TYPE_STRING:
+				case .VALUE_TYPE_PERSON_ID:
+				case .VALUE_TYPE_URI:
+						break;
+				case .VALUE_TYPE_TAG_STRING:
+						photo.setTags(flickcurl_tag_s.flickcurl_build_tags_from_string(fc, /* A space-separated list of tags */photo, (byte)string_value, generatedTags_count));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(string_value);
+						special = 1;
+						break;
+				case .VALUE_TYPE_MEDIA_TYPE:
+						photo.setMedia_type(string_value);
+						string_value = ((Object)0);
+						datatype = .VALUE_TYPE_NONE;
+						break;
+				case .VALUE_TYPE_UNIXTIME:
+				case .VALUE_TYPE_PHOTO_ID:
+						photo.setId(string_value);
+						string_value = ((Object)0);
+						datatype = .VALUE_TYPE_NONE;
+						break;
+				case .VALUE_TYPE_COLLECTION_ID:
+				case .VALUE_TYPE_ICON_PHOTOS:
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
+				case .VALUE_TYPE_DATETIME:
+						if (datatype == .VALUE_TYPE_UNIXTIME) {
+							unix_time = /*Error: Function owner not recognized*/atoi(string_value);
+						} else {
+								unix_time = /*Error: Function owner not recognized*/curl_getdate((byte)string_value, ((Object)0));
+						} 
+						if (unix_time >= 0) {
+							byte new_value = ModernizedCProgram.flickcurl_unixtime_to_isotime(unix_time);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(string_value);
+							string_value = new_value;
+							int_value = (int)unix_time;
+							datatype = .VALUE_TYPE_DATETIME;
+						} else {
+								datatype = /* failed to convert, make it a string */.VALUE_TYPE_STRING;
+						} 
+						break;
+				case .VALUE_TYPE_PHOTO_URI:
+						photo.setUri(string_value);
+						string_value = ((Object)0);
+						datatype = .VALUE_TYPE_NONE;
+						break;
+				case .VALUE_TYPE_FLOAT:
+				}
+				if (/* If special, do not store here */special) {
+					continue;
+				} 
+				generatedFields[field].setString(string_value);
+				generatedFields[field].setInteger((flickcurl_photo_field_type)int_value);
+				generatedFields[field].setType(datatype);
+				if (generatedFailed) {
+					;
+				} 
+			}
+			if (!generatedTags) {
+				photo.setTags(flickcurl_tag_s.flickcurl_build_tags(fc, photo, xpathNodeCtx, ()"./tags/tag", generatedTags_count));
+			} 
+			if (!generatedPlace) {
+				photo.setPlace(fc.flickcurl_build_place(xpathNodeCtx, ()"./location"));
+			} 
+			photo.setVideo(fc.flickcurl_build_video(xpathNodeCtx, ()"./video"));
+			photo.setNotes(flickcurl_note_s.flickcurl_build_notes(fc, photo, xpathNodeCtx, ()"./notes/note", generatedNotes_count));
+			if (!generatedMedia_type) {
+				photo.setMedia_type((byte)/*Error: Function owner not recognized*/malloc(5 + 1));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedMedia_type, "photo", 5 + 1);
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/xmlXPathFreeContext(xpathNodeCtx);
+			photos[photo_count++] = photo/* for photos */;
+		}
+		if (photo_count_p) {
+			photo_count_p = photo_count;
+		} 
+		if (generatedFailed) {
+			if (photos) {
+				photos.flickcurl_free_photos();
+			} 
+			photos = ((Object)0);
+		} 
+		return photos;
+	}
+	public flickcurl_photo_s flickcurl_build_photo(flickcurl_s fc, Object xpathCtx) {
+		flickcurl_photo photos = new flickcurl_photo();
+		flickcurl_photo result = ((Object)0);
+		flickcurl_photo_s flickcurl_photo_s = new flickcurl_photo_s();
+		photos = flickcurl_photo_s.flickcurl_build_photos(fc, xpathCtx, ()"/rsp/photo", ((Object)0));
+		if (photos) {
+			result = photos[0];
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(photos);
+		} 
+		return result/**
+		 * flickcurl_free_photos:
+		 * @photos: photo object array
+		 *
+		 * Destructor for array of photo objects
+		 */;
+	}
+	public void flickcurl_free_photos() {
+		int i;
+		do {
+			if (!photos) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_photo_array is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\photo.c", 1204, __func__);
+				return /*Error: Unsupported expression*/;
+			} 
+		} while (0);
+		for (i = 0; photos[i]; i++) {
+			photos[i].flickcurl_free_photo();
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(photos/*
+		 * flickcurl_invoke_photos_list:
+		 * @fc: Flickcurl context
+		 * @xpathExpr: Xpath to the list of photos e.g. '/rsp/photos' or '/rsp/gallery'.  The /photos suffix is added internally.
+		 * @format: result format wanted
+		 *
+		 * INTERNAL - Build photos list from XML or get format content result from web service response document
+		 *
+		 * Return value: new photos list or NULL on failure
+		 */);
+	}
+	public flickcurl_photo_s flickcurl_photos_geo_photosForLocation(flickcurl_s fc,  location, Object extras, int per_page, int page) {
+		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
+		flickcurl_photos_list photos_list = new flickcurl_photos_list();
+		flickcurl_photo photos = new flickcurl_photo();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
+		list_params.setFormat(((Object)0));
+		list_params.setExtras(extras);
+		list_params.setPer_page(per_page);
+		list_params.setPage(page);
+		photos_list = ModernizedCProgram.flickcurl_photos_geo_photosForLocation_params(fc, location, list_params);
 		if (!photos_list) {
-			fc.setFailed(1);
+			return ((Object)0);
 		} 
 		Object generatedPhotos = photos_list.getPhotos();
-		if (photos_list) {
-			photos = generatedPhotos;
-			photos_list.setPhotos(((Object)0));
-			/* photos array is now owned by this function */photos_list.flickcurl_free_photos_list();
+		photos = generatedPhotos;
+		photos_list.setPhotos(((Object)0/* photos array is now owned by this function */));
+		photos_list.flickcurl_free_photos_list();
+		return photos/**
+		 * flickcurl_photos_geo_removeLocation:
+		 * @fc: flickcurl context
+		 * @photo_id: The id of the photo you want to remove location data from.
+		 * 
+		 * Removes the geo data associated with a photo.
+		 *
+		 * Implements flickr.photos.geo.removeLocation (0.12)
+		 * 
+		 * Return value: non-0 on failure
+		 **/;
+	}
+	public void command_print_photo() {
+		int i;
+		Byte generatedMedia_type = this.getMedia_type();
+		Byte generatedUri = this.getUri();
+		Byte generatedId = this.getId();
+		int generatedTags_count = this.getTags_count();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%s with URI %s ID %s and %d tags\n", generatedMedia_type, (generatedUri ? generatedUri : "(Unknown)"), generatedId, generatedTags_count);
+		Object generatedFields = this.getFields();
+		for (i = 0; i <= .PHOTO_FIELD_LAST; i++) {
+			flickcurl_photo_field_type field = (flickcurl_photo_field_type)i;
+			flickcurl_field_value_type datatype = generatedFields[field].getType();
+			if (datatype == .VALUE_TYPE_NONE) {
+				continue;
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "    field %s (%d) with %s value: '%s' / %d\n", ModernizedCProgram.flickcurl_get_photo_field_label(field), field, ModernizedCProgram.flickcurl_get_field_value_type_label(datatype), generatedFields[field].getString(), generatedFields[field].getInteger());
+		}
+		flickcurl_tag_s[][] generatedTags = this.getTags();
+		generatedTags.command_print_tags(((Object)0), ((Object)0));
+		flickcurl_note_s[][] generatedNotes = this.getNotes();
+		if (generatedNotes) {
+			generatedNotes.command_print_notes(((Object)0), ((Object)0));
 		} 
+		 generatedPlace = this.getPlace();
+		if (generatedPlace) {
+			generatedPlace.command_print_place(((Object)0), ((Object)0), 1);
+		} 
+		 generatedVideo = this.getVideo();
+		if (generatedVideo) {
+			generatedVideo.command_print_video();
+		} 
+	}
+	public flickcurl_photo_s flickcurl_interestingness_getList(flickcurl_s fc, Object date, Object extras, int per_page, int page) {
+		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
+		flickcurl_photos_list photos_list = new flickcurl_photos_list();
+		flickcurl_photo photos = new flickcurl_photo();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
+		list_params.setFormat(((Object)0));
+		list_params.setExtras(extras);
+		list_params.setPer_page(per_page);
+		list_params.setPage(page);
+		photos_list = ModernizedCProgram.flickcurl_interestingness_getList_params(fc, date, list_params);
+		if (!photos_list) {
+			return ((Object)0);
+		} 
+		Object generatedPhotos = photos_list.getPhotos();
+		photos = generatedPhotos;
+		photos_list.setPhotos(((Object)0/* photos array is now owned by this function */));
+		photos_list.flickcurl_free_photos_list();
 		return photos;
 	}
 	public flickcurl_photo_s flickcurl_people_getPublicPhotos(flickcurl_s fc, Object user_id, Object extras, int per_page, int page) {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -160,7 +507,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -191,7 +538,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -206,11 +553,66 @@ public class flickcurl_photo_s {
 		photos_list.flickcurl_free_photos_list();
 		return photos;
 	}
+	public flickcurl_photo_s flickcurl_groups_pools_getPhotos(flickcurl_s fc, Object group_id, Object tags, Object user_id, Object extras, int per_page, int page) {
+		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
+		flickcurl_photos_list photos_list = new flickcurl_photos_list();
+		flickcurl_photo photos = new flickcurl_photo();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
+		list_params.setFormat(((Object)0));
+		list_params.setExtras(extras);
+		list_params.setPer_page(per_page);
+		list_params.setPage(page);
+		photos_list = ModernizedCProgram.flickcurl_groups_pools_getPhotos_params(fc, group_id, tags, user_id, list_params);
+		if (!photos_list) {
+			return ((Object)0);
+		} 
+		Object generatedPhotos = photos_list.getPhotos();
+		photos = generatedPhotos;
+		photos_list.setPhotos(((Object)0/* photos array is now owned by this function */));
+		photos_list.flickcurl_free_photos_list();
+		return photos/**
+		 * flickcurl_groups_pools_remove:
+		 * @fc: flickcurl context
+		 * @photo_id: The id of the photo to remove from the group pool.
+		 * @group_id: The NSID of the group who's pool the photo is to removed from.
+		 * 
+		 * Remove a photo from a group pool.
+		 *
+		 * Implements flickr.groups.pools.remove (0.12)
+		 * 
+		 * Return value: non-0 on failure
+		 **/;
+	}
+	public flickcurl_photo_s flickcurl_panda_getPhotos(flickcurl_s fc, Object panda_name) {
+		flickcurl_photo photos = ((Object)0);
+		flickcurl_photos_list photos_list = ((Object)0);
+		byte format = ((Object)0);
+		fc.flickcurl_init_params(0);
+		if (!panda_name) {
+			return ((Object)0);
+		} 
+		fc.flickcurl_add_param("panda_name", panda_name);
+		fc.flickcurl_end_params();
+		if (fc.flickcurl_prepare("flickr.panda.getPhotos")) {
+			;
+		} 
+		photos_list = fc.flickcurl_invoke_photos_list(()"/rsp/photos", format);
+		if (!photos_list) {
+			fc.setFailed(1);
+		} 
+		Object generatedPhotos = photos_list.getPhotos();
+		if (photos_list) {
+			photos = generatedPhotos;
+			photos_list.setPhotos(((Object)0));
+			/* photos array is now owned by this function */photos_list.flickcurl_free_photos_list();
+		} 
+		return photos;
+	}
 	public flickcurl_photo_s flickcurl_photos_getContactsPhotos(flickcurl_s fc, int contact_count, int just_friends, int single_photo, int include_self, Object extras) {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(-1);
@@ -249,7 +651,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(-1);
@@ -294,7 +696,7 @@ public class flickcurl_photo_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -330,7 +732,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -359,7 +761,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -388,7 +790,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -425,7 +827,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -463,7 +865,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -502,7 +904,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -533,7 +935,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		Object generatedExtras = params.getExtras();
 		list_params.setExtras(generatedExtras);
@@ -562,335 +964,11 @@ public class flickcurl_photo_s {
 		 * Return value: non-0 on failure
 		 **/;
 	}
-	public void flickcurl_free_photo() {
-		int i;
-		do {
-			if (!photo) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_photo is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\photo.c", 130, __func__);
-				return ;
-			} 
-		} while (0);
-		Object generatedFields = this.getFields();
-		for (i = 0; i <= .PHOTO_FIELD_LAST; i++) {
-			if (generatedFields[i].getString()) {
-				.free(generatedFields[i].getString());
-			} 
-		}
-		flickcurl_tag_s generatedTags = this.getTags();
-		generatedTags.flickcurl_free_tags();
-		int generatedNotes_count = this.getNotes_count();
-		flickcurl_note_s generatedNotes = this.getNotes();
-		for (i = 0; i < generatedNotes_count; i++) {
-			generatedNotes[i].flickcurl_free_note();
-		}
-		.free(generatedNotes);
-		Byte generatedId = this.getId();
-		if (generatedId) {
-			.free(generatedId);
-		} 
-		Byte generatedUri = this.getUri();
-		if (generatedUri) {
-			.free(generatedUri);
-		} 
-		Byte generatedMedia_type = this.getMedia_type();
-		if (generatedMedia_type) {
-			.free(generatedMedia_type);
-		} 
-		 generatedPlace = this.getPlace();
-		if (generatedPlace) {
-			generatedPlace.flickcurl_free_place();
-		} 
-		 generatedVideo = this.getVideo();
-		if (generatedVideo) {
-			generatedVideo.flickcurl_free_video();
-		} 
-		.free(photo/**
-		 * flickcurl_photo_as_source_uri:
-		 * @photo: photo object
-		 * @c: size s, m, t or b
-		 *
-		 * Get a photo's image source URIs
-		 *
-		 * @c can be s,m,t,b for sizes, o for original, otherwise default
-		 * https://www.flickr.com/services/api/misc.urls.html
-		 *
-		 * Return value: new source URI string or NULL on failure
-		 */);
-	}
-	public Byte flickcurl_photo_as_source_uri(Object c) {
-		byte[] buf = new byte[512];
-		byte result;
-		size_t len = new size_t();
-		Object generatedFields = this.getFields();
-		Byte generatedId = this.getId();
-		if (c == (byte)'o') {
-			.sprintf(buf, /* https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{o-secret}_o.(jpg|gif|png) */"https://farm%s.staticflickr.com/%s/%s_%s_o.%s", generatedFields[.PHOTO_FIELD_farm].getString(), generatedFields[.PHOTO_FIELD_server].getString(), generatedId, generatedFields[.PHOTO_FIELD_originalsecret].getString(), generatedFields[.PHOTO_FIELD_originalformat].getString());
-		}  else if (c == (byte)'m' || c == (byte)'s' || c == (byte)'t' || c == (byte)'b') {
-			.sprintf(buf, /* https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstb].jpg */"https://farm%s.staticflickr.com/%s/%s_%s_%c.jpg", generatedFields[.PHOTO_FIELD_farm].getString(), generatedFields[.PHOTO_FIELD_server].getString(), generatedId, generatedFields[.PHOTO_FIELD_secret].getString(), c);
-		} else {
-				.sprintf(buf, /* https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg */"https://farm%s.staticflickr.com/%s/%s_%s.jpg", generatedFields[.PHOTO_FIELD_farm].getString(), generatedFields[.PHOTO_FIELD_server].getString(), generatedId, generatedFields[.PHOTO_FIELD_secret].getString());
-		} 
-		len = .strlen(buf);
-		result = (byte).malloc(len + 1);
-		.memcpy(result, buf, len + 1);
-		return result/**
-		 * flickcurl_photo_as_page_uri:
-		 * @photo: photo object
-		 *
-		 * Get a photo's page URI
-		 *
-		 * Return value: new source URI string or NULL on failure
-		 */;
-	}
-	public Byte flickcurl_photo_as_page_uri() {
-		byte[] buf = new byte[512];
-		byte result;
-		size_t len = new size_t();
-		Object generatedFields = this.getFields();
-		Byte generatedId = this.getId();
-		.sprintf(buf, /* https://www.flickr.com/photos/{owner}/{photo id}/ */"https://www.flickr.com/photos/%s/%s", generatedFields[.PHOTO_FIELD_owner_nsid].getString(), generatedId);
-		len = .strlen(buf);
-		result = (byte).malloc(len + 1);
-		.memcpy(result, buf, len + 1);
-		return result;
-	}
-	public Byte flickcurl_photo_as_short_uri() {
-		Byte generatedId = this.getId();
-		return ModernizedCProgram.flickcurl_photo_id_as_short_uri(generatedId);
-	}
-	public Byte flickcurl_photo_as_user_icon_uri() {
-		Object generatedFields = this.getFields();
-		return ModernizedCProgram.flickcurl_user_icon_uri(generatedFields[.PHOTO_FIELD_owner_iconfarm].getInteger(), generatedFields[.PHOTO_FIELD_owner_iconserver].getInteger(), generatedFields[.PHOTO_FIELD_owner_nsid].getString());
-	}
-	public flickcurl_photo_s flickcurl_build_photos(flickcurl_s fc, Object xpathCtx, Object xpathExpr, int photo_count_p) {
-		flickcurl_photo photos = ((Object)0);
-		int nodes_count;
-		int photo_count;
-		 xpathObj = ((Object)0);
-		 nodes = new ();
-		[] full_xpath = new ();
-		size_t xpathExpr_len = new size_t();
-		int i;
-		xpathExpr_len = .strlen((byte)xpathExpr);
-		.memcpy(full_xpath, xpathExpr, xpathExpr_len + 1);
-		xpathObj = .xmlXPathEvalExpression(xpathExpr, xpathCtx);
-		if (!xpathObj) {
-			fc.flickcurl_error("Unable to evaluate XPath expression \"%s\"", xpathExpr);
-			fc.setFailed(1);
-			;
-		} 
-		nodes = xpathObj.getNodesetval();
-		nodes_count = .xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
-		photos = (flickcurl_photo).calloc(, nodes_count + 1);
-		Object generatedFields = photo.getFields();
-		int generatedTags_count = photo.getTags_count();
-		flickcurl_tag_s flickcurl_tag_s = new flickcurl_tag_s();
-		int generatedFailed = fc.getFailed();
-		flickcurl_tag_s generatedTags = photo.getTags();
-		flickcurl_tag_s flickcurl_tag_s = new flickcurl_tag_s();
-		 generatedPlace = photo.getPlace();
-		int generatedNotes_count = photo.getNotes_count();
-		flickcurl_note_s flickcurl_note_s = new flickcurl_note_s();
-		Byte generatedMedia_type = photo.getMedia_type();
-		for (; i < nodes_count; i++) {
-			 node = nodes.getNodeTab()[i];
-			flickcurl_photo photo = new flickcurl_photo();
-			int expri;
-			 xpathNodeCtx = ((Object)0);
-			if (node.getType() != XML_ELEMENT_NODE) {
-				fc.flickcurl_error("Got unexpected node type %d", node.getType());
-				fc.setFailed(1);
-				break;
-			} 
-			photo = (flickcurl_photo).calloc(, 1);
-			xpathNodeCtx = .xmlXPathNewContext(xpathCtx.getDoc());
-			xpathNodeCtx.setNode(node);
-			for (expri = 0; expri <= .PHOTO_FIELD_LAST; expri++) {
-				if (generatedFields[expri].getString()) {
-					.free(generatedFields[expri].getString());
-				} 
-				generatedFields[expri].setString(((Object)0));
-				generatedFields[expri].setInteger((flickcurl_photo_field_type)-1);
-				generatedFields[expri].setType(.VALUE_TYPE_NONE);
-			}
-			for (expri = 0; photo_fields_table[expri].getXpath(); expri++) {
-				byte string_value;
-				flickcurl_field_value_type datatype = photo_fields_table[expri].getType();
-				int int_value = -1;
-				flickcurl_photo_field_type field = photo_fields_table[expri].getField();
-				time_t unix_time = new time_t();
-				int special = 0;
-				string_value = fc.flickcurl_xpath_eval(xpathNodeCtx, photo_fields_table[expri].getXpath());
-				if (!string_value) {
-					continue;
-				} 
-				switch (datatype) {
-				case .VALUE_TYPE_COLLECTION_ID:
-				case .VALUE_TYPE_URI:
-						break;
-				case .VALUE_TYPE_STRING:
-				case .VALUE_TYPE_PERSON_ID:
-				case .VALUE_TYPE_BOOLEAN:
-						if (!string_value && datatype == .VALUE_TYPE_BOOLEAN) {
-							.free(/* skip setting field with a boolean value '' */string_value);
-							special = 1;
-							break;
-						} 
-						int_value = .atoi(string_value);
-						break;
-				case .VALUE_TYPE_TAG_STRING:
-						photo.setTags(flickcurl_tag_s.flickcurl_build_tags_from_string(fc, /* A space-separated list of tags */photo, (byte)string_value, generatedTags_count));
-						.free(string_value);
-						special = 1;
-						break;
-				case .VALUE_TYPE_NONE:
-				case .VALUE_TYPE_FLOAT:
-				case .VALUE_TYPE_PHOTO_URI:
-						photo.setUri(string_value);
-						string_value = ((Object)0);
-						datatype = .VALUE_TYPE_NONE;
-						break;
-				case .VALUE_TYPE_INTEGER:
-				case .VALUE_TYPE_UNIXTIME:
-				case .VALUE_TYPE_MEDIA_TYPE:
-						photo.setMedia_type(string_value);
-						string_value = ((Object)0);
-						datatype = .VALUE_TYPE_NONE;
-						break;
-				case .VALUE_TYPE_ICON_PHOTOS:
-						.abort();
-				case .VALUE_TYPE_PHOTO_ID:
-						photo.setId(string_value);
-						string_value = ((Object)0);
-						datatype = .VALUE_TYPE_NONE;
-						break;
-				case .VALUE_TYPE_DATETIME:
-						if (datatype == .VALUE_TYPE_UNIXTIME) {
-							unix_time = .atoi(string_value);
-						} else {
-								unix_time = .curl_getdate((byte)string_value, ((Object)0));
-						} 
-						if (unix_time >= 0) {
-							byte new_value = ModernizedCProgram.flickcurl_unixtime_to_isotime(unix_time);
-							.free(string_value);
-							string_value = new_value;
-							int_value = (int)unix_time;
-							datatype = .VALUE_TYPE_DATETIME;
-						} else {
-								datatype = /* failed to convert, make it a string */.VALUE_TYPE_STRING;
-						} 
-						break;
-				}
-				if (/* If special, do not store here */special) {
-					continue;
-				} 
-				generatedFields[field].setString(string_value);
-				generatedFields[field].setInteger((flickcurl_photo_field_type)int_value);
-				generatedFields[field].setType(datatype);
-				if (generatedFailed) {
-					;
-				} 
-			}
-			if (!generatedTags) {
-				photo.setTags(flickcurl_tag_s.flickcurl_build_tags(fc, photo, xpathNodeCtx, ()"./tags/tag", generatedTags_count));
-			} 
-			if (!generatedPlace) {
-				photo.setPlace(fc.flickcurl_build_place(xpathNodeCtx, ()"./location"));
-			} 
-			photo.setVideo(fc.flickcurl_build_video(xpathNodeCtx, ()"./video"));
-			photo.setNotes(flickcurl_note_s.flickcurl_build_notes(fc, photo, xpathNodeCtx, ()"./notes/note", generatedNotes_count));
-			if (!generatedMedia_type) {
-				photo.setMedia_type((byte).malloc(5 + 1));
-				.memcpy(generatedMedia_type, "photo", 5 + 1);
-			} 
-			.xmlXPathFreeContext(xpathNodeCtx);
-			photos[photo_count++] = photo/* for photos */;
-		}
-		if (photo_count_p) {
-			photo_count_p = photo_count;
-		} 
-		if (generatedFailed) {
-			if (photos) {
-				photos.flickcurl_free_photos();
-			} 
-			photos = ((Object)0);
-		} 
-		return photos;
-	}
-	public flickcurl_photo_s flickcurl_build_photo(flickcurl_s fc, Object xpathCtx) {
-		flickcurl_photo photos = new flickcurl_photo();
-		flickcurl_photo result = ((Object)0);
-		flickcurl_photo_s flickcurl_photo_s = new flickcurl_photo_s();
-		photos = flickcurl_photo_s.flickcurl_build_photos(fc, xpathCtx, ()"/rsp/photo", ((Object)0));
-		if (photos) {
-			result = photos[0];
-			.free(photos);
-		} 
-		return result/**
-		 * flickcurl_free_photos:
-		 * @photos: photo object array
-		 *
-		 * Destructor for array of photo objects
-		 */;
-	}
-	public void flickcurl_free_photos() {
-		int i;
-		do {
-			if (!photos) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_photo_array is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\photo.c", 1204, __func__);
-				return ;
-			} 
-		} while (0);
-		for (i = 0; photos[i]; i++) {
-			photos[i].flickcurl_free_photo();
-		}
-		.free(photos/*
-		 * flickcurl_invoke_photos_list:
-		 * @fc: Flickcurl context
-		 * @xpathExpr: Xpath to the list of photos e.g. '/rsp/photos' or '/rsp/gallery'.  The /photos suffix is added internally.
-		 * @format: result format wanted
-		 *
-		 * INTERNAL - Build photos list from XML or get format content result from web service response document
-		 *
-		 * Return value: new photos list or NULL on failure
-		 */);
-	}
-	public void command_print_photo() {
-		int i;
-		Byte generatedMedia_type = this.getMedia_type();
-		Byte generatedUri = this.getUri();
-		Byte generatedId = this.getId();
-		int generatedTags_count = this.getTags_count();
-		.fprintf((_iob[1]), "%s with URI %s ID %s and %d tags\n", generatedMedia_type, (generatedUri ? generatedUri : "(Unknown)"), generatedId, generatedTags_count);
-		Object generatedFields = this.getFields();
-		for (i = 0; i <= .PHOTO_FIELD_LAST; i++) {
-			flickcurl_photo_field_type field = (flickcurl_photo_field_type)i;
-			flickcurl_field_value_type datatype = generatedFields[field].getType();
-			if (datatype == .VALUE_TYPE_NONE) {
-				continue;
-			} 
-			.fprintf((_iob[1]), "    field %s (%d) with %s value: '%s' / %d\n", ModernizedCProgram.flickcurl_get_photo_field_label(field), field, ModernizedCProgram.flickcurl_get_field_value_type_label(datatype), generatedFields[field].getString(), generatedFields[field].getInteger());
-		}
-		flickcurl_tag_s generatedTags = this.getTags();
-		generatedTags.command_print_tags(((Object)0), ((Object)0));
-		flickcurl_note_s generatedNotes = this.getNotes();
-		if (generatedNotes) {
-			generatedNotes.command_print_notes(((Object)0), ((Object)0));
-		} 
-		 generatedPlace = this.getPlace();
-		if (generatedPlace) {
-			generatedPlace.command_print_place(((Object)0), ((Object)0), 1);
-		} 
-		 generatedVideo = this.getVideo();
-		if (generatedVideo) {
-			generatedVideo.command_print_video();
-		} 
-	}
 	public flickcurl_photo_s flickcurl_galleries_getPhotos(flickcurl_s fc, Object gallery_id, Object extras, int per_page, int page) {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -909,7 +987,7 @@ public class flickcurl_photo_s {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		flickcurl_photos_list photos_list = new flickcurl_photos_list();
 		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -934,91 +1012,13 @@ public class flickcurl_photo_s {
 		 * Return value: non-0 on failure
 		 **/;
 	}
-	public flickcurl_photo_s flickcurl_groups_pools_getPhotos(flickcurl_s fc, Object group_id, Object tags, Object user_id, Object extras, int per_page, int page) {
-		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
-		flickcurl_photos_list photos_list = new flickcurl_photos_list();
-		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
-		list_params.setFormat(((Object)0));
-		list_params.setExtras(extras);
-		list_params.setPer_page(per_page);
-		list_params.setPage(page);
-		photos_list = ModernizedCProgram.flickcurl_groups_pools_getPhotos_params(fc, group_id, tags, user_id, list_params);
-		if (!photos_list) {
-			return ((Object)0);
-		} 
-		Object generatedPhotos = photos_list.getPhotos();
-		photos = generatedPhotos;
-		photos_list.setPhotos(((Object)0/* photos array is now owned by this function */));
-		photos_list.flickcurl_free_photos_list();
-		return photos/**
-		 * flickcurl_groups_pools_remove:
-		 * @fc: flickcurl context
-		 * @photo_id: The id of the photo to remove from the group pool.
-		 * @group_id: The NSID of the group who's pool the photo is to removed from.
-		 * 
-		 * Remove a photo from a group pool.
-		 *
-		 * Implements flickr.groups.pools.remove (0.12)
-		 * 
-		 * Return value: non-0 on failure
-		 **/;
-	}
-	public flickcurl_photo_s flickcurl_interestingness_getList(flickcurl_s fc, Object date, Object extras, int per_page, int page) {
-		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
-		flickcurl_photos_list photos_list = new flickcurl_photos_list();
-		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
-		list_params.setFormat(((Object)0));
-		list_params.setExtras(extras);
-		list_params.setPer_page(per_page);
-		list_params.setPage(page);
-		photos_list = ModernizedCProgram.flickcurl_interestingness_getList_params(fc, date, list_params);
-		if (!photos_list) {
-			return ((Object)0);
-		} 
-		Object generatedPhotos = photos_list.getPhotos();
-		photos = generatedPhotos;
-		photos_list.setPhotos(((Object)0/* photos array is now owned by this function */));
-		photos_list.flickcurl_free_photos_list();
-		return photos;
-	}
-	public flickcurl_photo_s flickcurl_photos_geo_photosForLocation(flickcurl_s fc,  location, Object extras, int per_page, int page) {
-		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
-		flickcurl_photos_list photos_list = new flickcurl_photos_list();
-		flickcurl_photo photos = new flickcurl_photo();
-		.memset(list_params, (byte)'\0', );
-		list_params.setFormat(((Object)0));
-		list_params.setExtras(extras);
-		list_params.setPer_page(per_page);
-		list_params.setPage(page);
-		photos_list = ModernizedCProgram.flickcurl_photos_geo_photosForLocation_params(fc, location, list_params);
-		if (!photos_list) {
-			return ((Object)0);
-		} 
-		Object generatedPhotos = photos_list.getPhotos();
-		photos = generatedPhotos;
-		photos_list.setPhotos(((Object)0/* photos array is now owned by this function */));
-		photos_list.flickcurl_free_photos_list();
-		return photos/**
-		 * flickcurl_photos_geo_removeLocation:
-		 * @fc: flickcurl context
-		 * @photo_id: The id of the photo you want to remove location data from.
-		 * 
-		 * Removes the geo data associated with a photo.
-		 *
-		 * Implements flickr.photos.geo.removeLocation (0.12)
-		 * 
-		 * Return value: non-0 on failure
-		 **/;
-	}
 	public flickcurl_photo_s flickcurl_stats_getPopularPhotos(flickcurl_s fc, Object date, Object sort, int per_page, int page, Object extras) {
 		flickcurl_photos_list_params list_params = new flickcurl_photos_list_params();
 		byte format = ((Object)0);
 		flickcurl_photos_list photos_list = ((Object)0);
 		flickcurl_photo photos = ((Object)0);
 		fc.flickcurl_init_params(0);
-		.memset(list_params, (byte)'\0', );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(list_params, (byte)'\0', /*Error: sizeof expression not supported yet*/);
 		list_params.setFormat(((Object)0));
 		list_params.setExtras(extras);
 		list_params.setPer_page(per_page);
@@ -1073,10 +1073,10 @@ public class flickcurl_photo_s {
 	public void setUri(Byte newUri) {
 		uri = newUri;
 	}
-	public flickcurl_tag_s getTags() {
+	public flickcurl_tag_s[][] getTags() {
 		return tags;
 	}
-	public void setTags(flickcurl_tag_s newTags) {
+	public void setTags(flickcurl_tag_s[][] newTags) {
 		tags = newTags;
 	}
 	public int getTags_count() {
@@ -1109,10 +1109,10 @@ public class flickcurl_photo_s {
 	public void setMedia_type(Byte newMedia_type) {
 		media_type = newMedia_type;
 	}
-	public flickcurl_note_s getNotes() {
+	public flickcurl_note_s[][] getNotes() {
 		return notes;
 	}
-	public void setNotes(flickcurl_note_s newNotes) {
+	public void setNotes(flickcurl_note_s[][] newNotes) {
 		notes = newNotes;
 	}
 	public int getNotes_count() {

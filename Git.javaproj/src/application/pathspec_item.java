@@ -9,10 +9,10 @@ public class pathspec_item {
 	private int nowildcard_len;
 	private int flags;
 	private int attr_match_nr;
-	private attr_match attr_match;
+	private attr_match[] attr_match;
 	private attr_check attr_check;
 	
-	public pathspec_item(Byte match, Byte original, int magic, int len, int prefix, int nowildcard_len, int flags, int attr_match_nr, attr_match attr_match, attr_check attr_check) {
+	public pathspec_item(Byte match, Byte original, int magic, int len, int prefix, int nowildcard_len, int flags, int attr_match_nr, attr_match[] attr_match, attr_check attr_check) {
 		setMatch(match);
 		setOriginal(original);
 		setMagic(magic);
@@ -42,9 +42,9 @@ public class pathspec_item {
 		attr_check attr_check = new attr_check();
 		this.setPathspec_item(attr_check.attr_check_alloc());
 		int generatedNr = list.getNr();
-		this.setPathspec_item(ModernizedCProgram.xcalloc(generatedNr, ));
-		string_list_item generatedItems = (list).getItems();
-		byte generatedString = si.getString();
+		this.setPathspec_item(ModernizedCProgram.xcalloc(generatedNr, /*Error: Unsupported expression*/));
+		string_list_item[] generatedItems = (list).getItems();
+		byte[] generatedString = si.getString();
 		attr_check_item attr_check_item = new attr_check_item();
 		for (si = generatedItems; si && si < generatedItems + generatedNr; ++si) {
 			size_t attr_len = new size_t();
@@ -57,15 +57,15 @@ public class pathspec_item {
 			case (byte)'!':
 					am.setMatch_mode(attr_match_mode.MATCH_UNSPECIFIED);
 					ModernizedCProgram.attr++;
-					attr_len = .strlen(ModernizedCProgram.attr);
+					attr_len = /*Error: Function owner not recognized*/strlen(ModernizedCProgram.attr);
 					break;
 			case (byte)'-':
 					am.setMatch_mode(attr_match_mode.MATCH_UNSET);
 					ModernizedCProgram.attr++;
-					attr_len = .strlen(ModernizedCProgram.attr);
+					attr_len = /*Error: Function owner not recognized*/strlen(ModernizedCProgram.attr);
 					break;
 			default:
-					attr_len = .strcspn(ModernizedCProgram.attr, "=");
+					attr_len = /*Error: Function owner not recognized*/strcspn(ModernizedCProgram.attr, "=");
 					if (ModernizedCProgram.attr[attr_len] != (byte)'=') {
 						am.setMatch_mode(attr_match_mode.MATCH_SET);
 					} else {
@@ -88,7 +88,7 @@ public class pathspec_item {
 		} 
 		list.string_list_clear(0);
 	}
-	public Object parse_long_magic(int magic, int prefix_len, Object elem) {
+	public Object parse_long_magic(Integer magic, Integer prefix_len, Object elem) {
 		byte pos;
 		byte nextat;
 		for (pos = elem + 2; pos && pos != (byte)')'; pos = nextat) {
@@ -104,7 +104,7 @@ public class pathspec_item {
 			} 
 			if (ModernizedCProgram.starts_with(pos, "prefix:")) {
 				byte endptr;
-				prefix_len = .strtol(pos + 7, endptr, 10);
+				prefix_len = /*Error: Function owner not recognized*/strtol(pos + 7, endptr, 10);
 				if (endptr - pos != ModernizedCProgram.len) {
 					ModernizedCProgram.die(ModernizedCProgram._("invalid parameter for pathspec magic 'prefix'"));
 				} 
@@ -117,13 +117,13 @@ public class pathspec_item {
 				ModernizedCProgram.free(attr_body);
 				continue;
 			} 
-			for (i = 0; i < ( /  + ( - 1)); i++) {
-				if (.strlen(pathspec_magic[i].getName()) == ModernizedCProgram.len && !.strncmp(pathspec_magic[i].getName(), pos, ModernizedCProgram.len)) {
+			for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
+				if (/*Error: Function owner not recognized*/strlen(pathspec_magic[i].getName()) == ModernizedCProgram.len && !/*Error: Function owner not recognized*/strncmp(pathspec_magic[i].getName(), pos, ModernizedCProgram.len)) {
 					magic |=  pathspec_magic[i].getBit();
 					break;
 				} 
 			}
-			if (( /  + ( - 1)) <= i) {
+			if ((/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)) <= i) {
 				ModernizedCProgram.die(ModernizedCProgram._("Invalid pathspec magic '%.*s' in '%s'"), (int)ModernizedCProgram.len, pos, elem);
 			} 
 		}
@@ -138,7 +138,7 @@ public class pathspec_item {
 		 * returns the position in 'elem' after all magic has been parsed
 		 */;
 	}
-	public Object parse_element_magic(Integer magic, Integer prefix_len, Object elem) {
+	public Object parse_element_magic(Integer magic, Integer prefix_len, Object[] elem) {
 		if (elem[0] != (byte)':' || ModernizedCProgram.get_literal_global()) {
 			return /* nothing to do */elem;
 		}  else if (elem[1] == (byte)'(') {
@@ -186,13 +186,13 @@ public class pathspec_item {
 		} 
 		this.setPathspec_item(match);
 		Object generatedPathspec_item = this.getPathspec_item();
-		this.setPathspec_item(.strlen(generatedPathspec_item));
+		this.setPathspec_item(/*Error: Function owner not recognized*/strlen(generatedPathspec_item));
 		this.setPathspec_item(prefixlen/*
 			 * Prefix the pathspec (keep all magic) and assign to
 			 * original. Useful for passing to another command.
 			 */);
 		if ((flags & (1 << 4)) && !ModernizedCProgram.get_literal_global()) {
-			strbuf sb = new strbuf(, , );
+			strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			sb.prefix_magic(prefixlen, /* Preserve the actual prefix length of each pattern */element_magic);
 			sb.strbuf_addstr(match);
 			this.setPathspec_item(sb.strbuf_detach(((Object)0)));
@@ -269,10 +269,10 @@ public class pathspec_item {
 	public void setAttr_match_nr(int newAttr_match_nr) {
 		attr_match_nr = newAttr_match_nr;
 	}
-	public attr_match getAttr_match() {
+	public attr_match[] getAttr_match() {
 		return attr_match;
 	}
-	public void setAttr_match(attr_match newAttr_match) {
+	public void setAttr_match(attr_match[] newAttr_match) {
 		attr_match = newAttr_match;
 	}
 	public attr_check getAttr_check() {

@@ -14,10 +14,10 @@ public class imap_socket {
 	public void socket_perror(Object func, int ret) {
 		Object generatedSsl = this.getSsl();
 		if (generatedSsl) {
-			int sslerr = .SSL_get_error(generatedSsl, ret);
+			int sslerr = /*Error: Function owner not recognized*/SSL_get_error(generatedSsl, ret);
 			switch (sslerr) {
 			case SSL_ERROR_SYSCALL:
-					.perror("SSL_connect");
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/perror("SSL_connect");
 					break;
 			case SSL_ERROR_NONE:
 					break;
@@ -27,9 +27,9 @@ public class imap_socket {
 			}
 		} else {
 				if (ret < 0) {
-					.perror(func);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/perror(func);
 				} else {
-						.fprintf((_iob[2]), "%s: unexpected EOF\n", func);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s: unexpected EOF\n", func);
 				} 
 		} 
 	}
@@ -38,40 +38,40 @@ public class imap_socket {
 		 ctx = new ();
 		int ret;
 		 cert = new ();
-		.SSL_library_init();
-		.SSL_load_error_strings();
-		meth = .SSLv23_method();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SSL_library_init();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SSL_load_error_strings();
+		meth = /*Error: Function owner not recognized*/SSLv23_method();
 		if (!meth) {
 			ModernizedCProgram.ssl_socket_perror("SSLv23_method");
 			return -1;
 		} 
-		ctx = .SSL_CTX_new(meth);
+		ctx = /*Error: Function owner not recognized*/SSL_CTX_new(meth);
 		if (!ctx) {
 			ModernizedCProgram.ssl_socket_perror("SSL_CTX_new");
 			return -1;
 		} 
 		if (use_tls_only) {
-			.SSL_CTX_set_options(ctx, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SSL_CTX_set_options(ctx, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3);
 		} 
 		if (verify) {
-			.SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, ((Object)0));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, ((Object)0));
 		} 
-		if (!.SSL_CTX_set_default_verify_paths(ctx)) {
+		if (!/*Error: Function owner not recognized*/SSL_CTX_set_default_verify_paths(ctx)) {
 			ModernizedCProgram.ssl_socket_perror("SSL_CTX_set_default_verify_paths");
 			return -1;
 		} 
-		this.setSsl(.SSL_new(ctx));
+		this.setSsl(/*Error: Function owner not recognized*/SSL_new(ctx));
 		Object generatedSsl = this.getSsl();
 		if (!generatedSsl) {
 			ModernizedCProgram.ssl_socket_perror("SSL_new");
 			return -1;
 		} 
 		Object generatedFd = this.getFd();
-		if (!.SSL_set_rfd(generatedSsl, generatedFd[0])) {
+		if (!/*Error: Function owner not recognized*/SSL_set_rfd(generatedSsl, generatedFd[0])) {
 			ModernizedCProgram.ssl_socket_perror("SSL_set_rfd");
 			return -1;
 		} 
-		if (!.SSL_set_wfd(generatedSsl, generatedFd[1])) {
+		if (!/*Error: Function owner not recognized*/SSL_set_wfd(generatedSsl, generatedFd[1])) {
 			ModernizedCProgram.ssl_socket_perror("SSL_set_wfd");
 			return -1/*
 				 * SNI (RFC4366)
@@ -79,13 +79,13 @@ public class imap_socket {
 				 * returns 1 on success, 0 on failure after calling SSLerr().
 				 */;
 		} 
-		ret = .SSL_connect(generatedSsl);
+		ret = /*Error: Function owner not recognized*/SSL_connect(generatedSsl);
 		if (ret <= 0) {
 			sock.socket_perror("SSL_connect", ret);
 			return -1;
 		} 
 		if (verify) {
-			cert = .SSL_get_peer_certificate(generatedSsl);
+			cert = /*Error: Function owner not recognized*/SSL_get_peer_certificate(generatedSsl);
 			if (!cert) {
 				return ();
 			} 
@@ -100,14 +100,14 @@ public class imap_socket {
 		Object generatedSsl = this.getSsl();
 		Object generatedFd = this.getFd();
 		if (generatedSsl) {
-			n = .SSL_read(generatedSsl, buf, len);
+			n = /*Error: Function owner not recognized*/SSL_read(generatedSsl, buf, len);
 		} else {
 				n = ModernizedCProgram.xread(generatedFd[0], buf, len);
 		} 
 		if (n <= 0) {
 			sock.socket_perror("read", n);
-			.close(generatedFd[0]);
-			.close(generatedFd[1]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd[0]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd[1]);
 			generatedFd[0] = generatedFd[1] = -1;
 		} 
 		return n;
@@ -117,14 +117,14 @@ public class imap_socket {
 		Object generatedSsl = this.getSsl();
 		Object generatedFd = this.getFd();
 		if (generatedSsl) {
-			n = .SSL_write(generatedSsl, buf, len);
+			n = /*Error: Function owner not recognized*/SSL_write(generatedSsl, buf, len);
 		} else {
 				n = ModernizedCProgram.write_in_full(generatedFd[1], buf, len);
 		} 
 		if (n != len) {
 			sock.socket_perror("write", n);
-			.close(generatedFd[0]);
-			.close(generatedFd[1]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd[0]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd[1]);
 			generatedFd[0] = generatedFd[1] = -1;
 		} 
 		return n;
@@ -132,12 +132,12 @@ public class imap_socket {
 	public void socket_shutdown() {
 		Object generatedSsl = this.getSsl();
 		if (generatedSsl) {
-			.SSL_shutdown(generatedSsl);
-			.SSL_free(generatedSsl);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SSL_shutdown(generatedSsl);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SSL_free(generatedSsl);
 		} 
 		Object generatedFd = this.getFd();
-		.close(generatedFd[0]);
-		.close(generatedFd[1]);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd[0]);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd[1]);
 	}
 	public Object getFd() {
 		return fd;

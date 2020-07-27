@@ -40,15 +40,15 @@ public class hashfile {
 		if (fd < 0) {
 			ModernizedCProgram.die_errno(ModernizedCProgram._("unable to open packfile for reuse: %s"), ModernizedCProgram.reuse_packfile.getPack_name());
 		} 
-		if (.lseek(fd, , 0) == -1) {
+		if (/*Error: Function owner not recognized*/lseek(fd, /*Error: Unsupported expression*/, 0) == -1) {
 			ModernizedCProgram.die_errno(ModernizedCProgram._("unable to seek in reused packfile"));
 		} 
 		if (ModernizedCProgram.reuse_packfile_offset < 0) {
 			ModernizedCProgram.reuse_packfile_offset = ModernizedCProgram.reuse_packfile.getPack_size() - ModernizedCProgram.the_repository.getHash_algo().getRawsz();
 		} 
-		total = to_write = ModernizedCProgram.reuse_packfile_offset - ;
+		total = to_write = ModernizedCProgram.reuse_packfile_offset - /*Error: Unsupported expression*/;
 		while (to_write) {
-			int read_pack = ModernizedCProgram.xread(fd, buffer, );
+			int read_pack = ModernizedCProgram.xread(fd, buffer, /*Error: sizeof expression not supported yet*/);
 			if (read_pack <= 0) {
 				ModernizedCProgram.die_errno(ModernizedCProgram._("unable to read from reused packfile"));
 			} 
@@ -67,33 +67,10 @@ public class hashfile {
 			ModernizedCProgram.written = ModernizedCProgram.reuse_packfile_objects * (((double)(total - to_write)) / total);
 			ModernizedCProgram.progress_state.display_progress(ModernizedCProgram.written);
 		}
-		.close(fd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
 		ModernizedCProgram.written = ModernizedCProgram.reuse_packfile_objects;
 		ModernizedCProgram.progress_state.display_progress(ModernizedCProgram.written);
-		return ModernizedCProgram.reuse_packfile_offset - ;
-	}
-	public void hashwrite_u8(Object data) {
-		f.hashwrite(data, );
-	}
-	public void hashwrite_be32(Object data) {
-		data = .htonl(data);
-		f.hashwrite(data, );
-	}
-	public Object write_pack_header(Object nr_entries) {
-		pack_header hdr = new pack_header();
-		hdr.setHdr_signature(.htonl(-1024));
-		hdr.setHdr_version(.htonl(2));
-		hdr.setHdr_entries(.htonl(nr_entries));
-		f.hashwrite(hdr, );
-		return ;
-	}
-	public hashfile create_tmp_packfile(byte pack_tmp_name) {
-		strbuf tmpname = new strbuf(, , );
-		int fd;
-		fd = tmpname.odb_mkstemp("pack/tmp_pack_XXXXXX");
-		pack_tmp_name = tmpname.strbuf_detach(((Object)0));
-		hashfile hashfile = new hashfile();
-		return hashfile.hashfd(fd, pack_tmp_name);
+		return ModernizedCProgram.reuse_packfile_offset - /*Error: Unsupported expression*/;
 	}
 	public int write_compressed(Object in, int size) {
 		git_zstream stream = new git_zstream();
@@ -105,9 +82,9 @@ public class hashfile {
 		long generatedAvail_out = stream.getAvail_out();
 		do {
 			stream.setNext_out(outbuf);
-			stream.setAvail_out();
+			stream.setAvail_out(/*Error: sizeof expression not supported yet*/);
 			status = stream.git_deflate(Z_FINISH);
-			f.hashwrite(outbuf,  - generatedAvail_out);
+			f.hashwrite(outbuf, /*Error: sizeof expression not supported yet*/ - generatedAvail_out);
 		} while (status == Z_OK);
 		if (status != Z_STREAM_END) {
 			ModernizedCProgram.die(ModernizedCProgram._("unable to deflate appended object (%d)"), status);
@@ -130,11 +107,11 @@ public class hashfile {
 			 * before deltas depending on them, a good heuristic is to start
 			 * resolving deltas in the same order as their position in the pack.
 			 */
-		(sorted_by_pos) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (ModernizedCProgram.nr_ref_deltas)));
+		(sorted_by_pos) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (ModernizedCProgram.nr_ref_deltas)));
 		for (i = 0; i < ModernizedCProgram.nr_ref_deltas; i++) {
 			sorted_by_pos[i] = ModernizedCProgram.ref_deltas[i];
 		}
-		ModernizedCProgram.sane_qsort((sorted_by_pos), (ModernizedCProgram.nr_ref_deltas), , delta_pos_compare);
+		ModernizedCProgram.sane_qsort((sorted_by_pos), (ModernizedCProgram.nr_ref_deltas), /*Error: sizeof expression not supported yet*/, delta_pos_compare);
 		object_id generatedOid = d.getOid();
 		int generatedNr = to_fetch.getNr();
 		if (ModernizedCProgram.has_promisor_remote()) {
@@ -177,6 +154,29 @@ public class hashfile {
 		}
 		ModernizedCProgram.free(sorted_by_pos);
 	}
+	public Object write_pack_header(Object nr_entries) {
+		pack_header hdr = new pack_header();
+		hdr.setHdr_signature(/*Error: Function owner not recognized*/htonl(-1024));
+		hdr.setHdr_version(/*Error: Function owner not recognized*/htonl(2));
+		hdr.setHdr_entries(/*Error: Function owner not recognized*/htonl(nr_entries));
+		f.hashwrite(hdr, /*Error: sizeof expression not supported yet*/);
+		return /*Error: sizeof expression not supported yet*/;
+	}
+	public hashfile create_tmp_packfile(Byte pack_tmp_name) {
+		strbuf tmpname = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		int fd;
+		fd = tmpname.odb_mkstemp("pack/tmp_pack_XXXXXX");
+		pack_tmp_name = tmpname.strbuf_detach(((Object)0));
+		hashfile hashfile = new hashfile();
+		return hashfile.hashfd(fd, pack_tmp_name);
+	}
+	public void hashwrite_u8(Object data) {
+		f.hashwrite(data, /*Error: sizeof expression not supported yet*/);
+	}
+	public void hashwrite_be32(Object data) {
+		data = /*Error: Function owner not recognized*/htonl(data);
+		f.hashwrite(data, /*Error: sizeof expression not supported yet*/);
+	}
 	public Object write_midx_header(byte num_chunks, Object num_packs) {
 		byte[] byte_values = new byte[4];
 		f.hashwrite_be32(-1024);
@@ -184,7 +184,7 @@ public class hashfile {
 		byte_values[1] = 1;
 		byte_values[2] = num_chunks;
 		byte_values[3] = /* unused */0;
-		f.hashwrite(byte_values, );
+		f.hashwrite(byte_values, /*Error: sizeof expression not supported yet*/);
 		f.hashwrite_be32(num_packs);
 		return 12;
 	}
@@ -194,7 +194,7 @@ public class hashfile {
 		git_hash_ctx generatedCtx = this.getCtx();
 		Object generatedBuffer = this.getBuffer();
 		if (offset) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedCtx, generatedBuffer, offset);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCtx, generatedBuffer, offset);
 			ModernizedCProgram.flush(f, generatedBuffer, offset);
 			this.setOffset(0);
 		} 
@@ -204,7 +204,7 @@ public class hashfile {
 		f.hashflush();
 		Object generatedBuffer = this.getBuffer();
 		git_hash_ctx generatedCtx = this.getCtx();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedBuffer, generatedCtx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedBuffer, generatedCtx);
 		if (result) {
 			ModernizedCProgram.hashcpy(result, generatedBuffer);
 		} 
@@ -217,7 +217,7 @@ public class hashfile {
 			ModernizedCProgram.fsync_or_die(generatedFd, generatedName);
 		} 
 		if (flags & 1) {
-			if (.close(generatedFd)) {
+			if (/*Error: Function owner not recognized*/close(generatedFd)) {
 				ModernizedCProgram.die_errno("%s: sha1 file error on close", generatedName);
 			} 
 			fd = 0;
@@ -234,7 +234,7 @@ public class hashfile {
 			if (cnt) {
 				ModernizedCProgram.die("%s: sha1 file has trailing garbage", generatedName);
 			} 
-			if (.close(generatedCheck_fd)) {
+			if (/*Error: Function owner not recognized*/close(generatedCheck_fd)) {
 				ModernizedCProgram.die_errno("%s: sha1 file error on close", generatedName);
 			} 
 		} 
@@ -249,16 +249,16 @@ public class hashfile {
 		git_hash_ctx generatedCtx = this.getCtx();
 		while (count) {
 			int offset = generatedOffset;
-			int left =  - ModernizedCProgram.offset;
+			int left = /*Error: sizeof expression not supported yet*/ - ModernizedCProgram.offset;
 			int nr = count > left ? left : count;
 			Object data;
 			if (generatedDo_crc) {
-				this.setCrc32(.crc32(generatedCrc32, buf, nr));
+				this.setCrc32(/*Error: Function owner not recognized*/crc32(generatedCrc32, buf, nr));
 			} 
-			if (nr == ) {
+			if (nr == /*Error: sizeof expression not supported yet*/) {
 				data = /* process full buffer directly without copy */buf;
 			} else {
-					.memcpy(generatedBuffer + ModernizedCProgram.offset, buf, nr);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedBuffer + ModernizedCProgram.offset, buf, nr);
 					data = generatedBuffer;
 			} 
 			count -= nr;
@@ -266,7 +266,7 @@ public class hashfile {
 			buf = (byte)buf + nr;
 			left -= nr;
 			if (!left) {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedCtx, data, ModernizedCProgram.offset);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCtx, data, ModernizedCProgram.offset);
 				ModernizedCProgram.flush(f, data, ModernizedCProgram.offset);
 				ModernizedCProgram.offset = 0;
 			} 
@@ -281,11 +281,11 @@ public class hashfile {
 		int sink;
 		int check;
 		hashfile f = new hashfile();
-		sink = .open("/dev/null", 1);
+		sink = /*Error: Function owner not recognized*/open("/dev/null", 1);
 		if (sink < 0) {
 			ModernizedCProgram.die_errno("unable to open /dev/null");
 		} 
-		check = .open(name, 0);
+		check = /*Error: Function owner not recognized*/open(name, 0);
 		if (check < 0) {
 			ModernizedCProgram.die_errno("unable to open '%s'", name);
 		} 
@@ -295,7 +295,7 @@ public class hashfile {
 		return f;
 	}
 	public hashfile hashfd_throughput(int fd, Object name, progress tp) {
-		hashfile f = ModernizedCProgram.xmalloc();
+		hashfile f = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		f.setFd(fd);
 		f.setCheck_fd(-1);
 		f.setOffset(0);
@@ -304,11 +304,11 @@ public class hashfile {
 		f.setName(name);
 		f.setDo_crc(0);
 		git_hash_ctx generatedCtx = f.getCtx();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedCtx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCtx);
 		return f;
 	}
 	public void crc32_begin() {
-		this.setCrc32(.crc32(0, ((Object)0), 0));
+		this.setCrc32(/*Error: Function owner not recognized*/crc32(0, ((Object)0), 0));
 		this.setDo_crc(1);
 	}
 	public Object crc32_end() {

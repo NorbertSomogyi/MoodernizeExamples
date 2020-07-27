@@ -86,7 +86,7 @@ public class gs_texture_2d {
 				size *= generatedHeight;
 				size /= 8;
 		} 
-		.glBufferData(GL_PIXEL_UNPACK_BUFFER, size, 0, GL_DYNAMIC_DRAW);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glBufferData(GL_PIXEL_UNPACK_BUFFER, size, 0, GL_DYNAMIC_DRAW);
 		if (!ModernizedCProgram.gl_success("glBufferData")) {
 			success = false;
 		} 

@@ -4,7 +4,7 @@ package application;
 public class obstack {
 	private long chunk_size;
 	private _obstack_chunk chunk;
-	private Byte object_base;
+	private byte[] object_base;
 	private Byte next_free;
 	private Byte chunk_limit;
 	private  temp;
@@ -16,7 +16,7 @@ public class obstack {
 	private int maybe_empty_object;
 	private int alloc_failed;
 	
-	public obstack(long chunk_size, _obstack_chunk chunk, Byte object_base, Byte next_free, Byte chunk_limit,  temp, int alignment_mask,  chunkfun,  freefun, Object extra_arg, int use_extra_arg, int maybe_empty_object, int alloc_failed) {
+	public obstack(long chunk_size, _obstack_chunk chunk, byte[] object_base, Byte next_free, Byte chunk_limit,  temp, int alignment_mask,  chunkfun,  freefun, Object extra_arg, int use_extra_arg, int maybe_empty_object, int alloc_failed) {
 		setChunk_size(chunk_size);
 		setChunk(chunk);
 		setObject_base(object_base);
@@ -67,12 +67,12 @@ public class obstack {
 		int generatedUse_extra_arg = (h).getUse_extra_arg();
 		Object generatedExtra_arg = (h).getExtra_arg();
 		long generatedChunk_size = this.getChunk_size();
-		chunk = this.setChunk(((generatedUse_extra_arg) ? .UNRECOGNIZEDFUNCTIONNAME(generatedExtra_arg, (generatedChunk_size)) : .UNRECOGNIZEDFUNCTIONNAME((generatedChunk_size))));
+		chunk = this.setChunk(((generatedUse_extra_arg) ? /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedExtra_arg, (generatedChunk_size)) : /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((generatedChunk_size))));
 		if (!chunk) {
-			.UNRECOGNIZEDFUNCTIONNAME();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME();
 		} 
 		Object generatedContents = chunk.getContents();
-		this.setNext_free(this.setObject_base((( <  ? ((byte)chunk) : (byte)0) + (((generatedContents) - ( <  ? ((byte)chunk) : (byte)0) + (alignment - 1)) & ~(alignment - 1)))));
+		this.setNext_free(this.setObject_base(((/*Error: Unsupported expression*/ < /*Error: Unsupported expression*/ ? ((byte)chunk) : (byte)0) + (((generatedContents) - (/*Error: Unsupported expression*/ < /*Error: Unsupported expression*/ ? ((byte)chunk) : (byte)0) + (alignment - 1)) & ~(alignment - 1)))));
 		this.setChunk_limit(chunk.setLimit((byte)chunk + generatedChunk_size));
 		chunk.setPrev(((Object)0));
 		this.setMaybe_empty_object(/* The initial chunk now contains no empty object.  */0);
@@ -106,12 +106,12 @@ public class obstack {
 		int generatedUse_extra_arg = (h).getUse_extra_arg();
 		Object generatedExtra_arg = (h).getExtra_arg();
 		long generatedChunk_size = this.getChunk_size();
-		chunk = this.setChunk(((generatedUse_extra_arg) ? .UNRECOGNIZEDFUNCTIONNAME(generatedExtra_arg, (generatedChunk_size)) : .UNRECOGNIZEDFUNCTIONNAME((generatedChunk_size))));
+		chunk = this.setChunk(((generatedUse_extra_arg) ? /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedExtra_arg, (generatedChunk_size)) : /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((generatedChunk_size))));
 		if (!chunk) {
-			.UNRECOGNIZEDFUNCTIONNAME();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME();
 		} 
 		Object generatedContents = chunk.getContents();
-		this.setNext_free(this.setObject_base((( <  ? ((byte)chunk) : (byte)0) + (((generatedContents) - ( <  ? ((byte)chunk) : (byte)0) + (alignment - 1)) & ~(alignment - 1)))));
+		this.setNext_free(this.setObject_base(((/*Error: Unsupported expression*/ < /*Error: Unsupported expression*/ ? ((byte)chunk) : (byte)0) + (((generatedContents) - (/*Error: Unsupported expression*/ < /*Error: Unsupported expression*/ ? ((byte)chunk) : (byte)0) + (alignment - 1)) & ~(alignment - 1)))));
 		this.setChunk_limit(chunk.setLimit((byte)chunk + generatedChunk_size));
 		chunk.setPrev(((Object)0));
 		this.setMaybe_empty_object(/* The initial chunk now contains no empty object.  */0);
@@ -128,7 +128,7 @@ public class obstack {
 		_obstack_chunk new_chunk = new _obstack_chunk();
 		long new_size;
 		Byte generatedNext_free = this.getNext_free();
-		Byte generatedObject_base = this.getObject_base();
+		byte[] generatedObject_base = this.getObject_base();
 		long obj_size = generatedNext_free - generatedObject_base;
 		long i;
 		long already;
@@ -141,22 +141,22 @@ public class obstack {
 		} 
 		int generatedUse_extra_arg = (h).getUse_extra_arg();
 		Object generatedExtra_arg = (h).getExtra_arg();
-		new_chunk = ((generatedUse_extra_arg) ? .UNRECOGNIZEDFUNCTIONNAME(generatedExtra_arg, (new_size)) : .UNRECOGNIZEDFUNCTIONNAME((/* Allocate and initialize the new chunk.  */new_size)));
+		new_chunk = ((generatedUse_extra_arg) ? /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedExtra_arg, (new_size)) : /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((/* Allocate and initialize the new chunk.  */new_size)));
 		if (!new_chunk) {
-			.UNRECOGNIZEDFUNCTIONNAME();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME();
 		} 
 		this.setChunk(new_chunk);
 		new_chunk.setPrev(old_chunk);
 		new_chunk.setLimit(this.setChunk_limit((byte)new_chunk + new_size));
 		Object generatedContents = new_chunk.getContents();
-		/* Compute an aligned object_base in the new chunk */object_base = (( <  ? ((byte)new_chunk) : (byte)0) + (((generatedContents) - ( <  ? ((byte)new_chunk) : (byte)0) + (generatedAlignment_mask)) & ~(generatedAlignment_mask)));
+		/* Compute an aligned object_base in the new chunk */object_base = ((/*Error: Unsupported expression*/ < /*Error: Unsupported expression*/ ? ((byte)new_chunk) : (byte)0) + (((generatedContents) - (/*Error: Unsupported expression*/ < /*Error: Unsupported expression*/ ? ((byte)new_chunk) : (byte)0) + (generatedAlignment_mask)) & ~(generatedAlignment_mask)));
 		if (generatedAlignment_mask + 1 >= .DEFAULT_ALIGNMENT) {
-			for (i = obj_size /  - 1; i >= 0; i--) {
+			for (i = obj_size / /*Error: Unsupported expression*/ - 1; i >= 0; i--) {
 				((int)object_base)[i] = ((int)generatedObject_base)[i/* We used to copy the odd few remaining bytes as one extra COPYING_UNIT,
 					 but that can cross a page boundary on a machine
 					 which does not do strict alignment for COPYING_UNITS.  */];
 			}
-			already = obj_size /  * ;
+			already = obj_size / /*Error: Unsupported expression*/ * /*Error: Unsupported expression*/;
 		} else {
 				already = 0;
 		} 
@@ -167,13 +167,13 @@ public class obstack {
 		}
 		int generatedMaybe_empty_object = this.getMaybe_empty_object();
 		_obstack_chunk generatedPrev = old_chunk.getPrev();
-		if (!generatedMaybe_empty_object && (generatedObject_base == (( <  ? ((byte)old_chunk) : (byte)0) + (((generatedContents) - ( <  ? ((byte)old_chunk) : (byte)0) + (generatedAlignment_mask)) & ~(generatedAlignment_mask))))) {
+		if (!generatedMaybe_empty_object && (generatedObject_base == ((/*Error: Unsupported expression*/ < /*Error: Unsupported expression*/ ? ((byte)old_chunk) : (byte)0) + (((generatedContents) - (/*Error: Unsupported expression*/ < /*Error: Unsupported expression*/ ? ((byte)old_chunk) : (byte)0) + (generatedAlignment_mask)) & ~(generatedAlignment_mask))))) {
 			new_chunk.setPrev(generatedPrev);
 			do {
 				if (generatedUse_extra_arg) {
-					.UNRECOGNIZEDFUNCTIONNAME(generatedExtra_arg, (old_chunk));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedExtra_arg, (old_chunk));
 				} else {
-						.UNRECOGNIZEDFUNCTIONNAME((old_chunk));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((old_chunk));
 				} 
 			} while (0);
 		} 
@@ -214,9 +214,9 @@ public class obstack {
 			plp = generatedPrev;
 			do {
 				if (generatedUse_extra_arg) {
-					.UNRECOGNIZEDFUNCTIONNAME(generatedExtra_arg, (lp));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedExtra_arg, (lp));
 				} else {
-						.UNRECOGNIZEDFUNCTIONNAME((lp));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((lp));
 				} 
 			} while (0);
 			lp = plp/* If we switch chunks, we can't tell whether the new current
@@ -228,7 +228,7 @@ public class obstack {
 			this.setChunk_limit(generatedLimit);
 			this.setChunk(lp);
 		}  else if (obj != ((Object)0)) {
-			.abort();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 		} 
 	}
 	public int _obstack_memory_used() {
@@ -254,10 +254,10 @@ public class obstack {
 	public void setChunk(_obstack_chunk newChunk) {
 		chunk = newChunk;
 	}
-	public Byte getObject_base() {
+	public byte[] getObject_base() {
 		return object_base;
 	}
-	public void setObject_base(Byte newObject_base) {
+	public void setObject_base(byte[] newObject_base) {
 		object_base = newObject_base;
 	}
 	public Byte getNext_free() {

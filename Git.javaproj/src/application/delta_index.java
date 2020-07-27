@@ -51,7 +51,7 @@ public class delta_index {
 		}
 		hsize = 1 << i;
 		hmask = hsize - 1;
-		memsize =  * /* allocate lookup index */hsize +  * entries;
+		memsize = /*Error: sizeof expression not supported yet*/ * /* allocate lookup index */hsize + /*Error: sizeof expression not supported yet*/ * entries;
 		mem = ModernizedCProgram.malloc(memsize);
 		if (!mem) {
 			return ((Object)0);
@@ -59,8 +59,8 @@ public class delta_index {
 		hash = mem;
 		mem = hash + hsize;
 		entry = mem;
-		.memset(hash, 0, hsize * );
-		hash_count = ModernizedCProgram.calloc(hsize, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(hash, 0, hsize * /*Error: sizeof expression not supported yet*/);
+		hash_count = ModernizedCProgram.calloc(hsize, /*Error: sizeof expression not supported yet*/);
 		if (!hash_count) {
 			ModernizedCProgram.free(hash);
 			return ((Object)0);
@@ -133,7 +133,7 @@ public class delta_index {
 			 * Now create the packed index in array form
 			 * rather than linked lists.
 			 */);
-		memsize =  +  * (hsize + 1) +  * entries;
+		memsize = /*Error: sizeof expression not supported yet*/ + /*Error: sizeof expression not supported yet*/ * (hsize + 1) + /*Error: sizeof expression not supported yet*/ * entries;
 		mem = ModernizedCProgram.malloc(memsize);
 		if (!mem) {
 			ModernizedCProgram.free(hash);
@@ -159,7 +159,7 @@ public class delta_index {
 			}
 		}
 		packed_hash[hsize] = /* Sentinel value to indicate the length of the last hash bucket */packed_entry;
-		((packed_entry - (index_entry)mem == entries) ? (Object)0 : ._assert("packed_entry - (struct index_entry *)mem == entries", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\diff-delta.c", 292));
+		((packed_entry - (index_entry)mem == entries) ? (Object)0 : /*Error: Function owner not recognized*/_assert("packed_entry - (struct index_entry *)mem == entries", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\diff-delta.c", 292));
 		ModernizedCProgram.free(hash);
 		return index;
 	}

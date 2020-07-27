@@ -19,11 +19,11 @@ public class urlmatch_item {
 		if (!url || !url_prefix || !url.getUrl() || !url_prefix.getUrl()) {
 			return 0;
 		} 
-		if (url_prefix.getScheme_len() != url.getScheme_len() || .strncmp(url.getUrl(), url_prefix.getUrl(), url.getScheme_len())) {
+		if (url_prefix.getScheme_len() != url.getScheme_len() || /*Error: Function owner not recognized*/strncmp(url.getUrl(), url_prefix.getUrl(), url.getScheme_len())) {
 			return /* schemes do not match */0;
 		} 
 		if (url_prefix.getUser_off()) {
-			if (!url.getUser_off() || url.getUser_len() != url_prefix.getUser_len() || .strncmp(url.getUrl() + url.getUser_off(), url_prefix.getUrl() + url_prefix.getUser_off(), url.getUser_len())) {
+			if (!url.getUser_off() || url.getUser_len() != url_prefix.getUser_len() || /*Error: Function owner not recognized*/strncmp(url.getUrl() + url.getUser_off(), url_prefix.getUrl() + url_prefix.getUser_off(), url.getUser_len())) {
 				return /* url_prefix has a user but it's not a match */0;
 			} 
 			usermatched = 1;
@@ -31,7 +31,7 @@ public class urlmatch_item {
 		if (!ModernizedCProgram.match_host(url, /* check the host */url_prefix)) {
 			return /* host names do not match */0;
 		} 
-		if (url_prefix.getPort_len() != url.getPort_len() || .strncmp(url.getUrl() + url.getPort_off(), url_prefix.getUrl() + url_prefix.getPort_off(), url.getPort_len())) {
+		if (url_prefix.getPort_len() != url.getPort_len() || /*Error: Function owner not recognized*/strncmp(url.getUrl() + url.getPort_off(), url_prefix.getUrl() + url_prefix.getPort_off(), url.getPort_len())) {
 			return /* ports do not match */0;
 		} 
 		pathmatchlen = ModernizedCProgram.url_match_prefix(url.getUrl() + url.getPath_off(), url_prefix.getUrl() + url_prefix.getPath_off(), url_prefix.getUrl_len() - url_prefix.getPath_off());

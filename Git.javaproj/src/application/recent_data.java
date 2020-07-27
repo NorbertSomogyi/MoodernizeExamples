@@ -16,7 +16,7 @@ public class recent_data {
 		object_type type;
 		Object generatedTimestamp = this.getTimestamp();
 		if (mtime <= generatedTimestamp) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		object_type.type = ModernizedCProgram.the_repository.oid_object_info(oid, ((Object)0));
 		if (object_type.type < 0) {
@@ -29,12 +29,12 @@ public class recent_data {
 		case object_type.OBJ_COMMIT:
 				obj = object.parse_object_or_die(oid, ((Object)0));
 				break;
-		case object_type.OBJ_BLOB:
-				obj = (object)blob.lookup_blob(ModernizedCProgram.the_repository, oid);
-				break;
-		case object_type.OBJ_TAG:
 		case object_type.OBJ_TREE:
 				obj = (object)tree.lookup_tree(ModernizedCProgram.the_repository, oid);
+				break;
+		case object_type.OBJ_TAG:
+		case object_type.OBJ_BLOB:
+				obj = (object)blob.lookup_blob(ModernizedCProgram.the_repository, oid);
 				break;
 		default:
 				ModernizedCProgram.die("unknown object type for %s: %s", ModernizedCProgram.oid_to_hex(oid), ModernizedCProgram.type_name(object_type.type));

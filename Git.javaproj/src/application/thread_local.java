@@ -20,7 +20,7 @@ public class thread_local {
 			if (ModernizedCProgram.threads_active) {
 				return ModernizedCProgram.pthread_getspecific(ModernizedCProgram.key);
 			} 
-			((!ModernizedCProgram.threads_active && "This should only be reached when all threads are gone") ? (Object)0 : ._assert("!threads_active && \"This should only be reached when all threads are gone\"", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\index-pack.c", 356));
+			((!ModernizedCProgram.threads_active && "This should only be reached when all threads are gone") ? (Object)0 : /*Error: Function owner not recognized*/_assert("!threads_active && \"This should only be reached when all threads are gone\"", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\index-pack.c", 356));
 		} 
 		return ModernizedCProgram.nothread_data;
 	}

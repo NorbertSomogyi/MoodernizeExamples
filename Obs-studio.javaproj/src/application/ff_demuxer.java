@@ -41,11 +41,11 @@ public class ff_demuxer {
 	
 	public ff_demuxer ff_demuxer_init() {
 		ff_demuxer demuxer = new ff_demuxer();
-		.av_register_all();
-		.avdevice_register_all();
-		.avfilter_register_all();
-		.avformat_network_init();
-		demuxer = .av_mallocz();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_register_all();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avdevice_register_all();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avfilter_register_all();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avformat_network_init();
+		demuxer = /*Error: Function owner not recognized*/av_mallocz(/*Error: Unsupported expression*/);
 		if (demuxer == ((Object)0)) {
 			return ((Object)0);
 		} 
@@ -62,9 +62,9 @@ public class ff_demuxer {
 	}
 	public boolean ff_demuxer_open(Byte input, Byte input_format) {
 		int ret;
-		this.setInput(.av_strdup(input));
+		this.setInput(/*Error: Function owner not recognized*/av_strdup(input));
 		if (input_format != ((Object)0)) {
-			this.setInput_format(.av_strdup(input_format));
+			this.setInput_format(/*Error: Function owner not recognized*/av_strdup(input_format));
 		} 
 		Object generatedDemuxer_thread = this.getDemuxer_thread();
 		ret = ModernizedCProgram.pthread_create(generatedDemuxer_thread, ((Object)0), ModernizedCProgram.demux_thread, demuxer);
@@ -77,11 +77,11 @@ public class ff_demuxer {
 		ModernizedCProgram.pthread_join(generatedDemuxer_thread, demuxer_thread_result);
 		Byte generatedInput = this.getInput();
 		if (generatedInput != ((Object)0)) {
-			.av_free(generatedInput);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(generatedInput);
 		} 
 		Byte generatedInput_format = this.getInput_format();
 		if (generatedInput_format != ((Object)0)) {
-			.av_free(generatedInput_format);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(generatedInput_format);
 		} 
 		ff_decoder generatedAudio_decoder = this.getAudio_decoder();
 		if (generatedAudio_decoder != ((Object)0)) {
@@ -93,9 +93,9 @@ public class ff_demuxer {
 		} 
 		Object generatedFormat_context = this.getFormat_context();
 		if (generatedFormat_context) {
-			.avformat_close_input(generatedFormat_context);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avformat_close_input(generatedFormat_context);
 		} 
-		.av_free(demuxer);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(demuxer);
 	}
 	public boolean set_clock_sync_type() {
 		ff_decoder generatedVideo_decoder = this.getVideo_decoder();
@@ -117,13 +117,13 @@ public class ff_demuxer {
 				generatedClock.setSync_clock(ff_external_clock);
 				generatedClock.setOpaque(((Object)0));
 				break;
-		case ff_av_sync_type.AV_SYNC_VIDEO_MASTER:
-				generatedClock.setSync_clock(ModernizedCProgram.ff_decoder_clock);
-				generatedClock.setOpaque(generatedVideo_decoder);
-				break;
 		case ff_av_sync_type.AV_SYNC_AUDIO_MASTER:
 				generatedClock.setSync_clock(ModernizedCProgram.ff_decoder_clock);
 				generatedClock.setOpaque(generatedAudio_decoder);
+				break;
+		case ff_av_sync_type.AV_SYNC_VIDEO_MASTER:
+				generatedClock.setSync_clock(ModernizedCProgram.ff_decoder_clock);
+				generatedClock.setOpaque(generatedVideo_decoder);
 				break;
 		default:
 				return 0;
@@ -188,14 +188,14 @@ public class ff_demuxer {
 		if (generatedIs_hw_decoding) {
 			 hwaccel = ModernizedCProgram.find_hwaccel_codec(codec_context);
 			if (hwaccel) {
-				 codec_vda = .avcodec_find_decoder_by_name(hwaccel.getName());
+				 codec_vda = /*Error: Function owner not recognized*/avcodec_find_decoder_by_name(hwaccel.getName());
 				if (codec_vda != ((Object)0)) {
 					AVGetFormatCb original_get_format = codec_context.getGet_format();
 					codec_context.setGet_format(get_hwaccel_format);
 					codec_context.setOpaque(hwaccel);
-					ret = .avcodec_open2(codec_context, codec_vda, options_dict);
+					ret = /*Error: Function owner not recognized*/avcodec_open2(codec_context, codec_vda, options_dict);
 					if (ret < 0) {
-						.av_log(((Object)0), AV_LOG_WARNING, "no hardware decoder found for codec with id %d", codec_context.getCodec_id());
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_log(((Object)0), AV_LOG_WARNING, "no hardware decoder found for codec with id %d", codec_context.getCodec_id());
 						codec_context.setGet_format(original_get_format);
 						codec_context.setOpaque(((Object)0));
 					} else {
@@ -207,19 +207,19 @@ public class ff_demuxer {
 		} 
 		if (codec == ((Object)0)) {
 			if (codec_context.getCodec_id() == AV_CODEC_ID_VP8) {
-				codec = .avcodec_find_decoder_by_name("libvpx");
+				codec = /*Error: Function owner not recognized*/avcodec_find_decoder_by_name("libvpx");
 			}  else if (codec_context.getCodec_id() == AV_CODEC_ID_VP9) {
-				codec = .avcodec_find_decoder_by_name("libvpx-vp9");
+				codec = /*Error: Function owner not recognized*/avcodec_find_decoder_by_name("libvpx-vp9");
 			} 
 			if (!codec) {
-				codec = .avcodec_find_decoder(codec_context.getCodec_id());
+				codec = /*Error: Function owner not recognized*/avcodec_find_decoder(codec_context.getCodec_id());
 			} 
 			if (codec == ((Object)0)) {
-				.av_log(((Object)0), AV_LOG_WARNING, "no decoder found for codec with id %d", codec_context.getCodec_id());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_log(((Object)0), AV_LOG_WARNING, "no decoder found for codec with id %d", codec_context.getCodec_id());
 				return 0;
 			} 
-			if (.avcodec_open2(codec_context, codec, options_dict) < 0) {
-				.av_log(((Object)0), AV_LOG_WARNING, "unable to open decoder with codec id %d", codec_context.getCodec_id());
+			if (/*Error: Function owner not recognized*/avcodec_open2(codec_context, codec, options_dict) < 0) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_log(((Object)0), AV_LOG_WARNING, "unable to open decoder with codec id %d", codec_context.getCodec_id());
 				return 0;
 			} 
 		} 
@@ -268,22 +268,22 @@ public class ff_demuxer {
 		 interrupted_callback = new ();
 		interrupted_callback.setCallback(demuxer_interrupted_callback);
 		interrupted_callback.setOpaque(demuxer);
-		format_context = .avformat_alloc_context();
+		format_context = /*Error: Function owner not recognized*/avformat_alloc_context();
 		(format_context).setInterrupt_callback(interrupted_callback);
 		Byte generatedInput_format = this.getInput_format();
 		if (generatedInput_format != ((Object)0)) {
-			input_format = .av_find_input_format(generatedInput_format);
+			input_format = /*Error: Function owner not recognized*/av_find_input_format(generatedInput_format);
 			if (input_format == ((Object)0)) {
-				.av_log(((Object)0), AV_LOG_WARNING, "unable to find input format %s", generatedInput_format);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_log(((Object)0), AV_LOG_WARNING, "unable to find input format %s", generatedInput_format);
 			} 
 		} 
 		Byte generatedInput = this.getInput();
 		ff_demuxer_options generatedOptions = this.getOptions();
 		Object generatedCustom_options = generatedOptions.getCustom_options();
-		if (.avformat_open_input(format_context, generatedInput, input_format, generatedCustom_options) != 0) {
+		if (/*Error: Function owner not recognized*/avformat_open_input(format_context, generatedInput, input_format, generatedCustom_options) != 0) {
 			return 0;
 		} 
-		return .avformat_find_stream_info(format_context, ((Object)0)) >= 0;
+		return /*Error: Function owner not recognized*/avformat_find_stream_info(format_context, ((Object)0)) >= 0;
 	}
 	public boolean find_and_initialize_stream_decoders() {
 		Object generatedFormat_context = this.getFormat_context();
@@ -301,7 +301,7 @@ public class ff_demuxer {
 				audio_stream = format_context.getStreams()[i];
 			} 
 		}
-		int default_stream_index = .av_find_default_stream_index(generatedFormat_context);
+		int default_stream_index = /*Error: Function owner not recognized*/av_find_default_stream_index(generatedFormat_context);
 		ff_clock generatedClock = this.getClock();
 		if (default_stream_index >= 0) {
 			 stream = format_context.getStreams()[default_stream_index];
@@ -331,8 +331,8 @@ public class ff_demuxer {
 			if (st.getDiscard() == AVDISCARD_ALL || st.getStart_time() == AV_NOPTS_VALUE) {
 				continue;
 			} 
-			st_start_time = .av_rescale_q(st.getStart_time(), st.getTime_base(), AV_TIME_BASE_Q);
-			start_time = .FFMIN(start_time, st_start_time);
+			st_start_time = /*Error: Function owner not recognized*/av_rescale_q(st.getStart_time(), st.getTime_base(), AV_TIME_BASE_Q);
+			start_time = /*Error: Function owner not recognized*/FFMIN(start_time, st_start_time);
 		}
 		if (format_context.getStart_time() != AV_NOPTS_VALUE) {
 			if (start_time > format_context.getStart_time() || start_time == -1024) {
@@ -388,11 +388,11 @@ public class ff_demuxer {
 				seek_stream = generatedStream;
 			} 
 			if (seek_stream != ((Object)0) && generatedFormat_context.getDuration() != AV_NOPTS_VALUE) {
-				seek_target = .av_rescale_q(seek_target, AV_TIME_BASE_Q, seek_stream.getTime_base());
+				seek_target = /*Error: Function owner not recognized*/av_rescale_q(seek_target, AV_TIME_BASE_Q, seek_stream.getTime_base());
 			} 
-			ret = .av_seek_frame(generatedFormat_context, 0, seek_target, generatedSeek_flags);
+			ret = /*Error: Function owner not recognized*/av_seek_frame(generatedFormat_context, 0, seek_target, generatedSeek_flags);
 			if (ret < 0) {
-				.av_log(((Object)0), AV_LOG_ERROR, "unable to seek stream: %s", .av_err2str(ret));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_log(((Object)0), AV_LOG_ERROR, "unable to seek stream: %s", /*Error: Function owner not recognized*/av_err2str(ret));
 				this.setSeek_pos(0);
 				this.setSeek_request(0);
 				return 0;
@@ -418,7 +418,7 @@ public class ff_demuxer {
 		this.setSeek_request(1);
 		this.setSeek_flush(0);
 		Byte generatedInput = this.getInput();
-		.av_log(((Object)0), AV_LOG_VERBOSE, "looping media %s", generatedInput);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_log(((Object)0), AV_LOG_VERBOSE, "looping media %s", generatedInput);
 	}
 	public Object getIo_context() {
 		return io_context;

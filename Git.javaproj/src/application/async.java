@@ -36,7 +36,7 @@ public class async {
 		if (need_in) {
 			if (ModernizedCProgram.pipe(fdin) < 0) {
 				if (generatedOut > 0) {
-					.close(generatedOut);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedOut);
 				} 
 				return ();
 			} 
@@ -48,7 +48,7 @@ public class async {
 				if (need_in) {
 					ModernizedCProgram.close_pair(fdin);
 				}  else if (generatedIn) {
-					.close(generatedIn);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedIn);
 				} 
 				return ();
 			} 
@@ -99,14 +99,14 @@ public class async {
 		if (need_out) {
 			ModernizedCProgram.close_pair(fdout);
 		}  else if (generatedOut) {
-			.close(generatedOut);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedOut);
 		} 
 		return -1;
 	}
 	public int finish_async() {
 		Object ret = (Object)(intptr_t)(true);
 		Object generatedTid = this.getTid();
-		if (.pthread_join(generatedTid, ret)) {
+		if (/*Error: Function owner not recognized*/pthread_join(generatedTid, ret)) {
 			();
 		} 
 		return (int)(intptr_t)ret;

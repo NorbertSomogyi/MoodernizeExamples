@@ -19,6 +19,49 @@ public class quat {
 	public quat() {
 	}
 	
+	public void quat_identity() {
+		this.setM(/*Error: Function owner not recognized*/_mm_setzero_ps());
+		this.setW(1.0);
+	}
+	public void quat_set(double x, double y, double z, double w) {
+		this.setM(/*Error: Function owner not recognized*/_mm_set_ps(x, y, z, w));
+	}
+	public void quat_copy(Object q) {
+		this.setM(q.getM());
+	}
+	public void quat_add(Object q1, Object q2) {
+		this.setM(/*Error: Function owner not recognized*/_mm_add_ps(q1.getM(), q2.getM()));
+	}
+	public void quat_sub(Object q1, Object q2) {
+		this.setM(/*Error: Function owner not recognized*/_mm_sub_ps(q1.getM(), q2.getM()));
+	}
+	public void quat_addf(Object q, double f) {
+		this.setM(/*Error: Function owner not recognized*/_mm_add_ps(q.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(f)));
+	}
+	public void quat_subf(Object q, double f) {
+		this.setM(/*Error: Function owner not recognized*/_mm_sub_ps(q.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(f)));
+	}
+	public void quat_mulf(Object q, double f) {
+		this.setM(/*Error: Function owner not recognized*/_mm_mul_ps(q.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(f)));
+	}
+	public void quat_divf(Object q, double f) {
+		this.setM(/*Error: Function owner not recognized*/_mm_div_ps(q.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(f)));
+	}
+	public void quat_inv(Object q) {
+		this.setX(-q.getX());
+		this.setY(-q.getY());
+		this.setZ(-q.getZ());
+	}
+	public void quat_neg(Object q) {
+		this.setX(-q.getX());
+		this.setY(-q.getY());
+		this.setZ(-q.getZ());
+		this.setW(-q.getW());
+	}
+	public void quat_norm(Object q) {
+		double dot_val = ModernizedCProgram.quat_dot(q, q);
+		this.setM((dot_val > 0.0) ? /*Error: Function owner not recognized*/_mm_mul_ps(q.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(1.0 / /*Error: Function owner not recognized*/sqrtf(dot_val))) : /*Error: Function owner not recognized*/_mm_setzero_ps());
+	}
 	public void quat_mul(Object q1, Object q2) {
 		vec3 q1axis = new vec3();
 		vec3 q2axis = new vec3();
@@ -35,11 +78,11 @@ public class quat {
 	}
 	public void quat_from_axisang(Object aa) {
 		double halfa = aa.getW() * 0.5;
-		double sine = .sinf(halfa);
+		double sine = /*Error: Function owner not recognized*/sinf(halfa);
 		this.setX(aa.getX() * sine);
 		this.setY(aa.getY() * sine);
 		this.setZ(aa.getZ() * sine);
-		this.setW(.cosf(halfa));
+		this.setW(/*Error: Function owner not recognized*/cosf(halfa));
 	}
 	public void quat_from_matrix3(Object m) {
 		dst.quat_from_matrix4((matrix4)m);
@@ -53,7 +96,7 @@ public class quat {
 		int k;
 		Object generatedPtr = val.getPtr();
 		if (tr > 0.0) {
-			four_d = .sqrtf(tr + 1.0);
+			four_d = /*Error: Function owner not recognized*/sqrtf(tr + 1.0);
 			this.setW(four_d * 0.5);
 			inv_half = 0.5 / four_d;
 			this.setX((m.getY().getZ() - m.getZ().getY()) * inv_half);
@@ -67,7 +110,7 @@ public class quat {
 				} 
 				j = (i + 1) % 3;
 				k = (i + 2) % 3;
-				four_d = .sqrtf((generatedPtr[i][i] - generatedPtr[j][j] - generatedPtr[k][k]) + 1.0);
+				four_d = /*Error: Function owner not recognized*/sqrtf((generatedPtr[i][i] - generatedPtr[j][j] - generatedPtr[k][k]) + 1.0);
 				generatedPtr[i] = four_d * 0.5;
 				inv_half = 0.5 / four_d;
 				generatedPtr[j] = (generatedPtr[i][j] + generatedPtr[j][i]) * inv_half;
@@ -92,11 +135,11 @@ public class quat {
 		double generatedY = new_dir.getY();
 		yz_valid = ModernizedCProgram.close_float(generatedY, 0.0, 1.0E-4);
 		if (xz_valid) {
-			aa.axisang_set(0.0, 1.0, 0.0, .atan2f(generatedX, generatedZ));
+			aa.axisang_set(0.0, 1.0, 0.0, /*Error: Function owner not recognized*/atan2f(generatedX, generatedZ));
 			xz_rot.quat_from_axisang(aa);
 		} 
 		if (yz_valid) {
-			aa.axisang_set(-1.0, 0.0, 0.0, .asinf(generatedY));
+			aa.axisang_set(-1.0, 0.0, 0.0, /*Error: Function owner not recognized*/asinf(generatedY));
 			yz_rot.quat_from_axisang(aa);
 		} 
 		if (!xz_valid) {
@@ -108,37 +151,37 @@ public class quat {
 		} 
 	}
 	public void quat_log(Object q) {
-		double angle = .acosf(q.getW());
-		double sine = .sinf(angle);
+		double angle = /*Error: Function owner not recognized*/acosf(q.getW());
+		double sine = /*Error: Function owner not recognized*/sinf(angle);
 		double w = q.getW();
 		dst.quat_copy(q);
 		this.setW(0.0);
-		if ((.fabsf(w) < 1.0) && (.fabsf(sine) >= 1.0E-4)) {
+		if ((/*Error: Function owner not recognized*/fabsf(w) < 1.0) && (/*Error: Function owner not recognized*/fabsf(sine) >= 1.0E-4)) {
 			sine = angle / sine;
 			dst.quat_mulf(dst, sine);
 		} 
 	}
 	public void quat_exp(Object q) {
-		double length = .sqrtf(q.getX() * q.getX() + q.getY() * q.getY() + q.getZ() * q.getZ());
-		double sine = .sinf(length);
+		double length = /*Error: Function owner not recognized*/sqrtf(q.getX() * q.getX() + q.getY() * q.getY() + q.getZ() * q.getZ());
+		double sine = /*Error: Function owner not recognized*/sinf(length);
 		dst.quat_copy(q);
 		sine = (length > 1.0E-4) ? (sine / length) : 1.0;
 		dst.quat_mulf(dst, sine);
-		this.setW(.cosf(length));
+		this.setW(/*Error: Function owner not recognized*/cosf(length));
 	}
 	public void quat_interpolate(Object q1, Object q2, double t) {
 		double dot = ModernizedCProgram.quat_dot(q1, q2);
-		double anglef = .acosf(dot);
+		double anglef = /*Error: Function owner not recognized*/acosf(dot);
 		double sine;
 		double sinei;
 		double sinet;
 		double sineti;
 		quat temp = new quat();
 		if (anglef >= 1.0E-4) {
-			sine = .sinf(anglef);
+			sine = /*Error: Function owner not recognized*/sinf(anglef);
 			sinei = 1 / sine;
-			sinet = .sinf(anglef * t) * sinei;
-			sineti = .sinf(anglef * (1.0 - t)) * sinei;
+			sinet = /*Error: Function owner not recognized*/sinf(anglef * t) * sinei;
+			sineti = /*Error: Function owner not recognized*/sinf(anglef * (1.0 - t)) * sinei;
 			temp.quat_mulf(q1, sineti);
 			dst.quat_mulf(q2, sinet);
 			dst.quat_add(temp, dst);
@@ -161,49 +204,6 @@ public class quat {
 		temp1.quat_interpolate(q1, q2, t);
 		temp2.quat_interpolate(m1, m2, t);
 		dst.quat_interpolate(temp1, temp2, 2.0 * (1.0 - t) * t);
-	}
-	public void quat_identity() {
-		this.setM(._mm_setzero_ps());
-		this.setW(1.0);
-	}
-	public void quat_set(double x, double y, double z, double w) {
-		this.setM(._mm_set_ps(x, y, z, w));
-	}
-	public void quat_copy(Object q) {
-		this.setM(q.getM());
-	}
-	public void quat_add(Object q1, Object q2) {
-		this.setM(._mm_add_ps(q1.getM(), q2.getM()));
-	}
-	public void quat_sub(Object q1, Object q2) {
-		this.setM(._mm_sub_ps(q1.getM(), q2.getM()));
-	}
-	public void quat_addf(Object q, double f) {
-		this.setM(._mm_add_ps(q.getM(), ._mm_set1_ps(f)));
-	}
-	public void quat_subf(Object q, double f) {
-		this.setM(._mm_sub_ps(q.getM(), ._mm_set1_ps(f)));
-	}
-	public void quat_mulf(Object q, double f) {
-		this.setM(._mm_mul_ps(q.getM(), ._mm_set1_ps(f)));
-	}
-	public void quat_divf(Object q, double f) {
-		this.setM(._mm_div_ps(q.getM(), ._mm_set1_ps(f)));
-	}
-	public void quat_inv(Object q) {
-		this.setX(-q.getX());
-		this.setY(-q.getY());
-		this.setZ(-q.getZ());
-	}
-	public void quat_neg(Object q) {
-		this.setX(-q.getX());
-		this.setY(-q.getY());
-		this.setZ(-q.getZ());
-		this.setW(-q.getW());
-	}
-	public void quat_norm(Object q) {
-		double dot_val = ModernizedCProgram.quat_dot(q, q);
-		this.setM((dot_val > 0.0) ? ._mm_mul_ps(q.getM(), ._mm_set1_ps(1.0 / .sqrtf(dot_val))) : ._mm_setzero_ps());
 	}
 	public double getX() {
 		return x;

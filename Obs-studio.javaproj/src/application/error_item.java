@@ -18,7 +18,7 @@ public class error_item {
 	}
 	
 	public void error_item_init() {
-		.memset(ei, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ei, 0, /*Error: Unsupported expression*/);
 	}
 	public void error_item_free() {
 		Byte generatedError = this.getError();

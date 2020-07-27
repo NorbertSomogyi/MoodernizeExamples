@@ -15,7 +15,7 @@ public class merge_simplify_state {
 		object generatedObject = commit.getObject();
 		st = generatedMerge_simplification.lookup_decoration(generatedObject);
 		if (!st) {
-			st = ModernizedCProgram.xcalloc(1, );
+			st = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 			generatedMerge_simplification.add_decoration(generatedObject, st);
 		} 
 		return st;

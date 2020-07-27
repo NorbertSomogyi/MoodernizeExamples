@@ -38,14 +38,14 @@ public class func_hook {
 		hook.do_hook(1);
 	}
 	public void hook_init(Object func_addr, Object hook_addr, Object name) {
-		.memset(hook, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(hook, 0, /*Error: sizeof expression not supported yet*/);
 		this.setFunc_addr((uintptr_t)func_addr);
 		this.setHook_addr((uintptr_t)hook_addr);
 		this.setName(name);
 		Object generatedFunc_addr = this.getFunc_addr();
 		ModernizedCProgram.fix_permissions((Object)(generatedFunc_addr - 5), 14 + 5);
 		Object generatedUnhook_data = this.getUnhook_data();
-		.memcpy(generatedUnhook_data, func_addr, 14);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedUnhook_data, func_addr, 14);
 	}
 	public Object patch_size() {
 		boolean generatedIs_64bit_jump = this.getIs_64bit_jump();
@@ -53,19 +53,19 @@ public class func_hook {
 	}
 	public void rehook64() {
 		uint8_t[] data = new uint8_t();
-		uintptr_t ptr_loc = (uintptr_t)((uint8_t)data + );
+		uintptr_t ptr_loc = (uintptr_t)((uint8_t)data + /*Error: sizeof expression not supported yet*/);
 		Object generatedFunc_addr = this.getFunc_addr();
 		ModernizedCProgram.fix_permissions((Object)generatedFunc_addr, 14);
-		.memcpy(data, (Object)generatedFunc_addr, 14);
-		.memcpy(data, ModernizedCProgram.longjmp64, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(data, (Object)generatedFunc_addr, 14);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(data, ModernizedCProgram.longjmp64, /*Error: sizeof expression not supported yet*/);
 		Object generatedHook_addr = this.getHook_addr();
 		ptr_loc = generatedHook_addr;
 		this.setCall_addr((Object)generatedFunc_addr);
 		this.setType(hook_type.HOOKTYPE_FORWARD_OVERWRITE);
 		this.setHooked(1);
-		.memcpy((Object)generatedFunc_addr, data, 14);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedFunc_addr, data, 14);
 	}
-	public void hook_reverse_new(Object p) {
+	public void hook_reverse_new(Object[] p) {
 		Object generatedFunc_addr = this.getFunc_addr();
 		this.setCall_addr((Object)(generatedFunc_addr + 2));
 		this.setType(hook_type.HOOKTYPE_REVERSE_CHAIN);
@@ -75,10 +75,10 @@ public class func_hook {
 		((uint32_t)p[1]) = (uint32_t)(generatedHook_addr - generatedFunc_addr);
 		((uint16_t)p[5]) = -1024;
 	}
-	public void hook_reverse_chain(Object p) {
+	public void hook_reverse_chain(Object[] p) {
 		hook_type generatedType = this.getType();
 		if (generatedType != hook_type.HOOKTYPE_FORWARD_OVERWRITE) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedFunc_addr = this.getFunc_addr();
 		this.setCall_addr((Object)(generatedFunc_addr + ((int32_t)p[1])));
@@ -87,11 +87,11 @@ public class func_hook {
 		Object generatedHook_addr = this.getHook_addr();
 		((uint32_t)p[1]) = (uint32_t)(generatedHook_addr - generatedFunc_addr);
 	}
-	public void hook_forward_chain(Object p, Object offset) {
+	public void hook_forward_chain(Object[] p, Object offset) {
 		int32_t cur_offset = (int32_t)p[6];
 		hook_type generatedType = this.getType();
 		if (generatedType != hook_type.HOOKTYPE_FORWARD_OVERWRITE) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedFunc_addr = this.getFunc_addr();
 		this.setCall_addr((Object)(generatedFunc_addr + 5 + cur_offset));
@@ -150,18 +150,18 @@ public class func_hook {
 		int pagesize;
 		int i;
 		Object generatedFunc_addr = this.getFunc_addr();
-		success = .VirtualQueryEx(.GetCurrentProcess(), (Object)generatedFunc_addr, mbi, );
+		success = /*Error: Function owner not recognized*/VirtualQueryEx(/*Error: Function owner not recognized*/GetCurrentProcess(), (Object)generatedFunc_addr, mbi, /*Error: sizeof expression not supported yet*/);
 		if (!success) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.GetSystemInfo(si);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GetSystemInfo(si);
 		Object generatedDwAllocationGranularity = si.getDwAllocationGranularity();
 		pagesize = (int)generatedDwAllocationGranularity;
 		Object generatedAllocationBase = mbi.getAllocationBase();
 		address = (uintptr_t)generatedAllocationBase - pagesize;
 		Object generatedBounce_addr = this.getBounce_addr();
 		for (i = 0; i < 256; ) {
-			this.setBounce_addr(.VirtualAlloc((LPVOID)address, pagesize, -1024 | -1024, -1024));
+			this.setBounce_addr(/*Error: Function owner not recognized*/VirtualAlloc((LPVOID)address, pagesize, -1024 | -1024, -1024));
 			if (generatedBounce_addr) {
 				break;
 			} 
@@ -170,14 +170,14 @@ public class func_hook {
 		if (!generatedBounce_addr) {
 			address = (uintptr_t)generatedAllocationBase + generatedRegionSize + pagesize;
 			for (i = 0; i < 256; ) {
-				this.setBounce_addr(.VirtualAlloc((LPVOID)address, pagesize, -1024 | -1024, -1024));
+				this.setBounce_addr(/*Error: Function owner not recognized*/VirtualAlloc((LPVOID)address, pagesize, -1024 | -1024, -1024));
 				if (generatedBounce_addr) {
 					break;
 				} 
 			}
 		} 
 		if (!generatedBounce_addr) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if ((generatedFunc_addr + 5) > (uintptr_t)generatedBounce_addr) {
 			newdiff = generatedFunc_addr + 5 - (uintptr_t)generatedBounce_addr;
@@ -187,7 +187,7 @@ public class func_hook {
 		Object generatedHook_addr = this.getHook_addr();
 		if (newdiff <= -1024) {
 			uint8_t addr = (uint8_t)generatedBounce_addr;
-			.memset((generatedBounce_addr), (true), (pagesize));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((generatedBounce_addr), (true), (pagesize));
 			(addr++) = -1024;
 			(addr++) = -1024;
 			((uint32_t)addr) = 0;
@@ -201,7 +201,7 @@ public class func_hook {
 		intptr_t offset = new intptr_t();
 		boolean generatedHooked = this.getHooked();
 		if (!force && generatedHooked) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		boolean generatedStarted = this.getStarted();
 		hook_type generatedType = this.getType();
@@ -218,9 +218,9 @@ public class func_hook {
 					addr = generatedFunc_addr;
 					size = hook.patch_size();
 			} 
-			.memcpy((Object)addr, generatedRehook_data, size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)addr, generatedRehook_data, size);
 			this.setHooked(1);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedHook_addr = this.getHook_addr();
 		offset = generatedHook_addr - generatedFunc_addr - 5;
@@ -231,7 +231,7 @@ public class func_hook {
 		size_t size = new size_t();
 		boolean generatedHooked = this.getHooked();
 		if (!generatedHooked) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		hook_type generatedType = this.getType();
 		Object generatedFunc_addr = this.getFunc_addr();
@@ -244,10 +244,10 @@ public class func_hook {
 		} 
 		ModernizedCProgram.fix_permissions((Object)addr, size);
 		Object generatedRehook_data = this.getRehook_data();
-		.memcpy(generatedRehook_data, (Object)addr, size);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedRehook_data, (Object)addr, size);
 		Object generatedUnhook_data = this.getUnhook_data();
 		if (generatedType == hook_type.HOOKTYPE_FORWARD_OVERWRITE) {
-			.memcpy((Object)generatedFunc_addr, generatedUnhook_data, size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedFunc_addr, generatedUnhook_data, size);
 		} 
 		this.setHooked(0);
 	}

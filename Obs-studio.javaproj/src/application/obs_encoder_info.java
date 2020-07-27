@@ -54,7 +54,7 @@ public class obs_encoder_info {
 		for ( i = 0;
 		 i < ModernizedCProgram.obs.getEncoder_types().getNum(); i++) {
 			obs_encoder_info info = ModernizedCProgram.obs.getEncoder_types().getArray() + i;
-			if (.strcmp(generatedId, id) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedId, id) == 0) {
 				return info;
 			} 
 		}

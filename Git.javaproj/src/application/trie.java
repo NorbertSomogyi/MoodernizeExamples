@@ -10,13 +10,13 @@ public class trie {
 	private int accepting;
 	private tree links;
 	private trie parent;
-	private trie next;
+	private trie[] next;
 	private trie fail;
 	private int depth;
 	private int shift;
 	private int maxshift;
 	
-	public trie(int accepting, tree links, trie parent, trie next, trie fail, int depth, int shift, int maxshift) {
+	public trie(int accepting, tree links, trie parent, trie[] next, trie fail, int depth, int shift, int maxshift) {
 		setAccepting(accepting);
 		setLinks(links);
 		setParent(parent);
@@ -32,14 +32,14 @@ public class trie {
 	public void treefails(Object tree, Object fail) {
 		tree link = new tree();
 		if (!tree) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		recourse.treefails(tree.getLlink(), fail);
 		recourse.treefails(tree.getRlink(), fail);
-		byte generatedLabel = link.getLabel();
-		tree generatedLlink = link.getLlink();
-		tree generatedRlink = link.getRlink();
-		trie generatedTrie = link.getTrie();
+		Object generatedLabel = link.getLabel();
+		Object generatedLlink = link.getLlink();
+		Object generatedRlink = link.getRlink();
+		Object generatedTrie = link.getTrie();
 		while (/* Find, in the chain of fails going back to the root, the first
 		     node that has a descendant on the current label. */fail) {
 			link = fail.getLinks();
@@ -52,7 +52,7 @@ public class trie {
 			}
 			if (link) {
 				generatedTrie.setFail(generatedTrie);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			fail = fail.getFail();
 		}
@@ -61,20 +61,20 @@ public class trie {
 	}
 	public void treenext(Object tree) {
 		if (!tree) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		next.treenext(tree.getLlink());
 		next.treenext(tree.getRlink());
 		next[tree.getLabel()] = tree.getTrie();
 	}
 	public trie make_trie_node(Object key, Object value) {
-		trie new_node = ModernizedCProgram.xcalloc(1, );
-		new_node.setLen(.strlen(key));
+		trie new_node = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+		new_node.setLen(/*Error: Function owner not recognized*/strlen(key));
 		Object generatedLen = new_node.getLen();
 		Object generatedContents = new_node.getContents();
 		if (generatedLen) {
 			new_node.setContents(ModernizedCProgram.xmalloc(generatedLen));
-			.memcpy(generatedContents, key, generatedLen);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedContents, key, generatedLen);
 		} 
 		new_node.setValue(value);
 		return new_node/*
@@ -82,7 +82,7 @@ public class trie {
 		 * If there was an existing value for this key, return it.
 		 */;
 	}
-	public Object add_to_trie(Object key, Object value) {
+	public Object add_to_trie(Object[] key, Object value) {
 		trie child = new trie();
 		Object old;
 		int i;
@@ -100,8 +100,8 @@ public class trie {
 			if (generatedContents[i] == key[i]) {
 				continue;
 			} 
-			child = ModernizedCProgram.xmalloc();
-			.memcpy(generatedChildren, generatedChildren, );
+			child = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedChildren, generatedChildren, /*Error: sizeof expression not supported yet*/);
 			child.setLen(generatedLen - i - 1);
 			if (generatedLen) {
 				child.setContents(ModernizedCProgram.xstrndup(generatedContents + i + 1, generatedLen));
@@ -109,7 +109,7 @@ public class trie {
 			child.setValue(generatedValue);
 			this.setValue(((Object)0));
 			this.setLen(i);
-			.memset(generatedChildren, 0, );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedChildren, 0, /*Error: sizeof expression not supported yet*/);
 			generatedChildren[(byte)generatedContents[i]] = child;
 			generatedChildren[(byte)key[/* This is the newly-added child. */i]] = trie.make_trie_node(key + i + 1, value);
 			return ((Object)0);
@@ -150,7 +150,7 @@ public class trie {
 		 *
 		 */;
 	}
-	public int trie_find(Object key, Object fn, Object baton) {
+	public int trie_find(Object[] key, Object fn, Object baton) {
 		int i;
 		int result;
 		trie child = new trie();
@@ -158,7 +158,7 @@ public class trie {
 		Object generatedLen = this.getLen();
 		if (!key) {
 			if (generatedValue && !generatedLen) {
-				return .fn(key, generatedValue, baton);
+				return /*Error: Function owner not recognized*/fn(key, generatedValue, baton);
 			} else {
 					return -1;
 			} 
@@ -175,7 +175,7 @@ public class trie {
 		}
 		key += /* Matched the entire compressed section */i;
 		if (!key) {
-			return .fn(key, generatedValue, /* End of key */baton);
+			return /*Error: Function owner not recognized*/fn(key, generatedValue, /* End of key */baton);
 		} 
 		while (key[0] == (byte)'/' && key[1] == /* Partial path normalization: skip consecutive slashes */(byte)'/') {
 			key++;
@@ -191,7 +191,7 @@ public class trie {
 			return result;
 		} 
 		if (generatedValue) {
-			return .fn(key, generatedValue, baton);
+			return /*Error: Function owner not recognized*/fn(key, generatedValue, baton);
 		} else {
 				return -1;
 		} 
@@ -214,10 +214,10 @@ public class trie {
 	public void setParent(trie newParent) {
 		parent = newParent;
 	}
-	public trie getNext() {
+	public trie[] getNext() {
 		return next;
 	}
-	public void setNext(trie newNext) {
+	public void setNext(trie[] newNext) {
 		next = newNext;
 	}
 	public trie getFail() {

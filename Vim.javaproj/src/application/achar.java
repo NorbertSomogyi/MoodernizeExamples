@@ -53,7 +53,7 @@ public class achar {
 		int h;
 		int m;
 		int l;
-		// using binary search to find c// using binary search to find ch = ( / );
+		// using binary search to find c// using binary search to find ch = (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/);
 		l = 0;
 		while (l < h) {
 			m = (h + l) / 2;

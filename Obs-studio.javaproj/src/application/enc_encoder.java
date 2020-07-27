@@ -47,7 +47,7 @@ public class enc_encoder {
 	
 	public Object initialize_codec() {
 		int ret;
-		this.setAframe(.avcodec_alloc_frame());
+		this.setAframe(/*Error: Function owner not recognized*/avcodec_alloc_frame());
 		Object generatedAframe = this.getAframe();
 		Object generatedType = this.getType();
 		obs_encoder generatedEncoder = this.getEncoder();
@@ -57,9 +57,9 @@ public class enc_encoder {
 		} 
 		Object generatedContext = this.getContext();
 		Object generatedCodec = this.getCodec();
-		ret = .avcodec_open2(generatedContext, generatedCodec, NULL);
+		ret = /*Error: Function owner not recognized*/avcodec_open2(generatedContext, generatedCodec, NULL);
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "[FFmpeg %s encoder: '%s'] Failed to open AAC codec: %s", generatedType, ModernizedCProgram.obs_encoder_get_name(generatedEncoder), .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "[FFmpeg %s encoder: '%s'] Failed to open AAC codec: %s", generatedType, ModernizedCProgram.obs_encoder_get_name(generatedEncoder), /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
 		generatedAframe.setFormat(generatedContext.getSample_fmt());
@@ -74,9 +74,9 @@ public class enc_encoder {
 		Object generatedAudio_size = this.getAudio_size();
 		this.setFrame_size_bytes(generatedFrame_size * (int)generatedAudio_size);
 		Object generatedSamples = this.getSamples();
-		ret = .av_samples_alloc(generatedSamples, NULL, generatedContext.getChannels(), generatedFrame_size, generatedContext.getSample_fmt(), 0);
+		ret = /*Error: Function owner not recognized*/av_samples_alloc(generatedSamples, NULL, generatedContext.getChannels(), generatedFrame_size, generatedContext.getSample_fmt(), 0);
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "[FFmpeg %s encoder: '%s'] Failed to create audio buffer: %s", generatedType, ModernizedCProgram.obs_encoder_get_name(generatedEncoder), .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "[FFmpeg %s encoder: '%s'] Failed to create audio buffer: %s", generatedType, ModernizedCProgram.obs_encoder_get_name(generatedEncoder), /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
 		return true;

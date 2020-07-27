@@ -24,7 +24,7 @@ public class todo_item {
 	public todo_item append_new_todo(todo_list todo_list) {
 		int generatedNr = todo_list.getNr();
 		int generatedAlloc = todo_list.getAlloc();
-		todo_item generatedItems = todo_list.getItems();
+		todo_item[] generatedItems = todo_list.getItems();
 		do {
 			if ((generatedNr + 1) > generatedAlloc) {
 				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNr + 1)) {
@@ -32,7 +32,7 @@ public class todo_item {
 				} else {
 						todo_list.setAlloc((((generatedAlloc) + 16) * 3 / 2));
 				} 
-				(generatedItems) = ModernizedCProgram.xrealloc((generatedItems), ModernizedCProgram.st_mult(, (generatedAlloc)));
+				(generatedItems) = ModernizedCProgram.xrealloc((generatedItems), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedAlloc)));
 			} 
 		} while (0);
 		return generatedItems + generatedNr++;
@@ -44,13 +44,13 @@ public class todo_item {
 		nth_slab = c.getIndex() / generatedSlab_size;
 		nth_slot = c.getIndex() % generatedSlab_size;
 		int generatedSlab_count = s.getSlab_count();
-		todo_item generatedSlab = s.getSlab();
+		todo_item[][][] generatedSlab = s.getSlab();
 		if (generatedSlab_count <= nth_slab) {
 			int i;
 			if (!add_if_missing) {
 				return ((Object)0);
 			} 
-			(generatedSlab) = ModernizedCProgram.xrealloc((generatedSlab), ModernizedCProgram.st_mult(, (nth_slab + 1)));
+			(generatedSlab) = ModernizedCProgram.xrealloc((generatedSlab), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (nth_slab + 1)));
 			for (i = generatedSlab_count; i <= nth_slab; i++) {
 				generatedSlab[i] = ((Object)0);
 			}
@@ -61,7 +61,7 @@ public class todo_item {
 			if (!add_if_missing) {
 				return ((Object)0);
 			} 
-			generatedSlab[nth_slab] = ModernizedCProgram.xcalloc(generatedSlab_size,  * generatedStride);
+			generatedSlab[nth_slab] = ModernizedCProgram.xcalloc(generatedSlab_size, /*Error: sizeof expression not supported yet*/ * generatedStride);
 		} 
 		return generatedSlab[nth_slab][nth_slot * generatedStride];
 	}

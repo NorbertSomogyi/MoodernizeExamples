@@ -45,10 +45,10 @@ public class index_tree_node_s {
 			generatedRight.index_tree_node_end(allocator, free_func);
 		} 
 		if (free_func != ((Object)0)) {
-			.free_func(node, allocator);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_func(node, allocator);
 		} 
 		ModernizedCProgram.lzma_free(node, allocator);
-		return ;/// Free the meory allocated for a tree. If free_func is not NULL,
+		return /*Error: Unsupported expression*/;/// Free the meory allocated for a tree. If free_func is not NULL,
 	}
 	public Object getUncompressed_base() {
 		return uncompressed_base;

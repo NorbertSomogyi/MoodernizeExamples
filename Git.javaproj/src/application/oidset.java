@@ -23,9 +23,28 @@ public class oidset {
 	public oidset() {
 	}
 	
+	public void add_all(oidset src) {
+		oidset_iter iter = new oidset_iter();
+		object_id src_oid = new object_id();
+		ModernizedCProgram.oidset_iter_init(src, iter);
+		object_id object_id = new object_id();
+		while ((src_oid = object_id.oidset_iter_next(iter)) != ((Object)0)) {
+			dest.oidset_insert(src_oid);
+		}
+	}
+	public void filter_combine__finalize_omits(Object filter_data) {
+		combine_filter_data d = filter_data;
+		size_t sub = new size_t();
+		Object generatedNr = d.getNr();
+		subfilter[] generatedSub = d.getSub();
+		for (sub = 0; sub < generatedNr; sub++) {
+			omits.add_all(generatedSub[sub].getOmits());
+			generatedSub[sub].getOmits().oidset_clear();
+		}
+	}
 	public void oidset_init(Object initial_size) {
 		 generatedSet = this.getSet();
-		.memset(generatedSet, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedSet, 0, /*Error: sizeof expression not supported yet*/);
 		if (initial_size) {
 			generatedSet.kh_resize_oid_set(initial_size);
 		} 
@@ -53,18 +72,18 @@ public class oidset {
 	}
 	public void oidset_parse_file(Object path) {
 		FILE fp = new FILE();
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		object_id oid = new object_id();
-		fp = .fopen(path, "r");
+		fp = /*Error: Function owner not recognized*/fopen(path, "r");
 		if (!fp) {
 			ModernizedCProgram.die("could not open object name list: %s", path);
 		} 
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		Object generatedLen = sb.getLen();
 		while (!ModernizedCProgram.strbuf_getline(sb, fp)) {
 			byte p;
 			byte name;
-			name = .strchr(generatedBuf, (byte)'#');
+			name = /*Error: Function owner not recognized*/strchr(generatedBuf, (byte)'#');
 			if (name) {
 				sb.strbuf_setlen(name - generatedBuf);
 			} 
@@ -81,27 +100,8 @@ public class oidset {
 		if ((generated_flag & -1024)) {
 			ModernizedCProgram.die_errno("Could not read '%s'", path);
 		} 
-		.fclose(fp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fp);
 		sb.strbuf_release();
-	}
-	public void add_all(oidset src) {
-		oidset_iter iter = new oidset_iter();
-		object_id src_oid = new object_id();
-		ModernizedCProgram.oidset_iter_init(src, iter);
-		object_id object_id = new object_id();
-		while ((src_oid = object_id.oidset_iter_next(iter)) != ((Object)0)) {
-			dest.oidset_insert(src_oid);
-		}
-	}
-	public void filter_combine__finalize_omits(Object filter_data) {
-		combine_filter_data d = filter_data;
-		size_t sub = new size_t();
-		Object generatedNr = d.getNr();
-		subfilter generatedSub = d.getSub();
-		for (sub = 0; sub < generatedNr; sub++) {
-			omits.add_all(generatedSub[sub].getOmits());
-			generatedSub[sub].getOmits().oidset_clear();
-		}
 	}
 	public  getSet() {
 		return set;

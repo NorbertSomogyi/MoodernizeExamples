@@ -11,7 +11,7 @@ public class blame_list {
 	public blame_list() {
 	}
 	
-	public blame_list setup_blame_list(blame_entry unblamed, int num_ents_p) {
+	public blame_list setup_blame_list(blame_entry unblamed, Integer num_ents_p) {
 		blame_entry e = new blame_entry();
 		int num_ents;
 		int i;
@@ -21,7 +21,7 @@ public class blame_list {
 			num_ents++;
 		}
 		if (num_ents) {
-			blame_list = ModernizedCProgram.xcalloc(num_ents, );
+			blame_list = ModernizedCProgram.xcalloc(num_ents, /*Error: Unsupported expression*/);
 			for (; e; e = generatedNext) {
 				blame_list[i++].setEnt(e);
 			}

@@ -20,19 +20,19 @@ public class thread_data {
 	public int init_thread_sync_data(Object hostname, int port, Object hints) {
 		thread_sync_data generatedTsd = this.getTsd();
 		thread_sync_data tsd = generatedTsd;
-		.memset(tsd, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(tsd, 0, /*Error: sizeof expression not supported yet*/);
 		tsd.setTd(td);
 		tsd.setPort(port/* Treat the request as done until the thread actually starts so any early
 		   * cleanup gets done properly.
 		   */);
 		tsd.setDone(1);
 		(Object)hints;
-		tsd.setMtx(.Curl_cmalloc());
+		tsd.setMtx(/*Error: Function owner not recognized*/Curl_cmalloc(/*Error: Unsupported expression*/));
 		_CRITICAL_SECTION generatedMtx = tsd.getMtx();
 		if (generatedMtx == ((Object)0)) {
 			;
 		} 
-		.InitializeCriticalSection(generatedMtx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/InitializeCriticalSection(generatedMtx);
 		Object generatedSock_pair = tsd.getSock_pair();
 		if (ModernizedCProgram.Curl_socketpair(1, 1, 0, generatedSock_pair[0]) < /* create socket pair, avoid AF_LOCAL since it doesn't build on Solaris */0) {
 			generatedSock_pair[0] = CURL_SOCKET_BAD;
@@ -42,7 +42,7 @@ public class thread_data {
 		tsd.setSock_error(CURLE_OK/* Copying hostname string because original can be destroyed by parent
 		   * thread during gethostbyname execution.
 		   */);
-		tsd.setHostname(.Curl_cstrdup(hostname));
+		tsd.setHostname(/*Error: Function owner not recognized*/Curl_cstrdup(hostname));
 		Byte generatedHostname = tsd.getHostname();
 		if (!generatedHostname) {
 			;

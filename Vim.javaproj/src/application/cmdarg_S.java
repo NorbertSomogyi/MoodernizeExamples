@@ -33,116 +33,484 @@ public class cmdarg_S {
 	public cmdarg_S() {
 	}
 	
-	/*
-	 * Search for a character in a line.  If "t_cmd" is FALSE, move to the
-	 * position of the character, otherwise move to just before the char.
-	 * Do this "cap->count1" times.
-	 * Return FAIL or OK.
-	 */
-	public int searchc(int t_cmd) {
+	public void do_pending_operator(int old_col, int gui_yank) {
+		oparg_S generatedOap = this.getOap();
+		oparg_T oap = generatedOap;
+		pos_T old_cursor = new pos_T();
+		int empty_region_error;
+		int restart_edit_save;
+		int lbr_saved = ModernizedCProgram.curwin.getW_onebuf_opt().getWo_lbr();
+		// The visual area is remembered for redo// 'v', 'V', or Ctrl-Vint redo_VIsual_mode = (byte)'\000';
+		// number of lineslinenr_T redo_VIsual_line_count = new linenr_T();
+		// number of cols or end columncolnr_T redo_VIsual_vcol = new colnr_T();
+		// count for Visual operatorlong redo_VIsual_count;
+		// extra argumentint redo_VIsual_arg;
+		int include_line_break = 0;
+		// Yank the visual area into the GUI selection register before we operate// on it and lose it forever.
+		Object generatedAvailable = clip_star.getAvailable();
+		int generatedOp_type = oap.getOp_type();
+		int generatedRegname = oap.getRegname();
+		// Don't do it if a specific register was specified, so that ""x"*P works.// This could call do_pending_operator() recursively, but that's OK// because gui_yank will be TRUE for the nested call.if ((generatedAvailable || generatedAvailable) && generatedOp_type != 0 && !gui_yank && VIsual_active && !redo_VIsual_busy && generatedRegname == 0) {
+			ModernizedCProgram.clip_auto_select();
+		} 
+		old_cursor = ModernizedCProgram.curwin.getW_cursor();
+		int generatedMotion_force = oap.getMotion_force();
+		int generatedMotion_type = oap.getMotion_type();
+		int generatedInclusive = oap.getInclusive();
+		 generatedStart = oap.getStart();
+		int generatedCmdchar = this.getCmdchar();
+		long generatedCount0 = this.getCount0();
 		int generatedNchar = this.getNchar();
-		int c = generatedNchar;
+		Object generatedSearchbuf = this.getSearchbuf();
+		memline generatedB_ml = curbuf.getB_ml();
+		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
+		 generatedB_visual = curbuf.getB_visual();
+		Object generatedLnum = (generatedStart).getLnum();
+		Object generatedCol = (generatedStart).getCol();
+		Object generatedColadd = (generatedStart).getColadd();
+		 generatedEnd = oap.getEnd();
+		Object generatedEnd_vcol = oap.getEnd_vcol();
+		long generatedLine_count = oap.getLine_count();
+		Object generatedStart_vcol = oap.getStart_vcol();
 		int generatedArg = this.getArg();
-		int dir = generatedArg;
+		int generatedEmpty = oap.getEmpty();
+		int generatedIs_VIsual = oap.getIs_VIsual();
+		int generatedB_p_ma = curbuf.getB_p_ma();
+		int generatedRetval = this.getRetval();
+		int generatedBlock_mode = oap.getBlock_mode();
 		long generatedCount1 = this.getCount1();
-		long count = generatedCount1;
-		int col;
-		char_u p = new char_u();
-		int len;
-		int stop = 1;
-		int generatedNcharC1 = this.getNcharC1();
-		int generatedNcharC2 = this.getNcharC2();
-		if (c != /* normal search: remember args for repeat */(byte)'\000') {
-			if (!/* don't remember when redoing */ModernizedCProgram.KeyStuffed) {
-				ModernizedCProgram.lastc = c;
-				ModernizedCProgram.set_csearch_direction(dir);
-				ModernizedCProgram.set_csearch_until(t_cmd);
-				ModernizedCProgram.lastc_bytelen = .UNRECOGNIZEDFUNCTIONNAME(c, ModernizedCProgram.lastc_bytes);
-				if (generatedNcharC1 != 0) {
-					ModernizedCProgram.lastc_bytelen += .UNRECOGNIZEDFUNCTIONNAME(generatedNcharC1, ModernizedCProgram.lastc_bytes + ModernizedCProgram.lastc_bytelen);
-					if (generatedNcharC2 != 0) {
-						ModernizedCProgram.lastc_bytelen += .UNRECOGNIZEDFUNCTIONNAME(generatedNcharC2, ModernizedCProgram.lastc_bytes + ModernizedCProgram.lastc_bytelen);
+		Object generatedB_p_lisp = curbuf.getB_p_lisp();
+		Object generatedB_p_inde = curbuf.getB_p_inde();
+		Object generatedB_p_fex = curbuf.getB_p_fex();
+		Object generatedB_p_fp = curbuf.getB_p_fp();
+		int generatedEnd_adjusted = oap.getEnd_adjusted();
+		// If an operation is pending, handle it...if ((finish_op || VIsual_active) && generatedOp_type != 0) {
+			int redo_yank = ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'y') != ((Object)0) && !gui_yank;
+			if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_lbr()) {
+				ModernizedCProgram.curwin.getW_valid() &=  ~-1024;
+			} 
+			ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(0);
+			oap.setIs_VIsual(VIsual_active);
+			if (generatedMotion_force == (byte)'V') {
+				oap.setMotion_type(1);
+			}  else if (generatedMotion_force == (byte)'v') {
+				if (generatedMotion_type == 1) {
+					oap.setInclusive(0);
+				}  else if (generatedMotion_type == 0) {
+					oap.setInclusive(!generatedInclusive);
+				} 
+				oap.setMotion_type(0);
+			}  else if (generatedMotion_force == 22) {
+				if (!VIsual_active) {
+					VIsual_active = 1;
+					ModernizedCProgram.VIsual = generatedStart;
+				} 
+				VIsual_mode = 22;
+				VIsual_select = 0;
+				ModernizedCProgram.VIsual_reselect = 0;
+			} 
+			if ((redo_yank || generatedOp_type != 2) && ((!VIsual_active || generatedMotion_force) || (VIsual_active && generatedCmdchar == (byte)':' && generatedOp_type != 10)) && generatedCmdchar != (byte)'D' && generatedOp_type != 19 && generatedOp_type != 20 && generatedOp_type != 21 && generatedOp_type != 22 && generatedOp_type != 23 && generatedOp_type != 24 && generatedOp_type != 25) {
+				ModernizedCProgram.prep_redo(generatedRegname, generatedCount0, ModernizedCProgram.get_op_char(generatedOp_type), ModernizedCProgram.get_extra_op_char(generatedOp_type), generatedMotion_force, generatedCmdchar, generatedNchar);
+				if (generatedCmdchar == (byte)'/' || generatedCmdchar == (byte)'?') {
+					if (ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'r') == ((Object)0)) {
+						ModernizedCProgram.AppendToRedobuffLit(generatedSearchbuf, -1);
+					} 
+					ModernizedCProgram.AppendToRedobuff((char_u)"\012");
+				}  else if (generatedCmdchar == (byte)':') {
+					if (repeat_cmdline == ((Object)0)) {
+						ModernizedCProgram.ResetRedobuff();
+					} else {
+							ModernizedCProgram.AppendToRedobuffLit(repeat_cmdline, -1);
+							ModernizedCProgram.AppendToRedobuff((char_u)"\012");
+							do {
+								if ((repeat_cmdline) != ((Object)0)) {
+									ModernizedCProgram.vim_free(repeat_cmdline);
+									(repeat_cmdline) = ((Object)0);
+								} 
+							} while (0);
 					} 
 				} 
 			} 
-		} else {
-				if (ModernizedCProgram.lastc == (byte)'\000' && ModernizedCProgram.lastc_bytelen == /* repeat previous search */1) {
-					return 0;
+			if (redo_VIsual_busy) {
+				oap.setStart(ModernizedCProgram.curwin.getW_cursor());
+				ModernizedCProgram.curwin.getW_cursor().getLnum() += redo_VIsual_line_count - 1;
+				if (ModernizedCProgram.curwin.getW_cursor().getLnum() > generatedMl_line_count) {
+					ModernizedCProgram.curwin.getW_cursor().setLnum(generatedMl_line_count);
 				} 
-				if (/* repeat in opposite direction */dir) {
-					dir = -ModernizedCProgram.lastcdir;
-				} else {
-						dir = ModernizedCProgram.lastcdir;
-				} 
-				t_cmd = ModernizedCProgram.last_t_cmd;
-				c = ModernizedCProgram.lastc/* For multi-byte re-use last lastc_bytes[] and lastc_bytelen. */;
-				if (ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)';') == ((Object)0) && count == 1 && /* Force a move of at least one char, so ";" and "," will move the
-					 * cursor, even if the cursor is right in front of char we are looking
-					 * at. */t_cmd) {
-					stop = 0;
-				} 
-		} 
-		oparg_S generatedOap = this.getOap();
-		if (dir == (true)) {
-			generatedOap.setInclusive(0);
-		} else {
-				generatedOap.setInclusive(1);
-		} 
-		p = ModernizedCProgram.ml_get_curline();
-		col = ModernizedCProgram.curwin.getW_cursor().getCol();
-		len = (int).strlen((byte)(p));
-		while (count--) {
-			if (has_mbyte) {
-				for (; ; ) {
-					if (dir > 0) {
-						col += .UNRECOGNIZEDFUNCTIONNAME(p + col);
-						if (col >= len) {
-							return 0;
+				VIsual_mode = redo_VIsual_mode;
+				if (redo_VIsual_vcol == INT_MAX || VIsual_mode == (byte)'v') {
+					if (VIsual_mode == (byte)'v') {
+						if (redo_VIsual_line_count <= 1) {
+							ModernizedCProgram.validate_virtcol();
+							ModernizedCProgram.curwin.setW_curswant(ModernizedCProgram.curwin.getW_virtcol() + redo_VIsual_vcol - 1);
+						} else {
+								ModernizedCProgram.curwin.setW_curswant(redo_VIsual_vcol);
 						} 
 					} else {
-							if (col == 0) {
-								return 0;
-							} 
-							col -= .UNRECOGNIZEDFUNCTIONNAME(p, p + col - 1) + 1;
+							ModernizedCProgram.curwin.setW_curswant(INT_MAX);
 					} 
-					if (ModernizedCProgram.lastc_bytelen == 1) {
-						if (p[col] == c && stop) {
-							break;
-						} 
-					}  else if (.strncmp((byte)(p + col), (byte)(ModernizedCProgram.lastc_bytes), (size_t)(ModernizedCProgram.lastc_bytelen)) == 0 && stop) {
-						break;
-					} 
-					stop = 1;
-				}
-			} else {
-					for (; ; ) {
-						if ((col += dir) < 0 || col >= len) {
-							return 0;
-						} 
-						if (p[col] == c && stop) {
-							break;
-						} 
-						stop = 1;
-					}
-			} 
-		}
-		if (t_cmd) {
-			col -= /* backup to before the character (possibly double-byte) */dir;
-			if (has_mbyte) {
-				if (dir < 0) {
-					col += ModernizedCProgram.lastc_bytelen - /* Landed on the search char which is lastc_bytelen long */1;
+					ModernizedCProgram.coladvance(ModernizedCProgram.curwin.getW_curswant());
+				} 
+				this.setCount0(redo_VIsual_count);
+				if (redo_VIsual_count != 0) {
+					this.setCount1(redo_VIsual_count);
 				} else {
-						col -= .UNRECOGNIZEDFUNCTIONNAME(p, p + /* To previous char, which may be multi-byte. */col);
+						this.setCount1(1);
+				} 
+			}  else if (VIsual_active) {
+				if (!gui_yank) {
+					generatedB_visual.setVi_start(ModernizedCProgram.VIsual);
+					generatedB_visual.setVi_end(ModernizedCProgram.curwin.getW_cursor());
+					generatedB_visual.setVi_mode(VIsual_mode);
+					ModernizedCProgram.restore_visual_mode();
+					generatedB_visual.setVi_curswant(ModernizedCProgram.curwin.getW_curswant());
+					curbuf.setB_visual_mode_eval(VIsual_mode);
+				} 
+				if (VIsual_select && VIsual_mode == (byte)'V' && generatedOp_type != 1) {
+					if ((((ModernizedCProgram.VIsual).getLnum() != (ModernizedCProgram.curwin.getW_cursor()).getLnum()) ? (ModernizedCProgram.VIsual).getLnum() < (ModernizedCProgram.curwin.getW_cursor()).getLnum() : (ModernizedCProgram.VIsual).getCol() != (ModernizedCProgram.curwin.getW_cursor()).getCol() ? (ModernizedCProgram.VIsual).getCol() < (ModernizedCProgram.curwin.getW_cursor()).getCol() : (ModernizedCProgram.VIsual).getColadd() < (ModernizedCProgram.curwin.getW_cursor()).getColadd())) {
+						ModernizedCProgram.VIsual.setCol(0);
+						ModernizedCProgram.curwin.getW_cursor().setCol((colnr_T)/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.ml_get(ModernizedCProgram.curwin.getW_cursor().getLnum()))));
+					} else {
+							ModernizedCProgram.curwin.getW_cursor().setCol(0);
+							ModernizedCProgram.VIsual.setCol((colnr_T)/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.ml_get(ModernizedCProgram.VIsual.getLnum()))));
+					} 
+					VIsual_mode = (byte)'v';
+				}  else if (VIsual_mode == (byte)'v') {
+					include_line_break = ModernizedCProgram.unadjust_for_sel();
+				} 
+				oap.setStart(ModernizedCProgram.VIsual);
+				if (VIsual_mode == (byte)'V') {
+					generatedStart.setCol(0);
+					generatedStart.setColadd(0);
 				} 
 			} 
+			if (((generatedLnum != generatedLnum) ? generatedLnum < generatedLnum : generatedCol != generatedCol ? generatedCol < generatedCol : generatedColadd < generatedColadd)) {
+				if (!VIsual_active) {
+					if (ModernizedCProgram.hasFolding(generatedLnum, generatedLnum, ((Object)0))) {
+						generatedStart.setCol(0);
+					} 
+					if ((generatedCol > 0 || generatedInclusive) && ModernizedCProgram.hasFolding(generatedLnum, ((Object)0), generatedLnum)) {
+						ModernizedCProgram.curwin.getW_cursor().setCol((colnr_T)/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.ml_get_curline())));
+					} 
+				} 
+				oap.setEnd(ModernizedCProgram.curwin.getW_cursor());
+				ModernizedCProgram.curwin.setW_cursor(generatedStart);
+				ModernizedCProgram.curwin.getW_valid() &=  ~-1024;
+			} else {
+					if (!VIsual_active && generatedMotion_type == 1) {
+						if (ModernizedCProgram.hasFolding(generatedLnum, generatedLnum, ((Object)0))) {
+							ModernizedCProgram.curwin.getW_cursor().setCol(0);
+						} 
+						if (ModernizedCProgram.hasFolding(generatedLnum, ((Object)0), generatedLnum)) {
+							generatedStart.setCol((colnr_T)/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.ml_get(generatedLnum))));
+						} 
+					} 
+					oap.setEnd(generatedStart);
+					oap.setStart(ModernizedCProgram.curwin.getW_cursor());
+			} 
+			ModernizedCProgram.check_pos(ModernizedCProgram.curwin.getW_buffer(), generatedEnd);
+			oap.setLine_count(generatedLnum - generatedLnum + 1);
+			virtual_op = ModernizedCProgram.virtual_active();
+			if (VIsual_active || redo_VIsual_busy) {
+				oap.get_op_vcol(redo_VIsual_vcol, 1);
+				if (!redo_VIsual_busy && !gui_yank) {
+					resel_VIsual_mode = VIsual_mode;
+					if (ModernizedCProgram.curwin.getW_curswant() == INT_MAX) {
+						ModernizedCProgram.resel_VIsual_vcol = INT_MAX;
+					} else {
+							if (VIsual_mode != 22) {
+								ModernizedCProgram.getvvcol(ModernizedCProgram.curwin, (generatedEnd), ((Object)0), ((Object)0), generatedEnd_vcol);
+							} 
+							if (VIsual_mode == 22 || generatedLine_count <= 1) {
+								if (VIsual_mode != 22) {
+									ModernizedCProgram.getvvcol(ModernizedCProgram.curwin, (generatedStart), generatedStart_vcol, ((Object)0), ((Object)0));
+								} 
+								ModernizedCProgram.resel_VIsual_vcol = generatedEnd_vcol - generatedStart_vcol + 1;
+							} else {
+									ModernizedCProgram.resel_VIsual_vcol = generatedEnd_vcol;
+							} 
+					} 
+					ModernizedCProgram.resel_VIsual_line_count = generatedLine_count;
+				} 
+				if ((redo_yank || generatedOp_type != 2) && generatedOp_type != 10 && generatedOp_type != 19 && generatedOp_type != 20 && generatedOp_type != 21 && generatedOp_type != 22 && generatedOp_type != 23 && generatedOp_type != 24 && generatedOp_type != 25 && generatedMotion_force == (byte)'\000') {
+					if (generatedCmdchar == (byte)'g' && (generatedNchar == (byte)'n' || generatedNchar == (byte)'N')) {
+						ModernizedCProgram.prep_redo(generatedRegname, generatedCount0, ModernizedCProgram.get_op_char(generatedOp_type), ModernizedCProgram.get_extra_op_char(generatedOp_type), generatedMotion_force, generatedCmdchar, generatedNchar);
+					}  else if (generatedCmdchar != (byte)':') {
+						int nchar = generatedOp_type == 16 ? generatedNchar : (byte)'\000';
+						if (nchar == -1) {
+							nchar = (byte)'\015';
+						}  else if (nchar == -2) {
+							nchar = (byte)'\012';
+						} 
+						ModernizedCProgram.prep_redo(generatedRegname, -1024, (byte)'\000', (byte)'v', ModernizedCProgram.get_op_char(generatedOp_type), ModernizedCProgram.get_extra_op_char(generatedOp_type), nchar);
+					} 
+					if (!redo_VIsual_busy) {
+						redo_VIsual_mode = resel_VIsual_mode;
+						redo_VIsual_vcol = ModernizedCProgram.resel_VIsual_vcol;
+						redo_VIsual_line_count = ModernizedCProgram.resel_VIsual_line_count;
+						redo_VIsual_count = generatedCount0;
+						redo_VIsual_arg = generatedArg;
+					} 
+				} 
+				if (generatedMotion_force == (byte)'\000' || generatedMotion_type == 1) {
+					oap.setInclusive(1);
+				} 
+				if (VIsual_mode == (byte)'V') {
+					oap.setMotion_type(1);
+				} else {
+						oap.setMotion_type(0);
+						if (VIsual_mode != 22 && (generatedEnd).ml_get_pos() == (byte)'\000' && (include_line_break || !virtual_op)) {
+							oap.setInclusive(0);
+							if (ModernizedCProgram.p_sel != (byte)'o' && !ModernizedCProgram.op_on_lines(generatedOp_type) && generatedLnum < generatedMl_line_count) {
+								++generatedLnum;
+								generatedEnd.setCol(0);
+								generatedEnd.setColadd(0);
+								++generatedLine_count;
+							} 
+						} 
+				} 
+				redo_VIsual_busy = 0;
+				if (!gui_yank) {
+					VIsual_active = 0;
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setmouse();
+					mouse_dragging = 0;
+					ModernizedCProgram.may_clear_cmdline();
+					if ((generatedOp_type == 2 || generatedOp_type == 10 || generatedOp_type == 27 || generatedOp_type == 6) && generatedMotion_force == (byte)'\000') {
+						ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
+						ModernizedCProgram.redraw_curbuf_later(20);
+					} 
+				} 
+			} 
+			if (has_mbyte && generatedInclusive) {
+				int l;
+				ModernizedCProgram.l = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedEnd.ml_get_pos());
+				if (ModernizedCProgram.l > 1) {
+					generatedCol += ModernizedCProgram.l - 1;
+				} 
+			} 
+			ModernizedCProgram.curwin.setW_set_curswant(1);
+			oap.setEmpty((generatedMotion_type == 0 && (!generatedInclusive || (generatedOp_type == 2 && generatedEnd.gchar_pos() == (byte)'\000')) && ((generatedLnum == generatedLnum) && (generatedCol == generatedCol) && (generatedColadd == generatedColadd)) && !(virtual_op && generatedColadd != generatedColadd)));
+			empty_region_error = (generatedEmpty && ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'E') != ((Object)0));
+			if (generatedIs_VIsual && (generatedEmpty || !generatedB_p_ma || generatedOp_type == 19)) {
+				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
+				ModernizedCProgram.redraw_curbuf_later(20);
+			} 
+			if (generatedMotion_type == 0 && generatedInclusive == 0 && !(generatedRetval & 2) && generatedCol == 0 && (!generatedIs_VIsual || ModernizedCProgram.p_sel == (byte)'o') && !generatedBlock_mode && generatedLine_count > 1) {
+				oap.setEnd_adjusted(1);
+				--generatedLine_count;
+				--generatedLnum;
+				if (ModernizedCProgram.inindent(0)) {
+					oap.setMotion_type(1);
+				} else {
+						generatedEnd.setCol((colnr_T)/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.ml_get(generatedLnum))));
+						if (generatedCol) {
+							--generatedCol;
+							oap.setInclusive(1);
+						} 
+				} 
+			} else {
+					oap.setEnd_adjusted(0);
+			} 
+			switch (generatedOp_type) {
+			case 6:
+					if (ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'!') != ((Object)0)) {
+						ModernizedCProgram.AppendToRedobuff((char_u)"!\r");
+					} else {
+							bangredo = 1;
+					} 
+			case 29:
+					if (empty_region_error) {
+						ModernizedCProgram.vim_beep(-1024);
+						ModernizedCProgram.CancelRedo();
+					} else {
+							VIsual_active = 1;
+							ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
+							oap.op_addsub(generatedCount1, redo_VIsual_arg);
+							VIsual_active = 0;
+					} 
+					ModernizedCProgram.check_cursor_col();
+					break;
+			case 11:
+			case 15:
+					if (empty_region_error) {
+						ModernizedCProgram.vim_beep(-1024);
+						ModernizedCProgram.CancelRedo();
+					} else {
+							oap.op_tilde();
+					} 
+					ModernizedCProgram.check_cursor_col();
+					break;
+			case 20:
+			case 1:
+					ModernizedCProgram.VIsual_reselect = 0;
+					if (empty_region_error) {
+						ModernizedCProgram.vim_beep(-1024);
+						ModernizedCProgram.CancelRedo();
+					} else {
+							(Object)oap.op_delete();
+							if (generatedMotion_type == 1 && ModernizedCProgram.has_format_option((byte)'a')) {
+								ModernizedCProgram.u_save_cursor();
+							} 
+							ModernizedCProgram.auto_format(0, 1);
+					} 
+					break;
+			case 13:
+					if (generatedLine_count < 2) {
+						oap.setLine_count(2);
+					} 
+					if (generatedLnum + generatedLine_count - 1 > generatedMl_line_count) {
+						ModernizedCProgram.beep_flush();
+					} else {
+							(Object)ModernizedCProgram.do_join(generatedLine_count, generatedOp_type == 13, 1, 1, 1);
+							ModernizedCProgram.auto_format(0, 1);
+					} 
+					break;
+			case 28:
+			case 10:
+					if (generatedOp_type == 8 && ModernizedCProgram.get_equalprg() == (byte)'\000') {
+						if (generatedB_p_lisp) {
+							oap.op_reindent(get_lisp_indent);
+							break;
+						} 
+						oap.op_reindent(generatedB_p_inde != (byte)'\000' ? get_expr_indent : get_c_indent);
+						break;
+					} 
+					oap.op_colon();
+					break;
+			case 26:
+					oap.op_format(1);
+					break;
+			case 22:
+			case 19:
+					ModernizedCProgram.VIsual_reselect = 0;
+					ModernizedCProgram.foldCreate(generatedLnum, generatedLnum);
+					break;
+			case 16:
+					ModernizedCProgram.VIsual_reselect = 0;
+					if (empty_region_error) {
+						ModernizedCProgram.vim_beep(-1024);
+						ModernizedCProgram.CancelRedo();
+					} else {
+							if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_lbr() != lbr_saved) {
+								ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
+								oap.get_op_vcol(redo_VIsual_mode, 0);
+							} 
+							oap.op_replace(generatedNchar);
+					} 
+					break;
+			case 9:
+					if (generatedB_p_fex != (byte)'\000') {
+						oap.op_formatexpr();
+					}  else if (ModernizedCProgram.p_fp != (byte)'\000' || generatedB_p_fp != (byte)'\000') {
+						oap.op_colon();
+					} else {
+							oap.op_format(0);
+					} 
+					break;
+			case 25:
+					ModernizedCProgram.VIsual_reselect = 0;
+					ModernizedCProgram.deleteFold(generatedLnum, generatedLnum, generatedOp_type == 25, generatedIs_VIsual);
+					break;
+			case 5:
+					oap.op_shift(1, generatedIs_VIsual ? (int)generatedCount1 : 1);
+					ModernizedCProgram.auto_format(0, 1);
+					break;
+			case 27:
+					ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
+					oap.op_function();
+					break;
+			case 12:
+			case 14:
+			case 3:
+					ModernizedCProgram.VIsual_reselect = 0;
+					if (empty_region_error) {
+						ModernizedCProgram.vim_beep(-1024);
+						ModernizedCProgram.CancelRedo();
+					} else {
+							if (ModernizedCProgram.p_im || !ModernizedCProgram.KeyTyped) {
+								restart_edit_save = restart_edit;
+							} else {
+									restart_edit_save = 0;
+							} 
+							restart_edit = 0;
+							if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_lbr() != lbr_saved) {
+								ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
+								oap.get_op_vcol(redo_VIsual_mode, 0);
+							} 
+							finish_op = 0;
+							if (oap.op_change()) {
+								generatedRetval |=  1;
+							} 
+							if (restart_edit == 0) {
+								restart_edit = restart_edit_save;
+							} 
+					} 
+					break;
+			case 21:
+			case 23:
+					ModernizedCProgram.VIsual_reselect = 0;
+					ModernizedCProgram.opFoldRange(generatedLnum, generatedLnum, generatedOp_type == 20 || generatedOp_type == 21, generatedOp_type == 21 || generatedOp_type == 23, generatedIs_VIsual);
+					break;
+			case 8:
+			case 18:
+					ModernizedCProgram.VIsual_reselect = 0;
+					if (empty_region_error) {
+						ModernizedCProgram.vim_beep(-1024);
+						ModernizedCProgram.CancelRedo();
+					} else {
+							restart_edit_save = restart_edit;
+							restart_edit = 0;
+							if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_lbr() != lbr_saved) {
+								ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
+								oap.get_op_vcol(redo_VIsual_mode, 0);
+							} 
+							oap.op_insert(generatedCount1);
+							ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(0);
+							ModernizedCProgram.auto_format(0, 1);
+							if (restart_edit == 0) {
+								restart_edit = restart_edit_save;
+							} else {
+									generatedRetval |=  1;
+							} 
+					} 
+					break;
+			case 4:
+			case 7:
+			case 17:
+			case 24:
+			case 2:
+					if (empty_region_error) {
+						if (!gui_yank) {
+							ModernizedCProgram.vim_beep(-1024);
+							ModernizedCProgram.CancelRedo();
+						} 
+					} else {
+							ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
+							(Object)oap.op_yank(0, !gui_yank);
+					} 
+					ModernizedCProgram.check_cursor_col();
+					break;
+			default:
+					oap.clearopbeep();
+			}
+			virtual_op = 2;
+			if (!gui_yank) {
+				if (!ModernizedCProgram.p_sol && generatedMotion_type == 1 && !generatedEnd_adjusted && (generatedOp_type == 4 || generatedOp_type == 5 || generatedOp_type == 1)) {
+					ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(0);
+					ModernizedCProgram.coladvance(ModernizedCProgram.curwin.setW_curswant(old_col));
+				} 
+			} else {
+					ModernizedCProgram.curwin.setW_cursor(old_cursor);
+			} 
+			oap.setBlock_mode(0);
+			oap.clearop();
+			motion_force = (byte)'\000';
 		} 
-		ModernizedCProgram.curwin.getW_cursor().setCol(col);
-		return 1/*
-		 * "Other" Searches
-		 */;
+		// Yank can be redone when 'y' is in 'cpoptions', but not when yanking
+		ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
 	}
 	// saved Visual mode
-	public void set_vcount_ca(int set_prevcount) {
+	public void set_vcount_ca(Integer set_prevcount) {
 		long generatedCount0 = this.getCount0();
 		long count = generatedCount0;
 		long generatedOpcount = this.getOpcount();
@@ -166,20 +534,20 @@ public class cmdarg_S {
 	public void unshift_special() {
 		int generatedCmdchar = this.getCmdchar();
 		switch (generatedCmdchar) {
+		case (-(((byte)'%') + ((int)((byte)'i') << 8))):
+				this.setCmdchar((-(((byte)'k') + ((int)((byte)'r') << 8))));
+				break;
+		case (-((true) + ((int)(key_extra.KE_S_DOWN) << 8))):
+				this.setCmdchar((-(((byte)'k') + ((int)((byte)'d') << 8))));
+				break;
 		case (-(((byte)'#') + ((int)((byte)'4') << 8))):
 				this.setCmdchar((-(((byte)'k') + ((int)((byte)'l') << 8))));
 				break;
 		case (-((true) + ((int)(key_extra.KE_S_UP) << 8))):
 				this.setCmdchar((-(((byte)'k') + ((int)((byte)'u') << 8))));
 				break;
-		case (-((true) + ((int)(key_extra.KE_S_DOWN) << 8))):
-				this.setCmdchar((-(((byte)'k') + ((int)((byte)'d') << 8))));
-				break;
 		case (-(((byte)'*') + ((int)((byte)'7') << 8))):
 				this.setCmdchar((-(((byte)'@') + ((int)((byte)'7') << 8))));
-				break;
-		case (-(((byte)'%') + ((int)((byte)'i') << 8))):
-				this.setCmdchar((-(((byte)'k') + ((int)((byte)'r') << 8))));
 				break;
 		case (-(((byte)'#') + ((int)((byte)'2') << 8))):
 				this.setCmdchar((-(((byte)'k') + ((int)((byte)'h') << 8))));
@@ -271,10 +639,10 @@ public class cmdarg_S {
 			 * "z123{nchar}": edit the count before obtaining {nchar}
 			 */)) {
 			if (generatedOap.checkclearop()) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			n = nchar - (byte)'0';
-			for (; ; ) {
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				++/* disallow scrolling here */no_mapping;
 				++/* no mapping for nchar, but allow key codes */allow_keys;
 				nchar = ModernizedCProgram.plain_vgetc();
@@ -306,7 +674,7 @@ public class cmdarg_S {
 				} 
 			}
 			generatedOap.setOp_type(0);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		long generatedCount0 = this.getCount0();
 		memline generatedB_ml = curbuf.getB_ml();
@@ -323,44 +691,27 @@ public class cmdarg_S {
 		int generatedOp_type = generatedOap.getOp_type();
 		Object generatedCol = pos.getCol();
 		switch (nchar) {
-		case (byte)'e':
-				if (!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap()) {
-					if (ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)0))) {
-						col = /* like the cursor is in col 0 */0;
+		case (byte)'D':
+				if (ModernizedCProgram.foldManualAllowed(0)) {
+					if (VIsual_active) {
+						cap.nv_operator();
 					} else {
-							ModernizedCProgram.getvcol(ModernizedCProgram.curwin, ModernizedCProgram.curwin.getW_cursor(), ((Object)0), ((Object)0), col);
-					} 
-					n = ModernizedCProgram.curwin.getW_width() - ModernizedCProgram.curwin_col_off();
-					if ((long)col + siso < n) {
-						col = 0;
-					} else {
-							col = col + siso - n + 1;
-					} 
-					if (ModernizedCProgram.curwin.getW_leftcol() != col) {
-						ModernizedCProgram.curwin.setW_leftcol(col);
-						ModernizedCProgram.redraw_later(40);
+							ModernizedCProgram.deleteFold(ModernizedCProgram.curwin.getW_cursor().getLnum(), ModernizedCProgram.curwin.getW_cursor().getLnum(), nchar == (byte)'D', 0);
 					} 
 				} 
 				break;
-		case (byte)'s':
+		case /* FALLTHROUGH */(byte)'-':
+				ModernizedCProgram.beginline(1 | 4/* FALLTHROUGH */);
+		case (-(((byte)'k') + ((int)((byte)'r') << 8))):
 				if (!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap()) {
-					if (ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)0))) {
-						col = /* like the cursor is in col 0 */0;
-					} else {
-							ModernizedCProgram.getvcol(ModernizedCProgram.curwin, ModernizedCProgram.curwin.getW_cursor(), col, ((Object)0), ((Object)0));
-					} 
-					if ((long)col > siso) {
-						col -= siso;
-					} else {
-							col = 0;
-					} 
-					if (ModernizedCProgram.curwin.getW_leftcol() != col) {
-						ModernizedCProgram.curwin.setW_leftcol(col);
-						ModernizedCProgram.redraw_later(40);
-					} 
+					ModernizedCProgram.curwin.getW_leftcol() += (colnr_T)generatedCount1;
+					ModernizedCProgram.leftcol_changed();
 				} 
 				break;
-		case /* "zF": create fold command *//* "zf": create fold operator */(byte)'F':
+		case (byte)'N':
+				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(/* "zN": fold Normal: set 'foldenable' */1);
+				break;
+		case /* "zG": add good word to temp word list */(byte)'G':
 		case /* "z+", "z<CR>" and "zt": put cursor at top of screen */(byte)'+':
 				if (generatedCount0 == 0) {
 					ModernizedCProgram.validate_botline();
@@ -370,65 +721,25 @@ public class cmdarg_S {
 							ModernizedCProgram.curwin.getW_cursor().setLnum(ModernizedCProgram.curwin.getW_botline());
 					} 
 				} 
-		case /* "zj" move to next fold downwards */(byte)'j':
-		case (byte)'L':
-				generatedCount1 *= ModernizedCProgram.curwin.getW_width() / /* "zL" - scroll screen left half-page */2/* FALLTHROUGH */;
-		case (-(((byte)'K') + ((int)((byte)'A') << 8))):
-				ModernizedCProgram.beginline(1 | 4/* FALLTHROUGH */);
-		case (byte)'a':
-				if (ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)/* "za": open closed fold or close open fold at cursor */0))) {
-					ModernizedCProgram.openFold(ModernizedCProgram.curwin.getW_cursor().getLnum(), generatedCount1);
-				} else {
-						ModernizedCProgram.closeFold(ModernizedCProgram.curwin.getW_cursor().getLnum(), generatedCount1);
-						ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(1);
-				} 
-				break;
+		case /* "zh" - scroll screen to the right */(byte)'h':
 		case (byte)'M':
 				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fdl(/* "zM": close all folds */0);
 				old_fdl = -/* force an update */1;
 				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(1);
 				break;
-		case (byte)'i':
-				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_fen());
+		case /* "zw": add wrong word to word list */(byte)'w':
+		case (byte)'b':
+				ModernizedCProgram.scroll_cursor_bot(0, 1);
+				ModernizedCProgram.redraw_later(10);
+				ModernizedCProgram.curwin.set_fraction();
 				break;
-		case (byte)'o':
-				if (/* "zo": open fold at cursor or Visual area */VIsual_active) {
-					cap.nv_operator();
-				} else {
-						ModernizedCProgram.openFold(ModernizedCProgram.curwin.getW_cursor().getLnum(), generatedCount1);
-				} 
-				break;
-		case (byte)'A':
-				if (ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)/* "zA": open fold at cursor recursively */0))) {
-					ModernizedCProgram.openFoldRecurse(ModernizedCProgram.curwin.getW_cursor().getLnum());
-				} else {
-						ModernizedCProgram.closeFoldRecurse(ModernizedCProgram.curwin.getW_cursor().getLnum());
-						ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(1);
-				} 
-				break;
-		case /* "z^", "z-" and "zb": put cursor at bottom of screen *//* Strange Vi behavior: <count>z^ finds line at top of window
-				 * when <count> is at bottom of window, and puts that one at
-				 * bottom of window. */(byte)'^':
-				if (generatedCount0 != 0) {
-					ModernizedCProgram.scroll_cursor_bot(0, 1);
-					ModernizedCProgram.curwin.getW_cursor().setLnum(ModernizedCProgram.curwin.getW_topline());
-				}  else if (ModernizedCProgram.curwin.getW_topline() == 1) {
-					ModernizedCProgram.curwin.getW_cursor().setLnum(1);
-				} else {
-						ModernizedCProgram.curwin.getW_cursor().setLnum(ModernizedCProgram.curwin.getW_topline() - 1);
-				} 
-		case /* "zG": add good word to temp word list */(byte)'G':
-		case (byte)'r':
-				ModernizedCProgram.curwin.getW_onebuf_opt().getWo_fdl() += generatedCount1;
-				{ 
-					int d = ModernizedCProgram.getDeepestNesting();
-					if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_fdl() >= d) {
-						ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fdl(d);
-					} 
-				}
-				break;
-		case (byte)'N':
-				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(/* "zN": fold Normal: set 'foldenable' */1);
+		case (byte)'L':
+				generatedCount1 *= ModernizedCProgram.curwin.getW_width() / /* "zL" - scroll screen left half-page */2/* FALLTHROUGH */;
+		case (byte)'x':
+				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(/* "zx": re-apply 'foldlevel' and open folds at the cursor */1);
+				ModernizedCProgram.curwin.setW_foldinvalid(/* recompute folds */1);
+				ModernizedCProgram.newFoldLevel();
+				ModernizedCProgram.foldOpenCursor();
 				break;
 		case /* "zug" and "zuw": undo "zg" and "zw" */(byte)'u':
 				++no_mapping;
@@ -451,6 +762,45 @@ public class cmdarg_S {
 					break;
 				} 
 				undo = 1/* FALLTHROUGH */;
+		case (byte)'i':
+				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_fen());
+				break;
+		case (-(((byte)'k') + ((int)((byte)'l') << 8))):
+				if (!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap()) {
+					if ((colnr_T)generatedCount1 > ModernizedCProgram.curwin.getW_leftcol()) {
+						ModernizedCProgram.curwin.setW_leftcol(0);
+					} else {
+							ModernizedCProgram.curwin.getW_leftcol() -= (colnr_T)generatedCount1;
+					} 
+					ModernizedCProgram.leftcol_changed();
+				} 
+				break;
+		case (byte)'t':
+				ModernizedCProgram.scroll_cursor_top(0, 1);
+				ModernizedCProgram.redraw_later(10);
+				ModernizedCProgram.curwin.set_fraction();
+				break;
+		case (byte)'r':
+				ModernizedCProgram.curwin.getW_onebuf_opt().getWo_fdl() += generatedCount1;
+				{ 
+					int d = ModernizedCProgram.getDeepestNesting();
+					if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_fdl() >= d) {
+						ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fdl(d);
+					} 
+				}
+				break;
+		case /* FALLTHROUGH */(byte)'\012':
+		case /* "z=": suggestions for a badly spelled word  */(byte)'=':
+				if (!generatedOap.checkclearop()) {
+					ModernizedCProgram.spell_suggest((int)generatedCount0);
+				} 
+				break;
+		case (byte)'v':
+				ModernizedCProgram.foldOpenCursor();
+				break;
+		case (byte)'n':
+				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(/* "zn": fold none: reset 'foldenable' */0);
+				break;
 		case (byte)'C':
 				if (/* "zC": close fold recursively */VIsual_active) {
 					cap.nv_operator();
@@ -459,17 +809,20 @@ public class cmdarg_S {
 				} 
 				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(1);
 				break;
-		case (byte)'f':
-				if (ModernizedCProgram.foldManualAllowed(1)) {
-					this.setNchar((byte)'f');
-					cap.nv_operator();
-					ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(1);
-					if (nchar == (byte)'F' && generatedOp_type == /* "zF" is like "zfzf" */19) {
-						cap.nv_operator();
-						finish_op = 1;
-					} 
+		case /* "zg": add good word to word list */(byte)'g':
+		case (byte)'a':
+				if (ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)/* "za": open closed fold or close open fold at cursor */0))) {
+					ModernizedCProgram.openFold(ModernizedCProgram.curwin.getW_cursor().getLnum(), generatedCount1);
 				} else {
-						generatedOap.clearopbeep();
+						ModernizedCProgram.closeFold(ModernizedCProgram.curwin.getW_cursor().getLnum(), generatedCount1);
+						ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(1);
+				} 
+				break;
+		case (byte)'o':
+				if (/* "zo": open fold at cursor or Visual area */VIsual_active) {
+					cap.nv_operator();
+				} else {
+						ModernizedCProgram.openFold(ModernizedCProgram.curwin.getW_cursor().getLnum(), generatedCount1);
 				} 
 				break;
 		case (byte)'m':
@@ -490,7 +843,7 @@ public class cmdarg_S {
 						break;
 					} 
 					if (VIsual_active && cap.get_visual_text(ptr, len) == 0) {
-						return ;
+						return /*Error: Unsupported expression*/;
 					} 
 					if (ptr == ((Object)0)) {
 						pos_T pos = ModernizedCProgram.curwin.getW_cursor();
@@ -503,15 +856,25 @@ public class cmdarg_S {
 						ModernizedCProgram.curwin.setW_cursor(pos);
 					} 
 					if (ptr == ((Object)0) && (len = ModernizedCProgram.find_ident_under_cursor(ptr, 1)) == 0) {
-						return ;
+						return /*Error: Unsupported expression*/;
 					} 
 					ModernizedCProgram.spell_add_word(ptr, len, nchar == (byte)'w' || nchar == (byte)'W' ? 1 : 0, (nchar == (byte)'G' || nchar == (byte)'W') ? 0 : (int)generatedCount1, undo);
 				}
 				break;
-		case (-(((byte)'k') + ((int)((byte)'r') << 8))):
-				if (!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap()) {
-					ModernizedCProgram.curwin.getW_leftcol() += (colnr_T)generatedCount1;
-					ModernizedCProgram.leftcol_changed();
+		case (-(((byte)'K') + ((int)((byte)'A') << 8))):
+				ModernizedCProgram.beginline(1 | 4/* FALLTHROUGH */);
+		case (byte)'A':
+				if (ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)/* "zA": open fold at cursor recursively */0))) {
+					ModernizedCProgram.openFoldRecurse(ModernizedCProgram.curwin.getW_cursor().getLnum());
+				} else {
+						ModernizedCProgram.closeFoldRecurse(ModernizedCProgram.curwin.getW_cursor().getLnum());
+						ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(1);
+				} 
+				break;
+		case /* "zl" - scroll screen to the left */(byte)'l':
+		case /* "zk" move to next fold upwards */(byte)'k':
+				if (ModernizedCProgram.foldMoveTo(1, nchar == (byte)'j' ? 1 : (true), generatedCount1) == 0) {
+					generatedOap.clearopbeep();
 				} 
 				break;
 		case (byte)'O':
@@ -521,6 +884,74 @@ public class cmdarg_S {
 						ModernizedCProgram.openFoldRecurse(ModernizedCProgram.curwin.getW_cursor().getLnum());
 				} 
 				break;
+		case (byte)'f':
+				if (ModernizedCProgram.foldManualAllowed(1)) {
+					this.setNchar((byte)'f');
+					cap.nv_operator();
+					ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(1);
+					if (nchar == (byte)'F' && generatedOp_type == /* "zF" is like "zfzf" */19) {
+						cap.nv_operator();
+						finish_op = 1;
+					} 
+				} else {
+						generatedOap.clearopbeep();
+				} 
+				break;
+		case /* "zH" - scroll screen right half-page */(byte)'H':
+				generatedCount1 *= ModernizedCProgram.curwin.getW_width() / 2/* FALLTHROUGH */;
+		case (byte)'\015':
+		case (byte)'z':
+				ModernizedCProgram.scroll_cursor_halfway(1);
+				ModernizedCProgram.redraw_later(10);
+				ModernizedCProgram.curwin.set_fraction();
+				break;
+		case (byte)'c':
+				if (/* "zc": close fold at cursor or Visual area */VIsual_active) {
+					cap.nv_operator();
+				} else {
+						ModernizedCProgram.closeFold(ModernizedCProgram.curwin.getW_cursor().getLnum(), generatedCount1);
+				} 
+				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(1);
+				break;
+		case (byte)'s':
+				if (!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap()) {
+					if (ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)0))) {
+						col = /* like the cursor is in col 0 */0;
+					} else {
+							ModernizedCProgram.getvcol(ModernizedCProgram.curwin, ModernizedCProgram.curwin.getW_cursor(), col, ((Object)0), ((Object)0));
+					} 
+					if ((long)col > siso) {
+						col -= siso;
+					} else {
+							col = 0;
+					} 
+					if (ModernizedCProgram.curwin.getW_leftcol() != col) {
+						ModernizedCProgram.curwin.setW_leftcol(col);
+						ModernizedCProgram.redraw_later(40);
+					} 
+				} 
+				break;
+		case (byte)'e':
+				if (!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap()) {
+					if (ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)0))) {
+						col = /* like the cursor is in col 0 */0;
+					} else {
+							ModernizedCProgram.getvcol(ModernizedCProgram.curwin, ModernizedCProgram.curwin.getW_cursor(), ((Object)0), ((Object)0), col);
+					} 
+					n = ModernizedCProgram.curwin.getW_width() - ModernizedCProgram.curwin_col_off();
+					if ((long)col + siso < n) {
+						col = 0;
+					} else {
+							col = col + siso - n + 1;
+					} 
+					if (ModernizedCProgram.curwin.getW_leftcol() != col) {
+						ModernizedCProgram.curwin.setW_leftcol(col);
+						ModernizedCProgram.redraw_later(40);
+					} 
+				} 
+				break;
+		case /* "zF": create fold command *//* "zf": create fold operator */(byte)'F':
+		case /* "zd": delete fold at cursor *//* "zD": delete fold at cursor recursively */(byte)'d':
 		case (byte)'E':
 				if (/* "zE": erase all folds */ModernizedCProgram.curwin.foldmethodIsManual()) {
 					ModernizedCProgram.curwin.clearFolding();
@@ -531,92 +962,29 @@ public class cmdarg_S {
 						ModernizedCProgram.emsg(((byte)("E352: Cannot erase folds with current 'foldmethod'")));
 				} 
 				break;
-		case (byte)'\015':
-		case (byte)'.':
-				ModernizedCProgram.beginline(1 | /* "z." and "zz": put cursor in middle of screen */4/* FALLTHROUGH */);
-		case (byte)'c':
-				if (/* "zc": close fold at cursor or Visual area */VIsual_active) {
-					cap.nv_operator();
-				} else {
-						ModernizedCProgram.closeFold(ModernizedCProgram.curwin.getW_cursor().getLnum(), generatedCount1);
-				} 
-				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(1);
-				break;
-		case (byte)'t':
-				ModernizedCProgram.scroll_cursor_top(0, 1);
-				ModernizedCProgram.redraw_later(10);
-				ModernizedCProgram.curwin.set_fraction();
-				break;
-		case (byte)'D':
-				if (ModernizedCProgram.foldManualAllowed(0)) {
-					if (VIsual_active) {
-						cap.nv_operator();
-					} else {
-							ModernizedCProgram.deleteFold(ModernizedCProgram.curwin.getW_cursor().getLnum(), ModernizedCProgram.curwin.getW_cursor().getLnum(), nchar == (byte)'D', 0);
-					} 
-				} 
-				break;
-		case /* "zw": add wrong word to word list */(byte)'w':
-		case (byte)'R':
-				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fdl(ModernizedCProgram.getDeepestNesting());
-				old_fdl = -/* force an update */1;
-				break;
-		case /* "zk" move to next fold upwards */(byte)'k':
-				if (ModernizedCProgram.foldMoveTo(1, nchar == (byte)'j' ? 1 : (true), generatedCount1) == 0) {
-					generatedOap.clearopbeep();
-				} 
-				break;
-		case /* FALLTHROUGH */(byte)'-':
-				ModernizedCProgram.beginline(1 | 4/* FALLTHROUGH */);
-		case /* "zh" - scroll screen to the right */(byte)'h':
-		case (byte)'n':
-				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(/* "zn": fold none: reset 'foldenable' */0);
-				break;
-		case /* FALLTHROUGH */(byte)'\012':
-		case (byte)'b':
-				ModernizedCProgram.scroll_cursor_bot(0, 1);
-				ModernizedCProgram.redraw_later(10);
-				ModernizedCProgram.curwin.set_fraction();
-				break;
-		case /* "zl" - scroll screen to the left */(byte)'l':
-		case (byte)'v':
-				ModernizedCProgram.foldOpenCursor();
-				break;
-		case (-(((byte)'k') + ((int)((byte)'l') << 8))):
-				if (!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap()) {
-					if ((colnr_T)generatedCount1 > ModernizedCProgram.curwin.getW_leftcol()) {
-						ModernizedCProgram.curwin.setW_leftcol(0);
-					} else {
-							ModernizedCProgram.curwin.getW_leftcol() -= (colnr_T)generatedCount1;
-					} 
-					ModernizedCProgram.leftcol_changed();
-				} 
-				break;
-		case (byte)'z':
-				ModernizedCProgram.scroll_cursor_halfway(1);
-				ModernizedCProgram.redraw_later(10);
-				ModernizedCProgram.curwin.set_fraction();
-				break;
-		case /* "z=": suggestions for a badly spelled word  */(byte)'=':
-				if (!generatedOap.checkclearop()) {
-					ModernizedCProgram.spell_suggest((int)generatedCount0);
-				} 
-				break;
-		case (byte)'x':
-				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(/* "zx": re-apply 'foldlevel' and open folds at the cursor */1);
-				ModernizedCProgram.curwin.setW_foldinvalid(/* recompute folds */1);
-				ModernizedCProgram.newFoldLevel();
-				ModernizedCProgram.foldOpenCursor();
-				break;
-		case /* "zH" - scroll screen right half-page */(byte)'H':
-				generatedCount1 *= ModernizedCProgram.curwin.getW_width() / 2/* FALLTHROUGH */;
-		case /* "zd": delete fold at cursor *//* "zD": delete fold at cursor recursively */(byte)'d':
 		case (byte)'X':
 				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fen(/* "zX": undo manual opens/closes, re-apply 'foldlevel' */1);
 				ModernizedCProgram.curwin.setW_foldinvalid(/* recompute folds */1);
 				old_fdl = -/* force an update */1;
 				break;
-		case /* "zg": add good word to word list */(byte)'g':
+		case /* "zj" move to next fold downwards */(byte)'j':
+		case (byte)'.':
+				ModernizedCProgram.beginline(1 | /* "z." and "zz": put cursor in middle of screen */4/* FALLTHROUGH */);
+		case /* "z^", "z-" and "zb": put cursor at bottom of screen *//* Strange Vi behavior: <count>z^ finds line at top of window
+				 * when <count> is at bottom of window, and puts that one at
+				 * bottom of window. */(byte)'^':
+				if (generatedCount0 != 0) {
+					ModernizedCProgram.scroll_cursor_bot(0, 1);
+					ModernizedCProgram.curwin.getW_cursor().setLnum(ModernizedCProgram.curwin.getW_topline());
+				}  else if (ModernizedCProgram.curwin.getW_topline() == 1) {
+					ModernizedCProgram.curwin.getW_cursor().setLnum(1);
+				} else {
+						ModernizedCProgram.curwin.getW_cursor().setLnum(ModernizedCProgram.curwin.getW_topline() - 1);
+				} 
+		case (byte)'R':
+				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_fdl(ModernizedCProgram.getDeepestNesting());
+				old_fdl = -/* force an update */1;
+				break;
 		default:
 				generatedOap.clearopbeep();
 		}
@@ -712,7 +1080,7 @@ public class cmdarg_S {
 				} 
 				if (cmd_result == 0) {
 					generatedOap.clearop();
-				}  else if (generatedOp_type != 0 && (generatedLnum > generatedMl_line_count || generatedCol > (colnr_T).strlen((byte)(ModernizedCProgram.ml_get(generatedLnum))) || ModernizedCProgram.did_emsg)) {
+				}  else if (generatedOp_type != 0 && (generatedLnum > generatedMl_line_count || generatedCol > (colnr_T)/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.ml_get(generatedLnum))) || ModernizedCProgram.did_emsg)) {
 					generatedOap.clearopbeep();
 				} 
 		} 
@@ -722,7 +1090,7 @@ public class cmdarg_S {
 		long generatedCount0 = this.getCount0();
 		if (/* toggle Selection/Visual mode */VIsual_active) {
 			VIsual_select = !VIsual_select;
-			.showmode();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/showmode();
 		}  else if (!generatedOap.checkclearop()) {
 			ModernizedCProgram.fileinfo((int)generatedCount0, 0, /* print full name if count given or :cd used */1/*
 			 * Handle CTRL-H <Backspace> command.
@@ -759,7 +1127,7 @@ public class cmdarg_S {
 		long generatedCount1 = this.getCount1();
 		if (VIsual_active && VIsual_select) {
 			VIsual_select = 0;
-			.showmode();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/showmode();
 			ModernizedCProgram.restart_VIsual_select = /* restart Select mode later */2;
 		} else {
 				this.setCount1(-generatedCount1);
@@ -811,78 +1179,33 @@ public class cmdarg_S {
 		oparg_S generatedOap = this.getOap();
 		if (cmdchar == (byte)']' || cmdchar == 29 || cmdchar == (byte)'K') {
 			if (VIsual_active && cap.get_visual_text(ptr, n) == 0) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (generatedOap.checkclearopq()) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		if (ptr == ((Object)0) && (n = ModernizedCProgram.find_ident_under_cursor(ptr, (cmdchar == (byte)'*' || cmdchar == (byte)'#') ? 1 | 2 : 1)) == 0) {
 			generatedOap.clearop();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedB_p_kp = curbuf.getB_p_kp();
 		kp = (generatedB_p_kp == (byte)'\000' ? ModernizedCProgram.p_kp : generatedB_p_kp);
-		kp_help = (kp == (byte)'\000' || .strcmp((byte)(kp), (byte)(":he")) == 0 || .strcmp((byte)(kp), (byte)(":help")) == 0);
+		kp_help = (kp == (byte)'\000' || /*Error: Function owner not recognized*/strcmp((byte)(kp), (byte)(":he")) == 0 || /*Error: Function owner not recognized*/strcmp((byte)(kp), (byte)(":help")) == 0);
 		if (kp_help && ModernizedCProgram.skipwhite(ptr) == (byte)'\000') {
 			ModernizedCProgram.emsg(((byte)(/* found white space only */ModernizedCProgram.e_noident)));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		kp_ex = (kp == (byte)':');
-		buflen = (int)(n * 2 + 30 + .strlen((byte)(kp)));
+		buflen = (int)(n * 2 + 30 + /*Error: Function owner not recognized*/strlen((byte)(kp)));
 		buf = ModernizedCProgram.alloc(buflen);
 		if (buf == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		buf[0] = (byte)'\000';
 		long generatedCount0 = this.getCount0();
 		int generatedB_help = curbuf.getB_help();
 		switch (cmdchar) {
-		case (byte)']':
-				tag_cmd = 1;
-				.strcpy((byte)(buf), (byte)("ts "));
-				break;
-		case (byte)'K':
-				if (kp_help) {
-					.strcpy((byte)(buf), (byte)("he! "));
-				}  else if (kp_ex) {
-					if (generatedCount0 != 0) {
-						ModernizedCProgram.vim_snprintf((byte)buf, buflen, "%s %ld", kp, generatedCount0);
-					} else {
-							.strcpy((byte)(buf), (byte)(kp));
-					} 
-					.strcat((byte)(buf), (byte)(" "));
-				} else {
-						while (ptr == (byte)'-' && n > /* An external command will probably use an argument starting
-								 * with "-" as an option.  To avoid trouble we skip the "-". */0) {
-							++ptr;
-							--n;
-						}
-						if (n == 0) {
-							ModernizedCProgram.emsg(((byte)(/* found dashes only */ModernizedCProgram.e_noident)));
-							ModernizedCProgram.vim_free(buf);
-							return ;
-						} 
-						isman = (.strcmp((byte)(kp), (byte)("man")) == /* When a count is given, turn it into a range.  Is this
-								 * really what we want? */0);
-						isman_s = (.strcmp((byte)(kp), (byte)("man -s")) == 0);
-						if (generatedCount0 != 0 && !(isman || isman_s)) {
-							.sprintf((byte)buf, ".,.+%ld", generatedCount0 - 1);
-						} 
-						.strcat((byte)(buf), (byte)("! "));
-						if (generatedCount0 == 0 && isman_s) {
-							.strcat((byte)(buf), (byte)("man"));
-						} else {
-								.strcat((byte)(buf), (byte)(kp));
-						} 
-						.strcat((byte)(buf), (byte)(" "));
-						if (generatedCount0 != 0 && (isman || isman_s)) {
-							.sprintf((byte)buf + .strlen((byte)(buf)), "%ld", generatedCount0);
-							.strcat((byte)(buf), (byte)(" "));
-						} 
-				} 
-				break;
-		case (byte)'*':
 		case (byte)'#'/*
 			     * Put cursor at start of word, makes search skip the word
 			     * under the cursor.
@@ -892,19 +1215,64 @@ public class cmdarg_S {
 				ModernizedCProgram.setpcmark();
 				ModernizedCProgram.curwin.getW_cursor().setCol((colnr_T)(ptr - ModernizedCProgram.ml_get_curline()));
 				if (!g_cmd && ModernizedCProgram.vim_iswordp(ptr)) {
-					.strcpy((byte)(buf), (byte)("\\<"));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(buf), (byte)("\\<"));
 				} 
 				no_smartcase = /* don't use 'smartcase' now */1;
+				break;
+		case (byte)'K':
+				if (kp_help) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(buf), (byte)("he! "));
+				}  else if (kp_ex) {
+					if (generatedCount0 != 0) {
+						ModernizedCProgram.vim_snprintf((byte)buf, buflen, "%s %ld", kp, generatedCount0);
+					} else {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(buf), (byte)(kp));
+					} 
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(buf), (byte)(" "));
+				} else {
+						while (ptr == (byte)'-' && n > /* An external command will probably use an argument starting
+								 * with "-" as an option.  To avoid trouble we skip the "-". */0) {
+							++ptr;
+							--n;
+						}
+						if (n == 0) {
+							ModernizedCProgram.emsg(((byte)(/* found dashes only */ModernizedCProgram.e_noident)));
+							ModernizedCProgram.vim_free(buf);
+							return /*Error: Unsupported expression*/;
+						} 
+						isman = (/*Error: Function owner not recognized*/strcmp((byte)(kp), (byte)("man")) == /* When a count is given, turn it into a range.  Is this
+								 * really what we want? */0);
+						isman_s = (/*Error: Function owner not recognized*/strcmp((byte)(kp), (byte)("man -s")) == 0);
+						if (generatedCount0 != 0 && !(isman || isman_s)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)buf, ".,.+%ld", generatedCount0 - 1);
+						} 
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(buf), (byte)("! "));
+						if (generatedCount0 == 0 && isman_s) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(buf), (byte)("man"));
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(buf), (byte)(kp));
+						} 
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(buf), (byte)(" "));
+						if (generatedCount0 != 0 && (isman || isman_s)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)buf + /*Error: Function owner not recognized*/strlen((byte)(buf)), "%ld", generatedCount0);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(buf), (byte)(" "));
+						} 
+				} 
+				break;
+		case (byte)'*':
+		case (byte)']':
+				tag_cmd = 1;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(buf), (byte)("ts "));
 				break;
 		default:
 				tag_cmd = 1;
 				if (generatedB_help) {
-					.strcpy((byte)(buf), (byte)("he! "));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(buf), (byte)("he! "));
 				} else {
 						if (g_cmd) {
-							.strcpy((byte)(buf), (byte)("tj "));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(buf), (byte)("tj "));
 						} else {
-								.sprintf((byte)buf, "%ldta ", generatedCount0);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)buf, "%ldta ", generatedCount0);
 						} 
 				} 
 		}
@@ -920,16 +1288,16 @@ public class cmdarg_S {
 			ModernizedCProgram.vim_free(ptr);
 			if (p == ((Object)0)) {
 				ModernizedCProgram.vim_free(buf);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
-			newbuf = .realloc((buf), (.strlen((byte)(buf)) + .strlen((byte)(p)) + 1));
+			newbuf = /*Error: Function owner not recognized*/realloc((buf), (/*Error: Function owner not recognized*/strlen((byte)(buf)) + /*Error: Function owner not recognized*/strlen((byte)(p)) + 1));
 			if (newbuf == ((Object)0)) {
 				ModernizedCProgram.vim_free(buf);
 				ModernizedCProgram.vim_free(p);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			buf = newbuf;
-			.strcat((byte)(buf), (byte)(p));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(buf), (byte)(p));
 			ModernizedCProgram.vim_free(p);
 		} else {
 				if (cmdchar == (byte)'*') {
@@ -945,7 +1313,7 @@ public class cmdarg_S {
 				} else {
 						aux_ptr = (char_u)"\\|\"\n*?[";
 				} 
-				p = buf + .strlen((byte)(buf));
+				p = buf + /*Error: Function owner not recognized*/strlen((byte)(buf));
 				while (n-- > 0) {
 					if (ModernizedCProgram.vim_strchr(aux_ptr, ptr) != ((Object)/* put a backslash before \ and some others */0)) {
 						p++ = (byte)'\\'/* When current byte is a part of multibyte character, copy all
@@ -953,7 +1321,7 @@ public class cmdarg_S {
 					} 
 					if (has_mbyte) {
 						int i;
-						int len = .UNRECOGNIZEDFUNCTIONNAME(ptr) - 1;
+						int len = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ptr) - 1;
 						for (i = 0; i < len && n >= 1; ) {
 							p++ = ptr++;
 						}
@@ -966,7 +1334,7 @@ public class cmdarg_S {
 		     * Execute the command.
 		     */(byte)'#') {
 			if (!g_cmd && (has_mbyte ? ModernizedCProgram.vim_iswordp(ModernizedCProgram.mb_prevptr(ModernizedCProgram.ml_get_curline(), ptr)) : ModernizedCProgram.vim_iswordc(ptr[-1]))) {
-				.strcat((byte)(buf), (byte)("\\>"));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(buf), (byte)("\\>"));
 			} 
 			ModernizedCProgram.init_history();
 			ModernizedCProgram.add_to_history(1, buf, 1, (byte)'\000');
@@ -981,7 +1349,7 @@ public class cmdarg_S {
 		 * Returns FAIL if more than one line selected.
 		 */);
 	}
-	public int get_visual_text(Object pp, int lenp) {
+	public int get_visual_text(Object pp, Integer lenp) {
 		if (VIsual_mode != /* return: length of selected text */(byte)'V') {
 			ModernizedCProgram.unadjust_for_sel();
 		} 
@@ -994,7 +1362,7 @@ public class cmdarg_S {
 		} 
 		if (VIsual_mode == (byte)'V') {
 			pp = ModernizedCProgram.ml_get_curline();
-			lenp = (int).strlen((byte)(pp));
+			lenp = (int)/*Error: Function owner not recognized*/strlen((byte)(pp));
 		} else {
 				if ((((ModernizedCProgram.curwin.getW_cursor()).getLnum() != (ModernizedCProgram.VIsual).getLnum()) ? (ModernizedCProgram.curwin.getW_cursor()).getLnum() < (ModernizedCProgram.VIsual).getLnum() : (ModernizedCProgram.curwin.getW_cursor()).getCol() != (ModernizedCProgram.VIsual).getCol() ? (ModernizedCProgram.curwin.getW_cursor()).getCol() < (ModernizedCProgram.VIsual).getCol() : (ModernizedCProgram.curwin.getW_cursor()).getColadd() < (ModernizedCProgram.VIsual).getColadd())) {
 					pp = ModernizedCProgram.curwin.getW_cursor().ml_get_pos();
@@ -1004,7 +1372,7 @@ public class cmdarg_S {
 						lenp = ModernizedCProgram.curwin.getW_cursor().getCol() - ModernizedCProgram.VIsual.getCol() + 1;
 				} 
 				if (has_mbyte) {
-					lenp += .UNRECOGNIZEDFUNCTIONNAME(pp + (lenp - 1)) - /* Correct the length to include the whole last character. */1;
+					lenp += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(pp + (lenp - 1)) - /* Correct the length to include the whole last character. */1;
 				} 
 		} 
 		ModernizedCProgram.reset_VIsual_and_resel();
@@ -1102,7 +1470,7 @@ public class cmdarg_S {
 				this.setArg(1);
 			} 
 			cap.nv_wordcmd();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		oparg_S generatedOap = this.getOap();
 		generatedOap.setMotion_type(0);
@@ -1154,7 +1522,7 @@ public class cmdarg_S {
 					ModernizedCProgram.oneright();
 				} else {
 						if (has_mbyte) {
-							ModernizedCProgram.curwin.getW_cursor().getCol() += .UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.ml_get_cursor());
+							ModernizedCProgram.curwin.getW_cursor().getCol() += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.ml_get_cursor());
 						} else {
 								++ModernizedCProgram.curwin.getW_cursor().getCol();
 						} 
@@ -1172,7 +1540,7 @@ public class cmdarg_S {
 				this.setArg(1);
 			} 
 			cap.nv_bck_word();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		oparg_S generatedOap = this.getOap();
 		generatedOap.setMotion_type(0);
@@ -1197,7 +1565,7 @@ public class cmdarg_S {
 						char_u cp = ModernizedCProgram.ml_get_cursor();
 						if (cp != (byte)'\000') {
 							if (has_mbyte) {
-								ModernizedCProgram.curwin.getW_cursor().getCol() += .UNRECOGNIZEDFUNCTIONNAME(cp);
+								ModernizedCProgram.curwin.getW_cursor().getCol() += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(cp);
 							} else {
 									++ModernizedCProgram.curwin.getW_cursor().getCol();
 							} 
@@ -1269,11 +1637,11 @@ public class cmdarg_S {
 		if (ModernizedCProgram.text_locked()) {
 			generatedOap.clearopbeep();
 			ModernizedCProgram.text_locked_msg();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.curbuf_locked()) {
 			generatedOap.clearop();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		long generatedCount1 = this.getCount1();
 		ptr = ModernizedCProgram.grab_file_name(generatedCount1, lnum);
@@ -1332,7 +1700,7 @@ public class cmdarg_S {
 			this.setCmdchar(/* Translate "g??" to "g?g?" */(byte)'g');
 			this.setNchar((byte)'?');
 			cap.nv_operator();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		long generatedCount1 = this.getCount1();
 		this.setSearchbuf(ModernizedCProgram.getcmdline(generatedCmdchar, generatedCount1, 0, /* When using 'incsearch' the cursor may be moved to set a different search
@@ -1340,7 +1708,7 @@ public class cmdarg_S {
 		Object generatedSearchbuf = this.getSearchbuf();
 		if (generatedSearchbuf == ((Object)0)) {
 			oap.clearop();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedArg = this.getArg();
 		Object generatedLnum = (save_cursor).getLnum();
@@ -1370,7 +1738,7 @@ public class cmdarg_S {
 			 */;
 		} 
 	}
-	public int normal_search(int dir, Object pat, int opt, int wrapped) {
+	public int normal_search(int dir, Object pat, int opt, Integer wrapped) {
 		// extra flags for do_search()int i;
 		searchit_arg_T sia = new searchit_arg_T();
 		oparg_S generatedOap = this.getOap();
@@ -1378,7 +1746,7 @@ public class cmdarg_S {
 		generatedOap.setInclusive(0);
 		generatedOap.setUse_reg_one(1);
 		ModernizedCProgram.curwin.setW_set_curswant(1);
-		.memset((sia), (false), ());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((sia), (false), (/*Error: sizeof expression not supported yet*/));
 		long generatedCount1 = this.getCount1();
 		i = ModernizedCProgram.do_search(generatedOap, dir, pat, generatedCount1, opt | -1024 | -1024 | -1024, sia);
 		Object generatedSa_wrapped = sia.getSa_wrapped();
@@ -1476,7 +1844,7 @@ public class cmdarg_S {
 			if ((len = ModernizedCProgram.find_ident_under_cursor(ptr, 1)) == 0) {
 				generatedOap.clearop();
 			} else {
-					ModernizedCProgram.find_pattern_in_path(ptr, 0, len, 1, generatedCount0 == 0 ? !.isupper(generatedNchar) : 0, ((generatedNchar & -1024) == ((byte)'d' & -1024)) ? 2 : 1, generatedCount1, .isupper(generatedNchar) ? 4 : .islower(generatedNchar) ? 1 : 2, generatedCmdchar == (byte)']' ? ModernizedCProgram.curwin.getW_cursor().getLnum() + 1 : (linenr_T)1, (linenr_T)LONG_MAX);
+					ModernizedCProgram.find_pattern_in_path(ptr, 0, len, 1, generatedCount0 == 0 ? !/*Error: Function owner not recognized*/isupper(generatedNchar) : 0, ((generatedNchar & -1024) == ((byte)'d' & -1024)) ? 2 : 1, generatedCount1, /*Error: Function owner not recognized*/isupper(generatedNchar) ? 4 : /*Error: Function owner not recognized*/islower(generatedNchar) ? 1 : 2, generatedCmdchar == (byte)']' ? ModernizedCProgram.curwin.getW_cursor().getLnum() + 1 : (linenr_T)1, (linenr_T)LONG_MAX);
 					ModernizedCProgram.curwin.setW_set_curswant(1);
 			} 
 		}  else if ((generatedCmdchar == (byte)'[' && ModernizedCProgram.vim_strchr((char_u)"{(*/#mM", generatedNchar) != ((Object)0)) || (generatedCmdchar == (byte)']' && ModernizedCProgram.vim_strchr((char_u)"})*/#mM", generatedNchar) != ((Object)0))) {
@@ -1529,7 +1897,7 @@ public class cmdarg_S {
 						pos = ((Object)0);
 				} 
 				while (n > 0) {
-					for (; ; ) {
+					for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 						if ((findc == (byte)'{' ? ModernizedCProgram.dec_cursor() : ModernizedCProgram.inc_cursor()) < 0) {
 							if (pos == ((Object)/* if not found anything, that's an error */0)) {
 								generatedOap.clearopbeep();
@@ -1616,7 +1984,7 @@ public class cmdarg_S {
 			     * indent adjustment.  Any other button just does as usual.
 			     */);
 		}  else if (generatedNchar >= (-((true) + ((int)(key_extra.KE_RIGHTRELEASE) << 8))) && generatedNchar <= (-((true) + ((int)(key_extra.KE_LEFTMOUSE) << 8)))) {
-			(Object).do_mouse(generatedOap, generatedNchar, (generatedCmdchar == (byte)']') ? 1 : (true), generatedCount1, 1);
+			(Object)/*Error: Function owner not recognized*/do_mouse(generatedOap, generatedNchar, (generatedCmdchar == (byte)']') ? 1 : (true), generatedCount1, 1);
 		}  else if (generatedNchar == /*
 		     * "[z" and "]z": move to start or end of open fold.
 		     */(byte)'z') {
@@ -1772,7 +2140,7 @@ public class cmdarg_S {
 		long n;
 		oparg_S generatedOap = this.getOap();
 		if (generatedOap.checkclearop()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedNchar = this.getNchar();
 		if (generatedNchar == /* get another character */22) {
@@ -1786,7 +2154,7 @@ public class cmdarg_S {
 		} 
 		if (((generatedNchar) < /* Abort if the character is a special key. */0)) {
 			generatedOap.clearopbeep();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (/* Visual mode "r" */VIsual_active) {
 			if (got_int) {
@@ -1801,12 +2169,12 @@ public class cmdarg_S {
 				} 
 			} 
 			cap.nv_operator();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		long generatedCount1 = this.getCount1();
 		if (ModernizedCProgram.virtual_active()) {
 			if (ModernizedCProgram.u_save_cursor() == 0) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (ModernizedCProgram.gchar_cursor() == (byte)'\000') {
 				ModernizedCProgram.coladvance_force((colnr_T)(ModernizedCProgram.getviscol() + generatedCount1));
@@ -1816,9 +2184,9 @@ public class cmdarg_S {
 			} 
 		} 
 		ptr = ModernizedCProgram.ml_get_cursor();
-		if (.strlen((byte)(ptr)) < (int)generatedCount1 || (has_mbyte && ModernizedCProgram.mb_charlen(ptr) < generatedCount1)) {
+		if (/*Error: Function owner not recognized*/strlen((byte)(ptr)) < (int)generatedCount1 || (has_mbyte && ModernizedCProgram.mb_charlen(ptr) < generatedCount1)) {
 			generatedOap.clearopbeep();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedB_p_et = curbuf.getB_p_et();
 		if (had_ctrl_v != 22 && generatedNchar == (byte)'\t' && (generatedB_p_et || ModernizedCProgram.p_sta)) {
@@ -1826,10 +2194,10 @@ public class cmdarg_S {
 			ModernizedCProgram.stuffcharReadbuff((byte)'R');
 			ModernizedCProgram.stuffcharReadbuff((byte)'\t');
 			ModernizedCProgram.stuffcharReadbuff((byte)'\033');
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.u_save_cursor() == /* save line for undo */0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedRegname = generatedOap.getRegname();
 		int generatedNcharC1 = this.getNcharC1();
@@ -1946,15 +2314,15 @@ public class cmdarg_S {
 		int did_change = 0;
 		oparg_S generatedOap = this.getOap();
 		if (generatedOap.checkclearopq()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if ((ModernizedCProgram.ml_get(ModernizedCProgram.curwin.getW_cursor().getLnum()) == (byte)'\000') && ModernizedCProgram.vim_strchr(ModernizedCProgram.p_ww, (byte)'~') == ((Object)0)) {
 			generatedOap.clearopbeep();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		cap.prep_redo_cmd();
 		if (ModernizedCProgram.u_save_cursor() == 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		startpos = ModernizedCProgram.curwin.getW_cursor();
 		int generatedOp_type = generatedOap.getOp_type();
@@ -1995,7 +2363,7 @@ public class cmdarg_S {
 	public void v_visop() {
 		char_u[] trans = "YyDdCcxdXdAAIIrr";
 		int generatedCmdchar = this.getCmdchar();
-		if (.isupper(generatedCmdchar)) {
+		if (/*Error: Function owner not recognized*/isupper(generatedCmdchar)) {
 			if (VIsual_mode != 22) {
 				ModernizedCProgram.VIsual_mode_orig = VIsual_mode;
 				VIsual_mode = (byte)'V';
@@ -2146,7 +2514,7 @@ public class cmdarg_S {
 	public void nv_regname() {
 		oparg_S generatedOap = this.getOap();
 		if (generatedOap.checkclearop()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedNchar = this.getNchar();
 		if (generatedNchar == (byte)'=') {
@@ -2173,7 +2541,7 @@ public class cmdarg_S {
 		     * characterwise, linewise, or blockwise. */0) {
 			motion_force = generatedOap.setMotion_force(generatedCmdchar);
 			finish_op = /* operator doesn't finish now but later */0;
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedArg = this.getArg();
 		VIsual_select = generatedArg;
@@ -2186,7 +2554,7 @@ public class cmdarg_S {
 				ModernizedCProgram.end_visual_mode();
 			} else {
 					VIsual_mode = generatedCmdchar;
-					.showmode();
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/showmode();
 			} 
 			ModernizedCProgram.redraw_curbuf_later(/* update the inversion */20);
 		} else {
@@ -2198,7 +2566,7 @@ public class cmdarg_S {
 					if (!generatedArg) {
 						ModernizedCProgram.may_start_select(/* start Select mode when 'selectmode' contains "cmd" */(byte)'c');
 					} 
-					.setmouse();
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setmouse();
 					if (ModernizedCProgram.p_smd && msg_silent == 0) {
 						redraw_cmdline = /* show visual mode later */1/*
 							     * For V and ^V, we multiply the number of lines even if there
@@ -2298,168 +2666,71 @@ public class cmdarg_S {
 		Object generatedLnum = generatedB_last_insert.getLnum();
 		long generatedCount0 = this.getCount0();
 		switch (generatedNchar) {
-		case (byte)'e':
-		case (byte)'0':
-		case (byte)'#':
-		case /* FALLTHROUGH */(byte)'~':
-		case (byte)'H':
+		case (byte)'P':
+				cap.nv_put();
+				break;
+		case /* :tselect for current identifier */(byte)']':
+				cap.nv_ident();
+				break;
+		case 8/* EBCDIC: 'v'-'h' != '^v'-'^h' */:
+				this.setCmdchar(generatedNchar + ((byte)'v' - (byte)'h'));
+				this.setArg(1);
+				cap.nv_visual();
+				break;
+		case (byte)'D':
+				oap.nv_gd(generatedNchar, (int)generatedCount0);
+				break;
 		case (-((true) + ((int)(key_extra.KE_MOUSEMOVE) << 8))):
+		case (byte)'J':
+				cap.nv_join();
+				break;
+		case (-((true) + ((int)(key_extra.KE_RIGHTRELEASE) << 8))):
+		case (byte)'U':
 		case /* :tag or :tselect for current identifier */29:
-		case (-((true) + ((int)(key_extra.KE_LEFTRELEASE) << 8))):
-		case (byte)',':
-				cap.nv_pcmark();
+		case (-((true) + ((int)(key_extra.KE_IGNORE) << 8))):
 				break;
-		case (byte)'r':
-				cap.nv_vreplace();
+		case (byte)'k':
+		case (-((true) + ((int)(key_extra.KE_X2RELEASE) << 8))):
+				mod_mask = -1024;
+				(Object)/*Error: Function owner not recognized*/do_mouse(oap, generatedNchar, (true), generatedCount1, 0);
 				break;
-		case (byte)'^':
-				flag = 1/* FALLTHROUGH */;
 		case (byte)'s':
 				ModernizedCProgram.do_sleep(generatedCount1 * -1024);
 				break;
-		case /* FALLTHROUGH */(byte)'h':
-		case (byte)'_'/* "g_": to the last non-blank character in the line or <count> lines
-			 * downward. */:
-				generatedOap.setMotion_type(0);
-				generatedOap.setInclusive(1);
-				ModernizedCProgram.curwin.setW_curswant(INT_MAX);
-				if (ModernizedCProgram.cursor_down((long)(generatedCount1 - 1), generatedOp_type == 0) == 0) {
-					generatedOap.clearopbeep();
-				} else {
-						char_u ptr = ModernizedCProgram.ml_get_curline();
-						if (ModernizedCProgram.curwin.getW_cursor().getCol() > 0 && ptr[ModernizedCProgram.curwin.getW_cursor().getCol()] == /* In Visual mode we may end up after the line. */(byte)'\000') {
-							--ModernizedCProgram.curwin.getW_cursor().getCol();
-						} 
-						while (ModernizedCProgram.curwin.getW_cursor().getCol() > /* Decrease the cursor column until it's on a non-blank. */0 && ((ptr[ModernizedCProgram.curwin.getW_cursor().getCol()]) == (byte)' ' || (ptr[ModernizedCProgram.curwin.getW_cursor().getCol()]) == (byte)'\t')) {
-							--ModernizedCProgram.curwin.getW_cursor().getCol();
-						}
-						ModernizedCProgram.curwin.setW_set_curswant(1);
-						cap.adjust_for_sel();
-				} 
-				break;
-		case (byte)'u':
-		case (-((true) + ((int)(key_extra.KE_MIDDLEDRAG) << 8))):
-		case (byte)'$':
-		case (-((true) + ((int)(key_extra.KE_RIGHTMOUSE) << 8))):
-		case (byte)'p':
-		case (byte)'j':
 		case (-((true) + ((int)(key_extra.KE_X1DRAG) << 8))):
-		case 24/*
-		     * "g^A": dump log of used memory.
-		     */:
-				if (/*
-				     * "g^A/g^X": sequentially increment visually selected region
-				     */VIsual_active) {
-					this.setArg(1);
-					this.setCmdchar(generatedNchar);
-					this.setNchar((byte)'\000');
-					cap.nv_addsub();
-				} else {
-						oap.clearopbeep();
-				} 
-				break;
-		case (-(((byte)'K') + ((int)((byte)'1') << 8))):
-				oap.setMotion_type(0);
-				oap.setInclusive(0);
-				if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap() && ModernizedCProgram.curwin.getW_width() != 0) {
-					int width1 = ModernizedCProgram.curwin.getW_width() - ModernizedCProgram.curwin_col_off();
-					int width2 = width1 + ModernizedCProgram.curwin_col_off2();
-					ModernizedCProgram.validate_virtcol();
-					i = 0;
-					if (ModernizedCProgram.curwin.getW_virtcol() >= (colnr_T)width1 && width2 > 0) {
-						i = (ModernizedCProgram.curwin.getW_virtcol() - width1) / width2 * width2 + width1;
-					} 
-				} else {
-						i = ModernizedCProgram.curwin.getW_leftcol();
-				} 
-				if (generatedNchar == (byte)'m') {
-					i += (ModernizedCProgram.curwin.getW_width() - ModernizedCProgram.curwin_col_off() + ((ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap() && i > 0) ? ModernizedCProgram.curwin_col_off2() : 0)) / 2;
-				} 
-				ModernizedCProgram.coladvance((colnr_T)i);
-				if (flag) {
-					do {
-						i = ModernizedCProgram.gchar_cursor();
-					} while (((i) == (byte)' ' || (i) == (byte)'\t') && ModernizedCProgram.oneright() == 1);
-					ModernizedCProgram.curwin.getW_valid() &=  ~-1024;
-				} 
-				ModernizedCProgram.curwin.setW_set_curswant(1);
-				break;
-		case (-(((byte)'k') + ((int)((byte)'b') << 8))):
-				this.setNchar(8);
-		case (byte)'a':
-				((Object)0).do_ascii();
-				break;
-		case (byte)'E':
-				oap.setMotion_type(0);
-				ModernizedCProgram.curwin.setW_set_curswant(1);
-				oap.setInclusive(1);
-				if (ModernizedCProgram.bckend_word(generatedCount1, generatedNchar == (byte)'E', 0) == 0) {
-					oap.clearopbeep();
-				} 
-				break;
-		case (-((true) + ((int)(key_extra.KE_X1RELEASE) << 8))):
-		case /* pound sign (sometimes equal to '#') */-1024:
-		case (byte)'d':
-		case (byte)'&':
-				ModernizedCProgram.do_cmdline_cmd((char_u)"%s//~/&");
-				break;
-		case (-(((byte)'k') + ((int)((byte)'d') << 8/* with 'nowrap' it works just like the normal "j" command; also when
+		case (-(((byte)'k') + ((int)((byte)'u') << 8/* with 'nowrap' it works just like the normal "k" command; also when
 			 * in a closed fold */))):
 				if (!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap() || ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)0))) {
 					oap.setMotion_type(1);
-					i = ModernizedCProgram.cursor_down(generatedCount1, generatedOp_type == 0);
+					i = ModernizedCProgram.cursor_up(generatedCount1, generatedOp_type == 0);
 				} else {
-						i = oap.nv_screengo(1, generatedCount1);
+						i = oap.nv_screengo((true), generatedCount1);
 				} 
 				if (i == 0) {
 					oap.clearopbeep();
 				} 
 				break;
-		case (-((true) + ((int)(key_extra.KE_X2DRAG) << 8))):
-		case (-(((byte)'@') + ((int)((byte)'7') << 8))):
-		case (byte)'q':
-		case (byte)'8':
-				if (generatedCount0 == 8) {
-					ModernizedCProgram.utf_find_illegal();
-				} else {
-						ModernizedCProgram.show_utf8();
+		case /* "gQ": improved Ex mode */(byte)'Q':
+				if (ModernizedCProgram.text_locked()) {
+					generatedOap.clearopbeep();
+					ModernizedCProgram.text_locked_msg();
+					break;
+				} 
+				if (!oap.checkclearopq()) {
+					ModernizedCProgram.do_exmode(1);
 				} 
 				break;
-		case (byte)'t':
-				if (!oap.checkclearop()) {
-					ModernizedCProgram.goto_tabpage((int)generatedCount0);
+		case (byte)'#':
+		case (byte)'I':
+				ModernizedCProgram.beginline(0);
+				if (!oap.checkclearopq()) {
+					cap.invoke_edit(0, (byte)'g', 0);
 				} 
 				break;
-		case (byte)'F':
-				cap.nv_gotofile();
-				break;
-		case (byte)'J':
-				cap.nv_join();
-				break;
-		case (byte)'?':
-		case (-((true) + ((int)(key_extra.KE_RIGHTRELEASE) << 8))):
-		case /* :tselect for current identifier */(byte)']':
-				cap.nv_ident();
-				break;
-		case (-((true) + ((int)(key_extra.KE_MIDDLEMOUSE) << 8))):
-		case (byte)'N':
-		case (-((true) + ((int)(key_extra.KE_X2RELEASE) << 8))):
-				mod_mask = -1024;
-				(Object).do_mouse(oap, generatedNchar, (true), generatedCount1, 0);
-				break;
-		case (byte)'n':
-				if (!ModernizedCProgram.current_search(generatedCount1, generatedNchar == (byte)'n')) {
-					oap.clearopbeep();
-				} 
-				break;
-		case /* "g'm" and "g`m": jump to mark without setting pcmark */(byte)'\'':
-				this.setArg(1);
-		case 7:
-				((Object)0).cursor_pos_info();
-				break;
-		case (-((true) + ((int)(key_extra.KE_IGNORE) << 8))):
-				break;
-		case (-((true) + ((int)(key_extra.KE_RIGHTDRAG) << 8))):
+		case (byte)'w':
+				oap.setCursor_start(ModernizedCProgram.curwin.getW_cursor());
+		case (byte)'H':
+		case (byte)'e':
 		case (byte)'v':
 				if (oap.checkclearop()) {
 					break;
@@ -2497,14 +2768,47 @@ public class cmdarg_S {
 						} else {
 								ModernizedCProgram.may_start_select((byte)'c');
 						} 
-						.setmouse();
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setmouse();
 						clip_star.setVmode(/* Make sure the clipboard gets updated.  Needed because start and
 							     * end are still the same, and the selection needs to be owned */(byte)'\000');
 						ModernizedCProgram.redraw_curbuf_later(20);
-						.showmode();
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/showmode();
 				} 
 				break;
-		case (-(((byte)'k') + ((int)((byte)'h') << 8))):
+		case (-((true) + ((int)(key_extra.KE_MIDDLEDRAG) << 8))):
+		case /* FALLTHROUGH */(byte)'~':
+		case 7:
+				((Object)0).cursor_pos_info();
+				break;
+		case (byte)'?':
+		case (byte)'r':
+				cap.nv_vreplace();
+				break;
+		case (-((true) + ((int)(key_extra.KE_X1RELEASE) << 8))):
+		case (-((true) + ((int)(key_extra.KE_X2DRAG) << 8))):
+		case (byte)'n':
+				if (!ModernizedCProgram.current_search(generatedCount1, generatedNchar == (byte)'n')) {
+					oap.clearopbeep();
+				} 
+				break;
+		case (byte)'i':
+				if (generatedLnum != 0) {
+					ModernizedCProgram.curwin.setW_cursor(generatedB_last_insert);
+					ModernizedCProgram.check_cursor_lnum();
+					i = (int)/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.ml_get_curline()));
+					if (ModernizedCProgram.curwin.getW_cursor().getCol() > (colnr_T)i) {
+						if (ModernizedCProgram.virtual_active()) {
+							ModernizedCProgram.curwin.getW_cursor().getColadd() += ModernizedCProgram.curwin.getW_cursor().getCol() - i;
+						} 
+						ModernizedCProgram.curwin.getW_cursor().setCol(i);
+					} 
+				} 
+				this.setCmdchar((byte)'i');
+				cap.nv_edit();
+				break;
+		case /* "g'm" and "g`m": jump to mark without setting pcmark */(byte)'\'':
+				this.setArg(1);
+		case (-((true) + ((int)(key_extra.KE_MIDDLERELEASE) << 8))):
 		case (-(((byte)'K') + ((int)((byte)'4') << 8))):
 				{ 
 					int col_off = ModernizedCProgram.curwin_col_off();
@@ -2544,111 +2848,175 @@ public class cmdarg_S {
 					} 
 				}
 				break;
+		case (byte)'F':
+				cap.nv_gotofile();
+				break;
+		case (-((true) + ((int)(key_extra.KE_RIGHTDRAG) << 8))):
+		case (byte)'p':
 		case 1:
-		case (-(((byte)'k') + ((int)((byte)'u') << 8/* with 'nowrap' it works just like the normal "k" command; also when
-			 * in a closed fold */))):
-				if (!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap() || ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)0))) {
-					oap.setMotion_type(1);
-					i = ModernizedCProgram.cursor_up(generatedCount1, generatedOp_type == 0);
+		case (byte)'q':
+		case 24/*
+		     * "g^A": dump log of used memory.
+		     */:
+				if (/*
+				     * "g^A/g^X": sequentially increment visually selected region
+				     */VIsual_active) {
+					this.setArg(1);
+					this.setCmdchar(generatedNchar);
+					this.setNchar((byte)'\000');
+					cap.nv_addsub();
 				} else {
-						i = oap.nv_screengo((true), generatedCount1);
-				} 
-				if (i == 0) {
-					oap.clearopbeep();
+						oap.clearopbeep();
 				} 
 				break;
-		case (byte)'g':
-				this.setArg(0);
-				cap.nv_goto();
+		case (byte)'&':
+				ModernizedCProgram.do_cmdline_cmd((char_u)"%s//~/&");
 				break;
-		case (byte)'P':
-				cap.nv_put();
+		case (-((true) + ((int)(key_extra.KE_LEFTMOUSE) << 8))):
+		case (byte)'N':
+		case (byte)'V':
+				ModernizedCProgram.VIsual_reselect = 0;
 				break;
-		case (byte)'i':
-				if (generatedLnum != 0) {
-					ModernizedCProgram.curwin.setW_cursor(generatedB_last_insert);
-					ModernizedCProgram.check_cursor_lnum();
-					i = (int).strlen((byte)(ModernizedCProgram.ml_get_curline()));
-					if (ModernizedCProgram.curwin.getW_cursor().getCol() > (colnr_T)i) {
-						if (ModernizedCProgram.virtual_active()) {
-							ModernizedCProgram.curwin.getW_cursor().getColadd() += ModernizedCProgram.curwin.getW_cursor().getCol() - i;
-						} 
-						ModernizedCProgram.curwin.getW_cursor().setCol(i);
-					} 
-				} 
-				this.setCmdchar((byte)'i');
-				cap.nv_edit();
-				break;
-		case /* "go": goto byte count from start of buffer */(byte)'o':
-				ModernizedCProgram.goto_byte(generatedCount0);
-				break;
-		case /* "gQ": improved Ex mode */(byte)'Q':
-				if (ModernizedCProgram.text_locked()) {
-					generatedOap.clearopbeep();
-					ModernizedCProgram.text_locked_msg();
-					break;
-				} 
-				if (!oap.checkclearopq()) {
-					ModernizedCProgram.do_exmode(1);
+		case (byte)'t':
+				if (!oap.checkclearop()) {
+					ModernizedCProgram.goto_tabpage((int)generatedCount0);
 				} 
 				break;
-		case 8/* EBCDIC: 'v'-'h' != '^v'-'^h' */:
-				this.setCmdchar(generatedNchar + ((byte)'v' - (byte)'h'));
+		case (byte)'R':
 				this.setArg(1);
-				cap.nv_visual();
-				break;
-		case (-((true) + ((int)(key_extra.KE_MIDDLERELEASE) << 8))):
-		case (byte)'w':
-				oap.setCursor_start(ModernizedCProgram.curwin.getW_cursor());
-		case /* "g<": show scrollback text */(byte)'<':
-				ModernizedCProgram.show_sb_text();
-				break;
-		case (byte)';':
-				this.setCount1(-generatedCount1);
-				cap.nv_pcmark();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/nv_Replace(cap);
 				break;
 		case (byte)'@':
 				cap.nv_operator();
 				break;
-		case (byte)'R':
-				this.setArg(1);
-				.nv_Replace(cap);
-				break;
-		case /* "g+" and "g-": undo or redo along the timeline */(byte)'-':
-				if (!oap.checkclearopq()) {
-					ModernizedCProgram.undo_time(generatedNchar == (byte)'-' ? -generatedCount1 : generatedCount1, 0, 0, 0);
-				} 
-				break;
-		case /* FALLTHROUGH */(byte)'`':
-				cap.nv_gomark();
-				break;
-		case (byte)'U':
-		case (byte)'k':
-		case (byte)'m':
-		case (-((true) + ((int)(key_extra.KE_X2MOUSE) << 8))):
-		case (byte)'*':
-		case (-((true) + ((int)(key_extra.KE_X1MOUSE) << 8))):
-		case (byte)'V':
-				ModernizedCProgram.VIsual_reselect = 0;
-				break;
-		case (byte)'f':
-		case (-((true) + ((int)(key_extra.KE_LEFTMOUSE) << 8))):
-		case (-((true) + ((int)(key_extra.KE_LEFTDRAG) << 8))):
-		case (byte)'+':
-		case (byte)'D':
-				oap.nv_gd(generatedNchar, (int)generatedCount0);
-				break;
-		case (byte)'I':
-				ModernizedCProgram.beginline(0);
-				if (!oap.checkclearopq()) {
-					cap.invoke_edit(0, (byte)'g', 0);
-				} 
-				break;
+		case (byte)'$':
 		case (byte)'T':
 				if (!oap.checkclearop()) {
 					ModernizedCProgram.goto_tabpage(-(int)generatedCount1);
 				} 
 				break;
+		case (byte)'E':
+				oap.setMotion_type(0);
+				ModernizedCProgram.curwin.setW_set_curswant(1);
+				oap.setInclusive(1);
+				if (ModernizedCProgram.bckend_word(generatedCount1, generatedNchar == (byte)'E', 0) == 0) {
+					oap.clearopbeep();
+				} 
+				break;
+		case (-((true) + ((int)(key_extra.KE_X1MOUSE) << 8))):
+		case (-(((byte)'k') + ((int)((byte)'b') << 8))):
+				this.setNchar(8);
+		case (-(((byte)'k') + ((int)((byte)'d') << 8/* with 'nowrap' it works just like the normal "j" command; also when
+			 * in a closed fold */))):
+				if (!ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap() || ModernizedCProgram.hasFolding(ModernizedCProgram.curwin.getW_cursor().getLnum(), ((Object)0), ((Object)0))) {
+					oap.setMotion_type(1);
+					i = ModernizedCProgram.cursor_down(generatedCount1, generatedOp_type == 0);
+				} else {
+						i = oap.nv_screengo(1, generatedCount1);
+				} 
+				if (i == 0) {
+					oap.clearopbeep();
+				} 
+				break;
+		case /* pound sign (sometimes equal to '#') */-1024:
+		case (-((true) + ((int)(key_extra.KE_LEFTDRAG) << 8))):
+		case (-(((byte)'k') + ((int)((byte)'h') << 8))):
+		case /* "go": goto byte count from start of buffer */(byte)'o':
+				ModernizedCProgram.goto_byte(generatedCount0);
+				break;
+		case (-((true) + ((int)(key_extra.KE_RIGHTMOUSE) << 8))):
+		case (byte)',':
+				cap.nv_pcmark();
+				break;
+		case (byte)'a':
+				((Object)0).do_ascii();
+				break;
+		case (byte)'u':
+		case (-(((byte)'K') + ((int)((byte)'1') << 8))):
+				oap.setMotion_type(0);
+				oap.setInclusive(0);
+				if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap() && ModernizedCProgram.curwin.getW_width() != 0) {
+					int width1 = ModernizedCProgram.curwin.getW_width() - ModernizedCProgram.curwin_col_off();
+					int width2 = width1 + ModernizedCProgram.curwin_col_off2();
+					ModernizedCProgram.validate_virtcol();
+					i = 0;
+					if (ModernizedCProgram.curwin.getW_virtcol() >= (colnr_T)width1 && width2 > 0) {
+						i = (ModernizedCProgram.curwin.getW_virtcol() - width1) / width2 * width2 + width1;
+					} 
+				} else {
+						i = ModernizedCProgram.curwin.getW_leftcol();
+				} 
+				if (generatedNchar == (byte)'m') {
+					i += (ModernizedCProgram.curwin.getW_width() - ModernizedCProgram.curwin_col_off() + ((ModernizedCProgram.curwin.getW_onebuf_opt().getWo_wrap() && i > 0) ? ModernizedCProgram.curwin_col_off2() : 0)) / 2;
+				} 
+				ModernizedCProgram.coladvance((colnr_T)i);
+				if (flag) {
+					do {
+						i = ModernizedCProgram.gchar_cursor();
+					} while (((i) == (byte)' ' || (i) == (byte)'\t') && ModernizedCProgram.oneright() == 1);
+					ModernizedCProgram.curwin.getW_valid() &=  ~-1024;
+				} 
+				ModernizedCProgram.curwin.setW_set_curswant(1);
+				break;
+		case (byte)'_'/* "g_": to the last non-blank character in the line or <count> lines
+			 * downward. */:
+				generatedOap.setMotion_type(0);
+				generatedOap.setInclusive(1);
+				ModernizedCProgram.curwin.setW_curswant(INT_MAX);
+				if (ModernizedCProgram.cursor_down((long)(generatedCount1 - 1), generatedOp_type == 0) == 0) {
+					generatedOap.clearopbeep();
+				} else {
+						char_u ptr = ModernizedCProgram.ml_get_curline();
+						if (ModernizedCProgram.curwin.getW_cursor().getCol() > 0 && ptr[ModernizedCProgram.curwin.getW_cursor().getCol()] == /* In Visual mode we may end up after the line. */(byte)'\000') {
+							--ModernizedCProgram.curwin.getW_cursor().getCol();
+						} 
+						while (ModernizedCProgram.curwin.getW_cursor().getCol() > /* Decrease the cursor column until it's on a non-blank. */0 && ((ptr[ModernizedCProgram.curwin.getW_cursor().getCol()]) == (byte)' ' || (ptr[ModernizedCProgram.curwin.getW_cursor().getCol()]) == (byte)'\t')) {
+							--ModernizedCProgram.curwin.getW_cursor().getCol();
+						}
+						ModernizedCProgram.curwin.setW_set_curswant(1);
+						cap.adjust_for_sel();
+				} 
+				break;
+		case (byte)'f':
+		case (-((true) + ((int)(key_extra.KE_MIDDLEMOUSE) << 8))):
+		case /* FALLTHROUGH */(byte)'h':
+		case (byte)'g':
+				this.setArg(0);
+				cap.nv_goto();
+				break;
+		case /* "g<": show scrollback text */(byte)'<':
+				ModernizedCProgram.show_sb_text();
+				break;
+		case (byte)'^':
+				flag = 1/* FALLTHROUGH */;
+		case (byte)'0':
+		case (-((true) + ((int)(key_extra.KE_X2MOUSE) << 8))):
+		case (-(((byte)'@') + ((int)((byte)'7') << 8))):
+		case (byte)'*':
+		case (byte)';':
+				this.setCount1(-generatedCount1);
+				cap.nv_pcmark();
+				break;
+		case (byte)'+':
+		case (byte)'m':
+		case /* FALLTHROUGH */(byte)'`':
+				cap.nv_gomark();
+				break;
+		case (-((true) + ((int)(key_extra.KE_LEFTRELEASE) << 8))):
+		case (byte)'d':
+		case /* "g+" and "g-": undo or redo along the timeline */(byte)'-':
+				if (!oap.checkclearopq()) {
+					ModernizedCProgram.undo_time(generatedNchar == (byte)'-' ? -generatedCount1 : generatedCount1, 0, 0, 0);
+				} 
+				break;
+		case (byte)'8':
+				if (generatedCount0 == 8) {
+					ModernizedCProgram.utf_find_illegal();
+				} else {
+						ModernizedCProgram.show_utf8();
+				} 
+				break;
+		case (byte)'j':
 		default:
 				oap.clearopbeep();
 				break;
@@ -2816,7 +3184,7 @@ public class cmdarg_S {
 					if (generatedCount1 == 1 && ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'w') != ((Object)0)) {
 						generatedOap.setInclusive(1);
 						generatedOap.setMotion_type(0);
-						return ;
+						return /*Error: Unsupported expression*/;
 					} 
 				} else {
 						generatedOap.setInclusive(1);
@@ -2967,7 +3335,7 @@ public class cmdarg_S {
 			if (cmdwin_type != 0) {
 				cmdwin_result = (-((true) + ((int)(key_extra.KE_IGNORE) << 8)));
 				got_int = /* don't stop executing autocommands et al. */0;
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		if (VIsual_active) {
@@ -3027,6 +3395,11 @@ public class cmdarg_S {
 			cap.invoke_edit(0, generatedCmdchar, /* Insert to replace the deleted text with the pasted text. */0);
 		}  else if (!generatedOap.checkclearopq()) {
 			switch (generatedCmdchar) {
+			case (-(((byte)'P') + ((int)((byte)'S') << 8/* Bracketed paste works like "a"ppend, unless the cursor is in
+					 * the first column, then it inserts. */))):
+					if (generatedCol == 0) {
+						break;
+					} 
 			case /* "a"ppend is like "i"nsert on the next character. */(byte)'a'/* increment coladd when in virtual space, increment the
 					 * column otherwise, also to append after an unprintable char */:
 					if (ModernizedCProgram.virtual_active() && (generatedColadd > 0 || ModernizedCProgram.ml_get_cursor() == (byte)'\000' || ModernizedCProgram.ml_get_cursor() == (byte)'\011')) {
@@ -3045,11 +3418,6 @@ public class cmdarg_S {
 			case /* "A"ppend after the line */(byte)'A':
 					ModernizedCProgram.set_cursor_for_append_to_line();
 					break;
-			case (-(((byte)'P') + ((int)((byte)'S') << 8/* Bracketed paste works like "a"ppend, unless the cursor is in
-					 * the first column, then it inserts. */))):
-					if (generatedCol == 0) {
-						break;
-					} 
 			}
 			if (generatedColadd && generatedCmdchar != (byte)'A') {
 				int save_State = State;
@@ -3106,25 +3474,28 @@ public class cmdarg_S {
 		int generatedNchar = this.getNchar();
 		switch (generatedNchar) {
 		case /* "ab" = a braces block */(byte)'b':
-		case /* "a"" = a double quoted string */(byte)'"':
-		case (byte)'>':
-				flag = generatedOap.current_block(generatedCount1, include, (byte)'<', (byte)'>');
+		case /* "as" = a sentence */(byte)'s':
+				flag = generatedOap.current_sent(generatedCount1, include);
 				break;
-		case (byte)'{':
-		case (byte)'(':
-		case /* "aB" = a Brackets block */(byte)'B':
-		case (byte)']':
-				flag = generatedOap.current_block(generatedCount1, include, (byte)'[', (byte)']');
+		case (byte)'}':
+				flag = generatedOap.current_block(generatedCount1, include, (byte)'{', (byte)'}');
 				break;
 		case /* "a<" = a <> block */(byte)'<':
-		case /* "a`" = a backtick quoted string */(byte)'`':
-				flag = generatedOap.current_quote(generatedCount1, include, generatedNchar);
+		case (byte)')':
+				flag = generatedOap.current_block(generatedCount1, include, (byte)'(', (byte)')');
 				break;
 		case /* "ap" = a paragraph */(byte)'p':
 				flag = generatedOap.current_par(generatedCount1, include, (byte)'p');
 				break;
-		case (byte)')':
-				flag = generatedOap.current_block(generatedCount1, include, (byte)'(', (byte)')');
+		case /* "a"" = a double quoted string */(byte)'"':
+		case /* "aw" = a word */(byte)'w':
+				flag = generatedOap.current_word(generatedCount1, include, 0);
+				break;
+		case (byte)'>':
+				flag = generatedOap.current_block(generatedCount1, include, (byte)'<', (byte)'>');
+				break;
+		case /* "a`" = a backtick quoted string */(byte)'`':
+				flag = generatedOap.current_quote(generatedCount1, include, generatedNchar);
 				break;
 		case /* "at" = a tag block (xml and html) */(byte)'t'/* Do not adjust oap->end in do_pending_operator()
 				 * otherwise there are different results for 'dit'
@@ -3137,18 +3508,15 @@ public class cmdarg_S {
 				flag = generatedOap.current_tagblock(generatedCount1, include);
 				break;
 		case /* "a'" = a single quoted string */(byte)'\'':
-		case (byte)'}':
-				flag = generatedOap.current_block(generatedCount1, include, (byte)'{', (byte)'}');
-				break;
-		case /* "aw" = a word */(byte)'w':
-				flag = generatedOap.current_word(generatedCount1, include, 0);
-				break;
+		case /* "aB" = a Brackets block */(byte)'B':
+		case (byte)'{':
+		case (byte)'(':
 		case /* "a[" = a [] block */(byte)'[':
+		case (byte)']':
+				flag = generatedOap.current_block(generatedCount1, include, (byte)'[', (byte)']');
+				break;
 		case /* "aW" = a WORD */(byte)'W':
 				flag = generatedOap.current_word(generatedCount1, include, 1);
-				break;
-		case /* "as" = a sentence */(byte)'s':
-				flag = generatedOap.current_sent(generatedCount1, include);
 				break;
 		default:
 				flag = 0;
@@ -3185,12 +3553,12 @@ public class cmdarg_S {
 	public void nv_at() {
 		oparg_S generatedOap = this.getOap();
 		if (generatedOap.checkclearop()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedNchar = this.getNchar();
 		if (generatedNchar == (byte)'=') {
 			if (ModernizedCProgram.get_expr_register() == (byte)'\000') {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		long generatedCount1 = this.getCount1();
@@ -3231,7 +3599,7 @@ public class cmdarg_S {
 			if (ModernizedCProgram.curwin.getW_cursor().getLnum() + generatedCount0 - 1 > generatedMl_line_count) {
 				if (generatedCount0 <= /* can't join when on the last line */2) {
 					generatedOap.clearopbeep();
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				this.setCount0(generatedMl_line_count - ModernizedCProgram.curwin.getW_cursor().getLnum() + 1);
 			} 
@@ -3382,481 +3750,113 @@ public class cmdarg_S {
 		int generatedRetval = this.getRetval();
 		generatedRetval |=  /* don't call edit() now */1;
 	}
-	public void do_pending_operator(int old_col, int gui_yank) {
-		oparg_S generatedOap = this.getOap();
-		oparg_T oap = generatedOap;
-		pos_T old_cursor = new pos_T();
-		int empty_region_error;
-		int restart_edit_save;
-		int lbr_saved = ModernizedCProgram.curwin.getW_onebuf_opt().getWo_lbr();
-		// The visual area is remembered for redo// 'v', 'V', or Ctrl-Vint redo_VIsual_mode = (byte)'\000';
-		// number of lineslinenr_T redo_VIsual_line_count = new linenr_T();
-		// number of cols or end columncolnr_T redo_VIsual_vcol = new colnr_T();
-		// count for Visual operatorlong redo_VIsual_count;
-		// extra argumentint redo_VIsual_arg;
-		int include_line_break = 0;
-		// Yank the visual area into the GUI selection register before we operate// on it and lose it forever.
-		Object generatedAvailable = clip_star.getAvailable();
-		int generatedOp_type = oap.getOp_type();
-		int generatedRegname = oap.getRegname();
-		// Don't do it if a specific register was specified, so that ""x"*P works.// This could call do_pending_operator() recursively, but that's OK// because gui_yank will be TRUE for the nested call.if ((generatedAvailable || generatedAvailable) && generatedOp_type != 0 && !gui_yank && VIsual_active && !redo_VIsual_busy && generatedRegname == 0) {
-			ModernizedCProgram.clip_auto_select();
-		} 
-		old_cursor = ModernizedCProgram.curwin.getW_cursor();
-		int generatedMotion_force = oap.getMotion_force();
-		int generatedMotion_type = oap.getMotion_type();
-		int generatedInclusive = oap.getInclusive();
-		 generatedStart = oap.getStart();
-		int generatedCmdchar = this.getCmdchar();
-		long generatedCount0 = this.getCount0();
+	/*
+	 * Search for a character in a line.  If "t_cmd" is FALSE, move to the
+	 * position of the character, otherwise move to just before the char.
+	 * Do this "cap->count1" times.
+	 * Return FAIL or OK.
+	 */
+	public int searchc(int t_cmd) {
 		int generatedNchar = this.getNchar();
-		Object generatedSearchbuf = this.getSearchbuf();
-		memline generatedB_ml = curbuf.getB_ml();
-		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
-		 generatedB_visual = curbuf.getB_visual();
-		Object generatedLnum = (generatedStart).getLnum();
-		Object generatedCol = (generatedStart).getCol();
-		Object generatedColadd = (generatedStart).getColadd();
-		 generatedEnd = oap.getEnd();
-		Object generatedEnd_vcol = oap.getEnd_vcol();
-		long generatedLine_count = oap.getLine_count();
-		Object generatedStart_vcol = oap.getStart_vcol();
+		int c = generatedNchar;
 		int generatedArg = this.getArg();
-		int generatedEmpty = oap.getEmpty();
-		int generatedIs_VIsual = oap.getIs_VIsual();
-		int generatedB_p_ma = curbuf.getB_p_ma();
-		int generatedRetval = this.getRetval();
-		int generatedBlock_mode = oap.getBlock_mode();
+		int dir = generatedArg;
 		long generatedCount1 = this.getCount1();
-		Object generatedB_p_lisp = curbuf.getB_p_lisp();
-		Object generatedB_p_inde = curbuf.getB_p_inde();
-		Object generatedB_p_fex = curbuf.getB_p_fex();
-		Object generatedB_p_fp = curbuf.getB_p_fp();
-		int generatedEnd_adjusted = oap.getEnd_adjusted();
-		// If an operation is pending, handle it...if ((finish_op || VIsual_active) && generatedOp_type != 0) {
-			int redo_yank = ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'y') != ((Object)0) && !gui_yank;
-			if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_lbr()) {
-				ModernizedCProgram.curwin.getW_valid() &=  ~-1024;
-			} 
-			ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(0);
-			oap.setIs_VIsual(VIsual_active);
-			if (generatedMotion_force == (byte)'V') {
-				oap.setMotion_type(1);
-			}  else if (generatedMotion_force == (byte)'v') {
-				if (generatedMotion_type == 1) {
-					oap.setInclusive(0);
-				}  else if (generatedMotion_type == 0) {
-					oap.setInclusive(!generatedInclusive);
-				} 
-				oap.setMotion_type(0);
-			}  else if (generatedMotion_force == 22) {
-				if (!VIsual_active) {
-					VIsual_active = 1;
-					ModernizedCProgram.VIsual = generatedStart;
-				} 
-				VIsual_mode = 22;
-				VIsual_select = 0;
-				ModernizedCProgram.VIsual_reselect = 0;
-			} 
-			if ((redo_yank || generatedOp_type != 2) && ((!VIsual_active || generatedMotion_force) || (VIsual_active && generatedCmdchar == (byte)':' && generatedOp_type != 10)) && generatedCmdchar != (byte)'D' && generatedOp_type != 19 && generatedOp_type != 20 && generatedOp_type != 21 && generatedOp_type != 22 && generatedOp_type != 23 && generatedOp_type != 24 && generatedOp_type != 25) {
-				ModernizedCProgram.prep_redo(generatedRegname, generatedCount0, ModernizedCProgram.get_op_char(generatedOp_type), ModernizedCProgram.get_extra_op_char(generatedOp_type), generatedMotion_force, generatedCmdchar, generatedNchar);
-				if (generatedCmdchar == (byte)'/' || generatedCmdchar == (byte)'?') {
-					if (ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'r') == ((Object)0)) {
-						ModernizedCProgram.AppendToRedobuffLit(generatedSearchbuf, -1);
-					} 
-					ModernizedCProgram.AppendToRedobuff((char_u)"\012");
-				}  else if (generatedCmdchar == (byte)':') {
-					if (repeat_cmdline == ((Object)0)) {
-						ModernizedCProgram.ResetRedobuff();
-					} else {
-							ModernizedCProgram.AppendToRedobuffLit(repeat_cmdline, -1);
-							ModernizedCProgram.AppendToRedobuff((char_u)"\012");
-							do {
-								if ((repeat_cmdline) != ((Object)0)) {
-									ModernizedCProgram.vim_free(repeat_cmdline);
-									(repeat_cmdline) = ((Object)0);
-								} 
-							} while (0);
+		long count = generatedCount1;
+		int col;
+		char_u p = new char_u();
+		int len;
+		int stop = 1;
+		int generatedNcharC1 = this.getNcharC1();
+		int generatedNcharC2 = this.getNcharC2();
+		if (c != /* normal search: remember args for repeat */(byte)'\000') {
+			if (!/* don't remember when redoing */ModernizedCProgram.KeyStuffed) {
+				ModernizedCProgram.lastc = c;
+				ModernizedCProgram.set_csearch_direction(dir);
+				ModernizedCProgram.set_csearch_until(t_cmd);
+				ModernizedCProgram.lastc_bytelen = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(c, ModernizedCProgram.lastc_bytes);
+				if (generatedNcharC1 != 0) {
+					ModernizedCProgram.lastc_bytelen += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedNcharC1, ModernizedCProgram.lastc_bytes + ModernizedCProgram.lastc_bytelen);
+					if (generatedNcharC2 != 0) {
+						ModernizedCProgram.lastc_bytelen += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedNcharC2, ModernizedCProgram.lastc_bytes + ModernizedCProgram.lastc_bytelen);
 					} 
 				} 
 			} 
-			if (redo_VIsual_busy) {
-				oap.setStart(ModernizedCProgram.curwin.getW_cursor());
-				ModernizedCProgram.curwin.getW_cursor().getLnum() += redo_VIsual_line_count - 1;
-				if (ModernizedCProgram.curwin.getW_cursor().getLnum() > generatedMl_line_count) {
-					ModernizedCProgram.curwin.getW_cursor().setLnum(generatedMl_line_count);
+		} else {
+				if (ModernizedCProgram.lastc == (byte)'\000' && ModernizedCProgram.lastc_bytelen == /* repeat previous search */1) {
+					return 0;
 				} 
-				VIsual_mode = redo_VIsual_mode;
-				if (redo_VIsual_vcol == INT_MAX || VIsual_mode == (byte)'v') {
-					if (VIsual_mode == (byte)'v') {
-						if (redo_VIsual_line_count <= 1) {
-							ModernizedCProgram.validate_virtcol();
-							ModernizedCProgram.curwin.setW_curswant(ModernizedCProgram.curwin.getW_virtcol() + redo_VIsual_vcol - 1);
-						} else {
-								ModernizedCProgram.curwin.setW_curswant(redo_VIsual_vcol);
-						} 
-					} else {
-							ModernizedCProgram.curwin.setW_curswant(INT_MAX);
-					} 
-					ModernizedCProgram.coladvance(ModernizedCProgram.curwin.getW_curswant());
-				} 
-				this.setCount0(redo_VIsual_count);
-				if (redo_VIsual_count != 0) {
-					this.setCount1(redo_VIsual_count);
+				if (/* repeat in opposite direction */dir) {
+					dir = -ModernizedCProgram.lastcdir;
 				} else {
-						this.setCount1(1);
+						dir = ModernizedCProgram.lastcdir;
 				} 
-			}  else if (VIsual_active) {
-				if (!gui_yank) {
-					generatedB_visual.setVi_start(ModernizedCProgram.VIsual);
-					generatedB_visual.setVi_end(ModernizedCProgram.curwin.getW_cursor());
-					generatedB_visual.setVi_mode(VIsual_mode);
-					ModernizedCProgram.restore_visual_mode();
-					generatedB_visual.setVi_curswant(ModernizedCProgram.curwin.getW_curswant());
-					curbuf.setB_visual_mode_eval(VIsual_mode);
+				t_cmd = ModernizedCProgram.last_t_cmd;
+				c = ModernizedCProgram.lastc/* For multi-byte re-use last lastc_bytes[] and lastc_bytelen. */;
+				if (ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)';') == ((Object)0) && count == 1 && /* Force a move of at least one char, so ";" and "," will move the
+					 * cursor, even if the cursor is right in front of char we are looking
+					 * at. */t_cmd) {
+					stop = 0;
 				} 
-				if (VIsual_select && VIsual_mode == (byte)'V' && generatedOp_type != 1) {
-					if ((((ModernizedCProgram.VIsual).getLnum() != (ModernizedCProgram.curwin.getW_cursor()).getLnum()) ? (ModernizedCProgram.VIsual).getLnum() < (ModernizedCProgram.curwin.getW_cursor()).getLnum() : (ModernizedCProgram.VIsual).getCol() != (ModernizedCProgram.curwin.getW_cursor()).getCol() ? (ModernizedCProgram.VIsual).getCol() < (ModernizedCProgram.curwin.getW_cursor()).getCol() : (ModernizedCProgram.VIsual).getColadd() < (ModernizedCProgram.curwin.getW_cursor()).getColadd())) {
-						ModernizedCProgram.VIsual.setCol(0);
-						ModernizedCProgram.curwin.getW_cursor().setCol((colnr_T).strlen((byte)(ModernizedCProgram.ml_get(ModernizedCProgram.curwin.getW_cursor().getLnum()))));
-					} else {
-							ModernizedCProgram.curwin.getW_cursor().setCol(0);
-							ModernizedCProgram.VIsual.setCol((colnr_T).strlen((byte)(ModernizedCProgram.ml_get(ModernizedCProgram.VIsual.getLnum()))));
-					} 
-					VIsual_mode = (byte)'v';
-				}  else if (VIsual_mode == (byte)'v') {
-					include_line_break = ModernizedCProgram.unadjust_for_sel();
-				} 
-				oap.setStart(ModernizedCProgram.VIsual);
-				if (VIsual_mode == (byte)'V') {
-					generatedStart.setCol(0);
-					generatedStart.setColadd(0);
-				} 
-			} 
-			if (((generatedLnum != generatedLnum) ? generatedLnum < generatedLnum : generatedCol != generatedCol ? generatedCol < generatedCol : generatedColadd < generatedColadd)) {
-				if (!VIsual_active) {
-					if (ModernizedCProgram.hasFolding(generatedLnum, generatedLnum, ((Object)0))) {
-						generatedStart.setCol(0);
-					} 
-					if ((generatedCol > 0 || generatedInclusive) && ModernizedCProgram.hasFolding(generatedLnum, ((Object)0), generatedLnum)) {
-						ModernizedCProgram.curwin.getW_cursor().setCol((colnr_T).strlen((byte)(ModernizedCProgram.ml_get_curline())));
-					} 
-				} 
-				oap.setEnd(ModernizedCProgram.curwin.getW_cursor());
-				ModernizedCProgram.curwin.setW_cursor(generatedStart);
-				ModernizedCProgram.curwin.getW_valid() &=  ~-1024;
-			} else {
-					if (!VIsual_active && generatedMotion_type == 1) {
-						if (ModernizedCProgram.hasFolding(generatedLnum, generatedLnum, ((Object)0))) {
-							ModernizedCProgram.curwin.getW_cursor().setCol(0);
+		} 
+		oparg_S generatedOap = this.getOap();
+		if (dir == (true)) {
+			generatedOap.setInclusive(0);
+		} else {
+				generatedOap.setInclusive(1);
+		} 
+		p = ModernizedCProgram.ml_get_curline();
+		col = ModernizedCProgram.curwin.getW_cursor().getCol();
+		len = (int)/*Error: Function owner not recognized*/strlen((byte)(p));
+		while (count--) {
+			if (has_mbyte) {
+				for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+					if (dir > 0) {
+						col += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p + col);
+						if (col >= len) {
+							return 0;
 						} 
-						if (ModernizedCProgram.hasFolding(generatedLnum, ((Object)0), generatedLnum)) {
-							generatedStart.setCol((colnr_T).strlen((byte)(ModernizedCProgram.ml_get(generatedLnum))));
-						} 
-					} 
-					oap.setEnd(generatedStart);
-					oap.setStart(ModernizedCProgram.curwin.getW_cursor());
-			} 
-			ModernizedCProgram.check_pos(ModernizedCProgram.curwin.getW_buffer(), generatedEnd);
-			oap.setLine_count(generatedLnum - generatedLnum + 1);
-			virtual_op = ModernizedCProgram.virtual_active();
-			if (VIsual_active || redo_VIsual_busy) {
-				oap.get_op_vcol(redo_VIsual_vcol, 1);
-				if (!redo_VIsual_busy && !gui_yank) {
-					resel_VIsual_mode = VIsual_mode;
-					if (ModernizedCProgram.curwin.getW_curswant() == INT_MAX) {
-						ModernizedCProgram.resel_VIsual_vcol = INT_MAX;
 					} else {
-							if (VIsual_mode != 22) {
-								ModernizedCProgram.getvvcol(ModernizedCProgram.curwin, (generatedEnd), ((Object)0), ((Object)0), generatedEnd_vcol);
+							if (col == 0) {
+								return 0;
 							} 
-							if (VIsual_mode == 22 || generatedLine_count <= 1) {
-								if (VIsual_mode != 22) {
-									ModernizedCProgram.getvvcol(ModernizedCProgram.curwin, (generatedStart), generatedStart_vcol, ((Object)0), ((Object)0));
-								} 
-								ModernizedCProgram.resel_VIsual_vcol = generatedEnd_vcol - generatedStart_vcol + 1;
-							} else {
-									ModernizedCProgram.resel_VIsual_vcol = generatedEnd_vcol;
-							} 
+							col -= /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p, p + col - 1) + 1;
 					} 
-					ModernizedCProgram.resel_VIsual_line_count = generatedLine_count;
-				} 
-				if ((redo_yank || generatedOp_type != 2) && generatedOp_type != 10 && generatedOp_type != 19 && generatedOp_type != 20 && generatedOp_type != 21 && generatedOp_type != 22 && generatedOp_type != 23 && generatedOp_type != 24 && generatedOp_type != 25 && generatedMotion_force == (byte)'\000') {
-					if (generatedCmdchar == (byte)'g' && (generatedNchar == (byte)'n' || generatedNchar == (byte)'N')) {
-						ModernizedCProgram.prep_redo(generatedRegname, generatedCount0, ModernizedCProgram.get_op_char(generatedOp_type), ModernizedCProgram.get_extra_op_char(generatedOp_type), generatedMotion_force, generatedCmdchar, generatedNchar);
-					}  else if (generatedCmdchar != (byte)':') {
-						int nchar = generatedOp_type == 16 ? generatedNchar : (byte)'\000';
-						if (nchar == -1) {
-							nchar = (byte)'\015';
-						}  else if (nchar == -2) {
-							nchar = (byte)'\012';
-						} 
-						ModernizedCProgram.prep_redo(generatedRegname, -1024, (byte)'\000', (byte)'v', ModernizedCProgram.get_op_char(generatedOp_type), ModernizedCProgram.get_extra_op_char(generatedOp_type), nchar);
-					} 
-					if (!redo_VIsual_busy) {
-						redo_VIsual_mode = resel_VIsual_mode;
-						redo_VIsual_vcol = ModernizedCProgram.resel_VIsual_vcol;
-						redo_VIsual_line_count = ModernizedCProgram.resel_VIsual_line_count;
-						redo_VIsual_count = generatedCount0;
-						redo_VIsual_arg = generatedArg;
-					} 
-				} 
-				if (generatedMotion_force == (byte)'\000' || generatedMotion_type == 1) {
-					oap.setInclusive(1);
-				} 
-				if (VIsual_mode == (byte)'V') {
-					oap.setMotion_type(1);
-				} else {
-						oap.setMotion_type(0);
-						if (VIsual_mode != 22 && (generatedEnd).ml_get_pos() == (byte)'\000' && (include_line_break || !virtual_op)) {
-							oap.setInclusive(0);
-							if (ModernizedCProgram.p_sel != (byte)'o' && !ModernizedCProgram.op_on_lines(generatedOp_type) && generatedLnum < generatedMl_line_count) {
-								++generatedLnum;
-								generatedEnd.setCol(0);
-								generatedEnd.setColadd(0);
-								++generatedLine_count;
-							} 
-						} 
-				} 
-				redo_VIsual_busy = 0;
-				if (!gui_yank) {
-					VIsual_active = 0;
-					.setmouse();
-					mouse_dragging = 0;
-					ModernizedCProgram.may_clear_cmdline();
-					if ((generatedOp_type == 2 || generatedOp_type == 10 || generatedOp_type == 27 || generatedOp_type == 6) && generatedMotion_force == (byte)'\000') {
-						ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
-						ModernizedCProgram.redraw_curbuf_later(20);
-					} 
-				} 
-			} 
-			if (has_mbyte && generatedInclusive) {
-				int l;
-				ModernizedCProgram.l = .UNRECOGNIZEDFUNCTIONNAME(generatedEnd.ml_get_pos());
-				if (ModernizedCProgram.l > 1) {
-					generatedCol += ModernizedCProgram.l - 1;
-				} 
-			} 
-			ModernizedCProgram.curwin.setW_set_curswant(1);
-			oap.setEmpty((generatedMotion_type == 0 && (!generatedInclusive || (generatedOp_type == 2 && generatedEnd.gchar_pos() == (byte)'\000')) && ((generatedLnum == generatedLnum) && (generatedCol == generatedCol) && (generatedColadd == generatedColadd)) && !(virtual_op && generatedColadd != generatedColadd)));
-			empty_region_error = (generatedEmpty && ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'E') != ((Object)0));
-			if (generatedIs_VIsual && (generatedEmpty || !generatedB_p_ma || generatedOp_type == 19)) {
-				ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
-				ModernizedCProgram.redraw_curbuf_later(20);
-			} 
-			if (generatedMotion_type == 0 && generatedInclusive == 0 && !(generatedRetval & 2) && generatedCol == 0 && (!generatedIs_VIsual || ModernizedCProgram.p_sel == (byte)'o') && !generatedBlock_mode && generatedLine_count > 1) {
-				oap.setEnd_adjusted(1);
-				--generatedLine_count;
-				--generatedLnum;
-				if (ModernizedCProgram.inindent(0)) {
-					oap.setMotion_type(1);
-				} else {
-						generatedEnd.setCol((colnr_T).strlen((byte)(ModernizedCProgram.ml_get(generatedLnum))));
-						if (generatedCol) {
-							--generatedCol;
-							oap.setInclusive(1);
-						} 
-				} 
-			} else {
-					oap.setEnd_adjusted(0);
-			} 
-			switch (generatedOp_type) {
-			case 19:
-					ModernizedCProgram.VIsual_reselect = 0;
-					ModernizedCProgram.foldCreate(generatedLnum, generatedLnum);
-					break;
-			case 9:
-					if (generatedB_p_fex != (byte)'\000') {
-						oap.op_formatexpr();
-					}  else if (ModernizedCProgram.p_fp != (byte)'\000' || generatedB_p_fp != (byte)'\000') {
-						oap.op_colon();
-					} else {
-							oap.op_format(0);
-					} 
-					break;
-			case 23:
-					ModernizedCProgram.VIsual_reselect = 0;
-					ModernizedCProgram.opFoldRange(generatedLnum, generatedLnum, generatedOp_type == 20 || generatedOp_type == 21, generatedOp_type == 21 || generatedOp_type == 23, generatedIs_VIsual);
-					break;
-			case 7:
-			case 12:
-			case 26:
-					oap.op_format(1);
-					break;
-			case 20:
-			case 3:
-					ModernizedCProgram.VIsual_reselect = 0;
-					if (empty_region_error) {
-						ModernizedCProgram.vim_beep(-1024);
-						ModernizedCProgram.CancelRedo();
-					} else {
-							if (ModernizedCProgram.p_im || !ModernizedCProgram.KeyTyped) {
-								restart_edit_save = restart_edit;
-							} else {
-									restart_edit_save = 0;
-							} 
-							restart_edit = 0;
-							if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_lbr() != lbr_saved) {
-								ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
-								oap.get_op_vcol(redo_VIsual_mode, 0);
-							} 
-							finish_op = 0;
-							if (oap.op_change()) {
-								generatedRetval |=  1;
-							} 
-							if (restart_edit == 0) {
-								restart_edit = restart_edit_save;
-							} 
-					} 
-					break;
-			case 25:
-					ModernizedCProgram.VIsual_reselect = 0;
-					ModernizedCProgram.deleteFold(generatedLnum, generatedLnum, generatedOp_type == 25, generatedIs_VIsual);
-					break;
-			case 28:
-			case 27:
-					ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
-					oap.op_function();
-					break;
-			case 24:
-			case 5:
-					oap.op_shift(1, generatedIs_VIsual ? (int)generatedCount1 : 1);
-					ModernizedCProgram.auto_format(0, 1);
-					break;
-			case 14:
-			case 16:
-					ModernizedCProgram.VIsual_reselect = 0;
-					if (empty_region_error) {
-						ModernizedCProgram.vim_beep(-1024);
-						ModernizedCProgram.CancelRedo();
-					} else {
-							if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_lbr() != lbr_saved) {
-								ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
-								oap.get_op_vcol(redo_VIsual_mode, 0);
-							} 
-							oap.op_replace(generatedNchar);
-					} 
-					break;
-			case 4:
-			case 10:
-					if (generatedOp_type == 8 && ModernizedCProgram.get_equalprg() == (byte)'\000') {
-						if (generatedB_p_lisp) {
-							oap.op_reindent(get_lisp_indent);
+					if (ModernizedCProgram.lastc_bytelen == 1) {
+						if (p[col] == c && stop) {
 							break;
 						} 
-						oap.op_reindent(generatedB_p_inde != (byte)'\000' ? get_expr_indent : get_c_indent);
+					}  else if (/*Error: Function owner not recognized*/strncmp((byte)(p + col), (byte)(ModernizedCProgram.lastc_bytes), (size_t)(ModernizedCProgram.lastc_bytelen)) == 0 && stop) {
 						break;
 					} 
-					oap.op_colon();
-					break;
-			case 15:
-					if (empty_region_error) {
-						ModernizedCProgram.vim_beep(-1024);
-						ModernizedCProgram.CancelRedo();
-					} else {
-							oap.op_tilde();
-					} 
-					ModernizedCProgram.check_cursor_col();
-					break;
-			case 1:
-					ModernizedCProgram.VIsual_reselect = 0;
-					if (empty_region_error) {
-						ModernizedCProgram.vim_beep(-1024);
-						ModernizedCProgram.CancelRedo();
-					} else {
-							(Object)oap.op_delete();
-							if (generatedMotion_type == 1 && ModernizedCProgram.has_format_option((byte)'a')) {
-								ModernizedCProgram.u_save_cursor();
-							} 
-							ModernizedCProgram.auto_format(0, 1);
-					} 
-					break;
-			case 6:
-					if (ModernizedCProgram.vim_strchr(ModernizedCProgram.p_cpo, (byte)'!') != ((Object)0)) {
-						ModernizedCProgram.AppendToRedobuff((char_u)"!\r");
-					} else {
-							bangredo = 1;
-					} 
-			case 22:
-			case 2:
-					if (empty_region_error) {
-						if (!gui_yank) {
-							ModernizedCProgram.vim_beep(-1024);
-							ModernizedCProgram.CancelRedo();
-						} 
-					} else {
-							ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
-							(Object)oap.op_yank(0, !gui_yank);
-					} 
-					ModernizedCProgram.check_cursor_col();
-					break;
-			case 18:
-					ModernizedCProgram.VIsual_reselect = 0;
-					if (empty_region_error) {
-						ModernizedCProgram.vim_beep(-1024);
-						ModernizedCProgram.CancelRedo();
-					} else {
-							restart_edit_save = restart_edit;
-							restart_edit = 0;
-							if (ModernizedCProgram.curwin.getW_onebuf_opt().getWo_lbr() != lbr_saved) {
-								ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
-								oap.get_op_vcol(redo_VIsual_mode, 0);
-							} 
-							oap.op_insert(generatedCount1);
-							ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(0);
-							ModernizedCProgram.auto_format(0, 1);
-							if (restart_edit == 0) {
-								restart_edit = restart_edit_save;
-							} else {
-									generatedRetval |=  1;
-							} 
-					} 
-					break;
-			case 17:
-			case 13:
-					if (generatedLine_count < 2) {
-						oap.setLine_count(2);
-					} 
-					if (generatedLnum + generatedLine_count - 1 > generatedMl_line_count) {
-						ModernizedCProgram.beep_flush();
-					} else {
-							(Object)ModernizedCProgram.do_join(generatedLine_count, generatedOp_type == 13, 1, 1, 1);
-							ModernizedCProgram.auto_format(0, 1);
-					} 
-					break;
-			case 11:
-			case 21:
-			case 29:
-					if (empty_region_error) {
-						ModernizedCProgram.vim_beep(-1024);
-						ModernizedCProgram.CancelRedo();
-					} else {
-							VIsual_active = 1;
-							ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
-							oap.op_addsub(generatedCount1, redo_VIsual_arg);
-							VIsual_active = 0;
-					} 
-					ModernizedCProgram.check_cursor_col();
-					break;
-			case 8:
-			default:
-					oap.clearopbeep();
-			}
-			virtual_op = 2;
-			if (!gui_yank) {
-				if (!ModernizedCProgram.p_sol && generatedMotion_type == 1 && !generatedEnd_adjusted && (generatedOp_type == 4 || generatedOp_type == 5 || generatedOp_type == 1)) {
-					ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(0);
-					ModernizedCProgram.coladvance(ModernizedCProgram.curwin.setW_curswant(old_col));
-				} 
+					stop = 1;
+				}
 			} else {
-					ModernizedCProgram.curwin.setW_cursor(old_cursor);
+					for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+						if ((col += dir) < 0 || col >= len) {
+							return 0;
+						} 
+						if (p[col] == c && stop) {
+							break;
+						} 
+						stop = 1;
+					}
 			} 
-			oap.setBlock_mode(0);
-			oap.clearop();
-			motion_force = (byte)'\000';
+		}
+		if (t_cmd) {
+			col -= /* backup to before the character (possibly double-byte) */dir;
+			if (has_mbyte) {
+				if (dir < 0) {
+					col += ModernizedCProgram.lastc_bytelen - /* Landed on the search char which is lastc_bytelen long */1;
+				} else {
+						col -= /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p, p + /* To previous char, which may be multi-byte. */col);
+				} 
+			} 
 		} 
-		// Yank can be redone when 'y' is in 'cpoptions', but not when yanking
-		ModernizedCProgram.curwin.getW_onebuf_opt().setWo_lbr(lbr_saved);
+		ModernizedCProgram.curwin.getW_cursor().setCol(col);
+		return 1/*
+		 * "Other" Searches
+		 */;
 	}
 	public oparg_S getOap() {
 		return oap;

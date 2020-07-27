@@ -13,7 +13,7 @@ public class oid_stat {
 	public oid_stat() {
 	}
 	
-	public int do_read_blob(Object oid, Object size_out, byte data_out) {
+	public int do_read_blob(Object oid, Object size_out, Byte data_out) {
 		object_type type;
 		long sz;
 		byte data;
@@ -27,7 +27,7 @@ public class oid_stat {
 		stat_data generatedStat = this.getStat();
 		object_id generatedOid = this.getOid();
 		if (oid_stat) {
-			.memset(generatedStat, 0, );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedStat, 0, /*Error: sizeof expression not supported yet*/);
 			generatedOid.oidcpy(oid);
 		} 
 		if (sz == 0) {
@@ -45,7 +45,7 @@ public class oid_stat {
 	public int read_skip_worktree_file_from_index(Object istate, Object path, Object size_out, Byte data_out) {
 		int pos;
 		int len;
-		len = .strlen(path);
+		len = /*Error: Function owner not recognized*/strlen(path);
 		pos = ModernizedCProgram.index_name_pos(istate, path, len);
 		if (pos < 0) {
 			return -1;

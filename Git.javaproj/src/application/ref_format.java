@@ -20,10 +20,10 @@ public class ref_format {
 		byte sp;
 		this.setNeed_color_reset_at_eol(0);
 		Object generatedFormat = this.getFormat();
-		for (cp = generatedFormat; cp && (sp = ModernizedCProgram.find_next(cp)); ) {
-			strbuf err = new strbuf(, , );
+		for (cp = generatedFormat; cp && (sp = cp.find_next()); /*Error: Unsupported expression*/) {
+			strbuf err = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			byte color;
-			byte ep = .strchr(sp, (byte)')');
+			byte ep = /*Error: Function owner not recognized*/strchr(sp, (byte)')');
 			int at;
 			if (!ep) {
 				return ();
@@ -34,7 +34,7 @@ public class ref_format {
 			} 
 			cp = ep + 1;
 			if (ModernizedCProgram.skip_prefix(used_atom[at].getName(), "color:", color)) {
-				this.setNeed_color_reset_at_eol(!!.strcmp(color, "reset"));
+				this.setNeed_color_reset_at_eol(!!/*Error: Function owner not recognized*/strcmp(color, "reset"));
 			} 
 			ModernizedCProgram.err.strbuf_release();
 		}

@@ -75,29 +75,6 @@ public class unpack_trees_options {
 	public unpack_trees_options() {
 	}
 	
-	public void debug_stage(Object label, Object ce) {
-		.printf("%s ", label);
-		cache_entry generatedDf_conflict_entry = this.getDf_conflict_entry();
-		if (!ce) {
-			.printf("(missing)\n");
-		}  else if (ce == generatedDf_conflict_entry) {
-			.printf("(conflict)\n");
-		} else {
-				.printf("%06o #%d %s %.8s\n", ce.getCe_mode(), (((true) & (ce).getCe_flags()) >> 12), ce.getName(), ModernizedCProgram.oid_to_hex(ce.getOid()));
-		} 
-	}
-	public int debug_merge(Object stages) {
-		int i;
-		int generatedMerge_size = this.getMerge_size();
-		.printf("* %d-way merge\n", generatedMerge_size);
-		o.debug_stage("index", stages[0]);
-		for (i = 1; i <= generatedMerge_size; i++) {
-			byte[] buf = new byte[24];
-			ModernizedCProgram.xsnprintf(ModernizedCProgram.buf, , "ent#%d", i);
-			o.debug_stage(ModernizedCProgram.buf, stages[i]);
-		}
-		return 0;
-	}
 	public void do_oneway_diff(Object idx, Object tree) {
 		Object generatedUnpack_data = this.getUnpack_data();
 		rev_info revs = generatedUnpack_data;
@@ -113,7 +90,7 @@ public class unpack_trees_options {
 		if (generatedIndex_only && generatedIta_invisible_in_index && idx && ((idx).getCe_flags() & (1 << 29))) {
 			idx = ((Object)0);
 			if (!tree) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		cached = generatedIndex_only || (idx && ((idx.getCe_flags() & (true)) || ((idx).getCe_flags() & (1 << 30/*
@@ -125,26 +102,26 @@ public class unpack_trees_options {
 			 */))));
 		int generatedIgnore_merges = revs.getIgnore_merges();
 		match_missing = !generatedIgnore_merges;
-		diff_filespec generatedOne = pair.getOne();
+		diff_filespec[] generatedOne = pair.getOne();
 		if (cached && idx && (((true) & (idx).getCe_flags()) >> 12)) {
 			diff_filepair pair = new diff_filepair();
-			pair = .diff_unmerge(generatedDiffopt, idx.getName());
+			pair = /*Error: Function owner not recognized*/diff_unmerge(generatedDiffopt, idx.getName());
 			if (tree) {
-				.fill_filespec(generatedOne, tree.getOid(), 1, tree.getCe_mode());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fill_filespec(generatedOne, tree.getOid(), 1, tree.getCe_mode());
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!/*
 			 * Something added to the tree?
 			 */tree) {
 			revs.show_new_file(idx, cached, match_missing);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!/*
 			 * Something removed from the tree?
 			 */idx) {
 			revs.diff_index_show_file("-", tree, tree.getOid(), 1, tree.getCe_mode(), 0);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		revs.show_modified(tree, idx, 1, cached, /* Show difference between old and new */match_missing/*
 		 * The unpack_trees() interface is designed for merging, so
@@ -162,7 +139,7 @@ public class unpack_trees_options {
 		 * the skipping, the path matching, the type conflict cases etc.
 		 */);
 	}
-	public int oneway_diff(Object src) {
+	public int oneway_diff(Object[][] src) {
 		cache_entry idx = src[0];
 		cache_entry tree = src[1];
 		Object generatedUnpack_data = this.getUnpack_data();
@@ -177,7 +154,7 @@ public class unpack_trees_options {
 		pathspec generatedPrune_data = revs.getPrune_data();
 		if (ModernizedCProgram.ce_path_match(generatedIndex, idx ? idx : tree, generatedPrune_data, ((Object)0))) {
 			o.do_oneway_diff(idx, tree);
-			if (.diff_can_quit_early(generatedDiffopt)) {
+			if (/*Error: Function owner not recognized*/diff_can_quit_early(generatedDiffopt)) {
 				this.setExiting_early(1);
 				return -1;
 			} 
@@ -191,26 +168,26 @@ public class unpack_trees_options {
 		byte msg;
 		argv_array generatedMsgs_to_free = this.getMsgs_to_free();
 		generatedMsgs_to_free.argv_array_init();
-		if (!.strcmp(cmd, "checkout")) {
+		if (!/*Error: Function owner not recognized*/strcmp(cmd, "checkout")) {
 			msg = ModernizedCProgram.advice_commit_before_merge ? ModernizedCProgram._("Your local changes to the following files would be overwritten by checkout:\n%%sPlease commit your changes or stash them before you switch branches.") : ModernizedCProgram._("Your local changes to the following files would be overwritten by checkout:\n%%s");
-		}  else if (!.strcmp(cmd, "merge")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(cmd, "merge")) {
 			msg = ModernizedCProgram.advice_commit_before_merge ? ModernizedCProgram._("Your local changes to the following files would be overwritten by merge:\n%%sPlease commit your changes or stash them before you merge.") : ModernizedCProgram._("Your local changes to the following files would be overwritten by merge:\n%%s");
 		} else {
 				msg = ModernizedCProgram.advice_commit_before_merge ? ModernizedCProgram._("Your local changes to the following files would be overwritten by %s:\n%%sPlease commit your changes or stash them before you %s.") : ModernizedCProgram._("Your local changes to the following files would be overwritten by %s:\n%%s");
 		} 
 		msgs[unpack_trees_error_types.ERROR_WOULD_OVERWRITE] = msgs[unpack_trees_error_types.ERROR_NOT_UPTODATE_FILE] = generatedMsgs_to_free.argv_array_pushf(msg, cmd, cmd);
 		msgs[unpack_trees_error_types.ERROR_NOT_UPTODATE_DIR] = ModernizedCProgram._("Updating the following directories would lose untracked files in them:\n%s");
-		if (!.strcmp(cmd, "checkout")) {
+		if (!/*Error: Function owner not recognized*/strcmp(cmd, "checkout")) {
 			msg = ModernizedCProgram.advice_commit_before_merge ? ModernizedCProgram._("The following untracked working tree files would be removed by checkout:\n%%sPlease move or remove them before you switch branches.") : ModernizedCProgram._("The following untracked working tree files would be removed by checkout:\n%%s");
-		}  else if (!.strcmp(cmd, "merge")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(cmd, "merge")) {
 			msg = ModernizedCProgram.advice_commit_before_merge ? ModernizedCProgram._("The following untracked working tree files would be removed by merge:\n%%sPlease move or remove them before you merge.") : ModernizedCProgram._("The following untracked working tree files would be removed by merge:\n%%s");
 		} else {
 				msg = ModernizedCProgram.advice_commit_before_merge ? ModernizedCProgram._("The following untracked working tree files would be removed by %s:\n%%sPlease move or remove them before you %s.") : ModernizedCProgram._("The following untracked working tree files would be removed by %s:\n%%s");
 		} 
 		msgs[unpack_trees_error_types.ERROR_WOULD_LOSE_UNTRACKED_REMOVED] = generatedMsgs_to_free.argv_array_pushf(msg, cmd, cmd);
-		if (!.strcmp(cmd, "checkout")) {
+		if (!/*Error: Function owner not recognized*/strcmp(cmd, "checkout")) {
 			msg = ModernizedCProgram.advice_commit_before_merge ? ModernizedCProgram._("The following untracked working tree files would be overwritten by checkout:\n%%sPlease move or remove them before you switch branches.") : ModernizedCProgram._("The following untracked working tree files would be overwritten by checkout:\n%%s");
-		}  else if (!.strcmp(cmd, "merge")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(cmd, "merge")) {
 			msg = ModernizedCProgram.advice_commit_before_merge ? ModernizedCProgram._("The following untracked working tree files would be overwritten by merge:\n%%sPlease move or remove them before you merge.") : ModernizedCProgram._("The following untracked working tree files would be overwritten by merge:\n%%s");
 		} else {
 				msg = ModernizedCProgram.advice_commit_before_merge ? ModernizedCProgram._("The following untracked working tree files would be overwritten by %s:\n%%sPlease move or remove them before you %s.") : ModernizedCProgram._("The following untracked working tree files would be overwritten by %s:\n%%s");
@@ -226,7 +203,7 @@ public class unpack_trees_options {
 		msgs[unpack_trees_error_types.ERROR_WOULD_LOSE_SUBMODULE] = ModernizedCProgram._("Cannot update submodule:\n%s");
 		this.setShow_all_errors(1);
 		Object generatedUnpack_rejects = this.getUnpack_rejects();
-		for (i = 0; i < ( /  + ( - 1)); /* rejected paths may not have a static buffer */i++) {
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); /* rejected paths may not have a static buffer */i++) {
 			generatedUnpack_rejects[i].setStrdup_strings(1);
 		}
 	}
@@ -234,7 +211,7 @@ public class unpack_trees_options {
 		argv_array generatedMsgs_to_free = this.getMsgs_to_free();
 		generatedMsgs_to_free.argv_array_clear();
 		Object generatedMsgs = this.getMsgs();
-		.memset(generatedMsgs, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedMsgs, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public int add_rejected_path(unpack_trees_error_types e, Object path) {
 		int generatedQuiet = this.getQuiet();
@@ -246,7 +223,8 @@ public class unpack_trees_options {
 			return ();
 		} 
 		Object generatedUnpack_rejects = this.getUnpack_rejects();
-		generatedUnpack_rejects[unpack_trees_error_types.e].string_list_append(path);
+		string_list_item string_list_item = new string_list_item();
+		string_list_item.string_list_append(generatedUnpack_rejects[unpack_trees_error_types.e], path);
 		return -1/*
 		 * display all the error messages stored in a nice way
 		 */;
@@ -257,11 +235,11 @@ public class unpack_trees_options {
 		int something_displayed = 0;
 		Object generatedUnpack_rejects = this.getUnpack_rejects();
 		int generatedNr = rejects.getNr();
-		string_list_item generatedItems = rejects.getItems();
+		string_list_item[] generatedItems = rejects.getItems();
 		for (e = 0; e < unpack_trees_error_types.NB_UNPACK_TREES_ERROR_TYPES; e++) {
 			string_list rejects = generatedUnpack_rejects[e];
 			if (generatedNr > 0) {
-				strbuf path = new strbuf(, , );
+				strbuf path = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 				something_displayed = 1;
 				for (i = 0; i < generatedNr; i++) {
 					ModernizedCProgram.path.strbuf_addf("\t%s\n", generatedItems[i].getString());
@@ -272,7 +250,7 @@ public class unpack_trees_options {
 			rejects.string_list_clear(0);
 		}
 		if (something_displayed) {
-			.fprintf((_iob[2]), ModernizedCProgram._("Aborting\n"));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("Aborting\n"));
 		} 
 	}
 	public int check_submodule_move_head(Object ce, Object old_id, Object new_id) {
@@ -326,7 +304,7 @@ public class unpack_trees_options {
 			ModernizedCProgram.load_gitmodules_file(index, ((Object)0));
 		} 
 		int generatedCache_nr = index.getCache_nr();
-		cache_entry generatedCache = index.getCache();
+		cache_entry[][] generatedCache = index.getCache();
 		for (i = 0; i < generatedCache_nr; i++) {
 			cache_entry ce = generatedCache[i];
 			if (ce.getCe_flags() & (1 << 22)) {
@@ -393,7 +371,7 @@ public class unpack_trees_options {
 		return errs != 0;
 	}
 	public int call_unpack_fn(Object src) {
-		int ret = .UNRECOGNIZEDFUNCTIONNAME(src, o);
+		int ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(src, o);
 		if (ret > 0) {
 			ret = 0;
 		} 
@@ -422,12 +400,12 @@ public class unpack_trees_options {
 			ModernizedCProgram.die("programming error in a caller of mark_ce_used_same_name");
 		} 
 		int generatedCache_nr = index.getCache_nr();
-		cache_entry generatedCache = index.getCache();
+		cache_entry[][] generatedCache = index.getCache();
 		int generatedCe_namelen = (next).getCe_namelen();
 		Object generatedName = next.getName();
 		for (pos = -pos - 1; pos < generatedCache_nr; pos++) {
 			cache_entry next = generatedCache[pos];
-			if (len != (generatedCe_namelen) || .memcmp(ce.getName(), generatedName, len)) {
+			if (len != (generatedCe_namelen) || /*Error: Function owner not recognized*/memcmp(ce.getName(), generatedName, len)) {
 				break;
 			} 
 			next.add_entry(o, 0, 0);
@@ -473,7 +451,7 @@ public class unpack_trees_options {
 			return 0;
 		} 
 		index_state generatedSrc_index = this.getSrc_index();
-		if (!.lstat(ce.getName(), st)) {
+		if (!/*Error: Function owner not recognized*/lstat(ce.getName(), st)) {
 			int flags = 1 | 4;
 			int changed = ModernizedCProgram.ie_match_stat(generatedSrc_index, ce, st, flags);
 			if (ModernizedCProgram.submodule_from_ce(ce)) {
@@ -493,9 +471,9 @@ public class unpack_trees_options {
 			if ((((ce.getCe_mode()) & -1024) == 160000)) {
 				return 0;
 			} 
-			(._errno()) = 0;
+			(/*Error: Function owner not recognized*/_errno()) = 0;
 		} 
-		if ((._errno()) == 2) {
+		if ((/*Error: Function owner not recognized*/_errno()) == 2) {
 			return 0;
 		} 
 		return o.add_rejected_path(unpack_trees_error_types.error_type, ce.getName());
@@ -522,7 +500,7 @@ public class unpack_trees_options {
 	}
 	public void invalidate_ce_path(Object ce) {
 		if (!ce) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		index_state generatedSrc_index = this.getSrc_index();
 		generatedSrc_index.cache_tree_invalidate_path(ce.getName());
@@ -563,14 +541,14 @@ public class unpack_trees_options {
 		namelen = ((ce).getCe_namelen());
 		index_state generatedSrc_index = this.getSrc_index();
 		int generatedCache_nr = generatedSrc_index.getCache_nr();
-		cache_entry generatedCache = generatedSrc_index.getCache();
+		cache_entry[][] generatedCache = generatedSrc_index.getCache();
 		int generatedCe_namelen = (ce2).getCe_namelen();
 		Object generatedName = ce2.getName();
 		int generatedCe_flags = (ce2).getCe_flags();
 		for (i = o.locate_in_src_index(ce); i < generatedCache_nr; i++) {
 			cache_entry ce2 = generatedCache[i];
 			int len = (generatedCe_namelen);
-			if (ModernizedCProgram.len < namelen || .strncmp(ce.getName(), generatedName, namelen) || generatedName[namelen] != (byte)'/') {
+			if (ModernizedCProgram.len < namelen || /*Error: Function owner not recognized*/strncmp(ce.getName(), generatedName, namelen) || generatedName[namelen] != (byte)'/') {
 				break;
 			} 
 			if (!(((true) & generatedCe_flags) >> 12)) {
@@ -587,7 +565,7 @@ public class unpack_trees_options {
 				 */++;
 		}
 		pathbuf = ModernizedCProgram.xstrfmt("%.*s/", namelen, generatedName);
-		.memset(d, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(d, 0, /*Error: sizeof expression not supported yet*/);
 		dir_struct generatedDir = this.getDir();
 		Object generatedExclude_per_dir = generatedDir.getExclude_per_dir();
 		if (generatedDir) {
@@ -623,7 +601,7 @@ public class unpack_trees_options {
 			byte path;
 			int ret;
 			ModernizedCProgram.path = ModernizedCProgram.xmemdupz(ce.getName(), len);
-			if (.lstat(ModernizedCProgram.path, st)) {
+			if (/*Error: Function owner not recognized*/lstat(ModernizedCProgram.path, st)) {
 				ret = ();
 			} else {
 					if (ModernizedCProgram.submodule_from_ce(ce)) {
@@ -634,8 +612,8 @@ public class unpack_trees_options {
 			} 
 			ModernizedCProgram.free(ModernizedCProgram.path);
 			return ret;
-		}  else if (.lstat(ce.getName(), st)) {
-			if ((._errno()) != 2) {
+		}  else if (/*Error: Function owner not recognized*/lstat(ce.getName(), st)) {
+			if ((/*Error: Function owner not recognized*/_errno()) != 2) {
 				return ();
 			} 
 			return 0;
@@ -738,7 +716,39 @@ public class unpack_trees_options {
 		o.invalidate_ce_path(ce);
 		return 1;
 	}
-	public int threeway_merge(Object stages) {
+	public int keep_entry(Object ce) {
+		ce.add_entry(o, 0, 0);
+		if ((((true) & (ce).getCe_flags()) >> 12)) {
+			o.invalidate_ce_path(ce);
+		} 
+		return 1;
+		commit commit = new commit();
+		if (ModernizedCProgram.is_null_oid(oid)) {
+			return 1;
+		} 
+		commit = /*Error: Function owner not recognized*/lookup_commit_reference_gently(ModernizedCProgram.the_repository, oid, 1);
+		if (!commit) {
+			return 0/*
+				 * Make sure everything in this commit exists.
+				 *
+				 * We have walked all the objects reachable from the refs
+				 * and cache earlier.  The commits reachable by this commit
+				 * must meet SEEN commits -- and then we should mark them as
+				 * SEEN as well.
+				 */;
+		} 
+		if (!commit.commit_is_complete()) {
+			return 0;
+		} 
+		it = commit;
+		return 1/*
+		 * Starting from commits in the cb->mark_list, mark commits that are
+		 * reachable from them.  Stop the traversal at commits older than
+		 * the expire_limit and queue them back, so that the caller can call
+		 * us again to restart the traversal with longer expire_limit.
+		 */;
+	}
+	public int threeway_merge(Object[][] stages) {
 		cache_entry index = new cache_entry();
 		cache_entry head = new cache_entry();
 		int generatedHead_idx = this.getHead_idx();
@@ -864,17 +874,17 @@ public class unpack_trees_options {
 		if (!head_match || !remote_match) {
 			for (i = 1; i < generatedHead_idx; i++) {
 				if (stages[i] && stages[i] != generatedDf_conflict_entry) {
-					ModernizedCProgram.keep_entry(stages[i], o);
+					o.keep_entry(stages[i]);
 					count++;
 					break;
 				} 
 			}
 		} 
 		if (head) {
-			count += ModernizedCProgram.keep_entry(head, o);
+			count += o.keep_entry(head);
 		} 
 		if (remote) {
-			count += ModernizedCProgram.keep_entry(remote, o);
+			count += o.keep_entry(remote);
 		} 
 		return count/*
 		 * Two-way merge.
@@ -886,7 +896,7 @@ public class unpack_trees_options {
 		 *
 		 */;
 	}
-	public int twoway_merge(Object src) {
+	public int twoway_merge(Object[][] src) {
 		cache_entry current = src[0];
 		cache_entry oldtree = src[1];
 		cache_entry newtree = src[2];
@@ -914,7 +924,7 @@ public class unpack_trees_options {
 				} 
 				return o.reject_merge(current);
 			}  else if ((!oldtree && !/* 4 and 5 */newtree) || (!oldtree && newtree && ModernizedCProgram.same(current, /* 6 and 7 */newtree)) || (oldtree && newtree && ModernizedCProgram.same(oldtree, /* 14 and 15 */newtree)) || (oldtree && newtree && !ModernizedCProgram.same(oldtree, /* 18 and 19 */newtree) && ModernizedCProgram.same(current, newtree))) {
-				return ModernizedCProgram.keep_entry(current, o);
+				return o.keep_entry(current);
 			}  else if (oldtree && !newtree && ModernizedCProgram.same(current, oldtree)) {
 				return /* 10 or 11 */o.deleted_entry(oldtree, current);
 			}  else if (oldtree && newtree && ModernizedCProgram.same(current, oldtree) && !ModernizedCProgram.same(current, newtree)) {
@@ -938,7 +948,7 @@ public class unpack_trees_options {
 		 * stage0 does not have anything there.
 		 */.deleted_entry(oldtree, current);
 	}
-	public int bind_merge(Object src) {
+	public int bind_merge(Object[][] src) {
 		cache_entry old = src[0];
 		cache_entry a = src[1];
 		int generatedMerge_size = this.getMerge_size();
@@ -950,7 +960,7 @@ public class unpack_trees_options {
 			return generatedQuiet ? -1 : ();
 		} 
 		if (!a) {
-			return ModernizedCProgram.keep_entry(old, o);
+			return o.keep_entry(old);
 		} else {
 				return o/*
 				 * One-way merge.
@@ -960,7 +970,7 @@ public class unpack_trees_options {
 				 */.merged_entry(a, ((Object)0));
 		} 
 	}
-	public int oneway_merge(Object src) {
+	public int oneway_merge(Object[][] src) {
 		cache_entry old = src[0];
 		cache_entry a = src[1];
 		int generatedMerge_size = this.getMerge_size();
@@ -978,7 +988,7 @@ public class unpack_trees_options {
 			int update = 0;
 			if (generatedReset && generatedUpdate && !((old).getCe_flags() & (1 << 18)) && !((old).getCe_flags() & (1 << 30))) {
 				stat st = new stat();
-				if (.lstat(old.getName(), st) || ModernizedCProgram.ie_match_stat(generatedSrc_index, old, st, 1 | 4)) {
+				if (/*Error: Function owner not recognized*/lstat(old.getName(), st) || ModernizedCProgram.ie_match_stat(generatedSrc_index, old, st, 1 | 4)) {
 					update |=  (1 << 16);
 				} 
 			} 
@@ -989,6 +999,29 @@ public class unpack_trees_options {
 			return 0;
 		} 
 		return o.merged_entry(a, old);
+	}
+	public void debug_stage(Object label, Object ce) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s ", label);
+		cache_entry generatedDf_conflict_entry = this.getDf_conflict_entry();
+		if (!ce) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("(missing)\n");
+		}  else if (ce == generatedDf_conflict_entry) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("(conflict)\n");
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%06o #%d %s %.8s\n", ce.getCe_mode(), (((true) & (ce).getCe_flags()) >> 12), ce.getName(), ModernizedCProgram.oid_to_hex(ce.getOid()));
+		} 
+	}
+	public int debug_merge(Object[][] stages) {
+		int i;
+		int generatedMerge_size = this.getMerge_size();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("* %d-way merge\n", generatedMerge_size);
+		o.debug_stage("index", stages[0]);
+		for (i = 1; i <= generatedMerge_size; i++) {
+			byte[] buf = new byte[24];
+			ModernizedCProgram.xsnprintf(ModernizedCProgram.buf, /*Error: sizeof expression not supported yet*/, "ent#%d", i);
+			o.debug_stage(ModernizedCProgram.buf, stages[i]);
+		}
+		return 0;
 	}
 	public int getReset() {
 		return reset;

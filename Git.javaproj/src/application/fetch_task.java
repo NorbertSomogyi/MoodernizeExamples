@@ -17,8 +17,8 @@ public class fetch_task {
 	}
 	
 	public fetch_task fetch_task_create(repository r, Object path) {
-		fetch_task task = ModernizedCProgram.xmalloc();
-		.memset(task, 0, );
+		fetch_task task = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(task, 0, /*Error: sizeof expression not supported yet*/);
 		task.setSub(r.submodule_from_path(ModernizedCProgram.null_oid, path));
 		Object generatedSub = task.getSub();
 		if (!generatedSub) {

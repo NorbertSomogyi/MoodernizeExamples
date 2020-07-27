@@ -29,7 +29,41 @@ public class option {
 	public option() {
 	}
 	
-	public option preprocess_options(parse_opt_ctx_t ctx, Object options) {
+	public option parse_options_dup(Object o) {
+		option opts = new option();
+		int nr = 0;
+		while (o && o.getType() != parse_opt_type.OPTION_END) {
+			nr++;
+			o++;
+		}
+		(opts) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (nr + 1)));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(opts, o - nr, /*Error: sizeof expression not supported yet*/ * nr);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(opts + nr, 0, /*Error: sizeof expression not supported yet*/);
+		opts[nr].setType(parse_opt_type.OPTION_END);
+		return opts;
+	}
+	public option parse_options_concat(option[] b) {
+		option ret = new option();
+		size_t i = new size_t();
+		size_t a_len = 0;
+		size_t b_len = 0;
+		for (i = 0; a[i].getType() != parse_opt_type.OPTION_END; i++) {
+			a_len++;
+		}
+		for (i = 0; b[i].getType() != parse_opt_type.OPTION_END; i++) {
+			b_len++;
+		}
+		(ret) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (ModernizedCProgram.st_add(ModernizedCProgram.st_add((a_len), (b_len)), (true)))));
+		for (i = 0; i < a_len; i++) {
+			ret[i] = a[i];
+		}
+		for (i = 0; i < b_len; i++) {
+			ret[a_len + i] = b[i];
+		}
+		ret[a_len + b_len] = b[/* final OPTION_END */b_len];
+		return ret;
+	}
+	public option preprocess_options(parse_opt_ctx_t ctx, Object[] options) {
 		option newopt = new option();
 		int i;
 		int nr;
@@ -43,10 +77,10 @@ public class option {
 		if (!nr_aliases) {
 			return ((Object)0);
 		} 
-		(newopt) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (nr + 1)));
-		ModernizedCProgram.copy_array((newopt), (options), (nr + 1),  + ( - 1));
-		Object generatedAlias_groups = ctx.getAlias_groups();
-		(generatedAlias_groups) = ModernizedCProgram.xcalloc((3 * (nr_aliases + 1)), );
+		(newopt) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (nr + 1)));
+		ModernizedCProgram.copy_array((newopt), (options), (nr + 1), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+		Object[][] generatedAlias_groups = ctx.getAlias_groups();
+		(generatedAlias_groups) = ModernizedCProgram.xcalloc((3 * (nr_aliases + 1)), /*Error: sizeof expression not supported yet*/);
 		;
 		for (; i < nr; i++) {
 			int short_name;
@@ -64,7 +98,7 @@ public class option {
 			} 
 			for (j = 0; j < nr; j++) {
 				byte name = options[j].getLong_name();
-				if (!name || .strcmp(name, source)) {
+				if (!name || /*Error: Function owner not recognized*/strcmp(name, source)) {
 					continue;
 				} 
 				if (options[j].getType() == parse_opt_type.OPTION_ALIAS) {
@@ -75,7 +109,7 @@ public class option {
 								 * print the original help string.
 								 */);
 				} 
-				.memcpy(newopt + i, options + j, );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(newopt + i, options + j, /*Error: sizeof expression not supported yet*/);
 				newopt[i].setShort_name(short_name);
 				newopt[i].setLong_name(long_name);
 				break;
@@ -89,40 +123,6 @@ public class option {
 			alias++;
 		}
 		return newopt;
-	}
-	public option parse_options_dup(Object o) {
-		option opts = new option();
-		int nr = 0;
-		while (o && o.getType() != parse_opt_type.OPTION_END) {
-			nr++;
-			o++;
-		}
-		(opts) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (nr + 1)));
-		.memcpy(opts, o - nr,  * nr);
-		.memset(opts + nr, 0, );
-		opts[nr].setType(parse_opt_type.OPTION_END);
-		return opts;
-	}
-	public option parse_options_concat(option b) {
-		option ret = new option();
-		size_t i = new size_t();
-		size_t a_len = 0;
-		size_t b_len = 0;
-		for (i = 0; a[i].getType() != parse_opt_type.OPTION_END; i++) {
-			a_len++;
-		}
-		for (i = 0; b[i].getType() != parse_opt_type.OPTION_END; i++) {
-			b_len++;
-		}
-		(ret) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (ModernizedCProgram.st_add(ModernizedCProgram.st_add((a_len), (b_len)), (true)))));
-		for (i = 0; i < a_len; i++) {
-			ret[i] = a[i];
-		}
-		for (i = 0; i < b_len; i++) {
-			ret[a_len + i] = b[i];
-		}
-		ret[a_len + b_len] = b[/* final OPTION_END */b_len];
-		return ret;
 	}
 	public option add_common_options(checkout_opts opts) {
 		int generatedQuiet = opts.getQuiet();

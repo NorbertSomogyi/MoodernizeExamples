@@ -81,15 +81,15 @@ public class ref_lock {
 		 */);
 	}
 	public ref_lock lock_ref_oid_basic(files_ref_store refs, Object refname, Object old_oid, Object extras, Object skip, int flags, Integer type, strbuf err) {
-		strbuf ref_file = new strbuf(, , );
+		strbuf ref_file = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		ref_lock lock = new ref_lock();
 		int last_errno = 0;
 		int mustexist = (old_oid && !ModernizedCProgram.is_null_oid(old_oid));
 		int resolve_flags = -1024;
 		int resolved;
 		refs.files_assert_main_repository("lock_ref_oid_basic");
-		((err) ? (Object)0 : ._assert("err", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\files-backend.c", 937));
-		lock = ModernizedCProgram.xcalloc(1, );
+		((err) ? (Object)0 : /*Error: Function owner not recognized*/_assert("err", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\files-backend.c", 937));
+		lock = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 		if (mustexist) {
 			resolve_flags |=  -1024;
 		} 
@@ -100,14 +100,14 @@ public class ref_lock {
 		ref_store generatedBase = refs.getBase();
 		object_id generatedOld_oid = lock.getOld_oid();
 		resolved = !!ModernizedCProgram.refs_resolve_ref_unsafe(generatedBase, refname, resolve_flags, generatedOld_oid, type);
-		if (!resolved && (._errno()) == 21/*
+		if (!resolved && (/*Error: Function owner not recognized*/_errno()) == 21/*
 				 * we are trying to lock foo but we used to
 				 * have foo/bar which now does not exist;
 				 * it is normal for the empty directory 'foo'
 				 * to remain.
 				 */) {
 			if (ref_file.remove_empty_directories()) {
-				last_errno = (._errno());
+				last_errno = (/*Error: Function owner not recognized*/_errno());
 				if (!ModernizedCProgram.refs_verify_refname_available(generatedBase, refname, extras, skip, err)) {
 					err.strbuf_addf("there are still refs under '%s'", refname);
 				} 
@@ -116,9 +116,9 @@ public class ref_lock {
 			resolved = !!ModernizedCProgram.refs_resolve_ref_unsafe(generatedBase, refname, resolve_flags, generatedOld_oid, type);
 		} 
 		if (!resolved) {
-			last_errno = (._errno());
+			last_errno = (/*Error: Function owner not recognized*/_errno());
 			if (last_errno != 20 || !ModernizedCProgram.refs_verify_refname_available(generatedBase, refname, extras, skip, err)) {
-				err.strbuf_addf("unable to resolve reference '%s': %s", refname, .strerror(last_errno));
+				err.strbuf_addf("unable to resolve reference '%s': %s", refname, /*Error: Function owner not recognized*/strerror(last_errno));
 			} 
 			;
 		} 
@@ -128,20 +128,20 @@ public class ref_lock {
 			;
 		} 
 		lock.setRef_name(ModernizedCProgram.xstrdup(refname));
-		byte generatedBuf = ref_file.getBuf();
+		byte[] generatedBuf = ref_file.getBuf();
 		lock_file generatedLk = lock.getLk();
 		if (ModernizedCProgram.raceproof_create_file(generatedBuf, create_reflock, generatedLk)) {
-			last_errno = (._errno());
-			err.unable_to_lock_message(generatedBuf, (._errno()));
+			last_errno = (/*Error: Function owner not recognized*/_errno());
+			err.unable_to_lock_message(generatedBuf, (/*Error: Function owner not recognized*/_errno()));
 			;
 		} 
 		if (ModernizedCProgram.verify_lock(generatedBase, lock, old_oid, mustexist, err)) {
-			last_errno = (._errno());
+			last_errno = (/*Error: Function owner not recognized*/_errno());
 			;
 		} 
 		;
 		lock = ((Object)0);
-		(._errno()) = last_errno;
+		(/*Error: Function owner not recognized*/_errno()) = last_errno;
 		return lock;
 	}
 	public int close_ref_gently() {
@@ -156,13 +156,13 @@ public class ref_lock {
 		byte path = generatedLk.get_locked_file_path();
 		stat st = new stat();
 		Object generatedSt_mode = st.getSt_mode();
-		if (!.lstat(path, st) && (((generatedSt_mode) & -1024) == -1024/*
+		if (!/*Error: Function owner not recognized*/lstat(path, st) && (((generatedSt_mode) & -1024) == -1024/*
 				 * There is a directory at the path we want to rename
 				 * the lockfile to. Hopefully it is empty; try to
 				 * delete it.
 				 */)) {
-			size_t len = .strlen(path);
-			strbuf sb_path = new strbuf(, , );
+			size_t len = /*Error: Function owner not recognized*/strlen(path);
+			strbuf sb_path = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			sb_path.strbuf_attach(path, ModernizedCProgram.len, ModernizedCProgram.len/*
 					 * If this fails, commit_lock_file() will also fail
 					 * and will report the problem.
@@ -181,11 +181,11 @@ public class ref_lock {
 		int ret = -1;
 		lock_file generatedLk = this.getLk();
 		byte ref_path = generatedLk.get_locked_file_path();
-		.unlink(ref_path);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(ref_path);
 		ret = ModernizedCProgram.symlink(target, ref_path);
 		ModernizedCProgram.free(ref_path);
 		if (ret) {
-			.fprintf((_iob[2]), "no symlink - falling back to symbolic ref\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "no symlink - falling back to symbolic ref\n");
 		} 
 		return ret;
 	}

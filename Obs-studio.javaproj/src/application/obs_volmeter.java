@@ -36,11 +36,11 @@ public class obs_volmeter {
 		for (size_t i = generatedCallbacks.getNum();
 		 i > 0; i--) {
 			meter_cb cb = generatedCallbacks.getArray()[i - 1];
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.cb.getParam(), magnitude, peak, input_peak);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.cb.getParam(), magnitude, peak, input_peak);
 		}
 		ModernizedCProgram.pthread_mutex_unlock(generatedCallback_mutex);
 	}
-	public void volmeter_process_peak_last_samples(int channel_nr, Double samples, Object nr_samples) {
+	public void volmeter_process_peak_last_samples(int channel_nr, double[] samples, Object nr_samples) {
 		Object generatedPrev_samples = this.getPrev_samples();
 		switch (/* Take the last 4 samples that need to be used for the next peak
 			 * calculation. If there are less than 4 samples in total the new
@@ -51,6 +51,12 @@ public class obs_volmeter {
 				generatedPrev_samples[channel_nr][2] = samples[nr_samples - 2];
 				generatedPrev_samples[channel_nr][3] = samples[nr_samples - 1];
 				break;
+		case 1:
+				generatedPrev_samples[channel_nr][0] = generatedPrev_samples[channel_nr][1];
+				generatedPrev_samples[channel_nr][1] = generatedPrev_samples[channel_nr][2];
+				generatedPrev_samples[channel_nr][2] = generatedPrev_samples[channel_nr][3];
+				generatedPrev_samples[channel_nr][3] = samples[nr_samples - 1];
+				break;
 		case 3:
 				generatedPrev_samples[channel_nr][0] = generatedPrev_samples[channel_nr][3];
 				generatedPrev_samples[channel_nr][1] = samples[nr_samples - 3];
@@ -58,12 +64,6 @@ public class obs_volmeter {
 				generatedPrev_samples[channel_nr][3] = samples[nr_samples - 1];
 				break;
 		case 0:
-				break;
-		case 1:
-				generatedPrev_samples[channel_nr][0] = generatedPrev_samples[channel_nr][1];
-				generatedPrev_samples[channel_nr][1] = generatedPrev_samples[channel_nr][2];
-				generatedPrev_samples[channel_nr][2] = generatedPrev_samples[channel_nr][3];
-				generatedPrev_samples[channel_nr][3] = samples[nr_samples - 1];
 				break;
 		default:
 				generatedPrev_samples[channel_nr][0] = samples[nr_samples - 4];
@@ -85,12 +85,12 @@ public class obs_volmeter {
 				continue;
 			} 
 			if ((()samples & -1024) > 0) {
-				.printf("Audio plane %i is not aligned %p skipping peak volume measurement.\n", plane_nr, samples);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Audio plane %i is not aligned %p skipping peak volume measurement.\n", plane_nr, samples);
 				generatedPeak[channel_nr] = 1.0;
 				channel_nr++;
 				continue;
 			} 
-			__m128 previous_samples = ._mm_loadu_ps(generatedPrev_samples[channel_nr]);
+			__m128 previous_samples = /*Error: Function owner not recognized*/_mm_loadu_ps(generatedPrev_samples[channel_nr]);
 			double peak;
 			switch (generatedPeak_meter_type) {
 			case obs_peak_meter_type.SAMPLE_PEAK_METER:
@@ -125,7 +125,7 @@ public class obs_volmeter {
 				double sample = samples[i];
 				sum += sample * sample;
 			}
-			generatedMagnitude[channel_nr] = .sqrtf(sum / nr_samples);
+			generatedMagnitude[channel_nr] = /*Error: Function owner not recognized*/sqrtf(sum / nr_samples);
 			channel_nr++;
 		}
 	}
@@ -135,7 +135,7 @@ public class obs_volmeter {
 		volmeter.volmeter_process_magnitude(data, nr_channels);
 	}
 	public obs_volmeter obs_volmeter_create(obs_fader_type type) {
-		obs_volmeter volmeter = ModernizedCProgram.bzalloc();
+		obs_volmeter volmeter = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		if (!volmeter) {
 			return ((Object)0);
 		} 
@@ -156,11 +156,11 @@ public class obs_volmeter {
 	}
 	public void obs_volmeter_destroy() {
 		if (!volmeter) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		volmeter.obs_volmeter_detach_source();
 		Object generatedCallbacks = this.getCallbacks();
-		.da_free(generatedCallbacks);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedCallbacks);
 		Object generatedCallback_mutex = this.getCallback_mutex();
 		ModernizedCProgram.pthread_mutex_destroy(generatedCallback_mutex);
 		Object generatedMutex = this.getMutex();
@@ -171,7 +171,7 @@ public class obs_volmeter {
 		 sh = new ();
 		obs_source_t source = new obs_source_t();
 		if (!volmeter) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedMutex);
@@ -180,11 +180,11 @@ public class obs_volmeter {
 		this.setSource(((Object)0));
 		ModernizedCProgram.pthread_mutex_unlock(generatedMutex);
 		if (!source) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		sh = ModernizedCProgram.obs_source_get_signal_handler(source);
-		.signal_handler_disconnect(sh, "volume", volmeter_source_volume_changed, volmeter);
-		.signal_handler_disconnect(sh, "destroy", volmeter_source_destroyed, volmeter);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_disconnect(sh, "volume", volmeter_source_volume_changed, volmeter);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_disconnect(sh, "destroy", volmeter_source_destroyed, volmeter);
 		source.obs_source_remove_audio_capture_callback(volmeter_source_data_received, volmeter);
 	}
 	public void obs_volmeter_set_peak_meter_type(obs_peak_meter_type peak_meter_type) {
@@ -195,7 +195,7 @@ public class obs_volmeter {
 	}
 	public void obs_volmeter_set_update_interval(Object ms) {
 		if (!volmeter || !ms) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedMutex);
@@ -236,23 +236,23 @@ public class obs_volmeter {
 	public void obs_volmeter_add_callback(Object callback, Object param) {
 		meter_cb cb = new meter_cb(callback, param);
 		if (!ModernizedCProgram.obs_object_valid(volmeter, "obs_volmeter_add_callback", "volmeter")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedCallback_mutex = this.getCallback_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedCallback_mutex);
 		Object generatedCallbacks = this.getCallbacks();
-		.da_push_back(generatedCallbacks, cb);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedCallbacks, cb);
 		ModernizedCProgram.pthread_mutex_unlock(generatedCallback_mutex);
 	}
 	public void obs_volmeter_remove_callback(Object callback, Object param) {
 		meter_cb cb = new meter_cb(callback, param);
 		if (!ModernizedCProgram.obs_object_valid(volmeter, "obs_volmeter_remove_callback", "volmeter")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedCallback_mutex = this.getCallback_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedCallback_mutex);
 		Object generatedCallbacks = this.getCallbacks();
-		.da_erase_item(generatedCallbacks, cb);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase_item(generatedCallbacks, cb);
 		ModernizedCProgram.pthread_mutex_unlock(generatedCallback_mutex);
 	}
 	public Object getMutex() {

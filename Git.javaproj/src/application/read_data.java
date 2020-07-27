@@ -2,14 +2,14 @@ package application;
 
 public class read_data {
 	private int index;
-	private untracked_cache_dir ucd;
+	private untracked_cache_dir[][] ucd;
 	private ewah_bitmap check_only;
 	private ewah_bitmap valid;
 	private ewah_bitmap sha1_valid;
 	private Object data;
 	private Object end;
 	
-	public read_data(int index, untracked_cache_dir ucd, ewah_bitmap check_only, ewah_bitmap valid, ewah_bitmap sha1_valid, Object data, Object end) {
+	public read_data(int index, untracked_cache_dir[][] ucd, ewah_bitmap check_only, ewah_bitmap valid, ewah_bitmap sha1_valid, Object data, Object end) {
 		setIndex(index);
 		setUcd(ucd);
 		setCheck_only(check_only);
@@ -27,10 +27,10 @@ public class read_data {
 	public void setIndex(int newIndex) {
 		index = newIndex;
 	}
-	public untracked_cache_dir getUcd() {
+	public untracked_cache_dir[][] getUcd() {
 		return ucd;
 	}
-	public void setUcd(untracked_cache_dir newUcd) {
+	public void setUcd(untracked_cache_dir[][] newUcd) {
 		ucd = newUcd;
 	}
 	public ewah_bitmap getCheck_only() {

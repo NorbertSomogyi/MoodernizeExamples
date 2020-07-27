@@ -15,16 +15,16 @@ public class credential_cache_entry {
 		int i;
 		for (i = 0; i < ModernizedCProgram.entries_nr; i++) {
 			credential e = ModernizedCProgram.entries[i].getItem();
-			if (.credential_match(c, e)) {
+			if (/*Error: Function owner not recognized*/credential_match(c, e)) {
 				return ModernizedCProgram.entries[i];
 			} 
 		}
 		return ((Object)0);
 		string_list_item fn = new string_list_item();
-		byte generatedString = fn.getString();
+		byte[] generatedString = fn.getString();
 		for (fn = (fns).getItems(); fn && fn < (fns).getItems() + (fns).getNr(); ++fn) {
 			if (c.parse_credential_file(generatedString, print_entry, ((Object)0))) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		}
 	}

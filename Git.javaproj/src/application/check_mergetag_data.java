@@ -2,9 +2,9 @@ package application;
 
 public class check_mergetag_data {
 	private int argc;
-	private Object argv;
+	private Object[][] argv;
 	
-	public check_mergetag_data(int argc, Object argv) {
+	public check_mergetag_data(int argc, Object[][] argv) {
 		setArgc(argc);
 		setArgv(argv);
 	}
@@ -17,10 +17,10 @@ public class check_mergetag_data {
 	public void setArgc(int newArgc) {
 		argc = newArgc;
 	}
-	public Object getArgv() {
+	public Object[][] getArgv() {
 		return argv;
 	}
-	public void setArgv(Object newArgv) {
+	public void setArgv(Object[][] newArgv) {
 		argv = newArgv;
 	}
 }

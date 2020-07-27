@@ -6,10 +6,10 @@ public class hwmon_ctx {
 	private Object hm_nvml;
 	private Object hm_nvapi;
 	private Object hm_sysfs;
-	private hm_attrs hm_device;
+	private hm_attrs[] hm_device;
 	private struct_ADLOD6MemClockState od_clock_mem_status;
 	
-	public hwmon_ctx(boolean enabled, Object hm_adl, Object hm_nvml, Object hm_nvapi, Object hm_sysfs, hm_attrs hm_device, struct_ADLOD6MemClockState od_clock_mem_status) {
+	public hwmon_ctx(boolean enabled, Object hm_adl, Object hm_nvml, Object hm_nvapi, Object hm_sysfs, hm_attrs[] hm_device, struct_ADLOD6MemClockState od_clock_mem_status) {
 		setEnabled(enabled);
 		setHm_adl(hm_adl);
 		setHm_nvml(hm_nvml);
@@ -51,10 +51,10 @@ public class hwmon_ctx {
 	public void setHm_sysfs(Object newHm_sysfs) {
 		hm_sysfs = newHm_sysfs;
 	}
-	public hm_attrs getHm_device() {
+	public hm_attrs[] getHm_device() {
 		return hm_device;
 	}
-	public void setHm_device(hm_attrs newHm_device) {
+	public void setHm_device(hm_attrs[] newHm_device) {
 		hm_device = newHm_device;
 	}
 	public struct_ADLOD6MemClockState getOd_clock_mem_status() {

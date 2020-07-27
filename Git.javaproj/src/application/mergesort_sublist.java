@@ -14,7 +14,7 @@ public class mergesort_sublist {
 	public Object pop_item(Object get_next_fn) {
 		Object generatedPtr = this.getPtr();
 		Object p = generatedPtr;
-		this.setPtr(.get_next_fn(generatedPtr));
+		this.setPtr(/*Error: Function owner not recognized*/get_next_fn(generatedPtr));
 		long generatedLen = this.getLen();
 		this.setLen(generatedPtr ? (generatedLen - 1) : 0);
 		return p;

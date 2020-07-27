@@ -7,18 +7,18 @@ package application;
  * be modified in any way.
  */
 public class parse_opt_ctx_t {
-	private Object argv;
+	private Object[][] argv;
 	private Object out;
 	private int argc;
 	private int cpidx;
 	private int total;
-	private Object opt;
+	private Object[] opt;
 	private int flags;
 	private Object prefix;
-	private Object alias_groups;
+	private Object[][] alias_groups;
 	private option updated_options;
 	
-	public parse_opt_ctx_t(Object argv, Object out, int argc, int cpidx, int total, Object opt, int flags, Object prefix, Object alias_groups, option updated_options) {
+	public parse_opt_ctx_t(Object[][] argv, Object out, int argc, int cpidx, int total, Object[] opt, int flags, Object prefix, Object[][] alias_groups, option updated_options) {
 		setArgv(argv);
 		setOut(out);
 		setArgc(argc);
@@ -33,10 +33,20 @@ public class parse_opt_ctx_t {
 	public parse_opt_ctx_t() {
 	}
 	
+	public parse_opt_result parse_opt_unknown_cb(Object opt, Object arg, int unset) {
+		do {
+			if ((arg)) {
+				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\parse-options-cb.c", 231, "option callback does not expect an argument");
+			} 
+		} while (0);
+		return parse_opt_result.PARSE_OPT_UNKNOWN/**
+		 * Recreates the command-line option in the strbuf.
+		 */;
+	}
 	public parse_opt_result get_arg(Object opt, int flags, Object arg) {
-		Object generatedOpt = this.getOpt();
+		Object[] generatedOpt = this.getOpt();
 		int generatedArgc = this.getArgc();
-		Object generatedArgv = this.getArgv();
+		Object[][] generatedArgv = this.getArgv();
 		if (generatedOpt) {
 			arg = generatedOpt;
 			this.setOpt(((Object)0));
@@ -53,7 +63,7 @@ public class parse_opt_ctx_t {
 	public parse_opt_result parse_short_opt(Object options) {
 		option all_opts = options;
 		option numopt = ((Object)0);
-		Object generatedOpt = this.getOpt();
+		Object[] generatedOpt = this.getOpt();
 		for (; options.getType() != parse_opt_type.OPTION_END; options++) {
 			if (options.getShort_name() == generatedOpt) {
 				this.setOpt(generatedOpt[1] ? generatedOpt + 1 : ((Object)0));
@@ -76,9 +86,9 @@ public class parse_opt_ctx_t {
 			arg = ModernizedCProgram.xmemdupz(generatedOpt, ModernizedCProgram.len);
 			this.setOpt(generatedOpt[ModernizedCProgram.len] ? generatedOpt + ModernizedCProgram.len : ((Object)0));
 			if (numopt.getCallback()) {
-				ModernizedCProgram.rc = .UNRECOGNIZEDFUNCTIONNAME(numopt, arg, 0) ? (true) : 0;
+				ModernizedCProgram.rc = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(numopt, arg, 0) ? (true) : 0;
 			} else {
-					ModernizedCProgram.rc = .UNRECOGNIZEDFUNCTIONNAME(p, numopt, arg, 0);
+					ModernizedCProgram.rc = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p, numopt, arg, 0);
 			} 
 			ModernizedCProgram.free(arg);
 			return ModernizedCProgram.rc;
@@ -119,7 +129,7 @@ public class parse_opt_ctx_t {
 		} 
 		return parse_opt_result.PARSE_OPT_UNKNOWN;
 	}
-	public int parse_nodash_opt(Object arg, Object options) {
+	public int parse_nodash_opt(Object[] arg, Object options) {
 		option all_opts = options;
 		for (; options.getType() != parse_opt_type.OPTION_END; options++) {
 			if (!(options.getFlags() & parse_opt_option_flags.PARSE_OPT_NODASH)) {
@@ -152,7 +162,7 @@ public class parse_opt_ctx_t {
 		ModernizedCProgram.parse_options_check(options);
 	}
 	public void parse_options_start(int argc, Object argv, Object prefix, Object options, int flags) {
-		.memset(ModernizedCProgram.ctx, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.ctx, 0, /*Error: sizeof expression not supported yet*/);
 		ModernizedCProgram.ctx.parse_options_start_1(argc, argv, prefix, options, flags);
 	}
 	public int parse_options_step(Object options, Object usagestr) {
@@ -164,7 +174,7 @@ public class parse_opt_ctx_t {
 		if (ModernizedCProgram.ctx.getFlags() & parse_opt_flags.PARSE_OPT_ONE_SHOT) {
 			return ModernizedCProgram.ctx.getTotal() - ModernizedCProgram.ctx.getArgc();
 		} 
-		ModernizedCProgram.move_array((ModernizedCProgram.ctx.getOut() + ModernizedCProgram.ctx.getCpidx()), (ModernizedCProgram.ctx.getArgv()), (ModernizedCProgram.ctx.getArgc()),  + ( - 1));
+		ModernizedCProgram.move_array((ModernizedCProgram.ctx.getOut() + ModernizedCProgram.ctx.getCpidx()), (ModernizedCProgram.ctx.getArgv()), (ModernizedCProgram.ctx.getArgc()), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		ModernizedCProgram.ctx.getOut()[ModernizedCProgram.ctx.getCpidx() + ModernizedCProgram.ctx.getArgc()] = ((Object)0);
 		return ModernizedCProgram.ctx.getCpidx() + ModernizedCProgram.ctx.getArgc();
 	}
@@ -175,7 +185,7 @@ public class parse_opt_ctx_t {
 			return parse_opt_result.PARSE_OPT_HELP;
 		} 
 		if (!err && ModernizedCProgram.ctx && ModernizedCProgram.ctx.getFlags() & parse_opt_option_flags.PARSE_OPT_SHELL_EVAL) {
-			.fprintf(outfile, "cat <<\\EOF\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(outfile, "cat <<\\EOF\n");
 		} 
 		outfile.fprintf_ln(ModernizedCProgram._("usage: %s"), ModernizedCProgram._(usagestr++));
 		while (usagestr && usagestr/*
@@ -188,7 +198,7 @@ public class parse_opt_ctx_t {
 			if (usagestr) {
 				outfile.fprintf_ln(ModernizedCProgram._("    %s"), ModernizedCProgram._(usagestr));
 			} else {
-					.fputc((byte)'\n', outfile);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\n', outfile);
 			} 
 			usagestr++;
 		}
@@ -197,10 +207,10 @@ public class parse_opt_ctx_t {
 			size_t pos = new size_t();
 			int pad;
 			if (opts.getType() == parse_opt_type.OPTION_GROUP) {
-				.fputc((byte)'\n', outfile);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\n', outfile);
 				need_newline = 0;
 				if (opts.getHelp()) {
-					.fprintf(outfile, "%s\n", ModernizedCProgram._(opts.getHelp()));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(outfile, "%s\n", ModernizedCProgram._(opts.getHelp()));
 				} 
 				continue;
 			} 
@@ -208,22 +218,22 @@ public class parse_opt_ctx_t {
 				continue;
 			} 
 			if (need_newline) {
-				.fputc((byte)'\n', outfile);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\n', outfile);
 				need_newline = 0;
 			} 
-			pos = .fprintf(outfile, "    ");
+			pos = /*Error: Function owner not recognized*/fprintf(outfile, "    ");
 			if (opts.getShort_name()) {
 				if (opts.getFlags() & parse_opt_option_flags.PARSE_OPT_NODASH) {
-					pos += .fprintf(outfile, "%c", opts.getShort_name());
+					pos += /*Error: Function owner not recognized*/fprintf(outfile, "%c", opts.getShort_name());
 				} else {
-						pos += .fprintf(outfile, "-%c", opts.getShort_name());
+						pos += /*Error: Function owner not recognized*/fprintf(outfile, "-%c", opts.getShort_name());
 				} 
 			} 
 			if (opts.getLong_name() && opts.getShort_name()) {
-				pos += .fprintf(outfile, ", ");
+				pos += /*Error: Function owner not recognized*/fprintf(outfile, ", ");
 			} 
 			if (opts.getLong_name()) {
-				pos += .fprintf(outfile, "--%s", opts.getLong_name());
+				pos += /*Error: Function owner not recognized*/fprintf(outfile, "--%s", opts.getLong_name());
 			} 
 			if (opts.getType() == parse_opt_type.OPTION_NUMBER) {
 				pos += outfile.utf8_fprintf(ModernizedCProgram._("-NUM"));
@@ -234,19 +244,19 @@ public class parse_opt_ctx_t {
 			if (pos <= 24) {
 				pad = 24 - pos;
 			} else {
-					.fputc((byte)'\n', outfile);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\n', outfile);
 					pad = 24;
 			} 
 			if (opts.getType() == parse_opt_type.OPTION_ALIAS) {
-				.fprintf(outfile, "%*s", pad + 2, "");
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(outfile, "%*s", pad + 2, "");
 				outfile.fprintf_ln(ModernizedCProgram._("alias of --%s"), (byte)opts.getValue());
 				continue;
 			} 
-			.fprintf(outfile, "%*s%s\n", pad + 2, "", ModernizedCProgram._(opts.getHelp()));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(outfile, "%*s%s\n", pad + 2, "", ModernizedCProgram._(opts.getHelp()));
 		}
-		.fputc((byte)'\n', outfile);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\n', outfile);
 		if (!err && ModernizedCProgram.ctx && ModernizedCProgram.ctx.getFlags() & parse_opt_option_flags.PARSE_OPT_SHELL_EVAL) {
-			.fputs("EOF\n", outfile);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs("EOF\n", outfile);
 		} 
 		return parse_opt_result.PARSE_OPT_HELP;
 	}
@@ -364,7 +374,7 @@ public class parse_opt_ctx_t {
 				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\update-index.c", 918, "option callback does not expect an argument");
 			} 
 		} while (0);
-		has_errors = ModernizedCProgram.do_unresolve(ModernizedCProgram.ctx.getArgc(), ModernizedCProgram.ctx.getArgv(), prefix, prefix ? .strlen(prefix) : 0);
+		has_errors = ModernizedCProgram.do_unresolve(ModernizedCProgram.ctx.getArgc(), ModernizedCProgram.ctx.getArgv(), prefix, prefix ? /*Error: Function owner not recognized*/strlen(prefix) : 0);
 		if (has_errors) {
 			(ModernizedCProgram.the_index.getCache_changed()) = 0;
 		} 
@@ -394,20 +404,10 @@ public class parse_opt_ctx_t {
 		ModernizedCProgram.ctx.setArgc(1);
 		return 0;
 	}
-	public parse_opt_result parse_opt_unknown_cb(Object opt, Object arg, int unset) {
-		do {
-			if ((arg)) {
-				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\parse-options-cb.c", 231, "option callback does not expect an argument");
-			} 
-		} while (0);
-		return parse_opt_result.PARSE_OPT_UNKNOWN/**
-		 * Recreates the command-line option in the strbuf.
-		 */;
-	}
-	public Object getArgv() {
+	public Object[][] getArgv() {
 		return argv;
 	}
-	public void setArgv(Object newArgv) {
+	public void setArgv(Object[][] newArgv) {
 		argv = newArgv;
 	}
 	public Object getOut() {
@@ -434,10 +434,10 @@ public class parse_opt_ctx_t {
 	public void setTotal(int newTotal) {
 		total = newTotal;
 	}
-	public Object getOpt() {
+	public Object[] getOpt() {
 		return opt;
 	}
-	public void setOpt(Object newOpt) {
+	public void setOpt(Object[] newOpt) {
 		opt = newOpt;
 	}
 	public int getFlags() {
@@ -452,10 +452,10 @@ public class parse_opt_ctx_t {
 	public void setPrefix(Object newPrefix) {
 		prefix = newPrefix;
 	}
-	public Object getAlias_groups() {
+	public Object[][] getAlias_groups() {
 		return alias_groups;
 	}
-	public void setAlias_groups(Object newAlias_groups) {
+	public void setAlias_groups(Object[][] newAlias_groups) {
 		alias_groups = newAlias_groups;
 	}
 	public option getUpdated_options() {

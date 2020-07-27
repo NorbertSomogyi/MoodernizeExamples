@@ -33,9 +33,9 @@ public class gl_shader_parser {
 		dstr generatedGl_string = this.getGl_string();
 		generatedGl_string.dstr_init();
 		Object generatedTexture_samplers = this.getTexture_samplers();
-		.da_init(generatedTexture_samplers);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedTexture_samplers);
 		Object generatedAttribs = this.getAttribs();
-		.da_init(generatedAttribs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedAttribs);
 	}
 	public void gl_shader_parser_free() {
 		 i = new ();
@@ -43,9 +43,9 @@ public class gl_shader_parser {
 		for (i = 0; i < generatedAttribs.getNum(); i++) {
 			generatedAttribs.getArray() + i.gl_parser_attrib_free();
 		}
-		.da_free(generatedAttribs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedAttribs);
 		Object generatedTexture_samplers = this.getTexture_samplers();
-		.da_free(generatedTexture_samplers);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedTexture_samplers);
 		dstr generatedGl_string = this.getGl_string();
 		generatedGl_string.dstr_free();
 		shader_parser generatedParser = this.getParser();
@@ -99,7 +99,7 @@ public class gl_shader_parser {
 	}
 	public void gl_write_type(Object type) {
 		dstr generatedGl_string = this.getGl_string();
-		if (!glsp.gl_write_type_n(type, .strlen(type))) {
+		if (!glsp.gl_write_type_n(type, /*Error: Function owner not recognized*/strlen(type))) {
 			generatedGl_string.dstr_cat(type);
 		} 
 	}
@@ -335,7 +335,7 @@ public class gl_shader_parser {
 		glsp.gl_write_type(func.getReturn_type());
 		dstr generatedGl_string = this.getGl_string();
 		generatedGl_string.dstr_cat(" ");
-		if (.strcmp(func.getName(), "main") == 0) {
+		if (/*Error: Function owner not recognized*/strcmp(func.getName(), "main") == 0) {
 			generatedGl_string.dstr_cat("_main_wrap");
 		} else {
 				generatedGl_string.dstr_cat(func.getName());

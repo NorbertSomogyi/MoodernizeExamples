@@ -12,10 +12,10 @@ public class userformat_want {
 	}
 	
 	public void userformat_find_requirements(Object fmt) {
-		strbuf dummy = new strbuf(, , );
+		strbuf dummy = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		if (!fmt) {
 			if (!ModernizedCProgram.user_format) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			fmt = ModernizedCProgram.user_format;
 		} 

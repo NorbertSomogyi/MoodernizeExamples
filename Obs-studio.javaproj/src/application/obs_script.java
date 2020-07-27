@@ -43,12 +43,12 @@ public class obs_script {
 		dstr generatedDir = data.getDir();
 		Object generatedDstr = generatedDir.getDstr();
 		if (ModernizedCProgram.python_loaded && !generatedLoaded) {
-			 gstate = .Import_PyGILState_Ensure();
+			 gstate = /*Error: Function owner not recognized*/Import_PyGILState_Ensure();
 			if (!generatedModule) {
 				ModernizedCProgram.add_to_python_path(generatedDstr);
 			} 
 			generatedBase.setLoaded(data.load_python_script());
-			.Import_PyGILState_Release(gstate);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyGILState_Release(gstate);
 			if (generatedLoaded) {
 				ModernizedCProgram.obs_python_script_update(ModernizedCProgram.s, NULL);
 			} 
@@ -56,7 +56,7 @@ public class obs_script {
 		return generatedLoaded;
 	}
 	public obs_script obs_python_script_create(Object path, obs_data settings) {
-		obs_python_script data = ModernizedCProgram.bzalloc();
+		obs_python_script data = ModernizedCProgram.bzalloc(/*Error: sizeof expression not supported yet*/);
 		obs_script generatedBase = data.getBase();
 		generatedBase.setType(obs_script_lang.OBS_SCRIPT_LANG_PYTHON);
 		dstr generatedPath = generatedBase.getPath();
@@ -64,7 +64,7 @@ public class obs_script {
 		generatedPath.dstr_replace("\\", "/");
 		Object generatedDstr = generatedPath.getDstr();
 		path = generatedDstr;
-		byte slash = path && path ? .strrchr(path, (byte)'/') : NULL;
+		byte slash = path && path ? /*Error: Function owner not recognized*/strrchr(path, (byte)'/') : NULL;
 		dstr generatedFile = generatedBase.getFile();
 		dstr generatedDir = data.getDir();
 		if (slash) {
@@ -77,7 +77,7 @@ public class obs_script {
 		path = generatedDstr;
 		dstr generatedName = data.getName();
 		generatedName.dstr_copy_dstr(generatedFile);
-		byte ext = .strstr(path, ".py");
+		byte ext = /*Error: Function owner not recognized*/strstr(path, ".py");
 		if (ext) {
 			generatedName.dstr_resize(ext - path);
 		} 
@@ -90,7 +90,7 @@ public class obs_script {
 		if (!ModernizedCProgram.python_loaded) {
 			return (obs_script_t)data;
 		} 
-		 gstate = .Import_PyGILState_Ensure();
+		 gstate = /*Error: Function owner not recognized*/Import_PyGILState_Ensure();
 		ModernizedCProgram.add_to_python_path(generatedDstr);
 		generatedBase.setLoaded(data.load_python_script());
 		Object generatedLoaded = generatedBase.getLoaded();
@@ -99,13 +99,13 @@ public class obs_script {
 			ModernizedCProgram.obs_python_script_update(generatedBase, NULL);
 			ModernizedCProgram.cur_python_script = NULL;
 		} 
-		.Import_PyGILState_Release(gstate);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyGILState_Release(gstate);
 		return (obs_script_t)data;
 	}
 	public void obs_python_script_unload() {
 		obs_python_script data = (obs_python_script)ModernizedCProgram.s;
 		if (!ModernizedCProgram.s.getLoaded() || !ModernizedCProgram.python_loaded) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_python_script generatedP_prev_next_tick = data.getP_prev_next_tick();
 		obs_python_script generatedNext_tick = data.getNext_tick();
@@ -120,15 +120,15 @@ public class obs_script {
 			data.setP_prev_next_tick(NULL);
 			data.setNext_tick(NULL);
 		} 
-		 gstate = .Import_PyGILState_Ensure();
+		 gstate = /*Error: Function owner not recognized*/Import_PyGILState_Ensure();
 		Object generatedTick = data.getTick();
-		.Py_XDECREF(generatedTick);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(generatedTick);
 		Object generatedSave = data.getSave();
-		.Py_XDECREF(generatedSave);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(generatedSave);
 		Object generatedUpdate = data.getUpdate();
-		.Py_XDECREF(generatedUpdate);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(generatedUpdate);
 		Object generatedGet_properties = data.getGet_properties();
-		.Py_XDECREF(generatedGet_properties);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(generatedGet_properties);
 		data.setTick(NULL);
 		data.setSave(NULL);
 		data.setUpdate(NULL);
@@ -142,7 +142,7 @@ public class obs_script {
 			cb = next;
 		}
 		/* ---------------------------- *//* unload                       */data.unload_python_script();
-		.Import_PyGILState_Release(gstate);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyGILState_Release(gstate);
 		ModernizedCProgram.s.setLoaded(false);
 	}
 	public void obs_python_script_destroy() {
@@ -157,9 +157,9 @@ public class obs_script {
 		dstr generatedName = data.getName();
 		if (data) {
 			if (ModernizedCProgram.python_loaded) {
-				 gstate = .Import_PyGILState_Ensure();
-				.Py_XDECREF(generatedModule);
-				.Import_PyGILState_Release(gstate);
+				 gstate = /*Error: Function owner not recognized*/Import_PyGILState_Ensure();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(generatedModule);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyGILState_Release(gstate);
 			} 
 			generatedPath.dstr_free();
 			generatedFile.dstr_free();
@@ -173,25 +173,25 @@ public class obs_script {
 	public void obs_python_script_save() {
 		obs_python_script data = (obs_python_script)ModernizedCProgram.s;
 		if (!ModernizedCProgram.s.getLoaded() || !ModernizedCProgram.python_loaded) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedSave = data.getSave();
 		if (!generatedSave) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		 gstate = .Import_PyGILState_Ensure();
+		 gstate = /*Error: Function owner not recognized*/Import_PyGILState_Ensure();
 		ModernizedCProgram.cur_python_script = data;
 		ModernizedCProgram.PyObject * py_settings;
 		if (ModernizedCProgram.libobs_to_py_("obs_data_t *", ModernizedCProgram.s.getSettings(), false, py_settings, NULL, __FUNCTION__, 1465)) {
-			 args = .Import_Py_BuildValue("(O)", py_settings);
-			 ret = .Import_PyObject_CallObject(generatedSave, args);
+			 args = /*Error: Function owner not recognized*/Import_Py_BuildValue("(O)", py_settings);
+			 ret = /*Error: Function owner not recognized*/Import_PyObject_CallObject(generatedSave, args);
 			ModernizedCProgram.py_error_(__FUNCTION__, 1468);
-			.Py_XDECREF(ret);
-			.Py_XDECREF(args);
-			.Py_XDECREF(py_settings);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(ret);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(args);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_settings);
 		} 
 		ModernizedCProgram.cur_python_script = NULL;
-		.Import_PyGILState_Release(gstate);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyGILState_Release(gstate);
 	}
 	public obs_script obs_script_create(Object path, obs_data settings) {
 		obs_script_t script = NULL;
@@ -202,7 +202,7 @@ public class obs_script {
 		if (!ModernizedCProgram.pointer_valid(path, "path", __FUNCTION__)) {
 			return NULL;
 		} 
-		ext = .strrchr(path, (byte)'.');
+		ext = /*Error: Function owner not recognized*/strrchr(path, (byte)'.');
 		if (!ext) {
 			return NULL;
 		} 
@@ -221,7 +221,7 @@ public class obs_script {
 	}
 	public void obs_script_destroy() {
 		if (!script) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 	}
 	public Object obs_lua_script_load() {
@@ -237,7 +237,7 @@ public class obs_script {
 		return generatedLoaded;
 	}
 	public obs_script obs_lua_script_create(Object path, obs_data settings) {
-		obs_lua_script data = ModernizedCProgram.bzalloc();
+		obs_lua_script data = ModernizedCProgram.bzalloc(/*Error: sizeof expression not supported yet*/);
 		obs_script generatedBase = data.getBase();
 		generatedBase.setType(obs_script_lang.OBS_SCRIPT_LANG_LUA);
 		data.setTick(LUA_REFNIL);
@@ -252,7 +252,7 @@ public class obs_script {
 		} 
 		dstr generatedPath = generatedBase.getPath();
 		generatedPath.dstr_copy(path);
-		byte slash = path && path ? .strrchr(path, (byte)'/') : NULL;
+		byte slash = path && path ? /*Error: Function owner not recognized*/strrchr(path, (byte)'/') : NULL;
 		dstr generatedFile = generatedBase.getFile();
 		dstr generatedDir = data.getDir();
 		if (slash) {
@@ -274,7 +274,7 @@ public class obs_script {
 	public void obs_lua_script_unload() {
 		obs_lua_script data = (obs_lua_script)ModernizedCProgram.s;
 		if (!ModernizedCProgram.s.getLoaded()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedScript = data.getScript();
 		 script = generatedScript;
@@ -294,8 +294,8 @@ public class obs_script {
 		} 
 		Object generatedMutex = data.getMutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedMutex);
-		.lua_getglobal(script, "script_unload");
-		.lua_pcall(script, 0, 0, 0/* ---------------------------- */);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_getglobal(script, "script_unload");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_pcall(script, 0, 0, 0/* ---------------------------- */);
 		script_callback generatedFirst_callback = data.getFirst_callback();
 		/* remove all callbacks         */lua_obs_callback cb = (lua_obs_callback)generatedFirst_callback;
 		script_callback generatedBase = cb.getBase();
@@ -306,7 +306,7 @@ public class obs_script {
 			cb = next;
 		}
 		ModernizedCProgram.pthread_mutex_unlock(generatedMutex);
-		.lua_close(/* close script                 */script);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_close(/* close script                 */script);
 		ModernizedCProgram.s.setLoaded(false);
 	}
 	public void obs_lua_script_destroy() {
@@ -335,11 +335,11 @@ public class obs_script {
 		Object generatedScript = data.getScript();
 		 script = generatedScript;
 		if (!ModernizedCProgram.s.getLoaded()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedSave = data.getSave();
 		if (generatedSave == LUA_REFNIL) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.current_lua_script = data;
 		Object generatedMutex = data.getMutex();
@@ -358,31 +358,31 @@ public class obs_script {
 		Object generatedDstr = generatedFile.getDstr();
 		if (script) {
 			switch (generatedType) {
+			case obs_script_lang.OBS_SCRIPT_LANG_PYTHON:
+					lang = "Python";
+					break;
 			case obs_script_lang.OBS_SCRIPT_LANG_UNKNOWN:
 					lang = "(Unknown language)";
 					break;
 			case obs_script_lang.OBS_SCRIPT_LANG_LUA:
 					lang = "Lua";
 					break;
-			case obs_script_lang.OBS_SCRIPT_LANG_PYTHON:
-					lang = "Python";
-					break;
 			}
-			start_len = .snprintf(msg, , "[%s: %s] ", lang, generatedDstr);
+			start_len = /*Error: Function owner not recognized*/snprintf(msg, /*Error: sizeof expression not supported yet*/, "[%s: %s] ", lang, generatedDstr);
 		} else {
-				start_len = .snprintf(msg, , "[Unknown Script] ");
+				start_len = /*Error: Function owner not recognized*/snprintf(msg, /*Error: sizeof expression not supported yet*/, "[Unknown Script] ");
 		} 
-		.vsnprintf(msg + start_len,  - start_len, format, args);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/vsnprintf(msg + start_len, /*Error: sizeof expression not supported yet*/ - start_len, format, args);
 		if (ModernizedCProgram.callback) {
-			.callback(ModernizedCProgram.param, script, level, msg + start_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/callback(ModernizedCProgram.param, script, level, msg + start_len);
 		} 
 		ModernizedCProgram.blog(level, "%s", msg);
 	}
 	public void script_log(int level, Object format) {
 		va_list args = new va_list();
-		.__builtin_va_start(args, format);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(args, format);
 		script.script_log_va(level, format, args);
-		.__builtin_va_end(args);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(args);
 	}
 	public obs_script_lang getType() {
 		return type;

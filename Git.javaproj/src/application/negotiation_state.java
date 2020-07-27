@@ -59,7 +59,7 @@ public class negotiation_state {
 		prio_queue generatedRev_list = data.getRev_list();
 		int generatedNr = generatedRev_list.getNr();
 		int generatedNon_common_revs = data.getNon_common_revs();
-		commit generatedCommit = entry.getCommit();
+		Object generatedCommit = entry.getCommit();
 		object generatedObject = commit.getObject();
 		int generatedFlags = generatedObject.getFlags();
 		Object generatedTtl = entry.getTtl();

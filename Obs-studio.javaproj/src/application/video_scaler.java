@@ -43,15 +43,15 @@ public class video_scaler {
 		if (AVPixelFormat.format_src == AV_PIX_FMT_NONE || AVPixelFormat.format_dst == AV_PIX_FMT_NONE) {
 			return -1;
 		} 
-		scaler = ModernizedCProgram.bzalloc();
+		scaler = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		scaler.setSrc_height(src.getHeight());
-		scaler.setSwscale(.sws_getCachedContext(NULL, src.getWidth(), src.getHeight(), AVPixelFormat.format_src, dst.getWidth(), dst.getHeight(), AVPixelFormat.format_dst, scale_type, NULL, NULL, NULL));
+		scaler.setSwscale(/*Error: Function owner not recognized*/sws_getCachedContext(NULL, src.getWidth(), src.getHeight(), AVPixelFormat.format_src, dst.getWidth(), dst.getHeight(), AVPixelFormat.format_dst, scale_type, NULL, NULL, NULL));
 		SwsContext generatedSwscale = scaler.getSwscale();
 		if (!generatedSwscale) {
 			ModernizedCProgram.blog(LOG_ERROR, "video_scaler_create: Could not create swscale");
 			;
 		} 
-		ret = .sws_setColorspaceDetails(generatedSwscale, coeff_src, range_src, coeff_dst, range_dst, 0, (1 << 16), (1 << 16));
+		ret = /*Error: Function owner not recognized*/sws_setColorspaceDetails(generatedSwscale, coeff_src, range_src, coeff_dst, range_dst, 0, (1 << 16), (1 << 16));
 		if (ret < 0) {
 			ModernizedCProgram.blog(LOG_DEBUG, "video_scaler_create: sws_setColorspaceDetails failed, ignoring");
 		} 
@@ -62,7 +62,7 @@ public class video_scaler {
 	public void video_scaler_destroy() {
 		SwsContext generatedSwscale = this.getSwscale();
 		if (scaler) {
-			.sws_freeContext(generatedSwscale);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sws_freeContext(generatedSwscale);
 			ModernizedCProgram.bfree(scaler);
 		} 
 	}
@@ -72,7 +72,7 @@ public class video_scaler {
 		} 
 		SwsContext generatedSwscale = this.getSwscale();
 		int generatedSrc_height = this.getSrc_height();
-		int ret = .sws_scale(generatedSwscale, input, (int)in_linesize, 0, generatedSrc_height, output, (int)out_linesize);
+		int ret = /*Error: Function owner not recognized*/sws_scale(generatedSwscale, input, (int)in_linesize, 0, generatedSrc_height, output, (int)out_linesize);
 		if (ret <= 0) {
 			ModernizedCProgram.blog(LOG_ERROR, "video_scaler_scale: sws_scale failed: %d", ret);
 			return false;

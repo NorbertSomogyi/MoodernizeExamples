@@ -15,6 +15,10 @@ public class cache_def {
 	public cache_def() {
 	}
 	
+	public void cache_def_clear() {
+		strbuf generatedPath = this.getPath();
+		generatedPath.strbuf_release();
+	}
 	public void reset_lstat_cache() {
 		strbuf generatedPath = this.getPath();
 		generatedPath.strbuf_setlen(0);
@@ -35,7 +39,7 @@ public class cache_def {
 	 * of the prefix, where the cache should use the stat() function
 	 * instead of the lstat() function to test each path component.
 	 */
-	public int lstat_cache_matchlen(Object name, int len, int ret_flags, int track_flags, int prefix_len_stat_func) {
+	public int lstat_cache_matchlen(Object[] name, int len, Integer ret_flags, int track_flags, int prefix_len_stat_func) {
 		int match_len;
 		int last_slash;
 		int last_slash_dir;
@@ -46,7 +50,7 @@ public class cache_def {
 		int generatedTrack_flags = this.getTrack_flags();
 		int generatedPrefix_len_stat_func = this.getPrefix_len_stat_func();
 		strbuf generatedPath = this.getPath();
-		byte generatedBuf = generatedPath.getBuf();
+		byte[] generatedBuf = generatedPath.getBuf();
 		Object generatedLen = generatedPath.getLen();
 		int generatedFlags = this.getFlags();
 		if (generatedTrack_flags != track_flags || generatedPrefix_len_stat_func != prefix_len_stat_func/*
@@ -102,19 +106,19 @@ public class cache_def {
 			last_slash = match_len;
 			generatedBuf[last_slash] = (byte)'\0';
 			if (last_slash <= prefix_len_stat_func) {
-				ret = .stat(generatedBuf, st);
+				ret = /*Error: Function owner not recognized*/stat(generatedBuf, st);
 			} else {
-					ret = .lstat(generatedBuf, st);
+					ret = /*Error: Function owner not recognized*/lstat(generatedBuf, st);
 			} 
 			if (ret) {
 				ret_flags = (1 << 3);
-				if ((._errno()) == 2) {
+				if ((/*Error: Function owner not recognized*/_errno()) == 2) {
 					ret_flags |=  (1 << 1);
 				} 
 			}  else if ((((generatedSt_mode) & -1024) == -1024)) {
 				last_slash_dir = last_slash;
 				continue;
-			}  else if (.S_ISLNK(generatedSt_mode)) {
+			}  else if (/*Error: Function owner not recognized*/S_ISLNK(generatedSt_mode)) {
 				ret_flags = (1 << 2);
 			} else {
 					ret_flags = (1 << 4);
@@ -182,10 +186,6 @@ public class cache_def {
 	 * Returns the length (on a path component basis) of the longest
 	 * common prefix match of 'name_a' and 'name_b'.
 	 */
-	public void cache_def_clear() {
-		strbuf generatedPath = this.getPath();
-		generatedPath.strbuf_release();
-	}
 	public strbuf getPath() {
 		return path;
 	}

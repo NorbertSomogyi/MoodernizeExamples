@@ -35,7 +35,7 @@ public class ext2_group_desc {
 	}
 	
 	public ext2_group_desc ext2fs_group_desc(Object fs, opaque_ext2_group_desc gdp, Object group) {
-		int desc_size = .EXT2_DESC_SIZE(fs.getSuper()) & ~7;
+		int desc_size = /*Error: Function owner not recognized*/EXT2_DESC_SIZE(fs.getSuper()) & ~7;
 		return (ext2_group_desc)((byte)gdp + group * desc_size);
 	}
 	public Object getBg_block_bitmap() {

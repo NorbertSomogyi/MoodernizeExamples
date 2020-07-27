@@ -15,46 +15,6 @@ public class matrix3 {
 	public matrix3() {
 	}
 	
-	public void matrix3_copy(Object m) {
-		vec3 generatedX = this.getX();
-		generatedX.vec3_copy(generatedX);
-		vec3 generatedY = this.getY();
-		generatedY.vec3_copy(generatedY);
-		vec3 generatedZ = this.getZ();
-		generatedZ.vec3_copy(generatedZ);
-		vec3 generatedT = this.getT();
-		generatedT.vec3_copy(generatedT);
-	}
-	public void matrix3_identity() {
-		vec3 generatedX = this.getX();
-		generatedX.vec3_zero();
-		vec3 generatedY = this.getY();
-		generatedY.vec3_zero();
-		vec3 generatedZ = this.getZ();
-		generatedZ.vec3_zero();
-		vec3 generatedT = this.getT();
-		generatedT.vec3_zero();
-		generatedX.setX(generatedY.setY(generatedZ.setZ(1.0)));
-	}
-	public void matrix3_translate(Object m, Object v) {
-		vec3 generatedT = this.getT();
-		generatedT.vec3_sub(generatedT, v);
-	}
-	public void matrix3_translate3f(Object m, double x, double y, double z) {
-		vec3 v = new vec3();
-		v.vec3_set(x, y, z);
-		dst.matrix3_translate(m, v);
-	}
-	public void matrix3_rotate_aa4f(Object m, double x, double y, double z, double rot) {
-		axisang aa = new axisang();
-		aa.axisang_set(x, y, z, rot);
-		dst.matrix3_rotate_aa(m, aa);
-	}
-	public void matrix3_scale3f(Object m, double x, double y, double z) {
-		vec3 v = new vec3();
-		v.vec3_set(x, y, z);
-		dst.matrix3_scale(m, v);
-	}
 	/******************************************************************************
 	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
 	
@@ -156,14 +116,14 @@ public class matrix3 {
 		vec3 generatedT = this.getT();
 		generatedT.vec3_rotate(generatedT, m);
 		generatedT.vec3_neg(generatedT);
-		tmp1 = ._mm_movelh_ps(m.getX().getM(), m.getY().getM());
-		tmp2 = ._mm_movehl_ps(m.getY().getM(), m.getX().getM());
+		tmp1 = /*Error: Function owner not recognized*/_mm_movelh_ps(m.getX().getM(), m.getY().getM());
+		tmp2 = /*Error: Function owner not recognized*/_mm_movehl_ps(m.getY().getM(), m.getX().getM());
 		vec3 generatedX = this.getX();
-		generatedX.setM(((__m128).__builtin_ia32_shufps((__v4sf)(__m128)(tmp1), (__v4sf)(__m128)(m.getZ().getM()), (int)((((true) << 6) | ((false) << 4) | ((true) << 2) | (false))))));
+		generatedX.setM(((__m128)/*Error: Function owner not recognized*/__builtin_ia32_shufps((__v4sf)(__m128)(tmp1), (__v4sf)(__m128)(m.getZ().getM()), (int)((((true) << 6) | ((false) << 4) | ((true) << 2) | (false))))));
 		vec3 generatedY = this.getY();
-		generatedY.setM(((__m128).__builtin_ia32_shufps((__v4sf)(__m128)(tmp1), (__v4sf)(__m128)(m.getZ().getM()), (int)((((true) << 6) | ((true) << 4) | ((true) << 2) | (true))))));
+		generatedY.setM(((__m128)/*Error: Function owner not recognized*/__builtin_ia32_shufps((__v4sf)(__m128)(tmp1), (__v4sf)(__m128)(m.getZ().getM()), (int)((((true) << 6) | ((true) << 4) | ((true) << 2) | (true))))));
 		vec3 generatedZ = this.getZ();
-		generatedZ.setM(((__m128).__builtin_ia32_shufps((__v4sf)(__m128)(tmp2), (__v4sf)(__m128)(m.getZ().getM()), (int)((((true) << 6) | ((true) << 4) | ((true) << 2) | (false))))));
+		generatedZ.setM(((__m128)/*Error: Function owner not recognized*/__builtin_ia32_shufps((__v4sf)(__m128)(tmp2), (__v4sf)(__m128)(m.getZ().getM()), (int)((((true) << 6) | ((true) << 4) | ((true) << 2) | (false))))));
 	}
 	public void matrix3_inv(Object m) {
 		matrix4 m4 = new matrix4();
@@ -191,6 +151,46 @@ public class matrix3 {
 		generatedZ.vec3_mirrorv(generatedZ, v);
 		vec3 generatedT = this.getT();
 		generatedT.vec3_mirrorv(generatedT, v);
+	}
+	public void matrix3_copy(Object m) {
+		vec3 generatedX = this.getX();
+		generatedX.vec3_copy(generatedX);
+		vec3 generatedY = this.getY();
+		generatedY.vec3_copy(generatedY);
+		vec3 generatedZ = this.getZ();
+		generatedZ.vec3_copy(generatedZ);
+		vec3 generatedT = this.getT();
+		generatedT.vec3_copy(generatedT);
+	}
+	public void matrix3_identity() {
+		vec3 generatedX = this.getX();
+		generatedX.vec3_zero();
+		vec3 generatedY = this.getY();
+		generatedY.vec3_zero();
+		vec3 generatedZ = this.getZ();
+		generatedZ.vec3_zero();
+		vec3 generatedT = this.getT();
+		generatedT.vec3_zero();
+		generatedX.setX(generatedY.setY(generatedZ.setZ(1.0)));
+	}
+	public void matrix3_translate(Object m, Object v) {
+		vec3 generatedT = this.getT();
+		generatedT.vec3_sub(generatedT, v);
+	}
+	public void matrix3_translate3f(Object m, double x, double y, double z) {
+		vec3 v = new vec3();
+		v.vec3_set(x, y, z);
+		dst.matrix3_translate(m, v);
+	}
+	public void matrix3_rotate_aa4f(Object m, double x, double y, double z, double rot) {
+		axisang aa = new axisang();
+		aa.axisang_set(x, y, z, rot);
+		dst.matrix3_rotate_aa(m, aa);
+	}
+	public void matrix3_scale3f(Object m, double x, double y, double z) {
+		vec3 v = new vec3();
+		v.vec3_set(x, y, z);
+		dst.matrix3_scale(m, v);
 	}
 	public vec3 getX() {
 		return x;

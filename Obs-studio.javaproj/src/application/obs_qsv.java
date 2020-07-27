@@ -79,6 +79,71 @@ public class obs_qsv {
 	public obs_qsv() {
 	}
 	
+	public void clear_data() {
+		qsv_t generatedContext = this.getContext();
+		Object generatedExtra_data = this.getExtra_data();
+		if (generatedContext) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/EnterCriticalSection(ModernizedCProgram.g_QsvCs);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/qsv_encoder_close(generatedContext);
+			this.setContext(((Object)0));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LeaveCriticalSection(ModernizedCProgram.g_QsvCs);
+			ModernizedCProgram.bfree(generatedExtra_data);
+			this.setExtra_data(((Object)0));
+		} 
+		Object generatedContext = obsx264.getContext();
+		Object generatedSei = obsx264.getSei();
+		Object generatedExtra_data = obsx264.getExtra_data();
+		if (generatedContext) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/x264_encoder_close(generatedContext);
+			ModernizedCProgram.bfree(generatedSei);
+			ModernizedCProgram.bfree(generatedExtra_data);
+			obsx264.setContext(((Object)0));
+			obsx264.setSei(((Object)0));
+			obsx264.setExtra_data(((Object)0));
+		} 
+	}
+	public void load_headers() {
+		 uint8_t = new ();
+		header;
+		 sei = 0;
+		// Not sure if SEI is needed.// Just filling in empty meaningless SEI message.
+		/*Error: Function owner not recognized*/// Seems to work fine.// DARRAY(uint8_t) sei;/*Error: Function owner not recognized*/// Seems to work fine.// DARRAY(uint8_t) sei;da_init(header)// da_init(sei);;// da_init(sei);
+		 pSPS = new ();
+		 pPPS = new ();
+		uint16_t nSPS = new uint16_t();
+		uint16_t nPPS = new uint16_t();
+		qsv_t generatedContext = this.getContext();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/qsv_encoder_headers(generatedContext, pSPS, pPPS, nSPS, nPPS);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back_array(header, pSPS, nSPS);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back_array(header, pPPS, nPPS);
+		this.setExtra_data(header.getArray());
+		this.setExtra_data_size(header.getNum());
+		this.setSei(sei);
+		this.setSei_size(1);
+		 nals = new ();
+		int nal_count;
+		 uint8_t = new ();
+		header;
+		 uint8_t = new ();
+		sei;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(header);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(sei);
+		Object generatedContext = obsx264.getContext();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/x264_encoder_headers(generatedContext, nals, nal_count);
+		for (int i = 0;
+		 i < nal_count; i++) {
+			 nal = nals + i;
+			if (nal.getI_type() == NAL_SEI) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back_array(sei, nal.getP_payload(), nal.getI_payload());
+			} else {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back_array(header, nal.getP_payload(), nal.getI_payload());
+			} 
+		}
+		obsx264.setExtra_data(header.getArray());
+		obsx264.setExtra_data_size(header.getNum());
+		obsx264.setSei(sei.getArray());
+		obsx264.setSei_size(sei.getNum());
+	}
 	public obs_encoder getEncoder() {
 		return encoder;
 	}

@@ -15,7 +15,7 @@ public class mf_hashitem_S {
 	
 	public mf_hashitem_S mf_hash_find(mf_hashtab_S mht, Object key) {
 		mf_hashitem_T mhi = new mf_hashitem_T();
-		mf_hashitem_S generatedMht_buckets = mht.getMht_buckets();
+		mf_hashitem_S[][] generatedMht_buckets = mht.getMht_buckets();
 		Object generatedMht_mask = mht.getMht_mask();
 		mhi = generatedMht_buckets[key & generatedMht_mask];
 		Object generatedMhi_key = mhi.getMhi_key();

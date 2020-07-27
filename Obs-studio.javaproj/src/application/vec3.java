@@ -20,50 +20,50 @@ public class vec3 {
 	}
 	
 	public void vec3_zero() {
-		this.setM(._mm_setzero_ps());
+		this.setM(/*Error: Function owner not recognized*/_mm_setzero_ps());
 	}
 	public void vec3_set(double x, double y, double z) {
-		this.setM(._mm_set_ps(0.0, z, y, x));
+		this.setM(/*Error: Function owner not recognized*/_mm_set_ps(0.0, z, y, x));
 	}
 	public void vec3_copy(Object v) {
 		this.setM(v.getM());
 	}
 	public void vec3_add(Object v1, Object v2) {
-		this.setM(._mm_add_ps(v1.getM(), v2.getM()));
+		this.setM(/*Error: Function owner not recognized*/_mm_add_ps(v1.getM(), v2.getM()));
 		this.setW(0.0);
 	}
 	public void vec3_sub(Object v1, Object v2) {
-		this.setM(._mm_sub_ps(v1.getM(), v2.getM()));
+		this.setM(/*Error: Function owner not recognized*/_mm_sub_ps(v1.getM(), v2.getM()));
 		this.setW(0.0);
 	}
 	public void vec3_mul(Object v1, Object v2) {
-		this.setM(._mm_mul_ps(v1.getM(), v2.getM()));
+		this.setM(/*Error: Function owner not recognized*/_mm_mul_ps(v1.getM(), v2.getM()));
 	}
 	public void vec3_div(Object v1, Object v2) {
-		this.setM(._mm_div_ps(v1.getM(), v2.getM()));
+		this.setM(/*Error: Function owner not recognized*/_mm_div_ps(v1.getM(), v2.getM()));
 		this.setW(0.0);
 	}
 	public void vec3_addf(Object v, double f) {
-		this.setM(._mm_add_ps(v.getM(), ._mm_set1_ps(f)));
+		this.setM(/*Error: Function owner not recognized*/_mm_add_ps(v.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(f)));
 		this.setW(0.0);
 	}
 	public void vec3_subf(Object v, double f) {
-		this.setM(._mm_sub_ps(v.getM(), ._mm_set1_ps(f)));
+		this.setM(/*Error: Function owner not recognized*/_mm_sub_ps(v.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(f)));
 		this.setW(0.0);
 	}
 	public void vec3_mulf(Object v, double f) {
-		this.setM(._mm_mul_ps(v.getM(), ._mm_set1_ps(f)));
+		this.setM(/*Error: Function owner not recognized*/_mm_mul_ps(v.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(f)));
 	}
 	public void vec3_divf(Object v, double f) {
-		this.setM(._mm_div_ps(v.getM(), ._mm_set1_ps(f)));
+		this.setM(/*Error: Function owner not recognized*/_mm_div_ps(v.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(f)));
 		this.setW(0.0);
 	}
 	public void vec3_cross(Object v1, Object v2) {
-		__m128 s1v1 = ((__m128).__builtin_ia32_shufps((__v4sf)(__m128)(v1.getM()), (__v4sf)(__m128)(v1.getM()), (int)((((true) << 6) | ((false) << 4) | ((true) << 2) | (true)))));
-		__m128 s1v2 = ((__m128).__builtin_ia32_shufps((__v4sf)(__m128)(v2.getM()), (__v4sf)(__m128)(v2.getM()), (int)((((true) << 6) | ((true) << 4) | ((false) << 2) | (true)))));
-		__m128 s2v1 = ((__m128).__builtin_ia32_shufps((__v4sf)(__m128)(v1.getM()), (__v4sf)(__m128)(v1.getM()), (int)((((true) << 6) | ((true) << 4) | ((false) << 2) | (true)))));
-		__m128 s2v2 = ((__m128).__builtin_ia32_shufps((__v4sf)(__m128)(v2.getM()), (__v4sf)(__m128)(v2.getM()), (int)((((true) << 6) | ((false) << 4) | ((true) << 2) | (true)))));
-		this.setM(._mm_sub_ps(._mm_mul_ps(s1v1, s1v2), ._mm_mul_ps(s2v1, s2v2)));
+		__m128 s1v1 = ((__m128)/*Error: Function owner not recognized*/__builtin_ia32_shufps((__v4sf)(__m128)(v1.getM()), (__v4sf)(__m128)(v1.getM()), (int)((((true) << 6) | ((false) << 4) | ((true) << 2) | (true)))));
+		__m128 s1v2 = ((__m128)/*Error: Function owner not recognized*/__builtin_ia32_shufps((__v4sf)(__m128)(v2.getM()), (__v4sf)(__m128)(v2.getM()), (int)((((true) << 6) | ((true) << 4) | ((false) << 2) | (true)))));
+		__m128 s2v1 = ((__m128)/*Error: Function owner not recognized*/__builtin_ia32_shufps((__v4sf)(__m128)(v1.getM()), (__v4sf)(__m128)(v1.getM()), (int)((((true) << 6) | ((true) << 4) | ((false) << 2) | (true)))));
+		__m128 s2v2 = ((__m128)/*Error: Function owner not recognized*/__builtin_ia32_shufps((__v4sf)(__m128)(v2.getM()), (__v4sf)(__m128)(v2.getM()), (int)((((true) << 6) | ((false) << 4) | ((true) << 2) | (true)))));
+		this.setM(/*Error: Function owner not recognized*/_mm_sub_ps(/*Error: Function owner not recognized*/_mm_mul_ps(s1v1, s1v2), /*Error: Function owner not recognized*/_mm_mul_ps(s2v1, s2v2)));
 	}
 	public void vec3_neg(Object v) {
 		this.setX(-v.getX());
@@ -73,90 +73,41 @@ public class vec3 {
 	}
 	public void vec3_norm(Object v) {
 		double dot_val = ModernizedCProgram.vec3_dot(v, v);
-		this.setM((dot_val > 0.0) ? ._mm_mul_ps(v.getM(), ._mm_set1_ps(1.0 / .sqrtf(dot_val))) : ._mm_setzero_ps());
+		this.setM((dot_val > 0.0) ? /*Error: Function owner not recognized*/_mm_mul_ps(v.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(1.0 / /*Error: Function owner not recognized*/sqrtf(dot_val))) : /*Error: Function owner not recognized*/_mm_setzero_ps());
 	}
 	public void vec3_min(Object v1, Object v2) {
-		this.setM(._mm_min_ps(v1.getM(), v2.getM()));
+		this.setM(/*Error: Function owner not recognized*/_mm_min_ps(v1.getM(), v2.getM()));
 		this.setW(0.0);
 	}
 	public void vec3_minf(Object v, double f) {
-		this.setM(._mm_min_ps(v.getM(), ._mm_set1_ps(f)));
+		this.setM(/*Error: Function owner not recognized*/_mm_min_ps(v.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(f)));
 		this.setW(0.0);
 	}
 	public void vec3_max(Object v1, Object v2) {
-		this.setM(._mm_max_ps(v1.getM(), v2.getM()));
+		this.setM(/*Error: Function owner not recognized*/_mm_max_ps(v1.getM(), v2.getM()));
 		this.setW(0.0);
 	}
 	public void vec3_maxf(Object v, double f) {
-		this.setM(._mm_max_ps(v.getM(), ._mm_set1_ps(f)));
+		this.setM(/*Error: Function owner not recognized*/_mm_max_ps(v.getM(), /*Error: Function owner not recognized*/_mm_set1_ps(f)));
 		this.setW(0.0);
 	}
 	public void vec3_abs(Object v) {
-		this.setX(.fabsf(v.getX()));
-		this.setY(.fabsf(v.getY()));
-		this.setZ(.fabsf(v.getZ()));
+		this.setX(/*Error: Function owner not recognized*/fabsf(v.getX()));
+		this.setY(/*Error: Function owner not recognized*/fabsf(v.getY()));
+		this.setZ(/*Error: Function owner not recognized*/fabsf(v.getZ()));
 		this.setW(0.0);
 	}
 	public void vec3_floor(Object v) {
-		this.setX(.floorf(v.getX()));
-		this.setY(.floorf(v.getY()));
-		this.setZ(.floorf(v.getZ()));
+		this.setX(/*Error: Function owner not recognized*/floorf(v.getX()));
+		this.setY(/*Error: Function owner not recognized*/floorf(v.getY()));
+		this.setZ(/*Error: Function owner not recognized*/floorf(v.getZ()));
 		this.setW(0.0);
 	}
 	public void vec3_ceil(Object v) {
-		this.setX(.ceilf(v.getX()));
-		this.setY(.ceilf(v.getY()));
-		this.setZ(.ceilf(v.getZ()));
+		this.setX(/*Error: Function owner not recognized*/ceilf(v.getX()));
+		this.setY(/*Error: Function owner not recognized*/ceilf(v.getY()));
+		this.setZ(/*Error: Function owner not recognized*/ceilf(v.getZ()));
 		this.setW(0.0);
-	}
-	/******************************************************************************
-	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
-	
-	    This program is free software: you can redistribute it and/or modify
-	    it under the terms of the GNU General Public License as published by
-	    the Free Software Foundation, either version 2 of the License, or
-	    (at your option) any later version.
-	
-	    This program is distributed in the hope that it will be useful,
-	    but WITHOUT ANY WARRANTY; without even the implied warranty of
-	    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	    GNU General Public License for more details.
-	
-	    You should have received a copy of the GNU General Public License
-	    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-	******************************************************************************/
-	public void quat_vec3(Object q) {
-		this.setM(q.getM());
-		this.setW(0.0);
-	}
-	public void quat_get_dir(Object q) {
-		matrix3 m = new matrix3();
-		m.matrix3_from_quat(q);
-		vec3 generatedZ = m.getZ();
-		dst.vec3_copy(generatedZ);
-	}
-	public void bounds_get_point(Object b, int i) {
-		if (i > 8) {
-			return ;
-		} 
-		if (i > 3) {
-			this.setX(b.getMax().getX());
-			i -= 4;
-		} else {
-				this.setX(b.getMin().getX());
-		} 
-		if (i > 1) {
-			this.setY(b.getMax().getY());
-			i -= 2;
-		} else {
-				this.setY(b.getMin().getY());
-		} 
-		this.setZ((i == 1) ? b.getMax().getZ() : b.getMin().getZ());
-	}
-	public void bounds_get_center(Object b) {
-		dst.vec3_sub(b.getMax(), b.getMin());
-		dst.vec3_mulf(dst, 0.5);
-		dst.vec3_add(dst, b.getMin());
 	}
 	/******************************************************************************
 	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
@@ -216,6 +167,29 @@ public class vec3 {
 		this.setZ(ModernizedCProgram.rand_float(positive_only));
 		this.setW(0.0);
 	}
+	public void bounds_get_point(Object b, int i) {
+		if (i > 8) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (i > 3) {
+			this.setX(b.getMax().getX());
+			i -= 4;
+		} else {
+				this.setX(b.getMin().getX());
+		} 
+		if (i > 1) {
+			this.setY(b.getMax().getY());
+			i -= 2;
+		} else {
+				this.setY(b.getMin().getY());
+		} 
+		this.setZ((i == 1) ? b.getMax().getZ() : b.getMin().getZ());
+	}
+	public void bounds_get_center(Object b) {
+		dst.vec3_sub(b.getMax(), b.getMin());
+		dst.vec3_mulf(dst, 0.5);
+		dst.vec3_add(dst, b.getMin());
+	}
 	/******************************************************************************
 	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
 	
@@ -234,11 +208,11 @@ public class vec3 {
 	******************************************************************************/
 	public void polar_to_cart(Object v) {
 		vec3 cart = new vec3();
-		double sinx = .cosf(v.getX());
+		double sinx = /*Error: Function owner not recognized*/cosf(v.getX());
 		double sinx_z = v.getZ() * sinx;
-		cart.setX(sinx_z * .sinf(v.getY()));
-		cart.setZ(sinx_z * .cosf(v.getY()));
-		cart.setY(v.getZ() * .sinf(v.getX()));
+		cart.setX(sinx_z * /*Error: Function owner not recognized*/sinf(v.getY()));
+		cart.setZ(sinx_z * /*Error: Function owner not recognized*/cosf(v.getY()));
+		cart.setY(v.getZ() * /*Error: Function owner not recognized*/sinf(v.getX()));
 		dst.vec3_copy(cart);
 	}
 	public void cart_to_polar(Object v) {
@@ -248,16 +222,16 @@ public class vec3 {
 		if (ModernizedCProgram.close_float(generatedZ, 0.0, 1.0E-4)) {
 			polar.vec3_zero();
 		} else {
-				polar.setX(.asinf(v.getY() / generatedZ));
-				polar.setY(.atan2f(v.getX(), generatedZ));
+				polar.setX(/*Error: Function owner not recognized*/asinf(v.getY() / generatedZ));
+				polar.setY(/*Error: Function owner not recognized*/atan2f(v.getX(), generatedZ));
 		} 
 		dst.vec3_copy(polar);
 	}
 	public void polar_to_norm(Object polar) {
-		double sinx = .sinf(polar.getX());
-		this.setX(sinx * .cosf(polar.getY()));
-		this.setY(sinx * .sinf(polar.getY()));
-		this.setZ(.cosf(polar.getX()));
+		double sinx = /*Error: Function owner not recognized*/sinf(polar.getX());
+		this.setX(sinx * /*Error: Function owner not recognized*/cosf(polar.getY()));
+		this.setY(sinx * /*Error: Function owner not recognized*/sinf(polar.getY()));
+		this.setZ(/*Error: Function owner not recognized*/cosf(polar.getX()));
 	}
 	public void calc_torque(Object v1, Object v2, double torque, double min_adjust, double t) {
 		vec3 line = new vec3();
@@ -267,7 +241,7 @@ public class vec3 {
 		double adjust_dist;
 		if (ModernizedCProgram.vec3_close(v1, v2, 1.0E-4)) {
 			dst.vec3_copy(v1);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		line.vec3_sub(v2, v1);
 		orig_dist = ModernizedCProgram.vec3_len(line);
@@ -283,6 +257,32 @@ public class vec3 {
 		} else {
 				dst.vec3_copy(/* clamp if overshoot */v2);
 		} 
+	}
+	/******************************************************************************
+	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
+	
+	    This program is free software: you can redistribute it and/or modify
+	    it under the terms of the GNU General Public License as published by
+	    the Free Software Foundation, either version 2 of the License, or
+	    (at your option) any later version.
+	
+	    This program is distributed in the hope that it will be useful,
+	    but WITHOUT ANY WARRANTY; without even the implied warranty of
+	    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	    GNU General Public License for more details.
+	
+	    You should have received a copy of the GNU General Public License
+	    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	******************************************************************************/
+	public void quat_vec3(Object q) {
+		this.setM(q.getM());
+		this.setW(0.0);
+	}
+	public void quat_get_dir(Object q) {
+		matrix3 m = new matrix3();
+		m.matrix3_from_quat(q);
+		vec3 generatedZ = m.getZ();
+		dst.vec3_copy(generatedZ);
 	}
 	public double getX() {
 		return x;

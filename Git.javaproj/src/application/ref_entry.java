@@ -17,9 +17,9 @@ public class ref_entry {
 		ref_entry ref = new ref_entry();
 		Object generatedName = ((ref)).getName();
 		do {
-			size_t flex_array_len_ = (.strlen(refname));
-			((ref)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedName, ((refname)), flex_array_len_);
+			size_t flex_array_len_ = (/*Error: Function owner not recognized*/strlen(refname));
+			((ref)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedName, ((refname)), flex_array_len_);
 		} while (0);
 		 generatedU = ref.getU();
 		Object generatedValue = generatedU.getValue();
@@ -44,8 +44,8 @@ public class ref_entry {
 		Object generatedName = (direntry).getName();
 		do {
 			size_t flex_array_len_ = (len);
-			(direntry) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedName, (dirname), flex_array_len_);
+			(direntry) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedName, (dirname), flex_array_len_);
 		} while (0);
 		 generatedU = direntry.getU();
 		Object generatedSubdir = generatedU.getSubdir();
@@ -60,11 +60,11 @@ public class ref_entry {
 		if (!dir) {
 			return ((Object)0);
 		} 
-		entry_index = dir.search_ref_dir(refname, .strlen(refname));
+		entry_index = dir.search_ref_dir(refname, /*Error: Function owner not recognized*/strlen(refname));
 		if (entry_index == -1) {
 			return ((Object)0);
 		} 
-		ref_entry generatedEntries = dir.getEntries();
+		ref_entry[][] generatedEntries = dir.getEntries();
 		entry = generatedEntries[entry_index];
 		byte generatedFlag = entry.getFlag();
 		return (generatedFlag & -1024) ? ((Object)0) : entry;

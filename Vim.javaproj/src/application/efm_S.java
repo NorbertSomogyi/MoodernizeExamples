@@ -23,7 +23,7 @@ public class efm_S {
 	public efm_S() {
 	}
 	
-	public Object efmpat_to_regpat(Object efmpat, Object regpat, int idx, int round) {
+	public Object efmpat_to_regpat(Object[] efmpat, Object regpat, int idx, int round) {
 		char_u srcptr = new char_u();
 		Object generatedAddr = this.getAddr();
 		if (generatedAddr[idx]) {
@@ -39,16 +39,16 @@ public class efm_S {
 		regpat++ = (byte)'\\';
 		regpat++ = (byte)'(';
 		if (efmpat == (byte)'f') {
-			.strcpy((byte)(regpat), (byte)("\\%(\\a:\\)\\="));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(regpat), (byte)("\\%(\\a:\\)\\="));
 			regpat += 10;
 		} 
 		// Also match "c:" in the file name, even when
 		if (efmpat == (byte)'f' && efmpat[1] != (byte)'\000') {
 			if (efmpat[1] != (byte)'\\' && efmpat[1] != (byte)'%') {
-				.strcpy((byte)(regpat), (byte)(".\\{-1,}"));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(regpat), (byte)(".\\{-1,}"));
 				regpat += 7;
 			} else {
-					.strcpy((byte)(regpat), (byte)("\\f\\+"));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(regpat), (byte)("\\f\\+"));
 					regpat += 4;
 			} 
 		} else {
@@ -155,7 +155,7 @@ public class efm_S {
 		 * a regular expression pattern.
 		 */);
 	}
-	public efm_S parse_efm_option(Object efm) {
+	public efm_S parse_efm_option(Object[] efm) {
 		efm_T fmt_ptr = ((Object)0);
 		efm_T fmt_first = ((Object)0);
 		efm_T fmt_last = ((Object)0);
@@ -169,7 +169,7 @@ public class efm_S {
 		} 
 		regprog regprog = new regprog();
 		while (efm[0] != (byte)'\000') {
-			fmt_ptr = (efm_T)ModernizedCProgram.alloc_clear();
+			fmt_ptr = (efm_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/);
 			if (fmt_ptr == ((Object)0)) {
 				;
 			} 

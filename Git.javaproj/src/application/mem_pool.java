@@ -13,13 +13,28 @@ public class mem_pool {
 	public mem_pool() {
 	}
 	
+	public mem_pool find_mem_pool(index_state istate) {
+		mem_pool pool_ptr = new mem_pool();
+		split_index generatedSplit_index = istate.getSplit_index();
+		index_state generatedBase = generatedSplit_index.getBase();
+		mem_pool generatedCe_mem_pool = generatedBase.getCe_mem_pool();
+		if (generatedSplit_index && generatedBase) {
+			pool_ptr = generatedCe_mem_pool;
+		} else {
+				pool_ptr = generatedCe_mem_pool;
+		} 
+		if (!pool_ptr) {
+			pool_ptr.mem_pool_init(0);
+		} 
+		return pool_ptr;
+	}
 	public void mem_pool_init(Object initial_size) {
 		mem_pool pool = new mem_pool();
 		if (mem_pool) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		pool = ModernizedCProgram.xcalloc(1, );
-		pool.setBlock_alloc(1024 * 1024 - );
+		pool = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+		pool.setBlock_alloc(1024 * 1024 - /*Error: Unsupported expression*/);
 		;
 		if (initial_size > 0) {
 			((Object)0).mem_pool_alloc_block(pool, initial_size);
@@ -38,7 +53,7 @@ public class mem_pool {
 			block_to_free = block;
 			block = generatedNext_block;
 			if (invalidate_memory) {
-				.memset(generatedSpace, -1024, ((byte)generatedEnd) - ((byte)generatedSpace));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedSpace, -1024, ((byte)generatedEnd) - ((byte)generatedSpace));
 			} 
 			ModernizedCProgram.free(block_to_free);
 		}
@@ -47,8 +62,8 @@ public class mem_pool {
 	public Object mem_pool_alloc(Object len) {
 		mp_block p = ((Object)0);
 		Object r;
-		if (len & ( - /* round up to a 'uintmax_t' alignment */1)) {
-			len +=  - (len & ( - 1));
+		if (len & (/*Error: Unsupported expression*/ - /* round up to a 'uintmax_t' alignment */1)) {
+			len += /*Error: Unsupported expression*/ - (len & (/*Error: Unsupported expression*/ - 1));
 		} 
 		mp_block generatedMp_block = this.getMp_block();
 		Byte generatedEnd = generatedMp_block.getEnd();
@@ -70,7 +85,7 @@ public class mem_pool {
 	public Object mem_pool_calloc(Object count, Object size) {
 		size_t len = ModernizedCProgram.st_mult(count, size);
 		Object r = mem_pool.mem_pool_alloc(len);
-		.memset(r, 0, len);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(r, 0, len);
 		return r;
 	}
 	public int mem_pool_contains(Object mem) {
@@ -103,21 +118,6 @@ public class mem_pool {
 		generatedPool_alloc += generatedPool_alloc;
 		src.setPool_alloc(0);
 		src.setMp_block(((Object)0));
-	}
-	public mem_pool find_mem_pool(index_state istate) {
-		mem_pool pool_ptr = new mem_pool();
-		split_index generatedSplit_index = istate.getSplit_index();
-		index_state generatedBase = generatedSplit_index.getBase();
-		mem_pool generatedCe_mem_pool = generatedBase.getCe_mem_pool();
-		if (generatedSplit_index && generatedBase) {
-			pool_ptr = generatedCe_mem_pool;
-		} else {
-				pool_ptr = generatedCe_mem_pool;
-		} 
-		if (!pool_ptr) {
-			pool_ptr.mem_pool_init(0);
-		} 
-		return pool_ptr;
 	}
 	public mp_block getMp_block() {
 		return mp_block;

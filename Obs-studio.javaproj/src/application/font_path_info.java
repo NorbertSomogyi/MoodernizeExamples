@@ -6,13 +6,13 @@ public class font_path_info {
 	private Object face_len;
 	private Object is_bitmap;
 	private Object num_sizes;
-	private Integer sizes;
+	private int[] sizes;
 	private Object bold;
 	private Object italic;
 	private Byte path;
 	private Object index;
 	
-	public font_path_info(Byte face_and_style, Object full_len, Object face_len, Object is_bitmap, Object num_sizes, Integer sizes, Object bold, Object italic, Byte path, Object index) {
+	public font_path_info(Byte face_and_style, Object full_len, Object face_len, Object is_bitmap, Object num_sizes, int[] sizes, Object bold, Object italic, Byte path, Object index) {
 		setFace_and_style(face_and_style);
 		setFull_len(full_len);
 		setFace_len(face_len);
@@ -32,20 +32,20 @@ public class font_path_info {
 		if (!generatedIs_bitmap) {
 			this.setNum_sizes(0);
 			this.setSizes(((Object)0));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.da_init(sizes);
-		.da_reserve(sizes, face.getNum_fixed_sizes());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(sizes);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_reserve(sizes, face.getNum_fixed_sizes());
 		for (int i = 0;
 		 i < face.getNum_fixed_sizes(); i++) {
 			int val = face.getAvailable_sizes()[i].getSize() >> 6;
-			.da_push_back(sizes, val);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(sizes, val);
 		}
 		this.setSizes(sizes.getArray());
 		this.setNum_sizes(()face.getNum_fixed_sizes());
 	}
 	public void font_path_info_free() {
-		Integer generatedSizes = this.getSizes();
+		int[] generatedSizes = this.getSizes();
 		ModernizedCProgram.bfree(generatedSizes);
 		Byte generatedFace_and_style = this.getFace_and_style();
 		ModernizedCProgram.bfree(generatedFace_and_style);
@@ -82,10 +82,10 @@ public class font_path_info {
 	public void setNum_sizes(Object newNum_sizes) {
 		num_sizes = newNum_sizes;
 	}
-	public Integer getSizes() {
+	public int[] getSizes() {
 		return sizes;
 	}
-	public void setSizes(Integer newSizes) {
+	public void setSizes(int[] newSizes) {
 		sizes = newSizes;
 	}
 	public Object getBold() {

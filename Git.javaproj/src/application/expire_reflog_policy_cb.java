@@ -37,7 +37,7 @@ public class expire_reflog_policy_cb {
 		commit_list generatedParents = commit.getParents();
 		while (pending) {
 			commit_list parent = new commit_list();
-			commit commit = .pop_commit(pending);
+			commit commit = /*Error: Function owner not recognized*/pop_commit(pending);
 			if (generatedFlags & (-1024 << 12)) {
 				continue;
 			} 
@@ -46,7 +46,7 @@ public class expire_reflog_policy_cb {
 			} 
 			generatedFlags |=  (-1024 << 12);
 			if (generatedDate < expire_limit) {
-				.commit_list_insert(commit, leftover);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/commit_list_insert(commit, leftover);
 				continue;
 			} 
 			generatedFlags |=  (-1024 << 12);
@@ -57,7 +57,7 @@ public class expire_reflog_policy_cb {
 				if (generatedFlags & (-1024 << 12)) {
 					continue;
 				} 
-				.commit_list_insert(commit, pending);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/commit_list_insert(commit, pending);
 			}
 		}
 		this.setMark_list(leftover);

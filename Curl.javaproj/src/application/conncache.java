@@ -44,12 +44,6 @@ public class conncache {
 	public conncache() {
 	}
 	
-	public Object upkeep(Object data) {
-		ModernizedCProgram.Curl_conncache_foreach(/* Loop over every connection and make connection alive. */data, conn_cache, data, conn_upkeep);
-		return CURLE_OK/*
-		 * Performs connection upkeep for the given session handle.
-		 */;
-	}
 	public int Curl_conncache_init(int size) {
 		int rc;
 		Curl_easy curl_easy = new Curl_easy();
@@ -60,7 +54,7 @@ public class conncache {
 		} 
 		curl_hash generatedHash = this.getHash();
 		rc = generatedHash.Curl_hash_init(size, ModernizedCProgram.Curl_hash_str, ModernizedCProgram.Curl_str_key_compare, free_bundle_hash_entry);
-		Object generatedState = generatedClosure_handle.getState();
+		UrlState generatedState = generatedClosure_handle.getState();
 		if (rc) {
 			generatedClosure_handle.Curl_close();
 			this.setClosure_handle(((Object)0));
@@ -91,16 +85,23 @@ public class conncache {
 			} while (0);
 			conn = connectdata.conncache_find_first_connection(connc);
 		}
-		Object generatedDns = generatedClosure_handle.getDns();
+		Names generatedDns = generatedClosure_handle.getDns();
+		curl_hash generatedHostcache = generatedDns.getHostcache();
 		if (generatedClosure_handle) {
 			;
 			do {
 			} while (0);
-			ModernizedCProgram.Curl_hostcache_clean(generatedClosure_handle, generatedDns.getHostcache());
+			ModernizedCProgram.Curl_hostcache_clean(generatedClosure_handle, generatedHostcache);
 			generatedClosure_handle.Curl_close();
 			do {
 			} while (0/* Useful for debugging the connection cache */);
 		} 
+	}
+	public Object upkeep(Object data) {
+		ModernizedCProgram.Curl_conncache_foreach(/* Loop over every connection and make connection alive. */data, conn_cache, data, conn_upkeep);
+		return CURLE_OK/*
+		 * Performs connection upkeep for the given session handle.
+		 */;
 	}
 	public curl_hash getHash() {
 		return hash;

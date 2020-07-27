@@ -3,7 +3,7 @@ package application;
 public class smb_conn {
 	private smb_conn_state state;
 	private Byte user;
-	private Byte domain;
+	private byte[] domain;
 	private Byte share;
 	private Object challenge;
 	private int session_key;
@@ -14,7 +14,7 @@ public class smb_conn {
 	private Object sent;
 	private Object got;
 	
-	public smb_conn(smb_conn_state state, Byte user, Byte domain, Byte share, Object challenge, int session_key, int uid, Byte recv_buf, Object upload_size, Object send_size, Object sent, Object got) {
+	public smb_conn(smb_conn_state state, Byte user, byte[] domain, Byte share, Object challenge, int session_key, int uid, Byte recv_buf, Object upload_size, Object send_size, Object sent, Object got) {
 		setState(state);
 		setUser(user);
 		setDomain(domain);
@@ -43,10 +43,10 @@ public class smb_conn {
 	public void setUser(Byte newUser) {
 		user = newUser;
 	}
-	public Byte getDomain() {
+	public byte[] getDomain() {
 		return domain;
 	}
-	public void setDomain(Byte newDomain) {
+	public void setDomain(byte[] newDomain) {
 		domain = newDomain;
 	}
 	public Byte getShare() {

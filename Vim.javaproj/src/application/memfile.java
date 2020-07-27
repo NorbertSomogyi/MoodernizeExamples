@@ -68,11 +68,11 @@ public class memfile {
 		int generatedDb_txt_start = dp.getDb_txt_start();
 		text_start = (char_u)dp + generatedDb_txt_start;
 		text_len = size - generatedDb_txt_start;
-		.memmove((byte)(new_data), (byte)(dp), (size_t)(head_end - (char_u)/* Copy the header and the text. */dp));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(new_data), (byte)(dp), (size_t)(head_end - (char_u)/* Copy the header and the text. */dp));
 		state.crypt_encode(text_start, text_len, new_data + generatedDb_txt_start);
 		state.crypt_free_state();
 		if (head_end < /* Clear the gap. */text_start) {
-			.memset((new_data + (head_end - data)), (false), (text_start - head_end));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((new_data + (head_end - data)), (false), (text_start - head_end));
 		} 
 		return new_data/*
 		 * Decrypt the text in "data" if it points to an encrypted data block.
@@ -94,7 +94,7 @@ public class memfile {
 			text_start = (char_u)dp + generatedDb_txt_start;
 			text_len = generatedDb_txt_end - generatedDb_txt_start;
 			if (head_end > text_start || generatedDb_txt_start > size || generatedDb_txt_end > size) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			state = mfp.ml_crypt_prepare(offset, 1);
 			if (state != ((Object)0)) {
@@ -131,13 +131,13 @@ public class memfile {
 			return ((Object)0);
 		} 
 		if (method_nr == 0) {
-			ModernizedCProgram.vim_snprintf((byte)salt, , "%s%ld", key, (long)/* For PKzip: Append the offset to the key, so that we use a different
+			ModernizedCProgram.vim_snprintf((byte)salt, /*Error: sizeof expression not supported yet*/, "%s%ld", key, (long)/* For PKzip: Append the offset to the key, so that we use a different
 				 * key for every block. */offset);
 			return ModernizedCProgram.crypt_create(method_nr, salt, ((Object)0), 0, ((Object)0), 0);
 		} 
-		ModernizedCProgram.vim_snprintf((byte)salt, , "%ld", (long)/* Using blowfish or better: add salt and seed. We use the byte offset
+		ModernizedCProgram.vim_snprintf((byte)salt, /*Error: sizeof expression not supported yet*/, "%ld", (long)/* Using blowfish or better: add salt and seed. We use the byte offset
 		     * of the block for the salt. */offset);
-		return ModernizedCProgram.crypt_create(method_nr, key, salt, (int).strlen((byte)(salt)), seed, 8);
+		return ModernizedCProgram.crypt_create(method_nr, key, salt, (int)/*Error: Function owner not recognized*/strlen((byte)(salt)), seed, 8);
 	}
 	/*
 	 * Open an existing or new memory block file.
@@ -154,7 +154,7 @@ public class memfile {
 	public memfile mf_open(Object fname, int flags) {
 		memfile_T mfp = new memfile_T();
 		off_T size = new off_T();
-		if ((mfp = (memfile_T)ModernizedCProgram.alloc()) == ((Object)0)) {
+		if ((mfp = (memfile_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*/)) == ((Object)0)) {
 			return ((Object)0);
 		} 
 		int generatedMf_fd = mfp.getMf_fd();
@@ -187,7 +187,7 @@ public class memfile {
 		     * mf_blocknr_max must be rounded up.
 		     */));
 		int generatedMf_page_size = mfp.getMf_page_size();
-		if (generatedMf_fd < 0 || (flags & (-1024 | -1024)) || (size = .lseek64(generatedMf_fd, (off_T)-1024, 2)) <= 0) {
+		if (generatedMf_fd < 0 || (flags & (-1024 | -1024)) || (size = /*Error: Function owner not recognized*/lseek64(generatedMf_fd, (off_T)-1024, 2)) <= 0) {
 			mfp.setMf_blocknr_max(/* no file or empty file */0);
 		} else {
 				mfp.setMf_blocknr_max((blocknr_T)((size + generatedMf_page_size - 1) / generatedMf_page_size));
@@ -235,11 +235,11 @@ public class memfile {
 		bhdr_T hp = new bhdr_T();
 		bhdr_T nextp = new bhdr_T();
 		if (mfp == ((Object)/* safety check */0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedMf_fd = this.getMf_fd();
 		if (generatedMf_fd >= 0) {
-			if (.close(generatedMf_fd) < 0) {
+			if (/*Error: Function owner not recognized*/close(generatedMf_fd) < 0) {
 				ModernizedCProgram.emsg(((byte)(e_swapclose)));
 			} 
 		} 
@@ -346,7 +346,7 @@ public class memfile {
 		if ((flags & 4) && ModernizedCProgram.p_sws != (byte)'\000'/*
 			 * most Unixes have the very useful fsync() function, just what we need.
 			 *//* OpenNT is strictly POSIX (Benzinger) *//* Tandem/Himalaya NSK-OSS doesn't have sync() */) {
-			if (._commit(generatedMf_fd)) {
+			if (/*Error: Function owner not recognized*/_commit(generatedMf_fd)) {
 				status = 0;
 			} 
 		} 

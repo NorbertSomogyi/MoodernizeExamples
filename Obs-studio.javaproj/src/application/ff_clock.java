@@ -41,7 +41,7 @@ public class ff_clock {
 	// Amount of microseconds between checks to see if a clock has started
 	public double ff_get_sync_clock() {
 		Object generatedOpaque = this.getOpaque();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedOpaque);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOpaque);
 	}
 	public Object ff_clock_start_time() {
 		int64_t start_time = AV_NOPTS_VALUE;
@@ -66,7 +66,7 @@ public class ff_clock {
 		if (generatedSync_type == ff_av_sync_type.sync_type && !generatedStarted) {
 			ModernizedCProgram.pthread_mutex_lock(generatedMutex);
 			if (!generatedStarted) {
-				this.setStart_time(.av_gettime());
+				this.setStart_time(/*Error: Function owner not recognized*/av_gettime());
 				this.setStarted(1);
 			} 
 			ModernizedCProgram.pthread_cond_signal(generatedCond);
@@ -74,8 +74,8 @@ public class ff_clock {
 		} else {
 				while (!generatedStarted) {
 					ModernizedCProgram.pthread_mutex_lock(generatedMutex);
-					int64_t current_time = .av_gettime() + 100;
-					timespec sleep_time = new timespec(, );
+					int64_t current_time = /*Error: Function owner not recognized*/av_gettime() + 100;
+					timespec sleep_time = new timespec(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 					ModernizedCProgram.pthread_cond_timedwait(generatedCond, generatedMutex, sleep_time);
 					aborted = abort;
 					if (generatedRetain == 1) {
@@ -83,7 +83,7 @@ public class ff_clock {
 					} 
 					ModernizedCProgram.pthread_mutex_unlock(generatedMutex);
 					if (aborted || release) {
-						.av_log(((Object)0), AV_LOG_ERROR, "could not start slave clock as master clock was never started before being released or aborted");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_log(((Object)0), AV_LOG_ERROR, "could not start slave clock as master clock was never started before being released or aborted");
 						break;
 					} 
 				}
@@ -94,7 +94,7 @@ public class ff_clock {
 		return !release && !aborted;
 	}
 	public ff_clock ff_clock_init() {
-		ff_clock clock = .av_mallocz();
+		ff_clock clock = /*Error: Function owner not recognized*/av_mallocz(/*Error: Unsupported expression*/);
 		if (clock == ((Object)0)) {
 			return ((Object)0);
 		} 
@@ -126,7 +126,7 @@ public class ff_clock {
 		if (ModernizedCProgram.ff_atomic_dec_long(generatedRetain) == 0) {
 			ModernizedCProgram.pthread_cond_destroy(generatedCond);
 			ModernizedCProgram.pthread_mutex_destroy(generatedMutex);
-			.av_free(clock);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(clock);
 		} 
 		clock = ((Object)0);
 	}
@@ -136,7 +136,7 @@ public class ff_clock {
 		double diff = pts - sync_time;
 		double sync_threshold;
 		sync_threshold = (pts_diff > 0.01) ? pts_diff : 0.01;
-		if (.fabs(diff) < 10.0) {
+		if (/*Error: Function owner not recognized*/fabs(diff) < 10.0) {
 			if (diff <= -sync_threshold) {
 				new_pts_diff = 0;
 			}  else if (diff >= sync_threshold) {

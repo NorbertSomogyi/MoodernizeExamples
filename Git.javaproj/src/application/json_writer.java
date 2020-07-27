@@ -55,6 +55,33 @@ public class json_writer {
 	public json_writer() {
 	}
 	
+	public void get_processes(Object hSnapshot) {
+		PROCESSENTRY32 pe32 = new PROCESSENTRY32();
+		DWORD pid = new DWORD();
+		DWORD[] pid_list = new DWORD();
+		int k;
+		int nr_pids = 0;
+		pid = /*Error: Function owner not recognized*/GetCurrentProcessId();
+		Object generatedSzExeFile = pe32.getSzExeFile();
+		Object generatedTh32ParentProcessID = pe32.getTh32ParentProcessID();
+		while (pe32.find_pid(pid, hSnapshot)) {
+			if (/* Only report parents. Omit self from the JSON output. */nr_pids) {
+				jw.jw_array_string(generatedSzExeFile);
+			} 
+			for (k = 0; k < nr_pids; /* Check for cycle in snapshot. (Yes, it happened.) */k++) {
+				if (pid == pid_list[k]) {
+					jw.jw_array_string("(cycle)");
+					return /*Error: Unsupported expression*/;
+				} 
+			}
+			if (nr_pids == 10) {
+				jw.jw_array_string("(truncated)");
+				return /*Error: Unsupported expression*/;
+			} 
+			pid_list[nr_pids++] = pid;
+			pid = generatedTh32ParentProcessID;
+		}
+	}
 	public void event_fmt_prepare(Object event_name, Object file, int line, Object repo) {
 		tr2tls_thread_ctx tr2tls_thread_ctx = new tr2tls_thread_ctx();
 		tr2tls_thread_ctx ctx = tr2tls_thread_ctx.tr2tls_get_self();
@@ -64,7 +91,7 @@ public class json_writer {
 		Object generatedTr2tls_thread_ctx = ctx.getTr2tls_thread_ctx();
 		jw.jw_object_string("thread", generatedTr2tls_thread_ctx.getBuf());
 		Object generatedTr2_tbuf = tb_now.getTr2_tbuf();
-		if (!ModernizedCProgram.tr2env_event_be_brief || !.strcmp(event_name, "version") || !.strcmp(event_name, "atexit")) {
+		if (!ModernizedCProgram.tr2env_event_be_brief || !/*Error: Function owner not recognized*/strcmp(event_name, "version") || !/*Error: Function owner not recognized*/strcmp(event_name, "atexit")) {
 			tb_now.tr2_tbuf_utc_datetime_extended();
 			jw.jw_object_string("time", generatedTr2_tbuf);
 		} 
@@ -79,41 +106,14 @@ public class json_writer {
 	public void maybe_add_string_va(Object field_name, Object fmt, Object ap) {
 		if (fmt && fmt) {
 			va_list copy_ap = new va_list();
-			strbuf buf = new strbuf(, , );
-			.__builtin_va_copy(copy_ap, ap);
+			strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_copy(copy_ap, ap);
 			ModernizedCProgram.buf.strbuf_vaddf(fmt, copy_ap);
-			.__builtin_va_end(copy_ap);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(copy_ap);
 			jw.jw_object_string(field_name, ModernizedCProgram.buf.getBuf());
 			ModernizedCProgram.buf.strbuf_release();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-	}
-	public void get_processes(Object hSnapshot) {
-		PROCESSENTRY32 pe32 = new PROCESSENTRY32();
-		DWORD pid = new DWORD();
-		DWORD[] pid_list = new DWORD();
-		int k;
-		int nr_pids = 0;
-		pid = .GetCurrentProcessId();
-		Object generatedSzExeFile = pe32.getSzExeFile();
-		Object generatedTh32ParentProcessID = pe32.getTh32ParentProcessID();
-		while (pe32.find_pid(pid, hSnapshot)) {
-			if (/* Only report parents. Omit self from the JSON output. */nr_pids) {
-				jw.jw_array_string(generatedSzExeFile);
-			} 
-			for (k = 0; k < nr_pids; /* Check for cycle in snapshot. (Yes, it happened.) */k++) {
-				if (pid == pid_list[k]) {
-					jw.jw_array_string("(cycle)");
-					return ;
-				} 
-			}
-			if (nr_pids == 10) {
-				jw.jw_array_string("(truncated)");
-				return ;
-			} 
-			pid_list[nr_pids++] = pid;
-			pid = generatedTh32ParentProcessID;
-		}
 	}
 	public void jw_init() {
 		strbuf generatedJson = this.getJson();
@@ -162,11 +162,11 @@ public class json_writer {
 	}
 	public void fmt_double(int precision, double value) {
 		strbuf generatedJson = this.getJson();
-		byte generatedBuf = fmt.getBuf();
+		byte[] generatedBuf = fmt.getBuf();
 		if (precision < 0) {
 			generatedJson.strbuf_addf("%f", value);
 		} else {
-				strbuf fmt = new strbuf(, , );
+				strbuf fmt = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 				fmt.strbuf_addf("%%.%df", precision);
 				generatedJson.strbuf_addf(generatedBuf, value);
 				fmt.strbuf_release();
@@ -243,18 +243,18 @@ public class json_writer {
 		Object generatedLen = generatedOpen_stack.getLen();
 		strbuf generatedJson = this.getJson();
 		if (generatedPretty && generatedLen && generatedPretty) {
-			strbuf sb = new strbuf(, , );
+			strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			sb.increase_indent(value, generatedLen * 2);
 			generatedJson.strbuf_addbuf(sb);
 			sb.strbuf_release();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!generatedPretty && generatedPretty) {
-			strbuf sb = new strbuf(, , );
+			strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			sb.kill_indent(value);
 			generatedJson.strbuf_addbuf(sb);
 			sb.strbuf_release();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		generatedJson.strbuf_addbuf(generatedJson);
 	}
@@ -315,7 +315,7 @@ public class json_writer {
 		jw.array_common();
 		jw.append_sub_jw(value);
 	}
-	public void jw_array_argc_argv(int argc, Object argv) {
+	public void jw_array_argc_argv(int argc, Object[][] argv) {
 		int k;
 		for (k = 0; k < argc; k++) {
 			jw.jw_array_string(argv[k]);
@@ -342,7 +342,7 @@ public class json_writer {
 		strbuf generatedOpen_stack = this.getOpen_stack();
 		Object generatedLen = generatedOpen_stack.getLen();
 		strbuf generatedJson = this.getJson();
-		byte generatedBuf = generatedJson.getBuf();
+		byte[] generatedBuf = generatedJson.getBuf();
 		if (!generatedLen) {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\json-writer.c", 397, "json-writer: too many jw_end(): '%s'", generatedBuf);
 		} 

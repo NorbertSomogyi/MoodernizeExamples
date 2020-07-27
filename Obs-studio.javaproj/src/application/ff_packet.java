@@ -45,8 +45,8 @@ public class ff_packet {
 		Object generatedBase = this.getBase();
 		if (packet_length <= generatedBase.getSize()) {
 			int remaining = generatedBase.getSize() - packet_length;
-			.memmove(generatedBase.getData(), generatedBase.getData()[packet_length], remaining);
-			.av_shrink_packet(generatedBase, remaining);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(generatedBase.getData(), generatedBase.getData()[packet_length], remaining);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_shrink_packet(generatedBase, remaining);
 		} 
 	}
 	public Object getBase() {

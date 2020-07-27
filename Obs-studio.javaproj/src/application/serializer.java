@@ -17,43 +17,119 @@ public class serializer {
 	public serializer() {
 	}
 	
+	public boolean file_input_serializer_init(Object path) {
+		ModernizedCProgram.s.setData(ModernizedCProgram.os_fopen(path, "rb"));
+		if (!ModernizedCProgram.s.getData()) {
+			return 0;
+		} 
+		ModernizedCProgram.s.setRead(file_input_read);
+		ModernizedCProgram.s.setWrite(((Object)0));
+		ModernizedCProgram.s.setSeek(file_input_seek);
+		ModernizedCProgram.s.setGet_pos(file_input_get_pos);
+		return 1;
+	}
+	public void file_input_serializer_free() {
+		if (ModernizedCProgram.s.getData()) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(ModernizedCProgram.s.getData());
+		} 
+	}
+	public boolean file_output_serializer_init(Object path) {
+		FILE file = ModernizedCProgram.os_fopen(path, "wb");
+		file_output_data out = new file_output_data();
+		if (!file) {
+			return 0;
+		} 
+		out = ModernizedCProgram.bzalloc(/*Error: sizeof expression not supported yet*/);
+		out.setFile(file);
+		ModernizedCProgram.s.setData(out);
+		ModernizedCProgram.s.setRead(((Object)0));
+		ModernizedCProgram.s.setWrite(file_output_write);
+		ModernizedCProgram.s.setSeek(file_output_seek);
+		ModernizedCProgram.s.setGet_pos(file_output_get_pos);
+		return 1;
+	}
+	public boolean file_output_serializer_init_safe(Object path, Object temp_ext) {
+		dstr temp_name = new dstr(0);
+		file_output_data out = new file_output_data();
+		FILE file = new FILE();
+		if (!temp_ext || !temp_ext) {
+			return 0;
+		} 
+		temp_name.dstr_copy(path);
+		if (temp_ext != (byte)'.') {
+			temp_name.dstr_cat_ch((byte)'.');
+		} 
+		temp_name.dstr_cat(temp_ext);
+		byte[] generatedArray = temp_name.getArray();
+		file = ModernizedCProgram.os_fopen(generatedArray, "wb");
+		if (!file) {
+			temp_name.dstr_free();
+			return 0;
+		} 
+		out = ModernizedCProgram.bzalloc(/*Error: sizeof expression not supported yet*/);
+		out.setFile_name(ModernizedCProgram.bstrdup(path));
+		out.setTemp_name(generatedArray);
+		out.setFile(file);
+		ModernizedCProgram.s.setData(out);
+		ModernizedCProgram.s.setRead(((Object)0));
+		ModernizedCProgram.s.setWrite(file_output_write);
+		ModernizedCProgram.s.setSeek(file_output_seek);
+		ModernizedCProgram.s.setGet_pos(file_output_get_pos);
+		return 1;
+	}
+	public void file_output_serializer_free() {
+		file_output_data out = ModernizedCProgram.s.getData();
+		_iobuf generatedFile = out.getFile();
+		Byte generatedTemp_name = out.getTemp_name();
+		Byte generatedFile_name = out.getFile_name();
+		if (out) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(generatedFile);
+			if (generatedTemp_name) {
+				ModernizedCProgram.os_unlink(generatedFile_name);
+				ModernizedCProgram.os_rename(generatedTemp_name, generatedFile_name);
+			} 
+			ModernizedCProgram.bfree(generatedFile_name);
+			ModernizedCProgram.bfree(generatedTemp_name);
+			ModernizedCProgram.bfree(out);
+		} 
+	}
 	public Object s_read(Object data, Object size) {
 		if (ModernizedCProgram.s && ModernizedCProgram.s.getRead() && data && size) {
-			return .UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.s.getData(), (Object)data, size);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.s.getData(), (Object)data, size);
 		} 
 		return 0;
 	}
 	public Object s_write(Object data, Object size) {
 		if (ModernizedCProgram.s && ModernizedCProgram.s.getWrite() && data && size) {
-			return .UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.s.getData(), (Object)data, size);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.s.getData(), (Object)data, size);
 		} 
 		return 0;
 	}
 	public Object serialize(Object data, Object len) {
 		if (ModernizedCProgram.s) {
 			if (ModernizedCProgram.s.getWrite()) {
-				return .UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.s.getData(), data, len);
+				return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.s.getData(), data, len);
 			}  else if (ModernizedCProgram.s.getRead()) {
-				return .UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.s.getData(), data, len);
+				return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.s.getData(), data, len);
 			} 
 		} 
 		return 0;
 	}
 	public Object serializer_seek(Object offset, serialize_seek_type seek_type) {
 		if (ModernizedCProgram.s && ModernizedCProgram.s.getSeek()) {
-			return .UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.s.getData(), offset, serialize_seek_type.seek_type);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.s.getData(), offset, serialize_seek_type.seek_type);
 		} 
 		return -1;
 	}
 	public Object serializer_get_pos() {
 		if (ModernizedCProgram.s && ModernizedCProgram.s.getGet_pos()) {
-			return .UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.s.getData());
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.s.getData());
 		} 
 		return -1;
 	}
 	/* formatted this to be similar to the AVIO layout that ffmpeg uses */
 	public void s_w8(Object u8) {
-		ModernizedCProgram.s.s_write(u8, );
+		ModernizedCProgram.s.s_write(u8, /*Error: Unsupported expression*/);
 	}
 	public void s_wl16(Object u16) {
 		ModernizedCProgram.s.s_w8((uint8_t)u16);
@@ -98,82 +174,6 @@ public class serializer {
 	}
 	public void s_wbd(double d) {
 		ModernizedCProgram.s.s_wb64((uint64_t)d);
-	}
-	public boolean file_input_serializer_init(Object path) {
-		ModernizedCProgram.s.setData(ModernizedCProgram.os_fopen(path, "rb"));
-		if (!ModernizedCProgram.s.getData()) {
-			return 0;
-		} 
-		ModernizedCProgram.s.setRead(file_input_read);
-		ModernizedCProgram.s.setWrite(((Object)0));
-		ModernizedCProgram.s.setSeek(file_input_seek);
-		ModernizedCProgram.s.setGet_pos(file_input_get_pos);
-		return 1;
-	}
-	public void file_input_serializer_free() {
-		if (ModernizedCProgram.s.getData()) {
-			.fclose(ModernizedCProgram.s.getData());
-		} 
-	}
-	public boolean file_output_serializer_init(Object path) {
-		FILE file = ModernizedCProgram.os_fopen(path, "wb");
-		file_output_data out = new file_output_data();
-		if (!file) {
-			return 0;
-		} 
-		out = ModernizedCProgram.bzalloc();
-		out.setFile(file);
-		ModernizedCProgram.s.setData(out);
-		ModernizedCProgram.s.setRead(((Object)0));
-		ModernizedCProgram.s.setWrite(file_output_write);
-		ModernizedCProgram.s.setSeek(file_output_seek);
-		ModernizedCProgram.s.setGet_pos(file_output_get_pos);
-		return 1;
-	}
-	public boolean file_output_serializer_init_safe(Object path, Object temp_ext) {
-		dstr temp_name = new dstr(0);
-		file_output_data out = new file_output_data();
-		FILE file = new FILE();
-		if (!temp_ext || !temp_ext) {
-			return 0;
-		} 
-		temp_name.dstr_copy(path);
-		if (temp_ext != (byte)'.') {
-			temp_name.dstr_cat_ch((byte)'.');
-		} 
-		temp_name.dstr_cat(temp_ext);
-		byte generatedArray = temp_name.getArray();
-		file = ModernizedCProgram.os_fopen(generatedArray, "wb");
-		if (!file) {
-			temp_name.dstr_free();
-			return 0;
-		} 
-		out = ModernizedCProgram.bzalloc();
-		out.setFile_name(ModernizedCProgram.bstrdup(path));
-		out.setTemp_name(generatedArray);
-		out.setFile(file);
-		ModernizedCProgram.s.setData(out);
-		ModernizedCProgram.s.setRead(((Object)0));
-		ModernizedCProgram.s.setWrite(file_output_write);
-		ModernizedCProgram.s.setSeek(file_output_seek);
-		ModernizedCProgram.s.setGet_pos(file_output_get_pos);
-		return 1;
-	}
-	public void file_output_serializer_free() {
-		file_output_data out = ModernizedCProgram.s.getData();
-		_iobuf generatedFile = out.getFile();
-		Byte generatedTemp_name = out.getTemp_name();
-		Byte generatedFile_name = out.getFile_name();
-		if (out) {
-			.fclose(generatedFile);
-			if (generatedTemp_name) {
-				ModernizedCProgram.os_unlink(generatedFile_name);
-				ModernizedCProgram.os_rename(generatedTemp_name, generatedFile_name);
-			} 
-			ModernizedCProgram.bfree(generatedFile_name);
-			ModernizedCProgram.bfree(generatedTemp_name);
-			ModernizedCProgram.bfree(out);
-		} 
 	}
 	public Object getData() {
 		return data;

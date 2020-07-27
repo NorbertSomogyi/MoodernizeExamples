@@ -16,7 +16,7 @@ public class ptw32_oll_ticket_t_ {
 		ptw32_oll_snziNodeOrRoot_t_ generatedSnziNodeOrRoot = ticket.getSnziNodeOrRoot();
 		Object generatedWord = generatedCounter.getWord();
 		Object generatedLeafs = csnzi.getLeafs();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			ptw32_oll_ticket_t ticket = new ptw32_oll_ticket_t();
 			ptw32_oll_snziRoot_t oldProxy = generatedProxyRoot;
 			if (generatedInternal.getState() != .ptw32_oll_snziRoot_open) {
@@ -26,7 +26,7 @@ public class ptw32_oll_ticket_t_ {
 			if (!ModernizedCProgram.ptw32_oll_ShouldArriveAtTree()) {
 				ptw32_oll_snziRoot_t newProxy = oldProxy;
 				generatedInternal.getCount()++;
-				if ( == (size_t)generatedWord) {
+				if (/*Error: Unsupported expression*/ == (size_t)generatedWord) {
 					generatedSnziNodeOrRoot.setRootPtr(generatedProxyRoot);
 					return ticket;
 				} 

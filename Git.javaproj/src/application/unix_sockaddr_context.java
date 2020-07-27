@@ -11,29 +11,29 @@ public class unix_sockaddr_context {
 	
 	public void unix_sockaddr_cleanup() {
 		if (!ModernizedCProgram.ctx.getOrig_dir()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		if (.chdir(ModernizedCProgram.ctx.getOrig_dir()) < 0) {
+		if (/*Error: Function owner not recognized*/chdir(ModernizedCProgram.ctx.getOrig_dir()) < 0) {
 			ModernizedCProgram.die("unable to restore original working directory");
 		} 
 		ModernizedCProgram.free(ModernizedCProgram.ctx.getOrig_dir());
 	}
 	public int unix_sockaddr_init(Object sa, Object path) {
-		int size = .strlen(path) + 1;
+		int size = /*Error: Function owner not recognized*/strlen(path) + 1;
 		ModernizedCProgram.ctx.setOrig_dir(((Object)0));
-		if (size > ) {
+		if (size > /*Error: sizeof expression not supported yet*/) {
 			byte slash = ModernizedCProgram.git_find_last_dir_sep(path);
 			byte dir;
-			strbuf cwd = new strbuf(, , );
+			strbuf cwd = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			if (!slash) {
-				(._errno()) = 38;
+				(/*Error: Function owner not recognized*/_errno()) = 38;
 				return -1;
 			} 
 			dir = path;
 			path = slash + 1;
-			size = .strlen(path) + 1;
-			if (size > ) {
-				(._errno()) = 38;
+			size = /*Error: Function owner not recognized*/strlen(path) + 1;
+			if (size > /*Error: sizeof expression not supported yet*/) {
+				(/*Error: Function owner not recognized*/_errno()) = 38;
 				return -1;
 			} 
 			if (cwd.strbuf_getcwd()) {
@@ -44,9 +44,9 @@ public class unix_sockaddr_context {
 				return -1;
 			} 
 		} 
-		.memset(sa, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(sa, 0, /*Error: sizeof expression not supported yet*/);
 		sa.setSun_family(1);
-		.memcpy(sa.getSun_path(), path, size);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(sa.getSun_path(), path, size);
 		return 0;
 	}
 	public Byte getOrig_dir() {

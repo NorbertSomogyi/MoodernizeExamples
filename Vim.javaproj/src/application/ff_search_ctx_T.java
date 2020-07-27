@@ -7,15 +7,15 @@ public class ff_search_ctx_T {
 	private ff_visited_list_hdr ffsc_visited_lists_list;
 	private ff_visited_list_hdr ffsc_dir_visited_lists_list;
 	private Object ffsc_file_to_search;
-	private Object ffsc_start_dir;
-	private Object ffsc_fix_path;
+	private Object[] ffsc_start_dir;
+	private Object[] ffsc_fix_path;
 	private Object ffsc_wc_path;
 	private int ffsc_level;
-	private Object ffsc_stopdirs_v;
+	private Object[][] ffsc_stopdirs_v;
 	private int ffsc_find_what;
 	private int ffsc_tagfile;
 	
-	public ff_search_ctx_T(ff_stack ffsc_stack_ptr, ff_visited_list_hdr ffsc_visited_list, ff_visited_list_hdr ffsc_dir_visited_list, ff_visited_list_hdr ffsc_visited_lists_list, ff_visited_list_hdr ffsc_dir_visited_lists_list, Object ffsc_file_to_search, Object ffsc_start_dir, Object ffsc_fix_path, Object ffsc_wc_path, int ffsc_level, Object ffsc_stopdirs_v, int ffsc_find_what, int ffsc_tagfile) {
+	public ff_search_ctx_T(ff_stack ffsc_stack_ptr, ff_visited_list_hdr ffsc_visited_list, ff_visited_list_hdr ffsc_dir_visited_list, ff_visited_list_hdr ffsc_visited_lists_list, ff_visited_list_hdr ffsc_dir_visited_lists_list, Object ffsc_file_to_search, Object[] ffsc_start_dir, Object[] ffsc_fix_path, Object ffsc_wc_path, int ffsc_level, Object[][] ffsc_stopdirs_v, int ffsc_find_what, int ffsc_tagfile) {
 		setFfsc_stack_ptr(ffsc_stack_ptr);
 		setFfsc_visited_list(ffsc_visited_list);
 		setFfsc_dir_visited_list(ffsc_dir_visited_list);
@@ -41,13 +41,13 @@ public class ff_search_ctx_T {
 		}
 		Object generatedFfsc_file_to_search = this.getFfsc_file_to_search();
 		ModernizedCProgram.vim_free(generatedFfsc_file_to_search);
-		Object generatedFfsc_start_dir = this.getFfsc_start_dir();
+		Object[] generatedFfsc_start_dir = this.getFfsc_start_dir();
 		ModernizedCProgram.vim_free(generatedFfsc_start_dir);
-		Object generatedFfsc_fix_path = this.getFfsc_fix_path();
+		Object[] generatedFfsc_fix_path = this.getFfsc_fix_path();
 		ModernizedCProgram.vim_free(generatedFfsc_fix_path);
 		Object generatedFfsc_wc_path = this.getFfsc_wc_path();
 		ModernizedCProgram.vim_free(generatedFfsc_wc_path);
-		Object generatedFfsc_stopdirs_v = this.getFfsc_stopdirs_v();
+		Object[][] generatedFfsc_stopdirs_v = this.getFfsc_stopdirs_v();
 		if (generatedFfsc_stopdirs_v != ((Object)0)) {
 			int i = 0;
 			while (generatedFfsc_stopdirs_v[i] != ((Object)0)) {
@@ -102,16 +102,16 @@ public class ff_search_ctx_T {
 	public void setFfsc_file_to_search(Object newFfsc_file_to_search) {
 		ffsc_file_to_search = newFfsc_file_to_search;
 	}
-	public Object getFfsc_start_dir() {
+	public Object[] getFfsc_start_dir() {
 		return ffsc_start_dir;
 	}
-	public void setFfsc_start_dir(Object newFfsc_start_dir) {
+	public void setFfsc_start_dir(Object[] newFfsc_start_dir) {
 		ffsc_start_dir = newFfsc_start_dir;
 	}
-	public Object getFfsc_fix_path() {
+	public Object[] getFfsc_fix_path() {
 		return ffsc_fix_path;
 	}
-	public void setFfsc_fix_path(Object newFfsc_fix_path) {
+	public void setFfsc_fix_path(Object[] newFfsc_fix_path) {
 		ffsc_fix_path = newFfsc_fix_path;
 	}
 	public Object getFfsc_wc_path() {
@@ -126,10 +126,10 @@ public class ff_search_ctx_T {
 	public void setFfsc_level(int newFfsc_level) {
 		ffsc_level = newFfsc_level;
 	}
-	public Object getFfsc_stopdirs_v() {
+	public Object[][] getFfsc_stopdirs_v() {
 		return ffsc_stopdirs_v;
 	}
-	public void setFfsc_stopdirs_v(Object newFfsc_stopdirs_v) {
+	public void setFfsc_stopdirs_v(Object[][] newFfsc_stopdirs_v) {
 		ffsc_stopdirs_v = newFfsc_stopdirs_v;
 	}
 	public int getFfsc_find_what() {

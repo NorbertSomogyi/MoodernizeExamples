@@ -30,10 +30,10 @@ public class ref_states {
 		remote generatedRemote = this.getRemote();
 		refspec generatedFetch = generatedRemote.getFetch();
 		int generatedNr = generatedFetch.getNr();
-		refspec_item generatedItems = generatedFetch.getItems();
-		Object generatedRaw = generatedFetch.getRaw();
+		refspec_item[] generatedItems = generatedFetch.getItems();
+		Object[][] generatedRaw = generatedFetch.getRaw();
 		for (i = 0; i < generatedNr; i++) {
-			if (.get_fetch_map(remote_refs, generatedItems[i], tail, 1)) {
+			if (/*Error: Function owner not recognized*/get_fetch_map(remote_refs, generatedItems[i], tail, 1)) {
 				ModernizedCProgram.die(ModernizedCProgram._("Could not get fetch map for refspec %s"), generatedRaw[i]);
 			} 
 		}
@@ -45,21 +45,22 @@ public class ref_states {
 		generatedStale.setStrdup_strings(1);
 		ref generatedPeer_ref = ref.getPeer_ref();
 		Object generatedName = generatedPeer_ref.getName();
+		string_list_item string_list_item = new string_list_item();
 		ref generatedNext = ref.getNext();
 		for (ref = fetch_map; ref; ref = generatedNext) {
 			if (!generatedPeer_ref || !ModernizedCProgram.ref_exists(generatedName)) {
-				generatedNew_refs.string_list_append(ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/"));
+				string_list_item.string_list_append(generatedNew_refs, ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/"));
 			} else {
-					generatedTracked.string_list_append(ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/"));
+					string_list_item.string_list_append(generatedTracked, ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/"));
 			} 
 		}
-		stale_refs = .get_stale_heads(generatedFetch, fetch_map);
+		stale_refs = /*Error: Function owner not recognized*/get_stale_heads(generatedFetch, fetch_map);
 		for (ref = stale_refs; ref; ref = generatedNext) {
-			string_list_item item = generatedStale.string_list_append(ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/"));
+			string_list_item item = string_list_item.string_list_append(generatedStale, ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/"));
 			item.setUtil(ModernizedCProgram.xstrdup(generatedName));
 		}
-		.free_refs(stale_refs);
-		.free_refs(fetch_map);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_refs(stale_refs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_refs(fetch_map);
 		generatedNew_refs.string_list_sort();
 		generatedTracked.string_list_sort();
 		generatedStale.string_list_sort();
@@ -75,14 +76,15 @@ public class ref_states {
 		if (generatedMirror) {
 			return 0;
 		} 
-		local_refs = .get_local_heads();
-		push_map = .copy_ref_list(remote_refs);
+		local_refs = /*Error: Function owner not recognized*/get_local_heads();
+		push_map = /*Error: Function owner not recognized*/copy_ref_list(remote_refs);
 		refspec generatedPush = remote.getPush();
-		.match_push_refs(local_refs, push_map, generatedPush, match_refs_flags.MATCH_REFS_NONE);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/match_push_refs(local_refs, push_map, generatedPush, match_refs_flags.MATCH_REFS_NONE);
 		generatedPush.setStrdup_strings(1);
 		ref generatedPeer_ref = ref.getPeer_ref();
 		object_id generatedNew_oid = ref.getNew_oid();
 		Object generatedName = generatedPeer_ref.getName();
+		string_list_item string_list_item = new string_list_item();
 		Object generatedUtil = item.getUtil();
 		int generatedForce = ref.getForce();
 		object_id generatedOld_oid = ref.getOld_oid();
@@ -94,8 +96,8 @@ public class ref_states {
 				continue;
 			} 
 			generatedNew_oid.oidcpy(generatedNew_oid);
-			item = generatedPush.string_list_append(ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/"));
-			item.setUtil(ModernizedCProgram.xcalloc(1, ));
+			item = string_list_item.string_list_append(generatedPush, ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/"));
+			item.setUtil(ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/));
 			info = generatedUtil;
 			info.setForced(generatedForce);
 			info.setDest(ModernizedCProgram.xstrdup(ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/")));
@@ -111,8 +113,8 @@ public class ref_states {
 					info.setStatus(.PUSH_STATUS_OUTOFDATE);
 			} 
 		}
-		.free_refs(local_refs);
-		.free_refs(push_map);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_refs(local_refs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_refs(push_map);
 		return 0;
 	}
 	public int get_push_ref_states_noquery() {
@@ -128,24 +130,25 @@ public class ref_states {
 		string_list generatedPush = this.getPush();
 		generatedPush.setStrdup_strings(1);
 		int generatedNr = generatedPush.getNr();
-		byte generatedString = item.getString();
+		string_list_item string_list_item = new string_list_item();
+		byte[] generatedString = item.getString();
 		if (!generatedNr) {
-			item = generatedPush.string_list_append(ModernizedCProgram._("(matching)"));
-			info = item.setUtil(ModernizedCProgram.xcalloc(1, ));
+			item = string_list_item.string_list_append(generatedPush, ModernizedCProgram._("(matching)"));
+			info = item.setUtil(ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/));
 			info.setStatus(.PUSH_STATUS_NOTQUERIED);
 			info.setDest(ModernizedCProgram.xstrdup(generatedString));
 		} 
-		string_list_item generatedItems = generatedPush.getItems();
+		string_list_item[] generatedItems = generatedPush.getItems();
 		for (i = 0; i < generatedNr; i++) {
 			refspec_item spec = generatedItems[i];
 			if (spec.getMatching()) {
-				item = generatedPush.string_list_append(ModernizedCProgram._("(matching)"));
-			}  else if (.strlen(spec.getSrc())) {
-				item = generatedPush.string_list_append(spec.getSrc());
+				item = string_list_item.string_list_append(generatedPush, ModernizedCProgram._("(matching)"));
+			}  else if (/*Error: Function owner not recognized*/strlen(spec.getSrc())) {
+				item = string_list_item.string_list_append(generatedPush, spec.getSrc());
 			} else {
-					item = generatedPush.string_list_append(ModernizedCProgram._("(delete)"));
+					item = string_list_item.string_list_append(generatedPush, ModernizedCProgram._("(delete)"));
 			} 
-			info = item.setUtil(ModernizedCProgram.xcalloc(1, ));
+			info = item.setUtil(ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/));
 			info.setForced(spec.getForce());
 			info.setStatus(.PUSH_STATUS_NOTQUERIED);
 			info.setDest(ModernizedCProgram.xstrdup(spec.getDst() ? spec.getDst() : generatedString));
@@ -163,15 +166,16 @@ public class ref_states {
 		refspec.setSrc(refspec.setDst("refs/heads/*"));
 		string_list generatedHeads = this.getHeads();
 		generatedHeads.setStrdup_strings(1);
-		.get_fetch_map(remote_refs, refspec, fetch_map_tail, 0);
-		matches = .guess_remote_head(.find_ref_by_name(remote_refs, "HEAD"), fetch_map, 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/get_fetch_map(remote_refs, refspec, fetch_map_tail, 0);
+		matches = /*Error: Function owner not recognized*/guess_remote_head(/*Error: Function owner not recognized*/find_ref_by_name(remote_refs, "HEAD"), fetch_map, 1);
 		Object generatedName = ref.getName();
+		string_list_item string_list_item = new string_list_item();
 		ref generatedNext = ref.getNext();
 		for (ref = matches; ref; ref = generatedNext) {
-			generatedHeads.string_list_append(ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/"));
+			string_list_item.string_list_append(generatedHeads, ModernizedCProgram.abbrev_ref((generatedName), "refs/heads/"));
 		}
-		.free_refs(fetch_map);
-		.free_refs(matches);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_refs(fetch_map);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_refs(matches);
 		return 0;
 	}
 	public void free_remote_ref_states() {
@@ -189,14 +193,14 @@ public class ref_states {
 	public int get_remote_ref_states(Object name, int query) {
 		transport transport = new transport();
 		ref remote_refs = new ref();
-		this.setRemote(.remote_get(name));
+		this.setRemote(/*Error: Function owner not recognized*/remote_get(name));
 		remote generatedRemote = this.getRemote();
 		if (!generatedRemote) {
 			return ();
 		} 
 		ModernizedCProgram.read_branches();
 		int generatedUrl_nr = generatedRemote.getUrl_nr();
-		Object generatedUrl = generatedRemote.getUrl();
+		Object[][] generatedUrl = generatedRemote.getUrl();
 		transport transport = new transport();
 		string_list generatedTracked = this.getTracked();
 		if (query) {

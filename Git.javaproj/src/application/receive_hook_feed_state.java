@@ -45,7 +45,7 @@ public class receive_hook_feed_state {
 		} 
 		int generatedIn = muxer.getIn();
 		if (ModernizedCProgram.use_sideband) {
-			.memset(muxer, 0, );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(muxer, 0, /*Error: sizeof expression not supported yet*/);
 			muxer.setProc(copy_to_sideband);
 			muxer.setIn(-1);
 			code = muxer.start_async();
@@ -66,14 +66,14 @@ public class receive_hook_feed_state {
 		while (1) {
 			byte buf;
 			size_t n = new size_t();
-			if (.feed(feed_state, ModernizedCProgram.buf, n)) {
+			if (/*Error: Function owner not recognized*/feed(feed_state, ModernizedCProgram.buf, n)) {
 				break;
 			} 
 			if (ModernizedCProgram.write_in_full(generatedIn, ModernizedCProgram.buf, n) < 0) {
 				break;
 			} 
 		}
-		.close(generatedIn);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedIn);
 		if (ModernizedCProgram.use_sideband) {
 			muxer.finish_async();
 		} 

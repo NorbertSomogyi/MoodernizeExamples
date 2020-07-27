@@ -20,7 +20,7 @@ public class out {
 	public void out_flush() {
 		int generatedLen = this.getLen();
 		if (generatedLen == 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedBuf = this.getBuf();
 		hc_fp generatedFp = this.getFp();
@@ -31,7 +31,7 @@ public class out {
 		Object generatedBuf = this.getBuf();
 		int generatedLen = this.getLen();
 		byte ptr = generatedBuf + generatedLen;
-		.memcpy(ptr, pw_buf, pw_len);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr, pw_buf, pw_len);
 		ptr[pw_len + 0] = (byte)'\r';
 		ptr[pw_len + 1] = (byte)'\n';
 		generatedLen += pw_len + 2;

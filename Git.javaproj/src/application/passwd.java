@@ -13,54 +13,6 @@ public class passwd {
 	public passwd() {
 	}
 	
-	public passwd getpwuid(int uid) {
-		int initialized;
-		byte[] user_name = new byte[100];
-		passwd p = new passwd();
-		wchar_t[] buf = new wchar_t();
-		DWORD len = new DWORD();
-		if (initialized) {
-			return p;
-		} 
-		len = ( /  + ( - 1));
-		if (!.GetUserNameW(buf, len)) {
-			initialized = 1;
-			return ((Object)0);
-		} 
-		if (ModernizedCProgram.xwcstoutf(user_name, buf, ) < 0) {
-			initialized = 1;
-			return ((Object)0);
-		} 
-		p = ModernizedCProgram.xmalloc();
-		p.setPasswd(user_name);
-		p.setPasswd(ModernizedCProgram.get_extended_user_info(EXTENDED_NAME_FORMAT.NameDisplay));
-		Object generatedPasswd = p.getPasswd();
-		if (!generatedPasswd) {
-			p.setPasswd("unknown");
-		} 
-		p.setPasswd(((Object)0));
-		initialized = 1;
-		return p;
-	}
-	public passwd getpwnam(Object name) {
-		return ((Object)0);
-	}
-	public passwd xgetpwuid_self(int is_bogus) {
-		passwd pw = new passwd();
-		(._errno()) = 0;
-		passwd passwd = new passwd();
-		pw = passwd.getpwuid(ModernizedCProgram.getuid());
-		if (!pw) {
-			passwd fallback = new passwd();
-			fallback.setPasswd("unknown");
-			fallback.setPasswd("Unknown");
-			pw = fallback;
-			if (is_bogus) {
-				is_bogus = 1;
-			} 
-		} 
-		return pw;
-	}
 	public passwd getpw_str(Object username, Object len) {
 		passwd pw = new passwd();
 		byte username_z = ModernizedCProgram.xmemdupz(username, len);
@@ -74,6 +26,54 @@ public class passwd {
 		 *
 		 * If real_home is true, real_path($HOME) is used in the expansion.
 		 */;
+	}
+	public passwd getpwnam(Object name) {
+		return ((Object)0);
+	}
+	public passwd xgetpwuid_self(Integer is_bogus) {
+		passwd pw = new passwd();
+		(/*Error: Function owner not recognized*/_errno()) = 0;
+		passwd passwd = new passwd();
+		pw = passwd.getpwuid(ModernizedCProgram.getuid());
+		if (!pw) {
+			passwd fallback = new passwd();
+			fallback.setPasswd("unknown");
+			fallback.setPasswd("Unknown");
+			pw = fallback;
+			if (is_bogus) {
+				is_bogus = 1;
+			} 
+		} 
+		return pw;
+	}
+	public passwd getpwuid(int uid) {
+		int initialized;
+		byte[] user_name = new byte[100];
+		passwd p = new passwd();
+		wchar_t[] buf = new wchar_t();
+		DWORD len = new DWORD();
+		if (initialized) {
+			return p;
+		} 
+		len = (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+		if (!/*Error: Function owner not recognized*/GetUserNameW(buf, len)) {
+			initialized = 1;
+			return ((Object)0);
+		} 
+		if (ModernizedCProgram.xwcstoutf(user_name, buf, /*Error: sizeof expression not supported yet*/) < 0) {
+			initialized = 1;
+			return ((Object)0);
+		} 
+		p = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+		p.setPasswd(user_name);
+		p.setPasswd(ModernizedCProgram.get_extended_user_info(EXTENDED_NAME_FORMAT.NameDisplay));
+		Object generatedPasswd = p.getPasswd();
+		if (!generatedPasswd) {
+			p.setPasswd("unknown");
+		} 
+		p.setPasswd(((Object)0));
+		initialized = 1;
+		return p;
 	}
 	public Byte getPw_name() {
 		return pw_name;

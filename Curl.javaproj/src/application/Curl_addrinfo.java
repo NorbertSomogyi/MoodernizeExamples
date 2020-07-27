@@ -50,33 +50,6 @@ public class Curl_addrinfo {
 	public Curl_addrinfo() {
 	}
 	
-	public Curl_addrinfo fake_ai() {
-		Curl_addrinfo ai = new Curl_addrinfo();
-		ai = .calloc(1, );
-		if (!ai) {
-			return ((Object)0);
-		} 
-		ai.setAi_canonname(.strdup("dummy"));
-		Byte generatedAi_canonname = ai.getAi_canonname();
-		if (!generatedAi_canonname) {
-			.free(ai);
-			return ((Object)0);
-		} 
-		ai.setAi_addr(.calloc(1, ));
-		sockaddr generatedAi_addr = ai.getAi_addr();
-		if (!generatedAi_addr) {
-			.free(generatedAi_canonname);
-			.free(ai);
-			return ((Object)0);
-		} 
-		ai.setAi_family(2);
-		ai.setAi_addrlen();
-		return ai;
-	}
-	public Curl_addrinfo Curl_getaddrinfo(connectdata conn, Object hostname, int port, Integer waitp) {
-		Curl_addrinfo curl_addrinfo = new Curl_addrinfo();
-		return curl_addrinfo.Curl_resolver_getaddrinfo(conn, hostname, port, waitp/* CURLRES_ASYNCH */);
-	}
 	/* synchronous response only */
 	/* CURLRES_SYNCH */
 	/* CURLRES_IPV4 */
@@ -96,7 +69,7 @@ public class Curl_addrinfo {
 		if (ModernizedCProgram.Curl_inet_pton(2, hostname, in) > 0) {
 			return curl_addrinfo.Curl_ip2addr(2, in, hostname, /* This is a dotted IP address 123.123.123.123-style */port);
 		} else {
-				h = .gethostbyname((Object)/* set return code to NULL *//* HAVE_GETADDRINFO_THREADSAFE || HAVE_GETHOSTBYNAME_R *//*
+				h = /*Error: Function owner not recognized*/gethostbyname((Object)/*
 				     * Here is code for platforms that don't have a thread safe
 				     * getaddrinfo() nor gethostbyname_r() function or for which
 				     * gethostbyname() is the preferred one.
@@ -129,13 +102,187 @@ public class Curl_addrinfo {
 		       * name lookup. Fixing this would require an extra malloc() and then
 		       * calling Curl_addrinfo_copy() that subsequent realloc()s down the new
 		       * memory area to the actually used amount.
-		       *//* HAVE_...BYNAME_R_5 || HAVE_...BYNAME_R_6 || HAVE_...BYNAME_R_3 */if (h) {
+		       *//* HAVE_...BYNAME_R_5 || HAVE_...BYNAME_R_6 || HAVE_...BYNAME_R_3 *//* set return code to NULL *//* HAVE_GETADDRINFO_THREADSAFE || HAVE_GETHOSTBYNAME_R */if (h) {
 			ai = curl_addrinfo.Curl_he2ai(h, port);
 			if (/* used a *_r() function */buf) {
-				.Curl_cfree(buf);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(buf);
 			} 
 		} 
 		return ai/* defined(CURLRES_IPV4) && !defined(CURLRES_ARES) */;
+	}
+	public Curl_addrinfo Curl_doh(connectdata conn, Object hostname, int port, Integer waitp) {
+		Curl_easy generatedData = conn.getData();
+		Curl_easy data = generatedData;
+		 result = CURLE_OK;
+		waitp = /* this never returns synchronously */1;
+		(Object)conn;
+		(Object)hostname;
+		(Object)port;
+		SingleRequest generatedReq = data.getReq();
+		dohdata generatedDoh = generatedReq.getDoh();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedDoh, 0, /*Error: Unsupported expression*//* start clean, consider allocating this struct on demand */);
+		generatedDoh.setHost(hostname);
+		generatedDoh.setPort(port);
+		generatedDoh.setHeaders(((Object)0).curl_slist_append("Content-Type: application/dns-message"));
+		curl_slist generatedHeaders = generatedDoh.getHeaders();
+		if (!generatedHeaders) {
+			;
+		} 
+		long generatedIp_version = conn.getIp_version();
+		Object generatedProbe = generatedDoh.getProbe();
+		UserDefined generatedSet = data.getSet();
+		Object generatedStr = generatedSet.getStr();
+		Curl_multi generatedMulti = data.getMulti();
+		int generatedPending = generatedDoh.getPending();
+		if (generatedIp_version != CURL_IPRESOLVE_V6) {
+			result = ModernizedCProgram.dohprobe(data, generatedProbe[0], /* create IPv4 DOH request */.DNS_TYPE_A, hostname, generatedStr[dupstring.STRING_DOH], generatedMulti, generatedHeaders);
+			if (result) {
+				;
+			} 
+			generatedPending++;
+		} 
+		if (generatedIp_version != CURL_IPRESOLVE_V4) {
+			result = ModernizedCProgram.dohprobe(data, generatedProbe[1], /* create IPv6 DOH request */.DNS_TYPE_AAAA, hostname, generatedStr[dupstring.STRING_DOH], generatedMulti, generatedHeaders);
+			if (result) {
+				;
+			} 
+			generatedPending++;
+		} 
+		return ((Object)0);
+		generatedDoh.setHeaders(((Object)0));
+		generatedProbe[0].getEasy().Curl_close();
+		generatedProbe[0].setEasy(((Object)0));
+		generatedProbe[1].getEasy().Curl_close();
+		generatedProbe[1].setEasy(((Object)0));
+		return ((Object)0);
+	}
+	public Curl_addrinfo doh2ai(Object de, Object hostname, int port) {
+		Curl_addrinfo ai = new Curl_addrinfo();
+		Curl_addrinfo prevai = ((Object)0);
+		Curl_addrinfo firstai = ((Object)0);
+		sockaddr_in addr = new sockaddr_in();
+		 result = CURLE_OK;
+		int i;
+		if (!de) {
+			return ((Object)/* no input == no output! */0);
+		} 
+		Byte generatedAi_canonname = ai.getAi_canonname();
+		sockaddr generatedAi_addr = ai.getAi_addr();
+		Object generatedSin_addr = addr.getSin_addr();
+		int generatedAi_family = ai.getAi_family();
+		for (i = 0; i < de.getNumaddr(); i++) {
+			size_t ss_size = new size_t();
+			int addrtype;
+			if (de.getAddr()[i].getType() == .DNS_TYPE_AAAA) {
+				continue;
+			} else {
+					ss_size = /*Error: Unsupported expression*/;
+					addrtype = 2;
+			} 
+			ai = /*Error: Function owner not recognized*/Curl_ccalloc(1, /*Error: Unsupported expression*/);
+			if (!ai) {
+				result = CURLE_OUT_OF_MEMORY;
+				break;
+			} 
+			ai.setAi_canonname(/*Error: Function owner not recognized*/Curl_cstrdup(hostname));
+			if (!generatedAi_canonname) {
+				result = CURLE_OUT_OF_MEMORY;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(ai);
+				break;
+			} 
+			ai.setAi_addr(/*Error: Function owner not recognized*/Curl_ccalloc(1, ss_size));
+			if (!generatedAi_addr) {
+				result = CURLE_OUT_OF_MEMORY;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedAi_canonname);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(ai);
+				break;
+			} 
+			if (!firstai) {
+				firstai = /* store the pointer we want to return from this function */ai;
+			} 
+			if (prevai) {
+				prevai.setAi_next(/* make the previous entry point to this */ai);
+			} 
+			ai.setAi_family(addrtype);
+			ai.setAi_socktype(/* we return all names as STREAM, so when using this address for TFTP
+			       the type must be ignored and conn->socktype be used instead! */1);
+			ai.setAi_addrlen(()ss_size);
+			switch (generatedAi_family) {
+			case 2:
+					addr = (Object)generatedAi_addr;
+					do {
+					} while (0);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedSin_addr, de.getAddr()[i].getIp().getV4(), /*Error: Unsupported expression*/);
+					addr.setSin_family((int)addrtype);
+					addr.setSin_port(/*Error: Function owner not recognized*/htons((int)port));
+					break;
+			}
+			prevai = ai;
+		}
+		if (result) {
+			firstai.Curl_freeaddrinfo();
+			firstai = ((Object)0);
+		} 
+		return firstai;
+	}
+	/*
+	 * Curl_getaddrinfo() - for platforms without getaddrinfo
+	 */
+	/*
+	 * Curl_getaddrinfo() - for platforms without getaddrinfo
+	 */
+	public Curl_addrinfo Curl_resolver_getaddrinfo(connectdata conn, Object hostname, int port, Integer waitp) {
+		in_addr in = new in_addr();
+		Curl_easy generatedData = conn.getData();
+		Curl_easy data = generatedData;
+		UrlState generatedState = data.getState();
+		Object generatedResolver = generatedState.getResolver();
+		resdata reslv = (resdata)generatedResolver;
+		waitp = /* default to synchronous response */0;
+		Curl_addrinfo curl_addrinfo = new Curl_addrinfo();
+		if (ModernizedCProgram.Curl_inet_pton(2, hostname, in) > 0) {
+			return curl_addrinfo.Curl_ip2addr(2, in, hostname, /* This is a dotted IP address 123.123.123.123-style */port);
+		} 
+		curltime curltime = new curltime();
+		reslv.setStart(curltime.Curl_now());
+		if (conn.init_resolve_thread(hostname, port, ((Object)/* fire up a new resolver thread! */0))) {
+			waitp = /* expect asynchronous response */1;
+			return ((Object)0);
+		} 
+		generatedData.Curl_failf("getaddrinfo() thread failed\n");
+		return ((Object)0/* !HAVE_GETADDRINFO *//*
+		 * Curl_resolver_getaddrinfo() - for getaddrinfo
+		 */);
+	}
+	/* default to synchronous response */
+	/* First check if this is an IPv4 address string */
+	/* This is a dotted IP address 123.123.123.123-style */
+	public Curl_addrinfo fake_ai() {
+		Curl_addrinfo ai = new Curl_addrinfo();
+		ai = /*Error: Function owner not recognized*/calloc(1, /*Error: Unsupported expression*/);
+		if (!ai) {
+			return ((Object)0);
+		} 
+		ai.setAi_canonname(/*Error: Function owner not recognized*/strdup("dummy"));
+		Byte generatedAi_canonname = ai.getAi_canonname();
+		if (!generatedAi_canonname) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(ai);
+			return ((Object)0);
+		} 
+		ai.setAi_addr(/*Error: Function owner not recognized*/calloc(1, /*Error: Unsupported expression*/));
+		sockaddr generatedAi_addr = ai.getAi_addr();
+		if (!generatedAi_addr) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAi_canonname);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(ai);
+			return ((Object)0);
+		} 
+		ai.setAi_family(2);
+		ai.setAi_addrlen(/*Error: Unsupported expression*/);
+		return ai;
+	}
+	public Curl_addrinfo Curl_getaddrinfo(connectdata conn, Object hostname, int port, Integer waitp) {
+		Curl_addrinfo curl_addrinfo = new Curl_addrinfo();
+		return curl_addrinfo.Curl_resolver_getaddrinfo(conn, hostname, port, waitp/* CURLRES_ASYNCH */);
 	}
 	/***************************************************************************
 	 *                                  _   _ ____  _
@@ -175,22 +322,10 @@ public class Curl_addrinfo {
 		Byte generatedAi_canonname = ca.getAi_canonname();
 		Curl_addrinfo generatedAi_next = ca.getAi_next();
 		for (ca = cahead; ca != ((Object)0); ca = canext) {
-			.Curl_cfree(generatedAi_addr);
-			.Curl_cfree(generatedAi_canonname);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedAi_addr);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedAi_canonname);
 			canext = generatedAi_next;
-			.Curl_cfree(ca/*
-			 * Curl_getaddrinfo_ex()
-			 *
-			 * This is a wrapper function around system's getaddrinfo(), with
-			 * the only difference that instead of returning a linked list of
-			 * addrinfo structs this one returns a linked list of Curl_addrinfo
-			 * ones. The memory allocated by this function *MUST* be free'd with
-			 * Curl_freeaddrinfo().  For each successful call to this function
-			 * there must be an associated call later to Curl_freeaddrinfo().
-			 *
-			 * There should be no single call to system's getaddrinfo() in the
-			 * whole library, any such call should be 'routed' through this one.
-			 */);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(ca);
 		}
 	}
 	/* assume failure */
@@ -268,23 +403,23 @@ public class Curl_addrinfo {
 		int generatedAi_family = ai.getAi_family();
 		for (i = 0; (curr = he.getH_addr_list()[i]) != ((Object)0); i++) {
 			size_t ss_size = new size_t();
-			ss_size = ;
-			ai = .Curl_ccalloc(1, );
+			ss_size = /*Error: Unsupported expression*/;
+			ai = /*Error: Function owner not recognized*/Curl_ccalloc(1, /*Error: Unsupported expression*/);
 			if (!ai) {
 				result = CURLE_OUT_OF_MEMORY;
 				break;
 			} 
-			ai.setAi_canonname(.Curl_cstrdup(he.getH_name()));
+			ai.setAi_canonname(/*Error: Function owner not recognized*/Curl_cstrdup(he.getH_name()));
 			if (!generatedAi_canonname) {
 				result = CURLE_OUT_OF_MEMORY;
-				.Curl_cfree(ai);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(ai);
 				break;
 			} 
-			ai.setAi_addr(.Curl_ccalloc(1, ss_size));
+			ai.setAi_addr(/*Error: Function owner not recognized*/Curl_ccalloc(1, ss_size));
 			if (!generatedAi_addr) {
 				result = CURLE_OUT_OF_MEMORY;
-				.Curl_cfree(generatedAi_canonname);
-				.Curl_cfree(ai);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedAi_canonname);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(ai);
 				break;
 			} 
 			if (!firstai) {
@@ -300,9 +435,9 @@ public class Curl_addrinfo {
 			switch (generatedAi_family) {
 			case 2:
 					addr = (Object)generatedAi_addr;
-					.memcpy(generatedSin_addr, curr, );
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedSin_addr, curr, /*Error: Unsupported expression*/);
 					addr.setSin_family((int)(he.getH_addrtype()));
-					addr.setSin_port(.htons((int)port));
+					addr.setSin_port(/*Error: Function owner not recognized*/htons((int)port));
 					break;
 			}
 			prevai = ai;
@@ -322,26 +457,26 @@ public class Curl_addrinfo {
 		size_t addrsize = new size_t();
 		do {
 		} while (0);
-		buf = .Curl_cmalloc();
+		buf = /*Error: Function owner not recognized*/Curl_cmalloc(/*Error: Unsupported expression*/);
 		if (!buf) {
 			return ((Object)0);
 		} 
-		hoststr = .Curl_cstrdup(hostname);
+		hoststr = /*Error: Function owner not recognized*/Curl_cstrdup(hostname);
 		if (!hoststr) {
-			.Curl_cfree(buf);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(buf);
 			return ((Object)0);
 		} 
 		 generatedAddrentry = buf.getAddrentry();
 		Object generatedIna4 = generatedAddrentry.getIna4();
 		switch (af) {
 		case 2:
-				addrsize = ;
+				addrsize = /*Error: Unsupported expression*/;
 				addrentry = (Object)generatedIna4;
-				.memcpy(addrentry, inaddr, );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(addrentry, inaddr, /*Error: Unsupported expression*/);
 				break;
 		default:
-				.Curl_cfree(hoststr);
-				.Curl_cfree(buf);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(hoststr);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(buf);
 				return ((Object)0);
 		}
 		hostent generatedHostentry = buf.getHostentry();
@@ -356,8 +491,8 @@ public class Curl_addrinfo {
 		generatedH_addr_list[1] = ((Object)/* terminate list of entries */0);
 		Curl_addrinfo curl_addrinfo = new Curl_addrinfo();
 		ai = curl_addrinfo.Curl_he2ai(h, port);
-		.Curl_cfree(hoststr);
-		.Curl_cfree(buf);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(hoststr);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(buf);
 		return ai/*
 		 * Given an IPv4 or IPv6 dotted string address, this converts it to a proper
 		 * allocated Curl_addrinfo struct and returns it.
@@ -402,147 +537,6 @@ public class Curl_addrinfo {
 	 */
 	/* storage area for this info */
 	/* storage area for this info */
-	public Curl_addrinfo Curl_doh(connectdata conn, Object hostname, int port, int waitp) {
-		Curl_easy generatedData = conn.getData();
-		Curl_easy data = generatedData;
-		 result = CURLE_OK;
-		waitp = /* this never returns synchronously */1;
-		(Object)conn;
-		(Object)hostname;
-		(Object)port;
-		Object generatedReq = data.getReq();
-		.memset(generatedReq.getDoh(), 0, /* start clean, consider allocating this struct on demand */);
-		generatedReq.getDoh().setHost(hostname);
-		generatedReq.getDoh().setPort(port);
-		generatedReq.getDoh().setHeaders(((Object)0).curl_slist_append("Content-Type: application/dns-message"));
-		if (!generatedReq.getDoh().getHeaders()) {
-			;
-		} 
-		long generatedIp_version = conn.getIp_version();
-		Object generatedSet = data.getSet();
-		Object generatedMulti = data.getMulti();
-		if (generatedIp_version != CURL_IPRESOLVE_V6) {
-			result = ModernizedCProgram.dohprobe(data, generatedReq.getDoh().getProbe()[0], /* create IPv4 DOH request */.DNS_TYPE_A, hostname, generatedSet.getStr()[dupstring.STRING_DOH], generatedMulti, generatedReq.getDoh().getHeaders());
-			if (result) {
-				;
-			} 
-			generatedReq.getDoh().getPending()++;
-		} 
-		if (generatedIp_version != CURL_IPRESOLVE_V4) {
-			result = ModernizedCProgram.dohprobe(data, generatedReq.getDoh().getProbe()[1], /* create IPv6 DOH request */.DNS_TYPE_AAAA, hostname, generatedSet.getStr()[dupstring.STRING_DOH], generatedMulti, generatedReq.getDoh().getHeaders());
-			if (result) {
-				;
-			} 
-			generatedReq.getDoh().getPending()++;
-		} 
-		return ((Object)0);
-		generatedReq.getDoh().setHeaders(((Object)0));
-		generatedReq.getDoh().getProbe()[0].getEasy().Curl_close();
-		generatedReq.getDoh().getProbe()[0].setEasy(((Object)0));
-		generatedReq.getDoh().getProbe()[1].getEasy().Curl_close();
-		generatedReq.getDoh().getProbe()[1].setEasy(((Object)0));
-		return ((Object)0);
-	}
-	public Curl_addrinfo doh2ai(Object de, Object hostname, int port) {
-		Curl_addrinfo ai = new Curl_addrinfo();
-		Curl_addrinfo prevai = ((Object)0);
-		Curl_addrinfo firstai = ((Object)0);
-		sockaddr_in addr = new sockaddr_in();
-		 result = CURLE_OK;
-		int i;
-		if (!de) {
-			return ((Object)/* no input == no output! */0);
-		} 
-		Byte generatedAi_canonname = ai.getAi_canonname();
-		sockaddr generatedAi_addr = ai.getAi_addr();
-		Object generatedSin_addr = addr.getSin_addr();
-		int generatedAi_family = ai.getAi_family();
-		for (i = 0; i < de.getNumaddr(); i++) {
-			size_t ss_size = new size_t();
-			int addrtype;
-			if (de.getAddr()[i].getType() == .DNS_TYPE_AAAA) {
-				continue;
-			} else {
-					ss_size = ;
-					addrtype = 2;
-			} 
-			ai = .Curl_ccalloc(1, );
-			if (!ai) {
-				result = CURLE_OUT_OF_MEMORY;
-				break;
-			} 
-			ai.setAi_canonname(.Curl_cstrdup(hostname));
-			if (!generatedAi_canonname) {
-				result = CURLE_OUT_OF_MEMORY;
-				.Curl_cfree(ai);
-				break;
-			} 
-			ai.setAi_addr(.Curl_ccalloc(1, ss_size));
-			if (!generatedAi_addr) {
-				result = CURLE_OUT_OF_MEMORY;
-				.Curl_cfree(generatedAi_canonname);
-				.Curl_cfree(ai);
-				break;
-			} 
-			if (!firstai) {
-				firstai = /* store the pointer we want to return from this function */ai;
-			} 
-			if (prevai) {
-				prevai.setAi_next(/* make the previous entry point to this */ai);
-			} 
-			ai.setAi_family(addrtype);
-			ai.setAi_socktype(/* we return all names as STREAM, so when using this address for TFTP
-			       the type must be ignored and conn->socktype be used instead! */1);
-			ai.setAi_addrlen(()ss_size);
-			switch (generatedAi_family) {
-			case 2:
-					addr = (Object)generatedAi_addr;
-					do {
-					} while (0);
-					.memcpy(generatedSin_addr, de.getAddr()[i].getIp().getV4(), );
-					addr.setSin_family((int)addrtype);
-					addr.setSin_port(.htons((int)port));
-					break;
-			}
-			prevai = ai;
-		}
-		if (result) {
-			firstai.Curl_freeaddrinfo();
-			firstai = ((Object)0);
-		} 
-		return firstai;
-	}
-	/*
-	 * Curl_getaddrinfo() - for platforms without getaddrinfo
-	 */
-	/*
-	 * Curl_getaddrinfo() - for platforms without getaddrinfo
-	 */
-	public Curl_addrinfo Curl_resolver_getaddrinfo(connectdata conn, Object hostname, int port, int waitp) {
-		in_addr in = new in_addr();
-		Curl_easy generatedData = conn.getData();
-		Curl_easy data = generatedData;
-		Object generatedState = data.getState();
-		resdata reslv = (resdata)generatedState.getResolver();
-		waitp = /* default to synchronous response */0;
-		Curl_addrinfo curl_addrinfo = new Curl_addrinfo();
-		if (ModernizedCProgram.Curl_inet_pton(2, hostname, in) > 0) {
-			return curl_addrinfo.Curl_ip2addr(2, in, hostname, /* This is a dotted IP address 123.123.123.123-style */port);
-		} 
-		curltime curltime = new curltime();
-		reslv.setStart(curltime.Curl_now());
-		if (conn.init_resolve_thread(hostname, port, ((Object)/* fire up a new resolver thread! */0))) {
-			waitp = /* expect asynchronous response */1;
-			return ((Object)0);
-		} 
-		generatedData.Curl_failf("getaddrinfo() thread failed\n");
-		return ((Object)0/* !HAVE_GETADDRINFO *//*
-		 * Curl_resolver_getaddrinfo() - for getaddrinfo
-		 */);
-	}
-	/* default to synchronous response */
-	/* First check if this is an IPv4 address string */
-	/* This is a dotted IP address 123.123.123.123-style */
 	public int getAi_flags() {
 		return ai_flags;
 	}

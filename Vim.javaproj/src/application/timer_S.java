@@ -44,7 +44,7 @@ public class timer_S {
 		 */);
 	}
 	public timer_S create_timer(long msec, int repeat) {
-		timer_T timer = (timer_T)ModernizedCProgram.alloc_clear();
+		timer_T timer = (timer_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/);
 		long prev_id = ModernizedCProgram.last_timer_id;
 		if (timer == ((Object)0)) {
 			return ((Object)0);

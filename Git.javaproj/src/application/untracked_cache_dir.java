@@ -1,8 +1,8 @@
 package application;
 
 public class untracked_cache_dir {
-	private untracked_cache_dir dirs;
-	private Byte untracked;
+	private untracked_cache_dir[][] dirs;
+	private byte[][] untracked;
 	private stat_data stat_data;
 	private int untracked_alloc;
 	private int dirs_nr;
@@ -14,7 +14,7 @@ public class untracked_cache_dir {
 	private object_id exclude_oid;
 	private Object name;
 	
-	public untracked_cache_dir(untracked_cache_dir dirs, Byte untracked, stat_data stat_data, int untracked_alloc, int dirs_nr, int dirs_alloc, int untracked_nr, int check_only, int valid, int recurse, object_id exclude_oid, Object name) {
+	public untracked_cache_dir(untracked_cache_dir[][] dirs, byte[][] untracked, stat_data stat_data, int untracked_alloc, int dirs_nr, int dirs_alloc, int untracked_nr, int check_only, int valid, int recurse, object_id exclude_oid, Object name) {
 		setDirs(dirs);
 		setUntracked(untracked);
 		setStat_data(stat_data);
@@ -31,7 +31,7 @@ public class untracked_cache_dir {
 	public untracked_cache_dir() {
 	}
 	
-	public untracked_cache_dir lookup_untracked(untracked_cache uc, Object name, int len) {
+	public untracked_cache_dir lookup_untracked(untracked_cache uc, Object[] name, int len) {
 		int first;
 		int last;
 		untracked_cache_dir d = new untracked_cache_dir();
@@ -44,14 +44,14 @@ public class untracked_cache_dir {
 		first = 0;
 		int generatedDirs_nr = this.getDirs_nr();
 		last = generatedDirs_nr;
-		untracked_cache_dir generatedDirs = this.getDirs();
+		untracked_cache_dir[][] generatedDirs = this.getDirs();
 		Object generatedName = d.getName();
 		while (last > first) {
 			int cmp;
 			int next = first + ((last - first) >> 1);
 			d = generatedDirs[next];
-			cmp = .strncmp(name, generatedName, len);
-			if (!cmp && .strlen(generatedName) > len) {
+			cmp = /*Error: Function owner not recognized*/strncmp(name, generatedName, len);
+			if (!cmp && /*Error: Function owner not recognized*/strlen(generatedName) > len) {
 				cmp = -1;
 			} 
 			if (!cmp) {
@@ -67,8 +67,8 @@ public class untracked_cache_dir {
 		generatedDir_created++;
 		do {
 			size_t flex_array_len_ = (len);
-			(d) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedName, (name), flex_array_len_);
+			(d) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedName, (name), flex_array_len_);
 		} while (0);
 		int generatedDirs_alloc = this.getDirs_alloc();
 		do {
@@ -78,10 +78,10 @@ public class untracked_cache_dir {
 				} else {
 						this.setDirs_alloc((((generatedDirs_alloc) + 16) * 3 / 2));
 				} 
-				(generatedDirs) = ModernizedCProgram.xrealloc((generatedDirs), ModernizedCProgram.st_mult(, (generatedDirs_alloc)));
+				(generatedDirs) = ModernizedCProgram.xrealloc((generatedDirs), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedDirs_alloc)));
 			} 
 		} while (0);
-		ModernizedCProgram.move_array((generatedDirs + first + 1), (generatedDirs + first), (generatedDirs_nr - first),  + ( - 1));
+		ModernizedCProgram.move_array((generatedDirs + first + 1), (generatedDirs + first), (generatedDirs_nr - first), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		generatedDirs_nr++;
 		generatedDirs[first] = d;
 		return d;
@@ -91,18 +91,18 @@ public class untracked_cache_dir {
 		this.setValid(0);
 		this.setUntracked_nr(0);
 		int generatedDirs_nr = this.getDirs_nr();
-		untracked_cache_dir generatedDirs = this.getDirs();
+		untracked_cache_dir[][] generatedDirs = this.getDirs();
 		for (i = 0; i < generatedDirs_nr; i++) {
 			generatedDirs[i].do_invalidate_gitignore();
 		}
 	}
 	public void add_untracked(Object name) {
 		if (!dir) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedUntracked_nr = this.getUntracked_nr();
 		int generatedUntracked_alloc = this.getUntracked_alloc();
-		Byte generatedUntracked = this.getUntracked();
+		byte[][] generatedUntracked = this.getUntracked();
 		do {
 			if ((generatedUntracked_nr + 1) > generatedUntracked_alloc) {
 				if ((((generatedUntracked_alloc) + 16) * 3 / 2) < (generatedUntracked_nr + 1)) {
@@ -110,7 +110,7 @@ public class untracked_cache_dir {
 				} else {
 						this.setUntracked_alloc((((generatedUntracked_alloc) + 16) * 3 / 2));
 				} 
-				(generatedUntracked) = ModernizedCProgram.xrealloc((generatedUntracked), ModernizedCProgram.st_mult(, (generatedUntracked_alloc)));
+				(generatedUntracked) = ModernizedCProgram.xrealloc((generatedUntracked), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedUntracked_alloc)));
 			} 
 		} while (0);
 		generatedUntracked[generatedUntracked_nr++] = ModernizedCProgram.xstrdup(name);
@@ -123,7 +123,7 @@ public class untracked_cache_dir {
 			return ((Object)0);
 		} 
 		if (untracked_cache_disabled < 0) {
-			untracked_cache_disabled = .git_env_bool("GIT_DISABLE_UNTRACKED_CACHE", 0);
+			untracked_cache_disabled = /*Error: Function owner not recognized*/git_env_bool("GIT_DISABLE_UNTRACKED_CACHE", 0);
 		} 
 		if (untracked_cache_disabled) {
 			return ((Object)0/*
@@ -155,7 +155,7 @@ public class untracked_cache_dir {
 				 */);
 		} 
 		Object generatedExclude_per_dir = dir.getExclude_per_dir();
-		if (generatedExclude_per_dir != generatedExclude_per_dir && .strcmp(generatedExclude_per_dir, generatedExclude_per_dir)) {
+		if (generatedExclude_per_dir != generatedExclude_per_dir && /*Error: Function owner not recognized*/strcmp(generatedExclude_per_dir, generatedExclude_per_dir)) {
 			return ((Object)0/*
 				 * EXC_CMDL is not considered in the cache. If people set it,
 				 * skip the cache.
@@ -171,9 +171,9 @@ public class untracked_cache_dir {
 		} 
 		untracked_cache_dir generatedRoot = generatedUntracked.getRoot();
 		if (!generatedRoot) {
-			int len = ;
+			int len = /*Error: sizeof expression not supported yet*/;
 			generatedUntracked.setRoot(ModernizedCProgram.xmalloc(ModernizedCProgram.len));
-			.memset(generatedRoot, 0, ModernizedCProgram.len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedRoot, 0, ModernizedCProgram.len);
 		} 
 		root = generatedRoot;
 		oid_stat generatedSs_info_exclude = dir.getSs_info_exclude();
@@ -193,15 +193,15 @@ public class untracked_cache_dir {
 	public void free_untracked() {
 		int i;
 		if (!ucd) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedDirs_nr = this.getDirs_nr();
-		untracked_cache_dir generatedDirs = this.getDirs();
+		untracked_cache_dir[][] generatedDirs = this.getDirs();
 		for (i = 0; i < generatedDirs_nr; i++) {
 			generatedDirs[i].free_untracked();
 		}
 		int generatedUntracked_nr = this.getUntracked_nr();
-		Byte generatedUntracked = this.getUntracked();
+		byte[][] generatedUntracked = this.getUntracked();
 		for (i = 0; i < generatedUntracked_nr; i++) {
 			ModernizedCProgram.free(generatedUntracked[i]);
 		}
@@ -209,16 +209,16 @@ public class untracked_cache_dir {
 		ModernizedCProgram.free(generatedDirs);
 		ModernizedCProgram.free(ucd);
 	}
-	public untracked_cache_dir getDirs() {
+	public untracked_cache_dir[][] getDirs() {
 		return dirs;
 	}
-	public void setDirs(untracked_cache_dir newDirs) {
+	public void setDirs(untracked_cache_dir[][] newDirs) {
 		dirs = newDirs;
 	}
-	public Byte getUntracked() {
+	public byte[][] getUntracked() {
 		return untracked;
 	}
-	public void setUntracked(Byte newUntracked) {
+	public void setUntracked(byte[][] newUntracked) {
 		untracked = newUntracked;
 	}
 	public stat_data getStat_data() {

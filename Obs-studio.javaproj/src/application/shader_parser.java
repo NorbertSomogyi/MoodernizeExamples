@@ -50,8 +50,8 @@ public class shader_parser {
 			;
 		} 
 		Object generatedSamplers = this.getSamplers();
-		.da_push_back(generatedSamplers, ss);
-		return ;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedSamplers, ss);
+		return /*Error: Unsupported expression*/;
 	}
 	public void sp_parse_struct() {
 		shader_struct ss = new shader_struct();
@@ -70,32 +70,32 @@ public class shader_parser {
 			shader_var var = new shader_var();
 			var.shader_var_init();
 			switch (ModernizedCProgram.sp_parse_struct_var(sp, var)) {
-			case PARSE_UNEXPECTED_BREAK:
-					generatedCfp.cf_adderror_syntax_error();
 			case PARSE_UNEXPECTED_CONTINUE:
 					generatedCfp.cf_adderror_syntax_error();
-			case /* Falls through. */PARSE_CONTINUE:
-					var.shader_var_free();
-					continue;
-			case PARSE_EOF:
-					var.shader_var_free();
-					;
 			case /* Falls through. */PARSE_BREAK:
 					var.shader_var_free();
 					do_break = true;
 					break;
+			case /* Falls through. */PARSE_CONTINUE:
+					var.shader_var_free();
+					continue;
+			case PARSE_UNEXPECTED_BREAK:
+					generatedCfp.cf_adderror_syntax_error();
+			case PARSE_EOF:
+					var.shader_var_free();
+					;
 			}
 			if (do_break) {
 				break;
 			} 
-			.da_push_back(generatedVars, var);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedVars, var);
 		}
 		if (generatedCfp.cf_next_token_should_be(";", NULL, NULL) != PARSE_SUCCESS) {
 			;
 		} 
 		Object generatedStructs = this.getStructs();
-		.da_push_back(generatedStructs, ss);
-		return ;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedStructs, ss);
+		return /*Error: Unsupported expression*/;
 	}
 	public int sp_check_for_keyword(Object keyword, Object val) {
 		cf_parser generatedCfp = this.getCfp();
@@ -145,8 +145,8 @@ public class shader_parser {
 		generatedCfp.cf_next_token();
 		func.setEnd(generatedCf_parser);
 		Object generatedFuncs = this.getFuncs();
-		.da_push_back(generatedFuncs, func);
-		return ;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedFuncs, func);
+		return /*Error: Unsupported expression*/;
 	}
 	public void sp_parse_param(Byte type, Byte name, Object is_const, Object is_uniform) {
 		shader_var param = new shader_var();
@@ -164,7 +164,7 @@ public class shader_parser {
 		if (!generatedCfp.cf_token_is(";")) {
 			;
 		} 
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public Object sp_get_var_specifiers(Object is_const, Object is_uniform) {
 		while (true) {
@@ -216,10 +216,10 @@ public class shader_parser {
 			sp.report_invalid_func_keyword("const", is_const);
 			sp.report_invalid_func_keyword("uniform", is_uniform);
 			sp.sp_parse_function(type, name);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} else {
 				sp.sp_parse_param(type, name, is_const, is_uniform);
-				return ;
+				return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.bfree(name);
 	}
@@ -249,13 +249,13 @@ public class shader_parser {
 		cf_parser generatedCfp = this.getCfp();
 		generatedCfp.cf_parser_init();
 		Object generatedParams = this.getParams();
-		.da_init(generatedParams);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedParams);
 		Object generatedStructs = this.getStructs();
-		.da_init(generatedStructs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedStructs);
 		Object generatedSamplers = this.getSamplers();
-		.da_init(generatedSamplers);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedSamplers);
 		Object generatedFuncs = this.getFuncs();
-		.da_init(generatedFuncs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedFuncs);
 	}
 	public void shader_parser_free() {
 		 i = new ();
@@ -277,10 +277,10 @@ public class shader_parser {
 		}
 		cf_parser generatedCfp = this.getCfp();
 		generatedCfp.cf_parser_free();
-		.da_free(generatedParams);
-		.da_free(generatedStructs);
-		.da_free(generatedSamplers);
-		.da_free(generatedFuncs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedParams);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedStructs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedSamplers);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedFuncs);
 	}
 	public Byte shader_parser_geterrors() {
 		cf_parser generatedCfp = this.getCfp();

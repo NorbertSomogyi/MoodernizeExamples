@@ -58,7 +58,7 @@ public class tftp_state_data {
 		 generatedState = this.getState();
 		bool start = (generatedState == .TFTP_STATE_START) ? 1 : 0;
 		Object generatedStart_time = this.getStart_time();
-		.time(generatedStart_time);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/time(generatedStart_time);
 		connectdata generatedConn = this.getConn();
 		Curl_easy generatedData = generatedConn.getData();
 		timeout_ms = ModernizedCProgram.Curl_timeleft(generatedData, ((Object)0), /* Compute drop-dead time */start);
@@ -103,7 +103,7 @@ public class tftp_state_data {
 		Object generatedMax_time = this.getMax_time();
 		generatedData.Curl_infof("set timeouts for state %d; Total %ld, retry %d maxtry %d\n", (int)generatedState, (long)(generatedMax_time - generatedStart_time), generatedRetry_time, generatedRetry_max);
 		Object generatedRx_time = this.getRx_time();
-		.time(generatedRx_time);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/time(generatedRx_time);
 		return CURLE_OK/**********************************************************
 		 *
 		 * tftp_set_send_first
@@ -120,7 +120,8 @@ public class tftp_state_data {
 		this.setBlksize(/* if OACK doesn't contain blksize option, the default (512) must be used */512);
 		int generatedRequested_blksize = this.getRequested_blksize();
 		int generatedBlksize = this.getBlksize();
-		Object generatedSet = data.getSet();
+		UserDefined generatedSet = data.getSet();
+		Object generatedUpload = generatedSet.getUpload();
 		while (tmp < ptr + len) {
 			byte option;
 			byte value;
@@ -130,9 +131,9 @@ public class tftp_state_data {
 				return CURLE_TFTP_ILLEGAL;
 			} 
 			data.Curl_infof("got option=(%s) value=(%s)\n", option, value);
-			if (ModernizedCProgram.curl_strnequal(option, "blksize", .strlen(option))) {
+			if (ModernizedCProgram.curl_strnequal(option, "blksize", /*Error: Function owner not recognized*/strlen(option))) {
 				long blksize;
-				blksize = .strtol(value, ((Object)0), 10);
+				blksize = /*Error: Function owner not recognized*/strtol(value, ((Object)0), 10);
 				if (!blksize) {
 					data.Curl_failf("invalid blocksize value in OACK packet");
 					return CURLE_TFTP_ILLEGAL;
@@ -149,11 +150,11 @@ public class tftp_state_data {
 				} 
 				this.setBlksize((int)blksize);
 				data.Curl_infof("%s (%d) %s (%d)\n", "blksize parsed from OACK", generatedBlksize, "requested", generatedRequested_blksize);
-			}  else if (ModernizedCProgram.curl_strnequal(option, "tsize", .strlen(option))) {
+			}  else if (ModernizedCProgram.curl_strnequal(option, "tsize", /*Error: Function owner not recognized*/strlen(option))) {
 				long tsize = 0;
-				tsize = .strtol(value, ((Object)0), 10);
+				tsize = /*Error: Function owner not recognized*/strtol(value, ((Object)0), 10);
 				data.Curl_infof("%s (%ld)\n", "tsize parsed from OACK", tsize);
-				if (!generatedSet.getUpload()) {
+				if (!generatedUpload) {
 					if (!tsize) {
 						data.Curl_failf("invalid tsize -:%s:- value in OACK packet", value);
 						return CURLE_TFTP_ILLEGAL;
@@ -166,11 +167,11 @@ public class tftp_state_data {
 	}
 	public Object tftp_option_add(Object csize, Byte buf, Object option) {
 		int generatedBlksize = this.getBlksize();
-		if ((.strlen(option) + csize + 1) > (size_t)generatedBlksize) {
+		if ((/*Error: Function owner not recognized*/strlen(option) + csize + 1) > (size_t)generatedBlksize) {
 			return CURLE_TFTP_ILLEGAL;
 		} 
-		.strcpy(buf, option);
-		csize += .strlen(option) + 1;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(buf, option);
+		csize += /*Error: Function owner not recognized*/strlen(option) + 1;
 		return CURLE_OK;
 	}
 	public Object tftp_connect_for_tx( event) {
@@ -208,26 +209,33 @@ public class tftp_state_data {
 		Curl_easy generatedData = generatedConn.getData();
 		Curl_easy data = generatedData;
 		 result = CURLE_OK;
-		Object generatedSet = data.getSet();
-		if (generatedSet.getPrefer_ascii()) {
+		UserDefined generatedSet = data.getSet();
+		Object generatedPrefer_ascii = generatedSet.getPrefer_ascii();
+		if (generatedPrefer_ascii) {
 			mode = "netascii";
 		} 
 		int generatedRetries = this.getRetries();
 		int generatedRetry_max = this.getRetry_max();
+		Object generatedUpload = generatedSet.getUpload();
 		tftp_packet generatedSpacket = this.getSpacket();
-		Object generatedReq = generatedData.getReq();
-		Object generatedState = data.getState();
+		SingleRequest generatedReq = generatedData.getReq();
+		UrlState generatedState = data.getState();
+		Object generatedInfilesize = generatedState.getInfilesize();
+		urlpieces generatedUp = generatedState.getUp();
+		byte[] generatedPath = generatedUp.getPath();
 		int generatedBlksize = this.getBlksize();
+		Object generatedTftp_no_options = generatedSet.getTftp_no_options();
 		return result/* the next blocknum is x + 1 but it needs to wrap at an unsigned 16bit
-		   boundary *//**********************************************************
-		 *
-		 * tftp_rx
-		 *
-		 * Event handler for the RX state
-		 *
-		 **********************************************************/;
+		   boundary */;
 	}
 	/* Forward declarations */
+	/**********************************************************
+	 *
+	 * tftp_rx
+	 *
+	 * Event handler for the RX state
+	 *
+	 **********************************************************/
 	public Object tftp_rx( event) {
 		ssize_t sbytes = new ssize_t();
 		int rblock;
@@ -261,9 +269,9 @@ public class tftp_state_data {
 				this.setBlock((int)/* ACK this block. */rblock);
 				generatedSpacket.setpacketevent(.TFTP_EVENT_ACK);
 				generatedSpacket.setpacketblock(generatedBlock);
-				sbytes = .sendto(generatedSockfd, (Object)generatedData, 4, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
+				sbytes = /*Error: Function owner not recognized*/sendto(generatedSockfd, (Object)generatedData, 4, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
 				if (sbytes < 0) {
-					data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int).WSAGetLastError()), buffer, ));
+					data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int)/*Error: Function owner not recognized*/WSAGetLastError()), buffer, /*Error: sizeof expression not supported yet*/));
 					return CURLE_SEND_ERROR;
 				} 
 				if (generatedRbytes < (ssize_t)generatedBlksize + /* Check if completed (That is, a less than full packet is received) */4) {
@@ -271,12 +279,12 @@ public class tftp_state_data {
 				} else {
 						this.setState(.TFTP_STATE_RX);
 				} 
-				.time(generatedRx_time);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/time(generatedRx_time);
 				break;
 		case .TFTP_EVENT_ERROR:
 				generatedSpacket.setpacketevent(.TFTP_EVENT_ERROR);
 				generatedSpacket.setpacketblock(generatedBlock);
-				(Object).sendto(generatedSockfd, (Object)generatedData, 4, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
+				(Object)/*Error: Function owner not recognized*/sendto(generatedSockfd, (Object)generatedData, 4, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
 				this.setState(.TFTP_STATE_FIN);
 				break;
 		case .TFTP_EVENT_TIMEOUT:
@@ -286,9 +294,9 @@ public class tftp_state_data {
 					this.setError(.TFTP_ERR_TIMEOUT);
 					this.setState(.TFTP_STATE_FIN);
 				} else {
-						sbytes = .sendto(generatedSockfd, (Object)generatedData, 4, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
+						sbytes = /*Error: Function owner not recognized*/sendto(generatedSockfd, (Object)generatedData, 4, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
 						if (sbytes < 0) {
-							data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int).WSAGetLastError()), buffer, ));
+							data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int)/*Error: Function owner not recognized*/WSAGetLastError()), buffer, /*Error: sizeof expression not supported yet*/));
 							return CURLE_SEND_ERROR;
 						} 
 				} 
@@ -298,13 +306,13 @@ public class tftp_state_data {
 				this.setRetries(0);
 				generatedSpacket.setpacketevent(.TFTP_EVENT_ACK);
 				generatedSpacket.setpacketblock(generatedBlock);
-				sbytes = .sendto(generatedSockfd, (Object)generatedData, 4, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
+				sbytes = /*Error: Function owner not recognized*/sendto(generatedSockfd, (Object)generatedData, 4, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
 				if (sbytes < 0) {
-					data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int).WSAGetLastError()), buffer, ));
+					data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int)/*Error: Function owner not recognized*/WSAGetLastError()), buffer, /*Error: sizeof expression not supported yet*/));
 					return CURLE_SEND_ERROR;
 				} 
 				this.setState(/* we're ready to RX data */.TFTP_STATE_RX);
-				.time(generatedRx_time);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/time(generatedRx_time);
 				break;
 		default:
 				data.Curl_failf("%s", "tftp_rx: internal error");
@@ -325,7 +333,7 @@ public class tftp_state_data {
 		Curl_easy data = generatedData;
 		ssize_t sbytes = new ssize_t();
 		 result = CURLE_OK;
-		Object generatedReq = data.getReq();
+		SingleRequest generatedReq = data.getReq();
 		SingleRequest k = generatedReq;
 		/* Bytes currently read */size_t cb = new size_t();
 		byte[] buffer = new byte[128];
@@ -340,30 +348,15 @@ public class tftp_state_data {
 		Object generatedRx_time = this.getRx_time();
 		tftp_packet generatedSpacket = this.getSpacket();
 		int generatedBlksize = this.getBlksize();
+		byte[] generatedUpload_fromhere = generatedReq.getUpload_fromhere();
 		Object generatedWritebytecount = k.getWritebytecount();
 		switch (event) {
-		case .TFTP_EVENT_ACK:
 		case .TFTP_EVENT_ERROR:
 				this.setState(.TFTP_STATE_FIN);
 				generatedSpacket.setpacketevent(.TFTP_EVENT_ERROR);
 				generatedSpacket.setpacketblock(generatedBlock);
-				(Object).sendto(generatedSockfd, (Object)generatedData, 4, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
+				(Object)/*Error: Function owner not recognized*/sendto(generatedSockfd, (Object)generatedData, 4, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
 				this.setState(.TFTP_STATE_FIN);
-				break;
-		case .TFTP_EVENT_TIMEOUT:
-				generatedRetries++;
-				data.Curl_infof("Timeout waiting for block %d ACK.  Retries = %d\n", (((generatedBlock) + 1) & -1024), generatedRetries);
-				if (generatedRetries > generatedRetry_max) {
-					this.setError(.TFTP_ERR_TIMEOUT);
-					this.setState(.TFTP_STATE_FIN);
-				} else {
-						sbytes = .sendto(generatedSockfd, (Object)generatedData, 4 + generatedSbytes, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
-						if (sbytes < /* Check all sbytes were sent */0) {
-							data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int).WSAGetLastError()), buffer, ));
-							return CURLE_SEND_ERROR;
-						} 
-						data.Curl_pgrsSetUploadCounter(generatedWritebytecount);
-				} 
 				break;
 		case .TFTP_EVENT_OACK:
 				if (event == .TFTP_EVENT_ACK) {
@@ -375,15 +368,15 @@ public class tftp_state_data {
 							data.Curl_failf("tftp_tx: giving up waiting for block %d ack", generatedBlock);
 							result = CURLE_SEND_ERROR;
 						} else {
-								sbytes = .sendto(generatedSockfd, (Object)generatedData, 4 + generatedSbytes, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
+								sbytes = /*Error: Function owner not recognized*/sendto(generatedSockfd, (Object)generatedData, 4 + generatedSbytes, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
 								if (sbytes < /* Check all sbytes were sent */0) {
-									data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int).WSAGetLastError()), buffer, ));
+									data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int)/*Error: Function owner not recognized*/WSAGetLastError()), buffer, /*Error: sizeof expression not supported yet*/));
 									result = CURLE_SEND_ERROR;
 								} 
 						} 
 						return result;
 					} 
-					.time(generatedRx_time);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/time(generatedRx_time);
 					generatedBlock++;
 				} else {
 						this.setBlock(/* first data block is 1 when using OACK */1);
@@ -406,15 +399,31 @@ public class tftp_state_data {
 						return result;
 					} 
 					generatedSbytes += (int)cb;
-					generatedReq.getUpload_fromhere() += cb;
+					generatedUpload_fromhere += cb;
 				} while (generatedSbytes < generatedBlksize && cb != 0);
-				sbytes = .sendto(generatedSockfd, (Object)generatedData, 4 + generatedSbytes, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
+				sbytes = /*Error: Function owner not recognized*/sendto(generatedSockfd, (Object)generatedData, 4 + generatedSbytes, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
 				if (sbytes < /* Check all sbytes were sent */0) {
-					data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int).WSAGetLastError()), buffer, ));
+					data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int)/*Error: Function owner not recognized*/WSAGetLastError()), buffer, /*Error: sizeof expression not supported yet*/));
 					return CURLE_SEND_ERROR;
 				} 
 				generatedWritebytecount += generatedSbytes;
 				data.Curl_pgrsSetUploadCounter(generatedWritebytecount);
+				break;
+		case .TFTP_EVENT_ACK:
+		case .TFTP_EVENT_TIMEOUT:
+				generatedRetries++;
+				data.Curl_infof("Timeout waiting for block %d ACK.  Retries = %d\n", (((generatedBlock) + 1) & -1024), generatedRetries);
+				if (generatedRetries > generatedRetry_max) {
+					this.setError(.TFTP_ERR_TIMEOUT);
+					this.setState(.TFTP_STATE_FIN);
+				} else {
+						sbytes = /*Error: Function owner not recognized*/sendto(generatedSockfd, (Object)generatedData, 4 + generatedSbytes, 0, (sockaddr)generatedRemote_addr, generatedRemote_addrlen);
+						if (sbytes < /* Check all sbytes were sent */0) {
+							data.Curl_failf("%s", ModernizedCProgram.Curl_strerror(((int)/*Error: Function owner not recognized*/WSAGetLastError()), buffer, /*Error: sizeof expression not supported yet*/));
+							return CURLE_SEND_ERROR;
+						} 
+						data.Curl_pgrsSetUploadCounter(generatedWritebytecount);
+				} 
 				break;
 		default:
 				data.Curl_failf("tftp_tx: internal error, event: %i", (int)(event));
@@ -435,6 +444,11 @@ public class tftp_state_data {
 		Curl_easy data = generatedData;
 		 generatedState = this.getState();
 		switch (generatedState) {
+		case .TFTP_STATE_TX:
+				do {
+				} while (0);
+				result = state.tftp_tx(event);
+				break;
 		case .TFTP_STATE_RX:
 				do {
 				} while (0);
@@ -447,11 +461,6 @@ public class tftp_state_data {
 				break;
 		case .TFTP_STATE_FIN:
 				data.Curl_infof("%s\n", "TFTP finished");
-				break;
-		case .TFTP_STATE_TX:
-				do {
-				} while (0);
-				result = state.tftp_tx(event);
 				break;
 		default:
 				do {

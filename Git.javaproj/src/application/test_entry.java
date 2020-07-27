@@ -14,14 +14,14 @@ public class test_entry {
 	}
 	
 	public test_entry alloc_test_entry(int hash, Byte key, Byte value) {
-		size_t klen = .strlen(key);
-		size_t vlen = .strlen(value);
-		test_entry entry = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(ModernizedCProgram.st_add(ModernizedCProgram.st_add((()), ((klen))), ((vlen))), (true)));
+		size_t klen = /*Error: Function owner not recognized*/strlen(key);
+		size_t vlen = /*Error: Function owner not recognized*/strlen(value);
+		test_entry entry = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(ModernizedCProgram.st_add(ModernizedCProgram.st_add(((/*Error: sizeof expression not supported yet*/)), ((klen))), ((vlen))), (true)));
 		hashmap_entry generatedEnt = entry.getEnt();
 		generatedEnt.hashmap_entry_init(hash);
 		Object generatedKey = entry.getKey();
-		.memcpy(generatedKey, key, klen + 1);
-		.memcpy(generatedKey + klen + 1, value, vlen + 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedKey, key, klen + 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedKey + klen + 1, value, vlen + 1);
 		return entry;
 	}
 	public int getPadding() {

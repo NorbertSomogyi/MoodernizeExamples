@@ -38,7 +38,7 @@ public class s_mmfile {
 	public s_mmfile() {
 	}
 	
-	public Object xdl_mmfile_first(long size) {
+	public Object xdl_mmfile_first(Long size) {
 		long generatedSize = this.getSize();
 		size = generatedSize;
 		Byte generatedPtr = this.getPtr();
@@ -56,9 +56,9 @@ public class s_mmfile {
 		byte cur;
 		byte top;
 		if ((cur = data = mf.xdl_mmfile_first(size)) != ((Object)0)) {
-			for (top = data + size; nl < sample && cur < top; ) {
+			for (top = data + size; nl < sample && cur < top; /*Error: Unsupported expression*/) {
 				nl++;
-				if (!(cur = .memchr(cur, (byte)'\n', top - cur))) {
+				if (!(cur = /*Error: Function owner not recognized*/memchr(cur, (byte)'\n', top - cur))) {
 					cur = top;
 				} else {
 						cur++;

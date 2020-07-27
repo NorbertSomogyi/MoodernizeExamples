@@ -2,7 +2,7 @@ package application;
 
 public class wl_data {
 	private boolean enabled;
-	private Byte buf;
+	private byte[] buf;
 	private Object incr;
 	private Object avail;
 	private Object cnt;
@@ -12,7 +12,7 @@ public class wl_data {
 	private Byte iconv_tmp;
 	private Object func;
 	
-	public wl_data(boolean enabled, Byte buf, Object incr, Object avail, Object cnt, Object pos, boolean iconv_enabled, Object iconv_ctx, Byte iconv_tmp, Object func) {
+	public wl_data(boolean enabled, byte[] buf, Object incr, Object avail, Object cnt, Object pos, boolean iconv_enabled, Object iconv_ctx, Byte iconv_tmp, Object func) {
 		setEnabled(enabled);
 		setBuf(buf);
 		setIncr(incr);
@@ -33,10 +33,10 @@ public class wl_data {
 	public void setEnabled(boolean newEnabled) {
 		enabled = newEnabled;
 	}
-	public Byte getBuf() {
+	public byte[] getBuf() {
 		return buf;
 	}
-	public void setBuf(Byte newBuf) {
+	public void setBuf(byte[] newBuf) {
 		buf = newBuf;
 	}
 	public Object getIncr() {

@@ -45,72 +45,26 @@ public class obs_source_audio_mix {
 	public obs_source_audio_mix() {
 	}
 	
-	public Object slide_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
-		slide_info slide = data;
-		obs_source generatedSource = slide.getSource();
+	public Object fade_to_color_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
+		fade_to_color_info fade_to_color = data;
+		obs_source generatedSource = fade_to_color.getSource();
 		return ModernizedCProgram.obs_transition_audio_render(generatedSource, ts_out, audio, mixers, channels, sample_rate, mix_a, mix_b);
 	}
-	public Object stinger_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
-		stinger_info s = data;
-		 ts = 0;
-		obs_source generatedMedia_source = s.getMedia_source();
-		if (!ModernizedCProgram.obs_source_audio_pending(generatedMedia_source)) {
-			ts = ModernizedCProgram.obs_source_get_audio_timestamp(generatedMedia_source);
-			if (!ts) {
-				return false;
-			} 
+	public void obs_source_get_audio_mix(Object source) {
+		if (!ModernizedCProgram.obs_object_valid(source, "obs_source_get_audio_mix", "source")) {
+			return /*Error: Unsupported expression*/;
 		} 
-		obs_source generatedSource = s.getSource();
-		Object generatedMix_a = s.getMix_a();
-		Object generatedMix_b = s.getMix_b();
-		 success = ModernizedCProgram.obs_transition_audio_render(generatedSource, ts_out, audio, mixers, channels, sample_rate, generatedMix_a, generatedMix_b);
-		if (!ts) {
-			return success;
+		if (!ModernizedCProgram.obs_object_valid(audio, "audio", "audio")) {
+			return /*Error: Unsupported expression*/;
 		} 
-		if (!ts_out || ts < ts_out) {
-			ts_out = ts;
-		} 
-		obs_source_audio_mix child_audio = new obs_source_audio_mix();
-		child_audio.obs_source_get_audio_mix(generatedMedia_source);
 		Object generatedOutput = this.getOutput();
 		for ( mix = 0;
 		 mix < MAX_AUDIO_MIXES; mix++) {
-			if ((mixers & (1 << mix)) == 0) {
-				continue;
-			} 
 			for ( ch = 0;
-			 ch < channels; ch++) {
-				double out = generatedOutput[mix].getAudio_output_data()[ch];
-				double in = generatedOutput[mix].getAudio_output_data()[ch];
-				double end = in + AUDIO_OUTPUT_FRAMES;
-				while (in < end) {
-					(out++) += (in++);
-				}
+			 ch < MAX_AUDIO_CHANNELS; ch++) {
+				generatedOutput[mix].getAudio_output_data()[ch] = source.getAudio_output_buf()[mix][ch];
 			}
 		}
-		return true;
-	}
-	public Object fade_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
-		fade_info fade = data;
-		obs_source generatedSource = fade.getSource();
-		return ModernizedCProgram.obs_transition_audio_render(generatedSource, ts_out, audio, mixers, channels, sample_rate, mix_a, mix_b);
-	}
-	public Object luma_wipe_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
-		luma_wipe_info lwipe = data;
-		obs_source generatedSource = lwipe.getSource();
-		return ModernizedCProgram.obs_transition_audio_render(generatedSource, ts_out, audio, mixers, channels, sample_rate, mix_a, mix_b);
-	}
-	public Object ss_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
-		slideshow ss = data;
-		obs_source obs_source = new obs_source();
-		obs_source_t transition = obs_source.get_transition(ss);
-		 success = new ();
-		if (!transition) {
-			return false;
-		} 
-		success = ModernizedCProgram.ss_audio_render_(transition, ts_out, audio_output, mixers, channels, sample_rate);
-		transition.obs_source_release();
-		return success;
 	}
 	public Object scene_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
 		 timestamp = 0;
@@ -188,38 +142,84 @@ public class obs_source_audio_mix {
 		}
 		ts_out = timestamp;
 		ModernizedCProgram.pthread_mutex_unlock(generatedAudio_mutex);
-		.free(buf);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(buf);
 		return true;
 	}
-	public void obs_source_get_audio_mix(Object source) {
-		if (!ModernizedCProgram.obs_object_valid(source, "obs_source_get_audio_mix", "source")) {
-			return ;
+	public Object stinger_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
+		stinger_info s = data;
+		 ts = 0;
+		obs_source generatedMedia_source = s.getMedia_source();
+		if (!ModernizedCProgram.obs_source_audio_pending(generatedMedia_source)) {
+			ts = ModernizedCProgram.obs_source_get_audio_timestamp(generatedMedia_source);
+			if (!ts) {
+				return false;
+			} 
 		} 
-		if (!ModernizedCProgram.obs_object_valid(audio, "audio", "audio")) {
-			return ;
+		obs_source generatedSource = s.getSource();
+		Object generatedMix_a = s.getMix_a();
+		Object generatedMix_b = s.getMix_b();
+		 success = ModernizedCProgram.obs_transition_audio_render(generatedSource, ts_out, audio, mixers, channels, sample_rate, generatedMix_a, generatedMix_b);
+		if (!ts) {
+			return success;
 		} 
+		if (!ts_out || ts < ts_out) {
+			ts_out = ts;
+		} 
+		obs_source_audio_mix child_audio = new obs_source_audio_mix();
+		child_audio.obs_source_get_audio_mix(generatedMedia_source);
 		Object generatedOutput = this.getOutput();
 		for ( mix = 0;
 		 mix < MAX_AUDIO_MIXES; mix++) {
+			if ((mixers & (1 << mix)) == 0) {
+				continue;
+			} 
 			for ( ch = 0;
-			 ch < MAX_AUDIO_CHANNELS; ch++) {
-				generatedOutput[mix].getAudio_output_data()[ch] = source.getAudio_output_buf()[mix][ch];
+			 ch < channels; ch++) {
+				double out = generatedOutput[mix].getAudio_output_data()[ch];
+				double in = generatedOutput[mix].getAudio_output_data()[ch];
+				double end = in + AUDIO_OUTPUT_FRAMES;
+				while (in < end) {
+					(out++) += (in++);
+				}
 			}
 		}
+		return true;
+	}
+	public Object slide_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
+		slide_info slide = data;
+		obs_source generatedSource = slide.getSource();
+		return ModernizedCProgram.obs_transition_audio_render(generatedSource, ts_out, audio, mixers, channels, sample_rate, mix_a, mix_b);
+	}
+	public Object ss_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
+		slideshow ss = data;
+		obs_source obs_source = new obs_source();
+		obs_source_t transition = obs_source.get_transition(ss);
+		 success = new ();
+		if (!transition) {
+			return false;
+		} 
+		success = ModernizedCProgram.ss_audio_render_(transition, ts_out, audio_output, mixers, channels, sample_rate);
+		transition.obs_source_release();
+		return success;
+	}
+	public Object cut_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
+		cut_info cut = data;
+		obs_source generatedSource = cut.getSource();
+		return ModernizedCProgram.obs_transition_audio_render(generatedSource, ts_out, audio, mixers, channels, sample_rate, mix_a, mix_b);
 	}
 	public Object swipe_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
 		swipe_info swipe = data;
 		obs_source generatedSource = swipe.getSource();
 		return ModernizedCProgram.obs_transition_audio_render(generatedSource, ts_out, audio, mixers, channels, sample_rate, mix_a, mix_b);
 	}
-	public Object fade_to_color_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
-		fade_to_color_info fade_to_color = data;
-		obs_source generatedSource = fade_to_color.getSource();
+	public Object luma_wipe_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
+		luma_wipe_info lwipe = data;
+		obs_source generatedSource = lwipe.getSource();
 		return ModernizedCProgram.obs_transition_audio_render(generatedSource, ts_out, audio, mixers, channels, sample_rate, mix_a, mix_b);
 	}
-	public Object cut_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
-		cut_info cut = data;
-		obs_source generatedSource = cut.getSource();
+	public Object fade_audio_render(Object data, Object ts_out, Object mixers, Object channels, Object sample_rate) {
+		fade_info fade = data;
+		obs_source generatedSource = fade.getSource();
 		return ModernizedCProgram.obs_transition_audio_render(generatedSource, ts_out, audio, mixers, channels, sample_rate, mix_a, mix_b);
 	}
 	public Object getOutput() {

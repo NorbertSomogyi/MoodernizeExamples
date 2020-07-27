@@ -36,43 +36,43 @@ public class http_object_request {
 	
 	public http_object_request new_http_object_request(Object base_url, Object oid) {
 		byte hex = ModernizedCProgram.oid_to_hex(oid);
-		strbuf filename = new strbuf(, , );
-		strbuf prevfile = new strbuf(, , );
+		strbuf filename = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf prevfile = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int prevlocal;
 		byte[] prev_buf = new byte[4096];
 		ssize_t prev_read = 0;
 		off_t prev_posn = 0;
 		http_object_request freq = new http_object_request();
-		freq = ModernizedCProgram.xcalloc(1, );
+		freq = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		strbuf generatedTmpfile = freq.getTmpfile();
 		generatedTmpfile.strbuf_init(0);
 		object_id generatedOid = freq.getOid();
 		generatedOid.oidcpy(oid);
 		freq.setLocalfile(-1);
 		ModernizedCProgram.loose_object_path(ModernizedCProgram.the_repository, filename, oid);
-		byte generatedBuf = filename.getBuf();
+		byte[] generatedBuf = filename.getBuf();
 		generatedTmpfile.strbuf_addf("%s.temp", generatedBuf);
 		prevfile.strbuf_addf("%s.prev", generatedBuf);
 		ModernizedCProgram.unlink_or_warn(generatedBuf);
-		.rename(generatedBuf, generatedBuf);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/rename(generatedBuf, generatedBuf);
 		ModernizedCProgram.unlink_or_warn(generatedBuf);
 		filename.strbuf_release();
 		int generatedLocalfile = freq.getLocalfile();
 		if (generatedLocalfile != -1) {
 			();
 		} 
-		freq.setLocalfile(.open(generatedBuf, 1 | -1024 | -1024, 666/*
+		freq.setLocalfile(/*Error: Function owner not recognized*/open(generatedBuf, 1 | -1024 | -1024, 666/*
 			 * This could have failed due to the "lazy directory creation";
 			 * try to mkdir the last path component.
 			 */));
-		if (generatedLocalfile < 0 && (._errno()) == 2) {
-			byte dir = .strrchr(generatedBuf, (byte)'/');
+		if (generatedLocalfile < 0 && (/*Error: Function owner not recognized*/_errno()) == 2) {
+			byte dir = /*Error: Function owner not recognized*/strrchr(generatedBuf, (byte)'/');
 			if (dir) {
 				dir = 0;
-				.mkdir(generatedBuf, 777);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mkdir(generatedBuf, 777);
 				dir = (byte)'/';
 			} 
-			freq.setLocalfile(.open(generatedBuf, 1 | -1024 | -1024, 666));
+			freq.setLocalfile(/*Error: Function owner not recognized*/open(generatedBuf, 1 | -1024 | -1024, 666));
 		} 
 		if (generatedLocalfile < 0) {
 			();
@@ -81,12 +81,12 @@ public class http_object_request {
 		git_zstream generatedStream = freq.getStream();
 		generatedStream.git_inflate_init();
 		git_hash_ctx generatedC = freq.getC();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedC);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedC);
 		freq.setUrl(ModernizedCProgram.get_remote_object_url(base_url, hex, 0/*
 			 * If a previous temp file is present, process what was already
 			 * fetched.
 			 */));
-		prevlocal = .open(generatedBuf, 0);
+		prevlocal = /*Error: Function owner not recognized*/open(generatedBuf, 0);
 		if (prevlocal != -1) {
 			do {
 				prev_read = ModernizedCProgram.xread(prevlocal, prev_buf, 4096);
@@ -98,7 +98,7 @@ public class http_object_request {
 					} 
 				} 
 			} while (prev_read > 0);
-			.close(prevlocal);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(prevlocal);
 		} 
 		ModernizedCProgram.unlink_or_warn(generatedBuf);
 		prevfile/*
@@ -106,13 +106,13 @@ public class http_object_request {
 			 * file; also rewind to the beginning of the local file.
 			 */.strbuf_release();
 		if (prev_read == -1) {
-			.memset(generatedStream, 0, );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedStream, 0, /*Error: sizeof expression not supported yet*/);
 			generatedStream.git_inflate_init();
-			.UNRECOGNIZEDFUNCTIONNAME(generatedC);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedC);
 			if (prev_posn > 0) {
 				prev_posn = 0;
-				.lseek(generatedLocalfile, 0, 0);
-				if (.ftruncate(generatedLocalfile, 0) < 0) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lseek(generatedLocalfile, 0, 0);
+				if (/*Error: Function owner not recognized*/ftruncate(generatedLocalfile, 0) < 0) {
 					();
 					;
 				} 
@@ -122,20 +122,20 @@ public class http_object_request {
 		freq.setSlot(active_request_slot.get_active_slot());
 		active_request_slot generatedSlot = freq.getSlot();
 		Object generatedCurl = generatedSlot.getCurl();
-		.curl_easy_setopt(generatedCurl, CURLOPT_FILE, freq);
-		.curl_easy_setopt(generatedCurl, CURLOPT_FAILONERROR, 0);
-		.curl_easy_setopt(generatedCurl, CURLOPT_WRITEFUNCTION, fwrite_sha1_file);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_FILE, freq);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_FAILONERROR, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_WRITEFUNCTION, fwrite_sha1_file);
 		Object generatedErrorstr = freq.getErrorstr();
-		.curl_easy_setopt(generatedCurl, CURLOPT_ERRORBUFFER, generatedErrorstr);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_ERRORBUFFER, generatedErrorstr);
 		Byte generatedUrl = freq.getUrl();
-		.curl_easy_setopt(generatedCurl, CURLOPT_URL, generatedUrl);
-		.curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, ModernizedCProgram.no_pragma_header/*
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_URL, generatedUrl);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, ModernizedCProgram.no_pragma_header/*
 			 * If we have successfully processed data from a previous fetch
 			 * attempt, only fetch the data we don't already have.
 			 */);
 		if (prev_posn > 0) {
 			if (ModernizedCProgram.http_is_verbose) {
-				.fprintf((_iob[2]), "Resuming fetch of object %s at byte %llu\n", hex, (uintmax_t)prev_posn);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Resuming fetch of object %s at byte %llu\n", hex, (uintmax_t)prev_posn);
 			} 
 			ModernizedCProgram.http_opt_request_remainder(generatedCurl, prev_posn);
 		} 
@@ -147,7 +147,7 @@ public class http_object_request {
 	public void process_http_object_request() {
 		active_request_slot generatedSlot = this.getSlot();
 		if (generatedSlot == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedCurl_result = generatedSlot.getCurl_result();
 		this.setCurl_result(generatedCurl_result);
@@ -157,20 +157,20 @@ public class http_object_request {
 	}
 	public int finish_http_object_request() {
 		stat st = new stat();
-		strbuf filename = new strbuf(, , );
+		strbuf filename = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int generatedLocalfile = this.getLocalfile();
-		.close(generatedLocalfile);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedLocalfile);
 		this.setLocalfile(-1);
 		freq.process_http_object_request();
 		long generatedHttp_code = this.getHttp_code();
 		Object generatedCurl_result = this.getCurl_result();
 		strbuf generatedTmpfile = this.getTmpfile();
-		byte generatedBuf = generatedTmpfile.getBuf();
+		byte[] generatedBuf = generatedTmpfile.getBuf();
 		Object generatedSt_size = st.getSt_size();
 		if (generatedHttp_code == 416) {
 			ModernizedCProgram.warning("requested range invalid; we may already have all the data.");
 		}  else if (generatedCurl_result != CURLE_OK) {
-			if (.stat(generatedBuf, st) == 0) {
+			if (/*Error: Function owner not recognized*/stat(generatedBuf, st) == 0) {
 				if (generatedSt_size == 0) {
 					ModernizedCProgram.unlink_or_warn(generatedBuf);
 				} 
@@ -182,7 +182,7 @@ public class http_object_request {
 		object_id generatedReal_oid = this.getReal_oid();
 		Object generatedHash = generatedReal_oid.getHash();
 		git_hash_ctx generatedC = this.getC();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedHash, generatedC);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedHash, generatedC);
 		int generatedZret = this.getZret();
 		if (generatedZret != Z_STREAM_END) {
 			ModernizedCProgram.unlink_or_warn(generatedBuf);
@@ -201,14 +201,14 @@ public class http_object_request {
 	}
 	public void abort_http_object_request() {
 		strbuf generatedTmpfile = this.getTmpfile();
-		byte generatedBuf = generatedTmpfile.getBuf();
+		byte[] generatedBuf = generatedTmpfile.getBuf();
 		ModernizedCProgram.unlink_or_warn(generatedBuf);
 		freq.release_http_object_request();
 	}
 	public void release_http_object_request() {
 		int generatedLocalfile = this.getLocalfile();
 		if (generatedLocalfile != -1) {
-			.close(generatedLocalfile);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedLocalfile);
 			this.setLocalfile(-1);
 		} 
 		Byte generatedUrl = this.getUrl();

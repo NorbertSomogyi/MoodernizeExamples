@@ -137,7 +137,7 @@ public class tempfile {
 		return tempfile && generatedActive;
 	}
 	public tempfile new_tempfile() {
-		tempfile tempfile = ModernizedCProgram.xmalloc();
+		tempfile tempfile = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		tempfile.setFd(-1);
 		tempfile.setFp(((Object)0));
 		tempfile.setActive(0);
@@ -155,12 +155,12 @@ public class tempfile {
 		} 
 		if (!initialized) {
 			ModernizedCProgram.sigchain_push_common(remove_tempfiles_on_signal);
-			.atexit(remove_tempfiles_on_exit);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/atexit(remove_tempfiles_on_exit);
 			initialized = 1;
 		} 
 		Object generatedList = this.getList();
 		ModernizedCProgram.volatile_list_add(generatedList, ModernizedCProgram.tempfile_list);
-		this.setOwner(.getpid());
+		this.setOwner(/*Error: Function owner not recognized*/getpid());
 		this.setActive(1);
 	}
 	public void deactivate_tempfile() {
@@ -176,11 +176,11 @@ public class tempfile {
 		tempfile tempfile = tempfile.new_tempfile();
 		strbuf generatedFilename = tempfile.getFilename();
 		generatedFilename.strbuf_add_absolute_path(path);
-		byte generatedBuf = generatedFilename.getBuf();
-		tempfile.setFd(.open(generatedBuf, 2 | -1024 | -1024 | 0, 666));
+		byte[] generatedBuf = generatedFilename.getBuf();
+		tempfile.setFd(/*Error: Function owner not recognized*/open(generatedBuf, 2 | -1024 | -1024 | 0, 666));
 		Object generatedFd = tempfile.getFd();
-		if (false && generatedFd < 0 && (._errno()) == 22) {
-			tempfile.setFd(.open(generatedBuf, 2 | -1024 | -1024, 666));
+		if (false && generatedFd < 0 && (/*Error: Function owner not recognized*/_errno()) == 22) {
+			tempfile.setFd(/*Error: Function owner not recognized*/open(generatedBuf, 2 | -1024 | -1024, 666));
 		} 
 		if (generatedFd < 0) {
 			tempfile.deactivate_tempfile();
@@ -188,10 +188,10 @@ public class tempfile {
 		} 
 		tempfile.activate_tempfile();
 		if (ModernizedCProgram.adjust_shared_perm(generatedBuf)) {
-			int save_errno = (._errno());
+			int save_errno = (/*Error: Function owner not recognized*/_errno());
 			();
 			tempfile.delete_tempfile();
-			(._errno()) = save_errno;
+			(/*Error: Function owner not recognized*/_errno()) = save_errno;
 			return ((Object)0);
 		} 
 		return tempfile;
@@ -209,7 +209,7 @@ public class tempfile {
 		tempfile tempfile = tempfile.new_tempfile();
 		strbuf generatedFilename = tempfile.getFilename();
 		generatedFilename.strbuf_add_absolute_path(filename_template);
-		byte generatedBuf = generatedFilename.getBuf();
+		byte[] generatedBuf = generatedFilename.getBuf();
 		tempfile.setFd(ModernizedCProgram.git_mkstemps_mode(generatedBuf, suffixlen, mode));
 		Object generatedFd = tempfile.getFd();
 		if (generatedFd < 0) {
@@ -223,13 +223,13 @@ public class tempfile {
 		tempfile tempfile = new tempfile();
 		tempfile tempfile = tempfile.new_tempfile();
 		byte tmpdir;
-		tmpdir = .getenv("TMPDIR");
+		tmpdir = /*Error: Function owner not recognized*/getenv("TMPDIR");
 		if (!tmpdir) {
 			tmpdir = "/tmp";
 		} 
 		strbuf generatedFilename = tempfile.getFilename();
 		generatedFilename.strbuf_addf("%s/%s", tmpdir, filename_template);
-		byte generatedBuf = generatedFilename.getBuf();
+		byte[] generatedBuf = generatedFilename.getBuf();
 		tempfile.setFd(ModernizedCProgram.git_mkstemps_mode(generatedBuf, suffixlen, mode));
 		Object generatedFd = tempfile.getFd();
 		if (generatedFd < 0) {
@@ -241,9 +241,9 @@ public class tempfile {
 	}
 	public tempfile xmks_tempfile_m(Object filename_template, int mode) {
 		tempfile tempfile = new tempfile();
-		strbuf full_template = new strbuf(, , );
+		strbuf full_template = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		full_template.strbuf_add_absolute_path(filename_template);
-		byte generatedBuf = full_template.getBuf();
+		byte[] generatedBuf = full_template.getBuf();
 		tempfile tempfile = new tempfile();
 		tempfile = tempfile.mks_tempfile_m(generatedBuf, mode);
 		if (!tempfile) {
@@ -261,7 +261,7 @@ public class tempfile {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\tempfile.c", 221, "fdopen_tempfile() called for open object");
 		} 
 		Object generatedFd = this.getFd();
-		this.setFp(.fdopen(generatedFd, mode));
+		this.setFp(/*Error: Function owner not recognized*/fdopen(generatedFd, mode));
 		return generatedFp;
 	}
 	public Object get_tempfile_path() {
@@ -269,7 +269,7 @@ public class tempfile {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\tempfile.c", 230, "get_tempfile_path() called for inactive object");
 		} 
 		strbuf generatedFilename = this.getFilename();
-		byte generatedBuf = generatedFilename.getBuf();
+		byte[] generatedBuf = generatedFilename.getBuf();
 		return generatedBuf;
 	}
 	public int get_tempfile_fd() {
@@ -303,14 +303,14 @@ public class tempfile {
 			this.setFp(((Object)0));
 			if ((generated_flag & -1024)) {
 				err = -1;
-				if (!.fclose(fp)) {
-					(._errno()) = 5;
+				if (!/*Error: Function owner not recognized*/fclose(fp)) {
+					(/*Error: Function owner not recognized*/_errno()) = 5;
 				} 
 			} else {
-					err = .fclose(fp);
+					err = /*Error: Function owner not recognized*/fclose(fp);
 			} 
 		} else {
-				err = .close(fd);
+				err = /*Error: Function owner not recognized*/close(fd);
 		} 
 		return err ? -1 : 0;
 	}
@@ -323,8 +323,8 @@ public class tempfile {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\tempfile.c", 281, "reopen_tempfile called for an open object");
 		} 
 		strbuf generatedFilename = this.getFilename();
-		byte generatedBuf = generatedFilename.getBuf();
-		this.setFd(.open(generatedBuf, 1 | -1024));
+		byte[] generatedBuf = generatedFilename.getBuf();
+		this.setFd(/*Error: Function owner not recognized*/open(generatedBuf, 1 | -1024));
 		return generatedFd;
 	}
 	public int rename_tempfile(Object path) {
@@ -337,11 +337,11 @@ public class tempfile {
 			return -1;
 		} 
 		strbuf generatedFilename = tempfile.getFilename();
-		byte generatedBuf = generatedFilename.getBuf();
-		if (.rename(generatedBuf, path)) {
-			int save_errno = (._errno());
+		byte[] generatedBuf = generatedFilename.getBuf();
+		if (/*Error: Function owner not recognized*/rename(generatedBuf, path)) {
+			int save_errno = (/*Error: Function owner not recognized*/_errno());
 			tempfile_p.delete_tempfile();
-			(._errno()) = save_errno;
+			(/*Error: Function owner not recognized*/_errno()) = save_errno;
 			return -1;
 		} 
 		tempfile.deactivate_tempfile();
@@ -351,11 +351,11 @@ public class tempfile {
 	public void delete_tempfile() {
 		tempfile tempfile = tempfile_p;
 		if (!tempfile.is_tempfile_active()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		tempfile.close_tempfile_gently();
 		strbuf generatedFilename = tempfile.getFilename();
-		byte generatedBuf = generatedFilename.getBuf();
+		byte[] generatedBuf = generatedFilename.getBuf();
 		ModernizedCProgram.unlink_or_warn(generatedBuf);
 		tempfile.deactivate_tempfile();
 		tempfile_p = ((Object)0);

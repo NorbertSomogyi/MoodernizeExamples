@@ -15,11 +15,6 @@ public class object_array_entry {
 	public object_array_entry() {
 	}
 	
-	public Object blob_path() {
-		Byte generatedPath = this.getPath();
-		Byte generatedName = this.getName();
-		return generatedPath ? generatedPath : generatedName;
-	}
 	public void object_array_release_entry() {
 		Byte generatedName = this.getName();
 		if (generatedName != ModernizedCProgram.object_array_slopbuf) {
@@ -27,6 +22,11 @@ public class object_array_entry {
 		} 
 		Byte generatedPath = this.getPath();
 		ModernizedCProgram.free(generatedPath);
+	}
+	public Object blob_path() {
+		Byte generatedPath = this.getPath();
+		Byte generatedName = this.getName();
+		return generatedPath ? generatedPath : generatedName;
 	}
 	/*
 	 * Return true for entries that have not yet been shown.  (This is an

@@ -3,9 +3,9 @@ package application;
 // Xtended file mark: also has a file name
 public class xfilemark {
 	private filemark fmark;
-	private Object fname;
+	private Object[] fname;
 	
-	public xfilemark(filemark fmark, Object fname) {
+	public xfilemark(filemark fmark, Object[] fname) {
 		setFmark(fmark);
 		setFname(fname);
 	}
@@ -14,7 +14,7 @@ public class xfilemark {
 	
 	public void fname2fnum() {
 		char_u p = new char_u();
-		Object generatedFname = this.getFname();
+		Object[] generatedFname = this.getFname();
 		file_buffer file_buffer = new file_buffer();
 		if (generatedFname != ((Object)0/*
 			 * First expand "~/" in the file name to the home directory.
@@ -23,7 +23,7 @@ public class xfilemark {
 			if (generatedFname[0] == (byte)'~' && (generatedFname[1] == (byte)'/' || generatedFname[1] == (byte)'\\')) {
 				int len;
 				ModernizedCProgram.expand_env((char_u)"~/", ModernizedCProgram.NameBuff, 1024);
-				len = (int).strlen((byte)(ModernizedCProgram.NameBuff));
+				len = (int)/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.NameBuff));
 				ModernizedCProgram.vim_strncpy(ModernizedCProgram.NameBuff + len, generatedFname + 2, 1024 - len - 1);
 			} else {
 					ModernizedCProgram.vim_strncpy(ModernizedCProgram.NameBuff, generatedFname, 1024 - 1);
@@ -49,10 +49,10 @@ public class xfilemark {
 	public void setFmark(filemark newFmark) {
 		fmark = newFmark;
 	}
-	public Object getFname() {
+	public Object[] getFname() {
 		return fname;
 	}
-	public void setFname(Object newFname) {
+	public void setFname(Object[] newFname) {
 		fname = newFname;
 	}
 }

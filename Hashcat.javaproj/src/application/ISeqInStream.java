@@ -9,13 +9,6 @@ public class ISeqInStream {
 	public ISeqInStream() {
 	}
 	
-	public Object LzmaEnc_PrepareForLzma2(Object pp, Object keepWindowSize, Object alloc, Object allocBig) {
-		CLzmaEnc p = (CLzmaEnc)pp;
-		Object generatedMatchFinderBase = p.getMatchFinderBase();
-		generatedMatchFinderBase.setStream(inStream);
-		p.setNeedInit(1);
-		return p.LzmaEnc_AllocAndInit(keepWindowSize, alloc, allocBig);
-	}
 	/* XzIn.c - Xz input
 	2018-07-04 : Igor Pavlov : Public domain */
 	/*
@@ -30,7 +23,7 @@ public class ISeqInStream {
 			} 
 		}
 		;
-		if (.memcmp(sig, ModernizedCProgram.XZ_SIG, 6) != 0) {
+		if (/*Error: Function owner not recognized*/memcmp(sig, ModernizedCProgram.XZ_SIG, 6) != 0) {
 			return 17;
 		} 
 		return ModernizedCProgram.Xz_ParseHeader(p, sig);
@@ -40,7 +33,27 @@ public class ISeqInStream {
 		processedSize = 0;
 		while (size != 0) {
 			size_t cur = size;
-			SRes res = .UNRECOGNIZEDFUNCTIONNAME(stream, data, cur);
+			SRes res = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(stream, data, cur);
+			processedSize += cur;
+			data += cur;
+			size -= cur;
+			{ 
+				int __result__ = (res);
+				if (__result__ != 0) {
+					return __result__;
+				} 
+			}
+			;
+			if (cur == 0) {
+				return 0;
+			} 
+		}
+		return 0;
+		size_t size = processedSize;
+		processedSize = 0;
+		while (size != 0) {
+			size_t cur = size;
+			SRes res = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(stream, data, cur);
 			processedSize += cur;
 			data += cur;
 			size -= cur;
@@ -60,26 +73,13 @@ public class ISeqInStream {
 		  SZ_OK           - in all normal cases (even for stream error or memory allocation error)
 		  SZ_ERROR_THREAD - in case of failure in system synch function
 		*/;
-		size_t size = processedSize;
-		processedSize = 0;
-		while (size != 0) {
-			size_t cur = size;
-			SRes res = .UNRECOGNIZEDFUNCTIONNAME(stream, data, cur);
-			processedSize += cur;
-			data += cur;
-			size -= cur;
-			{ 
-				int __result__ = (res);
-				if (__result__ != 0) {
-					return __result__;
-				} 
-			}
-			;
-			if (cur == 0) {
-				return 0;
-			} 
-		}
-		return 0;
+	}
+	public Object LzmaEnc_PrepareForLzma2(Object pp, Object keepWindowSize, Object alloc, Object allocBig) {
+		CLzmaEnc p = (CLzmaEnc)pp;
+		Object generatedMatchFinderBase = p.getMatchFinderBase();
+		generatedMatchFinderBase.setStream(inStream);
+		p.setNeedInit(1);
+		return p.LzmaEnc_AllocAndInit(keepWindowSize, alloc, allocBig);
 	}
 	/* ---------- Read from CLzma2DecMtHandle Interface ---------- */
 	public Object Lzma2DecMt_Init(Object pp, Object prop, Object props, Object outDataSize, int finishMode) {

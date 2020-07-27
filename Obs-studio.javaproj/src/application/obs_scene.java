@@ -39,7 +39,7 @@ public class obs_scene {
 	}
 	public void remove_all_items() {
 		obs_scene_item item = new obs_scene_item();
-		.da_init(items);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(items);
 		scene.full_lock();
 		obs_scene_item generatedFirst_item = this.getFirst_item();
 		item = generatedFirst_item;
@@ -48,27 +48,27 @@ public class obs_scene {
 			obs_scene_item del_item = item;
 			item = generatedNext;
 			del_item.remove_without_release();
-			.da_push_back(items, del_item);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(items, del_item);
 		}
 		scene.full_unlock();
 		for ( i = 0;
 		 i < items.getNum(); i++) {
 			items.getArray()[i].obs_sceneitem_release();
 		}
-		.da_free(items);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(items);
 	}
 	public obs_scene create_id(Object id, Object name) {
 		obs_source obs_source = new obs_source();
 		obs_source source = obs_source.obs_source_create(id, name, NULL, NULL);
 		obs_context_data generatedContext = source.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		return generatedData;
 	}
 	public obs_scene create_private_id(Object id, Object name) {
 		obs_source obs_source = new obs_source();
 		obs_source source = obs_source.obs_source_create_private(id, name, NULL);
 		obs_context_data generatedContext = source.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		return generatedData;
 	}
 	public obs_scene obs_scene_create(Object name) {
@@ -85,7 +85,7 @@ public class obs_scene {
 		obs_scene new_scene = new obs_scene();
 		obs_scene_item item = new obs_scene_item();
 		obs_source source = new obs_source();
-		.da_init(items);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(items);
 		if (!ModernizedCProgram.obs_object_valid(scene, "obs_scene_duplicate", "scene")) {
 			return NULL;
 		} 
@@ -94,7 +94,7 @@ public class obs_scene {
 		item = generatedFirst_item;
 		obs_scene_item generatedNext = item.getNext();
 		while (item) {
-			.da_push_back(items, item);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(items, item);
 			item.obs_sceneitem_addref();
 			item = generatedNext;
 		}
@@ -135,7 +135,7 @@ public class obs_scene {
 		if (generatedIs_group) {
 			new_scene.resize_scene();
 		} 
-		.da_free(items);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(items);
 		return new_scene;
 	}
 	public void obs_scene_addref() {
@@ -165,7 +165,7 @@ public class obs_scene {
 	public void obs_scene_enum_items(Object callback, Object param) {
 		obs_scene_item item = new obs_scene_item();
 		if (!scene || !callback) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		scene.full_lock();
 		obs_scene_item generatedFirst_item = this.getFirst_item();
@@ -174,7 +174,7 @@ public class obs_scene {
 		while (item) {
 			obs_scene_item next = generatedNext;
 			item.obs_sceneitem_addref();
-			if (!.callback(scene, item, param)) {
+			if (!/*Error: Function owner not recognized*/callback(scene, item, param)) {
 				item.obs_sceneitem_release();
 				break;
 			} 
@@ -191,11 +191,11 @@ public class obs_scene {
 		obs_source generatedSource = this.getSource();
 		obs_context_data generatedContext = generatedSource.getContext();
 		Object generatedSignals = generatedContext.getSignals();
-		.signal_handler_signal(generatedSignals, command, params);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_signal(generatedSignals, command, params);
 	}
 	public void obs_scene_atomic_update(Object func, Object data) {
 		if (!scene) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		scene.obs_scene_addref();
 		scene.full_lock();

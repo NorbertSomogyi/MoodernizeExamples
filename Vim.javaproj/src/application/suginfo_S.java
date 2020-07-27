@@ -34,7 +34,7 @@ public class suginfo_S {
 	private int su_maxscore;
 	private int su_sfmaxscore;
 	private growarray su_sga;
-	private Object su_badptr;
+	private Object[] su_badptr;
 	private int su_badlen;
 	private int su_badflags;
 	private Object su_badword;
@@ -43,7 +43,7 @@ public class suginfo_S {
 	private hashtable_S su_banned;
 	private slang_S su_sallang;
 	
-	public suginfo_S(growarray su_ga, int su_maxcount, int su_maxscore, int su_sfmaxscore, growarray su_sga, Object su_badptr, int su_badlen, int su_badflags, Object su_badword, Object su_fbadword, Object su_sal_badword, hashtable_S su_banned, slang_S su_sallang) {
+	public suginfo_S(growarray su_ga, int su_maxcount, int su_maxscore, int su_sfmaxscore, growarray su_sga, Object[] su_badptr, int su_badlen, int su_badflags, Object su_badword, Object su_fbadword, Object su_sal_badword, hashtable_S su_banned, slang_S su_sallang) {
 		setSu_ga(su_ga);
 		setSu_maxcount(su_maxcount);
 		setSu_maxscore(su_maxscore);
@@ -78,18 +78,18 @@ public class suginfo_S {
 		int c;
 		int i;
 		langp_T lp = new langp_T();
-		// Set the info in "*su".// Set the info in "*su"..memset((su), (false), ());
+		/*Error: Function owner not recognized*/// Set the info in "*su"./*Error: Function owner not recognized*/// Set the info in "*su".memset((su), (false), (/*Error: Unsupported expression*/));
 		growarray generatedSu_ga = this.getSu_ga();
-		generatedSu_ga.ga_init2((int), 10);
+		generatedSu_ga.ga_init2((int)/*Error: Unsupported expression*/, 10);
 		growarray generatedSu_sga = this.getSu_sga();
-		generatedSu_sga.ga_init2((int), 10);
+		generatedSu_sga.ga_init2((int)/*Error: Unsupported expression*/, 10);
 		if (badptr == (byte)'\000') {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		hashtable_S generatedSu_banned = this.getSu_banned();
 		generatedSu_banned.hash_init();
 		this.setSu_badptr(badptr);
-		Object generatedSu_badptr = this.getSu_badptr();
+		Object[] generatedSu_badptr = this.getSu_badptr();
 		if (badlen != 0) {
 			this.setSu_badlen(badlen);
 		} else {
@@ -125,7 +125,7 @@ public class suginfo_S {
 		// Soundfold the bad word with the default sound folding, so that we don't// have to do this many times.if (generatedSu_sallang != ((Object)0)) {
 			generatedSu_sallang.spell_soundfold(generatedSu_fbadword, 1, generatedSu_sal_badword);
 		} 
-		// word to be bad then it might need to be capitalised.  Add a suggestion// for that.// word to be bad then it might need to be capitalised.  Add a suggestion// for that.c = (has_mbyte ? .mb_ptr2char(generatedSu_badptr) : (int)(generatedSu_badptr));
+		// word to be bad then it might need to be capitalised.  Add a suggestion// for that.// word to be bad then it might need to be capitalised.  Add a suggestion// for that.c = (has_mbyte ? /*Error: Function owner not recognized*/mb_ptr2char(generatedSu_badptr) : (int)(generatedSu_badptr));
 		Object generatedSt_isu = spelltab.getSt_isu();
 		if (!(enc_utf8 && (c) >= 128 ? ModernizedCProgram.utf_isupper(c) : (c) < 256 ? generatedSt_isu[c] : (false)) && attr == .HLF_COUNT) {
 			ModernizedCProgram.make_case_word(generatedSu_badword, buf, -1024);
@@ -136,17 +136,17 @@ public class suginfo_S {
 		} 
 		// Make a copy of 'spellsuggest', because the expression may change it.// Make a copy of 'spellsuggest', because the expression may change it.sps_copy = ModernizedCProgram.vim_strsave(p_sps);
 		if (sps_copy == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		// Loop over the items in 'spellsuggest'.for (p = sps_copy; p != (byte)'\000'; ) {
+		// Loop over the items in 'spellsuggest'.for (p = sps_copy; p != (byte)'\000'; /*Error: Unsupported expression*/) {
 			ModernizedCProgram.copy_option_part(p, buf, 1024, ",");
-			if (.strncmp((byte)(buf), (byte)("expr:"), (size_t)(true)) == 0) {
+			if (/*Error: Function owner not recognized*/strncmp((byte)(buf), (byte)("expr:"), (size_t)(true)) == 0) {
 				if (!expr_busy) {
 					expr_busy = 1;
 					su.spell_suggest_expr(buf + 5);
 					expr_busy = 0;
 				} 
-			}  else if (.strncmp((byte)(buf), (byte)("file:"), (size_t)(true)) == 0) {
+			}  else if (/*Error: Function owner not recognized*/strncmp((byte)(buf), (byte)("file:"), (size_t)(true)) == 0) {
 				su.spell_suggest_file(buf + 5);
 			} else {
 					su.spell_suggest_intern(interactive);
@@ -206,7 +206,7 @@ public class suginfo_S {
 		// Open the file.// Open the file.fd = ModernizedCProgram.mch_fopen((byte)fname, "r");
 		if (fd == ((Object)0)) {
 			ModernizedCProgram.semsg(((byte)(e_notopen)), fname);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedSu_badword = this.getSu_badword();
 		int generatedSu_badflags = this.getSu_badflags();
@@ -232,7 +232,7 @@ public class suginfo_S {
 				ModernizedCProgram.add_suggestion(su, generatedSu_ga, p, generatedSu_badlen, 30, 0, 1, generatedSu_sallang, 0);
 			} 
 		}
-		.fclose(fd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fd);
 		// Remove bogus suggestions, sort and truncate at "maxcount".// Remove bogus suggestions, sort and truncate at "maxcount".ModernizedCProgram.check_suggestions(su, generatedSu_ga);
 		int generatedSu_maxscore = this.getSu_maxscore();
 		int generatedSu_maxcount = this.getSu_maxcount();
@@ -314,7 +314,7 @@ public class suginfo_S {
 		growarray generatedSu_ga = this.getSu_ga();
 		int generatedSu_badlen = this.getSu_badlen();
 		slang_S generatedSu_sallang = this.getSu_sallang();
-		if (.strlen((byte)(p)) == len && .strncmp((byte)(generatedSu_fbadword), (byte)(p), (size_t)(len)) == 0) {
+		if (/*Error: Function owner not recognized*/strlen((byte)(p)) == len && /*Error: Function owner not recognized*/strncmp((byte)(generatedSu_fbadword), (byte)(p), (size_t)(len)) == 0) {
 			c = generatedSu_fbadword[len];
 			generatedSu_fbadword[len] = (byte)'\000';
 			ModernizedCProgram.make_case_word(generatedSu_fbadword, word, generatedSu_badflags);
@@ -338,12 +338,12 @@ public class suginfo_S {
 		langp_T lp = new langp_T();
 		// We make a copy of the case-folded bad word, so that we can modify it
 		Object generatedSu_fbadword = this.getSu_fbadword();
-		// to find matches (esp. REP items).  Append some more text, changing// chars after the bad word may help.// to find matches (esp. REP items).  Append some more text, changing// chars after the bad word may help..strcpy((byte)(fword), (byte)(generatedSu_fbadword));
-		n = (int).strlen((byte)(fword));
-		Object generatedSu_badptr = this.getSu_badptr();
+		/*Error: Function owner not recognized*/// to find matches (esp. REP items).  Append some more text, changing// chars after the bad word may help./*Error: Function owner not recognized*/// to find matches (esp. REP items).  Append some more text, changing// chars after the bad word may help.strcpy((byte)(fword), (byte)(generatedSu_fbadword));
+		n = (int)/*Error: Function owner not recognized*/strlen((byte)(fword));
+		Object[] generatedSu_badptr = this.getSu_badptr();
 		int generatedSu_badlen = this.getSu_badlen();
 		p = generatedSu_badptr + generatedSu_badlen;
-		(Object)ModernizedCProgram.spell_casefold(p, (int).strlen((byte)(p)), fword + n, 254 - n);
+		(Object)ModernizedCProgram.spell_casefold(p, (int)/*Error: Function owner not recognized*/strlen((byte)(p)), fword + n, 254 - n);
 		slang_S generatedLp_slang = lp.getLp_slang();
 		Object generatedSl_fbyts = generatedLp_slang.getSl_fbyts();
 		for (lpi = 0; lpi < ModernizedCProgram.curwin.getW_s().getB_langp().getGa_len(); ++lpi) {
@@ -366,7 +366,7 @@ public class suginfo_S {
 		growarray generatedSu_ga = this.getSu_ga();
 		int generatedGa_len = generatedSu_ga.getGa_len();
 		if (generatedSu_sga.ga_grow(generatedGa_len) == 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		slang_S generatedLp_slang = lp.getLp_slang();
 		Object generatedSu_fbadword = this.getSu_fbadword();
@@ -439,7 +439,7 @@ public class suginfo_S {
 		int generatedSu_maxcount = this.getSu_maxcount();
 		// Using "double" without sound folding.if (slang == ((Object)0)) {
 			(Object)generatedSu_ga.cleanup_suggestions(generatedSu_maxscore, generatedSu_maxcount);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedSu_badword = this.getSu_badword();
 		Object generatedSt_word = stp.getSt_word();
@@ -458,9 +458,9 @@ public class suginfo_S {
 		growarray generatedSu_sga = this.getSu_sga();
 		ModernizedCProgram.check_suggestions(su, generatedSu_sga);
 		(Object)generatedSu_sga.cleanup_suggestions(generatedSu_maxscore, generatedSu_maxcount);
-		ga.ga_init2((int), 1);
+		ga.ga_init2((int)/*Error: Unsupported expression*/, 1);
 		if (ga.ga_grow(generatedGa_len + generatedGa_len) == 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		stp = (((suggest_T)generatedGa_data)[0]);
 		for (i = 0; i < generatedGa_len || i < generatedGa_len; ++i) {
@@ -469,7 +469,7 @@ public class suginfo_S {
 				if (i < generatedGa_len) {
 					p = generatedSt_word;
 					for (j = 0; j < generatedGa_len; ++j) {
-						if (.strcmp((byte)(generatedSt_word), (byte)(p)) == 0) {
+						if (/*Error: Function owner not recognized*/strcmp((byte)(generatedSt_word), (byte)(p)) == 0) {
 							break;
 						} 
 					}
@@ -579,10 +579,10 @@ public class suginfo_S {
 	public void setSu_sga(growarray newSu_sga) {
 		su_sga = newSu_sga;
 	}
-	public Object getSu_badptr() {
+	public Object[] getSu_badptr() {
 		return su_badptr;
 	}
-	public void setSu_badptr(Object newSu_badptr) {
+	public void setSu_badptr(Object[] newSu_badptr) {
 		su_badptr = newSu_badptr;
 	}
 	public int getSu_badlen() {

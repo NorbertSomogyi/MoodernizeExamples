@@ -81,16 +81,16 @@ public class obs_video_info {
 				generatedConvert_textures[0] = gs_texture.gs_texture_create(generatedOutput_width, generatedOutput_height, GS_R8, 1, NULL, GS_RENDER_TARGET);
 				video_output_info info = ModernizedCProgram.video_output_get_info(generatedVideo);
 				switch (info.getVideo_output_info()) {
-				case VIDEO_FORMAT_I444:
-						generatedConvert_textures[1] = gs_texture.gs_texture_create(generatedOutput_width, generatedOutput_height, GS_R8, 1, NULL, GS_RENDER_TARGET);
-						generatedConvert_textures[2] = gs_texture.gs_texture_create(generatedOutput_width, generatedOutput_height, GS_R8, 1, NULL, GS_RENDER_TARGET);
+				case VIDEO_FORMAT_I420:
+						generatedConvert_textures[1] = gs_texture.gs_texture_create(generatedOutput_width / 2, generatedOutput_height / 2, GS_R8, 1, NULL, GS_RENDER_TARGET);
+						generatedConvert_textures[2] = gs_texture.gs_texture_create(generatedOutput_width / 2, generatedOutput_height / 2, GS_R8, 1, NULL, GS_RENDER_TARGET);
 						if (!generatedConvert_textures[2]) {
 							return false;
 						} 
 						break;
-				case VIDEO_FORMAT_I420:
-						generatedConvert_textures[1] = gs_texture.gs_texture_create(generatedOutput_width / 2, generatedOutput_height / 2, GS_R8, 1, NULL, GS_RENDER_TARGET);
-						generatedConvert_textures[2] = gs_texture.gs_texture_create(generatedOutput_width / 2, generatedOutput_height / 2, GS_R8, 1, NULL, GS_RENDER_TARGET);
+				case VIDEO_FORMAT_I444:
+						generatedConvert_textures[1] = gs_texture.gs_texture_create(generatedOutput_width, generatedOutput_height, GS_R8, 1, NULL, GS_RENDER_TARGET);
+						generatedConvert_textures[2] = gs_texture.gs_texture_create(generatedOutput_width, generatedOutput_height, GS_R8, 1, NULL, GS_RENDER_TARGET);
 						if (!generatedConvert_textures[2]) {
 							return false;
 						} 
@@ -129,22 +129,22 @@ public class obs_video_info {
 					return false;
 				} 
 				break;
-		case VIDEO_FORMAT_I420:
-				generatedCopy_surfaces[i][1] = gs_stage_surface.gs_stagesurface_create(generatedOutput_width / 2, generatedOutput_height / 2, GS_R8);
-				if (!generatedCopy_surfaces[i][1]) {
-					return false;
-				} 
-				generatedCopy_surfaces[i][2] = gs_stage_surface.gs_stagesurface_create(generatedOutput_width / 2, generatedOutput_height / 2, GS_R8);
-				if (!generatedCopy_surfaces[i][2]) {
-					return false;
-				} 
-				break;
 		case VIDEO_FORMAT_I444:
 				generatedCopy_surfaces[i][1] = gs_stage_surface.gs_stagesurface_create(generatedOutput_width, generatedOutput_height, GS_R8);
 				if (!generatedCopy_surfaces[i][1]) {
 					return false;
 				} 
 				generatedCopy_surfaces[i][2] = gs_stage_surface.gs_stagesurface_create(generatedOutput_width, generatedOutput_height, GS_R8);
+				if (!generatedCopy_surfaces[i][2]) {
+					return false;
+				} 
+				break;
+		case VIDEO_FORMAT_I420:
+				generatedCopy_surfaces[i][1] = gs_stage_surface.gs_stagesurface_create(generatedOutput_width / 2, generatedOutput_height / 2, GS_R8);
+				if (!generatedCopy_surfaces[i][1]) {
+					return false;
+				} 
+				generatedCopy_surfaces[i][2] = gs_stage_surface.gs_stagesurface_create(generatedOutput_width / 2, generatedOutput_height / 2, GS_R8);
 				if (!generatedCopy_surfaces[i][2]) {
 					return false;
 				} 
@@ -211,10 +211,10 @@ public class obs_video_info {
 		errorcode = generatedGraphics.gs_create(generatedGraphics_module, generatedAdapter);
 		if (errorcode != GS_SUCCESS) {
 			switch (errorcode) {
-			case GS_ERROR_NOT_SUPPORTED:
-					return -2;
 			case GS_ERROR_MODULE_NOT_FOUND:
 					return -5;
+			case GS_ERROR_NOT_SUPPORTED:
+					return -2;
 			default:
 					return -1;
 			}
@@ -392,14 +392,14 @@ public class obs_video_info {
 		case obs_scale_type.OBS_SCALE_BICUBIC:
 				scale_type_name = "Bicubic";
 				break;
-		case obs_scale_type.OBS_SCALE_DISABLE:
-				scale_type_name = "Disabled";
+		case obs_scale_type.OBS_SCALE_BILINEAR:
+				scale_type_name = "Bilinear";
 				break;
 		case obs_scale_type.OBS_SCALE_POINT:
 				scale_type_name = "Point";
 				break;
-		case obs_scale_type.OBS_SCALE_BILINEAR:
-				scale_type_name = "Bilinear";
+		case obs_scale_type.OBS_SCALE_DISABLE:
+				scale_type_name = "Disabled";
 				break;
 		case obs_scale_type.OBS_SCALE_LANCZOS:
 				scale_type_name = "Lanczos";

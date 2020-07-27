@@ -8,7 +8,7 @@ public class mp_media {
 	private Object a_cb;
 	private Object opaque;
 	private Byte path;
-	private byte format_name;
+	private Byte format_name;
 	private int buffering;
 	private int speed;
 	private AVPixelFormat scale_format;
@@ -43,7 +43,7 @@ public class mp_media {
 	private Object thread_valid;
 	private Object thread;
 	
-	public mp_media(Object fmt, Object v_preload_cb, Object stop_cb, Object v_cb, Object a_cb, Object opaque, Byte path, byte format_name, int buffering, int speed, AVPixelFormat scale_format, SwsContext swscale, Object scale_linesizes, Object scale_pic, mp_decode v, mp_decode a, Object is_local_file, Object has_video, Object has_audio, Object is_file, Object eof, Object hw, obs_source_frame obsframe, video_colorspace cur_space, video_range_type cur_range, video_range_type force_range, Object play_sys_ts, Object next_pts_ns, Object next_ns, Object start_ts, Object base_ts, Object interrupt_poll_ts, Object mutex, Object sem, Object stopping, Object looping, Object active, Object reset, Object kill, Object thread_valid, Object thread) {
+	public mp_media(Object fmt, Object v_preload_cb, Object stop_cb, Object v_cb, Object a_cb, Object opaque, Byte path, Byte format_name, int buffering, int speed, AVPixelFormat scale_format, SwsContext swscale, Object scale_linesizes, Object scale_pic, mp_decode v, mp_decode a, Object is_local_file, Object has_video, Object has_audio, Object is_file, Object eof, Object hw, obs_source_frame obsframe, video_colorspace cur_space, video_range_type cur_range, video_range_type force_range, Object play_sys_ts, Object next_pts_ns, Object next_ns, Object start_ts, Object base_ts, Object interrupt_poll_ts, Object mutex, Object sem, Object stopping, Object looping, Object active, Object reset, Object kill, Object thread_valid, Object thread) {
 		setFmt(fmt);
 		setV_preload_cb(v_preload_cb);
 		setStop_cb(stop_cb);
@@ -92,23 +92,23 @@ public class mp_media {
 	public int mp_media_next_packet() {
 		 new_pkt = new ();
 		 pkt = new ();
-		.av_init_packet(pkt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_init_packet(pkt);
 		new_pkt = pkt;
 		Object generatedFmt = this.getFmt();
-		int ret = .av_read_frame(generatedFmt, pkt);
+		int ret = /*Error: Function owner not recognized*/av_read_frame(generatedFmt, pkt);
 		if (ret < 0) {
 			if (ret != AVERROR_EOF) {
-				ModernizedCProgram.blog(LOG_WARNING, "MP: av_read_frame failed: %s (%d)", .av_err2str(ret), ret);
+				ModernizedCProgram.blog(LOG_WARNING, "MP: av_read_frame failed: %s (%d)", /*Error: Function owner not recognized*/av_err2str(ret), ret);
 			} 
 			return ret;
 		} 
 		mp_decode mp_decode = new mp_decode();
 		mp_decode d = mp_decode.get_packet_decoder(media, pkt);
 		if (d && pkt.getSize()) {
-			.av_packet_ref(new_pkt, pkt);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_packet_ref(new_pkt, pkt);
 			d.mp_decode_push_packet(new_pkt);
 		} 
-		.av_packet_unref(pkt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_packet_unref(pkt);
 		return ret;
 	}
 	public Object mp_media_ready_to_start() {
@@ -130,18 +130,18 @@ public class mp_media {
 		Object generatedDecoder = generatedV.getDecoder();
 		int space = ModernizedCProgram.get_sws_colorspace(generatedDecoder.getColorspace());
 		int range = ModernizedCProgram.get_sws_range(generatedDecoder.getColor_range());
-		int coeff = .sws_getCoefficients(space);
+		int coeff = /*Error: Function owner not recognized*/sws_getCoefficients(space);
 		AVPixelFormat generatedScale_format = this.getScale_format();
-		this.setSwscale(.sws_getCachedContext(NULL, generatedDecoder.getWidth(), generatedDecoder.getHeight(), generatedDecoder.getPix_fmt(), generatedDecoder.getWidth(), generatedDecoder.getHeight(), generatedScale_format, SWS_FAST_BILINEAR, NULL, NULL, NULL));
+		this.setSwscale(/*Error: Function owner not recognized*/sws_getCachedContext(NULL, generatedDecoder.getWidth(), generatedDecoder.getHeight(), generatedDecoder.getPix_fmt(), generatedDecoder.getWidth(), generatedDecoder.getHeight(), generatedScale_format, SWS_FAST_BILINEAR, NULL, NULL, NULL));
 		SwsContext generatedSwscale = this.getSwscale();
 		if (!generatedSwscale) {
 			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to initialize scaler");
 			return false;
 		} 
-		.sws_setColorspaceDetails(generatedSwscale, coeff, range, coeff, range, 0, (1 << 16), (1 << 16));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sws_setColorspaceDetails(generatedSwscale, coeff, range, coeff, range, 0, (1 << 16), (1 << 16));
 		Object generatedScale_pic = this.getScale_pic();
 		Object generatedScale_linesizes = this.getScale_linesizes();
-		int ret = .av_image_alloc(generatedScale_pic, generatedScale_linesizes, generatedDecoder.getWidth(), generatedDecoder.getHeight(), generatedScale_format, 1);
+		int ret = /*Error: Function owner not recognized*/av_image_alloc(generatedScale_pic, generatedScale_linesizes, generatedDecoder.getWidth(), generatedDecoder.getHeight(), generatedScale_format, 1);
 		if (ret < 0) {
 			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to create scale pic data");
 			return false;
@@ -224,12 +224,12 @@ public class mp_media {
 		Object generatedFrame = d.getFrame();
 		 f = generatedFrame;
 		if (!ModernizedCProgram.mp_media_can_play_frame(m, d)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		d.setFrame_ready(false);
 		Object generatedA_cb = this.getA_cb();
 		if (!generatedA_cb) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedData = audio.getData();
 		for ( i = 0;
@@ -248,10 +248,10 @@ public class mp_media {
 		audio.setTimestamp(generatedBase_ts + generatedFrame_pts - generatedStart_ts + generatedPlay_sys_ts - ModernizedCProgram.base_sys_ts);
 		audio_format generatedFormat = audio.getFormat();
 		if (generatedFormat == AUDIO_FORMAT_UNKNOWN) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedOpaque = this.getOpaque();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedOpaque, audio);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOpaque, audio);
 	}
 	public void mp_media_next_video(Object preload) {
 		mp_decode generatedV = this.getV();
@@ -267,14 +267,14 @@ public class mp_media {
 		Object generatedFrame_ready = d.getFrame_ready();
 		if (!preload) {
 			if (!ModernizedCProgram.mp_media_can_play_frame(m, d)) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			d.setFrame_ready(false);
 			if (!generatedV_cb) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		}  else if (!generatedFrame_ready) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 flip = false;
 		SwsContext generatedSwscale = this.getSwscale();
@@ -283,22 +283,22 @@ public class mp_media {
 		Object generatedData = frame.getData();
 		Object generatedLinesize = frame.getLinesize();
 		if (generatedSwscale) {
-			int ret = .sws_scale(generatedSwscale, ()f.getData(), f.getLinesize(), 0, f.getHeight(), generatedScale_pic, generatedScale_linesizes);
+			int ret = /*Error: Function owner not recognized*/sws_scale(generatedSwscale, ()f.getData(), f.getLinesize(), 0, f.getHeight(), generatedScale_pic, generatedScale_linesizes);
 			if (ret < 0) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			flip = generatedScale_linesizes[0] < 0 && generatedScale_linesizes[1] == 0;
 			for ( i = 0;
 			 i < 4; i++) {
 				generatedData[i] = generatedScale_pic[i];
-				generatedLinesize[i] = .abs(generatedScale_linesizes[i]);
+				generatedLinesize[i] = /*Error: Function owner not recognized*/abs(generatedScale_linesizes[i]);
 			}
 		} else {
 				flip = generatedLinesize[0] < 0 && generatedLinesize[1] == 0;
 				for ( i = 0;
 				 i < MAX_AV_PLANES; i++) {
 					generatedData[i] = generatedData[i];
-					generatedLinesize[i] = .abs(generatedLinesize[i]);
+					generatedLinesize[i] = /*Error: Function owner not recognized*/abs(generatedLinesize[i]);
 				}
 		} 
 		if (flip) {
@@ -325,11 +325,11 @@ public class mp_media {
 			this.setCur_range(video_range_type.new_range);
 			if (!success) {
 				frame.setFormat(VIDEO_FORMAT_NONE);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		if (generatedFormat == VIDEO_FORMAT_NONE) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedBase_ts = this.getBase_ts();
 		Object generatedFrame_pts = d.getFrame_pts();
@@ -343,15 +343,15 @@ public class mp_media {
 		Object generatedGot_first_keyframe = d.getGot_first_keyframe();
 		if (!generatedIs_local_file && !generatedGot_first_keyframe) {
 			if (!f.getKey_frame()) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			d.setGot_first_keyframe(true);
 		} 
 		Object generatedOpaque = this.getOpaque();
 		if (preload) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedOpaque, frame);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOpaque, frame);
 		} else {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedOpaque, frame);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOpaque, frame);
 		} 
 	}
 	public void mp_media_calc_next_ns() {
@@ -382,12 +382,12 @@ public class mp_media {
 				seek_pos = generatedFmt.getStart_time();
 				seek_flags = AVSEEK_FLAG_BACKWARD;
 		} 
-		 seek_target = seek_flags == AVSEEK_FLAG_BACKWARD ? .av_rescale_q(seek_pos, AV_TIME_BASE_Q, stream.getTime_base()) : seek_pos;
+		 seek_target = seek_flags == AVSEEK_FLAG_BACKWARD ? /*Error: Function owner not recognized*/av_rescale_q(seek_pos, AV_TIME_BASE_Q, stream.getTime_base()) : seek_pos;
 		Object generatedIs_local_file = this.getIs_local_file();
 		if (generatedIs_local_file) {
-			int ret = .av_seek_frame(generatedFmt, 0, seek_target, seek_flags);
+			int ret = /*Error: Function owner not recognized*/av_seek_frame(generatedFmt, 0, seek_target, seek_flags);
 			if (ret < 0) {
-				ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to seek: %s", .av_err2str(ret));
+				ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to seek: %s", /*Error: Function owner not recognized*/av_err2str(ret));
 			} 
 		} 
 		Object generatedHas_video = this.getHas_video();
@@ -439,7 +439,7 @@ public class mp_media {
 		Object generatedStop_cb = this.getStop_cb();
 		Object generatedOpaque = this.getOpaque();
 		if (stopping && generatedStop_cb) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedOpaque);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOpaque);
 		} 
 		return true;
 	}
@@ -485,10 +485,10 @@ public class mp_media {
 	}
 	public Object init_avformat() {
 		 format = NULL;
-		byte generatedFormat_name = this.getFormat_name();
+		Byte generatedFormat_name = this.getFormat_name();
 		Byte generatedPath = this.getPath();
 		if (generatedFormat_name && generatedFormat_name) {
-			format = .av_find_input_format(generatedFormat_name);
+			format = /*Error: Function owner not recognized*/av_find_input_format(generatedFormat_name);
 			if (!format) {
 				ModernizedCProgram.blog(LOG_INFO, "MP: Unable to find input format for '%s'", generatedPath);
 			} 
@@ -497,19 +497,19 @@ public class mp_media {
 		int generatedBuffering = this.getBuffering();
 		Object generatedIs_local_file = this.getIs_local_file();
 		if (generatedBuffering && !generatedIs_local_file) {
-			.av_dict_set_int(opts, "buffer_size", generatedBuffering, 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_set_int(opts, "buffer_size", generatedBuffering, 0);
 		} 
-		this.setFmt(.avformat_alloc_context());
+		this.setFmt(/*Error: Function owner not recognized*/avformat_alloc_context());
 		Object generatedFmt = this.getFmt();
 		generatedFmt.getInterrupt_callback().setCallback(interrupt_callback);
 		generatedFmt.getInterrupt_callback().setOpaque(m);
-		int ret = .avformat_open_input(generatedFmt, generatedPath, format, opts ? opts : NULL);
-		.av_dict_free(opts);
+		int ret = /*Error: Function owner not recognized*/avformat_open_input(generatedFmt, generatedPath, format, opts ? opts : NULL);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_free(opts);
 		if (ret < 0) {
 			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to open media: '%s'", generatedPath);
 			return false;
 		} 
-		if (.avformat_find_stream_info(generatedFmt, NULL) < 0) {
+		if (/*Error: Function owner not recognized*/avformat_find_stream_info(generatedFmt, NULL) < 0) {
 			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to find stream info for '%s'", generatedPath);
 			return false;
 		} 
@@ -539,7 +539,7 @@ public class mp_media {
 		Object generatedKill = this.getKill();
 		Object generatedHas_video = this.getHas_video();
 		Object generatedHas_audio = this.getHas_audio();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			 reset = new ();
 			 kill = new ();
 			 is_active = new ();
@@ -608,7 +608,7 @@ public class mp_media {
 		return true;
 	}
 	public Object mp_media_init(Object info) {
-		.memset(media, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(media, 0, /*Error: sizeof expression not supported yet*/);
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_init_value(generatedMutex);
 		this.setOpaque(info.getOpaque());
@@ -626,8 +626,8 @@ public class mp_media {
 		} 
 		 initialized = false;
 		if (!initialized) {
-			.avdevice_register_all();
-			.avformat_network_init();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avdevice_register_all();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avformat_network_init();
 			initialized = true;
 		} 
 		if (!ModernizedCProgram.base_sys_ts) {
@@ -654,7 +654,7 @@ public class mp_media {
 	}
 	public void mp_media_free() {
 		if (!media) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		media.mp_media_stop();
 		media.mp_kill_thread();
@@ -663,20 +663,20 @@ public class mp_media {
 		mp_decode generatedA = this.getA();
 		generatedA.mp_decode_free();
 		Object generatedFmt = this.getFmt();
-		.avformat_close_input(generatedFmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avformat_close_input(generatedFmt);
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_destroy(generatedMutex);
 		Object generatedSem = this.getSem();
 		generatedSem.os_sem_destroy();
 		SwsContext generatedSwscale = this.getSwscale();
-		.sws_freeContext(generatedSwscale);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sws_freeContext(generatedSwscale);
 		Object generatedScale_pic = this.getScale_pic();
-		.av_freep(generatedScale_pic[0]);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_freep(generatedScale_pic[0]);
 		Byte generatedPath = this.getPath();
 		ModernizedCProgram.bfree(generatedPath);
-		byte generatedFormat_name = this.getFormat_name();
+		Byte generatedFormat_name = this.getFormat_name();
 		ModernizedCProgram.bfree(generatedFormat_name);
-		.memset(media, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(media, 0, /*Error: sizeof expression not supported yet*/);
 		ModernizedCProgram.pthread_mutex_init_value(generatedMutex);
 	}
 	public void mp_media_play(Object loop) {
@@ -712,11 +712,11 @@ public class mp_media {
 		AVCodecID id;
 		 stream = new ();
 		int ret;
-		.memset(d, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(d, 0, /*Error: sizeof expression not supported yet*/);
 		d.setM(m);
 		d.setAudio(type == AVMEDIA_TYPE_AUDIO);
 		Object generatedFmt = this.getFmt();
-		ret = .av_find_best_stream(generatedFmt, type, -1, -1, NULL, 0);
+		ret = /*Error: Function owner not recognized*/av_find_best_stream(generatedFmt, type, -1, -1, NULL, 0);
 		if (ret < 0) {
 			return false;
 		} 
@@ -724,37 +724,37 @@ public class mp_media {
 		AVCodecID.id = stream.getCodecpar().getCodec_id();
 		if (AVCodecID.id == AV_CODEC_ID_VP8 || AVCodecID.id == AV_CODEC_ID_VP9) {
 			 tag = NULL;
-			tag = .av_dict_get(stream.getMetadata(), "alpha_mode", tag, AV_DICT_IGNORE_SUFFIX);
-			if (tag && .strcmp(tag.getValue(), "1") == 0) {
+			tag = /*Error: Function owner not recognized*/av_dict_get(stream.getMetadata(), "alpha_mode", tag, AV_DICT_IGNORE_SUFFIX);
+			if (tag && /*Error: Function owner not recognized*/strcmp(tag.getValue(), "1") == 0) {
 				byte codec = (AVCodecID.id == AV_CODEC_ID_VP8) ? "libvpx" : "libvpx-vp9";
-				d.setCodec(.avcodec_find_decoder_by_name(codec));
+				d.setCodec(/*Error: Function owner not recognized*/avcodec_find_decoder_by_name(codec));
 			} 
 		} 
 		Object generatedCodec = d.getCodec();
 		if (!generatedCodec) {
-			d.setCodec(.avcodec_find_decoder(AVCodecID.id));
+			d.setCodec(/*Error: Function owner not recognized*/avcodec_find_decoder(AVCodecID.id));
 		} 
 		if (!generatedCodec) {
-			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to find %s codec", .av_get_media_type_string(type));
+			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to find %s codec", /*Error: Function owner not recognized*/av_get_media_type_string(type));
 			return false;
 		} 
 		ret = d.mp_open_codec(hw);
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to open %s decoder: %s", .av_get_media_type_string(type), .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to open %s decoder: %s", /*Error: Function owner not recognized*/av_get_media_type_string(type), /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
-		d.setSw_frame(.av_frame_alloc());
+		d.setSw_frame(/*Error: Function owner not recognized*/av_frame_alloc());
 		Object generatedSw_frame = d.getSw_frame();
 		if (!generatedSw_frame) {
-			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to allocate %s frame", .av_get_media_type_string(type));
+			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to allocate %s frame", /*Error: Function owner not recognized*/av_get_media_type_string(type));
 			return false;
 		} 
 		Object generatedHw = d.getHw();
 		Object generatedHw_frame = d.getHw_frame();
 		if (generatedHw) {
-			d.setHw_frame(.av_frame_alloc());
+			d.setHw_frame(/*Error: Function owner not recognized*/av_frame_alloc());
 			if (!generatedHw_frame) {
-				ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to allocate %s hw frame", .av_get_media_type_string(type));
+				ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to allocate %s hw frame", /*Error: Function owner not recognized*/av_get_media_type_string(type));
 				return false;
 			} 
 			d.setIn_frame(generatedHw_frame);
@@ -809,10 +809,10 @@ public class mp_media {
 	public void setPath(Byte newPath) {
 		path = newPath;
 	}
-	public byte getFormat_name() {
+	public Byte getFormat_name() {
 		return format_name;
 	}
-	public void setFormat_name(byte newFormat_name) {
+	public void setFormat_name(Byte newFormat_name) {
 		format_name = newFormat_name;
 	}
 	public int getBuffering() {

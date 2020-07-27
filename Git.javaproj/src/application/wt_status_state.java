@@ -40,10 +40,10 @@ public class wt_status_state {
 	public int wt_status_check_rebase(Object wt) {
 		stat st = new stat();
 		Object generatedSt_size = st.getSt_size();
-		if (!.stat(ModernizedCProgram.worktree_git_path(wt, "rebase-apply"), st)) {
-			if (!.stat(ModernizedCProgram.worktree_git_path(wt, "rebase-apply/applying"), st)) {
+		if (!/*Error: Function owner not recognized*/stat(ModernizedCProgram.worktree_git_path(wt, "rebase-apply"), st)) {
+			if (!/*Error: Function owner not recognized*/stat(ModernizedCProgram.worktree_git_path(wt, "rebase-apply/applying"), st)) {
 				ModernizedCProgram.state.setAm_in_progress(1);
-				if (!.stat(ModernizedCProgram.worktree_git_path(wt, "rebase-apply/patch"), st) && !generatedSt_size) {
+				if (!/*Error: Function owner not recognized*/stat(ModernizedCProgram.worktree_git_path(wt, "rebase-apply/patch"), st) && !generatedSt_size) {
 					ModernizedCProgram.state.setAm_empty_patch(1);
 				} 
 			} else {
@@ -51,8 +51,8 @@ public class wt_status_state {
 					ModernizedCProgram.state.setBranch(ModernizedCProgram.get_branch(wt, "rebase-apply/head-name"));
 					ModernizedCProgram.state.setOnto(ModernizedCProgram.get_branch(wt, "rebase-apply/onto"));
 			} 
-		}  else if (!.stat(ModernizedCProgram.worktree_git_path(wt, "rebase-merge"), st)) {
-			if (!.stat(ModernizedCProgram.worktree_git_path(wt, "rebase-merge/interactive"), st)) {
+		}  else if (!/*Error: Function owner not recognized*/stat(ModernizedCProgram.worktree_git_path(wt, "rebase-merge"), st)) {
+			if (!/*Error: Function owner not recognized*/stat(ModernizedCProgram.worktree_git_path(wt, "rebase-merge/interactive"), st)) {
 				ModernizedCProgram.state.setRebase_interactive_in_progress(1);
 			} else {
 					ModernizedCProgram.state.setRebase_in_progress(1);
@@ -66,7 +66,7 @@ public class wt_status_state {
 	}
 	public int wt_status_check_bisect(Object wt) {
 		stat st = new stat();
-		if (!.stat(ModernizedCProgram.worktree_git_path(wt, "BISECT_LOG"), st)) {
+		if (!/*Error: Function owner not recognized*/stat(ModernizedCProgram.worktree_git_path(wt, "BISECT_LOG"), st)) {
 			ModernizedCProgram.state.setBisect_in_progress(1);
 			ModernizedCProgram.state.setBranch(ModernizedCProgram.get_branch(wt, "BISECT_START"));
 			return 1;

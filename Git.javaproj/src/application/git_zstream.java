@@ -22,7 +22,7 @@ public class git_zstream {
 	}
 	
 	public int unpack_loose_short_header(Byte map, long mapsize, Object buffer, long bufsiz) {
-		.memset(stream, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(stream, 0, /*Error: sizeof expression not supported yet*/);
 		this.setNext_in(map);
 		this.setAvail_in(mapsize);
 		this.setNext_out(buffer);
@@ -36,13 +36,13 @@ public class git_zstream {
 			return status;
 		} 
 		Byte generatedNext_out = this.getNext_out();
-		if (!.memchr(buffer, (byte)'\0', generatedNext_out - (byte)/* Make sure we have the terminating NUL */buffer)) {
+		if (!/*Error: Function owner not recognized*/memchr(buffer, (byte)'\0', generatedNext_out - (byte)/* Make sure we have the terminating NUL */buffer)) {
 			return -1;
 		} 
 		return 0;
 	}
 	public Object unpack_loose_rest(Object buffer, long size, Object oid) {
-		int bytes = .strlen(buffer) + 1;
+		int bytes = /*Error: Function owner not recognized*/strlen(buffer) + 1;
 		byte buf = ModernizedCProgram.xmallocz(size);
 		long n;
 		int status = Z_OK;
@@ -51,7 +51,7 @@ public class git_zstream {
 		if (n > size) {
 			n = size;
 		} 
-		.memcpy(buf, (byte)buffer + bytes, n);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf, (byte)buffer + bytes, n);
 		bytes = n;
 		if (bytes <= size/*
 				 * The above condition must be (bytes <= size), not
@@ -95,10 +95,10 @@ public class git_zstream {
 		byte[] buf = new byte[4096];
 		long total_read;
 		int status = Z_OK;
-		.UNRECOGNIZEDFUNCTIONNAME(c);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(c);
 		long generatedTotal_out = this.getTotal_out();
-		.UNRECOGNIZEDFUNCTIONNAME(c, hdr, generatedTotal_out);
-		total_read = generatedTotal_out - .strlen(hdr) - 1/*
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(c, hdr, generatedTotal_out);
+		total_read = generatedTotal_out - /*Error: Function owner not recognized*/strlen(hdr) - 1/*
 			 * This size comparison must be "<=" to read the final zlib packets;
 			 * see the comment in unpack_loose_rest for details.
 			 */;
@@ -106,12 +106,12 @@ public class git_zstream {
 		Byte generatedNext_out = this.getNext_out();
 		while (total_read <= size && (status == Z_OK || (status == Z_BUF_ERROR && !generatedAvail_out))) {
 			this.setNext_out(buf);
-			this.setAvail_out();
+			this.setAvail_out(/*Error: sizeof expression not supported yet*/);
 			if (size - total_read < generatedAvail_out) {
 				this.setAvail_out(size - total_read);
 			} 
 			status = stream.git_inflate(Z_FINISH);
-			.UNRECOGNIZEDFUNCTIONNAME(c, buf, generatedNext_out - buf);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(c, buf, generatedNext_out - buf);
 			total_read += generatedNext_out - buf;
 		}
 		stream.git_inflate_end();
@@ -125,7 +125,7 @@ public class git_zstream {
 			return -1;
 		} 
 		Object generatedHash = real_oid.getHash();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedHash, c);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedHash, c);
 		if (!ModernizedCProgram.oideq(expected_oid, real_oid)) {
 			();
 			return -1;
@@ -176,10 +176,10 @@ public class git_zstream {
 		int status;
 		strm.zlib_pre_call();
 		Object generatedZ = this.getZ();
-		status = .inflateInit(generatedZ);
+		status = /*Error: Function owner not recognized*/inflateInit(generatedZ);
 		strm.zlib_post_call();
 		if (status == Z_OK) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.die("inflateInit: %s (%s)", ModernizedCProgram.zerr_to_string(status), generatedZ.getMsg() ? generatedZ.getMsg() : "no message");
 	}
@@ -188,10 +188,10 @@ public class git_zstream {
 		int status;
 		strm.zlib_pre_call();
 		Object generatedZ = this.getZ();
-		status = .inflateInit2(generatedZ, windowBits);
+		status = /*Error: Function owner not recognized*/inflateInit2(generatedZ, windowBits);
 		strm.zlib_post_call();
 		if (status == Z_OK) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.die("inflateInit2: %s (%s)", ModernizedCProgram.zerr_to_string(status), generatedZ.getMsg() ? generatedZ.getMsg() : "no message");
 	}
@@ -203,10 +203,10 @@ public class git_zstream {
 		int status;
 		strm.zlib_pre_call();
 		Object generatedZ = this.getZ();
-		status = .inflateEnd(generatedZ);
+		status = /*Error: Function owner not recognized*/inflateEnd(generatedZ);
 		strm.zlib_post_call();
 		if (status == Z_OK) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		();
 	}
@@ -215,9 +215,9 @@ public class git_zstream {
 		Object generatedZ = this.getZ();
 		long generatedAvail_in = this.getAvail_in();
 		long generatedAvail_out = this.getAvail_out();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			strm.zlib_pre_call();
-			status = .inflate(generatedZ, (generatedZ.getAvail_in() != generatedAvail_in) ? 0 : flush);
+			status = /*Error: Function owner not recognized*/inflate(generatedZ, (generatedZ.getAvail_in() != generatedAvail_in) ? 0 : flush);
 			if (status == Z_MEM_ERROR) {
 				ModernizedCProgram.die("inflate: out of memory");
 			} 
@@ -231,10 +231,10 @@ public class git_zstream {
 			break;
 		}
 		switch (status) {
-		case Z_STREAM_END:
-				return status;
 		case /* Z_BUF_ERROR: normal, needs more space in the output buffer */Z_BUF_ERROR:
 		case Z_OK:
+		case Z_STREAM_END:
+				return status;
 		default:
 				break;
 		}
@@ -246,25 +246,25 @@ public class git_zstream {
 	}
 	public void git_deflate_init(int level) {
 		int status;
-		.memset(strm, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(strm, 0, /*Error: sizeof expression not supported yet*/);
 		strm.zlib_pre_call();
 		Object generatedZ = this.getZ();
-		status = .deflateInit(generatedZ, level);
+		status = /*Error: Function owner not recognized*/deflateInit(generatedZ, level);
 		strm.zlib_post_call();
 		if (status == Z_OK) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.die("deflateInit: %s (%s)", ModernizedCProgram.zerr_to_string(status), generatedZ.getMsg() ? generatedZ.getMsg() : "no message");
 	}
 	public void do_git_deflate_init(int level, int windowBits) {
 		int status;
-		.memset(strm, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(strm, 0, /*Error: sizeof expression not supported yet*/);
 		strm.zlib_pre_call();
 		Object generatedZ = this.getZ();
-		status = .deflateInit2(generatedZ, level, Z_DEFLATED, windowBits, 8, Z_DEFAULT_STRATEGY);
+		status = /*Error: Function owner not recognized*/deflateInit2(generatedZ, level, Z_DEFLATED, windowBits, 8, Z_DEFAULT_STRATEGY);
 		strm.zlib_post_call();
 		if (status == Z_OK) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.die("deflateInit2: %s (%s)", ModernizedCProgram.zerr_to_string(status), generatedZ.getMsg() ? generatedZ.getMsg() : "no message");
 	}
@@ -286,14 +286,14 @@ public class git_zstream {
 		int status;
 		strm.zlib_pre_call();
 		Object generatedZ = this.getZ();
-		status = .deflateEnd(generatedZ);
+		status = /*Error: Function owner not recognized*/deflateEnd(generatedZ);
 		strm.zlib_post_call();
 		return status;
 	}
 	public void git_deflate_end() {
 		int status = strm.git_deflate_abort();
 		if (status == Z_OK) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		();
 	}
@@ -301,7 +301,7 @@ public class git_zstream {
 		int status;
 		strm.zlib_pre_call();
 		Object generatedZ = this.getZ();
-		status = .deflateEnd(generatedZ);
+		status = /*Error: Function owner not recognized*/deflateEnd(generatedZ);
 		strm.zlib_post_call();
 		return status;
 	}
@@ -310,9 +310,9 @@ public class git_zstream {
 		Object generatedZ = this.getZ();
 		long generatedAvail_in = this.getAvail_in();
 		long generatedAvail_out = this.getAvail_out();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			strm.zlib_pre_call();
-			status = .deflate(generatedZ, (generatedZ.getAvail_in() != generatedAvail_in) ? 0 : flush);
+			status = /*Error: Function owner not recognized*/deflate(generatedZ, (generatedZ.getAvail_in() != generatedAvail_in) ? 0 : flush);
 			if (status == Z_MEM_ERROR) {
 				ModernizedCProgram.die("deflate: out of memory");
 			} 
@@ -327,9 +327,9 @@ public class git_zstream {
 		}
 		switch (status) {
 		case Z_OK:
-		case /* Z_BUF_ERROR: normal, needs more space in the output buffer */Z_BUF_ERROR:
 		case Z_STREAM_END:
 				return status;
+		case /* Z_BUF_ERROR: normal, needs more space in the output buffer */Z_BUF_ERROR:
 		default:
 				break;
 		}

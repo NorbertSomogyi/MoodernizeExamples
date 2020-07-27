@@ -28,10 +28,10 @@ package application;
 /* somewhat unix-specific */
 /* curl stuff */
 public class Memory {
-	private Byte memory;
+	private byte[] memory;
 	private Object size;
 	
-	public Memory(Byte memory, Object size) {
+	public Memory(byte[] memory, Object size) {
 		setMemory(memory);
 		setSize(size);
 	}
@@ -39,13 +39,13 @@ public class Memory {
 	}
 	
 	public void init_memory() {
-		this.setMemory(.malloc(/* grown as needed with realloc */1));
+		this.setMemory(/*Error: Function owner not recognized*/malloc(/* grown as needed with realloc */1));
 		this.setSize(/* no data at this point */0);
 	}
-	public Byte getMemory() {
+	public byte[] getMemory() {
 		return memory;
 	}
-	public void setMemory(Byte newMemory) {
+	public void setMemory(byte[] newMemory) {
 		memory = newMemory;
 	}
 	public Object getSize() {

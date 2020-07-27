@@ -24,7 +24,7 @@ public class gs_monitor_info {
 		if (!thread_graphics.getExports().getDevice_get_duplicator_monitor_info()) {
 			return false;
 		} 
-		return .UNRECOGNIZEDFUNCTIONNAME(thread_graphics.getDevice(), monitor_idx, monitor_info);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(thread_graphics.getDevice(), monitor_idx, monitor_info);
 	}
 	public int getRotation_degrees() {
 		return rotation_degrees;

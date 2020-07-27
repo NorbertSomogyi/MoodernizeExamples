@@ -17,7 +17,7 @@ public class dohentry {
 	public dohentry() {
 	}
 	
-	public  store_a(Byte doh, int index) {
+	public  store_a(byte[] doh, int index) {
 		int generatedNumaddr = this.getNumaddr();
 		Object generatedAddr = this.getAddr();
 		 generatedIp = a.getIp();
@@ -25,12 +25,12 @@ public class dohentry {
 		if (generatedNumaddr < /* silently ignore addresses over the limit */24) {
 			dohaddr a = generatedAddr[generatedNumaddr];
 			a.setType(.DNS_TYPE_A);
-			.memcpy(generatedV4, doh[index], 4);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedV4, doh[index], 4);
 			generatedNumaddr++;
 		} 
 		return .DOH_OK;
 	}
-	public  store_aaaa(Byte doh, int index) {
+	public  store_aaaa(byte[] doh, int index) {
 		int generatedNumaddr = this.getNumaddr();
 		Object generatedAddr = this.getAddr();
 		 generatedIp = a.getIp();
@@ -38,12 +38,12 @@ public class dohentry {
 		if (generatedNumaddr < /* silently ignore addresses over the limit */24) {
 			dohaddr a = generatedAddr[generatedNumaddr];
 			a.setType(.DNS_TYPE_AAAA);
-			.memcpy(generatedV6, doh[index], 16);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedV6, doh[index], 16);
 			generatedNumaddr++;
 		} 
 		return .DOH_OK;
 	}
-	public  store_cname(Byte doh, Object dohlen, int index) {
+	public  store_cname(byte[] doh, Object dohlen, int index) {
 		cnamestore c = new cnamestore();
 		int loop = /* a valid DNS name can never loop this much */128;
 		byte length;
@@ -107,17 +107,17 @@ public class dohentry {
 					return rc;
 				} 
 				break;
-		case .DNS_TYPE_CNAME:
-				rc = d.store_cname(doh, dohlen, index);
-				if (rc) {
-					return rc;
-				} 
-				break;
 		case .DNS_TYPE_A:
 				if (rdlength != 4) {
 					return .DOH_DNS_RDATA_LEN;
 				} 
 				rc = d.store_a(doh, index);
+				if (rc) {
+					return rc;
+				} 
+				break;
+		case .DNS_TYPE_CNAME:
+				rc = d.store_cname(doh, dohlen, index);
 				if (rc) {
 					return rc;
 				} 
@@ -128,10 +128,10 @@ public class dohentry {
 		return .DOH_OK;
 	}
 	public void init_dohentry() {
-		.memset(de, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(de, 0, /*Error: sizeof expression not supported yet*/);
 		this.setTtl(INT_MAX);
 	}
-	public  doh_decode(Byte doh, Object dohlen,  dnstype) {
+	public  doh_decode(byte[] doh, Object dohlen,  dnstype) {
 		byte rcode;
 		int qdcount;
 		int ancount;
@@ -268,7 +268,7 @@ public class dohentry {
 		int generatedNumcname = this.getNumcname();
 		Object generatedCname = this.getCname();
 		for (i = 0; i < generatedNumcname; i++) {
-			.Curl_cfree(generatedCname[i].getAlloc());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedCname[i].getAlloc());
 		}
 	}
 	public int getTtl() {

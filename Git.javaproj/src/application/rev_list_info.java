@@ -50,7 +50,7 @@ public class rev_list_info {
 		} 
 		if (flags & (1 << 0)) {
 			revs.traverse_commit_list(show_commit, show_object, info);
-			.printf("------\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("------\n");
 		} 
 		ModernizedCProgram.print_var_str("bisect_rev", hex);
 		ModernizedCProgram.print_var_int("bisect_nr", cnt - 1);

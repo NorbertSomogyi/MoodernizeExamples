@@ -9,10 +9,10 @@ public class hashtable_S {
 	private Object ht_filled;
 	private int ht_locked;
 	private int ht_error;
-	private hashitem_S ht_array;
+	private hashitem_S[] ht_array;
 	private Object ht_smallarray;
 	
-	public hashtable_S(Object ht_mask, Object ht_used, Object ht_filled, int ht_locked, int ht_error, hashitem_S ht_array, Object ht_smallarray) {
+	public hashtable_S(Object ht_mask, Object ht_used, Object ht_filled, int ht_locked, int ht_error, hashitem_S[] ht_array, Object ht_smallarray) {
 		setHt_mask(ht_mask);
 		setHt_used(ht_used);
 		setHt_filled(ht_filled);
@@ -28,12 +28,12 @@ public class hashtable_S {
 		long todo;
 		hashitem_T hi = new hashitem_T();
 		if (ht == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedHt_used = this.getHt_used();
 		todo = (long)generatedHt_used;
 		Object generatedHi_key = (hi).getHi_key();
-		hashitem_S generatedHt_array = this.getHt_array();
+		hashitem_S[] generatedHt_array = this.getHt_array();
 		for (hi = generatedHt_array; todo > 0; ++hi) {
 			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
 				proptype_T prop = ((proptype_T)((generatedHi_key) - ((size_t)((proptype_T)0).getPt_name())));
@@ -50,7 +50,7 @@ public class hashtable_S {
 	 * Initialize an empty hash table.
 	 */
 	public void hash_init() {
-		.memset((ht), (false), (/* This zeroes all "ht_" entries and all the "hi_key" in "ht_smallarray". */));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((ht), (false), (/*Error: Unsupported expression*//* This zeroes all "ht_" entries and all the "hi_key" in "ht_smallarray". */));
 		Object generatedHt_smallarray = this.getHt_smallarray();
 		this.setHt_array(generatedHt_smallarray);
 		this.setHt_mask(16 - 1/*
@@ -59,7 +59,7 @@ public class hashtable_S {
 		 */);
 	}
 	public void hash_clear() {
-		hashitem_S generatedHt_array = this.getHt_array();
+		hashitem_S[] generatedHt_array = this.getHt_array();
 		Object generatedHt_smallarray = this.getHt_smallarray();
 		if (generatedHt_array != generatedHt_smallarray) {
 			ModernizedCProgram.vim_free(generatedHt_array);
@@ -71,7 +71,7 @@ public class hashtable_S {
 		Object generatedHt_used = this.getHt_used();
 		todo = (long)generatedHt_used;
 		Object generatedHi_key = (hi).getHi_key();
-		hashitem_S generatedHt_array = this.getHt_array();
+		hashitem_S[] generatedHt_array = this.getHt_array();
 		for (hi = generatedHt_array; todo > 0; ++hi) {
 			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
 				ModernizedCProgram.vim_free(generatedHi_key - off);
@@ -175,7 +175,7 @@ public class hashtable_S {
 			return 1;
 		} 
 		Object generatedHt_filled = this.getHt_filled();
-		hashitem_S generatedHt_array = this.getHt_array();
+		hashitem_S[] generatedHt_array = this.getHt_array();
 		Object generatedHt_smallarray = this.getHt_smallarray();
 		Object generatedHt_mask = this.getHt_mask();
 		Object generatedHt_used = this.getHt_used();
@@ -216,13 +216,13 @@ public class hashtable_S {
 			if (generatedHt_array == newarray/* Moving from ht_smallarray to ht_smallarray!  Happens when there
 				     * are many removed items.  Copy the items to be able to clean up
 				     * removed items. */) {
-				.memmove((byte)(temparray), (byte)(newarray), (size_t)());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(temparray), (byte)(newarray), (size_t)(/*Error: sizeof expression not supported yet*/));
 				oldarray = temparray;
 			} else {
 					oldarray = generatedHt_array;
 			} 
 		} else {
-				newarray = (hashitem_T)ModernizedCProgram.alloc( * (/* Allocate an array. */newsize));
+				newarray = (hashitem_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*/ * (/* Allocate an array. */newsize));
 				if (newarray == ((Object)0/* Out of memory.  When there are NULL items still return OK.
 					     * Otherwise set ht_error, because lookup may result in a hang if
 					     * we add another item. */)) {
@@ -234,7 +234,7 @@ public class hashtable_S {
 				} 
 				oldarray = generatedHt_array;
 		} 
-		.memset((newarray), (false), ((size_t)( * newsize/*
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((newarray), (false), ((size_t)(/*Error: Unsupported expression*/ * newsize/*
 		     * Move all the items from the old array to the new one, placing them in
 		     * the right spot.  The new array won't have any removed items, thus this
 		     * is also a cleanup action.
@@ -252,7 +252,7 @@ public class hashtable_S {
 				newi = (int)(generatedHi_hash & newmask);
 				newitem = newarray[newi];
 				if (generatedHi_key != ((Object)0)) {
-					for (perturb = generatedHi_hash; ; perturb >>=  5) {
+					for (perturb = generatedHi_hash; /*Error: Unsupported expression*/; perturb >>=  5) {
 						newi = (int)((newi << -1024) + newi + perturb + -1024);
 						newitem = newarray[newi & newmask];
 						if (generatedHi_key == ((Object)0)) {
@@ -285,22 +285,158 @@ public class hashtable_S {
 	 * Create an empty hash table.
 	 * Returns NULL when out of memory.
 	 */
-	public hashtable_S func_tbl_get() {
-		return ModernizedCProgram.func_hashtab/*
-		 * Get function arguments.
-		 */;
+	public int syn_list_keywords(int id, int did_header, int attr) {
+		/* header has already been printed */int outlen;
+		hashitem_T hi = new hashitem_T();
+		keyentry_T kp = new keyentry_T();
+		int todo;
+		int prev_contained = 0;
+		int prev_next_list = ((Object)0);
+		int prev_cont_in_list = ((Object)0);
+		int prev_skipnl = 0;
+		int prev_skipwhite = 0;
+		int prev_skipempty = 0/*
+		     * Unfortunately, this list of keywords is not sorted on alphabet but on
+		     * hash value...
+		     */;
+		Object generatedHt_used = this.getHt_used();
+		todo = (int)generatedHt_used;
+		Object generatedHi_key = (hi).getHi_key();
+		Object generatedK_syn = kp.getK_syn();
+		Object generatedFlags = kp.getFlags();
+		Object generatedNext_list = kp.getNext_list();
+		Object generatedKeyword = kp.getKeyword();
+		Object generatedKe_next = kp.getKe_next();
+		hashitem_S[] generatedHt_array = this.getHt_array();
+		for (hi = generatedHt_array; todo > 0 && !got_int; ++hi) {
+			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
+				--todo;
+				for (kp = ((keyentry_T)((generatedHi_key) - (generatedKeyword - (char_u)ModernizedCProgram.dumkey))); kp != ((Object)0) && !got_int; kp = generatedKe_next) {
+					if (generatedK_syn.getId() == id) {
+						if (prev_contained != (generatedFlags & -1024) || prev_skipnl != (generatedFlags & -1024) || prev_skipwhite != (generatedFlags & -1024) || prev_skipempty != (generatedFlags & -1024) || prev_cont_in_list != generatedK_syn.getCont_in_list() || prev_next_list != generatedNext_list) {
+							outlen = 9999;
+						} else {
+								outlen = (int)/*Error: Function owner not recognized*/strlen((byte)(generatedKeyword));
+						} 
+						if (ModernizedCProgram.syn_list_header(did_header, outlen, /* output "contained" and "nextgroup" on each line */id)) {
+							prev_contained = 0;
+							prev_next_list = ((Object)0);
+							prev_cont_in_list = ((Object)0);
+							prev_skipnl = 0;
+							prev_skipwhite = 0;
+							prev_skipempty = 0;
+						} 
+						did_header = 1;
+						if (prev_contained != (generatedFlags & -1024)) {
+							ModernizedCProgram.msg_puts_attr("contained", attr);
+							ModernizedCProgram.msg_putchar((byte)' ');
+							prev_contained = (generatedFlags & -1024);
+						} 
+						if (generatedK_syn.getCont_in_list() != prev_cont_in_list) {
+							ModernizedCProgram.put_id_list((char_u)"containedin", generatedK_syn.getCont_in_list(), attr);
+							ModernizedCProgram.msg_putchar((byte)' ');
+							prev_cont_in_list = generatedK_syn.getCont_in_list();
+						} 
+						if (generatedNext_list != prev_next_list) {
+							ModernizedCProgram.put_id_list((char_u)"nextgroup", generatedNext_list, attr);
+							ModernizedCProgram.msg_putchar((byte)' ');
+							prev_next_list = generatedNext_list;
+							if (generatedFlags & -1024) {
+								ModernizedCProgram.msg_puts_attr("skipnl", attr);
+								ModernizedCProgram.msg_putchar((byte)' ');
+								prev_skipnl = (generatedFlags & -1024);
+							} 
+							if (generatedFlags & -1024) {
+								ModernizedCProgram.msg_puts_attr("skipwhite", attr);
+								ModernizedCProgram.msg_putchar((byte)' ');
+								prev_skipwhite = (generatedFlags & -1024);
+							} 
+							if (generatedFlags & -1024) {
+								ModernizedCProgram.msg_puts_attr("skipempty", attr);
+								ModernizedCProgram.msg_putchar((byte)' ');
+								prev_skipempty = (generatedFlags & -1024);
+							} 
+						} 
+						ModernizedCProgram.msg_outtrans(generatedKeyword);
+					} 
+				}
+			} 
+		}
+		return did_header;
 	}
-	public hashtable_S get_funccal_local_ht() {
-		if (ModernizedCProgram.current_funccal == ((Object)0)) {
-			return ((Object)0);
-		} 
-		return ModernizedCProgram.get_funccal().getL_vars().getDv_hashtab();
+	public void syn_clear_keyword(int id) {
+		hashitem_T hi = new hashitem_T();
+		keyentry_T kp = new keyentry_T();
+		keyentry_T kp_prev = new keyentry_T();
+		keyentry_T kp_next = new keyentry_T();
+		int todo;
+		ht.hash_lock();
+		Object generatedHt_used = this.getHt_used();
+		todo = (int)generatedHt_used;
+		Object generatedHi_key = (hi).getHi_key();
+		Object generatedK_syn = kp.getK_syn();
+		Object generatedKe_next = kp.getKe_next();
+		Object generatedKeyword = (kp_next).getKeyword();
+		Object generatedNext_list = kp.getNext_list();
+		hashitem_S[] generatedHt_array = this.getHt_array();
+		for (hi = generatedHt_array; todo > 0; ++hi) {
+			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
+				--todo;
+				kp_prev = ((Object)0);
+				for (kp = ((keyentry_T)((generatedHi_key) - (generatedKeyword - (char_u)ModernizedCProgram.dumkey))); kp != ((Object)0); /*Error: Unsupported expression*/) {
+					if (generatedK_syn.getId() == id) {
+						kp_next = generatedKe_next;
+						if (kp_prev == ((Object)0)) {
+							if (kp_next == ((Object)0)) {
+								ModernizedCProgram.hash_remove(ht, hi);
+							} else {
+									hi.setHi_key((generatedKeyword));
+							} 
+						} else {
+								kp_prev.setKe_next(kp_next);
+						} 
+						ModernizedCProgram.vim_free(generatedNext_list);
+						ModernizedCProgram.vim_free(generatedK_syn.getCont_in_list());
+						ModernizedCProgram.vim_free(kp);
+						kp = kp_next;
+					} else {
+							kp_prev = kp;
+							kp = generatedKe_next;
+					} 
+				}
+			} 
+		}
+		ht/*
+		 * Clear a whole keyword table.
+		 */.hash_unlock();
 	}
-	public hashtable_S get_funccal_args_ht() {
-		if (ModernizedCProgram.current_funccal == ((Object)0)) {
-			return ((Object)0);
-		} 
-		return ModernizedCProgram.get_funccal().getL_avars().getDv_hashtab();
+	public void clear_keywtab() {
+		hashitem_T hi = new hashitem_T();
+		int todo;
+		keyentry_T kp = new keyentry_T();
+		keyentry_T kp_next = new keyentry_T();
+		Object generatedHt_used = this.getHt_used();
+		todo = (int)generatedHt_used;
+		Object generatedHi_key = (hi).getHi_key();
+		Object generatedKe_next = kp.getKe_next();
+		Object generatedNext_list = kp.getNext_list();
+		Object generatedK_syn = kp.getK_syn();
+		hashitem_S[] generatedHt_array = this.getHt_array();
+		for (hi = generatedHt_array; todo > 0; ++hi) {
+			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
+				--todo;
+				for (kp = ((keyentry_T)((generatedHi_key) - (ModernizedCProgram.dumkey.getKeyword() - (char_u)ModernizedCProgram.dumkey))); kp != ((Object)0); kp = kp_next) {
+					kp_next = generatedKe_next;
+					ModernizedCProgram.vim_free(generatedNext_list);
+					ModernizedCProgram.vim_free(generatedK_syn.getCont_in_list());
+					ModernizedCProgram.vim_free(kp);
+				}
+			} 
+		}
+		ht.hash_clear();
+		ht/*
+		 * Add a keyword to the list of keywords.
+		 */.hash_init();
 	}
 	public void list_hashtable_vars(Byte prefix, int empty, Integer first) {
 		hashitem_T hi = new hashitem_T();
@@ -314,7 +450,7 @@ public class hashtable_S {
 		 generatedDi_tv = di.getDi_tv();
 		Object generatedV_type = generatedDi_tv.getV_type();
 		Object generatedVval = generatedDi_tv.getVval();
-		hashitem_S generatedHt_array = this.getHt_array();
+		hashitem_S[] generatedHt_array = this.getHt_array();
 		for (hi = generatedHt_array; todo > 0 && !got_int; ++hi) {
 			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
 				--todo;
@@ -333,7 +469,7 @@ public class hashtable_S {
 	public hashtable_S get_globvar_ht() {
 		return ModernizedCProgram.globvardict.getDv_hashtab();
 	}
-	public hashtable_S find_var_ht(Object name, Object varname) {
+	public hashtable_S find_var_ht(Object[] name, Object varname) {
 		hashitem_T hi = new hashitem_T();
 		hashtab_T ht = new hashtab_T();
 		if (name[0] == (byte)'\000') {
@@ -412,7 +548,7 @@ public class hashtable_S {
 		Object generatedHi_key = (hi).getHi_key();
 		 generatedDi_tv = v.getDi_tv();
 		Object generatedDi_flags = v.getDi_flags();
-		hashitem_S generatedHt_array = this.getHt_array();
+		hashitem_S[] generatedHt_array = this.getHt_array();
 		for (hi = generatedHt_array; todo > 0; ++hi) {
 			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
 				--todo;
@@ -431,158 +567,22 @@ public class hashtable_S {
 		 * Clear the variable value and free the dictitem.
 		 */);
 	}
-	public int syn_list_keywords(int id, int did_header, int attr) {
-		/* header has already been printed */int outlen;
-		hashitem_T hi = new hashitem_T();
-		keyentry_T kp = new keyentry_T();
-		int todo;
-		int prev_contained = 0;
-		int prev_next_list = ((Object)0);
-		int prev_cont_in_list = ((Object)0);
-		int prev_skipnl = 0;
-		int prev_skipwhite = 0;
-		int prev_skipempty = 0/*
-		     * Unfortunately, this list of keywords is not sorted on alphabet but on
-		     * hash value...
-		     */;
-		Object generatedHt_used = this.getHt_used();
-		todo = (int)generatedHt_used;
-		Object generatedHi_key = (hi).getHi_key();
-		Object generatedK_syn = kp.getK_syn();
-		Object generatedFlags = kp.getFlags();
-		Object generatedNext_list = kp.getNext_list();
-		Object generatedKeyword = kp.getKeyword();
-		Object generatedKe_next = kp.getKe_next();
-		hashitem_S generatedHt_array = this.getHt_array();
-		for (hi = generatedHt_array; todo > 0 && !got_int; ++hi) {
-			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-				--todo;
-				for (kp = ((keyentry_T)((generatedHi_key) - (generatedKeyword - (char_u)ModernizedCProgram.dumkey))); kp != ((Object)0) && !got_int; kp = generatedKe_next) {
-					if (generatedK_syn.getId() == id) {
-						if (prev_contained != (generatedFlags & -1024) || prev_skipnl != (generatedFlags & -1024) || prev_skipwhite != (generatedFlags & -1024) || prev_skipempty != (generatedFlags & -1024) || prev_cont_in_list != generatedK_syn.getCont_in_list() || prev_next_list != generatedNext_list) {
-							outlen = 9999;
-						} else {
-								outlen = (int).strlen((byte)(generatedKeyword));
-						} 
-						if (ModernizedCProgram.syn_list_header(did_header, outlen, /* output "contained" and "nextgroup" on each line */id)) {
-							prev_contained = 0;
-							prev_next_list = ((Object)0);
-							prev_cont_in_list = ((Object)0);
-							prev_skipnl = 0;
-							prev_skipwhite = 0;
-							prev_skipempty = 0;
-						} 
-						did_header = 1;
-						if (prev_contained != (generatedFlags & -1024)) {
-							ModernizedCProgram.msg_puts_attr("contained", attr);
-							ModernizedCProgram.msg_putchar((byte)' ');
-							prev_contained = (generatedFlags & -1024);
-						} 
-						if (generatedK_syn.getCont_in_list() != prev_cont_in_list) {
-							ModernizedCProgram.put_id_list((char_u)"containedin", generatedK_syn.getCont_in_list(), attr);
-							ModernizedCProgram.msg_putchar((byte)' ');
-							prev_cont_in_list = generatedK_syn.getCont_in_list();
-						} 
-						if (generatedNext_list != prev_next_list) {
-							ModernizedCProgram.put_id_list((char_u)"nextgroup", generatedNext_list, attr);
-							ModernizedCProgram.msg_putchar((byte)' ');
-							prev_next_list = generatedNext_list;
-							if (generatedFlags & -1024) {
-								ModernizedCProgram.msg_puts_attr("skipnl", attr);
-								ModernizedCProgram.msg_putchar((byte)' ');
-								prev_skipnl = (generatedFlags & -1024);
-							} 
-							if (generatedFlags & -1024) {
-								ModernizedCProgram.msg_puts_attr("skipwhite", attr);
-								ModernizedCProgram.msg_putchar((byte)' ');
-								prev_skipwhite = (generatedFlags & -1024);
-							} 
-							if (generatedFlags & -1024) {
-								ModernizedCProgram.msg_puts_attr("skipempty", attr);
-								ModernizedCProgram.msg_putchar((byte)' ');
-								prev_skipempty = (generatedFlags & -1024);
-							} 
-						} 
-						ModernizedCProgram.msg_outtrans(generatedKeyword);
-					} 
-				}
-			} 
-		}
-		return did_header;
+	public hashtable_S func_tbl_get() {
+		return ModernizedCProgram.func_hashtab/*
+		 * Get function arguments.
+		 */;
 	}
-	public void syn_clear_keyword(int id) {
-		hashitem_T hi = new hashitem_T();
-		keyentry_T kp = new keyentry_T();
-		keyentry_T kp_prev = new keyentry_T();
-		keyentry_T kp_next = new keyentry_T();
-		int todo;
-		ht.hash_lock();
-		Object generatedHt_used = this.getHt_used();
-		todo = (int)generatedHt_used;
-		Object generatedHi_key = (hi).getHi_key();
-		Object generatedK_syn = kp.getK_syn();
-		Object generatedKe_next = kp.getKe_next();
-		Object generatedKeyword = (kp_next).getKeyword();
-		Object generatedNext_list = kp.getNext_list();
-		hashitem_S generatedHt_array = this.getHt_array();
-		for (hi = generatedHt_array; todo > 0; ++hi) {
-			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-				--todo;
-				kp_prev = ((Object)0);
-				for (kp = ((keyentry_T)((generatedHi_key) - (generatedKeyword - (char_u)ModernizedCProgram.dumkey))); kp != ((Object)0); ) {
-					if (generatedK_syn.getId() == id) {
-						kp_next = generatedKe_next;
-						if (kp_prev == ((Object)0)) {
-							if (kp_next == ((Object)0)) {
-								ModernizedCProgram.hash_remove(ht, hi);
-							} else {
-									hi.setHi_key((generatedKeyword));
-							} 
-						} else {
-								kp_prev.setKe_next(kp_next);
-						} 
-						ModernizedCProgram.vim_free(generatedNext_list);
-						ModernizedCProgram.vim_free(generatedK_syn.getCont_in_list());
-						ModernizedCProgram.vim_free(kp);
-						kp = kp_next;
-					} else {
-							kp_prev = kp;
-							kp = generatedKe_next;
-					} 
-				}
-			} 
-		}
-		ht/*
-		 * Clear a whole keyword table.
-		 */.hash_unlock();
+	public hashtable_S get_funccal_local_ht() {
+		if (ModernizedCProgram.current_funccal == ((Object)0)) {
+			return ((Object)0);
+		} 
+		return ModernizedCProgram.get_funccal().getL_vars().getDv_hashtab();
 	}
-	public void clear_keywtab() {
-		hashitem_T hi = new hashitem_T();
-		int todo;
-		keyentry_T kp = new keyentry_T();
-		keyentry_T kp_next = new keyentry_T();
-		Object generatedHt_used = this.getHt_used();
-		todo = (int)generatedHt_used;
-		Object generatedHi_key = (hi).getHi_key();
-		Object generatedKe_next = kp.getKe_next();
-		Object generatedNext_list = kp.getNext_list();
-		Object generatedK_syn = kp.getK_syn();
-		hashitem_S generatedHt_array = this.getHt_array();
-		for (hi = generatedHt_array; todo > 0; ++hi) {
-			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-				--todo;
-				for (kp = ((keyentry_T)((generatedHi_key) - (ModernizedCProgram.dumkey.getKeyword() - (char_u)ModernizedCProgram.dumkey))); kp != ((Object)0); kp = kp_next) {
-					kp_next = generatedKe_next;
-					ModernizedCProgram.vim_free(generatedNext_list);
-					ModernizedCProgram.vim_free(generatedK_syn.getCont_in_list());
-					ModernizedCProgram.vim_free(kp);
-				}
-			} 
-		}
-		ht.hash_clear();
-		ht/*
-		 * Add a keyword to the list of keywords.
-		 */.hash_init();
+	public hashtable_S get_funccal_args_ht() {
+		if (ModernizedCProgram.current_funccal == ((Object)0)) {
+			return ((Object)0);
+		} 
+		return ModernizedCProgram.get_funccal().getL_avars().getDv_hashtab();
 	}
 	public Object getHt_mask() {
 		return ht_mask;
@@ -614,10 +614,10 @@ public class hashtable_S {
 	public void setHt_error(int newHt_error) {
 		ht_error = newHt_error;
 	}
-	public hashitem_S getHt_array() {
+	public hashitem_S[] getHt_array() {
 		return ht_array;
 	}
-	public void setHt_array(hashitem_S newHt_array) {
+	public void setHt_array(hashitem_S[] newHt_array) {
 		ht_array = newHt_array;
 	}
 	public Object getHt_smallarray() {

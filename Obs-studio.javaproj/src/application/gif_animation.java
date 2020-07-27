@@ -4,12 +4,12 @@ package application;
 */
 public class gif_animation {
 	private gif_bitmap_callback_vt bitmap_callbacks;
-	private Byte gif_data;
+	private byte[] gif_data;
 	private int width;
 	private int height;
 	private int frame_count;
 	private int frame_count_partial;
-	private gif_frame frames;
+	private gif_frame[] frames;
 	private int decoded_frame;
 	private Object frame_image;
 	private int loop_count;
@@ -21,13 +21,13 @@ public class gif_animation {
 	private int aspect_ratio;
 	private int colour_table_size;
 	private boolean global_colours;
-	private Integer global_colour_table;
+	private int[] global_colour_table;
 	private Integer local_colour_table;
 	private Object buf;
-	private Byte direct;
+	private byte[] direct;
 	private Object table;
 	private Object stack;
-	private byte stack_pointer;
+	private Byte stack_pointer;
 	private int code_size;
 	private int set_code_size;
 	private int max_code;
@@ -43,7 +43,7 @@ public class gif_animation {
 	private boolean get_done;
 	private boolean clear_image;
 	
-	public gif_animation(gif_bitmap_callback_vt bitmap_callbacks, Byte gif_data, int width, int height, int frame_count, int frame_count_partial, gif_frame frames, int decoded_frame, Object frame_image, int loop_count,  current_error, int buffer_position, int buffer_size, int frame_holders, int background_index, int aspect_ratio, int colour_table_size, boolean global_colours, Integer global_colour_table, Integer local_colour_table, Object buf, Byte direct, Object table, Object stack, byte stack_pointer, int code_size, int set_code_size, int max_code, int max_code_size, int clear_code, int end_code, int curbit, int lastbit, int last_byte, int firstcode, int oldcode, boolean zero_data_block, boolean get_done, boolean clear_image) {
+	public gif_animation(gif_bitmap_callback_vt bitmap_callbacks, byte[] gif_data, int width, int height, int frame_count, int frame_count_partial, gif_frame[] frames, int decoded_frame, Object frame_image, int loop_count,  current_error, int buffer_position, int buffer_size, int frame_holders, int background_index, int aspect_ratio, int colour_table_size, boolean global_colours, int[] global_colour_table, Integer local_colour_table, Object buf, byte[] direct, Object table, Object stack, Byte stack_pointer, int code_size, int set_code_size, int max_code, int max_code_size, int clear_code, int end_code, int curbit, int lastbit, int last_byte, int firstcode, int oldcode, boolean zero_data_block, boolean get_done, boolean clear_image) {
 		setBitmap_callbacks(bitmap_callbacks);
 		setGif_data(gif_data);
 		setWidth(width);
@@ -102,12 +102,12 @@ public class gif_animation {
 			return /*    Check for sufficient data to be a GIF (6-byte header + 7-byte logical screen descriptor)
 			    */.GIF_INSUFFICIENT_DATA;
 		} 
-		Byte generatedGif_data = this.getGif_data();
+		byte[] generatedGif_data = this.getGif_data();
 		int generatedBuffer_position = this.getBuffer_position();
 		gif_data = generatedGif_data + generatedBuffer_position;
 		int generatedWidth = this.getWidth();
 		int generatedHeight = this.getHeight();
-		Integer generatedGlobal_colour_table = this.getGlobal_colour_table();
+		int[] generatedGlobal_colour_table = this.getGlobal_colour_table();
 		Integer generatedLocal_colour_table = this.getLocal_colour_table();
 		gif_bitmap_callback_vt generatedBitmap_callbacks = this.getBitmap_callbacks();
 		Object generatedBitmap_create = generatedBitmap_callbacks.getBitmap_create();
@@ -127,7 +127,7 @@ public class gif_animation {
 			         *    +0    3CHARS    Signature ('GIF')
 			         *    +3    3CHARS    Version ('87a' or '89a')
 			         */);
-			if (.strncmp((byte)gif_data, "GIF", 3) != 0) {
+			if (/*Error: Function owner not recognized*/strncmp((byte)gif_data, "GIF", 3) != 0) {
 				return .GIF_DATA_ERROR;
 			} 
 			gif_data += 3/*    Ensure GIF reports version 87a or 89a
@@ -165,8 +165,8 @@ public class gif_animation {
 				            to give the wrong colours than to trample over some memory somewhere.
 				        */);
 			} 
-			this.setGlobal_colour_table((int).calloc(256, ));
-			this.setLocal_colour_table((int).calloc(256, ));
+			this.setGlobal_colour_table((int)/*Error: Function owner not recognized*/calloc(256, /*Error: Unsupported expression*/));
+			this.setLocal_colour_table((int)/*Error: Function owner not recognized*/calloc(256, /*Error: Unsupported expression*/));
 			if ((generatedGlobal_colour_table == ((Object)0)) || (generatedLocal_colour_table == ((Object)0))) {
 				gif.gif_finalise();
 				return .GIF_INSUFFICIENT_MEMORY;
@@ -183,15 +183,15 @@ public class gif_animation {
 						return .GIF_INSUFFICIENT_DATA;
 				} 
 			} 
-			if ((this.setFrames((gif_frame).malloc())) == ((Object)/*    Initialise enough workspace for 4 frames initially
+			if ((this.setFrames((gif_frame)/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/))) == ((Object)/*    Initialise enough workspace for 4 frames initially
 			        */0)) {
 				gif.gif_finalise();
 				return .GIF_INSUFFICIENT_MEMORY;
 			} 
 			this.setFrame_holders(1);
-			((generatedBitmap_create) ? (Object)0 : ._assert("gif->bitmap_callbacks.bitmap_create", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", /*    Initialise the sprite header
+			((generatedBitmap_create) ? (Object)0 : /*Error: Function owner not recognized*/_assert("gif->bitmap_callbacks.bitmap_create", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", /*    Initialise the sprite header
 			        */285));
-			if ((this.setFrame_image(.UNRECOGNIZEDFUNCTIONNAME(generatedWidth, generatedHeight))) == ((Object)0)) {
+			if ((this.setFrame_image(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedWidth, generatedHeight))) == ((Object)0)) {
 				gif.gif_finalise();
 				return .GIF_INSUFFICIENT_MEMORY;
 			} 
@@ -332,15 +332,15 @@ public class gif_animation {
 		max_height = (height > generatedHeight) ? height : generatedHeight;
 		gif_bitmap_callback_vt generatedBitmap_callbacks = this.getBitmap_callbacks();
 		Object generatedBitmap_create = generatedBitmap_callbacks.getBitmap_create();
-		((generatedBitmap_create) ? (Object)0 : ._assert("gif->bitmap_callbacks.bitmap_create", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", /*    Allocate some more memory
+		((generatedBitmap_create) ? (Object)0 : /*Error: Function owner not recognized*/_assert("gif->bitmap_callbacks.bitmap_create", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", /*    Allocate some more memory
 		    */382));
-		if ((buffer = .UNRECOGNIZEDFUNCTIONNAME(max_width, max_height)) == ((Object)0)) {
+		if ((buffer = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(max_width, max_height)) == ((Object)0)) {
 			return .GIF_INSUFFICIENT_MEMORY;
 		} 
 		Object generatedBitmap_destroy = generatedBitmap_callbacks.getBitmap_destroy();
-		((generatedBitmap_destroy) ? (Object)0 : ._assert("gif->bitmap_callbacks.bitmap_destroy", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", 385));
+		((generatedBitmap_destroy) ? (Object)0 : /*Error: Function owner not recognized*/_assert("gif->bitmap_callbacks.bitmap_destroy", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", 385));
 		Object generatedFrame_image = this.getFrame_image();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedFrame_image);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFrame_image);
 		this.setFrame_image(buffer);
 		this.setWidth(max_width);
 		this.setHeight(max_height);
@@ -374,7 +374,7 @@ public class gif_animation {
 		gif_result return_value = new gif_result();
 		int generatedFrame_count = this.getFrame_count();
 		frame = generatedFrame_count;
-		Byte generatedGif_data = this.getGif_data();
+		byte[] generatedGif_data = this.getGif_data();
 		int generatedBuffer_position = this.getBuffer_position();
 		gif_data = (byte)(generatedGif_data + generatedBuffer_position);
 		int generatedBuffer_size = this.getBuffer_size();
@@ -395,11 +395,11 @@ public class gif_animation {
 			return .GIF_FRAME_DATA_ERROR;
 		} 
 		int generatedFrame_holders = this.getFrame_holders();
-		gif_frame generatedFrames = this.getFrames();
+		gif_frame[] generatedFrames = this.getFrames();
 		if ((int)generatedFrame_holders <= /*    Get some memory to store our pointers in etc.
 		    */frame/*    Allocate more memory
 		        */) {
-			if ((temp_buf = (gif_frame).realloc(generatedFrames, (frame + 1) * )) == ((Object)0)) {
+			if ((temp_buf = (gif_frame)/*Error: Function owner not recognized*/realloc(generatedFrames, (frame + 1) * /*Error: Unsupported expression*/)) == ((Object)0)) {
 				return .GIF_INSUFFICIENT_MEMORY;
 			} 
 			this.setFrames(temp_buf);
@@ -543,12 +543,12 @@ public class gif_animation {
 		byte gif_end;
 		int gif_bytes;
 		int block_size;
-		Byte generatedGif_data = this.getGif_data();
+		byte[] generatedGif_data = this.getGif_data();
 		int generatedBuffer_position = this.getBuffer_position();
 		gif_data = (byte)(generatedGif_data + generatedBuffer_position);
 		int generatedBuffer_size = this.getBuffer_size();
 		gif_end = (byte)(generatedGif_data + generatedBuffer_size);
-		gif_frame generatedFrames = this.getFrames();
+		gif_frame[] generatedFrames = this.getFrames();
 		while (gif_data[0] == /*    Initialise the extensions
 		    */-1024) {
 			++gif_data;
@@ -589,7 +589,7 @@ public class gif_animation {
 					if (gif_bytes < 17) {
 						return .GIF_INSUFFICIENT_FRAME_DATA;
 					} 
-					if ((gif_data[1] == -1024) && (.strncmp((byte)gif_data + 2, "NETSCAPE2.0", 11) == 0) && (gif_data[13] == -1024) && (gif_data[14] == -1024)) {
+					if ((gif_data[1] == -1024) && (/*Error: Function owner not recognized*/strncmp((byte)gif_data + 2, "NETSCAPE2.0", 11) == 0) && (gif_data[13] == -1024) && (gif_data[14] == -1024)) {
 						this.setLoop_count(gif_data[15] | (gif_data[16] << 8));
 					} 
 					gif_data += (2 + gif_data[1]);
@@ -653,7 +653,7 @@ public class gif_animation {
 		if (frame >= generatedFrame_count_partial) {
 			return .GIF_INSUFFICIENT_DATA;
 		} 
-		gif_frame generatedFrames = this.getFrames();
+		gif_frame[] generatedFrames = this.getFrames();
 		if (generatedFrames[frame].getDisplay() == /*    Ensure this frame is supposed to be decoded
 		    */0) {
 			this.setCurrent_error(.GIF_FRAME_NO_DISPLAY);
@@ -664,7 +664,7 @@ public class gif_animation {
 		if ((!generatedClear_image) && ((int)frame == generatedDecoded_frame)) {
 			return .GIF_OK;
 		} 
-		Byte generatedGif_data = this.getGif_data();
+		byte[] generatedGif_data = this.getGif_data();
 		gif_data = generatedGif_data + generatedFrames[frame].getFrame_pointer();
 		int generatedBuffer_size = this.getBuffer_size();
 		gif_end = generatedGif_data + generatedBuffer_size;
@@ -712,7 +712,7 @@ public class gif_animation {
 		    */10;
 		gif_bytes = (int)(gif_end - gif_data);
 		Integer generatedLocal_colour_table = this.getLocal_colour_table();
-		Integer generatedGlobal_colour_table = this.getGlobal_colour_table();
+		int[] generatedGlobal_colour_table = this.getGlobal_colour_table();
 		if (flags & /*    Set up the colour table
 		    */-1024) {
 			if (gif_bytes < (int)(3 * colour_table_size)) {
@@ -752,17 +752,17 @@ public class gif_animation {
 		} 
 		gif_bitmap_callback_vt generatedBitmap_callbacks = this.getBitmap_callbacks();
 		Object generatedBitmap_get_buffer = generatedBitmap_callbacks.getBitmap_get_buffer();
-		((generatedBitmap_get_buffer) ? (Object)0 : ._assert("gif->bitmap_callbacks.bitmap_get_buffer", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", /*    Get the frame data
+		((generatedBitmap_get_buffer) ? (Object)0 : /*Error: Function owner not recognized*/_assert("gif->bitmap_callbacks.bitmap_get_buffer", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", /*    Get the frame data
 		    */885));
 		Object generatedFrame_image = this.getFrame_image();
-		frame_data = (Object).UNRECOGNIZEDFUNCTIONNAME(generatedFrame_image);
+		frame_data = (Object)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFrame_image);
 		if (!frame_data) {
 			return .GIF_INSUFFICIENT_MEMORY;
 		} 
 		int generatedSet_code_size = this.getSet_code_size();
 		int generatedClear_code = this.getClear_code();
 		Object generatedBuf = this.getBuf();
-		byte generatedStack_pointer = this.getStack_pointer();
+		Byte generatedStack_pointer = this.getStack_pointer();
 		Object generatedStack = this.getStack();
 		 generatedCurrent_error = this.getCurrent_error();
 		int generatedBackground_index = this.getBackground_index();
@@ -777,7 +777,7 @@ public class gif_animation {
 			if ((frame == 0) || (generatedDecoded_frame == -/*    If the previous frame's disposal method requires we restore the background
 			         *    colour or this is the first frame, clear the frame data
 			        */1)) {
-				.memset((byte)frame_data, -1024, generatedWidth * generatedHeight * );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((byte)frame_data, -1024, generatedWidth * generatedHeight * /*Error: Unsupported expression*/);
 				this.setDecoded_frame(frame/* The line below would fill the image with its background color, but because GIFs support
 				             * transparency we likely wouldn't want to do that. */);
 			}  else if ((frame != 0) && (generatedFrames[frame - 1].getDisposal_method() == /* memset((char*)frame_data, colour_table[gif->background_index], gif->width * gif->height * sizeof(int)); */2)) {
@@ -793,13 +793,13 @@ public class gif_animation {
 				}
 				if (last_undisposed_frame == -/*    If we don't find one, clear the frame data
 				                */1) {
-					.memset((byte)frame_data, -1024, generatedWidth * generatedHeight * /* see notes above on transparency vs. background color */);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((byte)frame_data, -1024, generatedWidth * generatedHeight * /*Error: Unsupported expression*//* see notes above on transparency vs. background color */);
 				} else {
 						if ((return_value = gif.gif_decode_frame(last_undisposed_frame)) != .GIF_OK) {
 							;
 						} 
-						((generatedBitmap_get_buffer) ? (Object)0 : ._assert("gif->bitmap_callbacks.bitmap_get_buffer", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", 935));
-						frame_data = (Object).UNRECOGNIZEDFUNCTIONNAME(generatedFrame_image);
+						((generatedBitmap_get_buffer) ? (Object)0 : /*Error: Function owner not recognized*/_assert("gif->bitmap_callbacks.bitmap_get_buffer", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", 935));
+						frame_data = (Object)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFrame_image);
 						if (!frame_data) {
 							return .GIF_INSUFFICIENT_MEMORY;
 						} 
@@ -862,20 +862,20 @@ public class gif_animation {
 					for (y = 0; y < height; y++) {
 						frame_scanline = frame_data + offset_x + ((offset_y + y) * generatedWidth);
 						if (generatedFrames[frame].getTransparency()) {
-							.memset(frame_scanline, -1024, width * 4);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(frame_scanline, -1024, width * 4);
 						} else {
-								.memset(frame_scanline, colour_table[generatedBackground_index], width * 4);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(frame_scanline, colour_table[generatedBackground_index], width * 4);
 						} 
 					}
 				} 
 		} 
 		Object generatedBitmap_set_opaque = generatedBitmap_callbacks.getBitmap_set_opaque();
 		if (generatedBitmap_set_opaque) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedFrame_image, generatedFrames[frame].getOpaque());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFrame_image, generatedFrames[frame].getOpaque());
 		} 
 		Object generatedBitmap_modified = generatedBitmap_callbacks.getBitmap_modified();
 		if (generatedBitmap_modified) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedFrame_image);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFrame_image);
 		} 
 		this.setBuffer_position(/*    Restore the buffer position
 		    */save_buffer_position);
@@ -891,7 +891,7 @@ public class gif_animation {
 		byte gif_end;
 		int gif_bytes;
 		int block_size;
-		Byte generatedGif_data = this.getGif_data();
+		byte[] generatedGif_data = this.getGif_data();
 		int generatedBuffer_position = this.getBuffer_position();
 		gif_data = (byte)(generatedGif_data + generatedBuffer_position);
 		int generatedBuffer_size = this.getBuffer_size();
@@ -933,18 +933,18 @@ public class gif_animation {
 		gif_bitmap_callback_vt generatedBitmap_callbacks = this.getBitmap_callbacks();
 		Object generatedBitmap_destroy = generatedBitmap_callbacks.getBitmap_destroy();
 		if (generatedFrame_image) {
-			((generatedBitmap_destroy) ? (Object)0 : ._assert("gif->bitmap_callbacks.bitmap_destroy", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", 1115));
-			.UNRECOGNIZEDFUNCTIONNAME(generatedFrame_image);
+			((generatedBitmap_destroy) ? (Object)0 : /*Error: Function owner not recognized*/_assert("gif->bitmap_callbacks.bitmap_destroy", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\libnsgif.c", 1115));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFrame_image);
 		} 
 		this.setFrame_image(((Object)0));
-		gif_frame generatedFrames = this.getFrames();
-		.free(generatedFrames);
+		gif_frame[] generatedFrames = this.getFrames();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedFrames);
 		this.setFrames(((Object)0));
 		Integer generatedLocal_colour_table = this.getLocal_colour_table();
-		.free(generatedLocal_colour_table);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedLocal_colour_table);
 		this.setLocal_colour_table(((Object)0));
-		Integer generatedGlobal_colour_table = this.getGlobal_colour_table();
-		.free(generatedGlobal_colour_table);
+		int[] generatedGlobal_colour_table = this.getGlobal_colour_table();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedGlobal_colour_table);
 		this.setGlobal_colour_table(((Object)0/**
 		 * Initialise LZW decoding
 		 */));
@@ -961,10 +961,10 @@ public class gif_animation {
 		if (generatedClear_code >= (1 << 12)) {
 			this.setStack_pointer(generatedStack);
 			this.setCurrent_error(.GIF_FRAME_DATA_ERROR);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedTable = this.getTable();
-		.memset(generatedTable, -1024, (1 << 12) * /* initialise our table */8);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedTable, -1024, (1 << 12) * /* initialise our table */8);
 		for (i = 0; i < generatedClear_code; ++i) {
 			generatedTable[1][i] = i;
 		}
@@ -978,7 +978,7 @@ public class gif_animation {
 		do {
 			this.setFirstcode(this.setOldcode(gif.gif_next_code(generatedCode_size)));
 		} while (generatedFirstcode == generatedClear_code);
-		byte generatedStack_pointer = this.getStack_pointer();
+		Byte generatedStack_pointer = this.getStack_pointer();
 		generatedStack_pointer++ = generatedFirstcode;
 	}
 	public boolean gif_next_LZW() {
@@ -991,7 +991,7 @@ public class gif_animation {
 		int generatedClear_code = this.getClear_code();
 		int generatedEnd_code = this.getEnd_code();
 		boolean generatedZero_data_block = this.getZero_data_block();
-		Byte generatedGif_data = this.getGif_data();
+		byte[] generatedGif_data = this.getGif_data();
 		int generatedBuffer_position = this.getBuffer_position();
 		if (code < 0) {
 			this.setCurrent_error(code);
@@ -1014,7 +1014,7 @@ public class gif_animation {
 		} 
 		incode = code;
 		int generatedMax_code = this.getMax_code();
-		byte generatedStack_pointer = this.getStack_pointer();
+		Byte generatedStack_pointer = this.getStack_pointer();
 		int generatedFirstcode = this.getFirstcode();
 		int generatedOldcode = this.getOldcode();
 		if (code >= generatedMax_code) {
@@ -1064,9 +1064,9 @@ public class gif_animation {
 		int generatedLastbit = this.getLastbit();
 		boolean generatedGet_done = this.getGet_done();
 		Object generatedBuf = this.getBuf();
-		Byte generatedDirect = this.getDirect();
+		byte[] generatedDirect = this.getDirect();
 		int generatedLast_byte = this.getLast_byte();
-		Byte generatedGif_data = this.getGif_data();
+		byte[] generatedGif_data = this.getGif_data();
 		int generatedBuffer_position = this.getBuffer_position();
 		int generatedBuffer_size = this.getBuffer_size();
 		if (end >= generatedLastbit) {
@@ -1117,10 +1117,10 @@ public class gif_animation {
 	public void setBitmap_callbacks(gif_bitmap_callback_vt newBitmap_callbacks) {
 		bitmap_callbacks = newBitmap_callbacks;
 	}
-	public Byte getGif_data() {
+	public byte[] getGif_data() {
 		return gif_data;
 	}
-	public void setGif_data(Byte newGif_data) {
+	public void setGif_data(byte[] newGif_data) {
 		gif_data = newGif_data;
 	}
 	public int getWidth() {
@@ -1147,10 +1147,10 @@ public class gif_animation {
 	public void setFrame_count_partial(int newFrame_count_partial) {
 		frame_count_partial = newFrame_count_partial;
 	}
-	public gif_frame getFrames() {
+	public gif_frame[] getFrames() {
 		return frames;
 	}
-	public void setFrames(gif_frame newFrames) {
+	public void setFrames(gif_frame[] newFrames) {
 		frames = newFrames;
 	}
 	public int getDecoded_frame() {
@@ -1219,10 +1219,10 @@ public class gif_animation {
 	public void setGlobal_colours(boolean newGlobal_colours) {
 		global_colours = newGlobal_colours;
 	}
-	public Integer getGlobal_colour_table() {
+	public int[] getGlobal_colour_table() {
 		return global_colour_table;
 	}
-	public void setGlobal_colour_table(Integer newGlobal_colour_table) {
+	public void setGlobal_colour_table(int[] newGlobal_colour_table) {
 		global_colour_table = newGlobal_colour_table;
 	}
 	public Integer getLocal_colour_table() {
@@ -1237,10 +1237,10 @@ public class gif_animation {
 	public void setBuf(Object newBuf) {
 		buf = newBuf;
 	}
-	public Byte getDirect() {
+	public byte[] getDirect() {
 		return direct;
 	}
-	public void setDirect(Byte newDirect) {
+	public void setDirect(byte[] newDirect) {
 		direct = newDirect;
 	}
 	public Object getTable() {
@@ -1255,10 +1255,10 @@ public class gif_animation {
 	public void setStack(Object newStack) {
 		stack = newStack;
 	}
-	public byte getStack_pointer() {
+	public Byte getStack_pointer() {
 		return stack_pointer;
 	}
-	public void setStack_pointer(byte newStack_pointer) {
+	public void setStack_pointer(Byte newStack_pointer) {
 		stack_pointer = newStack_pointer;
 	}
 	public int getCode_size() {

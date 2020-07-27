@@ -11,11 +11,6 @@ public class gs_image_file2 {
 	public gs_image_file2() {
 	}
 	
-	public void gs_image_file2_init(Object file) {
-		gs_image_file generatedImage = this.getImage();
-		Object generatedMem_usage = this.getMem_usage();
-		generatedImage.gs_image_file_init_internal(file, generatedMem_usage);
-	}
 	public void gs_image_file2_free() {
 		gs_image_file generatedImage = this.getImage();
 		generatedImage.gs_image_file_free();
@@ -32,6 +27,11 @@ public class gs_image_file2 {
 	public void gs_image_file2_update_texture() {
 		gs_image_file generatedImage = this.getImage();
 		generatedImage.gs_image_file_update_texture();
+	}
+	public void gs_image_file2_init(Object file) {
+		gs_image_file generatedImage = this.getImage();
+		Object generatedMem_usage = this.getMem_usage();
+		generatedImage.gs_image_file_init_internal(file, generatedMem_usage);
 	}
 	public gs_image_file getImage() {
 		return image;

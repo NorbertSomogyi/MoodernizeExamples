@@ -39,7 +39,7 @@ public class xz_dec {
 	public xz_dec() {
 	}
 	
-	public xz_ret dec_vli(Object in, Object in_pos, Object in_size) {
+	public xz_ret dec_vli(Object[] in, Object in_pos, Object in_size) {
 		uint8_t byte = new uint8_t();
 		Object generatedPos = this.getPos();
 		if (generatedPos == 0) {
@@ -58,7 +58,7 @@ public class xz_dec {
 				return xz_ret.XZ_STREAM_END;
 			} 
 			generatedPos += 7;
-			if (generatedPos == 7 * ( * 8 / 7)) {
+			if (generatedPos == 7 * (/*Error: Unsupported expression*/ * 8 / 7)) {
 				return xz_ret.XZ_DATA_ERROR;
 			} 
 		}
@@ -88,7 +88,7 @@ public class xz_dec {
 	public xz_ret dec_stream_header() {
 		 generatedTemp = this.getTemp();
 		Object generatedBuf = generatedTemp.getBuf();
-		if (!(.memcmp(generatedBuf, "\xFD7zXZ", 6) == 0)) {
+		if (!(/*Error: Function owner not recognized*/memcmp(generatedBuf, "\xFD7zXZ", 6) == 0)) {
 			return xz_ret.XZ_FORMAT_ERROR;
 		} 
 		if (ModernizedCProgram.xz_crc32(generatedBuf + 6, 2, 0) != ModernizedCProgram.get_unaligned_le32(generatedBuf + 6 + 2)) {
@@ -112,7 +112,7 @@ public class xz_dec {
 	public xz_ret dec_stream_footer() {
 		 generatedTemp = this.getTemp();
 		Object generatedBuf = generatedTemp.getBuf();
-		if (!(.memcmp(generatedBuf + 10, "YZ", 2) == 0)) {
+		if (!(/*Error: Function owner not recognized*/memcmp(generatedBuf + 10, "YZ", 2) == 0)) {
 			return xz_ret.XZ_DATA_ERROR;
 		} 
 		if (ModernizedCProgram.xz_crc32(generatedBuf + 4, 6, 0) != ModernizedCProgram.get_unaligned_le32(generatedBuf)) {
@@ -222,7 +222,7 @@ public class xz_dec {
 		return xz_ret.XZ_OK;
 	}
 	public xz_dec xz_dec_init(xz_mode mode, Object dict_max) {
-		xz_dec s = .malloc();
+		xz_dec s = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		if (s == ((Object)0)) {
 			return ((Object)0);
 		} 
@@ -249,9 +249,9 @@ public class xz_dec {
 		this.setPos(0);
 		this.setCrc32(0);
 		 generatedBlock = this.getBlock();
-		.memset(generatedBlock, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedBlock, 0, /*Error: sizeof expression not supported yet*/);
 		 generatedIndex = this.getIndex();
-		.memset(generatedIndex, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedIndex, 0, /*Error: sizeof expression not supported yet*/);
 		 generatedTemp = this.getTemp();
 		generatedTemp.setPos(0);
 		generatedTemp.setSize(12);
@@ -261,8 +261,8 @@ public class xz_dec {
 		xz_dec_bcj generatedBcj = this.getBcj();
 		if (s != ((Object)0)) {
 			generatedLzma2.xz_dec_lzma2_end();
-			.free(generatedBcj);
-			.free(s);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBcj);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(s);
 		} 
 	}
 	public  getSequence() {

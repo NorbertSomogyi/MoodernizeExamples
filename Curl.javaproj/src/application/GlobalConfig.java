@@ -56,34 +56,34 @@ public class GlobalConfig {
 		} 
 		if (!unit) {
 			unit = (byte)"b";
-		}  else if (.strlen(unit) > 1) {
+		}  else if (/*Error: Function owner not recognized*/strlen(unit) > 1) {
 			unit = (byte)/* unsupported */"w";
 		} 
 		switch (unit) {
+		case (byte)'G':
+		case (byte)'b':
+		case (byte)'k':
+				if (value > (/*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) / 1024)) {
+					return .PARAM_NUMBER_TOO_LARGE;
+				} 
+				value *= 1024;
+				break;
+		case (byte)'B'/* for plain bytes, leave as-is */:
+				break;
+		case (byte)'K':
+		case (byte)'m':
+				if (value > (/*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) / (1024 * 1024))) {
+					return .PARAM_NUMBER_TOO_LARGE;
+				} 
+				value *= 1024 * 1024;
+				break;
 		case (byte)'g':
-				if (value > (.CURL_OFF_T_C(-1024) / (1024 * 1024 * 1024))) {
+				if (value > (/*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) / (1024 * 1024 * 1024))) {
 					return .PARAM_NUMBER_TOO_LARGE;
 				} 
 				value *= 1024 * 1024 * 1024;
 				break;
 		case (byte)'M':
-		case (byte)'b':
-		case (byte)'K':
-		case (byte)'B'/* for plain bytes, leave as-is */:
-				break;
-		case (byte)'k':
-				if (value > (.CURL_OFF_T_C(-1024) / 1024)) {
-					return .PARAM_NUMBER_TOO_LARGE;
-				} 
-				value *= 1024;
-				break;
-		case (byte)'m':
-				if (value > (.CURL_OFF_T_C(-1024) / (1024 * 1024))) {
-					return .PARAM_NUMBER_TOO_LARGE;
-				} 
-				value *= 1024 * 1024;
-				break;
-		case (byte)'G':
 		default:
 				global.warnf("unsupported %s unit. Use G, M, K or B!\n", which);
 				return .PARAM_BAD_USE;
@@ -91,7 +91,7 @@ public class GlobalConfig {
 		value_out = value;
 		return .PARAM_OK;
 	}
-	public  parse_args(int argc, Byte argv) {
+	public  parse_args(int argc, byte[][] argv) {
 		int i;
 		bool stillflags = new bool();
 		byte orig_opt = ((Object)0);
@@ -106,7 +106,7 @@ public class GlobalConfig {
 			if (stillflags && ((byte)'-' == argv[i][0])) {
 				bool passarg = new bool();
 				byte flag = argv[i];
-				if (!.strcmp("--", argv[i/* This indicates the end of the flags and thus enables the
+				if (!/*Error: Function owner not recognized*/strcmp("--", argv[i/* This indicates the end of the flags and thus enables the
 				           following (URL) argument to start with -. */])) {
 					stillflags = 0;
 				} else {
@@ -116,7 +116,7 @@ public class GlobalConfig {
 						             returned from this function */) {
 							result = .PARAM_OK;
 							if (generatedUrl_list && generatedUrl) {
-								config.setNext(.malloc(/* Allocate the next config */));
+								config.setNext(/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*//* Allocate the next config */));
 								if (generatedNext) {
 									generatedNext.config_init();
 									generatedNext.setGlobal(/* Set the global config pointer */global);
@@ -139,7 +139,7 @@ public class GlobalConfig {
 		_iobuf generatedErrors = this.getErrors();
 		if (result && result != .PARAM_HELP_REQUESTED && result != .PARAM_MANUAL_REQUESTED && result != .PARAM_VERSION_INFO_REQUESTED && result != .PARAM_ENGINES_REQUESTED) {
 			byte reason = ModernizedCProgram.param2text(result);
-			if (orig_opt && .strcmp(":", orig_opt)) {
+			if (orig_opt && /*Error: Function owner not recognized*/strcmp(":", orig_opt)) {
 				generatedErrors.helpf("option %s: %s\n", orig_opt, reason);
 			} else {
 					generatedErrors.helpf("%s\n", reason);
@@ -191,7 +191,7 @@ public class GlobalConfig {
 			byte[] preamble = new byte[/* we only use this for real if --libcurl was used *//* should accommodate any symbol name */80];
 			long rest = /* bits not handled yet */lval;
 			NameValue nv = ((Object)0);
-			ModernizedCProgram.curl_msnprintf(preamble, , "curl_easy_setopt(hnd, %s, ", name);
+			ModernizedCProgram.curl_msnprintf(preamble, /*Error: sizeof expression not supported yet*/, "curl_easy_setopt(hnd, %s, ", name);
 			for (nv = nvlist; nv.getName(); nv++) {
 				if ((nv.getValue() & ~rest) == 0) {
 					rest &=  ~nv.getValue();
@@ -204,7 +204,7 @@ public class GlobalConfig {
 					if (!rest) {
 						break;
 					} 
-					ModernizedCProgram.curl_msnprintf(preamble, , "%*s", .strlen(preamble), /* replace with all spaces for continuation line */"");
+					ModernizedCProgram.curl_msnprintf(preamble, /*Error: sizeof expression not supported yet*/, "%*s", /*Error: Function owner not recognized*/strlen(preamble), /* replace with all spaces for continuation line */"");
 				} 
 			}
 			if (/* If any bits have no definition, output an explicit value.
@@ -231,7 +231,7 @@ public class GlobalConfig {
 			byte[] preamble = new byte[/* we only use this for real if --libcurl was used */80];
 			long rest = (long)lval;
 			NameValueUnsigned nv = ((Object)0);
-			ModernizedCProgram.curl_msnprintf(preamble, , "curl_easy_setopt(hnd, %s, ", name);
+			ModernizedCProgram.curl_msnprintf(preamble, /*Error: sizeof expression not supported yet*/, "curl_easy_setopt(hnd, %s, ", name);
 			for (nv = nvlist; nv.getName(); nv++) {
 				if ((nv.getValue() & ~rest) == 0) {
 					rest &=  ~nv.getValue();
@@ -244,7 +244,7 @@ public class GlobalConfig {
 					if (!rest) {
 						break;
 					} 
-					ModernizedCProgram.curl_msnprintf(preamble, , "%*s", .strlen(preamble), /* replace with all spaces for continuation line */"");
+					ModernizedCProgram.curl_msnprintf(preamble, /*Error: sizeof expression not supported yet*/, "%*s", /*Error: Function owner not recognized*/strlen(preamble), /* replace with all spaces for continuation line */"");
 				} 
 			}
 			if (/* If any bits have no definition, output an explicit value.
@@ -286,8 +286,8 @@ public class GlobalConfig {
 		bool escape = 0;
 		byte escaped = ((Object)0);
 		 ret = CURLE_OK;
-		.__builtin_va_start(arg, tag);
-		.__builtin_va_end(arg);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(arg, tag);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(arg);
 		if (ModernizedCProgram.config.getLibcurl() && !skip && !ret/* we only use this for real if --libcurl was used */) {
 			if (remark) {
 				do {
@@ -338,7 +338,7 @@ public class GlobalConfig {
 		ModernizedCProgram.config.setErrors((_iob[/* Default errors to stderr */2]));
 		ModernizedCProgram.config.setStyled_output(/* enable detection */1);
 		ModernizedCProgram.config.setParallel_max(50);
-		ModernizedCProgram.config.setFirst(ModernizedCProgram.config.setLast(.malloc(/* Allocate the initial operate config */)));
+		ModernizedCProgram.config.setFirst(ModernizedCProgram.config.setLast(/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*//* Allocate the initial operate config */)));
 		if (ModernizedCProgram.config.getFirst()) {
 			result = ModernizedCProgram.curl_global_init(/* Perform the libcurl initialization */CURL_GLOBAL_DEFAULT);
 			if (!result) {
@@ -348,11 +348,11 @@ public class GlobalConfig {
 					ModernizedCProgram.config.getFirst().setGlobal(ModernizedCProgram.config);
 				} else {
 						(_iob[2]).helpf("error retrieving curl library information\n");
-						.free(ModernizedCProgram.config.getFirst());
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(ModernizedCProgram.config.getFirst());
 				} 
 			} else {
 					(_iob[2]).helpf("error initializing curl library\n");
-					.free(ModernizedCProgram.config.getFirst());
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(ModernizedCProgram.config.getFirst());
 			} 
 		} else {
 				(_iob[2]).helpf("error initializing curl\n");
@@ -362,19 +362,19 @@ public class GlobalConfig {
 	}
 	public void free_globalconfig() {
 		do {
-			.free((ModernizedCProgram.config.getTrace_dump()));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getTrace_dump()));
 			(ModernizedCProgram.config.getTrace_dump()) = ((Object)0);
 		} while (0);
 		if (ModernizedCProgram.config.getErrors_fopened() && ModernizedCProgram.config.getErrors()) {
-			.fclose(ModernizedCProgram.config.getErrors());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(ModernizedCProgram.config.getErrors());
 		} 
 		ModernizedCProgram.config.setErrors(((Object)0));
 		if (ModernizedCProgram.config.getTrace_fopened() && ModernizedCProgram.config.getTrace_stream()) {
-			.fclose(ModernizedCProgram.config.getTrace_stream());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(ModernizedCProgram.config.getTrace_stream());
 		} 
 		ModernizedCProgram.config.setTrace_stream(((Object)0));
 		do {
-			.free((ModernizedCProgram.config.getLibcurl()));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((ModernizedCProgram.config.getLibcurl()));
 			(ModernizedCProgram.config.getLibcurl()) = ((Object)0);
 		} while (0/*
 		 * This is the main global destructor for the app. Call this after
@@ -391,6 +391,61 @@ public class GlobalConfig {
 		ModernizedCProgram.config.getLast().config_free();
 		ModernizedCProgram.config.setFirst(((Object)0));
 		ModernizedCProgram.config.setLast(((Object)0));
+	}
+	public void dumpeasysrc() {
+		curl_slist ptr = new curl_slist();
+		byte o = ModernizedCProgram.config.getLibcurl();
+		FILE out = new FILE();
+		bool fopened = 0;
+		if (/*Error: Function owner not recognized*/strcmp(o, "-")) {
+			out = /*Error: Function owner not recognized*/fopen(o, "wt");
+			fopened = 1;
+		} else {
+				out = (_iob[1]);
+		} 
+		Object generatedCurl_slist = ptr.getCurl_slist();
+		if (!out) {
+			ModernizedCProgram.config.warnf("Failed to open %s to write libcurl code!\n", o);
+		} else {
+				int i;
+				byte c;
+				for (i = 0; ((c = ModernizedCProgram.srchead[i]) != ((Object)0)); i++) {
+					out.curl_mfprintf("%s\n", c);
+				}
+				if (/* Declare variables used for complex setopt values */ModernizedCProgram.easysrc_decl) {
+					for (ptr = ModernizedCProgram.easysrc_decl.getFirst(); ptr; ptr = generatedCurl_slist) {
+						out.curl_mfprintf("  %s\n", generatedCurl_slist);
+					}
+				} 
+				if (/* Set up complex values for setopt calls */ModernizedCProgram.easysrc_data) {
+					out.curl_mfprintf("\n");
+					for (ptr = ModernizedCProgram.easysrc_data.getFirst(); ptr; ptr = generatedCurl_slist) {
+						out.curl_mfprintf("  %s\n", generatedCurl_slist);
+					}
+				} 
+				out.curl_mfprintf("\n");
+				if (ModernizedCProgram.easysrc_code) {
+					for (ptr = ModernizedCProgram.easysrc_code.getFirst(); ptr; ptr = generatedCurl_slist) {
+						if (generatedCurl_slist[0]) {
+							out.curl_mfprintf("  %s\n", generatedCurl_slist);
+						} else {
+								out.curl_mfprintf("\n");
+						} 
+					}
+				} 
+				if (ModernizedCProgram.easysrc_clean) {
+					for (ptr = ModernizedCProgram.easysrc_clean.getFirst(); ptr; ptr = generatedCurl_slist) {
+						out.curl_mfprintf("  %s\n", generatedCurl_slist);
+					}
+				} 
+				for (i = 0; ((c = ModernizedCProgram.srcend[i]) != ((Object)0)); i++) {
+					out.curl_mfprintf("%s\n", c);
+				}
+				if (fopened) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(out);
+				} 
+		} 
+		ModernizedCProgram.easysrc_free();
 	}
 	public Object add_parallel_transfers(Object multi, Object share,  morep,  addedp) {
 		per_transfer per = new per_transfer();
@@ -456,7 +511,7 @@ public class GlobalConfig {
 			if (!mcode) {
 				mcode = multi.curl_multi_perform(still_running);
 			} 
-			global.progress_meter(start, 0);
+			ModernizedCProgram.progress_meter(global, start, 0);
 			if (!mcode) {
 				int rc;
 				 msg = new ();
@@ -488,7 +543,7 @@ public class GlobalConfig {
 				} 
 			} 
 		}
-		(Object)global.progress_meter(start, 1);
+		(Object)ModernizedCProgram.progress_meter(global, start, 1);
 		if (/* Make sure to return some kind of error if there was a multi problem */mcode) {
 			result = (mcode == CURLM_OUT_OF_MEMORY) ? CURLE_OUT_OF_MEMORY/* The other multi errors should never happen, so return
 			         something suitably generic */ : CURLE_BAD_FUNCTION_ARGUMENT;
@@ -509,7 +564,7 @@ public class GlobalConfig {
 		Object generatedCurl = per.getCurl();
 		 generatedFail_early = this.getFail_early();
 		metalinkfile generatedMlfile = per.getMlfile();
-		for (per = ModernizedCProgram.transfers; per; ) {
+		for (per = ModernizedCProgram.transfers; per; /*Error: Unsupported expression*/) {
 			bool retry = new bool();
 			bool bailout = 0;
 			result = ModernizedCProgram.pre_transfer(global, per);
@@ -581,7 +636,7 @@ public class GlobalConfig {
 			} 
 		} 
 		OperationConfig generatedConfig = per.getConfig();
-		for (per = ModernizedCProgram.transfers; /* cleanup if there are any left */per; ) {
+		for (per = ModernizedCProgram.transfers; /* cleanup if there are any left */per; /*Error: Unsupported expression*/) {
 			bool retry = new bool();
 			 result2 = ModernizedCProgram.post_per_transfer(global, per, result, retry);
 			if (!result) {
@@ -595,9 +650,9 @@ public class GlobalConfig {
 		this.setIsatty(orig_isatty);
 		return result;
 	}
-	public Object operate(int argc, Byte argv) {
+	public Object operate(int argc, byte[][] argv) {
 		 result = CURLE_OK;
-		.setlocale(0, /* Setup proper locale from environment */"");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setlocale(0, /* Setup proper locale from environment */"");
 		OperationConfig generatedFirst = this.getFirst();
 		getout generatedUrl_list = generatedFirst.getUrl_list();
 		_iobuf generatedErrors = this.getErrors();
@@ -618,7 +673,7 @@ public class GlobalConfig {
 				if (ModernizedCProgram.res == /* Check if we were asked for the help */.PARAM_HELP_REQUESTED) {
 					ModernizedCProgram.tool_help();
 				}  else if (ModernizedCProgram.res == /* Check if we were asked for the manual */.PARAM_MANUAL_REQUESTED) {
-					.hugehelp();
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/hugehelp();
 				}  else if (ModernizedCProgram.res == /* Check if we were asked for the version information */.PARAM_VERSION_INFO_REQUESTED) {
 					ModernizedCProgram.tool_version_info();
 				}  else if (ModernizedCProgram.res == /* Check if we were asked to list the SSL engines */.PARAM_ENGINES_REQUESTED) {
@@ -689,19 +744,19 @@ public class GlobalConfig {
 	/* use our own printf() functions */
 	/* keep this as LAST include */
 	public void voutf(Object prefix, Object fmt, Object ap) {
-		size_t width = (79 - .strlen(prefix));
+		size_t width = (79 - /*Error: Function owner not recognized*/strlen(prefix));
 		if (!ModernizedCProgram.config.getMute()) {
 			size_t len = new size_t();
 			byte ptr;
 			byte print_buffer;
 			print_buffer = ModernizedCProgram.curl_mvaprintf(fmt, ap);
 			if (!print_buffer) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
-			len = .strlen(print_buffer);
+			len = /*Error: Function owner not recognized*/strlen(print_buffer);
 			ptr = print_buffer;
 			while (len > 0) {
-				.fputs(prefix, ModernizedCProgram.config.getErrors());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(prefix, ModernizedCProgram.config.getErrors());
 				if (len > width) {
 					size_t cut = width - 1;
 					while (!(ModernizedCProgram.Curl_isspace((int)((byte)ptr[cut]))) && cut) {
@@ -711,12 +766,12 @@ public class GlobalConfig {
 					             max text width then! */) {
 						cut = width - 1;
 					} 
-					(Object).fwrite(ptr, cut + 1, 1, ModernizedCProgram.config.getErrors());
-					.fputs("\n", ModernizedCProgram.config.getErrors());
+					(Object)/*Error: Function owner not recognized*/fwrite(ptr, cut + 1, 1, ModernizedCProgram.config.getErrors());
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs("\n", ModernizedCProgram.config.getErrors());
 					ptr += cut + /* skip the space too */1;
 					len -= cut + 1;
 				} else {
-						.fputs(ptr, ModernizedCProgram.config.getErrors());
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(ptr, ModernizedCProgram.config.getErrors());
 						len = 0;
 				} 
 			}
@@ -728,77 +783,22 @@ public class GlobalConfig {
 	}
 	public void notef(Object fmt) {
 		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
 		if (ModernizedCProgram.config.getTracetype()) {
 			ModernizedCProgram.config.voutf("Note: ", fmt, ap);
 		} 
-		.__builtin_va_end(ap/*
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap/*
 		 * Emit warning formatted message on configured 'errors' stream unless
 		 * mute (--silent) was selected.
 		 */);
 	}
 	public void warnf(Object fmt) {
 		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
 		ModernizedCProgram.config.voutf("Warning: ", fmt, ap);
-		.__builtin_va_end(ap/*
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap/*
 		 * Emit help formatted message on given stream.
 		 */);
-	}
-	public void dumpeasysrc() {
-		curl_slist ptr = new curl_slist();
-		byte o = ModernizedCProgram.config.getLibcurl();
-		FILE out = new FILE();
-		bool fopened = 0;
-		if (.strcmp(o, "-")) {
-			out = .fopen(o, "wt");
-			fopened = 1;
-		} else {
-				out = (_iob[1]);
-		} 
-		Object generatedCurl_slist = ptr.getCurl_slist();
-		if (!out) {
-			ModernizedCProgram.config.warnf("Failed to open %s to write libcurl code!\n", o);
-		} else {
-				int i;
-				byte c;
-				for (i = 0; ((c = ModernizedCProgram.srchead[i]) != ((Object)0)); i++) {
-					out.curl_mfprintf("%s\n", c);
-				}
-				if (/* Declare variables used for complex setopt values */ModernizedCProgram.easysrc_decl) {
-					for (ptr = ModernizedCProgram.easysrc_decl.getFirst(); ptr; ptr = generatedCurl_slist) {
-						out.curl_mfprintf("  %s\n", generatedCurl_slist);
-					}
-				} 
-				if (/* Set up complex values for setopt calls */ModernizedCProgram.easysrc_data) {
-					out.curl_mfprintf("\n");
-					for (ptr = ModernizedCProgram.easysrc_data.getFirst(); ptr; ptr = generatedCurl_slist) {
-						out.curl_mfprintf("  %s\n", generatedCurl_slist);
-					}
-				} 
-				out.curl_mfprintf("\n");
-				if (ModernizedCProgram.easysrc_code) {
-					for (ptr = ModernizedCProgram.easysrc_code.getFirst(); ptr; ptr = generatedCurl_slist) {
-						if (generatedCurl_slist[0]) {
-							out.curl_mfprintf("  %s\n", generatedCurl_slist);
-						} else {
-								out.curl_mfprintf("\n");
-						} 
-					}
-				} 
-				if (ModernizedCProgram.easysrc_clean) {
-					for (ptr = ModernizedCProgram.easysrc_clean.getFirst(); ptr; ptr = generatedCurl_slist) {
-						out.curl_mfprintf("  %s\n", generatedCurl_slist);
-					}
-				} 
-				for (i = 0; ((c = ModernizedCProgram.srcend[i]) != ((Object)0)); i++) {
-					out.curl_mfprintf("%s\n", c);
-				}
-				if (fopened) {
-					.fclose(out);
-				} 
-		} 
-		ModernizedCProgram.easysrc_free();
 	}
 	/* return 0 on everything-is-fine, and non-zero otherwise */
 	public int parseconfig(Object filename) {
@@ -816,10 +816,10 @@ public class GlobalConfig {
 				do {
 					pathalloc = ModernizedCProgram.curl_maprintf("%s%s%ccurlrc", home, "\\", /* check for .curlrc then _curlrc in the home dir */prefix);
 					if (!pathalloc) {
-						.free(home);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(home);
 						return /* out of memory */1;
 					} 
-					file = .fopen(pathalloc, /* Check if the file exists - if not, try _curlrc */"rt");
+					file = /*Error: Function owner not recognized*/fopen(pathalloc, /* Check if the file exists - if not, try _curlrc */"rt");
 					if (file) {
 						filename = pathalloc;
 						break;
@@ -834,13 +834,13 @@ public class GlobalConfig {
 				} 
 			} 
 			do {
-				.free((home));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((home));
 				(home) = ((Object)0);
 			} while (/* we've used it, now free it */0);
 		} 
 		if (!file && /* no need to fopen() again */filename) {
-			if (.strcmp(filename, "-")) {
-				file = .fopen(filename, "rt");
+			if (/*Error: Function owner not recognized*/strcmp(filename, "-")) {
+				file = /*Error: Function owner not recognized*/fopen(filename, "rt");
 			} else {
 					file = (_iob[0]);
 			} 
@@ -865,17 +865,17 @@ public class GlobalConfig {
 					line++;
 				}
 				switch (line) {
+				case (byte)'#':
+				case (byte)'/':
+				case (byte)'\n':
+				case (byte)'*':
+				case (byte)'\r':
 				case (byte)'\0':
 						do {
-							.free((aline));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((aline));
 							(aline) = ((Object)0);
 						} while (0);
 						continue;
-				case (byte)'*':
-				case (byte)'/':
-				case (byte)'\r':
-				case (byte)'\n':
-				case (byte)'#':
 				}
 				option = /* the option keywords starts here */line;
 				dashed_option = option[0] == (byte)'-' ? 1 : /* the option starts with a dash? */0;
@@ -890,10 +890,10 @@ public class GlobalConfig {
 				}
 				if (line == /* the parameter starts here (unless quoted) */(byte)'\"') {
 					/* quoted parameter, do the quote dance */line++;
-					param = .malloc(.strlen(line) + /* parameter */1);
+					param = /*Error: Function owner not recognized*/malloc(/*Error: Function owner not recognized*/strlen(line) + /* parameter */1);
 					if (!param) {
 						do {
-							.free((aline));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((aline));
 							(aline) = ((Object)0);
 						} while (/* out of memory */0);
 						rc = 1;
@@ -914,10 +914,10 @@ public class GlobalConfig {
 							}
 							switch (line) {
 							case (byte)'\n':
-							case /* comment */(byte)'#':
-									break;
 							case (byte)'\0':
 							case (byte)'\r':
+							case /* comment */(byte)'#':
+									break;
 							default:
 									generatedGlobal.warnf("%s:%d: warning: '%s' uses unquoted white space in the line that may cause side-effects!\n", filename, lineno, option);
 							}
@@ -933,7 +933,7 @@ public class GlobalConfig {
 				} 
 				if (ModernizedCProgram.res == .PARAM_NEXT_OPERATION) {
 					if (generatedUrl_list && generatedUrl) {
-						operation.setNext(.malloc(/* Allocate the next config */));
+						operation.setNext(/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*//* Allocate the next config */));
 						if (generatedNext) {
 							generatedNext.config_init();
 							generatedNext.setGlobal(/* Set the global config pointer */global);
@@ -946,7 +946,7 @@ public class GlobalConfig {
 					} 
 				} 
 				if (ModernizedCProgram.res != .PARAM_OK && ModernizedCProgram.res != .PARAM_NEXT_OPERATION) {
-					if (!.strcmp(filename, /* the help request isn't really an error */"-")) {
+					if (!/*Error: Function owner not recognized*/strcmp(filename, /* the help request isn't really an error */"-")) {
 						filename = "<stdin>";
 					} 
 					if (ModernizedCProgram.res != .PARAM_HELP_REQUESTED && ModernizedCProgram.res != .PARAM_MANUAL_REQUESTED && ModernizedCProgram.res != .PARAM_VERSION_INFO_REQUESTED && ModernizedCProgram.res != .PARAM_ENGINES_REQUESTED) {
@@ -956,22 +956,22 @@ public class GlobalConfig {
 				} 
 				if (alloced_param) {
 					do {
-						.free((param));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((param));
 						(param) = ((Object)0);
 					} while (0);
 				} 
 				do {
-					.free((aline));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((aline));
 					(aline) = ((Object)0);
 				} while (0);
 			}
 			if (file != (_iob[0])) {
-				.fclose(file);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(file);
 			} 
 		} else {
 				rc = /* couldn't open the file */1;
 		} 
-		.free(pathalloc);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(pathalloc);
 		return rc/*
 		 * Copies the string from line to the buffer at param, unquoting
 		 * backslash-quoted characters and NUL-terminating the output string.

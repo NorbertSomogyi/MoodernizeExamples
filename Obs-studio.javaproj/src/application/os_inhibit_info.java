@@ -11,18 +11,18 @@ public class os_inhibit_info {
 	
 	public os_inhibit_info os_inhibit_sleep_create(Object reason) {
 		(Object)reason;
-		return ModernizedCProgram.bzalloc();
-		os_inhibit_info info = ModernizedCProgram.bzalloc();
+		return ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
+		os_inhibit_info info = ModernizedCProgram.bzalloc(/*Error: sizeof expression not supported yet*/);
 		sigset_t set = new sigset_t();
 		Object generatedStop_event = info.getStop_event();
 		generatedStop_event.os_event_init(os_event_type.OS_EVENT_TYPE_AUTO);
 		Object generatedAttr = info.getAttr();
-		.posix_spawnattr_init(generatedAttr);
-		.sigemptyset(set);
-		.posix_spawnattr_setsigmask(generatedAttr, set);
-		.sigaddset(set, SIGPIPE);
-		.posix_spawnattr_setsigdefault(generatedAttr, set);
-		.posix_spawnattr_setflags(generatedAttr, POSIX_SPAWN_SETSIGDEF | POSIX_SPAWN_SETSIGMASK);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/posix_spawnattr_init(generatedAttr);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sigemptyset(set);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/posix_spawnattr_setsigmask(generatedAttr, set);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sigaddset(set, SIGPIPE);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/posix_spawnattr_setsigdefault(generatedAttr, set);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/posix_spawnattr_setflags(generatedAttr, POSIX_SPAWN_SETSIGDEF | POSIX_SPAWN_SETSIGMASK);
 		info.setReason(ModernizedCProgram.bstrdup(reason));
 		return info;
 	}
@@ -35,9 +35,9 @@ public class os_inhibit_info {
 			return 0;
 		} 
 		if (active) {
-			.SetThreadExecutionState(-1024 | -1024 | ES_AWAYMODE_REQUIRED | -1024);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SetThreadExecutionState(-1024 | -1024 | ES_AWAYMODE_REQUIRED | -1024);
 		} else {
-				.SetThreadExecutionState(-1024);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SetThreadExecutionState(-1024);
 		} 
 		this.setActive(active);
 		return 1;
@@ -78,7 +78,7 @@ public class os_inhibit_info {
 		if (info) {
 			info.os_inhibit_sleep_set_active(0);
 			generatedStop_event.os_event_destroy();
-			.posix_spawnattr_destroy(generatedAttr);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/posix_spawnattr_destroy(generatedAttr);
 			ModernizedCProgram.bfree(generatedReason);
 			ModernizedCProgram.bfree(info);
 		} 
@@ -87,10 +87,10 @@ public class os_inhibit_info {
 		byte[] argv = new byte[]{(byte)"xdg-screensaver", (byte)"reset", ((Object)0)};
 		pid_t pid = new pid_t();
 		Object generatedAttr = this.getAttr();
-		int err = .posix_spawnp(pid, "xdg-screensaver", ((Object)0), generatedAttr, argv, (.__p__environ()));
+		int err = /*Error: Function owner not recognized*/posix_spawnp(pid, "xdg-screensaver", ((Object)0), generatedAttr, argv, (/*Error: Function owner not recognized*/__p__environ()));
 		if (err == 0) {
 			int status;
-			while (.waitpid(pid, status, 0) == -1) {
+			while (/*Error: Function owner not recognized*/waitpid(pid, status, 0) == -1) {
 				;
 			}
 		} else {

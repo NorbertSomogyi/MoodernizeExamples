@@ -25,7 +25,7 @@ public class profile_call {
 		profile_call prev_call = ((Object)0);
 		if (!ModernizedCProgram.lock_root()) {
 			context.free_call_context();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedName = this.getName();
 		profile_root_entry profile_root_entry = new profile_root_entry();
@@ -45,7 +45,7 @@ public class profile_call {
 	}
 	public void free_call_children() {
 		if (!call) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 generatedChildren = this.getChildren();
 		Object generatedNum = generatedChildren.getNum();

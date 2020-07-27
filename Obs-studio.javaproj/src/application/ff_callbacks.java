@@ -25,7 +25,7 @@ public class ff_callbacks {
 			return 1;
 		} 
 		Object generatedOpaque = this.getOpaque();
-		return .UNRECOGNIZEDFUNCTIONNAME(codec_context, generatedOpaque);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(codec_context, generatedOpaque);
 	}
 	public boolean ff_callbacks_initialize() {
 		Object generatedInitialize = this.getInitialize();
@@ -33,7 +33,7 @@ public class ff_callbacks {
 			return 1;
 		} 
 		Object generatedOpaque = this.getOpaque();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedOpaque);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOpaque);
 	}
 	public void ff_demuxer_set_callbacks(Object frame, Object format, Object initialize, Object frame_initialize, Object frame_free, Object opaque) {
 		this.setOpaque(opaque);

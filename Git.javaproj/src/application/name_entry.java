@@ -15,6 +15,15 @@ public class name_entry {
 	public name_entry() {
 	}
 	
+	public int are_same_oid(name_entry name_k) {
+		object_id generatedOid = this.getOid();
+		return !ModernizedCProgram.is_null_oid(generatedOid) && !ModernizedCProgram.is_null_oid(generatedOid) && ModernizedCProgram.oideq(generatedOid, generatedOid);
+	}
+	public void debug_name_entry(int i) {
+		Object generatedPath = this.getPath();
+		int generatedMode = this.getMode();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("ent#%d %06o %s\n", i, generatedPath ? generatedMode : 0, generatedPath ? generatedPath : "(missing)");
+	}
 	/* An empty entry never compares same, not even to another empty entry */
 	public int same_entry(name_entry b) {
 		object_id generatedOid = this.getOid();
@@ -30,7 +39,7 @@ public class name_entry {
 		merge_list final = new merge_list();
 		byte path;
 		if (!/* If it's already ours, don't bother showing it */ours) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		path = ModernizedCProgram.traverse_path(info, result);
 		int generatedMode = this.getMode();
@@ -56,7 +65,7 @@ public class name_entry {
 			} 
 		}
 		if (n + 3 <= p) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		newbase = ModernizedCProgram.traverse_path(info, p);
 		buf0 = ModernizedCProgram.fill_tree_descriptor(r, t + 0, ((generatedMode && (((generatedMode) & -1024) == -1024)) ? (n + 0).getOid() : ((Object)0)));
@@ -84,7 +93,7 @@ public class name_entry {
 		}
 		n.unresolved_directory(info);
 		if (dirmask == mask) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (n[2].getMode() && !(((n[2].getMode()) & -1024) == -1024)) {
 			entry = entry.link_entry(3, info, n + 2);
@@ -125,17 +134,8 @@ public class name_entry {
 		 * in git-read-tree.
 		 */.add_merge_entry();
 	}
-	public int are_same_oid(name_entry name_k) {
-		object_id generatedOid = this.getOid();
-		return !ModernizedCProgram.is_null_oid(generatedOid) && !ModernizedCProgram.is_null_oid(generatedOid) && ModernizedCProgram.oideq(generatedOid, generatedOid);
-	}
-	public void debug_name_entry(int i) {
-		Object generatedPath = this.getPath();
-		int generatedMode = this.getMode();
-		.printf("ent#%d %06o %s\n", i, generatedPath ? generatedMode : 0, generatedPath ? generatedPath : "(missing)");
-	}
 	public void entry_clear() {
-		.memset(a, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(a, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public object_id getOid() {
 		return oid;

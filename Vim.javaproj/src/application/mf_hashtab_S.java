@@ -3,11 +3,11 @@ package application;
 public class mf_hashtab_S {
 	private Object mht_mask;
 	private Object mht_count;
-	private mf_hashitem_S mht_buckets;
+	private mf_hashitem_S[][] mht_buckets;
 	private Object mht_small_buckets;
 	private byte mht_fixed;
 	
-	public mf_hashtab_S(Object mht_mask, Object mht_count, mf_hashitem_S mht_buckets, Object mht_small_buckets, byte mht_fixed) {
+	public mf_hashtab_S(Object mht_mask, Object mht_count, mf_hashitem_S[][] mht_buckets, Object mht_small_buckets, byte mht_fixed) {
 		setMht_mask(mht_mask);
 		setMht_count(mht_count);
 		setMht_buckets(mht_buckets);
@@ -27,7 +27,7 @@ public class mf_hashtab_S {
 	 * Initialize an empty hash table.
 	 */
 	public void mf_hash_init() {
-		.memset((mht), (false), ());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((mht), (false), (/*Error: Unsupported expression*/));
 		Object generatedMht_small_buckets = this.getMht_small_buckets();
 		this.setMht_buckets(generatedMht_small_buckets);
 		this.setMht_mask(64 - 1/*
@@ -36,7 +36,7 @@ public class mf_hashtab_S {
 		 */);
 	}
 	public void mf_hash_free() {
-		mf_hashitem_S generatedMht_buckets = this.getMht_buckets();
+		mf_hashitem_S[][] generatedMht_buckets = this.getMht_buckets();
 		Object generatedMht_small_buckets = this.getMht_small_buckets();
 		if (generatedMht_buckets != generatedMht_small_buckets) {
 			ModernizedCProgram.vim_free(generatedMht_buckets);
@@ -48,7 +48,7 @@ public class mf_hashtab_S {
 		mf_hashitem_T next = new mf_hashitem_T();
 		Object generatedMht_mask = this.getMht_mask();
 		mf_hashitem_S generatedMhi_next = mhi.getMhi_next();
-		mf_hashitem_S generatedMht_buckets = this.getMht_buckets();
+		mf_hashitem_S[][] generatedMht_buckets = this.getMht_buckets();
 		for (idx = 0; idx <= generatedMht_mask; idx++) {
 			for (mhi = generatedMht_buckets[idx]; mhi != ((Object)0); mhi = next) {
 				next = generatedMhi_next;
@@ -69,7 +69,7 @@ public class mf_hashtab_S {
 		mf_hashitem_T buckets = new mf_hashitem_T();
 		size_t size = new size_t();
 		Object generatedMht_mask = this.getMht_mask();
-		size = (generatedMht_mask + 1) * 2 * ;
+		size = (generatedMht_mask + 1) * 2 * /*Error: Unsupported expression*/;
 		buckets = ModernizedCProgram.lalloc_clear(size, 0);
 		if (buckets == ((Object)0)) {
 			return 0;
@@ -80,7 +80,7 @@ public class mf_hashtab_S {
 		}
 		Object generatedMhi_key = mhi.getMhi_key();
 		mf_hashitem_S generatedMhi_next = mhi.getMhi_next();
-		mf_hashitem_S generatedMht_buckets = this.getMht_buckets();
+		mf_hashitem_S[][] generatedMht_buckets = this.getMht_buckets();
 		for (i = 0; i <= generatedMht_mask; i/*
 			 * Traverse the items in the i-th original bucket and move them into
 			 * MHT_GROWTH_FACTOR new buckets, preserving their relative order
@@ -91,7 +91,7 @@ public class mf_hashtab_S {
 			 * Here we strongly rely on the fact the hashes are computed modulo
 			 * a power of two.
 			 */++) {
-			.memset((tails), (false), ());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((tails), (false), (/*Error: sizeof expression not supported yet*/));
 			for (mhi = generatedMht_buckets[i]; mhi != ((Object)0); mhi = generatedMhi_next) {
 				j = (generatedMhi_key >> shift) & (2 - 1);
 				if (tails[j] == ((Object)0)) {
@@ -145,10 +145,10 @@ public class mf_hashtab_S {
 	public void setMht_count(Object newMht_count) {
 		mht_count = newMht_count;
 	}
-	public mf_hashitem_S getMht_buckets() {
+	public mf_hashitem_S[][] getMht_buckets() {
 		return mht_buckets;
 	}
-	public void setMht_buckets(mf_hashitem_S newMht_buckets) {
+	public void setMht_buckets(mf_hashitem_S[][] newMht_buckets) {
 		mht_buckets = newMht_buckets;
 	}
 	public Object getMht_small_buckets() {

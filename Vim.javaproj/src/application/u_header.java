@@ -62,11 +62,11 @@ public class u_header {
 		u_entry_T last_uep = new u_entry_T();
 		int c;
 		int error;
-		uhp = ModernizedCProgram.lalloc(, 0);
+		uhp = ModernizedCProgram.lalloc(/*Error: Unsupported expression*/, 0);
 		if (uhp == ((Object)0)) {
 			return ((Object)0);
 		} 
-		.memset((uhp), (false), ());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((uhp), (false), (/*Error: Unsupported expression*/));
 		 generatedUh_next = uhp.getUh_next();
 		generatedUh_next.setSeq(bi.undo_read_4c());
 		 generatedUh_prev = uhp.getUh_prev();
@@ -93,7 +93,7 @@ public class u_header {
 		 generatedUh_visual = uhp.getUh_visual();
 		bi.unserialize_visualinfo(generatedUh_visual);
 		uhp.setUh_time(bi.undo_read_time());
-		/* Optional fields. */for (; ; ) {
+		/* Optional fields. */for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			int len = bi.undo_read_byte();
 			int what;
 			if (len == (true)) {

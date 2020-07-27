@@ -52,9 +52,9 @@ public class ProgressData {
 		int pos;
 		int generatedWidth = this.getWidth();
 		int check = generatedWidth - 2;
-		ModernizedCProgram.curl_msnprintf(buf, , "%*s\r", generatedWidth - 1, " ");
+		ModernizedCProgram.curl_msnprintf(buf, /*Error: sizeof expression not supported yet*/, "%*s\r", generatedWidth - 1, " ");
 		int generatedBar = this.getBar();
-		.memcpy(buf[generatedBar], "-=O=-", 5);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf[generatedBar], "-=O=-", 5);
 		int generatedTick = this.getTick();
 		pos = ModernizedCProgram.sinus[generatedTick % 200] / (10000 / check);
 		buf[pos] = (byte)'#';
@@ -65,7 +65,7 @@ public class ProgressData {
 		pos = ModernizedCProgram.sinus[(generatedTick + 15) % 200] / (10000 / check);
 		buf[pos] = (byte)'#';
 		_iobuf generatedOut = this.getOut();
-		.fputs(buf, generatedOut);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(buf, generatedOut);
 		generatedTick += 2;
 		if (generatedTick >= 200) {
 			generatedTick -= 200;

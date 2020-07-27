@@ -70,7 +70,7 @@ public class ffmpeg_muxer {
 		Object generatedCirclebuf = generatedPackets.getCirclebuf();
 		while (generatedCirclebuf > 0) {
 			encoder_packet pkt = new encoder_packet();
-			generatedPackets.circlebuf_pop_front(pkt, );
+			generatedPackets.circlebuf_pop_front(pkt, /*Error: sizeof expression not supported yet*/);
 			pkt.obs_encoder_packet_release();
 		}
 		generatedPackets.circlebuf_free();
@@ -89,28 +89,28 @@ public class ffmpeg_muxer {
 		int ret;
 		 dict = NULL;
 		obs_output generatedOutput = this.getOutput();
-		if ((ret = .av_dict_parse_string(dict, settings, "=", " ", 0))) {
-			ModernizedCProgram.blog(LOG_WARNING, "[ffmpeg muxer: '%s'] Failed to parse muxer settings: %s\n%s", ModernizedCProgram.obs_output_get_name(generatedOutput), .av_err2str(ret), settings);
-			.av_dict_free(dict);
-			return ;
+		if ((ret = /*Error: Function owner not recognized*/av_dict_parse_string(dict, settings, "=", " ", 0))) {
+			ModernizedCProgram.blog(LOG_WARNING, "[ffmpeg muxer: '%s'] Failed to parse muxer settings: %s\n%s", ModernizedCProgram.obs_output_get_name(generatedOutput), /*Error: Function owner not recognized*/av_err2str(ret), settings);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_free(dict);
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedDstr = str.getDstr();
-		if (.av_dict_count(dict) > 0) {
+		if (/*Error: Function owner not recognized*/av_dict_count(dict) > 0) {
 			dstr str = new dstr(0);
 			 entry = NULL;
-			while ((entry = .av_dict_get(dict, "", entry, AV_DICT_IGNORE_SUFFIX))) {
+			while ((entry = /*Error: Function owner not recognized*/av_dict_get(dict, "", entry, AV_DICT_IGNORE_SUFFIX))) {
 				str.dstr_catf("\n\t%s=%s", entry.getKey(), entry.getValue());
 			}
 			ModernizedCProgram.blog(LOG_INFO, "[ffmpeg muxer: '%s'] Using muxer settings:%s", ModernizedCProgram.obs_output_get_name(generatedOutput), generatedDstr);
 			str.dstr_free();
 		} 
-		.av_dict_free(dict);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_free(dict);
 	}
 	public void start_pipe(Object path) {
 		dstr cmd = new dstr();
 		ModernizedCProgram.build_command_line(stream, cmd, path);
 		Object generatedDstr = cmd.getDstr();
-		this.setPipe(.os_process_pipe_create(generatedDstr, "w"));
+		this.setPipe(/*Error: Function owner not recognized*/os_process_pipe_create(generatedDstr, "w"));
 		cmd.dstr_free();
 	}
 	public int deactivate(int code) {
@@ -122,7 +122,7 @@ public class ffmpeg_muxer {
 		dstr generatedPath = this.getPath();
 		Object generatedDstr = generatedPath.getDstr();
 		if (stream.active()) {
-			ret = .os_process_pipe_destroy(generatedPipe);
+			ret = /*Error: Function owner not recognized*/os_process_pipe_destroy(generatedPipe);
 			this.setPipe(NULL);
 			ModernizedCProgram.os_atomic_set_bool(generatedActive, false);
 			ModernizedCProgram.os_atomic_set_bool(generatedSent_headers, false);
@@ -143,7 +143,7 @@ public class ffmpeg_muxer {
 		int code;
 		 len = new ();
 		Object generatedPipe = this.getPipe();
-		len = .os_process_pipe_read_err(generatedPipe, ()error,  - 1);
+		len = /*Error: Function owner not recognized*/os_process_pipe_read_err(generatedPipe, ()error, /*Error: sizeof expression not supported yet*/ - 1);
 		obs_output generatedOutput = this.getOutput();
 		if (len > 0) {
 			error[len] = 0;
@@ -166,7 +166,7 @@ public class ffmpeg_muxer {
 		obs_output generatedOutput = this.getOutput();
 		obs_encoder obs_encoder = new obs_encoder();
 		obs_encoder_t vencoder = obs_encoder.obs_output_get_video_encoder(generatedOutput);
-		encoder_packet packet = new encoder_packet(, );
+		encoder_packet packet = new encoder_packet(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		Object generatedData = packet.getData();
 		Object generatedSize = packet.getSize();
 		ModernizedCProgram.obs_encoder_get_extra_data(vencoder, generatedData, generatedSize);
@@ -176,7 +176,7 @@ public class ffmpeg_muxer {
 		encoder_packet pkt = new encoder_packet();
 		 keyframe = new ();
 		circlebuf generatedPackets = this.getPackets();
-		generatedPackets.circlebuf_pop_front(pkt, );
+		generatedPackets.circlebuf_pop_front(pkt, /*Error: sizeof expression not supported yet*/);
 		obs_encoder_type generatedType = pkt.getType();
 		Object generatedKeyframe = pkt.getKeyframe();
 		keyframe = generatedType == obs_encoder_type.OBS_ENCODER_VIDEO && generatedKeyframe;
@@ -193,7 +193,7 @@ public class ffmpeg_muxer {
 			this.setCur_time(0);
 		} else {
 				encoder_packet first = new encoder_packet();
-				generatedPackets.circlebuf_peek_front(first, );
+				generatedPackets.circlebuf_peek_front(first, /*Error: sizeof expression not supported yet*/);
 				this.setCur_time(generatedDts_usec);
 				generatedCur_size -= ()generatedSize;
 		} 
@@ -206,22 +206,22 @@ public class ffmpeg_muxer {
 		Object generatedKeyframe = pkt.getKeyframe();
 		if (stream.purge_front()) {
 			encoder_packet pkt = new encoder_packet();
-			for (; ; ) {
-				generatedPackets.circlebuf_peek_front(pkt, );
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+				generatedPackets.circlebuf_peek_front(pkt, /*Error: sizeof expression not supported yet*/);
 				if (generatedType == obs_encoder_type.OBS_ENCODER_VIDEO && generatedKeyframe) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				stream.purge_front();
 			}
 		} 
 	}
 	public void replay_buffer_save() {
-		 size = ;
+		 size = /*Error: Unsupported expression*/;
 		circlebuf generatedPackets = this.getPackets();
 		Object generatedCirclebuf = generatedPackets.getCirclebuf();
 		 num_packets = generatedCirclebuf / size;
 		Object generatedMux_packets = this.getMux_packets();
-		.da_reserve(generatedMux_packets, num_packets/* ---------------------------- */);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_reserve(generatedMux_packets, num_packets/* ---------------------------- */);
 		 found_video = /* reorder packets */false;
 		[] found_audio = new []{0};
 		 video_offset = 0;

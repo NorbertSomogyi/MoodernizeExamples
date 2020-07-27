@@ -89,9 +89,9 @@ public class obs_hotkeys_translations {
 		dstr mouse = new dstr(0);
 		dstr button = new dstr(0);
 		if (!translations) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.memcpy(t, translations, (size < ) ? size : );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(t, translations, (size < /*Error: sizeof expression not supported yet*/) ? size : /*Error: sizeof expression not supported yet*/);
 		Object generatedInsert = t.getInsert();
 		if (generatedInsert) {
 			ModernizedCProgram.obs_set_key_translation(obs_key.OBS_KEY_INSERT, generatedInsert);

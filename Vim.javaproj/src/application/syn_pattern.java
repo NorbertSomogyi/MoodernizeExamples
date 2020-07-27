@@ -62,7 +62,7 @@ public class syn_pattern {
 		ModernizedCProgram.msg_puts_attr(s, /* output the name of the pattern and an '=' or ' ' */attr);
 		ModernizedCProgram.msg_putchar(c);
 		Object generatedSp_pattern = this.getSp_pattern();
-		for (i = 0; ModernizedCProgram.vim_strchr(generatedSp_pattern, sepchars[i]) != ((Object)/* output the pattern, in between a char that is not in the pattern */0); ) {
+		for (i = 0; ModernizedCProgram.vim_strchr(generatedSp_pattern, sepchars[i]) != ((Object)/* output the pattern, in between a char that is not in the pattern */0); /*Error: Unsupported expression*/) {
 			if (sepchars[++i] == (byte)'\000') {
 				i = /* no good char found, just use the first one */0;
 				break;
@@ -103,7 +103,7 @@ public class syn_pattern {
 		 * Return TRUE if the header has been printed.
 		 */);
 	}
-	public Object get_syn_pattern(Object arg) {
+	public Object get_syn_pattern(Object[] arg) {
 		char_u end = new char_u();
 		int p;
 		int idx;
@@ -138,8 +138,8 @@ public class syn_pattern {
 		Object generatedSp_offsets = this.getSp_offsets();
 		int generatedSp_off_flags = this.getSp_off_flags();
 		do {
-			for (idx = 7; --idx >= 0; ) {
-				if (.strncmp((byte)(end), (byte)(ModernizedCProgram.spo_name_tab[idx]), (size_t)(true)) == 0) {
+			for (idx = 7; --idx >= 0; /*Error: Unsupported expression*/) {
+				if (/*Error: Function owner not recognized*/strncmp((byte)(end), (byte)(ModernizedCProgram.spo_name_tab[idx]), (size_t)(true)) == 0) {
 					break;
 				} 
 			}
@@ -147,12 +147,12 @@ public class syn_pattern {
 				p = (generatedSp_offsets[idx]);
 				if (idx != 6) {
 					switch (end[3]) {
+					case (byte)'s':
+							break;
 					case (byte)'e':
 							idx += 7;
 							break;
 					case (byte)'b':
-							break;
-					case (byte)'s':
 							break;
 					default:
 							idx = -1;

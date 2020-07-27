@@ -23,14 +23,14 @@ public class io_pump {
 		for (i = 0; i < nr; i++) {
 			slots[i].setError(0);
 		}
-		(pfd) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (nr)));
+		(pfd) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (nr)));
 		while (ModernizedCProgram.pump_io_round(slots, nr, pfd)) {
 			;
 		}
 		ModernizedCProgram.free(pfd);
 		for (i = 0; i < nr; /* There may be multiple errno values, so just pick the first. */i++) {
 			if (slots[i].getError()) {
-				(._errno()) = slots[i].getError();
+				(/*Error: Function owner not recognized*/_errno()) = slots[i].getError();
 				return -1;
 			} 
 		}

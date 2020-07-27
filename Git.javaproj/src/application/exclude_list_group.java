@@ -3,9 +3,9 @@ package application;
 public class exclude_list_group {
 	private int nr;
 	private int alloc;
-	private pattern_list pl;
+	private pattern_list[] pl;
 	
-	public exclude_list_group(int nr, int alloc, pattern_list pl) {
+	public exclude_list_group(int nr, int alloc, pattern_list[] pl) {
 		setNr(nr);
 		setAlloc(alloc);
 		setPl(pl);
@@ -25,10 +25,10 @@ public class exclude_list_group {
 	public void setAlloc(int newAlloc) {
 		alloc = newAlloc;
 	}
-	public pattern_list getPl() {
+	public pattern_list[] getPl() {
 		return pl;
 	}
-	public void setPl(pattern_list newPl) {
+	public void setPl(pattern_list[] newPl) {
 		pl = newPl;
 	}
 }

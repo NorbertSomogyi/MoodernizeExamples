@@ -33,19 +33,19 @@ public class fileinfo {
 	}
 	
 	public fileinfo Curl_fileinfo_alloc() {
-		return .Curl_ccalloc(1, );
+		return /*Error: Function owner not recognized*/Curl_ccalloc(1, /*Error: Unsupported expression*/);
 	}
 	public void Curl_fileinfo_cleanup() {
 		if (!finfo) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		curl_fileinfo generatedInfo = this.getInfo();
 		Object generatedCurl_fileinfo = generatedInfo.getCurl_fileinfo();
 		do {
-			.Curl_cfree((generatedCurl_fileinfo));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedCurl_fileinfo));
 			(generatedCurl_fileinfo) = ((Object)0);
 		} while (0);
-		.Curl_cfree(finfo);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(finfo);
 	}
 	public curl_fileinfo getInfo() {
 		return info;

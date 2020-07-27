@@ -42,18 +42,18 @@ public class stash_info {
 			ModernizedCProgram.die(ModernizedCProgram._("'%s' is not a stash-like commit"), revision);
 		} 
 	}
-	public int get_stash_info(int argc, Object argv) {
+	public int get_stash_info(int argc, Object[][] argv) {
 		int ret;
 		byte end_of_rev;
 		byte expanded_ref;
 		byte revision;
 		byte commit = ((Object)0);
 		object_id dummy = new object_id();
-		strbuf symbolic = new strbuf(, , );
-		byte generatedBuf = refs_msg.getBuf();
+		strbuf symbolic = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		byte[] generatedBuf = refs_msg.getBuf();
 		if (argc > 1) {
 			int i;
-			strbuf refs_msg = new strbuf(, , );
+			strbuf refs_msg = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			for (i = 0; i < argc; i++) {
 				refs_msg.strbuf_addf(" '%s'", argv[i]);
 			}
@@ -73,7 +73,7 @@ public class stash_info {
 				return -1;
 			} 
 			generatedRevision.strbuf_addf("%s@{0}", ModernizedCProgram.ref_stash);
-		}  else if (.strspn(commit, "0123456789") == .strlen(commit)) {
+		}  else if (/*Error: Function owner not recognized*/strspn(commit, "0123456789") == /*Error: Function owner not recognized*/strlen(commit)) {
 			generatedRevision.strbuf_addf("%s@{%s}", ModernizedCProgram.ref_stash, commit);
 		} else {
 				generatedRevision.strbuf_addstr(commit);
@@ -95,7 +95,7 @@ public class stash_info {
 		symbolic.strbuf_release();
 		switch (ret) {
 		case 1:
-				this.setIs_stash_ref(!.strcmp(expanded_ref, ModernizedCProgram.ref_stash));
+				this.setIs_stash_ref(!/*Error: Function owner not recognized*/strcmp(expanded_ref, ModernizedCProgram.ref_stash));
 				break;
 		case /* Not found, but valid ref */0:
 				this.setIs_stash_ref(0);
@@ -118,18 +118,17 @@ public class stash_info {
 		if (ModernizedCProgram.the_repository.repo_refresh_and_write_index((true), (false), (false), ((Object)0), ((Object)0), ((Object)0))) {
 			return -1;
 		} 
-		if (.write_cache_as_tree(c_tree, 0, ((Object)0))) {
+		if (/*Error: Function owner not recognized*/write_cache_as_tree(c_tree, 0, ((Object)0))) {
 			return ();
 		} 
 		object_id generatedB_tree = this.getB_tree();
 		object_id generatedI_tree = this.getI_tree();
 		object_id generatedW_commit = this.getW_commit();
-		object_id object_id = new object_id();
 		if (index) {
 			if (ModernizedCProgram.oideq(generatedB_tree, generatedI_tree) || ModernizedCProgram.oideq(c_tree, generatedI_tree)) {
 				has_index = 0;
 			} else {
-					strbuf out = new strbuf(, , );
+					strbuf out = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 					if (ModernizedCProgram.diff_tree_binary(out, generatedW_commit)) {
 						out.strbuf_release();
 						return ();
@@ -141,10 +140,10 @@ public class stash_info {
 					} 
 					ModernizedCProgram.the_index.discard_index();
 					ModernizedCProgram.the_repository.repo_read_index();
-					if (.write_cache_as_tree(index_tree, 0, ((Object)0))) {
+					if (/*Error: Function owner not recognized*/write_cache_as_tree(index_tree, 0, ((Object)0))) {
 						return ();
 					} 
-					object_id.reset_head();
+					ModernizedCProgram.reset_head();
 					ModernizedCProgram.the_index.discard_index();
 					ModernizedCProgram.the_repository.repo_read_index();
 			} 
@@ -154,7 +153,7 @@ public class stash_info {
 		if (generatedHas_u && generatedU_tree.restore_untracked()) {
 			return ();
 		} 
-		.init_merge_options(o, ModernizedCProgram.the_repository);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/init_merge_options(o, ModernizedCProgram.the_repository);
 		o.setBranch1("Updated upstream");
 		o.setBranch2("Stashed changes");
 		if (ModernizedCProgram.oideq(generatedB_tree, c_tree)) {
@@ -171,9 +170,9 @@ public class stash_info {
 		} 
 		bases[0] = generatedB_tree;
 		object_id generatedW_tree = this.getW_tree();
-		ret = .merge_recursive_generic(o, c_tree, generatedW_tree, 1, bases, result);
+		ret = /*Error: Function owner not recognized*/merge_recursive_generic(o, c_tree, generatedW_tree, 1, bases, result);
 		if (ret) {
-			.repo_rerere(ModernizedCProgram.the_repository, 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/repo_rerere(ModernizedCProgram.the_repository, 0);
 			if (index) {
 				(_iob[2]).fprintf_ln(ModernizedCProgram._("Index was not unstashed."));
 			} 
@@ -184,7 +183,7 @@ public class stash_info {
 				return -1;
 			} 
 		} else {
-				strbuf out = new strbuf(, , );
+				strbuf out = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 				if (ModernizedCProgram.get_newly_staged(out, c_tree)) {
 					out.strbuf_release();
 					return -1;
@@ -232,7 +231,7 @@ public class stash_info {
 		argv_array generatedArgs = cp_reflog.getArgs();
 		generatedArgs.argv_array_pushl("reflog", "delete", "--updateref", "--rewrite", ((Object)0));
 		strbuf generatedRevision = this.getRevision();
-		byte generatedBuf = generatedRevision.getBuf();
+		byte[] generatedBuf = generatedRevision.getBuf();
 		generatedArgs.argv_array_push(generatedBuf);
 		ret = cp_reflog.run_command();
 		object_id generatedW_commit = this.getW_commit();
@@ -261,14 +260,14 @@ public class stash_info {
 		if (!generatedIs_stash_ref) {
 			();
 			info.free_stash_info();
-			.exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\stash.c", 585, (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\stash.c", 585, (true)));
 		} 
 	}
 	public int stash_working_tree(Object ps) {
 		int ret = 0;
 		rev_info rev = new rev_info();
 		child_process cp_upd_index = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		strbuf diff_output = new strbuf(, , );
+		strbuf diff_output = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		index_state istate = new index_state(((Object)0));
 		ModernizedCProgram.repo_init_revisions(ModernizedCProgram.the_repository, rev, ((Object)0));
 		pathspec generatedPrune_data = rev.getPrune_data();
@@ -301,7 +300,7 @@ public class stash_info {
 		generatedArgs.argv_array_pushl("update-index", "-z", "--add", "--remove", "--stdin", ((Object)0));
 		argv_array generatedEnv_array = cp_upd_index.getEnv_array();
 		generatedEnv_array.argv_array_pushf("GIT_INDEX_FILE=%s", ModernizedCProgram.stash_index_path.getBuf());
-		byte generatedBuf = diff_output.getBuf();
+		byte[] generatedBuf = diff_output.getBuf();
 		Object generatedLen = diff_output.getLen();
 		if (ModernizedCProgram.pipe_command(cp_upd_index, generatedBuf, generatedLen, ((Object)0), 0, ((Object)0), 0)) {
 			ret = -1;

@@ -27,10 +27,10 @@ public class ffmpeg_image {
 	
 	public Object ffmpeg_image_open_decoder_context() {
 		Object generatedFmt_ctx = this.getFmt_ctx();
-		int ret = .av_find_best_stream(generatedFmt_ctx, AVMEDIA_TYPE_VIDEO, -1, 1, NULL, 0);
+		int ret = /*Error: Function owner not recognized*/av_find_best_stream(generatedFmt_ctx, AVMEDIA_TYPE_VIDEO, -1, 1, NULL, 0);
 		Object generatedFile = this.getFile();
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "Couldn't find video stream in file '%s': %s", generatedFile, .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "Couldn't find video stream in file '%s': %s", generatedFile, /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
 		this.setStream_idx(ret);
@@ -38,43 +38,43 @@ public class ffmpeg_image {
 		Object generatedStream = this.getStream();
 		this.setDecoder_ctx(generatedStream.getCodec());
 		Object generatedDecoder_ctx = this.getDecoder_ctx();
-		this.setDecoder(.avcodec_find_decoder(generatedDecoder_ctx.getCodec_id()));
+		this.setDecoder(/*Error: Function owner not recognized*/avcodec_find_decoder(generatedDecoder_ctx.getCodec_id()));
 		Object generatedDecoder = this.getDecoder();
 		if (!generatedDecoder) {
 			ModernizedCProgram.blog(LOG_WARNING, "Failed to find decoder for file '%s'", generatedFile);
 			return false;
 		} 
-		ret = .avcodec_open2(generatedDecoder_ctx, generatedDecoder, NULL);
+		ret = /*Error: Function owner not recognized*/avcodec_open2(generatedDecoder_ctx, generatedDecoder, NULL);
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "Failed to open video codec for file '%s': %s", generatedFile, .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "Failed to open video codec for file '%s': %s", generatedFile, /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
 		return true;
 	}
 	public void ffmpeg_image_free() {
 		Object generatedDecoder_ctx = this.getDecoder_ctx();
-		.avcodec_close(generatedDecoder_ctx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avcodec_close(generatedDecoder_ctx);
 		Object generatedFmt_ctx = this.getFmt_ctx();
-		.avformat_close_input(generatedFmt_ctx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avformat_close_input(generatedFmt_ctx);
 	}
 	public Object ffmpeg_image_init(Object file) {
 		int ret;
 		if (!file || !file) {
 			return false;
 		} 
-		.memset(info, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(info, 0, /*Error: Unsupported expression*/);
 		this.setFile(file);
 		this.setStream_idx(-1);
 		Object generatedFmt_ctx = this.getFmt_ctx();
-		ret = .avformat_open_input(generatedFmt_ctx, file, NULL, NULL);
+		ret = /*Error: Function owner not recognized*/avformat_open_input(generatedFmt_ctx, file, NULL, NULL);
 		Object generatedFile = this.getFile();
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "Failed to open file '%s': %s", generatedFile, .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "Failed to open file '%s': %s", generatedFile, /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
-		ret = .avformat_find_stream_info(generatedFmt_ctx, NULL);
+		ret = /*Error: Function owner not recognized*/avformat_find_stream_info(generatedFmt_ctx, NULL);
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "Could not find stream info for file '%s': %s", generatedFile, .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "Could not find stream info for file '%s': %s", generatedFile, /*Error: Function owner not recognized*/av_err2str(ret));
 			;
 		} 
 		if (!info.ffmpeg_image_open_decoder_context()) {
@@ -99,21 +99,21 @@ public class ffmpeg_image {
 				int min_line = linesize < frame.getLinesize()[0] ? linesize : frame.getLinesize()[0];
 				for (int y = 0;
 				 y < generatedCy; y++) {
-					.memcpy(out + y * linesize, frame.getData()[0] + y * frame.getLinesize()[0], min_line);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(out + y * linesize, frame.getData()[0] + y * frame.getLinesize()[0], min_line);
 				}
 			} else {
-					.memcpy(out, frame.getData()[0], linesize * generatedCy);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(out, frame.getData()[0], linesize * generatedCy);
 			} 
 		} else {
-				sws_ctx = .sws_getContext(generatedCx, generatedCy, generatedFormat, generatedCx, generatedCy, AV_PIX_FMT_BGRA, SWS_POINT, NULL, NULL, NULL);
+				sws_ctx = /*Error: Function owner not recognized*/sws_getContext(generatedCx, generatedCy, generatedFormat, generatedCx, generatedCy, AV_PIX_FMT_BGRA, SWS_POINT, NULL, NULL, NULL);
 				if (!sws_ctx) {
 					ModernizedCProgram.blog(LOG_WARNING, "Failed to create scale context for '%s'", generatedFile);
 					return false;
 				} 
-				ret = .sws_scale(sws_ctx, ()frame.getData(), frame.getLinesize(), 0, generatedCy, out, linesize);
-				.sws_freeContext(sws_ctx);
+				ret = /*Error: Function owner not recognized*/sws_scale(sws_ctx, ()frame.getData(), frame.getLinesize(), 0, generatedCy, out, linesize);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sws_freeContext(sws_ctx);
 				if (ret < 0) {
-					ModernizedCProgram.blog(LOG_WARNING, "sws_scale failed for '%s': %s", generatedFile, .av_err2str(ret));
+					ModernizedCProgram.blog(LOG_WARNING, "sws_scale failed for '%s': %s", generatedFile, /*Error: Function owner not recognized*/av_err2str(ret));
 					return false;
 				} 
 				this.setFormat(AV_PIX_FMT_BGRA);
@@ -123,7 +123,7 @@ public class ffmpeg_image {
 	public Object ffmpeg_image_decode(Object out, int linesize) {
 		 packet = new (0);
 		 success = false;
-		 frame = .avcodec_alloc_frame();
+		 frame = /*Error: Function owner not recognized*/avcodec_alloc_frame();
 		int got_frame = 0;
 		int ret;
 		Object generatedFile = this.getFile();
@@ -132,28 +132,28 @@ public class ffmpeg_image {
 			return false;
 		} 
 		Object generatedFmt_ctx = this.getFmt_ctx();
-		ret = .av_read_frame(generatedFmt_ctx, packet);
+		ret = /*Error: Function owner not recognized*/av_read_frame(generatedFmt_ctx, packet);
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "Failed to read image frame from '%s': %s", generatedFile, .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "Failed to read image frame from '%s': %s", generatedFile, /*Error: Function owner not recognized*/av_err2str(ret));
 			;
 		} 
 		Object generatedDecoder_ctx = this.getDecoder_ctx();
 		while (!got_frame) {
-			ret = .avcodec_send_packet(generatedDecoder_ctx, packet);
+			ret = /*Error: Function owner not recognized*/avcodec_send_packet(generatedDecoder_ctx, packet);
 			if (ret == 0) {
-				ret = .avcodec_receive_frame(generatedDecoder_ctx, frame);
+				ret = /*Error: Function owner not recognized*/avcodec_receive_frame(generatedDecoder_ctx, frame);
 			} 
 			got_frame = (ret == 0);
-			if (ret == AVERROR_EOF || ret == .AVERROR(EAGAIN)) {
+			if (ret == AVERROR_EOF || ret == /*Error: Function owner not recognized*/AVERROR(EAGAIN)) {
 				ret = 0;
 			} 
 			if (ret < 0) {
-				ModernizedCProgram.blog(LOG_WARNING, "Failed to decode frame for '%s': %s", generatedFile, .av_err2str(ret));
+				ModernizedCProgram.blog(LOG_WARNING, "Failed to decode frame for '%s': %s", generatedFile, /*Error: Function owner not recognized*/av_err2str(ret));
 				;
 			} 
 		}
 		success = info.ffmpeg_image_reformat_frame(frame, out, linesize);
-		.avcodec_free_frame(frame);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avcodec_free_frame(frame);
 		return success;
 	}
 	public Object getFile() {

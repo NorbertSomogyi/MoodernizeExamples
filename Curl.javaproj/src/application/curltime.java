@@ -34,58 +34,20 @@ public class curltime {
 	public curltime() {
 	}
 	
-	public Object Curl_pgrsLimitWaitTime(Object cursize, Object startsize, Object limit, curltime now) {
-		 size = cursize - startsize;
-		timediff_t minimum = new timediff_t();
-		timediff_t actual = new timediff_t();
-		if (!limit || !size) {
-			return 0/*
-			   * 'minimum' is the number of milliseconds 'size' should take to download to
-			   * stay below 'limit'.
-			   */;
-		} 
-		if (size < .CURL_OFF_T_C(-1024) / 1000) {
-			minimum = (time_t)(.CURL_OFF_T_C(1000) * size / limit);
-		} else {
-				minimum = (time_t)(size / limit);
-				if (minimum < .CURL_OFF_T_C(-1024) / 1000) {
-					minimum *= 1000;
-				} else {
-						minimum = .CURL_OFF_T_C(-1024/*
-						   * 'actual' is the time in milliseconds it took to actually download the
-						   * last 'size' bytes.
-						   */);
-				} 
-		} 
-		actual = now.Curl_timediff(start);
-		if (actual < minimum/* if it downloaded the data faster than the limit, make it wait the
-		       difference */) {
-			return (minimum - actual);
-		} 
-		return 0/*
-		 * Set the number of downloaded bytes so far.
-		 */;
-	}
 	public curltime Curl_now() {
 		curltime now = new curltime();
 		Object generatedQuadPart = count.getQuadPart();
 		if (/* QPC timer might have issues pre-Vista */ModernizedCProgram.Curl_isVistaOrGreater) {
 			LARGE_INTEGER count = new LARGE_INTEGER();
-			.QueryPerformanceCounter(count);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/QueryPerformanceCounter(count);
 			now.setTv_sec((time_t)(generatedQuadPart / generatedQuadPart));
 			now.setTv_usec((int)((generatedQuadPart % generatedQuadPart) * 1000000 / generatedQuadPart));
 		} else {
-				DWORD milliseconds = .GetTickCount();
+				DWORD milliseconds = /*Error: Function owner not recognized*/GetTickCount();
 				now.setTv_sec(milliseconds / 1000);
 				now.setTv_usec((milliseconds % 1000) * 1000);
 		} 
-		return now/*
-		  ** clock_gettime() is granted to be increased monotonically when the
-		  ** monotonic clock is queried. Time starting point is unspecified, it
-		  ** could be the system start-up time, the Epoch, or something else,
-		  ** in any case the time starting point does not change once that the
-		  ** system has started up.
-		  */;
+		return now;
 	}
 	/*
 	  ** Monotonic timer on Mac OS is provided by mach_absolute_time(), which
@@ -110,10 +72,10 @@ public class curltime {
 	public Object Curl_timediff(curltime older) {
 		Object generatedTv_sec = this.getTv_sec();
 		timediff_t diff = (timediff_t)generatedTv_sec - generatedTv_sec;
-		if (diff >= (.CURL_OFF_T_C(-1024) / 1000)) {
-			return .CURL_OFF_T_C(-1024);
-		}  else if (diff <= ((-.CURL_OFF_T_C(-1024) - .CURL_OFF_T_C(1)) / 1000)) {
-			return (-.CURL_OFF_T_C(-1024) - .CURL_OFF_T_C(1));
+		if (diff >= (/*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) / 1000)) {
+			return /*Error: Function owner not recognized*/CURL_OFF_T_C(-1024);
+		}  else if (diff <= ((-/*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) - /*Error: Function owner not recognized*/CURL_OFF_T_C(1)) / 1000)) {
+			return (-/*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) - /*Error: Function owner not recognized*/CURL_OFF_T_C(1));
 		} 
 		int generatedTv_usec = this.getTv_usec();
 		return diff * 1000 + (generatedTv_usec - generatedTv_usec) / 1000/*
@@ -124,13 +86,45 @@ public class curltime {
 	public Object Curl_timediff_us(curltime older) {
 		Object generatedTv_sec = this.getTv_sec();
 		timediff_t diff = (timediff_t)generatedTv_sec - generatedTv_sec;
-		if (diff >= (.CURL_OFF_T_C(-1024) / 1000000)) {
-			return .CURL_OFF_T_C(-1024);
-		}  else if (diff <= ((-.CURL_OFF_T_C(-1024) - .CURL_OFF_T_C(1)) / 1000000)) {
-			return (-.CURL_OFF_T_C(-1024) - .CURL_OFF_T_C(1));
+		if (diff >= (/*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) / 1000000)) {
+			return /*Error: Function owner not recognized*/CURL_OFF_T_C(-1024);
+		}  else if (diff <= ((-/*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) - /*Error: Function owner not recognized*/CURL_OFF_T_C(1)) / 1000000)) {
+			return (-/*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) - /*Error: Function owner not recognized*/CURL_OFF_T_C(1));
 		} 
 		int generatedTv_usec = this.getTv_usec();
 		return diff * 1000000 + generatedTv_usec - generatedTv_usec;
+	}
+	public Object Curl_pgrsLimitWaitTime(Object cursize, Object startsize, Object limit, curltime now) {
+		 size = cursize - startsize;
+		timediff_t minimum = new timediff_t();
+		timediff_t actual = new timediff_t();
+		if (!limit || !size) {
+			return 0/*
+			   * 'minimum' is the number of milliseconds 'size' should take to download to
+			   * stay below 'limit'.
+			   */;
+		} 
+		if (size < /*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) / 1000) {
+			minimum = (time_t)(/*Error: Function owner not recognized*/CURL_OFF_T_C(1000) * size / limit);
+		} else {
+				minimum = (time_t)(size / limit);
+				if (minimum < /*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) / 1000) {
+					minimum *= 1000;
+				} else {
+						minimum = /*Error: Function owner not recognized*/CURL_OFF_T_C(-1024/*
+						   * 'actual' is the time in milliseconds it took to actually download the
+						   * last 'size' bytes.
+						   */);
+				} 
+		} 
+		actual = now.Curl_timediff(start);
+		if (actual < minimum/* if it downloaded the data faster than the limit, make it wait the
+		       difference */) {
+			return (minimum - actual);
+		} 
+		return 0/*
+		 * Set the number of downloaded bytes so far.
+		 */;
 	}
 	public Object getTv_sec() {
 		return tv_sec;

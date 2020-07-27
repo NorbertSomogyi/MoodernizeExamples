@@ -8,10 +8,10 @@ public class urlpieces {
 	private Byte user;
 	private Byte password;
 	private Byte options;
-	private Byte path;
+	private byte[] path;
 	private Byte query;
 	
-	public urlpieces(Byte scheme, Byte hostname, Byte port, Byte user, Byte password, Byte options, Byte path, Byte query) {
+	public urlpieces(Byte scheme, Byte hostname, Byte port, Byte user, Byte password, Byte options, byte[] path, Byte query) {
 		setScheme(scheme);
 		setHostname(hostname);
 		setPort(port);
@@ -60,10 +60,10 @@ public class urlpieces {
 	public void setOptions(Byte newOptions) {
 		options = newOptions;
 	}
-	public Byte getPath() {
+	public byte[] getPath() {
 		return path;
 	}
-	public void setPath(Byte newPath) {
+	public void setPath(byte[] newPath) {
 		path = newPath;
 	}
 	public Byte getQuery() {

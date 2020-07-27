@@ -15,17 +15,17 @@ public class diff_rename_src {
 	public diff_rename_src register_rename_src(diff_filepair p) {
 		int first;
 		int last;
-		diff_filespec generatedOne = p.getOne();
+		diff_filespec[] generatedOne = p.getOne();
 		diff_filespec one = generatedOne;
 		int generatedScore = p.getScore();
 		int score = generatedScore;
 		first = 0;
 		last = ModernizedCProgram.rename_src_nr;
-		Byte generatedPath = one.getPath();
+		byte[] generatedPath = one.getPath();
 		while (last > first) {
 			int next = first + ((last - first) >> 1);
 			diff_rename_src src = (rename_src[next]);
-			int cmp = .strcmp(generatedPath, generatedPath);
+			int cmp = /*Error: Function owner not recognized*/strcmp(generatedPath, generatedPath);
 			if (!cmp) {
 				return src;
 			} 
@@ -42,12 +42,12 @@ public class diff_rename_src {
 				} else {
 						ModernizedCProgram.rename_src_alloc = (((ModernizedCProgram.rename_src_alloc) + 16) * 3 / 2);
 				} 
-				(rename_src) = ModernizedCProgram.xrealloc((rename_src), ModernizedCProgram.st_mult(, (ModernizedCProgram.rename_src_alloc)));
+				(rename_src) = ModernizedCProgram.xrealloc((rename_src), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (ModernizedCProgram.rename_src_alloc)));
 			} 
 		} while (/* insert to make it at "first" */0);
 		ModernizedCProgram.rename_src_nr++;
 		if (first < ModernizedCProgram.rename_src_nr) {
-			ModernizedCProgram.move_array((rename_src + first + 1), (rename_src + first), (ModernizedCProgram.rename_src_nr - first - 1),  + ( - 1));
+			ModernizedCProgram.move_array((rename_src + first + 1), (rename_src + first), (ModernizedCProgram.rename_src_nr - first - 1), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		} 
 		rename_src[first].setP(p);
 		rename_src[first].setScore(score);

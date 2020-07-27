@@ -16,7 +16,7 @@ public class credentials {
 		passwd generatedPass = this.getPass();
 		Object generatedPasswd = generatedPass.getPasswd();
 		Object generatedGid = this.getGid();
-		if (cred && (.initgroups(generatedPasswd, generatedGid) || .setgid(generatedGid) || .setuid(generatedPasswd))) {
+		if (cred && (/*Error: Function owner not recognized*/initgroups(generatedPasswd, generatedGid) || /*Error: Function owner not recognized*/setgid(generatedGid) || /*Error: Function owner not recognized*/setuid(generatedPasswd))) {
 			ModernizedCProgram.die("cannot drop privileges");
 		} 
 	}
@@ -33,7 +33,7 @@ public class credentials {
 		if (!group_name) {
 			c.setGid(generatedPasswd);
 		} else {
-				group group = .getgrnam(group_name);
+				group group = /*Error: Function owner not recognized*/getgrnam(group_name);
 				if (!group) {
 					ModernizedCProgram.die("group not found - %s", group_name);
 				} 

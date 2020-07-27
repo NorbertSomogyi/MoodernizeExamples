@@ -81,7 +81,7 @@ public class rebase_options {
 		byte revisions = ((Object)0);
 		byte shortrevisions = ((Object)0);
 		argv_array make_script_args = new argv_array(ModernizedCProgram.empty_argv, 0, 0);
-		todo_list todo_list = new todo_list(new todo_list(, , ));
+		todo_list todo_list = new todo_list(new todo_list(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/));
 		replay_opts replay_opts = new replay_opts();
 		replay_opts replay = replay_opts.get_replay_opts(opts);
 		string_list commands = new string_list(((Object)0), 0, 0, 1, ((Object)0));
@@ -113,7 +113,7 @@ public class rebase_options {
 		} 
 		strbuf generatedBuf = todo_list.getBuf();
 		int generatedArgc = make_script_args.getArgc();
-		Object generatedArgv = make_script_args.getArgv();
+		Object[][] generatedArgv = make_script_args.getArgv();
 		ret = ModernizedCProgram.sequencer_make_script(ModernizedCProgram.the_repository, generatedBuf, generatedArgc, generatedArgv, flags);
 		Byte generatedCmd = this.getCmd();
 		Object generatedOnto_name = this.getOnto_name();
@@ -139,7 +139,7 @@ public class rebase_options {
 		int flags = 0;
 		int abbreviate_commands = 0;
 		int ret = 0;
-		.git_config_get_bool("rebase.abbreviatecommands", abbreviate_commands);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_get_bool("rebase.abbreviatecommands", abbreviate_commands);
 		int generatedKeep_empty = this.getKeep_empty();
 		flags |=  generatedKeep_empty ? (-1024 << 0) : 0;
 		flags |=  abbreviate_commands ? (-1024 << 2) : 0;
@@ -156,26 +156,15 @@ public class rebase_options {
 		argv_array generatedArgs = cmd.getArgs();
 		Byte generatedCmd = this.getCmd();
 		switch (action.command) {
-		case /* fallthrough */action.ACTION_CONTINUE:
-				{ 
-					replay_opts replay_opts = replay_opts.get_replay_opts(opts);
-					ret = ModernizedCProgram.sequencer_continue(ModernizedCProgram.the_repository, replay_opts);
-					break;
-				}
-		case action.ACTION_SHORTEN_OIDS:
-		case action.ACTION_ADD_EXEC:
-				{ 
-					string_list commands = new string_list(((Object)0), 0, 0, 1, ((Object)0));
-					ModernizedCProgram.commands.split_exec_commands(generatedCmd);
-					ret = ModernizedCProgram.commands.add_exec_commands();
-					ModernizedCProgram.commands.string_list_clear(0);
-					break;
-				}
-		case action.ACTION_EDIT_TODO:
-				ret = ModernizedCProgram.edit_todo_file(flags);
-				break;
 		case action.ACTION_EXPAND_OIDS:
 				ret = ModernizedCProgram.transform_todo_file(flags);
+				break;
+		case action.ACTION_CHECK_TODO_LIST:
+				ret = ModernizedCProgram.the_repository.check_todo_list_from_file();
+				break;
+		case action.ACTION_SHORTEN_OIDS:
+		case action.ACTION_EDIT_TODO:
+				ret = ModernizedCProgram.edit_todo_file(flags);
 				break;
 		case action.ACTION_SHOW_CURRENT_PATCH:
 				{ 
@@ -183,6 +172,28 @@ public class rebase_options {
 					cmd.setGit_cmd(1);
 					generatedArgs.argv_array_pushl("show", "REBASE_HEAD", "--", ((Object)0));
 					ret = cmd.run_command();
+					break;
+				}
+		case action.ACTION_SKIP:
+				{ 
+					string_list merge_rr = new string_list(((Object)0), 0, 0, 1, ((Object)0));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/rerere_clear(ModernizedCProgram.the_repository, merge_rr);
+				}
+		case action.ACTION_REARRANGE_SQUASH:
+				ret = ModernizedCProgram.rearrange_squash_in_todo_file();
+				break;
+		case /* fallthrough */action.ACTION_CONTINUE:
+				{ 
+					replay_opts replay_opts = replay_opts.get_replay_opts(opts);
+					ret = ModernizedCProgram.sequencer_continue(ModernizedCProgram.the_repository, replay_opts);
+					break;
+				}
+		case action.ACTION_ADD_EXEC:
+				{ 
+					string_list commands = new string_list(((Object)0), 0, 0, 1, ((Object)0));
+					ModernizedCProgram.commands.split_exec_commands(generatedCmd);
+					ret = ModernizedCProgram.commands.add_exec_commands();
+					ModernizedCProgram.commands.string_list_clear(0);
 					break;
 				}
 		case action.ACTION_NONE:
@@ -193,17 +204,6 @@ public class rebase_options {
 					ret = opts.do_interactive_rebase(flags);
 					break;
 				}
-		case action.ACTION_SKIP:
-				{ 
-					string_list merge_rr = new string_list(((Object)0), 0, 0, 1, ((Object)0));
-					.rerere_clear(ModernizedCProgram.the_repository, merge_rr);
-				}
-		case action.ACTION_CHECK_TODO_LIST:
-				ret = ModernizedCProgram.the_repository.check_todo_list_from_file();
-				break;
-		case action.ACTION_REARRANGE_SQUASH:
-				ret = ModernizedCProgram.rearrange_squash_in_todo_file();
-				break;
 		default:
 				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\rebase.c", 431, "invalid command '%d'", action.command);
 		}
@@ -216,13 +216,13 @@ public class rebase_options {
 	public void imply_interactive(Object option) {
 		rebase_type generatedType = this.getType();
 		switch (generatedType) {
-		case rebase_type.REBASE_MERGE/* we now implement --merge via --interactive */:
-		case rebase_type.REBASE_INTERACTIVE:
 		case rebase_type.REBASE_PRESERVE_MERGES:
 				break;
+		case rebase_type.REBASE_INTERACTIVE:
 		case rebase_type.REBASE_AM:
 				ModernizedCProgram.die(ModernizedCProgram._("%s requires an interactive rebase"), option);
 				break;
+		case rebase_type.REBASE_MERGE/* we now implement --merge via --interactive */:
 		default:
 				this.setType(/* implied */rebase_type.REBASE_INTERACTIVE);
 				break;
@@ -230,7 +230,7 @@ public class rebase_options {
 	}
 	/* Returns the filename prefixed by the state_dir */
 	public Object state_dir_path(Object filename) {
-		strbuf path = new strbuf(, , );
+		strbuf path = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		size_t prefix_len = new size_t();
 		Object generatedState_dir = this.getState_dir();
 		Object generatedLen = path.getLen();
@@ -240,24 +240,24 @@ public class rebase_options {
 		} 
 		path.strbuf_setlen(prefix_len);
 		path.strbuf_addstr(filename);
-		byte generatedBuf = path.getBuf();
+		byte[] generatedBuf = path.getBuf();
 		return generatedBuf;
 	}
 	/* Initialize the rebase options from the state directory. */
 	public int read_basic_state() {
-		strbuf head_name = new strbuf(, , );
-		strbuf buf = new strbuf(, , );
+		strbuf head_name = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		object_id oid = new object_id();
 		if (head_name.read_one(opts.state_dir_path("head-name")) || buf.read_one(opts.state_dir_path("onto"))) {
 			return -1;
 		} 
-		byte generatedBuf = head_name.getBuf();
+		byte[] generatedBuf = head_name.getBuf();
 		this.setHead_name(ModernizedCProgram.starts_with(generatedBuf, "refs/") ? ModernizedCProgram.xstrdup(generatedBuf) : ((Object)0));
 		head_name.strbuf_release();
 		if (ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, generatedBuf, oid)) {
 			return ();
 		} 
-		this.setOnto(.lookup_commit_or_die(oid, generatedBuf));
+		this.setOnto(/*Error: Function owner not recognized*/lookup_commit_or_die(oid, generatedBuf));
 		buf.strbuf_setlen(0);
 		if (ModernizedCProgram.file_exists(opts.state_dir_path("orig-head"))) {
 			if (buf.read_one(opts.state_dir_path("orig-head"))) {
@@ -288,9 +288,9 @@ public class rebase_options {
 			if (buf.read_one(opts.state_dir_path("allow_rerere_autoupdate"))) {
 				return -1;
 			} 
-			if (!.strcmp(generatedBuf, "--rerere-autoupdate")) {
+			if (!/*Error: Function owner not recognized*/strcmp(generatedBuf, "--rerere-autoupdate")) {
 				this.setAllow_rerere_autoupdate(1);
-			}  else if (!.strcmp(generatedBuf, "--no-rerere-autoupdate")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(generatedBuf, "--no-rerere-autoupdate")) {
 				this.setAllow_rerere_autoupdate(2);
 			} else {
 					ModernizedCProgram.warning(ModernizedCProgram._("ignoring invalid allow_rerere_autoupdate: '%s'"), generatedBuf);
@@ -362,78 +362,8 @@ public class rebase_options {
 		} 
 		return 0;
 	}
-	public int apply_autostash() {
-		byte path = opts.state_dir_path("autostash");
-		strbuf autostash = new strbuf(, , );
-		child_process stash_apply = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		if (!ModernizedCProgram.file_exists(path)) {
-			return 0;
-		} 
-		if (autostash.read_one(path)) {
-			return ();
-		} 
-		autostash.strbuf_addstr(/* Ensure that the hash is not mistaken for a number */"^0");
-		argv_array generatedArgs = stash_apply.getArgs();
-		byte generatedBuf = autostash.getBuf();
-		generatedArgs.argv_array_pushl("stash", "apply", generatedBuf, ((Object)0));
-		stash_apply.setGit_cmd(1);
-		stash_apply.setNo_stderr(stash_apply.setNo_stdout(stash_apply.setNo_stdin(1)));
-		if (!stash_apply.run_command()) {
-			.printf(ModernizedCProgram._("Applied autostash.\n"));
-		} else {
-				argv_array args = new argv_array(ModernizedCProgram.empty_argv, 0, 0);
-				int res = 0;
-				ModernizedCProgram.args.argv_array_pushl("stash", "store", "-m", "autostash", "-q", generatedBuf, ((Object)0));
-				if (ModernizedCProgram.run_command_v_opt(ModernizedCProgram.args.getArgv(), 2)) {
-					res = ();
-				} 
-				ModernizedCProgram.args.argv_array_clear();
-				autostash.strbuf_release();
-				if (res) {
-					return res;
-				} 
-				.fprintf((_iob[2]), ModernizedCProgram._("Applying autostash resulted in conflicts.\nYour changes are safe in the stash.\nYou can run \"git stash pop\" or \"git stash drop\" at any time.\n"));
-		} 
-		autostash.strbuf_release();
-		return 0;
-		strbuf stash_sha1 = new strbuf(, , );
-		child_process child = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		int ret = 0;
-		if (!stash_sha1.read_oneliner(ModernizedCProgram.rebase_path_autostash(), 1)) {
-			stash_sha1.strbuf_release();
-			return 0;
-		} 
-		stash_sha1.strbuf_trim();
-		child.setGit_cmd(1);
-		child.setNo_stdout(1);
-		child.setNo_stderr(1);
-		argv_array generatedArgs = child.getArgs();
-		generatedArgs.argv_array_push("stash");
-		generatedArgs.argv_array_push("apply");
-		byte generatedBuf = stash_sha1.getBuf();
-		generatedArgs.argv_array_push(generatedBuf);
-		if (!child.run_command()) {
-			.fprintf((_iob[2]), ModernizedCProgram._("Applied autostash.\n"));
-		} else {
-				child_process store = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-				store.setGit_cmd(1);
-				generatedArgs.argv_array_push("stash");
-				generatedArgs.argv_array_push("store");
-				generatedArgs.argv_array_push("-m");
-				generatedArgs.argv_array_push("autostash");
-				generatedArgs.argv_array_push("-q");
-				generatedArgs.argv_array_push(generatedBuf);
-				if (store.run_command()) {
-					ret = ();
-				} else {
-						.fprintf((_iob[2]), ModernizedCProgram._("Applying autostash resulted in conflicts.\nYour changes are safe in the stash.\nYou can run \"git stash pop\" or \"git stash drop\" at any time.\n"));
-				} 
-		} 
-		stash_sha1.strbuf_release();
-		return ret;
-	}
 	public int finish_rebase() {
-		strbuf dir = new strbuf(, , );
+		strbuf dir = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte[] argv_gc_auto = new byte[]{"gc", "--auto", ((Object)0)};
 		int ret = 0;
 		ModernizedCProgram.delete_ref(((Object)0), "REBASE_HEAD", ((Object)0), (1 << 0));
@@ -443,7 +373,7 @@ public class rebase_options {
 		rebase_type generatedType = this.getType();
 		Object generatedState_dir = this.getState_dir();
 		if (generatedType == rebase_type.REBASE_INTERACTIVE) {
-			replay_opts replay = new replay_opts(, );
+			replay_opts replay = new replay_opts(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			replay.setAction(replay_action.REPLAY_INTERACTIVE_REBASE);
 			ret = replay.sequencer_remove_state();
 		} else {
@@ -456,8 +386,8 @@ public class rebase_options {
 		return ret;
 	}
 	public int move_to_original_branch() {
-		strbuf orig_head_reflog = new strbuf(, , );
-		strbuf head_reflog = new strbuf(, , );
+		strbuf orig_head_reflog = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf head_reflog = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int ret;
 		Byte generatedHead_name = this.getHead_name();
 		if (!generatedHead_name) {
@@ -471,8 +401,8 @@ public class rebase_options {
 		object_id generatedOid = generatedObject.getOid();
 		orig_head_reflog.strbuf_addf("rebase finished: %s onto %s", generatedHead_name, ModernizedCProgram.oid_to_hex(generatedOid));
 		head_reflog.strbuf_addf("rebase finished: returning to %s", generatedHead_name);
-		byte generatedBuf = orig_head_reflog.getBuf();
-		ret = ((Object)0).reset_head("", generatedHead_name, (1 << 3), generatedBuf, generatedBuf);
+		byte[] generatedBuf = orig_head_reflog.getBuf();
+		ret = ModernizedCProgram.reset_head(((Object)0), "", generatedHead_name, (1 << 3), generatedBuf, generatedBuf);
 		orig_head_reflog.strbuf_release();
 		head_reflog.strbuf_release();
 		return ret;
@@ -480,7 +410,7 @@ public class rebase_options {
 	public int run_am() {
 		child_process am = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
 		child_process format_patch = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		strbuf revisions = new strbuf(, , );
+		strbuf revisions = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int status;
 		byte rebased_patches;
 		am.setGit_cmd(1);
@@ -488,7 +418,7 @@ public class rebase_options {
 		generatedArgs.argv_array_push("am");
 		Object generatedAction = this.getAction();
 		Byte generatedGpg_sign_opt = this.getGpg_sign_opt();
-		if (generatedAction && !.strcmp("continue", generatedAction)) {
+		if (generatedAction && !/*Error: Function owner not recognized*/strcmp("continue", generatedAction)) {
 			generatedArgs.argv_array_push("--resolved");
 			generatedArgs.argv_array_pushf("--resolvemsg=%s", ModernizedCProgram.resolvemsg);
 			if (generatedGpg_sign_opt) {
@@ -500,7 +430,7 @@ public class rebase_options {
 			} 
 			return opts.move_to_original_branch();
 		} 
-		if (generatedAction && !.strcmp("skip", generatedAction)) {
+		if (generatedAction && !/*Error: Function owner not recognized*/strcmp("skip", generatedAction)) {
 			generatedArgs.argv_array_push("--skip");
 			generatedArgs.argv_array_pushf("--resolvemsg=%s", ModernizedCProgram.resolvemsg);
 			status = am.run_command();
@@ -509,7 +439,7 @@ public class rebase_options {
 			} 
 			return opts.move_to_original_branch();
 		} 
-		if (generatedAction && !.strcmp("show-current-patch", generatedAction)) {
+		if (generatedAction && !/*Error: Function owner not recognized*/strcmp("show-current-patch", generatedAction)) {
 			generatedArgs.argv_array_push("--show-current-patch");
 			return am.run_command();
 		} 
@@ -520,7 +450,7 @@ public class rebase_options {
 		object_id generatedOrig_head = this.getOrig_head();
 		revisions.strbuf_addf("%s...%s", ModernizedCProgram.oid_to_hex(generatedRoot ? generatedOid : generatedOid), ModernizedCProgram.oid_to_hex(generatedOrig_head));
 		rebased_patches = ModernizedCProgram.xstrdup(ModernizedCProgram.git_path("rebased-patches"));
-		format_patch.setOut(.open(rebased_patches, 1 | -1024 | -1024, 666));
+		format_patch.setOut(/*Error: Function owner not recognized*/open(rebased_patches, 1 | -1024 | -1024, 666));
 		int generatedOut = format_patch.getOut();
 		if (generatedOut < 0) {
 			status = ();
@@ -532,7 +462,7 @@ public class rebase_options {
 		generatedArgs.argv_array_pushl("format-patch", "-k", "--stdout", "--full-index", "--cherry-pick", "--right-only", "--src-prefix=a/", "--dst-prefix=b/", "--no-renames", "--no-cover-letter", "--pretty=mboxrd", "--topo-order", ((Object)0));
 		strbuf generatedGit_format_patch_opt = this.getGit_format_patch_opt();
 		Object generatedLen = generatedGit_format_patch_opt.getLen();
-		byte generatedBuf = generatedGit_format_patch_opt.getBuf();
+		byte[] generatedBuf = generatedGit_format_patch_opt.getBuf();
 		if (generatedLen) {
 			generatedArgs.argv_array_split(generatedBuf);
 		} 
@@ -544,16 +474,16 @@ public class rebase_options {
 		status = format_patch.run_command();
 		Byte generatedHead_name = this.getHead_name();
 		if (status) {
-			.unlink(rebased_patches);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(rebased_patches);
 			ModernizedCProgram.free(rebased_patches);
 			generatedArgs.argv_array_clear();
-			generatedOrig_head.reset_head("checkout", generatedHead_name, 0, "HEAD", ((Object)0));
+			ModernizedCProgram.reset_head(generatedOrig_head, "checkout", generatedHead_name, 0, "HEAD", ((Object)0));
 			();
 			revisions.strbuf_release();
 			return status;
 		} 
 		revisions.strbuf_release();
-		am.setIn(.open(rebased_patches, 0));
+		am.setIn(/*Error: Function owner not recognized*/open(rebased_patches, 0));
 		int generatedIn = am.getIn();
 		if (generatedIn < 0) {
 			status = ();
@@ -562,7 +492,7 @@ public class rebase_options {
 			return status;
 		} 
 		argv_array generatedGit_am_opts = this.getGit_am_opts();
-		Object generatedArgv = generatedGit_am_opts.getArgv();
+		Object[][] generatedArgv = generatedGit_am_opts.getArgv();
 		generatedArgs.argv_array_pushv(generatedArgv);
 		generatedArgs.argv_array_push("--rebasing");
 		generatedArgs.argv_array_pushf("--resolvemsg=%s", ModernizedCProgram.resolvemsg);
@@ -577,7 +507,7 @@ public class rebase_options {
 			generatedArgs.argv_array_push(generatedGpg_sign_opt);
 		} 
 		status = am.run_command();
-		.unlink(rebased_patches);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(rebased_patches);
 		ModernizedCProgram.free(rebased_patches);
 		if (!status) {
 			return opts.move_to_original_branch();
@@ -590,8 +520,8 @@ public class rebase_options {
 	}
 	public int run_specific_rebase(action action) {
 		byte[] argv = new byte[]{((Object)0), ((Object)0)};
-		strbuf script_snippet = new strbuf(, , );
-		strbuf buf = new strbuf(, , );
+		strbuf script_snippet = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int status;
 		byte backend;
 		byte backend_func;
@@ -599,9 +529,9 @@ public class rebase_options {
 		 generatedFlags = this.getFlags();
 		Byte generatedGpg_sign_opt = this.getGpg_sign_opt();
 		if (generatedType == rebase_type.REBASE_INTERACTIVE) {
-			.setenv("GIT_CHERRY_PICK_HELP", ModernizedCProgram.resolvemsg, /* Run builtin interactive rebase */1);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setenv("GIT_CHERRY_PICK_HELP", ModernizedCProgram.resolvemsg, /* Run builtin interactive rebase */1);
 			if (!(generatedFlags & .REBASE_INTERACTIVE_EXPLICIT)) {
-				.setenv("GIT_SEQUENCE_EDITOR", ":", 1);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setenv("GIT_SEQUENCE_EDITOR", ":", 1);
 				this.setAutosquash(0);
 			} 
 			if (generatedGpg_sign_opt) {
@@ -639,9 +569,9 @@ public class rebase_options {
 		script_snippet.add_var("restrict_revision", generatedRestrict_revision ? ModernizedCProgram.oid_to_hex(generatedOid) : ((Object)0));
 		script_snippet.add_var("GIT_QUIET", generatedFlags & .REBASE_NO_QUIET ? "" : "t");
 		argv_array generatedGit_am_opts = this.getGit_am_opts();
-		Object generatedArgv = generatedGit_am_opts.getArgv();
+		Object[][] generatedArgv = generatedGit_am_opts.getArgv();
 		buf.sq_quote_argv_pretty(generatedArgv);
-		byte generatedBuf = buf.getBuf();
+		byte[] generatedBuf = buf.getBuf();
 		script_snippet.add_var("git_am_opt", generatedBuf);
 		buf.strbuf_release();
 		script_snippet.add_var("verbose", generatedFlags & .REBASE_VERBOSE ? "t" : "");
@@ -700,17 +630,17 @@ public class rebase_options {
 	}
 	public void set_reflog_action() {
 		byte env;
-		strbuf buf = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		if (!ModernizedCProgram.options.is_interactive()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		env = .getenv("GIT_REFLOG_ACTION");
-		if (env && .strcmp("rebase", env)) {
-			return ;
+		env = /*Error: Function owner not recognized*/getenv("GIT_REFLOG_ACTION");
+		if (env && /*Error: Function owner not recognized*/strcmp("rebase", env)) {
+			return /*Error: Unsupported expression*/;
 		} 
 		buf.strbuf_addf("rebase -i (%s)", ModernizedCProgram.options.getAction());
-		byte generatedBuf = buf.getBuf();
-		.setenv("GIT_REFLOG_ACTION", generatedBuf, 1);
+		byte[] generatedBuf = buf.getBuf();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setenv("GIT_REFLOG_ACTION", generatedBuf, 1);
 		buf.strbuf_release();
 	}
 	public rebase_type getType() {

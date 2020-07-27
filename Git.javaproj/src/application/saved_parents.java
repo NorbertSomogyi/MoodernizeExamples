@@ -4,9 +4,9 @@ public class saved_parents {
 	private int slab_size;
 	private int stride;
 	private int slab_count;
-	private commit_list slab;
+	private commit_list[][][] slab;
 	
-	public saved_parents(int slab_size, int stride, int slab_count, commit_list slab) {
+	public saved_parents(int slab_size, int stride, int slab_count, commit_list[][][] slab) {
 		setSlab_size(slab_size);
 		setStride(stride);
 		setSlab_count(slab_count);
@@ -21,7 +21,7 @@ public class saved_parents {
 			stride = 1;
 		} 
 		this.setStride(stride);
-		elem_size =  * stride;
+		elem_size = /*Error: Unsupported expression*/ * stride;
 		this.setSlab_size((512 * 1024 - 32) / elem_size);
 		this.setSlab_count(0);
 		this.setSlab(((Object)0));
@@ -32,7 +32,7 @@ public class saved_parents {
 	public void clear_saved_parents() {
 		int i;
 		int generatedSlab_count = this.getSlab_count();
-		commit_list generatedSlab = this.getSlab();
+		commit_list[][][] generatedSlab = this.getSlab();
 		for (i = 0; i < generatedSlab_count; i++) {
 			ModernizedCProgram.free(generatedSlab[i]);
 		}
@@ -60,10 +60,10 @@ public class saved_parents {
 	public void setSlab_count(int newSlab_count) {
 		slab_count = newSlab_count;
 	}
-	public commit_list getSlab() {
+	public commit_list[][][] getSlab() {
 		return slab;
 	}
-	public void setSlab(commit_list newSlab) {
+	public void setSlab(commit_list[][][] newSlab) {
 		slab = newSlab;
 	}
 }

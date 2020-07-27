@@ -16,15 +16,6 @@ public class cf_def {
 	public cf_def() {
 	}
 	
-	public cf_def cf_preprocess_get_def(cf_preprocessor pp, Object def_name) {
-		size_t idx = pp.cf_preprocess_get_def_idx(def_name);
-		if (idx == ((size_t)-1)) {
-			return ((Object)0);
-		} 
-		 generatedDefines = pp.getDefines();
-		Object generatedArray = generatedDefines.getArray();
-		return generatedArray + idx;
-	}
 	public void cf_def_init() {
 		cf_token generatedName = this.getName();
 		generatedName.cf_token_clear();
@@ -41,6 +32,15 @@ public class cf_def {
 		Object generatedDa = generatedParams.getDa();
 		generatedDa.darray_free();
 		generatedDa.darray_free();
+	}
+	public cf_def cf_preprocess_get_def(cf_preprocessor pp, Object def_name) {
+		size_t idx = pp.cf_preprocess_get_def_idx(def_name);
+		if (idx == ((size_t)-1)) {
+			return ((Object)0);
+		} 
+		 generatedDefines = pp.getDefines();
+		Object generatedArray = generatedDefines.getArray();
+		return generatedArray + idx;
 	}
 	public cf_token getName() {
 		return name;

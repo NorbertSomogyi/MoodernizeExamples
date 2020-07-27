@@ -7,7 +7,7 @@ package application;
  * It holds response cache and non-blocking sending data.
  */
 public class pingpong {
-	private Byte cache;
+	private byte[] cache;
 	private Object cache_size;
 	private Object nread_resp;
 	private Byte linestart_resp;
@@ -21,7 +21,7 @@ public class pingpong {
 	private Object statemach_act;
 	private Object endofresp;
 	
-	public pingpong(Byte cache, Object cache_size, Object nread_resp, Byte linestart_resp,  pending_resp, Byte sendthis, Object sendleft, Object sendsize, curltime response, long response_time, connectdata conn, Object statemach_act, Object endofresp) {
+	public pingpong(byte[] cache, Object cache_size, Object nread_resp, Byte linestart_resp,  pending_resp, Byte sendthis, Object sendleft, Object sendsize, curltime response, long response_time, connectdata conn, Object statemach_act, Object endofresp) {
 		setCache(cache);
 		setCache_size(cache_size);
 		setNread_resp(nread_resp);
@@ -72,16 +72,18 @@ public class pingpong {
 		Curl_easy generatedData = conn.getData();
 		Curl_easy data = generatedData;
 		/* in milliseconds */time_t timeout_ms = new time_t();
-		Object generatedSet = data.getSet();
+		UserDefined generatedSet = data.getSet();
+		long generatedServer_response_timeout = generatedSet.getServer_response_timeout();
 		long generatedResponse_time = this.getResponse_time();
-		long response_time = (generatedSet.getServer_response_timeout()) ? generatedSet.getServer_response_timeout() : generatedResponse_time;
+		long response_time = (generatedServer_response_timeout) ? generatedServer_response_timeout : generatedResponse_time;
 		curltime curltime = new curltime();
 		curltime generatedResponse = this.getResponse();
 		timeout_ms = /* Without a requested timeout, we only wait 'response_time' seconds for the
 		     full response to arrive before we bail out */response_time - (time_t)curltime.Curl_now().Curl_timediff(generatedResponse);
+		long generatedTimeout = generatedSet.getTimeout();
 		curltime generatedNow = conn.getNow();
-		if (generatedSet.getTimeout() && !disconnecting) {
-			time_t timeout2_ms = generatedSet.getTimeout() - (time_t)curltime.Curl_now().Curl_timediff(generatedNow);
+		if (generatedTimeout && !disconnecting) {
+			time_t timeout2_ms = generatedTimeout - (time_t)curltime.Curl_now().Curl_timediff(generatedNow);
 			timeout_ms = ((timeout_ms) < (timeout2_ms) ? (timeout_ms) : (/* pick the lowest number */timeout2_ms));
 		} 
 		return timeout_ms/*
@@ -112,11 +114,11 @@ public class pingpong {
 				interval_ms = /* immediate */0;
 		} 
 		Object generatedSendleft = this.getSendleft();
-		if (.Curl_ssl_data_pending(conn, 0)) {
+		if (/*Error: Function owner not recognized*/Curl_ssl_data_pending(conn, 0)) {
 			rc = 1;
 		}  else if (pp.Curl_pp_moredata()) {
 			rc = /* We are receiving and there is data in the cache so just read it */1;
-		}  else if (!generatedSendleft && .Curl_ssl_data_pending(conn, 0)) {
+		}  else if (!generatedSendleft && /*Error: Function owner not recognized*/Curl_ssl_data_pending(conn, 0)) {
 			rc = /* We are receiving and there is data ready in the SSL library */1;
 		} else {
 				rc = ModernizedCProgram.Curl_socket_check(generatedSendleft ? CURL_SOCKET_BAD : /* reading */sock, CURL_SOCKET_BAD, generatedSendleft ? sock : /* writing */CURL_SOCKET_BAD, interval_ms);
@@ -136,7 +138,7 @@ public class pingpong {
 			data.Curl_failf("select/poll error");
 			result = CURLE_OUT_OF_MEMORY;
 		}  else if (rc) {
-			result = .UNRECOGNIZEDFUNCTIONNAME(conn);
+			result = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(conn);
 		} 
 		return result;
 	}
@@ -146,8 +148,9 @@ public class pingpong {
 		connectdata conn = generatedConn;
 		this.setNread_resp(0);
 		Curl_easy generatedData = conn.getData();
-		Object generatedState = generatedData.getState();
-		this.setLinestart_resp(generatedState.getBuffer());
+		UrlState generatedState = generatedData.getState();
+		byte[] generatedBuffer = generatedState.getBuffer();
+		this.setLinestart_resp(generatedBuffer);
 		this.setPending_resp(1);
 		curltime curltime = new curltime();
 		this.setResponse(curltime.Curl_now());
@@ -177,26 +180,27 @@ public class pingpong {
 			return CURLE_OUT_OF_MEMORY;
 		} 
 		s = ModernizedCProgram.curl_mvaprintf(fmt_crlf, /* trailing CRLF appended */args);
-		.Curl_cfree(fmt_crlf);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(fmt_crlf);
 		if (!s) {
 			return CURLE_OUT_OF_MEMORY;
 		} 
 		bytes_written = 0;
-		write_len = .strlen(s);
+		write_len = /*Error: Function owner not recognized*/strlen(s);
 		pp.Curl_pp_init();
 		result = ();
 		if (/* Curl_convert_to_network calls failf if unsuccessful */result) {
-			.Curl_cfree(s);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(s);
 			return result;
 		} 
 		Object generatedSock = conn.getSock();
 		result = conn.Curl_write(generatedSock[0], s, write_len, bytes_written);
 		if (result) {
-			.Curl_cfree(s);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(s);
 			return result;
 		} 
-		Object generatedSet = generatedData.getSet();
-		if (generatedSet.getVerbose()) {
+		UserDefined generatedSet = generatedData.getSet();
+		Object generatedVerbose = generatedSet.getVerbose();
+		if (generatedVerbose) {
 			generatedData.Curl_debug(CURLINFO_HEADER_OUT, s, (size_t)bytes_written);
 		} 
 		curltime curltime = new curltime();
@@ -205,7 +209,7 @@ public class pingpong {
 			this.setSendsize(write_len);
 			this.setSendleft(write_len - bytes_written);
 		} else {
-				.Curl_cfree(s);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(s);
 				this.setSendthis(((Object)0));
 				this.setSendleft(this.setSendsize(0));
 				this.setResponse(curltime.Curl_now());
@@ -224,16 +228,16 @@ public class pingpong {
 	public Object Curl_pp_sendf(Object fmt) {
 		 result = new ();
 		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
 		result = pp.Curl_pp_vsendf(fmt, ap);
-		.__builtin_va_end(ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
 		return result/*
 		 * Curl_pp_readresp()
 		 *
 		 * Reads a piece of a server response.
 		 */;
 	}
-	public Object Curl_pp_readresp(Object sockfd, int code, Object size) {
+	public Object Curl_pp_readresp(Object sockfd, Integer code, Object size) {
 		/* count bytes per line */ssize_t perline = new ssize_t();
 		bool keepon = 1;
 		ssize_t gotbytes = new ssize_t();
@@ -242,8 +246,9 @@ public class pingpong {
 		connectdata conn = generatedConn;
 		Curl_easy generatedData = conn.getData();
 		Curl_easy data = generatedData;
-		Object generatedState = data.getState();
-		byte buf = generatedState.getBuffer();
+		UrlState generatedState = data.getState();
+		byte[] generatedBuffer = generatedState.getBuffer();
+		byte buf = generatedBuffer;
 		 result = CURLE_OK;
 		code = /* 0 for errors or not done */0;
 		size = 0;
@@ -251,25 +256,28 @@ public class pingpong {
 		ptr = buf + generatedNread_resp;
 		Byte generatedLinestart_resp = this.getLinestart_resp();
 		perline = (ssize_t)(ptr - generatedLinestart_resp);
-		Object generatedSet = data.getSet();
-		Byte generatedCache = this.getCache();
+		UserDefined generatedSet = data.getSet();
+		long generatedBuffer_size = generatedSet.getBuffer_size();
+		byte[] generatedCache = this.getCache();
 		Object generatedCache_size = this.getCache_size();
-		Object generatedReq = data.getReq();
-		while ((generatedNread_resp < (size_t)generatedSet.getBuffer_size()) && (keepon && !result)) {
+		SingleRequest generatedReq = data.getReq();
+		Object generatedHeaderbytecount = generatedReq.getHeaderbytecount();
+		Object generatedVerbose = generatedSet.getVerbose();
+		while ((generatedNread_resp < (size_t)generatedBuffer_size) && (keepon && !result)) {
 			if (generatedCache) {
-				if ((ptr + generatedCache_size) > (buf + generatedSet.getBuffer_size() + 1)) {
+				if ((ptr + generatedCache_size) > (buf + generatedBuffer_size + 1)) {
 					data.Curl_failf("cached response data too big to handle");
 					return CURLE_RECV_ERROR;
 				} 
-				.memcpy(ptr, generatedCache, generatedCache_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr, generatedCache, generatedCache_size);
 				gotbytes = (ssize_t)generatedCache_size;
-				.Curl_cfree(generatedCache);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedCache);
 				this.setCache(((Object)/* clear the pointer */0));
 				this.setCache_size(/* zero the size just in case */0);
 			} else {
 					do {
 					} while (0);
-					result = conn.Curl_read(sockfd, ptr, generatedSet.getBuffer_size() - generatedNread_resp, gotbytes);
+					result = conn.Curl_read(sockfd, ptr, generatedBuffer_size - generatedNread_resp, gotbytes);
 					if (result == CURLE_AGAIN) {
 						return /* return */CURLE_OK;
 					} 
@@ -292,13 +300,13 @@ public class pingpong {
 					ssize_t i = new ssize_t();
 					ssize_t clipamount = 0;
 					bool restart = 0;
-					generatedReq.getHeaderbytecount() += (long)gotbytes;
+					generatedHeaderbytecount += (long)gotbytes;
 					generatedNread_resp += gotbytes;
 					for (i = 0; i < gotbytes; ) {
 						perline++;
 						if (ptr == (byte)'\n'/* a newline is CRLF in pp-talk, so the CR is ignored as
 						             the line isn't really terminated until the LF comes */) {
-							if (generatedSet.getVerbose()) {
+							if (generatedVerbose) {
 								data.Curl_debug(CURLINFO_HEADER_IN, generatedLinestart_resp, (size_t)perline/*
 								           * We pass all response-lines to the callback function registered
 								           * for "headers". The response lines can be seen as a kind of
@@ -309,10 +317,10 @@ public class pingpong {
 							if (result) {
 								return result;
 							} 
-							if (.UNRECOGNIZEDFUNCTIONNAME(conn, generatedLinestart_resp, perline, code/* This is the end of the last line, copy the last line to the
+							if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(conn, generatedLinestart_resp, perline, code/* This is the end of the last line, copy the last line to the
 							               start of the buffer and zero terminate, for old times sake */)) {
 								size_t n = ptr - generatedLinestart_resp;
-								.memmove(buf, generatedLinestart_resp, n);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(buf, generatedLinestart_resp, n);
 								buf[n] = /* zero terminate */0;
 								keepon = 0;
 								this.setLinestart_resp(ptr + /* advance pointer */1);
@@ -334,14 +342,14 @@ public class pingpong {
 						do {
 						} while (0);
 					}  else if (keepon) {
-						if ((perline == gotbytes) && (gotbytes > generatedSet.getBuffer_size() / 2/* We got an excessive line without newlines and we need to deal
+						if ((perline == gotbytes) && (gotbytes > generatedBuffer_size / 2/* We got an excessive line without newlines and we need to deal
 						             with it. We keep the first bytes of the line then we throw
 						             away the rest. */)) {
 							data.Curl_infof("Excessive server response line length received, %zd bytes. Stripping\n", gotbytes);
 							restart = 1;
 							clipamount = /* we keep 40 bytes since all our pingpong protocols are only
 							             interested in the first piece */40;
-						}  else if (generatedNread_resp > (size_t)generatedSet.getBuffer_size() / 2/* We got a large chunk of data and there's potentially still
+						}  else if (generatedNread_resp > (size_t)generatedBuffer_size / 2/* We got a large chunk of data and there's potentially still
 						             trailing data to take care of, so we put any such part in the
 						             "cache", clear the buffer to make space and restart. */) {
 							clipamount = perline;
@@ -352,9 +360,9 @@ public class pingpong {
 					} 
 					if (clipamount) {
 						this.setCache_size(clipamount);
-						this.setCache(.Curl_cmalloc(generatedCache_size));
+						this.setCache(/*Error: Function owner not recognized*/Curl_cmalloc(generatedCache_size));
 						if (generatedCache) {
-							.memcpy(generatedCache, generatedLinestart_resp, generatedCache_size);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedCache, generatedLinestart_resp, generatedCache_size);
 						} else {
 								return CURLE_OUT_OF_MEMORY;
 						} 
@@ -370,7 +378,7 @@ public class pingpong {
 		this.setPending_resp(/* while there's buffer left and loop is requested */0);
 		return result;
 	}
-	public int Curl_pp_getsock(Object socks) {
+	public int Curl_pp_getsock(Object[] socks) {
 		connectdata generatedConn = this.getConn();
 		connectdata conn = generatedConn;
 		Object generatedSock = conn.getSock();
@@ -398,7 +406,7 @@ public class pingpong {
 		if (written != (ssize_t)generatedSendleft) {
 			generatedSendleft -= /* only a fraction was sent */written;
 		} else {
-				.Curl_cfree(generatedSendthis);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedSendthis);
 				this.setSendthis(((Object)0));
 				this.setSendleft(this.setSendsize(0));
 				this.setResponse(curltime.Curl_now());
@@ -406,27 +414,27 @@ public class pingpong {
 		return CURLE_OK;
 	}
 	public Object Curl_pp_disconnect() {
-		Byte generatedCache = this.getCache();
-		.Curl_cfree(generatedCache);
+		byte[] generatedCache = this.getCache();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedCache);
 		this.setCache(((Object)0));
 		return CURLE_OK;
 	}
 	public  Curl_pp_moredata() {
 		Object generatedSendleft = this.getSendleft();
-		Byte generatedCache = this.getCache();
+		byte[] generatedCache = this.getCache();
 		Object generatedNread_resp = this.getNread_resp();
 		Object generatedCache_size = this.getCache_size();
 		return (!generatedSendleft && generatedCache && generatedNread_resp < generatedCache_size) ? 1 : 0;
 	}
-	public Object ftp_readresp(Object sockfd, int ftpcode, Object size) {
+	public Object ftp_readresp(Object sockfd, Integer ftpcode, Object size) {
 		connectdata generatedConn = this.getConn();
 		connectdata conn = generatedConn;
 		Curl_easy generatedData = conn.getData();
 		Curl_easy data = generatedData;
 		int code;
 		 result = pp.Curl_pp_readresp(sockfd, code, size/* handle the security-oriented responses 6xx ***/);
-		Object generatedInfo = data.getInfo();
-		generatedInfo.setHttpcode(/* normal ftp stuff we pass through! *//* store the latest code for later retrieval */code);
+		PureInfo generatedInfo = data.getInfo();
+		/* normal ftp stuff we pass through! *//* normal ftp stuff we pass through! */generatedInfo.setHttpcode(/* store the latest code for later retrieval */code);
 		if (ftpcode) {
 			ftpcode = code;
 		} 
@@ -447,10 +455,10 @@ public class pingpong {
 		 *
 		 */;
 	}
-	public Byte getCache() {
+	public byte[] getCache() {
 		return cache;
 	}
-	public void setCache(Byte newCache) {
+	public void setCache(byte[] newCache) {
 		cache = newCache;
 	}
 	public Object getCache_size() {

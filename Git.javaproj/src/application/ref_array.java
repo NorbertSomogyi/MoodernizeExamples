@@ -3,10 +3,10 @@ package application;
 public class ref_array {
 	private int nr;
 	private int alloc;
-	private ref_array_item items;
+	private ref_array_item[][] items;
 	private rev_info revs;
 	
-	public ref_array(int nr, int alloc, ref_array_item items, rev_info revs) {
+	public ref_array(int nr, int alloc, ref_array_item[][] items, rev_info revs) {
 		setNr(nr);
 		setAlloc(alloc);
 		setItems(items);
@@ -19,7 +19,7 @@ public class ref_array {
 	public void ref_array_clear() {
 		int i;
 		int generatedNr = this.getNr();
-		ref_array_item generatedItems = this.getItems();
+		ref_array_item[][] generatedItems = this.getItems();
 		for (i = 0; i < generatedNr; i++) {
 			generatedItems[i].free_array_item();
 		}
@@ -41,7 +41,7 @@ public class ref_array {
 		if (generatedWorktrees) {
 			(generatedMap).hashmap_free_(((size_t)((ref_to_worktree_entry)0).getEnt()));
 			;
-			.free_worktrees(generatedWorktrees);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_worktrees(generatedWorktrees);
 			ref_to_worktree_map.setWorktrees(((Object)0));
 		} 
 	}
@@ -57,10 +57,10 @@ public class ref_array {
 	public void setAlloc(int newAlloc) {
 		alloc = newAlloc;
 	}
-	public ref_array_item getItems() {
+	public ref_array_item[][] getItems() {
 		return items;
 	}
-	public void setItems(ref_array_item newItems) {
+	public void setItems(ref_array_item[][] newItems) {
 		items = newItems;
 	}
 	public rev_info getRevs() {

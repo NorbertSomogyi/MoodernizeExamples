@@ -6,7 +6,7 @@ package application;
 /* do not break a file smaller than this */
 public class diff_filespec {
 	private object_id oid;
-	private Byte path;
+	private byte[] path;
 	private Object data;
 	private Object cnt_data;
 	private long size;
@@ -22,7 +22,7 @@ public class diff_filespec {
 	private int is_binary;
 	private userdiff_driver driver;
 	
-	public diff_filespec(object_id oid, Byte path, Object data, Object cnt_data, long size, int count, int rename_used, int mode, int oid_valid, int should_free, int should_munmap, int dirty_submodule, int is_stdin, int has_more_entries, int is_binary, userdiff_driver driver) {
+	public diff_filespec(object_id oid, byte[] path, Object data, Object cnt_data, long size, int count, int rename_used, int mode, int oid_valid, int should_free, int should_munmap, int dirty_submodule, int is_stdin, int has_more_entries, int is_binary, userdiff_driver driver) {
 		setOid(oid);
 		setPath(path);
 		setData(data);
@@ -43,16 +43,41 @@ public class diff_filespec {
 	public diff_filespec() {
 	}
 	
+	public int populate_from_stdin() {
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		size_t size = 0;
+		if (buf.strbuf_read(0, 0) < 0) {
+			return ();
+		} 
+		this.setShould_munmap(0);
+		this.setData(buf.strbuf_detach(size));
+		this.setSize(size);
+		this.setShould_free(1);
+		this.setIs_stdin(1);
+		return 0;
+	}
+	public diff_filespec noindex_filespec(Object name, int mode) {
+		diff_filespec s = new diff_filespec();
+		if (!name) {
+			name = "/dev/null";
+		} 
+		s = /*Error: Function owner not recognized*/alloc_filespec(name);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fill_filespec(s, ModernizedCProgram.null_oid, 0, mode);
+		if (name == ModernizedCProgram.file_from_standard_input) {
+			s.populate_from_stdin();
+		} 
+		return s;
+	}
 	public int find_rename_dst() {
 		int first;
 		int last;
 		first = 0;
 		last = ModernizedCProgram.rename_dst_nr;
-		Byte generatedPath = this.getPath();
+		byte[] generatedPath = this.getPath();
 		while (last > first) {
 			int next = first + ((last - first) >> 1);
 			diff_rename_dst dst = (rename_dst[next]);
-			int cmp = .strcmp(generatedPath, generatedPath);
+			int cmp = /*Error: Function owner not recognized*/strcmp(generatedPath, generatedPath);
 			if (!cmp) {
 				return next;
 			} 
@@ -77,26 +102,26 @@ public class diff_filespec {
 				} else {
 						ModernizedCProgram.rename_dst_alloc = (((ModernizedCProgram.rename_dst_alloc) + 16) * 3 / 2);
 				} 
-				(rename_dst) = ModernizedCProgram.xrealloc((rename_dst), ModernizedCProgram.st_mult(, (ModernizedCProgram.rename_dst_alloc)));
+				(rename_dst) = ModernizedCProgram.xrealloc((rename_dst), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (ModernizedCProgram.rename_dst_alloc)));
 			} 
 		} while (/* insert to make it at "first" */0);
 		ModernizedCProgram.rename_dst_nr++;
 		if (first < ModernizedCProgram.rename_dst_nr) {
-			ModernizedCProgram.move_array((rename_dst + first + 1), (rename_dst + first), (ModernizedCProgram.rename_dst_nr - first - 1),  + ( - 1));
+			ModernizedCProgram.move_array((rename_dst + first + 1), (rename_dst + first), (ModernizedCProgram.rename_dst_nr - first - 1), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		} 
-		Byte generatedPath = this.getPath();
-		rename_dst[first].setTwo(.alloc_filespec(generatedPath));
+		byte[] generatedPath = this.getPath();
+		rename_dst[first].setTwo(/*Error: Function owner not recognized*/alloc_filespec(generatedPath));
 		object_id generatedOid = this.getOid();
 		int generatedOid_valid = this.getOid_valid();
 		int generatedMode = this.getMode();
-		.fill_filespec(rename_dst[first].getTwo(), generatedOid, generatedOid_valid, generatedMode);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fill_filespec(rename_dst[first].getTwo(), generatedOid, generatedOid_valid, generatedMode);
 		rename_dst[first].setPair(((Object)0));
 		return 0;
 	}
 	public int basename_same(diff_filespec dst) {
-		Byte generatedPath = this.getPath();
-		int src_len = .strlen(generatedPath);
-		int dst_len = .strlen(generatedPath);
+		byte[] generatedPath = this.getPath();
+		int src_len = /*Error: Function owner not recognized*/strlen(generatedPath);
+		int dst_len = /*Error: Function owner not recognized*/strlen(generatedPath);
 		while (src_len && dst_len) {
 			byte c1 = generatedPath[--src_len];
 			byte c2 = generatedPath[--dst_len];
@@ -109,41 +134,16 @@ public class diff_filespec {
 		}
 		return (!src_len || generatedPath[src_len - 1] == (byte)'/') && (!dst_len || generatedPath[dst_len - 1] == (byte)'/');
 	}
-	public int populate_from_stdin() {
-		strbuf buf = new strbuf(, , );
-		size_t size = 0;
-		if (buf.strbuf_read(0, 0) < 0) {
-			return ();
-		} 
-		this.setShould_munmap(0);
-		this.setData(buf.strbuf_detach(size));
-		this.setSize(size);
-		this.setShould_free(1);
-		this.setIs_stdin(1);
-		return 0;
-	}
-	public diff_filespec noindex_filespec(Object name, int mode) {
-		diff_filespec s = new diff_filespec();
-		if (!name) {
-			name = "/dev/null";
-		} 
-		s = .alloc_filespec(name);
-		.fill_filespec(s, ModernizedCProgram.null_oid, 0, mode);
-		if (name == ModernizedCProgram.file_from_standard_input) {
-			s.populate_from_stdin();
-		} 
-		return s;
-	}
 	public object_id getOid() {
 		return oid;
 	}
 	public void setOid(object_id newOid) {
 		oid = newOid;
 	}
-	public Byte getPath() {
+	public byte[] getPath() {
 		return path;
 	}
-	public void setPath(Byte newPath) {
+	public void setPath(byte[] newPath) {
 		path = newPath;
 	}
 	public Object getData() {

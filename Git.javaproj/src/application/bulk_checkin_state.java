@@ -9,11 +9,11 @@ public class bulk_checkin_state {
 	private hashfile f;
 	private Object offset;
 	private pack_idx_option pack_idx_opts;
-	private pack_idx_entry written;
+	private pack_idx_entry[][] written;
 	private Object alloc_written;
 	private Object nr_written;
 	
-	public bulk_checkin_state(int plugged, Byte pack_tmp_name, hashfile f, Object offset, pack_idx_option pack_idx_opts, pack_idx_entry written, Object alloc_written, Object nr_written) {
+	public bulk_checkin_state(int plugged, Byte pack_tmp_name, hashfile f, Object offset, pack_idx_option pack_idx_opts, pack_idx_entry[][] written, Object alloc_written, Object nr_written) {
 		setPlugged(plugged);
 		setPack_tmp_name(pack_tmp_name);
 		setF(f);
@@ -28,36 +28,36 @@ public class bulk_checkin_state {
 	
 	public void finish_bulk_checkin() {
 		object_id oid = new object_id();
-		strbuf packname = new strbuf(, , );
+		strbuf packname = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int i;
 		if (!ModernizedCProgram.state.getF()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedHash = oid.getHash();
 		if (ModernizedCProgram.state.getNr_written() == 0) {
-			.close(ModernizedCProgram.state.getF().getFd());
-			.unlink(ModernizedCProgram.state.getPack_tmp_name());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(ModernizedCProgram.state.getF().getFd());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(ModernizedCProgram.state.getPack_tmp_name());
 			;
 		}  else if (ModernizedCProgram.state.getNr_written() == 1) {
 			ModernizedCProgram.state.getF().finalize_hashfile(generatedHash, 4 | 2 | 1);
 		} else {
 				int fd = ModernizedCProgram.state.getF().finalize_hashfile(generatedHash, 0);
 				ModernizedCProgram.fixup_pack_header_footer(fd, generatedHash, ModernizedCProgram.state.getPack_tmp_name(), ModernizedCProgram.state.getNr_written(), generatedHash, ModernizedCProgram.state.getOffset());
-				.close(fd);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
 		} 
 		packname.strbuf_addf("%s/pack/pack-", ModernizedCProgram.get_object_directory());
 		ModernizedCProgram.finish_tmp_packfile(packname, ModernizedCProgram.state.getPack_tmp_name(), ModernizedCProgram.state.getWritten(), ModernizedCProgram.state.getNr_written(), ModernizedCProgram.state.getPack_idx_opts(), generatedHash);
 		for (i = 0; i < ModernizedCProgram.state.getNr_written(); i++) {
 			ModernizedCProgram.free(ModernizedCProgram.state.getWritten()[i]);
 		}
-		.memset(ModernizedCProgram.state, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.state, 0, /*Error: sizeof expression not supported yet*/);
 		packname.strbuf_release();
 		/* Make objects we just wrote available to ourselves */ModernizedCProgram.the_repository.reprepare_packed_git();
 	}
 	/* Lazily create backing packfile for the state */
 	public void prepare_to_stream(int flags) {
 		if (!(flags & 1) || ModernizedCProgram.state.getF()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		hashfile hashfile = new hashfile();
 		ModernizedCProgram.state.setF(hashfile.create_tmp_packfile(ModernizedCProgram.state.getPack_tmp_name()));
@@ -97,10 +97,10 @@ public class bulk_checkin_state {
 	public void setPack_idx_opts(pack_idx_option newPack_idx_opts) {
 		pack_idx_opts = newPack_idx_opts;
 	}
-	public pack_idx_entry getWritten() {
+	public pack_idx_entry[][] getWritten() {
 		return written;
 	}
-	public void setWritten(pack_idx_entry newWritten) {
+	public void setWritten(pack_idx_entry[][] newWritten) {
 		written = newWritten;
 	}
 	public Object getAlloc_written() {

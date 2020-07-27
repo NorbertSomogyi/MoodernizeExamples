@@ -1,6 +1,5 @@
 package application;
 
-// nevercrack is required because it's quite likely that a collision is found which will not necessarily work as password for the archive
 // this is required to force mingw to accept the packed attribute
 public class pkzip_hash {
 	private Object data_type_enum;

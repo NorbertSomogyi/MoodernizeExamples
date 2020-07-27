@@ -43,7 +43,7 @@ public class vlc_source {
 		media_file_data data = new media_file_data();
 		dstr new_path = new dstr(0);
 		 new_media = new ();
-		 is_url = path && .strstr(path, "://") != NULL;
+		 is_url = path && /*Error: Function owner not recognized*/strstr(path, "://") != NULL;
 		new_files.setDa(array);
 		new_path.dstr_copy(path);
 		if (!is_url) {
@@ -63,22 +63,22 @@ public class vlc_source {
 			if (is_url) {
 				dstr network_caching_option = new dstr(0);
 				network_caching_option.dstr_catf(":network-caching=%d", network_caching);
-				.libvlc_media_add_option_(new_media, generatedDstr);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/libvlc_media_add_option_(new_media, generatedDstr);
 				network_caching_option.dstr_free();
 			} 
 			dstr track_option = new dstr(0);
 			track_option.dstr_catf(":audio-track=%d", track_index - 1);
-			.libvlc_media_add_option_(new_media, generatedDstr);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/libvlc_media_add_option_(new_media, generatedDstr);
 			track_option.dstr_free();
 			dstr sub_option = new dstr(0);
 			if (subtitle_enable) {
 				sub_option.dstr_catf(":sub-track=%d", subtitle_index - 1);
 			} 
-			.libvlc_media_add_option_(new_media, generatedDstr);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/libvlc_media_add_option_(new_media, generatedDstr);
 			sub_option.dstr_free();
 			data.setPath(generatedDstr);
 			data.setMedia(new_media);
-			.da_push_back(new_files, data);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(new_files, data);
 		} else {
 				new_path.dstr_free();
 		} 
@@ -105,7 +105,7 @@ public class vlc_source {
 			 new_cy = new_source.obs_source_get_height();
 			data.setPath(ModernizedCProgram.bstrdup(path));
 			data.setSource(new_source);
-			.da_push_back(new_files, data);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(new_files, data);
 			if (new_cx > cx) {
 				cx = new_cx;
 			} 

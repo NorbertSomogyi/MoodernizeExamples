@@ -14,7 +14,7 @@ public class ISeqOutStream {
 	// #define _7ZIP_ST
 	/* max pack size for LZMA2 block + check-64bytrs: */
 	public Object WriteBytes(Object buf, Object size) {
-		return (.UNRECOGNIZEDFUNCTIONNAME(s, buf, size) == size) ? 0 : 9;
+		return (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s, buf, size) == size) ? 0 : 9;
 	}
 	public Object WriteBytesUpdateCrc(Object buf, Object size, Object crc) {
 		crc = ModernizedCProgram.CrcUpdate(crc, buf, size);
@@ -23,7 +23,7 @@ public class ISeqOutStream {
 	public Object Xz_WriteHeader(Object f) {
 		UInt32 crc = new UInt32();
 		Byte[] header = new Byte();
-		.memcpy(header, ModernizedCProgram.XZ_SIG, 6);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(header, ModernizedCProgram.XZ_SIG, 6);
 		header[6] = (Byte)(f >> 8);
 		header[6 + 1] = (Byte)(f & -1024);
 		crc = ModernizedCProgram.CrcCalc(header + 6, 2);
@@ -50,7 +50,7 @@ public class ISeqOutStream {
 			CXzFilter f = p.getFilters()[i];
 			pos += ModernizedCProgram.Xz_WriteVarInt(header + pos, f.getId());
 			pos += ModernizedCProgram.Xz_WriteVarInt(header + pos, f.getPropsSize());
-			.memcpy(header + pos, f.getProps(), f.getPropsSize());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(header + pos, f.getProps(), f.getPropsSize());
 			pos += f.getPropsSize();
 		}
 		while ((pos & 3) != 0) {

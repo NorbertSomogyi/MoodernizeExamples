@@ -20,9 +20,9 @@ public class status_ctx {
 	private Object words_cur;
 	private Object words_base;
 	private Object words_cnt;
-	private Object words_progress_done;
-	private Object words_progress_rejected;
-	private Object words_progress_restored;
+	private Object[] words_progress_done;
+	private Object[] words_progress_rejected;
+	private Object[] words_progress_restored;
 	private Object runtime_start;
 	private Object runtime_stop;
 	private Object timer_running;
@@ -30,7 +30,7 @@ public class status_ctx {
 	private double msec_paused;
 	private Object stdin_read_timeout_cnt;
 	
-	public status_ctx(boolean accessible, Object devices_status, hashcat_status hashcat_status_final, boolean run_main_level1, boolean run_main_level2, boolean run_main_level3, boolean run_thread_level1, boolean run_thread_level2, boolean shutdown_inner, boolean shutdown_outer, boolean checkpoint_shutdown, Object mux_dispatcher, Object mux_counter, Object mux_hwmon, Object mux_display, Object words_off, Object words_cur, Object words_base, Object words_cnt, Object words_progress_done, Object words_progress_rejected, Object words_progress_restored, Object runtime_start, Object runtime_stop, Object timer_running, Object timer_paused, double msec_paused, Object stdin_read_timeout_cnt) {
+	public status_ctx(boolean accessible, Object devices_status, hashcat_status hashcat_status_final, boolean run_main_level1, boolean run_main_level2, boolean run_main_level3, boolean run_thread_level1, boolean run_thread_level2, boolean shutdown_inner, boolean shutdown_outer, boolean checkpoint_shutdown, Object mux_dispatcher, Object mux_counter, Object mux_hwmon, Object mux_display, Object words_off, Object words_cur, Object words_base, Object words_cnt, Object[] words_progress_done, Object[] words_progress_rejected, Object[] words_progress_restored, Object runtime_start, Object runtime_stop, Object timer_running, Object timer_paused, double msec_paused, Object stdin_read_timeout_cnt) {
 		setAccessible(accessible);
 		setDevices_status(devices_status);
 		setHashcat_status_final(hashcat_status_final);
@@ -177,22 +177,22 @@ public class status_ctx {
 	public void setWords_cnt(Object newWords_cnt) {
 		words_cnt = newWords_cnt;
 	}
-	public Object getWords_progress_done() {
+	public Object[] getWords_progress_done() {
 		return words_progress_done;
 	}
-	public void setWords_progress_done(Object newWords_progress_done) {
+	public void setWords_progress_done(Object[] newWords_progress_done) {
 		words_progress_done = newWords_progress_done;
 	}
-	public Object getWords_progress_rejected() {
+	public Object[] getWords_progress_rejected() {
 		return words_progress_rejected;
 	}
-	public void setWords_progress_rejected(Object newWords_progress_rejected) {
+	public void setWords_progress_rejected(Object[] newWords_progress_rejected) {
 		words_progress_rejected = newWords_progress_rejected;
 	}
-	public Object getWords_progress_restored() {
+	public Object[] getWords_progress_restored() {
 		return words_progress_restored;
 	}
-	public void setWords_progress_restored(Object newWords_progress_restored) {
+	public void setWords_progress_restored(Object[] newWords_progress_restored) {
 		words_progress_restored = newWords_progress_restored;
 	}
 	public Object getRuntime_start() {

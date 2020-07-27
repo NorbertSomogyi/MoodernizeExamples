@@ -56,7 +56,7 @@ public class ipc_pipe_server {
 	 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 	 */
 	public boolean ipc_pipe_internal_create_events() {
-		ModernizedCProgram.pipe.setReady_event(.CreateEventA(((Object)0), 0, 0, ((Object)0)));
+		ModernizedCProgram.pipe.setReady_event(/*Error: Function owner not recognized*/CreateEventA(((Object)0), 0, 0, ((Object)0)));
 		return !!ModernizedCProgram.pipe.getReady_event();
 	}
 	public boolean ipc_pipe_internal_create_pipe(Object name) {
@@ -65,40 +65,40 @@ public class ipc_pipe_server {
 		Object sd;
 		DWORD access = 3 | 1073741824;
 		DWORD flags = 4 | 2 | 0;
-		.strcpy_s(new_name, , "\\\\.\\pipe\\");
-		.strcat_s(new_name, , name);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy_s(new_name, /*Error: sizeof expression not supported yet*/, "\\\\.\\pipe\\");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat_s(new_name, /*Error: sizeof expression not supported yet*/, name);
 		sd = ModernizedCProgram.create_full_access_security_descriptor();
 		if (!sd) {
 			return 0;
 		} 
-		sa.setNLength();
+		sa.setNLength(/*Error: sizeof expression not supported yet*/);
 		sa.setLpSecurityDescriptor(sd);
 		sa.setBInheritHandle(0);
-		ModernizedCProgram.pipe.setHandle(.CreateNamedPipeA(new_name, access, flags, 1, 1024, 1024, 0, sa));
-		.free(sd);
+		ModernizedCProgram.pipe.setHandle(/*Error: Function owner not recognized*/CreateNamedPipeA(new_name, access, flags, 1, 1024, 1024, 0, sa));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(sd);
 		return ModernizedCProgram.pipe.getHandle() != (HANDLE)(true);
 	}
 	public void ipc_pipe_internal_ensure_capacity(Object new_size) {
 		if (ModernizedCProgram.pipe.getCapacity() >= new_size) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		ModernizedCProgram.pipe.setRead_data(.realloc(ModernizedCProgram.pipe.getRead_data(), new_size));
+		ModernizedCProgram.pipe.setRead_data(/*Error: Function owner not recognized*/realloc(ModernizedCProgram.pipe.getRead_data(), new_size));
 		ModernizedCProgram.pipe.setCapacity(new_size);
 	}
 	public void ipc_pipe_internal_append_bytes(Object bytes, Object size) {
 		size_t new_size = ModernizedCProgram.pipe.getSize() + size;
 		ModernizedCProgram.pipe.ipc_pipe_internal_ensure_capacity(new_size);
-		.memcpy(ModernizedCProgram.pipe.getRead_data() + ModernizedCProgram.pipe.getSize(), bytes, size);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.pipe.getRead_data() + ModernizedCProgram.pipe.getSize(), bytes, size);
 		ModernizedCProgram.pipe.setSize(new_size);
 	}
 	public boolean ipc_pipe_internal_start_server_thread() {
-		ModernizedCProgram.pipe.setThread(.CreateThread(((Object)0), 0, ipc_pipe_internal_server_thread, ModernizedCProgram.pipe, 0, ((Object)0)));
+		ModernizedCProgram.pipe.setThread(/*Error: Function owner not recognized*/CreateThread(((Object)0), 0, ipc_pipe_internal_server_thread, ModernizedCProgram.pipe, 0, ((Object)0)));
 		return ModernizedCProgram.pipe.getThread() != ((Object)0);
 	}
 	public boolean ipc_pipe_internal_wait_for_connection() {
 		boolean success;
 		ModernizedCProgram.pipe.getOverlap().setHEvent(ModernizedCProgram.pipe.getReady_event());
-		success = !!.ConnectNamedPipe(ModernizedCProgram.pipe.getHandle(), ModernizedCProgram.pipe.getOverlap());
+		success = !!/*Error: Function owner not recognized*/ConnectNamedPipe(ModernizedCProgram.pipe.getHandle(), ModernizedCProgram.pipe.getOverlap());
 		return success || (!success && ModernizedCProgram.ipc_pipe_internal_io_pending());
 	}
 	/* ------------------------------------------------------------------------- */
@@ -122,22 +122,22 @@ public class ipc_pipe_server {
 	}
 	public void ipc_pipe_server_free() {
 		if (!ModernizedCProgram.pipe) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.pipe.getThread()) {
-			.CancelIoEx(ModernizedCProgram.pipe.getHandle(), ModernizedCProgram.pipe.getOverlap());
-			.SetEvent(ModernizedCProgram.pipe.getReady_event());
-			.WaitForSingleObject(ModernizedCProgram.pipe.getThread(), -1024);
-			.CloseHandle(ModernizedCProgram.pipe.getThread());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CancelIoEx(ModernizedCProgram.pipe.getHandle(), ModernizedCProgram.pipe.getOverlap());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SetEvent(ModernizedCProgram.pipe.getReady_event());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/WaitForSingleObject(ModernizedCProgram.pipe.getThread(), -1024);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(ModernizedCProgram.pipe.getThread());
 		} 
 		if (ModernizedCProgram.pipe.getReady_event()) {
-			.CloseHandle(ModernizedCProgram.pipe.getReady_event());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(ModernizedCProgram.pipe.getReady_event());
 		} 
 		if (ModernizedCProgram.pipe.getHandle()) {
-			.CloseHandle(ModernizedCProgram.pipe.getHandle());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(ModernizedCProgram.pipe.getHandle());
 		} 
-		.free(ModernizedCProgram.pipe.getRead_data());
-		.memset(ModernizedCProgram.pipe, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(ModernizedCProgram.pipe.getRead_data());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.pipe, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public _OVERLAPPED getOverlap() {
 		return overlap;

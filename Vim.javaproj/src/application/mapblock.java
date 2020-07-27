@@ -5,7 +5,7 @@ package application;
  */
 public class mapblock {
 	private mapblock m_next;
-	private Object m_keys;
+	private Object[] m_keys;
 	private Object m_str;
 	private Object m_orig_str;
 	private int m_keylen;
@@ -15,7 +15,7 @@ public class mapblock {
 	private byte m_silent;
 	private byte m_nowait;
 	
-	public mapblock(mapblock m_next, Object m_keys, Object m_str, Object m_orig_str, int m_keylen, int m_mode, int m_simplified, int m_noremap, byte m_silent, byte m_nowait) {
+	public mapblock(mapblock m_next, Object[] m_keys, Object m_str, Object m_orig_str, int m_keylen, int m_mode, int m_simplified, int m_noremap, byte m_silent, byte m_nowait) {
 		setM_next(m_next);
 		setM_keys(m_keys);
 		setM_str(m_str);
@@ -46,7 +46,7 @@ public class mapblock {
 	public void map_free() {
 		mapblock_T mp = new mapblock_T();
 		mp = mpp;
-		Object generatedM_keys = mp.getM_keys();
+		Object[] generatedM_keys = mp.getM_keys();
 		ModernizedCProgram.vim_free(generatedM_keys);
 		Object generatedM_str = mp.getM_str();
 		ModernizedCProgram.vim_free(generatedM_str);
@@ -62,22 +62,22 @@ public class mapblock {
 	public void showmap(int local) {
 		// TRUE for buffer-local mapint len = 1;
 		char_u mapchars = new char_u();
-		Object generatedM_keys = this.getM_keys();
+		Object[] generatedM_keys = this.getM_keys();
 		Object generatedM_str = this.getM_str();
 		if (ModernizedCProgram.message_filtered(generatedM_keys) && ModernizedCProgram.message_filtered(generatedM_str)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (msg_didout || msg_silent != 0) {
 			ModernizedCProgram.msg_putchar((byte)'\n');
 			if (got_int) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		int generatedM_mode = this.getM_mode();
 		mapchars = ModernizedCProgram.map_mode_to_chars(generatedM_mode);
 		if (mapchars != ((Object)0)) {
 			ModernizedCProgram.msg_puts((byte)mapchars);
-			len = (int).strlen((byte)(mapchars));
+			len = (int)/*Error: Function owner not recognized*/strlen((byte)(mapchars));
 			ModernizedCProgram.vim_free(mapchars);
 		} 
 		while (++len <= 3) {
@@ -117,7 +117,7 @@ public class mapblock {
 		} 
 		// show one line at a time// show one line at a timeModernizedCProgram.out_flush();
 	}
-	public Object check_map(Object keys, int mode, int exact, int ign_mod, int abbr, int local_ptr) {
+	public Object check_map(Object keys, int mode, int exact, int ign_mod, int abbr, Integer local_ptr) {
 		// do abbreviations// return: pointer to mapblock or NULL// return: buffer-local mapping or NULLint hash;
 		int len;
 		int minlen;
@@ -125,12 +125,12 @@ public class mapblock {
 		char_u s = new char_u();
 		int local;
 		ModernizedCProgram.validate_maphash();
-		len = (int).strlen((byte)(keys));
+		len = (int)/*Error: Function owner not recognized*/strlen((byte)(keys));
 		mapblock generatedB_first_abbr = curbuf.getB_first_abbr();
 		Object generatedB_maphash = curbuf.getB_maphash();
 		int generatedM_mode = mp.getM_mode();
 		int generatedM_keylen = mp.getM_keylen();
-		Object generatedM_keys = mp.getM_keys();
+		Object[] generatedM_keys = mp.getM_keys();
 		Object generatedM_str = mp.getM_str();
 		mapblock generatedM_next = mp.getM_next();
 		for (local = 1; local >= 0; --local) {
@@ -163,7 +163,7 @@ public class mapblock {
 								minlen = generatedM_keylen - 3;
 							} 
 						} 
-						if (.strncmp((byte)(s), (byte)(keys), (size_t)(minlen)) == 0) {
+						if (/*Error: Function owner not recognized*/strncmp((byte)(s), (byte)(keys), (size_t)(minlen)) == 0) {
 							if (mp_ptr != ((Object)0)) {
 								mp_ptr = mp;
 							} 
@@ -186,10 +186,10 @@ public class mapblock {
 	public void setM_next(mapblock newM_next) {
 		m_next = newM_next;
 	}
-	public Object getM_keys() {
+	public Object[] getM_keys() {
 		return m_keys;
 	}
-	public void setM_keys(Object newM_keys) {
+	public void setM_keys(Object[] newM_keys) {
 		m_keys = newM_keys;
 	}
 	public Object getM_str() {

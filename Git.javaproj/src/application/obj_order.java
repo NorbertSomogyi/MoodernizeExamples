@@ -17,14 +17,14 @@ public class obj_order {
 	public void order_objects(Object orderfile, Object obj_path, int nr) {
 		int i;
 		if (!nr) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.prepare_order(orderfile);
 		for (i = 0; i < nr; i++) {
 			objs[i].setOrig_order(i);
-			objs[i].setOrder(ModernizedCProgram.match_order(.obj_path(objs[i].getObj())));
+			objs[i].setOrder(ModernizedCProgram.match_order(/*Error: Function owner not recognized*/obj_path(objs[i].getObj())));
 		}
-		ModernizedCProgram.sane_qsort((objs), (nr), , compare_objs_order);
+		ModernizedCProgram.sane_qsort((objs), (nr), /*Error: sizeof expression not supported yet*/, compare_objs_order);
 	}
 	public Object getObj() {
 		return obj;

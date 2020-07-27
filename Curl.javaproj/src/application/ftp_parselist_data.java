@@ -23,7 +23,7 @@ public class ftp_parselist_data {
 	}
 	
 	public ftp_parselist_data Curl_ftp_parselist_data_alloc() {
-		return .Curl_ccalloc(1, );
+		return /*Error: Function owner not recognized*/Curl_ccalloc(1, /*Error: Unsupported expression*/);
 	}
 	public void Curl_ftp_parselist_data_free() {
 		ftp_parselist_data parser = parserp;
@@ -31,7 +31,7 @@ public class ftp_parselist_data {
 		if (parser) {
 			generatedFile_data.Curl_fileinfo_cleanup();
 		} 
-		.Curl_cfree(parser);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(parser);
 		parserp = ((Object)0);
 	}
 	public Object Curl_ftp_parselist_geterror() {

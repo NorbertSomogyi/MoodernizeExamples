@@ -15,6 +15,71 @@ public class matrix4 {
 	public matrix4() {
 	}
 	
+	public void matrix4_copy(Object m) {
+		vec4 generatedX = this.getX();
+		generatedX.setM(m.getX().getM());
+		vec4 generatedY = this.getY();
+		generatedY.setM(m.getY().getM());
+		vec4 generatedZ = this.getZ();
+		generatedZ.setM(m.getZ().getM());
+		vec4 generatedT = this.getT();
+		generatedT.setM(m.getT().getM());
+	}
+	public void matrix4_identity() {
+		vec4 generatedX = this.getX();
+		generatedX.vec4_zero();
+		vec4 generatedY = this.getY();
+		generatedY.vec4_zero();
+		vec4 generatedZ = this.getZ();
+		generatedZ.vec4_zero();
+		vec4 generatedT = this.getT();
+		generatedT.vec4_zero();
+		generatedX.setX(1.0);
+		generatedY.setY(1.0);
+		generatedZ.setZ(1.0);
+		generatedT.setW(1.0);
+	}
+	public void matrix4_translate3f(Object m, double x, double y, double z) {
+		vec3 v = new vec3();
+		v.vec3_set(x, y, z);
+		dst.matrix4_translate3v(m, v);
+	}
+	public void matrix4_rotate_aa4f(Object m, double x, double y, double z, double rot) {
+		axisang aa = new axisang();
+		aa.axisang_set(x, y, z, rot);
+		dst.matrix4_rotate_aa(m, aa);
+	}
+	public void matrix4_scale3f(Object m, double x, double y, double z) {
+		vec3 v = new vec3();
+		v.vec3_set(x, y, z);
+		dst.matrix4_scale(m, v);
+	}
+	public void obs_sceneitem_get_draw_transform(Object item) {
+		if (item) {
+			transform.matrix4_copy(item.getDraw_transform());
+		} 
+	}
+	public void obs_sceneitem_get_box_transform(Object item) {
+		if (item) {
+			transform.matrix4_copy(item.getBox_transform());
+		} 
+	}
+	public matrix4 top_matrix(graphics_subsystem graphics) {
+		Object generatedMatrix_stack = graphics.getMatrix_stack();
+		Object generatedCur_matrix = graphics.getCur_matrix();
+		return generatedMatrix_stack.getArray() + generatedCur_matrix;
+	}
+	public void gs_matrix_get() {
+		matrix4 top_mat = new matrix4();
+		if (!ModernizedCProgram.gs_valid("gs_matrix_get")) {
+			return /*Error: Unsupported expression*/;
+		} 
+		matrix4 matrix4 = new matrix4();
+		top_mat = matrix4.top_matrix(thread_graphics);
+		if (top_mat) {
+			dst.matrix4_copy(top_mat);
+		} 
+	}
 	/******************************************************************************
 	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
 	
@@ -188,7 +253,7 @@ public class matrix4 {
 		} 
 		dstv = (vec4)dst;
 		det = ModernizedCProgram.matrix4_determinant(m);
-		if (.fabs(det) < 5.0E-4) {
+		if (/*Error: Function owner not recognized*/fabs(det) < 5.0E-4) {
 			return false;
 		} 
 		for (i = 0; i < 4; i++) {
@@ -204,85 +269,20 @@ public class matrix4 {
 		if (dst == m) {
 			matrix4 temp = m;
 			dst.matrix4_transpose(temp);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		__m128 a0 = ._mm_unpacklo_ps(m.getX().getM(), m.getZ().getM());
-		__m128 a1 = ._mm_unpacklo_ps(m.getY().getM(), m.getT().getM());
-		__m128 a2 = ._mm_unpackhi_ps(m.getX().getM(), m.getZ().getM());
-		__m128 a3 = ._mm_unpackhi_ps(m.getY().getM(), m.getT().getM());
+		__m128 a0 = /*Error: Function owner not recognized*/_mm_unpacklo_ps(m.getX().getM(), m.getZ().getM());
+		__m128 a1 = /*Error: Function owner not recognized*/_mm_unpacklo_ps(m.getY().getM(), m.getT().getM());
+		__m128 a2 = /*Error: Function owner not recognized*/_mm_unpackhi_ps(m.getX().getM(), m.getZ().getM());
+		__m128 a3 = /*Error: Function owner not recognized*/_mm_unpackhi_ps(m.getY().getM(), m.getT().getM());
 		vec4 generatedX = this.getX();
-		generatedX.setM(._mm_unpacklo_ps(a0, a1));
+		generatedX.setM(/*Error: Function owner not recognized*/_mm_unpacklo_ps(a0, a1));
 		vec4 generatedY = this.getY();
-		generatedY.setM(._mm_unpackhi_ps(a0, a1));
+		generatedY.setM(/*Error: Function owner not recognized*/_mm_unpackhi_ps(a0, a1));
 		vec4 generatedZ = this.getZ();
-		generatedZ.setM(._mm_unpacklo_ps(a2, a3));
+		generatedZ.setM(/*Error: Function owner not recognized*/_mm_unpacklo_ps(a2, a3));
 		vec4 generatedT = this.getT();
-		generatedT.setM(._mm_unpackhi_ps(a2, a3));
-	}
-	public void matrix4_copy(Object m) {
-		vec4 generatedX = this.getX();
-		generatedX.setM(m.getX().getM());
-		vec4 generatedY = this.getY();
-		generatedY.setM(m.getY().getM());
-		vec4 generatedZ = this.getZ();
-		generatedZ.setM(m.getZ().getM());
-		vec4 generatedT = this.getT();
-		generatedT.setM(m.getT().getM());
-	}
-	public void matrix4_identity() {
-		vec4 generatedX = this.getX();
-		generatedX.vec4_zero();
-		vec4 generatedY = this.getY();
-		generatedY.vec4_zero();
-		vec4 generatedZ = this.getZ();
-		generatedZ.vec4_zero();
-		vec4 generatedT = this.getT();
-		generatedT.vec4_zero();
-		generatedX.setX(1.0);
-		generatedY.setY(1.0);
-		generatedZ.setZ(1.0);
-		generatedT.setW(1.0);
-	}
-	public void matrix4_translate3f(Object m, double x, double y, double z) {
-		vec3 v = new vec3();
-		v.vec3_set(x, y, z);
-		dst.matrix4_translate3v(m, v);
-	}
-	public void matrix4_rotate_aa4f(Object m, double x, double y, double z, double rot) {
-		axisang aa = new axisang();
-		aa.axisang_set(x, y, z, rot);
-		dst.matrix4_rotate_aa(m, aa);
-	}
-	public void matrix4_scale3f(Object m, double x, double y, double z) {
-		vec3 v = new vec3();
-		v.vec3_set(x, y, z);
-		dst.matrix4_scale(m, v);
-	}
-	public void obs_sceneitem_get_draw_transform(Object item) {
-		if (item) {
-			transform.matrix4_copy(item.getDraw_transform());
-		} 
-	}
-	public void obs_sceneitem_get_box_transform(Object item) {
-		if (item) {
-			transform.matrix4_copy(item.getBox_transform());
-		} 
-	}
-	public matrix4 top_matrix(graphics_subsystem graphics) {
-		Object generatedMatrix_stack = graphics.getMatrix_stack();
-		Object generatedCur_matrix = graphics.getCur_matrix();
-		return generatedMatrix_stack.getArray() + generatedCur_matrix;
-	}
-	public void gs_matrix_get() {
-		matrix4 top_mat = new matrix4();
-		if (!ModernizedCProgram.gs_valid("gs_matrix_get")) {
-			return ;
-		} 
-		matrix4 matrix4 = new matrix4();
-		top_mat = matrix4.top_matrix(thread_graphics);
-		if (top_mat) {
-			dst.matrix4_copy(top_mat);
-		} 
+		generatedT.setM(/*Error: Function owner not recognized*/_mm_unpackhi_ps(a2, a3));
 	}
 	public vec4 getX() {
 		return x;

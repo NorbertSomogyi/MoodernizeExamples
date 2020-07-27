@@ -16,7 +16,7 @@ public class argentry {
 		int generatedAe_fnum = this.getAe_fnum();
 		file_buffer file_buffer = new file_buffer();
 		// Use the name from the associated buffer if it exists.// Use the name from the associated buffer if it exists.bp = file_buffer.buflist_findnr(generatedAe_fnum);
-		Object generatedB_fname = bp.getB_fname();
+		Object[] generatedB_fname = bp.getB_fname();
 		Object generatedAe_fname = this.getAe_fname();
 		if (bp == ((Object)0) || generatedB_fname == ((Object)0)) {
 			return generatedAe_fname;

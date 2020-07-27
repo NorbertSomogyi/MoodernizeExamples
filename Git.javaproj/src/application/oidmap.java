@@ -15,7 +15,7 @@ public class oidmap {
 	}
 	public void oidmap_free(int free_entries) {
 		if (!map) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		hashmap generatedMap = this.getMap();
 		generatedMap.hashmap_free_(free_entries ? 0 : -/* TODO: make oidmap itself not depend on struct layouts */1);

@@ -19,7 +19,7 @@ public class text_node {
 	public void text_node_destroy() {
 		text_node subnode = new text_node();
 		if (!node) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		text_node generatedFirst_subnode = this.getFirst_subnode();
 		subnode = generatedFirst_subnode;
@@ -41,7 +41,7 @@ public class text_node {
 		text_node generatedFirst_subnode = this.getFirst_subnode();
 		text_node subnode = generatedFirst_subnode;
 		dstr generatedStr = subnode.getStr();
-		byte generatedArray = generatedStr.getArray();
+		byte[] generatedArray = generatedStr.getArray();
 		text_node generatedNext = subnode.getNext();
 		while (subnode) {
 			if (!ModernizedCProgram.dstr_is_empty(generatedStr) && generatedArray[0] == ch) {
@@ -55,7 +55,7 @@ public class text_node {
 		text_node generatedFirst_subnode = this.getFirst_subnode();
 		text_node subnode = generatedFirst_subnode;
 		dstr generatedStr = subnode.getStr();
-		byte generatedArray = generatedStr.getArray();
+		byte[] generatedArray = generatedStr.getArray();
 		Object generatedLen = generatedStr.getLen();
 		text_node generatedNext = subnode.getNext();
 		while (subnode) {

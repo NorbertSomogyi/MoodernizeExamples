@@ -37,10 +37,6 @@ public class ffmpeg_decode {
 	public ffmpeg_decode() {
 	}
 	
-	public Object ffmpeg_decode_valid() {
-		Object generatedDecoder = this.getDecoder();
-		return generatedDecoder != NULL;
-	}
 	/******************************************************************************
 	    Copyright (C) 2014 by Hugh Bailey <obs.jim@gmail.com>
 	
@@ -59,17 +55,17 @@ public class ffmpeg_decode {
 	******************************************************************************/
 	public int ffmpeg_decode_init(Object id, Object use_hw) {
 		int ret;
-		.memset(decode, 0, );
-		this.setCodec(.avcodec_find_decoder(id));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(decode, 0, /*Error: sizeof expression not supported yet*/);
+		this.setCodec(/*Error: Function owner not recognized*/avcodec_find_decoder(id));
 		Object generatedCodec = this.getCodec();
 		if (!generatedCodec) {
 			return -1;
 		} 
-		this.setDecoder(.avcodec_alloc_context3(generatedCodec));
+		this.setDecoder(/*Error: Function owner not recognized*/avcodec_alloc_context3(generatedCodec));
 		Object generatedDecoder = this.getDecoder();
 		generatedDecoder.setThread_count(0);
 		(Object)use_hw;
-		ret = .avcodec_open2(generatedDecoder, generatedCodec, NULL);
+		ret = /*Error: Function owner not recognized*/avcodec_open2(generatedDecoder, generatedCodec, NULL);
 		if (ret < 0) {
 			decode.ffmpeg_decode_free();
 			return ret;
@@ -82,22 +78,26 @@ public class ffmpeg_decode {
 	public void ffmpeg_decode_free() {
 		Object generatedHw_frame = this.getHw_frame();
 		if (generatedHw_frame) {
-			.av_free(generatedHw_frame);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(generatedHw_frame);
 		} 
 		Object generatedDecoder = this.getDecoder();
 		if (generatedDecoder) {
-			.avcodec_close(generatedDecoder);
-			.av_free(generatedDecoder);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avcodec_close(generatedDecoder);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(generatedDecoder);
 		} 
 		Object generatedFrame = this.getFrame();
 		if (generatedFrame) {
-			.av_free(generatedFrame);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(generatedFrame);
 		} 
 		Object generatedPacket_buffer = this.getPacket_buffer();
 		if (generatedPacket_buffer) {
 			ModernizedCProgram.bfree(generatedPacket_buffer);
 		} 
-		.memset(decode, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(decode, 0, /*Error: sizeof expression not supported yet*/);
+	}
+	public Object ffmpeg_decode_valid() {
+		Object generatedDecoder = this.getDecoder();
+		return generatedDecoder != NULL;
 	}
 	public Object getDecoder() {
 		return decoder;

@@ -3,12 +3,12 @@ package application;
 public class cf_lexer {
 	private Byte file;
 	private lexer base_lexer;
-	private Byte reformatted;
-	private byte write_offset;
+	private byte[] reformatted;
+	private byte[] write_offset;
 	private  tokens;
 	private boolean unexpected_eof;
 	
-	public cf_lexer(Byte file, lexer base_lexer, Byte reformatted, byte write_offset,  tokens, boolean unexpected_eof) {
+	public cf_lexer(Byte file, lexer base_lexer, byte[] reformatted, byte[] write_offset,  tokens, boolean unexpected_eof) {
 		setFile(file);
 		setBase_lexer(base_lexer);
 		setReformatted(reformatted);
@@ -20,8 +20,8 @@ public class cf_lexer {
 	}
 	
 	public void cf_lexer_write_strref(Object ref) {
-		byte generatedWrite_offset = this.getWrite_offset();
-		.strncpy(generatedWrite_offset, ref.getArray(), ref.getLen());
+		byte[] generatedWrite_offset = this.getWrite_offset();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strncpy(generatedWrite_offset, ref.getArray(), ref.getLen());
 		generatedWrite_offset[ref.getLen()] = 0;
 		generatedWrite_offset += ref.getLen();
 	}
@@ -68,7 +68,7 @@ public class cf_lexer {
 	public void cf_lexer_free() {
 		Byte generatedFile = this.getFile();
 		ModernizedCProgram.bfree(generatedFile);
-		Byte generatedReformatted = this.getReformatted();
+		byte[] generatedReformatted = this.getReformatted();
 		ModernizedCProgram.bfree(generatedReformatted);
 		lexer generatedBase_lexer = this.getBase_lexer();
 		generatedBase_lexer.lexer_free();
@@ -93,12 +93,12 @@ public class cf_lexer {
 		lexer generatedBase_lexer = this.getBase_lexer();
 		generatedBase_lexer.lexer_start(str);
 		token.cf_token_clear();
-		this.setReformatted(ModernizedCProgram.bmalloc(.strlen(str) + 1));
-		Byte generatedReformatted = this.getReformatted();
+		this.setReformatted(ModernizedCProgram.bmalloc(/*Error: Function owner not recognized*/strlen(str) + 1));
+		byte[] generatedReformatted = this.getReformatted();
 		generatedReformatted[0] = 0;
 		this.setWrite_offset(generatedReformatted);
 		strref generatedStr = last_token.getStr();
-		Object generatedArray = generatedStr.getArray();
+		Object[] generatedArray = generatedStr.getArray();
 		 generatedTokens = this.getTokens();
 		Object generatedDa = generatedTokens.getDa();
 		while (ModernizedCProgram.cf_lexer_nexttoken(lex, token)) {
@@ -107,17 +107,17 @@ public class cf_lexer {
 				continue;
 			} 
 			token.setLex(lex);
-			last_token = generatedDa.darray_push_back_new();
-			.memcpy(last_token, token, );
+			last_token = generatedDa.darray_push_back_new(/*Error: sizeof expression not supported yet*/);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(last_token, token, /*Error: Unsupported expression*/);
 		}
 		token.cf_token_clear();
-		byte generatedWrite_offset = this.getWrite_offset();
+		byte[] generatedWrite_offset = this.getWrite_offset();
 		generatedStr.setArray(generatedWrite_offset);
 		Object generatedOffset = generatedBase_lexer.getOffset();
 		strref generatedUnmerged_str = token.getUnmerged_str();
 		generatedUnmerged_str.setArray(generatedOffset);
 		token.setLex(lex);
-		generatedDa.darray_push_back(, token);
+		generatedDa.darray_push_back(/*Error: sizeof expression not supported yet*/, token);
 		boolean generatedUnexpected_eof = this.getUnexpected_eof();
 		return !generatedUnexpected_eof;
 	}
@@ -133,16 +133,16 @@ public class cf_lexer {
 	public void setBase_lexer(lexer newBase_lexer) {
 		base_lexer = newBase_lexer;
 	}
-	public Byte getReformatted() {
+	public byte[] getReformatted() {
 		return reformatted;
 	}
-	public void setReformatted(Byte newReformatted) {
+	public void setReformatted(byte[] newReformatted) {
 		reformatted = newReformatted;
 	}
-	public byte getWrite_offset() {
+	public byte[] getWrite_offset() {
 		return write_offset;
 	}
-	public void setWrite_offset(byte newWrite_offset) {
+	public void setWrite_offset(byte[] newWrite_offset) {
 		write_offset = newWrite_offset;
 	}
 	public  getTokens() {

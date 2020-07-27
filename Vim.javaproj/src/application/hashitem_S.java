@@ -58,7 +58,7 @@ public class hashitem_S {
 		int idx;
 		Object generatedHt_mask = ht.getHt_mask();
 		idx = (int)(hash & generatedHt_mask);
-		hashitem_S generatedHt_array = ht.getHt_array();
+		hashitem_S[] generatedHt_array = ht.getHt_array();
 		hi = generatedHt_array[idx];
 		Object generatedHi_key = hi.getHi_key();
 		if (generatedHi_key == ((Object)0)) {
@@ -67,7 +67,7 @@ public class hashitem_S {
 		Object generatedHi_hash = hi.getHi_hash();
 		if (generatedHi_key == ModernizedCProgram.hash_removed) {
 			freeitem = hi;
-		}  else if (generatedHi_hash == hash && .strcmp((byte)(generatedHi_key), (byte)(key)) == 0) {
+		}  else if (generatedHi_hash == hash && /*Error: Function owner not recognized*/strcmp((byte)(generatedHi_key), (byte)(key)) == 0) {
 			return hi;
 		} else {
 				freeitem = ((Object)0/*
@@ -80,13 +80,13 @@ public class hashitem_S {
 				     * item).
 				     */);
 		} 
-		for (perturb = hash; ; perturb >>=  5) {
+		for (perturb = hash; /*Error: Unsupported expression*/; perturb >>=  5) {
 			idx = (int)((idx << -1024) + idx + perturb + /* count a "miss" for hashtab lookup */-1024);
 			hi = generatedHt_array[idx & generatedHt_mask];
 			if (generatedHi_key == ((Object)0)) {
 				return freeitem == ((Object)0) ? hi : freeitem;
 			} 
-			if (generatedHi_hash == hash && generatedHi_key != ModernizedCProgram.hash_removed && .strcmp((byte)(generatedHi_key), (byte)(key)) == 0) {
+			if (generatedHi_hash == hash && generatedHi_key != ModernizedCProgram.hash_removed && /*Error: Function owner not recognized*/strcmp((byte)(generatedHi_key), (byte)(key)) == 0) {
 				return hi;
 			} 
 			if (generatedHi_key == ModernizedCProgram.hash_removed && freeitem == ((Object)0)) {

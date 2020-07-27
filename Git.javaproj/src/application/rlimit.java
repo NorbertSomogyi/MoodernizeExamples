@@ -11,7 +11,7 @@ public class rlimit {
 	
 	public int getrlimit(int resource) {
 		if (resource != 0) {
-			(._errno()) = EINVAL;
+			(/*Error: Function owner not recognized*/_errno()) = EINVAL;
 			return -1;
 		} 
 		this.setRlim_cur(2048);

@@ -38,11 +38,11 @@ public class noise_suppress_data {
 	
 	public void alloc_channel(Object sample_rate, Object channel, Object frames) {
 		Object generatedStates = this.getStates();
-		generatedStates[channel] = .speex_preprocess_state_init((int)frames, sample_rate);
+		generatedStates[channel] = /*Error: Function owner not recognized*/speex_preprocess_state_init((int)frames, sample_rate);
 		Object generatedInput_buffers = this.getInput_buffers();
-		generatedInput_buffers[channel].circlebuf_reserve(frames * );
+		generatedInput_buffers[channel].circlebuf_reserve(frames * /*Error: Unsupported expression*/);
 		Object generatedOutput_buffers = this.getOutput_buffers();
-		generatedOutput_buffers[channel].circlebuf_reserve(frames * );
+		generatedOutput_buffers[channel].circlebuf_reserve(frames * /*Error: Unsupported expression*/);
 	}
 	public void reset_data() {
 		Object generatedChannels = this.getChannels();

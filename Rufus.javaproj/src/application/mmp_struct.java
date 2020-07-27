@@ -62,7 +62,7 @@ public class mmp_struct {
 		} 
 		calculated = mmp.ext2fs_mmp_csum(fs);
 		Object generatedMmp_checksum = this.getMmp_checksum();
-		return .ext2fs_le32_to_cpu(generatedMmp_checksum) == calculated;
+		return /*Error: Function owner not recognized*/ext2fs_le32_to_cpu(generatedMmp_checksum) == calculated;
 	}
 	public Object ext2fs_mmp_csum_set(Object fs) {
 		 crc = new ();
@@ -70,7 +70,7 @@ public class mmp_struct {
 			return 0;
 		} 
 		crc = mmp.ext2fs_mmp_csum(fs);
-		this.setMmp_checksum(.ext2fs_cpu_to_le32(crc));
+		this.setMmp_checksum(/*Error: Function owner not recognized*/ext2fs_cpu_to_le32(crc));
 		return 0;
 	}
 	public Object getMmp_magic() {

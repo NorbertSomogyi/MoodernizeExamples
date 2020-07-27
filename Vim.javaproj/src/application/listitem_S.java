@@ -20,7 +20,7 @@ public class listitem_S {
 	}
 	
 	public listitem_S listitem_alloc() {
-		return (listitem_T)ModernizedCProgram.alloc(/*
+		return (listitem_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*//*
 		 * Free a list item.  Also clears the value.  Does not notify watchers.
 		 */);
 	}

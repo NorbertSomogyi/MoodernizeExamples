@@ -125,8 +125,8 @@ public class _CMtCoder {
 	public void MtCoder_Destruct() {
 		p.MtCoder_Free();
 		Object generatedCs = this.getCs();
-		.DeleteCriticalSection(generatedCs);
-		.DeleteCriticalSection(generatedCs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteCriticalSection(generatedCs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteCriticalSection(generatedCs);
 	}
 	public Object MtCoder_Code() {
 		int generatedNumThreadsMax = this.getNumThreadsMax();
@@ -159,7 +159,7 @@ public class _CMtCoder {
 			for (i = 0; i < 64; i++) {
 				CMtCoderThread t = generatedThreads[i];
 				if (generatedInBuf) {
-					.UNRECOGNIZEDFUNCTIONNAME(generatedAllocBig, generatedInBuf);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAllocBig, generatedInBuf);
 					t.setInBuf(((Object)0));
 				} 
 			}

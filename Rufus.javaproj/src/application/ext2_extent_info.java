@@ -47,7 +47,7 @@ public class ext2_extent_info {
 		if (!(handle) || (handle).getMagic() != (EXT2_ET_MAGIC_EXTENT_HANDLE)) {
 			return (EXT2_ET_MAGIC_EXTENT_HANDLE);
 		} 
-		.memset(info, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(info, 0, /*Error: Unsupported expression*/);
 		path = handle.getPath() + handle.getLevel();
 		Object generatedCurr = path.getCurr();
 		Byte generatedBuf = path.getBuf();
@@ -55,13 +55,13 @@ public class ext2_extent_info {
 		int generatedMax_entries = path.getMax_entries();
 		if (path) {
 			if (generatedCurr) {
-				this.setCurr_entry(((byte)generatedCurr - generatedBuf) / );
+				this.setCurr_entry(((byte)generatedCurr - generatedBuf) / /*Error: Unsupported expression*/);
 			} else {
 					this.setCurr_entry(0);
 			} 
 			this.setNum_entries(generatedEntries);
 			this.setMax_entries(generatedMax_entries);
-			this.setBytes_avail((generatedMax_entries - generatedEntries) * );
+			this.setBytes_avail((generatedMax_entries - generatedEntries) * /*Error: Unsupported expression*/);
 		} 
 		this.setCurr_level(handle.getLevel());
 		this.setMax_depth(handle.getMax_depth());

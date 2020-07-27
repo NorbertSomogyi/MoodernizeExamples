@@ -19,11 +19,11 @@ public class spanhash_top {
 		int generatedAlloc_log2 = this.getAlloc_log2();
 		int osz = 1 << generatedAlloc_log2;
 		int sz = osz << 1;
-		new_spanhash = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(, ModernizedCProgram.st_mult(, sz)));
+		new_spanhash = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(/*Error: sizeof expression not supported yet*/, ModernizedCProgram.st_mult(/*Error: Unsupported expression*/, sz)));
 		new_spanhash.setAlloc_log2(generatedAlloc_log2 + 1);
 		new_spanhash.setFree(((1 << (generatedAlloc_log2)) * (generatedAlloc_log2 - 3) / (generatedAlloc_log2)));
 		Object generatedData = new_spanhash.getData();
-		.memset(generatedData, 0,  * sz);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedData, 0, /*Error: Unsupported expression*/ * sz);
 		int generatedCnt = o.getCnt();
 		int generatedHashval = o.getHashval();
 		int generatedFree = new_spanhash.getFree();
@@ -92,12 +92,12 @@ public class spanhash_top {
 		byte buf = generatedData;
 		long generatedSize = one.getSize();
 		int sz = generatedSize;
-		int is_text = !.diff_filespec_is_binary(r, one);
+		int is_text = !/*Error: Function owner not recognized*/diff_filespec_is_binary(r, one);
 		i = 9;
-		hash = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(, ModernizedCProgram.st_mult(, 1 << i)));
+		hash = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(/*Error: sizeof expression not supported yet*/, ModernizedCProgram.st_mult(/*Error: Unsupported expression*/, 1 << i)));
 		hash.setAlloc_log2(i);
 		hash.setFree(((1 << (i)) * (i - 3) / (i)));
-		.memset(generatedData, 0,  * (1 << i));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedData, 0, /*Error: Unsupported expression*/ * (1 << i));
 		n = 0;
 		accum1 = accum2 = 0;
 		while (sz) {
@@ -119,7 +119,7 @@ public class spanhash_top {
 			accum1 = accum2 = 0;
 		}
 		int generatedAlloc_log2 = hash.getAlloc_log2();
-		ModernizedCProgram.sane_qsort((generatedData), (-1024 << generatedAlloc_log2), , spanhash_cmp);
+		ModernizedCProgram.sane_qsort((generatedData), (-1024 << generatedAlloc_log2), /*Error: sizeof expression not supported yet*/, spanhash_cmp);
 		return hash;
 	}
 	public int getAlloc_log2() {

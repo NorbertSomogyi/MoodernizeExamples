@@ -32,18 +32,18 @@ public class ServerReply {
 		growarray generatedStrings = e.getStrings();
 		if (p == ((Object)0) && ServerReplyOp.op == ServerReplyOp.SROP_Add) {
 			if (ModernizedCProgram.serverReply.getGa_growsize() == 0) {
-				ModernizedCProgram.serverReply.ga_init2(, 1);
+				ModernizedCProgram.serverReply.ga_init2(/*Error: Unsupported expression*/, 1);
 			} 
 			if (ModernizedCProgram.serverReply.ga_grow(1) == 1) {
 				p = ((ServerReply)ModernizedCProgram.serverReply.getGa_data()) + ModernizedCProgram.serverReply.getGa_len();
 				e.setId(w);
 				generatedStrings.ga_init2(1, 100);
-				.memmove((byte)(p), (byte)(e), (size_t)());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(p), (byte)(e), (size_t)(/*Error: sizeof expression not supported yet*/));
 				ModernizedCProgram.serverReply.getGa_len()++;
 			} 
 		}  else if (p != ((Object)0) && ServerReplyOp.op == ServerReplyOp.SROP_Delete) {
 			generatedStrings.ga_clear();
-			.memmove((byte)(p), (byte)(p + 1), (size_t)((ModernizedCProgram.serverReply.getGa_len() - i - 1) * ));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(p), (byte)(p + 1), (size_t)((ModernizedCProgram.serverReply.getGa_len() - i - 1) * /*Error: sizeof expression not supported yet*/));
 			ModernizedCProgram.serverReply.getGa_len()--;
 		} 
 		return p/*

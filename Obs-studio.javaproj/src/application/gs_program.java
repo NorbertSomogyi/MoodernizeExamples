@@ -21,6 +21,28 @@ public class gs_program {
 	public gs_program() {
 	}
 	
+	public gs_program find_program(Object device) {
+		gs_program program = device.getFirst_program();
+		gs_shader generatedVertex_shader = program.getVertex_shader();
+		gs_shader generatedPixel_shader = program.getPixel_shader();
+		gs_program generatedNext = program.getNext();
+		while (program) {
+			if (generatedVertex_shader == device.getCur_vertex_shader() && generatedPixel_shader == device.getCur_pixel_shader()) {
+				return program;
+			} 
+			program = generatedNext;
+		}
+		return NULL;
+	}
+	public gs_program get_shader_program(gs_device device) {
+		gs_program gs_program = new gs_program();
+		gs_program program = gs_program.find_program(device);
+		gs_program gs_program = new gs_program();
+		if (!program) {
+			program = gs_program.gs_program_create(device);
+		} 
+		return program;
+	}
 	public void program_update_params() {
 		Object generatedParams = this.getParams();
 		for ( i = 0;
@@ -54,31 +76,31 @@ public class gs_program {
 		return true;
 	}
 	public gs_program gs_program_create(gs_device device) {
-		gs_program program = ModernizedCProgram.bzalloc();
+		gs_program program = ModernizedCProgram.bzalloc(/*Error: sizeof expression not supported yet*/);
 		int linked = false;
 		program.setDevice(device);
 		Object generatedCur_vertex_shader = device.getCur_vertex_shader();
 		program.setVertex_shader(generatedCur_vertex_shader);
 		Object generatedCur_pixel_shader = device.getCur_pixel_shader();
 		program.setPixel_shader(generatedCur_pixel_shader);
-		program.setObj(.glCreateProgram());
+		program.setObj(/*Error: Function owner not recognized*/glCreateProgram());
 		if (!ModernizedCProgram.gl_success("glCreateProgram")) {
 			;
 		} 
 		Object generatedObj = program.getObj();
-		.glAttachShader(generatedObj, generatedObj);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glAttachShader(generatedObj, generatedObj);
 		if (!ModernizedCProgram.gl_success("glAttachShader (vertex)")) {
 			;
 		} 
-		.glAttachShader(generatedObj, generatedObj);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glAttachShader(generatedObj, generatedObj);
 		if (!ModernizedCProgram.gl_success("glAttachShader (pixel)")) {
 			;
 		} 
-		.glLinkProgram(generatedObj);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glLinkProgram(generatedObj);
 		if (!ModernizedCProgram.gl_success("glLinkProgram")) {
 			;
 		} 
-		.glGetProgramiv(generatedObj, GL_LINK_STATUS, linked);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glGetProgramiv(generatedObj, GL_LINK_STATUS, linked);
 		if (!ModernizedCProgram.gl_success("glGetProgramiv")) {
 			;
 		} 
@@ -92,9 +114,9 @@ public class gs_program {
 		if (!program.assign_program_params()) {
 			;
 		} 
-		.glDetachShader(generatedObj, generatedObj);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glDetachShader(generatedObj, generatedObj);
 		ModernizedCProgram.gl_success("glDetachShader (vertex)");
-		.glDetachShader(generatedObj, generatedObj);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glDetachShader(generatedObj, generatedObj);
 		ModernizedCProgram.gl_success("glDetachShader (pixel)");
 		gs_program generatedFirst_program = device.getFirst_program();
 		program.setNext(generatedFirst_program);
@@ -111,18 +133,18 @@ public class gs_program {
 	}
 	public void gs_program_destroy() {
 		if (!program) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedDevice = this.getDevice();
 		if (generatedDevice.getCur_program() == program) {
 			generatedDevice.setCur_program(0);
-			.glUseProgram(0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glUseProgram(0);
 			ModernizedCProgram.gl_success("glUseProgram (zero)");
 		} 
 		Object generatedAttribs = this.getAttribs();
-		.da_free(generatedAttribs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedAttribs);
 		Object generatedParams = this.getParams();
-		.da_free(generatedParams);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedParams);
 		gs_program generatedNext = this.getNext();
 		gs_program generatedPrev_next = this.getPrev_next();
 		if (generatedNext) {
@@ -132,31 +154,9 @@ public class gs_program {
 			generatedPrev_next = generatedNext;
 		} 
 		Object generatedObj = this.getObj();
-		.glDeleteProgram(generatedObj);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glDeleteProgram(generatedObj);
 		ModernizedCProgram.gl_success("glDeleteProgram");
 		ModernizedCProgram.bfree(program);
-	}
-	public gs_program find_program(Object device) {
-		gs_program program = device.getFirst_program();
-		gs_shader generatedVertex_shader = program.getVertex_shader();
-		gs_shader generatedPixel_shader = program.getPixel_shader();
-		gs_program generatedNext = program.getNext();
-		while (program) {
-			if (generatedVertex_shader == device.getCur_vertex_shader() && generatedPixel_shader == device.getCur_pixel_shader()) {
-				return program;
-			} 
-			program = generatedNext;
-		}
-		return NULL;
-	}
-	public gs_program get_shader_program(gs_device device) {
-		gs_program gs_program = new gs_program();
-		gs_program program = gs_program.find_program(device);
-		gs_program gs_program = new gs_program();
-		if (!program) {
-			program = gs_program.gs_program_create(device);
-		} 
-		return program;
 	}
 	public Object getDevice() {
 		return device;

@@ -32,6 +32,79 @@ public class listvar_S {
 	public listvar_S() {
 	}
 	
+	public void sign_getlist(Object name) {
+		sign_T sp = ModernizedCProgram.first_sign;
+		dict_T dict = new dict_T();
+		if (name != ((Object)0)) {
+			sp = ((Object)0).sign_find(name);
+			if (sp == ((Object)0)) {
+				return /*Error: Unsupported expression*/;
+			} 
+		} 
+		dictvar_S dictvar_S = new dictvar_S();
+		sign generatedSn_next = sp.getSn_next();
+		for (; sp != ((Object)0) && !got_int; sp = generatedSn_next) {
+			if ((dict = dictvar_S.dict_alloc_id(.aid_sign_getlist)) == ((Object)0)) {
+				return /*Error: Unsupported expression*/;
+			} 
+			if (ModernizedCProgram.list_append_dict(retlist, dict) == 0) {
+				return /*Error: Unsupported expression*/;
+			} 
+			ModernizedCProgram.sign_getinfo(sp, dict);
+			if (name != ((Object)0)) {
+				break;
+			} 
+		}
+	}
+	public void sign_define_multiple(listvar_S retlist) {
+		listitem_T li = new listitem_T();
+		int retval;
+		 generatedLi_tv = li.getLi_tv();
+		Object generatedV_type = generatedLi_tv.getV_type();
+		Object generatedVval = generatedLi_tv.getVval();
+		listitem_S generatedLi_next = li.getLi_next();
+		for (li = ModernizedCProgram.l.getLv_first(); li != ((Object)0); li = generatedLi_next) {
+			retval = -1;
+			if (generatedV_type == .VAR_DICT) {
+				retval = generatedVval.getV_dict().sign_define_from_dict(((Object)0));
+			} else {
+					ModernizedCProgram.emsg(((byte)(e_dictreq)));
+			} 
+			retlist.list_append_number(retval/*
+			 * "sign_define()" function
+			 */);
+		}
+	}
+	public void sign_undefine_multiple(listvar_S retlist) {
+		char_u name = new char_u();
+		listitem_T li = new listitem_T();
+		int retval;
+		 generatedLi_tv = li.getLi_tv();
+		listitem_S generatedLi_next = li.getLi_next();
+		for (li = ModernizedCProgram.l.getLv_first(); li != ((Object)0); li = generatedLi_next) {
+			retval = -1;
+			name = generatedLi_tv.tv_get_string_chk();
+			if (name != ((Object)0) && (ModernizedCProgram.sign_undefine_by_name(name, 1) == 1)) {
+				retval = 0;
+			} 
+			retlist.list_append_number(retval/*
+			 * "sign_undefine()" function
+			 */);
+		}
+	}
+	public int set_ref_in_list(int copyID) {
+		int generatedLv_copyID = this.getLv_copyID();
+		if (ll != ((Object)0) && generatedLv_copyID != copyID) {
+			this.setLv_copyID(copyID);
+			return ModernizedCProgram.set_ref_in_list_items(ll, copyID, ((Object)0));
+		} 
+		return 0/*
+		 * Mark all lists and dicts referenced through list "l" with "copyID".
+		 * "ht_stack" is used to add hashtabs to be marked.  Can be NULL.
+		 *
+		 * Returns TRUE if setting references failed somehow.
+		 */;
+	}
 	public void ins_compl_add_list() {
 		listitem_T li = new listitem_T();
 		int dir = ModernizedCProgram.compl_direction;
@@ -66,7 +139,7 @@ public class listvar_S {
 			flags |=  16;
 		} 
 		if (ModernizedCProgram.compl_orig_text == ((Object)0) || ModernizedCProgram.ins_compl_add(ModernizedCProgram.compl_orig_text, -1, ((Object)0), ((Object)0), 0, flags, 0) != 1) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.ctrl_x_mode = 16;
 		list.ins_compl_add_list();
@@ -89,9 +162,345 @@ public class listvar_S {
 		} 
 		ModernizedCProgram.out_flush();
 	}
+	public int get_tags(Object pat, Object buf_fname) {
+		int num_matches;
+		int i;
+		int ret;
+		char_u matches = new char_u();
+		char_u p = new char_u();
+		char_u full_fname = new char_u();
+		dict_T dict = new dict_T();
+		tagptrs_T tp = new tagptrs_T();
+		long is_static;
+		ret = ModernizedCProgram.find_tags(pat, num_matches, matches, 4 | 8, (int)INT_MAX, buf_fname);
+		Object generatedTagname = tp.getTagname();
+		dictvar_S dictvar_S = new dictvar_S();
+		Object generatedTagname_end = tp.getTagname_end();
+		Object generatedCommand = tp.getCommand();
+		Object generatedCommand_end = tp.getCommand_end();
+		Object generatedTagkind = tp.getTagkind();
+		Object generatedTagkind_end = tp.getTagkind_end();
+		if (ret == 1 && num_matches > 0) {
+			for (i = 0; i < num_matches; ++i) {
+				tp.parse_match(matches[i]);
+				is_static = tp.test_for_static();
+				if (/*Error: Function owner not recognized*/strncmp((byte)(generatedTagname), (byte)("!_TAG_"), (size_t)(true)) == /* Skip pseudo-tag lines. */0) {
+					continue;
+				} 
+				if ((dict = dictvar_S.dict_alloc()) == ((Object)0)) {
+					ret = 0;
+				} 
+				if (ModernizedCProgram.list_append_dict(list, dict) == 0) {
+					ret = 0;
+				} 
+				full_fname = tp.tag_full_fname();
+				if (dict.add_tag_field("name", generatedTagname, generatedTagname_end) == 0 || dict.add_tag_field("filename", full_fname, ((Object)0)) == 0 || dict.add_tag_field("cmd", generatedCommand, generatedCommand_end) == 0 || dict.add_tag_field("kind", generatedTagkind, generatedTagkind_end) == 0 || dict.dict_add_number("static", is_static) == 0) {
+					ret = 0;
+				} 
+				ModernizedCProgram.vim_free(full_fname);
+				if (generatedCommand_end != ((Object)0)) {
+					for (p = generatedCommand_end + 3; p != (byte)'\000' && p != (byte)'\n' && p != (byte)'\r'; ++p) {
+						if (p == generatedTagkind || (p + 5 == generatedTagkind && /*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("kind:"), (size_t)(true)) == 0)) {
+							p = generatedTagkind_end - /* skip "kind:<kind>" and "<kind>" */1;
+						}  else if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("file:"), (size_t)(true)) == 0) {
+							p += /* skip "file:" (static tag) */4;
+						}  else if (!((p) == (byte)' ' || (p) == (byte)'\t')) {
+							char_u s = new char_u();
+							char_u n = new char_u();
+							int len;
+							n = /* Add extra field as a dict entry.  Fields are
+										 * separated by Tabs. */p;
+							while (p != (byte)'\000' && p >= (byte)' ' && p < 127 && p != (byte)':') {
+								++p;
+							}
+							len = (int)(p - n);
+							if (p == (byte)':' && len > 0) {
+								s = ++p;
+								while (p != (byte)'\000' && p >= (byte)' ') {
+									++p;
+								}
+								n[len] = (byte)'\000';
+								if (dict.add_tag_field((byte)n, s, p) == 0) {
+									ret = 0;
+								} 
+								n[len] = (byte)':';
+							} else {
+									while (p != (byte)'\000' && p >= /* Skip field without colon. */(byte)' ') {
+										++p;
+									}
+							} 
+							if (p == (byte)'\000') {
+								break;
+							} 
+						} 
+					}
+				} 
+				ModernizedCProgram.vim_free(matches[i]);
+			}
+			ModernizedCProgram.vim_free(matches);
+		} 
+		return ret/*
+		 * Return information about 'tag' in dict 'retdict'.
+		 */;
+	}
+	public void ui_post_balloon(Object mesg) {
+		ModernizedCProgram.ui_remove_balloon();
+		if (mesg == ((Object)0) && list == ((Object)0)) {
+			ModernizedCProgram.pum_undisplay();
+			return /*Error: Unsupported expression*/;
+		} 
+		int generatedLv_len = this.getLv_len();
+		 generatedLi_tv = li.getLi_tv();
+		if (list != ((Object)0)) {
+			listitem_T li = new listitem_T();
+			int idx;
+			ModernizedCProgram.balloon_arraysize = generatedLv_len;
+			ModernizedCProgram.balloon_array = (pumitem_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/ * (generatedLv_len));
+			if (ModernizedCProgram.balloon_array == ((Object)0)) {
+				return /*Error: Unsupported expression*/;
+			} 
+			for (; li != ((Object)0); ) {
+				char_u text = generatedLi_tv.tv_get_string_chk();
+				ModernizedCProgram.balloon_array[idx].setPum_text(ModernizedCProgram.vim_strsave(text == ((Object)0) ? (char_u)"" : text));
+			}
+		} else {
+				ModernizedCProgram.balloon_arraysize = ModernizedCProgram.balloon_array.split_message(mesg);
+		} 
+		if (ModernizedCProgram.balloon_arraysize > 0) {
+			ModernizedCProgram.pum_array = ModernizedCProgram.balloon_array;
+			ModernizedCProgram.pum_size = ModernizedCProgram.balloon_arraysize;
+			ModernizedCProgram.pum_compute_size();
+			ModernizedCProgram.pum_scrollbar = 0;
+			ModernizedCProgram.pum_height = ModernizedCProgram.balloon_arraysize;
+			ModernizedCProgram.pum_position_at_mouse(50);
+			ModernizedCProgram.pum_selected = -1;
+			ModernizedCProgram.pum_first = 0;
+			ModernizedCProgram.pum_redraw();
+		} 
+	}
+	public listvar_S eval_spell_expr(Object badword, Object expr) {
+		typval_T save_val = new typval_T();
+		typval_T rettv = new typval_T();
+		list_T list = ((Object)0);
+		char_u p = ModernizedCProgram.skipwhite(expr);
+		// Set "v:val" to the bad word.// Set "v:val" to the bad word.save_val.prepare_vimvar(34);
+		ModernizedCProgram.set_vim_var_string(34, badword, -1);
+		if (ModernizedCProgram.p_verbose == 0) {
+			++emsg_off;
+		} 
+		Object generatedV_type = rettv.getV_type();
+		Object generatedVval = rettv.getVval();
+		if (rettv.eval1(p, 1) == 1) {
+			if (generatedV_type != .VAR_LIST) {
+				rettv.clear_tv();
+			} else {
+					list = generatedVval.getV_list();
+			} 
+		} 
+		if (ModernizedCProgram.p_verbose == 0) {
+			--emsg_off;
+		} 
+		ModernizedCProgram.get_vim_var_tv(34).clear_tv();
+		save_val.restore_vimvar(34);
+		return list/*
+		 * "list" is supposed to contain two items: a word and a number.  Return the
+		 * word in "pp" and the number as the return value.
+		 * Return -1 if anything isn't right.
+		 * Used to get the good word and score from the eval_spell_expr() result.
+		 */;
+	}
+	public int get_spellword(Object pp) {
+		listitem_T li = new listitem_T();
+		listitem_S generatedLv_first = this.getLv_first();
+		li = generatedLv_first;
+		if (li == ((Object)0)) {
+			return -1;
+		} 
+		 generatedLi_tv = li.getLi_tv();
+		pp = generatedLi_tv.tv_get_string();
+		listitem_S generatedLi_next = li.getLi_next();
+		li = generatedLi_next;
+		if (li == ((Object)0)) {
+			return -1;
+		} 
+		return (int)generatedLi_tv.tv_get_number();
+	}
+	public listvar_S heredoc_get(exarg eap, Object[] cmd) {
+		char_u theline = new char_u();
+		char_u marker = new char_u();
+		list_T l = new list_T();
+		char_u p = new char_u();
+		int marker_indent_len = 0;
+		int text_indent_len = 0;
+		char_u text_indent = ((Object)0);
+		Object generatedGetline = eap.getGetline();
+		if (generatedGetline == ((Object)0)) {
+			ModernizedCProgram.emsg(((byte)("E991: cannot use =<< here")));
+			return ((Object)0);
+		} 
+		// Check for the optional 'trim' word before the marker// Check for the optional 'trim' word before the markercmd = ModernizedCProgram.skipwhite(cmd);
+		Object generatedCmdlinep = eap.getCmdlinep();
+		if (/*Error: Function owner not recognized*/strncmp((byte)(cmd), (byte)("trim"), (size_t)(true)) == 0 && (cmd[4] == (byte)'\000' || ((cmd[4]) == (byte)' ' || (cmd[4]) == (byte)'\t'))) {
+			cmd = ModernizedCProgram.skipwhite(cmd + 4);
+			p = generatedCmdlinep;
+			while (((p) == (byte)' ' || (p) == (byte)'\t')) {
+				p++;
+				marker_indent_len++;
+			}
+			text_indent_len = -1;
+		} 
+		// The marker is the next word.if (cmd != (byte)'\000' && cmd != (byte)'"') {
+			marker = ModernizedCProgram.skipwhite(cmd);
+			p = ModernizedCProgram.skiptowhite(marker);
+			if (ModernizedCProgram.skipwhite(p) != (byte)'\000' && ModernizedCProgram.skipwhite(p) != (byte)'"') {
+				ModernizedCProgram.emsg(((byte)(e_trailing)));
+				return ((Object)0);
+			} 
+			p = (byte)'\000';
+			if (ModernizedCProgram.vim_islower(marker)) {
+				ModernizedCProgram.emsg(((byte)("E221: Marker cannot start with lower case letter")));
+				return ((Object)0);
+			} 
+		} else {
+				ModernizedCProgram.emsg(((byte)("E172: Missing marker")));
+				return ((Object)0);
+		} 
+		listvar_S listvar_S = new listvar_S();
+		l = listvar_S.list_alloc();
+		if (l == ((Object)0)) {
+			return ((Object)0);
+		} 
+		Object generatedCookie = eap.getCookie();
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+			int mi = 0;
+			int ti = 0;
+			theline = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((byte)'\000', generatedCookie, 0, 0);
+			if (theline == ((Object)0)) {
+				ModernizedCProgram.semsg(((byte)("E990: Missing end marker '%s'")), marker);
+				break;
+			} 
+			if (marker_indent_len > 0 && /*Error: Function owner not recognized*/strncmp((byte)(theline), (byte)(generatedCmdlinep), (size_t)(marker_indent_len)) == 0) {
+				mi = marker_indent_len;
+			} 
+			if (/*Error: Function owner not recognized*/strcmp((byte)(marker), (byte)(theline + mi)) == 0) {
+				ModernizedCProgram.vim_free(theline);
+				break;
+			} 
+			if (text_indent_len == -1 && theline != (byte)'\000') {
+				p = theline;
+				text_indent_len = 0;
+				while (((p) == (byte)' ' || (p) == (byte)'\t')) {
+					p++;
+					text_indent_len++;
+				}
+				text_indent = ModernizedCProgram.vim_strnsave(theline, text_indent_len);
+			} 
+			if (text_indent != ((Object)0)) {
+				for (ti = 0; ti < text_indent_len; ++ti) {
+					if (theline[ti] != text_indent[ti]) {
+						break;
+					} 
+				}
+			} 
+			if (l.list_append_string(theline + ti, -1) == 0) {
+				break;
+			} 
+			ModernizedCProgram.vim_free(theline);
+		}
+		ModernizedCProgram.vim_free(text_indent);
+		return l/*
+		 * ":let"			list all variable values
+		 * ":let var1 var2"		list variable values
+		 * ":let var = expr"		assignment command.
+		 * ":let var += expr"		assignment command.
+		 * ":let var -= expr"		assignment command.
+		 * ":let var *= expr"		assignment command.
+		 * ":let var /= expr"		assignment command.
+		 * ":let var %= expr"		assignment command.
+		 * ":let var .= expr"		assignment command.
+		 * ":let var ..= expr"		assignment command.
+		 * ":let [var1, var2] = expr"	unpack list.
+		 */;
+	}
+	public listvar_S get_vim_var_list(int idx) {
+		return vimvars[idx].getVv_di().getDi_tv().getVval().getV_list();
+	}
+	public void set_vim_var_list(int idx) {
+		vimvars[idx].getVv_di().getDi_tv().clear_tv();
+		vimvars[idx].getVv_di().getDi_tv().setV_type(.VAR_LIST);
+		vimvars[idx].getVv_di().getDi_tv().getVval().setV_list(val);
+		int generatedLv_refcount = this.getLv_refcount();
+		if (val != ((Object)0)) {
+			++generatedLv_refcount;
+		} 
+	}
+	public listvar_S reg_submatch_list(int no) {
+		char_u s = new char_u();
+		linenr_T slnum = new linenr_T();
+		linenr_T elnum = new linenr_T();
+		colnr_T scol = new colnr_T();
+		colnr_T ecol = new colnr_T();
+		int i;
+		list_T list = new list_T();
+		int error = 0;
+		if (!ModernizedCProgram.can_f_submatch || no < 0) {
+			return ((Object)0);
+		} 
+		listvar_S listvar_S = new listvar_S();
+		if (ModernizedCProgram.rsm.getSm_match() == ((Object)0)) {
+			slnum = ModernizedCProgram.rsm.getSm_mmatch().getStartpos()[no].getLnum();
+			elnum = ModernizedCProgram.rsm.getSm_mmatch().getEndpos()[no].getLnum();
+			if (slnum < 0 || elnum < 0) {
+				return ((Object)0);
+			} 
+			scol = ModernizedCProgram.rsm.getSm_mmatch().getStartpos()[no].getCol();
+			ecol = ModernizedCProgram.rsm.getSm_mmatch().getEndpos()[no].getCol();
+			list = listvar_S.list_alloc();
+			if (list == ((Object)0)) {
+				return ((Object)0);
+			} 
+			s = ModernizedCProgram.reg_getline_submatch(slnum) + scol;
+			if (slnum == elnum) {
+				if (list.list_append_string(s, ecol - scol) == 0) {
+					error = 1;
+				} 
+			} else {
+					if (list.list_append_string(s, -1) == 0) {
+						error = 1;
+					} 
+					for (i = 1; i < elnum - slnum; i++) {
+						s = ModernizedCProgram.reg_getline_submatch(slnum + i);
+						if (list.list_append_string(s, -1) == 0) {
+							error = 1;
+						} 
+					}
+					s = ModernizedCProgram.reg_getline_submatch(elnum);
+					if (list.list_append_string(s, ecol) == 0) {
+						error = 1;
+					} 
+			} 
+		} else {
+				s = ModernizedCProgram.rsm.getSm_match().getStartp()[no];
+				if (s == ((Object)0) || ModernizedCProgram.rsm.getSm_match().getEndp()[no] == ((Object)0)) {
+					return ((Object)0);
+				} 
+				list = listvar_S.list_alloc();
+				if (list == ((Object)0)) {
+					return ((Object)0);
+				} 
+				if (list.list_append_string(s, (int)(ModernizedCProgram.rsm.getSm_match().getEndp()[no] - s)) == 0) {
+					error = 1;
+				} 
+		} 
+		if (error) {
+			list.list_free();
+			return ((Object)0);
+		} 
+		return list;
+	}
 	public listvar_S list_alloc() {
 		list_T l = new list_T();
-		l = (list_T)ModernizedCProgram.alloc_clear();
+		l = (list_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/);
 		if (l != ((Object)0)) {
 			if (ModernizedCProgram.first_list != ((Object)/* Prepend the list to the list of lists for garbage collection. */0)) {
 				ModernizedCProgram.first_list.setLv_used_prev(l);
@@ -105,7 +514,7 @@ public class listvar_S {
 		 */;
 	}
 	public listvar_S list_alloc_id( id) {
-		if (alloc_fail_id == id && ModernizedCProgram.alloc_does_fail()) {
+		if (alloc_fail_id == id && ModernizedCProgram.alloc_does_fail(/*Error: Unsupported expression*/)) {
 			return ((Object)0);
 		} 
 		listvar_S listvar_S = new listvar_S();
@@ -183,7 +592,7 @@ public class listvar_S {
 		 * Returns NULL when "n" is out of range.
 		 */);
 	}
-	public long list_find_nr(long idx, int errorp) {
+	public long list_find_nr(long idx, Integer errorp) {
 		/* set to TRUE when something wrong */listitem_T li = new listitem_T();
 		listitem_S listitem_S = new listitem_S();
 		li = listitem_S.list_find(ModernizedCProgram.l, idx);
@@ -316,415 +725,6 @@ public class listvar_S {
 		 * This used to be called list_remove, but that conflicts with a Sun header
 		 * file.
 		 */;
-	}
-	public listvar_S reg_submatch_list(int no) {
-		char_u s = new char_u();
-		linenr_T slnum = new linenr_T();
-		linenr_T elnum = new linenr_T();
-		colnr_T scol = new colnr_T();
-		colnr_T ecol = new colnr_T();
-		int i;
-		list_T list = new list_T();
-		int error = 0;
-		if (!ModernizedCProgram.can_f_submatch || no < 0) {
-			return ((Object)0);
-		} 
-		listvar_S listvar_S = new listvar_S();
-		if (ModernizedCProgram.rsm.getSm_match() == ((Object)0)) {
-			slnum = ModernizedCProgram.rsm.getSm_mmatch().getStartpos()[no].getLnum();
-			elnum = ModernizedCProgram.rsm.getSm_mmatch().getEndpos()[no].getLnum();
-			if (slnum < 0 || elnum < 0) {
-				return ((Object)0);
-			} 
-			scol = ModernizedCProgram.rsm.getSm_mmatch().getStartpos()[no].getCol();
-			ecol = ModernizedCProgram.rsm.getSm_mmatch().getEndpos()[no].getCol();
-			list = listvar_S.list_alloc();
-			if (list == ((Object)0)) {
-				return ((Object)0);
-			} 
-			s = ModernizedCProgram.reg_getline_submatch(slnum) + scol;
-			if (slnum == elnum) {
-				if (list.list_append_string(s, ecol - scol) == 0) {
-					error = 1;
-				} 
-			} else {
-					if (list.list_append_string(s, -1) == 0) {
-						error = 1;
-					} 
-					for (i = 1; i < elnum - slnum; i++) {
-						s = ModernizedCProgram.reg_getline_submatch(slnum + i);
-						if (list.list_append_string(s, -1) == 0) {
-							error = 1;
-						} 
-					}
-					s = ModernizedCProgram.reg_getline_submatch(elnum);
-					if (list.list_append_string(s, ecol) == 0) {
-						error = 1;
-					} 
-			} 
-		} else {
-				s = ModernizedCProgram.rsm.getSm_match().getStartp()[no];
-				if (s == ((Object)0) || ModernizedCProgram.rsm.getSm_match().getEndp()[no] == ((Object)0)) {
-					return ((Object)0);
-				} 
-				list = listvar_S.list_alloc();
-				if (list == ((Object)0)) {
-					return ((Object)0);
-				} 
-				if (list.list_append_string(s, (int)(ModernizedCProgram.rsm.getSm_match().getEndp()[no] - s)) == 0) {
-					error = 1;
-				} 
-		} 
-		if (error) {
-			list.list_free();
-			return ((Object)0);
-		} 
-		return list;
-	}
-	public void ui_post_balloon(Object mesg) {
-		ModernizedCProgram.ui_remove_balloon();
-		if (mesg == ((Object)0) && list == ((Object)0)) {
-			ModernizedCProgram.pum_undisplay();
-			return ;
-		} 
-		int generatedLv_len = this.getLv_len();
-		 generatedLi_tv = li.getLi_tv();
-		if (list != ((Object)0)) {
-			listitem_T li = new listitem_T();
-			int idx;
-			ModernizedCProgram.balloon_arraysize = generatedLv_len;
-			ModernizedCProgram.balloon_array = (pumitem_T)ModernizedCProgram.alloc_clear( * (generatedLv_len));
-			if (ModernizedCProgram.balloon_array == ((Object)0)) {
-				return ;
-			} 
-			for (; li != ((Object)0); ) {
-				char_u text = generatedLi_tv.tv_get_string_chk();
-				ModernizedCProgram.balloon_array[idx].setPum_text(ModernizedCProgram.vim_strsave(text == ((Object)0) ? (char_u)"" : text));
-			}
-		} else {
-				ModernizedCProgram.balloon_arraysize = ModernizedCProgram.balloon_array.split_message(mesg);
-		} 
-		if (ModernizedCProgram.balloon_arraysize > 0) {
-			ModernizedCProgram.pum_array = ModernizedCProgram.balloon_array;
-			ModernizedCProgram.pum_size = ModernizedCProgram.balloon_arraysize;
-			ModernizedCProgram.pum_compute_size();
-			ModernizedCProgram.pum_scrollbar = 0;
-			ModernizedCProgram.pum_height = ModernizedCProgram.balloon_arraysize;
-			ModernizedCProgram.pum_position_at_mouse(50);
-			ModernizedCProgram.pum_selected = -1;
-			ModernizedCProgram.pum_first = 0;
-			ModernizedCProgram.pum_redraw();
-		} 
-	}
-	public int get_tags(Object pat, Object buf_fname) {
-		int num_matches;
-		int i;
-		int ret;
-		char_u matches = new char_u();
-		char_u p = new char_u();
-		char_u full_fname = new char_u();
-		dict_T dict = new dict_T();
-		tagptrs_T tp = new tagptrs_T();
-		long is_static;
-		ret = ModernizedCProgram.find_tags(pat, num_matches, matches, 4 | 8, (int)INT_MAX, buf_fname);
-		Object generatedTagname = tp.getTagname();
-		dictvar_S dictvar_S = new dictvar_S();
-		Object generatedTagname_end = tp.getTagname_end();
-		Object generatedCommand = tp.getCommand();
-		Object generatedCommand_end = tp.getCommand_end();
-		Object generatedTagkind = tp.getTagkind();
-		Object generatedTagkind_end = tp.getTagkind_end();
-		if (ret == 1 && num_matches > 0) {
-			for (i = 0; i < num_matches; ++i) {
-				tp.parse_match(matches[i]);
-				is_static = tp.test_for_static();
-				if (.strncmp((byte)(generatedTagname), (byte)("!_TAG_"), (size_t)(true)) == /* Skip pseudo-tag lines. */0) {
-					continue;
-				} 
-				if ((dict = dictvar_S.dict_alloc()) == ((Object)0)) {
-					ret = 0;
-				} 
-				if (ModernizedCProgram.list_append_dict(list, dict) == 0) {
-					ret = 0;
-				} 
-				full_fname = tp.tag_full_fname();
-				if (dict.add_tag_field("name", generatedTagname, generatedTagname_end) == 0 || dict.add_tag_field("filename", full_fname, ((Object)0)) == 0 || dict.add_tag_field("cmd", generatedCommand, generatedCommand_end) == 0 || dict.add_tag_field("kind", generatedTagkind, generatedTagkind_end) == 0 || dict.dict_add_number("static", is_static) == 0) {
-					ret = 0;
-				} 
-				ModernizedCProgram.vim_free(full_fname);
-				if (generatedCommand_end != ((Object)0)) {
-					for (p = generatedCommand_end + 3; p != (byte)'\000' && p != (byte)'\n' && p != (byte)'\r'; ++p) {
-						if (p == generatedTagkind || (p + 5 == generatedTagkind && .strncmp((byte)(p), (byte)("kind:"), (size_t)(true)) == 0)) {
-							p = generatedTagkind_end - /* skip "kind:<kind>" and "<kind>" */1;
-						}  else if (.strncmp((byte)(p), (byte)("file:"), (size_t)(true)) == 0) {
-							p += /* skip "file:" (static tag) */4;
-						}  else if (!((p) == (byte)' ' || (p) == (byte)'\t')) {
-							char_u s = new char_u();
-							char_u n = new char_u();
-							int len;
-							n = /* Add extra field as a dict entry.  Fields are
-										 * separated by Tabs. */p;
-							while (p != (byte)'\000' && p >= (byte)' ' && p < 127 && p != (byte)':') {
-								++p;
-							}
-							len = (int)(p - n);
-							if (p == (byte)':' && len > 0) {
-								s = ++p;
-								while (p != (byte)'\000' && p >= (byte)' ') {
-									++p;
-								}
-								n[len] = (byte)'\000';
-								if (dict.add_tag_field((byte)n, s, p) == 0) {
-									ret = 0;
-								} 
-								n[len] = (byte)':';
-							} else {
-									while (p != (byte)'\000' && p >= /* Skip field without colon. */(byte)' ') {
-										++p;
-									}
-							} 
-							if (p == (byte)'\000') {
-								break;
-							} 
-						} 
-					}
-				} 
-				ModernizedCProgram.vim_free(matches[i]);
-			}
-			ModernizedCProgram.vim_free(matches);
-		} 
-		return ret/*
-		 * Return information about 'tag' in dict 'retdict'.
-		 */;
-	}
-	public int set_ref_in_list(int copyID) {
-		int generatedLv_copyID = this.getLv_copyID();
-		if (ll != ((Object)0) && generatedLv_copyID != copyID) {
-			this.setLv_copyID(copyID);
-			return ModernizedCProgram.set_ref_in_list_items(ll, copyID, ((Object)0));
-		} 
-		return 0/*
-		 * Mark all lists and dicts referenced through list "l" with "copyID".
-		 * "ht_stack" is used to add hashtabs to be marked.  Can be NULL.
-		 *
-		 * Returns TRUE if setting references failed somehow.
-		 */;
-	}
-	public listvar_S eval_spell_expr(Object badword, Object expr) {
-		typval_T save_val = new typval_T();
-		typval_T rettv = new typval_T();
-		list_T list = ((Object)0);
-		char_u p = ModernizedCProgram.skipwhite(expr);
-		// Set "v:val" to the bad word.// Set "v:val" to the bad word.save_val.prepare_vimvar(34);
-		ModernizedCProgram.set_vim_var_string(34, badword, -1);
-		if (ModernizedCProgram.p_verbose == 0) {
-			++emsg_off;
-		} 
-		Object generatedV_type = rettv.getV_type();
-		Object generatedVval = rettv.getVval();
-		if (rettv.eval1(p, 1) == 1) {
-			if (generatedV_type != .VAR_LIST) {
-				rettv.clear_tv();
-			} else {
-					list = generatedVval.getV_list();
-			} 
-		} 
-		if (ModernizedCProgram.p_verbose == 0) {
-			--emsg_off;
-		} 
-		ModernizedCProgram.get_vim_var_tv(34).clear_tv();
-		save_val.restore_vimvar(34);
-		return list/*
-		 * "list" is supposed to contain two items: a word and a number.  Return the
-		 * word in "pp" and the number as the return value.
-		 * Return -1 if anything isn't right.
-		 * Used to get the good word and score from the eval_spell_expr() result.
-		 */;
-	}
-	public int get_spellword(Object pp) {
-		listitem_T li = new listitem_T();
-		listitem_S generatedLv_first = this.getLv_first();
-		li = generatedLv_first;
-		if (li == ((Object)0)) {
-			return -1;
-		} 
-		 generatedLi_tv = li.getLi_tv();
-		pp = generatedLi_tv.tv_get_string();
-		listitem_S generatedLi_next = li.getLi_next();
-		li = generatedLi_next;
-		if (li == ((Object)0)) {
-			return -1;
-		} 
-		return (int)generatedLi_tv.tv_get_number();
-	}
-	public listvar_S heredoc_get(exarg eap, Object cmd) {
-		char_u theline = new char_u();
-		char_u marker = new char_u();
-		list_T l = new list_T();
-		char_u p = new char_u();
-		int marker_indent_len = 0;
-		int text_indent_len = 0;
-		char_u text_indent = ((Object)0);
-		Object generatedGetline = eap.getGetline();
-		if (generatedGetline == ((Object)0)) {
-			ModernizedCProgram.emsg(((byte)("E991: cannot use =<< here")));
-			return ((Object)0);
-		} 
-		// Check for the optional 'trim' word before the marker// Check for the optional 'trim' word before the markercmd = ModernizedCProgram.skipwhite(cmd);
-		Object generatedCmdlinep = eap.getCmdlinep();
-		if (.strncmp((byte)(cmd), (byte)("trim"), (size_t)(true)) == 0 && (cmd[4] == (byte)'\000' || ((cmd[4]) == (byte)' ' || (cmd[4]) == (byte)'\t'))) {
-			cmd = ModernizedCProgram.skipwhite(cmd + 4);
-			p = generatedCmdlinep;
-			while (((p) == (byte)' ' || (p) == (byte)'\t')) {
-				p++;
-				marker_indent_len++;
-			}
-			text_indent_len = -1;
-		} 
-		// The marker is the next word.if (cmd != (byte)'\000' && cmd != (byte)'"') {
-			marker = ModernizedCProgram.skipwhite(cmd);
-			p = ModernizedCProgram.skiptowhite(marker);
-			if (ModernizedCProgram.skipwhite(p) != (byte)'\000' && ModernizedCProgram.skipwhite(p) != (byte)'"') {
-				ModernizedCProgram.emsg(((byte)(e_trailing)));
-				return ((Object)0);
-			} 
-			p = (byte)'\000';
-			if (ModernizedCProgram.vim_islower(marker)) {
-				ModernizedCProgram.emsg(((byte)("E221: Marker cannot start with lower case letter")));
-				return ((Object)0);
-			} 
-		} else {
-				ModernizedCProgram.emsg(((byte)("E172: Missing marker")));
-				return ((Object)0);
-		} 
-		listvar_S listvar_S = new listvar_S();
-		l = listvar_S.list_alloc();
-		if (l == ((Object)0)) {
-			return ((Object)0);
-		} 
-		Object generatedCookie = eap.getCookie();
-		for (; ; ) {
-			int mi = 0;
-			int ti = 0;
-			theline = .UNRECOGNIZEDFUNCTIONNAME((byte)'\000', generatedCookie, 0, 0);
-			if (theline == ((Object)0)) {
-				ModernizedCProgram.semsg(((byte)("E990: Missing end marker '%s'")), marker);
-				break;
-			} 
-			if (marker_indent_len > 0 && .strncmp((byte)(theline), (byte)(generatedCmdlinep), (size_t)(marker_indent_len)) == 0) {
-				mi = marker_indent_len;
-			} 
-			if (.strcmp((byte)(marker), (byte)(theline + mi)) == 0) {
-				ModernizedCProgram.vim_free(theline);
-				break;
-			} 
-			if (text_indent_len == -1 && theline != (byte)'\000') {
-				p = theline;
-				text_indent_len = 0;
-				while (((p) == (byte)' ' || (p) == (byte)'\t')) {
-					p++;
-					text_indent_len++;
-				}
-				text_indent = ModernizedCProgram.vim_strnsave(theline, text_indent_len);
-			} 
-			if (text_indent != ((Object)0)) {
-				for (ti = 0; ti < text_indent_len; ++ti) {
-					if (theline[ti] != text_indent[ti]) {
-						break;
-					} 
-				}
-			} 
-			if (l.list_append_string(theline + ti, -1) == 0) {
-				break;
-			} 
-			ModernizedCProgram.vim_free(theline);
-		}
-		ModernizedCProgram.vim_free(text_indent);
-		return l/*
-		 * ":let"			list all variable values
-		 * ":let var1 var2"		list variable values
-		 * ":let var = expr"		assignment command.
-		 * ":let var += expr"		assignment command.
-		 * ":let var -= expr"		assignment command.
-		 * ":let var *= expr"		assignment command.
-		 * ":let var /= expr"		assignment command.
-		 * ":let var %= expr"		assignment command.
-		 * ":let var .= expr"		assignment command.
-		 * ":let var ..= expr"		assignment command.
-		 * ":let [var1, var2] = expr"	unpack list.
-		 */;
-	}
-	public listvar_S get_vim_var_list(int idx) {
-		return vimvars[idx].getVv_di().getDi_tv().getVval().getV_list();
-	}
-	public void set_vim_var_list(int idx) {
-		vimvars[idx].getVv_di().getDi_tv().clear_tv();
-		vimvars[idx].getVv_di().getDi_tv().setV_type(.VAR_LIST);
-		vimvars[idx].getVv_di().getDi_tv().getVval().setV_list(val);
-		int generatedLv_refcount = this.getLv_refcount();
-		if (val != ((Object)0)) {
-			++generatedLv_refcount;
-		} 
-	}
-	public void sign_getlist(Object name) {
-		sign_T sp = ModernizedCProgram.first_sign;
-		dict_T dict = new dict_T();
-		if (name != ((Object)0)) {
-			sp = ((Object)0).sign_find(name);
-			if (sp == ((Object)0)) {
-				return ;
-			} 
-		} 
-		dictvar_S dictvar_S = new dictvar_S();
-		sign generatedSn_next = sp.getSn_next();
-		for (; sp != ((Object)0) && !got_int; sp = generatedSn_next) {
-			if ((dict = dictvar_S.dict_alloc_id(.aid_sign_getlist)) == ((Object)0)) {
-				return ;
-			} 
-			if (ModernizedCProgram.list_append_dict(retlist, dict) == 0) {
-				return ;
-			} 
-			ModernizedCProgram.sign_getinfo(sp, dict);
-			if (name != ((Object)0)) {
-				break;
-			} 
-		}
-	}
-	public void sign_define_multiple(listvar_S retlist) {
-		listitem_T li = new listitem_T();
-		int retval;
-		 generatedLi_tv = li.getLi_tv();
-		Object generatedV_type = generatedLi_tv.getV_type();
-		Object generatedVval = generatedLi_tv.getVval();
-		listitem_S generatedLi_next = li.getLi_next();
-		for (li = ModernizedCProgram.l.getLv_first(); li != ((Object)0); li = generatedLi_next) {
-			retval = -1;
-			if (generatedV_type == .VAR_DICT) {
-				retval = generatedVval.getV_dict().sign_define_from_dict(((Object)0));
-			} else {
-					ModernizedCProgram.emsg(((byte)(e_dictreq)));
-			} 
-			retlist.list_append_number(retval/*
-			 * "sign_define()" function
-			 */);
-		}
-	}
-	public void sign_undefine_multiple(listvar_S retlist) {
-		char_u name = new char_u();
-		listitem_T li = new listitem_T();
-		int retval;
-		 generatedLi_tv = li.getLi_tv();
-		listitem_S generatedLi_next = li.getLi_next();
-		for (li = ModernizedCProgram.l.getLv_first(); li != ((Object)0); li = generatedLi_next) {
-			retval = -1;
-			name = generatedLi_tv.tv_get_string_chk();
-			if (name != ((Object)0) && (ModernizedCProgram.sign_undefine_by_name(name, 1) == 1)) {
-				retval = 0;
-			} 
-			retlist.list_append_number(retval/*
-			 * "sign_undefine()" function
-			 */);
-		}
 	}
 	public listitem_S getLv_first() {
 		return lv_first;

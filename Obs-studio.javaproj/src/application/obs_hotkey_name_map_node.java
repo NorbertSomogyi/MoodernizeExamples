@@ -12,11 +12,11 @@ public class obs_hotkey_name_map_node {
 	}
 	
 	public obs_hotkey_name_map_node new_node() {
-		return ModernizedCProgram.bzalloc();
+		return ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 	}
 	public obs_hotkey_name_map_node new_leaf() {
 		obs_hotkey_name_map_t name_map = ModernizedCProgram.obs.getHotkeys().getName_map();
-		obs_hotkey_name_map_node generatedLeaves = name_map.getLeaves();
+		obs_hotkey_name_map_node[] generatedLeaves = name_map.getLeaves();
 		Object generatedNext_leaf = name_map.getNext_leaf();
 		obs_hotkey_name_map_node_t node = generatedLeaves[generatedNext_leaf];
 		generatedNext_leaf += 1;
@@ -27,26 +27,26 @@ public class obs_hotkey_name_map_node {
 		Object generatedIs_leaf = this.getIs_leaf();
 		int generatedVal = this.getVal();
 		if (generatedIs_leaf) {
-			.printf(": % 3d\n", generatedVal);
-			return ;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(": % 3d\n", generatedVal);
+			return /*Error: Unsupported expression*/;
 		} 
-		.printf("\n");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("\n");
 		for (int i = 0;
 		 i < in; i += 2) {
-			.printf("| ");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("| ");
 		}
 		Object generatedChildren = this.getChildren();
-		.printf("%lu:\n", (long)generatedChildren.getNum());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%lu:\n", (long)generatedChildren.getNum());
 		obs_hotkey_name_map_node generatedNode = e.getNode();
 		for (size_t i = 0;
 		 i < generatedChildren.getNum(); i++) {
 			for (int i = 0;
 			 i < in; i += 2) {
-				.printf("| ");
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("| ");
 			}
-			.printf("\\ ");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("\\ ");
 			obs_hotkey_name_map_edge_t e = generatedChildren.getArray()[i];
-			.printf("%s", e.get_prefix());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s", e.get_prefix());
 			generatedNode.show_node(in + 2);
 		}
 	}
@@ -58,7 +58,7 @@ public class obs_hotkey_name_map_node {
 			 i < generatedChildren.getNum(); i++) {
 				generatedChildren.getArray()[i].free_edge();
 			}
-			.da_free(generatedChildren);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedChildren);
 		} 
 		if (release && !generatedIs_leaf) {
 			ModernizedCProgram.bfree(node);

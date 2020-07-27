@@ -23,7 +23,7 @@ public class conv_attrs {
 		if (!ModernizedCProgram.check) {
 			ModernizedCProgram.check = attr_check.attr_check_initl("crlf", "ident", "filter", "eol", "text", "working-tree-encoding", ((Object)0));
 			user_convert_tail = user_convert;
-			.git_config(read_convert_config, ((Object)0));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config(read_convert_config, ((Object)0));
 		} 
 		ModernizedCProgram.check.git_check_attr(istate, path);
 		ccheck = ModernizedCProgram.check.getItems();

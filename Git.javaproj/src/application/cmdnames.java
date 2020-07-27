@@ -3,9 +3,9 @@ package application;
 public class cmdnames {
 	private int alloc;
 	private int cnt;
-	private cmdname names;
+	private cmdname[][] names;
 	
-	public cmdnames(int alloc, int cnt, cmdname names) {
+	public cmdnames(int alloc, int cnt, cmdname[][] names) {
 		setAlloc(alloc);
 		setCnt(cnt);
 		setNames(names);
@@ -25,10 +25,10 @@ public class cmdnames {
 	public void setCnt(int newCnt) {
 		cnt = newCnt;
 	}
-	public cmdname getNames() {
+	public cmdname[][] getNames() {
 		return names;
 	}
-	public void setNames(cmdname newNames) {
+	public void setNames(cmdname[][] newNames) {
 		names = newNames;
 	}
 }

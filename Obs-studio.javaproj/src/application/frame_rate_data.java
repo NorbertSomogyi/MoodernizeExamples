@@ -20,16 +20,16 @@ public class frame_rate_data {
 			ModernizedCProgram.bfree(generatedName);
 			ModernizedCProgram.bfree(generatedDescription);
 		}
-		.da_resize(ModernizedCProgram.data.getExtra_options(), 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_resize(ModernizedCProgram.data.getExtra_options(), 0);
 	}
 	public void frame_rate_data_ranges_free() {
-		.da_resize(ModernizedCProgram.data.getRanges(), 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_resize(ModernizedCProgram.data.getRanges(), 0);
 	}
 	public void frame_rate_data_free() {
 		ModernizedCProgram.data.frame_rate_data_options_free();
 		ModernizedCProgram.data.frame_rate_data_ranges_free();
-		.da_free(ModernizedCProgram.data.getExtra_options());
-		.da_free(ModernizedCProgram.data.getRanges());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(ModernizedCProgram.data.getExtra_options());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(ModernizedCProgram.data.getRanges());
 	}
 	public Object get() {
 		return ;

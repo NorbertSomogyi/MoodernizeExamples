@@ -43,8 +43,8 @@ public class revindex_entry {
 		revindex_entry to = new revindex_entry();
 		int bits;
 		int pos;
-		(pos) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, ((1 << (true)))));
-		(tmp) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (n)));
+		(pos) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, ((1 << (true)))));
+		(tmp) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (n)));
 		from = ModernizedCProgram.entries;
 		to = tmp/*
 			 * If (max >> bits) is zero, then we know that the radix digit we are
@@ -53,7 +53,7 @@ public class revindex_entry {
 			 */;
 		for (bits = 0; max >> bits; bits += (true)) {
 			int i;
-			.memset(pos, 0, (1 << (true)) * );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(pos, 0, (1 << (true)) * /*Error: sizeof expression not supported yet*/);
 			for (i = 0; i < n; i++) {
 				pos[(((from)[(i)].getOffset() >> (bits)) & ((1 << (true)) - 1))]++;
 			}
@@ -81,17 +81,17 @@ public class revindex_entry {
 			do {
 				Object _swap_a_ptr = (from);
 				Object _swap_b_ptr = (to);
-				byte[] _swap_buffer = new byte[];
-				.memcpy(_swap_buffer, _swap_a_ptr, );
-				.memcpy(_swap_a_ptr, _swap_b_ptr,  + ( - 1));
-				.memcpy(_swap_b_ptr, _swap_buffer, );
+				byte[] _swap_buffer = new byte[/*Error: sizeof expression not supported yet*/];
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_buffer, _swap_a_ptr, /*Error: sizeof expression not supported yet*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_a_ptr, _swap_b_ptr, /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_b_ptr, _swap_buffer, /*Error: sizeof expression not supported yet*/);
 			} while (0/*
 				 * If we ended with our data in the original array, great. If not,
 				 * we have to move it back from the temporary storage.
 				 */);
 		}
 		if (from != ModernizedCProgram.entries) {
-			ModernizedCProgram.copy_array((ModernizedCProgram.entries), (tmp), (n),  + ( - 1));
+			ModernizedCProgram.copy_array((ModernizedCProgram.entries), (tmp), (n), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		} 
 		ModernizedCProgram.free(tmp);
 		ModernizedCProgram.free(pos);
@@ -114,7 +114,7 @@ public class revindex_entry {
 		if (pos < 0) {
 			return ((Object)0);
 		} 
-		revindex_entry generatedRevindex = p.getRevindex();
+		revindex_entry[] generatedRevindex = p.getRevindex();
 		return generatedRevindex + pos;
 	}
 	public Object getOffset() {

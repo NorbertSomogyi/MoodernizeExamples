@@ -20,7 +20,7 @@ public class pot_tree_entry {
 		pot_tree_entry_t entry = tree;
 		while (tree != ((Object)0)) {
 			entry = (pot_tree_entry_t)tree;
-			.tdelete(entry, (Object)tree, ModernizedCProgram.sort_pot_tree_by_hash);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/tdelete(entry, (Object)tree, ModernizedCProgram.sort_pot_tree_by_hash);
 		}
 	}
 	public pot_hash_node getNodes() {

@@ -23,11 +23,11 @@ public class obs_lua_data {
 		obs_lua_source ls = generatedLs;
 		Object generatedScript = ls.getScript();
 		int generatedLua_data_ref = this.getLua_data_ref();
-		.lua_rawgeti(generatedScript, LUA_REGISTRYINDEX, generatedLua_data_ref);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_rawgeti(generatedScript, LUA_REGISTRYINDEX, generatedLua_data_ref);
 		int generatedFunc_destroy = ls.getFunc_destroy();
 		Object generatedDisplay_name = ls.getDisplay_name();
 		ModernizedCProgram.call_func_(generatedScript, generatedFunc_destroy, 1, 0, "destroy", generatedDisplay_name);
-		.luaL_unref(generatedScript, LUA_REGISTRYINDEX, generatedLua_data_ref);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/luaL_unref(generatedScript, LUA_REGISTRYINDEX, generatedLua_data_ref);
 		this.setLua_data_ref(LUA_REFNIL);
 	}
 	public obs_source getSource() {

@@ -31,7 +31,7 @@ public class hashtable_pair {
 		hashtable_list generatedNext = list.getNext();
 		while (1) {
 			pair = ((pair_t)((byte)list - ((size_t)((pair_t)0).getList())));
-			if (generatedHash == hash && .strcmp(generatedKey, key) == 0) {
+			if (generatedHash == hash && /*Error: Function owner not recognized*/strcmp(generatedKey, key) == 0) {
 				return pair;
 			} 
 			if (list == generatedLast) {

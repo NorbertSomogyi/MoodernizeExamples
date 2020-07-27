@@ -5,9 +5,9 @@ public class cache_ref_iterator {
 	private Object levels_nr;
 	private Object levels_alloc;
 	private Object prefix;
-	private cache_ref_iterator_level levels;
+	private cache_ref_iterator_level[] levels;
 	
-	public cache_ref_iterator(ref_iterator base, Object levels_nr, Object levels_alloc, Object prefix, cache_ref_iterator_level levels) {
+	public cache_ref_iterator(ref_iterator base, Object levels_nr, Object levels_alloc, Object prefix, cache_ref_iterator_level[] levels) {
 		setBase(base);
 		setLevels_nr(levels_nr);
 		setLevels_alloc(levels_alloc);
@@ -41,10 +41,10 @@ public class cache_ref_iterator {
 	public void setPrefix(Object newPrefix) {
 		prefix = newPrefix;
 	}
-	public cache_ref_iterator_level getLevels() {
+	public cache_ref_iterator_level[] getLevels() {
 		return levels;
 	}
-	public void setLevels(cache_ref_iterator_level newLevels) {
+	public void setLevels(cache_ref_iterator_level[] newLevels) {
 		levels = newLevels;
 	}
 }

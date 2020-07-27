@@ -3,12 +3,12 @@ package application;
 public class RTMPSockBuf {
 	private Object sb_socket;
 	private int sb_size;
-	private byte sb_start;
+	private byte[] sb_start;
 	private Object sb_buf;
 	private int sb_timedout;
 	private Object sb_ssl;
 	
-	public RTMPSockBuf(Object sb_socket, int sb_size, byte sb_start, Object sb_buf, int sb_timedout, Object sb_ssl) {
+	public RTMPSockBuf(Object sb_socket, int sb_size, byte[] sb_start, Object sb_buf, int sb_timedout, Object sb_ssl) {
 		setSb_socket(sb_socket);
 		setSb_size(sb_size);
 		setSb_start(sb_start);
@@ -26,15 +26,15 @@ public class RTMPSockBuf {
 		if (!generatedSb_size) {
 			this.setSb_start(generatedSb_buf);
 		} 
-		byte generatedSb_start = this.getSb_start();
+		byte[] generatedSb_start = this.getSb_start();
 		Object generatedSb_ssl = this.getSb_ssl();
 		Object generatedSb_socket = this.getSb_socket();
 		while (1) {
-			nBytes = (int) - 1 - generatedSb_size - (generatedSb_start - generatedSb_buf);
+			nBytes = (int)/*Error: sizeof expression not supported yet*/ - 1 - generatedSb_size - (generatedSb_start - generatedSb_buf);
 			if (generatedSb_ssl) {
-				nBytes = .TLS_read(generatedSb_ssl, generatedSb_start + generatedSb_size, nBytes);
+				nBytes = /*Error: Function owner not recognized*/TLS_read(generatedSb_ssl, generatedSb_start + generatedSb_size, nBytes);
 			} else {
-					nBytes = .recv(generatedSb_socket, generatedSb_start + generatedSb_size, nBytes, 0);
+					nBytes = /*Error: Function owner not recognized*/recv(generatedSb_socket, generatedSb_start + generatedSb_size, nBytes, 0);
 			} 
 			if (nBytes > 0) {
 				generatedSb_size += nBytes;
@@ -42,7 +42,7 @@ public class RTMPSockBuf {
 				ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "%s, remote host closed connection", __FUNCTION__);
 			} else {
 					int level;
-					int sockerr = .WSAGetLastError();
+					int sockerr = /*Error: Function owner not recognized*/WSAGetLastError();
 					if (sockerr == -1024 || sockerr == 11) {
 						level = .RTMP_LOGDEBUG;
 					} else {
@@ -66,22 +66,22 @@ public class RTMPSockBuf {
 		Object generatedSb_ssl = this.getSb_ssl();
 		Object generatedSb_socket = this.getSb_socket();
 		if (generatedSb_ssl) {
-			rc = .TLS_write(generatedSb_ssl, buf, len);
+			rc = /*Error: Function owner not recognized*/TLS_write(generatedSb_ssl, buf, len);
 		} else {
-				rc = .send(generatedSb_socket, buf, len, 0);
+				rc = /*Error: Function owner not recognized*/send(generatedSb_socket, buf, len, 0);
 		} 
 		return rc;
 	}
 	public int RTMPSockBuf_Close() {
 		Object generatedSb_ssl = this.getSb_ssl();
 		if (generatedSb_ssl) {
-			.TLS_shutdown(generatedSb_ssl);
-			.TLS_close(generatedSb_ssl);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/TLS_shutdown(generatedSb_ssl);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/TLS_close(generatedSb_ssl);
 			this.setSb_ssl(((Object)0));
 		} 
 		Object generatedSb_socket = this.getSb_socket();
 		if (generatedSb_socket != (SOCKET)(~0)) {
-			return .closesocket(generatedSb_socket);
+			return /*Error: Function owner not recognized*/closesocket(generatedSb_socket);
 		} 
 		return 0;
 	}
@@ -97,10 +97,10 @@ public class RTMPSockBuf {
 	public void setSb_size(int newSb_size) {
 		sb_size = newSb_size;
 	}
-	public byte getSb_start() {
+	public byte[] getSb_start() {
 		return sb_start;
 	}
-	public void setSb_start(byte newSb_start) {
+	public void setSb_start(byte[] newSb_start) {
 		sb_start = newSb_start;
 	}
 	public Object getSb_buf() {

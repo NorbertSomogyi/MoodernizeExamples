@@ -7,9 +7,9 @@ public class gs_vb_data {
 	private vec3 tangents;
 	private Object colors;
 	private Object num_tex;
-	private gs_tvertarray tvarray;
+	private gs_tvertarray[] tvarray;
 	
-	public gs_vb_data(Object num, vec3 points, vec3 normals, vec3 tangents, Object colors, Object num_tex, gs_tvertarray tvarray) {
+	public gs_vb_data(Object num, vec3 points, vec3 normals, vec3 tangents, Object colors, Object num_tex, gs_tvertarray[] tvarray) {
 		setNum(num);
 		setPoints(points);
 		setNormals(normals);
@@ -21,31 +21,6 @@ public class gs_vb_data {
 	public gs_vb_data() {
 	}
 	
-	public gs_vb_data gs_vbdata_create() {
-		return (gs_vb_data)ModernizedCProgram.bzalloc();
-	}
-	public void gs_vbdata_destroy() {
-		 i = new ();
-		if (!ModernizedCProgram.data) {
-			return ;
-		} 
-		ModernizedCProgram.bfree(ModernizedCProgram.data.getPoints());
-		ModernizedCProgram.bfree(ModernizedCProgram.data.getNormals());
-		ModernizedCProgram.bfree(ModernizedCProgram.data.getTangents());
-		ModernizedCProgram.bfree(ModernizedCProgram.data.getColors());
-		for (i = 0; i < ModernizedCProgram.data.getNum_tex(); i++) {
-			ModernizedCProgram.bfree(ModernizedCProgram.data.getTvarray()[i].getArray());
-		}
-		ModernizedCProgram.bfree(ModernizedCProgram.data.getTvarray());
-		ModernizedCProgram.bfree(ModernizedCProgram.data);
-	}
-	public gs_vb_data gs_vertexbuffer_get_data(Object vb) {
-		return vb.getData();
-		if (!(ModernizedCProgram.gs_valid("gs_vertexbuffer_get_data") && ModernizedCProgram.gs_obj_valid(vertbuffer, "gs_vertexbuffer_get_data", "vertbuffer"))) {
-			return ((Object)0);
-		} 
-		return .UNRECOGNIZEDFUNCTIONNAME(vertbuffer);
-	}
 	public void build_sprite(double fcx, double fcy, double start_u, double end_u, double start_v, double end_v) {
 		vec2 tvarray = ModernizedCProgram.data.getTvarray()[0].getArray();
 		ModernizedCProgram.data.getPoints().vec3_zero();
@@ -87,6 +62,31 @@ public class gs_vb_data {
 		} 
 		ModernizedCProgram.data.build_sprite(fsub_cx, fsub_cy, start_u, end_u, start_v, end_v);
 	}
+	public gs_vb_data gs_vertexbuffer_get_data(Object vertbuffer) {
+		if (!(ModernizedCProgram.gs_valid("gs_vertexbuffer_get_data") && ModernizedCProgram.gs_obj_valid(vertbuffer, "gs_vertexbuffer_get_data", "vertbuffer"))) {
+			return ((Object)0);
+		} 
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(vertbuffer);
+		return vb.getData();
+	}
+	public gs_vb_data gs_vbdata_create() {
+		return (gs_vb_data)ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
+	}
+	public void gs_vbdata_destroy() {
+		 i = new ();
+		if (!ModernizedCProgram.data) {
+			return /*Error: Unsupported expression*/;
+		} 
+		ModernizedCProgram.bfree(ModernizedCProgram.data.getPoints());
+		ModernizedCProgram.bfree(ModernizedCProgram.data.getNormals());
+		ModernizedCProgram.bfree(ModernizedCProgram.data.getTangents());
+		ModernizedCProgram.bfree(ModernizedCProgram.data.getColors());
+		for (i = 0; i < ModernizedCProgram.data.getNum_tex(); i++) {
+			ModernizedCProgram.bfree(ModernizedCProgram.data.getTvarray()[i].getArray());
+		}
+		ModernizedCProgram.bfree(ModernizedCProgram.data.getTvarray());
+		ModernizedCProgram.bfree(ModernizedCProgram.data);
+	}
 	public Object getNum() {
 		return num;
 	}
@@ -123,10 +123,10 @@ public class gs_vb_data {
 	public void setNum_tex(Object newNum_tex) {
 		num_tex = newNum_tex;
 	}
-	public gs_tvertarray getTvarray() {
+	public gs_tvertarray[] getTvarray() {
 		return tvarray;
 	}
-	public void setTvarray(gs_tvertarray newTvarray) {
+	public void setTvarray(gs_tvertarray[] newTvarray) {
 		tvarray = newTvarray;
 	}
 }

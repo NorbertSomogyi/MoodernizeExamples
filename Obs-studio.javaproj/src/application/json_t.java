@@ -23,6 +23,360 @@ public class json_t {
 	public json_t() {
 	}
 	
+	public json_t obs_data_to_json(obs_data data) {
+		json_t json_t = new json_t();
+		json_t json = json_t.json_object();
+		obs_data_item_t item = ((Object)0);
+		obs_data_item obs_data_item = new obs_data_item();
+		for (item = obs_data_item.obs_data_first(data); item; item.obs_data_item_next()) {
+			obs_data_type type = item.obs_data_item_gettype();
+			byte name = item.get_item_name();
+			if (!item.obs_data_item_has_user_value()) {
+				continue;
+			} 
+			if (obs_data_type.type == obs_data_type.OBS_DATA_STRING) {
+				ModernizedCProgram.set_json_string(json, name, item);
+			}  else if (obs_data_type.type == obs_data_type.OBS_DATA_NUMBER) {
+				ModernizedCProgram.set_json_number(json, name, item);
+			}  else if (obs_data_type.type == obs_data_type.OBS_DATA_BOOLEAN) {
+				ModernizedCProgram.set_json_bool(json, name, item);
+			}  else if (obs_data_type.type == obs_data_type.OBS_DATA_OBJECT) {
+				ModernizedCProgram.set_json_obj(json, name, item);
+			}  else if (obs_data_type.type == obs_data_type.OBS_DATA_ARRAY) {
+				ModernizedCProgram.set_json_array(json, name, item);
+			} 
+		}
+		return json;
+	}
+	public Object get_string_val(Object key) {
+		json_t json_t = new json_t();
+		json_t str_val = json_t.json_object_get(service, key);
+		 generatedType = (str_val).getType();
+		if (!str_val || !((str_val) && (generatedType) == .JSON_STRING)) {
+			return ((Object)0);
+		} 
+		return ModernizedCProgram.json_string_value(str_val);
+	}
+	public int get_int_val(Object key) {
+		json_t json_t = new json_t();
+		json_t integer_val = json_t.json_object_get(service, key);
+		 generatedType = (integer_val).getType();
+		if (!integer_val || !((integer_val) && (generatedType) == .JSON_INTEGER)) {
+			return 0;
+		} 
+		return (int)ModernizedCProgram.json_integer_value(integer_val);
+	}
+	public Object get_bool_val(Object key) {
+		json_t json_t = new json_t();
+		json_t bool_val = json_t.json_object_get(service, key);
+		 generatedType = (bool_val).getType();
+		if (!bool_val || !(((bool_val) && (generatedType) == .JSON_TRUE) || ((bool_val) && (generatedType) == .JSON_FALSE))) {
+			return false;
+		} 
+		return ((bool_val) && (generatedType) == .JSON_TRUE);
+	}
+	public json_t open_json_file(Object file) {
+		byte file_data = ModernizedCProgram.os_quick_read_utf8_file(file);
+		json_error_t error = new json_error_t();
+		json_t root = new json_t();
+		json_t list = new json_t();
+		int format_ver;
+		if (!file_data) {
+			return ((Object)0);
+		} 
+		json_t json_t = new json_t();
+		root = json_t.json_loads(file_data, -1024, error);
+		ModernizedCProgram.bfree(file_data);
+		Object generatedLine = error.getLine();
+		Object generatedText = error.getText();
+		if (!root) {
+			ModernizedCProgram.blog(LOG_WARNING, "rtmp-common.c: [open_json_file] Error reading JSON file (%d): %s", generatedLine, generatedText);
+			return ((Object)0);
+		} 
+		format_ver = root.get_int_val("format_version");
+		if (format_ver != 2) {
+			ModernizedCProgram.blog(LOG_DEBUG, "rtmp-common.c: [open_json_file] Wrong format version (%d), expected %d", format_ver, 2);
+			root.json_decref();
+			return ((Object)0);
+		} 
+		json_t json_t = new json_t();
+		list = json_t.json_object_get(root, "services");
+		if (list) {
+			list.json_incref();
+		} 
+		root.json_decref();
+		if (!list) {
+			ModernizedCProgram.blog(LOG_WARNING, "rtmp-common.c: [open_json_file] No services list");
+			return ((Object)0);
+		} 
+		return list;
+	}
+	public json_t open_services_file() {
+		byte file;
+		json_t root = ((Object)0);
+		obs_module obs_module = new obs_module();
+		file = obs_module.obs_current_module().obs_module_get_config_path("services.json");
+		json_t json_t = new json_t();
+		if (file) {
+			root = json_t.open_json_file(file);
+			ModernizedCProgram.bfree(file);
+		} 
+		if (!root) {
+			file = obs_module.obs_current_module().obs_find_module_file("services.json");
+			if (file) {
+				root = json_t.open_json_file(file);
+				ModernizedCProgram.bfree(file);
+			} 
+		} 
+		return root;
+	}
+	public json_t find_service(Object name, Object p_new_name) {
+		size_t index = new size_t();
+		json_t service = new json_t();
+		if (p_new_name) {
+			p_new_name = ((Object)0);
+		} 
+		json_t json_t = new json_t();
+		json_t json_t = new json_t();
+		for (index = 0; index < ModernizedCProgram.json_array_size(root) && (service = json_t.json_array_get(root, index)); index++) {
+			byte cur_name = service.get_string_val("name");
+			if (/*Error: Function owner not recognized*/strcmp(name, cur_name) == 0) {
+				return service;
+			} 
+			json_t alt_names = json_t.json_object_get(service, /* check for alternate names */"alt_names");
+			size_t alt_name_idx = new size_t();
+			json_t alt_name_obj = new json_t();
+			for (alt_name_idx = 0; alt_name_idx < ModernizedCProgram.json_array_size(alt_names) && (alt_name_obj = json_t.json_array_get(alt_names, alt_name_idx)); alt_name_idx++) {
+				byte alt_name = ModernizedCProgram.json_string_value(alt_name_obj);
+				if (alt_name && /*Error: Function owner not recognized*/strcmp(name, alt_name) == 0) {
+					if (p_new_name) {
+						p_new_name = cur_name;
+					} 
+					return service;
+				} 
+			}
+		}
+		return ((Object)0);
+		 i = new ();
+		for (i = 0; i < ModernizedCProgram.obs.getService_types().getNum(); i++) {
+			if (/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.obs.getService_types().getArray()[i].getId(), id) == 0) {
+				return ModernizedCProgram.obs.getService_types().getArray() + i;
+			} 
+		}
+		return NULL;
+	}
+	public json_t pack_object( s, Object ap) {
+		json_t json_t = new json_t();
+		json_t object = json_t.json_object();
+		s.next_token();
+		Object generatedToken = (s).getToken();
+		json_t json_t = new json_t();
+		while ((generatedToken.getToken()) != (byte)'}') {
+			byte key;
+			size_t len = new size_t();
+			int ours;
+			json_t value = new json_t();
+			if (!(generatedToken)) {
+				s.set_error("<format>", "Unexpected end of format string");
+				;
+			} 
+			if ((generatedToken) != (byte)'s') {
+				s.set_error("<format>", "Expected format 's', got '%c'", (generatedToken));
+				;
+			} 
+			ModernizedCProgram.key = s.read_string(ap, "object key", len, ours);
+			if (!ModernizedCProgram.key) {
+				;
+			} 
+			s.next_token();
+			value = json_t.pack(s, ap);
+			if (!value) {
+				if (ours) {
+					ModernizedCProgram.jsonp_free(ModernizedCProgram.key);
+				} 
+				;
+			} 
+			if (object.json_object_set_new_nocheck(ModernizedCProgram.key, value)) {
+				s.set_error("<internal>", "Unable to add key \"%s\"", ModernizedCProgram.key);
+				if (ours) {
+					ModernizedCProgram.jsonp_free(ModernizedCProgram.key);
+				} 
+				;
+			} 
+			if (ours) {
+				ModernizedCProgram.jsonp_free(ModernizedCProgram.key);
+			} 
+			s.next_token();
+		}
+		return object;
+		return ((Object)0);
+	}
+	public json_t pack_array( s, Object ap) {
+		json_t json_t = new json_t();
+		json_t array = json_t.json_array();
+		s.next_token();
+		Object generatedToken = (s).getToken();
+		json_t json_t = new json_t();
+		while ((generatedToken.getToken()) != (byte)']') {
+			json_t value = new json_t();
+			if (!(generatedToken)) {
+				s.set_error("<format>", "Unexpected end of format string");
+				;
+			} 
+			value = json_t.pack(s, ap);
+			if (!value) {
+				;
+			} 
+			if (array.json_array_append_new(value)) {
+				s.set_error("<internal>", "Unable to append to array");
+				;
+			} 
+			s.next_token();
+		}
+		return array;
+		return ((Object)0);
+	}
+	public json_t pack_string( s, Object ap) {
+		byte str;
+		size_t len = new size_t();
+		int ours;
+		int nullable;
+		s.next_token();
+		Object generatedToken = (s).getToken();
+		nullable = (generatedToken.getToken()) == (byte)'?';
+		if (!nullable) {
+			s.prev_token();
+		} 
+		str = s.read_string(ap, "string", len, ours);
+		json_t json_t = new json_t();
+		json_t json_t = new json_t();
+		json_t json_t = new json_t();
+		if (!str) {
+			return nullable ? json_t.json_null() : ((Object)0);
+		}  else if (ours) {
+			return json_t.jsonp_stringn_nocheck_own(str, len);
+		} else {
+				return json_t.json_stringn_nocheck(str, len);
+		} 
+	}
+	public json_t pack( s, Object ap) {
+		json_t json_t = new json_t();
+		json_t json_t = new json_t();
+		json_t json_t = new json_t();
+		json_t json_t = new json_t();
+		json_t json_t = new json_t();
+		json_t json_t = new json_t();
+		json_t json_t = new json_t();
+		json_t json_t = new json_t();
+		Object generatedToken = (s).getToken();
+		switch ((generatedToken)) {
+		case /* integer from json_int_t */(byte)'I':
+				return json_t.json_integer((int)ap);
+		case /* real */(byte)'f':
+				return json_t.json_real((int)ap);
+		case /* integer from int */(byte)'i':
+				return json_t.json_integer((int)ap);
+		case /* a json_t object; increments refcount */(byte)'O':
+				{ 
+					int nullable;
+					json_t json = new json_t();
+					s.next_token();
+					nullable = (generatedToken.getToken()) == (byte)'?';
+					if (!nullable) {
+						s.prev_token();
+					} 
+					json = (int)ap;
+					if (!json && nullable) {
+						return json_t.json_null();
+					} else {
+							return json.json_incref();
+					} 
+				}
+		case (byte)'{':
+				return json_t.pack_object(s, ap);
+		case (byte)'[':
+				return json_t.pack_array(s, ap);
+		case /* string */(byte)'s':
+				return json_t.pack_string(s, ap);
+		case /* null */(byte)'n':
+				return json_t.json_null();
+		case /* boolean */(byte)'b':
+				return (int)ap ? json_t.json_true() : json_t.json_false();
+		case /* a json_t object; doesn't increment refcount */(byte)'o':
+				{ 
+					int nullable;
+					json_t json = new json_t();
+					s.next_token();
+					nullable = (generatedToken) == (byte)'?';
+					if (!nullable) {
+						s.prev_token();
+					} 
+					json = (int)ap;
+					if (!json && nullable) {
+						return json_t.json_null();
+					} else {
+							return json;
+					} 
+				}
+		default:
+				s.set_error("<format>", "Unexpected format character '%c'", (generatedToken));
+				return ((Object)0);
+		}
+	}
+	public json_t json_vpack_ex( error, Object flags, Object fmt, Object ap) {
+		scanner_t s = new scanner_t();
+		va_list ap_copy = new va_list();
+		json_t value = new json_t();
+		if (!fmt || !fmt) {
+			error.jsonp_error_init("<format>");
+			error.jsonp_error_set(-1, -1, 0, "NULL or empty format string");
+			return ((Object)0);
+		} 
+		error.jsonp_error_init(((Object)0));
+		s.scanner_init(error, flags, fmt);
+		s.next_token();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_copy(ap_copy, ap);
+		json_t json_t = new json_t();
+		value = json_t.pack(s, ap_copy);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap_copy);
+		if (!value) {
+			return ((Object)0);
+		} 
+		s.next_token();
+		Object generatedToken = (s).getToken();
+		if ((generatedToken.getToken())) {
+			value.json_decref();
+			s.set_error("<format>", "Garbage after format string");
+			return ((Object)0);
+		} 
+		return value;
+	}
+	public json_t json_pack_ex( error, Object flags, Object fmt) {
+		json_t value = new json_t();
+		va_list ap = new va_list();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
+		json_t json_t = new json_t();
+		value = json_t.json_vpack_ex(error, flags, fmt, ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
+		return value;
+	}
+	public json_t json_pack(Object fmt) {
+		json_t value = new json_t();
+		va_list ap = new va_list();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
+		json_t json_t = new json_t();
+		value = json_t.json_vpack_ex(((Object)0), 0, fmt, ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
+		return value;
+	}
+	public int json_unpack(Object fmt) {
+		int ret;
+		va_list ap = new va_list();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
+		ret = ModernizedCProgram.json_vunpack_ex(root, ((Object)0), 0, fmt, ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
+		return ret;
+	}
 	public json_t parse_object( lex, Object flags,  error) {
 		json_t json_t = new json_t();
 		json_t object = json_t.json_object();
@@ -48,7 +402,7 @@ public class json_t {
 			if (!ModernizedCProgram.key) {
 				return ((Object)0);
 			} 
-			if (.memchr(ModernizedCProgram.key, (byte)'\0', len)) {
+			if (/*Error: Function owner not recognized*/memchr(ModernizedCProgram.key, (byte)'\0', len)) {
 				ModernizedCProgram.jsonp_free(ModernizedCProgram.key);
 				error.error_set(lex, "NUL byte in object key not supported");
 				;
@@ -147,40 +501,21 @@ public class json_t {
 		json_t json_t = new json_t();
 		Object generatedToken = lex.getToken();
 		switch (generatedToken) {
-		case (byte)'{':
-				json = json_t.parse_object(lex, flags, error);
+		case 259:
+				json = json_t.json_true();
 				break;
-		case 261:
-				json = json_t.json_null();
-				break;
-		case 258:
-				{ 
-					json = json_t.json_real(generatedValue.getReal());
-					break;
-				}
 		case (byte)'[':
 				json = json_t.parse_array(lex, flags, error);
 				break;
-		case -1:
-				error.error_set(lex, "invalid token");
-				return ((Object)0);
 		case 260:
 				json = json_t.json_false();
-				break;
-		case 257:
-				{ 
-					json = json_t.json_integer(generatedValue.getInteger());
-					break;
-				}
-		case 259:
-				json = json_t.json_true();
 				break;
 		case 256:
 				{ 
 					byte value = generatedValue.getString().getVal();
 					size_t len = generatedValue.getString().getLen();
 					if (!(flags & -1024)) {
-						if (.memchr(value, (byte)'\0', len)) {
+						if (/*Error: Function owner not recognized*/memchr(value, (byte)'\0', len)) {
 							error.error_set(lex, "\\u0000 is not allowed without JSON_ALLOW_NUL");
 							return ((Object)0);
 						} 
@@ -190,6 +525,25 @@ public class json_t {
 						generatedValue.getString().setVal(((Object)0));
 						generatedValue.getString().setLen(0);
 					} 
+					break;
+				}
+		case 257:
+				{ 
+					json = json_t.json_integer(generatedValue.getInteger());
+					break;
+				}
+		case 261:
+				json = json_t.json_null();
+				break;
+		case -1:
+				error.error_set(lex, "invalid token");
+				return ((Object)0);
+		case (byte)'{':
+				json = json_t.parse_object(lex, flags, error);
+				break;
+		case 258:
+				{ 
+					json = json_t.json_real(generatedValue.getReal());
 					break;
 				}
 		default:
@@ -301,21 +655,21 @@ public class json_t {
 			error.error_set(((Object)0), "wrong arguments");
 			return ((Object)0);
 		} 
-		fp = .fopen(path, "rb");
+		fp = /*Error: Function owner not recognized*/fopen(path, "rb");
 		if (!fp) {
-			error.error_set(((Object)0), "unable to open %s: %s", path, .strerror((._errno())));
+			error.error_set(((Object)0), "unable to open %s: %s", path, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			return ((Object)0);
 		} 
 		json_t json_t = new json_t();
 		result = json_t.json_loadf(fp, flags, error);
-		.fclose(fp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fp);
 		return result;
 	}
 	public json_t json_load_callback(Object callback, Object arg, Object flags,  error) {
 		lex_t lex = new lex_t();
 		json_t result = new json_t();
 		callback_data_t stream_data = new callback_data_t();
-		.memset(stream_data, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(stream_data, 0, /*Error: sizeof expression not supported yet*/);
 		stream_data.setCallback(callback);
 		stream_data.setArg(arg);
 		error.jsonp_error_init("<callback>");
@@ -330,243 +684,6 @@ public class json_t {
 		result = json_t.parse_json(lex, flags, error);
 		lex.lex_close();
 		return result;
-	}
-	public json_t pack_object( s, Object ap) {
-		json_t json_t = new json_t();
-		json_t object = json_t.json_object();
-		s.next_token();
-		Object generatedToken = (s).getToken();
-		json_t json_t = new json_t();
-		while ((generatedToken.getToken()) != (byte)'}') {
-			byte key;
-			size_t len = new size_t();
-			int ours;
-			json_t value = new json_t();
-			if (!(generatedToken)) {
-				s.set_error("<format>", "Unexpected end of format string");
-				;
-			} 
-			if ((generatedToken) != (byte)'s') {
-				s.set_error("<format>", "Expected format 's', got '%c'", (generatedToken));
-				;
-			} 
-			ModernizedCProgram.key = s.read_string(ap, "object key", len, ours);
-			if (!ModernizedCProgram.key) {
-				;
-			} 
-			s.next_token();
-			value = json_t.pack(s, ap);
-			if (!value) {
-				if (ours) {
-					ModernizedCProgram.jsonp_free(ModernizedCProgram.key);
-				} 
-				;
-			} 
-			if (object.json_object_set_new_nocheck(ModernizedCProgram.key, value)) {
-				s.set_error("<internal>", "Unable to add key \"%s\"", ModernizedCProgram.key);
-				if (ours) {
-					ModernizedCProgram.jsonp_free(ModernizedCProgram.key);
-				} 
-				;
-			} 
-			if (ours) {
-				ModernizedCProgram.jsonp_free(ModernizedCProgram.key);
-			} 
-			s.next_token();
-		}
-		return object;
-		return ((Object)0);
-	}
-	public json_t pack_array( s, Object ap) {
-		json_t json_t = new json_t();
-		json_t array = json_t.json_array();
-		s.next_token();
-		Object generatedToken = (s).getToken();
-		json_t json_t = new json_t();
-		while ((generatedToken.getToken()) != (byte)']') {
-			json_t value = new json_t();
-			if (!(generatedToken)) {
-				s.set_error("<format>", "Unexpected end of format string");
-				;
-			} 
-			value = json_t.pack(s, ap);
-			if (!value) {
-				;
-			} 
-			if (array.json_array_append_new(value)) {
-				s.set_error("<internal>", "Unable to append to array");
-				;
-			} 
-			s.next_token();
-		}
-		return array;
-		return ((Object)0);
-	}
-	public json_t pack_string( s, Object ap) {
-		byte str;
-		size_t len = new size_t();
-		int ours;
-		int nullable;
-		s.next_token();
-		Object generatedToken = (s).getToken();
-		nullable = (generatedToken.getToken()) == (byte)'?';
-		if (!nullable) {
-			s.prev_token();
-		} 
-		str = s.read_string(ap, "string", len, ours);
-		json_t json_t = new json_t();
-		json_t json_t = new json_t();
-		json_t json_t = new json_t();
-		if (!str) {
-			return nullable ? json_t.json_null() : ((Object)0);
-		}  else if (ours) {
-			return json_t.jsonp_stringn_nocheck_own(str, len);
-		} else {
-				return json_t.json_stringn_nocheck(str, len);
-		} 
-	}
-	public json_t pack( s, Object ap) {
-		json_t json_t = new json_t();
-		json_t json_t = new json_t();
-		json_t json_t = new json_t();
-		json_t json_t = new json_t();
-		json_t json_t = new json_t();
-		json_t json_t = new json_t();
-		json_t json_t = new json_t();
-		json_t json_t = new json_t();
-		Object generatedToken = (s).getToken();
-		switch ((generatedToken)) {
-		case /* real */(byte)'f':
-				return json_t.json_real((int)ap);
-		case /* integer from json_int_t */(byte)'I':
-				return json_t.json_integer((int)ap);
-		case (byte)'[':
-				return json_t.pack_array(s, ap);
-		case /* string */(byte)'s':
-				return json_t.pack_string(s, ap);
-		case /* integer from int */(byte)'i':
-				return json_t.json_integer((int)ap);
-		case /* null */(byte)'n':
-				return json_t.json_null();
-		case /* boolean */(byte)'b':
-				return (int)ap ? json_t.json_true() : json_t.json_false();
-		case /* a json_t object; increments refcount */(byte)'O':
-				{ 
-					int nullable;
-					json_t json = new json_t();
-					s.next_token();
-					nullable = (generatedToken.getToken()) == (byte)'?';
-					if (!nullable) {
-						s.prev_token();
-					} 
-					json = (int)ap;
-					if (!json && nullable) {
-						return json_t.json_null();
-					} else {
-							return json.json_incref();
-					} 
-				}
-		case /* a json_t object; doesn't increment refcount */(byte)'o':
-				{ 
-					int nullable;
-					json_t json = new json_t();
-					s.next_token();
-					nullable = (generatedToken) == (byte)'?';
-					if (!nullable) {
-						s.prev_token();
-					} 
-					json = (int)ap;
-					if (!json && nullable) {
-						return json_t.json_null();
-					} else {
-							return json;
-					} 
-				}
-		case (byte)'{':
-				return json_t.pack_object(s, ap);
-		default:
-				s.set_error("<format>", "Unexpected format character '%c'", (generatedToken));
-				return ((Object)0);
-		}
-	}
-	public json_t json_vpack_ex( error, Object flags, Object fmt, Object ap) {
-		scanner_t s = new scanner_t();
-		va_list ap_copy = new va_list();
-		json_t value = new json_t();
-		if (!fmt || !fmt) {
-			error.jsonp_error_init("<format>");
-			error.jsonp_error_set(-1, -1, 0, "NULL or empty format string");
-			return ((Object)0);
-		} 
-		error.jsonp_error_init(((Object)0));
-		s.scanner_init(error, flags, fmt);
-		s.next_token();
-		.__builtin_va_copy(ap_copy, ap);
-		json_t json_t = new json_t();
-		value = json_t.pack(s, ap_copy);
-		.__builtin_va_end(ap_copy);
-		if (!value) {
-			return ((Object)0);
-		} 
-		s.next_token();
-		Object generatedToken = (s).getToken();
-		if ((generatedToken.getToken())) {
-			value.json_decref();
-			s.set_error("<format>", "Garbage after format string");
-			return ((Object)0);
-		} 
-		return value;
-	}
-	public json_t json_pack_ex( error, Object flags, Object fmt) {
-		json_t value = new json_t();
-		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
-		json_t json_t = new json_t();
-		value = json_t.json_vpack_ex(error, flags, fmt, ap);
-		.__builtin_va_end(ap);
-		return value;
-	}
-	public json_t json_pack(Object fmt) {
-		json_t value = new json_t();
-		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
-		json_t json_t = new json_t();
-		value = json_t.json_vpack_ex(((Object)0), 0, fmt, ap);
-		.__builtin_va_end(ap);
-		return value;
-	}
-	public int json_unpack(Object fmt) {
-		int ret;
-		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
-		ret = ModernizedCProgram.json_vunpack_ex(root, ((Object)0), 0, fmt, ap);
-		.__builtin_va_end(ap);
-		return ret;
-	}
-	public json_t obs_data_to_json(obs_data data) {
-		json_t json_t = new json_t();
-		json_t json = json_t.json_object();
-		obs_data_item_t item = ((Object)0);
-		obs_data_item obs_data_item = new obs_data_item();
-		for (item = obs_data_item.obs_data_first(data); item; item.obs_data_item_next()) {
-			obs_data_type type = item.obs_data_item_gettype();
-			byte name = item.get_item_name();
-			if (!item.obs_data_item_has_user_value()) {
-				continue;
-			} 
-			if (obs_data_type.type == obs_data_type.OBS_DATA_STRING) {
-				ModernizedCProgram.set_json_string(json, name, item);
-			}  else if (obs_data_type.type == obs_data_type.OBS_DATA_NUMBER) {
-				ModernizedCProgram.set_json_number(json, name, item);
-			}  else if (obs_data_type.type == obs_data_type.OBS_DATA_BOOLEAN) {
-				ModernizedCProgram.set_json_bool(json, name, item);
-			}  else if (obs_data_type.type == obs_data_type.OBS_DATA_OBJECT) {
-				ModernizedCProgram.set_json_obj(json, name, item);
-			}  else if (obs_data_type.type == obs_data_type.OBS_DATA_ARRAY) {
-				ModernizedCProgram.set_json_array(json, name, item);
-			} 
-		}
-		return json;
 	}
 	public json_t json_incref() {
 		Object generatedRefcount = this.getRefcount();
@@ -606,6 +723,135 @@ public class json_t {
 		return array.json_array_insert_new(ind, value.json_incref());
 	}
 	/*
+	 * Simple example of parsing and printing JSON using jansson.
+	 *
+	 * SYNOPSIS:
+	 * $ examples/simple_parse
+	 * Type some JSON > [true, false, null, 1, 0.0, -0.0, "", {"name": "barney"}]
+	 * JSON Array of 8 elements:
+	 *   JSON True
+	 *   JSON False
+	 *   JSON Null
+	 *   JSON Integer: "1"
+	 *   JSON Real: 0.000000
+	 *   JSON Real: -0.000000
+	 *   JSON String: ""
+	 *   JSON Object of 1 pair:
+	 *     JSON Key: "name"
+	 *     JSON String: "barney"
+	 *
+	 * Copyright (c) 2014 Robert Poor <rdpoor@gmail.com>
+	 *
+	 * Jansson is free software; you can redistribute it and/or modify
+	 * it under the terms of the MIT license. See LICENSE for details.
+	 */
+	/* forward refs */
+	public void print_json() {
+		root.print_json_aux(0);
+	}
+	public void print_json_aux(int indent) {
+		 generatedType = (element).getType();
+		switch ((generatedType)) {
+		case .JSON_ARRAY:
+				element.print_json_array(indent);
+				break;
+		case .JSON_NULL:
+				element.print_json_null(indent);
+				break;
+		case .JSON_REAL:
+				element.print_json_real(indent);
+				break;
+		case .JSON_STRING:
+				element.print_json_string(indent);
+				break;
+		case .JSON_OBJECT:
+				element.print_json_object(indent);
+				break;
+		case .JSON_INTEGER:
+				element.print_json_integer(indent);
+				break;
+		case .JSON_TRUE:
+				element.print_json_true(indent);
+				break;
+		case .JSON_FALSE:
+				element.print_json_false(indent);
+				break;
+		default:
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "unrecognized JSON type %d\n", (generatedType));
+		}
+	}
+	public void print_json_object(int indent) {
+		size_t size = new size_t();
+		byte key;
+		json_t value = new json_t();
+		ModernizedCProgram.print_json_indent(indent);
+		size = ModernizedCProgram.json_object_size(element);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("JSON Object of %ld pair%s:\n", size, ModernizedCProgram.json_plural(size));
+		json_t json_t = new json_t();
+		for (key = ModernizedCProgram.json_object_iter_key(element.json_object_iter()); key && (value = json_t.json_object_iter_value(ModernizedCProgram.json_object_key_to_iter(key))); key = ModernizedCProgram.json_object_iter_key(element.json_object_iter_next(ModernizedCProgram.json_object_key_to_iter(key)))) {
+			ModernizedCProgram.print_json_indent(indent + 2);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("JSON Key: \"%s\"\n", key);
+			value.print_json_aux(indent + 2);
+		}
+	}
+	public void print_json_array(int indent) {
+		size_t i = new size_t();
+		size_t size = ModernizedCProgram.json_array_size(element);
+		ModernizedCProgram.print_json_indent(indent);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("JSON Array of %ld element%s:\n", size, ModernizedCProgram.json_plural(size));
+		json_t json_t = new json_t();
+		for (i = 0; i < size; i++) {
+			json_t.json_array_get(element, i).print_json_aux(indent + 2);
+		}
+	}
+	public void print_json_string(int indent) {
+		ModernizedCProgram.print_json_indent(indent);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("JSON String: \"%s\"\n", ModernizedCProgram.json_string_value(element));
+	}
+	public void print_json_integer(int indent) {
+		ModernizedCProgram.print_json_indent(indent);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("JSON Integer: \"%I64d\"\n", ModernizedCProgram.json_integer_value(element));
+	}
+	public void print_json_real(int indent) {
+		ModernizedCProgram.print_json_indent(indent);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("JSON Real: %f\n", ModernizedCProgram.json_real_value(element));
+	}
+	public void print_json_true(int indent) {
+		(Object)element;
+		ModernizedCProgram.print_json_indent(indent);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("JSON True\n");
+	}
+	public void print_json_false(int indent) {
+		(Object)element;
+		ModernizedCProgram.print_json_indent(indent);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("JSON False\n");
+	}
+	public void print_json_null(int indent) {
+		(Object)element;
+		ModernizedCProgram.print_json_indent(indent);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("JSON Null\n"/*
+		 * Parse text into a JSON object. If text is valid JSON, returns a
+		 * json_t structure, otherwise prints and error and returns null.
+		 */);
+	}
+	public json_t load_json(Object text) {
+		json_t root = new json_t();
+		json_error_t error = new json_error_t();
+		json_t json_t = new json_t();
+		root = json_t.json_loads(text, 0, error);
+		Object generatedLine = error.getLine();
+		Object generatedText = error.getText();
+		if (root) {
+			return root;
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "json error on line %d: %s\n", generatedLine, generatedText);
+				return (json_t)0/*
+				 * Print a prompt and return (by reference) a null-terminated line of
+				 * text.  Returns NULL on eof or some error.
+				 */;
+		} 
+	}
+	/*
 	 * Copyright (c) 2009-2016 Petri Lehtinen <petri@digip.org>
 	 *
 	 * Jansson is free software; you can redistribute it and/or modify
@@ -617,7 +863,7 @@ public class json_t {
 		this.setRefcount(1/*** object ***/);
 	}
 	public json_t json_object() {
-		json_object_t object = ModernizedCProgram.jsonp_malloc();
+		json_object_t object = ModernizedCProgram.jsonp_malloc(/*Error: Unsupported expression*/);
 		if (!object) {
 			return ((Object)0);
 		} 
@@ -662,7 +908,7 @@ public class json_t {
 		return 0;
 	}
 	public int json_object_set_new(Object key, json_t value) {
-		if (!key || !ModernizedCProgram.utf8_check_string(key, .strlen(key))) {
+		if (!key || !ModernizedCProgram.utf8_check_string(key, /*Error: Function owner not recognized*/strlen(key))) {
 			value.json_decref();
 			return -1;
 		} 
@@ -836,7 +1082,7 @@ public class json_t {
 	}
 	/*** array ***/
 	public json_t json_array() {
-		json_array_t array = ModernizedCProgram.jsonp_malloc();
+		json_array_t array = ModernizedCProgram.jsonp_malloc(/*Error: Unsupported expression*/);
 		if (!array) {
 			return ((Object)0);
 		} 
@@ -845,7 +1091,7 @@ public class json_t {
 		array.setEntries(0);
 		array.setSize(8);
 		Object generatedSize = array.getSize();
-		array.setTable(ModernizedCProgram.jsonp_malloc(generatedSize * ));
+		array.setTable(ModernizedCProgram.jsonp_malloc(generatedSize * /*Error: Unsupported expression*/));
 		Object generatedTable = array.getTable();
 		if (!generatedTable) {
 			ModernizedCProgram.jsonp_free(array);
@@ -888,8 +1134,8 @@ public class json_t {
 		generatedTable[index] = value;
 		return 0;
 	}
-	public void array_copy(Object dpos, json_t src, Object spos, Object count) {
-		.memcpy(dest[dpos], src[spos], count * );
+	public void array_copy(Object dpos, json_t[][] src, Object spos, Object count) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dest[dpos], src[spos], count * /*Error: Unsupported expression*/);
 	}
 	public json_t json_array_grow( array, Object amount, int copy) {
 		size_t new_size = new size_t();
@@ -903,7 +1149,7 @@ public class json_t {
 		} 
 		old_table = generatedTable;
 		new_size = ((generatedSize + amount) > (generatedSize * 2) ? (generatedSize + amount) : (generatedSize * 2));
-		new_table = ModernizedCProgram.jsonp_malloc(new_size * );
+		new_table = ModernizedCProgram.jsonp_malloc(new_size * /*Error: Unsupported expression*/);
 		if (!new_table) {
 			return ((Object)0);
 		} 
@@ -1094,7 +1340,7 @@ public class json_t {
 					return ((Object)0);
 				} 
 		} 
-		string = ModernizedCProgram.jsonp_malloc();
+		string = ModernizedCProgram.jsonp_malloc(/*Error: Unsupported expression*/);
 		if (!string) {
 			if (!own) {
 				ModernizedCProgram.jsonp_free(v);
@@ -1112,7 +1358,7 @@ public class json_t {
 			return ((Object)0);
 		} 
 		json_t json_t = new json_t();
-		return json_t.string_create(value, .strlen(value), 0);
+		return json_t.string_create(value, /*Error: Function owner not recognized*/strlen(value), 0);
 	}
 	public json_t json_stringn_nocheck(Object value, Object len) {
 		json_t json_t = new json_t();
@@ -1128,7 +1374,7 @@ public class json_t {
 			return ((Object)0);
 		} 
 		json_t json_t = new json_t();
-		return json_t.json_stringn(value, .strlen(value));
+		return json_t.json_stringn(value, /*Error: Function owner not recognized*/strlen(value));
 	}
 	public json_t json_stringn(Object value, Object len) {
 		if (!value || !ModernizedCProgram.utf8_check_string(value, len)) {
@@ -1141,7 +1387,7 @@ public class json_t {
 		if (!value) {
 			return -1;
 		} 
-		return json.json_string_setn_nocheck(value, .strlen(value));
+		return json.json_string_setn_nocheck(value, /*Error: Function owner not recognized*/strlen(value));
 	}
 	public int json_string_setn_nocheck(Object value, Object len) {
 		byte dup;
@@ -1165,7 +1411,7 @@ public class json_t {
 		if (!value) {
 			return -1;
 		} 
-		return json.json_string_setn(value, .strlen(value));
+		return json.json_string_setn(value, /*Error: Function owner not recognized*/strlen(value));
 	}
 	public int json_string_setn(Object value, Object len) {
 		if (!value || !ModernizedCProgram.utf8_check_string(value, len)) {
@@ -1184,7 +1430,7 @@ public class json_t {
 		s2 = ((json_string_t)((byte)string2 - ((size_t)((json_string_t)0).getJson())));
 		Object generatedLength = s1.getLength();
 		Object generatedValue = s1.getValue();
-		return generatedLength == generatedLength && !.memcmp(generatedValue, generatedValue, generatedLength);
+		return generatedLength == generatedLength && !/*Error: Function owner not recognized*/memcmp(generatedValue, generatedValue, generatedLength);
 	}
 	public json_t json_string_copy(Object string) {
 		json_string_t s = new json_string_t();
@@ -1199,7 +1445,7 @@ public class json_t {
 	}
 	/*** integer ***/
 	public json_t json_integer(Object value) {
-		json_integer_t integer = ModernizedCProgram.jsonp_malloc();
+		json_integer_t integer = ModernizedCProgram.jsonp_malloc(/*Error: Unsupported expression*/);
 		if (!integer) {
 			return ((Object)0);
 		} 
@@ -1226,10 +1472,10 @@ public class json_t {
 	/*** real ***/
 	public json_t json_real(double value) {
 		json_real_t real = new json_real_t();
-		if (( ==  ? .__isnanf(value) :  ==  ? .__isnan(value) : .__isnanl(value)) || (( ==  ? .__fpclassifyf(value) :  ==  ? .__fpclassify(value) : .__fpclassifyl(value)) == (-1024 | -1024))) {
+		if ((/*Error: sizeof expression not supported yet*/ == /*Error: Unsupported expression*/ ? /*Error: Function owner not recognized*/__isnanf(value) : /*Error: sizeof expression not supported yet*/ == /*Error: Unsupported expression*/ ? /*Error: Function owner not recognized*/__isnan(value) : /*Error: Function owner not recognized*/__isnanl(value)) || ((/*Error: sizeof expression not supported yet*/ == /*Error: Unsupported expression*/ ? /*Error: Function owner not recognized*/__fpclassifyf(value) : /*Error: sizeof expression not supported yet*/ == /*Error: Unsupported expression*/ ? /*Error: Function owner not recognized*/__fpclassify(value) : /*Error: Function owner not recognized*/__fpclassifyl(value)) == (-1024 | -1024))) {
 			return ((Object)0);
 		} 
-		real = ModernizedCProgram.jsonp_malloc();
+		real = ModernizedCProgram.jsonp_malloc(/*Error: Unsupported expression*/);
 		if (!real) {
 			return ((Object)0);
 		} 
@@ -1240,7 +1486,7 @@ public class json_t {
 	}
 	public int json_real_set(double value) {
 		 generatedType = (json).getType();
-		if (!((json) && (generatedType) == .JSON_REAL) || ( ==  ? .__isnanf(value) :  ==  ? .__isnan(value) : .__isnanl(value)) || (( ==  ? .__fpclassifyf(value) :  ==  ? .__fpclassify(value) : .__fpclassifyl(value)) == (-1024 | -1024))) {
+		if (!((json) && (generatedType) == .JSON_REAL) || (/*Error: sizeof expression not supported yet*/ == /*Error: Unsupported expression*/ ? /*Error: Function owner not recognized*/__isnanf(value) : /*Error: sizeof expression not supported yet*/ == /*Error: Unsupported expression*/ ? /*Error: Function owner not recognized*/__isnan(value) : /*Error: Function owner not recognized*/__isnanl(value)) || ((/*Error: sizeof expression not supported yet*/ == /*Error: Unsupported expression*/ ? /*Error: Function owner not recognized*/__fpclassifyf(value) : /*Error: sizeof expression not supported yet*/ == /*Error: Unsupported expression*/ ? /*Error: Function owner not recognized*/__fpclassify(value) : /*Error: Function owner not recognized*/__fpclassifyl(value)) == (-1024 | -1024))) {
 			return -1;
 		} 
 		((json_real_t)((byte)json - ((size_t)((json_real_t)0).getJson()))).setValue(value);
@@ -1269,15 +1515,18 @@ public class json_t {
 	/*** deletion ***/
 	public void json_delete() {
 		if (!json) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 generatedType = (json).getType();
 		switch ((generatedType)) {
-		case .JSON_INTEGER:
-				((json_integer_t)((byte)json - ((size_t)((json_integer_t)0).getJson()))).json_delete_integer();
-				break;
 		case .JSON_OBJECT:
 				((json_object_t)((byte)json - ((size_t)((json_object_t)0).getJson()))).json_delete_object();
+				break;
+		case .JSON_REAL:
+				((json_real_t)((byte)json - ((size_t)((json_real_t)0).getJson()))).json_delete_real();
+				break;
+		case .JSON_INTEGER:
+				((json_integer_t)((byte)json - ((size_t)((json_integer_t)0).getJson()))).json_delete_integer();
 				break;
 		case .JSON_STRING:
 				((json_string_t)((byte)json - ((size_t)((json_string_t)0).getJson()))).json_delete_string();
@@ -1285,11 +1534,8 @@ public class json_t {
 		case .JSON_ARRAY:
 				((json_array_t)((byte)json - ((size_t)((json_array_t)0).getJson()))).json_delete_array();
 				break;
-		case .JSON_REAL:
-				((json_real_t)((byte)json - ((size_t)((json_real_t)0).getJson()))).json_delete_real();
-				break;
 		default:
-				return ;
+				return /*Error: Unsupported expression*/;
 		}
 	}
 	/*** equality ***/
@@ -1305,16 +1551,16 @@ public class json_t {
 			return 1;
 		} 
 		switch ((generatedType)) {
-		case .JSON_ARRAY:
-				return json1.json_array_equal(json2);
 		case .JSON_REAL:
 				return json1.json_real_equal(json2);
-		case .JSON_INTEGER:
-				return json1.json_integer_equal(json2);
 		case .JSON_STRING:
 				return json1.json_string_equal(json2);
 		case .JSON_OBJECT:
 				return json1.json_object_equal(json2);
+		case .JSON_ARRAY:
+				return json1.json_array_equal(json2);
+		case .JSON_INTEGER:
+				return json1.json_integer_equal(json2);
 		default:
 				return 0;
 		}
@@ -1331,18 +1577,18 @@ public class json_t {
 		switch ((generatedType)) {
 		case .JSON_STRING:
 				return json_t.json_string_copy(json);
-		case .JSON_REAL:
-				return json_t.json_real_copy(json);
+		case .JSON_FALSE:
 		case .JSON_NULL:
 				return json;
-		case .JSON_FALSE:
-		case .JSON_INTEGER:
-				return json_t.json_integer_copy(json);
 		case .JSON_OBJECT:
 				return json.json_object_copy();
-		case .JSON_TRUE:
 		case .JSON_ARRAY:
 				return json.json_array_copy();
+		case .JSON_INTEGER:
+				return json_t.json_integer_copy(json);
+		case .JSON_TRUE:
+		case .JSON_REAL:
+				return json_t.json_real_copy(json);
 		default:
 				return ((Object)0);
 		}
@@ -1358,21 +1604,21 @@ public class json_t {
 		json_t json_t = new json_t();
 		json_t json_t = new json_t();
 		switch (((json).getType())) {
+		case .JSON_TRUE:
+		case .JSON_OBJECT:
+				return json_t.json_object_deep_copy(json);
 		case .JSON_ARRAY:
 				return json_t.json_array_deep_copy(json/* for the rest of the types, deep copying doesn't differ from
 				               shallow copying */);
-		case .JSON_FALSE:
-		case .JSON_INTEGER:
-				return json_t.json_integer_copy(json);
-		case .JSON_OBJECT:
-				return json_t.json_object_deep_copy(json);
-		case .JSON_STRING:
-				return json_t.json_string_copy(json);
 		case .JSON_REAL:
 				return json_t.json_real_copy(json);
-		case .JSON_TRUE:
+		case .JSON_FALSE:
+		case .JSON_STRING:
+				return json_t.json_string_copy(json);
 		case .JSON_NULL:
 				return (json_t)json;
+		case .JSON_INTEGER:
+				return json_t.json_integer_copy(json);
 		default:
 				return ((Object)0);
 		}
@@ -1383,217 +1629,6 @@ public class json_t {
 		json_t generatedValue = pair.getValue();
 		generatedValue.json_decref();
 		pair.setValue(value);
-	}
-	public Object get_string_val(Object key) {
-		json_t json_t = new json_t();
-		json_t str_val = json_t.json_object_get(service, key);
-		 generatedType = (str_val).getType();
-		if (!str_val || !((str_val) && (generatedType) == .JSON_STRING)) {
-			return ((Object)0);
-		} 
-		return ModernizedCProgram.json_string_value(str_val);
-	}
-	public int get_int_val(Object key) {
-		json_t json_t = new json_t();
-		json_t integer_val = json_t.json_object_get(service, key);
-		 generatedType = (integer_val).getType();
-		if (!integer_val || !((integer_val) && (generatedType) == .JSON_INTEGER)) {
-			return 0;
-		} 
-		return (int)ModernizedCProgram.json_integer_value(integer_val);
-	}
-	public Object get_bool_val(Object key) {
-		json_t json_t = new json_t();
-		json_t bool_val = json_t.json_object_get(service, key);
-		 generatedType = (bool_val).getType();
-		if (!bool_val || !(((bool_val) && (generatedType) == .JSON_TRUE) || ((bool_val) && (generatedType) == .JSON_FALSE))) {
-			return false;
-		} 
-		return ((bool_val) && (generatedType) == .JSON_TRUE);
-	}
-	public json_t open_json_file(Object file) {
-		byte file_data = ModernizedCProgram.os_quick_read_utf8_file(file);
-		json_error_t error = new json_error_t();
-		json_t root = new json_t();
-		json_t list = new json_t();
-		int format_ver;
-		if (!file_data) {
-			return ((Object)0);
-		} 
-		json_t json_t = new json_t();
-		root = json_t.json_loads(file_data, -1024, error);
-		ModernizedCProgram.bfree(file_data);
-		Object generatedLine = error.getLine();
-		Object generatedText = error.getText();
-		if (!root) {
-			ModernizedCProgram.blog(LOG_WARNING, "rtmp-common.c: [open_json_file] Error reading JSON file (%d): %s", generatedLine, generatedText);
-			return ((Object)0);
-		} 
-		format_ver = root.get_int_val("format_version");
-		if (format_ver != 2) {
-			ModernizedCProgram.blog(LOG_DEBUG, "rtmp-common.c: [open_json_file] Wrong format version (%d), expected %d", format_ver, 2);
-			root.json_decref();
-			return ((Object)0);
-		} 
-		json_t json_t = new json_t();
-		list = json_t.json_object_get(root, "services");
-		if (list) {
-			list.json_incref();
-		} 
-		root.json_decref();
-		if (!list) {
-			ModernizedCProgram.blog(LOG_WARNING, "rtmp-common.c: [open_json_file] No services list");
-			return ((Object)0);
-		} 
-		return list;
-	}
-	public json_t open_services_file() {
-		byte file;
-		json_t root = ((Object)0);
-		obs_module obs_module = new obs_module();
-		file = obs_module.obs_current_module().obs_module_get_config_path("services.json");
-		json_t json_t = new json_t();
-		if (file) {
-			root = json_t.open_json_file(file);
-			ModernizedCProgram.bfree(file);
-		} 
-		if (!root) {
-			file = obs_module.obs_current_module().obs_find_module_file("services.json");
-			if (file) {
-				root = json_t.open_json_file(file);
-				ModernizedCProgram.bfree(file);
-			} 
-		} 
-		return root;
-	}
-	/*
-	 * Simple example of parsing and printing JSON using jansson.
-	 *
-	 * SYNOPSIS:
-	 * $ examples/simple_parse
-	 * Type some JSON > [true, false, null, 1, 0.0, -0.0, "", {"name": "barney"}]
-	 * JSON Array of 8 elements:
-	 *   JSON True
-	 *   JSON False
-	 *   JSON Null
-	 *   JSON Integer: "1"
-	 *   JSON Real: 0.000000
-	 *   JSON Real: -0.000000
-	 *   JSON String: ""
-	 *   JSON Object of 1 pair:
-	 *     JSON Key: "name"
-	 *     JSON String: "barney"
-	 *
-	 * Copyright (c) 2014 Robert Poor <rdpoor@gmail.com>
-	 *
-	 * Jansson is free software; you can redistribute it and/or modify
-	 * it under the terms of the MIT license. See LICENSE for details.
-	 */
-	/* forward refs */
-	public void print_json() {
-		root.print_json_aux(0);
-	}
-	public void print_json_aux(int indent) {
-		 generatedType = (element).getType();
-		switch ((generatedType)) {
-		case .JSON_INTEGER:
-				element.print_json_integer(indent);
-				break;
-		case .JSON_NULL:
-				element.print_json_null(indent);
-				break;
-		case .JSON_STRING:
-				element.print_json_string(indent);
-				break;
-		case .JSON_FALSE:
-				element.print_json_false(indent);
-				break;
-		case .JSON_REAL:
-				element.print_json_real(indent);
-				break;
-		case .JSON_TRUE:
-				element.print_json_true(indent);
-				break;
-		case .JSON_ARRAY:
-				element.print_json_array(indent);
-				break;
-		case .JSON_OBJECT:
-				element.print_json_object(indent);
-				break;
-		default:
-				.fprintf((_iob[2]), "unrecognized JSON type %d\n", (generatedType));
-		}
-	}
-	public void print_json_object(int indent) {
-		size_t size = new size_t();
-		byte key;
-		json_t value = new json_t();
-		ModernizedCProgram.print_json_indent(indent);
-		size = ModernizedCProgram.json_object_size(element);
-		.printf("JSON Object of %ld pair%s:\n", size, ModernizedCProgram.json_plural(size));
-		json_t json_t = new json_t();
-		for (key = ModernizedCProgram.json_object_iter_key(element.json_object_iter()); key && (value = json_t.json_object_iter_value(ModernizedCProgram.json_object_key_to_iter(key))); key = ModernizedCProgram.json_object_iter_key(element.json_object_iter_next(ModernizedCProgram.json_object_key_to_iter(key)))) {
-			ModernizedCProgram.print_json_indent(indent + 2);
-			.printf("JSON Key: \"%s\"\n", key);
-			value.print_json_aux(indent + 2);
-		}
-	}
-	public void print_json_array(int indent) {
-		size_t i = new size_t();
-		size_t size = ModernizedCProgram.json_array_size(element);
-		ModernizedCProgram.print_json_indent(indent);
-		.printf("JSON Array of %ld element%s:\n", size, ModernizedCProgram.json_plural(size));
-		json_t json_t = new json_t();
-		for (i = 0; i < size; i++) {
-			json_t.json_array_get(element, i).print_json_aux(indent + 2);
-		}
-	}
-	public void print_json_string(int indent) {
-		ModernizedCProgram.print_json_indent(indent);
-		.printf("JSON String: \"%s\"\n", ModernizedCProgram.json_string_value(element));
-	}
-	public void print_json_integer(int indent) {
-		ModernizedCProgram.print_json_indent(indent);
-		.printf("JSON Integer: \"%I64d\"\n", ModernizedCProgram.json_integer_value(element));
-	}
-	public void print_json_real(int indent) {
-		ModernizedCProgram.print_json_indent(indent);
-		.printf("JSON Real: %f\n", ModernizedCProgram.json_real_value(element));
-	}
-	public void print_json_true(int indent) {
-		(Object)element;
-		ModernizedCProgram.print_json_indent(indent);
-		.printf("JSON True\n");
-	}
-	public void print_json_false(int indent) {
-		(Object)element;
-		ModernizedCProgram.print_json_indent(indent);
-		.printf("JSON False\n");
-	}
-	public void print_json_null(int indent) {
-		(Object)element;
-		ModernizedCProgram.print_json_indent(indent);
-		.printf("JSON Null\n"/*
-		 * Parse text into a JSON object. If text is valid JSON, returns a
-		 * json_t structure, otherwise prints and error and returns null.
-		 */);
-	}
-	public json_t load_json(Object text) {
-		json_t root = new json_t();
-		json_error_t error = new json_error_t();
-		json_t json_t = new json_t();
-		root = json_t.json_loads(text, 0, error);
-		Object generatedLine = error.getLine();
-		Object generatedText = error.getText();
-		if (root) {
-			return root;
-		} else {
-				.fprintf((_iob[2]), "json error on line %d: %s\n", generatedLine, generatedText);
-				return (json_t)0/*
-				 * Print a prompt and return (by reference) a null-terminated line of
-				 * text.  Returns NULL on eof or some error.
-				 */;
-		} 
 	}
 	public  getType() {
 		return type;

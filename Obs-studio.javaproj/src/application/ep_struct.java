@@ -22,7 +22,7 @@ public class ep_struct {
 		return false;
 	}
 	public void ep_struct_init() {
-		.memset(eps, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(eps, 0, /*Error: Unsupported expression*/);
 	}
 	public void ep_struct_free() {
 		 i = new ();
@@ -32,13 +32,13 @@ public class ep_struct {
 		for (i = 0; i < generatedVars.getNum(); i++) {
 			generatedVars.getArray() + i.ep_var_free();
 		}
-		.da_free(generatedVars);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedVars);
 	}
 	public ep_struct ep_getstruct(effect_parser ep, Object name) {
 		 i = new ();
 		Object generatedStructs = ep.getStructs();
 		for (i = 0; i < generatedStructs.getNum(); i++) {
-			if (.strcmp(name, generatedStructs.getArray()[i].getName()) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(name, generatedStructs.getArray()[i].getName()) == 0) {
 				return generatedStructs.getArray() + i;
 			} 
 		}

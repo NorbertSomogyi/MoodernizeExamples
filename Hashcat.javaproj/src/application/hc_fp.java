@@ -46,20 +46,20 @@ public class hc_fp {
 		} 
 		int oflag = -1;
 		int fmode = -1024 | -1024;
-		if (.strncmp(mode, "a", 1) == 0 || .strncmp(mode, "ab", 2) == 0) {
+		if (/*Error: Function owner not recognized*/strncmp(mode, "a", 1) == 0 || /*Error: Function owner not recognized*/strncmp(mode, "ab", 2) == 0) {
 			oflag = 1 | -1024 | -1024;
-			if (.strncmp(mode, "ab", 2) == 0) {
+			if (/*Error: Function owner not recognized*/strncmp(mode, "ab", 2) == 0) {
 				oflag |=  -1024;
 			} 
-		}  else if (.strncmp(mode, "r", 1) == 0 || .strncmp(mode, "rb", 2) == 0) {
+		}  else if (/*Error: Function owner not recognized*/strncmp(mode, "r", 1) == 0 || /*Error: Function owner not recognized*/strncmp(mode, "rb", 2) == 0) {
 			oflag = 0;
 			fmode = -1;
-			if (.strncmp(mode, "rb", 2) == 0) {
+			if (/*Error: Function owner not recognized*/strncmp(mode, "rb", 2) == 0) {
 				oflag |=  -1024;
 			} 
-		}  else if (.strncmp(mode, "w", 1) == 0 || .strncmp(mode, "wb", 2) == 0) {
+		}  else if (/*Error: Function owner not recognized*/strncmp(mode, "w", 1) == 0 || /*Error: Function owner not recognized*/strncmp(mode, "wb", 2) == 0) {
 			oflag = 1 | -1024 | -1024;
-			if (.strncmp(mode, "wb", 2) == 0) {
+			if (/*Error: Function owner not recognized*/strncmp(mode, "wb", 2) == 0) {
 				oflag |=  -1024;
 			} 
 		} else {
@@ -69,10 +69,10 @@ public class hc_fp {
 		this.setIs_gzip(0);
 		this.setIs_zip(0);
 		byte[] check = new byte[]{0};
-		int fd_tmp = ModernizedCProgram.open(path, 0);
+		int fd_tmp = /*Error: Function owner not recognized*/open(path, 0);
 		if (fd_tmp != -1) {
-			.lseek(fd_tmp, 0, 0);
-			if (.read(fd_tmp, check, ) > 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lseek(fd_tmp, 0, 0);
+			if (/*Error: Function owner not recognized*/read(fd_tmp, check, /*Error: sizeof expression not supported yet*/) > 0) {
 				if (check[0] == -1024 && check[1] == -1024 && check[2] == -1024 && check[3] == -1024) {
 					this.setIs_gzip(1);
 				} 
@@ -80,12 +80,12 @@ public class hc_fp {
 					this.setIs_zip(1);
 				} 
 			} 
-			ModernizedCProgram.close(fd_tmp);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd_tmp);
 		} 
 		if (fmode == -1) {
-			this.setFd(ModernizedCProgram.open(path, oflag));
+			this.setFd(/*Error: Function owner not recognized*/open(path, oflag));
 		} else {
-				this.setFd(ModernizedCProgram.open(path, oflag, fmode));
+				this.setFd(/*Error: Function owner not recognized*/open(path, oflag, fmode));
 		} 
 		int generatedFd = this.getFd();
 		boolean generatedIs_zip = this.getIs_zip();
@@ -106,7 +106,7 @@ public class hc_fp {
 				return 0;
 			} 
 		} else {
-				if ((this.setPfp(.fdopen(generatedFd, mode))) == ((Object)0)) {
+				if ((this.setPfp(/*Error: Function owner not recognized*/fdopen(generatedFd, mode))) == ((Object)0)) {
 					return 0;
 				} 
 		} 
@@ -130,7 +130,7 @@ public class hc_fp {
 			int s = size * nmemb;
 			n = ModernizedCProgram.unzReadCurrentFile(generatedUfp, ptr, s);
 		} else {
-				n = .fread(ptr, size, nmemb, generatedPfp);
+				n = /*Error: Function owner not recognized*/fread(ptr, size, nmemb, generatedPfp);
 		} 
 		return n;
 	}
@@ -147,7 +147,7 @@ public class hc_fp {
 			n = ModernizedCProgram.gzfwrite(ptr, size, nmemb, generatedGfp);
 		}  else if (generatedIs_zip) {
 		} else {
-				n = .fwrite(ptr, size, nmemb, generatedPfp);
+				n = /*Error: Function owner not recognized*/fwrite(ptr, size, nmemb, generatedPfp);
 		} 
 		if (n != nmemb) {
 			return -1;
@@ -167,13 +167,13 @@ public class hc_fp {
 			r = ModernizedCProgram.gzseek(generatedGfp, offset, whence);
 		}  else if (generatedIs_zip) {
 		} else {
-				r = .fseeko(generatedPfp, offset, whence);
+				r = /*Error: Function owner not recognized*/fseeko(generatedPfp, offset, whence);
 		} 
 		return r;
 	}
 	public void hc_rewind() {
 		if (fp == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
 		Object generatedGfp = this.getGfp();
@@ -185,7 +185,7 @@ public class hc_fp {
 		}  else if (generatedIs_zip) {
 			ModernizedCProgram.unzGoToFirstFile(generatedUfp);
 		} else {
-				.rewind(generatedPfp);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/rewind(generatedPfp);
 		} 
 	}
 	public Object hc_ftell() {
@@ -203,7 +203,7 @@ public class hc_fp {
 		}  else if (generatedIs_zip) {
 			n = ModernizedCProgram.unztell(generatedUfp);
 		} else {
-				n = .ftello(generatedPfp);
+				n = /*Error: Function owner not recognized*/ftello(generatedPfp);
 		} 
 		return n;
 	}
@@ -220,7 +220,7 @@ public class hc_fp {
 			r = ModernizedCProgram.gzputc(generatedGfp, c);
 		}  else if (generatedIs_zip) {
 		} else {
-				r = .fputc(c, generatedPfp);
+				r = /*Error: Function owner not recognized*/fputc(c, generatedPfp);
 		} 
 		return r;
 	}
@@ -235,14 +235,14 @@ public class hc_fp {
 		Object generatedUfp = this.getUfp();
 		_iobuf generatedPfp = this.getPfp();
 		if (generatedIs_gzip) {
-			r = ((generatedGfp).getHave() ? () : .UNRECOGNIZEDFUNCTIONNAME(generatedGfp));
+			r = ((generatedGfp).getHave() ? () : /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedGfp));
 		}  else if (generatedIs_zip) {
 			byte c = 0;
 			if (ModernizedCProgram.unzReadCurrentFile(generatedUfp, c, 1) == 1) {
 				r = (int)c;
 			} 
 		} else {
-				r = .fgetc(generatedPfp);
+				r = /*Error: Function owner not recognized*/fgetc(generatedPfp);
 		} 
 		return r;
 	}
@@ -263,7 +263,7 @@ public class hc_fp {
 				r = buf;
 			} 
 		} else {
-				r = .fgets(buf, len, generatedPfp);
+				r = /*Error: Function owner not recognized*/fgets(buf, len, generatedPfp);
 		} 
 		return r;
 	}
@@ -280,7 +280,7 @@ public class hc_fp {
 			r = ModernizedCProgram.gzvprintf(generatedGfp, format, ap);
 		}  else if (generatedIs_zip) {
 		} else {
-				r = .vfprintf(generatedPfp, format, ap);
+				r = /*Error: Function owner not recognized*/vfprintf(generatedPfp, format, ap);
 		} 
 		return r;
 	}
@@ -290,7 +290,7 @@ public class hc_fp {
 			return r;
 		} 
 		va_list ap = new va_list();
-		.__builtin_va_start(ap, format);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, format);
 		boolean generatedIs_gzip = this.getIs_gzip();
 		Object generatedGfp = this.getGfp();
 		boolean generatedIs_zip = this.getIs_zip();
@@ -299,9 +299,9 @@ public class hc_fp {
 			r = ModernizedCProgram.gzvprintf(generatedGfp, format, ap);
 		}  else if (generatedIs_zip) {
 		} else {
-				r = .vfprintf(generatedPfp, format, ap);
+				r = /*Error: Function owner not recognized*/vfprintf(generatedPfp, format, ap);
 		} 
-		.__builtin_va_end(ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
 		return r;
 	}
 	public int hc_fscanf(Object format, Object ptr) {
@@ -317,7 +317,7 @@ public class hc_fp {
 			ModernizedCProgram.hcfree(buf);
 			return -1;
 		} 
-		.sscanf(b, format, ptr);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sscanf(b, format, ptr);
 		ModernizedCProgram.hcfree(buf);
 		return 1;
 	}
@@ -350,7 +350,7 @@ public class hc_fp {
 	}
 	public void hc_fflush() {
 		if (fp == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
 		Object generatedGfp = this.getGfp();
@@ -360,12 +360,12 @@ public class hc_fp {
 			ModernizedCProgram.gzflush(generatedGfp, 2);
 		}  else if (generatedIs_zip) {
 		} else {
-				.fflush(generatedPfp);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fflush(generatedPfp);
 		} 
 	}
 	public void hc_fclose() {
 		if (fp == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
 		Object generatedGfp = this.getGfp();
@@ -378,10 +378,10 @@ public class hc_fp {
 			ModernizedCProgram.unzCloseCurrentFile(generatedUfp);
 			ModernizedCProgram.unzClose(generatedUfp);
 		} else {
-				.fclose(generatedPfp);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(generatedPfp);
 		} 
 		int generatedFd = this.getFd();
-		ModernizedCProgram.close(generatedFd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd);
 		this.setFd(-1);
 		this.setPfp(((Object)0));
 		this.setIs_gzip(0);
@@ -389,7 +389,7 @@ public class hc_fp {
 		this.setPath(((Object)0));
 		this.setMode(((Object)0));
 	}
-	public Object fgetl(Byte line_buf, Object line_sz) {
+	public Object fgetl(byte[] line_buf, Object line_sz) {
 		size_t line_truncated = 0;
 		size_t line_len = 0;
 		while (!fp.hc_feof()) {
@@ -408,7 +408,7 @@ public class hc_fp {
 			} 
 		}
 		if (line_truncated > 0) {
-			.fprintf((_iob[2]), "\nOversized line detected! Truncated %I64u bytes\n", line_truncated);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "\nOversized line detected! Truncated %I64u bytes\n", line_truncated);
 		} 
 		if (line_len == 0) {
 			return 0;
@@ -432,7 +432,7 @@ public class hc_fp {
 		byte buf = (byte)ModernizedCProgram.hcmalloc(-1024 + 1);
 		byte prev = (byte)'\n';
 		while (!fp.hc_feof()) {
-			size_t nread = fp.hc_fread(buf, , -1024);
+			size_t nread = fp.hc_fread(buf, /*Error: Unsupported expression*/, -1024);
 			if (nread < 1) {
 				continue;
 			} 

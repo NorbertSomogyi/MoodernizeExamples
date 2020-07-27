@@ -19,7 +19,7 @@ public class stream_filter {
 			count = osize_p;
 		} 
 		if (count) {
-			.memmove(output, input, count);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(output, input, count);
 			isize_p -= count;
 			osize_p -= count;
 		} 
@@ -33,7 +33,7 @@ public class stream_filter {
 		 * LF-to-CRLF filter
 		 */;
 	}
-	public int lf_to_crlf_filter_fn(Object input, Object isize_p, Byte output, Object osize_p) {
+	public int lf_to_crlf_filter_fn(Object[] input, Object isize_p, byte[] output, Object osize_p) {
 		size_t count = new size_t();
 		size_t o = 0;
 		lf_to_crlf_filter lf_to_crlf = (lf_to_crlf_filter)ModernizedCProgram.filter/*
@@ -100,7 +100,7 @@ public class stream_filter {
 		ModernizedCProgram.free(ModernizedCProgram.filter);
 	}
 	public stream_filter lf_to_crlf_filter() {
-		lf_to_crlf_filter lf_to_crlf = ModernizedCProgram.xcalloc(1, );
+		lf_to_crlf_filter lf_to_crlf = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		stream_filter generatedFilter = lf_to_crlf.getFilter();
 		generatedFilter.setVtbl(ModernizedCProgram.lf_to_crlf_vtbl);
 		return (stream_filter)lf_to_crlf/*
@@ -136,11 +136,11 @@ public class stream_filter {
 			if (input && !to_feed) {
 				break;
 			} 
-			remaining = ;
+			remaining = /*Error: sizeof expression not supported yet*/;
 			if (generatedOne.stream_filter(input, to_feed, generatedBuf, remaining)) {
 				return -1;
 			} 
-			cas.setEnd( - remaining);
+			cas.setEnd(/*Error: sizeof expression not supported yet*/ - remaining);
 			cas.setPtr(0);
 			if (input) {
 				size_t fed = isize_p - to_feed;
@@ -179,7 +179,7 @@ public class stream_filter {
 		if (!two || two.is_null_stream_filter()) {
 			return one;
 		} 
-		cascade = ModernizedCProgram.xmalloc();
+		cascade = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		cascade.setOne(one);
 		cascade.setTwo(two);
 		cascade.setEnd(cascade.setPtr(0));
@@ -204,7 +204,7 @@ public class stream_filter {
 			}
 			return 0;
 		} 
-		byte generatedBuf = generatedLeft.getBuf();
+		byte[] generatedBuf = generatedLeft.getBuf();
 		Object generatedIdent = ident.getIdent();
 		while (isize_p || (generatedState == (true))) {
 			int ch;
@@ -226,20 +226,20 @@ public class stream_filter {
 					continue;
 				} 
 				if (ch == (byte)'$' && !ModernizedCProgram.is_foreign_ident(generatedBuf)) {
-					generatedLeft.strbuf_setlen( - 1);
+					generatedLeft.strbuf_setlen(/*Error: sizeof expression not supported yet*/ - 1);
 					generatedLeft.strbuf_addstr(generatedIdent);
 				} 
 				ident.setState((true));
 				continue;
 			} 
-			if (generatedState <  && head[generatedState] == ch) {
+			if (generatedState < /*Error: sizeof expression not supported yet*/ && head[generatedState] == ch) {
 				generatedState++;
 				continue;
 			} 
 			if (generatedState) {
 				generatedLeft.strbuf_add(head, generatedState);
 			} 
-			if (generatedState ==  - 1) {
+			if (generatedState == /*Error: sizeof expression not supported yet*/ - 1) {
 				if (ch != (byte)':' && ch != (byte)'$') {
 					generatedLeft.strbuf_addch(ch);
 					ident.setState(0);
@@ -266,9 +266,9 @@ public class stream_filter {
 		ModernizedCProgram.free(ModernizedCProgram.filter);
 	}
 	public stream_filter ident_filter(Object oid) {
-		ident_filter ident = ModernizedCProgram.xmalloc();
+		ident_filter ident = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		Object generatedIdent = ident.getIdent();
-		ModernizedCProgram.xsnprintf(generatedIdent, , ": %s $", ModernizedCProgram.oid_to_hex(oid));
+		ModernizedCProgram.xsnprintf(generatedIdent, /*Error: sizeof expression not supported yet*/, ": %s $", ModernizedCProgram.oid_to_hex(oid));
 		strbuf generatedLeft = ident.getLeft();
 		generatedLeft.strbuf_init(0);
 		stream_filter generatedFilter = ident.getFilter();
@@ -316,10 +316,10 @@ public class stream_filter {
 		return filter;
 	}
 	public void free_stream_filter() {
-		.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.filter);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.filter);
 	}
 	public int stream_filter(Object input, Object isize_p, Byte output, Object osize_p) {
-		return .UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.filter, input, isize_p, output, osize_p);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.filter, input, isize_p, output, osize_p);
 	}
 	public int stream_blob_to_fd(int fd, Object oid, int can_seek) {
 		git_istream st = new git_istream();
@@ -338,18 +338,18 @@ public class stream_filter {
 		if (object_type.type != object_type.OBJ_BLOB) {
 			;
 		} 
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			byte[] buf = new byte[1024 * 16];
 			ssize_t wrote = new ssize_t();
 			ssize_t holeto = new ssize_t();
-			ssize_t readlen = st.read_istream(ModernizedCProgram.buf, );
+			ssize_t readlen = st.read_istream(ModernizedCProgram.buf, /*Error: sizeof expression not supported yet*/);
 			if (readlen < 0) {
 				;
 			} 
 			if (!readlen) {
 				break;
 			} 
-			if (can_seek &&  == readlen) {
+			if (can_seek && /*Error: sizeof expression not supported yet*/ == readlen) {
 				for (holeto = 0; holeto < readlen; holeto++) {
 					if (ModernizedCProgram.buf[holeto]) {
 						break;
@@ -360,7 +360,7 @@ public class stream_filter {
 					continue;
 				} 
 			} 
-			if (kept && .lseek(fd, kept, 1) == (off_t)-1) {
+			if (kept && /*Error: Function owner not recognized*/lseek(fd, kept, 1) == (off_t)-1) {
 				;
 			} else {
 					kept = 0;
@@ -370,7 +370,7 @@ public class stream_filter {
 				;
 			} 
 		}
-		if (kept && (.lseek(fd, kept - 1, 1) == (off_t)-1 || ModernizedCProgram.xwrite(fd, "", 1) != 1)) {
+		if (kept && (/*Error: Function owner not recognized*/lseek(fd, kept - 1, 1) == (off_t)-1 || ModernizedCProgram.xwrite(fd, "", 1) != 1)) {
 			;
 		} 
 		result = 0;

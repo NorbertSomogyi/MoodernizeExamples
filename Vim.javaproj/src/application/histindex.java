@@ -43,10 +43,10 @@ package application;
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 public class histindex {
-	private record records;
-	private record line_map;
+	private record[][] records;
+	private record[][] line_map;
 	private s_chastore rcha;
-	private Integer next_ptrs;
+	private int[] next_ptrs;
 	private int table_bits;
 	private int records_size;
 	private int line_map_size;
@@ -58,7 +58,7 @@ public class histindex {
 	private s_xdfenv env;
 	private Object xpp;
 	
-	public histindex(record records, record line_map, s_chastore rcha, Integer next_ptrs, int table_bits, int records_size, int line_map_size, int max_chain_length, int key_shift, int ptr_shift, int cnt, int has_common, s_xdfenv env, Object xpp) {
+	public histindex(record[][] records, record[][] line_map, s_chastore rcha, int[] next_ptrs, int table_bits, int records_size, int line_map_size, int max_chain_length, int key_shift, int ptr_shift, int cnt, int has_common, s_xdfenv env, Object xpp) {
 		setRecords(records);
 		setLine_map(line_map);
 		setRcha(rcha);
@@ -85,40 +85,40 @@ public class histindex {
 		record rec = new record();
 		s_xdfenv generatedEnv = this.getEnv();
 		s_xdfile generatedXdf1 = generatedEnv.getXdf1();
-		s_xrecord generatedRecs = generatedXdf1.getRecs();
+		s_xrecord[][] generatedRecs = generatedXdf1.getRecs();
 		int generatedTable_bits = this.getTable_bits();
-		record generatedRecords = this.getRecords();
+		record[][] generatedRecords = this.getRecords();
 		Object generatedXpp = this.getXpp();
 		int generatedPtr = rec.getPtr();
-		Integer generatedNext_ptrs = this.getNext_ptrs();
+		int[] generatedNext_ptrs = this.getNext_ptrs();
 		int generatedPtr_shift = this.getPtr_shift();
 		int generatedCnt = rec.getCnt();
-		record generatedLine_map = this.getLine_map();
+		record[][] generatedLine_map = this.getLine_map();
 		record generatedNext = rec.getNext();
 		int generatedMax_chain_length = this.getMax_chain_length();
 		s_chastore generatedRcha = this.getRcha();
 		return 0;
 	}
 	public void free_index() {
-		record generatedRecords = this.getRecords();
+		record[][] generatedRecords = this.getRecords();
 		ModernizedCProgram.vim_free(generatedRecords);
-		record generatedLine_map = this.getLine_map();
+		record[][] generatedLine_map = this.getLine_map();
 		ModernizedCProgram.vim_free(generatedLine_map);
-		Integer generatedNext_ptrs = this.getNext_ptrs();
+		int[] generatedNext_ptrs = this.getNext_ptrs();
 		ModernizedCProgram.vim_free(generatedNext_ptrs);
 		s_chastore generatedRcha = this.getRcha();
 		generatedRcha.xdl_cha_free();
 	}
-	public record getRecords() {
+	public record[][] getRecords() {
 		return records;
 	}
-	public void setRecords(record newRecords) {
+	public void setRecords(record[][] newRecords) {
 		records = newRecords;
 	}
-	public record getLine_map() {
+	public record[][] getLine_map() {
 		return line_map;
 	}
-	public void setLine_map(record newLine_map) {
+	public void setLine_map(record[][] newLine_map) {
 		line_map = newLine_map;
 	}
 	public s_chastore getRcha() {
@@ -127,10 +127,10 @@ public class histindex {
 	public void setRcha(s_chastore newRcha) {
 		rcha = newRcha;
 	}
-	public Integer getNext_ptrs() {
+	public int[] getNext_ptrs() {
 		return next_ptrs;
 	}
-	public void setNext_ptrs(Integer newNext_ptrs) {
+	public void setNext_ptrs(int[] newNext_ptrs) {
 		next_ptrs = newNext_ptrs;
 	}
 	public int getTable_bits() {

@@ -22,7 +22,7 @@ public class imap_cmd {
 		int n;
 		int bufl;
 		byte[] buf = new byte[1024];
-		cmd = ModernizedCProgram.xmalloc();
+		cmd = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
 		Byte generatedCmd = cmd.getCmd();
 		ModernizedCProgram.nfvasprintf(generatedCmd, fmt, ap);
 		int generatedNexttag = imap.getNexttag();
@@ -31,7 +31,7 @@ public class imap_cmd {
 		if (cb) {
 			cmd.setCb(cb);
 		} else {
-				.memset(generatedCb, 0, );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedCb, 0, /*Error: sizeof expression not supported yet*/);
 		} 
 		int generatedLiteral_pending = imap.getLiteral_pending();
 		while (generatedLiteral_pending) {
@@ -42,19 +42,19 @@ public class imap_cmd {
 		int generatedDlen = generatedCb.getDlen();
 		int generatedCaps = imap.getCaps();
 		if (!generatedData) {
-			bufl = ModernizedCProgram.nfsnprintf(buf, , "%d %s\r\n", generatedTag, generatedCmd);
+			bufl = ModernizedCProgram.nfsnprintf(buf, /*Error: sizeof expression not supported yet*/, "%d %s\r\n", generatedTag, generatedCmd);
 		} else {
-				bufl = ModernizedCProgram.nfsnprintf(buf, , "%d %s{%d%s}\r\n", generatedTag, generatedCmd, generatedDlen, (generatedCaps & (1 << (CAPABILITY.LITERALPLUS))) ? "+" : "");
+				bufl = ModernizedCProgram.nfsnprintf(buf, /*Error: sizeof expression not supported yet*/, "%d %s{%d%s}\r\n", generatedTag, generatedCmd, generatedDlen, (generatedCaps & (1 << (CAPABILITY.LITERALPLUS))) ? "+" : "");
 		} 
 		int generatedNum_in_progress = imap.getNum_in_progress();
 		if (0 < ModernizedCProgram.verbosity) {
 			if (generatedNum_in_progress) {
-				.printf("(%d in progress) ", generatedNum_in_progress);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("(%d in progress) ", generatedNum_in_progress);
 			} 
 			if (!ModernizedCProgram.starts_with(generatedCmd, "LOGIN")) {
-				.printf(">>> %s", buf);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(">>> %s", buf);
 			} else {
-					.printf(">>> %d LOGIN <user> <pass>\n", generatedTag);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(">>> %d LOGIN <user> <pass>\n", generatedTag);
 			} 
 		} 
 		imap_buffer generatedBuf = imap.getBuf();

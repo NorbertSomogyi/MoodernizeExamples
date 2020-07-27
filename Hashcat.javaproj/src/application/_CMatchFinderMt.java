@@ -2,7 +2,7 @@ package application;
 
 public class _CMatchFinderMt {
 	private Object pointerToCurPos;
-	private Object btBuf;
+	private Object[] btBuf;
 	private Object btBufPos;
 	private Object btBufPosLimit;
 	private Object lzPos;
@@ -10,11 +10,11 @@ public class _CMatchFinderMt {
 	private Object hash;
 	private Object fixedHashSize;
 	private Object historySize;
-	private Object crc;
+	private Object[] crc;
 	private Object MixMatchesFunc;
 	private _CMtSync btSync;
 	private Object btDummy;
-	private Object hashBuf;
+	private Object[] hashBuf;
 	private Object hashBufPos;
 	private Object hashBufPosLimit;
 	private Object hashNumAvail;
@@ -30,7 +30,7 @@ public class _CMatchFinderMt {
 	private Object GetHeadsFunc;
 	private _CMatchFinder MatchFinder;
 	
-	public _CMatchFinderMt(Object pointerToCurPos, Object btBuf, Object btBufPos, Object btBufPosLimit, Object lzPos, Object btNumAvailBytes, Object hash, Object fixedHashSize, Object historySize, Object crc, Object MixMatchesFunc, _CMtSync btSync, Object btDummy, Object hashBuf, Object hashBufPos, Object hashBufPosLimit, Object hashNumAvail, Object son, Object matchMaxLen, Object numHashBytes, Object pos, Object buffer, Object cyclicBufferPos, Object cyclicBufferSize, Object cutValue, _CMtSync hashSync, Object GetHeadsFunc, _CMatchFinder MatchFinder) {
+	public _CMatchFinderMt(Object pointerToCurPos, Object[] btBuf, Object btBufPos, Object btBufPosLimit, Object lzPos, Object btNumAvailBytes, Object hash, Object fixedHashSize, Object historySize, Object[] crc, Object MixMatchesFunc, _CMtSync btSync, Object btDummy, Object[] hashBuf, Object hashBufPos, Object hashBufPosLimit, Object hashNumAvail, Object son, Object matchMaxLen, Object numHashBytes, Object pos, Object buffer, Object cyclicBufferPos, Object cyclicBufferSize, Object cutValue, _CMtSync hashSync, Object GetHeadsFunc, _CMatchFinder MatchFinder) {
 		setPointerToCurPos(pointerToCurPos);
 		setBtBuf(btBuf);
 		setBtBufPos(btBufPos);
@@ -79,22 +79,22 @@ public class _CMatchFinderMt {
 		Object generatedFreeSemaphore = p.getFreeSemaphore();
 		Object generatedPos = mf.getPos();
 		Object generatedHistorySize = mf.getHistorySize();
-		Object generatedHash = mf.getHash();
+		Object[] generatedHash = mf.getHash();
 		Object generatedFixedHashSize = mf.getFixedHashSize();
 		Object generatedHashMask = mf.getHashMask();
-		Object generatedHashBuf = this.getHashBuf();
+		Object[] generatedHashBuf = this.getHashBuf();
 		Object generatedStreamPos = mf.getStreamPos();
 		Object generatedNumHashBytes = mf.getNumHashBytes();
 		Object generatedCrc = mf.getCrc();
 		Object generatedFilledSemaphore = p.getFilledSemaphore();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			UInt32 numProcessedBlocks = 0;
 			ModernizedCProgram.Handle_WaitObject((generatedCanStart));
 			ModernizedCProgram.Event_Set(generatedWasStarted);
 			generatedMatchFinder.MatchFinder_Init_HighHash();
-			for (; ; ) {
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				if (generatedExit) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				if (generatedStopWriting) {
 					p.setNumProcessedBlocks(numProcessedBlocks);
@@ -104,8 +104,8 @@ public class _CMatchFinderMt {
 				{ 
 					CMatchFinder mf = generatedMatchFinder;
 					if (mf.MatchFinder_NeedMove()) {
-						.EnterCriticalSection(generatedCs);
-						.EnterCriticalSection(generatedCs);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/EnterCriticalSection(generatedCs);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/EnterCriticalSection(generatedCs);
 						{ 
 							Byte beforePtr = (generatedBuffer);
 							ptrdiff_t offset = new ptrdiff_t();
@@ -114,8 +114,8 @@ public class _CMatchFinderMt {
 							generatedPointerToCurPos -= offset;
 							generatedBuffer -= offset;
 						}
-						.LeaveCriticalSection(generatedCs);
-						.LeaveCriticalSection(generatedCs);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LeaveCriticalSection(generatedCs);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LeaveCriticalSection(generatedCs);
 						continue;
 					} 
 					ModernizedCProgram.Handle_WaitObject((generatedFreeSemaphore));
@@ -135,7 +135,7 @@ public class _CMatchFinderMt {
 							if (ModernizedCProgram.num > (1 << 13) - 2) {
 								ModernizedCProgram.num = (1 << 13) - 2;
 							} 
-							.UNRECOGNIZEDFUNCTIONNAME(generatedBuffer, generatedPos, generatedHash + generatedFixedHashSize, generatedHashMask, heads + 2, ModernizedCProgram.num, generatedCrc);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedBuffer, generatedPos, generatedHash + generatedFixedHashSize, generatedHashMask, heads + 2, ModernizedCProgram.num, generatedCrc);
 							heads[0] = 2 + ModernizedCProgram.num;
 						} 
 						generatedPos += ModernizedCProgram.num;
@@ -152,12 +152,12 @@ public class _CMatchFinderMt {
 		Object generatedNumProcessedBlocks = generatedHashSync.getNumProcessedBlocks();
 		this.setHashBufPosLimit(this.setHashBufPos(((generatedNumProcessedBlocks - 1) & ((1 << 3) - 1)) * (1 << 13)));
 		Object generatedHashBufPosLimit = this.getHashBufPosLimit();
-		Object generatedHashBuf = this.getHashBuf();
+		Object[] generatedHashBuf = this.getHashBuf();
 		Object generatedHashBufPos = this.getHashBufPos();
 		generatedHashBufPosLimit += generatedHashBuf[generatedHashBufPos++];
 		this.setHashNumAvail(generatedHashBuf[generatedHashBufPos++]);
 	}
-	public void BtGetMatches(Object distances) {
+	public void BtGetMatches(Object[] distances) {
 		UInt32 numProcessed = 0;
 		UInt32 curPos = 2;
 		Object generatedMatchMaxLen = this.getMatchMaxLen();
@@ -173,7 +173,7 @@ public class _CMatchFinderMt {
 		Object generatedBuffer = this.getBuffer();
 		Object generatedSon = this.getSon();
 		Object generatedCutValue = this.getCutValue();
-		Object generatedHashBuf = this.getHashBuf();
+		Object[] generatedHashBuf = this.getHashBuf();
 		while (curPos < limit) {
 			if (generatedHashBufPos == generatedHashBufPosLimit) {
 				p.MatchFinderMt_GetNextBlock_Hash();
@@ -186,7 +186,7 @@ public class _CMatchFinderMt {
 				for (; generatedHashNumAvail != 0; generatedHashNumAvail--) {
 					distances++ = 0;
 				}
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			{ 
 				UInt32 size = generatedHashBufPosLimit - generatedHashBufPos;
@@ -231,10 +231,10 @@ public class _CMatchFinderMt {
 		Object generatedNeedStart = sync.getNeedStart();
 		Object generatedCs = sync.getCs();
 		if (!generatedNeedStart) {
-			.EnterCriticalSection(generatedCs);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/EnterCriticalSection(generatedCs);
 			sync.setCsWasEntered(1);
 		} 
-		Object generatedBtBuf = this.getBtBuf();
+		Object[] generatedBtBuf = this.getBtBuf();
 		p.BtGetMatches(generatedBtBuf + (globalBlockIndex & ((1 << 6) - 1)) * (1 << 14));
 		Object generatedPos = this.getPos();
 		Object generatedCyclicBufferSize = this.getCyclicBufferSize();
@@ -245,7 +245,7 @@ public class _CMatchFinderMt {
 			generatedPos -= subValue;
 		} 
 		if (!generatedNeedStart) {
-			.LeaveCriticalSection(generatedCs);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LeaveCriticalSection(generatedCs);
 			sync.setCsWasEntered(0);
 		} 
 	}
@@ -260,13 +260,13 @@ public class _CMatchFinderMt {
 		Object generatedWasStopped = p.getWasStopped();
 		Object generatedFreeSemaphore = p.getFreeSemaphore();
 		Object generatedFilledSemaphore = p.getFilledSemaphore();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			UInt32 blockIndex = 0;
 			ModernizedCProgram.Handle_WaitObject((generatedCanStart));
 			ModernizedCProgram.Event_Set(generatedWasStarted);
-			for (; ; ) {
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				if (generatedExit) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				if (generatedStopWriting) {
 					p.setNumProcessedBlocks(blockIndex);
@@ -288,8 +288,8 @@ public class _CMatchFinderMt {
 		generatedBtSync.MtSync_Construct();
 	}
 	public void MatchFinderMt_FreeMem(Object alloc) {
-		Object generatedHashBuf = this.getHashBuf();
-		.UNRECOGNIZEDFUNCTIONNAME(alloc, generatedHashBuf);
+		Object[] generatedHashBuf = this.getHashBuf();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, generatedHashBuf);
 		this.setHashBuf(((Object)0));
 	}
 	public void MatchFinderMt_Destruct(Object alloc) {
@@ -306,9 +306,9 @@ public class _CMatchFinderMt {
 		if ((1 << 14) <= matchMaxLen * 4) {
 			return 5;
 		} 
-		Object generatedHashBuf = this.getHashBuf();
+		Object[] generatedHashBuf = this.getHashBuf();
 		if (!generatedHashBuf) {
-			this.setHashBuf((UInt32).UNRECOGNIZEDFUNCTIONNAME(alloc, (((1 << 13) * (1 << 3)) + ((1 << 14) * (1 << 6))) * ));
+			this.setHashBuf((UInt32)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, (((1 << 13) * (1 << 3)) + ((1 << 14) * (1 << 6))) * /*Error: Unsupported expression*/));
 			if (!generatedHashBuf) {
 				return 2;
 			} 
@@ -350,13 +350,13 @@ public class _CMatchFinderMt {
 		this.setBtNumAvailBytes(0);
 		Object generatedHistorySize = this.getHistorySize();
 		this.setLzPos(generatedHistorySize + 1);
-		Object generatedHash = mf.getHash();
+		Object[] generatedHash = mf.getHash();
 		this.setHash(generatedHash);
 		Object generatedFixedHashSize = mf.getFixedHashSize();
 		this.setFixedHashSize(generatedFixedHashSize);
 		Object generatedCrc = mf.getCrc();
 		this.setCrc(generatedCrc);
-		Object generatedSon = mf.getSon();
+		Object[] generatedSon = mf.getSon();
 		this.setSon(generatedSon);
 		Object generatedMatchMaxLen = mf.getMatchMaxLen();
 		this.setMatchMaxLen(generatedMatchMaxLen);
@@ -393,7 +393,7 @@ public class _CMatchFinderMt {
 		blockIndex = ((generatedNumProcessedBlocks - 1) & ((1 << 6) - 1));
 		this.setBtBufPosLimit(this.setBtBufPos(blockIndex * (1 << 14)));
 		Object generatedBtBufPosLimit = this.getBtBufPosLimit();
-		Object generatedBtBuf = this.getBtBuf();
+		Object[] generatedBtBuf = this.getBtBuf();
 		Object generatedBtBufPos = this.getBtBufPos();
 		generatedBtBufPosLimit += generatedBtBuf[generatedBtBufPos++];
 		this.setBtNumAvailBytes(generatedBtBuf[generatedBtBufPos++]);
@@ -425,7 +425,7 @@ public class _CMatchFinderMt {
 		Byte cur = generatedPointerToCurPos;
 		Object generatedLzPos = this.getLzPos();
 		UInt32 lzPos = generatedLzPos;
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		h2 = (generatedCrc[cur[0]] ^ cur[1]) & ((1 << 10) - 1);
 		curMatch2 = hash[h2];
 		hash[h2] = lzPos;
@@ -437,7 +437,7 @@ public class _CMatchFinderMt {
 		} 
 		return distances;
 	}
-	public Object MixMatches3(Object matchMinPos, Object distances) {
+	public Object MixMatches3(Object matchMinPos, Object[] distances) {
 		UInt32 h2 = new UInt32();
 		UInt32 h3 = new UInt32();
 		UInt32 curMatch2 = new UInt32();
@@ -448,7 +448,7 @@ public class _CMatchFinderMt {
 		Byte cur = generatedPointerToCurPos;
 		Object generatedLzPos = this.getLzPos();
 		UInt32 lzPos = generatedLzPos;
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		{ 
 			UInt32 temp = generatedCrc[cur[0]] ^ cur[1];
 			h2 = temp & ((1 << 10) - 1);
@@ -526,8 +526,8 @@ public class _CMatchFinderMt {
 		}
 		*/;
 	}
-	public Object MatchFinderMt2_GetMatches(Object distances) {
-		Object generatedBtBuf = this.getBtBuf();
+	public Object MatchFinderMt2_GetMatches(Object[] distances) {
+		Object[] generatedBtBuf = this.getBtBuf();
 		Object generatedBtBufPos = this.getBtBufPos();
 		UInt32 btBuf = generatedBtBuf + generatedBtBufPos;
 		UInt32 len = btBuf++;
@@ -552,7 +552,7 @@ public class _CMatchFinderMt {
 		return len;
 	}
 	public Object MatchFinderMt_GetMatches(Object distances) {
-		Object generatedBtBuf = this.getBtBuf();
+		Object[] generatedBtBuf = this.getBtBuf();
 		Object generatedBtBufPos = this.getBtBufPos();
 		UInt32 btBuf = generatedBtBuf + generatedBtBufPos;
 		UInt32 len = btBuf++;
@@ -562,12 +562,12 @@ public class _CMatchFinderMt {
 		Object generatedHistorySize = this.getHistorySize();
 		if (len == 0) {
 			if (generatedBtNumAvailBytes-- >= /* change for bt5 ! */4) {
-				len = (UInt32)(.UNRECOGNIZEDFUNCTIONNAME(p, generatedLzPos - generatedHistorySize, distances) - (distances));
+				len = (UInt32)(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p, generatedLzPos - generatedHistorySize, distances) - (distances));
 			} 
 		} else {
 				UInt32 distances2 = new UInt32();
 				generatedBtNumAvailBytes--;
-				distances2 = .UNRECOGNIZEDFUNCTIONNAME(p, generatedLzPos - btBuf[1], distances);
+				distances2 = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p, generatedLzPos - btBuf[1], distances);
 				do {
 					UInt32 v0 = btBuf[0];
 					UInt32 v1 = btBuf[1];
@@ -589,7 +589,7 @@ public class _CMatchFinderMt {
 		Object generatedBtNumAvailBytes = this.getBtNumAvailBytes();
 		Object generatedLzPos = this.getLzPos();
 		Object generatedPointerToCurPos = this.getPointerToCurPos();
-		Object generatedBtBuf = this.getBtBuf();
+		Object[] generatedBtBuf = this.getBtBuf();
 		do {
 			if (generatedBtBufPos == generatedBtBufPosLimit) {
 				p.MatchFinderMt_GetNextBlock_Bt();
@@ -608,9 +608,9 @@ public class _CMatchFinderMt {
 		Object generatedBtNumAvailBytes = this.getBtNumAvailBytes();
 		Object generatedPointerToCurPos = this.getPointerToCurPos();
 		Object generatedHash = this.getHash();
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		Object generatedLzPos = this.getLzPos();
-		Object generatedBtBuf = this.getBtBuf();
+		Object[] generatedBtBuf = this.getBtBuf();
 		do {
 			if (generatedBtBufPos == generatedBtBufPosLimit) {
 				p.MatchFinderMt_GetNextBlock_Bt();
@@ -633,9 +633,9 @@ public class _CMatchFinderMt {
 		Object generatedBtNumAvailBytes = this.getBtNumAvailBytes();
 		Object generatedPointerToCurPos = this.getPointerToCurPos();
 		Object generatedHash = this.getHash();
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		Object generatedLzPos = this.getLzPos();
-		Object generatedBtBuf = this.getBtBuf();
+		Object[] generatedBtBuf = this.getBtBuf();
 		do {
 			if (generatedBtBufPos == generatedBtBufPosLimit) {
 				p.MatchFinderMt_GetNextBlock_Bt();
@@ -675,10 +675,10 @@ public class _CMatchFinderMt {
 	public void setPointerToCurPos(Object newPointerToCurPos) {
 		pointerToCurPos = newPointerToCurPos;
 	}
-	public Object getBtBuf() {
+	public Object[] getBtBuf() {
 		return btBuf;
 	}
-	public void setBtBuf(Object newBtBuf) {
+	public void setBtBuf(Object[] newBtBuf) {
 		btBuf = newBtBuf;
 	}
 	public Object getBtBufPos() {
@@ -723,10 +723,10 @@ public class _CMatchFinderMt {
 	public void setHistorySize(Object newHistorySize) {
 		historySize = newHistorySize;
 	}
-	public Object getCrc() {
+	public Object[] getCrc() {
 		return crc;
 	}
-	public void setCrc(Object newCrc) {
+	public void setCrc(Object[] newCrc) {
 		crc = newCrc;
 	}
 	public Object getMixMatchesFunc() {
@@ -747,10 +747,10 @@ public class _CMatchFinderMt {
 	public void setBtDummy(Object newBtDummy) {
 		btDummy = newBtDummy;
 	}
-	public Object getHashBuf() {
+	public Object[] getHashBuf() {
 		return hashBuf;
 	}
-	public void setHashBuf(Object newHashBuf) {
+	public void setHashBuf(Object[] newHashBuf) {
 		hashBuf = newHashBuf;
 	}
 	public Object getHashBufPos() {

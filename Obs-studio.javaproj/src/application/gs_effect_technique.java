@@ -17,7 +17,7 @@ public class gs_effect_technique {
 	}
 	
 	public void effect_technique_init() {
-		.memset(t, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(t, 0, /*Error: Unsupported expression*/);
 	}
 	public void effect_technique_free() {
 		 i = new ();
@@ -25,7 +25,7 @@ public class gs_effect_technique {
 		for (i = 0; i < generatedPasses.getNum(); i++) {
 			generatedPasses.getArray() + i.effect_pass_free();
 		}
-		.da_free(generatedPasses);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedPasses);
 		Byte generatedName = this.getName();
 		ModernizedCProgram.bfree(generatedName);
 	}
@@ -37,7 +37,7 @@ public class gs_effect_technique {
 		for ( i = 0;
 		 i < effect.getTechniques().getNum(); i++) {
 			gs_effect_technique tech = effect.getTechniques().getArray() + i;
-			if (.strcmp(generatedName, name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, name) == 0) {
 				return tech;
 			} 
 		}
@@ -62,7 +62,7 @@ public class gs_effect_technique {
 	}
 	public void gs_technique_end() {
 		if (!tech) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		gs_effect generatedEffect = this.getEffect();
 		gs_effect effect = generatedEffect;
@@ -76,7 +76,7 @@ public class gs_effect_technique {
 		generatedGraphics.setCur_effect(((Object)0));
 		for (i = 0; i < generatedParams.getNum(); i++) {
 			gs_effect_param param = params + i;
-			.da_free(ModernizedCProgram.param.getCur_val());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(ModernizedCProgram.param.getCur_val());
 			ModernizedCProgram.param.setChanged(false);
 			if (ModernizedCProgram.param.getNext_sampler()) {
 				ModernizedCProgram.param.setNext_sampler(((Object)0));
@@ -110,7 +110,7 @@ public class gs_effect_technique {
 		for ( i = 0;
 		 i < generatedPasses.getNum(); i++) {
 			gs_effect_pass pass = generatedPasses.getArray() + i;
-			if (.strcmp(generatedName, name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, name) == 0) {
 				tech.gs_technique_begin_pass(i);
 				return true;
 			} 
@@ -119,13 +119,13 @@ public class gs_effect_technique {
 	}
 	public void gs_technique_end_pass() {
 		if (!tech) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		gs_effect generatedEffect = this.getEffect();
 		gs_effect_pass generatedCur_pass = generatedEffect.getCur_pass();
 		gs_effect_pass pass = generatedCur_pass;
 		if (!pass) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedVertshader_params = pass.getVertshader_params();
 		generatedVertshader_params.getDa().clear_tex_params();

@@ -23,7 +23,7 @@ public class _CLzmaProps {
 	public _CLzmaProps() {
 	}
 	
-	public Object LzmaProps_Decode(Object data, int size) {
+	public Object LzmaProps_Decode(Object[] data, int size) {
 		UInt32 dicSize = new UInt32();
 		Byte d = new Byte();
 		if (size < 5) {

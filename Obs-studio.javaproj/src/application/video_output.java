@@ -61,7 +61,7 @@ public class video_output {
 			video_input input = generatedInputs.getArray() + i;
 			video_data frame = generatedFrame;
 			if (ModernizedCProgram.scale_video_output(input, frame)) {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedParam, frame);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedParam, frame);
 			} 
 		}
 		ModernizedCProgram.pthread_mutex_unlock(generatedInput_mutex);
@@ -111,7 +111,7 @@ public class video_output {
 	}
 	public void video_output_close() {
 		if (!video) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		video.video_output_stop();
 		Object generatedInputs = this.getInputs();
@@ -119,7 +119,7 @@ public class video_output {
 		 i < generatedInputs.getNum(); i++) {
 			generatedInputs.getArray()[i].video_input_free();
 		}
-		.da_free(generatedInputs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedInputs);
 		video_output_info generatedInfo = this.getInfo();
 		Object generatedCache_size = generatedInfo.getCache_size();
 		Object generatedCache = this.getCache();
@@ -158,7 +158,7 @@ public class video_output {
 		Object generatedRaw_active = this.getRaw_active();
 		if (ModernizedCProgram.video_get_input_idx(video, callback, param) == DARRAY_INVALID) {
 			video_input input = new video_input();
-			.memset(input, 0, );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(input, 0, /*Error: sizeof expression not supported yet*/);
 			input.setCallback(callback);
 			input.setParam(param);
 			if (conversion) {
@@ -182,7 +182,7 @@ public class video_output {
 					} 
 					ModernizedCProgram.os_atomic_set_bool(generatedRaw_active, true);
 				} 
-				.da_push_back(generatedInputs, input);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedInputs, input);
 			} 
 		} 
 		ModernizedCProgram.pthread_mutex_unlock(generatedInput_mutex);
@@ -199,7 +199,7 @@ public class video_output {
 	}
 	public void video_output_disconnect(Object callback, Object param) {
 		if (!video || !callback) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedInput_mutex = this.getInput_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedInput_mutex);
@@ -209,7 +209,7 @@ public class video_output {
 		Object generatedGpu_refs = this.getGpu_refs();
 		if (idx != DARRAY_INVALID) {
 			generatedInputs.getArray() + idx.video_input_free();
-			.da_erase(generatedInputs, idx);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase(generatedInputs, idx);
 			if (generatedInputs.getNum() == 0) {
 				ModernizedCProgram.os_atomic_set_bool(generatedRaw_active, false);
 				if (!ModernizedCProgram.os_atomic_load_long(generatedGpu_refs)) {
@@ -221,7 +221,7 @@ public class video_output {
 	}
 	public void video_output_unlock_frame() {
 		if (!video) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedData_mutex = this.getData_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedData_mutex);
@@ -234,7 +234,7 @@ public class video_output {
 	public void video_output_stop() {
 		Object thread_ret;
 		if (!video) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedInitialized = this.getInitialized();
 		Object generatedUpdate_semaphore = this.getUpdate_semaphore();

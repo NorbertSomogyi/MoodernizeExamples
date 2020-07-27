@@ -34,14 +34,14 @@ public class util_uint128 {
 		Object generatedLow = this.getLow();
 		val = (generatedLow & -1024) + (generatedLow & -1024);
 		Object generatedI32 = out.getI32();
-		generatedI32[0] = .UNRECOGNIZEDFUNCTIONNAME(val & -1024);
+		generatedI32[0] = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(val & -1024);
 		val >>=  32;
 		val += (generatedLow >> 32) + (generatedLow >> 32);
 		generatedI32[1] = ()val;
 		val >>=  32;
 		Object generatedHigh = this.getHigh();
 		val += (generatedHigh & -1024) + (generatedHigh & -1024);
-		generatedI32[2] = .UNRECOGNIZEDFUNCTIONNAME(val & -1024);
+		generatedI32[2] = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(val & -1024);
 		val >>=  32;
 		val += (generatedHigh >> 32) + (generatedHigh >> 32);
 		generatedI32[3] = ()val;
@@ -86,7 +86,7 @@ public class util_uint128 {
 				generatedI32[i] = 0;
 				continue;
 			} 
-			generatedI32[i] = .UNRECOGNIZEDFUNCTIONNAME(val / b);
+			generatedI32[i] = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(val / b);
 			val = val % b;
 		}
 		return out;

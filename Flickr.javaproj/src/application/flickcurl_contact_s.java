@@ -25,137 +25,6 @@ public class flickcurl_contact_s {
 	
 	/* -*- Mode: c; c-basic-offset: 2 -*-
 	 *
-	 * contacts.c - Flickcurl method contact functions
-	 *
-	 * Copyright (C) 2007-2009, David Beckett http://www.dajobe.org/
-	 * Copyright (C) 2007 Vanilla I. Shu 
-	 *   (flickcurl_free_contact, flickcurl_free_contacts,
-	 *    flickcurl_build_contacts)
-	 * 
-	 * This file is licensed under the following three licenses as alternatives:
-	 *   1. GNU Lesser General Public License (LGPL) V2.1 or any newer version
-	 *   2. GNU General Public License (GPL) V2 or any newer version
-	 *   3. Apache License, V2.0 or any newer version
-	 * 
-	 * You may not use this file except in compliance with at least one of
-	 * the above three licenses.
-	 * 
-	 * See LICENSE.html or LICENSE.txt at the top of this package for the
-	 * complete terms and further detail along with the license texts for
-	 * the licenses in COPYING.LIB, COPYING and LICENSE-2.0.txt respectively.
-	 * 
-	 */
-	/**
-	 * flickcurl_free_contact:
-	 * @contact_object: contact object
-	 *
-	 * Destructor for contact object
-	 */
-	public void flickcurl_free_contact() {
-		do {
-			if (!contact_object) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_contact is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\contacts.c", 49, __func__);
-				return ;
-			} 
-		} while (0);
-		Byte generatedNsid = this.getNsid();
-		if (generatedNsid) {
-			.free(generatedNsid);
-		} 
-		Byte generatedUsername = this.getUsername();
-		if (generatedUsername) {
-			.free(generatedUsername);
-		} 
-		Byte generatedRealname = this.getRealname();
-		if (generatedRealname) {
-			.free(generatedRealname);
-		} 
-		.free(contact_object/**
-		 * flickcurl_free_contacts:
-		 * @contacts_object: contact object array
-		 *
-		 * Destructor for array of contact object
-		 */);
-	}
-	public void flickcurl_free_contacts() {
-		int i;
-		do {
-			if (!contacts_object) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_contact is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\contacts.c", 73, __func__);
-				return ;
-			} 
-		} while (0);
-		for (i = 0; contacts_object[i]; i++) {
-			contacts_object[i].flickcurl_free_contact();
-		}
-		.free(contacts_object);
-	}
-	public flickcurl_contact_s flickcurl_build_contacts(flickcurl_s fc, Object xpathCtx, Object xpathExpr, int contact_count_p) {
-		flickcurl_contact contacts = ((Object)0);
-		int nodes_count;
-		int contact_count;
-		int i;
-		 xpathObj = ((Object)0);
-		 nodes = new ();
-		xpathObj = .xmlXPathEvalExpression(xpathExpr, /* Now do contacts */xpathCtx);
-		if (!xpathObj) {
-			fc.flickcurl_error("Unable to evaluate XPath expression \"%s\"", xpathExpr);
-			fc.setFailed(1);
-			;
-		} 
-		nodes = xpathObj.getNodesetval();
-		nodes_count = .xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
-		contacts = (flickcurl_contact).calloc(, nodes_count + 1);
-		for (; i < nodes_count; i++) {
-			 node = nodes.getNodeTab()[i];
-			 attr = new ();
-			flickcurl_contact contact_object = new flickcurl_contact();
-			if (node.getType() != XML_ELEMENT_NODE) {
-				fc.flickcurl_error("Got unexpected node type %d", node.getType());
-				fc.setFailed(1);
-				break;
-			} 
-			contact_object = (flickcurl_contact).calloc(, 1);
-			for (attr = node.getProperties(); attr; attr = attr.getNext()) {
-				size_t attr_len = .strlen((byte)attr.getChildren().getContent());
-				byte attr_name = (byte)attr.getName();
-				byte attr_value;
-				attr_value = (byte).malloc(attr_len + 1);
-				.memcpy(attr_value, attr.getChildren().getContent(), attr_len + 1);
-				if (!.strcmp(attr_name, "nsid")) {
-					contact_object.setNsid(attr_value);
-				}  else if (!.strcmp(attr_name, "username")) {
-					contact_object.setUsername(attr_value);
-				}  else if (!.strcmp(attr_name, "iconserver")) {
-					contact_object.setIconserver(.atoi((byte)attr_value));
-					.free(attr_value);
-				}  else if (!.strcmp(attr_name, "realname")) {
-					contact_object.setRealname(attr_value);
-				}  else if (!.strcmp(attr_name, "friend")) {
-					contact_object.setIs_friend(.atoi((byte)attr_value));
-					.free(attr_value);
-				}  else if (!.strcmp(attr_name, "family")) {
-					contact_object.setIs_family(.atoi((byte)attr_value));
-					.free(attr_value);
-				}  else if (!.strcmp(attr_name, "ignored")) {
-					contact_object.setIgnored(.atoi((byte)attr_value));
-					.free(attr_value);
-				}  else if (!.strcmp(attr_name, "uploaded")) {
-					contact_object.setUploaded(.atoi((byte)attr_value));
-					.free(attr_value);
-				} else {
-						.free(attr_value);
-				} 
-			}
-			contacts[contact_count++] = contact_object/* for nodes */;
-		}
-		if (contact_count_p) {
-			contact_count_p = contact_count;
-		} 
-		return contacts;
-	}
-	/* -*- Mode: c; c-basic-offset: 2 -*-
-	 *
 	 * contacts-api.c - Flickr flickr.contacts.* API calls
 	 *
 	 * Copyright (C) 2007-2012, David Beckett http://www.dajobe.org/
@@ -200,11 +69,11 @@ public class flickcurl_contact_s {
 			fc.flickcurl_add_param("filter", filter);
 		} 
 		if (page >= 0) {
-			.sprintf(page_str, "%d", page);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(page_str, "%d", page);
 			fc.flickcurl_add_param("page", page_str);
 		} 
 		if (per_page >= 0) {
-			.sprintf(per_page_str, "%d", per_page);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(per_page_str, "%d", per_page);
 			fc.flickcurl_add_param("per_page", per_page_str);
 		} 
 		fc.flickcurl_end_params();
@@ -215,7 +84,7 @@ public class flickcurl_contact_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -255,7 +124,7 @@ public class flickcurl_contact_s {
 		byte[] date_lastupload_str = new byte[20];
 		fc.flickcurl_init_params(0);
 		if (date_lastupload >= 0) {
-			.sprintf(date_lastupload_str, "%d", date_lastupload);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(date_lastupload_str, "%d", date_lastupload);
 			fc.flickcurl_add_param("date_lastupload", date_lastupload_str);
 		} 
 		if (filter) {
@@ -269,7 +138,7 @@ public class flickcurl_contact_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -311,11 +180,11 @@ public class flickcurl_contact_s {
 		} 
 		fc.flickcurl_add_param("user_id", user_id);
 		if (page >= 0) {
-			.sprintf(page_str, "%d", page);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(page_str, "%d", page);
 			fc.flickcurl_add_param("page", page_str);
 		} 
 		if (per_page >= 0) {
-			.sprintf(per_page_str, "%d", per_page);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(per_page_str, "%d", per_page);
 			fc.flickcurl_add_param("per_page", per_page_str);
 		} 
 		fc.flickcurl_end_params();
@@ -326,7 +195,7 @@ public class flickcurl_contact_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -375,11 +244,11 @@ public class flickcurl_contact_s {
 			fc.flickcurl_add_param("include_address_book", include_address_book);
 		} 
 		if (page >= 0) {
-			.sprintf(page_str, "%d", page);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(page_str, "%d", page);
 			fc.flickcurl_add_param("page", page_str);
 		} 
 		if (per_page >= 0) {
-			.sprintf(per_page_str, "%d", per_page);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(per_page_str, "%d", per_page);
 			fc.flickcurl_add_param("per_page", per_page_str);
 		} 
 		fc.flickcurl_end_params();
@@ -390,7 +259,7 @@ public class flickcurl_contact_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -416,7 +285,138 @@ public class flickcurl_contact_s {
 		int generatedIs_family = this.getIs_family();
 		int generatedIgnored = this.getIgnored();
 		int generatedUploaded = this.getUploaded();
-		.fprintf((_iob[1]), "contact %d: NSID %s username %s iconserver %d realname %s friend %d family %d ignored %d upload count %d\n", i, generatedNsid, generatedUsername, generatedIconserver, generatedRealname, generatedIs_friend, generatedIs_family, generatedIgnored, generatedUploaded);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "contact %d: NSID %s username %s iconserver %d realname %s friend %d family %d ignored %d upload count %d\n", i, generatedNsid, generatedUsername, generatedIconserver, generatedRealname, generatedIs_friend, generatedIs_family, generatedIgnored, generatedUploaded);
+	}
+	/* -*- Mode: c; c-basic-offset: 2 -*-
+	 *
+	 * contacts.c - Flickcurl method contact functions
+	 *
+	 * Copyright (C) 2007-2009, David Beckett http://www.dajobe.org/
+	 * Copyright (C) 2007 Vanilla I. Shu 
+	 *   (flickcurl_free_contact, flickcurl_free_contacts,
+	 *    flickcurl_build_contacts)
+	 * 
+	 * This file is licensed under the following three licenses as alternatives:
+	 *   1. GNU Lesser General Public License (LGPL) V2.1 or any newer version
+	 *   2. GNU General Public License (GPL) V2 or any newer version
+	 *   3. Apache License, V2.0 or any newer version
+	 * 
+	 * You may not use this file except in compliance with at least one of
+	 * the above three licenses.
+	 * 
+	 * See LICENSE.html or LICENSE.txt at the top of this package for the
+	 * complete terms and further detail along with the license texts for
+	 * the licenses in COPYING.LIB, COPYING and LICENSE-2.0.txt respectively.
+	 * 
+	 */
+	/**
+	 * flickcurl_free_contact:
+	 * @contact_object: contact object
+	 *
+	 * Destructor for contact object
+	 */
+	public void flickcurl_free_contact() {
+		do {
+			if (!contact_object) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_contact is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\contacts.c", 49, __func__);
+				return /*Error: Unsupported expression*/;
+			} 
+		} while (0);
+		Byte generatedNsid = this.getNsid();
+		if (generatedNsid) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedNsid);
+		} 
+		Byte generatedUsername = this.getUsername();
+		if (generatedUsername) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedUsername);
+		} 
+		Byte generatedRealname = this.getRealname();
+		if (generatedRealname) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedRealname);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(contact_object/**
+		 * flickcurl_free_contacts:
+		 * @contacts_object: contact object array
+		 *
+		 * Destructor for array of contact object
+		 */);
+	}
+	public void flickcurl_free_contacts() {
+		int i;
+		do {
+			if (!contacts_object) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_contact is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\contacts.c", 73, __func__);
+				return /*Error: Unsupported expression*/;
+			} 
+		} while (0);
+		for (i = 0; contacts_object[i]; i++) {
+			contacts_object[i].flickcurl_free_contact();
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(contacts_object);
+	}
+	public flickcurl_contact_s flickcurl_build_contacts(flickcurl_s fc, Object xpathCtx, Object xpathExpr, Integer contact_count_p) {
+		flickcurl_contact contacts = ((Object)0);
+		int nodes_count;
+		int contact_count;
+		int i;
+		 xpathObj = ((Object)0);
+		 nodes = new ();
+		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, /* Now do contacts */xpathCtx);
+		if (!xpathObj) {
+			fc.flickcurl_error("Unable to evaluate XPath expression \"%s\"", xpathExpr);
+			fc.setFailed(1);
+			;
+		} 
+		nodes = xpathObj.getNodesetval();
+		nodes_count = /*Error: Function owner not recognized*/xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
+		contacts = (flickcurl_contact)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, nodes_count + 1);
+		for (; i < nodes_count; i++) {
+			 node = nodes.getNodeTab()[i];
+			 attr = new ();
+			flickcurl_contact contact_object = new flickcurl_contact();
+			if (node.getType() != XML_ELEMENT_NODE) {
+				fc.flickcurl_error("Got unexpected node type %d", node.getType());
+				fc.setFailed(1);
+				break;
+			} 
+			contact_object = (flickcurl_contact)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
+			for (attr = node.getProperties(); attr; attr = attr.getNext()) {
+				size_t attr_len = /*Error: Function owner not recognized*/strlen((byte)attr.getChildren().getContent());
+				byte attr_name = (byte)attr.getName();
+				byte attr_value;
+				attr_value = (byte)/*Error: Function owner not recognized*/malloc(attr_len + 1);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(attr_value, attr.getChildren().getContent(), attr_len + 1);
+				if (!/*Error: Function owner not recognized*/strcmp(attr_name, "nsid")) {
+					contact_object.setNsid(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "username")) {
+					contact_object.setUsername(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "iconserver")) {
+					contact_object.setIconserver(/*Error: Function owner not recognized*/atoi((byte)attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "realname")) {
+					contact_object.setRealname(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "friend")) {
+					contact_object.setIs_friend(/*Error: Function owner not recognized*/atoi((byte)attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "family")) {
+					contact_object.setIs_family(/*Error: Function owner not recognized*/atoi((byte)attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "ignored")) {
+					contact_object.setIgnored(/*Error: Function owner not recognized*/atoi((byte)attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "uploaded")) {
+					contact_object.setUploaded(/*Error: Function owner not recognized*/atoi((byte)attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				} else {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				} 
+			}
+			contacts[contact_count++] = contact_object/* for nodes */;
+		}
+		if (contact_count_p) {
+			contact_count_p = contact_count;
+		} 
+		return contacts;
 	}
 	public Byte getNsid() {
 		return nsid;

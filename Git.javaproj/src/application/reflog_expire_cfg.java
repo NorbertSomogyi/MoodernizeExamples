@@ -23,14 +23,14 @@ public class reflog_expire_cfg {
 		Object generatedPattern = ent.getPattern();
 		reflog_expire_cfg generatedNext = ent.getNext();
 		for (ent = reflog_expire_cfg; ent; ent = generatedNext) {
-			if (!.strncmp(generatedPattern, pattern, len) && generatedPattern[len] == (byte)'\0') {
+			if (!/*Error: Function owner not recognized*/strncmp(generatedPattern, pattern, len) && generatedPattern[len] == (byte)'\0') {
 				return ent;
 			} 
 		}
 		do {
 			size_t flex_array_len_ = (len);
-			(ent) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedPattern, (pattern), flex_array_len_);
+			(ent) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedPattern, (pattern), flex_array_len_);
 		} while (0);
 		reflog_expire_cfg_tail = ent;
 		reflog_expire_cfg_tail = (generatedNext);

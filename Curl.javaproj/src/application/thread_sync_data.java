@@ -35,20 +35,20 @@ public class thread_sync_data {
 	public void destroy_thread_sync_data() {
 		_CRITICAL_SECTION generatedMtx = this.getMtx();
 		if (generatedMtx) {
-			.DeleteCriticalSection(generatedMtx);
-			.Curl_cfree(generatedMtx);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteCriticalSection(generatedMtx);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedMtx);
 		} 
 		Byte generatedHostname = this.getHostname();
-		.Curl_cfree(generatedHostname);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedHostname);
 		Curl_addrinfo generatedRes = this.getRes();
 		if (generatedRes) {
 			generatedRes.Curl_freeaddrinfo();
 		} 
 		Object generatedSock_pair = this.getSock_pair();
 		if (generatedSock_pair[1] != CURL_SOCKET_BAD) {
-			.closesocket((generatedSock_pair[1]));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/closesocket((generatedSock_pair[1]));
 		} 
-		.memset(tsd, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(tsd, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public _CRITICAL_SECTION getMtx() {
 		return mtx;

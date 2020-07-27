@@ -23,38 +23,38 @@ public class stat_data {
 	
 	public void stat_data_to_disk(Object from) {
 		cache_time generatedSd_ctime = this.getSd_ctime();
-		generatedSd_ctime.setSec(.htonl(from.getSd_ctime().getSec()));
+		generatedSd_ctime.setSec(/*Error: Function owner not recognized*/htonl(from.getSd_ctime().getSec()));
 		Object generatedNsec = generatedSd_ctime.getNsec();
-		generatedSd_ctime.setNsec(.htonl(generatedNsec));
+		generatedSd_ctime.setNsec(/*Error: Function owner not recognized*/htonl(generatedNsec));
 		cache_time generatedSd_mtime = this.getSd_mtime();
-		generatedSd_mtime.setSec(.htonl(from.getSd_mtime().getSec()));
-		generatedSd_mtime.setNsec(.htonl(generatedNsec));
-		this.setSd_dev(.htonl(from.getSd_dev()));
-		this.setSd_ino(.htonl(from.getSd_ino()));
-		this.setSd_uid(.htonl(from.getSd_uid()));
-		this.setSd_gid(.htonl(from.getSd_gid()));
-		this.setSd_size(.htonl(from.getSd_size()));
+		generatedSd_mtime.setSec(/*Error: Function owner not recognized*/htonl(from.getSd_mtime().getSec()));
+		generatedSd_mtime.setNsec(/*Error: Function owner not recognized*/htonl(generatedNsec));
+		this.setSd_dev(/*Error: Function owner not recognized*/htonl(from.getSd_dev()));
+		this.setSd_ino(/*Error: Function owner not recognized*/htonl(from.getSd_ino()));
+		this.setSd_uid(/*Error: Function owner not recognized*/htonl(from.getSd_uid()));
+		this.setSd_gid(/*Error: Function owner not recognized*/htonl(from.getSd_gid()));
+		this.setSd_size(/*Error: Function owner not recognized*/htonl(from.getSd_size()));
 	}
 	public void stat_data_from_disk(Object data) {
-		.memcpy(to, data, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(to, data, /*Error: sizeof expression not supported yet*/);
 		cache_time generatedSd_ctime = this.getSd_ctime();
 		Object generatedSec = generatedSd_ctime.getSec();
-		generatedSd_ctime.setSec(.ntohl(generatedSec));
+		generatedSd_ctime.setSec(/*Error: Function owner not recognized*/ntohl(generatedSec));
 		Object generatedNsec = generatedSd_ctime.getNsec();
-		generatedSd_ctime.setNsec(.ntohl(generatedNsec));
+		generatedSd_ctime.setNsec(/*Error: Function owner not recognized*/ntohl(generatedNsec));
 		cache_time generatedSd_mtime = this.getSd_mtime();
-		generatedSd_mtime.setSec(.ntohl(generatedSec));
-		generatedSd_mtime.setNsec(.ntohl(generatedNsec));
+		generatedSd_mtime.setSec(/*Error: Function owner not recognized*/ntohl(generatedSec));
+		generatedSd_mtime.setNsec(/*Error: Function owner not recognized*/ntohl(generatedNsec));
 		int generatedSd_dev = this.getSd_dev();
-		this.setSd_dev(.ntohl(generatedSd_dev));
+		this.setSd_dev(/*Error: Function owner not recognized*/ntohl(generatedSd_dev));
 		int generatedSd_ino = this.getSd_ino();
-		this.setSd_ino(.ntohl(generatedSd_ino));
+		this.setSd_ino(/*Error: Function owner not recognized*/ntohl(generatedSd_ino));
 		int generatedSd_uid = this.getSd_uid();
-		this.setSd_uid(.ntohl(generatedSd_uid));
+		this.setSd_uid(/*Error: Function owner not recognized*/ntohl(generatedSd_uid));
 		int generatedSd_gid = this.getSd_gid();
-		this.setSd_gid(.ntohl(generatedSd_gid));
+		this.setSd_gid(/*Error: Function owner not recognized*/ntohl(generatedSd_gid));
 		int generatedSd_size = this.getSd_size();
-		this.setSd_size(.ntohl(generatedSd_size));
+		this.setSd_size(/*Error: Function owner not recognized*/ntohl(generatedSd_size));
 	}
 	public cache_time getSd_ctime() {
 		return sd_ctime;

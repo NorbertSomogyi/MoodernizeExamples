@@ -41,6 +41,20 @@ public class archive_handle_t {
 	}
 	/* vi: set sw=4 ts=4: */
 	/*
+	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
+	 */
+	public archive_handle_t init_handle() {
+		archive_handle_t archive_handle = new archive_handle_t();
+		archive_handle = /*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, /* Initialize default values */1);
+		archive_handle.setFile_header(/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1));
+		archive_handle.setAction_header(ModernizedCProgram.header_skip);
+		archive_handle.setAction_data(ModernizedCProgram.data_skip);
+		archive_handle.setFilter(ModernizedCProgram.filter_accept_all);
+		archive_handle.setSeek(ModernizedCProgram.seek_by_jump);
+		return archive_handle;
+	}
+	/* vi: set sw=4 ts=4: */
+	/*
 	 * Copyright (C) 2002 by Glenn McGrath
 	 *
 	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
@@ -58,233 +72,11 @@ public class archive_handle_t {
 	/*
 	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
 	 */
-	public void data_align(int boundary) {
-		Object generatedOffset = this.getOffset();
-		int skip_amount = (boundary - (generatedOffset % boundary)) % boundary;
+	public void data_skip() {
 		int generatedSrc_fd = this.getSrc_fd();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedSrc_fd, skip_amount);
-		generatedOffset += skip_amount;
-	}
-	/* vi: set sw=4 ts=4: */
-	/*
-	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
-	 */
-	public void data_extract_all() {
 		file_header_t generatedFile_header = this.getFile_header();
-		file_header_t file_header = generatedFile_header;
-		int dst_fd;
-		int res;
-		/* setfscreatecon is 4 syscalls, avoid if possible */
-		int generatedAh_flags = this.getAh_flags();
-		Byte generatedName = file_header.getName();
-		if (generatedAh_flags & (1 << 1)) {
-			byte slash = .strrchr(generatedName, (byte)'/');
-			if (slash) {
-				slash = (byte)'\0';
-				((Object)0).SHCreateDirectoryExU(((Object)0), generatedName);
-				slash = (byte)'/';
-			} 
-		} 
-		Object generatedMode = file_header.getMode();
-		Byte generatedLink_target = file_header.getLink_target();
-		Object generatedSize = file_header.getSize();
-		Object generatedSt_mtime = existing_sb.getSt_mtime();
-		Object generatedMtime = file_header.getMtime();
-		if (generatedAh_flags & (1 << 2)) {
-			if (!(((generatedMode) & -1024) == /* Remove the entry if it exists */-1024/* Is it hardlink?
-						 * We encode hard links as regular files of size 0 with a symlink */)) {
-				if ((((generatedMode) & -1024) == -1024) && generatedLink_target && generatedSize == 0/* Ugly special case:
-								 * tar cf t.tar hardlink1 hardlink2 hardlink1
-								 * results in this tarball structure:
-								 * hardlink1
-								 * hardlink2 -> hardlink1
-								 * hardlink1 -> hardlink1 <== !!!
-								 */) {
-					if (.strcmp(generatedLink_target, generatedName) == 0) {
-						;
-					} 
-				} 
-				if (._unlink(generatedName) == -/* Proceed with deleting */1 && (._errno()) != 2) {
-					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								.bled_printf("Error: can't remove old file %s", generatedName);
-							} else {
-									.printf("Error: can't remove old file %s", generatedName);
-									.putchar((byte)'\n');
-							} 
-						} while (0);
-						.longjmp(ModernizedCProgram.bb_error_jmp, 1);
-					} while (0);
-				} 
-			} 
-		}  else if (generatedAh_flags & (1 << 4/* Remove the existing entry if its older than the extracted entry */)) {
-			stat existing_sb = new stat();
-			if (.stat(generatedName, existing_sb) == -1) {
-				if ((._errno()) != 2) {
-					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								.bled_printf("Error: can't stat old file");
-							} else {
-									.printf("Error: can't stat old file");
-									.putchar((byte)'\n');
-							} 
-						} while (0);
-						.longjmp(ModernizedCProgram.bb_error_jmp, 1);
-					} while (0);
-				} 
-			}  else if (generatedSt_mtime >= generatedMtime) {
-				if (!(generatedAh_flags & (1 << 3)) && !(((generatedMode) & -1024) == -1024)) {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							.bled_printf("Error: %s not created: newer or same age file exists", generatedName);
-						} else {
-								.printf("Error: %s not created: newer or same age file exists", generatedName);
-								.putchar((byte)'\n');
-						} 
-					} while (0);
-				} 
-				archive_handle.data_skip();
-				;
-			}  else if ((._unlink(generatedName) == -1) && ((._errno()) != 21)) {
-				do {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							.bled_printf("Error: can't remove old file %s", generatedName);
-						} else {
-								.printf("Error: can't remove old file %s", generatedName);
-								.putchar((byte)'\n');
-						} 
-					} while (0);
-					.longjmp(ModernizedCProgram.bb_error_jmp, 1);
-				} while (0);
-			} 
-		} 
-		if ((((generatedMode) & -1024) == /* Handle hard links separately
-			 * We encode hard links as regular files of size 0 with a symlink */-1024) && generatedLink_target && generatedSize == 0) {
-			res = ModernizedCProgram.link(generatedLink_target, generatedName);
-			if ((res == -1) && !(generatedAh_flags & (1 << 3))) {
-				do {
-					if (ModernizedCProgram.bled_printf != ((Object)0)) {
-						.bled_printf("Error: can't create %slink from %s to %s", "hard", generatedName, generatedLink_target);
-					} else {
-							.printf("Error: can't create %slink from %s to %s", "hard", generatedName, generatedLink_target);
-							.putchar((byte)'\n');
-					} 
-				} while (0);
-			} 
-			;
-		} 
-		Object generatedDevice = file_header.getDevice();
-		switch (generatedMode & /* Create the filesystem entry */-1024) {
-		case -1024:
-		case -1024/* Regular file */:
-				{ 
-					byte dst_name;
-					int flags = 1 | -1024 | -1024;
-					if (generatedAh_flags & (1 << 8)) {
-						flags = 1 | -1024 | -1024;
-					} 
-					dst_name = generatedName;
-					if (._sopen_s(dst_fd, dst_name, flags, -1024, generatedMode) != /* rpm-style temp file name */0) {
-						do {
-							do {
-								if (ModernizedCProgram.bled_printf != ((Object)0)) {
-									.bled_printf("Error: can't open file %s", dst_name);
-								} else {
-										.printf("Error: can't open file %s", dst_name);
-										.putchar((byte)'\n');
-								} 
-							} while (0);
-							.longjmp(ModernizedCProgram.bb_error_jmp, 1);
-						} while (0);
-					} 
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							.bled_printf("Error: Not implemented");
-						} else {
-								.printf("Error: Not implemented");
-								.putchar((byte)'\n');
-						} 
-					} while (0);
-					._close(dst_fd);
-					break;
-				}
-		case -1024:
-		case -1024/* Symlink */:
-				res = ModernizedCProgram.symlink(generatedLink_target, generatedName);
-				if ((res == -1) && !(generatedAh_flags & (1 << 3))) {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							.bled_printf("Error: can't create %slink from %s to %s", "sym", generatedName, generatedLink_target);
-						} else {
-								.printf("Error: can't create %slink from %s to %s", "sym", generatedName, generatedLink_target);
-								.putchar((byte)'\n');
-						} 
-					} while (0);
-				} 
-				break;
-		case -1024:
-		case -1024:
-				res = ModernizedCProgram.mknod(generatedName, generatedMode, generatedDevice);
-				if ((res == -1) && !(generatedAh_flags & (1 << 3))) {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							.bled_printf("Error: can't create node %s", generatedName);
-						} else {
-								.printf("Error: can't create node %s", generatedName);
-								.putchar((byte)'\n');
-						} 
-					} while (0);
-				} 
-				break;
-		case -1024:
-				res = ModernizedCProgram._mkdirU(generatedName);
-				if ((res == -1) && ((._errno()) != /* btw, Linux doesn't return this */21) && ((._errno()) != 17) && !(generatedAh_flags & (1 << 3))) {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							.bled_printf("Error: can't make dir %s", generatedName);
-						} else {
-								.printf("Error: can't make dir %s", generatedName);
-								.putchar((byte)'\n');
-						} 
-					} while (0);
-				} 
-				break;
-		default:
-				do {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							.bled_printf("Error: unrecognized file type");
-						} else {
-								.printf("Error: unrecognized file type");
-								.putchar((byte)'\n');
-						} 
-					} while (0);
-					.longjmp(ModernizedCProgram.bb_error_jmp, 1);
-				} while (0);
-		}
-		Object generatedUid = file_header.getUid();
-		Object generatedGid = file_header.getGid();
-		if (!(((generatedMode) & -1024) == -1024)) {
-			if (!(generatedAh_flags & (1 << 5))) {
-				uid_t uid = generatedUid;
-				gid_t gid = generatedGid;
-				ModernizedCProgram.chown(generatedName, uid, /* GNU tar 1.15.1 uses chown, not lchown */gid/* uclibc has no lchmod, glibc is even stranger -
-						 * it has lchmod which seems to do nothing!
-						 * so we use chmod... */);
-			} 
-			if (!(generatedAh_flags & (1 << 6))) {
-				(Object)._chmod(generatedName, generatedMode);
-			} 
-			if (generatedAh_flags & (1 << 0)) {
-				timeval[] t = new timeval();
-				t[1].setTv_sec(t[0].setTv_sec((long)generatedMtime));
-				t[1].setTv_usec(t[0].setTv_usec(0));
-				ModernizedCProgram.utimes(generatedName, t);
-			} 
-		} 
+		Object generatedSize = generatedFile_header.getSize();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSrc_fd, generatedSize);
 	}
 	/* vi: set sw=4 ts=4: */
 	/*
@@ -320,25 +112,233 @@ public class archive_handle_t {
 	/*
 	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
 	 */
-	public void data_skip() {
+	public void data_align(int boundary) {
+		Object generatedOffset = this.getOffset();
+		int skip_amount = (boundary - (generatedOffset % boundary)) % boundary;
 		int generatedSrc_fd = this.getSrc_fd();
-		file_header_t generatedFile_header = this.getFile_header();
-		Object generatedSize = generatedFile_header.getSize();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedSrc_fd, generatedSize);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSrc_fd, skip_amount);
+		generatedOffset += skip_amount;
 	}
 	/* vi: set sw=4 ts=4: */
 	/*
 	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
 	 */
-	public archive_handle_t init_handle() {
-		archive_handle_t archive_handle = new archive_handle_t();
-		archive_handle = .calloc(, /* Initialize default values */1);
-		archive_handle.setFile_header(.calloc(, 1));
-		archive_handle.setAction_header(ModernizedCProgram.header_skip);
-		archive_handle.setAction_data(ModernizedCProgram.data_skip);
-		archive_handle.setFilter(ModernizedCProgram.filter_accept_all);
-		archive_handle.setSeek(ModernizedCProgram.seek_by_jump);
-		return archive_handle;
+	public void data_extract_all() {
+		file_header_t generatedFile_header = this.getFile_header();
+		file_header_t file_header = generatedFile_header;
+		int dst_fd;
+		int res;
+		/* setfscreatecon is 4 syscalls, avoid if possible */
+		int generatedAh_flags = this.getAh_flags();
+		Byte generatedName = file_header.getName();
+		if (generatedAh_flags & (1 << 1)) {
+			byte slash = /*Error: Function owner not recognized*/strrchr(generatedName, (byte)'/');
+			if (slash) {
+				slash = (byte)'\0';
+				((Object)0).SHCreateDirectoryExU(((Object)0), generatedName);
+				slash = (byte)'/';
+			} 
+		} 
+		Object generatedMode = file_header.getMode();
+		Byte generatedLink_target = file_header.getLink_target();
+		Object generatedSize = file_header.getSize();
+		Object generatedSt_mtime = existing_sb.getSt_mtime();
+		Object generatedMtime = file_header.getMtime();
+		if (generatedAh_flags & (1 << 2)) {
+			if (!(((generatedMode) & -1024) == /* Remove the entry if it exists */-1024/* Is it hardlink?
+						 * We encode hard links as regular files of size 0 with a symlink */)) {
+				if ((((generatedMode) & -1024) == -1024) && generatedLink_target && generatedSize == 0/* Ugly special case:
+								 * tar cf t.tar hardlink1 hardlink2 hardlink1
+								 * results in this tarball structure:
+								 * hardlink1
+								 * hardlink2 -> hardlink1
+								 * hardlink1 -> hardlink1 <== !!!
+								 */) {
+					if (/*Error: Function owner not recognized*/strcmp(generatedLink_target, generatedName) == 0) {
+						;
+					} 
+				} 
+				if (/*Error: Function owner not recognized*/_unlink(generatedName) == -/* Proceed with deleting */1 && (/*Error: Function owner not recognized*/_errno()) != 2) {
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != ((Object)0)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't remove old file %s", generatedName);
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't remove old file %s", generatedName);
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(ModernizedCProgram.bb_error_jmp, 1);
+					} while (0);
+				} 
+			} 
+		}  else if (generatedAh_flags & (1 << 4/* Remove the existing entry if its older than the extracted entry */)) {
+			stat existing_sb = new stat();
+			if (/*Error: Function owner not recognized*/stat(generatedName, existing_sb) == -1) {
+				if ((/*Error: Function owner not recognized*/_errno()) != 2) {
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != ((Object)0)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't stat old file");
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't stat old file");
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(ModernizedCProgram.bb_error_jmp, 1);
+					} while (0);
+				} 
+			}  else if (generatedSt_mtime >= generatedMtime) {
+				if (!(generatedAh_flags & (1 << 3)) && !(((generatedMode) & -1024) == -1024)) {
+					do {
+						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: %s not created: newer or same age file exists", generatedName);
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: %s not created: newer or same age file exists", generatedName);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+				} 
+				archive_handle.data_skip();
+				;
+			}  else if ((/*Error: Function owner not recognized*/_unlink(generatedName) == -1) && ((/*Error: Function owner not recognized*/_errno()) != 21)) {
+				do {
+					do {
+						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't remove old file %s", generatedName);
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't remove old file %s", generatedName);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(ModernizedCProgram.bb_error_jmp, 1);
+				} while (0);
+			} 
+		} 
+		if ((((generatedMode) & -1024) == /* Handle hard links separately
+			 * We encode hard links as regular files of size 0 with a symlink */-1024) && generatedLink_target && generatedSize == 0) {
+			res = ModernizedCProgram.link(generatedLink_target, generatedName);
+			if ((res == -1) && !(generatedAh_flags & (1 << 3))) {
+				do {
+					if (ModernizedCProgram.bled_printf != ((Object)0)) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't create %slink from %s to %s", "hard", generatedName, generatedLink_target);
+					} else {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't create %slink from %s to %s", "hard", generatedName, generatedLink_target);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+					} 
+				} while (0);
+			} 
+			;
+		} 
+		Object generatedDevice = file_header.getDevice();
+		switch (generatedMode & /* Create the filesystem entry */-1024) {
+		case -1024:
+				res = ModernizedCProgram._mkdirU(generatedName);
+				if ((res == -1) && ((/*Error: Function owner not recognized*/_errno()) != /* btw, Linux doesn't return this */21) && ((/*Error: Function owner not recognized*/_errno()) != 17) && !(generatedAh_flags & (1 << 3))) {
+					do {
+						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't make dir %s", generatedName);
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't make dir %s", generatedName);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+				} 
+				break;
+		case -1024/* Symlink */:
+				res = ModernizedCProgram.symlink(generatedLink_target, generatedName);
+				if ((res == -1) && !(generatedAh_flags & (1 << 3))) {
+					do {
+						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't create %slink from %s to %s", "sym", generatedName, generatedLink_target);
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't create %slink from %s to %s", "sym", generatedName, generatedLink_target);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+				} 
+				break;
+		case -1024:
+		case -1024:
+		case -1024/* Regular file */:
+				{ 
+					byte dst_name;
+					int flags = 1 | -1024 | -1024;
+					if (generatedAh_flags & (1 << 8)) {
+						flags = 1 | -1024 | -1024;
+					} 
+					dst_name = generatedName;
+					if (/*Error: Function owner not recognized*/_sopen_s(dst_fd, dst_name, flags, -1024, generatedMode) != /* rpm-style temp file name */0) {
+						do {
+							do {
+								if (ModernizedCProgram.bled_printf != ((Object)0)) {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't open file %s", dst_name);
+								} else {
+										/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't open file %s", dst_name);
+										/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+								} 
+							} while (0);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(ModernizedCProgram.bb_error_jmp, 1);
+						} while (0);
+					} 
+					do {
+						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: Not implemented");
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: Not implemented");
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_close(dst_fd);
+					break;
+				}
+		case -1024:
+				res = ModernizedCProgram.mknod(generatedName, generatedMode, generatedDevice);
+				if ((res == -1) && !(generatedAh_flags & (1 << 3))) {
+					do {
+						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't create node %s", generatedName);
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't create node %s", generatedName);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+				} 
+				break;
+		case -1024:
+		default:
+				do {
+					do {
+						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: unrecognized file type");
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: unrecognized file type");
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(ModernizedCProgram.bb_error_jmp, 1);
+				} while (0);
+		}
+		Object generatedUid = file_header.getUid();
+		Object generatedGid = file_header.getGid();
+		if (!(((generatedMode) & -1024) == -1024)) {
+			if (!(generatedAh_flags & (1 << 5))) {
+				uid_t uid = generatedUid;
+				gid_t gid = generatedGid;
+				ModernizedCProgram.chown(generatedName, uid, /* GNU tar 1.15.1 uses chown, not lchown */gid/* uclibc has no lchmod, glibc is even stranger -
+						 * it has lchmod which seems to do nothing!
+						 * so we use chmod... */);
+			} 
+			if (!(generatedAh_flags & (1 << 6))) {
+				(Object)/*Error: Function owner not recognized*/_chmod(generatedName, generatedMode);
+			} 
+			if (generatedAh_flags & (1 << 0)) {
+				timeval[] t = new timeval();
+				t[1].setTv_sec(t[0].setTv_sec((long)generatedMtime));
+				t[1].setTv_usec(t[0].setTv_usec(0));
+				ModernizedCProgram.utimes(generatedName, t);
+			} 
+		} 
 	}
 	public int getAh_flags() {
 		return ah_flags;

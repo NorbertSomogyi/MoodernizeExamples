@@ -33,7 +33,7 @@ public class AMFObjectProperty {
 		 generatedP_type = this.getP_type();
 		return generatedP_type != .AMF_INVALID;
 	}
-	public Byte AMFProp_Encode(byte pBuffer, Byte pBufEnd) {
+	public Byte AMFProp_Encode(Byte pBuffer, Byte pBufEnd) {
 		 generatedP_type = this.getP_type();
 		if (generatedP_type == .AMF_INVALID) {
 			return ((Object)0);
@@ -43,11 +43,11 @@ public class AMFObjectProperty {
 		if (generatedP_type != .AMF_NULL && pBuffer + generatedAv_len + 2 + 1 >= pBufEnd) {
 			return ((Object)0);
 		} 
-		Byte generatedAv_val = generatedP_name.getAv_val();
+		byte[] generatedAv_val = generatedP_name.getAv_val();
 		if (generatedP_type != .AMF_NULL && generatedAv_len) {
 			pBuffer++ = generatedAv_len >> 8;
 			pBuffer++ = generatedAv_len & -1024;
-			.memcpy(pBuffer, generatedAv_val, generatedAv_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(pBuffer, generatedAv_val, generatedAv_len);
 			pBuffer += generatedAv_len;
 		} 
 		 generatedP_vu = this.getP_vu();
@@ -58,18 +58,6 @@ public class AMFObjectProperty {
 		case .AMF_ECMA_ARRAY:
 				pBuffer = generatedP_object.AMF_EncodeEcmaArray(pBuffer, pBufEnd);
 				break;
-		case .AMF_OBJECT:
-				pBuffer = generatedP_object.AMF_Encode(pBuffer, pBufEnd);
-				break;
-		case .AMF_NUMBER:
-				pBuffer = ModernizedCProgram.AMF_EncodeNumber(pBuffer, pBufEnd, generatedP_number);
-				break;
-		case .AMF_BOOLEAN:
-				pBuffer = ModernizedCProgram.AMF_EncodeBoolean(pBuffer, pBufEnd, generatedP_number != 0);
-				break;
-		case .AMF_STRING:
-				pBuffer = ModernizedCProgram.AMF_EncodeString(pBuffer, pBufEnd, generatedP_aval);
-				break;
 		case .AMF_NULL:
 				if (pBuffer + 1 >= pBufEnd) {
 					return ((Object)0);
@@ -78,6 +66,18 @@ public class AMFObjectProperty {
 				break;
 		case .AMF_STRICT_ARRAY:
 				pBuffer = generatedP_object.AMF_EncodeArray(pBuffer, pBufEnd);
+				break;
+		case .AMF_BOOLEAN:
+				pBuffer = ModernizedCProgram.AMF_EncodeBoolean(pBuffer, pBufEnd, generatedP_number != 0);
+				break;
+		case .AMF_OBJECT:
+				pBuffer = generatedP_object.AMF_Encode(pBuffer, pBufEnd);
+				break;
+		case .AMF_STRING:
+				pBuffer = ModernizedCProgram.AMF_EncodeString(pBuffer, pBufEnd, generatedP_aval);
+				break;
+		case .AMF_NUMBER:
+				pBuffer = ModernizedCProgram.AMF_EncodeNumber(pBuffer, pBufEnd, generatedP_number);
 				break;
 		default:
 				ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "%s, invalid type. %d", __FUNCTION__, generatedP_type);
@@ -116,19 +116,16 @@ public class AMFObjectProperty {
 		Object generatedP_aval = generatedP_vu.getP_aval();
 		Object generatedP_object = generatedP_vu.getP_object();
 		switch (type) {
-		case .AMF3_XML:
-				{ 
-					int len = generatedP_aval.AMF3ReadString(pBuffer);
-					this.setP_type(.AMF_STRING);
-					nSize -= len;
-					break;
-				}
-		case .AMF3_ARRAY:
 		case .AMF3_UNDEFINED:
-		case .AMF3_TRUE:
-				this.setP_type(.AMF_BOOLEAN);
-				generatedP_vu.setP_number(1.0);
+		case .AMF3_DOUBLE:
+				if (nSize < 8) {
+					return -1;
+				} 
+				generatedP_vu.setP_number(ModernizedCProgram.AMF_DecodeNumber(pBuffer));
+				this.setP_type(.AMF_NUMBER);
+				nSize -= 8;
 				break;
+		case .AMF3_XML_DOC:
 		case .AMF3_DATE:
 				{ 
 					int32_t res = 0;
@@ -148,21 +145,6 @@ public class AMFObjectProperty {
 					} 
 					break;
 				}
-		case .AMF3_DOUBLE:
-				if (nSize < 8) {
-					return -1;
-				} 
-				generatedP_vu.setP_number(ModernizedCProgram.AMF_DecodeNumber(pBuffer));
-				this.setP_type(.AMF_NUMBER);
-				nSize -= 8;
-				break;
-		case .AMF3_FALSE:
-				this.setP_type(.AMF_BOOLEAN);
-				generatedP_vu.setP_number(0.0);
-				break;
-		case .AMF3_NULL:
-				this.setP_type(.AMF_NULL);
-				break;
 		case .AMF3_INTEGER:
 				{ 
 					int32_t res = 0;
@@ -172,6 +154,20 @@ public class AMFObjectProperty {
 					nSize -= len;
 					break;
 				}
+		case .AMF3_BYTE_ARRAY:
+		case .AMF3_FALSE:
+				this.setP_type(.AMF_BOOLEAN);
+				generatedP_vu.setP_number(0.0);
+				break;
+		case .AMF3_XML:
+				{ 
+					int len = generatedP_aval.AMF3ReadString(pBuffer);
+					this.setP_type(.AMF_STRING);
+					nSize -= len;
+					break;
+				}
+		case .AMF3_ARRAY:
+		case .AMF3_STRING:
 		case .AMF3_OBJECT:
 				{ 
 					int nRes = generatedP_object.AMF3_Decode(pBuffer, nSize, 1);
@@ -182,9 +178,13 @@ public class AMFObjectProperty {
 					this.setP_type(.AMF_OBJECT);
 					break;
 				}
-		case .AMF3_STRING:
-		case .AMF3_XML_DOC:
-		case .AMF3_BYTE_ARRAY:
+		case .AMF3_NULL:
+				this.setP_type(.AMF_NULL);
+				break;
+		case .AMF3_TRUE:
+				this.setP_type(.AMF_BOOLEAN);
+				generatedP_vu.setP_number(1.0);
+				break;
 		default:
 				ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s - AMF3 unknown/unsupported datatype 0x%02x, @%p", __FUNCTION__, (byte)(pBuffer), pBuffer);
 				return -1;
@@ -228,55 +228,6 @@ public class AMFObjectProperty {
 		Object generatedP_object = generatedP_vu.getP_object();
 		 generatedP_type = this.getP_type();
 		switch (generatedP_type) {
-		case .AMF_STRICT_ARRAY:
-				{ 
-					int nArrayLen = ModernizedCProgram.AMF_DecodeInt32(pBuffer);
-					nSize -= 4;
-					nRes = generatedP_object.AMF_DecodeArray(pBuffer + 4, nSize, nArrayLen, 0);
-					if (nRes == -1) {
-						return -1;
-					} 
-					nSize -= nRes;
-					break;
-				}
-		case .AMF_STRING:
-				{ 
-					int nStringSize = ModernizedCProgram.AMF_DecodeInt16(pBuffer);
-					if (nSize < (long)nStringSize + 2) {
-						return -1;
-					} 
-					generatedP_aval.AMF_DecodeString(pBuffer);
-					nSize -= (2 + nStringSize);
-					break;
-				}
-		case .AMF_NULL:
-		case .AMF_TYPED_OBJECT:
-				{ 
-					ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "AMF_TYPED_OBJECT not supported!");
-					return -1;
-					break;
-				}
-		case .AMF_BOOLEAN:
-				if (nSize < 1) {
-					return -1;
-				} 
-				generatedP_vu.setP_number((double)ModernizedCProgram.AMF_DecodeBoolean(pBuffer));
-				nSize--;
-				break;
-		case .AMF_UNSUPPORTED:
-				this.setP_type(.AMF_NULL);
-				break;
-		case .AMF_ECMA_ARRAY:
-				{ 
-					nSize -= 4;
-					nRes = generatedP_object.AMF_Decode(pBuffer + 4, nSize, /* next comes the rest, mixed array has a final 0x000009 mark and names, so its an object */1);
-					if (nRes == -1) {
-						return -1;
-					} 
-					nSize -= nRes;
-					break;
-				}
-		case .AMF_LONG_STRING:
 		case .AMF_XML_DOC:
 				{ 
 					int nStringSize = ModernizedCProgram.AMF_DecodeInt32(pBuffer);
@@ -290,22 +241,86 @@ public class AMFObjectProperty {
 					} 
 					break;
 				}
-		case .AMF_UNDEFINED:
-		case .AMF_DATE:
+		case .AMF_NUMBER:
+				if (nSize < 8) {
+					return -1;
+				} 
+				generatedP_vu.setP_number(ModernizedCProgram.AMF_DecodeNumber(pBuffer));
+				nSize -= 8;
+				break;
+		case .AMF_ECMA_ARRAY:
 				{ 
-					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "AMF_DATE");
-					if (nSize < 10) {
+					nSize -= 4;
+					nRes = generatedP_object.AMF_Decode(pBuffer + 4, nSize, /* next comes the rest, mixed array has a final 0x000009 mark and names, so its an object */1);
+					if (nRes == -1) {
 						return -1;
 					} 
-					generatedP_vu.setP_number(ModernizedCProgram.AMF_DecodeNumber(pBuffer));
-					this.setP_UTCoffset(ModernizedCProgram.AMF_DecodeInt16(pBuffer + 8));
-					nSize -= 10;
+					nSize -= nRes;
 					break;
 				}
 		case .AMF_RECORDSET:
 				{ 
 					ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "AMF_RECORDSET reserved!");
 					return -1;
+					break;
+				}
+		case .AMF_REFERENCE:
+				{ 
+					ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "AMF_REFERENCE not supported!");
+					return -1;
+					break;
+				}
+		case .AMF_LONG_STRING:
+		case .AMF_MOVIECLIP:
+				{ 
+					ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "AMF_MOVIECLIP reserved!");
+					return -1;
+					break;
+				}
+		case .AMF_NULL:
+		case .AMF_UNSUPPORTED:
+				this.setP_type(.AMF_NULL);
+				break;
+		case .AMF_STRING:
+				{ 
+					int nStringSize = ModernizedCProgram.AMF_DecodeInt16(pBuffer);
+					if (nSize < (long)nStringSize + 2) {
+						return -1;
+					} 
+					generatedP_aval.AMF_DecodeString(pBuffer);
+					nSize -= (2 + nStringSize);
+					break;
+				}
+		case .AMF_OBJECT_END:
+				{ 
+					return -1;
+					break;
+				}
+		case .AMF_TYPED_OBJECT:
+				{ 
+					ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "AMF_TYPED_OBJECT not supported!");
+					return -1;
+					break;
+				}
+		case .AMF_UNDEFINED:
+		case .AMF_OBJECT:
+				{ 
+					int nRes = generatedP_object.AMF_Decode(pBuffer, nSize, 1);
+					if (nRes == -1) {
+						return -1;
+					} 
+					nSize -= nRes;
+					break;
+				}
+		case .AMF_STRICT_ARRAY:
+				{ 
+					int nArrayLen = ModernizedCProgram.AMF_DecodeInt32(pBuffer);
+					nSize -= 4;
+					nRes = generatedP_object.AMF_DecodeArray(pBuffer + 4, nSize, nArrayLen, 0);
+					if (nRes == -1) {
+						return -1;
+					} 
+					nSize -= nRes;
 					break;
 				}
 		case .AMF_AVMPLUS:
@@ -318,39 +333,24 @@ public class AMFObjectProperty {
 					this.setP_type(.AMF_OBJECT);
 					break;
 				}
-		case .AMF_OBJECT:
+		case .AMF_DATE:
 				{ 
-					int nRes = generatedP_object.AMF_Decode(pBuffer, nSize, 1);
-					if (nRes == -1) {
+					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "AMF_DATE");
+					if (nSize < 10) {
 						return -1;
 					} 
-					nSize -= nRes;
+					generatedP_vu.setP_number(ModernizedCProgram.AMF_DecodeNumber(pBuffer));
+					this.setP_UTCoffset(ModernizedCProgram.AMF_DecodeInt16(pBuffer + 8));
+					nSize -= 10;
 					break;
 				}
-		case .AMF_REFERENCE:
-				{ 
-					ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "AMF_REFERENCE not supported!");
-					return -1;
-					break;
-				}
-		case .AMF_NUMBER:
-				if (nSize < 8) {
+		case .AMF_BOOLEAN:
+				if (nSize < 1) {
 					return -1;
 				} 
-				generatedP_vu.setP_number(ModernizedCProgram.AMF_DecodeNumber(pBuffer));
-				nSize -= 8;
+				generatedP_vu.setP_number((double)ModernizedCProgram.AMF_DecodeBoolean(pBuffer));
+				nSize--;
 				break;
-		case .AMF_OBJECT_END:
-				{ 
-					return -1;
-					break;
-				}
-		case .AMF_MOVIECLIP:
-				{ 
-					ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "AMF_MOVIECLIP reserved!");
-					return -1;
-					break;
-				}
 		default:
 				ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s - unknown datatype 0x%02x, @%p", __FUNCTION__, generatedP_type, pBuffer - 1);
 				return -1;
@@ -364,11 +364,11 @@ public class AMFObjectProperty {
 		 generatedP_type = this.getP_type();
 		if (generatedP_type == .AMF_INVALID) {
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "Property: INVALID");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (generatedP_type == .AMF_NULL) {
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "Property: NULL");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		AVal generatedP_name = this.getP_name();
 		int generatedAv_len = generatedP_name.getAv_len();
@@ -376,45 +376,45 @@ public class AMFObjectProperty {
 			name = generatedP_name;
 		} else {
 				name.setAv_val("no-name.");
-				name.setAv_len( - 1);
+				name.setAv_len(/*Error: sizeof expression not supported yet*/ - 1);
 		} 
 		if (generatedAv_len > 18) {
 			name.setAv_len(18);
 		} 
-		Byte generatedAv_val = name.getAv_val();
-		.snprintf(strRes, 255, "Name: %18.*s, ", generatedAv_len, generatedAv_val);
+		byte[] generatedAv_val = name.getAv_val();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(strRes, 255, "Name: %18.*s, ", generatedAv_len, generatedAv_val);
 		 generatedP_vu = this.getP_vu();
 		Object generatedP_object = generatedP_vu.getP_object();
 		if (generatedP_type == .AMF_OBJECT) {
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "Property: <%sOBJECT>", strRes);
 			generatedP_object.AMF_Dump();
-			return ;
+			return /*Error: Unsupported expression*/;
 		}  else if (generatedP_type == .AMF_ECMA_ARRAY) {
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "Property: <%sECMA_ARRAY>", strRes);
 			generatedP_object.AMF_Dump();
-			return ;
+			return /*Error: Unsupported expression*/;
 		}  else if (generatedP_type == .AMF_STRICT_ARRAY) {
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "Property: <%sSTRICT_ARRAY>", strRes);
 			generatedP_object.AMF_Dump();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedP_number = generatedP_vu.getP_number();
 		Object generatedP_UTCoffset = this.getP_UTCoffset();
 		switch (generatedP_type) {
-		case .AMF_BOOLEAN:
-				.snprintf(str, 255, "BOOLEAN:\t%s", generatedP_number != 0.0 ? "TRUE" : "FALSE");
-				break;
 		case .AMF_NUMBER:
-				.snprintf(str, 255, "NUMBER:\t%.2f", generatedP_number);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(str, 255, "NUMBER:\t%.2f", generatedP_number);
 				break;
 		case .AMF_DATE:
-				.snprintf(str, 255, "DATE:\ttimestamp: %.2f, UTC offset: %d", generatedP_number, generatedP_UTCoffset);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(str, 255, "DATE:\ttimestamp: %.2f, UTC offset: %d", generatedP_number, generatedP_UTCoffset);
 				break;
 		case .AMF_STRING:
-				.snprintf(str, 255, "STRING:\t%.*s", generatedAv_len, generatedAv_val);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(str, 255, "STRING:\t%.*s", generatedAv_len, generatedAv_val);
+				break;
+		case .AMF_BOOLEAN:
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(str, 255, "BOOLEAN:\t%s", generatedP_number != 0.0 ? "TRUE" : "FALSE");
 				break;
 		default:
-				.snprintf(str, 255, "INVALID TYPE 0x%02x", (byte)generatedP_type);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(str, 255, "INVALID TYPE 0x%02x", (byte)generatedP_type);
 		}
 		ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "Property: <%s%s>", strRes, str);
 	}
@@ -433,7 +433,7 @@ public class AMFObjectProperty {
 	}
 	public AMFObjectProperty AMF_GetProp(AMFObject obj, Object name, int nIndex) {
 		int generatedO_num = obj.getO_num();
-		AMFObjectProperty generatedO_props = obj.getO_props();
+		AMFObjectProperty[] generatedO_props = obj.getO_props();
 		if (nIndex >= 0) {
 			if (nIndex < generatedO_num) {
 				return generatedO_props[nIndex];
@@ -441,7 +441,7 @@ public class AMFObjectProperty {
 		} else {
 				int n;
 				for (n = 0; n < generatedO_num; n++) {
-					if (((generatedO_props[n].getP_name()).getAv_len() == (name).getAv_len() && !.memcmp((generatedO_props[n].getP_name()).getAv_val(), (name).getAv_val(), (generatedO_props[n].getP_name()).getAv_len()))) {
+					if (((generatedO_props[n].getP_name()).getAv_len() == (name).getAv_len() && !/*Error: Function owner not recognized*/memcmp((generatedO_props[n].getP_name()).getAv_val(), (name).getAv_val(), (generatedO_props[n].getP_name()).getAv_len()))) {
 						return generatedO_props[n];
 					} 
 				}

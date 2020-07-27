@@ -31,11 +31,11 @@ public class nedpool_t {
 					generatedFrees++;
 					ModernizedCProgram.RemoveCacheEntries(p, tc, 0);
 					if (!(!generatedFreeInCache)) {
-						.abort();
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 					} 
 					tc.setMymspace(-1);
 					tc.setThreadid(0);
-					.mspace_free(0, tc);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mspace_free(0, tc);
 					generatedCaches[n] = 0;
 				} 
 			}
@@ -43,7 +43,7 @@ public class nedpool_t {
 	}
 	public int InitPool(Object capacity, int threads) {
 		((Object)(ModernizedCProgram.mparams.getMagic() != 0 || ModernizedCProgram.init_mparams()));
-		.win32_acquire_lock(malloc_global_mutex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_acquire_lock(malloc_global_mutex);
 		;
 		int generatedThreads = this.getThreads();
 		if (generatedThreads) {
@@ -56,7 +56,7 @@ public class nedpool_t {
 			;
 		} 
 		Object generatedM = this.getM();
-		if (!(generatedM[0] = (mstate).create_mspace(capacity, 1))) {
+		if (!(generatedM[0] = (mstate)/*Error: Function owner not recognized*/create_mspace(capacity, 1))) {
 			;
 		} 
 		generatedM[0].setExtp(p);
@@ -65,23 +65,23 @@ public class nedpool_t {
 		return 1;
 		p.DestroyCaches();
 		if (generatedM[0]) {
-			.destroy_mspace(generatedM[0]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/destroy_mspace(generatedM[0]);
 			generatedM[0] = 0;
 		} 
 		Object generatedMycache = this.getMycache();
 		if (generatedMycache) {
-			if ((!.TlsFree(generatedMycache))) {
-				.abort();
+			if ((!/*Error: Function owner not recognized*/TlsFree(generatedMycache))) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 			} 
 			this.setMycache(0);
 		} 
-		.win32_release_lock(malloc_global_mutex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_release_lock(malloc_global_mutex);
 		;
 		return 0;
 	}
 	public nedpool_t nedcreatepool(Object capacity, int threads) {
 		nedpool ret = new nedpool();
-		if (!(ret = (nedpool)0.nedpcalloc(1, ))) {
+		if (!(ret = (nedpool)0.nedpcalloc(1, /*Error: Unsupported expression*/))) {
 			return 0;
 		} 
 		if (!ret.InitPool(capacity, threads)) {
@@ -93,17 +93,17 @@ public class nedpool_t {
 	public void neddestroypool() {
 		int n;
 		win32_mlock_t generatedMutex = this.getMutex();
-		.win32_acquire_lock(generatedMutex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_acquire_lock(generatedMutex);
 		p.DestroyCaches();
 		Object generatedM = this.getM();
 		for (n = 0; generatedM[n]; n++) {
-			.destroy_mspace(generatedM[n]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/destroy_mspace(generatedM[n]);
 			generatedM[n] = 0;
 		}
-		.win32_release_lock(generatedMutex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_release_lock(generatedMutex);
 		Object generatedMycache = this.getMycache();
-		if ((!.TlsFree(generatedMycache))) {
-			.abort();
+		if ((!/*Error: Function owner not recognized*/TlsFree(generatedMycache))) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 		} 
 		0.nedpfree(p);
 	}
@@ -118,9 +118,9 @@ public class nedpool_t {
 	}
 	public Object nedgetvalue(Object mem) {
 		nedpool np = 0;
-		mchunkptr mcp = ((mchunkptr)((byte)(mem) - (() << 1)));
+		mchunkptr mcp = ((mchunkptr)((byte)(mem) - ((/*Error: Unsupported expression*/) << 1)));
 		mstate fm = new mstate();
-		if (!((((size_t)((((Object)((byte)(mcp) + (() << 1))))) & ((((size_t)-1024) - ((size_t)1)))) == 0)) && mcp.getHead() != (((((size_t)1)) | (((size_t)2))) | ())) {
+		if (!((((size_t)((((Object)((byte)(mcp) + ((/*Error: Unsupported expression*/) << 1))))) & ((((size_t)-1024) - ((size_t)1)))) == 0)) && mcp.getHead() != (((((size_t)1)) | (((size_t)2))) | (/*Error: Unsupported expression*/))) {
 			return 0;
 		} 
 		if (!((mcp).getHead() & (((size_t)2)))) {
@@ -168,23 +168,23 @@ public class nedpool_t {
 		int generatedMymspace = tc.getMymspace();
 		Object generatedFreeInCache = tc.getFreeInCache();
 		if (!mycache) {
-			if ((!.TlsSetValue(generatedMycache, (Object)-1))) {
-				.abort();
+			if ((!/*Error: Function owner not recognized*/TlsSetValue(generatedMycache, (Object)-1))) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 			} 
 		}  else if (mycache > 0) {
 			threadcache tc = generatedCaches[mycache - /* Set to last used mspace */1];
-			.printf("Threadcache utilisation: %lf%% in cache with %lf%% lost to other threads\n", 100.0 * generatedSuccesses / generatedMallocs, 100.0 * ((double)generatedMallocs - generatedFrees) / generatedMallocs);
-			if ((!.TlsSetValue(generatedMycache, (Object)(size_t)(-generatedMymspace)))) {
-				.abort();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Threadcache utilisation: %lf%% in cache with %lf%% lost to other threads\n", 100.0 * generatedSuccesses / generatedMallocs, 100.0 * ((double)generatedMallocs - generatedFrees) / generatedMallocs);
+			if ((!/*Error: Function owner not recognized*/TlsSetValue(generatedMycache, (Object)(size_t)(-generatedMymspace)))) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 			} 
 			generatedFrees++;
 			ModernizedCProgram.RemoveCacheEntries(p, tc, 0);
 			if (!(!generatedFreeInCache)) {
-				.abort();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 			} 
 			tc.setMymspace(-1);
 			tc.setThreadid(0);
-			.mspace_free(0, generatedCaches[mycache - 1]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mspace_free(0, generatedCaches[mycache - 1]);
 			generatedCaches[mycache - 1] = 0;
 		} 
 	}
@@ -199,8 +199,8 @@ public class nedpool_t {
 		if (!ret) {
 			do {
 				mstate m = ModernizedCProgram.GetMSpace((p), (tc), (mymspace), (size));
-				ret = .mspace_malloc(m, size);
-				.win32_release_lock(m.getMutex());
+				ret = /*Error: Function owner not recognized*/mspace_malloc(m, size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_release_lock(m.getMutex());
 			} while (/* Use this thread's mspace */0);
 		} 
 		return ret;
@@ -213,14 +213,14 @@ public class nedpool_t {
 		ModernizedCProgram.GetThreadCache(p, tc, mymspace, rsize);
 		if (tc && rsize <= 8192) {
 			if ((ret = ModernizedCProgram.threadcache_malloc(p, tc, /* Use the thread cache */rsize))) {
-				.memset(ret, 0, rsize);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ret, 0, rsize);
 			} 
 		} 
 		if (!ret) {
 			do {
 				mstate m = ModernizedCProgram.GetMSpace((p), (tc), (mymspace), (rsize));
-				ret = .mspace_calloc(m, 1, rsize);
-				.win32_release_lock(m.getMutex());
+				ret = /*Error: Function owner not recognized*/mspace_calloc(m, 1, rsize);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_release_lock(m.getMutex());
 			} while (/* Use this thread's mspace */0);
 		} 
 		return ret;
@@ -236,20 +236,20 @@ public class nedpool_t {
 		if (tc && size && size <= 8192) {
 			size_t memsize = ModernizedCProgram.nedblksize(/* Use the thread cache */mem);
 			if (!(memsize)) {
-				.abort();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 			} 
 			if ((ret = ModernizedCProgram.threadcache_malloc(p, tc, size))) {
-				.memcpy(ret, mem, memsize < size ? memsize : size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ret, mem, memsize < size ? memsize : size);
 				if (memsize <= 8192) {
 					ModernizedCProgram.threadcache_free(p, tc, mymspace, mem, memsize);
 				} else {
-						.mspace_free(0, mem);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mspace_free(0, mem);
 				} 
 			} 
 		} 
 		if (!ret/* Reallocs always happen in the mspace they happened in, so skip
 				locking the preferred mspace for this thread */) {
-			ret = .mspace_realloc(0, mem, size);
+			ret = /*Error: Function owner not recognized*/mspace_realloc(0, mem, size);
 		} 
 		return ret;
 	}
@@ -258,17 +258,17 @@ public class nedpool_t {
 		int mymspace;
 		size_t memsize = new size_t();
 		if (!(mem)) {
-			.abort();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 		} 
 		ModernizedCProgram.GetThreadCache(p, tc, mymspace, 0);
 		memsize = ModernizedCProgram.nedblksize(mem);
 		if (!(memsize)) {
-			.abort();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 		} 
-		if (mem && tc && memsize <= (8192 + ((() << 1)))) {
+		if (mem && tc && memsize <= (8192 + (((/*Error: Unsupported expression*/) << 1)))) {
 			ModernizedCProgram.threadcache_free(p, tc, mymspace, mem, memsize);
 		} else {
-				.mspace_free(0, mem);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mspace_free(0, mem);
 		} 
 	}
 	/* Frees always happen in the mspace they happened in, so skip
@@ -281,14 +281,14 @@ public class nedpool_t {
 		{ 
 			do {
 				mstate m = ModernizedCProgram.GetMSpace((p), (tc), (mymspace), (bytes));
-				ret = .mspace_memalign(m, alignment, bytes);
-				.win32_release_lock(m.getMutex());
+				ret = /*Error: Function owner not recognized*/mspace_memalign(m, alignment, bytes);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_release_lock(m.getMutex());
 			} while (/* Use this thread's mspace */0);
 		}
 		return ret;
 	}
 	public int nedpmallopt(int parno, int value) {
-		return .mspace_mallopt(parno, value);
+		return /*Error: Function owner not recognized*/mspace_mallopt(parno, value);
 	}
 	public int nedpmalloc_trim(Object pad) {
 		int n;
@@ -301,7 +301,7 @@ public class nedpool_t {
 		} 
 		Object generatedM = this.getM();
 		for (n = 0; generatedM[n]; n++) {
-			ret += .mspace_trim(generatedM[n], pad);
+			ret += /*Error: Function owner not recognized*/mspace_trim(generatedM[n], pad);
 		}
 		return ret;
 	}
@@ -315,7 +315,7 @@ public class nedpool_t {
 		} 
 		Object generatedM = this.getM();
 		for (n = 0; generatedM[n]; n++) {
-			.mspace_malloc_stats(generatedM[n]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mspace_malloc_stats(generatedM[n]);
 		}
 	}
 	public Object nedpmalloc_footprint() {
@@ -329,7 +329,7 @@ public class nedpool_t {
 		} 
 		Object generatedM = this.getM();
 		for (n = 0; generatedM[n]; n++) {
-			ret += .mspace_footprint(generatedM[n]);
+			ret += /*Error: Function owner not recognized*/mspace_footprint(generatedM[n]);
 		}
 		return ret;
 	}
@@ -340,28 +340,28 @@ public class nedpool_t {
 		ModernizedCProgram.GetThreadCache(p, tc, mymspace, elemsize);
 		do {
 			mstate m = ModernizedCProgram.GetMSpace((p), (tc), (mymspace), (elemsno * elemsize));
-			ret = .mspace_independent_calloc(m, elemsno, elemsize, chunks);
-			.win32_release_lock(m.getMutex());
+			ret = /*Error: Function owner not recognized*/mspace_independent_calloc(m, elemsno, elemsize, chunks);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_release_lock(m.getMutex());
 		} while (0);
 		return ret;
 	}
-	public Object nedpindependent_comalloc(Object elems, Object sizes, Object chunks) {
+	public Object nedpindependent_comalloc(Object elems, Object[] sizes, Object chunks) {
 		Object ret;
 		threadcache tc = new threadcache();
 		int mymspace;
 		size_t i = new size_t();
-		size_t adjustedsizes = (size_t).__builtin_alloca((elems * ));
+		size_t adjustedsizes = (size_t)/*Error: Function owner not recognized*/__builtin_alloca((elems * /*Error: Unsupported expression*/));
 		if (!adjustedsizes) {
 			return 0;
 		} 
 		for (i = 0; i < elems; i++) {
-			adjustedsizes[i] = sizes[i] <  ?  : sizes[i];
+			adjustedsizes[i] = sizes[i] < /*Error: Unsupported expression*/ ? /*Error: Unsupported expression*/ : sizes[i];
 		}
 		ModernizedCProgram.GetThreadCache(p, tc, mymspace, 0);
 		do {
 			mstate m = ModernizedCProgram.GetMSpace((p), (tc), (mymspace), (false));
-			ret = .mspace_independent_comalloc(m, elems, adjustedsizes, chunks);
-			.win32_release_lock(m.getMutex());
+			ret = /*Error: Function owner not recognized*/mspace_independent_comalloc(m, elems, adjustedsizes, chunks);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_release_lock(m.getMutex());
 		} while (0);
 		return ret;
 	}

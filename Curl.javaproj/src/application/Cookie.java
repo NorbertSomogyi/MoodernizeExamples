@@ -26,21 +26,21 @@ public class Cookie {
 	private Cookie next;
 	private Byte name;
 	private Byte value;
-	private Byte path;
+	private byte[] path;
 	private Byte spath;
 	private Byte domain;
 	private Object expires;
 	private Byte expirestr;
 	private  tailmatch;
 	private Byte version;
-	private byte maxage;
+	private byte[] maxage;
 	private  secure;
 	private  livecookie;
 	private  httponly;
 	private int creationtime;
 	private byte prefix;
 	
-	public Cookie(Cookie next, Byte name, Byte value, Byte path, Byte spath, Byte domain, Object expires, Byte expirestr,  tailmatch, Byte version, byte maxage,  secure,  livecookie,  httponly, int creationtime, byte prefix) {
+	public Cookie(Cookie next, Byte name, Byte value, byte[] path, Byte spath, Byte domain, Object expires, Byte expirestr,  tailmatch, Byte version, byte[] maxage,  secure,  livecookie,  httponly, int creationtime, byte prefix) {
 		setNext(next);
 		setName(name);
 		setValue(value);
@@ -143,32 +143,32 @@ public class Cookie {
 	/* The last 3 #include files should be in this order */
 	public void freecookie() {
 		Byte generatedExpirestr = this.getExpirestr();
-		.Curl_cfree(generatedExpirestr);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedExpirestr);
 		Byte generatedDomain = this.getDomain();
-		.Curl_cfree(generatedDomain);
-		Byte generatedPath = this.getPath();
-		.Curl_cfree(generatedPath);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedDomain);
+		byte[] generatedPath = this.getPath();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedPath);
 		Byte generatedSpath = this.getSpath();
-		.Curl_cfree(generatedSpath);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedSpath);
 		Byte generatedName = this.getName();
-		.Curl_cfree(generatedName);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedName);
 		Byte generatedValue = this.getValue();
-		.Curl_cfree(generatedValue);
-		byte generatedMaxage = this.getMaxage();
-		.Curl_cfree(generatedMaxage);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedValue);
+		byte[] generatedMaxage = this.getMaxage();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedMaxage);
 		Byte generatedVersion = this.getVersion();
-		.Curl_cfree(generatedVersion);
-		.Curl_cfree(co);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedVersion);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(co);
 	}
-	public Cookie Curl_cookie_add(Curl_easy data, CookieInfo c,  httpheader,  noexpire, byte lineptr, Object domain, Object path,  secure) {
+	public Cookie Curl_cookie_add(Curl_easy data, CookieInfo c,  httpheader,  noexpire, byte[] lineptr, Object domain, Object path,  secure) {
 		/* TRUE if connection is over secure origin */Cookie clist = new Cookie();
 		Cookie co = new Cookie();
 		Cookie lastc = ((Object)0);
-		time_t now = .time(((Object)0));
+		time_t now = /*Error: Function owner not recognized*/time(((Object)0));
 		bool replace_old = 0;
 		bool badcookie = /* cookies are good by default. mmmmm yummy */0;
 		size_t myhash = new size_t();
-		co = .Curl_ccalloc(1, /* First, alloc and init a new struct for it */);
+		co = /*Error: Function owner not recognized*/Curl_ccalloc(1, /*Error: Unsupported expression*//* First, alloc and init a new struct for it */);
 		if (!co) {
 			return ((Object)/* bail out if we're this low on memory */0);
 		} 
@@ -176,11 +176,11 @@ public class Cookie {
 		Byte generatedName = co.getName();
 		Byte generatedValue = co.getValue();
 		 generatedRunning = c.getRunning();
-		Byte generatedPath = co.getPath();
+		byte[] generatedPath = co.getPath();
 		Byte generatedSpath = co.getSpath();
 		Byte generatedDomain = co.getDomain();
 		Byte generatedVersion = co.getVersion();
-		byte generatedMaxage = co.getMaxage();
+		byte[] generatedMaxage = co.getMaxage();
 		Byte generatedExpirestr = co.getExpirestr();
 		Object generatedExpires = co.getExpires();
 		if (httpheader) {
@@ -188,26 +188,26 @@ public class Cookie {
 			byte[] what = new byte[4096];
 			byte ptr;
 			byte semiptr;
-			size_t linelength = .strlen(lineptr);
+			size_t linelength = /*Error: Function owner not recognized*/strlen(lineptr);
 			if (linelength > 5000) {
-				.Curl_cfree(/* discard overly long lines at once */co);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(/* discard overly long lines at once */co);
 				return ((Object)0);
 			} 
-			semiptr = .strchr(lineptr, /* first, find a semicolon */(byte)';');
+			semiptr = /*Error: Function owner not recognized*/strchr(lineptr, /* first, find a semicolon */(byte)';');
 			while (lineptr && (int)((((byte)lineptr) == (byte)' ') || (((byte)lineptr) == (byte)'\t'))) {
 				lineptr++;
 			}
 			ptr = lineptr;
 			do {
 				ModernizedCProgram.name[0] = what[0] = /* we have a <what>=<this> pair or a stand-alone word here *//* init the buffers */0;
-				if (1 <= .sscanf(ptr, "%4095[^;\r\n=] =%4095[^;\r\n]", ModernizedCProgram.name, what/* Use strstore() below to properly deal with received cookie
+				if (1 <= /*Error: Function owner not recognized*/sscanf(ptr, "%4095[^;\r\n=] =%4095[^;\r\n]", ModernizedCProgram.name, what/* Use strstore() below to properly deal with received cookie
 				           headers that have the same string property set more than once,
 				           and then we use the last one. */)) {
 					byte whatptr;
 					bool done = 0;
 					bool sep = new bool();
-					size_t len = .strlen(what);
-					size_t nlen = .strlen(ModernizedCProgram.name);
+					size_t len = /*Error: Function owner not recognized*/strlen(what);
+					size_t nlen = /*Error: Function owner not recognized*/strlen(ModernizedCProgram.name);
 					byte endofn = ptr[nlen];
 					if (nlen >= (4096 - 1) || len >= (4096 - 1) || ((nlen + len) > 4096/* too long individual name or contents, or too long combination of
 					             name + contents. Chrome and Firefox support 4095 or 4096 bytes
@@ -252,8 +252,8 @@ public class Cookie {
 							badcookie = /* Bad name/value pair. */1;
 							break;
 						} 
-						co.setName(.Curl_cstrdup(ModernizedCProgram.name));
-						co.setValue(.Curl_cstrdup(whatptr));
+						co.setName(/*Error: Function owner not recognized*/Curl_cstrdup(ModernizedCProgram.name));
+						co.setValue(/*Error: Function owner not recognized*/Curl_cstrdup(whatptr));
 						done = 1;
 						if (!generatedName || !generatedValue) {
 							badcookie = 1;
@@ -287,7 +287,7 @@ public class Cookie {
 							badcookie = /* out of memory bad */1;
 							break;
 						} 
-						.Curl_cfree(generatedSpath);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedSpath);
 						co.setSpath(ModernizedCProgram.sanitize_cookie_path(generatedPath));
 						if (!generatedSpath) {
 							badcookie = /* out of memory bad */1;
@@ -310,7 +310,7 @@ public class Cookie {
 							domain = ":";
 						} 
 						is_ip = ModernizedCProgram.isip(domain ? domain : whatptr);
-						if (!domain || (is_ip && !.strcmp(whatptr, domain)) || (!is_ip && ModernizedCProgram.tailmatch(whatptr, domain))) {
+						if (!domain || (is_ip && !/*Error: Function owner not recognized*/strcmp(whatptr, domain)) || (!is_ip && ModernizedCProgram.tailmatch(whatptr, domain))) {
 							ModernizedCProgram.strstore(generatedDomain, whatptr);
 							if (!generatedDomain) {
 								badcookie = 1;
@@ -362,22 +362,22 @@ public class Cookie {
 				while (ptr && (int)((((byte)ptr) == (byte)' ') || (((byte)ptr) == (byte)'\t'))) {
 					ptr++;
 				}
-				semiptr = .strchr(ptr, /* now, find the next semicolon */(byte)';');
+				semiptr = /*Error: Function owner not recognized*/strchr(ptr, /* now, find the next semicolon */(byte)';');
 				if (!semiptr && ptr/* There are no more semicolons, but there's a final name=value pair
 				           coming up */) {
-					semiptr = .strchr(ptr, (byte)'\0');
+					semiptr = /*Error: Function owner not recognized*/strchr(ptr, (byte)'\0');
 				} 
 			} while (semiptr);
 			if (generatedMaxage) {
 				CURLofft offt = new CURLofft();
 				offt = ModernizedCProgram.curlx_strtoofft((generatedMaxage == (byte)'\"') ? generatedMaxage[1] : generatedMaxage[0], ((Object)0), 10, generatedExpires);
 				if (offt == .CURL_OFFT_FLOW) {
-					co.setExpires(.CURL_OFF_T_C(/* overflow, used max value */-1024));
+					co.setExpires(/*Error: Function owner not recognized*/CURL_OFF_T_C(/* overflow, used max value */-1024));
 				}  else if (!offt) {
 					if (!generatedExpires) {
 						co.setExpires(/* already expired */1);
-					}  else if (.CURL_OFF_T_C(-1024) - now < generatedExpires) {
-						co.setExpires(.CURL_OFF_T_C(/* would overflow */-1024));
+					}  else if (/*Error: Function owner not recognized*/CURL_OFF_T_C(-1024) - now < generatedExpires) {
+						co.setExpires(/*Error: Function owner not recognized*/CURL_OFF_T_C(/* would overflow */-1024));
 					} else {
 							generatedExpires += now;
 					} 
@@ -394,7 +394,7 @@ public class Cookie {
 			} 
 			if (!badcookie && !generatedDomain) {
 				if (domain) {
-					co.setDomain(.Curl_cstrdup(/* no domain was given in the header line, set the default */domain));
+					co.setDomain(/*Error: Function owner not recognized*/Curl_cstrdup(/* no domain was given in the header line, set the default */domain));
 					if (!generatedDomain) {
 						badcookie = 1;
 					} 
@@ -403,19 +403,19 @@ public class Cookie {
 			if (!badcookie && !generatedPath && path/* No path was given in the header line, set the default.
 			         Note that the passed-in path to this function MAY have a '?' and
 			         following part that MUST not be stored as part of the path. */) {
-				byte queryp = .strchr(path, (byte)'?'/* queryp is where the interesting part of the path ends, so now we
+				byte queryp = /*Error: Function owner not recognized*/strchr(path, (byte)'?'/* queryp is where the interesting part of the path ends, so now we
 				         want to the find the last */);
 				byte endslash;
 				if (!queryp) {
-					endslash = .strrchr(path, (byte)'/');
+					endslash = /*Error: Function owner not recognized*/strrchr(path, (byte)'/');
 				} else {
 						endslash = ModernizedCProgram.Curl_memrchr((path), ((byte)'/'), ((queryp - path)));
 				} 
 				if (endslash) {
 					size_t pathlen = (endslash - path + /* include end slash */1);
-					co.setPath(.Curl_cmalloc(pathlen + /* one extra for the zero byte */1));
+					co.setPath(/*Error: Function owner not recognized*/Curl_cmalloc(pathlen + /* one extra for the zero byte */1));
 					if (generatedPath) {
-						.memcpy(generatedPath, path, pathlen);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPath, path, pathlen);
 						generatedPath[pathlen] = /* zero terminate */0;
 						co.setSpath(ModernizedCProgram.sanitize_cookie_path(generatedPath));
 						if (!generatedSpath) {
@@ -435,19 +435,19 @@ public class Cookie {
 				byte firstptr;
 				byte tok_buf = ((Object)0);
 				int fields;
-				if (.strncmp(lineptr, "#HttpOnly_", 10) == 0) {
+				if (/*Error: Function owner not recognized*/strncmp(lineptr, "#HttpOnly_", 10) == 0) {
 					lineptr += 10;
 					co.setHttponly(1);
 				} 
 				if (lineptr[0] == (byte)'#') {
-					.Curl_cfree(/* don't even try the comments */co);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(/* don't even try the comments */co);
 					return ((Object)0);
 				} 
-				ptr = .strchr(lineptr, /* strip off the possible end-of-line characters */(byte)'\r');
+				ptr = /*Error: Function owner not recognized*/strchr(lineptr, /* strip off the possible end-of-line characters */(byte)'\r');
 				if (ptr) {
 					ptr = /* clear it */0;
 				} 
-				ptr = .strchr(lineptr, (byte)'\n');
+				ptr = /*Error: Function owner not recognized*/strchr(lineptr, (byte)'\n');
 				if (ptr) {
 					ptr = /* clear it */0;
 				} 
@@ -455,60 +455,6 @@ public class Cookie {
 				for (; ptr && !/* Now loop through the fields and init the struct we already have
 				       allocated */badcookie; ) {
 					switch (fields) {
-					case 1/* flag: A TRUE/FALSE value indicating if all machines within a given
-					           domain can access the variable. Set TRUE when the cookie says
-					           .domain.com and to false when the domain is complete www.domain.com
-					        */:
-							co.setTailmatch(ModernizedCProgram.Curl_strcasecompare(ptr, "TRUE") ? 1 : 0);
-							break;
-					case 0:
-							if (ptr[0] == /* skip preceding dots */(byte)'.') {
-								ptr++;
-							} 
-							co.setDomain(.Curl_cstrdup(ptr));
-							if (!generatedDomain) {
-								badcookie = 1;
-							} 
-							break;
-					case 2:
-							if (.strcmp("TRUE", ptr) && .strcmp("FALSE", /* The file format allows the path field to remain not filled in */ptr)) {
-								co.setPath(.Curl_cstrdup(/* only if the path doesn't look like a boolean option! */ptr));
-								if (!generatedPath) {
-									badcookie = 1;
-								} else {
-										co.setSpath(ModernizedCProgram.sanitize_cookie_path(generatedPath));
-										if (!generatedSpath) {
-											badcookie = /* out of memory bad */1;
-										} 
-								} 
-								break;
-							} 
-							co.setPath(.Curl_cstrdup(/* this doesn't look like a path, make one up! */"/"));
-							if (!generatedPath) {
-								badcookie = 1;
-							} 
-							co.setSpath(.Curl_cstrdup("/"));
-							if (!generatedSpath) {
-								badcookie = 1;
-							} 
-							/* add a field and fall down to secure */fields++;
-					case 4:
-							if (ModernizedCProgram.curlx_strtoofft(ptr, ((Object)0), 10, generatedExpires)) {
-								badcookie = 1;
-							} 
-							break;
-					case 5:
-							co.setName(.Curl_cstrdup(ptr));
-							if (!generatedName) {
-								badcookie = 1;
-							} else {
-									if (ModernizedCProgram.Curl_strncasecompare("__Secure-", generatedName, /* For Netscape file format cookies we check prefix on the name */9)) {
-										generatedPrefix |=  (1 << 0);
-									}  else if (ModernizedCProgram.Curl_strncasecompare("__Host-", generatedName, 7)) {
-										generatedPrefix |=  (1 << 1);
-									} 
-							} 
-							break;
 					case /* FALLTHROUGH */3:
 							co.setSecure(0);
 							if (ModernizedCProgram.Curl_strcasecompare(ptr, "TRUE")) {
@@ -519,16 +465,70 @@ public class Cookie {
 								} 
 							} 
 							break;
+					case 1/* flag: A TRUE/FALSE value indicating if all machines within a given
+					           domain can access the variable. Set TRUE when the cookie says
+					           .domain.com and to false when the domain is complete www.domain.com
+					        */:
+							co.setTailmatch(ModernizedCProgram.Curl_strcasecompare(ptr, "TRUE") ? 1 : 0);
+							break;
+					case 4:
+							if (ModernizedCProgram.curlx_strtoofft(ptr, ((Object)0), 10, generatedExpires)) {
+								badcookie = 1;
+							} 
+							break;
+					case 2:
+							if (/*Error: Function owner not recognized*/strcmp("TRUE", ptr) && /*Error: Function owner not recognized*/strcmp("FALSE", /* The file format allows the path field to remain not filled in */ptr)) {
+								co.setPath(/*Error: Function owner not recognized*/Curl_cstrdup(/* only if the path doesn't look like a boolean option! */ptr));
+								if (!generatedPath) {
+									badcookie = 1;
+								} else {
+										co.setSpath(ModernizedCProgram.sanitize_cookie_path(generatedPath));
+										if (!generatedSpath) {
+											badcookie = /* out of memory bad */1;
+										} 
+								} 
+								break;
+							} 
+							co.setPath(/*Error: Function owner not recognized*/Curl_cstrdup(/* this doesn't look like a path, make one up! */"/"));
+							if (!generatedPath) {
+								badcookie = 1;
+							} 
+							co.setSpath(/*Error: Function owner not recognized*/Curl_cstrdup("/"));
+							if (!generatedSpath) {
+								badcookie = 1;
+							} 
+							/* add a field and fall down to secure */fields++;
 					case 6:
-							co.setValue(.Curl_cstrdup(ptr));
+							co.setValue(/*Error: Function owner not recognized*/Curl_cstrdup(ptr));
 							if (!generatedValue) {
 								badcookie = 1;
+							} 
+							break;
+					case 0:
+							if (ptr[0] == /* skip preceding dots */(byte)'.') {
+								ptr++;
+							} 
+							co.setDomain(/*Error: Function owner not recognized*/Curl_cstrdup(ptr));
+							if (!generatedDomain) {
+								badcookie = 1;
+							} 
+							break;
+					case 5:
+							co.setName(/*Error: Function owner not recognized*/Curl_cstrdup(ptr));
+							if (!generatedName) {
+								badcookie = 1;
+							} else {
+									if (ModernizedCProgram.Curl_strncasecompare("__Secure-", generatedName, /* For Netscape file format cookies we check prefix on the name */9)) {
+										generatedPrefix |=  (1 << 0);
+									}  else if (ModernizedCProgram.Curl_strncasecompare("__Host-", generatedName, 7)) {
+										generatedPrefix |=  (1 << 1);
+									} 
 							} 
 							break;
 					}
 				}
 				if (6 == fields) {
-					co.setValue(.Curl_cstrdup(/* we got a cookie with blank contents, fix it */""));
+					co.setValue(/*Error: Function owner not recognized*/Curl_cstrdup(/* we got a cookie with blank contents, fix it */""));
 					if (!generatedValue) {
 						badcookie = 1;
 					} else {
@@ -555,7 +555,7 @@ public class Cookie {
 		     * The __Host- prefix requires the cookie to be secure, have a "/" path
 		     * and not have a domain set.
 		     */)) {
-			if (generatedSecure && generatedPath && .strcmp(generatedPath, "/") == 0 && !generatedTailmatch) {
+			if (generatedSecure && generatedPath && /*Error: Function owner not recognized*/strcmp(generatedPath, "/") == 0 && !generatedTailmatch) {
 				;
 			} else {
 					co.freecookie();
@@ -594,11 +594,11 @@ public class Cookie {
 						if (generatedSecure && !generatedSecure && !secure) {
 							size_t cllen = new size_t();
 							byte sep;
-							sep = .strchr(generatedSpath + 1, (byte)'/');
+							sep = /*Error: Function owner not recognized*/strchr(generatedSpath + 1, (byte)'/');
 							if (sep) {
 								cllen = sep - generatedSpath;
 							} else {
-									cllen = .strlen(generatedSpath);
+									cllen = /*Error: Function owner not recognized*/strlen(generatedSpath);
 							} 
 							if (ModernizedCProgram.Curl_strncasecompare(generatedSpath, generatedSpath, cllen)) {
 								co.freecookie();
@@ -622,16 +622,16 @@ public class Cookie {
 				if (replace_old) {
 					co.setNext(generatedNext);
 					co.setCreationtime(generatedCreationtime);
-					.Curl_cfree(generatedName);
-					.Curl_cfree(generatedValue);
-					.Curl_cfree(generatedDomain);
-					.Curl_cfree(generatedPath);
-					.Curl_cfree(generatedSpath);
-					.Curl_cfree(generatedExpirestr);
-					.Curl_cfree(generatedVersion);
-					.Curl_cfree(generatedMaxage);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedName);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedValue);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedDomain);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedPath);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedSpath);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedExpirestr);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedVersion);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedMaxage);
 					clist = /* then store all the new data */co;
-					.Curl_cfree(/* free the newly alloced memory */co);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(/* free the newly alloced memory */co);
 					co = /* point to the previous struct instead */clist/* We have replaced a cookie, now skip the rest of the list but
 					           make sure the 'lastc' pointer is properly set */;
 					do {
@@ -671,14 +671,14 @@ public class Cookie {
 	                   must only be used very carefully for things that can deal
 	                   with data being NULL. Such as infof() and similar */
 	public Cookie dup_cookie() {
-		Cookie d = .Curl_ccalloc(, 1);
+		Cookie d = /*Error: Function owner not recognized*/Curl_ccalloc(/*Error: Unsupported expression*/, 1);
 		Byte generatedExpirestr = this.getExpirestr();
 		Byte generatedDomain = this.getDomain();
-		Byte generatedPath = this.getPath();
+		byte[] generatedPath = this.getPath();
 		Byte generatedSpath = this.getSpath();
 		Byte generatedName = this.getName();
 		Byte generatedValue = this.getValue();
-		byte generatedMaxage = this.getMaxage();
+		byte[] generatedMaxage = this.getMaxage();
 		Byte generatedVersion = this.getVersion();
 		Object generatedExpires = this.getExpires();
 		 generatedTailmatch = this.getTailmatch();
@@ -689,7 +689,7 @@ public class Cookie {
 		if (d) {
 			do {
 				if (generatedExpirestr) {
-					d.setExpirestr(.Curl_cstrdup(generatedExpirestr));
+					d.setExpirestr(/*Error: Function owner not recognized*/Curl_cstrdup(generatedExpirestr));
 					if (!generatedExpirestr) {
 						;
 					} 
@@ -697,7 +697,7 @@ public class Cookie {
 			} while (0);
 			do {
 				if (generatedDomain) {
-					d.setDomain(.Curl_cstrdup(generatedDomain));
+					d.setDomain(/*Error: Function owner not recognized*/Curl_cstrdup(generatedDomain));
 					if (!generatedDomain) {
 						;
 					} 
@@ -705,7 +705,7 @@ public class Cookie {
 			} while (0);
 			do {
 				if (generatedPath) {
-					d.setPath(.Curl_cstrdup(generatedPath));
+					d.setPath(/*Error: Function owner not recognized*/Curl_cstrdup(generatedPath));
 					if (!generatedPath) {
 						;
 					} 
@@ -713,7 +713,7 @@ public class Cookie {
 			} while (0);
 			do {
 				if (generatedSpath) {
-					d.setSpath(.Curl_cstrdup(generatedSpath));
+					d.setSpath(/*Error: Function owner not recognized*/Curl_cstrdup(generatedSpath));
 					if (!generatedSpath) {
 						;
 					} 
@@ -721,7 +721,7 @@ public class Cookie {
 			} while (0);
 			do {
 				if (generatedName) {
-					d.setName(.Curl_cstrdup(generatedName));
+					d.setName(/*Error: Function owner not recognized*/Curl_cstrdup(generatedName));
 					if (!generatedName) {
 						;
 					} 
@@ -729,7 +729,7 @@ public class Cookie {
 			} while (0);
 			do {
 				if (generatedValue) {
-					d.setValue(.Curl_cstrdup(generatedValue));
+					d.setValue(/*Error: Function owner not recognized*/Curl_cstrdup(generatedValue));
 					if (!generatedValue) {
 						;
 					} 
@@ -737,7 +737,7 @@ public class Cookie {
 			} while (0);
 			do {
 				if (generatedMaxage) {
-					d.setMaxage(.Curl_cstrdup(generatedMaxage));
+					d.setMaxage(/*Error: Function owner not recognized*/Curl_cstrdup(generatedMaxage));
 					if (!generatedMaxage) {
 						;
 					} 
@@ -745,7 +745,7 @@ public class Cookie {
 			} while (0);
 			do {
 				if (generatedVersion) {
-					d.setVersion(.Curl_cstrdup(generatedVersion));
+					d.setVersion(/*Error: Function owner not recognized*/Curl_cstrdup(generatedVersion));
 					if (!generatedVersion) {
 						;
 					} 
@@ -814,7 +814,7 @@ public class Cookie {
 		       the swiftest way, we just sort them all based on path length. */) {
 			Cookie array = new Cookie();
 			size_t i = new size_t();
-			array = .Curl_cmalloc( * /* alloc an array and store all cookie pointers */matches);
+			array = /*Error: Function owner not recognized*/Curl_cmalloc(/*Error: Unsupported expression*/ * /* alloc an array and store all cookie pointers */matches);
 			if (!array) {
 				;
 			} 
@@ -822,13 +822,13 @@ public class Cookie {
 			for (i = 0; co; co = generatedNext) {
 				array[i++] = co;
 			}
-			.qsort(array, matches, , /* now sort the cookie pointers in path length order */cookie_sort);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/qsort(array, matches, /*Error: Unsupported expression*/, /* now sort the cookie pointers in path length order */cookie_sort);
 			mainco = array[/* remake the linked list order according to the new order *//* start here */0];
 			for (i = 0; i < matches - 1; i++) {
 				array[i].setNext(array[i + 1]);
 			}
 			array[matches - 1].setNext(((Object)/* terminate the list */0));
-			.Curl_cfree(/* remove the temporary data again */array);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(/* remove the temporary data again */array);
 		} 
 		return /* return the new list */mainco;
 		return ((Object)0/*****************************************************************************
@@ -872,10 +872,10 @@ public class Cookie {
 	public void setValue(Byte newValue) {
 		value = newValue;
 	}
-	public Byte getPath() {
+	public byte[] getPath() {
 		return path;
 	}
-	public void setPath(Byte newPath) {
+	public void setPath(byte[] newPath) {
 		path = newPath;
 	}
 	public Byte getSpath() {
@@ -914,10 +914,10 @@ public class Cookie {
 	public void setVersion(Byte newVersion) {
 		version = newVersion;
 	}
-	public byte getMaxage() {
+	public byte[] getMaxage() {
 		return maxage;
 	}
-	public void setMaxage(byte newMaxage) {
+	public void setMaxage(byte[] newMaxage) {
 		maxage = newMaxage;
 	}
 	public  getSecure() {

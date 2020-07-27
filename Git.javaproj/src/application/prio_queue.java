@@ -6,9 +6,9 @@ public class prio_queue {
 	private Object cb_data;
 	private int alloc;
 	private int nr;
-	private prio_queue_entry array;
+	private prio_queue_entry[] array;
 	
-	public prio_queue(Object compare, int insertion_ctr, Object cb_data, int alloc, int nr, prio_queue_entry array) {
+	public prio_queue(Object compare, int insertion_ctr, Object cb_data, int alloc, int nr, prio_queue_entry[] array) {
 		setCompare(compare);
 		setInsertion_ctr(insertion_ctr);
 		setCb_data(cb_data);
@@ -22,7 +22,7 @@ public class prio_queue {
 	public int queue_has_nonstale() {
 		int i;
 		int generatedNr = this.getNr();
-		prio_queue_entry generatedArray = this.getArray();
+		prio_queue_entry[] generatedArray = this.getArray();
 		object generatedObject = commit.getObject();
 		int generatedFlags = generatedObject.getFlags();
 		for (i = 0; i < generatedNr; i++) {
@@ -34,26 +34,26 @@ public class prio_queue {
 		return 0;
 	}
 	public int compare(int i, int j) {
-		prio_queue_entry generatedArray = this.getArray();
+		prio_queue_entry[] generatedArray = this.getArray();
 		Object generatedCb_data = this.getCb_data();
-		int cmp = .UNRECOGNIZEDFUNCTIONNAME(generatedArray[i].getData(), generatedArray[j].getData(), generatedCb_data);
+		int cmp = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedArray[i].getData(), generatedArray[j].getData(), generatedCb_data);
 		if (!cmp) {
 			cmp = generatedArray[i].getCtr() - generatedArray[j].getCtr();
 		} 
 		return cmp;
 		entry a = a_;
 		entry b = b_;
-		return .compare_commits_by_commit_date(a.getCommit(), b.getCommit(), ((Object)0));
+		return /*Error: Function owner not recognized*/compare_commits_by_commit_date(a.getCommit(), b.getCommit(), ((Object)0));
 	}
 	public void swap(int i, int j) {
-		prio_queue_entry generatedArray = this.getArray();
+		prio_queue_entry[] generatedArray = this.getArray();
 		do {
 			Object _swap_a_ptr = (generatedArray[i]);
 			Object _swap_b_ptr = (generatedArray[j]);
-			byte[] _swap_buffer = new byte[];
-			.memcpy(_swap_buffer, _swap_a_ptr, );
-			.memcpy(_swap_a_ptr, _swap_b_ptr,  + ( - 1));
-			.memcpy(_swap_b_ptr, _swap_buffer, );
+			byte[] _swap_buffer = new byte[/*Error: sizeof expression not supported yet*/];
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_buffer, _swap_a_ptr, /*Error: sizeof expression not supported yet*/);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_a_ptr, _swap_b_ptr, /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_b_ptr, _swap_buffer, /*Error: sizeof expression not supported yet*/);
 		} while (0);
 	}
 	public void prio_queue_reverse() {
@@ -69,7 +69,7 @@ public class prio_queue {
 		}
 	}
 	public void clear_prio_queue() {
-		prio_queue_entry generatedArray = this.getArray();
+		prio_queue_entry[] generatedArray = this.getArray();
 		do {
 			ModernizedCProgram.free(generatedArray);
 			(generatedArray) = ((Object)0);
@@ -83,7 +83,7 @@ public class prio_queue {
 		int parent;
 		int generatedNr = this.getNr();
 		int generatedAlloc = this.getAlloc();
-		prio_queue_entry generatedArray = this.getArray();
+		prio_queue_entry[] generatedArray = this.getArray();
 		do {
 			if ((generatedNr + 1) > generatedAlloc) {
 				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNr + 1)) {
@@ -91,7 +91,7 @@ public class prio_queue {
 				} else {
 						this.setAlloc((((generatedAlloc) + 16) * 3 / 2));
 				} 
-				(generatedArray) = ModernizedCProgram.xrealloc((generatedArray), ModernizedCProgram.st_mult(, (generatedAlloc)));
+				(generatedArray) = ModernizedCProgram.xrealloc((generatedArray), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedAlloc)));
 			} 
 		} while (/* Append at the end */0);
 		int generatedInsertion_ctr = this.getInsertion_ctr();
@@ -100,7 +100,7 @@ public class prio_queue {
 		generatedNr++;
 		Object generatedCompare = this.getCompare();
 		if (!generatedCompare) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		for (ix = generatedNr - 1; ix; ix = /* Bubble up the new one */parent) {
 			parent = (ix - 1) / 2;
@@ -119,7 +119,7 @@ public class prio_queue {
 			return ((Object)0);
 		} 
 		Object generatedCompare = this.getCompare();
-		prio_queue_entry generatedArray = this.getArray();
+		prio_queue_entry[] generatedArray = this.getArray();
 		if (!generatedCompare) {
 			return generatedArray[--generatedNr].getData();
 		} 
@@ -146,7 +146,7 @@ public class prio_queue {
 			return ((Object)0);
 		} 
 		Object generatedCompare = this.getCompare();
-		prio_queue_entry generatedArray = this.getArray();
+		prio_queue_entry[] generatedArray = this.getArray();
 		if (!generatedCompare) {
 			return generatedArray[generatedNr - 1].getData();
 		} 
@@ -182,10 +182,10 @@ public class prio_queue {
 	public void setNr(int newNr) {
 		nr = newNr;
 	}
-	public prio_queue_entry getArray() {
+	public prio_queue_entry[] getArray() {
 		return array;
 	}
-	public void setArray(prio_queue_entry newArray) {
+	public void setArray(prio_queue_entry[] newArray) {
 		array = newArray;
 	}
 }

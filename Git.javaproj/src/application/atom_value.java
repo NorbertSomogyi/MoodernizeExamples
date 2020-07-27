@@ -16,7 +16,7 @@ public class atom_value {
 	}
 	
 	public void grab_date(Object buf, Object atomname) {
-		byte eoemail = .strstr(buf, "> ");
+		byte eoemail = /*Error: Function owner not recognized*/strstr(buf, "> ");
 		byte zone;
 		timestamp_t timestamp = new timestamp_t();
 		long tz;
@@ -28,7 +28,7 @@ public class atom_value {
 			 * parse_ref_filter_atom() wouldn't have allowed it, so we can assume that no
 			 * ":" means no format is specified, and use the default.
 			 */
-		formatp = .strchr(atomname, (byte)':');
+		formatp = /*Error: Function owner not recognized*/strchr(atomname, (byte)':');
 		if (formatp != ((Object)0)) {
 			formatp++;
 			date_mode.parse_date_format(formatp);
@@ -36,23 +36,23 @@ public class atom_value {
 		if (!eoemail) {
 			;
 		} 
-		timestamp = .strtoumax(eoemail + 2, zone, 10);
+		timestamp = /*Error: Function owner not recognized*/strtoumax(eoemail + 2, zone, 10);
 		if (timestamp == -1024) {
 			;
 		} 
-		tz = .strtol(zone, ((Object)0), 10);
-		if ((tz == (--1024 - 1) || tz == -1024) && (._errno()) == 34) {
+		tz = /*Error: Function owner not recognized*/strtol(zone, ((Object)0), 10);
+		if ((tz == (--1024 - 1) || tz == -1024) && (/*Error: Function owner not recognized*/_errno()) == 34) {
 			;
 		} 
 		this.setS(ModernizedCProgram.xstrdup(ModernizedCProgram.show_date(timestamp, tz, date_mode)));
 		this.setValue(timestamp);
-		return ;
+		return /*Error: Unsupported expression*/;
 		this.setValue(0);
 	}
 	/* See grab_values */
 	public void grab_person(Object who, int deref, Object buf) {
 		int i;
-		int wholen = .strlen(who);
+		int wholen = /*Error: Function owner not recognized*/strlen(who);
 		byte wholine = ((Object)0);
 		for (i = 0; i < ModernizedCProgram.used_atom_cnt; i++) {
 			byte name = used_atom[i].getName();
@@ -63,23 +63,23 @@ public class atom_value {
 			if (deref) {
 				name++;
 			} 
-			if (.strncmp(who, name, wholen)) {
+			if (/*Error: Function owner not recognized*/strncmp(who, name, wholen)) {
 				continue;
 			} 
-			if (name[wholen] != 0 && .strcmp(name + wholen, "name") && .strcmp(name + wholen, "email") && !ModernizedCProgram.starts_with(name + wholen, "date")) {
+			if (name[wholen] != 0 && /*Error: Function owner not recognized*/strcmp(name + wholen, "name") && /*Error: Function owner not recognized*/strcmp(name + wholen, "email") && !ModernizedCProgram.starts_with(name + wholen, "date")) {
 				continue;
 			} 
 			if (!wholine) {
 				wholine = ModernizedCProgram.find_wholine(who, wholen, buf);
 			} 
 			if (!wholine) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (name[wholen] == 0) {
 				v.setS(ModernizedCProgram.copy_line(wholine));
-			}  else if (!.strcmp(name + wholen, "name")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(name + wholen, "name")) {
 				v.setS(ModernizedCProgram.copy_name(wholine));
-			}  else if (!.strcmp(name + wholen, "email")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(name + wholen, "email")) {
 				v.setS(ModernizedCProgram.copy_email(wholine));
 			}  else if (ModernizedCProgram.starts_with(name + wholen, "date")) {
 				v.grab_date(wholine, name/*
@@ -88,14 +88,14 @@ public class atom_value {
 					 */);
 			} 
 		}
-		if (.strcmp(who, "tagger") && .strcmp(who, "committer")) {
-			return ;
+		if (/*Error: Function owner not recognized*/strcmp(who, "tagger") && /*Error: Function owner not recognized*/strcmp(who, "committer")) {
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!wholine) {
 			wholine = ModernizedCProgram.find_wholine(who, wholen, buf);
 		} 
 		if (!wholine) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		for (i = 0; i < ModernizedCProgram.used_atom_cnt; i++) {
 			byte name = used_atom[i].getName();
@@ -108,7 +108,7 @@ public class atom_value {
 			} 
 			if (ModernizedCProgram.starts_with(name, "creatordate")) {
 				v.grab_date(wholine, name);
-			}  else if (!.strcmp(name, "creator")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(name, "creator")) {
 				v.setS(ModernizedCProgram.copy_line(wholine));
 			} 
 		}
@@ -136,7 +136,7 @@ public class atom_value {
 			if (deref) {
 				name++;
 			} 
-			if (.strcmp(name, "subject") && .strcmp(name, "body") && !ModernizedCProgram.starts_with(name, "trailers") && !ModernizedCProgram.starts_with(name, "contents")) {
+			if (/*Error: Function owner not recognized*/strcmp(name, "subject") && /*Error: Function owner not recognized*/strcmp(name, "body") && !ModernizedCProgram.starts_with(name, "trailers") && !ModernizedCProgram.starts_with(name, "contents")) {
 				continue;
 			} 
 			if (!subpos) {
@@ -151,12 +151,12 @@ public class atom_value {
 			}  else if (generatedContents.getOption() == .C_SIG) {
 				v.setS(ModernizedCProgram.xmemdupz(sigpos, siglen));
 			}  else if (generatedContents.getOption() == .C_LINES) {
-				strbuf s = new strbuf(, , );
+				strbuf s = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 				byte contents_end = bodylen + bodypos - siglen;
 				s.append_lines(subpos, contents_end - subpos, generatedContents.getNlines());
 				v.setS(s.strbuf_detach(((Object)0)));
 			}  else if (generatedContents.getOption() == .C_TRAILERS) {
-				strbuf s = new strbuf(, , );
+				strbuf s = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 				s.format_trailers_from_commit(subpos, generatedContents.getTrailer_opts());
 				v.setS(s.strbuf_detach(((Object)0)));
 			}  else if (generatedContents.getOption() == .C_BARE) {

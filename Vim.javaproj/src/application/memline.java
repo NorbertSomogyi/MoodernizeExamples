@@ -7,7 +7,7 @@ public class memline {
 	private Object ml_line_count;
 	private memfile ml_mfp;
 	private int ml_flags;
-	private info_pointer ml_stack;
+	private info_pointer[] ml_stack;
 	private int ml_stack_top;
 	private int ml_stack_size;
 	private Object ml_line_lnum;
@@ -18,7 +18,7 @@ public class memline {
 	private Object ml_locked_high;
 	private int ml_locked_lineadd;
 	
-	public memline(Object ml_line_count, memfile ml_mfp, int ml_flags, info_pointer ml_stack, int ml_stack_top, int ml_stack_size, Object ml_line_lnum, Object ml_line_ptr, Object ml_line_len, block_hdr ml_locked, Object ml_locked_low, Object ml_locked_high, int ml_locked_lineadd) {
+	public memline(Object ml_line_count, memfile ml_mfp, int ml_flags, info_pointer[] ml_stack, int ml_stack_top, int ml_stack_size, Object ml_line_lnum, Object ml_line_ptr, Object ml_line_len, block_hdr ml_locked, Object ml_locked_low, Object ml_locked_high, int ml_locked_lineadd) {
 		setMl_line_count(ml_line_count);
 		setMl_mfp(ml_mfp);
 		setMl_flags(ml_flags);
@@ -54,10 +54,10 @@ public class memline {
 	public void setMl_flags(int newMl_flags) {
 		ml_flags = newMl_flags;
 	}
-	public info_pointer getMl_stack() {
+	public info_pointer[] getMl_stack() {
 		return ml_stack;
 	}
-	public void setMl_stack(info_pointer newMl_stack) {
+	public void setMl_stack(info_pointer[] newMl_stack) {
 		ml_stack = newMl_stack;
 	}
 	public int getMl_stack_top() {

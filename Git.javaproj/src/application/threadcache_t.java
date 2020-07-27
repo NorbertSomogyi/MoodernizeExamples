@@ -26,31 +26,31 @@ public class threadcache_t {
 		int n;
 		int end;
 		win32_mlock_t generatedMutex = p.getMutex();
-		.win32_acquire_lock(generatedMutex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_acquire_lock(generatedMutex);
 		Object generatedCaches = p.getCaches();
 		for (n = 0; n < 256 && generatedCaches[n]; n++) {
 			;
 		}
 		if (256 == n) {
-			.win32_release_lock(generatedMutex);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_release_lock(generatedMutex);
 			return 0;
 		} 
 		Object generatedM = p.getM();
-		tc = generatedCaches[n] = (threadcache).mspace_calloc(generatedM[0], 1, );
+		tc = generatedCaches[n] = (threadcache)/*Error: Function owner not recognized*/mspace_calloc(generatedM[0], 1, /*Error: Unsupported expression*/);
 		if (!tc) {
-			.win32_release_lock(generatedMutex);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_release_lock(generatedMutex);
 			return 0;
 		} 
-		tc.setThreadid((long)(size_t).win32_getcurrentthreadid());
+		tc.setThreadid((long)(size_t)/*Error: Function owner not recognized*/win32_getcurrentthreadid());
 		for (end = 0; generatedM[end]; end++) {
 			;
 		}
 		long generatedThreadid = tc.getThreadid();
 		tc.setMymspace(generatedThreadid % end);
-		.win32_release_lock(generatedMutex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/win32_release_lock(generatedMutex);
 		Object generatedMycache = p.getMycache();
-		if ((!.TlsSetValue(generatedMycache, (Object)(size_t)(n + 1)))) {
-			.abort();
+		if ((!/*Error: Function owner not recognized*/TlsSetValue(generatedMycache, (Object)(size_t)(n + 1)))) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 		} 
 		return tc;
 	}

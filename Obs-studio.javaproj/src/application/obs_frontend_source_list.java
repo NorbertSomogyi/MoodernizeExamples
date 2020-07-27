@@ -17,7 +17,7 @@ public class obs_frontend_source_list {
 		 i < num; i++) {
 			generatedSources.getArray()[i].obs_source_release();
 		}
-		.da_free(generatedSources)//!SWIG;//!SWIG
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedSources)//!SWIG;//!SWIG
 	}
 	/* NOTE: Functions that return char** string lists are a single allocation of
 	 * memory with pointers to itself.  Free with a single call to bfree on the

@@ -22,7 +22,7 @@ public class http_pack_request {
 	public void release_http_pack_request() {
 		_iobuf generatedPackfile = this.getPackfile();
 		if (generatedPackfile != ((Object)0)) {
-			.fclose(generatedPackfile);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(generatedPackfile);
 			this.setPackfile(((Object)0));
 		} 
 		this.setSlot(((Object)0));
@@ -41,7 +41,7 @@ public class http_pack_request {
 		child_process ip = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
 		p.close_pack_index();
 		_iobuf generatedPackfile = this.getPackfile();
-		.fclose(generatedPackfile);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(generatedPackfile);
 		this.setPackfile(((Object)0));
 		packed_git generatedLst = this.getLst();
 		lst = generatedLst;
@@ -51,7 +51,7 @@ public class http_pack_request {
 		}
 		lst = generatedNext;
 		strbuf generatedTmpfile = this.getTmpfile();
-		byte generatedBuf = generatedTmpfile.getBuf();
+		byte[] generatedBuf = generatedTmpfile.getBuf();
 		if (!ModernizedCProgram.strip_suffix(generatedBuf, ".pack.temp", len)) {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\http.c", 2224, "pack tmpfile does not end in .pack.temp?");
 		} 
@@ -64,13 +64,13 @@ public class http_pack_request {
 		ip.setNo_stdin(1);
 		ip.setNo_stdout(1);
 		if (ip.run_command()) {
-			.unlink(generatedBuf);
-			.unlink(tmp_idx);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(generatedBuf);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(tmp_idx);
 			ModernizedCProgram.free(tmp_idx);
 			return -1;
 		} 
 		Object generatedHash = p.getHash();
-		.unlink(ModernizedCProgram.sha1_pack_index_name(generatedHash));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(ModernizedCProgram.sha1_pack_index_name(generatedHash));
 		if (ModernizedCProgram.finalize_object_file(generatedBuf, ModernizedCProgram.sha1_pack_name(generatedHash)) || ModernizedCProgram.finalize_object_file(tmp_idx, ModernizedCProgram.sha1_pack_index_name(generatedHash))) {
 			ModernizedCProgram.free(tmp_idx);
 			return -1;
@@ -81,9 +81,9 @@ public class http_pack_request {
 	}
 	public http_pack_request new_http_pack_request(packed_git target, Object base_url) {
 		off_t prev_posn = 0;
-		strbuf buf = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		http_pack_request preq = new http_pack_request();
-		preq = ModernizedCProgram.xcalloc(1, );
+		preq = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		strbuf generatedTmpfile = preq.getTmpfile();
 		generatedTmpfile.strbuf_init(0);
 		preq.setTarget(target);
@@ -92,8 +92,8 @@ public class http_pack_request {
 		buf.strbuf_addf("objects/pack/pack-%s.pack", ModernizedCProgram.hash_to_hex(generatedHash));
 		preq.setUrl(buf.strbuf_detach(((Object)0)));
 		generatedTmpfile.strbuf_addf("%s.temp", ModernizedCProgram.sha1_pack_name(generatedHash));
-		byte generatedBuf = generatedTmpfile.getBuf();
-		preq.setPackfile(.fopen(generatedBuf, "a"));
+		byte[] generatedBuf = generatedTmpfile.getBuf();
+		preq.setPackfile(/*Error: Function owner not recognized*/fopen(generatedBuf, "a"));
 		_iobuf generatedPackfile = preq.getPackfile();
 		if (!generatedPackfile) {
 			();
@@ -103,18 +103,18 @@ public class http_pack_request {
 		preq.setSlot(active_request_slot.get_active_slot());
 		active_request_slot generatedSlot = preq.getSlot();
 		Object generatedCurl = generatedSlot.getCurl();
-		.curl_easy_setopt(generatedCurl, CURLOPT_FILE, generatedPackfile);
-		.curl_easy_setopt(generatedCurl, CURLOPT_WRITEFUNCTION, fwrite);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_FILE, generatedPackfile);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_WRITEFUNCTION, fwrite);
 		Byte generatedUrl = preq.getUrl();
-		.curl_easy_setopt(generatedCurl, CURLOPT_URL, generatedUrl);
-		.curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, ModernizedCProgram.no_pragma_header/*
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_URL, generatedUrl);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, ModernizedCProgram.no_pragma_header/*
 			 * If there is data present from a previous transfer attempt,
 			 * resume where it left off
 			 */);
-		prev_posn = .ftello(generatedPackfile);
+		prev_posn = /*Error: Function owner not recognized*/ftello(generatedPackfile);
 		if (prev_posn > 0) {
 			if (ModernizedCProgram.http_is_verbose) {
-				.fprintf((_iob[2]), "Resuming fetch of pack %s at byte %llu\n", ModernizedCProgram.hash_to_hex(generatedHash), (uintmax_t)prev_posn);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Resuming fetch of pack %s at byte %llu\n", ModernizedCProgram.hash_to_hex(generatedHash), (uintmax_t)prev_posn);
 			} 
 			ModernizedCProgram.http_opt_request_remainder(generatedCurl, prev_posn);
 		} 

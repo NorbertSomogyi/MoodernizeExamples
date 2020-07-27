@@ -6,11 +6,11 @@ public class loc_cmd_struct {
 	private Object line_nr;
 	private int ctrl_id;
 	private Object num;
-	private Object unum;
+	private Object[] unum;
 	private Object txt;
 	private list_head list;
 	
-	public loc_cmd_struct(Object command, Object unum_size, Object line_nr, int ctrl_id, Object num, Object unum, Object txt, list_head list) {
+	public loc_cmd_struct(Object command, Object unum_size, Object line_nr, int ctrl_id, Object num, Object[] unum, Object txt, list_head list) {
 		setCommand(command);
 		setUnum_size(unum_size);
 		setLine_nr(line_nr);
@@ -31,16 +31,16 @@ public class loc_cmd_struct {
 		loc_cmd htab_lcmd = new loc_cmd();
 		uint32_t i = new uint32_t();
 		Object generatedTxt = this.getTxt();
-		if ((lcmd == ((Object)0)) || (generatedTxt[0] == ((Object)0)) || (index < 0) || (index >= ( / ))) {
+		if ((lcmd == ((Object)0)) || (generatedTxt[0] == ((Object)0)) || (index < 0) || (index >= (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/))) {
 			ModernizedCProgram._uprintf("localization: invalid parameter for add_dialog_command\n");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		// with the new one.// Two dialogs may have different "m IDC_CONTROL" lines, and also// "m IDC_CONTROL" and "t IDC_CONTROL" are separate, so we compute two more// unique identifiers for dialog and command at the beginning of our string// with the new one.// Two dialogs may have different "m IDC_CONTROL" lines, and also// "m IDC_CONTROL" and "t IDC_CONTROL" are separate, so we compute two more// unique identifiers for dialog and command at the beginning of our stringstr[0] = index + -1024;
 		Object generatedCommand = this.getCommand();
 		str[1] = generatedCommand + -1024;
 		do {
-			.memcpy(str[2], generatedTxt[0], (((size_t)(((((byte)generatedTxt[0]) == ((Object)0)) ? 0 : .strlen(generatedTxt[0])) + 1)) < ((size_t)( - 2)) ? ((size_t)(((((byte)generatedTxt[0]) == ((Object)0)) ? 0 : .strlen(generatedTxt[0])) + 1)) : ((size_t)( - 2))));
-			((byte)str[2])[(((size_t)(((((byte)generatedTxt[0]) == ((Object)0)) ? 0 : .strlen(generatedTxt[0])) + 1)) < ((size_t)( - 2)) ? ((size_t)(((((byte)generatedTxt[0]) == ((Object)0)) ? 0 : .strlen(generatedTxt[0])) + 1)) : ((size_t)( - 2))) - 1] = 0;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(str[2], generatedTxt[0], (((size_t)(((((byte)generatedTxt[0]) == ((Object)0)) ? 0 : /*Error: Function owner not recognized*/strlen(generatedTxt[0])) + 1)) < ((size_t)(/*Error: sizeof expression not supported yet*/ - 2)) ? ((size_t)(((((byte)generatedTxt[0]) == ((Object)0)) ? 0 : /*Error: Function owner not recognized*/strlen(generatedTxt[0])) + 1)) : ((size_t)(/*Error: sizeof expression not supported yet*/ - 2))));
+			((byte)str[2])[(((size_t)(((((byte)generatedTxt[0]) == ((Object)0)) ? 0 : /*Error: Function owner not recognized*/strlen(generatedTxt[0])) + 1)) < ((size_t)(/*Error: sizeof expression not supported yet*/ - 2)) ? ((size_t)(((((byte)generatedTxt[0]) == ((Object)0)) ? 0 : /*Error: Function owner not recognized*/strlen(generatedTxt[0])) + 1)) : ((size_t)(/*Error: sizeof expression not supported yet*/ - 2))) - 1] = 0;
 		} while (0);
 		i = ModernizedCProgram.htab_loc.htab_hash(str);
 		list_head generatedList = htab_lcmd.getList();
@@ -57,15 +57,15 @@ public class loc_cmd_struct {
 	public void add_message_command() {
 		if (lcmd == ((Object)0)) {
 			ModernizedCProgram._uprintf("localization: invalid parameter for add_message_command\n");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedCtrl_id = this.getCtrl_id();
 		if ((generatedCtrl_id <= 3000) || (generatedCtrl_id >= 3321)) {
 			ModernizedCProgram._uprintf("localization: invalid MSG_ index\n");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		do {
-			.free((Object)ModernizedCProgram.msg_table[generatedCtrl_id - 3000]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)ModernizedCProgram.msg_table[generatedCtrl_id - 3000]);
 			ModernizedCProgram.msg_table[generatedCtrl_id - 3000] = ((Object)0);
 		} while (0);
 		Object generatedTxt = this.getTxt();
@@ -74,23 +74,23 @@ public class loc_cmd_struct {
 	}
 	public void free_loc_cmd() {
 		if (lcmd == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedTxt = this.getTxt();
 		do {
-			.free((Object)generatedTxt[0]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)generatedTxt[0]);
 			generatedTxt[0] = ((Object)0);
 		} while (0);
 		do {
-			.free((Object)generatedTxt[1]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)generatedTxt[1]);
 			generatedTxt[1] = ((Object)0);
 		} while (0);
-		Object generatedUnum = this.getUnum();
+		Object[] generatedUnum = this.getUnum();
 		do {
-			.free((Object)generatedUnum);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)generatedUnum);
 			this.setUnum(((Object)0));
 		} while (0);
-		.free(lcmd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(lcmd);
 	}
 	public Object dispatch_loc_cmd() {
 		size_t i = new size_t();
@@ -104,12 +104,12 @@ public class loc_cmd_struct {
 		Object generatedTxt = this.getTxt();
 		int generatedCtrl_id = this.getCtrl_id();
 		if (generatedCommand <= loc_command_type.LC_TEXT) {
-			if (.strncmp(((generatedTxt[0] == ((Object)0)) ? "<NULL>" : generatedTxt[0]), ((msg_prefix == ((Object)0)) ? "<NULL>" : msg_prefix), 4) == 0) {
+			if (/*Error: Function owner not recognized*/strncmp(((generatedTxt[0] == ((Object)0)) ? "<NULL>" : generatedTxt[0]), ((msg_prefix == ((Object)0)) ? "<NULL>" : msg_prefix), 4) == 0) {
 				if ((generatedTxt[0] == ((Object)0)) || (generatedCommand != loc_command_type.LC_TEXT)) {
 					ModernizedCProgram._uprintf("%s(%d): only the [t]ext command can be applied to a message (MSG_###)\n\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
 					;
 				} 
-				this.setCtrl_id(3000 + .atoi((generatedTxt[0][4])));
+				this.setCtrl_id(3000 + /*Error: Function owner not recognized*/atoi((generatedTxt[0][4])));
 				if (generatedCtrl_id == 3000) {
 					ModernizedCProgram._uprintf("%s(%d): failed to convert the numeric value in '%'\n\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr, generatedTxt[0]);
 					;
@@ -118,8 +118,8 @@ public class loc_cmd_struct {
 				lcmd.free_loc_cmd();
 				return 1;
 			} 
-			for (i = 0; i < ( / ); i++) {
-				if (.strcmp(((generatedTxt[0] == ((Object)0)) ? "<NULL>" : generatedTxt[0]), ((ModernizedCProgram.control_id[i].getName() == ((Object)0)) ? "<NULL>" : ModernizedCProgram.control_id[i].getName())) == 0) {
+			for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/); i++) {
+				if (/*Error: Function owner not recognized*/strcmp(((generatedTxt[0] == ((Object)0)) ? "<NULL>" : generatedTxt[0]), ((ModernizedCProgram.control_id[i].getName() == ((Object)0)) ? "<NULL>" : ModernizedCProgram.control_id[i].getName())) == 0) {
 					this.setCtrl_id(ModernizedCProgram.control_id[i].getId());
 					break;
 				} 
@@ -137,7 +137,7 @@ public class loc_cmd_struct {
 		loc_cmd_struct loc_cmd_struct = new loc_cmd_struct();
 		switch (generatedCommand) {
 		case loc_command_type.LC_GROUP:
-				if ((generatedCtrl_id - 101) > ( / )) {
+				if ((generatedCtrl_id - 101) > (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/)) {
 					ModernizedCProgram._uprintf("%s(%d): '%s' is not a group ID\n\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr, generatedTxt[0]);
 					;
 				} 
@@ -176,7 +176,7 @@ public class loc_cmd_struct {
 		} 
 		list_head generatedList = lcmd.getList();
 		Object generatedUnum_size = lcmd.getUnum_size();
-		Object generatedUnum = lcmd.getUnum();
+		Object[] generatedUnum = lcmd.getUnum();
 		list_head generatedNext = generatedList.getNext();
 		for (lcmd = ((loc_cmd)((uintptr_t)(generatedNext) - (uintptr_t)((size_t)generatedList))); generatedList != (ModernizedCProgram.locale_list); lcmd = ((loc_cmd)((uintptr_t)(generatedNext) - (uintptr_t)((size_t)generatedList)))) {
 			for (i = 0; i < generatedUnum_size; i++) {
@@ -203,7 +203,7 @@ public class loc_cmd_struct {
 		Object generatedTxt = lcmd.getTxt();
 		list_head generatedNext = generatedList.getNext();
 		for (lcmd = ((loc_cmd)((uintptr_t)(generatedNext) - (uintptr_t)((size_t)generatedList))); generatedList != (ModernizedCProgram.locale_list); lcmd = ((loc_cmd)((uintptr_t)(generatedNext) - (uintptr_t)((size_t)generatedList)))) {
-			if (.strcmp(((generatedTxt[0] == ((Object)0)) ? "<NULL>" : generatedTxt[0]), ((locale_name == ((Object)0)) ? "<NULL>" : locale_name)) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(((generatedTxt[0] == ((Object)0)) ? "<NULL>" : generatedTxt[0]), ((locale_name == ((Object)0)) ? "<NULL>" : locale_name)) == 0) {
 				return lcmd;
 			} 
 		}
@@ -220,20 +220,20 @@ public class loc_cmd_struct {
 	public Object get_language_id() {
 		int i;
 		wchar_t[] wlang = new wchar_t();
-		LANGID lang_id = .GetUserDefaultUILanguage();
+		LANGID lang_id = /*Error: Function owner not recognized*/GetUserDefaultUILanguage();
 		if (lcmd == ((Object)0)) {
 			return ((((WORD)(true)) << 10) | (WORD)(true));
 		} 
 		Object generatedUnum_size = this.getUnum_size();
-		Object generatedUnum = this.getUnum();
+		Object[] generatedUnum = this.getUnum();
 		// Find if the selected language is the user defaultfor (i = 0; i < generatedUnum_size; i++) {
 			if (generatedUnum[i] == lang_id) {
 				do {
 					do {
-						._snprintf(ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos], 4096 - ModernizedCProgram.ubuffer_pos - 2, "Will use default UI locale 0x%04X", lang_id);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_snprintf(ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos], 4096 - ModernizedCProgram.ubuffer_pos - 2, "Will use default UI locale 0x%04X", lang_id);
 						(ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos])[(4096 - ModernizedCProgram.ubuffer_pos - 2) - 1] = 0;
 					} while (0);
-					ModernizedCProgram.ubuffer_pos = .strlen(ModernizedCProgram.ubuffer);
+					ModernizedCProgram.ubuffer_pos = /*Error: Function owner not recognized*/strlen(ModernizedCProgram.ubuffer);
 					ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos++] = (byte)'\r';
 					ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos++] = (byte)'\n';
 					ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos] = 0;
@@ -244,15 +244,15 @@ public class loc_cmd_struct {
 		// Selected language is not user default - find if a language pack is installed for it// Selected language is not user default - find if a language pack is installed for itModernizedCProgram.found_lang = 0;
 		Object generatedTxt = this.getTxt();
 		for (i = 0; (i < generatedUnum_size); i++) {
-			._snwprintf(wlang, ( / ), L"%04X", generatedUnum[i]);
-			.EnumUILanguages(EnumUILanguagesProc, -1024, (LONG_PTR)wlang);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_snwprintf(wlang, (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/), L"%04X", generatedUnum[i]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/EnumUILanguages(EnumUILanguagesProc, -1024, (LONG_PTR)wlang);
 			if (ModernizedCProgram.found_lang) {
 				do {
 					do {
-						._snprintf(ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos], 4096 - ModernizedCProgram.ubuffer_pos - 2, "Detected installed Windows Language Pack for 0x%04X (%s)", generatedUnum[i], generatedTxt[1]);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_snprintf(ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos], 4096 - ModernizedCProgram.ubuffer_pos - 2, "Detected installed Windows Language Pack for 0x%04X (%s)", generatedUnum[i], generatedTxt[1]);
 						(ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos])[(4096 - ModernizedCProgram.ubuffer_pos - 2) - 1] = 0;
 					} while (0);
-					ModernizedCProgram.ubuffer_pos = .strlen(ModernizedCProgram.ubuffer);
+					ModernizedCProgram.ubuffer_pos = /*Error: Function owner not recognized*/strlen(ModernizedCProgram.ubuffer);
 					ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos++] = (byte)'\r';
 					ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos++] = (byte)'\n';
 					ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos] = 0;
@@ -262,17 +262,17 @@ public class loc_cmd_struct {
 		}// Always uppercase
 		do {
 			do {
-				._snprintf(ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos], 4096 - ModernizedCProgram.ubuffer_pos - 2, "NOTE: No Windows Language Pack is installed for %s on this system.\r\nThis means that some controls may still be displayed using the system locale.", generatedTxt[1]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_snprintf(ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos], 4096 - ModernizedCProgram.ubuffer_pos - 2, "NOTE: No Windows Language Pack is installed for %s on this system.\r\nThis means that some controls may still be displayed using the system locale.", generatedTxt[1]);
 				(ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos])[(4096 - ModernizedCProgram.ubuffer_pos - 2) - 1] = 0;
 			} while (0);
-			ModernizedCProgram.ubuffer_pos = .strlen(ModernizedCProgram.ubuffer);
+			ModernizedCProgram.ubuffer_pos = /*Error: Function owner not recognized*/strlen(ModernizedCProgram.ubuffer);
 			ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos++] = (byte)'\r';
 			ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos++] = (byte)'\n';
 			ModernizedCProgram.ubuffer[ModernizedCProgram.ubuffer_pos] = 0;
 		} while (0);
 		return ((((WORD)(true)) << 10) | (WORD)(true));
 	}
-	public loc_cmd_struct get_loc_cmd(byte c, Byte line) {
+	public loc_cmd_struct get_loc_cmd(byte c, byte[] line) {
 		size_t i = new size_t();
 		size_t j = new size_t();
 		size_t k = new size_t();
@@ -284,16 +284,16 @@ public class loc_cmd_struct {
 		byte expected_endptr;
 		byte token;
 		loc_cmd lcmd = ((Object)0);
-		for (j = 0; j < ( / ); j++) {
+		for (j = 0; j < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/); j++) {
 			if (c == ModernizedCProgram.parse_cmd[j].getC()) {
 				break;
 			} 
 		}
-		if (j >= ( / )) {
+		if (j >= (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/)) {
 			ModernizedCProgram._uprintf("%s(%d): unknown command\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
 			return ((Object)0);
 		} 
-		lcmd = (loc_cmd).calloc(, 1);
+		lcmd = (loc_cmd)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 		if (lcmd == ((Object)0)) {
 			ModernizedCProgram._uprintf("%s(%d): could not allocate command\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
 			return ((Object)0);
@@ -306,38 +306,18 @@ public class loc_cmd_struct {
 		Object generatedTxt = lcmd.getTxt();
 		Object generatedNum = lcmd.getNum();
 		Object generatedUnum_size = lcmd.getUnum_size();
-		Object generatedUnum = lcmd.getUnum();
+		Object[] generatedUnum = lcmd.getUnum();
 		for (k = 0; ModernizedCProgram.parse_cmd[j].getArg_type()[k] != 0; k++) {
-			i += .strspn(line[i], ModernizedCProgram.space);
+			i += /*Error: Function owner not recognized*/strspn(line[i], ModernizedCProgram.space);
 			r = i;
 			if (line[i] == 0) {
 				ModernizedCProgram._uprintf("%s(%d): missing parameter for command '%c'\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr, ModernizedCProgram.parse_cmd[j].getC());
 				;
 			} 
 			switch (ModernizedCProgram.parse_cmd[j].getArg_type()[k]) {
-			case (byte)'s':
-					if (line[i++] != (byte)'"') {
-						ModernizedCProgram._uprintf("%s(%d): no start quote\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
-						;
-					} 
-					r = i;
-					while ((line[i] != 0) && ((line[i] != (byte)'"') || ((line[i] == (byte)'"') && (line[i - 1] == (byte)'\\')))) {
-						if ((line[i] == (byte)'"') && (line[i - 1] == (byte)'\\')) {
-							.strcpy(line[i - 1], line[i]);
-						} else {
-								i++;
-						} 
-					}
-					if (line[i] == 0) {
-						ModernizedCProgram._uprintf("%s(%d): no end quote\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
-						;
-					} 
-					line[i++] = 0;
-					generatedTxt[ti++] = ._strdup(line[r]);
-					break;
 			case (byte)'i':
 					if ((line[i] == (byte)',') || (line[i] == (byte)'.')) {
-						i += .strspn(line[i + 1], ModernizedCProgram.space);
+						i += /*Error: Function owner not recognized*/strspn(line[i + 1], ModernizedCProgram.space);
 						r = i;
 					} 
 					while ((line[i] != 0) && (line[i] != ModernizedCProgram.space[0]) && (line[i] != ModernizedCProgram.space[1]) && (line[i] != (byte)',') && (line[i] != (byte)'.')) {
@@ -347,31 +327,9 @@ public class loc_cmd_struct {
 					if (line[i] != 0) {
 						line[i++] = 0;
 					} 
-					generatedNum[ii++] = (int32_t).strtol(line[r], endptr, 0);
+					generatedNum[ii++] = (int32_t)/*Error: Function owner not recognized*/strtol(line[r], endptr, 0);
 					if (endptr != expected_endptr) {
 						ModernizedCProgram._uprintf("%s(%d): invalid integer\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
-						;
-					} 
-					break;
-			case (byte)'u':
-					lcmd.setUnum_size(1);
-					for (l = i; line[l] != 0; l++) {
-						if ((line[l] == (byte)'.') || (line[l] == (byte)',')) {
-							generatedUnum_size++;
-						} 
-					}
-					lcmd.setUnum((uint32_t).malloc(generatedUnum_size * ));
-					if (generatedUnum == ((Object)0)) {
-						ModernizedCProgram._uprintf("%s(%d): could not allocate memory\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
-						;
-					} 
-					token = .strtok(line[i], ".,");
-					for (l = 0; (l < generatedUnum_size) && (token != ((Object)0)); l++) {
-						generatedUnum[l] = (int32_t).strtol(token, endptr, 0);
-						token = .strtok(((Object)0), ".,");
-					}
-					if ((token != ((Object)0)) || (l != generatedUnum_size)) {
-						ModernizedCProgram._uprintf("%s(%d): internal error (unexpected number of numeric values)\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
 						;
 					} 
 					break;
@@ -382,7 +340,49 @@ public class loc_cmd_struct {
 					if (line[i] != 0) {
 						line[i++] = 0;
 					} 
-					generatedTxt[ti++] = ._strdup(line[r]);
+					generatedTxt[ti++] = /*Error: Function owner not recognized*/_strdup(line[r]);
+					break;
+			case (byte)'s':
+					if (line[i++] != (byte)'"') {
+						ModernizedCProgram._uprintf("%s(%d): no start quote\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
+						;
+					} 
+					r = i;
+					while ((line[i] != 0) && ((line[i] != (byte)'"') || ((line[i] == (byte)'"') && (line[i - 1] == (byte)'\\')))) {
+						if ((line[i] == (byte)'"') && (line[i - 1] == (byte)'\\')) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(line[i - 1], line[i]);
+						} else {
+								i++;
+						} 
+					}
+					if (line[i] == 0) {
+						ModernizedCProgram._uprintf("%s(%d): no end quote\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
+						;
+					} 
+					line[i++] = 0;
+					generatedTxt[ti++] = /*Error: Function owner not recognized*/_strdup(line[r]);
+					break;
+			case (byte)'u':
+					lcmd.setUnum_size(1);
+					for (l = i; line[l] != 0; l++) {
+						if ((line[l] == (byte)'.') || (line[l] == (byte)',')) {
+							generatedUnum_size++;
+						} 
+					}
+					lcmd.setUnum((uint32_t)/*Error: Function owner not recognized*/malloc(generatedUnum_size * /*Error: Unsupported expression*/));
+					if (generatedUnum == ((Object)0)) {
+						ModernizedCProgram._uprintf("%s(%d): could not allocate memory\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
+						;
+					} 
+					token = /*Error: Function owner not recognized*/strtok(line[i], ".,");
+					for (l = 0; (l < generatedUnum_size) && (token != ((Object)0)); l++) {
+						generatedUnum[l] = (int32_t)/*Error: Function owner not recognized*/strtol(token, endptr, 0);
+						token = /*Error: Function owner not recognized*/strtok(((Object)0), ".,");
+					}
+					if ((token != ((Object)0)) || (l != generatedUnum_size)) {
+						ModernizedCProgram._uprintf("%s(%d): internal error (unexpected number of numeric values)\n", ModernizedCProgram.loc_filename, ModernizedCProgram.loc_line_nr);
+						;
+					} 
 					break;
 			default:
 					ModernizedCProgram._uprintf("localization: unhandled arg_type '%c'\n", ModernizedCProgram.parse_cmd[j].getArg_type()[k]);
@@ -394,7 +394,7 @@ public class loc_cmd_struct {
 		 * Parse an UTF-8 localization command line
 		 */);
 	}
-	public Object get_loc_data_file(Object filename) {
+	public Object get_loc_data_file(Object[] filename) {
 		size_t bufsize = 1024;
 		FILE fd = ((Object)0);
 		BOOL populate_default = 0;
@@ -428,7 +428,7 @@ public class loc_cmd_struct {
 		} 
 		// Initialize the default message table (usually en-US)
 		if (reentrant) {
-			cur_offset = .ftell(fd);
+			cur_offset = /*Error: Function owner not recognized*/ftell(fd);
 			old_loc_line_nr = ModernizedCProgram.loc_line_nr;
 		} else {
 				if ((filename == ((Object)0)) || (filename[0] == 0)) {
@@ -454,41 +454,19 @@ public class loc_cmd_struct {
 		Object generatedLine_nr = this.getLine_nr();
 		start_line = generatedLine_nr;
 		ModernizedCProgram.loc_line_nr = start_line;
-		buf = (byte).malloc(bufsize);
+		buf = (byte)/*Error: Function owner not recognized*/malloc(bufsize);
 		if (buf == ((Object)0)) {
 			ModernizedCProgram._uprintf("localization: could not allocate line buffer\n");
 			;
 		} 
-		if (.fseek(fd, offset, 0) != 0) {
+		if (/*Error: Function owner not recognized*/fseek(fd, offset, 0) != 0) {
 			ModernizedCProgram._uprintf("localization: could not rewind\n");
 			;
 		} 
 		// custom readline handling for string collation, realloc, line numbers, etc.do {
-			c = .getc(fd);
+			c = /*Error: Function owner not recognized*/getc(fd);
 			switch (c) {
-			case (byte)'\\':
-					if (!escape_sequence) {
-						escape_sequence = 1;
-						break;
-					} 
-			case (true):
-					buf[i] = 0;
-					if (!eol) {
-						ModernizedCProgram.loc_line_nr += line_nr_incr;
-					} 
-					ModernizedCProgram.get_loc_data_line(buf);
-					break;
 			case (byte)'\r':
-			case (byte)' ':
-			case (byte)'\t':
-					if (escape_sequence) {
-						escape_sequence = 0;
-						break;
-					} 
-					if (!eol) {
-						buf[i++] = (byte)c;
-					} 
-					break;
 			case (byte)'\n':
 					if (escape_sequence) {
 						escape_sequence = 0;
@@ -516,19 +494,41 @@ public class loc_cmd_struct {
 						eol = 1;
 					} 
 					break;
+			case (byte)'\t':
+					if (escape_sequence) {
+						escape_sequence = 0;
+						break;
+					} 
+					if (!eol) {
+						buf[i++] = (byte)c;
+					} 
+					break;
+			case (byte)'\\':
+					if (!escape_sequence) {
+						escape_sequence = 1;
+						break;
+					} 
+			case (byte)' ':
+			case (true):
+					buf[i] = 0;
+					if (!eol) {
+						ModernizedCProgram.loc_line_nr += line_nr_incr;
+					} 
+					ModernizedCProgram.get_loc_data_line(buf);
+					break;
 			default:
 					if (escape_sequence) {
 						switch (c) {
-						case (byte)'"':
-								buf[i++] = (byte)'\\';
-								buf[i++] = (byte)'"';
-								break;
 						case (byte)'\\':
 								buf[i++] = (byte)'\\';
 								break;
 						case (byte)'n':
 								buf[i++] = (byte)'\r';
 								buf[i++] = (byte)'\n';
+								break;
+						case (byte)'"':
+								buf[i++] = (byte)'\\';
+								buf[i++] = (byte)'"';
 								break;
 						default:
 								break;
@@ -550,7 +550,7 @@ public class loc_cmd_struct {
 					} 
 					break;
 			}
-			if ((c == (true)) || (.ftell(fd) > end_offset)) {
+			if ((c == (true)) || (/*Error: Function owner not recognized*/ftell(fd) > end_offset)) {
 				break;
 			} 
 			if (i >= bufsize - 2) {
@@ -568,7 +568,7 @@ public class loc_cmd_struct {
 		} while (1);
 		ret = 1;
 		do {
-			.free((Object)buf);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)buf);
 			buf = ((Object)0);
 		} while (0);
 		return ret/*
@@ -607,10 +607,10 @@ public class loc_cmd_struct {
 	public void setNum(Object newNum) {
 		num = newNum;
 	}
-	public Object getUnum() {
+	public Object[] getUnum() {
 		return unum;
 	}
-	public void setUnum(Object newUnum) {
+	public void setUnum(Object[] newUnum) {
 		unum = newUnum;
 	}
 	public Object getTxt() {

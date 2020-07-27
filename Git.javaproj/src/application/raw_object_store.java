@@ -33,28 +33,9 @@ public class raw_object_store {
 	public raw_object_store() {
 	}
 	
-	public void close_object_store() {
-		packed_git p = new packed_git();
-		int generatedDo_not_close = p.getDo_not_close();
-		packed_git generatedNext = p.getNext();
-		packed_git generatedPacked_git = this.getPacked_git();
-		for (p = generatedPacked_git; p; p = generatedNext) {
-			if (generatedDo_not_close) {
-				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\packfile.c", 339, "want to close pack marked 'do-not-close'");
-			} else {
-					p.close_pack();
-			} 
-		}
-		multi_pack_index generatedMulti_pack_index = this.getMulti_pack_index();
-		if (generatedMulti_pack_index) {
-			generatedMulti_pack_index.close_midx();
-			this.setMulti_pack_index(((Object)0));
-		} 
-		.close_commit_graph(o);
-	}
 	public raw_object_store raw_object_store_new() {
-		raw_object_store o = ModernizedCProgram.xmalloc();
-		.memset(o, 0, );
+		raw_object_store o = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(o, 0, /*Error: sizeof expression not supported yet*/);
 		list_head generatedPacked_git_mru = o.getPacked_git_mru();
 		(generatedPacked_git_mru).setNext((generatedPacked_git_mru).setPrev((generatedPacked_git_mru)));
 		return o;
@@ -82,7 +63,7 @@ public class raw_object_store {
 			(generatedReplace_map) = ((Object)0);
 		} while (0);
 		commit_graph generatedCommit_graph = this.getCommit_graph();
-		.free_commit_graph(generatedCommit_graph);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_commit_graph(generatedCommit_graph);
 		this.setCommit_graph(((Object)0));
 		this.setCommit_graph_attempted(0);
 		o.free_object_directories();
@@ -92,6 +73,25 @@ public class raw_object_store {
 		(generatedPacked_git_mru).setNext((generatedPacked_git_mru).setPrev((generatedPacked_git_mru)));
 		o.close_object_store();
 		this.setPacked_git(((Object)0));
+	}
+	public void close_object_store() {
+		packed_git p = new packed_git();
+		int generatedDo_not_close = p.getDo_not_close();
+		packed_git generatedNext = p.getNext();
+		packed_git generatedPacked_git = this.getPacked_git();
+		for (p = generatedPacked_git; p; p = generatedNext) {
+			if (generatedDo_not_close) {
+				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\packfile.c", 339, "want to close pack marked 'do-not-close'");
+			} else {
+					p.close_pack();
+			} 
+		}
+		multi_pack_index generatedMulti_pack_index = this.getMulti_pack_index();
+		if (generatedMulti_pack_index) {
+			generatedMulti_pack_index.close_midx();
+			this.setMulti_pack_index(((Object)0));
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close_commit_graph(o);
 	}
 	public object_directory getOdb() {
 		return odb;

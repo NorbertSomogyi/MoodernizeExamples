@@ -19,9 +19,9 @@ public class text_stat {
 	public text_stat() {
 	}
 	
-	public void gather_stats(Object buf, long size) {
+	public void gather_stats(Object[] buf, long size) {
 		long i;
-		.memset(stats, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(stats, 0, /*Error: sizeof expression not supported yet*/);
 		int generatedCrlf = this.getCrlf();
 		int generatedLonecr = this.getLonecr();
 		int generatedLonelf = this.getLonelf();
@@ -48,13 +48,13 @@ public class text_stat {
 			}  else if (c < 32) {
 				switch (c) {
 				case (byte)'\b':
-				case (byte)'\t':
-				case 0:
-						generatedNul++;
-				case (byte)'\033':
 				case /* BS, HT, ESC and FF */(byte)'\014':
 						generatedPrintable++;
 						break;
+				case (byte)'\033':
+				case (byte)'\t':
+				case 0:
+						generatedNul++;
 				default:
 						generatedNonprintable++;
 				}

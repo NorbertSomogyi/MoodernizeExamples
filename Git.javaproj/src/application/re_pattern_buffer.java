@@ -40,40 +40,6 @@ public class re_pattern_buffer {
 	public re_pattern_buffer() {
 	}
 	
-	public Object find_funcname_matching_regexp(Object xecfg, Object start) {
-		int reg_error;
-		regmatch_t[] match = new regmatch_t();
-		while (1) {
-			byte bol;
-			byte eol;
-			reg_error = ModernizedCProgram.regexec(ModernizedCProgram.regexp, start, 1, match, 0);
-			if (reg_error == .REG_NOMATCH) {
-				return ((Object)0);
-			}  else if (reg_error) {
-				byte[] errbuf = new byte[1024];
-				ModernizedCProgram.regerror(reg_error, ModernizedCProgram.regexp, errbuf, 1024);
-				ModernizedCProgram.die("-L parameter: regexec() failed: %s", errbuf);
-			} 
-			bol = start + match[0].getRm_so();
-			eol = start + match[0].getRm_eo();
-			while (bol > start && bol != (byte)'\n') {
-				bol--;
-			}
-			if (bol == (byte)'\n') {
-				bol++;
-			} 
-			while (eol && eol != (byte)'\n') {
-				eol++;
-			}
-			if (eol == (byte)'\n') {
-				eol++;
-			} 
-			if (ModernizedCProgram.match_funcname(xecfg, (byte)bol, (byte)/* is it a funcname line? */eol)) {
-				return bol;
-			} 
-			start = eol;
-		}
-	}
 	public int contains(Object mf, Object kws) {
 		int cnt;
 		long sz;
@@ -118,6 +84,40 @@ public class re_pattern_buffer {
 			ModernizedCProgram.regerror(err, regex, errbuf, 1024);
 			ModernizedCProgram.die("invalid regex: %s", errbuf);
 		} 
+	}
+	public Object find_funcname_matching_regexp(Object xecfg, Object start) {
+		int reg_error;
+		regmatch_t[] match = new regmatch_t();
+		while (1) {
+			byte bol;
+			byte eol;
+			reg_error = ModernizedCProgram.regexec(ModernizedCProgram.regexp, start, 1, match, 0);
+			if (reg_error == .REG_NOMATCH) {
+				return ((Object)0);
+			}  else if (reg_error) {
+				byte[] errbuf = new byte[1024];
+				ModernizedCProgram.regerror(reg_error, ModernizedCProgram.regexp, errbuf, 1024);
+				ModernizedCProgram.die("-L parameter: regexec() failed: %s", errbuf);
+			} 
+			bol = start + match[0].getRm_so();
+			eol = start + match[0].getRm_eo();
+			while (bol > start && bol != (byte)'\n') {
+				bol--;
+			}
+			if (bol == (byte)'\n') {
+				bol++;
+			} 
+			while (eol && eol != (byte)'\n') {
+				eol++;
+			}
+			if (eol == (byte)'\n') {
+				eol++;
+			} 
+			if (ModernizedCProgram.match_funcname(xecfg, (byte)bol, (byte)/* is it a funcname line? */eol)) {
+				return bol;
+			} 
+			start = eol;
+		}
 	}
 	public Byte getBuffer() {
 		return buffer;

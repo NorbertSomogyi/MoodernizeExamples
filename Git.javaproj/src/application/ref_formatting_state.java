@@ -11,7 +11,7 @@ public class ref_formatting_state {
 	public ref_formatting_state() {
 	}
 	
-	public void append_literal(Object cp, Object ep) {
+	public void append_literal(Object[] cp, Object ep) {
 		strbuf s = ModernizedCProgram.state.getStack().getOutput();
 		while (cp && (!ep || cp < ep)) {
 			if (cp == (byte)'%') {

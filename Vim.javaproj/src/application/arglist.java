@@ -42,7 +42,7 @@ public class arglist {
 	}
 	public void alist_init() {
 		growarray generatedAl_ga = this.getAl_ga();
-		generatedAl_ga.ga_init2((int), 5/*
+		generatedAl_ga.ga_init2((int)/*Error: Unsupported expression*/, 5/*
 		 * Remove a reference from an argument list.
 		 * Ignored when the argument list is the global one.
 		 * If the argument list is no longer used by any window, free it.
@@ -57,12 +57,12 @@ public class arglist {
 			 */);
 		} 
 	}
-	public void alist_set(int count, Object files, int use_curbuf, Integer fnum_list, int fnum_len) {
+	public void alist_set(int count, Object[][] files, int use_curbuf, int[] fnum_list, int fnum_len) {
 		int i;
 		int recursive = 0;
 		if (recursive) {
 			ModernizedCProgram.emsg(((byte)(e_au_recursive)));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		++recursive;
 		al.alist_clear();
@@ -95,7 +95,7 @@ public class arglist {
 	}
 	public void alist_add(Object fname, int set_fnum) {
 		// 1: set buffer number; 2: re-use curbuf// don't add NULL file namesif (fname == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.slash_adjust(fname);
 		growarray generatedAl_ga = (al).getAl_ga();

@@ -62,7 +62,7 @@ public class pbase_tree_cache {
 		} 
 		Object generatedTree_data = ent.getTree_data();
 		if (!ent) {
-			nent = ModernizedCProgram.xmalloc();
+			nent = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 			nent.setTemporary((available_ix < 0));
 		} else {
 				ModernizedCProgram.free(generatedTree_data);
@@ -83,7 +83,7 @@ public class pbase_tree_cache {
 		int generatedRef = this.getRef();
 		if (!generatedTemporary) {
 			generatedRef--;
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedTree_data = this.getTree_data();
 		ModernizedCProgram.free(generatedTree_data);

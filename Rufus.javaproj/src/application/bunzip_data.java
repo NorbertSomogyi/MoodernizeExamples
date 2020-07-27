@@ -7,7 +7,7 @@ public class bunzip_data {
 	private int out_fd;
 	private int inbufCount;
 	private int inbufPos;
-	private Object inbuf;
+	private Object[] inbuf;
 	private int writeCopies;
 	private int writePos;
 	private int writeRunCountdown;
@@ -16,14 +16,14 @@ public class bunzip_data {
 	private Object headerCRC;
 	private Object totalCRC;
 	private Object writeCRC;
-	private Object dbuf;
+	private Object[] dbuf;
 	private int dbufSize;
 	private Object jmpbuf;
 	private Object crc32Table;
 	private Object selectors;
 	private Object groups;
 	
-	public bunzip_data(int inbufBitCount, int inbufBits, int in_fd, int out_fd, int inbufCount, int inbufPos, Object inbuf, int writeCopies, int writePos, int writeRunCountdown, int writeCount, int writeCurrent, Object headerCRC, Object totalCRC, Object writeCRC, Object dbuf, int dbufSize, Object jmpbuf, Object crc32Table, Object selectors, Object groups) {
+	public bunzip_data(int inbufBitCount, int inbufBits, int in_fd, int out_fd, int inbufCount, int inbufPos, Object[] inbuf, int writeCopies, int writePos, int writeRunCountdown, int writeCount, int writeCurrent, Object headerCRC, Object totalCRC, Object writeCRC, Object[] dbuf, int dbufSize, Object jmpbuf, Object crc32Table, Object selectors, Object groups) {
 		setInbufBitCount(inbufBitCount);
 		setInbufBits(inbufBits);
 		setIn_fd(in_fd);
@@ -58,7 +58,7 @@ public class bunzip_data {
 		int generatedInbufPos = this.getInbufPos();
 		int generatedInbufCount = this.getInbufCount();
 		int generatedIn_fd = this.getIn_fd();
-		Object generatedInbuf = this.getInbuf();
+		Object[] generatedInbuf = this.getInbuf();
 		Object generatedJmpbuf = this.getJmpbuf();
 		int generatedInbufBits = this.getInbufBits();
 		while (bit_count < /* If we need to get more data from the byte buffer, do so.  (Loop getting
@@ -66,7 +66,7 @@ public class bunzip_data {
 			if (generatedInbufPos == generatedInbufCount) {
 				this.setInbufCount(ModernizedCProgram.full_read(generatedIn_fd, generatedInbuf, /* if "no input fd" case: in_fd == -1, read fails, we jump */4096));
 				if (generatedInbufCount <= 0) {
-					.longjmp(generatedJmpbuf, ());
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(generatedJmpbuf, ());
 				} 
 				this.setInbufPos(0);
 			} 
@@ -108,7 +108,7 @@ public class bunzip_data {
 		uint8_t selectors = new uint8_t();
 		uint32_t dbuf = new uint32_t();
 		int origPtr;
-		Object generatedDbuf = this.getDbuf();
+		Object[] generatedDbuf = this.getDbuf();
 		dbuf = generatedDbuf;
 		int generatedDbufSize = this.getDbufSize();
 		dbufSize = generatedDbufSize;
@@ -191,7 +191,7 @@ public class bunzip_data {
 			int len_m1;
 			len_m1 = bd.get_bits(5) - 1;
 			for (i = 0; i < symCount; i++) {
-				for (; ; ) {
+				for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 					int two_bits;
 					if ((int)len_m1 > (20 - 1)) {
 						return ();
@@ -247,7 +247,7 @@ public class bunzip_data {
 						 * limit minus the cumulative count of symbols coded for already). */]]++;
 			}
 			pp = t = 0;
-			for (i = minLen; i < maxLen; ) {
+			for (i = minLen; i < maxLen; /*Error: Unsupported expression*/) {
 				int temp_i = temp[i];
 				pp += temp_i/* We read the largest possible symbol size and then unget bits
 							   after determining how many we need, and those extra bits could
@@ -317,7 +317,7 @@ public class bunzip_data {
 		if (generatedWriteCount < /* If we already have error/end indicator, return it */0) {
 			return generatedWriteCount;
 		} 
-		Object generatedDbuf = this.getDbuf();
+		Object[] generatedDbuf = this.getDbuf();
 		dbuf = generatedDbuf;
 		int generatedWritePos = this.getWritePos();
 		pos = generatedWritePos;
@@ -350,24 +350,24 @@ public class bunzip_data {
 	public int start_bunzip(int in_fd, Object inbuf, int len) {
 		bunzip_data bd = new bunzip_data();
 		int i;
-		i = /* Figure out how much data to allocate */;
+		i = /*Error: Unsupported expression*//* Figure out how much data to allocate */;
 		if (in_fd != -1) {
 			i += 4096;
 		} 
-		bd = bdp = .calloc(i, /* Allocate bunzip_data.  Most fields initialize to zero. */1);
+		bd = bdp = /*Error: Function owner not recognized*/calloc(i, /* Allocate bunzip_data.  Most fields initialize to zero. */1);
 		bd.setIn_fd(/* Setup input buffer */in_fd);
-		Object generatedInbuf = bd.getInbuf();
+		Object[] generatedInbuf = bd.getInbuf();
 		if (-1 == in_fd) {
 			bd.setInbuf((Object)/* in this case, bd->inbuf is read-only *//* cast away const-ness */inbuf);
 		} else {
 				bd.setInbuf((uint8_t)(bd + 1));
-				.memcpy(generatedInbuf, inbuf, len);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedInbuf, inbuf, len);
 		} 
 		bd.setInbufCount(len);
 		Object generatedCrc32Table = bd.getCrc32Table();
 		ModernizedCProgram.crc32_filltable(generatedCrc32Table, /* Init the CRC32 table (big endian) */1);
 		Object generatedJmpbuf = bd.getJmpbuf();
-		i = ._setjmp(generatedJmpbuf);
+		i = /*Error: Function owner not recognized*/_setjmp(generatedJmpbuf);
 		if (i) {
 			return i/* Ensure that file starts with "BZh['1'-'9']." *//* Update: now caller verifies 1st two bytes, makes .gz/.bz2
 				 * integration easier */;
@@ -378,18 +378,18 @@ public class bunzip_data {
 		} 
 		bd.setDbufSize(100000 * (i - /* bd->dbufSize = 100000 * (i - BZh0); */.h0));
 		int generatedDbufSize = bd.getDbufSize();
-		Object generatedDbuf = bd.getDbuf();
-		bd.setDbuf(.malloc(generatedDbufSize * ));
+		Object[] generatedDbuf = bd.getDbuf();
+		bd.setDbuf(/*Error: Function owner not recognized*/malloc(generatedDbufSize * /*Error: sizeof expression not supported yet*/));
 		if (!generatedDbuf) {
-			.free(bd);
-			.longjmp(ModernizedCProgram.bb_error_jmp, 1);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(bd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(ModernizedCProgram.bb_error_jmp, 1);
 		} 
 		return 0;
 	}
 	public void dealloc_bunzip() {
-		Object generatedDbuf = this.getDbuf();
-		.free(generatedDbuf);
-		.free(bd);
+		Object[] generatedDbuf = this.getDbuf();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedDbuf);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(bd);
 	}
 	public int getInbufBitCount() {
 		return inbufBitCount;
@@ -427,10 +427,10 @@ public class bunzip_data {
 	public void setInbufPos(int newInbufPos) {
 		inbufPos = newInbufPos;
 	}
-	public Object getInbuf() {
+	public Object[] getInbuf() {
 		return inbuf;
 	}
-	public void setInbuf(Object newInbuf) {
+	public void setInbuf(Object[] newInbuf) {
 		inbuf = newInbuf;
 	}
 	public int getWriteCopies() {
@@ -481,10 +481,10 @@ public class bunzip_data {
 	public void setWriteCRC(Object newWriteCRC) {
 		writeCRC = newWriteCRC;
 	}
-	public Object getDbuf() {
+	public Object[] getDbuf() {
 		return dbuf;
 	}
-	public void setDbuf(Object newDbuf) {
+	public void setDbuf(Object[] newDbuf) {
 		dbuf = newDbuf;
 	}
 	public int getDbufSize() {

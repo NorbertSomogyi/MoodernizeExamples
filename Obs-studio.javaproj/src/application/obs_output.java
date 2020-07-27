@@ -150,7 +150,7 @@ public class obs_output {
 		delay_msg generatedMsg = dd.getMsg();
 		encoder_packet generatedPacket = dd.getPacket();
 		while (generatedCirclebuf) {
-			generatedDelay_data.circlebuf_pop_front(dd, );
+			generatedDelay_data.circlebuf_pop_front(dd, /*Error: sizeof expression not supported yet*/);
 			if (generatedMsg == delay_msg.DELAY_MSG_PACKET) {
 				generatedPacket.obs_encoder_packet_release();
 			} 
@@ -174,12 +174,12 @@ public class obs_output {
 		Object generatedReconnecting = this.getReconnecting();
 		Object generatedActive_delay_ns = this.getActive_delay_ns();
 		if (generatedCirclebuf) {
-			generatedDelay_data.circlebuf_peek_front(dd, );
+			generatedDelay_data.circlebuf_peek_front(dd, /*Error: sizeof expression not supported yet*/);
 			elapsed_time = (t - generatedTs);
 			if (preserve && generatedReconnecting) {
 				this.setActive_delay_ns(elapsed_time);
 			}  else if (elapsed_time > generatedActive_delay_ns) {
-				generatedDelay_data.circlebuf_pop_front(NULL, );
+				generatedDelay_data.circlebuf_pop_front(NULL, /*Error: sizeof expression not supported yet*/);
 				popped = true;
 			} 
 		} 
@@ -192,16 +192,16 @@ public class obs_output {
 	public void obs_output_signal_delay(Object signal) {
 		calldata params = new calldata();
 		uint8_t[] stack = new uint8_t();
-		params.calldata_init_fixed(stack, );
+		params.calldata_init_fixed(stack, /*Error: sizeof expression not supported yet*/);
 		params.calldata_set_ptr("output", output);
 		Object generatedActive_delay_ns = this.getActive_delay_ns();
 		params.calldata_set_int("sec", generatedActive_delay_ns / 1000000000);
 		obs_context_data generatedContext = this.getContext();
 		Object generatedSignals = generatedContext.getSignals();
-		.signal_handler_signal(generatedSignals, signal, params);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_signal(generatedSignals, signal, params);
 	}
 	public Object obs_output_delay_start() {
-		delay_data dd = new delay_data(, );
+		delay_data dd = new delay_data(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		if (!ModernizedCProgram.delay_active(output)) {
 			 can_begin = ModernizedCProgram.obs_output_can_begin_data_capture(output, 0);
 			if (!can_begin) {
@@ -214,7 +214,7 @@ public class obs_output {
 		Object generatedDelay_mutex = this.getDelay_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedDelay_mutex);
 		circlebuf generatedDelay_data = this.getDelay_data();
-		generatedDelay_data.circlebuf_push_back(dd, );
+		generatedDelay_data.circlebuf_push_back(dd, /*Error: sizeof expression not supported yet*/);
 		ModernizedCProgram.pthread_mutex_unlock(generatedDelay_mutex);
 		Object generatedDelay_restart_refs = this.getDelay_restart_refs();
 		ModernizedCProgram.os_atomic_inc_long(generatedDelay_restart_refs);
@@ -229,17 +229,17 @@ public class obs_output {
 		return true;
 	}
 	public void obs_output_delay_stop() {
-		delay_data dd = new delay_data(, );
+		delay_data dd = new delay_data(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		Object generatedDelay_mutex = this.getDelay_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedDelay_mutex);
 		circlebuf generatedDelay_data = this.getDelay_data();
-		generatedDelay_data.circlebuf_push_back(dd, );
+		generatedDelay_data.circlebuf_push_back(dd, /*Error: sizeof expression not supported yet*/);
 		ModernizedCProgram.pthread_mutex_unlock(generatedDelay_mutex);
 		output.do_output_signal("stopping");
 	}
 	public void obs_output_set_delay(Object delay_sec, Object flags) {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_set_delay", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_output_info generatedInfo = this.getInfo();
 		Object generatedFlags = generatedInfo.getFlags();
@@ -247,27 +247,10 @@ public class obs_output {
 		Byte generatedName = generatedContext.getName();
 		if ((generatedFlags & (1 << 2)) == 0) {
 			ModernizedCProgram.blog(LOG_WARNING, "Output '%s': Tried to set a delay value on a non-encoded output", generatedName);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setDelay_sec(delay_sec);
 		this.setDelay_flags(flags);
-	}
-	public Object obs_hotkey_register_output(Object name, Object description, Object func, Object data) {
-		if (!output || !ModernizedCProgram.lock()) {
-			return (~(obs_hotkey_id)0);
-		} 
-		obs_weak_output obs_weak_output = new obs_weak_output();
-		obs_context_data generatedContext = this.getContext();
-		obs_hotkey_id id = generatedContext.obs_hotkey_register_internal(obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_OUTPUT, obs_weak_output.obs_output_get_weak_output(output), name, description, func, data);
-		ModernizedCProgram.unlock();
-		return id;
-	}
-	public Object obs_hotkey_pair_register_output(Object name0, Object description0, Object name1, Object description1, Object func0, Object func1, Object data0, Object data1) {
-		if (!output) {
-			return (~(obs_hotkey_pair_id)0);
-		} 
-		obs_context_data generatedContext = this.getContext();
-		return generatedContext.register_hotkey_pair_internal(obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_OUTPUT, output, weak_output_ref, name0, description0, name1, description1, func0, func1, data0, data1);
 	}
 	public Object build_flv_meta_data(Object output, Object size, Object a_idx) {
 		obs_encoder obs_encoder = new obs_encoder();
@@ -278,7 +261,7 @@ public class obs_output {
 		 audio = ModernizedCProgram.obs_encoder_audio(aencoder);
 		byte[] buf = new byte[4096];
 		byte enc = buf;
-		byte end = enc + ;
+		byte end = enc + /*Error: sizeof expression not supported yet*/;
 		dstr encoder_name = new dstr(0);
 		if (a_idx > 0 && !aencoder) {
 			return false;
@@ -351,25 +334,11 @@ public class obs_output {
 		ModernizedCProgram.bfree(meta_data);
 		return true;
 	}
-	public void do_output_signal(Object signal) {
-		calldata params = new calldata(0);
-		params.calldata_set_ptr("output", output);
-		obs_context_data generatedContext = this.getContext();
-		Object generatedSignals = generatedContext.getSignals();
-		.signal_handler_signal(generatedSignals, signal, params);
-		params.calldata_free();
-	}
-	public obs_output obs_get_output_by_name(Object name) {
-		if (!ModernizedCProgram.obs) {
-			return NULL;
-		} 
-		return ModernizedCProgram.get_context_by_name(ModernizedCProgram.obs.getData().getFirst_output(), name, ModernizedCProgram.obs.getData().getOutputs_mutex(), obs_output_addref_safe_);
-	}
 	public obs_output obs_output_create(Object id, Object name, obs_data settings, obs_data hotkey_data) {
 		obs_output_info info = ModernizedCProgram.find_output(id);
 		obs_output output = new obs_output();
 		int ret;
-		output = ModernizedCProgram.bzalloc();
+		output = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		Object generatedInterleaved_mutex = output.getInterleaved_mutex();
 		ModernizedCProgram.pthread_mutex_init_value(generatedInterleaved_mutex);
 		Object generatedDelay_mutex = output.getDelay_mutex();
@@ -413,7 +382,7 @@ public class obs_output {
 		obs_context_data generatedContext = output.getContext();
 		obs_data generatedSettings = generatedContext.getSettings();
 		if (generatedGet_defaults) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedSettings);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSettings);
 		} 
 		Object generatedReconnect_stop_event = output.getReconnect_stop_event();
 		ret = generatedReconnect_stop_event.os_event_init(OS_EVENT_TYPE_MANUAL);
@@ -423,14 +392,14 @@ public class obs_output {
 		output.setReconnect_retry_sec(2);
 		output.setReconnect_retry_max(20);
 		output.setValid(true);
-		output.setControl(ModernizedCProgram.bzalloc());
+		output.setControl(ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/));
 		obs_weak_output generatedControl = output.getControl();
 		generatedControl.setOutput(output);
 		generatedContext.obs_context_data_insert(ModernizedCProgram.obs.getData().getOutputs_mutex(), ModernizedCProgram.obs.getData().getFirst_output());
 		if (info) {
-			generatedContext.setData(.UNRECOGNIZEDFUNCTIONNAME(generatedSettings, output));
+			generatedContext.setData(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSettings, output));
 		} 
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (!generatedData) {
 			ModernizedCProgram.blog(LOG_ERROR, "Failed to create output '%s'!", name);
 		} 
@@ -455,7 +424,7 @@ public class obs_output {
 		Object generatedStopping_event = this.getStopping_event();
 		Object generatedEnd_data_capture_thread = this.getEnd_data_capture_thread();
 		obs_service generatedService = this.getService();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		obs_encoder generatedVideo_encoder = this.getVideo_encoder();
 		Object generatedAudio_encoders = this.getAudio_encoders();
 		pause_data generatedPause = this.getPause();
@@ -483,7 +452,7 @@ public class obs_output {
 				generatedService.setOutput(NULL);
 			} 
 			if (generatedData) {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedData);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData);
 			} 
 			output.free_packets();
 			if (generatedVideo_encoder) {
@@ -524,9 +493,9 @@ public class obs_output {
 			this.setLast_error_message(NULL);
 		} 
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (generatedData) {
-			success = .UNRECOGNIZEDFUNCTIONNAME(generatedData);
+			success = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData);
 		} 
 		Object generatedVideo = this.getVideo();
 		if (success && generatedVideo) {
@@ -548,7 +517,7 @@ public class obs_output {
 			return false;
 		} 
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (!generatedData) {
 			return false;
 		} 
@@ -617,7 +586,7 @@ public class obs_output {
 		 call_stop = true;
 		 was_reconnecting = false;
 		if (output.stopping() && !force) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		output.obs_output_pause(false);
 		Object generatedStopping_event = this.getStopping_event();
@@ -649,9 +618,9 @@ public class obs_output {
 				call_stop = true;
 		} 
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (generatedData && call_stop) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedData, ts);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData, ts);
 		}  else if (was_reconnecting) {
 			this.setStop_code(0);
 			output.signal_stop();
@@ -669,19 +638,19 @@ public class obs_output {
 	public void obs_output_stop() {
 		 encoded = new ();
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_stop", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (!generatedData) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!output.active() && !ModernizedCProgram.reconnecting(output)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.reconnecting(output)) {
 			output.obs_output_force_stop();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_output_info generatedInfo = this.getInfo();
 		Object generatedFlags = generatedInfo.getFlags();
@@ -696,7 +665,7 @@ public class obs_output {
 	}
 	public void obs_output_force_stop() {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_force_stop", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!output.stopping()) {
 			this.setStop_code(0);
@@ -834,14 +803,14 @@ public class obs_output {
 	}
 	public void obs_output_set_media(Object video, Object audio) {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_set_media", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setVideo(video);
 		this.setAudio(audio);
 	}
 	public void obs_output_set_mixer(Object mixer_idx) {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_set_mixer", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!output.active()) {
 			this.setMixer_mask(()1 << mixer_idx);
@@ -849,29 +818,29 @@ public class obs_output {
 	}
 	public void obs_output_set_mixers(Object mixers) {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_set_mixers", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setMixer_mask(mixers);
 	}
 	public void obs_output_set_reconnect_settings(int retry_count, int retry_sec) {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_set_reconnect_settings", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setReconnect_retry_max(retry_count);
 		this.setReconnect_retry_sec(retry_sec);
 	}
 	public void obs_output_set_preferred_size(Object width, Object height) {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_set_preferred_size", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_output_info generatedInfo = this.getInfo();
 		Object generatedFlags = generatedInfo.getFlags();
 		if ((generatedFlags & (1 << 0)) == 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (output.active()) {
 			ModernizedCProgram.blog(LOG_WARNING, "output '%s': Cannot set the preferred resolution while the output is active", ModernizedCProgram.obs_output_get_name(output));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setScaled_width(width);
 		this.setScaled_height(height);
@@ -884,20 +853,20 @@ public class obs_output {
 	}
 	public void obs_output_set_video_conversion(Object conversion) {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_set_video_conversion", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ModernizedCProgram.obs_object_valid(conversion, "obs_output_set_video_conversion", "conversion")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setVideo_conversion(conversion);
 		this.setVideo_conversion_set(true);
 	}
 	public void obs_output_set_audio_conversion(Object conversion) {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_set_audio_conversion", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ModernizedCProgram.obs_object_valid(conversion, "obs_output_set_audio_conversion", "conversion")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setAudio_conversion(conversion);
 		this.setAudio_conversion_set(true);
@@ -909,17 +878,17 @@ public class obs_output {
 			 * opposing type of a higher timestamp in the interleave buffer.
 			 * this ensures that the timestamps are monotonic */];
 		if (!ModernizedCProgram.has_higher_opposing_ts(output, out)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.da_erase(generatedInterleaved_packets, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase(generatedInterleaved_packets, 0);
 		obs_encoder_type generatedType = out.getType();
 		int generatedTotal_frames = this.getTotal_frames();
 		if (generatedType == obs_encoder_type.OBS_ENCODER_VIDEO) {
 			generatedTotal_frames++;
 		} 
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedData, out);
+		Object[] generatedData = generatedContext.getData();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData, out);
 		out.obs_encoder_packet_release();
 	}
 	/* gets the point where audio and video are closest together */
@@ -942,7 +911,7 @@ public class obs_output {
 				} 
 				continue;
 			} 
-			diff = .llabs(generatedDts_usec - generatedDts_usec);
+			diff = /*Error: Function owner not recognized*/llabs(generatedDts_usec - generatedDts_usec);
 			if (diff < closest_diff) {
 				closest_diff = diff;
 				idx = i;
@@ -997,7 +966,7 @@ public class obs_output {
 			encoder_packet packet = generatedInterleaved_packets.getArray()[i];
 			packet.obs_encoder_packet_release();
 		}
-		.da_erase_range(generatedInterleaved_packets, 0, idx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase_range(generatedInterleaved_packets, 0, idx);
 	}
 	public Object prune_interleaved_packets() {
 		 start_idx = 0;
@@ -1097,12 +1066,12 @@ public class obs_output {
 	public void resort_interleaved_packets() {
 		Object generatedInterleaved_packets = this.getInterleaved_packets();
 		old_array.setDa(generatedInterleaved_packets.getDa());
-		.memset(generatedInterleaved_packets, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedInterleaved_packets, 0, /*Error: sizeof expression not supported yet*/);
 		for ( i = 0;
 		 i < old_array.getNum(); i++) {
 			ModernizedCProgram.insert_interleaved_packet(output, old_array.getArray()[i]);
 		}
-		.da_free(old_array);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(old_array);
 	}
 	public void discard_unused_audio_packets(Object dts_usec) {
 		 idx = 0;
@@ -1240,13 +1209,13 @@ public class obs_output {
 	public void signal_reconnect() {
 		calldata params = new calldata();
 		uint8_t[] stack = new uint8_t();
-		params.calldata_init_fixed(stack, );
+		params.calldata_init_fixed(stack, /*Error: sizeof expression not supported yet*/);
 		int generatedReconnect_retry_cur_sec = this.getReconnect_retry_cur_sec();
 		params.calldata_set_int("timeout_sec", generatedReconnect_retry_cur_sec);
 		params.calldata_set_ptr("output", output);
 		obs_context_data generatedContext = this.getContext();
 		Object generatedSignals = generatedContext.getSignals();
-		.signal_handler_signal(generatedSignals, "reconnect", params);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_signal(generatedSignals, "reconnect", params);
 	}
 	public void signal_reconnect_success() {
 		output.do_output_signal("reconnect_success");
@@ -1261,7 +1230,7 @@ public class obs_output {
 		params.calldata_set_ptr("output", output);
 		obs_context_data generatedContext = this.getContext();
 		Object generatedSignals = generatedContext.getSignals();
-		.signal_handler_signal(generatedSignals, "stop", params);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_signal(generatedSignals, "stop", params);
 		params.calldata_free();
 	}
 	public Object initialize_audio_encoders(Object num_mixes) {
@@ -1446,7 +1415,7 @@ public class obs_output {
 	public void obs_output_end_data_capture_internal(Object signal) {
 		int ret;
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_end_data_capture", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedStopping_event = this.getStopping_event();
 		if (!output.active() || !output.data_active()) {
@@ -1455,7 +1424,7 @@ public class obs_output {
 				this.setStop_code(0);
 				generatedStopping_event.os_event_signal();
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedDelay_capturing = this.getDelay_capturing();
 		Object generatedDelay_restart_refs = this.getDelay_restart_refs();
@@ -1466,7 +1435,7 @@ public class obs_output {
 				ModernizedCProgram.os_atomic_set_bool(generatedDelay_active, false);
 			} else {
 					generatedStopping_event.os_event_signal();
-					return ;
+					return /*Error: Unsupported expression*/;
 			} 
 		} 
 		Object generatedData_active = this.getData_active();
@@ -1514,7 +1483,7 @@ public class obs_output {
 				ModernizedCProgram.os_atomic_set_bool(generatedDelay_active, false);
 			} 
 			output.obs_output_end_data_capture();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedReconnect_stop_event = this.getReconnect_stop_event();
 		if (!ModernizedCProgram.reconnecting(output)) {
@@ -1544,7 +1513,7 @@ public class obs_output {
 	}
 	public void obs_output_signal_stop(int code) {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_signal_stop", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setStop_code(code);
 		Object generatedDelay_restart_refs = this.getDelay_restart_refs();
@@ -1564,7 +1533,7 @@ public class obs_output {
 	}
 	public void obs_output_addref() {
 		if (!output) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_weak_output generatedControl = this.getControl();
 		obs_weak_ref generatedRef = generatedControl.getRef();
@@ -1572,7 +1541,7 @@ public class obs_output {
 	}
 	public void obs_output_release() {
 		if (!output) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_weak_output generatedControl = this.getControl();
 		obs_weak_output_t control = generatedControl;
@@ -1615,9 +1584,9 @@ public class obs_output {
 		obs_output_info generatedInfo = this.getInfo();
 		Object generatedGet_congestion = generatedInfo.getGet_congestion();
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (generatedGet_congestion) {
-			double val = .UNRECOGNIZEDFUNCTIONNAME(generatedData);
+			double val = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData);
 			if (val < 0.0) {
 				val = 0.0;
 			}  else if (val > 1.0) {
@@ -1634,9 +1603,9 @@ public class obs_output {
 		obs_output_info generatedInfo = this.getInfo();
 		Object generatedGet_connect_time_ms = generatedInfo.getGet_connect_time_ms();
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (generatedGet_connect_time_ms) {
-			return .UNRECOGNIZEDFUNCTIONNAME(generatedData);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData);
 		} 
 		return -1;
 	}
@@ -1649,7 +1618,7 @@ public class obs_output {
 	}
 	public void obs_output_set_last_error(Object message) {
 		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_set_last_error", "output")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Byte generatedLast_error_message = this.getLast_error_message();
 		if (generatedLast_error_message) {
@@ -1660,6 +1629,37 @@ public class obs_output {
 		} else {
 				this.setLast_error_message(NULL);
 		} 
+	}
+	public void do_output_signal(Object signal) {
+		calldata params = new calldata(0);
+		params.calldata_set_ptr("output", output);
+		obs_context_data generatedContext = this.getContext();
+		Object generatedSignals = generatedContext.getSignals();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_signal(generatedSignals, signal, params);
+		params.calldata_free();
+	}
+	public obs_output obs_get_output_by_name(Object name) {
+		if (!ModernizedCProgram.obs) {
+			return NULL;
+		} 
+		return ModernizedCProgram.get_context_by_name(ModernizedCProgram.obs.getData().getFirst_output(), name, ModernizedCProgram.obs.getData().getOutputs_mutex(), obs_output_addref_safe_);
+	}
+	public Object obs_hotkey_register_output(Object name, Object description, Object func, Object data) {
+		if (!output || !ModernizedCProgram.lock()) {
+			return (~(obs_hotkey_id)0);
+		} 
+		obs_weak_output obs_weak_output = new obs_weak_output();
+		obs_context_data generatedContext = this.getContext();
+		obs_hotkey_id id = generatedContext.obs_hotkey_register_internal(obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_OUTPUT, obs_weak_output.obs_output_get_weak_output(output), name, description, func, data);
+		ModernizedCProgram.unlock();
+		return id;
+	}
+	public Object obs_hotkey_pair_register_output(Object name0, Object description0, Object name1, Object description1, Object func0, Object func1, Object data0, Object data1) {
+		if (!output) {
+			return (~(obs_hotkey_pair_id)0);
+		} 
+		obs_context_data generatedContext = this.getContext();
+		return generatedContext.register_hotkey_pair_internal(obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_OUTPUT, output, weak_output_ref, name0, description0, name1, description1, func0, func1, data0, data1);
 	}
 	public obs_context_data getContext() {
 		return context;

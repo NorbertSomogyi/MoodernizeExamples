@@ -33,10 +33,10 @@ public class profiler_snapshot_entry {
 		 generatedTimes = this.getTimes();
 		Object generatedArray = generatedTimes.getArray();
 		Object generatedNum = generatedTimes.getNum();
-		.qsort(generatedArray, generatedNum, , profiler_time_entry_compare);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/qsort(generatedArray, generatedNum, /*Error: Unsupported expression*/, profiler_time_entry_compare);
 		Object generatedExpected_time_between_calls = this.getExpected_time_between_calls();
 		if (generatedExpected_time_between_calls) {
-			.qsort(generatedArray, generatedNum, , profiler_time_entry_compare);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/qsort(generatedArray, generatedNum, /*Error: Unsupported expression*/, profiler_time_entry_compare);
 		} 
 		for (size_t i = 0;
 		 i < generatedNum; i++) {
@@ -63,7 +63,7 @@ public class profiler_snapshot_entry {
 	}
 	public void profiler_snapshot_enumerate_children(Object func, Object context) {
 		if (!entry) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 generatedChildren = this.getChildren();
 		Object generatedNum = generatedChildren.getNum();

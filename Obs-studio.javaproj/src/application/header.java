@@ -13,13 +13,13 @@ public class header {
 	
 	public void header_free() {
 		Object generatedData = this.getData();
-		.free(generatedData);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedData);
 	}
 	public void set_header(Object data, Object size) {
 		this.setSize((int)size);
-		this.setData(.malloc(size));
+		this.setData(/*Error: Function owner not recognized*/malloc(size));
 		Object generatedData = this.getData();
-		.memcpy(generatedData, data, size);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedData, data, size);
 	}
 	public Object getData() {
 		return data;

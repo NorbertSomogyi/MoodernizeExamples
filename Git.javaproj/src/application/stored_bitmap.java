@@ -23,7 +23,7 @@ public class stored_bitmap {
 		stored_bitmap stored = new stored_bitmap();
 		khiter_t hash_pos = new khiter_t();
 		int ret;
-		stored = ModernizedCProgram.xmalloc();
+		stored = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
 		stored.setRoot(root);
 		stored.setXor(xor_with);
 		stored.setFlags(flags);

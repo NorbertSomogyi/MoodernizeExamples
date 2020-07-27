@@ -15,8 +15,8 @@ public class _CMatchFinder {
 	private Object bigHash;
 	private Object directInput;
 	private Object matchMaxLen;
-	private Object hash;
-	private Object son;
+	private Object[] hash;
+	private Object[] son;
 	private Object hashMask;
 	private Object cutValue;
 	private Object bufferBase;
@@ -34,7 +34,7 @@ public class _CMatchFinder {
 	private Object numRefs;
 	private Object expectedDataSize;
 	
-	public _CMatchFinder(Object buffer, Object pos, Object posLimit, Object streamPos, Object lenLimit, Object cyclicBufferPos, Object cyclicBufferSize, Object streamEndWasReached, Object btMode, Object bigHash, Object directInput, Object matchMaxLen, Object hash, Object son, Object hashMask, Object cutValue, Object bufferBase, ISeqInStream stream, Object blockSize, Object keepSizeBefore, Object keepSizeAfter, Object numHashBytes, Object directInputRem, Object historySize, Object fixedHashSize, Object hashSizeSum, Object result, Object crc, Object numRefs, Object expectedDataSize) {
+	public _CMatchFinder(Object buffer, Object pos, Object posLimit, Object streamPos, Object lenLimit, Object cyclicBufferPos, Object cyclicBufferSize, Object streamEndWasReached, Object btMode, Object bigHash, Object directInput, Object matchMaxLen, Object[] hash, Object[] son, Object hashMask, Object cutValue, Object bufferBase, ISeqInStream stream, Object blockSize, Object keepSizeBefore, Object keepSizeAfter, Object numHashBytes, Object directInputRem, Object historySize, Object fixedHashSize, Object hashSizeSum, Object result, Object crc, Object numRefs, Object expectedDataSize) {
 		setBuffer(buffer);
 		setPos(pos);
 		setPosLimit(posLimit);
@@ -76,7 +76,7 @@ public class _CMatchFinder {
 		Object generatedDirectInput = this.getDirectInput();
 		Object generatedBufferBase = this.getBufferBase();
 		if (!generatedDirectInput) {
-			.UNRECOGNIZEDFUNCTIONNAME(alloc, generatedBufferBase);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, generatedBufferBase);
 			this.setBufferBase(((Object)0));
 		} 
 	}
@@ -95,7 +95,7 @@ public class _CMatchFinder {
 		if (!generatedBufferBase || generatedBlockSize != blockSize) {
 			p.LzInWindow_Free(alloc);
 			this.setBlockSize(blockSize);
-			this.setBufferBase((Byte).UNRECOGNIZEDFUNCTIONNAME(alloc, (size_t)blockSize));
+			this.setBufferBase((Byte)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, (size_t)blockSize));
 		} 
 		return (generatedBufferBase != ((Object)0));
 	}
@@ -120,7 +120,7 @@ public class _CMatchFinder {
 		Object generatedStreamEndWasReached = this.getStreamEndWasReached();
 		Object generatedResult = this.getResult();
 		if (generatedStreamEndWasReached || generatedResult != 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedDirectInput = this.getDirectInput();
 		Object generatedStreamPos = this.getStreamPos();
@@ -136,30 +136,30 @@ public class _CMatchFinder {
 			if (generatedDirectInputRem == 0) {
 				this.setStreamEndWasReached(1);
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedBuffer = this.getBuffer();
 		Object generatedBufferBase = this.getBufferBase();
 		Object generatedBlockSize = this.getBlockSize();
 		ISeqInStream generatedStream = this.getStream();
 		Object generatedKeepSizeAfter = this.getKeepSizeAfter();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			Byte dest = generatedBuffer + (generatedStreamPos - generatedPos);
 			size_t size = (generatedBufferBase + generatedBlockSize - dest);
 			if (ModernizedCProgram.size == 0) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
-			this.setResult(.UNRECOGNIZEDFUNCTIONNAME(generatedStream, dest, ModernizedCProgram.size));
+			this.setResult(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedStream, dest, ModernizedCProgram.size));
 			if (generatedResult != 0) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (ModernizedCProgram.size == 0) {
 				this.setStreamEndWasReached(1);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			generatedStreamPos += (UInt32)ModernizedCProgram.size;
 			if (generatedStreamPos - generatedPos > generatedKeepSizeAfter) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		}
 	}
@@ -169,7 +169,7 @@ public class _CMatchFinder {
 		Object generatedKeepSizeBefore = this.getKeepSizeBefore();
 		Object generatedStreamPos = this.getStreamPos();
 		Object generatedPos = this.getPos();
-		.memmove(generatedBufferBase, generatedBuffer - generatedKeepSizeBefore, (size_t)(generatedStreamPos - generatedPos) + generatedKeepSizeBefore);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(generatedBufferBase, generatedBuffer - generatedKeepSizeBefore, (size_t)(generatedStreamPos - generatedPos) + generatedKeepSizeBefore);
 		this.setBuffer(generatedBufferBase + generatedKeepSizeBefore);
 	}
 	public int MatchFinder_NeedMove() {
@@ -186,7 +186,7 @@ public class _CMatchFinder {
 	public void MatchFinder_ReadIfRequired() {
 		Object generatedStreamEndWasReached = this.getStreamEndWasReached();
 		if (generatedStreamEndWasReached) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedKeepSizeAfter = this.getKeepSizeAfter();
 		Object generatedStreamPos = this.getStreamPos();
@@ -225,8 +225,8 @@ public class _CMatchFinder {
 		}
 	}
 	public void MatchFinder_FreeThisClassMemory(Object alloc) {
-		Object generatedHash = this.getHash();
-		.UNRECOGNIZEDFUNCTIONNAME(alloc, generatedHash);
+		Object[] generatedHash = this.getHash();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, generatedHash);
 		this.setHash(((Object)0));
 	}
 	public void MatchFinder_Free(Object alloc) {
@@ -252,7 +252,7 @@ public class _CMatchFinder {
 		Object generatedExpectedDataSize = this.getExpectedDataSize();
 		Object generatedFixedHashSize = this.getFixedHashSize();
 		Object generatedBtMode = this.getBtMode();
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		Object generatedNumRefs = this.getNumRefs();
 		Object generatedHashSizeSum = this.getHashSizeSum();
 		if (p.LzInWindow_Create(sizeReserv, /* we need one additional byte, since we use MoveBlock after pos++ and before dictionary using */alloc)) {
@@ -358,7 +358,7 @@ public class _CMatchFinder {
 	}
 	public void MatchFinder_Init_LowHash() {
 		size_t i = new size_t();
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		CLzRef items = generatedHash;
 		Object generatedFixedHashSize = this.getFixedHashSize();
 		size_t numItems = generatedFixedHashSize;
@@ -368,7 +368,7 @@ public class _CMatchFinder {
 	}
 	public void MatchFinder_Init_HighHash() {
 		size_t i = new size_t();
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		Object generatedFixedHashSize = this.getFixedHashSize();
 		CLzRef items = generatedHash + generatedFixedHashSize;
 		Object generatedHashMask = this.getHashMask();
@@ -402,7 +402,7 @@ public class _CMatchFinder {
 	}
 	public void MatchFinder_Normalize() {
 		UInt32 subValue = p.MatchFinder_GetSubValue();
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		Object generatedNumRefs = this.getNumRefs();
 		ModernizedCProgram.MatchFinder_Normalize3(subValue, generatedHash, generatedNumRefs);
 		p.MatchFinder_ReduceOffsets(subValue);
@@ -457,12 +457,12 @@ public class _CMatchFinder {
 		cur = generatedBuffer;
 		hv = cur[0] | ((UInt32)cur[1] << 8);
 		;
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		curMatch = generatedHash[hv];
 		Object generatedPos = this.getPos();
 		generatedHash[hv] = generatedPos;
 		offset = 0;
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedCyclicBufferSize = this.getCyclicBufferSize();
 		Object generatedCutValue = this.getCutValue();
@@ -495,12 +495,12 @@ public class _CMatchFinder {
 		Object generatedCrc = this.getCrc();
 		hv = ((cur[2] | ((UInt32)cur[0] << 8)) ^ generatedCrc[cur[1]]) & -1024;
 		;
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		curMatch = generatedHash[hv];
 		Object generatedPos = this.getPos();
 		generatedHash[hv] = generatedPos;
 		offset = 0;
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedCyclicBufferSize = this.getCyclicBufferSize();
 		Object generatedCutValue = this.getCutValue();
@@ -514,7 +514,7 @@ public class _CMatchFinder {
 		return (UInt32)offset;
 		;
 	}
-	public Object Bt3_MatchFinder_GetMatches(Object distances) {
+	public Object Bt3_MatchFinder_GetMatches(Object[] distances) {
 		UInt32 h2 = new UInt32();
 		UInt32 d2 = new UInt32();
 		UInt32 pos = new UInt32();
@@ -543,7 +543,7 @@ public class _CMatchFinder {
 			hv = (temp ^ ((UInt32)cur[2] << 8)) & generatedHashMask;
 		}
 		;
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		hash = generatedHash;
 		Object generatedPos = this.getPos();
 		pos = generatedPos;
@@ -554,7 +554,7 @@ public class _CMatchFinder {
 		maxLen = 2;
 		offset = 0;
 		Object generatedCyclicBufferSize = this.getCyclicBufferSize();
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedCutValue = this.getCutValue();
 		Object generatedPosLimit = this.getPosLimit();
@@ -593,7 +593,7 @@ public class _CMatchFinder {
 		return (UInt32)offset;
 		;
 	}
-	public Object Bt4_MatchFinder_GetMatches(Object distances) {
+	public Object Bt4_MatchFinder_GetMatches(Object[] distances) {
 		UInt32 h2 = new UInt32();
 		UInt32 h3 = new UInt32();
 		UInt32 d2 = new UInt32();
@@ -626,7 +626,7 @@ public class _CMatchFinder {
 			hv = (temp ^ (generatedCrc[cur[3]] << 5)) & generatedHashMask;
 		}
 		;
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		hash = generatedHash;
 		Object generatedPos = this.getPos();
 		pos = generatedPos;
@@ -651,7 +651,7 @@ public class _CMatchFinder {
 			offset += 2;
 			d2 = d3;
 		} 
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedCutValue = this.getCutValue();
 		Object generatedPosLimit = this.getPosLimit();
@@ -766,7 +766,7 @@ public class _CMatchFinder {
 		*/;
 		;
 	}
-	public Object Hc4_MatchFinder_GetMatches(Object distances) {
+	public Object Hc4_MatchFinder_GetMatches(Object[] distances) {
 		UInt32 h2 = new UInt32();
 		UInt32 h3 = new UInt32();
 		UInt32 d2 = new UInt32();
@@ -799,7 +799,7 @@ public class _CMatchFinder {
 			hv = (temp ^ (generatedCrc[cur[3]] << 5)) & generatedHashMask;
 		}
 		;
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		hash = generatedHash;
 		Object generatedPos = this.getPos();
 		pos = generatedPos;
@@ -824,7 +824,7 @@ public class _CMatchFinder {
 			offset += 2;
 			d2 = d3;
 		} 
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedPosLimit = this.getPosLimit();
 		if (offset != 0) {
@@ -959,11 +959,11 @@ public class _CMatchFinder {
 		Object generatedCrc = this.getCrc();
 		hv = ((cur[2] | ((UInt32)cur[0] << 8)) ^ generatedCrc[cur[1]]) & -1024;
 		;
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		curMatch = generatedHash[hv];
 		Object generatedPos = this.getPos();
 		generatedHash[hv] = generatedPos;
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedCyclicBufferSize = this.getCyclicBufferSize();
 		Object generatedCutValue = this.getCutValue();
@@ -979,9 +979,9 @@ public class _CMatchFinder {
 	public void Bt2_MatchFinder_Skip(Object num) {
 		Object generatedLenLimit = this.getLenLimit();
 		Object generatedBuffer = this.getBuffer();
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedCyclicBufferSize = this.getCyclicBufferSize();
 		Object generatedCutValue = this.getCutValue();
@@ -1016,9 +1016,9 @@ public class _CMatchFinder {
 		Object generatedLenLimit = this.getLenLimit();
 		Object generatedBuffer = this.getBuffer();
 		Object generatedCrc = this.getCrc();
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedCyclicBufferSize = this.getCyclicBufferSize();
 		Object generatedCutValue = this.getCutValue();
@@ -1054,9 +1054,9 @@ public class _CMatchFinder {
 		Object generatedBuffer = this.getBuffer();
 		Object generatedCrc = this.getCrc();
 		Object generatedHashMask = this.getHashMask();
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedCyclicBufferSize = this.getCyclicBufferSize();
 		Object generatedCutValue = this.getCutValue();
@@ -1099,9 +1099,9 @@ public class _CMatchFinder {
 		Object generatedBuffer = this.getBuffer();
 		Object generatedCrc = this.getCrc();
 		Object generatedHashMask = this.getHashMask();
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedCyclicBufferSize = this.getCyclicBufferSize();
 		Object generatedCutValue = this.getCutValue();
@@ -1166,9 +1166,9 @@ public class _CMatchFinder {
 		Object generatedBuffer = this.getBuffer();
 		Object generatedCrc = this.getCrc();
 		Object generatedHashMask = this.getHashMask();
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedPosLimit = this.getPosLimit();
 		do {
@@ -1230,9 +1230,9 @@ public class _CMatchFinder {
 		Object generatedLenLimit = this.getLenLimit();
 		Object generatedBuffer = this.getBuffer();
 		Object generatedCrc = this.getCrc();
-		Object generatedHash = this.getHash();
+		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
-		Object generatedSon = this.getSon();
+		Object[] generatedSon = this.getSon();
 		Object generatedCyclicBufferPos = this.getCyclicBufferPos();
 		Object generatedPosLimit = this.getPosLimit();
 		do {
@@ -1332,16 +1332,16 @@ public class _CMatchFinder {
 	public void setMatchMaxLen(Object newMatchMaxLen) {
 		matchMaxLen = newMatchMaxLen;
 	}
-	public Object getHash() {
+	public Object[] getHash() {
 		return hash;
 	}
-	public void setHash(Object newHash) {
+	public void setHash(Object[] newHash) {
 		hash = newHash;
 	}
-	public Object getSon() {
+	public Object[] getSon() {
 		return son;
 	}
-	public void setSon(Object newSon) {
+	public void setSon(Object[] newSon) {
 		son = newSon;
 	}
 	public Object getHashMask() {

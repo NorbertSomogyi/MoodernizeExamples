@@ -134,7 +134,7 @@ public class obs_module {
 		} 
 		mod.setBin_path(ModernizedCProgram.bstrdup(path));
 		Byte generatedBin_path = mod.getBin_path();
-		mod.setFile(.strrchr(generatedBin_path, (byte)'/'));
+		mod.setFile(/*Error: Function owner not recognized*/strrchr(generatedBin_path, (byte)'/'));
 		Object generatedFile = mod.getFile();
 		mod.setFile((!generatedFile) ? generatedBin_path : (generatedFile + 1));
 		mod.setMod_name(ModernizedCProgram.get_module_name(generatedFile));
@@ -143,12 +143,12 @@ public class obs_module {
 		if (generatedFile) {
 			ModernizedCProgram.blog(LOG_DEBUG, "Loading module: %s", generatedFile);
 		} 
-		module = ModernizedCProgram.bmemdup(mod, );
+		module = ModernizedCProgram.bmemdup(mod, /*Error: sizeof expression not supported yet*/);
 		ModernizedCProgram.obs.setFirst_module((module));
-		.UNRECOGNIZEDFUNCTIONNAME(module);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(module);
 		Object generatedSet_locale = mod.getSet_locale();
 		if (generatedSet_locale) {
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.obs.getLocale());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.obs.getLocale());
 		} 
 		return 0;
 	}
@@ -163,7 +163,7 @@ public class obs_module {
 		Object generatedFile = this.getFile();
 		byte profile_name = ModernizedCProgram.obs_get_profiler_name_store().profile_store_name("obs_init_module(%s)", generatedFile);
 		ModernizedCProgram.profile_start(profile_name);
-		this.setLoaded(.UNRECOGNIZEDFUNCTIONNAME());
+		this.setLoaded(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME());
 		if (!generatedLoaded) {
 			ModernizedCProgram.blog(LOG_WARNING, "Failed to initialize module '%s'", generatedFile);
 		} 
@@ -176,15 +176,15 @@ public class obs_module {
 	}
 	public Object obs_get_module_name() {
 		Object generatedName = this.getName();
-		return (module && generatedName) ? .UNRECOGNIZEDFUNCTIONNAME() : NULL;
+		return (module && generatedName) ? /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME() : NULL;
 	}
 	public Object obs_get_module_author() {
 		Object generatedAuthor = this.getAuthor();
-		return (module && generatedAuthor) ? .UNRECOGNIZEDFUNCTIONNAME() : NULL;
+		return (module && generatedAuthor) ? /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME() : NULL;
 	}
 	public Object obs_get_module_description() {
 		Object generatedDescription = this.getDescription();
-		return (module && generatedDescription) ? .UNRECOGNIZEDFUNCTIONNAME() : NULL;
+		return (module && generatedDescription) ? /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME() : NULL;
 	}
 	public Object obs_get_module_binary_path() {
 		Byte generatedBin_path = this.getBin_path();
@@ -229,7 +229,7 @@ public class obs_module {
 	}
 	public void free_module() {
 		if (!mod) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedModule = this.getModule();
 		Object generatedFree_locale = this.getFree_locale();
@@ -237,10 +237,10 @@ public class obs_module {
 		Object generatedUnload = this.getUnload();
 		if (generatedModule) {
 			if (generatedFree_locale) {
-				.UNRECOGNIZEDFUNCTIONNAME();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME();
 			} 
 			if (generatedLoaded && generatedUnload) {
-				.UNRECOGNIZEDFUNCTIONNAME();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME();
 			} 
 		} 
 		Byte generatedMod_name = this.getMod_name();

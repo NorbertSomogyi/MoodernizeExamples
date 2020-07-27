@@ -25,6 +25,59 @@ public class ILookInStream {
 		;
 		return ModernizedCProgram.LookInStream_Read(stream, buf, size/* return LookInStream_Read2(stream, buf, size, SZ_ERROR_NO_ARCHIVE); */);
 	}
+	public Object SzArEx_Extract(Object p, Object fileIndex, Object blockIndex, Object tempBuf, Object outBufferSize, Object offset, Object outSizeProcessed, Object allocMain, Object allocTemp) {
+		UInt32 folderIndex = p.getFileToFolder()[fileIndex];
+		SRes res = 0;
+		offset = 0;
+		outSizeProcessed = 0;
+		if (folderIndex == (UInt32)-1) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, tempBuf);
+			blockIndex = folderIndex;
+			tempBuf = ((Object)0);
+			outBufferSize = 0;
+			return 0;
+		} 
+		if (tempBuf == ((Object)0) || blockIndex != folderIndex) {
+			UInt64 unpackSizeSpec = ModernizedCProgram.SzAr_GetFolderUnpackSize(p.getDb(), folderIndex/*
+			    UInt64 unpackSizeSpec =
+			        p->UnpackPositions[p->FolderToFile[(size_t)folderIndex + 1]] -
+			        p->UnpackPositions[p->FolderToFile[folderIndex]];
+			    */);
+			size_t unpackSize = (size_t)unpackSizeSpec;
+			if (unpackSize != unpackSizeSpec) {
+				return 2;
+			} 
+			blockIndex = folderIndex;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, tempBuf);
+			tempBuf = ((Object)0);
+			if (res == 0) {
+				outBufferSize = unpackSize;
+				if (unpackSize != 0) {
+					tempBuf = (Byte)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, unpackSize);
+					if (tempBuf == ((Object)0)) {
+						res = 2;
+					} 
+				} 
+				if (res == 0) {
+					res = inStream.SzAr_DecodeFolder(p.getDb(), folderIndex, p.getDataPos(), tempBuf, unpackSize, allocTemp);
+				} 
+			} 
+		} 
+		if (res == 0) {
+			UInt64 unpackPos = p.getUnpackPositions()[fileIndex];
+			offset = (size_t)(unpackPos - p.getUnpackPositions()[p.getFolderToFile()[folderIndex]]);
+			outSizeProcessed = (size_t)(p.getUnpackPositions()[(size_t)fileIndex + 1] - unpackPos);
+			if (offset + outSizeProcessed > outBufferSize) {
+				return 11;
+			} 
+			if (((p.getCRCs()).getDefs() && ((p.getCRCs()).getDefs()[(fileIndex) >> 3] & (-1024 >> ((fileIndex) & 7))) != 0)) {
+				if (ModernizedCProgram.CrcCalc(tempBuf + offset, outSizeProcessed) != p.getCRCs().getVals()[fileIndex]) {
+					res = 3;
+				} 
+			} 
+		} 
+		return res;
+	}
 	/* 7zDec.c -- Decoding from 7z folder
 	2019-02-02 : Igor Pavlov : Public domain */
 	/* #define _7ZIP_PPMD_SUPPPORT */
@@ -47,13 +100,13 @@ public class ILookInStream {
 		state.setDicBufSize(outSize);
 		state.LzmaDec_Init();
 		Object generatedDicPos = state.getDicPos();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			Object inBuf = ((Object)0);
 			size_t lookahead = (1 << 18);
 			if (lookahead > inSize) {
 				lookahead = (size_t)inSize;
 			} 
-			res = .UNRECOGNIZEDFUNCTIONNAME(inStream, inBuf, lookahead);
+			res = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(inStream, inBuf, lookahead);
 			if (res != 0) {
 				break;
 			} 
@@ -80,7 +133,7 @@ public class ILookInStream {
 					res = 1;
 					break;
 				} 
-				res = .UNRECOGNIZEDFUNCTIONNAME(inStream, inProcessed);
+				res = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(inStream, inProcessed);
 				if (res != 0) {
 					break;
 				} 
@@ -89,7 +142,7 @@ public class ILookInStream {
 		state.LzmaDec_FreeProbs(allocMain);
 		return res;
 	}
-	public Object SzDecodeLzma2(Object props, int propsSize, Object inSize, Object outBuffer, Object outSize, Object allocMain) {
+	public Object SzDecodeLzma2(Object[] props, int propsSize, Object inSize, Object outBuffer, Object outSize, Object allocMain) {
 		CLzma2Dec state = new CLzma2Dec();
 		SRes res = 0;
 		Object generatedDecoder = (state).getDecoder();
@@ -111,13 +164,13 @@ public class ILookInStream {
 		generatedDecoder.setDic(outBuffer);
 		generatedDecoder.setDicBufSize(outSize);
 		state.Lzma2Dec_Init();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			Object inBuf = ((Object)0);
 			size_t lookahead = (1 << 18);
 			if (lookahead > inSize) {
 				lookahead = (size_t)inSize;
 			} 
-			res = .UNRECOGNIZEDFUNCTIONNAME(inStream, inBuf, lookahead);
+			res = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(inStream, inBuf, lookahead);
 			if (res != 0) {
 				break;
 			} 
@@ -141,7 +194,7 @@ public class ILookInStream {
 					res = 1;
 					break;
 				} 
-				res = .UNRECOGNIZEDFUNCTIONNAME(inStream, inProcessed);
+				res = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(inStream, inProcessed);
 				if (res != 0) {
 					break;
 				} 
@@ -158,7 +211,7 @@ public class ILookInStream {
 				curSize = (size_t)inSize;
 			} 
 			{ 
-				int __result__ = (.UNRECOGNIZEDFUNCTIONNAME(inStream, inBuf, curSize));
+				int __result__ = (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(inStream, inBuf, curSize));
 				if (__result__ != 0) {
 					return __result__;
 				} 
@@ -167,11 +220,11 @@ public class ILookInStream {
 			if (curSize == 0) {
 				return 6;
 			} 
-			.memcpy(outBuffer, inBuf, curSize);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(outBuffer, inBuf, curSize);
 			outBuffer += curSize;
 			inSize -= curSize;
 			{ 
-				int __result__ = (.UNRECOGNIZEDFUNCTIONNAME(inStream, curSize));
+				int __result__ = (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(inStream, curSize));
 				if (__result__ != 0) {
 					return __result__;
 				} 
@@ -180,7 +233,7 @@ public class ILookInStream {
 		}
 		return 0;
 	}
-	public Object SzFolder_Decode2(Object folder, Object propsData, Object unpackSizes, Object packPositions, Object startPos, Object outBuffer, Object outSize, Object allocMain, Object tempBuf) {
+	public Object SzFolder_Decode2(Object folder, Object[] propsData, Object[] unpackSizes, Object[] packPositions, Object startPos, Object outBuffer, Object outSize, Object allocMain, Object[][] tempBuf) {
 		UInt32 ci = new UInt32();
 		SizeT[] tempSizes = new SizeT[]{0, 0, 0};
 		SizeT tempSize3 = 0;
@@ -216,7 +269,7 @@ public class ILookInStream {
 						if (outSizeCur != unpackSize) {
 							return 2;
 						} 
-						temp = (Byte).UNRECOGNIZEDFUNCTIONNAME(allocMain, outSizeCur);
+						temp = (Byte)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, outSizeCur);
 						if (!temp && outSizeCur != 0) {
 							return 2;
 						} 
@@ -281,7 +334,7 @@ public class ILookInStream {
 				if (tempSizes[2] != s3Size) {
 					return 2;
 				} 
-				tempBuf[2] = (Byte).UNRECOGNIZEDFUNCTIONNAME(allocMain, tempSizes[2]);
+				tempBuf[2] = (Byte)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, tempSizes[2]);
 				if (!tempBuf[2] && tempSizes[2] != 0) {
 					return 2;
 				} 
@@ -353,9 +406,6 @@ public class ILookInStream {
 						} 
 						switch (coder.getMethodID()) {
 						case -1024:
-								ModernizedCProgram.ARMT_Convert(outBuffer, outSize, 0, 0);
-								break;
-						case -1024:
 								{ 
 									UInt32 state = new UInt32();
 									{ 
@@ -366,16 +416,19 @@ public class ILookInStream {
 									break;
 								}
 						case -1024:
-								ModernizedCProgram.SPARC_Convert(outBuffer, outSize, 0, 0);
+								ModernizedCProgram.ARM_Convert(outBuffer, outSize, 0, 0);
 								break;
 						case -1024:
 								ModernizedCProgram.IA64_Convert(outBuffer, outSize, 0, 0);
 								break;
 						case -1024:
-								ModernizedCProgram.ARM_Convert(outBuffer, outSize, 0, 0);
+								ModernizedCProgram.PPC_Convert(outBuffer, outSize, 0, 0);
 								break;
 						case -1024:
-								ModernizedCProgram.PPC_Convert(outBuffer, outSize, 0, 0);
+								ModernizedCProgram.ARMT_Convert(outBuffer, outSize, 0, 0);
+								break;
+						case -1024:
+								ModernizedCProgram.SPARC_Convert(outBuffer, outSize, 0, 0);
 								break;
 						default:
 								return 4;
@@ -408,7 +461,7 @@ public class ILookInStream {
 			Byte[] tempBuf = new Byte[]{0, 0, 0};
 			res = inStream.SzFolder_Decode2(folder, data, p.getCoderUnpackSizes()[p.getFoToCoderUnpackSizes()[folderIndex]], p.getPackPositions() + p.getFoStartPackStreamIndex()[folderIndex], startPos, outBuffer, (SizeT)outSize, allocMain, tempBuf);
 			for (i = 0; i < 3; i++) {
-				.UNRECOGNIZEDFUNCTIONNAME(allocMain, tempBuf[i]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, tempBuf[i]);
 			}
 			if (res == 0) {
 				if (((p.getFolderCRCs()).getDefs() && ((p.getFolderCRCs()).getDefs()[(folderIndex) >> 3] & (-1024 >> ((folderIndex) & 7))) != 0)) {
@@ -419,59 +472,6 @@ public class ILookInStream {
 			} 
 			return res;
 		}
-	}
-	public Object SzArEx_Extract(Object p, Object fileIndex, Object blockIndex, Object tempBuf, Object outBufferSize, Object offset, Object outSizeProcessed, Object allocMain, Object allocTemp) {
-		UInt32 folderIndex = p.getFileToFolder()[fileIndex];
-		SRes res = 0;
-		offset = 0;
-		outSizeProcessed = 0;
-		if (folderIndex == (UInt32)-1) {
-			.UNRECOGNIZEDFUNCTIONNAME(allocMain, tempBuf);
-			blockIndex = folderIndex;
-			tempBuf = ((Object)0);
-			outBufferSize = 0;
-			return 0;
-		} 
-		if (tempBuf == ((Object)0) || blockIndex != folderIndex) {
-			UInt64 unpackSizeSpec = ModernizedCProgram.SzAr_GetFolderUnpackSize(p.getDb(), folderIndex/*
-			    UInt64 unpackSizeSpec =
-			        p->UnpackPositions[p->FolderToFile[(size_t)folderIndex + 1]] -
-			        p->UnpackPositions[p->FolderToFile[folderIndex]];
-			    */);
-			size_t unpackSize = (size_t)unpackSizeSpec;
-			if (unpackSize != unpackSizeSpec) {
-				return 2;
-			} 
-			blockIndex = folderIndex;
-			.UNRECOGNIZEDFUNCTIONNAME(allocMain, tempBuf);
-			tempBuf = ((Object)0);
-			if (res == 0) {
-				outBufferSize = unpackSize;
-				if (unpackSize != 0) {
-					tempBuf = (Byte).UNRECOGNIZEDFUNCTIONNAME(allocMain, unpackSize);
-					if (tempBuf == ((Object)0)) {
-						res = 2;
-					} 
-				} 
-				if (res == 0) {
-					res = inStream.SzAr_DecodeFolder(p.getDb(), folderIndex, p.getDataPos(), tempBuf, unpackSize, allocTemp);
-				} 
-			} 
-		} 
-		if (res == 0) {
-			UInt64 unpackPos = p.getUnpackPositions()[fileIndex];
-			offset = (size_t)(unpackPos - p.getUnpackPositions()[p.getFolderToFile()[folderIndex]]);
-			outSizeProcessed = (size_t)(p.getUnpackPositions()[(size_t)fileIndex + 1] - unpackPos);
-			if (offset + outSizeProcessed > outBufferSize) {
-				return 11;
-			} 
-			if (((p.getCRCs()).getDefs() && ((p.getCRCs()).getDefs()[(fileIndex) >> 3] & (-1024 >> ((fileIndex) & 7))) != 0)) {
-				if (ModernizedCProgram.CrcCalc(tempBuf + offset, outSizeProcessed) != p.getCRCs().getVals()[fileIndex]) {
-					res = 3;
-				} 
-			} 
-		} 
-		return res;
 	}
 	public Object getLook() {
 		return Look;

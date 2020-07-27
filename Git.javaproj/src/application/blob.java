@@ -42,12 +42,12 @@ public class blob {
 	}
 	public void mark_blob_uninteresting() {
 		if (!blob) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		object generatedObject = this.getObject();
 		int generatedFlags = generatedObject.getFlags();
 		if (generatedFlags & (-1024 << 1)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		generatedFlags |=  (-1024 << 1);
 	}

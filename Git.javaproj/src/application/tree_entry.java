@@ -18,8 +18,8 @@ public class tree_entry {
 		tree_entry e = new tree_entry();
 		if (!ModernizedCProgram.avail_tree_entry) {
 			int n = ModernizedCProgram.tree_entry_alloc;
-			ModernizedCProgram.tree_entry_allocd += n * ;
-			(e) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (n)));
+			ModernizedCProgram.tree_entry_allocd += n * /*Error: Unsupported expression*/;
+			(e) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (n)));
 			ModernizedCProgram.avail_tree_entry = e;
 			while (n-- > 1) {
 				((Object)e) = e + 1;
@@ -50,13 +50,13 @@ public class tree_entry {
 		tree_content tree_content = new tree_content();
 		this.setTree(t = tree_content.new_tree_content(8));
 		if (ModernizedCProgram.is_null_oid(oid)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		object_entry object_entry = new object_entry();
 		myoe = object_entry.find_object(oid);
 		Object generatedPack_id = myoe.getPack_id();
-		Object generatedType = myoe.getType();
-		int generatedDepth = myoe.getDepth();
+		byte generatedType = myoe.getType();
+		Object generatedDepth = myoe.getDepth();
 		if (myoe && generatedPack_id != ((1 << 16) - 1)) {
 			if (generatedType != object_type.OBJ_TREE) {
 				ModernizedCProgram.die("Not a tree: %s", ModernizedCProgram.oid_to_hex(oid));
@@ -93,7 +93,7 @@ public class tree_entry {
 				ModernizedCProgram.die("Corrupt mode in %s", ModernizedCProgram.oid_to_hex(oid));
 			} 
 			generatedVersions[0].setMode(generatedVersions[1].getMode());
-			e.setName(atom_str.to_atom(c, .strlen(c)));
+			e.setName(atom_str.to_atom(c, /*Error: Function owner not recognized*/strlen(c)));
 			c += generatedStr_len + 1;
 			ModernizedCProgram.hashcpy(generatedVersions[0].getOid().getHash(), (byte)c);
 			ModernizedCProgram.hashcpy(generatedVersions[1].getOid().getHash(), (byte)c);
@@ -106,11 +106,11 @@ public class tree_entry {
 		int i;
 		int j;
 		int del;
-		last_object lo = new last_object(new last_object(, , ), 0, 0, /* no_swap */1);
+		last_object lo = new last_object(new last_object(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/), 0, 0, /* no_swap */1);
 		object_entry le = ((Object)0);
 		Object generatedVersions = this.getVersions();
 		if (!ModernizedCProgram.is_null_oid(generatedVersions[1].getOid())) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		tree_content generatedTree = this.getTree();
 		if (!generatedTree) {
@@ -264,7 +264,7 @@ public class tree_entry {
 		} 
 		return 1;
 	}
-	public Object do_change_note_fanout(tree_entry root, Byte hex_oid, int hex_oid_len, Byte fullpath, int fullpath_len, byte fanout) {
+	public Object do_change_note_fanout(tree_entry root, Byte hex_oid, int hex_oid_len, byte[] fullpath, int fullpath_len, byte fanout) {
 		tree_content t = new tree_content();
 		tree_entry e = new tree_entry();
 		tree_entry leaf = new tree_entry();
@@ -300,11 +300,11 @@ public class tree_entry {
 			if (!generatedVersions[1].getMode() || tmp_hex_oid_len > hexsz || generatedStr_len % 2) {
 				continue;
 			} 
-			.memcpy(hex_oid + hex_oid_len, generatedStr_dat, generatedStr_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(hex_oid + hex_oid_len, generatedStr_dat, generatedStr_len);
 			if (tmp_fullpath_len) {
 				fullpath[tmp_fullpath_len++] = (byte)'/';
 			} 
-			.memcpy(fullpath + tmp_fullpath_len, generatedStr_dat, generatedStr_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(fullpath + tmp_fullpath_len, generatedStr_dat, generatedStr_len);
 			tmp_fullpath_len += generatedStr_len;
 			fullpath[tmp_fullpath_len] = (byte)'\0';
 			if (tmp_hex_oid_len == hexsz && !oid.get_oid_hex(hex_oid)) {
@@ -313,7 +313,7 @@ public class tree_entry {
 					continue;
 				} 
 				ModernizedCProgram.construct_path_with_fanout(hex_oid, fanout, realpath);
-				if (!.strcmp(fullpath, realpath)) {
+				if (!/*Error: Function owner not recognized*/strcmp(fullpath, realpath)) {
 					/* Note entry is in correct location */num_notes++;
 					continue;
 				} 

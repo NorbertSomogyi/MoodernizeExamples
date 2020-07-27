@@ -11,39 +11,20 @@ public class s_xdfenv {
 	public s_xdfenv() {
 	}
 	
-	public int xdl_fall_back_diff(Object xpp, int line1, int count1, int line2, int count2) {
-		mmfile_t subfile1 = new mmfile_t();
-		mmfile_t subfile2 = new mmfile_t();
-		xdfenv_t env = new xdfenv_t();
-		s_xdfile generatedXdf1 = this.getXdf1();
-		s_xrecord generatedRecs = generatedXdf1.getRecs();
-		subfile1.setPtr((byte)generatedRecs[line1 - 1].getPtr());
-		Byte generatedPtr = subfile1.getPtr();
-		subfile1.setSize(generatedRecs[line1 + count1 - 2].getPtr() + generatedRecs[line1 + count1 - 2].getSize() - generatedPtr);
-		subfile2.setPtr((byte)generatedPtr);
-		subfile2.setSize(generatedPtr + generatedRecs[line2 + count2 - 2].getSize() - generatedPtr);
-		if (ModernizedCProgram.xdl_do_diff(subfile1, subfile2, xpp, env) < 0) {
-			return -1;
-		} 
-		Byte generatedRchg = generatedXdf1.getRchg();
-		.memcpy(generatedRchg + line1 - 1, generatedRchg, count1);
-		.memcpy(generatedRchg + line2 - 1, generatedRchg, count2);
-		env.xdl_free_env();
-		return 0;
-	}
-	/*
-		 * This probably does not work outside Git, since
-		 * we have a very simple mmfile structure.
+	public int fall_back_to_classic_diff(Object xpp, int line1, int count1, int line2, int count2) {
+		xpparam_t xpparam = new xpparam_t();
+		xpparam.setFlags(xpp.getFlags() & ~((1 << 14) | (1 << 15)));
+		return env.xdl_fall_back_diff(xpparam, line1, count1, line2, count2);
+		xpparam_t xpp = new xpparam_t();
+		Object generatedXpp = map.getXpp();
+		xpp.setFlags(generatedXpp.getFlags() & ~((1 << 14) | (1 << 15)));
+		Object generatedEnv = map.getEnv();
+		return generatedEnv.xdl_fall_back_diff(xpp, line1, count1, line2, count2/*
+		 * Recursively find the longest common sequence of unique lines,
+		 * and if none was found, ask xdl_do_diff() to do the job.
 		 *
-		 * Note: ideally, we would reuse the prepared environment, but
-		 * the libxdiff interface does not (yet) allow for diffing only
-		 * ranges of lines instead of the whole files.
-		 */
-	public void xdl_free_env() {
-		s_xdfile generatedXdf2 = this.getXdf2();
-		generatedXdf2.xdl_free_ctx();
-		s_xdfile generatedXdf1 = this.getXdf1();
-		generatedXdf1.xdl_free_ctx();
+		 * This function assumes that env was prepared with xdl_prepare_env().
+		 */);
 	}
 	public int histogram_diff(Object xpp, int line1, int count1, int line2, int count2) {
 		region lcs = new region();
@@ -56,7 +37,7 @@ public class s_xdfenv {
 			return -1;
 		} 
 		s_xdfile generatedXdf2 = this.getXdf2();
-		Byte generatedRchg = generatedXdf2.getRchg();
+		byte[] generatedRchg = generatedXdf2.getRchg();
 		if (!count1) {
 			while (count2--) {
 				generatedRchg[line2++ - 1] = 1;
@@ -68,7 +49,7 @@ public class s_xdfenv {
 			}
 			return 0;
 		} 
-		.memset(lcs, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(lcs, 0, /*Error: sizeof expression not supported yet*/);
 		lcs_found = ModernizedCProgram.find_lcs(xpp, env, lcs, line1, count1, line2, count2);
 		int generatedBegin1 = lcs.getBegin1();
 		int generatedBegin2 = lcs.getBegin2();
@@ -77,7 +58,7 @@ public class s_xdfenv {
 		if (lcs_found < 0) {
 			;
 		}  else if (lcs_found) {
-			result = xpp.fall_back_to_classic_diff(env, line1, count1, line2, count2);
+			result = env.fall_back_to_classic_diff(xpp, line1, count1, line2, count2);
 		} else {
 				if (generatedBegin1 == 0 && generatedBegin2 == 0) {
 					while (count1--) {
@@ -103,7 +84,7 @@ public class s_xdfenv {
 	public int xdl_merge_cmp_lines(int i1, s_xdfenv xe2, int i2, int line_count, long flags) {
 		int i;
 		s_xdfile generatedXdf2 = this.getXdf2();
-		s_xrecord generatedRecs = generatedXdf2.getRecs();
+		s_xrecord[][] generatedRecs = generatedXdf2.getRecs();
 		xrecord_t rec1 = generatedRecs + i1;
 		xrecord_t rec2 = generatedRecs + i2;
 		for (i = 0; i < line_count; i++) {
@@ -114,18 +95,18 @@ public class s_xdfenv {
 		}
 		return 0;
 	}
-	public int xdl_recs_copy_0(int use_orig, int i, int count, int needs_cr, int add_nl, Byte dest) {
+	public int xdl_recs_copy_0(int use_orig, int i, int count, int needs_cr, int add_nl, byte[] dest) {
 		xrecord_t recs = new xrecord_t();
 		int size = 0;
 		s_xdfile generatedXdf1 = this.getXdf1();
-		s_xrecord generatedRecs = generatedXdf1.getRecs();
+		s_xrecord[][] generatedRecs = generatedXdf1.getRecs();
 		recs = (use_orig ? generatedRecs : generatedRecs) + i;
 		if (count < 1) {
 			return 0;
 		} 
 		for (i = 0; i < count; size += recs[i++].getSize()) {
 			if (dest) {
-				.memcpy(dest + size, recs[i].getPtr(), recs[i].getSize());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dest + size, recs[i].getPtr(), recs[i].getSize());
 			} 
 		}
 		if (add_nl) {
@@ -157,7 +138,7 @@ public class s_xdfenv {
 	}
 	public int lines_contain_alnum(int i, int chg) {
 		s_xdfile generatedXdf2 = this.getXdf2();
-		s_xrecord generatedRecs = generatedXdf2.getRecs();
+		s_xrecord[][] generatedRecs = generatedXdf2.getRecs();
 		for (; chg; ) {
 			if (ModernizedCProgram.line_contains_alnum(generatedRecs[i].getPtr(), generatedRecs[i].getSize())) {
 				return 1;
@@ -168,6 +149,40 @@ public class s_xdfenv {
 		 * as conflicting, too.
 		 */;
 	}
+	public void xdl_free_env() {
+		s_xdfile generatedXdf2 = this.getXdf2();
+		generatedXdf2.xdl_free_ctx();
+		s_xdfile generatedXdf1 = this.getXdf1();
+		generatedXdf1.xdl_free_ctx();
+	}
+	public int xdl_fall_back_diff(Object xpp, int line1, int count1, int line2, int count2) {
+		mmfile_t subfile1 = new mmfile_t();
+		mmfile_t subfile2 = new mmfile_t();
+		xdfenv_t env = new xdfenv_t();
+		s_xdfile generatedXdf1 = this.getXdf1();
+		s_xrecord[][] generatedRecs = generatedXdf1.getRecs();
+		subfile1.setPtr((byte)generatedRecs[line1 - 1].getPtr());
+		Byte generatedPtr = subfile1.getPtr();
+		subfile1.setSize(generatedRecs[line1 + count1 - 2].getPtr() + generatedRecs[line1 + count1 - 2].getSize() - generatedPtr);
+		subfile2.setPtr((byte)generatedPtr);
+		subfile2.setSize(generatedPtr + generatedRecs[line2 + count2 - 2].getSize() - generatedPtr);
+		if (ModernizedCProgram.xdl_do_diff(subfile1, subfile2, xpp, env) < 0) {
+			return -1;
+		} 
+		byte[] generatedRchg = generatedXdf1.getRchg();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedRchg + line1 - 1, generatedRchg, count1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedRchg + line2 - 1, generatedRchg, count2);
+		env.xdl_free_env();
+		return 0;
+	}
+	/*
+		 * This probably does not work outside Git, since
+		 * we have a very simple mmfile structure.
+		 *
+		 * Note: ideally, we would reuse the prepared environment, but
+		 * the libxdiff interface does not (yet) allow for diffing only
+		 * ranges of lines instead of the whole files.
+		 */
 	public s_xdfile getXdf1() {
 		return xdf1;
 	}

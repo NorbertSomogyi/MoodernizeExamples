@@ -36,7 +36,7 @@ public class SASL {
 			this.setPrefmech(0);
 		} 
 		int generatedPrefmech = this.getPrefmech();
-		if (!.strncmp(value, "*", len)) {
+		if (!/*Error: Function owner not recognized*/strncmp(value, "*", len)) {
 			this.setPrefmech((~-1024 & ~(1 << 5)));
 		} else {
 				int mechbit = ModernizedCProgram.Curl_sasl_decode_mech(value, len, mechlen);

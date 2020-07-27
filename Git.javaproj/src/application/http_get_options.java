@@ -29,7 +29,7 @@ public class http_get_options {
 		} 
 		if (ModernizedCProgram.options && ModernizedCProgram.options.getEffective_url() && ModernizedCProgram.options.getBase_url()) {
 			if (ModernizedCProgram.options.getBase_url().update_url_from_redirect(url, ModernizedCProgram.options.getEffective_url())) {
-				.credential_from_url(ModernizedCProgram.http_auth, ModernizedCProgram.options.getBase_url().getBuf());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/credential_from_url(ModernizedCProgram.http_auth, ModernizedCProgram.options.getBase_url().getBuf());
 				url = ModernizedCProgram.options.getEffective_url().getBuf();
 			} 
 		} 
@@ -40,40 +40,40 @@ public class http_get_options {
 				 */;
 		} 
 		switch (target) {
+		case 1:
+				if (/*Error: Function owner not recognized*/fflush(result)) {
+					();
+					return 3;
+				} 
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/rewind(result);
+				if (/*Error: Function owner not recognized*/ftruncate(((result).get_file()), 0) < 0) {
+					();
+					return 3;
+				} 
+				break;
 		case 0:
 				result.strbuf_setlen(0);
-				break;
-		case 1:
-				if (.fflush(result)) {
-					();
-					return 3;
-				} 
-				.rewind(result);
-				if (.ftruncate(((result).get_file()), 0) < 0) {
-					();
-					return 3;
-				} 
 				break;
 		default:
 				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\http.c", 2019, "Unknown http_request target");
 		}
-		.credential_fill(ModernizedCProgram.http_auth);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/credential_fill(ModernizedCProgram.http_auth);
 		return ModernizedCProgram.http_request(url, result, target, ModernizedCProgram.options);
 	}
 	public int http_get_file(Object url, Object filename) {
 		int ret;
-		strbuf tmpfile = new strbuf(, , );
+		strbuf tmpfile = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		FILE result = new FILE();
 		tmpfile.strbuf_addf("%s.temp", filename);
-		byte generatedBuf = tmpfile.getBuf();
-		result = .fopen(generatedBuf, "a");
+		byte[] generatedBuf = tmpfile.getBuf();
+		result = /*Error: Function owner not recognized*/fopen(generatedBuf, "a");
 		if (!result) {
 			();
 			ret = 2;
 			;
 		} 
 		ret = ModernizedCProgram.options.http_request_reauth(url, result, 1);
-		.fclose(result);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(result);
 		if (ret == 0 && ModernizedCProgram.finalize_object_file(generatedBuf, filename)) {
 			ret = 2;
 		} 

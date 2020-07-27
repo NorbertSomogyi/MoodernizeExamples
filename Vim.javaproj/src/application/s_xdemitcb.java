@@ -11,7 +11,7 @@ public class s_xdemitcb {
 	public s_xdemitcb() {
 	}
 	
-	public int xdl_emit_diffrec(Object rec, long size, Object pre, long psize) {
+	public int xdl_emit_diffrec(Object[] rec, long size, Object pre, long psize) {
 		int i = 2;
 		mmbuffer_t[] mb = new mmbuffer_t();
 		mb[0].setPtr((byte)pre);
@@ -20,11 +20,11 @@ public class s_xdemitcb {
 		mb[1].setSize(size);
 		if (size > 0 && rec[size - 1] != (byte)'\n') {
 			mb[2].setPtr((byte)"\n\\ No newline at end of file\n");
-			mb[2].setSize((long).strlen(mb[2].getPtr()));
+			mb[2].setSize((long)/*Error: Function owner not recognized*/strlen(mb[2].getPtr()));
 			i++;
 		} 
 		Object generatedPriv = this.getPriv();
-		if (.UNRECOGNIZEDFUNCTIONNAME(generatedPriv, mb, i) < 0) {
+		if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedPriv, mb, i) < 0) {
 			return -1;
 		} 
 		return 0;
@@ -33,37 +33,37 @@ public class s_xdemitcb {
 		int nb = 0;
 		mmbuffer_t mb = new mmbuffer_t();
 		byte[] buf = new byte[128];
-		.memcpy(buf, "@@ -", 4);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf, "@@ -", 4);
 		nb += 4;
 		nb += ModernizedCProgram.xdl_num_out(buf + nb, c1 ? s1 : s1 - 1);
 		if (c1 != 1) {
-			.memcpy(buf + nb, ",", 1);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf + nb, ",", 1);
 			nb += 1;
 			nb += ModernizedCProgram.xdl_num_out(buf + nb, c1);
 		} 
-		.memcpy(buf + nb, " +", 2);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf + nb, " +", 2);
 		nb += 2;
 		nb += ModernizedCProgram.xdl_num_out(buf + nb, c2 ? s2 : s2 - 1);
 		if (c2 != 1) {
-			.memcpy(buf + nb, ",", 1);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf + nb, ",", 1);
 			nb += 1;
 			nb += ModernizedCProgram.xdl_num_out(buf + nb, c2);
 		} 
-		.memcpy(buf + nb, " @@", 3);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf + nb, " @@", 3);
 		nb += 3;
 		if (func && funclen) {
 			buf[nb++] = (byte)' ';
-			if (funclen > (long) - nb - 1) {
-				funclen =  - nb - 1;
+			if (funclen > (long)/*Error: sizeof expression not supported yet*/ - nb - 1) {
+				funclen = /*Error: sizeof expression not supported yet*/ - nb - 1;
 			} 
-			.memcpy(buf + nb, func, funclen);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf + nb, func, funclen);
 			nb += funclen;
 		} 
 		buf[nb++] = (byte)'\n';
 		mb.setPtr(buf);
 		mb.setSize(nb);
 		Object generatedPriv = this.getPriv();
-		if (.UNRECOGNIZEDFUNCTIONNAME(generatedPriv, mb, 1) < 0) {
+		if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedPriv, mb, 1) < 0) {
 			return -1;
 		} 
 		return 0;

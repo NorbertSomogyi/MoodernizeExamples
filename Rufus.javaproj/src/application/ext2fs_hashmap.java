@@ -20,7 +20,7 @@ public class ext2fs_hashmap {
 	}
 	
 	public ext2fs_hashmap ext2fs_hashmap_create(Object hash_fct, Object free_fct, Object size) {
-		ext2fs_hashmap h = .calloc( +  * size, 1);
+		ext2fs_hashmap h = /*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/ + /*Error: Unsupported expression*/ * size, 1);
 		if (!h) {
 			return h;
 		} 
@@ -32,10 +32,10 @@ public class ext2fs_hashmap {
 	}
 	public void ext2fs_hashmap_add(Object data, Object key, Object key_len) {
 		Object generatedSize = this.getSize();
-		uint32_t hash = .UNRECOGNIZEDFUNCTIONNAME(key, key_len) % generatedSize;
-		ext2fs_hashmap_entry e = .malloc();
+		uint32_t hash = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(key, key_len) % generatedSize;
+		ext2fs_hashmap_entry e = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		if (!e) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		e.setData(data);
 		e.setKey(key);
@@ -58,14 +58,14 @@ public class ext2fs_hashmap {
 	public Object ext2fs_hashmap_lookup(Object key, Object key_len) {
 		ext2fs_hashmap_entry iter = new ext2fs_hashmap_entry();
 		Object generatedSize = this.getSize();
-		uint32_t hash = .UNRECOGNIZEDFUNCTIONNAME(key, key_len) % generatedSize;
+		uint32_t hash = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(key, key_len) % generatedSize;
 		Object generatedKey_len = iter.getKey_len();
 		Object generatedKey = iter.getKey();
 		Object generatedData = iter.getData();
 		ext2fs_hashmap_entry generatedNext = iter.getNext();
 		Object generatedEntries = this.getEntries();
 		for (iter = generatedEntries[hash]; iter; iter = generatedNext) {
-			if (generatedKey_len == key_len && !.memcmp(generatedKey, key, key_len)) {
+			if (generatedKey_len == key_len && !/*Error: Function owner not recognized*/memcmp(generatedKey, key, key_len)) {
 				return generatedData;
 			} 
 		}
@@ -83,13 +83,13 @@ public class ext2fs_hashmap {
 			while (it) {
 				ext2fs_hashmap_entry tmp = generatedNext;
 				if (generatedFree) {
-					.UNRECOGNIZEDFUNCTIONNAME(generatedData);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData);
 				} 
-				.free(it);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(it);
 				it = tmp;
 			}
 		}
-		.free(h);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(h);
 	}
 	public Object getSize() {
 		return size;

@@ -13,7 +13,7 @@ public class ep_technique {
 	}
 	
 	public void ep_technique_init() {
-		.memset(ept, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ept, 0, /*Error: Unsupported expression*/);
 	}
 	public void ep_technique_free() {
 		 i = new ();
@@ -23,7 +23,7 @@ public class ep_technique {
 		}
 		Byte generatedName = this.getName();
 		ModernizedCProgram.bfree(generatedName);
-		.da_free(generatedPasses);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedPasses);
 	}
 	public Byte getName() {
 		return name;

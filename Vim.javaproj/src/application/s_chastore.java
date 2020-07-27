@@ -34,7 +34,7 @@ public class s_chastore {
 		chanode_t tmp = new chanode_t();
 		s_chanode generatedNext = cur.getNext();
 		s_chanode generatedHead = this.getHead();
-		for (cur = generatedHead; (tmp = cur) != ((Object)0); ) {
+		for (cur = generatedHead; (tmp = cur) != ((Object)0); /*Error: Unsupported expression*/) {
 			cur = generatedNext;
 			ModernizedCProgram.vim_free(tmp);
 		}
@@ -48,7 +48,7 @@ public class s_chastore {
 		s_chanode generatedTail = this.getTail();
 		s_chanode generatedHead = this.getHead();
 		if (!(ancur = generatedAncur) || generatedIcurr == generatedNsize) {
-			if (!(ancur = (chanode_t)ModernizedCProgram.lalloc(( + generatedNsize), 1))) {
+			if (!(ancur = (chanode_t)ModernizedCProgram.lalloc((/*Error: Unsupported expression*/ + generatedNsize), 1))) {
 				return ((Object)0);
 			} 
 			ancur.setIcurr(0);
@@ -62,7 +62,7 @@ public class s_chastore {
 			this.setTail(ancur);
 			this.setAncur(ancur);
 		} 
-		data = (byte)ancur +  + generatedIcurr;
+		data = (byte)ancur + /*Error: Unsupported expression*/ + generatedIcurr;
 		long generatedIsize = this.getIsize();
 		generatedIcurr += generatedIsize;
 		return data;

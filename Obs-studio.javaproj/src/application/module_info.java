@@ -16,7 +16,7 @@ public class module_info {
 		Object generatedName_utf8 = this.getName_utf8();
 		if (generatedAddr >= module_base && generatedAddr < module_base + module_size) {
 			ModernizedCProgram.os_wcs_to_utf8(module_name, 0, generatedName_utf8, 260);
-			.strlwr(generatedName_utf8);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strlwr(generatedName_utf8);
 			return false;
 		} 
 		return true;

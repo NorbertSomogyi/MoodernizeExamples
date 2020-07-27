@@ -17,7 +17,7 @@ public class ep_var {
 	}
 	
 	public void ep_var_init() {
-		.memset(epv, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(epv, 0, /*Error: Unsupported expression*/);
 	}
 	public void ep_var_free() {
 		Byte generatedType = this.getType();

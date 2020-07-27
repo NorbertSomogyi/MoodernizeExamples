@@ -2,12 +2,12 @@ package application;
 
 public class hashtable {
 	private Object size;
-	private hashtable_bucket buckets;
+	private hashtable_bucket[] buckets;
 	private Object order;
 	private hashtable_list list;
 	private hashtable_list ordered_list;
 	
-	public hashtable(Object size, hashtable_bucket buckets, Object order, hashtable_list list, hashtable_list ordered_list) {
+	public hashtable(Object size, hashtable_bucket[] buckets, Object order, hashtable_list list, hashtable_list ordered_list) {
 		setSize(size);
 		setBuckets(buckets);
 		setOrder(order);
@@ -24,7 +24,7 @@ public class hashtable {
 		size_t index = new size_t();
 		Object generatedOrder = this.getOrder();
 		index = hash & (((size_t)1 << (generatedOrder)) - 1);
-		hashtable_bucket generatedBuckets = this.getBuckets();
+		hashtable_bucket[] generatedBuckets = this.getBuckets();
 		bucket = generatedBuckets[index];
 		hashtable_pair hashtable_pair = new hashtable_pair();
 		pair = hashtable_pair.hashtable_find_pair(hashtable, bucket, key, hash);
@@ -79,11 +79,11 @@ public class hashtable {
 		Object generatedOrder = this.getOrder();
 		new_order = generatedOrder + 1;
 		new_size = ((size_t)1 << (new_order));
-		new_buckets = ModernizedCProgram.jsonp_malloc(new_size * );
+		new_buckets = ModernizedCProgram.jsonp_malloc(new_size * /*Error: Unsupported expression*/);
 		if (!new_buckets) {
 			return -1;
 		} 
-		hashtable_bucket generatedBuckets = this.getBuckets();
+		hashtable_bucket[] generatedBuckets = this.getBuckets();
 		ModernizedCProgram.jsonp_free(generatedBuckets);
 		this.setBuckets(new_buckets);
 		this.setOrder(new_order);
@@ -108,8 +108,8 @@ public class hashtable {
 		this.setSize(0);
 		this.setOrder(3);
 		Object generatedOrder = this.getOrder();
-		this.setBuckets(ModernizedCProgram.jsonp_malloc(((size_t)1 << (generatedOrder)) * ));
-		hashtable_bucket generatedBuckets = this.getBuckets();
+		this.setBuckets(ModernizedCProgram.jsonp_malloc(((size_t)1 << (generatedOrder)) * /*Error: Unsupported expression*/));
+		hashtable_bucket[] generatedBuckets = this.getBuckets();
 		if (!generatedBuckets) {
 			return -1;
 		} 
@@ -124,15 +124,15 @@ public class hashtable {
 	}
 	public void hashtable_close() {
 		hashtable.hashtable_do_clear();
-		hashtable_bucket generatedBuckets = this.getBuckets();
+		hashtable_bucket[] generatedBuckets = this.getBuckets();
 		ModernizedCProgram.jsonp_free(generatedBuckets);
 	}
 	public Object hashtable_get(Object key) {
 		pair_t pair = new pair_t();
 		size_t hash = new size_t();
 		bucket_t bucket = new bucket_t();
-		hash = ((size_t)ModernizedCProgram.hashlittle((key), .strlen(key), ModernizedCProgram.hashtable_seed));
-		hashtable_bucket generatedBuckets = this.getBuckets();
+		hash = ((size_t)ModernizedCProgram.hashlittle((key), /*Error: Function owner not recognized*/strlen(key), ModernizedCProgram.hashtable_seed));
+		hashtable_bucket[] generatedBuckets = this.getBuckets();
 		Object generatedOrder = this.getOrder();
 		bucket = generatedBuckets[hash & (((size_t)1 << (generatedOrder)) - 1)];
 		hashtable_pair hashtable_pair = new hashtable_pair();
@@ -144,7 +144,7 @@ public class hashtable {
 		return generatedValue;
 	}
 	public int hashtable_del(Object key) {
-		size_t hash = ((size_t)ModernizedCProgram.hashlittle((key), .strlen(key), ModernizedCProgram.hashtable_seed));
+		size_t hash = ((size_t)ModernizedCProgram.hashlittle((key), /*Error: Function owner not recognized*/strlen(key), ModernizedCProgram.hashtable_seed));
 		return hashtable.hashtable_do_del(key, hash);
 	}
 	public void hashtable_clear() {
@@ -152,7 +152,7 @@ public class hashtable {
 		hashtable.hashtable_do_clear();
 		Object generatedOrder = this.getOrder();
 		hashtable_list generatedList = this.getList();
-		hashtable_bucket generatedBuckets = this.getBuckets();
+		hashtable_bucket[] generatedBuckets = this.getBuckets();
 		for (i = 0; i < ((size_t)1 << (generatedOrder)); i++) {
 			generatedBuckets[i].setFirst(generatedBuckets[i].setLast(generatedList));
 		}
@@ -169,8 +169,8 @@ public class hashtable {
 		pair_t pair = new pair_t();
 		size_t hash = new size_t();
 		bucket_t bucket = new bucket_t();
-		hash = ((size_t)ModernizedCProgram.hashlittle((key), .strlen(key), ModernizedCProgram.hashtable_seed));
-		hashtable_bucket generatedBuckets = this.getBuckets();
+		hash = ((size_t)ModernizedCProgram.hashlittle((key), /*Error: Function owner not recognized*/strlen(key), ModernizedCProgram.hashtable_seed));
+		hashtable_bucket[] generatedBuckets = this.getBuckets();
 		Object generatedOrder = this.getOrder();
 		bucket = generatedBuckets[hash & (((size_t)1 << (generatedOrder)) - 1)];
 		hashtable_pair hashtable_pair = new hashtable_pair();
@@ -196,10 +196,10 @@ public class hashtable {
 	public void setSize(Object newSize) {
 		size = newSize;
 	}
-	public hashtable_bucket getBuckets() {
+	public hashtable_bucket[] getBuckets() {
 		return buckets;
 	}
-	public void setBuckets(hashtable_bucket newBuckets) {
+	public void setBuckets(hashtable_bucket[] newBuckets) {
 		buckets = newBuckets;
 	}
 	public Object getOrder() {

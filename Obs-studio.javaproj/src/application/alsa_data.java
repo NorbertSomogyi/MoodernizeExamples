@@ -67,21 +67,21 @@ public class alsa_data {
 	public Object _alsa_open() {
 		pthread_attr_t attr = new pthread_attr_t();
 		int err;
-		err = .snd_pcm_open(ModernizedCProgram.data.getHandle(), ModernizedCProgram.data.getDevice(), SND_PCM_STREAM_CAPTURE, 0);
+		err = /*Error: Function owner not recognized*/snd_pcm_open(ModernizedCProgram.data.getHandle(), ModernizedCProgram.data.getDevice(), SND_PCM_STREAM_CAPTURE, 0);
 		if (err < 0) {
-			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: Failed to open '%s': %s", ModernizedCProgram.data.getDevice(), .snd_strerror(err));
+			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: Failed to open '%s': %s", ModernizedCProgram.data.getDevice(), /*Error: Function owner not recognized*/snd_strerror(err));
 			return false;
 		} 
 		if (!ModernizedCProgram.data._alsa_configure()) {
 			;
 		} 
-		if (.snd_pcm_state(ModernizedCProgram.data.getHandle()) != SND_PCM_STATE_PREPARED) {
+		if (/*Error: Function owner not recognized*/snd_pcm_state(ModernizedCProgram.data.getHandle()) != SND_PCM_STATE_PREPARED) {
 			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: Device not prepared: '%s'", ModernizedCProgram.data.getDevice());
 			;
 		} 
-		err = .snd_pcm_start(ModernizedCProgram.data.getHandle());
+		err = /*Error: Function owner not recognized*/snd_pcm_start(ModernizedCProgram.data.getHandle());
 		if (err < 0) {
-			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: Failed to start '%s': %s", ModernizedCProgram.data.getDevice(), .snd_strerror(err));
+			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: Failed to start '%s': %s", ModernizedCProgram.data.getDevice(), /*Error: Function owner not recognized*/snd_strerror(err));
 			;
 		} 
 		ModernizedCProgram.pthread_attr_init(/* create capture thread */attr);
@@ -103,7 +103,7 @@ public class alsa_data {
 			ModernizedCProgram.data.setListen_thread(0);
 		} 
 		if (ModernizedCProgram.data.getHandle()) {
-			.snd_pcm_drop(ModernizedCProgram.data.getHandle());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snd_pcm_drop(ModernizedCProgram.data.getHandle());
 			;
 		} 
 		if (ModernizedCProgram.data.getBuffer()) {
@@ -114,50 +114,50 @@ public class alsa_data {
 		 hwparams = new ();
 		int err;
 		int dir;
-		.snd_pcm_hw_params_alloca(hwparams);
-		err = .snd_pcm_hw_params_any(ModernizedCProgram.data.getHandle(), hwparams);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snd_pcm_hw_params_alloca(hwparams);
+		err = /*Error: Function owner not recognized*/snd_pcm_hw_params_any(ModernizedCProgram.data.getHandle(), hwparams);
 		if (err < 0) {
-			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_any failed: %s", .snd_strerror(err));
+			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_any failed: %s", /*Error: Function owner not recognized*/snd_strerror(err));
 			return false;
 		} 
-		err = .snd_pcm_hw_params_set_access(ModernizedCProgram.data.getHandle(), hwparams, SND_PCM_ACCESS_RW_INTERLEAVED);
+		err = /*Error: Function owner not recognized*/snd_pcm_hw_params_set_access(ModernizedCProgram.data.getHandle(), hwparams, SND_PCM_ACCESS_RW_INTERLEAVED);
 		if (err < 0) {
-			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_set_access failed: %s", .snd_strerror(err));
+			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_set_access failed: %s", /*Error: Function owner not recognized*/snd_strerror(err));
 			return false;
 		} 
 		ModernizedCProgram.data.setFormat(SND_PCM_FORMAT_S16);
-		err = .snd_pcm_hw_params_set_format(ModernizedCProgram.data.getHandle(), hwparams, ModernizedCProgram.data.getFormat());
+		err = /*Error: Function owner not recognized*/snd_pcm_hw_params_set_format(ModernizedCProgram.data.getHandle(), hwparams, ModernizedCProgram.data.getFormat());
 		if (err < 0) {
-			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_set_format failed: %s", .snd_strerror(err));
+			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_set_format failed: %s", /*Error: Function owner not recognized*/snd_strerror(err));
 			return false;
 		} 
-		err = .snd_pcm_hw_params_set_rate_near(ModernizedCProgram.data.getHandle(), hwparams, ModernizedCProgram.data.getRate(), 0);
+		err = /*Error: Function owner not recognized*/snd_pcm_hw_params_set_rate_near(ModernizedCProgram.data.getHandle(), hwparams, ModernizedCProgram.data.getRate(), 0);
 		if (err < 0) {
-			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_set_rate_near failed: %s", .snd_strerror(err));
+			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_set_rate_near failed: %s", /*Error: Function owner not recognized*/snd_strerror(err));
 			return false;
 		} 
 		ModernizedCProgram.blog(LOG_INFO, "alsa-input: PCM '%s' rate set to %d", ModernizedCProgram.data.getDevice(), ModernizedCProgram.data.getRate());
-		err = .snd_pcm_hw_params_get_channels(hwparams, ModernizedCProgram.data.getChannels());
+		err = /*Error: Function owner not recognized*/snd_pcm_hw_params_get_channels(hwparams, ModernizedCProgram.data.getChannels());
 		if (err < 0) {
 			ModernizedCProgram.data.setChannels(2);
 		} 
-		err = .snd_pcm_hw_params_set_channels_near(ModernizedCProgram.data.getHandle(), hwparams, ModernizedCProgram.data.getChannels());
+		err = /*Error: Function owner not recognized*/snd_pcm_hw_params_set_channels_near(ModernizedCProgram.data.getHandle(), hwparams, ModernizedCProgram.data.getChannels());
 		if (err < 0) {
-			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_set_channels_near failed: %s", .snd_strerror(err));
+			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_set_channels_near failed: %s", /*Error: Function owner not recognized*/snd_strerror(err));
 			return false;
 		} 
 		ModernizedCProgram.blog(LOG_INFO, "alsa-input: PCM '%s' channels set to %d", ModernizedCProgram.data.getDevice(), ModernizedCProgram.data.getChannels());
-		err = .snd_pcm_hw_params(ModernizedCProgram.data.getHandle(), hwparams);
+		err = /*Error: Function owner not recognized*/snd_pcm_hw_params(ModernizedCProgram.data.getHandle(), hwparams);
 		if (err < 0) {
-			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params failed: %s", .snd_strerror(err));
+			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params failed: %s", /*Error: Function owner not recognized*/snd_strerror(err));
 			return false;
 		} 
-		err = .snd_pcm_hw_params_get_period_size(hwparams, ModernizedCProgram.data.getPeriod_size(), dir);
+		err = /*Error: Function owner not recognized*/snd_pcm_hw_params_get_period_size(hwparams, ModernizedCProgram.data.getPeriod_size(), dir);
 		if (err < 0) {
-			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_get_period_size failed: %s", .snd_strerror(err));
+			ModernizedCProgram.blog(LOG_ERROR, "alsa-input: snd_pcm_hw_params_get_period_size failed: %s", /*Error: Function owner not recognized*/snd_strerror(err));
 			return false;
 		} 
-		ModernizedCProgram.data.setSample_size((ModernizedCProgram.data.getChannels() * .snd_pcm_format_physical_width(ModernizedCProgram.data.getFormat())) / 8);
+		ModernizedCProgram.data.setSample_size((ModernizedCProgram.data.getChannels() * /*Error: Function owner not recognized*/snd_pcm_format_physical_width(ModernizedCProgram.data.getFormat())) / 8);
 		if (ModernizedCProgram.data.getBuffer()) {
 			ModernizedCProgram.bfree(ModernizedCProgram.data.getBuffer());
 		} 
@@ -168,7 +168,7 @@ public class alsa_data {
 		pthread_attr_t attr = new pthread_attr_t();
 		int err;
 		if (ModernizedCProgram.os_atomic_load_bool(ModernizedCProgram.data.getReopen())) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.pthread_attr_init(attr);
 		ModernizedCProgram.pthread_attr_setdetachstate(attr, 0);

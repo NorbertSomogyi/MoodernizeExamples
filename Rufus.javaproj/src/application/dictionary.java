@@ -36,7 +36,7 @@ package application;
  * buffer directly.
  */
 public class dictionary {
-	private Object buf;
+	private Object[] buf;
 	private Object start;
 	private Object pos;
 	private Object full;
@@ -47,7 +47,7 @@ public class dictionary {
 	private Object allocated;
 	private xz_mode mode;
 	
-	public dictionary(Object buf, Object start, Object pos, Object full, Object limit, Object end, Object size, Object size_max, Object allocated, xz_mode mode) {
+	public dictionary(Object[] buf, Object start, Object pos, Object full, Object limit, Object end, Object size, Object size_max, Object allocated, xz_mode mode) {
 		setBuf(buf);
 		setStart(start);
 		setPos(pos);
@@ -73,7 +73,7 @@ public class dictionary {
 		} 
 	}
 	public void dict_put(Object byte) {
-		Object generatedBuf = this.getBuf();
+		Object[] generatedBuf = this.getBuf();
 		Object generatedPos = this.getPos();
 		generatedBuf[generatedPos++] = byte;
 		Object generatedFull = this.getFull();
@@ -98,7 +98,7 @@ public class dictionary {
 		if (dist >= generatedPos) {
 			back += generatedEnd;
 		} 
-		Object generatedBuf = this.getBuf();
+		Object[] generatedBuf = this.getBuf();
 		do {
 			generatedBuf[generatedPos++] = generatedBuf[back++];
 			if (back == generatedEnd) {
@@ -110,10 +110,10 @@ public class dictionary {
 		} 
 		return 1;
 	}
-	public Object getBuf() {
+	public Object[] getBuf() {
 		return buf;
 	}
-	public void setBuf(Object newBuf) {
+	public void setBuf(Object[] newBuf) {
 		buf = newBuf;
 	}
 	public Object getStart() {

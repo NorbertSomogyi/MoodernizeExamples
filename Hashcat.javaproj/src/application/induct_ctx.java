@@ -3,11 +3,11 @@ package application;
 public class induct_ctx {
 	private boolean enabled;
 	private Byte root_directory;
-	private Byte induction_dictionaries;
+	private byte[][] induction_dictionaries;
 	private int induction_dictionaries_cnt;
 	private int induction_dictionaries_pos;
 	
-	public induct_ctx(boolean enabled, Byte root_directory, Byte induction_dictionaries, int induction_dictionaries_cnt, int induction_dictionaries_pos) {
+	public induct_ctx(boolean enabled, Byte root_directory, byte[][] induction_dictionaries, int induction_dictionaries_cnt, int induction_dictionaries_pos) {
 		setEnabled(enabled);
 		setRoot_directory(root_directory);
 		setInduction_dictionaries(induction_dictionaries);
@@ -29,10 +29,10 @@ public class induct_ctx {
 	public void setRoot_directory(Byte newRoot_directory) {
 		root_directory = newRoot_directory;
 	}
-	public Byte getInduction_dictionaries() {
+	public byte[][] getInduction_dictionaries() {
 		return induction_dictionaries;
 	}
-	public void setInduction_dictionaries(Byte newInduction_dictionaries) {
+	public void setInduction_dictionaries(byte[][] newInduction_dictionaries) {
 		induction_dictionaries = newInduction_dictionaries;
 	}
 	public int getInduction_dictionaries_cnt() {

@@ -19,14 +19,14 @@ public class ref_sorting {
 	
 	public ref_sorting ref_default_sorting() {
 		byte[] cstr_name = "refname";
-		ref_sorting sorting = ModernizedCProgram.xcalloc(1, );
+		ref_sorting sorting = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		sorting.setNext(((Object)0));
 		sorting.setAtom(ModernizedCProgram.parse_sorting_atom(cstr_name));
 		return sorting;
 	}
 	public void parse_ref_sorting(Object arg) {
 		ref_sorting s = new ref_sorting();
-		s = ModernizedCProgram.xcalloc(1, );
+		s = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		s.setNext(sorting_tail);
 		sorting_tail = s;
 		if (arg == (byte)'-') {

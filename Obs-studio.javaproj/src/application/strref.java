@@ -18,26 +18,16 @@ package application;
 /* ------------------------------------------------------------------------- */
 /* string reference (string segment within an already existing array) */
 public class strref {
-	private Object array;
+	private Object[] array;
 	private Object len;
 	
-	public strref(Object array, Object len) {
+	public strref(Object[] array, Object len) {
 		setArray(array);
 		setLen(len);
 	}
 	public strref() {
 	}
 	
-	public boolean is_sys_include() {
-		Object generatedLen = this.getLen();
-		Object generatedArray = this.getArray();
-		return generatedLen >= 2 && generatedArray[0] == (byte)'<' && generatedArray[generatedLen - 1] == (byte)'>';
-	}
-	public boolean is_loc_include() {
-		Object generatedLen = this.getLen();
-		Object generatedArray = this.getArray();
-		return generatedLen >= 2 && generatedArray[0] == (byte)'"' && generatedArray[generatedLen - 1] == (byte)'"';
-	}
 	public void strref_clear() {
 		this.setArray(((Object)0));
 		this.setLen(0);
@@ -51,7 +41,7 @@ public class strref {
 		this.setLen(src.getLen());
 	}
 	public void strref_add(Object t) {
-		Object generatedArray = this.getArray();
+		Object[] generatedArray = this.getArray();
 		Object generatedLen = this.getLen();
 		if (!generatedArray) {
 			dst.strref_copy(t);
@@ -60,7 +50,7 @@ public class strref {
 		} 
 	}
 	public void remove_ref_whitespace() {
-		Object generatedArray = this.getArray();
+		Object[] generatedArray = this.getArray();
 		Object generatedLen = this.getLen();
 		if (generatedArray) {
 			while (ModernizedCProgram.is_whitespace(generatedArray)) {
@@ -72,10 +62,20 @@ public class strref {
 			}
 		} 
 	}
-	public Object getArray() {
+	public boolean is_sys_include() {
+		Object generatedLen = this.getLen();
+		Object[] generatedArray = this.getArray();
+		return generatedLen >= 2 && generatedArray[0] == (byte)'<' && generatedArray[generatedLen - 1] == (byte)'>';
+	}
+	public boolean is_loc_include() {
+		Object generatedLen = this.getLen();
+		Object[] generatedArray = this.getArray();
+		return generatedLen >= 2 && generatedArray[0] == (byte)'"' && generatedArray[generatedLen - 1] == (byte)'"';
+	}
+	public Object[] getArray() {
 		return array;
 	}
-	public void setArray(Object newArray) {
+	public void setArray(Object[] newArray) {
 		array = newArray;
 	}
 	public Object getLen() {

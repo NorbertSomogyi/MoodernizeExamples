@@ -82,7 +82,7 @@ public class signature_check {
 			if (!ModernizedCProgram.skip_prefix(line, "[GNUPG:] ", /* Skip lines that don't start with GNUPG status */line)) {
 				continue;
 			} 
-			for (i = 0; i < ( /  + ( - 1)); /* Iterate over all search strings */i++) {
+			for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); /* Iterate over all search strings */i++) {
 				if (ModernizedCProgram.skip_prefix(line, sigcheck_gpg_status[i].getCheck(), line)) {
 					if (sigcheck_gpg_status[i].getFlags() & (1 << 0)) {
 						if (seen_exclusive_status++) {
@@ -122,7 +122,7 @@ public class signature_check {
 				} 
 			}
 		}
-		return ;
+		return /*Error: Unsupported expression*/;
 		do {
 			ModernizedCProgram.free(generatedPrimary_key_fingerprint);
 			(generatedPrimary_key_fingerprint) = ((Object)0);
@@ -141,8 +141,8 @@ public class signature_check {
 		} while (0);
 	}
 	public int check_signature(Object payload, Object plen, Object signature, Object slen) {
-		strbuf gpg_output = new strbuf(, , );
-		strbuf gpg_status = new strbuf(, , );
+		strbuf gpg_output = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf gpg_status = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int status;
 		this.setResult((byte)'N');
 		status = gpg_output.verify_signed_buffer(payload, plen, signature, slen, gpg_status);

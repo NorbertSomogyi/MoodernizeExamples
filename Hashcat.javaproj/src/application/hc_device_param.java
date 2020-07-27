@@ -125,7 +125,7 @@ public class hc_device_param {
 	private Object extra_buffer_size;
 	private Byte scratch_buf;
 	private hc_fp combs_fp;
-	private pw combs_buf;
+	private pw[] combs_buf;
 	private Object hooks_buf;
 	private pw_idx pws_idx;
 	private Object pws_comp;
@@ -270,7 +270,7 @@ public class hc_device_param {
 	private Object opencl_platform_vendor_id;
 	private Object opencl_device;
 	
-	public hc_device_param(int device_id, int device_id_alias_cnt, Object device_id_alias_buf, Object pcie_bus, Object pcie_device, Object pcie_function, boolean skipped, boolean skipped_warning, Object device_processors, Object device_maxmem_alloc, Object device_global_mem, Object device_available_mem, Object device_maxclock_frequency, Object device_maxworkgroup_size, Object device_local_mem_size, int device_local_mem_type, Byte device_name, int sm_major, int sm_minor, Object kernel_exec_timeout, st_status_rc st_status, int vector_width, Object kernel_wgs1, Object kernel_wgs12, Object kernel_wgs2, Object kernel_wgs23, Object kernel_wgs3, Object kernel_wgs4, Object kernel_wgs_init2, Object kernel_wgs_loop2, Object kernel_wgs_mp, Object kernel_wgs_mp_l, Object kernel_wgs_mp_r, Object kernel_wgs_amp, Object kernel_wgs_tm, Object kernel_wgs_memset, Object kernel_wgs_atinit, Object kernel_wgs_decompress, Object kernel_wgs_aux1, Object kernel_wgs_aux2, Object kernel_wgs_aux3, Object kernel_wgs_aux4, Object kernel_preferred_wgs_multiple1, Object kernel_preferred_wgs_multiple12, Object kernel_preferred_wgs_multiple2, Object kernel_preferred_wgs_multiple23, Object kernel_preferred_wgs_multiple3, Object kernel_preferred_wgs_multiple4, Object kernel_preferred_wgs_multiple_init2, Object kernel_preferred_wgs_multiple_loop2, Object kernel_preferred_wgs_multiple_mp, Object kernel_preferred_wgs_multiple_mp_l, Object kernel_preferred_wgs_multiple_mp_r, Object kernel_preferred_wgs_multiple_amp, Object kernel_preferred_wgs_multiple_tm, Object kernel_preferred_wgs_multiple_memset, Object kernel_preferred_wgs_multiple_atinit, Object kernel_preferred_wgs_multiple_decompress, Object kernel_preferred_wgs_multiple_aux1, Object kernel_preferred_wgs_multiple_aux2, Object kernel_preferred_wgs_multiple_aux3, Object kernel_preferred_wgs_multiple_aux4, Object kernel_local_mem_size1, Object kernel_local_mem_size12, Object kernel_local_mem_size2, Object kernel_local_mem_size23, Object kernel_local_mem_size3, Object kernel_local_mem_size4, Object kernel_local_mem_size_init2, Object kernel_local_mem_size_loop2, Object kernel_local_mem_size_mp, Object kernel_local_mem_size_mp_l, Object kernel_local_mem_size_mp_r, Object kernel_local_mem_size_amp, Object kernel_local_mem_size_tm, Object kernel_local_mem_size_memset, Object kernel_local_mem_size_atinit, Object kernel_local_mem_size_decompress, Object kernel_local_mem_size_aux1, Object kernel_local_mem_size_aux2, Object kernel_local_mem_size_aux3, Object kernel_local_mem_size_aux4, Object kernel_accel, Object kernel_accel_prev, Object kernel_accel_min, Object kernel_accel_max, Object kernel_loops, Object kernel_loops_prev, Object kernel_loops_min, Object kernel_loops_max, Object kernel_loops_min_sav, Object kernel_loops_max_sav, Object kernel_threads, Object kernel_threads_min, Object kernel_threads_max, Object kernel_power, Object hardware_power, Object size_pws, Object size_pws_amp, Object size_pws_comp, Object size_pws_idx, Object size_pws_pre, Object size_pws_base, Object size_tmps, Object size_hooks, Object size_bfs, Object size_combs, Object size_rules, Object size_rules_c, Object size_root_css, Object size_markov_css, Object size_digests, Object size_salts, Object size_esalts, Object size_shown, Object size_results, Object size_plains, Object size_st_digests, Object size_st_salts, Object size_st_esalts, Object size_tm, Object extra_buffer_size, Byte scratch_buf, hc_fp combs_fp, pw combs_buf, Object hooks_buf, pw_idx pws_idx, Object pws_comp, Object pws_cnt, pw_pre pws_pre_buf, Object pws_pre_cnt, pw_pre pws_base_buf, Object pws_base_cnt, Object words_off, Object words_done, Object outerloop_pos, Object outerloop_left, double outerloop_msec, double outerloop_multi, Object innerloop_pos, Object innerloop_left, Object exec_pos, Object exec_msec, Object exec_us_prev1, Object exec_us_prev2, Object exec_us_prev3, Object exec_us_prev4, Object exec_us_prev_init2, Object exec_us_prev_loop2, Object exec_us_prev_aux1, Object exec_us_prev_aux2, Object exec_us_prev_aux3, Object exec_us_prev_aux4, Object speed_pos, Object speed_cnt, Object speed_msec, boolean speed_only_finish, Object timer_speed, boolean has_vadd3, boolean has_vbfe, boolean has_vperm, boolean has_bfe, boolean has_lop3, boolean has_mov64, boolean has_prmt, double spin_damp, Object kernel_params, Object kernel_params_mp, Object kernel_params_mp_r, Object kernel_params_mp_l, Object kernel_params_amp, Object kernel_params_tm, Object kernel_params_memset, Object kernel_params_atinit, Object kernel_params_decompress, Object kernel_params_buf32, Object kernel_params_buf64, Object kernel_params_mp_buf32, Object kernel_params_mp_buf64, Object kernel_params_mp_r_buf32, Object kernel_params_mp_r_buf64, Object kernel_params_mp_l_buf32, Object kernel_params_mp_l_buf64, Object kernel_params_amp_buf32, Object kernel_params_amp_buf64, Object kernel_params_memset_buf32, Object kernel_params_memset_buf64, Object kernel_params_atinit_buf32, Object kernel_params_atinit_buf64, Object kernel_params_decompress_buf32, Object kernel_params_decompress_buf64, boolean is_cuda, int cuda_warp_size, Object cuda_device, Object cuda_context, Object cuda_stream, Object cuda_event1, Object cuda_event2, Object cuda_module, Object cuda_module_mp, Object cuda_module_amp, Object cuda_function1, Object cuda_function12, Object cuda_function2, Object cuda_function23, Object cuda_function3, Object cuda_function4, Object cuda_function_init2, Object cuda_function_loop2, Object cuda_function_mp, Object cuda_function_mp_l, Object cuda_function_mp_r, Object cuda_function_amp, Object cuda_function_tm, Object cuda_function_memset, Object cuda_function_atinit, Object cuda_function_decompress, Object cuda_function_aux1, Object cuda_function_aux2, Object cuda_function_aux3, Object cuda_function_aux4, Object cuda_d_pws_buf, Object cuda_d_pws_amp_buf, Object cuda_d_pws_comp_buf, Object cuda_d_pws_idx, Object cuda_d_words_buf_l, Object cuda_d_words_buf_r, Object cuda_d_rules, Object cuda_d_rules_c, Object cuda_d_combs, Object cuda_d_combs_c, Object cuda_d_bfs, Object cuda_d_bfs_c, Object cuda_d_tm_c, Object cuda_d_bitmap_s1_a, Object cuda_d_bitmap_s1_b, Object cuda_d_bitmap_s1_c, Object cuda_d_bitmap_s1_d, Object cuda_d_bitmap_s2_a, Object cuda_d_bitmap_s2_b, Object cuda_d_bitmap_s2_c, Object cuda_d_bitmap_s2_d, Object cuda_d_plain_bufs, Object cuda_d_digests_buf, Object cuda_d_digests_shown, Object cuda_d_salt_bufs, Object cuda_d_esalt_bufs, Object cuda_d_tmps, Object cuda_d_hooks, Object cuda_d_result, Object cuda_d_extra0_buf, Object cuda_d_extra1_buf, Object cuda_d_extra2_buf, Object cuda_d_extra3_buf, Object cuda_d_root_css_buf, Object cuda_d_markov_css_buf, Object cuda_d_st_digests_buf, Object cuda_d_st_salts_buf, Object cuda_d_st_esalts_buf, boolean is_opencl, Byte opencl_driver_version, Byte opencl_device_vendor, Byte opencl_device_version, Byte opencl_device_c_version, Object opencl_device_type, Object opencl_device_vendor_id, Object opencl_platform_vendor_id, Object opencl_device) {
+	public hc_device_param(int device_id, int device_id_alias_cnt, Object device_id_alias_buf, Object pcie_bus, Object pcie_device, Object pcie_function, boolean skipped, boolean skipped_warning, Object device_processors, Object device_maxmem_alloc, Object device_global_mem, Object device_available_mem, Object device_maxclock_frequency, Object device_maxworkgroup_size, Object device_local_mem_size, int device_local_mem_type, Byte device_name, int sm_major, int sm_minor, Object kernel_exec_timeout, st_status_rc st_status, int vector_width, Object kernel_wgs1, Object kernel_wgs12, Object kernel_wgs2, Object kernel_wgs23, Object kernel_wgs3, Object kernel_wgs4, Object kernel_wgs_init2, Object kernel_wgs_loop2, Object kernel_wgs_mp, Object kernel_wgs_mp_l, Object kernel_wgs_mp_r, Object kernel_wgs_amp, Object kernel_wgs_tm, Object kernel_wgs_memset, Object kernel_wgs_atinit, Object kernel_wgs_decompress, Object kernel_wgs_aux1, Object kernel_wgs_aux2, Object kernel_wgs_aux3, Object kernel_wgs_aux4, Object kernel_preferred_wgs_multiple1, Object kernel_preferred_wgs_multiple12, Object kernel_preferred_wgs_multiple2, Object kernel_preferred_wgs_multiple23, Object kernel_preferred_wgs_multiple3, Object kernel_preferred_wgs_multiple4, Object kernel_preferred_wgs_multiple_init2, Object kernel_preferred_wgs_multiple_loop2, Object kernel_preferred_wgs_multiple_mp, Object kernel_preferred_wgs_multiple_mp_l, Object kernel_preferred_wgs_multiple_mp_r, Object kernel_preferred_wgs_multiple_amp, Object kernel_preferred_wgs_multiple_tm, Object kernel_preferred_wgs_multiple_memset, Object kernel_preferred_wgs_multiple_atinit, Object kernel_preferred_wgs_multiple_decompress, Object kernel_preferred_wgs_multiple_aux1, Object kernel_preferred_wgs_multiple_aux2, Object kernel_preferred_wgs_multiple_aux3, Object kernel_preferred_wgs_multiple_aux4, Object kernel_local_mem_size1, Object kernel_local_mem_size12, Object kernel_local_mem_size2, Object kernel_local_mem_size23, Object kernel_local_mem_size3, Object kernel_local_mem_size4, Object kernel_local_mem_size_init2, Object kernel_local_mem_size_loop2, Object kernel_local_mem_size_mp, Object kernel_local_mem_size_mp_l, Object kernel_local_mem_size_mp_r, Object kernel_local_mem_size_amp, Object kernel_local_mem_size_tm, Object kernel_local_mem_size_memset, Object kernel_local_mem_size_atinit, Object kernel_local_mem_size_decompress, Object kernel_local_mem_size_aux1, Object kernel_local_mem_size_aux2, Object kernel_local_mem_size_aux3, Object kernel_local_mem_size_aux4, Object kernel_accel, Object kernel_accel_prev, Object kernel_accel_min, Object kernel_accel_max, Object kernel_loops, Object kernel_loops_prev, Object kernel_loops_min, Object kernel_loops_max, Object kernel_loops_min_sav, Object kernel_loops_max_sav, Object kernel_threads, Object kernel_threads_min, Object kernel_threads_max, Object kernel_power, Object hardware_power, Object size_pws, Object size_pws_amp, Object size_pws_comp, Object size_pws_idx, Object size_pws_pre, Object size_pws_base, Object size_tmps, Object size_hooks, Object size_bfs, Object size_combs, Object size_rules, Object size_rules_c, Object size_root_css, Object size_markov_css, Object size_digests, Object size_salts, Object size_esalts, Object size_shown, Object size_results, Object size_plains, Object size_st_digests, Object size_st_salts, Object size_st_esalts, Object size_tm, Object extra_buffer_size, Byte scratch_buf, hc_fp combs_fp, pw[] combs_buf, Object hooks_buf, pw_idx pws_idx, Object pws_comp, Object pws_cnt, pw_pre pws_pre_buf, Object pws_pre_cnt, pw_pre pws_base_buf, Object pws_base_cnt, Object words_off, Object words_done, Object outerloop_pos, Object outerloop_left, double outerloop_msec, double outerloop_multi, Object innerloop_pos, Object innerloop_left, Object exec_pos, Object exec_msec, Object exec_us_prev1, Object exec_us_prev2, Object exec_us_prev3, Object exec_us_prev4, Object exec_us_prev_init2, Object exec_us_prev_loop2, Object exec_us_prev_aux1, Object exec_us_prev_aux2, Object exec_us_prev_aux3, Object exec_us_prev_aux4, Object speed_pos, Object speed_cnt, Object speed_msec, boolean speed_only_finish, Object timer_speed, boolean has_vadd3, boolean has_vbfe, boolean has_vperm, boolean has_bfe, boolean has_lop3, boolean has_mov64, boolean has_prmt, double spin_damp, Object kernel_params, Object kernel_params_mp, Object kernel_params_mp_r, Object kernel_params_mp_l, Object kernel_params_amp, Object kernel_params_tm, Object kernel_params_memset, Object kernel_params_atinit, Object kernel_params_decompress, Object kernel_params_buf32, Object kernel_params_buf64, Object kernel_params_mp_buf32, Object kernel_params_mp_buf64, Object kernel_params_mp_r_buf32, Object kernel_params_mp_r_buf64, Object kernel_params_mp_l_buf32, Object kernel_params_mp_l_buf64, Object kernel_params_amp_buf32, Object kernel_params_amp_buf64, Object kernel_params_memset_buf32, Object kernel_params_memset_buf64, Object kernel_params_atinit_buf32, Object kernel_params_atinit_buf64, Object kernel_params_decompress_buf32, Object kernel_params_decompress_buf64, boolean is_cuda, int cuda_warp_size, Object cuda_device, Object cuda_context, Object cuda_stream, Object cuda_event1, Object cuda_event2, Object cuda_module, Object cuda_module_mp, Object cuda_module_amp, Object cuda_function1, Object cuda_function12, Object cuda_function2, Object cuda_function23, Object cuda_function3, Object cuda_function4, Object cuda_function_init2, Object cuda_function_loop2, Object cuda_function_mp, Object cuda_function_mp_l, Object cuda_function_mp_r, Object cuda_function_amp, Object cuda_function_tm, Object cuda_function_memset, Object cuda_function_atinit, Object cuda_function_decompress, Object cuda_function_aux1, Object cuda_function_aux2, Object cuda_function_aux3, Object cuda_function_aux4, Object cuda_d_pws_buf, Object cuda_d_pws_amp_buf, Object cuda_d_pws_comp_buf, Object cuda_d_pws_idx, Object cuda_d_words_buf_l, Object cuda_d_words_buf_r, Object cuda_d_rules, Object cuda_d_rules_c, Object cuda_d_combs, Object cuda_d_combs_c, Object cuda_d_bfs, Object cuda_d_bfs_c, Object cuda_d_tm_c, Object cuda_d_bitmap_s1_a, Object cuda_d_bitmap_s1_b, Object cuda_d_bitmap_s1_c, Object cuda_d_bitmap_s1_d, Object cuda_d_bitmap_s2_a, Object cuda_d_bitmap_s2_b, Object cuda_d_bitmap_s2_c, Object cuda_d_bitmap_s2_d, Object cuda_d_plain_bufs, Object cuda_d_digests_buf, Object cuda_d_digests_shown, Object cuda_d_salt_bufs, Object cuda_d_esalt_bufs, Object cuda_d_tmps, Object cuda_d_hooks, Object cuda_d_result, Object cuda_d_extra0_buf, Object cuda_d_extra1_buf, Object cuda_d_extra2_buf, Object cuda_d_extra3_buf, Object cuda_d_root_css_buf, Object cuda_d_markov_css_buf, Object cuda_d_st_digests_buf, Object cuda_d_st_salts_buf, Object cuda_d_st_esalts_buf, boolean is_opencl, Byte opencl_driver_version, Byte opencl_device_vendor, Byte opencl_device_version, Byte opencl_device_c_version, Object opencl_device_type, Object opencl_device_vendor_id, Object opencl_platform_vendor_id, Object opencl_device) {
 		setDevice_id(device_id);
 		setDevice_id_alias_cnt(device_id_alias_cnt);
 		setDevice_id_alias_buf(device_id_alias_buf);
@@ -600,7 +600,7 @@ public class hc_device_param {
 			this.setBrain_link_send_active(1);
 			ModernizedCProgram.hc_timer_set(generatedTimer[generatedPos]);
 		} 
-		ssize_t nsend = .send(sockfd, buf, len, flags);
+		ssize_t nsend = /*Error: Function owner not recognized*/send(sockfd, buf, len, flags);
 		Object generatedBytes = link_speed.getBytes();
 		Object generatedBrain_link_send_bytes = this.getBrain_link_send_bytes();
 		if (device_param) {
@@ -621,7 +621,7 @@ public class hc_device_param {
 			if (device_param) {
 				ModernizedCProgram.hc_timer_set(generatedTimer[generatedPos]);
 			} 
-			ssize_t nsend_new = .send(sockfd, buf_new + nsend, len - nsend, flags);
+			ssize_t nsend_new = /*Error: Function owner not recognized*/send(sockfd, buf_new + nsend, len - nsend, flags);
 			if (device_param) {
 				generatedBytes[generatedPos] = nsend_new;
 				if (generatedPos++ == 10000) {
@@ -651,7 +651,7 @@ public class hc_device_param {
 			this.setBrain_link_recv_active(1);
 			ModernizedCProgram.hc_timer_set(generatedTimer[generatedPos]);
 		} 
-		ssize_t nrecv = .recv(sockfd, buf, len, flags);
+		ssize_t nrecv = /*Error: Function owner not recognized*/recv(sockfd, buf, len, flags);
 		Object generatedBytes = link_speed.getBytes();
 		Object generatedBrain_link_recv_bytes = this.getBrain_link_recv_bytes();
 		if (device_param) {
@@ -672,7 +672,7 @@ public class hc_device_param {
 			if (device_param) {
 				ModernizedCProgram.hc_timer_set(generatedTimer[generatedPos]);
 			} 
-			ssize_t nrecv_new = .recv(sockfd, buf_new + nrecv, len - nrecv, flags);
+			ssize_t nrecv_new = /*Error: Function owner not recognized*/recv(sockfd, buf_new + nrecv, len - nrecv, flags);
 			if (device_param) {
 				generatedBytes[generatedPos] = nrecv_new;
 				if (generatedPos++ == 10000) {
@@ -700,25 +700,25 @@ public class hc_device_param {
 		this.setBrain_link_recv_active(0);
 		this.setBrain_link_send_active(0);
 		Object generatedBrain_link_recv_speed = this.getBrain_link_recv_speed();
-		.memset(generatedBrain_link_recv_speed, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedBrain_link_recv_speed, 0, /*Error: Unsupported expression*/);
 		Object generatedBrain_link_send_speed = this.getBrain_link_send_speed();
-		.memset(generatedBrain_link_send_speed, 0, );
-		int brain_link_client_fd = .socket(2, 1, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedBrain_link_send_speed, 0, /*Error: Unsupported expression*/);
+		int brain_link_client_fd = /*Error: Function owner not recognized*/socket(2, 1, 0);
 		if (brain_link_client_fd == -1) {
-			(_iob[2]).brain_logging(0, "socket: %s\n", .strerror((._errno())));
+			(_iob[2]).brain_logging(0, "socket: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			return 0;
 		} 
 		addrinfo hints = new addrinfo();
-		.memset(hints, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(hints, 0, /*Error: sizeof expression not supported yet*/);
 		hints.setAi_family(2);
 		hints.setAi_socktype(1);
 		byte[] port_str = new byte[8];
-		.memset(port_str, 0, );
-		.snprintf(port_str, , "%i", port);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(port_str, 0, /*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(port_str, /*Error: sizeof expression not supported yet*/, "%i", port);
 		byte host_real = (host == ((Object)0)) ? "127.0.0.1" : host;
 		boolean connected = false;
 		addrinfo address_info = new addrinfo();
-		int rc_getaddrinfo = .getaddrinfo(host_real, port_str, hints, address_info);
+		int rc_getaddrinfo = /*Error: Function owner not recognized*/getaddrinfo(host_real, port_str, hints, address_info);
 		Object generatedAi_addr = address_info_ptr.getAi_addr();
 		Object generatedAi_addrlen = address_info_ptr.getAi_addrlen();
 		Object generatedAi_next = address_info_ptr.getAi_next();
@@ -730,75 +730,75 @@ public class hc_device_param {
 					break;
 				} 
 			}
-			.freeaddrinfo(address_info);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/freeaddrinfo(address_info);
 		} else {
-				(_iob[2]).brain_logging(0, "%s: %s\n", host_real, .gai_strerrorA(rc_getaddrinfo));
-				ModernizedCProgram.close(brain_link_client_fd);
+				(_iob[2]).brain_logging(0, "%s: %s\n", host_real, /*Error: Function owner not recognized*/gai_strerrorA(rc_getaddrinfo));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 				return 0;
 		} 
 		if (connected == false) {
-			ModernizedCProgram.close(brain_link_client_fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
 		this.setBrain_link_client_fd(brain_link_client_fd);
 		u32 brain_link_version = ModernizedCProgram.BRAIN_LINK_VERSION_CUR;
-		if (((Object)0).brain_send(brain_link_client_fd, brain_link_version, , 0, ((Object)0)) == 0) {
-			(_iob[2]).brain_logging(0, "brain_send: %s\n", .strerror((._errno())));
-			ModernizedCProgram.close(brain_link_client_fd);
+		if (((Object)0).brain_send(brain_link_client_fd, brain_link_version, /*Error: sizeof expression not supported yet*/, 0, ((Object)0)) == 0) {
+			(_iob[2]).brain_logging(0, "brain_send: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
 		u32 brain_link_version_ok = 0;
-		if (((Object)0).brain_recv(brain_link_client_fd, brain_link_version_ok, , 0, ((Object)0)) == 0) {
-			(_iob[2]).brain_logging(0, "brain_recv: %s\n", .strerror((._errno())));
-			ModernizedCProgram.close(brain_link_client_fd);
+		if (((Object)0).brain_recv(brain_link_client_fd, brain_link_version_ok, /*Error: sizeof expression not supported yet*/, 0, ((Object)0)) == 0) {
+			(_iob[2]).brain_logging(0, "brain_recv: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
 		if (brain_link_version_ok == 0) {
 			(_iob[2]).brain_logging(0, "Invalid brain server version\n");
-			ModernizedCProgram.close(brain_link_client_fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
 		u32 challenge = 0;
-		if (((Object)0).brain_recv(brain_link_client_fd, challenge, , 0, ((Object)0)) == 0) {
-			(_iob[2]).brain_logging(0, "brain_recv: %s\n", .strerror((._errno())));
-			ModernizedCProgram.close(brain_link_client_fd);
+		if (((Object)0).brain_recv(brain_link_client_fd, challenge, /*Error: sizeof expression not supported yet*/, 0, ((Object)0)) == 0) {
+			(_iob[2]).brain_logging(0, "brain_recv: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
-		u64 response = ModernizedCProgram.brain_auth_hash(challenge, password, .strlen(password));
-		if (((Object)0).brain_send(brain_link_client_fd, response, , 0, ((Object)0)) == 0) {
-			(_iob[2]).brain_logging(0, "brain_send: %s\n", .strerror((._errno())));
-			ModernizedCProgram.close(brain_link_client_fd);
+		u64 response = ModernizedCProgram.brain_auth_hash(challenge, password, /*Error: Function owner not recognized*/strlen(password));
+		if (((Object)0).brain_send(brain_link_client_fd, response, /*Error: sizeof expression not supported yet*/, 0, ((Object)0)) == 0) {
+			(_iob[2]).brain_logging(0, "brain_send: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
 		u32 password_ok = 0;
-		if (((Object)0).brain_recv(brain_link_client_fd, password_ok, , 0, ((Object)0)) == 0) {
-			(_iob[2]).brain_logging(0, "brain_recv: %s\n", .strerror((._errno())));
-			ModernizedCProgram.close(brain_link_client_fd);
+		if (((Object)0).brain_recv(brain_link_client_fd, password_ok, /*Error: sizeof expression not supported yet*/, 0, ((Object)0)) == 0) {
+			(_iob[2]).brain_logging(0, "brain_recv: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
 		if (password_ok == 0) {
 			(_iob[2]).brain_logging(0, "Invalid brain server password\n");
-			ModernizedCProgram.close(brain_link_client_fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
-		if (device_param.brain_send(brain_link_client_fd, brain_session, , 0, status_ctx) == 0) {
-			(_iob[2]).brain_logging(0, "brain_send: %s\n", .strerror((._errno())));
-			ModernizedCProgram.close(brain_link_client_fd);
+		if (device_param.brain_send(brain_link_client_fd, brain_session, /*Error: sizeof expression not supported yet*/, 0, status_ctx) == 0) {
+			(_iob[2]).brain_logging(0, "brain_send: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
-		if (device_param.brain_send(brain_link_client_fd, brain_attack, , 0, status_ctx) == 0) {
-			(_iob[2]).brain_logging(0, "brain_send: %s\n", .strerror((._errno())));
-			ModernizedCProgram.close(brain_link_client_fd);
+		if (device_param.brain_send(brain_link_client_fd, brain_attack, /*Error: sizeof expression not supported yet*/, 0, status_ctx) == 0) {
+			(_iob[2]).brain_logging(0, "brain_send: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
-		if (device_param.brain_send(brain_link_client_fd, passwords_max, , 0, status_ctx) == 0) {
-			(_iob[2]).brain_logging(0, "brain_send: %s\n", .strerror((._errno())));
-			ModernizedCProgram.close(brain_link_client_fd);
+		if (device_param.brain_send(brain_link_client_fd, passwords_max, /*Error: sizeof expression not supported yet*/, 0, status_ctx) == 0) {
+			(_iob[2]).brain_logging(0, "brain_send: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
-		if (((Object)0).brain_recv(brain_link_client_fd, highest, , 0, ((Object)0)) == 0) {
-			(_iob[2]).brain_logging(0, "brain_recv: %s\n", .strerror((._errno())));
-			ModernizedCProgram.close(brain_link_client_fd);
+		if (((Object)0).brain_recv(brain_link_client_fd, highest, /*Error: Unsupported expression*/, 0, ((Object)0)) == 0) {
+			(_iob[2]).brain_logging(0, "brain_recv: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
 		return 1;
@@ -806,7 +806,7 @@ public class hc_device_param {
 	public void brain_client_disconnect() {
 		Object generatedBrain_link_client_fd = this.getBrain_link_client_fd();
 		if (generatedBrain_link_client_fd > 2) {
-			ModernizedCProgram.close(generatedBrain_link_client_fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedBrain_link_client_fd);
 		} 
 		this.setBrain_link_client_fd(-1);
 	}
@@ -817,16 +817,16 @@ public class hc_device_param {
 			return 0;
 		} 
 		u8 operation = brain_operation.BRAIN_OPERATION_ATTACK_RESERVE;
-		if (device_param.brain_send(brain_link_client_fd, operation, , 0, status_ctx) == 0) {
+		if (device_param.brain_send(brain_link_client_fd, operation, /*Error: sizeof expression not supported yet*/, 0, status_ctx) == 0) {
 			return 0;
 		} 
-		if (device_param.brain_send(brain_link_client_fd, words_off, , 0, status_ctx) == 0) {
+		if (device_param.brain_send(brain_link_client_fd, words_off, /*Error: sizeof expression not supported yet*/, 0, status_ctx) == 0) {
 			return 0;
 		} 
-		if (device_param.brain_send(brain_link_client_fd, work, , 0, status_ctx) == 0) {
+		if (device_param.brain_send(brain_link_client_fd, work, /*Error: sizeof expression not supported yet*/, 0, status_ctx) == 0) {
 			return 0;
 		} 
-		if (device_param.brain_recv(brain_link_client_fd, overlap, , 0, status_ctx) == 0) {
+		if (device_param.brain_recv(brain_link_client_fd, overlap, /*Error: Unsupported expression*/, 0, status_ctx) == 0) {
 			return 0;
 		} 
 		return 1;
@@ -842,7 +842,7 @@ public class hc_device_param {
 			return 0;
 		} 
 		u8 operation = brain_operation.BRAIN_OPERATION_COMMIT;
-		if (device_param.brain_send(brain_link_client_fd, operation, , 0, status_ctx) == 0) {
+		if (device_param.brain_send(brain_link_client_fd, operation, /*Error: sizeof expression not supported yet*/, 0, status_ctx) == 0) {
 			return 0;
 		} 
 		return 1;
@@ -864,16 +864,16 @@ public class hc_device_param {
 		int in_size = 0;
 		int out_size = generatedPws_pre_cnt * ModernizedCProgram.BRAIN_HASH_SIZE;
 		u8 operation = brain_operation.BRAIN_OPERATION_HASH_LOOKUP;
-		if (device_param.brain_send(brain_link_client_fd, operation, , 0, status_ctx) == 0) {
+		if (device_param.brain_send(brain_link_client_fd, operation, /*Error: sizeof expression not supported yet*/, 0, status_ctx) == 0) {
 			return 0;
 		} 
-		if (device_param.brain_send(brain_link_client_fd, out_size, , 0, status_ctx) == 0) {
+		if (device_param.brain_send(brain_link_client_fd, out_size, /*Error: sizeof expression not supported yet*/, 0, status_ctx) == 0) {
 			return 0;
 		} 
 		if (device_param.brain_send(brain_link_client_fd, sendbuf, out_size, 0, status_ctx) == 0) {
 			return 0;
 		} 
-		if (device_param.brain_recv(brain_link_client_fd, in_size, , 0, status_ctx) == 0) {
+		if (device_param.brain_recv(brain_link_client_fd, in_size, /*Error: sizeof expression not supported yet*/, 0, status_ctx) == 0) {
 			return 0;
 		} 
 		Object generatedSize_brain_link_in = this.getSize_brain_link_in();
@@ -893,17 +893,17 @@ public class hc_device_param {
 		Object generatedBase_buf = pw_pre.getBase_buf();
 		if (generatedPws_pre_cnt < generatedKernel_power) {
 			pw_pre_t pw_pre = generatedPws_pre_buf + generatedPws_pre_cnt;
-			.memcpy(generatedPw_buf, pw_buf, pw_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPw_buf, pw_buf, pw_len);
 			pw_pre.setPw_len(pw_len);
 			if (base_buf != ((Object)0)) {
-				.memcpy(generatedBase_buf, base_buf, base_len);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedBase_buf, base_buf, base_len);
 				pw_pre.setBase_len(base_len);
 			} 
 			pw_pre.setRule_idx(rule_idx);
 			generatedPws_pre_cnt++;
 		} else {
-				.fprintf((_iob[1]), "BUG pw_pre_add()!!\n");
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "BUG pw_pre_add()!!\n");
+				return /*Error: Unsupported expression*/;
 		} 
 	}
 	public void pw_add(Object pw_buf, Object pw_len) {
@@ -920,14 +920,14 @@ public class hc_device_param {
 			pw_idx.setCnt(pw_len4_cnt);
 			pw_idx.setLen(pw_len);
 			u8 dst = (u8)(generatedPws_comp + generatedOff);
-			.memcpy(dst, pw_buf, pw_len);
-			.memset(dst + pw_len, 0, pw_len4 - pw_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dst, pw_buf, pw_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(dst + pw_len, 0, pw_len4 - pw_len);
 			pw_idx_t pw_idx_next = pw_idx + 1;
 			pw_idx_next.setOff(generatedOff + generatedCnt);
 			generatedPws_cnt++;
 		} else {
-				.fprintf((_iob[2]), "BUG pw_add()!!\n");
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "BUG pw_add()!!\n");
+				return /*Error: Unsupported expression*/;
 		} 
 	}
 	public void rebuild_pws_compressed_append(Object pws_cnt, Object chr) {
@@ -947,7 +947,7 @@ public class hc_device_param {
 			u32 src_off = generatedOff;
 			u32 src_len = generatedLen;
 			u8[] buf = new u8();
-			.memcpy(buf, generatedPws_comp + src_off, src_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf, generatedPws_comp + src_off, src_len);
 			buf[src_len] = chr;
 			u32 dst_len = src_len + 1;
 			u32 dst_pw_len4 = (dst_len + 3) & ~3;
@@ -955,13 +955,13 @@ public class hc_device_param {
 			pw_idx_dst.setCnt(dst_pw_len4_cnt);
 			pw_idx_dst.setLen(src_len);
 			u8 dst = (u8)(tmp_pws_comp + generatedOff);
-			.memcpy(dst, buf, dst_len);
-			.memset(dst + dst_len, 0, dst_pw_len4 - dst_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dst, buf, dst_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(dst + dst_len, 0, dst_pw_len4 - dst_len);
 			pw_idx_t pw_idx_dst_next = pw_idx_dst + 1;
 			pw_idx_dst_next.setOff(generatedOff + generatedCnt);
 		}
-		.memcpy(generatedPws_comp, tmp_pws_comp, generatedSize_pws_comp);
-		.memcpy(generatedPws_idx, tmp_pws_idx, generatedSize_pws_idx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPws_comp, tmp_pws_comp, generatedSize_pws_comp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPws_idx, tmp_pws_idx, generatedSize_pws_idx);
 		ModernizedCProgram.hcfree(tmp_pws_comp);
 		ModernizedCProgram.hcfree(tmp_pws_idx);
 	}
@@ -1010,8 +1010,8 @@ public class hc_device_param {
 			seven_zip_hook_t hook_item = hook_items[pw_pos];
 			u32 ukey = (u32)generatedUkey;
 			AES_KEY aes_key = new AES_KEY();
-			.memset(aes_key, 0, );
-			.aes256_set_decrypt_key(aes_key.getRdk(), ukey, (u32)ModernizedCProgram.te0, (u32)ModernizedCProgram.te1, (u32)ModernizedCProgram.te2, (u32)ModernizedCProgram.te3, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(aes_key, 0, /*Error: sizeof expression not supported yet*/);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/aes256_set_decrypt_key(aes_key.getRdk(), ukey, (u32)ModernizedCProgram.te0, (u32)ModernizedCProgram.te1, (u32)ModernizedCProgram.te2, (u32)ModernizedCProgram.te3, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3);
 			int aes_len = generatedAes_len;
 			u32[] data = new u32();
 			u32[] out = new u32();
@@ -1028,7 +1028,7 @@ public class hc_device_param {
 				data[1] = data_buf[j + 1];
 				data[2] = data_buf[j + 2];
 				data[3] = data_buf[j + 3];
-				.aes256_decrypt(aes_key.getRdk(), data, out, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3, (u32)ModernizedCProgram.td4);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/aes256_decrypt(aes_key.getRdk(), data, out, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3, (u32)ModernizedCProgram.td4);
 				out[0] ^=  iv[0];
 				out[1] ^=  iv[1];
 				out[2] ^=  iv[2];
@@ -1046,7 +1046,7 @@ public class hc_device_param {
 			data[1] = data_buf[j + 1];
 			data[2] = data_buf[j + 2];
 			data[3] = data_buf[j + 3];
-			.aes256_decrypt(aes_key.getRdk(), data, out, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3, (u32)ModernizedCProgram.td4);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/aes256_decrypt(aes_key.getRdk(), data, out, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3, (u32)ModernizedCProgram.td4);
 			out[0] ^=  iv[0];
 			out[1] ^=  iv[1];
 			out[2] ^=  iv[2];
@@ -1082,7 +1082,7 @@ public class hc_device_param {
 						inf.setNext_in(compressed_data);
 						inf.setAvail_out(decompressed_data_len);
 						inf.setNext_out(decompressed_data);
-						ModernizedCProgram.inflateInit2_((inf), (true), "1.2.11", (int));
+						ModernizedCProgram.inflateInit2_((inf), (true), "1.2.11", (int)/*Error: Unsupported expression*/);
 						int zlib_ret = ModernizedCProgram.inflate(inf, 0);
 						ModernizedCProgram.inflateEnd(inf);
 						if ((zlib_ret == 0) || (zlib_ret == 1)) {
@@ -1850,10 +1850,10 @@ public class hc_device_param {
 	public void setCombs_fp(hc_fp newCombs_fp) {
 		combs_fp = newCombs_fp;
 	}
-	public pw getCombs_buf() {
+	public pw[] getCombs_buf() {
 		return combs_buf;
 	}
-	public void setCombs_buf(pw newCombs_buf) {
+	public void setCombs_buf(pw[] newCombs_buf) {
 		combs_buf = newCombs_buf;
 	}
 	public Object getHooks_buf() {

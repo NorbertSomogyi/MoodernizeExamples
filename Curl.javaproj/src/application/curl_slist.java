@@ -29,83 +29,6 @@ public class curl_slist {
 	public curl_slist() {
 	}
 	
-	public curl_slist sethost() {
-		(Object)headers;
-		return ((Object)0).curl_slist_append(ModernizedCProgram.HOSTHEADER);
-	}
-	/* Check if header matches. */
-	public Byte match_header(Object lbl, Object len) {
-		byte value = ((Object)0);
-		Object generatedCurl_slist = this.getCurl_slist();
-		if (ModernizedCProgram.Curl_strncasecompare(generatedCurl_slist, lbl, len) && generatedCurl_slist[len] == (byte)':') {
-			for (value = generatedCurl_slist + len + 1; value == (byte)' '; value++) {
-				;
-			}
-		} 
-		return value;
-	}
-	/* Get a header from an slist. */
-	public Byte search_header(Object hdr) {
-		size_t len = .strlen(hdr);
-		byte value = ((Object)0);
-		Object generatedCurl_slist = this.getCurl_slist();
-		for (; !value && hdrlist; hdrlist = generatedCurl_slist) {
-			value = hdrlist.match_header(hdr, len);
-		}
-		return value;
-	}
-	/* Set mime part headers. */
-	public Object curl_mime_headers(Object part, int take_ownership) {
-		if (!part) {
-			return CURLE_BAD_FUNCTION_ARGUMENT;
-		} 
-		if (part.getFlags() & (1 << 0)) {
-			if (part.getUserheaders() != /* Allow setting twice the same list. */headers) {
-				part.getUserheaders().curl_slist_free_all();
-			} 
-			part.getFlags() &=  ~(1 << 0);
-		} 
-		part.setUserheaders(headers);
-		if (headers && take_ownership) {
-			part.getFlags() |=  (1 << 0);
-		} 
-		return CURLE_OK;
-	}
-	/* Compute header list size. */
-	public Object slist_size(Object overhead, Object skip) {
-		size_t size = 0;
-		size_t skiplen = skip ? .strlen(skip) : 0;
-		Object generatedCurl_slist = this.getCurl_slist();
-		for (; s; s = generatedCurl_slist) {
-			if (!skip || !s.match_header(skip, skiplen)) {
-				size += .strlen(generatedCurl_slist) + overhead;
-			} 
-		}
-		return size;
-	}
-	/* Add a header. */
-	/* VARARGS2 */
-	public Object Curl_mime_add_header(Object fmt) {
-		curl_slist hdr = ((Object)0);
-		byte s = ((Object)0);
-		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
-		s = ModernizedCProgram.curl_mvaprintf(fmt, ap);
-		.__builtin_va_end(ap);
-		if (s) {
-			hdr = slp.Curl_slist_append_nodup(s);
-			if (hdr) {
-				slp = hdr;
-			} else {
-					.Curl_cfree(s);
-			} 
-		} 
-		return hdr ? CURLE_OK : CURLE_OUT_OF_MEMORY;
-	}
-	/* Add a content type header. */
-	public Object add_content_type(Object type, Object boundary) {
-		return slp.Curl_mime_add_header("Content-Type: %s%s%s", type, boundary ? "; boundary=" : "", boundary ? boundary : "");
-	}
 	public curl_slist slist_get_last() {
 		curl_slist item = new curl_slist();
 		if (!/* if caller passed us a NULL, return now */list) {
@@ -131,7 +54,7 @@ public class curl_slist {
 		curl_slist new_item = new curl_slist();
 		do {
 		} while (0);
-		new_item = .Curl_cmalloc();
+		new_item = /*Error: Function owner not recognized*/Curl_cmalloc(/*Error: Unsupported expression*/);
 		if (!new_item) {
 			return ((Object)0);
 		} 
@@ -151,13 +74,13 @@ public class curl_slist {
 		 */;
 	}
 	public curl_slist curl_slist_append(Object data) {
-		byte dupdata = .Curl_cstrdup(data);
+		byte dupdata = /*Error: Function owner not recognized*/Curl_cstrdup(data);
 		if (!dupdata) {
 			return ((Object)0);
 		} 
 		list = list.Curl_slist_append_nodup(dupdata);
 		if (!list) {
-			.Curl_cfree(dupdata);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(dupdata);
 		} 
 		return list/*
 		 * Curl_slist_duplicate() duplicates a linked list. It always returns the
@@ -185,48 +108,67 @@ public class curl_slist {
 		curl_slist next = new curl_slist();
 		curl_slist item = new curl_slist();
 		if (!list) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		item = list;
 		Object generatedCurl_slist = item.getCurl_slist();
 		do {
 			next = generatedCurl_slist;
 			do {
-				.Curl_cfree((generatedCurl_slist));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedCurl_slist));
 				(generatedCurl_slist) = ((Object)0);
 			} while (0);
-			.Curl_cfree(item);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(item);
 			item = next;
 		} while (next);
 	}
-	public curl_slist GetLoadedModulePaths() {
-		HANDLE hnd = (HANDLE)(true);
-		MODULEENTRY32 mod = new MODULEENTRY32(0);
-		curl_slist slist = ((Object)0);
-		mod.setDwSize();
+	/* Generate code for a struct curl_slist. */
+	public Object libcurl_generate_slist(Integer slistno) {
+		 ret = CURLE_OK;
+		byte escaped = ((Object)0);
+		slistno = ++/* May need several slist variables, so invent name */ModernizedCProgram.easysrc_slist_count;
 		do {
-			hnd = .CreateToolhelp32Snapshot(-1024, 0);
-		} while (hnd == (HANDLE)(true) && .GetLastError() == -1024);
-		if (hnd == (HANDLE)(true)) {
-			;
-		} 
-		if (!.Module32First(hnd, mod)) {
-			;
-		} 
-		Object generatedSzExePath = mod.getSzExePath();
-		do {
-			byte path;
-			curl_slist temp = new curl_slist();
-			ModernizedCProgram.path = generatedSzExePath;
-			temp = slist.curl_slist_append(ModernizedCProgram.path);
-			if (!temp) {
+			ret = ModernizedCProgram.easysrc_decl.easysrc_addf("struct curl_slist *slist%d;", slistno);
+			if (ret) {
 				;
 			} 
-			slist = temp;
-		} while (.Module32Next(hnd, mod));
-		;
-		slist = ((Object)0);
-		return slist/* WIN32 *//* MSDOS || WIN32 */;
+		} while (0);
+		do {
+			ret = ModernizedCProgram.easysrc_data.easysrc_addf("slist%d = NULL;", slistno);
+			if (ret) {
+				;
+			} 
+		} while (0);
+		do {
+			ret = ModernizedCProgram.easysrc_clean.easysrc_addf("curl_slist_free_all(slist%d);", slistno);
+			if (ret) {
+				;
+			} 
+		} while (0);
+		do {
+			ret = ModernizedCProgram.easysrc_clean.easysrc_addf("slist%d = NULL;", slistno);
+			if (ret) {
+				;
+			} 
+		} while (0);
+		Object generatedCurl_slist = this.getCurl_slist();
+		for (; slist; slist = generatedCurl_slist) {
+			do {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((escaped));
+				(escaped) = ((Object)0);
+			} while (0);
+			escaped = ModernizedCProgram.c_escape(generatedCurl_slist, CURL_ZERO_TERMINATED);
+			if (!escaped) {
+				return CURLE_OUT_OF_MEMORY;
+			} 
+			do {
+				ret = ModernizedCProgram.easysrc_data.easysrc_addf("slist%d = curl_slist_append(slist%d, \"%s\");", slistno, slistno, escaped);
+				if (ret) {
+					;
+				} 
+			} while (0);
+		}
+		return ret;
 	}
 	public curl_slist slist_convert(int dccsid, int sccsid) {
 		curl_slist to = (curl_slist)((Object)0);
@@ -240,7 +182,7 @@ public class curl_slist {
 			nl = to.Curl_slist_append_nodup(cp);
 			if (!nl) {
 				to.curl_slist_free_all();
-				.free(cp);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(cp);
 				return ((Object)0);
 			} 
 			to = nl;
@@ -258,8 +200,114 @@ public class curl_slist {
 			return (curl_slist)((Object)0);
 		} 
 		list = list.curl_slist_append(s);
-		.free(s);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(s);
 		return list;
+	}
+	/* Check if header matches. */
+	public Byte match_header(Object lbl, Object len) {
+		byte value = ((Object)0);
+		Object generatedCurl_slist = this.getCurl_slist();
+		if (ModernizedCProgram.Curl_strncasecompare(generatedCurl_slist, lbl, len) && generatedCurl_slist[len] == (byte)':') {
+			for (value = generatedCurl_slist + len + 1; value == (byte)' '; value++) {
+				;
+			}
+		} 
+		return value;
+	}
+	/* Get a header from an slist. */
+	public Byte search_header(Object hdr) {
+		size_t len = /*Error: Function owner not recognized*/strlen(hdr);
+		byte value = ((Object)0);
+		Object generatedCurl_slist = this.getCurl_slist();
+		for (; !value && hdrlist; hdrlist = generatedCurl_slist) {
+			value = hdrlist.match_header(hdr, len);
+		}
+		return value;
+	}
+	/* Set mime part headers. */
+	public Object curl_mime_headers(Object part, int take_ownership) {
+		if (!part) {
+			return CURLE_BAD_FUNCTION_ARGUMENT;
+		} 
+		if (part.getFlags() & (1 << 0)) {
+			if (part.getUserheaders() != /* Allow setting twice the same list. */headers) {
+				part.getUserheaders().curl_slist_free_all();
+			} 
+			part.getFlags() &=  ~(1 << 0);
+		} 
+		part.setUserheaders(headers);
+		if (headers && take_ownership) {
+			part.getFlags() |=  (1 << 0);
+		} 
+		return CURLE_OK;
+	}
+	/* Compute header list size. */
+	public Object slist_size(Object overhead, Object skip) {
+		size_t size = 0;
+		size_t skiplen = skip ? /*Error: Function owner not recognized*/strlen(skip) : 0;
+		Object generatedCurl_slist = this.getCurl_slist();
+		for (; s; s = generatedCurl_slist) {
+			if (!skip || !s.match_header(skip, skiplen)) {
+				size += /*Error: Function owner not recognized*/strlen(generatedCurl_slist) + overhead;
+			} 
+		}
+		return size;
+	}
+	/* Add a header. */
+	/* VARARGS2 */
+	public Object Curl_mime_add_header(Object fmt) {
+		curl_slist hdr = ((Object)0);
+		byte s = ((Object)0);
+		va_list ap = new va_list();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
+		s = ModernizedCProgram.curl_mvaprintf(fmt, ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
+		if (s) {
+			hdr = slp.Curl_slist_append_nodup(s);
+			if (hdr) {
+				slp = hdr;
+			} else {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(s);
+			} 
+		} 
+		return hdr ? CURLE_OK : CURLE_OUT_OF_MEMORY;
+	}
+	/* Add a content type header. */
+	public Object add_content_type(Object type, Object boundary) {
+		return slp.Curl_mime_add_header("Content-Type: %s%s%s", type, boundary ? "; boundary=" : "", boundary ? boundary : "");
+	}
+	public curl_slist sethost() {
+		(Object)headers;
+		return ((Object)0).curl_slist_append(ModernizedCProgram.HOSTHEADER);
+	}
+	public curl_slist GetLoadedModulePaths() {
+		HANDLE hnd = (HANDLE)(true);
+		MODULEENTRY32 mod = new MODULEENTRY32(0);
+		curl_slist slist = ((Object)0);
+		mod.setDwSize(/*Error: Unsupported expression*/);
+		do {
+			hnd = /*Error: Function owner not recognized*/CreateToolhelp32Snapshot(-1024, 0);
+		} while (hnd == (HANDLE)(true) && /*Error: Function owner not recognized*/GetLastError() == -1024);
+		if (hnd == (HANDLE)(true)) {
+			;
+		} 
+		if (!/*Error: Function owner not recognized*/Module32First(hnd, mod)) {
+			;
+		} 
+		Object generatedSzExePath = mod.getSzExePath();
+		do {
+			byte path;
+			curl_slist temp = new curl_slist();
+			ModernizedCProgram.path = generatedSzExePath;
+			temp = slist.curl_slist_append(ModernizedCProgram.path);
+			if (!temp) {
+				;
+			} 
+			slist = temp;
+		} while (/*Error: Function owner not recognized*/Module32Next(hnd, mod));
+		;
+		slist = ((Object)0);
+		return slist/* WIN32 *//* MSDOS || WIN32 */;
 	}
 	public curl_slist cookie_list(Curl_easy data) {
 		curl_slist list = ((Object)0);
@@ -267,8 +315,9 @@ public class curl_slist {
 		Cookie c = new Cookie();
 		byte line;
 		int i;
-		Object generatedCookies = data.getCookies();
-		if ((generatedCookies == ((Object)0)) || (generatedCookies.getNumcookies() == 0)) {
+		CookieInfo[] generatedCookies = data.getCookies();
+		long generatedNumcookies = generatedCookies.getNumcookies();
+		if ((generatedCookies == ((Object)0)) || (generatedNumcookies == 0)) {
 			return ((Object)0);
 		} 
 		Byte generatedDomain = c.getDomain();
@@ -285,7 +334,7 @@ public class curl_slist {
 				} 
 				beg = list.Curl_slist_append_nodup(line);
 				if (!beg) {
-					.Curl_cfree(line);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(line);
 					list.curl_slist_free_all();
 					return ((Object)0);
 				} 

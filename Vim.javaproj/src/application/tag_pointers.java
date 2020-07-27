@@ -73,7 +73,7 @@ public class tag_pointers {
 		p = generatedCommand;
 		while ((p = ModernizedCProgram.vim_strchr(p, (byte)'\t')) != ((Object)0)) {
 			++p;
-			if (.strncmp((byte)(p), (byte)("file:"), (size_t)(true)) == 0) {
+			if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("file:"), (size_t)(true)) == 0) {
 				return 1;
 			} 
 		}
@@ -88,11 +88,11 @@ public class tag_pointers {
 		char_u pt = new char_u();
 		this.setTag_fname(lbuf + 1);
 		Object generatedTag_fname = this.getTag_fname();
-		lbuf += .strlen((byte)(generatedTag_fname)) + 2;
+		lbuf += /*Error: Function owner not recognized*/strlen((byte)(generatedTag_fname)) + 2;
 		if (lbuf) {
 			this.setIs_etag(1);
 			this.setFname(lbuf);
-			lbuf += .strlen((byte)(lbuf));
+			lbuf += /*Error: Function owner not recognized*/strlen((byte)(lbuf));
 			this.setFname_end(lbuf++);
 		} else {
 				this.setIs_etag(0);
@@ -117,9 +117,9 @@ public class tag_pointers {
 				p += /* skip ";\"" */2;
 				if (p++ == (byte)'\011') {
 					while ((((int)(p) - (byte)'A' < 26) || ((int)(p) - (byte)'a' < 26))) {
-						if (.strncmp((byte)(p), (byte)("kind:"), (size_t)(true)) == 0) {
+						if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("kind:"), (size_t)(true)) == 0) {
 							this.setTagkind(p + 5);
-						}  else if (.strncmp((byte)(p), (byte)("user_data:"), (size_t)(true)) == 0) {
+						}  else if (/*Error: Function owner not recognized*/strncmp((byte)(p), (byte)("user_data:"), (size_t)(true)) == 0) {
 							this.setUser_data(p + 10);
 						} 
 						if (generatedTagkind != ((Object)0) && generatedUser_data != ((Object)0)) {

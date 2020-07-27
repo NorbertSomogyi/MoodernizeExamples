@@ -14,8 +14,8 @@ public class gl_windowinfo {
 	}
 	
 	public gl_windowinfo gl_windowinfo_create(Object info) {
-		.UNUSED_PARAMETER(info);
-		return ModernizedCProgram.bmalloc();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(info);
+		return ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/);
 		gl_windowinfo gl_windowinfo = new gl_windowinfo();
 		gl_windowinfo wi = gl_windowinfo.gl_windowinfo_bare(info);
 		PIXELFORMATDESCRIPTOR pfd = new PIXELFORMATDESCRIPTOR();
@@ -35,22 +35,22 @@ public class gl_windowinfo {
 		return ((Object)0);
 	}
 	public void gl_windowinfo_destroy() {
-		.UNUSED_PARAMETER(info);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(info);
 		ModernizedCProgram.bfree(info);
 		Object generatedHdc = wi.getHdc();
 		Object generatedHwnd = wi.getHwnd();
 		if (wi) {
 			if (generatedHdc) {
-				.ReleaseDC(generatedHwnd, generatedHdc);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ReleaseDC(generatedHwnd, generatedHdc);
 			} 
 			ModernizedCProgram.bfree(wi);
 		} 
 	}
 	public gl_windowinfo gl_windowinfo_bare(Object info) {
-		gl_windowinfo wi = ModernizedCProgram.bzalloc();
+		gl_windowinfo wi = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		wi.setHwnd(info.getWindow().getHwnd());
 		Object generatedHwnd = wi.getHwnd();
-		wi.setHdc(.GetDC(generatedHwnd));
+		wi.setHdc(/*Error: Function owner not recognized*/GetDC(generatedHwnd));
 		Object generatedHdc = wi.getHdc();
 		if (!generatedHdc) {
 			ModernizedCProgram.blog(LOG_ERROR, "Unable to get device context from window");

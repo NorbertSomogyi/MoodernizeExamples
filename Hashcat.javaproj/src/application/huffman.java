@@ -1,22 +1,22 @@
 package application;
 
 public class huffman {
-	private Integer count;
-	private Integer symbol;
+	private int[] count;
+	private int[] symbol;
 	
-	public huffman(Integer count, Integer symbol) {
+	public huffman(int[] count, int[] symbol) {
 		setCount(count);
 		setSymbol(symbol);
 	}
 	public huffman() {
 	}
 	
-	public int construct(Object length, int n) {
+	public int construct(Object[] length, int n) {
 		/* current symbol when stepping through length[] */int symbol;
 		/* current length when stepping through h->count[] */int len;
 		/* number of possible codes left of current length */int left;
 		int[] offs = new int[15 + /* offsets in symbol table for each length */1];
-		Integer generatedCount = this.getCount();
+		int[] generatedCount = this.getCount();
 		for (len = 0; len <= 15; /* count number of codes of each length */len++) {
 			generatedCount[len] = 0;
 		}
@@ -41,7 +41,7 @@ public class huffman {
 			     * length
 			     */];
 		}
-		Integer generatedSymbol = this.getSymbol();
+		int[] generatedSymbol = this.getSymbol();
 		for (symbol = 0; symbol < n; symbol++) {
 			if (length[symbol] != 0) {
 				generatedSymbol[offs[length[symbol]]++] = symbol;
@@ -117,7 +117,7 @@ public class huffman {
 			} while (--left);
 		} while (--n);
 		n = symbol;
-		Integer generatedCount = this.getCount();
+		int[] generatedCount = this.getCount();
 		for (len = 0; len <= 13; /* count number of codes of each length */len++) {
 			generatedCount[len] = 0;
 		}
@@ -142,7 +142,7 @@ public class huffman {
 			     * length
 			     */];
 		}
-		Integer generatedSymbol = this.getSymbol();
+		int[] generatedSymbol = this.getSymbol();
 		for (symbol = 0; symbol < n; symbol++) {
 			if (length[symbol] != 0) {
 				generatedSymbol[offs[length[symbol]]++] = symbol;
@@ -187,16 +187,16 @@ public class huffman {
 		 *   this correctly.
 		 */;
 	}
-	public Integer getCount() {
+	public int[] getCount() {
 		return count;
 	}
-	public void setCount(Integer newCount) {
+	public void setCount(int[] newCount) {
 		count = newCount;
 	}
-	public Integer getSymbol() {
+	public int[] getSymbol() {
 		return symbol;
 	}
-	public void setSymbol(Integer newSymbol) {
+	public void setSymbol(int[] newSymbol) {
 		symbol = newSymbol;
 	}
 }

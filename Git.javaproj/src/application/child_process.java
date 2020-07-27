@@ -1,7 +1,7 @@
 package application;
 
 public class child_process {
-	private Object argv;
+	private Object[][] argv;
 	private argv_array args;
 	private argv_array env_array;
 	private Object pid;
@@ -26,7 +26,7 @@ public class child_process {
 	private Object clean_on_exit_handler;
 	private Object clean_on_exit_handler_cbdata;
 	
-	public child_process(Object argv, argv_array args, argv_array env_array, Object pid, int trace2_child_id, Object trace2_child_us_start, Object trace2_child_class, Object trace2_hook_name, int in, int out, int err, Object dir, Object env, int no_stdin, int no_stdout, int no_stderr, int git_cmd, int silent_exec_failure, int stdout_to_stderr, int use_shell, int clean_on_exit, int wait_after_clean, Object clean_on_exit_handler, Object clean_on_exit_handler_cbdata) {
+	public child_process(Object[][] argv, argv_array args, argv_array env_array, Object pid, int trace2_child_id, Object trace2_child_us_start, Object trace2_child_class, Object trace2_hook_name, int in, int out, int err, Object dir, Object env, int no_stdin, int no_stdout, int no_stderr, int git_cmd, int silent_exec_failure, int stdout_to_stderr, int use_shell, int clean_on_exit, int wait_after_clean, Object clean_on_exit_handler, Object clean_on_exit_handler_cbdata) {
 		setArgv(argv);
 		setArgs(args);
 		setEnv_array(env_array);
@@ -55,27 +55,13 @@ public class child_process {
 	public child_process() {
 	}
 	
-	/**
-	 * Convenience wrapper around pipe_command for the common case
-	 * of capturing only stdout.
-	 */
-	public int capture_command(Object out, Object hint) {
-		return ModernizedCProgram.pipe_command(cmd, ((Object)0), 0, out, hint, ((Object)0), 0/*
-		 * The purpose of the following functions is to feed a pipe by running
-		 * a function asynchronously and providing output that the caller reads.
-		 *
-		 * It is expected that no synchronization and mutual exclusion between
-		 * the caller and the feed function is necessary so that the function
-		 * can run in a thread without interfering with the caller.
-		 */);
-	}
 	public void trace2_child_start_fl(Object file, int line) {
 		tr2_tgt tgt_j = new tr2_tgt();
 		int j;
 		uint64_t us_now = new uint64_t();
 		uint64_t us_elapsed_absolute = new uint64_t();
 		if (!ModernizedCProgram.trace2_enabled) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		us_now = ModernizedCProgram.getnanotime() / 1000;
 		us_elapsed_absolute = ModernizedCProgram.tr2tls_absolute_elapsed(us_now);
@@ -85,7 +71,7 @@ public class child_process {
 		for (; tgt_j; ) {
 			if (ModernizedCProgram.tr2_dst_trace_want(generatedTr2_tgt)) {
 				if (generatedTr2_tgt) {
-					.UNRECOGNIZEDFUNCTIONNAME(file, line, us_elapsed_absolute, cmd);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(file, line, us_elapsed_absolute, cmd);
 				} 
 			} 
 		}
@@ -97,7 +83,7 @@ public class child_process {
 		uint64_t us_elapsed_absolute = new uint64_t();
 		uint64_t us_elapsed_child = new uint64_t();
 		if (!ModernizedCProgram.trace2_enabled) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		us_now = ModernizedCProgram.getnanotime() / 1000;
 		us_elapsed_absolute = ModernizedCProgram.tr2tls_absolute_elapsed(us_now);
@@ -113,7 +99,7 @@ public class child_process {
 		for (; tgt_j; ) {
 			if (ModernizedCProgram.tr2_dst_trace_want(generatedTr2_tgt)) {
 				if (generatedTr2_tgt) {
-					.UNRECOGNIZEDFUNCTIONNAME(file, line, us_elapsed_absolute, generatedTrace2_child_id, generatedPid, child_exit_code, us_elapsed_child);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(file, line, us_elapsed_absolute, generatedTrace2_child_id, generatedPid, child_exit_code, us_elapsed_child);
 				} 
 			} 
 		}
@@ -121,13 +107,13 @@ public class child_process {
 	public int git_connection_is_socket() {
 		return conn == ModernizedCProgram.no_fork;
 	}
-	public child_process git_tcp_connect(Integer fd, Byte host, int flags) {
+	public child_process git_tcp_connect(int[] fd, Byte host, int flags) {
 		int sockfd = ModernizedCProgram.git_tcp_connect_sock(host, flags);
 		fd[0] = sockfd;
-		fd[1] = .dup(sockfd);
+		fd[1] = /*Error: Function owner not recognized*/dup(sockfd);
 		return ModernizedCProgram.no_fork;
 	}
-	public child_process git_proxy_connect(Integer fd, Byte host) {
+	public child_process git_proxy_connect(int[] fd, Byte host) {
 		byte port = "9418";
 		child_process proxy = new child_process();
 		ModernizedCProgram.get_host_and_port(host, port);
@@ -137,7 +123,7 @@ public class child_process {
 		if (ModernizedCProgram.looks_like_command_line_option(port)) {
 			ModernizedCProgram.die(ModernizedCProgram._("strange port '%s' blocked"), port);
 		} 
-		proxy = ModernizedCProgram.xmalloc();
+		proxy = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		proxy.child_process_init();
 		argv_array generatedArgs = proxy.getArgs();
 		generatedArgs.argv_array_push(ModernizedCProgram.git_proxy_command);
@@ -154,10 +140,10 @@ public class child_process {
 		fd[1] = generatedIn;
 		return proxy;
 	}
-	public child_process git_connect_git(Integer fd, Byte hostandport, Object path, Object prog, protocol_version version, int flags) {
+	public child_process git_connect_git(int[] fd, Byte hostandport, Object path, Object prog, protocol_version version, int flags) {
 		child_process conn = new child_process();
-		strbuf request = new strbuf(, , );
-		byte target_host = .getenv("GIT_OVERRIDE_VIRTUAL_HOST");
+		strbuf request = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		byte target_host = /*Error: Function owner not recognized*/getenv("GIT_OVERRIDE_VIRTUAL_HOST");
 		if (target_host) {
 			target_host = ModernizedCProgram.xstrdup(target_host);
 		} else {
@@ -185,7 +171,7 @@ public class child_process {
 			request.strbuf_addch((byte)'\0');
 			request.strbuf_addf("version=%d%c", protocol_version.version, (byte)'\0');
 		} 
-		byte generatedBuf = request.getBuf();
+		byte[] generatedBuf = request.getBuf();
 		Object generatedLen = request.getLen();
 		ModernizedCProgram.packet_write(fd[1], generatedBuf, generatedLen);
 		ModernizedCProgram.free(target_host);
@@ -211,7 +197,7 @@ public class child_process {
 					 */);
 		} else {
 				this.setUse_shell(0);
-				ssh = .getenv("GIT_SSH");
+				ssh = /*Error: Function owner not recognized*/getenv("GIT_SSH");
 				if (!ssh) {
 					ssh = "ssh";
 				} 
@@ -244,38 +230,38 @@ public class child_process {
 		 * the connection failed).
 		 */);
 	}
-	public child_process git_connect(Integer fd, Object url, Object prog, int flags) {
+	public child_process git_connect(int[] fd, Object url, Object prog, int flags) {
 		byte hostandport;
 		byte path;
 		child_process conn = new child_process();
 		protocol protocol;
 		protocol_version version = ModernizedCProgram.get_protocol_version_config();
-		if (protocol_version.version == protocol_version.protocol_v2 && !.strcmp("git-receive-pack", prog)) {
+		if (protocol_version.version == protocol_version.protocol_v2 && !/*Error: Function owner not recognized*/strcmp("git-receive-pack", prog)) {
 			protocol_version.version = protocol_version.protocol_v0/* Without this we cannot rely on waitpid() to tell
 				 * what happened to our children.
 				 */;
 		} 
-		.signal(SIGCHLD, ((__p_sig_fn_t)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal(SIGCHLD, ((__p_sig_fn_t)0));
 		protocol.protocol = ModernizedCProgram.parse_connect_url(url, hostandport, path);
 		child_process child_process = new child_process();
 		argv_array generatedEnv_array = conn.getEnv_array();
 		argv_array generatedArgs = conn.getArgs();
-		byte generatedBuf = cmd.getBuf();
+		byte[] generatedBuf = cmd.getBuf();
 		int generatedOut = conn.getOut();
 		int generatedIn = conn.getIn();
 		if ((flags & (-1024 << 1)) && (protocol.protocol != protocol.PROTO_SSH)) {
-			.printf("Diag: url=%s\n", url ? url : "NULL");
-			.printf("Diag: protocol=%s\n", ModernizedCProgram.prot_name(protocol.protocol));
-			.printf("Diag: hostandport=%s\n", hostandport ? hostandport : "NULL");
-			.printf("Diag: path=%s\n", path ? path : "NULL");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Diag: url=%s\n", url ? url : "NULL");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Diag: protocol=%s\n", ModernizedCProgram.prot_name(protocol.protocol));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Diag: hostandport=%s\n", hostandport ? hostandport : "NULL");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Diag: path=%s\n", path ? path : "NULL");
 			conn = ((Object)0);
 		}  else if (protocol.protocol == protocol.PROTO_GIT) {
 			conn = child_process.git_connect_git(fd, hostandport, path, prog, protocol_version.version, flags);
 			conn.setTrace2_child_class("transport/git");
 		} else {
-				strbuf cmd = new strbuf(, , );
+				strbuf cmd = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 				byte var;
-				conn = ModernizedCProgram.xmalloc();
+				conn = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 				conn.child_process_init();
 				if (ModernizedCProgram.looks_like_command_line_option(path)) {
 					ModernizedCProgram.die(ModernizedCProgram._("strange pathname '%s' blocked"), path);
@@ -297,11 +283,11 @@ public class child_process {
 						ModernizedCProgram.port = ModernizedCProgram.get_port(ssh_host);
 					} 
 					if (flags & (-1024 << 1)) {
-						.printf("Diag: url=%s\n", url ? url : "NULL");
-						.printf("Diag: protocol=%s\n", ModernizedCProgram.prot_name(protocol.protocol));
-						.printf("Diag: userandhost=%s\n", ssh_host ? ssh_host : "NULL");
-						.printf("Diag: port=%s\n", ModernizedCProgram.port ? ModernizedCProgram.port : "NONE");
-						.printf("Diag: path=%s\n", path ? path : "NULL");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Diag: url=%s\n", url ? url : "NULL");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Diag: protocol=%s\n", ModernizedCProgram.prot_name(protocol.protocol));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Diag: userandhost=%s\n", ssh_host ? ssh_host : "NULL");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Diag: port=%s\n", ModernizedCProgram.port ? ModernizedCProgram.port : "NONE");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Diag: path=%s\n", path ? path : "NULL");
 						ModernizedCProgram.free(hostandport);
 						ModernizedCProgram.free(path);
 						ModernizedCProgram.free(conn);
@@ -338,93 +324,192 @@ public class child_process {
 		ModernizedCProgram.free(conn);
 		return code;
 	}
-	public void prepare_pack_objects(Object args) {
-		argv_array generatedArgs = this.getArgs();
-		generatedArgs.argv_array_push("pack-objects");
-		if (args.getWindow()) {
-			generatedArgs.argv_array_pushf("--window=%s", args.getWindow());
-		} 
-		if (args.getWindow_memory()) {
-			generatedArgs.argv_array_pushf("--window-memory=%s", args.getWindow_memory());
-		} 
-		if (args.getDepth()) {
-			generatedArgs.argv_array_pushf("--depth=%s", args.getDepth());
-		} 
-		if (args.getThreads()) {
-			generatedArgs.argv_array_pushf("--threads=%s", args.getThreads());
-		} 
-		if (args.getMax_pack_size()) {
-			generatedArgs.argv_array_pushf("--max-pack-size=%s", args.getMax_pack_size());
-		} 
-		if (args.getNo_reuse_delta()) {
-			generatedArgs.argv_array_pushf("--no-reuse-delta");
-		} 
-		if (args.getNo_reuse_object()) {
-			generatedArgs.argv_array_pushf("--no-reuse-object");
-		} 
-		if (args.getLocal()) {
-			generatedArgs.argv_array_push("--local");
-		} 
-		if (args.getQuiet()) {
-			generatedArgs.argv_array_push("--quiet");
-		} 
-		if (ModernizedCProgram.delta_base_offset) {
-			generatedArgs.argv_array_push("--delta-base-offset");
-		} 
-		generatedArgs.argv_array_push(ModernizedCProgram.packtmp);
-		this.setGit_cmd(1);
-		this.setOut(-1/*
-		 * Write oid to the given struct child_process's stdin, starting it first if
-		 * necessary.
+	/**
+	 * Convenience wrapper around pipe_command for the common case
+	 * of capturing only stdout.
+	 */
+	public int capture_command(Object out, Object hint) {
+		return ModernizedCProgram.pipe_command(cmd, ((Object)0), 0, out, hint, ((Object)0), 0/*
+		 * The purpose of the following functions is to feed a pipe by running
+		 * a function asynchronously and providing output that the caller reads.
+		 *
+		 * It is expected that no synchronization and mutual exclusion between
+		 * the caller and the feed function is necessary so that the function
+		 * can run in a thread without interfering with the caller.
 		 */);
 	}
-	public void subprocess_exit_handler() {
-		ModernizedCProgram.sigchain_push(SIGPIPE, ((__p_sig_fn_t)1));
-		.close(ModernizedCProgram.process.getIn());
-		.close(ModernizedCProgram.process.getOut());
-		ModernizedCProgram.sigchain_pop(SIGPIPE);
-		/* Finish command will wait until the shutdown is complete. */ModernizedCProgram.process.finish_command();
-	}
-	public int handshake_version(Object welcome_prefix, Integer versions, int chosen_version) {
-		int version_scratch;
-		int i;
-		byte line;
-		byte p;
-		if (!chosen_version) {
-			chosen_version = version_scratch;
+	public child_process get_helper(transport transport) {
+		Object generatedData = transport.getData();
+		helper_data data = generatedData;
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		child_process helper = new child_process();
+		int duped;
+		int code;
+		child_process generatedHelper = data.getHelper();
+		if (generatedHelper) {
+			return generatedHelper;
 		} 
-		if (ModernizedCProgram.packet_write_fmt_gently(ModernizedCProgram.process.getIn(), "%s-client\n", welcome_prefix)) {
-			return ();
+		helper = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+		helper.child_process_init();
+		helper.setIn(-1);
+		helper.setOut(-1);
+		helper.setErr(0);
+		argv_array generatedArgs = helper.getArgs();
+		Object generatedName = data.getName();
+		generatedArgs.argv_array_pushf("git-remote-%s", generatedName);
+		generatedArgs.argv_array_push(generatedName);
+		Object generatedUrl = transport.getUrl();
+		generatedArgs.argv_array_push(ModernizedCProgram.remove_ext_force(generatedUrl));
+		helper.setGit_cmd(0);
+		helper.setSilent_exec_failure(1);
+		argv_array generatedEnv_array = helper.getEnv_array();
+		if (ModernizedCProgram.have_git_dir()) {
+			generatedEnv_array.argv_array_pushf("%s=%s", "GIT_DIR", ModernizedCProgram.get_git_dir());
 		} 
-		for (i = 0; versions[i]; i++) {
-			if (ModernizedCProgram.packet_write_fmt_gently(ModernizedCProgram.process.getIn(), "version=%d\n", versions[i])) {
-				return ();
+		Object[][] generatedArgv = generatedArgs.getArgv();
+		helper.setTrace2_child_class(generatedArgv[/* "remote-<name>" */0]);
+		code = helper.start_command();
+		if (code < 0 && (/*Error: Function owner not recognized*/_errno()) == 2) {
+			ModernizedCProgram.die(ModernizedCProgram._("unable to find remote helper for '%s'"), generatedName);
+		}  else if (code != 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\transport-helper.c", 146, (code)));
+		} 
+		data.setHelper(helper);
+		data.setNo_disconnect_req(0);
+		refspec generatedRs = data.getRs();
+		generatedRs.refspec_init(1/*
+			 * Open the output as FILE* so strbuf_getline_*() family of
+			 * functions can be used.
+			 * Do this with duped fd because fclose() will close the fd,
+			 * and stuff like taking over will require the fd to remain.
+			 */);
+		int generatedOut = helper.getOut();
+		duped = /*Error: Function owner not recognized*/dup(generatedOut);
+		if (duped < 0) {
+			ModernizedCProgram.die_errno(ModernizedCProgram._("can't dup helper output fd"));
+		} 
+		data.setOut(ModernizedCProgram.xfdopen(duped, "r"));
+		int generatedIn = helper.getIn();
+		ModernizedCProgram.write_constant(generatedIn, "capabilities\n");
+		byte[] generatedBuf = buf.getBuf();
+		while (1) {
+			byte capname;
+			byte arg;
+			int mandatory = 0;
+			if (ModernizedCProgram.recvline(data, buf)) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\transport-helper.c", 169, (true)));
 			} 
-		}
-		if (ModernizedCProgram.packet_flush_gently(ModernizedCProgram.process.getIn())) {
-			return ();
-		} 
-		if (!(line = ModernizedCProgram.packet_read_line(ModernizedCProgram.process.getOut(), ((Object)0))) || !ModernizedCProgram.skip_prefix(line, welcome_prefix, p) || .strcmp(p, "-server")) {
-			return ();
-		} 
-		if (!(line = ModernizedCProgram.packet_read_line(ModernizedCProgram.process.getOut(), ((Object)0))) || !ModernizedCProgram.skip_prefix(line, "version=", p) || ModernizedCProgram.strtol_i(p, 10, chosen_version)) {
-			return ();
-		} 
-		if ((line = ModernizedCProgram.packet_read_line(ModernizedCProgram.process.getOut(), ((Object)0)))) {
-			return ();
-		} 
-		for (i = 0; versions[i]; /* Check to make sure that the version received is supported */i++) {
-			if (versions[i] == chosen_version) {
+			if (!generatedBuf) {
 				break;
 			} 
+			if (generatedBuf == (byte)'*') {
+				capname = generatedBuf + 1;
+				mandatory = 1;
+			} else {
+					capname = generatedBuf;
+			} 
+			if (ModernizedCProgram.debug) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Debug: Got cap %s\n", capname);
+			} 
+			if (!/*Error: Function owner not recognized*/strcmp(capname, "fetch")) {
+				data.setFetch(1);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(capname, "option")) {
+				data.setOption(1);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(capname, "push")) {
+				data.setPush(1);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(capname, "import")) {
+				data.setImport(1);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(capname, "bidi-import")) {
+				data.setBidi_import(1);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(capname, "export")) {
+				data.setExport(1);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(capname, "check-connectivity")) {
+				data.setCheck_connectivity(1);
+			}  else if (ModernizedCProgram.skip_prefix(capname, "refspec ", arg)) {
+				generatedRs.refspec_append(arg);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(capname, "connect")) {
+				data.setConnect(1);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(capname, "stateless-connect")) {
+				data.setStateless_connect(1);
+			}  else if (!/*Error: Function owner not recognized*/strcmp(capname, "signed-tags")) {
+				data.setSigned_tags(1);
+			}  else if (ModernizedCProgram.skip_prefix(capname, "export-marks ", arg)) {
+				data.setExport_marks(ModernizedCProgram.xstrdup(arg));
+			}  else if (ModernizedCProgram.skip_prefix(capname, "import-marks ", arg)) {
+				data.setImport_marks(ModernizedCProgram.xstrdup(arg));
+			}  else if (ModernizedCProgram.starts_with(capname, "no-private-update")) {
+				data.setNo_private_update(1);
+			}  else if (mandatory) {
+				ModernizedCProgram.die(ModernizedCProgram._("unknown mandatory capability %s; this remote helper probably needs newer version of Git"), capname);
+			} 
 		}
-		if (!versions[i]) {
-			return ();
+		int generatedNr = generatedRs.getNr();
+		int generatedImport = data.getImport();
+		int generatedBidi_import = data.getBidi_import();
+		int generatedExport = data.getExport();
+		if (!generatedNr && (generatedImport || generatedBidi_import || generatedExport)) {
+			ModernizedCProgram.warning(ModernizedCProgram._("this remote helper should implement refspec capability"));
 		} 
-		return 0;
+		buf.strbuf_release();
+		if (ModernizedCProgram.debug) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Debug: Capabilities complete.\n");
+		} 
+		transport.standard_options();
+		return generatedHelper;
+	}
+	public void fill_alternate_refs_command(Object repo_path) {
+		byte value;
+		argv_array generatedArgs = this.getArgs();
+		if (!/*Error: Function owner not recognized*/git_config_get_value("core.alternateRefsCommand", value)) {
+			this.setUse_shell(1);
+			generatedArgs.argv_array_push(value);
+			generatedArgs.argv_array_push(repo_path);
+		} else {
+				this.setGit_cmd(1);
+				generatedArgs.argv_array_pushf("--git-dir=%s", repo_path);
+				generatedArgs.argv_array_push("for-each-ref");
+				generatedArgs.argv_array_push("--format=%(objectname)");
+				if (!/*Error: Function owner not recognized*/git_config_get_value("core.alternateRefsPrefixes", value)) {
+					generatedArgs.argv_array_push("--");
+					generatedArgs.argv_array_split(value);
+				} 
+		} 
+		this.setEnv(ModernizedCProgram.local_repo_env);
+		this.setOut(-1);
+	}
+	public void prepare_push_cert_sha1() {
+		int already_done;
+		if (!ModernizedCProgram.push_cert.getLen()) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (!already_done) {
+			int bogs;
+			already_done = 1;
+			if (ModernizedCProgram.push_cert_oid.write_object_file(ModernizedCProgram.push_cert.getBuf(), ModernizedCProgram.push_cert.getLen(), "blob")) {
+				ModernizedCProgram.push_cert_oid.oidclr();
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.sigcheck, (byte)'\0', /*Error: sizeof expression not supported yet*/);
+			bogs = ModernizedCProgram.parse_signature(ModernizedCProgram.push_cert.getBuf(), ModernizedCProgram.push_cert.getLen());
+			ModernizedCProgram.sigcheck.check_signature(ModernizedCProgram.push_cert.getBuf(), bogs, ModernizedCProgram.push_cert.getBuf() + bogs, ModernizedCProgram.push_cert.getLen() - bogs);
+			ModernizedCProgram.nonce_status = ModernizedCProgram.check_nonce(ModernizedCProgram.push_cert.getBuf(), bogs);
+		} 
+		argv_array generatedEnv_array = this.getEnv_array();
+		if (!ModernizedCProgram.is_null_oid(ModernizedCProgram.push_cert_oid)) {
+			generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT=%s", ModernizedCProgram.oid_to_hex(ModernizedCProgram.push_cert_oid));
+			generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_SIGNER=%s", ModernizedCProgram.sigcheck.getSigner() ? ModernizedCProgram.sigcheck.getSigner() : "");
+			generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_KEY=%s", ModernizedCProgram.sigcheck.getKey() ? ModernizedCProgram.sigcheck.getKey() : "");
+			generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_STATUS=%c", ModernizedCProgram.sigcheck.getResult());
+			if (ModernizedCProgram.push_cert_nonce) {
+				generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_NONCE=%s", ModernizedCProgram.push_cert_nonce);
+				generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_NONCE_STATUS=%s", ModernizedCProgram.nonce_status);
+				if (ModernizedCProgram.nonce_status == ModernizedCProgram.NONCE_SLOP) {
+					generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_NONCE_SLOP=%ld", ModernizedCProgram.nonce_stamp_slop);
+				} 
+			} 
+		} 
 	}
 	public void child_process_init() {
-		.memset(child, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(child, 0, /*Error: sizeof expression not supported yet*/);
 		argv_array generatedArgs = this.getArgs();
 		generatedArgs.argv_array_init();
 		argv_array generatedEnv_array = this.getEnv_array();
@@ -437,13 +522,13 @@ public class child_process {
 		generatedEnv_array.argv_array_clear();
 	}
 	public void mark_child_for_cleanup(Object pid) {
-		child_to_clean p = ModernizedCProgram.xmalloc();
+		child_to_clean p = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		p.setPid(pid);
 		p.setProcess(ModernizedCProgram.process);
 		p.setNext(ModernizedCProgram.children_to_clean);
 		ModernizedCProgram.children_to_clean = p;
 		if (!ModernizedCProgram.installed_child_cleanup_handler) {
-			.atexit(cleanup_children_on_exit);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/atexit(cleanup_children_on_exit);
 			ModernizedCProgram.sigchain_push_common(cleanup_children_on_signal);
 			ModernizedCProgram.installed_child_cleanup_handler = 1;
 		} 
@@ -457,7 +542,7 @@ public class child_process {
 		int[] fderr = new int[2];
 		int failed_errno;
 		byte str;
-		Object generatedArgv = this.getArgv();
+		Object[][] generatedArgv = this.getArgv();
 		if (!generatedArgv) {
 			this.setArgv(generatedArgv);
 		} 
@@ -471,9 +556,9 @@ public class child_process {
 		int generatedOut = this.getOut();
 		if (need_in) {
 			if (ModernizedCProgram.pipe(fdin) < 0) {
-				failed_errno = (._errno());
+				failed_errno = (/*Error: Function owner not recognized*/_errno());
 				if (generatedOut > 0) {
-					.close(generatedOut);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedOut);
 				} 
 				str = "standard input";
 				;
@@ -485,11 +570,11 @@ public class child_process {
 		need_out = !generatedNo_stdout && !generatedStdout_to_stderr && generatedOut < 0;
 		if (need_out) {
 			if (ModernizedCProgram.pipe(fdout) < 0) {
-				failed_errno = (._errno());
+				failed_errno = (/*Error: Function owner not recognized*/_errno());
 				if (need_in) {
 					ModernizedCProgram.close_pair(fdin);
 				}  else if (generatedIn) {
-					.close(generatedIn);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedIn);
 				} 
 				str = "standard output";
 				;
@@ -501,7 +586,7 @@ public class child_process {
 		need_err = !generatedNo_stderr && generatedErr < 0;
 		(cmd).trace2_child_start_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\run-command.c", 735);
 		ModernizedCProgram.trace_run_command(cmd);
-		.fflush(((Object)0))/*
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fflush(((Object)0))/*
 			 * NOTE: In order to prevent deadlocking when using threads special
 			 * care should be taken with the function calls made in between the
 			 * fork() and exec() calls.  No calls should be made to functions which
@@ -553,27 +638,27 @@ public class child_process {
 			byte sargv = generatedArgv;
 			argv_array nargv = new argv_array(ModernizedCProgram.empty_argv, 0, 0);
 			if (generatedNo_stdin) {
-				fhin = .open("/dev/null", 2);
+				fhin = /*Error: Function owner not recognized*/open("/dev/null", 2);
 			}  else if (need_in) {
-				fhin = .dup(fdin[0]);
+				fhin = /*Error: Function owner not recognized*/dup(fdin[0]);
 			}  else if (generatedIn) {
-				fhin = .dup(generatedIn);
+				fhin = /*Error: Function owner not recognized*/dup(generatedIn);
 			} 
 			if (generatedNo_stderr) {
-				fherr = .open("/dev/null", 2);
+				fherr = /*Error: Function owner not recognized*/open("/dev/null", 2);
 			}  else if (need_err) {
-				fherr = .dup(fderr[1]);
+				fherr = /*Error: Function owner not recognized*/dup(fderr[1]);
 			}  else if (generatedErr > 2) {
-				fherr = .dup(generatedErr);
+				fherr = /*Error: Function owner not recognized*/dup(generatedErr);
 			} 
 			if (generatedNo_stdout) {
-				fhout = .open("/dev/null", 2);
+				fhout = /*Error: Function owner not recognized*/open("/dev/null", 2);
 			}  else if (generatedStdout_to_stderr) {
-				fhout = .dup(fherr);
+				fhout = /*Error: Function owner not recognized*/dup(fherr);
 			}  else if (need_out) {
-				fhout = .dup(fdout[1]);
+				fhout = /*Error: Function owner not recognized*/dup(fdout[1]);
 			}  else if (generatedOut > 1) {
-				fhout = .dup(generatedOut);
+				fhout = /*Error: Function owner not recognized*/dup(generatedOut);
 			} 
 			if (generatedGit_cmd) {
 				this.setArgv(nargv.prepare_git_cmd(generatedArgv));
@@ -581,8 +666,8 @@ public class child_process {
 				this.setArgv(nargv.prepare_shell_cmd(generatedArgv));
 			} 
 			this.setPid(ModernizedCProgram.mingw_spawnvpe(generatedArgv[0], generatedArgv, (byte)generatedEnv, generatedDir, fhin, fhout, fherr));
-			failed_errno = (._errno());
-			if (generatedPid < 0 && (!generatedSilent_exec_failure || (._errno()) != 2)) {
+			failed_errno = (/*Error: Function owner not recognized*/_errno());
+			if (generatedPid < 0 && (!generatedSilent_exec_failure || (/*Error: Function owner not recognized*/_errno()) != 2)) {
 				();
 			} 
 			if (generatedClean_on_exit && generatedPid >= 0) {
@@ -591,13 +676,13 @@ public class child_process {
 			nargv.argv_array_clear();
 			this.setArgv(sargv);
 			if (fhin != 0) {
-				.close(fhin);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fhin);
 			} 
 			if (fhout != 1) {
-				.close(fhout);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fhout);
 			} 
 			if (fherr != 2) {
-				.close(fherr);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fherr);
 			} 
 		}
 		/*
@@ -614,42 +699,42 @@ public class child_process {
 			if (need_in) {
 				ModernizedCProgram.close_pair(fdin);
 			}  else if (generatedIn) {
-				.close(generatedIn);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedIn);
 			} 
 			if (need_out) {
 				ModernizedCProgram.close_pair(fdout);
 			}  else if (generatedOut) {
-				.close(generatedOut);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedOut);
 			} 
 			if (need_err) {
 				ModernizedCProgram.close_pair(fderr);
 			}  else if (generatedErr) {
-				.close(generatedErr);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedErr);
 			} 
 			cmd.child_process_clear();
-			(._errno()) = failed_errno;
+			(/*Error: Function owner not recognized*/_errno()) = failed_errno;
 			return -1;
 		} 
 		if (need_in) {
-			.close(fdin[0]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fdin[0]);
 		}  else if (generatedIn) {
-			.close(generatedIn);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedIn);
 		} 
 		if (need_out) {
-			.close(fdout[1]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fdout[1]);
 		}  else if (generatedOut) {
-			.close(generatedOut);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedOut);
 		} 
 		if (need_err) {
-			.close(fderr[1]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fderr[1]);
 		}  else if (generatedErr) {
-			.close(generatedErr);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedErr);
 		} 
 		return 0;
 	}
 	public int finish_command() {
 		Object generatedPid = this.getPid();
-		Object generatedArgv = this.getArgv();
+		Object[][] generatedArgv = this.getArgv();
 		int ret = ModernizedCProgram.wait_or_whine(generatedPid, generatedArgv[0], 0);
 		(cmd).trace2_child_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\run-command.c", 990, (ret));
 		cmd.child_process_clear();
@@ -657,7 +742,7 @@ public class child_process {
 	}
 	public int finish_command_in_signal() {
 		Object generatedPid = this.getPid();
-		Object generatedArgv = this.getArgv();
+		Object[][] generatedArgv = this.getArgv();
 		int ret = ModernizedCProgram.wait_or_whine(generatedPid, generatedArgv[0], 1);
 		(cmd).trace2_child_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\run-command.c", 998, (ret));
 		return ret;
@@ -676,13 +761,13 @@ public class child_process {
 		return cmd.finish_command();
 	}
 	public int run_command_silent_on_success() {
-		strbuf buf = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int rc;
 		this.setStdout_to_stderr(1);
 		rc = ModernizedCProgram.pipe_command(cmd, ((Object)0), 0, ((Object)0), 0, buf, 0);
-		byte generatedBuf = buf.getBuf();
+		byte[] generatedBuf = buf.getBuf();
 		if (rc) {
-			.fputs(generatedBuf, (_iob[2]));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(generatedBuf, (_iob[2]));
 		} 
 		buf.strbuf_release();
 		return rc/*
@@ -698,61 +783,6 @@ public class child_process {
 		 * author metadata.
 		 */;
 	}
-	public child_process subprocess_get_child_process(subprocess_entry entry) {
-		child_process generatedProcess = entry.getProcess();
-		return generatedProcess;
-	}
-	public void prepare_push_cert_sha1() {
-		int already_done;
-		if (!ModernizedCProgram.push_cert.getLen()) {
-			return ;
-		} 
-		if (!already_done) {
-			int bogs;
-			already_done = 1;
-			if (ModernizedCProgram.push_cert_oid.write_object_file(ModernizedCProgram.push_cert.getBuf(), ModernizedCProgram.push_cert.getLen(), "blob")) {
-				ModernizedCProgram.push_cert_oid.oidclr();
-			} 
-			.memset(ModernizedCProgram.sigcheck, (byte)'\0', );
-			bogs = ModernizedCProgram.parse_signature(ModernizedCProgram.push_cert.getBuf(), ModernizedCProgram.push_cert.getLen());
-			ModernizedCProgram.sigcheck.check_signature(ModernizedCProgram.push_cert.getBuf(), bogs, ModernizedCProgram.push_cert.getBuf() + bogs, ModernizedCProgram.push_cert.getLen() - bogs);
-			ModernizedCProgram.nonce_status = ModernizedCProgram.check_nonce(ModernizedCProgram.push_cert.getBuf(), bogs);
-		} 
-		argv_array generatedEnv_array = this.getEnv_array();
-		if (!ModernizedCProgram.is_null_oid(ModernizedCProgram.push_cert_oid)) {
-			generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT=%s", ModernizedCProgram.oid_to_hex(ModernizedCProgram.push_cert_oid));
-			generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_SIGNER=%s", ModernizedCProgram.sigcheck.getSigner() ? ModernizedCProgram.sigcheck.getSigner() : "");
-			generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_KEY=%s", ModernizedCProgram.sigcheck.getKey() ? ModernizedCProgram.sigcheck.getKey() : "");
-			generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_STATUS=%c", ModernizedCProgram.sigcheck.getResult());
-			if (ModernizedCProgram.push_cert_nonce) {
-				generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_NONCE=%s", ModernizedCProgram.push_cert_nonce);
-				generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_NONCE_STATUS=%s", ModernizedCProgram.nonce_status);
-				if (ModernizedCProgram.nonce_status == ModernizedCProgram.NONCE_SLOP) {
-					generatedEnv_array.argv_array_pushf("GIT_PUSH_CERT_NONCE_SLOP=%ld", ModernizedCProgram.nonce_stamp_slop);
-				} 
-			} 
-		} 
-	}
-	public void fill_alternate_refs_command(Object repo_path) {
-		byte value;
-		argv_array generatedArgs = this.getArgs();
-		if (!.git_config_get_value("core.alternateRefsCommand", value)) {
-			this.setUse_shell(1);
-			generatedArgs.argv_array_push(value);
-			generatedArgs.argv_array_push(repo_path);
-		} else {
-				this.setGit_cmd(1);
-				generatedArgs.argv_array_pushf("--git-dir=%s", repo_path);
-				generatedArgs.argv_array_push("for-each-ref");
-				generatedArgs.argv_array_push("--format=%(objectname)");
-				if (!.git_config_get_value("core.alternateRefsPrefixes", value)) {
-					generatedArgs.argv_array_push("--");
-					generatedArgs.argv_array_split(value);
-				} 
-		} 
-		this.setEnv(ModernizedCProgram.local_repo_env);
-		this.setOut(-1);
-	}
 	public int run_service_command() {
 		argv_array generatedArgs = this.getArgs();
 		generatedArgs.argv_array_push(".");
@@ -761,130 +791,11 @@ public class child_process {
 		if (cld.start_command()) {
 			return -1;
 		} 
-		.close(0);
-		.close(1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(1);
 		int generatedErr = this.getErr();
 		ModernizedCProgram.copy_to_log(generatedErr);
 		return cld.finish_command();
-	}
-	public child_process get_helper(transport transport) {
-		Object generatedData = transport.getData();
-		helper_data data = generatedData;
-		strbuf buf = new strbuf(, , );
-		child_process helper = new child_process();
-		int duped;
-		int code;
-		child_process generatedHelper = data.getHelper();
-		if (generatedHelper) {
-			return generatedHelper;
-		} 
-		helper = ModernizedCProgram.xmalloc();
-		helper.child_process_init();
-		helper.setIn(-1);
-		helper.setOut(-1);
-		helper.setErr(0);
-		argv_array generatedArgs = helper.getArgs();
-		Object generatedName = data.getName();
-		generatedArgs.argv_array_pushf("git-remote-%s", generatedName);
-		generatedArgs.argv_array_push(generatedName);
-		Object generatedUrl = transport.getUrl();
-		generatedArgs.argv_array_push(ModernizedCProgram.remove_ext_force(generatedUrl));
-		helper.setGit_cmd(0);
-		helper.setSilent_exec_failure(1);
-		argv_array generatedEnv_array = helper.getEnv_array();
-		if (ModernizedCProgram.have_git_dir()) {
-			generatedEnv_array.argv_array_pushf("%s=%s", "GIT_DIR", ModernizedCProgram.get_git_dir());
-		} 
-		Object generatedArgv = generatedArgs.getArgv();
-		helper.setTrace2_child_class(generatedArgv[/* "remote-<name>" */0]);
-		code = helper.start_command();
-		if (code < 0 && (._errno()) == 2) {
-			ModernizedCProgram.die(ModernizedCProgram._("unable to find remote helper for '%s'"), generatedName);
-		}  else if (code != 0) {
-			.exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\transport-helper.c", 146, (code)));
-		} 
-		data.setHelper(helper);
-		data.setNo_disconnect_req(0);
-		refspec generatedRs = data.getRs();
-		generatedRs.refspec_init(1/*
-			 * Open the output as FILE* so strbuf_getline_*() family of
-			 * functions can be used.
-			 * Do this with duped fd because fclose() will close the fd,
-			 * and stuff like taking over will require the fd to remain.
-			 */);
-		int generatedOut = helper.getOut();
-		duped = .dup(generatedOut);
-		if (duped < 0) {
-			ModernizedCProgram.die_errno(ModernizedCProgram._("can't dup helper output fd"));
-		} 
-		data.setOut(ModernizedCProgram.xfdopen(duped, "r"));
-		int generatedIn = helper.getIn();
-		ModernizedCProgram.write_constant(generatedIn, "capabilities\n");
-		byte generatedBuf = buf.getBuf();
-		while (1) {
-			byte capname;
-			byte arg;
-			int mandatory = 0;
-			if (ModernizedCProgram.recvline(data, buf)) {
-				.exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\transport-helper.c", 169, (true)));
-			} 
-			if (!generatedBuf) {
-				break;
-			} 
-			if (generatedBuf == (byte)'*') {
-				capname = generatedBuf + 1;
-				mandatory = 1;
-			} else {
-					capname = generatedBuf;
-			} 
-			if (ModernizedCProgram.debug) {
-				.fprintf((_iob[2]), "Debug: Got cap %s\n", capname);
-			} 
-			if (!.strcmp(capname, "fetch")) {
-				data.setFetch(1);
-			}  else if (!.strcmp(capname, "option")) {
-				data.setOption(1);
-			}  else if (!.strcmp(capname, "push")) {
-				data.setPush(1);
-			}  else if (!.strcmp(capname, "import")) {
-				data.setImport(1);
-			}  else if (!.strcmp(capname, "bidi-import")) {
-				data.setBidi_import(1);
-			}  else if (!.strcmp(capname, "export")) {
-				data.setExport(1);
-			}  else if (!.strcmp(capname, "check-connectivity")) {
-				data.setCheck_connectivity(1);
-			}  else if (ModernizedCProgram.skip_prefix(capname, "refspec ", arg)) {
-				generatedRs.refspec_append(arg);
-			}  else if (!.strcmp(capname, "connect")) {
-				data.setConnect(1);
-			}  else if (!.strcmp(capname, "stateless-connect")) {
-				data.setStateless_connect(1);
-			}  else if (!.strcmp(capname, "signed-tags")) {
-				data.setSigned_tags(1);
-			}  else if (ModernizedCProgram.skip_prefix(capname, "export-marks ", arg)) {
-				data.setExport_marks(ModernizedCProgram.xstrdup(arg));
-			}  else if (ModernizedCProgram.skip_prefix(capname, "import-marks ", arg)) {
-				data.setImport_marks(ModernizedCProgram.xstrdup(arg));
-			}  else if (ModernizedCProgram.starts_with(capname, "no-private-update")) {
-				data.setNo_private_update(1);
-			}  else if (mandatory) {
-				ModernizedCProgram.die(ModernizedCProgram._("unknown mandatory capability %s; this remote helper probably needs newer version of Git"), capname);
-			} 
-		}
-		int generatedNr = generatedRs.getNr();
-		int generatedImport = data.getImport();
-		int generatedBidi_import = data.getBidi_import();
-		int generatedExport = data.getExport();
-		if (!generatedNr && (generatedImport || generatedBidi_import || generatedExport)) {
-			ModernizedCProgram.warning(ModernizedCProgram._("this remote helper should implement refspec capability"));
-		} 
-		buf.strbuf_release();
-		if (ModernizedCProgram.debug) {
-			.fprintf((_iob[2]), "Debug: Capabilities complete.\n");
-		} 
-		transport.standard_options();
-		return generatedHelper;
 	}
 	public void prepare_pager_args(Object pager) {
 		ModernizedCProgram.pager_process.getArgs().argv_array_push(pager);
@@ -892,10 +803,99 @@ public class child_process {
 		ModernizedCProgram.pager_process.getEnv_array().setup_pager_env();
 		ModernizedCProgram.pager_process.setTrace2_child_class("pager");
 	}
-	public Object getArgv() {
+	public void prepare_pack_objects(Object args) {
+		argv_array generatedArgs = this.getArgs();
+		generatedArgs.argv_array_push("pack-objects");
+		if (args.getWindow()) {
+			generatedArgs.argv_array_pushf("--window=%s", args.getWindow());
+		} 
+		if (args.getWindow_memory()) {
+			generatedArgs.argv_array_pushf("--window-memory=%s", args.getWindow_memory());
+		} 
+		if (args.getDepth()) {
+			generatedArgs.argv_array_pushf("--depth=%s", args.getDepth());
+		} 
+		if (args.getThreads()) {
+			generatedArgs.argv_array_pushf("--threads=%s", args.getThreads());
+		} 
+		if (args.getMax_pack_size()) {
+			generatedArgs.argv_array_pushf("--max-pack-size=%s", args.getMax_pack_size());
+		} 
+		if (args.getNo_reuse_delta()) {
+			generatedArgs.argv_array_pushf("--no-reuse-delta");
+		} 
+		if (args.getNo_reuse_object()) {
+			generatedArgs.argv_array_pushf("--no-reuse-object");
+		} 
+		if (args.getLocal()) {
+			generatedArgs.argv_array_push("--local");
+		} 
+		if (args.getQuiet()) {
+			generatedArgs.argv_array_push("--quiet");
+		} 
+		if (ModernizedCProgram.delta_base_offset) {
+			generatedArgs.argv_array_push("--delta-base-offset");
+		} 
+		generatedArgs.argv_array_push(ModernizedCProgram.packtmp);
+		this.setGit_cmd(1);
+		this.setOut(-1/*
+		 * Write oid to the given struct child_process's stdin, starting it first if
+		 * necessary.
+		 */);
+	}
+	public void subprocess_exit_handler() {
+		ModernizedCProgram.sigchain_push(SIGPIPE, ((__p_sig_fn_t)1));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(ModernizedCProgram.process.getIn());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(ModernizedCProgram.process.getOut());
+		ModernizedCProgram.sigchain_pop(SIGPIPE);
+		/* Finish command will wait until the shutdown is complete. */ModernizedCProgram.process.finish_command();
+	}
+	public int handshake_version(Object welcome_prefix, int[] versions, Integer chosen_version) {
+		int version_scratch;
+		int i;
+		byte line;
+		byte p;
+		if (!chosen_version) {
+			chosen_version = version_scratch;
+		} 
+		if (ModernizedCProgram.packet_write_fmt_gently(ModernizedCProgram.process.getIn(), "%s-client\n", welcome_prefix)) {
+			return ();
+		} 
+		for (i = 0; versions[i]; i++) {
+			if (ModernizedCProgram.packet_write_fmt_gently(ModernizedCProgram.process.getIn(), "version=%d\n", versions[i])) {
+				return ();
+			} 
+		}
+		if (ModernizedCProgram.packet_flush_gently(ModernizedCProgram.process.getIn())) {
+			return ();
+		} 
+		if (!(line = ModernizedCProgram.packet_read_line(ModernizedCProgram.process.getOut(), ((Object)0))) || !ModernizedCProgram.skip_prefix(line, welcome_prefix, p) || /*Error: Function owner not recognized*/strcmp(p, "-server")) {
+			return ();
+		} 
+		if (!(line = ModernizedCProgram.packet_read_line(ModernizedCProgram.process.getOut(), ((Object)0))) || !ModernizedCProgram.skip_prefix(line, "version=", p) || ModernizedCProgram.strtol_i(p, 10, chosen_version)) {
+			return ();
+		} 
+		if ((line = ModernizedCProgram.packet_read_line(ModernizedCProgram.process.getOut(), ((Object)0)))) {
+			return ();
+		} 
+		for (i = 0; versions[i]; /* Check to make sure that the version received is supported */i++) {
+			if (versions[i] == chosen_version) {
+				break;
+			} 
+		}
+		if (!versions[i]) {
+			return ();
+		} 
+		return 0;
+	}
+	public child_process subprocess_get_child_process(subprocess_entry entry) {
+		child_process generatedProcess = entry.getProcess();
+		return generatedProcess;
+	}
+	public Object[][] getArgv() {
 		return argv;
 	}
-	public void setArgv(Object newArgv) {
+	public void setArgv(Object[][] newArgv) {
 		argv = newArgv;
 	}
 	public argv_array getArgs() {

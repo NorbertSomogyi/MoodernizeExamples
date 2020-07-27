@@ -21,23 +21,23 @@ public class S_NTFSSECT_XPFUNCS_ {
 		if (!XpFuncs) {
 			return -1024;
 		} 
-		this.setSize();
-		this.setKernel32(.LoadLibraryA("kernel32.dll"));
-		rc = .GetLastError();
+		this.setSize(/*Error: sizeof expression not supported yet*/);
+		this.setKernel32(/*Error: Function owner not recognized*/LoadLibraryA("kernel32.dll"));
+		rc = /*Error: Function owner not recognized*/GetLastError();
 		Object generatedKernel32 = this.getKernel32();
 		if (!generatedKernel32) {
 			(ModernizedCProgram.NtfsSectLastErrorMessage = ("KERNEL32.DLL not found!"));
 			;
 		} 
-		this.setGetVolumePathNameA((F_KERNEL32_GETVOLUMEPATHNAME)(.GetProcAddress(generatedKernel32, "GetVolumePathNameA")));
-		rc = .GetLastError();
+		this.setGetVolumePathNameA((F_KERNEL32_GETVOLUMEPATHNAME)(/*Error: Function owner not recognized*/GetProcAddress(generatedKernel32, "GetVolumePathNameA")));
+		rc = /*Error: Function owner not recognized*/GetLastError();
 		Object generatedGetVolumePathNameA = this.getGetVolumePathNameA();
 		if (!generatedGetVolumePathNameA) {
 			(ModernizedCProgram.NtfsSectLastErrorMessage = ("GetVolumePathName() not found in KERNEL32.DLL!"));
 			;
 		} 
-		this.setGetDiskFreeSpaceA((F_KERNEL32_GETDISKFREESPACE)(.GetProcAddress(generatedKernel32, "GetDiskFreeSpaceA")));
-		rc = .GetLastError();
+		this.setGetDiskFreeSpaceA((F_KERNEL32_GETDISKFREESPACE)(/*Error: Function owner not recognized*/GetProcAddress(generatedKernel32, "GetDiskFreeSpaceA")));
+		rc = /*Error: Function owner not recognized*/GetLastError();
 		Object generatedGetDiskFreeSpaceA = this.getGetDiskFreeSpaceA();
 		if (!generatedGetDiskFreeSpaceA) {
 			(ModernizedCProgram.NtfsSectLastErrorMessage = ("GetDiskFreeSpace() not found in KERNEL32.DLL!"));
@@ -48,17 +48,17 @@ public class S_NTFSSECT_XPFUNCS_ {
 	}
 	public void NtfsSectUnloadXpFuncs() {
 		if (!XpFuncs) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setGetDiskFreeSpaceA(((Object)0));
 		this.setGetVolumePathNameA(((Object)0));
 		Object generatedKernel32 = this.getKernel32();
 		if (generatedKernel32) {
-			.FreeLibrary(generatedKernel32);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FreeLibrary(generatedKernel32);
 		} 
 		this.setKernel32(((Object)0));
 		this.setSize(0);
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public Object getSize() {
 		return Size;

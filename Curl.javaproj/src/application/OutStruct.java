@@ -58,7 +58,7 @@ package application;
  * context.
  */
 public class OutStruct {
-	private byte filename;
+	private Byte filename;
 	private  alloc_filename;
 	private  is_cd_filename;
 	private  s_isreg;
@@ -68,7 +68,7 @@ public class OutStruct {
 	private Object bytes;
 	private Object init;
 	
-	public OutStruct(byte filename,  alloc_filename,  is_cd_filename,  s_isreg,  fopened, _iobuf stream, OperationConfig config, Object bytes, Object init) {
+	public OutStruct(Byte filename,  alloc_filename,  is_cd_filename,  s_isreg,  fopened, _iobuf stream, OperationConfig config, Object bytes, Object init) {
 		setFilename(filename);
 		setAlloc_filename(alloc_filename);
 		setIs_cd_filename(is_cd_filename);
@@ -88,11 +88,11 @@ public class OutStruct {
 		byte stringp = ((Object)0);
 		long longinfo;
 		double doubleinfo;
-		byte generatedFilename = this.getFilename();
+		Byte generatedFilename = this.getFilename();
 		while (ptr && ptr) {
 			if ((byte)'%' == ptr && ptr[1]) {
 				if ((byte)'%' == ptr[1]) {
-					.fputc((byte)'%', /* an escaped %-letter */stream);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'%', /* an escaped %-letter */stream);
 					ptr += 2;
 				} else {
 						byte end;
@@ -100,10 +100,10 @@ public class OutStruct {
 							byte keepit;
 							int i;
 							bool match = 0;
-							end = .strchr(ptr, (byte)'}');
+							end = /*Error: Function owner not recognized*/strchr(ptr, (byte)'}');
 							ptr += /* pass the % and the { */2;
 							if (!end) {
-								.fputs("%{", stream);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs("%{", stream);
 								continue;
 							} 
 							keepit = end;
@@ -112,69 +112,29 @@ public class OutStruct {
 								if (ModernizedCProgram.curl_strequal(ptr, ModernizedCProgram.replacements[i].getName())) {
 									match = 1;
 									switch (ModernizedCProgram.replacements[i].getId()) {
-									case .VAR_SCHEME:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SCHEME, stringp)) {
-												stream.curl_mfprintf("%s", stringp);
-											} 
-											break;
-									case .VAR_SIZE_DOWNLOAD:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SIZE_DOWNLOAD, doubleinfo)) {
-												stream.curl_mfprintf("%.0f", doubleinfo);
-											} 
-											break;
-									case .VAR_PRIMARY_PORT:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_PRIMARY_PORT, longinfo)) {
-												stream.curl_mfprintf("%ld", longinfo);
-											} 
-											break;
-									case .VAR_CONTENT_TYPE:
-											if ((CURLE_OK == curl.curl_easy_getinfo(CURLINFO_CONTENT_TYPE, stringp)) && stringp) {
-												.fputs(stringp, stream);
-											} 
-											break;
-									case .VAR_SPEED_UPLOAD:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SPEED_UPLOAD, doubleinfo)) {
-												stream.curl_mfprintf("%.3f", doubleinfo);
-											} 
-											break;
 									case .VAR_HTTP_VERSION:
 											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_HTTP_VERSION, longinfo)) {
 												byte version = "0";
 												switch (longinfo) {
+												case CURL_HTTP_VERSION_1_0:
+														version = "1.0";
+														break;
+												case CURL_HTTP_VERSION_3:
+														version = "3";
+														break;
 												case CURL_HTTP_VERSION_2_0:
 														version = "2";
 														break;
 												case CURL_HTTP_VERSION_1_1:
 														version = "1.1";
 														break;
-												case CURL_HTTP_VERSION_3:
-														version = "3";
-														break;
-												case CURL_HTTP_VERSION_1_0:
-														version = "1.0";
-														break;
 												}
 												stream.curl_mfprintf(version);
-											} 
-											break;
-									case .VAR_HTTP_CODE:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_RESPONSE_CODE, longinfo)) {
-												stream.curl_mfprintf("%03ld", longinfo);
 											} 
 											break;
 									case .VAR_PRETRANSFER_TIME:
 											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_PRETRANSFER_TIME, doubleinfo)) {
 												stream.curl_mfprintf("%.6f", doubleinfo);
-											} 
-											break;
-									case .VAR_SIZE_UPLOAD:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SIZE_UPLOAD, doubleinfo)) {
-												stream.curl_mfprintf("%.0f", doubleinfo);
-											} 
-											break;
-									case .VAR_EFFECTIVE_FILENAME:
-											if (generatedFilename) {
-												stream.curl_mfprintf("%s", generatedFilename);
 											} 
 											break;
 									case .VAR_LOCAL_IP:
@@ -187,35 +147,9 @@ public class OutStruct {
 												stream.curl_mfprintf("%ld", longinfo);
 											} 
 											break;
-									case .VAR_STDERR:
-											stream = (_iob[2]);
-											break;
-									case .VAR_FTP_ENTRY_PATH:
-											if ((CURLE_OK == curl.curl_easy_getinfo(CURLINFO_FTP_ENTRY_PATH, stringp)) && stringp) {
-												.fputs(stringp, stream);
-											} 
-											break;
-									case .VAR_STDOUT:
-											stream = (_iob[1]);
-											break;
-									case .VAR_CONNECT_TIME:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_CONNECT_TIME, doubleinfo)) {
-												stream.curl_mfprintf("%.6f", doubleinfo);
-											} 
-											break;
-									case .VAR_APPCONNECT_TIME:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_APPCONNECT_TIME, doubleinfo)) {
-												stream.curl_mfprintf("%.6f", doubleinfo);
-											} 
-											break;
-									case .VAR_LOCAL_PORT:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_LOCAL_PORT, longinfo)) {
-												stream.curl_mfprintf("%ld", longinfo);
-											} 
-											break;
-									case .VAR_TOTAL_TIME:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_TOTAL_TIME, doubleinfo)) {
-												stream.curl_mfprintf("%.6f", doubleinfo);
+									case .VAR_EFFECTIVE_URL:
+											if ((CURLE_OK == curl.curl_easy_getinfo(CURLINFO_EFFECTIVE_URL, stringp)) && stringp) {
+												/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(stringp, stream);
 											} 
 											break;
 									case .VAR_NAMELOOKUP_TIME:
@@ -223,38 +157,13 @@ public class OutStruct {
 												stream.curl_mfprintf("%.6f", doubleinfo);
 											} 
 											break;
+									case .VAR_SSL_VERIFY_RESULT:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SSL_VERIFYRESULT, longinfo)) {
+												stream.curl_mfprintf("%ld", longinfo);
+											} 
+											break;
 									case .VAR_HEADER_SIZE:
 											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_HEADER_SIZE, longinfo)) {
-												stream.curl_mfprintf("%ld", longinfo);
-											} 
-											break;
-									case .VAR_HTTP_CODE_PROXY:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_HTTP_CONNECTCODE, longinfo)) {
-												stream.curl_mfprintf("%03ld", longinfo);
-											} 
-											break;
-									case .VAR_PROXY_SSL_VERIFY_RESULT:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_PROXY_SSL_VERIFYRESULT, longinfo)) {
-												stream.curl_mfprintf("%ld", longinfo);
-											} 
-											break;
-									case .VAR_REDIRECT_TIME:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_REDIRECT_TIME, doubleinfo)) {
-												stream.curl_mfprintf("%.6f", doubleinfo);
-											} 
-											break;
-									case .VAR_EFFECTIVE_URL:
-											if ((CURLE_OK == curl.curl_easy_getinfo(CURLINFO_EFFECTIVE_URL, stringp)) && stringp) {
-												.fputs(stringp, stream);
-											} 
-											break;
-									case .VAR_SPEED_DOWNLOAD:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SPEED_DOWNLOAD, doubleinfo)) {
-												stream.curl_mfprintf("%.3f", doubleinfo);
-											} 
-											break;
-									case .VAR_NUM_CONNECTS:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_NUM_CONNECTS, longinfo)) {
 												stream.curl_mfprintf("%ld", longinfo);
 											} 
 											break;
@@ -263,14 +172,80 @@ public class OutStruct {
 												stream.curl_mfprintf("%ld", longinfo);
 											} 
 											break;
-									case .VAR_SSL_VERIFY_RESULT:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SSL_VERIFYRESULT, longinfo)) {
+									case .VAR_STDOUT:
+											stream = (_iob[1]);
+											break;
+									case .VAR_SCHEME:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SCHEME, stringp)) {
+												stream.curl_mfprintf("%s", stringp);
+											} 
+											break;
+									case .VAR_SPEED_DOWNLOAD:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SPEED_DOWNLOAD, doubleinfo)) {
+												stream.curl_mfprintf("%.3f", doubleinfo);
+											} 
+											break;
+									case .VAR_LOCAL_PORT:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_LOCAL_PORT, longinfo)) {
 												stream.curl_mfprintf("%ld", longinfo);
+											} 
+											break;
+									case .VAR_CONNECT_TIME:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_CONNECT_TIME, doubleinfo)) {
+												stream.curl_mfprintf("%.6f", doubleinfo);
+											} 
+											break;
+									case .VAR_STARTTRANSFER_TIME:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_STARTTRANSFER_TIME, doubleinfo)) {
+												stream.curl_mfprintf("%.6f", doubleinfo);
+											} 
+											break;
+									case .VAR_SIZE_DOWNLOAD:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SIZE_DOWNLOAD, doubleinfo)) {
+												stream.curl_mfprintf("%.0f", doubleinfo);
+											} 
+											break;
+									case .VAR_FTP_ENTRY_PATH:
+											if ((CURLE_OK == curl.curl_easy_getinfo(CURLINFO_FTP_ENTRY_PATH, stringp)) && stringp) {
+												/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(stringp, stream);
 											} 
 											break;
 									case .VAR_REDIRECT_URL:
 											if ((CURLE_OK == curl.curl_easy_getinfo(CURLINFO_REDIRECT_URL, stringp)) && stringp) {
-												.fputs(stringp, stream);
+												/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(stringp, stream);
+											} 
+											break;
+									case .VAR_HTTP_CODE_PROXY:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_HTTP_CONNECTCODE, longinfo)) {
+												stream.curl_mfprintf("%03ld", longinfo);
+											} 
+											break;
+									case .VAR_REDIRECT_TIME:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_REDIRECT_TIME, doubleinfo)) {
+												stream.curl_mfprintf("%.6f", doubleinfo);
+											} 
+											break;
+									case .VAR_TOTAL_TIME:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_TOTAL_TIME, doubleinfo)) {
+												stream.curl_mfprintf("%.6f", doubleinfo);
+											} 
+											break;
+									case .VAR_SIZE_UPLOAD:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SIZE_UPLOAD, doubleinfo)) {
+												stream.curl_mfprintf("%.0f", doubleinfo);
+											} 
+											break;
+									case .VAR_PROXY_SSL_VERIFY_RESULT:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_PROXY_SSL_VERIFYRESULT, longinfo)) {
+												stream.curl_mfprintf("%ld", longinfo);
+											} 
+											break;
+									case .VAR_STDERR:
+											stream = (_iob[2]);
+											break;
+									case .VAR_PRIMARY_PORT:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_PRIMARY_PORT, longinfo)) {
+												stream.curl_mfprintf("%ld", longinfo);
 											} 
 											break;
 									case .VAR_PRIMARY_IP:
@@ -278,9 +253,34 @@ public class OutStruct {
 												stream.curl_mfprintf("%s", stringp);
 											} 
 											break;
-									case .VAR_STARTTRANSFER_TIME:
-											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_STARTTRANSFER_TIME, doubleinfo)) {
+									case .VAR_HTTP_CODE:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_RESPONSE_CODE, longinfo)) {
+												stream.curl_mfprintf("%03ld", longinfo);
+											} 
+											break;
+									case .VAR_NUM_CONNECTS:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_NUM_CONNECTS, longinfo)) {
+												stream.curl_mfprintf("%ld", longinfo);
+											} 
+											break;
+									case .VAR_EFFECTIVE_FILENAME:
+											if (generatedFilename) {
+												stream.curl_mfprintf("%s", generatedFilename);
+											} 
+											break;
+									case .VAR_APPCONNECT_TIME:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_APPCONNECT_TIME, doubleinfo)) {
 												stream.curl_mfprintf("%.6f", doubleinfo);
+											} 
+											break;
+									case .VAR_CONTENT_TYPE:
+											if ((CURLE_OK == curl.curl_easy_getinfo(CURLINFO_CONTENT_TYPE, stringp)) && stringp) {
+												/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(stringp, stream);
+											} 
+											break;
+									case .VAR_SPEED_UPLOAD:
+											if (CURLE_OK == curl.curl_easy_getinfo(CURLINFO_SPEED_UPLOAD, doubleinfo)) {
+												stream.curl_mfprintf("%.3f", doubleinfo);
 											} 
 											break;
 									default:
@@ -295,30 +295,30 @@ public class OutStruct {
 							ptr = end + /* pass the end */1;
 							end = keepit;
 						} else {
-								.fputc((byte)'%', /* illegal syntax, then just output the characters that are used */stream);
-								.fputc(ptr[1], stream);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'%', /* illegal syntax, then just output the characters that are used */stream);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc(ptr[1], stream);
 								ptr += 2;
 						} 
 				} 
 			}  else if ((byte)'\\' == ptr && ptr[1]) {
 				switch (ptr[1]) {
-				case (byte)'t':
-						.fputc((byte)'\t', stream);
-						break;
 				case (byte)'r':
-						.fputc((byte)'\r', stream);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\r', stream);
+						break;
+				case (byte)'t':
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\t', stream);
 						break;
 				case (byte)'n':
-						.fputc((byte)'\n', stream);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc((byte)'\n', stream);
 						break;
 				default:
-						.fputc(ptr, /* unknown, just output this */stream);
-						.fputc(ptr[1], stream);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc(ptr, /* unknown, just output this */stream);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc(ptr[1], stream);
 						break;
 				}
 				ptr += 2;
 			} else {
-					.fputc(ptr, stream);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc(ptr, stream);
 					ptr++;
 			} 
 		}
@@ -352,23 +352,23 @@ public class OutStruct {
 		Object generatedOperationConfig = generatedConfig.getOperationConfig();
 		GlobalConfig global = generatedOperationConfig;
 		FILE file = new FILE();
-		byte generatedFilename = this.getFilename();
+		Byte generatedFilename = this.getFilename();
 		if (!generatedFilename || !generatedFilename) {
 			global.warnf("Remote filename has no length!\n");
 			return 0;
 		} 
 		 generatedIs_cd_filename = this.getIs_cd_filename();
 		if (generatedIs_cd_filename) {
-			file = .fopen(generatedFilename, /* don't overwrite existing files */"rb");
+			file = /*Error: Function owner not recognized*/fopen(generatedFilename, /* don't overwrite existing files */"rb");
 			if (file) {
-				.fclose(file);
-				global.warnf("Refusing to overwrite %s: %s\n", generatedFilename, .strerror(17));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(file);
+				global.warnf("Refusing to overwrite %s: %s\n", generatedFilename, /*Error: Function owner not recognized*/strerror(17));
 				return 0;
 			} 
 		} 
-		file = .fopen(generatedFilename, /* open file for writing */"wb");
+		file = /*Error: Function owner not recognized*/fopen(generatedFilename, /* open file for writing */"wb");
 		if (!file) {
-			global.warnf("Failed to create the file %s: %s\n", generatedFilename, .strerror((._errno())));
+			global.warnf("Failed to create the file %s: %s\n", generatedFilename, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			return 0;
 		} 
 		this.setS_isreg(1);
@@ -380,10 +380,10 @@ public class OutStruct {
 		** callback for CURLOPT_WRITEFUNCTION
 		*/;
 	}
-	public byte getFilename() {
+	public Byte getFilename() {
 		return filename;
 	}
-	public void setFilename(byte newFilename) {
+	public void setFilename(Byte newFilename) {
 		filename = newFilename;
 	}
 	public  getAlloc_filename() {

@@ -5,11 +5,11 @@ public class rc_dec {
 	private Object range;
 	private Object code;
 	private Object init_bytes_left;
-	private Object in;
+	private Object[] in;
 	private Object in_pos;
 	private Object in_limit;
 	
-	public rc_dec(Object range, Object code, Object init_bytes_left, Object in, Object in_pos, Object in_limit) {
+	public rc_dec(Object range, Object code, Object init_bytes_left, Object[] in, Object in_pos, Object in_limit) {
 		setRange(range);
 		setCode(code);
 		setInit_bytes_left(init_bytes_left);
@@ -28,6 +28,21 @@ public class rc_dec {
 		 * Read the first five initial bytes into rc->code if they haven't been
 		 * read already. (Yes, the first byte gets completely ignored.)
 		 */);
+	}
+	/* Read the next input byte if needed. */
+	public void rc_normalize() {
+		Object generatedRange = this.getRange();
+		Object generatedCode = this.getCode();
+		Object[] generatedIn = this.getIn();
+		Object generatedIn_pos = this.getIn_pos();
+		if (generatedRange < (1 << 24)) {
+			generatedRange <<=  8;
+			this.setCode((generatedCode << 8) + generatedIn[generatedIn_pos++]);
+		} 
+		Object generatedRange = this.getRange();
+		if (generatedRange < (1 << 24)) {
+			rc.rc_do_normalize();
+		} 
 	}
 	public int rc_bit(Object prob) {
 		uint32_t bound = new uint32_t();
@@ -49,7 +64,7 @@ public class rc_dec {
 		return bit;
 	}
 	/* Decode a bittree starting from the most significant bit. */
-	public Object rc_bittree(Object probs, Object limit) {
+	public Object rc_bittree(Object[] probs, Object limit) {
 		uint32_t symbol = 1;
 		do {
 			if (rc.rc_bit(probs[symbol])) {
@@ -61,7 +76,7 @@ public class rc_dec {
 		return symbol;
 	}
 	/* Decode a bittree starting from the least significant bit. */
-	public void rc_bittree_reverse(Object probs, Object dest, Object limit) {
+	public void rc_bittree_reverse(Object[] probs, Object dest, Object limit) {
 		uint32_t symbol = 1;
 		uint32_t i = 0;
 		do {
@@ -107,10 +122,10 @@ public class rc_dec {
 	public void setInit_bytes_left(Object newInit_bytes_left) {
 		init_bytes_left = newInit_bytes_left;
 	}
-	public Object getIn() {
+	public Object[] getIn() {
 		return in;
 	}
-	public void setIn(Object newIn) {
+	public void setIn(Object[] newIn) {
 		in = newIn;
 	}
 	public Object getIn_pos() {

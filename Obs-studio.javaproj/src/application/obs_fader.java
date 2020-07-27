@@ -36,12 +36,12 @@ public class obs_fader {
 		for (size_t i = generatedCallbacks.getNum();
 		 i > 0; i--) {
 			fader_cb cb = generatedCallbacks.getArray()[i - 1];
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.cb.getParam(), db);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.cb.getParam(), db);
 		}
 		ModernizedCProgram.pthread_mutex_unlock(generatedCallback_mutex);
 	}
 	public obs_fader obs_fader_create(obs_fader_type type) {
-		obs_fader fader = ModernizedCProgram.bzalloc();
+		obs_fader fader = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		if (!fader) {
 			return ((Object)0);
 		} 
@@ -56,23 +56,23 @@ public class obs_fader {
 			;
 		} 
 		switch (obs_fader_type.type) {
-		case obs_fader_type.OBS_FADER_IEC:
-				fader.setDef_to_db(iec_def_to_db);
-				fader.setDb_to_def(iec_db_to_def);
-				fader.setMax_db(0.0);
-				fader.setMin_db(-.__builtin_inf());
-				break;
 		case obs_fader_type.OBS_FADER_LOG:
 				fader.setDef_to_db(log_def_to_db);
 				fader.setDb_to_def(log_db_to_def);
 				fader.setMax_db(0.0);
 				fader.setMin_db(-96.0);
 				break;
+		case obs_fader_type.OBS_FADER_IEC:
+				fader.setDef_to_db(iec_def_to_db);
+				fader.setDb_to_def(iec_db_to_def);
+				fader.setMax_db(0.0);
+				fader.setMin_db(-/*Error: Function owner not recognized*/__builtin_inf());
+				break;
 		case obs_fader_type.OBS_FADER_CUBIC:
 				fader.setDef_to_db(cubic_def_to_db);
 				fader.setDb_to_def(cubic_db_to_def);
 				fader.setMax_db(0.0);
-				fader.setMin_db(-.__builtin_inf());
+				fader.setMin_db(-/*Error: Function owner not recognized*/__builtin_inf());
 				break;
 		default:
 				;
@@ -84,11 +84,11 @@ public class obs_fader {
 	}
 	public void obs_fader_destroy() {
 		if (!fader) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		fader.obs_fader_detach_source();
 		Object generatedCallbacks = this.getCallbacks();
-		.da_free(generatedCallbacks);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedCallbacks);
 		Object generatedCallback_mutex = this.getCallback_mutex();
 		ModernizedCProgram.pthread_mutex_destroy(generatedCallback_mutex);
 		Object generatedMutex = this.getMutex();
@@ -111,7 +111,7 @@ public class obs_fader {
 		} 
 		double generatedMin_db = this.getMin_db();
 		if (generatedCur_db < generatedMin_db) {
-			this.setCur_db(-.__builtin_inf());
+			this.setCur_db(-/*Error: Function owner not recognized*/__builtin_inf());
 			clamped = true;
 		} 
 		this.setIgnore_next_signal(true);
@@ -139,7 +139,7 @@ public class obs_fader {
 		if (!fader) {
 			return false;
 		} 
-		return fader.obs_fader_set_db(.UNRECOGNIZEDFUNCTIONNAME(def));
+		return fader.obs_fader_set_db(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(def));
 	}
 	public double obs_fader_get_deflection() {
 		if (!fader) {
@@ -148,7 +148,7 @@ public class obs_fader {
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedMutex);
 		double generatedCur_db = this.getCur_db();
-		double def = .UNRECOGNIZEDFUNCTIONNAME(generatedCur_db);
+		double def = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCur_db);
 		ModernizedCProgram.pthread_mutex_unlock(generatedMutex);
 		return def;
 	}
@@ -173,7 +173,7 @@ public class obs_fader {
 		 sh = new ();
 		obs_source_t source = new obs_source_t();
 		if (!fader) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedMutex);
@@ -182,32 +182,32 @@ public class obs_fader {
 		this.setSource(((Object)0));
 		ModernizedCProgram.pthread_mutex_unlock(generatedMutex);
 		if (!source) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		sh = ModernizedCProgram.obs_source_get_signal_handler(source);
-		.signal_handler_disconnect(sh, "volume", fader_source_volume_changed, fader);
-		.signal_handler_disconnect(sh, "destroy", fader_source_destroyed, fader);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_disconnect(sh, "volume", fader_source_volume_changed, fader);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_disconnect(sh, "destroy", fader_source_destroyed, fader);
 	}
 	public void obs_fader_add_callback(Object callback, Object param) {
 		fader_cb cb = new fader_cb(callback, param);
 		if (!ModernizedCProgram.obs_object_valid(fader, "obs_fader_add_callback", "fader")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedCallback_mutex = this.getCallback_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedCallback_mutex);
 		Object generatedCallbacks = this.getCallbacks();
-		.da_push_back(generatedCallbacks, cb);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedCallbacks, cb);
 		ModernizedCProgram.pthread_mutex_unlock(generatedCallback_mutex);
 	}
 	public void obs_fader_remove_callback(Object callback, Object param) {
 		fader_cb cb = new fader_cb(callback, param);
 		if (!ModernizedCProgram.obs_object_valid(fader, "obs_fader_remove_callback", "fader")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedCallback_mutex = this.getCallback_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedCallback_mutex);
 		Object generatedCallbacks = this.getCallbacks();
-		.da_erase_item(generatedCallbacks, cb);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase_item(generatedCallbacks, cb);
 		ModernizedCProgram.pthread_mutex_unlock(generatedCallback_mutex);
 	}
 	public Object getMutex() {

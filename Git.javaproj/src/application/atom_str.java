@@ -20,13 +20,13 @@ public class atom_str {
 		Object generatedStr_dat = c.getStr_dat();
 		atom_str generatedNext_atom = c.getNext_atom();
 		for (c = ModernizedCProgram.atom_table[hc]; c; c = generatedNext_atom) {
-			if (generatedStr_len == len && !.strncmp(s, generatedStr_dat, len)) {
+			if (generatedStr_len == len && !/*Error: Function owner not recognized*/strncmp(s, generatedStr_dat, len)) {
 				return c;
 			} 
 		}
-		c = ModernizedCProgram.fi_mem_pool.mem_pool_alloc( + len + 1);
+		c = ModernizedCProgram.fi_mem_pool.mem_pool_alloc(/*Error: Unsupported expression*/ + len + 1);
 		c.setStr_len(len);
-		.memcpy(generatedStr_dat, s, len);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedStr_dat, s, len);
 		generatedStr_dat[len] = 0;
 		c.setNext_atom(ModernizedCProgram.atom_table[hc]);
 		ModernizedCProgram.atom_table[hc] = c;

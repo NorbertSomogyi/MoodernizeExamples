@@ -46,7 +46,7 @@ public class obs_data_item {
 	}
 	
 	public Byte get_item_name() {
-		return (byte)item + ;
+		return (byte)item + /*Error: Unsupported expression*/;
 	}
 	public Object get_data_ptr() {
 		Object generatedName_len = this.getName_len();
@@ -82,11 +82,11 @@ public class obs_data_item {
 		Object generatedData_len = this.getData_len();
 		Object generatedDefault_len = this.getDefault_len();
 		Object generatedAutoselect_size = this.getAutoselect_size();
-		return  + generatedName_len + generatedData_len + generatedDefault_len + generatedAutoselect_size;
+		return /*Error: Unsupported expression*/ + generatedName_len + generatedData_len + generatedDefault_len + generatedAutoselect_size;
 	}
 	public void item_data_release() {
 		if (!item.obs_data_item_has_user_value()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_data_type generatedType = this.getType();
 		obs_data obs_data = new obs_data();
@@ -138,7 +138,7 @@ public class obs_data_item {
 	public void item_default_data_addref() {
 		Object generatedData_size = this.getData_size();
 		if (!generatedData_size) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_data_type generatedType = this.getType();
 		obs_data obs_data = new obs_data();
@@ -171,7 +171,7 @@ public class obs_data_item {
 			return ((Object)0);
 		} 
 		name_size = ModernizedCProgram.get_name_align_size(name);
-		total_size = name_size +  + size;
+		total_size = name_size + /*Error: Unsupported expression*/ + size;
 		item = ModernizedCProgram.bzalloc(total_size);
 		item.setCapacity(total_size);
 		item.setType(obs_data_type.type);
@@ -186,8 +186,8 @@ public class obs_data_item {
 				item.setData_len(size);
 				item.setData_size(size);
 		} 
-		.strcpy(item.get_item_name(), name);
-		.memcpy(item.get_item_data(), data, size);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(item.get_item_name(), name);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(item.get_item_data(), data, size);
 		item.item_data_addref();
 		return item;
 	}
@@ -247,13 +247,13 @@ public class obs_data_item {
 		ptrdiff_t old_offset = ()old_data - ()old_item;
 		ptrdiff_t new_offset = ()data - ()item;
 		if (!old_data) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.memmove(()item + new_offset, ()item + old_offset, len);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(()item + new_offset, ()item + old_offset, len);
 	}
 	public void obs_data_item_setdata(Object data, Object size, obs_data_type type) {
 		if (!p_item || !p_item) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_data_item item = p_item;
 		ptrdiff_t old_default_data_pos = ()item.get_default_data_ptr() - ()item;
@@ -266,17 +266,17 @@ public class obs_data_item {
 		item = item.obs_data_item_ensure_capacity();
 		Object generatedDefault_len = item.getDefault_len();
 		if (generatedDefault_size || generatedAutoselect_size) {
-			.memmove(item.get_default_data_ptr(), ()item + old_default_data_pos, generatedDefault_len + generatedAutoselect_size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(item.get_default_data_ptr(), ()item + old_default_data_pos, generatedDefault_len + generatedAutoselect_size);
 		} 
 		if (size) {
-			.memcpy(item.get_item_data(), data, size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(item.get_item_data(), data, size);
 			item.item_data_addref();
 		} 
 		p_item = item;
 	}
 	public void obs_data_item_set_default_data(Object data, Object size, obs_data_type type) {
 		if (!p_item || !p_item) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_data_item item = p_item;
 		Object old_autoselect_data = item.get_autoselect_data_ptr();
@@ -292,14 +292,14 @@ public class obs_data_item {
 			p_item.move_data(old_autoselect_data, item, item.get_autoselect_data_ptr(), generatedAutoselect_size);
 		} 
 		if (size) {
-			.memcpy(item.get_item_default_data(), data, size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(item.get_item_default_data(), data, size);
 			item.item_default_data_addref();
 		} 
 		p_item = item;
 	}
 	public void obs_data_item_set_autoselect_data(Object data, Object size, obs_data_type type) {
 		if (!p_item || !p_item) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_data_item item = p_item;
 		item.item_autoselect_data_release();
@@ -311,7 +311,7 @@ public class obs_data_item {
 		item.setDefault_len(generatedDefault_size ? ModernizedCProgram.get_align_size(generatedDefault_size) : 0);
 		item = item.obs_data_item_ensure_capacity();
 		if (size) {
-			.memcpy(item.get_item_autoselect_data(), data, size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(item.get_item_autoselect_data(), data, size);
 			item.item_autoselect_data_addref();
 		} 
 		p_item = item;
@@ -324,7 +324,7 @@ public class obs_data_item {
 		obs_data_item item = generatedFirst_item;
 		obs_data_item generatedNext = item.getNext();
 		while (item) {
-			if (.strcmp(item.get_item_name(), name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(item.get_item_name(), name) == 0) {
 				return item;
 			} 
 			item = generatedNext;
@@ -353,7 +353,7 @@ public class obs_data_item {
 			} 
 			size = generatedDefault_len + generatedAutoselect_size;
 			if (size) {
-				.memmove(ptr, ()ptr + generatedData_len, size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(ptr, ()ptr + generatedData_len, size);
 			} 
 			this.setData_size(0);
 			this.setData_len(0);
@@ -374,7 +374,7 @@ public class obs_data_item {
 	public void obs_data_item_unset_user_value() {
 		Object generatedData_size = this.getData_size();
 		if (!item || !generatedData_size) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object old_non_user_data = item.get_default_data_ptr();
 		item.item_data_release();
@@ -390,7 +390,7 @@ public class obs_data_item {
 	public void obs_data_item_unset_default_value() {
 		Object generatedDefault_size = this.getDefault_size();
 		if (!item || !generatedDefault_size) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object old_autoselect_data = item.get_autoselect_data_ptr();
 		item.item_default_data_release();
@@ -404,7 +404,7 @@ public class obs_data_item {
 	public void obs_data_item_unset_autoselect_value() {
 		Object generatedAutoselect_size = this.getAutoselect_size();
 		if (!item || !generatedAutoselect_size) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		item.item_autoselect_data_release();
 		this.setAutoselect_size(0/* ------------------------------------------------------------------------- */);
@@ -526,14 +526,14 @@ public class obs_data_item {
 		return generatedFiles.getNum() && generatedCur_item < generatedFiles.getNum();
 	}
 	public Object data_item_get_string(Object get_data) {
-		return item.item_valid(obs_data_type.OBS_DATA_STRING) && .get_data(item) ? .get_data(item) : "";
+		return item.item_valid(obs_data_type.OBS_DATA_STRING) && /*Error: Function owner not recognized*/get_data(item) ? /*Error: Function owner not recognized*/get_data(item) : "";
 	}
 	public int item_int(Object get_data) {
 		obs_data_number_type generatedType = num.getType();
 		int generatedInt_val = num.getInt_val();
 		double generatedDouble_val = num.getDouble_val();
-		if (item && .get_data(item)) {
-			obs_data_number num = .get_data(item);
+		if (item && /*Error: Function owner not recognized*/get_data(item)) {
+			obs_data_number num = /*Error: Function owner not recognized*/get_data(item);
 			return (generatedType == obs_data_number_type.OBS_DATA_NUM_INT) ? generatedInt_val : (long)generatedDouble_val;
 		} 
 		return 0;
@@ -545,8 +545,8 @@ public class obs_data_item {
 		obs_data_number_type generatedType = num.getType();
 		int generatedInt_val = num.getInt_val();
 		double generatedDouble_val = num.getDouble_val();
-		if (item && .get_data(item)) {
-			obs_data_number num = .get_data(item);
+		if (item && /*Error: Function owner not recognized*/get_data(item)) {
+			obs_data_number num = /*Error: Function owner not recognized*/get_data(item);
 			return (generatedType == obs_data_number_type.OBS_DATA_NUM_INT) ? (double)generatedInt_val : generatedDouble_val;
 		} 
 		return 0.0;
@@ -555,7 +555,7 @@ public class obs_data_item {
 		return item.item_valid(obs_data_type.OBS_DATA_NUMBER) ? item : ((Object)0).item_double(get_data);
 	}
 	public Object data_item_get_bool(Object get_data) {
-		return item.item_valid(obs_data_type.OBS_DATA_BOOLEAN) && .get_data(item) ? ().get_data(item) : false;
+		return item.item_valid(obs_data_type.OBS_DATA_BOOLEAN) && /*Error: Function owner not recognized*/get_data(item) ? ()/*Error: Function owner not recognized*/get_data(item) : false;
 	}
 	public Object obs_data_item_get_string() {
 		return item.data_item_get_string(get_item_data);

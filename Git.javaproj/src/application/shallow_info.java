@@ -2,19 +2,19 @@ package application;
 
 public class shallow_info {
 	private oid_array shallow;
-	private Integer ours;
+	private int[] ours;
 	private int nr_ours;
-	private Integer theirs;
+	private int[] theirs;
 	private int nr_theirs;
 	private oid_array ref;
-	private Object used_shallow;
-	private int need_reachability_test;
-	private int reachable;
-	private int shallow_ref;
+	private Object[][] used_shallow;
+	private int[] need_reachability_test;
+	private int[] reachable;
+	private int[] shallow_ref;
 	private commit commits;
 	private int nr_commits;
 	
-	public shallow_info(oid_array shallow, Integer ours, int nr_ours, Integer theirs, int nr_theirs, oid_array ref, Object used_shallow, int need_reachability_test, int reachable, int shallow_ref, commit commits, int nr_commits) {
+	public shallow_info(oid_array shallow, int[] ours, int nr_ours, int[] theirs, int nr_theirs, oid_array ref, Object[][] used_shallow, int[] need_reachability_test, int[] reachable, int[] shallow_ref, commit commits, int nr_commits) {
 		setShallow(shallow);
 		setOurs(ours);
 		setNr_ours(nr_ours);
@@ -38,7 +38,7 @@ public class shallow_info {
 			return ModernizedCProgram.unpack(0, si);
 		} 
 		.use_keepalive = .KEEPALIVE_AFTER_NUL;
-		.memset(muxer, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(muxer, 0, /*Error: sizeof expression not supported yet*/);
 		muxer.setProc(copy_to_sideband);
 		muxer.setIn(-1);
 		if (muxer.start_async()) {
@@ -56,17 +56,17 @@ public class shallow_info {
 		int j;
 		int k;
 		int bitmap_size = (((generatedNr) + (true) - 1) / (true));
-		Object generatedUsed_shallow = this.getUsed_shallow();
-		(generatedUsed_shallow) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (generatedNr)));
+		Object[][] generatedUsed_shallow = this.getUsed_shallow();
+		(generatedUsed_shallow) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedNr)));
 		si.assign_shallow_commits_to_refs(generatedUsed_shallow, ((Object)0));
-		int generatedNeed_reachability_test = this.getNeed_reachability_test();
-		this.setNeed_reachability_test(ModernizedCProgram.xcalloc(generatedNr, ));
-		int generatedReachable = this.getReachable();
-		this.setReachable(ModernizedCProgram.xcalloc(generatedNr, ));
-		int generatedShallow_ref = this.getShallow_ref();
-		this.setShallow_ref(ModernizedCProgram.xcalloc(generatedNr, ));
+		int[] generatedNeed_reachability_test = this.getNeed_reachability_test();
+		this.setNeed_reachability_test(ModernizedCProgram.xcalloc(generatedNr, /*Error: sizeof expression not supported yet*/));
+		int[] generatedReachable = this.getReachable();
+		this.setReachable(ModernizedCProgram.xcalloc(generatedNr, /*Error: sizeof expression not supported yet*/));
+		int[] generatedShallow_ref = this.getShallow_ref();
+		this.setShallow_ref(ModernizedCProgram.xcalloc(generatedNr, /*Error: sizeof expression not supported yet*/));
 		int generatedNr_ours = this.getNr_ours();
-		Integer generatedOurs = this.getOurs();
+		int[] generatedOurs = this.getOurs();
 		for (i = 0; i < generatedNr_ours; i++) {
 			generatedNeed_reachability_test[generatedOurs[i]] = 1;
 		}
@@ -95,18 +95,18 @@ public class shallow_info {
 				 * true .git/shallow though.
 				 */;
 		}
-		.setenv("GIT_SHALLOW_FILE", ModernizedCProgram.alt_shallow_file, 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setenv("GIT_SHALLOW_FILE", ModernizedCProgram.alt_shallow_file, 1);
 	}
 	public void clear_shallow_info() {
-		Integer generatedOurs = this.getOurs();
+		int[] generatedOurs = this.getOurs();
 		ModernizedCProgram.free(generatedOurs);
-		Integer generatedTheirs = this.getTheirs();
+		int[] generatedTheirs = this.getTheirs();
 		ModernizedCProgram.free(generatedTheirs);
 	}
 	/* Step 4, remove non-existent ones in "theirs" after getting the pack */
 	public void remove_nonexistent_theirs_shallow() {
 		oid_array generatedShallow = this.getShallow();
-		object_id generatedOid = generatedShallow.getOid();
+		object_id[] generatedOid = generatedShallow.getOid();
 		object_id oid = generatedOid;
 		int i;
 		int dst;
@@ -116,7 +116,7 @@ public class shallow_info {
 			} 
 		} while (0);
 		int generatedNr_theirs = this.getNr_theirs();
-		Integer generatedTheirs = this.getTheirs();
+		int[] generatedTheirs = this.getTheirs();
 		for (i = dst = 0; i < generatedNr_theirs; i++) {
 			if (i != dst) {
 				generatedTheirs[dst] = generatedTheirs[i];
@@ -127,9 +127,9 @@ public class shallow_info {
 		}
 		this.setNr_theirs(dst);
 	}
-	public void assign_shallow_commits_to_refs(Object used, Integer ref_status) {
+	public void assign_shallow_commits_to_refs(Object[][] used, Integer ref_status) {
 		oid_array generatedShallow = this.getShallow();
-		object_id generatedOid = generatedShallow.getOid();
+		object_id[] generatedOid = generatedShallow.getOid();
 		object_id oid = generatedOid;
 		oid_array generatedRef = this.getRef();
 		oid_array ref = generatedRef;
@@ -145,12 +145,12 @@ public class shallow_info {
 		} while (0);
 		int generatedNr_ours = this.getNr_ours();
 		int generatedNr_theirs = this.getNr_theirs();
-		(shallow) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (generatedNr_ours + generatedNr_theirs)));
-		Integer generatedOurs = this.getOurs();
+		(shallow) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedNr_ours + generatedNr_theirs)));
+		int[] generatedOurs = this.getOurs();
 		for (i = 0; i < generatedNr_ours; i++) {
 			shallow[nr_shallow++] = generatedOurs[i];
 		}
-		Integer generatedTheirs = this.getTheirs();
+		int[] generatedTheirs = this.getTheirs();
 		for (i = 0; i < generatedNr_theirs; i++) {
 			shallow[nr_shallow++] = generatedTheirs[i/*
 				 * Prepare the commit graph to track what refs can reach what
@@ -168,7 +168,7 @@ public class shallow_info {
 			} 
 			generatedFlags &=  ~((-1024 << 1) | (-1024 << 10) | (-1024 << 0));
 		}
-		.memset(pi, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(pi, 0, /*Error: sizeof expression not supported yet*/);
 		ref_bitmap generatedRef_bitmap = pi.getRef_bitmap();
 		generatedRef_bitmap.init_ref_bitmap();
 		int generatedNr = ref.getNr();
@@ -176,7 +176,7 @@ public class shallow_info {
 		ModernizedCProgram.head_ref(mark_uninteresting, ((Object)0));
 		ModernizedCProgram.for_each_ref(mark_uninteresting, ((Object)0));
 		for (i = 0; i < nr_shallow; /* Mark potential bottoms so we won't go out of bound */i++) {
-			commit c = .lookup_commit(ModernizedCProgram.the_repository, oid[shallow[i]]);
+			commit c = /*Error: Function owner not recognized*/lookup_commit(ModernizedCProgram.the_repository, oid[shallow[i]]);
 			generatedFlags |=  (-1024 << 10);
 		}
 		for (i = 0; i < generatedNr; i++) {
@@ -184,10 +184,10 @@ public class shallow_info {
 		}
 		int generatedNr_bits = pi.getNr_bits();
 		if (used) {
-			int bitmap_size = (((generatedNr_bits) + (true) - 1) / (true)) * ;
-			.memset(used, 0,  * generatedNr);
+			int bitmap_size = (((generatedNr_bits) + (true) - 1) / (true)) * /*Error: Unsupported expression*/;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(used, 0, /*Error: sizeof expression not supported yet*/ * generatedNr);
 			for (i = 0; i < nr_shallow; i++) {
-				commit c = .lookup_commit(ModernizedCProgram.the_repository, oid[shallow[i]]);
+				commit c = /*Error: Function owner not recognized*/lookup_commit(ModernizedCProgram.the_repository, oid[shallow[i]]);
 				uint32_t map = generatedRef_bitmap.ref_bitmap_at(c);
 				if (map) {
 					used[shallow[i]] = ModernizedCProgram.xmemdupz(map, bitmap_size/*
@@ -203,7 +203,7 @@ public class shallow_info {
 		} 
 		generatedRef_bitmap.clear_ref_bitmap();
 		int generatedPool_count = pi.getPool_count();
-		Byte generatedPools = pi.getPools();
+		byte[][] generatedPools = pi.getPools();
 		for (i = 0; i < generatedPool_count; i++) {
 			ModernizedCProgram.free(generatedPools[i]);
 		}
@@ -212,18 +212,18 @@ public class shallow_info {
 	}
 	/* (Delayed) step 7, reachability test at commit level */
 	public int delayed_reachability_test(int c) {
-		int generatedNeed_reachability_test = this.getNeed_reachability_test();
+		int[] generatedNeed_reachability_test = this.getNeed_reachability_test();
 		oid_array generatedShallow = this.getShallow();
-		object_id generatedOid = generatedShallow.getOid();
+		object_id[] generatedOid = generatedShallow.getOid();
 		commit generatedCommits = this.getCommits();
 		int generatedNr = ca.getNr();
-		int generatedReachable = this.getReachable();
+		int[] generatedReachable = this.getReachable();
 		int generatedNr_commits = this.getNr_commits();
 		if (generatedNeed_reachability_test[c]) {
-			commit commit = .lookup_commit(ModernizedCProgram.the_repository, generatedOid[c]);
+			commit commit = /*Error: Function owner not recognized*/lookup_commit(ModernizedCProgram.the_repository, generatedOid[c]);
 			if (!generatedCommits) {
 				commit_array ca = new commit_array();
-				.memset(ca, 0, );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ca, 0, /*Error: sizeof expression not supported yet*/);
 				ModernizedCProgram.head_ref(add_ref, ca);
 				ModernizedCProgram.for_each_ref(add_ref, ca);
 				this.setCommits(generatedCommits);
@@ -240,10 +240,10 @@ public class shallow_info {
 	public void setShallow(oid_array newShallow) {
 		shallow = newShallow;
 	}
-	public Integer getOurs() {
+	public int[] getOurs() {
 		return ours;
 	}
-	public void setOurs(Integer newOurs) {
+	public void setOurs(int[] newOurs) {
 		ours = newOurs;
 	}
 	public int getNr_ours() {
@@ -252,10 +252,10 @@ public class shallow_info {
 	public void setNr_ours(int newNr_ours) {
 		nr_ours = newNr_ours;
 	}
-	public Integer getTheirs() {
+	public int[] getTheirs() {
 		return theirs;
 	}
-	public void setTheirs(Integer newTheirs) {
+	public void setTheirs(int[] newTheirs) {
 		theirs = newTheirs;
 	}
 	public int getNr_theirs() {
@@ -270,28 +270,28 @@ public class shallow_info {
 	public void setRef(oid_array newRef) {
 		ref = newRef;
 	}
-	public Object getUsed_shallow() {
+	public Object[][] getUsed_shallow() {
 		return used_shallow;
 	}
-	public void setUsed_shallow(Object newUsed_shallow) {
+	public void setUsed_shallow(Object[][] newUsed_shallow) {
 		used_shallow = newUsed_shallow;
 	}
-	public int getNeed_reachability_test() {
+	public int[] getNeed_reachability_test() {
 		return need_reachability_test;
 	}
-	public void setNeed_reachability_test(int newNeed_reachability_test) {
+	public void setNeed_reachability_test(int[] newNeed_reachability_test) {
 		need_reachability_test = newNeed_reachability_test;
 	}
-	public int getReachable() {
+	public int[] getReachable() {
 		return reachable;
 	}
-	public void setReachable(int newReachable) {
+	public void setReachable(int[] newReachable) {
 		reachable = newReachable;
 	}
-	public int getShallow_ref() {
+	public int[] getShallow_ref() {
 		return shallow_ref;
 	}
-	public void setShallow_ref(int newShallow_ref) {
+	public void setShallow_ref(int[] newShallow_ref) {
 		shallow_ref = newShallow_ref;
 	}
 	public commit getCommits() {

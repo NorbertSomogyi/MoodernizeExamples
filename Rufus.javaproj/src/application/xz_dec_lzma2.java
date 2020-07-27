@@ -44,7 +44,7 @@ public class xz_dec_lzma2 {
 		rc_dec generatedRc = this.getRc();
 		dictionary generatedDict = this.getDict();
 		Object generatedRep0 = generatedLzma.getRep0();
-		if (.lzma_state_is_literal(generatedState)) {
+		if (/*Error: Function owner not recognized*/lzma_state_is_literal(generatedState)) {
 			symbol = generatedRc.rc_bittree(probs, -1024);
 		} else {
 				symbol = 1;
@@ -64,7 +64,7 @@ public class xz_dec_lzma2 {
 				} while (symbol < -1024);
 		} 
 		generatedDict.dict_put((uint8_t)symbol);
-		.lzma_state_literal(generatedState);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lzma_state_literal(generatedState);
 	}
 	/* Decode a match. The distance will be stored in s->lzma.rep0. */
 	public void lzma_match(Object pos_state) {
@@ -73,7 +73,7 @@ public class xz_dec_lzma2 {
 		uint32_t limit = new uint32_t();
 		lzma_dec generatedLzma = this.getLzma();
 		lzma_state generatedState = generatedLzma.getState();
-		.lzma_state_match(generatedState);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lzma_state_match(generatedState);
 		Object generatedRep2 = generatedLzma.getRep2();
 		generatedLzma.setRep3(generatedRep2);
 		Object generatedRep1 = generatedLzma.getRep1();
@@ -84,7 +84,7 @@ public class xz_dec_lzma2 {
 		ModernizedCProgram.lzma_len(s, generatedMatch_len_dec, pos_state);
 		Object generatedDist_slot = generatedLzma.getDist_slot();
 		Object generatedLen = generatedLzma.getLen();
-		probs = generatedDist_slot[.lzma_get_dist_state(generatedLen)];
+		probs = generatedDist_slot[/*Error: Function owner not recognized*/lzma_get_dist_state(generatedLen)];
 		rc_dec generatedRc = this.getRc();
 		dist_slot = generatedRc.rc_bittree(probs, (1 << 6)) - (1 << 6);
 		Object generatedDist_special = generatedLzma.getDist_special();
@@ -124,9 +124,9 @@ public class xz_dec_lzma2 {
 		Object generatedRep0 = generatedLzma.getRep0();
 		if (!generatedRc.rc_bit(generatedIs_rep0[generatedState])) {
 			if (!generatedRc.rc_bit(generatedIs_rep0_long[generatedState][pos_state])) {
-				.lzma_state_short_rep(generatedState);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lzma_state_short_rep(generatedState);
 				generatedLzma.setLen(1);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} else {
 				if (!generatedRc.rc_bit(generatedIs_rep1[generatedState])) {
@@ -143,7 +143,7 @@ public class xz_dec_lzma2 {
 				generatedLzma.setRep1(generatedRep0);
 				generatedLzma.setRep0(tmp);
 		} 
-		.lzma_state_long_rep(generatedState);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lzma_state_long_rep(generatedState);
 		lzma_len_dec generatedRep_len_dec = generatedLzma.getRep_len_dec();
 		ModernizedCProgram.lzma_len(s, generatedRep_len_dec, pos_state);
 	}
@@ -240,32 +240,21 @@ public class xz_dec_lzma2 {
 		s.lzma_reset();
 		return 1/*********
 		 * LZMA2 *
-		 *********//*
-		 * The LZMA decoder assumes that if the input limit (s->rc.in_limit) hasn't
-		 * been exceeded, it is safe to read up to LZMA_IN_REQUIRED bytes. This
-		 * wrapper function takes care of making the LZMA decoder's assumption safe.
-		 *
-		 * As long as there is plenty of input left to be decoded in the current LZMA
-		 * chunk, we decode directly from the caller-supplied input buffer until
-		 * there's LZMA_IN_REQUIRED bytes left. Those remaining bytes are copied into
-		 * s->temp.buf, which (hopefully) gets filled on the next call to this
-		 * function. We decode a few bytes from the temporary buffer so that we can
-		 * continue decoding from the caller-supplied input buffer again.
-		 */;
+		 *********/;
 	}
 	public xz_dec_lzma2 xz_dec_lzma2_create(xz_mode mode, Object dict_max) {
-		xz_dec_lzma2 s = .malloc();
+		xz_dec_lzma2 s = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		if (s == ((Object)0)) {
 			return ((Object)0);
 		} 
 		dictionary generatedDict = s.getDict();
 		generatedDict.setMode(xz_mode.mode);
 		generatedDict.setSize_max(dict_max);
-		Object generatedBuf = generatedDict.getBuf();
+		Object[] generatedBuf = generatedDict.getBuf();
 		if (((xz_mode.mode) == xz_mode.XZ_PREALLOC)) {
-			generatedDict.setBuf(.malloc(dict_max));
+			generatedDict.setBuf(/*Error: Function owner not recognized*/malloc(dict_max));
 			if (generatedBuf == ((Object)0)) {
-				.free(s);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(s);
 				return ((Object)0);
 			} 
 		}  else if (((xz_mode.mode) == xz_mode.XZ_DYNALLOC)) {
@@ -285,7 +274,7 @@ public class xz_dec_lzma2 {
 		xz_mode generatedMode = generatedDict.getMode();
 		Object generatedSize_max = generatedDict.getSize_max();
 		Object generatedAllocated = generatedDict.getAllocated();
-		Object generatedBuf = generatedDict.getBuf();
+		Object[] generatedBuf = generatedDict.getBuf();
 		if (((generatedMode) != xz_mode.XZ_SINGLE)) {
 			if (generatedSize > generatedSize_max) {
 				return xz_ret.XZ_MEMLIMIT_ERROR;
@@ -293,8 +282,8 @@ public class xz_dec_lzma2 {
 			generatedDict.setEnd(generatedSize);
 			if (((generatedMode) == xz_mode.XZ_DYNALLOC)) {
 				if (generatedAllocated < generatedSize) {
-					.free(generatedBuf);
-					generatedDict.setBuf(.malloc(generatedSize));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuf);
+					generatedDict.setBuf(/*Error: Function owner not recognized*/malloc(generatedSize));
 					if (generatedBuf == ((Object)0)) {
 						generatedDict.setAllocated(0);
 						return xz_ret.XZ_MEM_ERROR;
@@ -314,11 +303,11 @@ public class xz_dec_lzma2 {
 	public void xz_dec_lzma2_end() {
 		dictionary generatedDict = this.getDict();
 		xz_mode generatedMode = generatedDict.getMode();
-		Object generatedBuf = generatedDict.getBuf();
+		Object[] generatedBuf = generatedDict.getBuf();
 		if (((generatedMode) != xz_mode.XZ_SINGLE)) {
-			.free(generatedBuf);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuf);
 		} 
-		.free(s);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(s);
 	}
 	public rc_dec getRc() {
 		return rc;

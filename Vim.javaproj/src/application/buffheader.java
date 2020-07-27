@@ -38,12 +38,12 @@ public class buffheader {
 		Object generatedB_str = bp.getB_str();
 		buffblock generatedB_next = bp.getB_next();
 		for (bp = generatedB_next; bp != ((Object)0); bp = generatedB_next) {
-			count += (long_u).strlen((byte)(generatedB_str));
+			count += (long_u)/*Error: Function owner not recognized*/strlen((byte)(generatedB_str));
 		}
 		if ((count || dozero) && (p = ModernizedCProgram.alloc(count + 1)) != ((Object)0)) {
 			p2 = p;
 			for (bp = generatedB_next; bp != ((Object)0); bp = generatedB_next) {
-				for (str = generatedB_str; str; ) {
+				for (str = generatedB_str; str; /*Error: Unsupported expression*/) {
 					p2++ = str++;
 				}
 			}
@@ -59,10 +59,10 @@ public class buffheader {
 		/* length of "s" or -1 */buffblock_T p = new buffblock_T();
 		long_u len = new long_u();
 		if (slen < 0) {
-			slen = (long).strlen((byte)(s));
+			slen = (long)/*Error: Function owner not recognized*/strlen((byte)(s));
 		} 
 		if (slen == /* don't add empty strings */0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		buffblock generatedBh_first = this.getBh_first();
 		buffblock generatedB_next = generatedBh_first.getB_next();
@@ -74,14 +74,14 @@ public class buffheader {
 			this.setBh_curr((generatedBh_first));
 		}  else if (generatedBh_curr == ((Object)/* buffer has already been read */0)) {
 			ModernizedCProgram.iemsg(((byte)("E222: Add to read buffer")));
-			return ;
+			return /*Error: Unsupported expression*/;
 		}  else if (generatedBh_index != 0) {
-			.memmove((byte)(generatedB_str), (byte)(generatedB_str + generatedBh_index), (size_t)(.strlen((byte)(generatedB_str + generatedBh_index)) + 1));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(generatedB_str), (byte)(generatedB_str + generatedBh_index), (size_t)(/*Error: Function owner not recognized*/strlen((byte)(generatedB_str + generatedBh_index)) + 1));
 		} 
 		this.setBh_index(0);
 		int generatedBh_space = this.getBh_space();
 		if (generatedBh_space >= (int)slen) {
-			len = (long_u).strlen((byte)(generatedB_str));
+			len = (long_u)/*Error: Function owner not recognized*/strlen((byte)(generatedB_str));
 			ModernizedCProgram.vim_strncpy(generatedB_str + len, s, (size_t)slen);
 			generatedBh_space -= slen;
 		} else {
@@ -92,7 +92,7 @@ public class buffheader {
 				} 
 				p = ModernizedCProgram.alloc(((size_t)generatedB_str) + len + 1);
 				if (p == ((Object)0)) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				this.setBh_space((int)(len - slen));
 				ModernizedCProgram.vim_strncpy(generatedB_str, s, (size_t)slen);
@@ -100,13 +100,13 @@ public class buffheader {
 				generatedBh_curr.setB_next(p);
 				this.setBh_curr(p);
 		} 
-		return ;/*
+		return /*Error: Unsupported expression*/;/*
 		 * Add number "n" to buffer "buf".
 		 */
 	}
 	public void add_num_buff(long n) {
 		char_u[] number = new char_u();
-		.sprintf((byte)number, "%ld", n);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)number, "%ld", n);
 		buf.add_buff(number, --1024/*
 		 * Add character 'c' to buffer "buf".
 		 * Translates special keys, NUL, CSI, K_SPECIAL and multibyte characters.
@@ -120,7 +120,7 @@ public class buffheader {
 		if (((c) < 0)) {
 			len = 1;
 		} else {
-				len = .UNRECOGNIZEDFUNCTIONNAME(c, bytes);
+				len = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(c, bytes);
 		} 
 		for (i = 0; i < len; ++i) {
 			if (!((c) < 0)) {

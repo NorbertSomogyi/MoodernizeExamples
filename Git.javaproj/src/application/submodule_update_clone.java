@@ -13,16 +13,16 @@ public class submodule_update_clone {
 	private Object depth;
 	private Object recursive_prefix;
 	private Object prefix;
-	private update_clone_data update_clone;
+	private update_clone_data[] update_clone;
 	private int update_clone_nr;
 	private int update_clone_alloc;
 	private int quickstop;
-	private Object failed_clones;
+	private Object[][] failed_clones;
 	private int failed_clones_nr;
 	private int failed_clones_alloc;
 	private int max_jobs;
 	
-	public submodule_update_clone(int current, module_list list, int warn_if_uninitialized, submodule_update_strategy update, int progress, int quiet, int recommend_shallow, string_list references, int dissociate, Object depth, Object recursive_prefix, Object prefix, update_clone_data update_clone, int update_clone_nr, int update_clone_alloc, int quickstop, Object failed_clones, int failed_clones_nr, int failed_clones_alloc, int max_jobs) {
+	public submodule_update_clone(int current, module_list list, int warn_if_uninitialized, submodule_update_strategy update, int progress, int quiet, int recommend_shallow, string_list references, int dissociate, Object depth, Object recursive_prefix, Object prefix, update_clone_data[] update_clone, int update_clone_nr, int update_clone_alloc, int quickstop, Object[][] failed_clones, int failed_clones_nr, int failed_clones_alloc, int max_jobs) {
 		setCurrent(current);
 		setList(list);
 		setWarn_if_uninitialized(warn_if_uninitialized);
@@ -63,7 +63,7 @@ public class submodule_update_clone {
 			return 1;
 		} 
 		int generatedUpdate_clone_nr = this.getUpdate_clone_nr();
-		update_clone_data generatedUpdate_clone = this.getUpdate_clone();
+		update_clone_data[] generatedUpdate_clone = this.getUpdate_clone();
 		for (i = 0; i < generatedUpdate_clone_nr; i++) {
 			generatedUpdate_clone[i].update_submodule();
 		}
@@ -150,10 +150,10 @@ public class submodule_update_clone {
 	public void setPrefix(Object newPrefix) {
 		prefix = newPrefix;
 	}
-	public update_clone_data getUpdate_clone() {
+	public update_clone_data[] getUpdate_clone() {
 		return update_clone;
 	}
-	public void setUpdate_clone(update_clone_data newUpdate_clone) {
+	public void setUpdate_clone(update_clone_data[] newUpdate_clone) {
 		update_clone = newUpdate_clone;
 	}
 	public int getUpdate_clone_nr() {
@@ -174,10 +174,10 @@ public class submodule_update_clone {
 	public void setQuickstop(int newQuickstop) {
 		quickstop = newQuickstop;
 	}
-	public Object getFailed_clones() {
+	public Object[][] getFailed_clones() {
 		return failed_clones;
 	}
-	public void setFailed_clones(Object newFailed_clones) {
+	public void setFailed_clones(Object[][] newFailed_clones) {
 		failed_clones = newFailed_clones;
 	}
 	public int getFailed_clones_nr() {

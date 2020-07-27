@@ -4,11 +4,11 @@ public class alloc_state {
 	private int count;
 	private int nr;
 	private Object p;
-	private Object slabs;
+	private Object[][] slabs;
 	private int slab_nr;
 	private int slab_alloc;
 	
-	public alloc_state(int count, int nr, Object p, Object slabs, int slab_nr, int slab_alloc) {
+	public alloc_state(int count, int nr, Object p, Object[][] slabs, int slab_nr, int slab_alloc) {
 		setCount(count);
 		setNr(nr);
 		setP(p);
@@ -20,11 +20,11 @@ public class alloc_state {
 	}
 	
 	public alloc_state allocate_alloc_state() {
-		return ModernizedCProgram.xcalloc(1, );
+		return ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 	}
 	public void clear_alloc_state() {
 		int generatedSlab_nr = this.getSlab_nr();
-		Object generatedSlabs = this.getSlabs();
+		Object[][] generatedSlabs = this.getSlabs();
 		while (generatedSlab_nr > 0) {
 			generatedSlab_nr--;
 			ModernizedCProgram.free(generatedSlabs[generatedSlab_nr]);
@@ -39,7 +39,7 @@ public class alloc_state {
 		int generatedNr = this.getNr();
 		int generatedSlab_nr = this.getSlab_nr();
 		int generatedSlab_alloc = this.getSlab_alloc();
-		Object generatedSlabs = this.getSlabs();
+		Object[][] generatedSlabs = this.getSlabs();
 		Object generatedP = this.getP();
 		if (!generatedNr) {
 			this.setNr(1024);
@@ -51,7 +51,7 @@ public class alloc_state {
 					} else {
 							this.setSlab_alloc((((generatedSlab_alloc) + 16) * 3 / 2));
 					} 
-					(generatedSlabs) = ModernizedCProgram.xrealloc((generatedSlabs), ModernizedCProgram.st_mult(, (generatedSlab_alloc)));
+					(generatedSlabs) = ModernizedCProgram.xrealloc((generatedSlabs), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedSlab_alloc)));
 				} 
 			} while (0);
 			generatedSlabs[generatedSlab_nr++] = generatedP;
@@ -61,7 +61,7 @@ public class alloc_state {
 		generatedCount++;
 		ret = generatedP;
 		this.setP((byte)generatedP + node_size);
-		.memset(ret, 0, node_size);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ret, 0, node_size);
 		return ret;
 	}
 	public int getCount() {
@@ -82,10 +82,10 @@ public class alloc_state {
 	public void setP(Object newP) {
 		p = newP;
 	}
-	public Object getSlabs() {
+	public Object[][] getSlabs() {
 		return slabs;
 	}
-	public void setSlabs(Object newSlabs) {
+	public void setSlabs(Object[][] newSlabs) {
 		slabs = newSlabs;
 	}
 	public int getSlab_nr() {

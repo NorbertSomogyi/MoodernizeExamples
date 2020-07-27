@@ -37,22 +37,22 @@ public class obs_hotkey_name_map_edge {
 		Object generatedPrefix_len = this.getPrefix_len();
 		Byte generatedPrefix = this.getPrefix();
 		Object generatedCompressed_prefix = this.getCompressed_prefix();
-		return generatedPrefix_len >= ( - ) ? generatedPrefix : generatedCompressed_prefix;
+		return generatedPrefix_len >= (/*Error: Unsupported expression*/ - /*Error: Unsupported expression*/) ? generatedPrefix : generatedCompressed_prefix;
 	}
 	public void set_prefix(Object prefix, Object l) {
 		Object generatedPrefix_len = this.getPrefix_len();
-		((generatedPrefix_len == 0) ? (Object)0 : ._assert("e->prefix_len == 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\obs-hotkey-name-map.c", 97));
+		((generatedPrefix_len == 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("e->prefix_len == 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\obs-hotkey-name-map.c", 97));
 		this.setCompressed_len(()l);
 		Object generatedCompressed_prefix = this.getCompressed_prefix();
-		if (l < ( - )) {
-			.strncpy(generatedCompressed_prefix, prefix, l);
+		if (l < (/*Error: Unsupported expression*/ - /*Error: Unsupported expression*/)) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strncpy(generatedCompressed_prefix, prefix, l);
 		} else {
 				this.setPrefix(ModernizedCProgram.bstrdup_n(prefix, l));
 		} 
 	}
 	public obs_hotkey_name_map_edge add_leaf(obs_hotkey_name_map_node node, Object key, Object l, int v) {
 		Object generatedChildren = node.getChildren();
-		obs_hotkey_name_map_edge_t e = .da_push_back_new(generatedChildren);
+		obs_hotkey_name_map_edge_t e = /*Error: Function owner not recognized*/da_push_back_new(generatedChildren);
 		e.set_prefix(key, l);
 		obs_hotkey_name_map_node obs_hotkey_name_map_node = new obs_hotkey_name_map_node();
 		e.setNode(obs_hotkey_name_map_node.new_leaf());
@@ -62,12 +62,12 @@ public class obs_hotkey_name_map_edge {
 	}
 	public void shrink_prefix(Object l) {
 		Object generatedPrefix_len = this.getPrefix_len();
-		 old_comp = generatedPrefix_len < ( - );
-		 new_comp = l < ( - );
+		 old_comp = generatedPrefix_len < (/*Error: Unsupported expression*/ - /*Error: Unsupported expression*/);
+		 new_comp = l < (/*Error: Unsupported expression*/ - /*Error: Unsupported expression*/);
 		byte str = e.get_prefix();
 		this.setPrefix_len(()l);
 		if (e.get_prefix() != str) {
-			.strncpy(e.get_prefix(), str, l);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strncpy(e.get_prefix(), str, l);
 		} else {
 				str[l] = 0;
 		} 
@@ -87,7 +87,7 @@ public class obs_hotkey_name_map_edge {
 		obs_hotkey_name_map_node obs_hotkey_name_map_node = new obs_hotkey_name_map_node();
 		obs_hotkey_name_map_node_t new_node_ = obs_hotkey_name_map_node.new_node();
 		Object generatedChildren = new_node_.getChildren();
-		obs_hotkey_name_map_edge_t tail = .da_push_back_new(generatedChildren);
+		obs_hotkey_name_map_edge_t tail = /*Error: Function owner not recognized*/da_push_back_new(generatedChildren);
 		obs_hotkey_name_map_node generatedNode = this.getNode();
 		ModernizedCProgram.connect(tail, generatedNode);
 		Object generatedPrefix_len = this.getPrefix_len();
@@ -97,7 +97,7 @@ public class obs_hotkey_name_map_edge {
 		ModernizedCProgram.connect(e, new_node_);
 		e.shrink_prefix(common_length);
 	}
-	public obs_hotkey_name_map_edge_compare_result compare_prefix(Object key, Object l) {
+	public obs_hotkey_name_map_edge_compare_result compare_prefix(Object[] key, Object l) {
 		Object generatedPrefix_len = this.getPrefix_len();
 		 pref_len = generatedPrefix_len;
 		byte str = edge.get_prefix();
@@ -119,8 +119,8 @@ public class obs_hotkey_name_map_edge {
 		obs_hotkey_name_map_node generatedNode = this.getNode();
 		generatedNode.free_node(true);
 		Object generatedPrefix_len = this.getPrefix_len();
-		if (generatedPrefix_len < ( - )) {
-			return ;
+		if (generatedPrefix_len < (/*Error: Unsupported expression*/ - /*Error: Unsupported expression*/)) {
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.bfree(edge.get_prefix());
 	}

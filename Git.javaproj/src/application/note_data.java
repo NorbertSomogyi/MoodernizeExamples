@@ -29,13 +29,13 @@ public class note_data {
 		int generatedGiven = this.getGiven();
 		Byte generatedEdit_path = this.getEdit_path();
 		strbuf generatedBuf = this.getBuf();
-		byte generatedBuf = generatedBuf.getBuf();
+		byte[] generatedBuf = generatedBuf.getBuf();
 		Object generatedLen = generatedBuf.getLen();
 		if (generatedUse_editor || !generatedGiven) {
 			int fd;
-			strbuf buf = new strbuf(, , );
+			strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			this.setEdit_path(ModernizedCProgram.git_pathdup(/* write the template message before editing: */"NOTES_EDITMSG"));
-			fd = .open(generatedEdit_path, -1024 | -1024 | 1, 600);
+			fd = /*Error: Function owner not recognized*/open(generatedEdit_path, -1024 | -1024 | 1, 600);
 			if (fd < 0) {
 				ModernizedCProgram.die_errno(ModernizedCProgram._("could not create file '%s'"), generatedEdit_path);
 			} 
@@ -45,12 +45,12 @@ public class note_data {
 				ModernizedCProgram.copy_obj_to_fd(fd, old_note);
 			} 
 			ModernizedCProgram.buf.strbuf_addch((byte)'\n');
-			ModernizedCProgram.buf.strbuf_add_commented_lines("\n", .strlen("\n"));
-			ModernizedCProgram.buf.strbuf_add_commented_lines(ModernizedCProgram._(ModernizedCProgram.note_template), .strlen(ModernizedCProgram._(ModernizedCProgram.note_template)));
+			ModernizedCProgram.buf.strbuf_add_commented_lines("\n", /*Error: Function owner not recognized*/strlen("\n"));
+			ModernizedCProgram.buf.strbuf_add_commented_lines(ModernizedCProgram._(ModernizedCProgram.note_template), /*Error: Function owner not recognized*/strlen(ModernizedCProgram._(ModernizedCProgram.note_template)));
 			ModernizedCProgram.buf.strbuf_addch((byte)'\n');
 			ModernizedCProgram.write_or_die(fd, generatedBuf, generatedLen);
 			ModernizedCProgram.write_commented_object(fd, object);
-			.close(fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
 			ModernizedCProgram.buf.strbuf_release();
 			generatedBuf.strbuf_setlen(0);
 			if (generatedBuf.launch_editor(generatedEdit_path, ((Object)0))) {

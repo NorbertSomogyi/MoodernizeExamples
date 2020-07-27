@@ -38,7 +38,7 @@ public class xz_dec_bcj {
 	public xz_dec_bcj() {
 	}
 	
-	public Object bcj_x86(Object buf, Object size) {
+	public Object bcj_x86(Object[] buf, Object size) {
 		boolean[] mask_to_allowed_status = new boolean[]{true, true, true, false, true, false, false, false};
 		uint8_t[] mask_to_bit_num = new uint8_t[]{0, 1, 2, 2, 3, 3, 3, 3};
 		size_t i = new size_t();
@@ -130,7 +130,7 @@ public class xz_dec_bcj {
 		 */;
 	}
 	public xz_dec_bcj xz_dec_bcj_create(boolean single_call) {
-		xz_dec_bcj s = .malloc();
+		xz_dec_bcj s = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		if (s != ((Object)0)) {
 			s.setSingle_call(single_call);
 		} 

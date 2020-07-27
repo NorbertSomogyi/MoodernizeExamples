@@ -11,9 +11,9 @@ public class RTMP_METHOD {
 	public RTMP_METHOD() {
 	}
 	
-	public void AV_erase(int num, int i, int freeit) {
+	public void AV_erase(Integer num, int i, int freeit) {
 		if (freeit) {
-			.free(vals[i].getName().getAv_val());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(vals[i].getName().getAv_val());
 		} 
 		(num)--;
 		for (; i < num; i++) {
@@ -26,9 +26,9 @@ public class RTMP_METHOD {
 	public void AV_clear(int num) {
 		int i;
 		for (i = 0; i < num; i++) {
-			.free(vals[i].getName().getAv_val());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(vals[i].getName().getAv_val());
 		}
-		.free(vals);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(vals);
 	}
 	public AVal getName() {
 		return name;

@@ -37,9 +37,9 @@ public class unidirectional_transfer {
 		if (((generatedState) == 1) && !generatedBufuse) {
 			this.setState(2);
 			if (generatedDest_is_sock) {
-				.shutdown(generatedDest, SHUT_WR);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/shutdown(generatedDest, SHUT_WR);
 			} else {
-					.close(generatedDest);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedDest);
 			} 
 			ModernizedCProgram.transfer_debug("Closed %s.", generatedDest_name);
 		} 
@@ -86,7 +86,7 @@ public class unidirectional_transfer {
 		}  else if (bytes > 0) {
 			generatedBufuse -= bytes;
 			if (generatedBufuse) {
-				.memmove(generatedBuf, generatedBuf + bytes, generatedBufuse);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(generatedBuf, generatedBuf + bytes, generatedBufuse);
 			} 
 			ModernizedCProgram.transfer_debug("Wrote %i bytes to %s (buffer now at %i)", (int)bytes, generatedDest_name, (int)generatedBufuse);
 		} 

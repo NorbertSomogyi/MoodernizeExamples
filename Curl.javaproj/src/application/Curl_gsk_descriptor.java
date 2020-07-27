@@ -17,10 +17,10 @@ public class Curl_gsk_descriptor {
 		Object generatedAsciistr = q.getAsciistr();
 		while ((q = generatedStrlist)) {
 			this.setStrlist(q);
-			.free((Object)generatedAsciistr);
-			.free(q);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)generatedAsciistr);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(q);
 		}
-		.free(p);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(p);
 	}
 	public int cachestring(Object ebcdicbuf, int bufsize, Object buffer) {
 		int rc;
@@ -35,16 +35,16 @@ public class Curl_gsk_descriptor {
 			} 
 		}
 		if (!sp) {
-			sp = (gskstrlist).malloc();
+			sp = (gskstrlist)/*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 			if (!sp) {
 				return GSK_INSUFFICIENT_STORAGE;
 			} 
-			asciibuf = .malloc(bufsize + 1);
+			asciibuf = /*Error: Function owner not recognized*/malloc(bufsize + 1);
 			if (!asciibuf) {
-				.free(sp);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(sp);
 				return GSK_INSUFFICIENT_STORAGE;
 			} 
-			.QadrtConvertE2A(asciibuf, ebcdicbuf, bufsize, bufsize);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/QadrtConvertE2A(asciibuf, ebcdicbuf, bufsize, bufsize);
 			asciibuf[bufsize] = (byte)'\0';
 			sp.setEbcdicstr(ebcdicbuf);
 			sp.setAsciistr(asciibuf);

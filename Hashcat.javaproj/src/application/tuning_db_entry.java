@@ -27,7 +27,7 @@ public class tuning_db_entry {
 		tuning_db_entry_t s = new tuning_db_entry_t();
 		// first we need to convert all spaces in the device_name to underscore
 		byte device_name_nospace = ModernizedCProgram.hcstrdup(device_name);
-		size_t device_name_length = .strlen(device_name_nospace);
+		size_t device_name_length = /*Error: Function owner not recognized*/strlen(device_name_nospace);
 		size_t i = new size_t();
 		for (i = 0; i < device_name_length; i++) {
 			if (device_name_nospace[i] == (byte)' ') {
@@ -37,12 +37,12 @@ public class tuning_db_entry {
 		// find out if there's an alias configuredtuning_db_alias_t a = new tuning_db_alias_t();
 		a.setDevice_name(device_name_nospace);
 		byte alias_name = ((Object)0);
-		tuning_db_alias generatedAlias_buf = tuning_db.getAlias_buf();
+		tuning_db_alias[] generatedAlias_buf = tuning_db.getAlias_buf();
 		int generatedAlias_cnt = tuning_db.getAlias_cnt();
 		Byte generatedAlias_name = alias.getAlias_name();
 		for (i = device_name_length; i >= 1; i--) {
 			device_name_nospace[i] = 0;
-			tuning_db_alias_t alias = .bsearch(a, generatedAlias_buf, generatedAlias_cnt, , sort_by_tuning_db_alias);
+			tuning_db_alias_t alias = /*Error: Function owner not recognized*/bsearch(a, generatedAlias_buf, generatedAlias_cnt, /*Error: Unsupported expression*/, sort_by_tuning_db_alias);
 			if (alias == ((Object)0)) {
 				continue;
 			} 
@@ -61,20 +61,20 @@ public class tuning_db_entry {
 		s.setHash_mode(hash_mode);
 		tuning_db_entry_t entry = ((Object)0);
 		// this will produce all 2^3 combinations required
-		tuning_db_entry generatedEntry_buf = tuning_db.getEntry_buf();
+		tuning_db_entry[] generatedEntry_buf = tuning_db.getEntry_buf();
 		int generatedEntry_cnt = tuning_db.getEntry_cnt();
 		for (i = 0; i < 8; i++) {
 			s.setDevice_name((i & 1) ? "*" : device_name_nospace);
 			s.setAttack_mode((i & 2) ? -1 : attack_mode);
 			s.setHash_mode((i & 4) ? -1 : hash_mode);
-			entry = .bsearch(s, generatedEntry_buf, generatedEntry_cnt, , sort_by_tuning_db_entry);
+			entry = /*Error: Function owner not recognized*/bsearch(s, generatedEntry_buf, generatedEntry_cnt, /*Error: Unsupported expression*/, sort_by_tuning_db_entry);
 			if (entry != ((Object)0)) {
 				break;
 			} 
 			if ((i & 1) == 0) {
 				if (alias_name != ((Object)0)) {
 					s.setDevice_name(alias_name);
-					entry = .bsearch(s, generatedEntry_buf, generatedEntry_cnt, , sort_by_tuning_db_entry);
+					entry = /*Error: Function owner not recognized*/bsearch(s, generatedEntry_buf, generatedEntry_cnt, /*Error: Unsupported expression*/, sort_by_tuning_db_entry);
 					if (entry != ((Object)0)) {
 						break;
 					} 
@@ -86,7 +86,7 @@ public class tuning_db_entry {
 				}  else if (device_type & CL_DEVICE_TYPE_ACCELERATOR) {
 					s.setDevice_name("DEVICE_TYPE_ACCELERATOR");
 				} 
-				entry = .bsearch(s, generatedEntry_buf, generatedEntry_cnt, , sort_by_tuning_db_entry);
+				entry = /*Error: Function owner not recognized*/bsearch(s, generatedEntry_buf, generatedEntry_cnt, /*Error: Unsupported expression*/, sort_by_tuning_db_entry);
 				if (entry != ((Object)0)) {
 					break;
 				} 

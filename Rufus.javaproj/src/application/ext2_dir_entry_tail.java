@@ -16,8 +16,8 @@ public class ext2_dir_entry_tail {
 	}
 	
 	public void ext2fs_initialize_dirent_tail(Object fs) {
-		.memset(t, 0, );
-		(ext2_dir_entry)t.ext2fs_set_rec_len(fs, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(t, 0, /*Error: Unsupported expression*/);
+		(ext2_dir_entry)t.ext2fs_set_rec_len(fs, /*Error: Unsupported expression*/);
 		this.setDet_reserved_name_len(-1024);
 	}
 	public Object getDet_reserved_zero1() {

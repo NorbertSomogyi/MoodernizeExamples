@@ -4,9 +4,9 @@ package application;
 public class range_set {
 	private int alloc;
 	private int nr;
-	private range ranges;
+	private range[] ranges;
 	
-	public range_set(int alloc, int nr, range ranges) {
+	public range_set(int alloc, int nr, range[] ranges) {
 		setAlloc(alloc);
 		setNr(nr);
 		setRanges(ranges);
@@ -22,7 +22,7 @@ public class range_set {
 				} else {
 						ModernizedCProgram.rs.setAlloc((((ModernizedCProgram.rs.getAlloc()) + 16) * 3 / 2));
 				} 
-				(ModernizedCProgram.rs.getRanges()) = ModernizedCProgram.xrealloc((ModernizedCProgram.rs.getRanges()), ModernizedCProgram.st_mult(, (ModernizedCProgram.rs.getAlloc())));
+				(ModernizedCProgram.rs.getRanges()) = ModernizedCProgram.xrealloc((ModernizedCProgram.rs.getRanges()), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (ModernizedCProgram.rs.getAlloc())));
 			} 
 		} while (0/* Either initialization would be fine */);
 	}
@@ -44,13 +44,13 @@ public class range_set {
 	public void range_set_copy(range_set src) {
 		int generatedNr = src.getNr();
 		dst.range_set_init(generatedNr);
-		range generatedRanges = this.getRanges();
-		ModernizedCProgram.copy_array((generatedRanges), (generatedRanges), (generatedNr),  + ( - 1));
+		range[] generatedRanges = this.getRanges();
+		ModernizedCProgram.copy_array((generatedRanges), (generatedRanges), (generatedNr), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		this.setNr(generatedNr);
 	}
 	public void range_set_move(range_set src) {
 		dst.range_set_release();
-		range generatedRanges = src.getRanges();
+		range[] generatedRanges = src.getRanges();
 		this.setRanges(generatedRanges);
 		int generatedNr = src.getNr();
 		this.setNr(generatedNr);
@@ -61,27 +61,27 @@ public class range_set {
 	}
 	/* tack on a _new_ range _at the end_ */
 	public void range_set_append_unsafe(long a, long b) {
-		((a <= b) ? (Object)0 : ._assert("a <= b", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 62));
+		((a <= b) ? (Object)0 : /*Error: Function owner not recognized*/_assert("a <= b", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 62));
 		ModernizedCProgram.rs.range_set_grow(1);
 		ModernizedCProgram.rs.getRanges()[ModernizedCProgram.rs.getNr()].setStart(a);
 		ModernizedCProgram.rs.getRanges()[ModernizedCProgram.rs.getNr()].setEnd(b);
 		ModernizedCProgram.rs.getNr()++;
 	}
 	public void range_set_append(long a, long b) {
-		((ModernizedCProgram.rs.getNr() == 0 || ModernizedCProgram.rs.getRanges()[ModernizedCProgram.rs.getNr() - 1].getEnd() <= a) ? (Object)0 : ._assert("rs->nr == 0 || rs->ranges[rs->nr-1].end <= a", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 71));
+		((ModernizedCProgram.rs.getNr() == 0 || ModernizedCProgram.rs.getRanges()[ModernizedCProgram.rs.getNr() - 1].getEnd() <= a) ? (Object)0 : /*Error: Function owner not recognized*/_assert("rs->nr == 0 || rs->ranges[rs->nr-1].end <= a", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 71));
 		ModernizedCProgram.rs.range_set_append_unsafe(a, b);
 	}
 	public void range_set_check_invariants() {
 		int i;
 		if (!ModernizedCProgram.rs) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.rs.getNr()) {
-			((ModernizedCProgram.rs.getRanges()[0].getStart() < ModernizedCProgram.rs.getRanges()[0].getEnd()) ? (Object)0 : ._assert("rs->ranges[0].start < rs->ranges[0].end", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 99));
+			((ModernizedCProgram.rs.getRanges()[0].getStart() < ModernizedCProgram.rs.getRanges()[0].getEnd()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("rs->ranges[0].start < rs->ranges[0].end", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 99));
 		} 
 		for (i = 1; i < ModernizedCProgram.rs.getNr(); i++) {
-			((ModernizedCProgram.rs.getRanges()[i - 1].getEnd() < ModernizedCProgram.rs.getRanges()[i].getStart()) ? (Object)0 : ._assert("rs->ranges[i-1].end < rs->ranges[i].start", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 102));
-			((ModernizedCProgram.rs.getRanges()[i].getStart() < ModernizedCProgram.rs.getRanges()[i].getEnd()) ? (Object)0 : ._assert("rs->ranges[i].start < rs->ranges[i].end", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 103/*
+			((ModernizedCProgram.rs.getRanges()[i - 1].getEnd() < ModernizedCProgram.rs.getRanges()[i].getStart()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("rs->ranges[i-1].end < rs->ranges[i].start", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 102));
+			((ModernizedCProgram.rs.getRanges()[i].getStart() < ModernizedCProgram.rs.getRanges()[i].getEnd()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("rs->ranges[i].start < rs->ranges[i].end", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 103/*
 			 * In-place pass of sorting and merging the ranges in the range set,
 			 * to establish the invariants when we get the ranges from the user
 			 */));
@@ -90,7 +90,7 @@ public class range_set {
 	public void sort_and_merge_range_set() {
 		int i;
 		int o = /* output cursor */0;
-		ModernizedCProgram.sane_qsort((ModernizedCProgram.rs.getRanges()), (ModernizedCProgram.rs.getNr()), , range_cmp);
+		ModernizedCProgram.sane_qsort((ModernizedCProgram.rs.getRanges()), (ModernizedCProgram.rs.getNr()), /*Error: sizeof expression not supported yet*/, range_cmp);
 		for (i = 0; i < ModernizedCProgram.rs.getNr(); i++) {
 			if (ModernizedCProgram.rs.getRanges()[i].getStart() == ModernizedCProgram.rs.getRanges()[i].getEnd()) {
 				continue;
@@ -105,7 +105,7 @@ public class range_set {
 					o++;
 			} 
 		}
-		((o <= ModernizedCProgram.rs.getNr()) ? (Object)0 : ._assert("o <= rs->nr", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 130));
+		((o <= ModernizedCProgram.rs.getNr()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("o <= rs->nr", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 130));
 		ModernizedCProgram.rs.setNr(o);
 		ModernizedCProgram.rs/*
 		 * Union of range sets (i.e., sets of line numbers).  Used to merge
@@ -119,11 +119,11 @@ public class range_set {
 	public void range_set_union(range_set a, range_set b) {
 		int i = 0;
 		int j = 0;
-		range generatedRanges = a.getRanges();
+		range[] generatedRanges = a.getRanges();
 		range ra = generatedRanges;
 		range rb = generatedRanges;
 		int generatedNr = this.getNr();
-		((generatedNr == 0) ? (Object)0 : ._assert("out->nr == 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 152));
+		((generatedNr == 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("out->nr == 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\line-log.c", 152));
 		long generatedStart = new_range.getStart();
 		long generatedEnd = new_range.getEnd();
 		while (i < generatedNr || j < generatedNr) {
@@ -159,7 +159,7 @@ public class range_set {
 		int i;
 		int j = 0;
 		int generatedNr = a.getNr();
-		range generatedRanges = a.getRanges();
+		range[] generatedRanges = a.getRanges();
 		for (i = 0; i < generatedNr; i++) {
 			long start = generatedRanges[i].getStart();
 			long end = generatedRanges[i].getEnd();
@@ -194,10 +194,10 @@ public class range_set {
 	public void setNr(int newNr) {
 		nr = newNr;
 	}
-	public range getRanges() {
+	public range[] getRanges() {
 		return ranges;
 	}
-	public void setRanges(range newRanges) {
+	public void setRanges(range[] newRanges) {
 		ranges = newRanges;
 	}
 }

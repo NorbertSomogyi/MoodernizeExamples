@@ -612,6 +612,39 @@ public class mallinfo {
 	public mallinfo() {
 	}
 	
+	public mallinfo nedmallinfo() {
+		mallinfo mallinfo = new mallinfo();
+		return mallinfo.nedpmallinfo(0);
+	}
+	public mallinfo nedpmallinfo(nedpool_t p) {
+		int n;
+		mallinfo ret = new mallinfo(0);
+		if (!p) {
+			p = ModernizedCProgram.syspool;
+			if (!ModernizedCProgram.syspool.getThreads()) {
+				ModernizedCProgram.syspool.InitPool(0, -1);
+			} 
+		} 
+		Object generatedM = p.getM();
+		Object generatedArena = ret.getArena();
+		Object generatedOrdblks = ret.getOrdblks();
+		Object generatedHblkhd = ret.getHblkhd();
+		Object generatedUsmblks = ret.getUsmblks();
+		Object generatedUordblks = ret.getUordblks();
+		Object generatedFordblks = ret.getFordblks();
+		Object generatedKeepcost = ret.getKeepcost();
+		for (n = 0; generatedM[n]; n++) {
+			mallinfo t = /*Error: Function owner not recognized*/mspace_mallinfo(generatedM[n]);
+			generatedArena += generatedArena;
+			generatedOrdblks += generatedOrdblks;
+			generatedHblkhd += generatedHblkhd;
+			generatedUsmblks += generatedUsmblks;
+			generatedUordblks += generatedUordblks;
+			generatedFordblks += generatedFordblks;
+			generatedKeepcost += generatedKeepcost;
+		}
+		return ret;
+	}
 	public mallinfo internal_mallinfo(Object m) {
 		mallinfo nm = new mallinfo(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		((Object)(ModernizedCProgram.mparams.getMagic() != 0 || ModernizedCProgram.init_mparams()));
@@ -619,12 +652,12 @@ public class mallinfo {
 			;
 			if (((m).getTop() != 0)) {
 				size_t nfree = ((size_t)/* top always free */1);
-				size_t mfree = m.getTopsize() + (((((size_t)(((Object)((byte)(false) + (() << 1)))) & (((size_t)-1024) - ((size_t)1))) == 0) ? 0 : ((((size_t)-1024) - ((size_t)(((Object)((byte)(false) + (() << 1)))) & (((size_t)-1024) - ((size_t)1)))) & (((size_t)-1024) - ((size_t)1)))) + ((() + (()) + (((size_t)-1024) - ((size_t)1))) & ~(((size_t)-1024) - ((size_t)1))) + ((() + (((size_t)-1024) - ((size_t)1))) & ~(((size_t)-1024) - ((size_t)1))));
+				size_t mfree = m.getTopsize() + (((((size_t)(((Object)((byte)(false) + ((/*Error: Unsupported expression*/) << 1)))) & (((size_t)-1024) - ((size_t)1))) == 0) ? 0 : ((((size_t)-1024) - ((size_t)(((Object)((byte)(false) + ((/*Error: Unsupported expression*/) << 1)))) & (((size_t)-1024) - ((size_t)1)))) & (((size_t)-1024) - ((size_t)1)))) + (((/*Error: Unsupported expression*/) + ((/*Error: Unsupported expression*/)) + (((size_t)-1024) - ((size_t)1))) & ~(((size_t)-1024) - ((size_t)1))) + (((/*Error: Unsupported expression*/) + (((size_t)-1024) - ((size_t)1))) & ~(((size_t)-1024) - ((size_t)1))));
 				size_t sum = mfree;
 				msegmentptr s = m.getSeg();
 				while (s != 0) {
-					mchunkptr q = (mchunkptr)((s.getBase()) + ((((size_t)(((Object)((byte)(s.getBase()) + (() << 1)))) & (((size_t)-1024) - ((size_t)1))) == 0) ? 0 : ((((size_t)-1024) - ((size_t)(((Object)((byte)(s.getBase()) + (() << 1)))) & (((size_t)-1024) - ((size_t)1)))) & (((size_t)-1024) - ((size_t)1)))));
-					while (((byte)(q) >= s.getBase() && (byte)(q) < s.getBase() + s.getSize()) && q != m.getTop() && q.getHead() != (((((size_t)1)) | (((size_t)2))) | ())) {
+					mchunkptr q = (mchunkptr)((s.getBase()) + ((((size_t)(((Object)((byte)(s.getBase()) + ((/*Error: Unsupported expression*/) << 1)))) & (((size_t)-1024) - ((size_t)1))) == 0) ? 0 : ((((size_t)-1024) - ((size_t)(((Object)((byte)(s.getBase()) + ((/*Error: Unsupported expression*/) << 1)))) & (((size_t)-1024) - ((size_t)1)))) & (((size_t)-1024) - ((size_t)1)))));
+					while (((byte)(q) >= s.getBase() && (byte)(q) < s.getBase() + s.getSize()) && q != m.getTop() && q.getHead() != (((((size_t)1)) | (((size_t)2))) | (/*Error: Unsupported expression*/))) {
 						size_t sz = ((q).getHead() & ~(((((size_t)1)) | (((size_t)2)) | (((size_t)4)))));
 						sum += sz;
 						if (!((q).getHead() & (((size_t)2)))) {
@@ -650,39 +683,6 @@ public class mallinfo {
 	public mallinfo mallinfo() {
 		mallinfo mallinfo = new mallinfo();
 		return mallinfo.internal_mallinfo((ModernizedCProgram._gm_/* NO_MALLINFO */));
-	}
-	public mallinfo nedmallinfo() {
-		mallinfo mallinfo = new mallinfo();
-		return mallinfo.nedpmallinfo(0);
-	}
-	public mallinfo nedpmallinfo(nedpool_t p) {
-		int n;
-		mallinfo ret = new mallinfo(0);
-		if (!p) {
-			p = ModernizedCProgram.syspool;
-			if (!ModernizedCProgram.syspool.getThreads()) {
-				ModernizedCProgram.syspool.InitPool(0, -1);
-			} 
-		} 
-		Object generatedM = p.getM();
-		Object generatedArena = ret.getArena();
-		Object generatedOrdblks = ret.getOrdblks();
-		Object generatedHblkhd = ret.getHblkhd();
-		Object generatedUsmblks = ret.getUsmblks();
-		Object generatedUordblks = ret.getUordblks();
-		Object generatedFordblks = ret.getFordblks();
-		Object generatedKeepcost = ret.getKeepcost();
-		for (n = 0; generatedM[n]; n++) {
-			mallinfo t = .mspace_mallinfo(generatedM[n]);
-			generatedArena += generatedArena;
-			generatedOrdblks += generatedOrdblks;
-			generatedHblkhd += generatedHblkhd;
-			generatedUsmblks += generatedUsmblks;
-			generatedUordblks += generatedUordblks;
-			generatedFordblks += generatedFordblks;
-			generatedKeepcost += generatedKeepcost;
-		}
-		return ret;
 	}
 	public Object getArena() {
 		return arena;

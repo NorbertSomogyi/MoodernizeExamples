@@ -13,8 +13,8 @@ public class treesame_state {
 	
 	public treesame_state initialise_treesame(rev_info revs, commit commit) {
 		commit_list generatedParents = commit.getParents();
-		int n = .commit_list_count(generatedParents);
-		treesame_state st = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(, n));
+		int n = /*Error: Function owner not recognized*/commit_list_count(generatedParents);
+		treesame_state st = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(/*Error: sizeof expression not supported yet*/, n));
 		st.setNparents(n);
 		decoration generatedTreesame = revs.getTreesame();
 		object generatedObject = commit.getObject();

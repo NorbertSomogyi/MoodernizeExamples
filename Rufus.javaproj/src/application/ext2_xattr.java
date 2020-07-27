@@ -25,7 +25,7 @@ public class ext2_xattr {
 		int idx;
 		int ret;
 		 err = new ();
-		.memset(entries_start, 0, storage_size);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(entries_start, 0, storage_size);
 		Byte generatedName = x.getName();
 		int generatedValue_len = x.getValue_len();
 		Object generatedEa_ino = x.getEa_ino();
@@ -37,17 +37,17 @@ public class ext2_xattr {
 			shortname = generatedName;
 			ret = ModernizedCProgram.find_ea_index(generatedName, shortname, idx);
 			value_size = ((generatedValue_len + ((int)1 << 2) - 1) / ((int)1 << 2)) * ((int)1 << 2);
-			e.setE_name_len(.strlen(/* Fill out e appropriately */shortname));
+			e.setE_name_len(/*Error: Function owner not recognized*/strlen(/* Fill out e appropriately */shortname));
 			e.setE_name_index((ret ? idx : 0));
 			e.setE_value_size(generatedValue_len);
 			e.setE_value_inum(generatedEa_ino);
-			.memcpy((byte)e + , shortname, generatedE_name_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((byte)e + /*Error: sizeof expression not supported yet*/, shortname, generatedE_name_len);
 			if (generatedEa_ino) {
 				e.setE_value_offs(0);
 			} else {
 					end -= value_size;
 					e.setE_value_offs(end - (byte)entries_start + value_offset_correction);
-					.memcpy(end, generatedValue, generatedE_value_size);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(end, generatedValue, generatedE_value_size);
 			} 
 			if (write_hash || generatedEa_ino) {
 				err = e.ext2fs_ext_attr_hash_entry2(fs, generatedEa_ino ? 0 : end, generatedE_hash);
@@ -57,7 +57,7 @@ public class ext2_xattr {
 			} else {
 					e.setE_hash(0);
 			} 
-			e = ((ext2_ext_attr_entry)((byte)(e) + (((generatedE_name_len) + (((int)1 << 2) - 1) + ) & ~(((int)1 << 2) - 1))));
+			e = ((ext2_ext_attr_entry)((byte)(e) + (((generatedE_name_len) + (((int)1 << 2) - 1) + /*Error: Unsupported expression*/) & ~(((int)1 << 2) - 1))));
 			()e = 0;
 		}
 		return 0;
@@ -70,18 +70,18 @@ public class ext2_xattr {
 		 ret = new ();
 		Byte generatedName = this.getName();
 		if (!generatedName) {
-			name_len = .strlen(name);
+			name_len = /*Error: Function owner not recognized*/strlen(name);
 			ret = ModernizedCProgram.ext2fs_get_mem(name_len + 1, new_name);
 			if (ret) {
 				;
 			} 
-			.memcpy(new_name, name, name_len + 1);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(new_name, name, name_len + 1);
 		} 
 		ret = ModernizedCProgram.ext2fs_get_mem(value_len, new_value);
 		if (ret) {
 			;
 		} 
-		.memcpy(new_value, value, value_len);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(new_value, value, value_len);
 		if (in_inode) {
 			ret = ModernizedCProgram.xattr_create_ea_inode(fs, value, value_len, ea_ino);
 			if (ret) {
@@ -124,7 +124,7 @@ public class ext2_xattr {
 		int shortname_len;
 		int x_shortname_len;
 		ModernizedCProgram.find_ea_index(name, shortname, name_idx);
-		shortname_len = .strlen(shortname);
+		shortname_len = /*Error: Function owner not recognized*/strlen(shortname);
 		Byte generatedName = x.getName();
 		for (; i < count; ) {
 			ModernizedCProgram.find_ea_index(generatedName, x_shortname, x_name_idx);
@@ -134,14 +134,14 @@ public class ext2_xattr {
 			if (name_idx > x_name_idx) {
 				continue;
 			} 
-			x_shortname_len = .strlen(x_shortname);
+			x_shortname_len = /*Error: Function owner not recognized*/strlen(x_shortname);
 			if (shortname_len < x_shortname_len) {
 				break;
 			} 
 			if (shortname_len > x_shortname_len) {
 				continue;
 			} 
-			if (.memcmp(shortname, x_shortname, shortname_len) <= 0) {
+			if (/*Error: Function owner not recognized*/memcmp(shortname, x_shortname, shortname_len) <= 0) {
 				break;
 			} 
 		}
@@ -159,8 +159,8 @@ public class ext2_xattr {
 		int generatedValue_len = x.getValue_len();
 		for (; i < count; ) {
 			ModernizedCProgram.find_ea_index(generatedName, shortname, name_idx);
-			len = .strlen(shortname);
-			total += (((len) + (((int)1 << 2) - 1) + ) & ~(((int)1 << 2) - 1));
+			len = /*Error: Function owner not recognized*/strlen(shortname);
+			total += (((len) + (((int)1 << 2) - 1) + /*Error: Unsupported expression*/) & ~(((int)1 << 2) - 1));
 			if (!generatedEa_ino) {
 				total += (((generatedValue_len) + (((int)1 << 2) - 1)) & ~(((int)1 << 2) - 1));
 			} 

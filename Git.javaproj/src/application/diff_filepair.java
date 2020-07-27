@@ -1,7 +1,7 @@
 package application;
 
 public class diff_filepair {
-	private diff_filespec one;
+	private diff_filespec[] one;
 	private diff_filespec two;
 	private int score;
 	private byte status;
@@ -11,7 +11,7 @@ public class diff_filepair {
 	private int done_skip_stat_unmatch;
 	private int skip_stat_unmatch_result;
 	
-	public diff_filepair(diff_filespec one, diff_filespec two, int score, byte status, int broken_pair, int renamed_pair, int is_unmerged, int done_skip_stat_unmatch, int skip_stat_unmatch_result) {
+	public diff_filepair(diff_filespec[] one, diff_filespec two, int score, byte status, int broken_pair, int renamed_pair, int is_unmerged, int done_skip_stat_unmatch, int skip_stat_unmatch_result) {
 		setOne(one);
 		setTwo(two);
 		setScore(score);
@@ -26,8 +26,8 @@ public class diff_filepair {
 	}
 	
 	public diff_filepair diff_filepair_dup() {
-		diff_filepair new_filepair = ModernizedCProgram.xmalloc();
-		diff_filespec generatedOne = this.getOne();
+		diff_filepair new_filepair = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
+		diff_filespec[] generatedOne = this.getOne();
 		new_filepair.setOne(generatedOne);
 		diff_filespec generatedTwo = this.getTwo();
 		new_filepair.setTwo(generatedTwo);
@@ -53,12 +53,12 @@ public class diff_filepair {
 		int i;
 		diff_filepair pair = new diff_filepair();
 		diff_filespec pool = new diff_filespec();
-		pair = ModernizedCProgram.xmalloc();
-		pool = ModernizedCProgram.xcalloc(ModernizedCProgram.st_add(num_parent, 1), );
+		pair = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+		pool = ModernizedCProgram.xcalloc(ModernizedCProgram.st_add(num_parent, 1), /*Error: Unsupported expression*/);
 		pair.setOne(pool + 1);
 		pair.setTwo(pool);
-		Byte generatedPath = p.getPath();
-		diff_filespec generatedOne = pair.getOne();
+		byte[] generatedPath = p.getPath();
+		diff_filespec[] generatedOne = pair.getOne();
 		Object generatedParent = p.getParent();
 		for (i = 0; i < num_parent; i++) {
 			generatedOne[i].setPath(generatedPath);
@@ -77,10 +77,10 @@ public class diff_filepair {
 		generatedTwo.setOid_valid(!ModernizedCProgram.is_null_oid(generatedOid));
 		return pair;
 	}
-	public diff_filespec getOne() {
+	public diff_filespec[] getOne() {
 		return one;
 	}
-	public void setOne(diff_filespec newOne) {
+	public void setOne(diff_filespec[] newOne) {
 		one = newOne;
 	}
 	public diff_filespec getTwo() {

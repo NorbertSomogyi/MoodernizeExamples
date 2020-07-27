@@ -7,11 +7,11 @@ public class _vtt_block_t {
 	private double timestamp;
 	private double duration;
 	private Byte cue_settings;
-	private Byte cue_id;
+	private byte[] cue_id;
 	private Object text_size;
 	private Byte block_text;
 	
-	public _vtt_block_t(_vtt_block_t next, VTT_BLOCK_TYPE type, double timestamp, double duration, Byte cue_settings, Byte cue_id, Object text_size, Byte block_text) {
+	public _vtt_block_t(_vtt_block_t next, VTT_BLOCK_TYPE type, double timestamp, double duration, Byte cue_settings, byte[] cue_id, Object text_size, Byte block_text) {
 		setNext(next);
 		setType(type);
 		setTimestamp(timestamp);
@@ -29,7 +29,7 @@ public class _vtt_block_t {
 		return generatedNext;
 	}
 	public Object vtt_block_data() {
-		return (utf8_char_t)(block) + /*! \brief
+		return (utf8_char_t)(block) + /*Error: Unsupported expression*//*! \brief
 		    \param
 		*/;
 	}
@@ -38,7 +38,7 @@ public class _vtt_block_t {
 		return generatedNext;
 	}
 	public _vtt_block_t vtt_block_new(_vtt_t vtt, Object data, Object size, VTT_BLOCK_TYPE type) {
-		vtt_block_t block = .malloc( + size + 1);
+		vtt_block_t block = /*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/ + size + 1);
 		block.setNext(((Object)0));
 		block.setType(VTT_BLOCK_TYPE.type);
 		block.setTimestamp(0.0);
@@ -61,6 +61,8 @@ public class _vtt_block_t {
 				} 
 				vtt.setCue_tail(block);
 				break;
+		case VTT_BLOCK_TYPE.VTT_NOTE:
+				break;
 		case VTT_BLOCK_TYPE.VTT_REGION:
 				if (generatedRegion_head == ((Object)0)) {
 					vtt.setRegion_head(block);
@@ -77,14 +79,12 @@ public class _vtt_block_t {
 				} 
 				vtt.setStyle_tail(block);
 				break;
-		case VTT_BLOCK_TYPE.VTT_NOTE:
-				break;
 		}
 		utf8_char_t dest = (utf8_char_t)block.vtt_block_data();
 		if (data) {
-			.memcpy(dest, data, size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dest, data, size);
 		} else {
-				.memset(dest, 0, size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(dest, 0, size);
 		} 
 		dest[size] = (byte)'\0';
 		return block;
@@ -115,15 +115,15 @@ public class _vtt_block_t {
 	public _vtt_block_t vtt_block_free_head() {
 		_vtt_block_t generatedNext = this.getNext();
 		vtt_block_t next = generatedNext;
-		Byte generatedCue_id = this.getCue_id();
+		byte[] generatedCue_id = this.getCue_id();
 		if (generatedCue_id != ((Object)0)) {
-			.free(generatedCue_id);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedCue_id);
 		} 
 		Byte generatedCue_settings = this.getCue_settings();
 		if (generatedCue_settings != ((Object)0)) {
-			.free(generatedCue_settings);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedCue_settings);
 		} 
-		.free(head);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(head);
 		return next;
 	}
 	public _vtt_block_t vtt_cue_from_caption_frame( frame, _vtt_t vtt) {
@@ -138,7 +138,7 @@ public class _vtt_block_t {
 		utf8_char_t data = cue.vtt_block_data();
 		frame.caption_frame_to_text(data);
 		cue.setTimestamp(generatedTimestamp)// vtt requires an extra new line;// vtt requires an extra new line
-		.strcat((byte)data, "\r\n");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)data, "\r\n");
 		return cue;
 	}
 	public _vtt_block_t getNext() {
@@ -171,10 +171,10 @@ public class _vtt_block_t {
 	public void setCue_settings(Byte newCue_settings) {
 		cue_settings = newCue_settings;
 	}
-	public Byte getCue_id() {
+	public byte[] getCue_id() {
 		return cue_id;
 	}
-	public void setCue_id(Byte newCue_id) {
+	public void setCue_id(byte[] newCue_id) {
 		cue_id = newCue_id;
 	}
 	public Object getText_size() {

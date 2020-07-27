@@ -1,7 +1,7 @@
 package application;
 
 public class lval_S {
-	private Object ll_name;
+	private Object[] ll_name;
 	private Object ll_exp_name;
 	private  ll_tv;
 	private listitem_S ll_li;
@@ -15,7 +15,7 @@ public class lval_S {
 	private Object ll_newkey;
 	private blobvar_S ll_blob;
 	
-	public lval_S(Object ll_name, Object ll_exp_name,  ll_tv, listitem_S ll_li, listvar_S ll_list, int ll_range, long ll_n1, long ll_n2, int ll_empty2, dictvar_S ll_dict, dictitem_S ll_di, Object ll_newkey, blobvar_S ll_blob) {
+	public lval_S(Object[] ll_name, Object ll_exp_name,  ll_tv, listitem_S ll_li, listvar_S ll_list, int ll_range, long ll_n1, long ll_n2, int ll_empty2, dictvar_S ll_dict, dictitem_S ll_di, Object ll_newkey, blobvar_S ll_blob) {
 		setLl_name(ll_name);
 		setLl_exp_name(ll_exp_name);
 		setLl_tv(ll_tv);
@@ -43,7 +43,7 @@ public class lval_S {
 		int ret = 1;
 		int cc;
 		 generatedLl_tv = this.getLl_tv();
-		Object generatedLl_name = this.getLl_name();
+		Object[] generatedLl_name = this.getLl_name();
 		listvar_S generatedLl_list = this.getLl_list();
 		byte generatedLv_lock = generatedLl_list.getLv_lock();
 		dictvar_S generatedLl_dict = this.getLl_dict();
@@ -104,7 +104,7 @@ public class lval_S {
 			return 1;
 		} 
 		 generatedLl_tv = this.getLl_tv();
-		Object generatedLl_name = this.getLl_name();
+		Object[] generatedLl_name = this.getLl_name();
 		dictitem_S dictitem_S = new dictitem_S();
 		Object generatedDi_flags = di.getDi_flags();
 		 generatedDi_tv = di.getDi_tv();
@@ -150,10 +150,10 @@ public class lval_S {
 		 * Lock or unlock an item.  "deep" is nr of levels to go.
 		 */;
 	}
-	public Object getLl_name() {
+	public Object[] getLl_name() {
 		return ll_name;
 	}
-	public void setLl_name(Object newLl_name) {
+	public void setLl_name(Object[] newLl_name) {
 		ll_name = newLl_name;
 	}
 	public Object getLl_exp_name() {

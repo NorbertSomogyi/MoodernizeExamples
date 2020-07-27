@@ -52,14 +52,14 @@ public class curl_mimepart_s {
 		byte s = (byte)((Object)0);
 		CURLcode result = new CURLcode();
 		if (!string) {
-			return .mimefunc(part, string);
+			return /*Error: Function owner not recognized*/mimefunc(part, string);
 		} 
 		s = ModernizedCProgram.dynconvert(819, string, -1, ccsid);
 		if (!s) {
 			return .CURLE_OUT_OF_MEMORY;
 		} 
-		result = .mimefunc(part, s);
-		.free(s);
+		result = /*Error: Function owner not recognized*/mimefunc(part, s);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(s);
 		return result;
 	}
 	public  curl_mime_name_ccsid(Object name, int ccsid) {
@@ -88,7 +88,7 @@ public class curl_mimepart_s {
 			return .CURLE_OUT_OF_MEMORY;
 		} 
 		result = ModernizedCProgram.curl_mime_data(part, s, datasize);
-		.free(s);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(s);
 		return result;
 	}
 	public Curl_easy getEasy() {

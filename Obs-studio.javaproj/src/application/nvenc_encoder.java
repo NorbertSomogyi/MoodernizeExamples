@@ -49,13 +49,13 @@ public class nvenc_encoder {
 		int ret;
 		Object generatedContext = this.getContext();
 		Object generatedNvenc = this.getNvenc();
-		ret = .avcodec_open2(generatedContext, generatedNvenc, NULL);
+		ret = /*Error: Function owner not recognized*/avcodec_open2(generatedContext, generatedNvenc, NULL);
 		obs_encoder generatedEncoder = this.getEncoder();
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "[NVENC encoder: '%s'] Failed to open NVENC codec: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "[NVENC encoder: '%s'] Failed to open NVENC codec: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
-		this.setVframe(.av_frame_alloc());
+		this.setVframe(/*Error: Function owner not recognized*/av_frame_alloc());
 		Object generatedVframe = this.getVframe();
 		if (!generatedVframe) {
 			ModernizedCProgram.blog(LOG_WARNING, "[NVENC encoder: '%s'] Failed to allocate video frame", ModernizedCProgram.obs_encoder_get_name(generatedEncoder));
@@ -66,9 +66,9 @@ public class nvenc_encoder {
 		generatedVframe.setHeight(generatedContext.getHeight());
 		generatedVframe.setColorspace(generatedContext.getColorspace());
 		generatedVframe.setColor_range(generatedContext.getColor_range());
-		ret = .av_frame_get_buffer(generatedVframe, ModernizedCProgram.base_get_alignment());
+		ret = /*Error: Function owner not recognized*/av_frame_get_buffer(generatedVframe, ModernizedCProgram.base_get_alignment());
 		if (ret < 0) {
-			ModernizedCProgram.blog(LOG_WARNING, "[NVENC encoder: '%s'] Failed to allocate vframe: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), .av_err2str(ret));
+			ModernizedCProgram.blog(LOG_WARNING, "[NVENC encoder: '%s'] Failed to allocate vframe: %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
 		this.setInitialized(true);

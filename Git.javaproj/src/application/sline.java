@@ -8,9 +8,9 @@ public class sline {
 	private Byte bol;
 	private int len;
 	private long flag;
-	private Long p_lno;
+	private long[] p_lno;
 	
-	public sline(lline lost, int lenlost, plost plost, Byte bol, int len, long flag, Long p_lno) {
+	public sline(lline lost, int lenlost, plost plost, Byte bol, int len, long flag, long[] p_lno) {
 		setLost(lost);
 		setLenlost(lenlost);
 		setPlost(plost);
@@ -22,7 +22,7 @@ public class sline {
 	public sline() {
 	}
 	
-	public void append_lost(int n, Object line, int len) {
+	public void append_lost(int n, Object[] line, int len) {
 		lline lline = new lline();
 		long this_mask = (-1024 << n);
 		if (line[len - 1] == (byte)'\n') {
@@ -31,8 +31,8 @@ public class sline {
 		Object generatedLine = (lline).getLine();
 		do {
 			size_t flex_array_len_ = (len);
-			(lline) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedLine, (line), flex_array_len_);
+			(lline) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedLine, (line), flex_array_len_);
 		} while (0);
 		lline.setLen(len);
 		lline.setNext(((Object)0));
@@ -50,6 +50,25 @@ public class sline {
 		generatedLen++;
 		lline.setParent_map(this_mask);
 	}
+	public int interesting(long all_mask) {
+		long generatedFlag = this.getFlag();
+		lline generatedLost = this.getLost();
+		return ((generatedFlag & all_mask) || generatedLost);
+		object generatedObject = commit.getObject();
+		int generatedFlags = generatedObject.getFlags();
+		while (ModernizedCProgram.list) {
+			commit commit = ModernizedCProgram.list.getItem();
+			ModernizedCProgram.list = ModernizedCProgram.list.getNext();
+			if (generatedFlags & 1) {
+				continue;
+			} 
+			return commit;
+		}
+		return ((Object)0);
+	}
+	/* If some parents lost lines here, or if we have added to
+		 * some parent, it is interesting.
+		 */
 	public long adjust_hunk_tail(long all_mask, long hunk_begin, long i) {
 		if ((hunk_begin + 1 <= i) && !(sline[i - 1].getFlag() & all_mask)) {
 			i--;
@@ -62,6 +81,40 @@ public class sline {
 		 * purpose of giving trailing context lines.  This is because
 		 * we output '-' line and then unmodified sline[i-1] itself in
 		 * that case which gives us one extra context line.
+		 */
+	public long find_next(long mark, long i, long cnt, int look_for_uninteresting) {
+		while (i <= cnt) {
+			if (look_for_uninteresting ? !(sline[i].getFlag() & mark) : (sline[i].getFlag() & mark)) {
+				return i;
+			} else {
+					i++;
+			} 
+		}
+		return i;
+		while (cp) {
+			if (cp == (byte)'%'/*
+						 * %( is the start of an atom;
+						 * %% is a quoted per-cent.
+						 */) {
+				if (cp[1] == (byte)'(') {
+					return cp;
+				}  else if (cp[1] == (byte)'%') {
+					/* skip over two % */cp/* otherwise this is a singleton, literal % */++;
+				} 
+			} 
+			cp++;
+		}
+		return ((Object)0/*
+		 * Make sure the format string is well formed, and parse out
+		 * the used atoms.
+		 */);
+	}
+	/* We have examined up to i-1 and are about to look at i.
+		 * Find next interesting or uninteresting line.  Here,
+		 * "interesting" does not mean interesting(), but marked by
+		 * the give_context() function below (i.e. it includes context
+		 * lines that are not interesting to interesting() function
+		 * that are surrounded by interesting() ones.
 		 */
 	public int give_context(long cnt, int num_parent) {
 		long all_mask = (-1024 << num_parent) - 1;
@@ -77,7 +130,7 @@ public class sline {
 			 * mark.  So interesting() would still say false for such context
 			 * lines but they are treated as "interesting" in the end.
 			 */
-		i = ModernizedCProgram.find_next(sline, mark, 0, cnt, 0);
+		i = sline.find_next(mark, 0, cnt, 0);
 		if (cnt < i) {
 			return 0;
 		} 
@@ -88,9 +141,8 @@ public class sline {
 		long mark = (-1024 << num_parent);
 		long i;
 		int has_interesting = 0;
-		commit commit = new commit();
 		for (i = 0; i <= cnt; i++) {
-			if (commit.interesting(sline[i], all_mask)) {
+			if (sline[i].interesting(all_mask)) {
 				sline[i].getFlag() |=  mark;
 			} else {
 					sline[i].getFlag() &=  ~mark;
@@ -197,21 +249,21 @@ public class sline {
 	public void show_parent_lno(long l0, long l1, int n, long null_context) {
 		l0 = sline[l0].getP_lno()[n];
 		l1 = sline[l1].getP_lno()[n];
-		.printf(" -%lu,%lu", l0, l1 - l0 - null_context);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(" -%lu,%lu", l0, l1 - l0 - null_context);
 	}
 	public void dump_sline(Object line_prefix, long cnt, int num_parent, int use_color, int result_deleted) {
 		long mark = (-1024 << num_parent);
 		long no_pre_delete = (-1024 << num_parent);
 		int i;
 		long lno = 0;
-		byte c_frag = .diff_get_color(use_color, color_diff.DIFF_FRAGINFO);
-		byte c_func = .diff_get_color(use_color, color_diff.DIFF_FUNCINFO);
-		byte c_new = .diff_get_color(use_color, color_diff.DIFF_FILE_NEW);
-		byte c_old = .diff_get_color(use_color, color_diff.DIFF_FILE_OLD);
-		byte c_context = .diff_get_color(use_color, color_diff.DIFF_CONTEXT);
-		byte c_reset = .diff_get_color(use_color, color_diff.DIFF_RESET);
+		byte c_frag = /*Error: Function owner not recognized*/diff_get_color(use_color, color_diff.DIFF_FRAGINFO);
+		byte c_func = /*Error: Function owner not recognized*/diff_get_color(use_color, color_diff.DIFF_FUNCINFO);
+		byte c_new = /*Error: Function owner not recognized*/diff_get_color(use_color, color_diff.DIFF_FILE_NEW);
+		byte c_old = /*Error: Function owner not recognized*/diff_get_color(use_color, color_diff.DIFF_FILE_OLD);
+		byte c_context = /*Error: Function owner not recognized*/diff_get_color(use_color, color_diff.DIFF_CONTEXT);
+		byte c_reset = /*Error: Function owner not recognized*/diff_get_color(use_color, color_diff.DIFF_RESET);
 		if (result_deleted) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		long generatedFlag = sl.getFlag();
 		lline generatedLost = sl.getLost();
@@ -261,16 +313,16 @@ public class sline {
 				}
 				rlines -= null_context;
 			} 
-			.printf("%s%s", line_prefix, c_frag);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s%s", line_prefix, c_frag);
 			for (i = 0; i <= num_parent; i++) {
-				.putchar(ModernizedCProgram.combine_marker);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar(ModernizedCProgram.combine_marker);
 			}
 			for (i = 0; i < num_parent; i++) {
 				sline.show_parent_lno(lno, hunk_end, i, null_context);
 			}
-			.printf(" +%lu,%lu ", lno + 1, rlines);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(" +%lu,%lu ", lno + 1, rlines);
 			for (i = 0; i <= num_parent; i++) {
-				.putchar(ModernizedCProgram.combine_marker);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar(ModernizedCProgram.combine_marker);
 			}
 			if (hunk_comment) {
 				int comment_end = 0;
@@ -284,13 +336,13 @@ public class sline {
 					} 
 				}
 				if (comment_end) {
-					.printf("%s%s %s%s", c_reset, c_context, c_reset, c_func);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s%s %s%s", c_reset, c_context, c_reset, c_func);
 				} 
 				for (i = 0; i < comment_end; i++) {
-					.putchar(hunk_comment[i]);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar(hunk_comment[i]);
 				}
 			} 
-			.printf("%s\n", c_reset);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s\n", c_reset);
 			while (lno < hunk_end) {
 				lline ll = new lline();
 				int j;
@@ -298,12 +350,12 @@ public class sline {
 				sline sl = sline[lno++];
 				ll = (generatedFlag & no_pre_delete) ? ((Object)0) : generatedLost;
 				while (ll) {
-					.printf("%s%s", line_prefix, c_old);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s%s", line_prefix, c_old);
 					for (j = 0; j < num_parent; j++) {
 						if (generatedParent_map & (-1024 << j)) {
-							.putchar((byte)'-');
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'-');
 						} else {
-								.putchar((byte)' ');
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)' ');
 						} 
 					}
 					ModernizedCProgram.show_line_to_eol(generatedLine, -1, c_reset);
@@ -313,7 +365,7 @@ public class sline {
 					break;
 				} 
 				p_mask = 1;
-				.fputs(line_prefix, (_iob[1]));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(line_prefix, (_iob[1]));
 				if (!(generatedFlag & (mark - 1/*
 								 * This sline was here to hang the
 								 * lost lines in front of it.
@@ -321,15 +373,15 @@ public class sline {
 					if (!ModernizedCProgram.context) {
 						continue;
 					} 
-					.fputs(c_context, (_iob[1]));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(c_context, (_iob[1]));
 				} else {
-						.fputs(c_new, (_iob[1]));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(c_new, (_iob[1]));
 				} 
 				for (j = 0; j < num_parent; j++) {
 					if (p_mask & generatedFlag) {
-						.putchar((byte)'+');
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'+');
 					} else {
-							.putchar((byte)' ');
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)' ');
 					} 
 					p_mask <<=  1;
 				}
@@ -344,7 +396,7 @@ public class sline {
 		imask = (-1024 << i);
 		jmask = (-1024 << j);
 		lline generatedLost = this.getLost();
-		Long generatedP_lno = this.getP_lno();
+		long[] generatedP_lno = this.getP_lno();
 		long generatedParent_map = ll.getParent_map();
 		lline generatedNext = ll.getNext();
 		long generatedFlag = this.getFlag();
@@ -404,10 +456,10 @@ public class sline {
 	public void setFlag(long newFlag) {
 		flag = newFlag;
 	}
-	public Long getP_lno() {
+	public long[] getP_lno() {
 		return p_lno;
 	}
-	public void setP_lno(Long newP_lno) {
+	public void setP_lno(long[] newP_lno) {
 		p_lno = newP_lno;
 	}
 }

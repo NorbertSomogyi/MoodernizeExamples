@@ -24,7 +24,7 @@ public class profiler_snapshot {
 		Object generatedArray = generatedRoots.getArray();
 		for (size_t i = 0;
 		 i < generatedNum; i++) {
-			.print(generatedArray[i], indent_buffer, output_buffer, 0, 0, 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/print(generatedArray[i], indent_buffer, output_buffer, 0, 0, 0);
 		}
 		ModernizedCProgram.blog(LOG_INFO, "=================================================");
 		if (free_snapshot) {
@@ -40,17 +40,17 @@ public class profiler_snapshot {
 		snap.profile_print_func("== Profiler Time Between Calls ==================", profile_print_entry_expected);
 	}
 	public profiler_snapshot profile_snapshot_create() {
-		profiler_snapshot_t snap = ModernizedCProgram.bzalloc();
+		profiler_snapshot_t snap = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		ModernizedCProgram.pthread_mutex_lock(ModernizedCProgram.root_mutex);
 		 generatedRoots = snap.getRoots();
 		Object generatedArray = generatedRoots.getArray();
 		Object generatedDa = generatedRoots.getDa();
 		Object generatedNum = root_entries.getNum();
-		generatedDa.darray_reserve(, generatedNum);
+		generatedDa.darray_reserve(/*Error: sizeof expression not supported yet*/, generatedNum);
 		for (size_t i = 0;
 		 i < generatedNum; i++) {
 			ModernizedCProgram.pthread_mutex_lock(generatedArray[i].getMutex());
-			ModernizedCProgram.add_entry_to_snapshot(generatedArray[i].getEntry(), generatedDa.darray_push_back_new());
+			ModernizedCProgram.add_entry_to_snapshot(generatedArray[i].getEntry(), generatedDa.darray_push_back_new(/*Error: sizeof expression not supported yet*/));
 			ModernizedCProgram.pthread_mutex_unlock(generatedArray[i].getMutex());
 		}
 		ModernizedCProgram.pthread_mutex_unlock(ModernizedCProgram.root_mutex);
@@ -62,7 +62,7 @@ public class profiler_snapshot {
 	}
 	public void profile_snapshot_free() {
 		if (!snap) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 generatedRoots = this.getRoots();
 		Object generatedNum = generatedRoots.getNum();
@@ -82,7 +82,7 @@ public class profiler_snapshot {
 	}
 	public void profiler_snapshot_enumerate_roots(Object func, Object context) {
 		if (!snap) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 generatedRoots = this.getRoots();
 		Object generatedNum = generatedRoots.getNum();
@@ -100,12 +100,12 @@ public class profiler_snapshot {
 		Object generatedArray = generatedRoots.getArray();
 		Object generatedDa = generatedRoots.getDa();
 		for (size_t i = 0;
-		 i < generatedNum; ) {
+		 i < generatedNum; /*Error: Unsupported expression*/) {
 			boolean remove = false;
 			boolean res = ModernizedCProgram.func(data, generatedArray[i].getName(), remove);
 			if (remove) {
 				generatedArray[i].free_snapshot_entry();
-				generatedDa.darray_erase(, i);
+				generatedDa.darray_erase(/*Error: sizeof expression not supported yet*/, i);
 			} 
 			if (!ModernizedCProgram.res) {
 				break;

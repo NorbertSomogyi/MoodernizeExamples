@@ -20,7 +20,7 @@ public class cmd_reflog_expire_cb {
 	public void set_reflog_expiry_param(int slot, Object ref) {
 		reflog_expire_cfg ent = new reflog_expire_cfg();
 		if (slot == (1 | 2)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedPattern = ent.getPattern();
 		Object generatedExpire_total = ent.getExpire_total();
@@ -34,10 +34,10 @@ public class cmd_reflog_expire_cb {
 				if (!(slot & 2)) {
 					this.setExpire_unreachable(generatedExpire_unreachable);
 				} 
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		}
-		if (!.strcmp(ref, /*
+		if (!/*Error: Function owner not recognized*/strcmp(ref, /*
 			 * If unconfigured, make stash never expire
 			 */"refs/stash")) {
 			if (!(slot & 1)) {
@@ -46,7 +46,7 @@ public class cmd_reflog_expire_cb {
 			if (!(slot & 2)) {
 				this.setExpire_unreachable(0);
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!(slot & /* Nothing matched -- use the default value */1)) {
 			this.setExpire_total(ModernizedCProgram.default_reflog_expire);

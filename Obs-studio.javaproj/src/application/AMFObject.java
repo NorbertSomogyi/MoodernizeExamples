@@ -2,23 +2,23 @@ package application;
 
 public class AMFObject {
 	private int o_num;
-	private AMFObjectProperty o_props;
+	private AMFObjectProperty[] o_props;
 	
-	public AMFObject(int o_num, AMFObjectProperty o_props) {
+	public AMFObject(int o_num, AMFObjectProperty[] o_props) {
 		setO_num(o_num);
 		setO_props(o_props);
 	}
 	public AMFObject() {
 	}
 	
-	public Byte AMF_Encode(byte pBuffer, Byte pBufEnd) {
+	public Byte AMF_Encode(Byte pBuffer, Byte pBufEnd) {
 		int i;
 		if (pBuffer + 4 >= pBufEnd) {
 			return ((Object)0);
 		} 
 		pBuffer++ = .AMF_OBJECT;
 		int generatedO_num = this.getO_num();
-		AMFObjectProperty generatedO_props = this.getO_props();
+		AMFObjectProperty[] generatedO_props = this.getO_props();
 		for (i = 0; i < generatedO_num; i++) {
 			byte res = generatedO_props[i].AMFProp_Encode(pBuffer, pBufEnd);
 			if (ModernizedCProgram.res == ((Object)0)) {
@@ -34,7 +34,7 @@ public class AMFObject {
 		pBuffer = ModernizedCProgram.AMF_EncodeInt24(pBuffer, pBufEnd, .AMF_OBJECT_END);
 		return pBuffer;
 	}
-	public Byte AMF_EncodeEcmaArray(byte pBuffer, Byte pBufEnd) {
+	public Byte AMF_EncodeEcmaArray(Byte pBuffer, Byte pBufEnd) {
 		int i;
 		if (pBuffer + 4 >= pBufEnd) {
 			return ((Object)0);
@@ -42,7 +42,7 @@ public class AMFObject {
 		pBuffer++ = .AMF_ECMA_ARRAY;
 		int generatedO_num = this.getO_num();
 		pBuffer = ModernizedCProgram.AMF_EncodeInt32(pBuffer, pBufEnd, generatedO_num);
-		AMFObjectProperty generatedO_props = this.getO_props();
+		AMFObjectProperty[] generatedO_props = this.getO_props();
 		for (i = 0; i < generatedO_num; i++) {
 			byte res = generatedO_props[i].AMFProp_Encode(pBuffer, pBufEnd);
 			if (ModernizedCProgram.res == ((Object)0)) {
@@ -58,7 +58,7 @@ public class AMFObject {
 		pBuffer = ModernizedCProgram.AMF_EncodeInt24(pBuffer, pBufEnd, .AMF_OBJECT_END);
 		return pBuffer;
 	}
-	public Byte AMF_EncodeArray(byte pBuffer, Byte pBufEnd) {
+	public Byte AMF_EncodeArray(Byte pBuffer, Byte pBufEnd) {
 		int i;
 		if (pBuffer + 4 >= pBufEnd) {
 			return ((Object)0);
@@ -66,7 +66,7 @@ public class AMFObject {
 		pBuffer++ = .AMF_STRICT_ARRAY;
 		int generatedO_num = this.getO_num();
 		pBuffer = ModernizedCProgram.AMF_EncodeInt32(pBuffer, pBufEnd, generatedO_num);
-		AMFObjectProperty generatedO_props = this.getO_props();
+		AMFObjectProperty[] generatedO_props = this.getO_props();
 		for (i = 0; i < generatedO_num; i++) {
 			byte res = generatedO_props[i].AMFProp_Encode(pBuffer, pBufEnd);
 			if (ModernizedCProgram.res == ((Object)0)) {
@@ -124,7 +124,7 @@ public class AMFObject {
 		pBuffer += len;
 		nSize -= len;
 		AVal generatedCd_name = cd.getCd_name();
-		Byte generatedAv_val = generatedCd_name.getAv_val();
+		byte[] generatedAv_val = generatedCd_name.getAv_val();
 		byte generatedCd_externalizable = cd.getCd_externalizable();
 		byte generatedCd_dynamic = cd.getCd_dynamic();
 		int generatedCd_num = cd.getCd_num();
@@ -170,11 +170,11 @@ public class AMFObject {
 	}
 	public void AMF_AddProp(Object prop) {
 		int generatedO_num = this.getO_num();
-		AMFObjectProperty generatedO_props = this.getO_props();
+		AMFObjectProperty[] generatedO_props = this.getO_props();
 		if (!(generatedO_num & -1024)) {
-			this.setO_props(.realloc(generatedO_props, (generatedO_num + 16) * ));
+			this.setO_props(/*Error: Function owner not recognized*/realloc(generatedO_props, (generatedO_num + 16) * /*Error: Unsupported expression*/));
 		} 
-		.memcpy(generatedO_props[generatedO_num++], prop, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedO_props[generatedO_num++], prop, /*Error: Unsupported expression*/);
 	}
 	public int AMF_CountProp() {
 		int generatedO_num = this.getO_num();
@@ -184,7 +184,7 @@ public class AMFObject {
 		int n;
 		ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "(object begin)");
 		int generatedO_num = this.getO_num();
-		AMFObjectProperty generatedO_props = this.getO_props();
+		AMFObjectProperty[] generatedO_props = this.getO_props();
 		for (n = 0; n < generatedO_num; n++) {
 			generatedO_props[n].AMFProp_Dump();
 		}
@@ -193,11 +193,11 @@ public class AMFObject {
 	public void AMF_Reset() {
 		int n;
 		int generatedO_num = this.getO_num();
-		AMFObjectProperty generatedO_props = this.getO_props();
+		AMFObjectProperty[] generatedO_props = this.getO_props();
 		for (n = 0; n < generatedO_num; n++) {
 			generatedO_props[n].AMFProp_Reset();
 		}
-		.free(generatedO_props);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedO_props);
 		this.setO_props(((Object)0));
 		this.setO_num(0);
 	}
@@ -209,7 +209,7 @@ public class AMFObject {
 		AMFObjectProperty aMFObjectProperty = new AMFObjectProperty();
 		AVal generatedP_name = prop.getP_name();
 		int generatedAv_len = generatedP_name.getAv_len();
-		Byte generatedAv_val = generatedP_name.getAv_val();
+		byte[] generatedAv_val = generatedP_name.getAv_val();
 		 generatedP_vu = prop.getP_vu();
 		Object generatedP_object = generatedP_vu.getP_object();
 		Object generatedP_number = generatedP_vu.getP_number();
@@ -219,7 +219,7 @@ public class AMFObject {
 			prop = aMFObjectProperty.AMF_GetProp(obj, ((Object)0), n);
 			switch (generatedP_type) {
 			case .AMF_BOOLEAN:
-					.snprintf(str, 255, "%s", generatedP_number != 0.0 ? "TRUE" : "FALSE");
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(str, 255, "%s", generatedP_number != 0.0 ? "TRUE" : "FALSE");
 					break;
 			case .AMF_STRICT_ARRAY:
 					if (generatedAv_len) {
@@ -227,22 +227,22 @@ public class AMFObject {
 					} 
 					generatedP_object.DumpMetaData();
 					break;
+			case .AMF_OBJECT:
+			case .AMF_NUMBER:
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(str, 255, "%.2f", generatedP_number);
+					break;
+			case .AMF_ECMA_ARRAY:
+			case .AMF_DATE:
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(str, 255, "timestamp:%.2f", generatedP_number);
+					break;
 			case .AMF_STRING:
-					len = .snprintf(str, 255, "%.*s", generatedAv_len, generatedAv_val);
+					len = /*Error: Function owner not recognized*/snprintf(str, 255, "%.*s", generatedAv_len, generatedAv_val);
 					if (len >= 1 && str[len - 1] == (byte)'\n') {
 						str[len - 1] = (byte)'\0';
 					} 
 					break;
-			case .AMF_NUMBER:
-					.snprintf(str, 255, "%.2f", generatedP_number);
-					break;
-			case .AMF_OBJECT:
-			case .AMF_ECMA_ARRAY:
-			case .AMF_DATE:
-					.snprintf(str, 255, "timestamp:%.2f", generatedP_number);
-					break;
 			default:
-					.snprintf(str, 255, "INVALID TYPE 0x%02x", (byte)generatedP_type);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(str, 255, "INVALID TYPE 0x%02x", (byte)generatedP_type);
 			}
 			if (str[0] && generatedAv_len) {
 				ModernizedCProgram.RTMP_Log(.RTMP_LOGINFO, "  %-22.*s%s", generatedAv_len, generatedAv_val, str);
@@ -256,10 +256,10 @@ public class AMFObject {
 	public void setO_num(int newO_num) {
 		o_num = newO_num;
 	}
-	public AMFObjectProperty getO_props() {
+	public AMFObjectProperty[] getO_props() {
 		return o_props;
 	}
-	public void setO_props(AMFObjectProperty newO_props) {
+	public void setO_props(AMFObjectProperty[] newO_props) {
 		o_props = newO_props;
 	}
 }

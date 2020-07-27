@@ -4,14 +4,14 @@ package application;
  * This represents a "file", which is an array of "lines".
  */
 public class image {
-	private Byte buf;
+	private byte[] buf;
 	private Object len;
 	private Object nr;
 	private Object alloc;
-	private line line_allocated;
-	private line line;
+	private line[] line_allocated;
+	private line[] line;
 	
-	public image(Byte buf, Object len, Object nr, Object alloc, line line_allocated, line line) {
+	public image(byte[] buf, Object len, Object nr, Object alloc, line[] line_allocated, line[] line) {
 		setBuf(buf);
 		setLen(len);
 		setNr(nr);
@@ -25,7 +25,7 @@ public class image {
 	public void add_line_info(Object bol, Object len, int flag) {
 		Object generatedNr = this.getNr();
 		Object generatedAlloc = this.getAlloc();
-		line generatedLine_allocated = this.getLine_allocated();
+		line[] generatedLine_allocated = this.getLine_allocated();
 		do {
 			if ((generatedNr + 1) > generatedAlloc) {
 				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNr + 1)) {
@@ -33,7 +33,7 @@ public class image {
 				} else {
 						this.setAlloc((((generatedAlloc) + 16) * 3 / 2));
 				} 
-				(generatedLine_allocated) = ModernizedCProgram.xrealloc((generatedLine_allocated), ModernizedCProgram.st_mult(, (generatedAlloc)));
+				(generatedLine_allocated) = ModernizedCProgram.xrealloc((generatedLine_allocated), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedAlloc)));
 			} 
 		} while (0);
 		generatedLine_allocated[generatedNr].setLen(len);
@@ -44,13 +44,13 @@ public class image {
 	public void prepare_image(Byte buf, Object len, int prepare_linetable) {
 		byte cp;
 		byte ep;
-		.memset(image, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(image, 0, /*Error: sizeof expression not supported yet*/);
 		this.setBuf(buf);
 		this.setLen(len);
 		if (!prepare_linetable) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		Byte generatedBuf = this.getBuf();
+		byte[] generatedBuf = this.getBuf();
 		Object generatedLen = this.getLen();
 		ep = generatedBuf + generatedLen;
 		cp = generatedBuf;
@@ -65,15 +65,15 @@ public class image {
 			image.add_line_info(cp, next - cp, 0);
 			cp = next;
 		}
-		line generatedLine_allocated = this.getLine_allocated();
+		line[] generatedLine_allocated = this.getLine_allocated();
 		this.setLine(generatedLine_allocated);
 	}
 	public void clear_image() {
-		Byte generatedBuf = this.getBuf();
+		byte[] generatedBuf = this.getBuf();
 		ModernizedCProgram.free(generatedBuf);
-		line generatedLine_allocated = this.getLine_allocated();
+		line[] generatedLine_allocated = this.getLine_allocated();
 		ModernizedCProgram.free(generatedLine_allocated);
-		.memset(image, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(image, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public void update_pre_post_images(image postimage, Byte buf, Object len, Object postlen) {
 		int i;
@@ -90,12 +90,12 @@ public class image {
 			 */
 		fixed_preimage.prepare_image(buf, len, 1);
 		Object generatedNr = fixed_preimage.getNr();
-		((postlen ? generatedNr == generatedNr : generatedNr <= generatedNr) ? (Object)0 : ._assert("postlen ? fixed_preimage.nr == preimage->nr : fixed_preimage.nr <= preimage->nr", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\apply.c", 2307));
-		line generatedLine = this.getLine();
+		((postlen ? generatedNr == generatedNr : generatedNr <= generatedNr) ? (Object)0 : /*Error: Function owner not recognized*/_assert("postlen ? fixed_preimage.nr == preimage->nr : fixed_preimage.nr <= preimage->nr", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\apply.c", 2307));
+		line[] generatedLine = this.getLine();
 		for (i = 0; i < generatedNr; i++) {
 			generatedLine[i].setFlag(generatedLine[i].getFlag());
 		}
-		line generatedLine_allocated = this.getLine_allocated();
+		line[] generatedLine_allocated = this.getLine_allocated();
 		ModernizedCProgram.free(generatedLine_allocated);
 		preimage = fixed_preimage/*
 			 * Adjust the common context lines in postimage. This can be
@@ -106,7 +106,7 @@ public class image {
 			 * We trust the caller to tell us if the update can be done
 			 * in place (postlen==0) or not.
 			 */;
-		Byte generatedBuf = postimage.getBuf();
+		byte[] generatedBuf = postimage.getBuf();
 		old_buf = generatedBuf;
 		if (postlen) {
 			new_buf = postimage.setBuf(ModernizedCProgram.xmalloc(postlen));
@@ -117,7 +117,7 @@ public class image {
 		for (i = reduced = ctx = 0; i < generatedNr; i++) {
 			size_t l_len = generatedLine[i].getLen();
 			if (!(generatedLine[i].getFlag() & 1)) {
-				.memmove(new_buf, old_buf, /* an added line -- no counterparts in preimage */l_len);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(new_buf, old_buf, /* an added line -- no counterparts in preimage */l_len);
 				old_buf += l_len;
 				new_buf += l_len;
 				continue;
@@ -135,7 +135,7 @@ public class image {
 				continue;
 			} 
 			l_len = generatedLine[ctx].getLen();
-			.memcpy(new_buf, fixed, l_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(new_buf, fixed, l_len);
 			new_buf += l_len;
 			fixed += l_len;
 			generatedLine[i].setLen(l_len);
@@ -161,8 +161,8 @@ public class image {
 		strbuf fixed = new strbuf();
 		byte fixed_buf;
 		size_t fixed_len = new size_t();
-		Byte generatedBuf = this.getBuf();
-		line generatedLine = preimage.getLine();
+		byte[] generatedBuf = this.getBuf();
+		line[] generatedLine = preimage.getLine();
 		for (i = 0; i < preimage_limit; i++) {
 			size_t prelen = generatedLen;
 			size_t imglen = generatedLen;
@@ -211,8 +211,8 @@ public class image {
 		return 1;
 	}
 	public void remove_first_line() {
-		Byte generatedBuf = this.getBuf();
-		line generatedLine = this.getLine();
+		byte[] generatedBuf = this.getBuf();
+		line[] generatedLine = this.getLine();
 		generatedBuf += generatedLine[0].getLen();
 		Object generatedLen = this.getLen();
 		generatedLen -= generatedLen;
@@ -224,10 +224,10 @@ public class image {
 		Object generatedLen = this.getLen();
 		generatedLen -= generatedLen;
 	}
-	public Byte getBuf() {
+	public byte[] getBuf() {
 		return buf;
 	}
-	public void setBuf(Byte newBuf) {
+	public void setBuf(byte[] newBuf) {
 		buf = newBuf;
 	}
 	public Object getLen() {
@@ -248,16 +248,16 @@ public class image {
 	public void setAlloc(Object newAlloc) {
 		alloc = newAlloc;
 	}
-	public line getLine_allocated() {
+	public line[] getLine_allocated() {
 		return line_allocated;
 	}
-	public void setLine_allocated(line newLine_allocated) {
+	public void setLine_allocated(line[] newLine_allocated) {
 		line_allocated = newLine_allocated;
 	}
-	public line getLine() {
+	public line[] getLine() {
 		return line;
 	}
-	public void setLine(line newLine) {
+	public void setLine(line[] newLine) {
 		line = newLine;
 	}
 }

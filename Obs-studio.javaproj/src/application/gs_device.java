@@ -110,9 +110,9 @@ public class gs_device {
 			generatedMatrix4.setY(-generatedMatrix4.getY());
 			generatedMatrix4.setY(-generatedMatrix4.getY());
 			generatedMatrix4.setY(-generatedMatrix4.getY());
-			.glFrontFace(GL_CW);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glFrontFace(GL_CW);
 		} else {
-				.glFrontFace(GL_CCW);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glFrontFace(GL_CCW);
 		} 
 		ModernizedCProgram.gl_success("glFrontFace");
 		matrix4 generatedCur_viewproj = this.getCur_viewproj();
@@ -120,7 +120,7 @@ public class gs_device {
 		generatedCur_viewproj.matrix4_transpose(generatedCur_viewproj);
 		gs_shader_param generatedViewproj = vs.getViewproj();
 		if (generatedViewproj) {
-			ModernizedCProgram.gs_shader_set_matrix4(generatedViewproj, generatedCur_viewproj);
+			generatedViewproj.gs_shader_set_matrix4(generatedCur_viewproj);
 		} 
 	}
 	public gl_platform getPlat() {

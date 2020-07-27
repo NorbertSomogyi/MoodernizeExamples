@@ -7,9 +7,9 @@ public class pack_idx_option {
 	private Object off32_limit;
 	private int anomaly_alloc;
 	private int anomaly_nr;
-	private Object anomaly;
+	private Object[] anomaly;
 	
-	public pack_idx_option(int flags, Object version, Object off32_limit, int anomaly_alloc, int anomaly_nr, Object anomaly) {
+	public pack_idx_option(int flags, Object version, Object off32_limit, int anomaly_alloc, int anomaly_nr, Object[] anomaly) {
 		setFlags(flags);
 		setVersion(version);
 		setOff32_limit(off32_limit);
@@ -20,14 +20,9 @@ public class pack_idx_option {
 	public pack_idx_option() {
 	}
 	
-	public void reset_pack_idx_option() {
-		.memset(opts, 0, );
-		this.setVersion(2);
-		this.setOff32_limit(-1024);
-	}
 	public void read_idx_option(Object pack_name) {
 		packed_git packed_git = new packed_git();
-		packed_git p = packed_git.add_packed_git(pack_name, .strlen(pack_name), 1);
+		packed_git p = packed_git.add_packed_git(pack_name, /*Error: Function owner not recognized*/strlen(pack_name), 1);
 		if (!p) {
 			ModernizedCProgram.die(ModernizedCProgram._("Cannot open existing pack file '%s'"), pack_name);
 		} 
@@ -48,6 +43,11 @@ public class pack_idx_option {
 		} 
 		p.close_pack_index();
 		ModernizedCProgram.free(p);
+	}
+	public void reset_pack_idx_option() {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(opts, 0, /*Error: sizeof expression not supported yet*/);
+		this.setVersion(2);
+		this.setOff32_limit(-1024);
 	}
 	public int getFlags() {
 		return flags;
@@ -79,10 +79,10 @@ public class pack_idx_option {
 	public void setAnomaly_nr(int newAnomaly_nr) {
 		anomaly_nr = newAnomaly_nr;
 	}
-	public Object getAnomaly() {
+	public Object[] getAnomaly() {
 		return anomaly;
 	}
-	public void setAnomaly(Object newAnomaly) {
+	public void setAnomaly(Object[] newAnomaly) {
 		anomaly = newAnomaly;
 	}
 }

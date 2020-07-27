@@ -69,6 +69,14 @@ public class cf_parser {
 		this.setCur_token(cf_token.cf_preprocessor_get_tokens(generatedPp));
 		return 1;
 	}
+	public void cf_adderror_expecting(Object expected) {
+		p.cf_adderror("Expected '$1'", 0, expected, ((Object)0), ((Object)0));
+		pp.cf_adderror(token, "Expected $1", expecting, ((Object)0), ((Object)0));
+	}
+	public void cf_adderror_unexpected_eof() {
+		p.cf_adderror("Unexpected EOF", 0, ((Object)0), ((Object)0), ((Object)0));
+		pp.cf_adderror(token, "Unexpected end of file", ((Object)0), ((Object)0), ((Object)0));
+	}
 	public void cf_adderror_syntax_error() {
 		p.cf_adderror("Syntax error", 0, ((Object)0), ((Object)0), ((Object)0));
 	}
@@ -93,7 +101,7 @@ public class cf_parser {
 	public boolean cf_go_to_token(Object str1, Object str2) {
 		cf_token generatedCur_token = this.getCur_token();
 		strref generatedStr = generatedCur_token.getStr();
-		Object generatedArray = generatedStr.getArray();
+		Object[] generatedArray = generatedStr.getArray();
 		while (p.cf_next_token()) {
 			if (ModernizedCProgram.strref_cmp(generatedStr, str1) == 0) {
 				return 1;
@@ -172,14 +180,14 @@ public class cf_parser {
 		} 
 		return 0;
 	}
-	public void cf_copy_token(byte dst) {
+	public void cf_copy_token(Byte dst) {
 		cf_token generatedCur_token = this.getCur_token();
 		strref generatedStr = generatedCur_token.getStr();
-		Object generatedArray = generatedStr.getArray();
+		Object[] generatedArray = generatedStr.getArray();
 		Object generatedLen = generatedStr.getLen();
 		dst = ModernizedCProgram.bstrdup_n(generatedArray, generatedLen);
 	}
-	public int cf_get_name(byte dst, Object name, Object goto_token) {
+	public int cf_get_name(Byte dst, Object name, Object goto_token) {
 		int errcode;
 		errcode = p.cf_token_is_type(cf_token_type.CFTOKEN_NAME, name, goto_token);
 		if (errcode != 0) {
@@ -187,7 +195,7 @@ public class cf_parser {
 		} 
 		cf_token generatedCur_token = this.getCur_token();
 		strref generatedStr = generatedCur_token.getStr();
-		Object generatedArray = generatedStr.getArray();
+		Object[] generatedArray = generatedStr.getArray();
 		Object generatedLen = generatedStr.getLen();
 		dst = ModernizedCProgram.bstrdup_n(generatedArray, generatedLen);
 		return 0;
@@ -209,7 +217,7 @@ public class cf_parser {
 		cf_token generatedCur_token = this.getCur_token();
 		cf_token_type generatedType = generatedCur_token.getType();
 		strref generatedStr = generatedCur_token.getStr();
-		Object generatedArray = generatedStr.getArray();
+		Object[] generatedArray = generatedStr.getArray();
 		if (generatedType != cf_token_type.CFTOKEN_OTHER || generatedArray != in) {
 			return generatedType != cf_token_type.CFTOKEN_NONE;
 		} 

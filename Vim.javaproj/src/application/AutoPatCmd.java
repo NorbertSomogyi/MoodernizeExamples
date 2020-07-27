@@ -64,9 +64,9 @@ public class AutoPatCmd {
 				if (generatedBuflocal_nr == 0 ? (generatedReg_prog.match_file_pat(((Object)0), generatedFname, generatedSfname, generatedTail, generatedAllow_dirs)) : generatedBuflocal_nr == generatedArg_bufnr) {
 					name = ModernizedCProgram.event_nr2name(generatedEvent);
 					s = ((byte)("%s Autocommands for \"%s\""));
-					sourcing_name = ModernizedCProgram.alloc(.strlen((byte)(s)) + .strlen((byte)(name)) + generatedPatlen + 1);
+					sourcing_name = ModernizedCProgram.alloc(/*Error: Function owner not recognized*/strlen((byte)(s)) + /*Error: Function owner not recognized*/strlen((byte)(name)) + generatedPatlen + 1);
 					if (sourcing_name != ((Object)0)) {
-						.sprintf((byte)sourcing_name, s, (byte)name, (byte)generatedPat);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)sourcing_name, s, (byte)name, (byte)generatedPat);
 						if (ModernizedCProgram.p_verbose >= 8) {
 							ModernizedCProgram.verbose_enter();
 							ModernizedCProgram.smsg(((byte)("Executing %s")), sourcing_name);

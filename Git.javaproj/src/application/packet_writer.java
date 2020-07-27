@@ -17,15 +17,15 @@ public class packet_writer {
 	}
 	public void packet_writer_write(Object fmt) {
 		va_list args = new va_list();
-		.__builtin_va_start(args, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(args, fmt);
 		ModernizedCProgram.packet_write_fmt_1(ModernizedCProgram.writer.getDest_fd(), 0, ModernizedCProgram.writer.getUse_sideband() ? "\001" : "", fmt, args);
-		.__builtin_va_end(args);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(args);
 	}
 	public void packet_writer_error(Object fmt) {
 		va_list args = new va_list();
-		.__builtin_va_start(args, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(args, fmt);
 		ModernizedCProgram.packet_write_fmt_1(ModernizedCProgram.writer.getDest_fd(), 0, ModernizedCProgram.writer.getUse_sideband() ? "\003" : "ERR ", fmt, args);
-		.__builtin_va_end(args);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(args);
 	}
 	public void packet_writer_delim() {
 		ModernizedCProgram.packet_delim(ModernizedCProgram.writer.getDest_fd());

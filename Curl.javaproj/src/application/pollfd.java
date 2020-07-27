@@ -151,14 +151,14 @@ public class pollfd {
 				pending_tv.setTv_sec(0);
 				pending_tv.setTv_usec(0);
 			} 
-			r = .select((int)maxfd + 1/* WinSock select() can't handle fd_sets with zero bits set, so
+			r = /*Error: Function owner not recognized*/select((int)maxfd + 1/* WinSock select() can't handle fd_sets with zero bits set, so
 			                  don't give it such arguments.  See the comment about this in
 			                  Curl_check_socket().
 			               */, generatedFd_count ? fds_read : ((Object)0), generatedFd_count ? fds_write : ((Object)0), generatedFd_count ? fds_err : ((Object)0), ptimeout);
 			if (r != -1) {
 				break;
 			} 
-			error = ((int).WSAGetLastError());
+			error = ((int)/*Error: Function owner not recognized*/WSAGetLastError());
 			if (error && (ModernizedCProgram.Curl_ack_eintr || error != -1024)) {
 				break;
 			} 
@@ -182,13 +182,13 @@ public class pollfd {
 			if (ufds[i].getFd() == CURL_SOCKET_BAD) {
 				continue;
 			} 
-			if (.__WSAFDIsSet((SOCKET)(ufds[i].getFd()), (fd_set)(fds_read))) {
+			if (/*Error: Function owner not recognized*/__WSAFDIsSet((SOCKET)(ufds[i].getFd()), (fd_set)(fds_read))) {
 				ufds[i].getRevents() |=  -1024;
 			} 
-			if (.__WSAFDIsSet((SOCKET)(ufds[i].getFd()), (fd_set)(fds_write))) {
+			if (/*Error: Function owner not recognized*/__WSAFDIsSet((SOCKET)(ufds[i].getFd()), (fd_set)(fds_write))) {
 				ufds[i].getRevents() |=  -1024;
 			} 
-			if (.__WSAFDIsSet((SOCKET)(ufds[i].getFd()), (fd_set)(fds_err))) {
+			if (/*Error: Function owner not recognized*/__WSAFDIsSet((SOCKET)(ufds[i].getFd()), (fd_set)(fds_err))) {
 				ufds[i].getRevents() |=  -1024;
 			} 
 			if (ufds[i].getRevents() != 0) {

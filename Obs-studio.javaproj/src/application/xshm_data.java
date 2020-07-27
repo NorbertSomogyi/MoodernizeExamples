@@ -112,7 +112,7 @@ public class xshm_data {
 			ModernizedCProgram.data.setXshm(((Object)0));
 		} 
 		if (ModernizedCProgram.data.getXcb()) {
-			.xcb_disconnect(ModernizedCProgram.data.getXcb());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/xcb_disconnect(ModernizedCProgram.data.getXcb());
 			ModernizedCProgram.data.setXcb(((Object)0));
 		} 
 		if (ModernizedCProgram.data.getServer()) {
@@ -125,8 +125,8 @@ public class xshm_data {
 	 */
 	public void xshm_capture_start() {
 		byte server = (ModernizedCProgram.data.getAdvanced() && ModernizedCProgram.data.getServer()) ? ModernizedCProgram.data.getServer() : ((Object)0);
-		ModernizedCProgram.data.setXcb(.xcb_connect(server, ((Object)0)));
-		if (!ModernizedCProgram.data.getXcb() || .xcb_connection_has_error(ModernizedCProgram.data.getXcb())) {
+		ModernizedCProgram.data.setXcb(/*Error: Function owner not recognized*/xcb_connect(server, ((Object)0)));
+		if (!ModernizedCProgram.data.getXcb() || /*Error: Function owner not recognized*/xcb_connection_has_error(ModernizedCProgram.data.getXcb())) {
 			ModernizedCProgram.blog(LOG_ERROR, "xshm-input: Unable to open X display !");
 			;
 		} 
@@ -149,7 +149,7 @@ public class xshm_data {
 		ModernizedCProgram.obs_enter_graphics();
 		ModernizedCProgram.data.xshm_resize_texture();
 		ModernizedCProgram.obs_leave_graphics();
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public obs_source getSource() {
 		return source;

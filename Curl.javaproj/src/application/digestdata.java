@@ -45,7 +45,7 @@ public class digestdata {
 		Byte generatedOpaque = this.getOpaque();
 		Byte generatedQop = this.getQop();
 		Byte generatedAlgorithm = this.getAlgorithm();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			byte[] value = new byte[DIGEST_MAX_VALUE_LENGTH];
 			byte[] content = new byte[DIGEST_MAX_CONTENT_LENGTH];
 			while (chlg && (ModernizedCProgram.Curl_isspace((int)((byte)/* Pass all additional spaces here */chlg)))) {
@@ -53,8 +53,8 @@ public class digestdata {
 			}
 			if (ModernizedCProgram.Curl_auth_digest_get_pair(chlg, value, content, /* Extract a value=content pair */chlg)) {
 				if (ModernizedCProgram.Curl_strcasecompare(value, "nonce")) {
-					.Curl_cfree(generatedNonce);
-					this.setNonce(.Curl_cstrdup(content));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedNonce);
+					this.setNonce(/*Error: Function owner not recognized*/Curl_cstrdup(content));
 					if (!generatedNonce) {
 						return CURLE_OUT_OF_MEMORY;
 					} 
@@ -64,21 +64,21 @@ public class digestdata {
 						this.setNc(/* we make a new nonce now */1);
 					} 
 				}  else if (ModernizedCProgram.Curl_strcasecompare(value, "realm")) {
-					.Curl_cfree(generatedRealm);
-					this.setRealm(.Curl_cstrdup(content));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedRealm);
+					this.setRealm(/*Error: Function owner not recognized*/Curl_cstrdup(content));
 					if (!generatedRealm) {
 						return CURLE_OUT_OF_MEMORY;
 					} 
 				}  else if (ModernizedCProgram.Curl_strcasecompare(value, "opaque")) {
-					.Curl_cfree(generatedOpaque);
-					this.setOpaque(.Curl_cstrdup(content));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedOpaque);
+					this.setOpaque(/*Error: Function owner not recognized*/Curl_cstrdup(content));
 					if (!generatedOpaque) {
 						return CURLE_OUT_OF_MEMORY;
 					} 
 				}  else if (ModernizedCProgram.Curl_strcasecompare(value, "qop")) {
 					byte tok_buf = ((Object)0/* Tokenize the list and choose auth if possible, use a temporary
 					           clone of the buffer since strtok_r() ruins it */);
-					tmp = .Curl_cstrdup(content);
+					tmp = /*Error: Function owner not recognized*/Curl_cstrdup(content);
 					if (!tmp) {
 						return CURLE_OUT_OF_MEMORY;
 					} 
@@ -91,23 +91,23 @@ public class digestdata {
 						} 
 						token = ModernizedCProgram.Curl_strtok_r(((Object)0), ",", tok_buf);
 					}
-					.Curl_cfree(tmp);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(tmp);
 					if (/* Select only auth or auth-int. Otherwise, ignore */foundAuth) {
-						.Curl_cfree(generatedQop);
-						this.setQop(.Curl_cstrdup("auth"));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedQop);
+						this.setQop(/*Error: Function owner not recognized*/Curl_cstrdup("auth"));
 						if (!generatedQop) {
 							return CURLE_OUT_OF_MEMORY;
 						} 
 					}  else if (foundAuthInt) {
-						.Curl_cfree(generatedQop);
-						this.setQop(.Curl_cstrdup("auth-int"));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedQop);
+						this.setQop(/*Error: Function owner not recognized*/Curl_cstrdup("auth-int"));
 						if (!generatedQop) {
 							return CURLE_OUT_OF_MEMORY;
 						} 
 					} 
 				}  else if (ModernizedCProgram.Curl_strcasecompare(value, "algorithm")) {
-					.Curl_cfree(generatedAlgorithm);
-					this.setAlgorithm(.Curl_cstrdup(content));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedAlgorithm);
+					this.setAlgorithm(/*Error: Function owner not recognized*/Curl_cstrdup(content));
 					if (!generatedAlgorithm) {
 						return CURLE_OUT_OF_MEMORY;
 					} 
@@ -172,32 +172,32 @@ public class digestdata {
 	public void Curl_auth_digest_cleanup() {
 		Byte generatedNonce = this.getNonce();
 		do {
-			.Curl_cfree((generatedNonce));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedNonce));
 			(generatedNonce) = ((Object)0);
 		} while (0);
 		Byte generatedCnonce = this.getCnonce();
 		do {
-			.Curl_cfree((generatedCnonce));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedCnonce));
 			(generatedCnonce) = ((Object)0);
 		} while (0);
 		Byte generatedRealm = this.getRealm();
 		do {
-			.Curl_cfree((generatedRealm));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedRealm));
 			(generatedRealm) = ((Object)0);
 		} while (0);
 		Byte generatedOpaque = this.getOpaque();
 		do {
-			.Curl_cfree((generatedOpaque));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedOpaque));
 			(generatedOpaque) = ((Object)0);
 		} while (0);
 		Byte generatedQop = this.getQop();
 		do {
-			.Curl_cfree((generatedQop));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedQop));
 			(generatedQop) = ((Object)0);
 		} while (0);
 		Byte generatedAlgorithm = this.getAlgorithm();
 		do {
-			.Curl_cfree((generatedAlgorithm));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedAlgorithm));
 			(generatedAlgorithm) = ((Object)0);
 		} while (0);
 		this.setNc(0);

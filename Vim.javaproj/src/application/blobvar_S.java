@@ -29,7 +29,7 @@ public class blobvar_S {
 	 * Caller should take care of the reference count.
 	 */
 	public blobvar_S blob_alloc() {
-		blob_T blob = (blob_T)ModernizedCProgram.alloc_clear();
+		blob_T blob = (blob_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/);
 		growarray generatedBv_ga = blob.getBv_ga();
 		if (blob != ((Object)0)) {
 			generatedBv_ga.ga_init2(1, 100);

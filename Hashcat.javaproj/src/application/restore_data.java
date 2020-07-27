@@ -7,9 +7,9 @@ public class restore_data {
 	private Object masks_pos;
 	private Object words_cur;
 	private Object argc;
-	private Byte argv;
+	private byte[][] argv;
 	
-	public restore_data(int version, Object cwd, Object dicts_pos, Object masks_pos, Object words_cur, Object argc, Byte argv) {
+	public restore_data(int version, Object cwd, Object dicts_pos, Object masks_pos, Object words_cur, Object argc, byte[][] argv) {
 		setVersion(version);
 		setCwd(cwd);
 		setDicts_pos(dicts_pos);
@@ -57,10 +57,10 @@ public class restore_data {
 	public void setArgc(Object newArgc) {
 		argc = newArgc;
 	}
-	public Byte getArgv() {
+	public byte[][] getArgv() {
 		return argv;
 	}
-	public void setArgv(Byte newArgv) {
+	public void setArgv(byte[][] newArgv) {
 		argv = newArgv;
 	}
 }

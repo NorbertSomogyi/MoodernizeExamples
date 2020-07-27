@@ -11,16 +11,6 @@ public class media_frames_per_second {
 	public media_frames_per_second() {
 	}
 	
-	public media_frames_per_second obs_property_frame_rate_fps_range_min(obs_property p, Object idx) {
-		frame_rate_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_FRAME_RATE);
-		Object generatedRanges = data.getRanges();
-		return data && generatedRanges.getNum() > idx ? generatedRanges.getArray()[idx].getMin_time() : ;
-	}
-	public media_frames_per_second obs_property_frame_rate_fps_range_max(obs_property p, Object idx) {
-		frame_rate_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_FRAME_RATE);
-		Object generatedRanges = data.getRanges();
-		return data && generatedRanges.getNum() > idx ? generatedRanges.getArray()[idx].getMax_time() : ;
-	}
 	public double media_frames_per_second_to_frame_interval() {
 		Object generatedDenominator = this.getDenominator();
 		Object generatedNumerator = this.getNumerator();
@@ -35,6 +25,16 @@ public class media_frames_per_second {
 		Object generatedNumerator = this.getNumerator();
 		Object generatedDenominator = this.getDenominator();
 		return generatedNumerator && generatedDenominator;
+	}
+	public media_frames_per_second obs_property_frame_rate_fps_range_min(obs_property p, Object idx) {
+		frame_rate_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_FRAME_RATE);
+		Object generatedRanges = data.getRanges();
+		return data && generatedRanges.getNum() > idx ? generatedRanges.getArray()[idx].getMin_time() : /*Error: Unsupported expression*/;
+	}
+	public media_frames_per_second obs_property_frame_rate_fps_range_max(obs_property p, Object idx) {
+		frame_rate_data data = p.get_type_data(obs_property_type.OBS_PROPERTY_FRAME_RATE);
+		Object generatedRanges = data.getRanges();
+		return data && generatedRanges.getNum() > idx ? generatedRanges.getArray()[idx].getMax_time() : /*Error: Unsupported expression*/;
 	}
 	public Object getNumerator() {
 		return numerator;

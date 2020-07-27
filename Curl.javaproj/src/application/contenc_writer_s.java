@@ -38,12 +38,12 @@ public class contenc_writer_s {
 	/* Create an unencoding writer stage using the given handler. */
 	public contenc_writer_s new_unencoding_writer(connectdata conn, Object handler) {
 		size_t sz = ((size_t)((contenc_writer)0).getParams()) + handler.getParamsize();
-		contenc_writer writer = (contenc_writer).Curl_ccalloc(1, sz);
+		contenc_writer writer = (contenc_writer)/*Error: Function owner not recognized*/Curl_ccalloc(1, sz);
 		if (writer) {
 			writer.setHandler(handler);
 			writer.setDownstream(downstream);
-			if (.UNRECOGNIZEDFUNCTIONNAME(conn, writer)) {
-				.Curl_cfree(writer);
+			if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(conn, writer)) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(writer);
 				writer = ((Object)0);
 			} 
 		} 

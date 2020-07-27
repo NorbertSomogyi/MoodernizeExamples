@@ -37,7 +37,7 @@ public class blk_SHA256_CTX {
 			S[i] = ModernizedCProgram.ctx.getState()[i];
 		}
 		for (i = 0; i < 16; ) {
-			W[i] = .get_be32(buf);
+			W[i] = /*Error: Function owner not recognized*/get_be32(buf);
 		}
 		for (i = 16; i < 64; /* fill W[16..63] */i++) {
 			W[i] = ModernizedCProgram.gamma1(W[i - 2]) + W[i - 7] + ModernizedCProgram.gamma0(W[i - 15]) + W[i - 16];
@@ -374,12 +374,12 @@ public class blk_SHA256_CTX {
 			if (len < left) {
 				left = len;
 			} 
-			.memcpy(len_buf + ModernizedCProgram.ctx.getBuf(), data, left);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(len_buf + ModernizedCProgram.ctx.getBuf(), data, left);
 			len_buf = (len_buf + left) & 63;
 			len -= left;
 			data = ((byte)data + left);
 			if (len_buf) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			ModernizedCProgram.ctx.blk_SHA256_Transform(ModernizedCProgram.ctx.getBuf());
 		} 
@@ -389,20 +389,20 @@ public class blk_SHA256_CTX {
 			len -= 64;
 		}
 		if (len) {
-			.memcpy(ModernizedCProgram.ctx.getBuf(), data, len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.ctx.getBuf(), data, len);
 		} 
 	}
 	public void blk_SHA256_Final(Byte digest) {
 		byte[] pad = new byte[]{-1024};
 		int[] padlen = new int[2];
 		int i;
-		padlen[0] = .htonl((uint32_t)(ModernizedCProgram.ctx.getSize() >> /* Pad with a binary 1 (ie 0x80), then zeroes, then length */29));
-		padlen[1] = .htonl((uint32_t)(ModernizedCProgram.ctx.getSize() << 3));
+		padlen[0] = /*Error: Function owner not recognized*/htonl((uint32_t)(ModernizedCProgram.ctx.getSize() >> /* Pad with a binary 1 (ie 0x80), then zeroes, then length */29));
+		padlen[1] = /*Error: Function owner not recognized*/htonl((uint32_t)(ModernizedCProgram.ctx.getSize() << 3));
 		i = ModernizedCProgram.ctx.getSize() & 63;
 		ModernizedCProgram.ctx.blk_SHA256_Update(pad, 1 + (63 & (55 - i)));
 		ModernizedCProgram.ctx.blk_SHA256_Update(padlen, 8);
 		for (i = 0; i < 8; ) {
-			.put_be32(digest, ModernizedCProgram.ctx.getState()[i]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/put_be32(digest, ModernizedCProgram.ctx.getState()[i]);
 		}
 	}
 	public Object getState() {

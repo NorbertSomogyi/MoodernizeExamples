@@ -35,8 +35,8 @@ public class url_info {
 	public url_info() {
 	}
 	
-	public Byte url_normalize_1(Object url, byte allow_globs) {
-		size_t url_len = .strlen(url);
+	public Byte url_normalize_1(Object[] url, byte allow_globs) {
+		size_t url_len = /*Error: Function owner not recognized*/strlen(url);
 		strbuf norm = new strbuf();
 		size_t spanned = new size_t();
 		size_t scheme_len = new size_t();
@@ -60,7 +60,7 @@ public class url_info {
 			 * Copy lowercased scheme and :// suffix, %-escapes are not allowed
 			 * First character of scheme must be URL_ALPHA
 			 */
-		spanned = .strspn(url, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+.-");
+		spanned = /*Error: Function owner not recognized*/strspn(url, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+.-");
 		if (!spanned || !((ModernizedCProgram.sane_ctype[(byte)(url[0])] & (true)) != 0) || spanned + 3 > url_len || url[spanned] != (byte)':' || url[spanned + 1] != (byte)'/' || url[spanned + 2] != (byte)'/') {
 			if (out_info) {
 				this.setUrl(((Object)0));
@@ -75,12 +75,12 @@ public class url_info {
 		while (spanned--) {
 			norm.strbuf_addch(ModernizedCProgram.sane_case((byte)(url++), -1024));
 		}
-		at_ptr = .strchr(url, /*
+		at_ptr = /*Error: Function owner not recognized*/strchr(url, /*
 			 * Copy any username:password if present normalizing %-escapes
 			 */(byte)'@');
-		slash_ptr = url + .strcspn(url, "/?#");
+		slash_ptr = url + /*Error: Function owner not recognized*/strcspn(url, "/?#");
 		Object generatedLen = norm.getLen();
-		byte generatedBuf = norm.getBuf();
+		byte[] generatedBuf = norm.getBuf();
 		if (at_ptr && at_ptr < slash_ptr) {
 			user_off = generatedLen;
 			if (at_ptr > url) {
@@ -92,7 +92,7 @@ public class url_info {
 					norm.strbuf_release();
 					return ((Object)0);
 				} 
-				colon_ptr = .strchr(generatedBuf + scheme_len + 3, (byte)':');
+				colon_ptr = /*Error: Function owner not recognized*/strchr(generatedBuf + scheme_len + 3, (byte)':');
 				if (colon_ptr) {
 					passwd_off = (colon_ptr + 1) - generatedBuf;
 					passwd_len = generatedLen - passwd_off;
@@ -105,10 +105,10 @@ public class url_info {
 			url_len -= (++at_ptr - url);
 			url = at_ptr;
 		} 
-		if (!url_len || .strchr(":/?#", /*
+		if (!url_len || /*Error: Function owner not recognized*/strchr(":/?#", /*
 			 * Copy the host part excluding any port part, no %-escapes allowed
 			 */url)) {
-			if (.strncmp(generatedBuf, "file:", /* Missing host invalid for all URL schemes except file */5)) {
+			if (/*Error: Function owner not recognized*/strncmp(generatedBuf, "file:", /* Missing host invalid for all URL schemes except file */5)) {
 				if (out_info) {
 					this.setUrl(((Object)0));
 					this.setErr(ModernizedCProgram._("missing host and scheme is not 'file:'"));
@@ -134,9 +134,9 @@ public class url_info {
 			return ((Object)0);
 		} 
 		if (allow_globs) {
-			spanned = .strspn(url, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-[:]*");
+			spanned = /*Error: Function owner not recognized*/strspn(url, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-[:]*");
 		} else {
-				spanned = .strspn(url, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-[:]");
+				spanned = /*Error: Function owner not recognized*/strspn(url, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-[:]");
 		} 
 		if (spanned < colon_ptr - url) {
 			if (/* Host name has invalid characters */out_info) {
@@ -155,13 +155,13 @@ public class url_info {
 			 * leading 0s); no %-escapes allowed
 			 */slash_ptr) {
 			/* skip the ':' and leading 0s but not the last one if all 0s */url++;
-			url += .strspn(url, "0");
+			url += /*Error: Function owner not recognized*/strspn(url, "0");
 			if (url == slash_ptr && url[-1] == (byte)'0') {
 				url--;
 			} 
 			if (url == slash_ptr) {
-			}  else if (slash_ptr - url == /* Skip ":" port with no number, it's same as default */2 && !.strncmp(generatedBuf, "http:", 5) && !.strncmp(url, "80", 2)) {
-			}  else if (slash_ptr - url == /* Skip http :80 as it's the default */3 && !.strncmp(generatedBuf, "https:", 6) && !.strncmp(url, "443", 3/* Skip https :443 as it's the default *//*
+			}  else if (slash_ptr - url == /* Skip ":" port with no number, it's same as default */2 && !/*Error: Function owner not recognized*/strncmp(generatedBuf, "http:", 5) && !/*Error: Function owner not recognized*/strncmp(url, "80", 2)) {
+			}  else if (slash_ptr - url == /* Skip http :80 as it's the default */3 && !/*Error: Function owner not recognized*/strncmp(generatedBuf, "https:", 6) && !/*Error: Function owner not recognized*/strncmp(url, "443", 3/* Skip https :443 as it's the default *//*
 						 * Port number must be all digits with leading 0s removed
 						 * and since all the protocols we deal with have a 16-bit
 						 * port number it must also be in the range 1..65535
@@ -170,7 +170,7 @@ public class url_info {
 						 */)) {
 			} else {
 					long pnum = 0;
-					spanned = .strspn(url, "0123456789");
+					spanned = /*Error: Function owner not recognized*/strspn(url, "0123456789");
 					if (spanned < slash_ptr - url) {
 						if (/* port number has invalid characters */out_info) {
 							this.setUrl(((Object)0));
@@ -180,7 +180,7 @@ public class url_info {
 						return ((Object)0);
 					} 
 					if (slash_ptr - url <= 5) {
-						pnum = .strtoul(url, ((Object)0), 10);
+						pnum = /*Error: Function owner not recognized*/strtoul(url, ((Object)0), 10);
 					} 
 					if (pnum == 0 || pnum > 65535) {
 						if (/* port number not in range 1..65535 */out_info) {
@@ -212,10 +212,10 @@ public class url_info {
 			url++;
 			url_len--;
 		} 
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			byte seg_start;
 			size_t seg_start_off = generatedLen;
-			byte next_slash = url + .strcspn(url, "/?#");
+			byte next_slash = url + /*Error: Function owner not recognized*/strcspn(url, "/?#");
 			int skip_add_slash = 0/*
 					 * RFC 3689 indicates that any . or .. segments should be
 					 * unescaped before being checked for.
@@ -229,14 +229,14 @@ public class url_info {
 				return ((Object)0);
 			} 
 			seg_start = generatedBuf + seg_start_off;
-			if (!.strcmp(seg_start, ".")) {
+			if (!/*Error: Function owner not recognized*/strcmp(seg_start, ".")) {
 				if (seg_start == path_start + /* ignore a . segment; be careful not to remove initial '/' */1) {
 					norm.strbuf_setlen(generatedLen - 1);
 					skip_add_slash = 1;
 				} else {
 						norm.strbuf_setlen(generatedLen - 2);
 				} 
-			}  else if (!.strcmp(seg_start, ".."/*
+			}  else if (!/*Error: Function owner not recognized*/strcmp(seg_start, ".."/*
 						 * ignore a .. segment and remove the previous segment;
 						 * be careful not to remove initial '/' from path
 						 */)) {

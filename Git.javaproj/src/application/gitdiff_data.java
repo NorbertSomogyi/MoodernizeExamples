@@ -21,7 +21,7 @@ public class gitdiff_data {
 	public gitdiff_data() {
 	}
 	
-	public int gitdiff_verify_name(Object line, int isnull, byte name, int side) {
+	public int gitdiff_verify_name(Object line, int isnull, Byte name, int side) {
 		if (!name && !isnull) {
 			name = ModernizedCProgram.state.getRoot().find_name(line, ((Object)0), ModernizedCProgram.state.getP_value(), 2);
 			return 0;
@@ -32,7 +32,7 @@ public class gitdiff_data {
 				return ();
 			} 
 			another = ModernizedCProgram.state.getRoot().find_name(line, ((Object)0), ModernizedCProgram.state.getP_value(), 2);
-			if (!another || .strcmp(another, name)) {
+			if (!another || /*Error: Function owner not recognized*/strcmp(another, name)) {
 				ModernizedCProgram.free(another);
 				return ();
 			} 

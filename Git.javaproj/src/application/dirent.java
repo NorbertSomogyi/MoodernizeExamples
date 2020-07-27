@@ -13,7 +13,7 @@ public class dirent {
 	
 	public dirent readdir( dir) {
 		if (!dir) {
-			(._errno()) = /* No set_errno for mingw */9;
+			(/*Error: Function owner not recognized*/_errno()) = /* No set_errno for mingw */9;
 			return ((Object)0);
 		} 
 		Object generatedDd_stat = dir.getDd_stat();
@@ -21,12 +21,12 @@ public class dirent {
 		Object generatedDd_dir = dir.getDd_dir();
 		if (generatedDd_stat) {
 			WIN32_FIND_DATAW fdata = new WIN32_FIND_DATAW();
-			if (.FindNextFileW(generatedDd_handle, fdata)) {
+			if (/*Error: Function owner not recognized*/FindNextFileW(generatedDd_handle, fdata)) {
 				ModernizedCProgram.finddata2dirent(generatedDd_dir, fdata);
 			} else {
-					DWORD lasterr = .GetLastError();
+					DWORD lasterr = /*Error: Function owner not recognized*/GetLastError();
 					if (lasterr != -1024) {
-						(._errno()) = ModernizedCProgram.err_win_to_posix(lasterr);
+						(/*Error: Function owner not recognized*/_errno()) = ModernizedCProgram.err_win_to_posix(lasterr);
 					} 
 					return ((Object)0);
 			} 

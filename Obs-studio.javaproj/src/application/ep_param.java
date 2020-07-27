@@ -44,11 +44,11 @@ public class ep_param {
 		this.setWriteorder(false);
 		this.setArray_count(0);
 		Object generatedDefault_val = this.getDefault_val();
-		.da_init(generatedDefault_val);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedDefault_val);
 		Object generatedProperties = this.getProperties();
-		.da_init(generatedProperties);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedProperties);
 		Object generatedAnnotations = this.getAnnotations();
-		.da_init(generatedAnnotations);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedAnnotations);
 	}
 	public void ep_param_free() {
 		Byte generatedType = this.getType();
@@ -56,21 +56,21 @@ public class ep_param {
 		Byte generatedName = this.getName();
 		ModernizedCProgram.bfree(generatedName);
 		Object generatedDefault_val = this.getDefault_val();
-		.da_free(generatedDefault_val);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedDefault_val);
 		Object generatedProperties = this.getProperties();
-		.da_free(generatedProperties);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedProperties);
 		Object generatedAnnotations = this.getAnnotations();
 		for ( i = 0;
 		 i < generatedAnnotations.getNum(); i++) {
 			generatedAnnotations.getArray() + i.ep_param_free();
 		}
-		.da_free(generatedAnnotations);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedAnnotations);
 	}
 	public ep_param ep_getparam(effect_parser ep, Object name) {
 		 i = new ();
 		Object generatedParams = ep.getParams();
 		for (i = 0; i < generatedParams.getNum(); i++) {
-			if (.strcmp(name, generatedParams.getArray()[i].getName()) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(name, generatedParams.getArray()[i].getName()) == 0) {
 				return generatedParams.getArray() + i;
 			} 
 		}
@@ -79,7 +79,7 @@ public class ep_param {
 	public ep_param ep_getannotation(Object name) {
 		 i = new ();
 		for (i = 0; i < ModernizedCProgram.param.getAnnotations().getNum(); i++) {
-			if (.strcmp(name, ModernizedCProgram.param.getAnnotations().getArray()[i].getName()) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(name, ModernizedCProgram.param.getAnnotations().getArray()[i].getName()) == 0) {
 				return ModernizedCProgram.param.getAnnotations().getArray() + i;
 			} 
 		}

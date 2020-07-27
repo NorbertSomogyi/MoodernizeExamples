@@ -13,14 +13,14 @@ public class obs_weak_source {
 	
 	public void obs_weak_source_addref() {
 		if (!weak) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_weak_ref generatedRef = this.getRef();
 		generatedRef.obs_weak_ref_addref();
 	}
 	public void obs_weak_source_release() {
 		if (!weak) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_weak_ref generatedRef = this.getRef();
 		if (generatedRef.obs_weak_ref_release()) {

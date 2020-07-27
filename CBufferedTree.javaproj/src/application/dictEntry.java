@@ -62,8 +62,8 @@ public class dictEntry {
 		} 
 		Object generatedHt = d.getHt();
 		ht = (generatedRehashidx != -1) ? generatedHt[1] : generatedHt[/* Allocate the memory and store the new entry */0];
-		entry = .malloc();
-		dictEntry generatedTable = ht.getTable();
+		entry = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
+		dictEntry[][] generatedTable = ht.getTable();
 		entry.setNext(generatedTable[index]);
 		generatedTable[index] = entry;
 		long generatedUsed = ht.getUsed();
@@ -73,7 +73,7 @@ public class dictEntry {
 		Object generatedPrivdata = (d).getPrivdata();
 		do {
 			if (generatedKeyDup) {
-				entry.setKey(.UNRECOGNIZEDFUNCTIONNAME(generatedPrivdata, key));
+				entry.setKey(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedPrivdata, key));
 			} else {
 					entry.setKey((key));
 			} 
@@ -102,7 +102,7 @@ public class dictEntry {
 		if ((generatedRehashidx != -1)) {
 			d._dictRehashStep();
 		} 
-		h = .UNRECOGNIZEDFUNCTIONNAME(key);
+		h = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(key);
 		dictType generatedType = (d).getType();
 		Object generatedKeyCompare = generatedType.getKeyCompare();
 		Object generatedPrivdata = (d).getPrivdata();
@@ -112,7 +112,7 @@ public class dictEntry {
 			idx = h & generatedHt[table].getSizemask();
 			he = generatedHt[table].getTable()[idx];
 			while (he) {
-				if (((generatedKeyCompare) ? .UNRECOGNIZEDFUNCTIONNAME(generatedPrivdata, key, generatedKey) : (key) == (generatedKey))) {
+				if (((generatedKeyCompare) ? /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedPrivdata, key, generatedKey) : (key) == (generatedKey))) {
 					return he;
 				} 
 				he = generatedNext;

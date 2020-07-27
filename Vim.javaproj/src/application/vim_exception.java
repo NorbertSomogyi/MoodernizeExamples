@@ -29,7 +29,7 @@ public class vim_exception {
 		char_u saved_IObuff = new char_u();
 		if (excp == ((Object)0)) {
 			ModernizedCProgram.internal_error("discard_exception()");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Byte generatedValue = this.getValue();
 		if (ModernizedCProgram.p_verbose >= 13 || debug_break_level > 0) {
@@ -55,7 +55,7 @@ public class vim_exception {
 			} else {
 					ModernizedCProgram.verbose_leave();
 			} 
-			.strcpy((byte)(ModernizedCProgram.IObuff), (byte)(saved_IObuff));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(ModernizedCProgram.IObuff), (byte)(saved_IObuff));
 			ModernizedCProgram.vim_free(saved_IObuff);
 		} 
 		 generatedType = this.getType();

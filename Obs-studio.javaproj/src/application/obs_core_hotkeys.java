@@ -52,51 +52,6 @@ public class obs_core_hotkeys {
 	public obs_core_hotkeys() {
 	}
 	
-	public Object obs_hotkeys_platform_init() {
-		.CFNotificationCenterAddObserver(.CFNotificationCenterGetDistributedCenter(), hotkeys, input_method_changed, kTISNotifySelectedKeyboardInputSourceChanged, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
-		ModernizedCProgram.input_method_changed(NULL, hotkeys, NULL, NULL, NULL);
-		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
-		return generatedPlatform_context != NULL;
-		this.setPlatform_context(ModernizedCProgram.bzalloc());
-		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
-		Object generatedVk_codes = generatedPlatform_context.getVk_codes();
-		for (size_t i = 0;
-		 i < obs_key.OBS_KEY_LAST_VALUE; i++) {
-			generatedVk_codes[i] = ModernizedCProgram.get_virtual_key(i);
-		}
-		return true;
-		 display = .XOpenDisplay(((Object)0));
-		if (!display) {
-			return false;
-		} 
-		this.setPlatform_context(ModernizedCProgram.bzalloc());
-		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
-		generatedPlatform_context.setDisplay(display);
-		hotkeys.fill_base_keysyms();
-		hotkeys.fill_keycodes();
-		return true;
-	}
-	public void obs_hotkeys_platform_free() {
-		.CFNotificationCenterRemoveEveryObserver(.CFNotificationCenterGetDistributedCenter(), hotkeys);
-		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
-		generatedPlatform_context.hotkeys_release();
-		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
-		ModernizedCProgram.bfree(generatedPlatform_context);
-		this.setPlatform_context(((Object)0));
-		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
-		obs_hotkeys_platform_t context = generatedPlatform_context;
-		Object generatedKeycodes = context.getKeycodes();
-		for (size_t i = 0;
-		 i < obs_key.OBS_KEY_LAST_VALUE; i++) {
-			.da_free(generatedKeycodes[i].getList());
-		}
-		Object generatedDisplay = context.getDisplay();
-		.XCloseDisplay(generatedDisplay);
-		Object generatedKeysyms = context.getKeysyms();
-		ModernizedCProgram.bfree(generatedKeysyms);
-		ModernizedCProgram.bfree(context);
-		this.setPlatform_context(((Object)0));
-	}
 	public void fill_base_keysyms() {
 		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
 		Object generatedBase_keysyms = generatedPlatform_context.getBase_keysyms();
@@ -109,8 +64,8 @@ public class obs_core_hotkeys {
 		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
 		obs_hotkeys_platform_t context = generatedPlatform_context;
 		Object generatedDisplay = context.getDisplay();
-		 connection = .XGetXCBConnection(generatedDisplay);
-		xcb_setup_t setup = .xcb_get_setup(connection);
+		 connection = /*Error: Function owner not recognized*/XGetXCBConnection(generatedDisplay);
+		xcb_setup_t setup = /*Error: Function owner not recognized*/xcb_get_setup(connection);
 		 cookie = new ();
 		 reply = new ();
 		 error = ((Object)0);
@@ -118,18 +73,18 @@ public class obs_core_hotkeys {
 		int mincode = setup.getXcb_setup_t();
 		int maxcode = setup.getXcb_setup_t();
 		context.setMin_keycode(setup.getXcb_setup_t());
-		cookie = .xcb_get_keyboard_mapping(connection, mincode, maxcode - mincode + 1);
-		reply = .xcb_get_keyboard_mapping_reply(connection, cookie, error);
+		cookie = /*Error: Function owner not recognized*/xcb_get_keyboard_mapping(connection, mincode, maxcode - mincode + 1);
+		reply = /*Error: Function owner not recognized*/xcb_get_keyboard_mapping_reply(connection, cookie, error);
 		if (error || !reply) {
 			ModernizedCProgram.blog(LOG_WARNING, "xcb_get_keyboard_mapping_reply failed");
 			;
 		} 
-		 keysyms = .xcb_get_keyboard_mapping_keysyms(reply);
+		 keysyms = /*Error: Function owner not recognized*/xcb_get_keyboard_mapping_keysyms(reply);
 		int syms_per_code = (int)reply.getKeysyms_per_keycode();
 		context.setNum_keysyms((maxcode - mincode + 1) * syms_per_code);
 		context.setSyms_per_code(syms_per_code);
-		Object generatedNum_keysyms = context.getNum_keysyms();
-		context.setKeysyms(ModernizedCProgram.bmemdup(keysyms,  * generatedNum_keysyms));
+		int generatedNum_keysyms = context.getNum_keysyms();
+		context.setKeysyms(ModernizedCProgram.bmemdup(keysyms, /*Error: Unsupported expression*/ * generatedNum_keysyms));
 		for (code = mincode; code <= maxcode; code++) {
 			 sym = new ();
 			obs_key_t key = new obs_key_t();
@@ -154,8 +109,53 @@ public class obs_core_hotkeys {
 				} 
 			}
 		}
-		.free(error);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(error);
 		return error != ((Object)0) || reply == ((Object)0);
+	}
+	public Object obs_hotkeys_platform_init() {
+		 display = /*Error: Function owner not recognized*/XOpenDisplay(((Object)0));
+		if (!display) {
+			return false;
+		} 
+		this.setPlatform_context(ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/));
+		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
+		generatedPlatform_context.setDisplay(display);
+		hotkeys.fill_base_keysyms();
+		hotkeys.fill_keycodes();
+		return true;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFNotificationCenterAddObserver(/*Error: Function owner not recognized*/CFNotificationCenterGetDistributedCenter(), hotkeys, input_method_changed, kTISNotifySelectedKeyboardInputSourceChanged, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+		ModernizedCProgram.input_method_changed(NULL, hotkeys, NULL, NULL, NULL);
+		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
+		return generatedPlatform_context != NULL;
+		this.setPlatform_context(ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/));
+		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
+		Object generatedVk_codes = generatedPlatform_context.getVk_codes();
+		for (size_t i = 0;
+		 i < obs_key.OBS_KEY_LAST_VALUE; i++) {
+			generatedVk_codes[i] = ModernizedCProgram.get_virtual_key(i);
+		}
+		return true;
+	}
+	public void obs_hotkeys_platform_free() {
+		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
+		obs_hotkeys_platform_t context = generatedPlatform_context;
+		Object generatedKeycodes = context.getKeycodes();
+		for (size_t i = 0;
+		 i < obs_key.OBS_KEY_LAST_VALUE; i++) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedKeycodes[i].getList());
+		}
+		Object generatedDisplay = context.getDisplay();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/XCloseDisplay(generatedDisplay);
+		Object generatedKeysyms = context.getKeysyms();
+		ModernizedCProgram.bfree(generatedKeysyms);
+		ModernizedCProgram.bfree(context);
+		this.setPlatform_context(((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFNotificationCenterRemoveEveryObserver(/*Error: Function owner not recognized*/CFNotificationCenterGetDistributedCenter(), hotkeys);
+		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
+		generatedPlatform_context.hotkeys_release();
+		obs_hotkeys_platform generatedPlatform_context = this.getPlatform_context();
+		ModernizedCProgram.bfree(generatedPlatform_context);
+		this.setPlatform_context(((Object)0));
 	}
 	public Object getMutex() {
 		return mutex;

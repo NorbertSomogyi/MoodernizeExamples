@@ -15,7 +15,7 @@ public class unpacked {
 	public unpacked() {
 	}
 	
-	public int try_delta(unpacked src, int max_depth, long mem_usage) {
+	public int try_delta(unpacked src, int max_depth, Long mem_usage) {
 		object_entry generatedEntry = this.getEntry();
 		object_entry trg_entry = generatedEntry;
 		object_entry src_entry = generatedEntry;
@@ -39,8 +39,8 @@ public class unpacked {
 				 */;
 		} 
 		packed_git packed_git = new packed_git();
-		int generatedPreferred_base = src_entry.getPreferred_base();
-		int generatedIn_pack_type = trg_entry.getIn_pack_type();
+		Object generatedPreferred_base = src_entry.getPreferred_base();
+		Object generatedIn_pack_type = trg_entry.getIn_pack_type();
 		if (ModernizedCProgram.reuse_delta && packed_git.oe_in_pack(ModernizedCProgram.to_pack, trg_entry) && packed_git.oe_in_pack(ModernizedCProgram.to_pack, trg_entry) == packed_git.oe_in_pack(ModernizedCProgram.to_pack, src_entry) && !generatedPreferred_base && generatedIn_pack_type != object_type.OBJ_REF_DELTA && generatedIn_pack_type != object_type.OBJ_OFS_DELTA) {
 			return 0;
 		} 
@@ -135,17 +135,17 @@ public class unpacked {
 		} 
 		Object generatedDelta_data = trg_entry.getDelta_data();
 		ModernizedCProgram.free(generatedDelta_data);
-		.pthread_mutex_lock(ModernizedCProgram.cache_mutex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_mutex_lock(ModernizedCProgram.cache_mutex);
 		if (generatedDelta_data) {
 			ModernizedCProgram.delta_cache_size -= ModernizedCProgram.to_pack.oe_delta_size(trg_entry);
 			trg_entry.setDelta_data(((Object)0));
 		} 
 		if (ModernizedCProgram.delta_cacheable(src_size, trg_size, delta_size)) {
 			ModernizedCProgram.delta_cache_size += delta_size;
-			.pthread_mutex_unlock(ModernizedCProgram.cache_mutex);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_mutex_unlock(ModernizedCProgram.cache_mutex);
 			trg_entry.setDelta_data(ModernizedCProgram.xrealloc(delta_buf, delta_size));
 		} else {
-				.pthread_mutex_unlock(ModernizedCProgram.cache_mutex);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_mutex_unlock(ModernizedCProgram.cache_mutex);
 				ModernizedCProgram.free(delta_buf);
 		} 
 		ModernizedCProgram.oe_set_delta(ModernizedCProgram.to_pack, trg_entry, src_entry);

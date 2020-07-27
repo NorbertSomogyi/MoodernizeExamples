@@ -31,7 +31,7 @@ public class ConsoleBufferStruct {
 			return 0;
 		} 
 		_CONSOLE_SCREEN_BUFFER_INFO generatedInfo = this.getInfo();
-		if (!.GetConsoleScreenBufferInfo(ModernizedCProgram.g_hConOut, generatedInfo)) {
+		if (!/*Error: Function owner not recognized*/GetConsoleScreenBufferInfo(ModernizedCProgram.g_hConOut, generatedInfo)) {
 			this.setIsValid(0);
 			return 0;
 		} 
@@ -50,7 +50,7 @@ public class ConsoleBufferStruct {
 			generatedBufferSize.setY(generatedY);
 			NumCells = generatedX * generatedY;
 			ModernizedCProgram.vim_free(generatedBuffer);
-			this.setBuffer((CHAR_INFO)ModernizedCProgram.alloc( * (NumCells)));
+			this.setBuffer((CHAR_INFO)ModernizedCProgram.alloc(/*Error: Unsupported expression*/ * (NumCells)));
 			if (generatedBuffer == ((Object)0)) {
 				return 0/*
 				     * We will now copy the console screen buffer into our buffer.
@@ -73,7 +73,7 @@ public class ConsoleBufferStruct {
 		if (generatedRegions == ((Object)0) || numregions != generatedNumRegions) {
 			this.setNumRegions(numregions);
 			ModernizedCProgram.vim_free(generatedRegions);
-			this.setRegions((SMALL_RECT)ModernizedCProgram.alloc( * (generatedNumRegions)));
+			this.setRegions((SMALL_RECT)ModernizedCProgram.alloc(/*Error: Unsupported expression*/ * (generatedNumRegions)));
 			if (generatedRegions == ((Object)0)) {
 				do {
 					if ((generatedBuffer) != ((Object)0)) {
@@ -93,7 +93,7 @@ public class ConsoleBufferStruct {
 				 */);
 			ReadRegion.setTop(Y);
 			ReadRegion.setBottom(Y + Y_incr - 1);
-			if (!.ReadConsoleOutputW(/* output handle */ModernizedCProgram.g_hConOut, generatedBuffer, generatedBufferSize, /* offset in our buffer */BufferCoord, /* region to save */ReadRegion)) {
+			if (!/*Error: Function owner not recognized*/ReadConsoleOutputW(/* output handle */ModernizedCProgram.g_hConOut, generatedBuffer, generatedBufferSize, /* offset in our buffer */BufferCoord, /* region to save */ReadRegion)) {
 				do {
 					if ((generatedBuffer) != ((Object)0)) {
 						ModernizedCProgram.vim_free(generatedBuffer);
@@ -139,10 +139,10 @@ public class ConsoleBufferStruct {
 		} 
 		Object generatedDwSize = generatedInfo.getDwSize();
 		generatedDwSize.FitConsoleWindow(1);
-		if (!.SetConsoleScreenBufferSize(ModernizedCProgram.g_hConOut, generatedDwSize)) {
+		if (!/*Error: Function owner not recognized*/SetConsoleScreenBufferSize(ModernizedCProgram.g_hConOut, generatedDwSize)) {
 			return 0;
 		} 
-		if (!.SetConsoleTextAttribute(ModernizedCProgram.g_hConOut, generatedWAttributes)) {
+		if (!/*Error: Function owner not recognized*/SetConsoleTextAttribute(ModernizedCProgram.g_hConOut, generatedWAttributes)) {
 			return 0;
 		} 
 		if (!RestoreScreen/*
@@ -151,11 +151,11 @@ public class ConsoleBufferStruct {
 			return 1;
 		} 
 		Object generatedDwCursorPosition = generatedInfo.getDwCursorPosition();
-		if (!.SetConsoleCursorPosition(ModernizedCProgram.g_hConOut, generatedDwCursorPosition)) {
+		if (!/*Error: Function owner not recognized*/SetConsoleCursorPosition(ModernizedCProgram.g_hConOut, generatedDwCursorPosition)) {
 			return 0;
 		} 
 		Object generatedSrWindow = generatedInfo.getSrWindow();
-		if (!.SetConsoleWindowInfo(ModernizedCProgram.g_hConOut, 1, generatedSrWindow)) {
+		if (!/*Error: Function owner not recognized*/SetConsoleWindowInfo(ModernizedCProgram.g_hConOut, 1, generatedSrWindow)) {
 			return 0/*
 			     * Restore the screen buffer contents.
 			     */;
@@ -169,7 +169,7 @@ public class ConsoleBufferStruct {
 				BufferCoord.setX(generatedRegions[i].getLeft());
 				BufferCoord.setY(generatedRegions[i].getTop());
 				WriteRegion = generatedRegions[i];
-				if (!.WriteConsoleOutputW(/* output handle */ModernizedCProgram.g_hConOut, generatedBuffer, generatedBufferSize, /* offset in our buffer */BufferCoord, /* region to restore */WriteRegion)) {
+				if (!/*Error: Function owner not recognized*/WriteConsoleOutputW(/* output handle */ModernizedCProgram.g_hConOut, generatedBuffer, generatedBufferSize, /* offset in our buffer */BufferCoord, /* region to restore */WriteRegion)) {
 					return 0;
 				} 
 			}

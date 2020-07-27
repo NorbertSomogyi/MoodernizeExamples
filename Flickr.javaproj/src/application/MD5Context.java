@@ -83,23 +83,23 @@ public class MD5Context {
 			byte p = (byte)generatedIn + t;
 			t = 64 - t;
 			if (len < t) {
-				.memcpy(p, buf, len);
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(p, buf, len);
+				return /*Error: Unsupported expression*/;
 			} 
-			.memcpy(p, buf, t);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(p, buf, t);
 			;
 			ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
 			buf += t;
 			len -= t;
 		} 
 		while (len >= /* Process data in 64-byte chunks */64) {
-			.memcpy(generatedIn, buf, 64);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedIn, buf, 64);
 			;
 			ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
 			buf += 64;
 			len -= 64;
 		}
-		.memcpy(generatedIn, buf, /* Handle any remaining bytes of data. */len/*
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedIn, buf, /* Handle any remaining bytes of data. */len/*
 		 * Final wrapup - pad to 64-byte boundary with the bit pattern 
 		 * 1 0* (64-bit count of bits processed, MSB-first)
 		 */);
@@ -117,12 +117,12 @@ public class MD5Context {
 		count = 64 - 1 - /* Bytes of padding needed to make 64 bytes */count;
 		Object generatedBuf = this.getBuf();
 		if (count < /* Pad out to 56 mod 64 */8) {
-			.memset(p, 0, /* Two lots of padding:  Pad the first block to 64 bytes */count);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(p, 0, /* Two lots of padding:  Pad the first block to 64 bytes */count);
 			;
 			ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
-			.memset(generatedIn, 0, /* Now fill the next block with 56 bytes */56);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedIn, 0, /* Now fill the next block with 56 bytes */56);
 		} else {
-				.memset(p, 0, count - /* Pad block to 56 bytes */8);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(p, 0, count - /* Pad block to 56 bytes */8);
 		} 
 		;
 		(()generatedIn)[14] = generatedBits[/* Append length in bits and transform */0];
@@ -130,7 +130,7 @@ public class MD5Context {
 		ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
 		;
 		Object generatedDigest = this.getDigest();
-		.memcpy(generatedDigest, generatedBuf, 16/* The four core functions - F1 is optimized somewhat */)/* #define F1(x, y, z) (x & y | ~x & z) */;/* #define F1(x, y, z) (x & y | ~x & z) */
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedDigest, generatedBuf, 16/* The four core functions - F1 is optimized somewhat */)/* #define F1(x, y, z) (x & y | ~x & z) */;/* #define F1(x, y, z) (x & y | ~x & z) */
 	}
 	public Object getBuf() {
 		return buf;

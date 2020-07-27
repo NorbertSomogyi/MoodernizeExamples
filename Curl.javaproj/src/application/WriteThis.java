@@ -1,22 +1,20 @@
 package application;
 
 public class WriteThis {
-	private byte readptr;
+	private byte[] readptr;
 	private Object sizeleft;
-	private int freecount;
 	
-	public WriteThis(byte readptr, Object sizeleft, int freecount) {
+	public WriteThis(byte[] readptr, Object sizeleft) {
 		setReadptr(readptr);
 		setSizeleft(sizeleft);
-		setFreecount(freecount);
 	}
 	public WriteThis() {
 	}
 	
-	public byte getReadptr() {
+	public byte[] getReadptr() {
 		return readptr;
 	}
-	public void setReadptr(byte newReadptr) {
+	public void setReadptr(byte[] newReadptr) {
 		readptr = newReadptr;
 	}
 	public Object getSizeleft() {
@@ -24,11 +22,5 @@ public class WriteThis {
 	}
 	public void setSizeleft(Object newSizeleft) {
 		sizeleft = newSizeleft;
-	}
-	public int getFreecount() {
-		return freecount;
-	}
-	public void setFreecount(int newFreecount) {
-		freecount = newFreecount;
 	}
 }

@@ -38,7 +38,7 @@ public class msgchunk_S {
 		int generatedSb_attr = mp.getSb_attr();
 		byte generatedSb_eol = mp.getSb_eol();
 		msgchunk_S generatedSb_next = mp.getSb_next();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			ModernizedCProgram.msg_row = row;
 			ModernizedCProgram.msg_col = generatedSb_msg_col;
 			p = generatedSb_text;

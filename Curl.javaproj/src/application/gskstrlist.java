@@ -1,5 +1,14 @@
 package application;
 
+/*
+ * EBCDIC --> ASCII string mapping table.
+ * Some strings returned by GSKit are dynamically allocated and automatically
+ * released when closing the handle.
+ * To provide the same functionality, we use a "private" handle that
+ * holds the GSKit handle and a list of string mappings. This will allow
+ * avoid conversion of already converted strings and releasing them upon
+ * close time.
+ */
 public class gskstrlist {
 	private gskstrlist next;
 	private Object ebcdicstr;

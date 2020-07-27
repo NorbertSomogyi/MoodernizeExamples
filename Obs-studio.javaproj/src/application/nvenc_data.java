@@ -83,15 +83,15 @@ public class nvenc_data {
 		 param = new (NV_ENC_CAPS_PARAM_VER);
 		int v;
 		param.setCapsToQuery(cap);
-		.UNRECOGNIZEDFUNCTIONNAME(generatedSession, ModernizedCProgram.NV_ENC_CODEC_H264_GUID, param, v);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSession, ModernizedCProgram.NV_ENC_CODEC_H264_GUID, param, v);
 		return v;
 	}
 	public Object get_lib(Object lib) {
-		HMODULE mod = .GetModuleHandleA(lib);
+		HMODULE mod = /*Error: Function owner not recognized*/GetModuleHandleA(lib);
 		if (mod) {
 			return mod;
 		} 
-		mod = .LoadLibraryA(lib);
+		mod = /*Error: Function owner not recognized*/LoadLibraryA(lib);
 		obs_encoder generatedEncoder = this.getEncoder();
 		if (!mod) {
 			ModernizedCProgram.blog(LOG_ERROR, "[jim-nvenc: '%s'] Failed to load %s", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), lib);
@@ -105,7 +105,7 @@ public class nvenc_data {
 		params.setDeviceType(NV_ENC_DEVICE_TYPE_DIRECTX);
 		params.setApiVersion(NVENCAPI_VERSION);
 		Object generatedSession = this.getSession();
-		if (enc.nv_failed(.UNRECOGNIZEDFUNCTIONNAME(params, generatedSession), __FUNCTION__, "nv.nvEncOpenEncodeSessionEx(&params, &enc->session)")) {
+		if (enc.nv_failed(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(params, generatedSession), __FUNCTION__, "nv.nvEncOpenEncodeSessionEx(&params, &enc->session)")) {
 			return false;
 		} 
 		return true;
@@ -113,47 +113,16 @@ public class nvenc_data {
 	public Object init_bitstreams() {
 		Object generatedBitstreams = this.getBitstreams();
 		Object generatedBuf_count = this.getBuf_count();
-		.da_reserve(generatedBitstreams, generatedBuf_count);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_reserve(generatedBitstreams, generatedBuf_count);
 		for (size_t i = 0;
 		 i < generatedBuf_count; i++) {
 			nv_bitstream bitstream = new nv_bitstream();
 			if (!ModernizedCProgram.nv_bitstream_init(enc, bitstream)) {
 				return false;
 			} 
-			.da_push_back(generatedBitstreams, bitstream);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedBitstreams, bitstream);
 		}
 		return true;
-	}
-	public Object init_textures() {
-		Object generatedBitstreams = this.getBitstreams();
-		Object generatedBuf_count = this.getBuf_count();
-		.da_reserve(generatedBitstreams, generatedBuf_count);
-		Object generatedTextures = this.getTextures();
-		for (size_t i = 0;
-		 i < generatedBuf_count; i++) {
-			nv_texture texture = new nv_texture();
-			if (!ModernizedCProgram.nv_texture_init(enc, texture)) {
-				return false;
-			} 
-			.da_push_back(generatedTextures, texture);
-		}
-		return true;
-		Object generatedCompatibility = capture.getCompatibility();
-		Object generatedWidth = capture.getWidth();
-		Object generatedHeight = capture.getHeight();
-		gs_texture gs_texture = new gs_texture();
-		gs_texture gs_texture = new gs_texture();
-		if (generatedCompatibility) {
-			capture.setTexture(gs_texture.gs_texture_create(generatedWidth, generatedHeight, GS_BGRA, 1, ((Object)0), GS_DYNAMIC));
-		} else {
-				capture.setTexture(gs_texture.gs_texture_create_gdi(generatedWidth, generatedHeight));
-		} 
-		Object generatedTexture = capture.getTexture();
-		if (!generatedTexture) {
-			ModernizedCProgram.blog(LOG_WARNING, "[dc_capture_init] Failed to create textures");
-			return ;
-		} 
-		capture.setValid(true);
 	}
 	public Object get_tex_from_handle(Object handle, Object km_out) {
 		Object generatedDevice = this.getDevice();
@@ -173,31 +142,31 @@ public class nvenc_data {
 				return generatedTex;
 			} 
 		}
-		hr = .UNRECOGNIZEDFUNCTIONNAME(device, (HANDLE)()handle, IID_ID3D11Texture2D, input_tex);
+		hr = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(device, (HANDLE)()handle, IID_ID3D11Texture2D, input_tex);
 		obs_encoder generatedEncoder = this.getEncoder();
 		if (((HRESULT)(hr) < 0)) {
 			ModernizedCProgram.blog(LOG_ERROR, "[jim-nvenc: '%s'] %s: %s: 0x%08lX", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), __FUNCTION__, "OpenSharedResource failed", ()hr);
 			;
 			return ((Object)0);
 		} 
-		hr = .UNRECOGNIZEDFUNCTIONNAME(input_tex, IID_IDXGIKeyedMutex, km);
+		hr = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(input_tex, IID_IDXGIKeyedMutex, km);
 		if (((HRESULT)(hr) < 0)) {
 			ModernizedCProgram.blog(LOG_ERROR, "[jim-nvenc: '%s'] %s: %s: 0x%08lX", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), __FUNCTION__, "QueryInterface(IDXGIKeyedMutex) failed", ()hr);
 			;
-			.UNRECOGNIZEDFUNCTIONNAME(input_tex);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(input_tex);
 			return ((Object)0);
 		} 
-		.UNRECOGNIZEDFUNCTIONNAME(input_tex, DXGI_RESOURCE_PRIORITY_MAXIMUM);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(input_tex, DXGI_RESOURCE_PRIORITY_MAXIMUM);
 		km_out = km;
 		handle_tex new_ht = new handle_tex(handle, input_tex, km);
-		.da_push_back(generatedInput_textures, new_ht);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedInput_textures, new_ht);
 		return input_tex;
 	}
 	public Object get_encoded_packet(Object finalize) {
 		Object generatedSession = this.getSession();
 		Object s = generatedSession;
 		Object generatedPacket_data = this.getPacket_data();
-		.da_resize(generatedPacket_data, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_resize(generatedPacket_data, 0);
 		Object generatedBuffers_queued = this.getBuffers_queued();
 		if (!generatedBuffers_queued) {
 			return true;
@@ -226,7 +195,7 @@ public class nvenc_data {
 			 lock = new (/* ---------------- */NV_ENC_LOCK_BITSTREAM_VER);
 			ModernizedCProgram.lock.setOutputBitstream(generatedPtr);
 			ModernizedCProgram.lock.setDoNotWait(false);
-			if (enc.nv_failed(.UNRECOGNIZEDFUNCTIONNAME(s, ModernizedCProgram.lock), __FUNCTION__, "nv.nvEncLockBitstream(s, &lock)")) {
+			if (enc.nv_failed(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s, ModernizedCProgram.lock), __FUNCTION__, "nv.nvEncLockBitstream(s, &lock)")) {
 				return false;
 			} 
 			if (generatedFirst_packet) {
@@ -234,19 +203,19 @@ public class nvenc_data {
 				size_t size = new size_t();
 				this.setFirst_packet(false);
 				ModernizedCProgram.obs_extract_avc_headers(ModernizedCProgram.lock.getBitstreamBufferPtr(), ModernizedCProgram.lock.getBitstreamSizeInBytes(), new_packet, size, generatedHeader, generatedHeader_size, generatedSei, generatedSei_size);
-				.da_copy_array(generatedPacket_data, new_packet, size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_copy_array(generatedPacket_data, new_packet, size);
 				ModernizedCProgram.bfree(new_packet);
 			} else {
-					.da_copy_array(generatedPacket_data, ModernizedCProgram.lock.getBitstreamBufferPtr(), ModernizedCProgram.lock.getBitstreamSizeInBytes());
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_copy_array(generatedPacket_data, ModernizedCProgram.lock.getBitstreamBufferPtr(), ModernizedCProgram.lock.getBitstreamSizeInBytes());
 			} 
 			this.setPacket_pts(()ModernizedCProgram.lock.getOutputTimeStamp());
 			this.setPacket_keyframe(ModernizedCProgram.lock.getPictureType() == NV_ENC_PIC_TYPE_IDR);
-			if (enc.nv_failed(.UNRECOGNIZEDFUNCTIONNAME(s, generatedPtr), __FUNCTION__, "nv.nvEncUnlockBitstream(s, bs->ptr)")) {
+			if (enc.nv_failed(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s, generatedPtr), __FUNCTION__, "nv.nvEncUnlockBitstream(s, bs->ptr)")) {
 				return false;
 			} 
 			if (generatedMapped_res) {
 				NVENCSTATUS err = new NVENCSTATUS();
-				err = .UNRECOGNIZEDFUNCTIONNAME(s, generatedMapped_res);
+				err = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s, generatedMapped_res);
 				if (enc.nv_failed(err, __FUNCTION__, "unmap")) {
 					return false;
 				} 

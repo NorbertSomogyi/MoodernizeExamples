@@ -29,9 +29,9 @@ public class bmap_rb_extent {
 	public void rb_get_new_extent(int start, int count) {
 		bmap_rb_extent new_ext = new bmap_rb_extent();
 		int retval;
-		retval = ModernizedCProgram.ext2fs_get_mem(, new_ext);
+		retval = ModernizedCProgram.ext2fs_get_mem(/*Error: Unsupported expression*/, new_ext);
 		if (retval) {
-			.abort();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 		} 
 		new_ext.setStart(start);
 		new_ext.setCount(count);

@@ -18,7 +18,7 @@ public class patch_id {
 		if (!commit.patch_id_defined()) {
 			return ((Object)0);
 		} 
-		.memset(patch, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(patch, 0, /*Error: sizeof expression not supported yet*/);
 		if (ModernizedCProgram.init_patch_id_entry(patch, commit, ids)) {
 			return ((Object)0);
 		} 
@@ -32,7 +32,7 @@ public class patch_id {
 		if (!commit.patch_id_defined()) {
 			return ((Object)0);
 		} 
-		key = ModernizedCProgram.xcalloc(1, );
+		key = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		if (ModernizedCProgram.init_patch_id_entry(key, commit, ids)) {
 			ModernizedCProgram.free(key);
 			return ((Object)0);

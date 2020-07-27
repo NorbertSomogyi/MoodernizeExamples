@@ -50,21 +50,21 @@ public class tmp_objdir {
 		if (ModernizedCProgram.the_tmp_objdir) {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\tmp-objdir.c", 130, "only one tmp_objdir can be used at a time");
 		} 
-		t = ModernizedCProgram.xmalloc();
+		t = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		strbuf generatedPath = t.getPath();
 		generatedPath.strbuf_init(0);
 		argv_array generatedEnv = t.getEnv();
 		generatedEnv.argv_array_init();
 		generatedPath.strbuf_addf("%s/incoming-XXXXXX", ModernizedCProgram.get_object_directory());
 		generatedPath.strbuf_grow(1024);
-		byte generatedBuf = generatedPath.getBuf();
-		if (!.mkdtemp(generatedBuf)) {
+		byte[] generatedBuf = generatedPath.getBuf();
+		if (!/*Error: Function owner not recognized*/mkdtemp(generatedBuf)) {
 			/* free, not destroy, as we never touched the filesystem */t.tmp_objdir_free();
 			return ((Object)0);
 		} 
 		ModernizedCProgram.the_tmp_objdir = t;
 		if (!installed_handlers) {
-			.atexit(remove_tmp_objdir);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/atexit(remove_tmp_objdir);
 			ModernizedCProgram.sigchain_push_common(remove_tmp_objdir_on_signal);
 			installed_handlers++;
 		} 
@@ -84,8 +84,8 @@ public class tmp_objdir {
 		 */;
 	}
 	public int tmp_objdir_migrate() {
-		strbuf src = new strbuf(, , );
-		strbuf dst = new strbuf(, , );
+		strbuf src = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf dst = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int ret;
 		if (!t) {
 			return 0;

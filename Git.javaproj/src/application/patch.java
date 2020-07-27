@@ -104,7 +104,7 @@ public class patch {
 		} 
 		return 0;
 	}
-	public void check_old_for_crlf(Object line, int len) {
+	public void check_old_for_crlf(Object[] line, int len) {
 		int generatedWs_rule = this.getWs_rule();
 		if (len >= 2 && line[len - 1] == (byte)'\n' && line[len - 2] == (byte)'\r') {
 			generatedWs_rule |=  1000;
@@ -147,59 +147,59 @@ public class patch {
 			do {
 				Object _swap_a_ptr = (generatedNew_name);
 				Object _swap_b_ptr = (generatedOld_name);
-				byte[] _swap_buffer = new byte[];
-				.memcpy(_swap_buffer, _swap_a_ptr, );
-				.memcpy(_swap_a_ptr, _swap_b_ptr,  + ( - 1));
-				.memcpy(_swap_b_ptr, _swap_buffer, );
+				byte[] _swap_buffer = new byte[/*Error: sizeof expression not supported yet*/];
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_buffer, _swap_a_ptr, /*Error: sizeof expression not supported yet*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_a_ptr, _swap_b_ptr, /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_b_ptr, _swap_buffer, /*Error: sizeof expression not supported yet*/);
 			} while (0);
 			do {
 				Object _swap_a_ptr = (generatedNew_mode);
 				Object _swap_b_ptr = (generatedOld_mode);
-				byte[] _swap_buffer = new byte[];
-				.memcpy(_swap_buffer, _swap_a_ptr, );
-				.memcpy(_swap_a_ptr, _swap_b_ptr,  + ( - 1));
-				.memcpy(_swap_b_ptr, _swap_buffer, );
+				byte[] _swap_buffer = new byte[/*Error: sizeof expression not supported yet*/];
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_buffer, _swap_a_ptr, /*Error: sizeof expression not supported yet*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_a_ptr, _swap_b_ptr, /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_b_ptr, _swap_buffer, /*Error: sizeof expression not supported yet*/);
 			} while (0);
 			do {
 				Object _swap_a_ptr = (generatedIs_new);
 				Object _swap_b_ptr = (generatedIs_delete);
-				byte[] _swap_buffer = new byte[];
-				.memcpy(_swap_buffer, _swap_a_ptr, );
-				.memcpy(_swap_a_ptr, _swap_b_ptr,  + ( - 1));
-				.memcpy(_swap_b_ptr, _swap_buffer, );
+				byte[] _swap_buffer = new byte[/*Error: sizeof expression not supported yet*/];
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_buffer, _swap_a_ptr, /*Error: sizeof expression not supported yet*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_a_ptr, _swap_b_ptr, /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_b_ptr, _swap_buffer, /*Error: sizeof expression not supported yet*/);
 			} while (0);
 			do {
 				Object _swap_a_ptr = (generatedLines_added);
 				Object _swap_b_ptr = (generatedLines_deleted);
-				byte[] _swap_buffer = new byte[];
-				.memcpy(_swap_buffer, _swap_a_ptr, );
-				.memcpy(_swap_a_ptr, _swap_b_ptr,  + ( - 1));
-				.memcpy(_swap_b_ptr, _swap_buffer, );
+				byte[] _swap_buffer = new byte[/*Error: sizeof expression not supported yet*/];
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_buffer, _swap_a_ptr, /*Error: sizeof expression not supported yet*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_a_ptr, _swap_b_ptr, /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_b_ptr, _swap_buffer, /*Error: sizeof expression not supported yet*/);
 			} while (0);
 			do {
 				Object _swap_a_ptr = (generatedOld_oid_prefix);
 				Object _swap_b_ptr = (generatedNew_oid_prefix);
-				byte[] _swap_buffer = new byte[];
-				.memcpy(_swap_buffer, _swap_a_ptr, );
-				.memcpy(_swap_a_ptr, _swap_b_ptr,  + ( - 1));
-				.memcpy(_swap_b_ptr, _swap_buffer, );
+				byte[] _swap_buffer = new byte[/*Error: sizeof expression not supported yet*/];
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_buffer, _swap_a_ptr, /*Error: sizeof expression not supported yet*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_a_ptr, _swap_b_ptr, /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_b_ptr, _swap_buffer, /*Error: sizeof expression not supported yet*/);
 			} while (0);
 			for (; frag; frag = generatedNext) {
 				do {
 					Object _swap_a_ptr = (generatedNewpos);
 					Object _swap_b_ptr = (generatedOldpos);
-					byte[] _swap_buffer = new byte[];
-					.memcpy(_swap_buffer, _swap_a_ptr, );
-					.memcpy(_swap_a_ptr, _swap_b_ptr,  + ( - 1));
-					.memcpy(_swap_b_ptr, _swap_buffer, );
+					byte[] _swap_buffer = new byte[/*Error: sizeof expression not supported yet*/];
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_buffer, _swap_a_ptr, /*Error: sizeof expression not supported yet*/);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_a_ptr, _swap_b_ptr, /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_b_ptr, _swap_buffer, /*Error: sizeof expression not supported yet*/);
 				} while (0);
 				do {
 					Object _swap_a_ptr = (generatedNewlines);
 					Object _swap_b_ptr = (generatedOldlines);
-					byte[] _swap_buffer = new byte[];
-					.memcpy(_swap_buffer, _swap_a_ptr, );
-					.memcpy(_swap_a_ptr, _swap_b_ptr,  + ( - 1));
-					.memcpy(_swap_b_ptr, _swap_buffer, );
+					byte[] _swap_buffer = new byte[/*Error: sizeof expression not supported yet*/];
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_buffer, _swap_a_ptr, /*Error: sizeof expression not supported yet*/);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_a_ptr, _swap_b_ptr, /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(_swap_b_ptr, _swap_buffer, /*Error: sizeof expression not supported yet*/);
 				} while (0);
 			}
 		}
@@ -235,7 +235,7 @@ public class patch {
 	public int was_deleted() {
 		return patch == ((patch)-1);
 	}
-	public patch previous_patch(apply_state state, int gone) {
+	public patch previous_patch(apply_state state, Integer gone) {
 		patch previous = new patch();
 		gone = 0;
 		int generatedIs_copy = this.getIs_copy();
@@ -292,9 +292,9 @@ public class patch {
 		Byte generatedNew_name = this.getNew_name();
 		if (generatedOld_mode && generatedNew_mode && generatedOld_mode != generatedNew_mode) {
 			if (show_name) {
-				.printf(" mode change %06o => %06o %s\n", generatedOld_mode, generatedNew_mode, generatedNew_name);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(" mode change %06o => %06o %s\n", generatedOld_mode, generatedNew_mode, generatedNew_name);
 			} else {
-					.printf(" mode change %06o => %06o\n", generatedOld_mode, generatedNew_mode);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(" mode change %06o => %06o\n", generatedOld_mode, generatedNew_mode);
 			} 
 		} 
 	}
@@ -310,9 +310,9 @@ public class patch {
 		while (1) {
 			byte slash_old;
 			byte slash_new;
-			slash_old = .strchr(old_name, (byte)'/');
-			slash_new = .strchr(new_name, (byte)'/');
-			if (!slash_old || !slash_new || slash_old - old_name != slash_new - new_name || .memcmp(old_name, new_name, slash_new - new_name)) {
+			slash_old = /*Error: Function owner not recognized*/strchr(old_name, (byte)'/');
+			slash_new = /*Error: Function owner not recognized*/strchr(new_name, (byte)'/');
+			if (!slash_old || !slash_new || slash_old - old_name != slash_new - new_name || /*Error: Function owner not recognized*/memcmp(old_name, new_name, slash_new - new_name)) {
 				break;
 			} 
 			old_name = slash_old + 1;
@@ -322,9 +322,9 @@ public class patch {
 		}
 		int generatedScore = this.getScore();
 		if (old_name != generatedOld_name) {
-			.printf(" %s %.*s{%s => %s} (%d%%)\n", renamecopy, (int)(old_name - generatedOld_name), generatedOld_name, old_name, new_name, generatedScore);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(" %s %.*s{%s => %s} (%d%%)\n", renamecopy, (int)(old_name - generatedOld_name), generatedOld_name, old_name, new_name, generatedScore);
 		} else {
-				.printf(" %s %s => %s (%d%%)\n", renamecopy, generatedOld_name, generatedNew_name, generatedScore);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(" %s %s => %s (%d%%)\n", renamecopy, generatedOld_name, generatedNew_name, generatedScore);
 		} 
 		p.show_mode_change(0);
 	}
@@ -350,7 +350,7 @@ public class patch {
 						p.show_rename_copy();
 					} else {
 							if (generatedScore) {
-								.printf(" rewrite %s (%d%%)\n", generatedNew_name, generatedScore);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(" rewrite %s (%d%%)\n", generatedNew_name, generatedScore);
 								p.show_mode_change(0);
 							} else {
 									p.show_mode_change(1);

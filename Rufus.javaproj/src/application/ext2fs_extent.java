@@ -101,9 +101,31 @@ public class ext2fs_extent {
 		Object generatedEnd_blk = path.getEnd_blk();
 		switch (op) {
 		case -1024:
+		case -1024:
+				ix = generatedCurr;
+				break;
+		case -1024:
+				eh = (ext3_extent_header)generatedBuf;
+				path.setCurr(/*Error: Function owner not recognized*/EXT_LAST_EXTENT(eh));
+				ix = generatedCurr;
+				path.setLeft(0);
+				path.setVisit_num(0);
+				break;
 		case /* fallthrough */-1024:
 				path.setLeft(generatedEntries);
 				path.setCurr(0);
+		case -1024:
+				if (!generatedCurr || generatedLeft + 1 >= generatedEntries) {
+					return EXT2_ET_EXTENT_NO_PREV;
+				} 
+				ix = generatedCurr;
+				ix--;
+				path.setCurr(ix);
+				generatedLeft++;
+				if (handle.getLevel() < handle.getMax_depth()) {
+					path.setVisit_num(1);
+				} 
+				break;
 		case -1024:
 				if (!generatedCurr || (handle.getLevel() >= handle.getMax_depth())) {
 					return EXT2_ET_EXTENT_NO_DOWN;
@@ -116,9 +138,9 @@ public class ext2fs_extent {
 						return retval;
 					} 
 				} 
-				blk = .ext2fs_le32_to_cpu(generatedExt3_extent_idx) + (().ext2fs_le16_to_cpu(generatedExt3_extent_idx) << 32);
+				blk = /*Error: Function owner not recognized*/ext2fs_le32_to_cpu(generatedExt3_extent_idx) + (()/*Error: Function owner not recognized*/ext2fs_le16_to_cpu(generatedExt3_extent_idx) << 32);
 				if ((handle.getFs().getFlags() & -1024) && (handle.getFs().getIo() != handle.getFs().getImage_io())) {
-					.memset(generatedBuf, 0, handle.getFs().getBlocksize());
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedBuf, 0, handle.getFs().getBlocksize());
 				} else {
 						retval = ModernizedCProgram.io_channel_read_blk64(handle.getFs().getIo(), blk, 1, generatedBuf);
 						if (retval) {
@@ -135,22 +157,22 @@ public class ext2fs_extent {
 				if (!(handle.getFs().getFlags() & -1024) && !ModernizedCProgram.ext2fs_extent_block_csum_verify(handle.getFs(), handle.getIno(), eh)) {
 					failed_csum = 1;
 				} 
-				newpath.setLeft(newpath.setEntries(.ext2fs_le16_to_cpu(generatedExt3_extent_header)));
-				newpath.setMax_entries(.ext2fs_le16_to_cpu(generatedExt3_extent_header));
+				newpath.setLeft(newpath.setEntries(/*Error: Function owner not recognized*/ext2fs_le16_to_cpu(generatedExt3_extent_header)));
+				newpath.setMax_entries(/*Error: Function owner not recognized*/ext2fs_le16_to_cpu(generatedExt3_extent_header));
 				if (generatedLeft > 0) {
 					ix++;
-					newpath.setEnd_blk(.ext2fs_le32_to_cpu(generatedExt3_extent_idx));
+					newpath.setEnd_blk(/*Error: Function owner not recognized*/ext2fs_le32_to_cpu(generatedExt3_extent_idx));
 				} else {
 						newpath.setEnd_blk(generatedEnd_blk);
 				} 
 				path = newpath;
 				if (op == -1024) {
-					ix = .EXT_FIRST_INDEX((ext3_extent_header)eh);
+					ix = /*Error: Function owner not recognized*/EXT_FIRST_INDEX((ext3_extent_header)eh);
 					path.setCurr(ix);
 					path.setLeft(generatedEntries - 1);
 					path.setVisit_num(0);
 				} else {
-						ix = .EXT_LAST_INDEX((ext3_extent_header)eh);
+						ix = /*Error: Function owner not recognized*/EXT_LAST_INDEX((ext3_extent_header)eh);
 						path.setCurr(ix);
 						path.setLeft(0);
 						if (handle.getLevel() < handle.getMax_depth()) {
@@ -159,13 +181,21 @@ public class ext2fs_extent {
 				} 
 				break;
 		case -1024:
-				ix = generatedCurr;
-				break;
-		case -1024:
-				eh = (ext3_extent_header)generatedBuf;
-				path.setCurr(.EXT_LAST_EXTENT(eh));
-				ix = generatedCurr;
-				path.setLeft(0);
+				handle.setLevel(0);
+				path = handle.getPath() + handle.getLevel();
+		case /* fallthrough */-1024:
+				if (generatedLeft <= 0) {
+					return EXT2_ET_EXTENT_NO_NEXT;
+				} 
+				if (generatedCurr) {
+					ix = generatedCurr;
+					ix++;
+				} else {
+						eh = (ext3_extent_header)generatedBuf;
+						ix = /*Error: Function owner not recognized*/EXT_FIRST_INDEX(eh);
+				} 
+				generatedLeft--;
+				path.setCurr(ix);
 				path.setVisit_num(0);
 				break;
 		case -1024:
@@ -179,36 +209,6 @@ public class ext2fs_extent {
 					path.setVisit_num(0);
 				} 
 				break;
-		case /* fallthrough */-1024:
-				if (generatedLeft <= 0) {
-					return EXT2_ET_EXTENT_NO_NEXT;
-				} 
-				if (generatedCurr) {
-					ix = generatedCurr;
-					ix++;
-				} else {
-						eh = (ext3_extent_header)generatedBuf;
-						ix = .EXT_FIRST_INDEX(eh);
-				} 
-				generatedLeft--;
-				path.setCurr(ix);
-				path.setVisit_num(0);
-				break;
-		case -1024:
-				if (!generatedCurr || generatedLeft + 1 >= generatedEntries) {
-					return EXT2_ET_EXTENT_NO_PREV;
-				} 
-				ix = generatedCurr;
-				ix--;
-				path.setCurr(ix);
-				generatedLeft++;
-				if (handle.getLevel() < handle.getMax_depth()) {
-					path.setVisit_num(1);
-				} 
-				break;
-		case -1024:
-				handle.setLevel(0);
-				path = handle.getPath() + handle.getLevel();
 		default:
 				return EXT2_ET_OP_NOT_SUPPORTED;
 		}
@@ -221,21 +221,21 @@ public class ext2fs_extent {
 		Object generatedE_len = this.getE_len();
 		Object generatedE_lblk = this.getE_lblk();
 		if (handle.getLevel() == handle.getMax_depth()) {
-			ex = (ext3_extent)ix;
-			this.setE_pblk(.ext2fs_le32_to_cpu(generatedExt3_extent) + (().ext2fs_le16_to_cpu(generatedExt3_extent) << 32));
-			this.setE_lblk(.ext2fs_le32_to_cpu(generatedExt3_extent));
-			this.setE_len(.ext2fs_le16_to_cpu(generatedExt3_extent));
+			ex = (Object)ix;
+			this.setE_pblk(/*Error: Function owner not recognized*/ext2fs_le32_to_cpu(generatedExt3_extent) + (()/*Error: Function owner not recognized*/ext2fs_le16_to_cpu(generatedExt3_extent) << 32));
+			this.setE_lblk(/*Error: Function owner not recognized*/ext2fs_le32_to_cpu(generatedExt3_extent));
+			this.setE_len(/*Error: Function owner not recognized*/ext2fs_le16_to_cpu(generatedExt3_extent));
 			generatedE_flags |=  -1024;
 			if (generatedE_len > EXT_INIT_MAX_LEN) {
 				generatedE_len -= EXT_INIT_MAX_LEN;
 				generatedE_flags |=  -1024;
 			} 
 		} else {
-				this.setE_pblk(.ext2fs_le32_to_cpu(generatedExt3_extent_idx) + (().ext2fs_le16_to_cpu(generatedExt3_extent_idx) << 32));
-				this.setE_lblk(.ext2fs_le32_to_cpu(generatedExt3_extent_idx));
+				this.setE_pblk(/*Error: Function owner not recognized*/ext2fs_le32_to_cpu(generatedExt3_extent_idx) + (()/*Error: Function owner not recognized*/ext2fs_le16_to_cpu(generatedExt3_extent_idx) << 32));
+				this.setE_lblk(/*Error: Function owner not recognized*/ext2fs_le32_to_cpu(generatedExt3_extent_idx));
 				if (generatedLeft > 0) {
 					ix++;
-					end_blk = .ext2fs_le32_to_cpu(generatedExt3_extent_idx);
+					end_blk = /*Error: Function owner not recognized*/ext2fs_le32_to_cpu(generatedExt3_extent_idx);
 				} else {
 						end_blk = generatedEnd_blk;
 				} 
@@ -279,25 +279,25 @@ public class ext2fs_extent {
 		Object generatedE_len = this.getE_len();
 		if (handle.getLevel() == handle.getMax_depth()) {
 			ex = generatedCurr;
-			ex.setExt3_extent(.ext2fs_cpu_to_le32(generatedE_lblk));
-			ex.setExt3_extent(.ext2fs_cpu_to_le32(generatedE_pblk & -1024));
-			ex.setExt3_extent(.ext2fs_cpu_to_le16(generatedE_pblk >> 32));
+			ex.setExt3_extent(/*Error: Function owner not recognized*/ext2fs_cpu_to_le32(generatedE_lblk));
+			ex.setExt3_extent(/*Error: Function owner not recognized*/ext2fs_cpu_to_le32(generatedE_pblk & -1024));
+			ex.setExt3_extent(/*Error: Function owner not recognized*/ext2fs_cpu_to_le16(generatedE_pblk >> 32));
 			if (generatedE_flags & -1024) {
 				if (generatedE_len > EXT_UNINIT_MAX_LEN) {
 					return EXT2_ET_EXTENT_INVALID_LENGTH;
 				} 
-				ex.setExt3_extent(.ext2fs_cpu_to_le16(generatedE_len + EXT_INIT_MAX_LEN));
+				ex.setExt3_extent(/*Error: Function owner not recognized*/ext2fs_cpu_to_le16(generatedE_len + EXT_INIT_MAX_LEN));
 			} else {
 					if (generatedE_len > EXT_INIT_MAX_LEN) {
 						return EXT2_ET_EXTENT_INVALID_LENGTH;
 					} 
-					ex.setExt3_extent(.ext2fs_cpu_to_le16(generatedE_len));
+					ex.setExt3_extent(/*Error: Function owner not recognized*/ext2fs_cpu_to_le16(generatedE_len));
 			} 
 		} else {
 				ix = generatedCurr;
-				ix.setExt3_extent_idx(.ext2fs_cpu_to_le32(generatedE_pblk & -1024));
-				ix.setExt3_extent_idx(.ext2fs_cpu_to_le16(generatedE_pblk >> 32));
-				ix.setExt3_extent_idx(.ext2fs_cpu_to_le32(generatedE_lblk));
+				ix.setExt3_extent_idx(/*Error: Function owner not recognized*/ext2fs_cpu_to_le32(generatedE_pblk & -1024));
+				ix.setExt3_extent_idx(/*Error: Function owner not recognized*/ext2fs_cpu_to_le16(generatedE_pblk >> 32));
+				ix.setExt3_extent_idx(/*Error: Function owner not recognized*/ext2fs_cpu_to_le32(generatedE_lblk));
 				ix.setExt3_extent_idx(0);
 		} 
 		ModernizedCProgram.update_path(handle);
@@ -342,17 +342,17 @@ public class ext2fs_extent {
 				generatedLeft--;
 			} 
 		} else {
-				ix = .EXT_FIRST_INDEX(eh);
+				ix = /*Error: Function owner not recognized*/EXT_FIRST_INDEX(eh);
 				path.setLeft(-1);
 		} 
 		path.setCurr(ix);
 		if (generatedLeft >= 0) {
-			.memmove(ix + 1, ix, (generatedLeft + 1) * );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(ix + 1, ix, (generatedLeft + 1) * /*Error: Unsupported expression*/);
 		} 
 		generatedLeft++;
 		generatedEntries++;
 		eh = (ext3_extent_header)generatedBuf;
-		eh.setExt3_extent_header(.ext2fs_cpu_to_le16(generatedEntries));
+		eh.setExt3_extent_header(/*Error: Function owner not recognized*/ext2fs_cpu_to_le16(generatedEntries));
 		retval = extent.ext2fs_extent_replace(handle, 0);
 		if (retval) {
 			;

@@ -17,14 +17,14 @@ public class payload {
 	
 	public payload payload_create(Object key, Object val, payload_type type) {
 		payload payload = new payload();
-		payload = .malloc();
+		payload = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		payload.setKey(key);
 		payload.setVal(val);
 		payload.setNext(((Object)0));
 		payload.setType(payload_type.type);
 		return payload;
 	}
-	public payload get_payload(Object compare, Object key, int is_equal) {
+	public payload get_payload(Object compare, Object key, Integer is_equal) {
 		payload curr_payload = new payload();
 		payload prev_payload = new payload();
 		int compared;
@@ -34,7 +34,7 @@ public class payload {
 		Object generatedKey = curr_payload.getKey();
 		payload generatedNext = curr_payload.getNext();
 		while (curr_payload) {
-			compared = .compare(key, generatedKey);
+			compared = /*Error: Function owner not recognized*/compare(key, generatedKey);
 			if (compared <= 0) {
 				if (compared == 0) {
 					is_equal = 1;
@@ -59,7 +59,7 @@ public class payload {
 		bftree_opts generatedOpts = tree.getOpts();
 		Object generatedKey_compare = generatedOpts.getKey_compare();
 		compare = generatedKey_compare;
-		container generatedContainers = node.getContainers();
+		container[][] generatedContainers = node.getContainers();
 		container = generatedContainers[container_idx];
 		payload generatedPayload_first = container.getPayload_first();
 		curr_payload = generatedPayload_first.get_payload(compare, key, is_equal);
@@ -100,7 +100,7 @@ public class payload {
 		payload generatedNext = iter.getNext();
 		node generatedRoot = tree.getRoot();
 		Object generatedContainer_size = generatedRoot.getContainer_size();
-		container generatedContainers = generatedRoot.getContainers();
+		container[][] generatedContainers = generatedRoot.getContainers();
 		if (!generatedNext) {
 			if (generatedContainer_size == 0) {
 				return ((Object)0);
@@ -125,7 +125,7 @@ public class payload {
 			if (next) {
 				if (!min) {
 					min = next;
-				}  else if (.key_compare(generatedKey, generatedKey) < 0) {
+				}  else if (/*Error: Function owner not recognized*/key_compare(generatedKey, generatedKey) < 0) {
 					min = next;
 				} 
 			} 

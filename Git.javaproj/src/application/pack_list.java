@@ -18,8 +18,8 @@ public class pack_list {
 	}
 	
 	public pack_list pack_list_insert(pack_list entry) {
-		pack_list p = ModernizedCProgram.xmalloc();
-		.memcpy(p, entry, );
+		pack_list p = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(p, entry, /*Error: Unsupported expression*/);
 		p.setNext(pl);
 		pl = p;
 		return p;
@@ -47,8 +47,8 @@ public class pack_list {
 			} 
 			pl = pl.getNext();
 		}
-		ret = ModernizedCProgram.xmalloc();
-		.memcpy(ret, A, );
+		ret = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ret, A, /*Error: Unsupported expression*/);
 		ret.setNext(pack_list.pack_list_difference(A.getNext(), B));
 		return ret;
 	}
@@ -134,14 +134,14 @@ public class pack_list {
 		int i;
 		size_t n = pl.pack_list_size();
 		if (n < 2) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		ary = ModernizedCProgram.xcalloc(n, /* prepare an array of packed_list for easier sorting */);
+		ary = ModernizedCProgram.xcalloc(n, /*Error: Unsupported expression*//* prepare an array of packed_list for easier sorting */);
 		pack_list generatedNext = p.getNext();
 		for (; p; p = generatedNext) {
 			ary[n++] = p;
 		}
-		ModernizedCProgram.sane_qsort((ary), (n), , cmp_remaining_objects);
+		ModernizedCProgram.sane_qsort((ary), (n), /*Error: sizeof expression not supported yet*/, cmp_remaining_objects);
 		for (i = 0; i < n - 1; /* link them back again */i++) {
 			ary[i].setNext(ary[i + 1]);
 		}
@@ -177,7 +177,7 @@ public class pack_list {
 		min = unique;
 		if (generatedSize == /* return if there are no objects missing from the unique set */0) {
 			ModernizedCProgram.free(missing);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		unique_pack_objects = all_objects.llist_copy();
 		unique_pack_objects.llist_sorted_difference_inplace(missing);
@@ -236,14 +236,14 @@ public class pack_list {
 	public pack_list add_pack_file(Object filename) {
 		packed_git packed_git = new packed_git();
 		packed_git p = packed_git.get_all_packs(ModernizedCProgram.the_repository);
-		if (.strlen(filename) < 40) {
+		if (/*Error: Function owner not recognized*/strlen(filename) < 40) {
 			ModernizedCProgram.die("Bad pack filename: %s", filename);
 		} 
 		Object generatedPack_name = p.getPack_name();
 		pack_list pack_list = new pack_list();
 		packed_git generatedNext = p.getNext();
 		while (p) {
-			if (.strstr(generatedPack_name, filename)) {
+			if (/*Error: Function owner not recognized*/strstr(generatedPack_name, filename)) {
 				return pack_list.add_pack(p);
 			} 
 			p = generatedNext;

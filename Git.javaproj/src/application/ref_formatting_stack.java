@@ -16,7 +16,7 @@ public class ref_formatting_stack {
 	}
 	
 	public void push_stack_element() {
-		ref_formatting_stack s = ModernizedCProgram.xcalloc(1, );
+		ref_formatting_stack s = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 		strbuf generatedOutput = s.getOutput();
 		generatedOutput.strbuf_init(0);
 		s.setPrev(stack);
@@ -38,11 +38,11 @@ public class ref_formatting_stack {
 		ref_formatting_stack cur = stack;
 		Object generatedAt_end_data = cur.getAt_end_data();
 		align align = (align)generatedAt_end_data;
-		strbuf s = new strbuf(, , );
+		strbuf s = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		 generatedPosition = align.getPosition();
 		int generatedWidth = align.getWidth();
 		strbuf generatedOutput = cur.getOutput();
-		byte generatedBuf = generatedOutput.getBuf();
+		byte[] generatedBuf = generatedOutput.getBuf();
 		s.strbuf_utf8_align(generatedPosition, generatedWidth, generatedBuf);
 		generatedOutput.strbuf_swap(s);
 		s.strbuf_release();

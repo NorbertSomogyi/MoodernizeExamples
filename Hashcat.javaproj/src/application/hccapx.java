@@ -38,7 +38,7 @@ public class hccapx {
 	public void to_hccapx_t(Object hashes, Object salt_pos, Object digest_pos) {
 		salt_t salts_buf = hashes.getSalts_buf();
 		Object esalts_buf = hashes.getEsalts_buf();
-		.memset(hccapx, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(hccapx, 0, /*Error: Unsupported expression*/);
 		this.setSignature(-1024);
 		this.setVersion(4);
 		salt_t salt = salts_buf[salt_pos];
@@ -46,48 +46,41 @@ public class hccapx {
 		this.setEssid_len(salt.getSalt_len());
 		Object generatedEssid = this.getEssid();
 		Object generatedEssid_len = this.getEssid_len();
-		.memcpy(generatedEssid, salt.getSalt_buf(), generatedEssid_len);
-		wpa_eapol_t wpa_eapols = (wpa_eapol_t)esalts_buf;
-		wpa_eapol_t wpa_eapol = wpa_eapols[digest_cur];
-		Object generatedMessage_pair = wpa_eapol.getMessage_pair();
-		this.setMessage_pair(generatedMessage_pair);
-		Object generatedKeyver = wpa_eapol.getKeyver();
-		this.setKeyver(generatedKeyver);
-		Object generatedEapol_len = wpa_eapol.getEapol_len();
-		this.setEapol_len(generatedEapol_len);
-		Object generatedEapol = wpa_eapol.getEapol();
-		if (generatedKeyver != 1) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedEssid, salt.getSalt_buf(), generatedEssid_len);
+		 wpa_eapols = ()esalts_buf;
+		 wpa_eapol = wpa_eapols[digest_cur];
+		this.setMessage_pair(wpa_eapol.getMessage_pair());
+		this.setKeyver(wpa_eapol.getKeyver());
+		this.setEapol_len(wpa_eapol.getEapol_len());
+		Object generatedEapol = this.getEapol();
+		if (wpa_eapol.getKeyver() != 1) {
 			u32[] eapol_tmp = new u32[]{0};
 			for (u32 i = 0;
 			 i < 64; i++) {
-				eapol_tmp[i] = ModernizedCProgram.byte_swap_32(generatedEapol[i]);
+				eapol_tmp[i] = ModernizedCProgram.byte_swap_32(wpa_eapol.getEapol()[i]);
 			}
-			.memcpy(generatedEapol, eapol_tmp, generatedEapol_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedEapol, eapol_tmp, wpa_eapol.getEapol_len());
 		} else {
-				.memcpy(generatedEapol, generatedEapol, generatedEapol_len);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedEapol, generatedEapol, wpa_eapol.getEapol_len());
 		} 
 		Object generatedMac_ap = this.getMac_ap();
-		Object generatedOrig_mac_ap = wpa_eapol.getOrig_mac_ap();
-		.memcpy(generatedMac_ap, generatedOrig_mac_ap, 6);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedMac_ap, wpa_eapol.getOrig_mac_ap(), 6);
 		Object generatedMac_sta = this.getMac_sta();
-		Object generatedOrig_mac_sta = wpa_eapol.getOrig_mac_sta();
-		.memcpy(generatedMac_sta, generatedOrig_mac_sta, 6);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedMac_sta, wpa_eapol.getOrig_mac_sta(), 6);
 		Object generatedNonce_ap = this.getNonce_ap();
-		Object generatedOrig_nonce_ap = wpa_eapol.getOrig_nonce_ap();
-		.memcpy(generatedNonce_ap, generatedOrig_nonce_ap, 32);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedNonce_ap, wpa_eapol.getOrig_nonce_ap(), 32);
 		Object generatedNonce_sta = this.getNonce_sta();
-		Object generatedOrig_nonce_sta = wpa_eapol.getOrig_nonce_sta();
-		.memcpy(generatedNonce_sta, generatedOrig_nonce_sta, 32);
-		Object generatedKeymic = wpa_eapol.getKeymic();
-		if (generatedKeyver != 1) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedNonce_sta, wpa_eapol.getOrig_nonce_sta(), 32);
+		Object generatedKeymic = this.getKeymic();
+		if (wpa_eapol.getKeyver() != 1) {
 			u32[] digest_tmp = new u32();
-			digest_tmp[0] = ModernizedCProgram.byte_swap_32(generatedKeymic[0]);
-			digest_tmp[1] = ModernizedCProgram.byte_swap_32(generatedKeymic[1]);
-			digest_tmp[2] = ModernizedCProgram.byte_swap_32(generatedKeymic[2]);
-			digest_tmp[3] = ModernizedCProgram.byte_swap_32(generatedKeymic[3]);
-			.memcpy(generatedKeymic, digest_tmp, 16);
+			digest_tmp[0] = ModernizedCProgram.byte_swap_32(wpa_eapol.getKeymic()[0]);
+			digest_tmp[1] = ModernizedCProgram.byte_swap_32(wpa_eapol.getKeymic()[1]);
+			digest_tmp[2] = ModernizedCProgram.byte_swap_32(wpa_eapol.getKeymic()[2]);
+			digest_tmp[3] = ModernizedCProgram.byte_swap_32(wpa_eapol.getKeymic()[3]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedKeymic, digest_tmp, 16);
 		} else {
-				.memcpy(generatedKeymic, generatedKeymic, 16/*
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedKeymic, generatedKeymic, 16/*
 				static int check_old_hccap (const char *hashfile)
 				{
 				  FILE *fp = fopen (hashfile, "rb");
@@ -110,7 +103,7 @@ public class hccapx {
 		} 
 		salt_t salts_buf = hashes.getSalts_buf();
 		Object esalts_buf = hashes.getEsalts_buf();
-		.memset(hccapx, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(hccapx, 0, /*Error: Unsupported expression*/);
 		this.setSignature(-1024);
 		this.setVersion(4);
 		salt_t salt = salts_buf[salt_pos];
@@ -118,48 +111,41 @@ public class hccapx {
 		this.setEssid_len(salt.getSalt_len());
 		Object generatedEssid = this.getEssid();
 		Object generatedEssid_len = this.getEssid_len();
-		.memcpy(generatedEssid, salt.getSalt_buf(), generatedEssid_len);
-		wpa_eapol_t wpa_eapols = (wpa_eapol_t)esalts_buf;
-		wpa_eapol_t wpa_eapol = wpa_eapols[digest_cur];
-		Object generatedMessage_pair = wpa_eapol.getMessage_pair();
-		this.setMessage_pair(generatedMessage_pair);
-		Object generatedKeyver = wpa_eapol.getKeyver();
-		this.setKeyver(generatedKeyver);
-		Object generatedEapol_len = wpa_eapol.getEapol_len();
-		this.setEapol_len(generatedEapol_len);
-		Object generatedEapol = wpa_eapol.getEapol();
-		if (generatedKeyver != 1) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedEssid, salt.getSalt_buf(), generatedEssid_len);
+		 wpa_eapols = ()esalts_buf;
+		 wpa_eapol = wpa_eapols[digest_cur];
+		this.setMessage_pair(wpa_eapol.getMessage_pair());
+		this.setKeyver(wpa_eapol.getKeyver());
+		this.setEapol_len(wpa_eapol.getEapol_len());
+		Object generatedEapol = this.getEapol();
+		if (wpa_eapol.getKeyver() != 1) {
 			u32[] eapol_tmp = new u32[]{0};
 			for (u32 i = 0;
 			 i < 64; i++) {
-				eapol_tmp[i] = ModernizedCProgram.byte_swap_32(generatedEapol[i]);
+				eapol_tmp[i] = ModernizedCProgram.byte_swap_32(wpa_eapol.getEapol()[i]);
 			}
-			.memcpy(generatedEapol, eapol_tmp, generatedEapol_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedEapol, eapol_tmp, wpa_eapol.getEapol_len());
 		} else {
-				.memcpy(generatedEapol, generatedEapol, generatedEapol_len);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedEapol, generatedEapol, wpa_eapol.getEapol_len());
 		} 
 		Object generatedMac_ap = this.getMac_ap();
-		Object generatedOrig_mac_ap = wpa_eapol.getOrig_mac_ap();
-		.memcpy(generatedMac_ap, generatedOrig_mac_ap, 6);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedMac_ap, wpa_eapol.getOrig_mac_ap(), 6);
 		Object generatedMac_sta = this.getMac_sta();
-		Object generatedOrig_mac_sta = wpa_eapol.getOrig_mac_sta();
-		.memcpy(generatedMac_sta, generatedOrig_mac_sta, 6);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedMac_sta, wpa_eapol.getOrig_mac_sta(), 6);
 		Object generatedNonce_ap = this.getNonce_ap();
-		Object generatedOrig_nonce_ap = wpa_eapol.getOrig_nonce_ap();
-		.memcpy(generatedNonce_ap, generatedOrig_nonce_ap, 32);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedNonce_ap, wpa_eapol.getOrig_nonce_ap(), 32);
 		Object generatedNonce_sta = this.getNonce_sta();
-		Object generatedOrig_nonce_sta = wpa_eapol.getOrig_nonce_sta();
-		.memcpy(generatedNonce_sta, generatedOrig_nonce_sta, 32);
-		Object generatedKeymic = wpa_eapol.getKeymic();
-		if (generatedKeyver != 1) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedNonce_sta, wpa_eapol.getOrig_nonce_sta(), 32);
+		Object generatedKeymic = this.getKeymic();
+		if (wpa_eapol.getKeyver() != 1) {
 			u32[] digest_tmp = new u32();
-			digest_tmp[0] = ModernizedCProgram.byte_swap_32(generatedKeymic[0]);
-			digest_tmp[1] = ModernizedCProgram.byte_swap_32(generatedKeymic[1]);
-			digest_tmp[2] = ModernizedCProgram.byte_swap_32(generatedKeymic[2]);
-			digest_tmp[3] = ModernizedCProgram.byte_swap_32(generatedKeymic[3]);
-			.memcpy(generatedKeymic, digest_tmp, 16);
+			digest_tmp[0] = ModernizedCProgram.byte_swap_32(wpa_eapol.getKeymic()[0]);
+			digest_tmp[1] = ModernizedCProgram.byte_swap_32(wpa_eapol.getKeymic()[1]);
+			digest_tmp[2] = ModernizedCProgram.byte_swap_32(wpa_eapol.getKeymic()[2]);
+			digest_tmp[3] = ModernizedCProgram.byte_swap_32(wpa_eapol.getKeymic()[3]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedKeymic, digest_tmp, 16);
 		} else {
-				.memcpy(generatedKeymic, generatedKeymic, 16/*
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedKeymic, generatedKeymic, 16/*
 				static int check_old_hccap (const char *hashfile)
 				{
 				  FILE *fp = fopen (hashfile, "rb");

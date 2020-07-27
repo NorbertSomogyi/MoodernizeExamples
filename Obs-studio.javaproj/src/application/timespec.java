@@ -108,7 +108,7 @@ public class timespec {
 		long generatedTv_nsec = this.getTv_nsec();
 		if (generatedTv_sec == -1024 && generatedTv_nsec == -1024) {
 			ModernizedCProgram.pthread_testcancel();
-			.Sleep(0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Sleep(0);
 			ModernizedCProgram.pthread_testcancel();
 			return (false);
 		} 
@@ -133,7 +133,7 @@ public class timespec {
 		       * Async cancelation won't catch us until wait_time is up.
 		       * Deferred cancelation will cancel us immediately.
 		       */) {
-			if (0 == (status = .WaitForSingleObject(generatedCancelEvent, wait_time))) {
+			if (0 == (status = /*Error: Function owner not recognized*/WaitForSingleObject(generatedCancelEvent, wait_time))) {
 				ptw32_mcs_local_node_t stateLock = new ptw32_mcs_local_node_t();
 				stateLock.ptw32_mcs_lock_acquire(generatedStateLock);
 				if (generatedState < .PThreadStateCanceling) {
@@ -148,9 +148,19 @@ public class timespec {
 				return 22;
 			} 
 		} else {
-				.Sleep(wait_time);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Sleep(wait_time);
 		} 
 		return (false);
+	}
+	public void add_ms_to_ts(long milliseconds) {
+		Object generatedTv_sec = this.getTv_sec();
+		generatedTv_sec += milliseconds / 1000;
+		long generatedTv_nsec = this.getTv_nsec();
+		generatedTv_nsec += (milliseconds % 1000) * 1000000;
+		if (generatedTv_nsec > 1000000000) {
+			generatedTv_sec += 1;
+			generatedTv_nsec -= 1000000000;
+		} 
 	}
 	public timespec millisecondsFromNow(int millisecs) {
 		_timeb currSysTime = new _timeb();
@@ -158,7 +168,7 @@ public class timespec {
 		int64_t secs = new int64_t();
 		int64_t NANOSEC_PER_MILLISEC = 1000000;
 		int64_t NANOSEC_PER_SEC = 1000000000;
-		._ftime(/* get current system time and add millisecs */currSysTime);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_ftime(/* get current system time and add millisecs */currSysTime);
 		Object generatedTime = currSysTime.getTime();
 		secs = (int64_t)(generatedTime) + (millisecs / 1000);
 		Object generatedMillitm = currSysTime.getMillitm();
@@ -173,16 +183,6 @@ public class timespec {
 		this.setTv_nsec((long)nanosecs);
 		this.setTv_sec((long)secs);
 		return time;
-	}
-	public void add_ms_to_ts(long milliseconds) {
-		Object generatedTv_sec = this.getTv_sec();
-		generatedTv_sec += milliseconds / 1000;
-		long generatedTv_nsec = this.getTv_nsec();
-		generatedTv_nsec += (milliseconds % 1000) * 1000000;
-		if (generatedTv_nsec > 1000000000) {
-			generatedTv_sec += 1;
-			generatedTv_nsec -= 1000000000;
-		} 
 	}
 	public Object getTv_sec() {
 		return tv_sec;

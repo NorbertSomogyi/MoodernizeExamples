@@ -6,7 +6,7 @@ public class remote {
 	private int origin;
 	private int configured_in_repo;
 	private Object foreign_vcs;
-	private Object url;
+	private Object[][] url;
 	private int url_nr;
 	private int url_alloc;
 	private Object pushurl;
@@ -24,7 +24,7 @@ public class remote {
 	private Byte http_proxy;
 	private Byte http_proxy_authmethod;
 	
-	public remote(hashmap_entry ent, Object name, int origin, int configured_in_repo, Object foreign_vcs, Object url, int url_nr, int url_alloc, Object pushurl, int pushurl_nr, int pushurl_alloc, refspec push, refspec fetch, int fetch_tags, int skip_default_update, int mirror, int prune, int prune_tags, Object receivepack, Object uploadpack, Byte http_proxy, Byte http_proxy_authmethod) {
+	public remote(hashmap_entry ent, Object name, int origin, int configured_in_repo, Object foreign_vcs, Object[][] url, int url_nr, int url_alloc, Object pushurl, int pushurl_nr, int pushurl_alloc, refspec push, refspec fetch, int fetch_tags, int skip_default_update, int mirror, int prune, int prune_tags, Object receivepack, Object uploadpack, Byte http_proxy, Byte http_proxy_authmethod) {
 		setEnt(ent);
 		setName(name);
 		setOrigin(origin);
@@ -51,33 +51,15 @@ public class remote {
 	public remote() {
 	}
 	
-	public void http_init(Object url, int proactive_auth) {
-		byte low_speed_limit;
-		byte low_speed_time;
-		byte normalized_url;
-		urlmatch_config config = new urlmatch_config(new urlmatch_config(((Object)0), 0, 0, 1, ((Object)0)));
-		config.setSection("http");
-		config.setKey(((Object)0));
-		config.setCollect_fn(http_options);
-		config.setCascade_fn(ModernizedCProgram.git_default_config);
-		config.setCb(((Object)0));
-		ModernizedCProgram.http_is_verbose = 0;
-		url_info generatedUrl = config.getUrl();
-		normalized_url = generatedUrl.url_normalize(url);
-		.git_config(ModernizedCProgram.urlmatch_config_entry, config);
-		ModernizedCProgram.free(normalized_url);
-		string_list generatedVars = config.getVars();
-		generatedVars.string_list_clear(1);
-	}
 	public int add_known_remote(Object cb_data) {
 		known_remotes all = cb_data;
 		known_remote r = new known_remote();
 		remote generatedTo_delete = all.getTo_delete();
 		Object generatedName = generatedTo_delete.getName();
-		if (!.strcmp(generatedName, generatedName)) {
+		if (!/*Error: Function owner not recognized*/strcmp(generatedName, generatedName)) {
 			return 0;
 		} 
-		r = ModernizedCProgram.xmalloc();
+		r = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		r.setRemote(ModernizedCProgram.remote);
 		known_remote generatedList = all.getList();
 		r.setNext(generatedList);
@@ -85,22 +67,22 @@ public class remote {
 		return 0;
 	}
 	public int migrate_file() {
-		strbuf buf = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int i;
 		buf.strbuf_addf("remote.%s.url", ModernizedCProgram.remote.getName());
-		byte generatedBuf = buf.getBuf();
+		byte[] generatedBuf = buf.getBuf();
 		for (i = 0; i < ModernizedCProgram.remote.getUrl_nr(); i++) {
-			.git_config_set_multivar(generatedBuf, ModernizedCProgram.remote.getUrl()[i], "^$", 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_set_multivar(generatedBuf, ModernizedCProgram.remote.getUrl()[i], "^$", 0);
 		}
 		buf.strbuf_setlen(0);
 		buf.strbuf_addf("remote.%s.push", ModernizedCProgram.remote.getName());
 		for (i = 0; i < ModernizedCProgram.remote.getPush().getRaw_nr(); i++) {
-			.git_config_set_multivar(generatedBuf, ModernizedCProgram.remote.getPush().getRaw()[i], "^$", 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_set_multivar(generatedBuf, ModernizedCProgram.remote.getPush().getRaw()[i], "^$", 0);
 		}
 		buf.strbuf_setlen(0);
 		buf.strbuf_addf("remote.%s.fetch", ModernizedCProgram.remote.getName());
 		for (i = 0; i < ModernizedCProgram.remote.getFetch().getRaw_nr(); i++) {
-			.git_config_set_multivar(generatedBuf, ModernizedCProgram.remote.getFetch().getRaw()[i], "^$", 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_set_multivar(generatedBuf, ModernizedCProgram.remote.getFetch().getRaw()[i], "^$", 0);
 		}
 		if (ModernizedCProgram.remote.getOrigin() == .REMOTE_REMOTES) {
 			ModernizedCProgram.unlink_or_warn(ModernizedCProgram.git_path("remotes/%s", ModernizedCProgram.remote.getName()));
@@ -112,15 +94,16 @@ public class remote {
 	}
 	public int get_one_entry(Object priv) {
 		string_list list = priv;
-		strbuf url_buf = new strbuf(, , );
+		strbuf url_buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte url;
 		int i;
 		int url_nr;
+		string_list_item string_list_item = new string_list_item();
 		if (ModernizedCProgram.remote.getUrl_nr() > 0) {
 			url_buf.strbuf_addf("%s (fetch)", ModernizedCProgram.remote.getUrl()[0]);
-			list.string_list_append(ModernizedCProgram.remote.getName()).setUtil(url_buf.strbuf_detach(((Object)0)));
+			string_list_item.string_list_append(list, ModernizedCProgram.remote.getName()).setUtil(url_buf.strbuf_detach(((Object)0)));
 		} else {
-				list.string_list_append(ModernizedCProgram.remote.getName()).setUtil(((Object)0));
+				string_list_item.string_list_append(list, ModernizedCProgram.remote.getName()).setUtil(((Object)0));
 		} 
 		if (ModernizedCProgram.remote.getPushurl_nr()) {
 			url = ModernizedCProgram.remote.getPushurl();
@@ -131,14 +114,14 @@ public class remote {
 		} 
 		for (i = 0; i < url_nr; i++) {
 			url_buf.strbuf_addf("%s (push)", url[i]);
-			list.string_list_append(ModernizedCProgram.remote.getName()).setUtil(url_buf.strbuf_detach(((Object)0)));
+			string_list_item.string_list_append(list, ModernizedCProgram.remote.getName()).setUtil(url_buf.strbuf_detach(((Object)0)));
 		}
 		return 0;
 	}
 	public void add_branches(Object branches, Object key) {
 		byte remotename = ModernizedCProgram.remote.getName();
 		int mirror = ModernizedCProgram.remote.getMirror();
-		strbuf refspec = new strbuf(, , );
+		strbuf refspec = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		for (; branches; branches++) {
 			refspec.add_branch(key, branches, remotename, mirror);
 		}
@@ -146,37 +129,38 @@ public class remote {
 	}
 	public int get_one_remote_for_fetch(Object priv) {
 		string_list list = priv;
+		string_list_item string_list_item = new string_list_item();
 		if (!ModernizedCProgram.remote.getSkip_default_update()) {
-			list.string_list_append(ModernizedCProgram.remote.getName());
+			string_list_item.string_list_append(list, ModernizedCProgram.remote.getName());
 		} 
 		return 0;
 	}
 	public void fetch_one_setup_partial() {
 		if (ModernizedCProgram.filter_options.getNo_filter()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ModernizedCProgram.has_promisor_remote() && !ModernizedCProgram.filter_options.getChoice()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.filter_options.getChoice()) {
 			ModernizedCProgram.filter_options.partial_clone_register(ModernizedCProgram.remote.getName());
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ModernizedCProgram.filter_options.getChoice()) {
 			ModernizedCProgram.filter_options.partial_clone_get_default_filter_spec(ModernizedCProgram.remote.getName());
 		} 
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	/*
 		 * Explicit --no-filter argument overrides everything, regardless
 		 * of any prior partial clones and fetches.
 		 */
-	public int fetch_one(int argc, Object argv, int prune_tags_ok) {
-		refspec rs = new refspec();
+	public int fetch_one(int argc, Object[][] argv, int prune_tags_ok) {
+		refspec rs = new refspec(/*Error: Invalid initializer*/);
 		int i;
 		int exit_code;
 		int maybe_prune_tags;
-		int remote_via_config = .remote_is_configured(ModernizedCProgram.remote, 0);
+		int remote_via_config = /*Error: Function owner not recognized*/remote_is_configured(ModernizedCProgram.remote, 0);
 		if (!ModernizedCProgram.remote) {
 			ModernizedCProgram.die(ModernizedCProgram._("No remote repository specified.  Please, specify either a URL or a\nremote name from which new revisions should be fetched."));
 		} 
@@ -208,7 +192,7 @@ public class remote {
 			rs.refspec_append("refs/tags/*:refs/tags/*");
 		} 
 		for (i = 0; i < argc; i++) {
-			if (!.strcmp(argv[i], "tag")) {
+			if (!/*Error: Function owner not recognized*/strcmp(argv[i], "tag")) {
 				byte tag;
 				i++;
 				if (i >= argc) {
@@ -225,7 +209,7 @@ public class remote {
 			ModernizedCProgram.gtransport.setServer_options(ModernizedCProgram.server_options);
 		} 
 		ModernizedCProgram.sigchain_push_common(unlock_pack_on_signal);
-		.atexit(unlock_pack);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/atexit(unlock_pack);
 		ModernizedCProgram.sigchain_push(SIGPIPE, ((__p_sig_fn_t)1));
 		exit_code = ModernizedCProgram.do_fetch(ModernizedCProgram.gtransport, rs);
 		ModernizedCProgram.sigchain_pop(SIGPIPE);
@@ -243,22 +227,13 @@ public class remote {
 		return ModernizedCProgram.remote.getUrl_nr();
 	}
 	public int is_workflow_triangular() {
-		remote fetch_remote = .remote_get(((Object)0));
+		remote fetch_remote = /*Error: Function owner not recognized*/remote_get(((Object)0));
 		return (fetch_remote && fetch_remote != ModernizedCProgram.remote);
 	}
 	public void setup_default_push_refspecs() {
-		branch branch = .branch_get(((Object)0));
+		branch branch = /*Error: Function owner not recognized*/branch_get(((Object)0));
 		int triangular = ModernizedCProgram.remote.is_workflow_triangular();
 		switch (push_default_type.push_default) {
-		case push_default_type.PUSH_DEFAULT_MATCHING:
-				ModernizedCProgram.rs.refspec_append(":");
-				break;
-		case push_default_type.PUSH_DEFAULT_UPSTREAM:
-				ModernizedCProgram.setup_push_upstream(ModernizedCProgram.remote, branch, triangular, 0);
-				break;
-		case push_default_type.PUSH_DEFAULT_NOTHING:
-				ModernizedCProgram.die(ModernizedCProgram._("You didn't specify any refspecs to push, and push.default is \"nothing\"."));
-				break;
 		case push_default_type.PUSH_DEFAULT_SIMPLE:
 				if (triangular) {
 					ModernizedCProgram.setup_push_current(ModernizedCProgram.remote, branch);
@@ -266,9 +241,18 @@ public class remote {
 						ModernizedCProgram.setup_push_upstream(ModernizedCProgram.remote, branch, triangular, 1);
 				} 
 				break;
-		case push_default_type.PUSH_DEFAULT_UNSPECIFIED:
+		case push_default_type.PUSH_DEFAULT_MATCHING:
+				ModernizedCProgram.rs.refspec_append(":");
+				break;
+		case push_default_type.PUSH_DEFAULT_UPSTREAM:
+				ModernizedCProgram.setup_push_upstream(ModernizedCProgram.remote, branch, triangular, 0);
+				break;
 		case push_default_type.PUSH_DEFAULT_CURRENT:
 				ModernizedCProgram.setup_push_current(ModernizedCProgram.remote, branch);
+				break;
+		case push_default_type.PUSH_DEFAULT_UNSPECIFIED:
+		case push_default_type.PUSH_DEFAULT_NOTHING:
+				ModernizedCProgram.die(ModernizedCProgram._("You didn't specify any refspecs to push, and push.default is \"nothing\"."));
 				break;
 		default:
 		}
@@ -314,6 +298,24 @@ public class remote {
 		} 
 		return !!errs;
 	}
+	public void http_init(Object url, int proactive_auth) {
+		byte low_speed_limit;
+		byte low_speed_time;
+		byte normalized_url;
+		urlmatch_config config = new urlmatch_config(new urlmatch_config(((Object)0), 0, 0, 1, ((Object)0)));
+		config.setSection("http");
+		config.setKey(((Object)0));
+		config.setCollect_fn(http_options);
+		config.setCascade_fn(ModernizedCProgram.git_default_config);
+		config.setCb(((Object)0));
+		ModernizedCProgram.http_is_verbose = 0;
+		url_info generatedUrl = config.getUrl();
+		normalized_url = generatedUrl.url_normalize(url);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config(ModernizedCProgram.urlmatch_config_entry, config);
+		ModernizedCProgram.free(normalized_url);
+		string_list generatedVars = config.getVars();
+		generatedVars.string_list_clear(1);
+	}
 	public int get_only_remote(Object cb_data) {
 		byte remote_name = cb_data;
 		if (remote_name) {
@@ -347,8 +349,8 @@ public class remote {
 		tracking tracking = priv;
 		refspec_item generatedSpec = tracking.getSpec();
 		int generatedMatches = tracking.getMatches();
-		byte generatedSrc = generatedSpec.getSrc();
-		if (!.remote_find_tracking(ModernizedCProgram.remote, generatedSpec)) {
+		Byte generatedSrc = generatedSpec.getSrc();
+		if (!/*Error: Function owner not recognized*/remote_find_tracking(ModernizedCProgram.remote, generatedSpec)) {
 			if (++generatedMatches == 1) {
 				tracking.setSrc(generatedSrc);
 				tracking.setRemote(ModernizedCProgram.remote.getName());
@@ -366,9 +368,9 @@ public class remote {
 	public int check_tracking_branch(Object cb_data) {
 		byte tracking_branch = cb_data;
 		refspec_item query = new refspec_item();
-		.memset(query, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(query, 0, /*Error: Unsupported expression*/);
 		query.setDst(tracking_branch);
-		return !.remote_find_tracking(ModernizedCProgram.remote, query);
+		return !/*Error: Function owner not recognized*/remote_find_tracking(ModernizedCProgram.remote, query);
 	}
 	public hashmap_entry getEnt() {
 		return ent;
@@ -400,10 +402,10 @@ public class remote {
 	public void setForeign_vcs(Object newForeign_vcs) {
 		foreign_vcs = newForeign_vcs;
 	}
-	public Object getUrl() {
+	public Object[][] getUrl() {
 		return url;
 	}
-	public void setUrl(Object newUrl) {
+	public void setUrl(Object[][] newUrl) {
 		url = newUrl;
 	}
 	public int getUrl_nr() {

@@ -31,7 +31,7 @@ public class batch_options {
 	public void batch_write(Object data, int len) {
 		int generatedBuffer_output = this.getBuffer_output();
 		if (generatedBuffer_output) {
-			if (.fwrite(data, 1, len, (_iob[1])) != len) {
+			if (/*Error: Function owner not recognized*/fwrite(data, 1, len, (_iob[1])) != len) {
 				ModernizedCProgram.die_errno("unable to write to stdout");
 			} 
 		} else {
@@ -39,8 +39,8 @@ public class batch_options {
 		} 
 	}
 	public int batch_objects() {
-		strbuf input = new strbuf(, , );
-		strbuf output = new strbuf(, , );
+		strbuf input = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf output = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		expand_data data = new expand_data();
 		int save_warning;
 		int retval = 0;
@@ -52,7 +52,7 @@ public class batch_options {
 				 * object.
 				 */);
 		} 
-		.memset(data, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(data, 0, /*Error: sizeof expression not supported yet*/);
 		data.setMark_query(1);
 		output.strbuf_expand(generatedFormat, expand_format, data);
 		data.setMark_query(0);
@@ -65,7 +65,7 @@ public class batch_options {
 		object_info generatedInfo = data.getInfo();
 		if (generatedAll_objects) {
 			object_info empty = new object_info(((Object)0));
-			if (!.memcmp(generatedInfo, empty, )) {
+			if (!/*Error: Function owner not recognized*/memcmp(generatedInfo, empty, /*Error: sizeof expression not supported yet*/)) {
 				data.setSkip_object_info(1/*
 					 * If we are printing out the object, then always fill in the type,
 					 * since we will want to decide whether or not to stream.
@@ -110,13 +110,13 @@ public class batch_options {
 		} 
 		save_warning = ModernizedCProgram.warn_on_object_refname_ambiguity;
 		ModernizedCProgram.warn_on_object_refname_ambiguity = 0;
-		int generatedSplit_on_whitespace = data.getSplit_on_whitespace();
-		byte generatedBuf = input.getBuf();
+		Object generatedSplit_on_whitespace = data.getSplit_on_whitespace();
+		byte[] generatedBuf = input.getBuf();
 		while (ModernizedCProgram.strbuf_getline(input, (_iob[0])) != (true)) {
 			if (generatedSplit_on_whitespace) {
-				byte p = .strpbrk(generatedBuf, " \t");
+				byte p = /*Error: Function owner not recognized*/strpbrk(generatedBuf, " \t");
 				if (p) {
-					while (p && .strchr(" \t", p)) {
+					while (p && /*Error: Function owner not recognized*/strchr(" \t", p)) {
 						p++ = (byte)'\0';
 					}
 				} 

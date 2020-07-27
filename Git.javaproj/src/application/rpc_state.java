@@ -65,19 +65,19 @@ public class rpc_state {
 		} 
 		if (generatedWrite_line_lengths) {
 			switch (status) {
-			case packet_read_status.PACKET_READ_DELIM:
-					.memcpy(buf - 4, "0001", 4);
-					break;
 			case packet_read_status.PACKET_READ_FLUSH:
-					.memcpy(buf - 4, "0000", 4);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf - 4, "0000", 4);
 					break;
-			case packet_read_status.PACKET_READ_NORMAL:
-					ModernizedCProgram.set_packet_header(buf - 4, appended);
+			case packet_read_status.PACKET_READ_DELIM:
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf - 4, "0001", 4);
 					break;
 			case packet_read_status.PACKET_READ_EOF:
 					if (!(options & (-1024 << 0))) {
 						ModernizedCProgram.die(ModernizedCProgram._("shouldn't have EOF when not gentle on EOF"));
 					} 
+					break;
+			case packet_read_status.PACKET_READ_NORMAL:
+					ModernizedCProgram.set_packet_header(buf - 4, appended);
 					break;
 			}
 		} 
@@ -118,7 +118,7 @@ public class rpc_state {
 			do {
 				err = ModernizedCProgram.probe_rpc(rpc, results);
 				if (err == 4) {
-					.credential_fill(ModernizedCProgram.http_auth);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/credential_fill(ModernizedCProgram.http_auth);
 				} 
 			} while (err == 4);
 			if (err != 0) {
@@ -129,20 +129,20 @@ public class rpc_state {
 			} 
 		} 
 		Byte generatedHdr_content_type = this.getHdr_content_type();
-		headers = .curl_slist_append(headers, generatedHdr_content_type);
+		headers = /*Error: Function owner not recognized*/curl_slist_append(headers, generatedHdr_content_type);
 		Byte generatedHdr_accept = this.getHdr_accept();
-		headers = .curl_slist_append(headers, generatedHdr_accept);
-		headers = .curl_slist_append(headers, needs_100_continue ? "Expect: 100-continue" : "Expect:");
+		headers = /*Error: Function owner not recognized*/curl_slist_append(headers, generatedHdr_accept);
+		headers = /*Error: Function owner not recognized*/curl_slist_append(headers, needs_100_continue ? "Expect: 100-continue" : "Expect:");
 		Byte generatedProtocol_header = this.getProtocol_header();
 		if (generatedProtocol_header) {
-			headers = .curl_slist_append(headers, generatedProtocol_header);
+			headers = /*Error: Function owner not recognized*/curl_slist_append(headers, generatedProtocol_header);
 		} 
 		Object generatedCurl = slot.getCurl();
-		.curl_easy_setopt(generatedCurl, CURLOPT_NOBODY, 0);
-		.curl_easy_setopt(generatedCurl, CURLOPT_POST, 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_NOBODY, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_POST, 1);
 		Byte generatedService_url = this.getService_url();
-		.curl_easy_setopt(generatedCurl, CURLOPT_URL, generatedService_url);
-		.curl_easy_setopt(generatedCurl, CURLOPT_ENCODING, "");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_URL, generatedService_url);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_ENCODING, "");
 		Object generatedService_name = this.getService_name();
 		Object generatedLen = this.getLen();
 		Byte generatedBuf = this.getBuf();
@@ -150,21 +150,21 @@ public class rpc_state {
 		if (large_request/* The request body is large and the size cannot be predicted.
 				 * We must use chunked encoding to send it.
 				 */) {
-			headers = .curl_slist_append(headers, "Transfer-Encoding: chunked");
+			headers = /*Error: Function owner not recognized*/curl_slist_append(headers, "Transfer-Encoding: chunked");
 			this.setInitial_buffer(1);
-			.curl_easy_setopt(generatedCurl, CURLOPT_READFUNCTION, rpc_out);
-			.curl_easy_setopt(generatedCurl, CURLOPT_INFILE, rpc);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_READFUNCTION, rpc_out);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_INFILE, rpc);
 			if (ModernizedCProgram.options.getVerbosity() > 1) {
-				.fprintf((_iob[2]), "POST %s (chunked)\n", generatedService_name);
-				.fflush((_iob[2]));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "POST %s (chunked)\n", generatedService_name);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fflush((_iob[2]));
 			} 
 		}  else if (gzip_body/*
 				 * If we are looping to retry authentication, then the previous
 				 * run will have set up the headers and gzip buffer already,
 				 * and we just need to send it.
 				 */) {
-			.curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDS, gzip_body);
-			.curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDSIZE_LARGE, ModernizedCProgram.xcurl_off_t(gzip_size));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDS, gzip_body);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDSIZE_LARGE, ModernizedCProgram.xcurl_off_t(gzip_size));
 		}  else if (use_gzip && 1024 < generatedLen) {
 			git_zstream stream = new git_zstream();
 			int ret;
@@ -184,31 +184,31 @@ public class rpc_state {
 				ModernizedCProgram.die(ModernizedCProgram._("cannot deflate request; zlib end error %d"), ret);
 			} 
 			gzip_size = generatedTotal_out;
-			headers = .curl_slist_append(headers, "Content-Encoding: gzip");
-			.curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDS, gzip_body);
-			.curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDSIZE_LARGE, ModernizedCProgram.xcurl_off_t(gzip_size));
+			headers = /*Error: Function owner not recognized*/curl_slist_append(headers, "Content-Encoding: gzip");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDS, gzip_body);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDSIZE_LARGE, ModernizedCProgram.xcurl_off_t(gzip_size));
 			if (ModernizedCProgram.options.getVerbosity() > 1) {
-				.fprintf((_iob[2]), "POST %s (gzip %lu to %lu bytes)\n", generatedService_name, (long)generatedLen, (long)gzip_size);
-				.fflush((_iob[2]));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "POST %s (gzip %lu to %lu bytes)\n", generatedService_name, (long)generatedLen, (long)gzip_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fflush((_iob[2]));
 			} 
 		} else {
-				.curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDS, generatedBuf);
-				.curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDSIZE_LARGE, ModernizedCProgram.xcurl_off_t(generatedLen));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDS, generatedBuf);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_POSTFIELDSIZE_LARGE, ModernizedCProgram.xcurl_off_t(generatedLen));
 				if (ModernizedCProgram.options.getVerbosity() > 1) {
-					.fprintf((_iob[2]), "POST %s (%lu bytes)\n", generatedService_name, (long)generatedLen);
-					.fflush((_iob[2]));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "POST %s (%lu bytes)\n", generatedService_name, (long)generatedLen);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fflush((_iob[2]));
 				} 
 		} 
-		.curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, headers);
-		.curl_easy_setopt(generatedCurl, CURLOPT_WRITEFUNCTION, rpc_in);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_HTTPHEADER, headers);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_WRITEFUNCTION, rpc_in);
 		rpc_in_data.setRpc(rpc);
 		rpc_in_data.setSlot(slot);
-		.curl_easy_setopt(generatedCurl, CURLOPT_FILE, rpc_in_data);
-		.curl_easy_setopt(generatedCurl, CURLOPT_FAILONERROR, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_FILE, rpc_in_data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_easy_setopt(generatedCurl, CURLOPT_FAILONERROR, 0);
 		this.setAny_written(0);
 		err = ModernizedCProgram.run_slot(slot, ((Object)0));
 		if (err == 4 && !large_request) {
-			.credential_fill(ModernizedCProgram.http_auth);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/credential_fill(ModernizedCProgram.http_auth);
 			;
 		} 
 		if (err != 0) {
@@ -218,7 +218,7 @@ public class rpc_state {
 		if (!generatedAny_written) {
 			err = -1;
 		} 
-		.curl_slist_free_all(headers);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/curl_slist_free_all(headers);
 		ModernizedCProgram.free(gzip_body);
 		return err;
 	}

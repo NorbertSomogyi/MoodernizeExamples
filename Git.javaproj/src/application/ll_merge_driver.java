@@ -6,14 +6,14 @@ package application;
  * Copyright (c) 2007 Junio C Hamano
  */
 public class ll_merge_driver {
-	private Object name;
+	private Object[] name;
 	private Object description;
 	private Object fn;
 	private Object recursive;
 	private ll_merge_driver next;
 	private Byte cmdline;
 	
-	public ll_merge_driver(Object name, Object description, Object fn, Object recursive, ll_merge_driver next, Byte cmdline) {
+	public ll_merge_driver(Object[] name, Object description, Object fn, Object recursive, ll_merge_driver next, Byte cmdline) {
 		setName(name);
 		setDescription(description);
 		setFn(fn);
@@ -24,10 +24,10 @@ public class ll_merge_driver {
 	public ll_merge_driver() {
 	}
 	
-	public Object getName() {
+	public Object[] getName() {
 		return name;
 	}
-	public void setName(Object newName) {
+	public void setName(Object[] newName) {
 		name = newName;
 	}
 	public Object getDescription() {

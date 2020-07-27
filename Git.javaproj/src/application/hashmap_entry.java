@@ -77,8 +77,8 @@ public class hashmap_entry {
 		int generatedTablepos = iter.getTablepos();
 		hashmap generatedMap = iter.getMap();
 		int generatedTablesize = generatedMap.getTablesize();
-		hashmap_entry generatedTable = generatedMap.getTable();
-		for (; ; ) {
+		hashmap_entry[][] generatedTable = generatedMap.getTable();
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (current) {
 				iter.setNext(generatedNext);
 				return current;

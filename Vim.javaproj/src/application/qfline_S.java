@@ -33,7 +33,7 @@ public class qfline_S {
 	public qfline_S() {
 	}
 	
-	public qfline_S get_next_valid_entry(qf_list_S qfl, int qf_index, int dir) {
+	public qfline_S get_next_valid_entry(qf_list_S qfl, Integer qf_index, int dir) {
 		int idx;
 		int old_qf_fnum;
 		idx = qf_index;
@@ -56,7 +56,7 @@ public class qfline_S {
 		 * search starts from the current entry.  Returns NULL on failure.
 		 */;
 	}
-	public qfline_S get_prev_valid_entry(qf_list_S qfl, int qf_index, int dir) {
+	public qfline_S get_prev_valid_entry(qf_list_S qfl, Integer qf_index, int dir) {
 		int idx;
 		int old_qf_fnum;
 		idx = qf_index;
@@ -80,7 +80,7 @@ public class qfline_S {
 		 *   dir == BACKWARD or BACKWARD_FILE: previous valid entry
 		 */;
 	}
-	public qfline_S get_nth_valid_entry(qf_list_S qfl, int errornr, int dir, int new_qfidx) {
+	public qfline_S get_nth_valid_entry(qf_list_S qfl, int errornr, int dir, Integer new_qfidx) {
 		qfline_S generatedQf_ptr = qfl.getQf_ptr();
 		qfline_T qf_ptr = generatedQf_ptr;
 		int generatedQf_index = qfl.getQf_index();
@@ -113,7 +113,7 @@ public class qfline_S {
 		 * list 'qfl'. Returns a pointer to the new entry and the index in 'new_qfidx'
 		 */;
 	}
-	public qfline_S get_nth_entry(qf_list_S qfl, int errornr, int new_qfidx) {
+	public qfline_S get_nth_entry(qf_list_S qfl, int errornr, Integer new_qfidx) {
 		qfline_S generatedQf_ptr = qfl.getQf_ptr();
 		qfline_T qf_ptr = generatedQf_ptr;
 		int generatedQf_index = qfl.getQf_index();
@@ -138,7 +138,7 @@ public class qfline_S {
 		 * 'new_qfidx'.
 		 */;
 	}
-	public qfline_S qf_get_entry(qf_list_S qfl, int errornr, int dir, int new_qfidx) {
+	public qfline_S qf_get_entry(qf_list_S qfl, int errornr, int dir, Integer new_qfidx) {
 		qfline_S generatedQf_ptr = qfl.getQf_ptr();
 		qfline_T qf_ptr = generatedQf_ptr;
 		int generatedQf_index = qfl.getQf_index();
@@ -169,7 +169,7 @@ public class qfline_S {
 		Object generatedQf_module = this.getQf_module();
 		int generatedQf_fnum = this.getQf_fnum();
 		file_buffer file_buffer = new file_buffer();
-		Object generatedB_fname = buf.getB_fname();
+		Object[] generatedB_fname = buf.getB_fname();
 		Object generatedQf_type = this.getQf_type();
 		if (generatedQf_module != ((Object)0) && generatedQf_module != (byte)'\000') {
 			ModernizedCProgram.vim_snprintf((byte)ModernizedCProgram.IObuff, (1024 + 1), "%2d %s", qf_idx, (byte)generatedQf_module);
@@ -181,7 +181,7 @@ public class qfline_S {
 					} 
 				} 
 				if (fname == ((Object)0)) {
-					.sprintf((byte)ModernizedCProgram.IObuff, "%2d", qf_idx);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)ModernizedCProgram.IObuff, "%2d", qf_idx);
 				} else {
 						ModernizedCProgram.vim_snprintf((byte)ModernizedCProgram.IObuff, (1024 + 1), "%2d %s", qf_idx, (byte)fname);
 				} 
@@ -202,7 +202,7 @@ public class qfline_S {
 			filter_entry &=  ModernizedCProgram.message_filtered(generatedQf_text);
 		} 
 		if (filter_entry) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.msg_putchar((byte)'\n');
 		ModernizedCProgram.msg_outtrans_attr(ModernizedCProgram.IObuff, cursel ? ModernizedCProgram.highlight_attr[(int)(.HLF_QFL)] : ModernizedCProgram.qfFileAttr);
@@ -214,12 +214,12 @@ public class qfline_S {
 		if (generatedQf_lnum == 0) {
 			ModernizedCProgram.IObuff[0] = (byte)'\000';
 		}  else if (generatedQf_col == 0) {
-			.sprintf((byte)ModernizedCProgram.IObuff, "%ld", generatedQf_lnum);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)ModernizedCProgram.IObuff, "%ld", generatedQf_lnum);
 		} else {
-				.sprintf((byte)ModernizedCProgram.IObuff, "%ld col %d", generatedQf_lnum, generatedQf_col);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)ModernizedCProgram.IObuff, "%ld col %d", generatedQf_lnum, generatedQf_col);
 		} 
 		int generatedQf_nr = this.getQf_nr();
-		.sprintf((byte)ModernizedCProgram.IObuff + .strlen((byte)(ModernizedCProgram.IObuff)), "%s", (byte)ModernizedCProgram.qf_types(generatedQf_type, generatedQf_nr));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)ModernizedCProgram.IObuff + /*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.IObuff)), "%s", (byte)ModernizedCProgram.qf_types(generatedQf_type, generatedQf_nr));
 		ModernizedCProgram.msg_puts_attr((byte)ModernizedCProgram.IObuff, ModernizedCProgram.qfLineAttr);
 		ModernizedCProgram.msg_puts_attr(":", ModernizedCProgram.qfSepAttr);
 		if (generatedQf_pattern != ((Object)0)) {
@@ -232,7 +232,7 @@ public class qfline_S {
 		ModernizedCProgram.msg_prt_line(ModernizedCProgram.IObuff, 0);
 		// show one line at a time// show one line at a timeModernizedCProgram.out_flush();
 	}
-	public qfline_S qf_find_first_entry_in_buf(qf_list_S qfl, int bnr, int errornr) {
+	public qfline_S qf_find_first_entry_in_buf(qf_list_S qfl, int bnr, Integer errornr) {
 		qfline_T qfp = ((Object)0);
 		int idx = 0;
 		int generatedQf_count = qfl.getQf_count();
@@ -249,7 +249,7 @@ public class qfline_S {
 		 * the quickfix list by line number.
 		 */;
 	}
-	public qfline_S qf_find_first_entry_on_line(int errornr) {
+	public qfline_S qf_find_first_entry_on_line(Integer errornr) {
 		qfline_S generatedQf_prev = this.getQf_prev();
 		int generatedQf_fnum = this.getQf_fnum();
 		Object generatedQf_lnum = this.getQf_lnum();
@@ -263,7 +263,7 @@ public class qfline_S {
 		 * the quickfix list by line number.
 		 */;
 	}
-	public qfline_S qf_find_last_entry_on_line(int errornr) {
+	public qfline_S qf_find_last_entry_on_line(Integer errornr) {
 		qfline_S generatedQf_next = this.getQf_next();
 		int generatedQf_fnum = this.getQf_fnum();
 		Object generatedQf_lnum = this.getQf_lnum();
@@ -277,7 +277,7 @@ public class qfline_S {
 		 *   or after the line and column.
 		 */;
 	}
-	public qfline_S qf_find_entry_after_pos(int bnr,  pos, int linewise, int errornr) {
+	public qfline_S qf_find_entry_after_pos(int bnr,  pos, int linewise, Integer errornr) {
 		if (ModernizedCProgram.qf_entry_after_pos(qfp, pos, linewise)) {
 			return qfp;
 		} 
@@ -304,7 +304,7 @@ public class qfline_S {
 		 * Returns NULL if an entry is not found before 'pos'.
 		 */;
 	}
-	public qfline_S qf_find_entry_before_pos(int bnr,  pos, int linewise, int errornr) {
+	public qfline_S qf_find_entry_before_pos(int bnr,  pos, int linewise, Integer errornr) {
 		qfline_S generatedQf_next = this.getQf_next();
 		int generatedQf_fnum = generatedQf_next.getQf_fnum();
 		// Find the entry just before the position 'pos'while (generatedQf_next != ((Object)0) && generatedQf_fnum == bnr && ModernizedCProgram.qf_entry_before_pos(generatedQf_next, pos, linewise)) {
@@ -323,7 +323,7 @@ public class qfline_S {
 		 * the direction 'dir'.
 		 */;
 	}
-	public qfline_S qf_find_closest_entry(qf_list_S qfl, int bnr,  pos, int dir, int linewise, int errornr) {
+	public qfline_S qf_find_closest_entry(qf_list_S qfl, int bnr,  pos, int dir, int linewise, Integer errornr) {
 		qfline_T qfp = new qfline_T();
 		errornr = 0;
 		qfline_S qfline_S = new qfline_S();
@@ -342,7 +342,7 @@ public class qfline_S {
 		 * as one.
 		 */;
 	}
-	public void qf_get_nth_below_entry(int n, int linewise, int errornr) {
+	public void qf_get_nth_below_entry(int n, int linewise, Integer errornr) {
 		qfline_S generatedQf_next = this.getQf_next();
 		int generatedQf_fnum = generatedQf_next.getQf_fnum();
 		while (n-- > 0 && !got_int) {
@@ -366,7 +366,7 @@ public class qfline_S {
 			 */;
 		}
 	}
-	public void qf_get_nth_above_entry(int n, int linewise, int errornr) {
+	public void qf_get_nth_above_entry(int n, int linewise, Integer errornr) {
 		qfline_S generatedQf_prev = this.getQf_prev();
 		int generatedQf_fnum = generatedQf_prev.getQf_fnum();
 		while (n-- > 0 && !got_int) {

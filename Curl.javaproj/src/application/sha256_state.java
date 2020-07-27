@@ -102,7 +102,7 @@ public class sha256_state {
 		long n;
 		long generatedCurlen = this.getCurlen();
 		Object generatedBuf = this.getBuf();
-		if (generatedCurlen > ) {
+		if (generatedCurlen > /*Error: sizeof expression not supported yet*/) {
 			return -1;
 		} 
 		int generatedLength = this.getLength();
@@ -116,7 +116,7 @@ public class sha256_state {
 				inlen -= 64;
 			} else {
 					n = ((inlen) < ((64 - generatedCurlen)) ? (inlen) : ((64 - generatedCurlen)));
-					.memcpy(generatedBuf + generatedCurlen, in, n);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedBuf + generatedCurlen, in, n);
 					generatedCurlen += n;
 					in += n;
 					inlen -= n;
@@ -140,7 +140,7 @@ public class sha256_state {
 		int i;
 		long generatedCurlen = this.getCurlen();
 		Object generatedBuf = this.getBuf();
-		if (generatedCurlen >= ) {
+		if (generatedCurlen >= /*Error: sizeof expression not supported yet*/) {
 			return -1;
 		} 
 		int generatedLength = this.getLength();

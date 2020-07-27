@@ -9,12 +9,12 @@ public class packet_reader {
 	private int options;
 	private packet_read_status status;
 	private int pktlen;
-	private Object line;
+	private Object[] line;
 	private int line_peeked;
 	private int use_sideband;
 	private Object me;
 	
-	public packet_reader(int fd, Byte src_buffer, Object src_len, Byte buffer, int buffer_size, int options, packet_read_status status, int pktlen, Object line, int line_peeked, int use_sideband, Object me) {
+	public packet_reader(int fd, Byte src_buffer, Object src_len, Byte buffer, int buffer_size, int options, packet_read_status status, int pktlen, Object[] line, int line_peeked, int use_sideband, Object me) {
 		setFd(fd);
 		setSrc_buffer(src_buffer);
 		setSrc_len(src_len);
@@ -32,7 +32,7 @@ public class packet_reader {
 	}
 	
 	public void process_capabilities_v2() {
-		Object generatedLine = this.getLine();
+		Object[] generatedLine = this.getLine();
 		while (reader.packet_reader_read() == packet_read_status.PACKET_READ_NORMAL) {
 			ModernizedCProgram.server_capabilities_v2.argv_array_push(generatedLine);
 		}
@@ -46,45 +46,45 @@ public class packet_reader {
 			 * Peek the first line of the server's response to
 			 * determine the protocol version the server is speaking.
 			 */;
-		Object generatedLine = this.getLine();
+		Object[] generatedLine = this.getLine();
 		switch (reader.packet_reader_peek()) {
-		case packet_read_status.PACKET_READ_FLUSH:
-		case packet_read_status.PACKET_READ_EOF:
-				ModernizedCProgram.die_initial_contact(0);
 		case packet_read_status.PACKET_READ_DELIM:
 				protocol_version.version = protocol_version.protocol_v0;
 				break;
+		case packet_read_status.PACKET_READ_EOF:
+				ModernizedCProgram.die_initial_contact(0);
+		case packet_read_status.PACKET_READ_FLUSH:
 		case packet_read_status.PACKET_READ_NORMAL:
 				protocol_version.version = ModernizedCProgram.determine_protocol_version_client(generatedLine);
 				break;
 		}
 		switch (protocol_version.version) {
-		case protocol_version.protocol_v0:
-				break;
-		case protocol_version.protocol_v2:
-				reader.process_capabilities_v2();
-				break;
 		case protocol_version.protocol_v1:
 				/* Read the peeked version line */reader.packet_reader_read();
 				break;
 		case protocol_version.protocol_unknown_version:
 				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\connect.c", 148, "unknown protocol version");
+		case protocol_version.protocol_v2:
+				reader.process_capabilities_v2();
+				break;
+		case protocol_version.protocol_v0:
+				break;
 		}
 		return protocol_version.version;
 	}
 	/* Packet Reader Functions */
 	public void packet_reader_init(int fd, Byte src_buffer, Object src_len, int options) {
-		.memset(reader, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(reader, 0, /*Error: sizeof expression not supported yet*/);
 		this.setFd(fd);
 		this.setSrc_buffer(src_buffer);
 		this.setSrc_len(src_len);
 		this.setBuffer(ModernizedCProgram.packet_buffer);
-		this.setBuffer_size();
+		this.setBuffer_size(/*Error: sizeof expression not supported yet*/);
 		this.setOptions(options);
 		this.setMe("git");
 	}
 	public packet_read_status packet_reader_read() {
-		strbuf scratch = new strbuf(, , );
+		strbuf scratch = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int generatedLine_peeked = this.getLine_peeked();
 		packet_read_status generatedStatus = this.getStatus();
 		if (generatedLine_peeked) {
@@ -175,10 +175,10 @@ public class packet_reader {
 	public void setPktlen(int newPktlen) {
 		pktlen = newPktlen;
 	}
-	public Object getLine() {
+	public Object[] getLine() {
 		return line;
 	}
-	public void setLine(Object newLine) {
+	public void setLine(Object[] newLine) {
 		line = newLine;
 	}
 	public int getLine_peeked() {

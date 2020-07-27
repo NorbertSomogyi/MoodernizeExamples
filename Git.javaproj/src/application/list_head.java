@@ -40,16 +40,6 @@ public class list_head {
 	public list_head() {
 	}
 	
-	public void new_trailers_clear() {
-		list_head pos = new list_head();
-		list_head tmp = new list_head();
-		new_trailer_item item = new new_trailer_item();
-		for (; pos != (trailers); ) {
-			item = ((new_trailer_item)((byte)(pos) - ((size_t)((new_trailer_item)0).getList())));
-			pos.list_del();
-			ModernizedCProgram.free(item);
-		}
-	}
 	/* Initialize a new list head. */
 	/* Add new element at the head of the list. */
 	public void list_add(list_head head) {
@@ -136,12 +126,6 @@ public class list_head {
 		 * handlers).
 		 */)));
 	}
-	public list_head get_packed_git_mru(repository r) {
-		r.prepare_packed_git();
-		raw_object_store generatedObjects = r.getObjects();
-		list_head generatedPacked_git_mru = generatedObjects.getPacked_git_mru();
-		return generatedPacked_git_mru;
-	}
 	public void process_trailers_lists(list_head arg_head) {
 		list_head pos = new list_head();
 		list_head p = new list_head();
@@ -157,7 +141,7 @@ public class list_head {
 		}
 	}
 	public void add_arg_item(Byte tok, Byte val, Object conf, Object new_trailer_item) {
-		arg_item new_item = ModernizedCProgram.xcalloc(, 1);
+		arg_item new_item = ModernizedCProgram.xcalloc(/*Error: sizeof expression not supported yet*/, 1);
 		new_item.setToken(tok);
 		new_item.setValue(val);
 		conf_info generatedConf = new_item.getConf();
@@ -178,8 +162,8 @@ public class list_head {
 	}
 	public void process_command_line_args(list_head new_trailer_head) {
 		arg_item item = new arg_item();
-		strbuf tok = new strbuf(, , );
-		strbuf val = new strbuf(, , );
+		strbuf tok = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf val = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		conf_info conf = new conf_info();
 		list_head pos = new list_head();
 		/*
@@ -201,7 +185,7 @@ public class list_head {
 			new_trailer_item tr = ((new_trailer_item)((byte)(pos) - ((size_t)((new_trailer_item)0).getList())));
 			ssize_t separator_pos = ModernizedCProgram.find_separator(generatedText, cl_separators);
 			if (separator_pos == 0) {
-				strbuf sb = new strbuf(, , );
+				strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 				sb.strbuf_addstr(generatedText);
 				sb.strbuf_trim();
 				();
@@ -223,7 +207,7 @@ public class list_head {
 	}
 	public void process_trailers(Object file, Object opts) {
 		list_head head = new list_head((head), (head));
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		size_t trailer_end = new size_t();
 		FILE outfile = (_iob[1]);
 		ModernizedCProgram.ensure_configured();
@@ -231,7 +215,7 @@ public class list_head {
 		if (opts.getIn_place()) {
 			outfile = ModernizedCProgram.create_in_place_tempfile(file);
 		} 
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		trailer_end = ModernizedCProgram.process_input_file(outfile, generatedBuf, head, /* Print the lines before the trailers */opts);
 		if (!opts.getOnly_input()) {
 			list_head arg_head = new list_head((arg_head), (arg_head));
@@ -242,7 +226,7 @@ public class list_head {
 		head.free_all();
 		Object generatedLen = sb.getLen();
 		if (!opts.getOnly_trailers()) {
-			.fwrite(generatedBuf + trailer_end, 1, generatedLen - trailer_end, outfile);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fwrite(generatedBuf + trailer_end, 1, generatedLen - trailer_end, outfile);
 		} 
 		if (opts.getIn_place()) {
 			if (ModernizedCProgram.trailers_tempfile.rename_tempfile(file)) {
@@ -250,6 +234,22 @@ public class list_head {
 			} 
 		} 
 		sb.strbuf_release();
+	}
+	public void new_trailers_clear() {
+		list_head pos = new list_head();
+		list_head tmp = new list_head();
+		new_trailer_item item = new new_trailer_item();
+		for (; pos != (trailers); ) {
+			item = ((new_trailer_item)((byte)(pos) - ((size_t)((new_trailer_item)0).getList())));
+			pos.list_del();
+			ModernizedCProgram.free(item);
+		}
+	}
+	public list_head get_packed_git_mru(repository r) {
+		r.prepare_packed_git();
+		raw_object_store generatedObjects = r.getObjects();
+		list_head generatedPacked_git_mru = generatedObjects.getPacked_git_mru();
+		return generatedPacked_git_mru;
 	}
 	public list_head getNext() {
 		return next;

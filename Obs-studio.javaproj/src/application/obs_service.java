@@ -21,6 +21,15 @@ public class obs_service {
 	public obs_service() {
 	}
 	
+	public obs_service obs_output_get_service(Object output) {
+		return ModernizedCProgram.obs_object_valid(output, "obs_output_get_service", "output") ? output.getService() : NULL;
+	}
+	public obs_service obs_get_service_by_name(Object name) {
+		if (!ModernizedCProgram.obs) {
+			return NULL;
+		} 
+		return ModernizedCProgram.get_context_by_name(ModernizedCProgram.obs.getData().getFirst_service(), name, ModernizedCProgram.obs.getData().getServices_mutex(), obs_service_addref_safe_);
+	}
 	public Object obs_hotkey_register_service(Object name, Object description, Object func, Object data) {
 		if (!service || !ModernizedCProgram.lock()) {
 			return (~(obs_hotkey_id)0);
@@ -39,13 +48,13 @@ public class obs_service {
 		return generatedContext.register_hotkey_pair_internal(obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_SERVICE, service, weak_service_ref, name0, description0, name1, description1, func0, func1, data0, data1);
 	}
 	public obs_service obs_service_create_internal(Object id, Object name, obs_data settings, obs_data hotkey_data, Object private) {
-		obs_service_info info = ModernizedCProgram.find_service(id);
+		obs_service_info info = id.find_service();
 		obs_service service = new obs_service();
 		if (!info) {
 			ModernizedCProgram.blog(LOG_ERROR, "Service '%s' not found", id);
 			return NULL;
 		} 
-		service = ModernizedCProgram.bzalloc();
+		service = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		obs_context_data generatedContext = service.getContext();
 		if (!ModernizedCProgram.obs_context_data_init(generatedContext, obs_obj_type.OBS_OBJ_TYPE_SERVICE, settings, name, hotkey_data, private)) {
 			ModernizedCProgram.bfree(service);
@@ -53,12 +62,12 @@ public class obs_service {
 		} 
 		service.setInfo(info);
 		obs_data generatedSettings = generatedContext.getSettings();
-		generatedContext.setData(.UNRECOGNIZEDFUNCTIONNAME(generatedSettings, service));
-		Object generatedData = generatedContext.getData();
+		generatedContext.setData(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSettings, service));
+		Object[] generatedData = generatedContext.getData();
 		if (!generatedData) {
 			ModernizedCProgram.blog(LOG_ERROR, "Failed to create service '%s'!", name);
 		} 
-		service.setControl(ModernizedCProgram.bzalloc());
+		service.setControl(ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/));
 		obs_weak_service generatedControl = service.getControl();
 		generatedControl.setService(service);
 		generatedContext.obs_context_data_insert(generatedData.getServices_mutex(), generatedData.getFirst_service());
@@ -75,9 +84,9 @@ public class obs_service {
 	}
 	public void actually_destroy_service() {
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (generatedData) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedData);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData);
 		} 
 		obs_output generatedOutput = this.getOutput();
 		if (generatedOutput) {
@@ -107,46 +116,46 @@ public class obs_service {
 	}
 	public void obs_service_activate() {
 		if (!ModernizedCProgram.obs_object_valid(service, "obs_service_activate", "service")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_output generatedOutput = this.getOutput();
 		if (!generatedOutput) {
 			ModernizedCProgram.blog(LOG_WARNING, "obs_service_deactivate: service '%s' is not assigned to an output", ModernizedCProgram.obs_service_get_name(service));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedActive = this.getActive();
 		if (generatedActive) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_service_info generatedInfo = this.getInfo();
 		Object generatedActivate = generatedInfo.getActivate();
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		obs_data generatedSettings = generatedContext.getSettings();
 		if (generatedActivate) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedData, generatedSettings);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData, generatedSettings);
 		} 
 		this.setActive(true);
 	}
 	public void obs_service_deactivate(Object remove) {
 		if (!ModernizedCProgram.obs_object_valid(service, "obs_service_deactivate", "service")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_output generatedOutput = this.getOutput();
 		if (!generatedOutput) {
 			ModernizedCProgram.blog(LOG_WARNING, "obs_service_deactivate: service '%s' is not assigned to an output", ModernizedCProgram.obs_service_get_name(service));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedActive = this.getActive();
 		if (!generatedActive) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_service_info generatedInfo = this.getInfo();
 		Object generatedDeactivate = generatedInfo.getDeactivate();
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (generatedDeactivate) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedData);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData);
 		} 
 		this.setActive(false);
 		Object generatedDestroy = this.getDestroy();
@@ -158,7 +167,7 @@ public class obs_service {
 	}
 	public void obs_service_addref() {
 		if (!service) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_weak_service generatedControl = this.getControl();
 		obs_weak_ref generatedRef = generatedControl.getRef();
@@ -166,7 +175,7 @@ public class obs_service {
 	}
 	public void obs_service_release() {
 		if (!service) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_weak_service generatedControl = this.getControl();
 		obs_weak_service_t control = generatedControl;
@@ -200,15 +209,6 @@ public class obs_service {
 		obs_service_info generatedInfo = this.getInfo();
 		Object generatedType_data = generatedInfo.getType_data();
 		return ModernizedCProgram.obs_object_valid(service, "obs_service_get_type_data", "service") ? generatedType_data : NULL;
-	}
-	public obs_service obs_get_service_by_name(Object name) {
-		if (!ModernizedCProgram.obs) {
-			return NULL;
-		} 
-		return ModernizedCProgram.get_context_by_name(ModernizedCProgram.obs.getData().getFirst_service(), name, ModernizedCProgram.obs.getData().getServices_mutex(), obs_service_addref_safe_);
-	}
-	public obs_service obs_output_get_service(Object output) {
-		return ModernizedCProgram.obs_object_valid(output, "obs_output_get_service", "output") ? output.getService() : NULL;
 	}
 	public obs_context_data getContext() {
 		return context;

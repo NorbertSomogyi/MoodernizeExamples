@@ -18,10 +18,10 @@ public class gs_rect {
 	public void gs_get_viewport() {
 		graphics_t graphics = thread_graphics;
 		if (!(ModernizedCProgram.gs_valid("gs_get_viewport") && ModernizedCProgram.gs_obj_valid(rect, "gs_get_viewport", "rect"))) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedDevice, rect);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, rect);
 	}
 	public int getX() {
 		return x;

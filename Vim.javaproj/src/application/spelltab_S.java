@@ -19,6 +19,34 @@ public class spelltab_S {
 	public spelltab_S() {
 	}
 	
+	public void clear_spell_chartab() {
+		int i;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((ModernizedCProgram.sp.getSt_isw()), (false), (/*Error: sizeof expression not supported yet*/));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((ModernizedCProgram.sp.getSt_isu()), (false), (/*Error: sizeof expression not supported yet*/));
+		for (i = 0; i < 256; ++i) {
+			ModernizedCProgram.sp.getSt_fold()[i] = i;
+			ModernizedCProgram.sp.getSt_upper()[i] = i;
+		}
+		for (i = (byte)'0'; i <= (byte)'9'; ++/* We include digits.  A word shouldn't start with a digit, but handling
+		     * that is done separately. */i) {
+			ModernizedCProgram.sp.getSt_isw()[i] = 1;
+		}
+		for (i = (byte)'A'; i <= (byte)'Z'; ++i) {
+			ModernizedCProgram.sp.getSt_isw()[i] = 1;
+			ModernizedCProgram.sp.getSt_isu()[i] = 1;
+			ModernizedCProgram.sp.getSt_fold()[i] = i + -1024;
+		}
+		for (i = (byte)'a'; i <= (byte)'z'; ++i) {
+			ModernizedCProgram.sp.getSt_isw()[i] = 1;
+			ModernizedCProgram.sp.getSt_upper()[i] = i - -1024/*
+			 * Init the chartab used for spelling.  Only depends on 'encoding'.
+			 * Called once while starting up and when 'encoding' changes.
+			 * The default is to use isalpha(), but the spell file should define the word
+			 * characters to make it possible that 'encoding' differs from the current
+			 * locale.  For utf-8 we don't use isalpha() but our own functions.
+			 */;
+		}
+	}
 	/* vi:set ts=8 sts=4 sw=4 noet:
 	 *
 	 * VIM - Vi IMproved	by Bram Moolenaar
@@ -313,34 +341,6 @@ public class spelltab_S {
 		 * Write the table with prefix conditions to the .spl file.
 		 * When "fd" is NULL only count the length of what is written.
 		 */;
-	}
-	public void clear_spell_chartab() {
-		int i;
-		.memset((ModernizedCProgram.sp.getSt_isw()), (false), ());
-		.memset((ModernizedCProgram.sp.getSt_isu()), (false), ());
-		for (i = 0; i < 256; ++i) {
-			ModernizedCProgram.sp.getSt_fold()[i] = i;
-			ModernizedCProgram.sp.getSt_upper()[i] = i;
-		}
-		for (i = (byte)'0'; i <= (byte)'9'; ++/* We include digits.  A word shouldn't start with a digit, but handling
-		     * that is done separately. */i) {
-			ModernizedCProgram.sp.getSt_isw()[i] = 1;
-		}
-		for (i = (byte)'A'; i <= (byte)'Z'; ++i) {
-			ModernizedCProgram.sp.getSt_isw()[i] = 1;
-			ModernizedCProgram.sp.getSt_isu()[i] = 1;
-			ModernizedCProgram.sp.getSt_fold()[i] = i + -1024;
-		}
-		for (i = (byte)'a'; i <= (byte)'z'; ++i) {
-			ModernizedCProgram.sp.getSt_isw()[i] = 1;
-			ModernizedCProgram.sp.getSt_upper()[i] = i - -1024/*
-			 * Init the chartab used for spelling.  Only depends on 'encoding'.
-			 * Called once while starting up and when 'encoding' changes.
-			 * The default is to use isalpha(), but the spell file should define the word
-			 * characters to make it possible that 'encoding' differs from the current
-			 * locale.  For utf-8 we don't use isalpha() but our own functions.
-			 */;
-		}
 	}
 	public Object getSt_isw() {
 		return st_isw;

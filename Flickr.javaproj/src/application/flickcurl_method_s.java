@@ -6,10 +6,10 @@ public class flickcurl_method_s {
 	private Byte description;
 	private Byte response;
 	private Byte explanation;
-	private flickcurl_arg_s args;
+	private flickcurl_arg_s[][] args;
 	private int args_count;
 	
-	public flickcurl_method_s(Byte name, int needslogin, Byte description, Byte response, Byte explanation, flickcurl_arg_s args, int args_count) {
+	public flickcurl_method_s(Byte name, int needslogin, Byte description, Byte response, Byte explanation, flickcurl_arg_s[][] args, int args_count) {
 		setName(name);
 		setNeedslogin(needslogin);
 		setDescription(description);
@@ -50,53 +50,42 @@ public class flickcurl_method_s {
 		int i;
 		do {
 			if (!method) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_method is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\method.c", 48, __func__);
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_method is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\method.c", 48, __func__);
+				return /*Error: Unsupported expression*/;
 			} 
 		} while (0);
 		Byte generatedName = this.getName();
 		if (generatedName) {
-			.free(generatedName);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedName);
 		} 
 		Byte generatedDescription = this.getDescription();
 		if (generatedDescription) {
-			.free(generatedDescription);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedDescription);
 		} 
 		Byte generatedResponse = this.getResponse();
 		if (generatedResponse) {
-			.free(generatedResponse);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedResponse);
 		} 
 		Byte generatedExplanation = this.getExplanation();
 		if (generatedExplanation) {
-			.free(generatedExplanation);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedExplanation);
 		} 
 		int generatedArgs_count = this.getArgs_count();
-		flickcurl_arg_s generatedArgs = this.getArgs();
+		flickcurl_arg_s[][] generatedArgs = this.getArgs();
 		for (i = 0; i < generatedArgs_count; i++) {
 			generatedArgs[i].flickcurl_free_arg();
 		}
-		.free(method);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(method);
 	}
 	public flickcurl_method_s flickcurl_build_method(flickcurl_s fc, Object xpathCtx) {
 		int expri;
 		flickcurl_method method = ((Object)0);
-		method = (flickcurl_method).calloc(, 1);
+		method = (flickcurl_method)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 		int generatedFailed = fc.getFailed();
 		for (expri = 0; method_fields_table[expri].getXpath(); expri++) {
 			flickcurl_method_field_type mft = method_fields_table[expri].getField();
 			byte string_value = fc.flickcurl_xpath_eval(xpathCtx, method_fields_table[expri].getXpath());
 			switch (mft) {
-			case .METHOD_FIELD_description:
-					method.setDescription(string_value);
-					string_value = ((Object)0);
-					break;
-			case .METHOD_FIELD_response:
-					method.setResponse(string_value);
-					string_value = ((Object)0);
-					break;
-			case .METHOD_FIELD_needslogin:
-					method.setNeedslogin(.atoi(string_value));
-					break;
 			case .METHOD_FIELD_name:
 					method.setName(string_value);
 					string_value = ((Object)0);
@@ -105,12 +94,23 @@ public class flickcurl_method_s {
 					method.setExplanation(string_value);
 					string_value = ((Object)0);
 					break;
+			case .METHOD_FIELD_needslogin:
+					method.setNeedslogin(/*Error: Function owner not recognized*/atoi(string_value));
+					break;
+			case .METHOD_FIELD_description:
+					method.setDescription(string_value);
+					string_value = ((Object)0);
+					break;
+			case .METHOD_FIELD_response:
+					method.setResponse(string_value);
+					string_value = ((Object)0);
+					break;
 			default:
 					fc.flickcurl_error("Unknown method field %d", (int)mft);
 					fc.setFailed(1);
 			}
 			if (string_value) {
-				.free(string_value);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(string_value);
 			} 
 			if (generatedFailed) {
 				;
@@ -137,7 +137,7 @@ public class flickcurl_method_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -184,10 +184,10 @@ public class flickcurl_method_s {
 	public void setExplanation(Byte newExplanation) {
 		explanation = newExplanation;
 	}
-	public flickcurl_arg_s getArgs() {
+	public flickcurl_arg_s[][] getArgs() {
 		return args;
 	}
-	public void setArgs(flickcurl_arg_s newArgs) {
+	public void setArgs(flickcurl_arg_s[][] newArgs) {
 		args = newArgs;
 	}
 	public int getArgs_count() {

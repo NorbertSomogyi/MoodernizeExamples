@@ -39,8 +39,8 @@ public class imap_store {
 		byte rsp;
 		int s = -1;
 		int preauth;
-		ctx = ModernizedCProgram.xcalloc(1, );
-		ctx.setImap(imap = ModernizedCProgram.xcalloc(1, ));
+		ctx = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+		ctx.setImap(imap = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/));
 		imap_buffer generatedBuf = imap.getBuf();
 		imap_socket generatedSock = generatedBuf.getSock();
 		Object generatedFd = generatedSock.getFd();
@@ -75,60 +75,60 @@ public class imap_store {
 				addrinfo ai = new addrinfo();
 				int gai;
 				byte[] portstr = new byte[6];
-				ModernizedCProgram.xsnprintf(portstr, , "%d", generatedPort);
-				.memset(hints, 0, );
+				ModernizedCProgram.xsnprintf(portstr, /*Error: sizeof expression not supported yet*/, "%d", generatedPort);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(hints, 0, /*Error: sizeof expression not supported yet*/);
 				hints.setAddrinfo(1);
 				hints.setAddrinfo(6);
 				ModernizedCProgram.imap_info("Resolving %s... ", generatedHost);
-				gai = .getaddrinfo(generatedHost, portstr, hints, ai);
+				gai = /*Error: Function owner not recognized*/getaddrinfo(generatedHost, portstr, hints, ai);
 				if (gai) {
-					.fprintf((_iob[2]), "getaddrinfo: %s\n", .gai_strerror(gai));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "getaddrinfo: %s\n", /*Error: Function owner not recognized*/gai_strerror(gai));
 					;
 				} 
 				ModernizedCProgram.imap_info("ok\n");
 				for (ai0 = ai; ai; ai = generatedAddrinfo) {
 					byte[] addr = new byte[1025];
-					s = .socket(generatedAddrinfo, generatedAddrinfo, generatedAddrinfo);
+					s = /*Error: Function owner not recognized*/socket(generatedAddrinfo, generatedAddrinfo, generatedAddrinfo);
 					if (s < 0) {
 						continue;
 					} 
-					.getnameinfo(generatedAddrinfo, generatedAddrinfo, addr, , ((Object)0), 0, NI_NUMERICHOST);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/getnameinfo(generatedAddrinfo, generatedAddrinfo, addr, /*Error: sizeof expression not supported yet*/, ((Object)0), 0, NI_NUMERICHOST);
 					ModernizedCProgram.imap_info("Connecting to [%s]:%s... ", addr, portstr);
-					if (.connect(s, generatedAddrinfo, generatedAddrinfo) < 0) {
-						.close(s);
+					if (/*Error: Function owner not recognized*/connect(s, generatedAddrinfo, generatedAddrinfo) < 0) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(s);
 						s = -1;
-						.perror("connect");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/perror("connect");
 						continue;
 					} 
 					break;
 				}
-				.freeaddrinfo(ai0/* NO_IPV6 */);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/freeaddrinfo(ai0/* NO_IPV6 */);
 				if (s < 0) {
-					.fputs("Error: unable to connect to server.\n", (_iob[2]));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs("Error: unable to connect to server.\n", (_iob[2]));
 					;
 				} 
 				generatedFd[0] = s;
-				generatedFd[1] = .dup(s);
+				generatedFd[1] = /*Error: Function owner not recognized*/dup(s);
 				if (generatedUse_ssl && generatedSock.ssl_socket_connect(0, generatedSsl_verify)) {
-					.close(s);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(s);
 					;
 				} 
 				ModernizedCProgram.imap_info("ok\n");
 		} 
 		if (generatedBuf.buffer_gets(/* read the greeting string */rsp)) {
-			.fprintf((_iob[2]), "IMAP error: no greeting response\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "IMAP error: no greeting response\n");
 			;
 		} 
 		arg = ModernizedCProgram.next_arg(rsp);
 		if (!arg || arg != (byte)'*' || (arg = ModernizedCProgram.next_arg(rsp)) == ((Object)0)) {
-			.fprintf((_iob[2]), "IMAP error: invalid greeting response\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "IMAP error: invalid greeting response\n");
 			;
 		} 
 		preauth = 0;
-		if (!.strcmp("PREAUTH", arg)) {
+		if (!/*Error: Function owner not recognized*/strcmp("PREAUTH", arg)) {
 			preauth = 1;
-		}  else if (.strcmp("OK", arg) != 0) {
-			.fprintf((_iob[2]), "IMAP error: unknown greeting response\n");
+		}  else if (/*Error: Function owner not recognized*/strcmp("OK", arg) != 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "IMAP error: unknown greeting response\n");
 			;
 		} 
 		ModernizedCProgram.parse_response_code(ctx, ((Object)0), rsp);
@@ -156,55 +156,55 @@ public class imap_store {
 			ModernizedCProgram.server_fill_credential(srvc, cred);
 			if (generatedAuth_method) {
 				imap_cmd_cb cb = new imap_cmd_cb();
-				if (!.strcmp(generatedAuth_method, "CRAM-MD5")) {
+				if (!/*Error: Function owner not recognized*/strcmp(generatedAuth_method, "CRAM-MD5")) {
 					if (!(generatedCaps & (1 << (CAPABILITY.AUTH_CRAM_MD5)))) {
-						.fprintf((_iob[2]), "You specified CRAM-MD5 as authentication method, but %s doesn't support it.\n", generatedHost);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "You specified CRAM-MD5 as authentication method, but %s doesn't support it.\n", generatedHost);
 						;
 					} 
-					.memset(cb, 0, );
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(cb, 0, /*Error: sizeof expression not supported yet*/);
 					cb.setCont(auth_cram_md5);
 					if (ModernizedCProgram.imap_exec(ctx, cb, "AUTHENTICATE CRAM-MD5") != 0) {
-						.fprintf((_iob[2]), "IMAP error: AUTHENTICATE CRAM-MD5 failed\n");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "IMAP error: AUTHENTICATE CRAM-MD5 failed\n");
 						;
 					} 
 				} else {
-						.fprintf((_iob[2]), "Unknown authentication method:%s\n", generatedHost);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Unknown authentication method:%s\n", generatedHost);
 						;
 				} 
 			} else {
 					if ((generatedCaps & (1 << (CAPABILITY.NOLOGIN)))) {
-						.fprintf((_iob[2]), "Skipping account %s@%s, server forbids LOGIN\n", generatedUser, generatedHost);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Skipping account %s@%s, server forbids LOGIN\n", generatedUser, generatedHost);
 						;
 					} 
 					if (!generatedSsl) {
 						ModernizedCProgram.imap_warn("*** IMAP Warning *** Password is being sent in the clear\n");
 					} 
 					if (ModernizedCProgram.imap_exec(ctx, ((Object)0), "LOGIN \"%s\" \"%s\"", generatedUser, generatedPass) != 0) {
-						.fprintf((_iob[2]), "IMAP error: LOGIN failed\n");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "IMAP error: LOGIN failed\n");
 						;
 					} 
 			} 
 		} 
 		Byte generatedUsername = cred.getUsername();
 		if (generatedUsername) {
-			.credential_approve(cred);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/credential_approve(cred);
 		} 
 		cred.credential_clear();
 		ctx.setName(/* check the target mailbox exists */folder);
 		Object generatedName = ctx.getName();
 		switch (ModernizedCProgram.imap_exec(ctx, ((Object)0), "EXAMINE \"%s\"", generatedName)) {
+		case 2:
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "IMAP error: could not check mailbox\n");
+				;
+		case 0/* ok */:
+				break;
 		case 1:
 				if (ModernizedCProgram.imap_exec(ctx, ((Object)0), "CREATE \"%s\"", generatedName) == 0) {
 					ModernizedCProgram.imap_info("Created missing mailbox\n");
 				} else {
-						.fprintf((_iob[2]), "IMAP error: could not create missing mailbox\n");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "IMAP error: could not create missing mailbox\n");
 						;
 				} 
-				break;
-		case 2:
-				.fprintf((_iob[2]), "IMAP error: could not check mailbox\n");
-				;
-		case 0/* ok */:
 				break;
 		}
 		ctx.setPrefix("");

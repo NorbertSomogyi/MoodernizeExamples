@@ -31,7 +31,7 @@ public class cmt_fmt_map {
 			if (!ModernizedCProgram.starts_with(commit_formats[i].getName(), sought)) {
 				continue;
 			} 
-			match_len = .strlen(commit_formats[i].getName());
+			match_len = /*Error: Function owner not recognized*/strlen(commit_formats[i].getName());
 			if (found == ((Object)0) || found_match_len > match_len) {
 				found = commit_formats[i];
 				found_match_len = match_len;

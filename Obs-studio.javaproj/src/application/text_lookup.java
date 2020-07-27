@@ -20,12 +20,12 @@ public class text_lookup {
 		lex.lexer_start(file_data);
 		name.strref_clear();
 		value.strref_clear();
-		Object generatedArray = name.getArray();
+		Object[] generatedArray = name.getArray();
 		lex.lexer_free();
 	}
 	/* ------------------------------------------------------------------------- */
 	public text_lookup text_lookup_create(Object path) {
-		text_lookup lookup = ModernizedCProgram.bzalloc();
+		text_lookup lookup = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		if (!lookup.text_lookup_add(path)) {
 			ModernizedCProgram.bfree(lookup);
 			lookup = ((Object)0);
@@ -42,14 +42,14 @@ public class text_lookup {
 		} 
 		file.os_fread_utf8(temp);
 		file_str.dstr_init_move_array(temp);
-		.fclose(file);
-		byte generatedArray = file_str.getArray();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(file);
+		byte[] generatedArray = file_str.getArray();
 		if (!generatedArray) {
 			return 0;
 		} 
 		text_node generatedTop = this.getTop();
 		if (!generatedTop) {
-			this.setTop(ModernizedCProgram.bzalloc());
+			this.setTop(ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/));
 		} 
 		file_str.dstr_replace("\r", " ");
 		lookup.lookup_addfiledata(generatedArray);

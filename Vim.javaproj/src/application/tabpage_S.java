@@ -45,63 +45,6 @@ public class tabpage_S {
 			this.setTp_python3_ref(((Object)0));
 		} 
 	}
-	public int current_tab_nr() {
-		tabpage_T tp = new tabpage_T();
-		int nr = 0;
-		tabpage_S generatedTp_next = tp.getTp_next();
-		for (tp = ModernizedCProgram.first_tabpage; tp != ((Object)0); tp = generatedTp_next) {
-			++nr;
-			if (tp == tab) {
-				break;
-			} 
-		}
-		return nr;
-	}
-	/*
-	 * Execute one Ex command.
-	 *
-	 * If 'sourcing' is TRUE, the command will be included in the error message.
-	 *
-	 * 1. skip comment lines and leading space
-	 * 2. handle command modifiers
-	 * 3. find the command
-	 * 4. parse range
-	 * 5. Parse the command.
-	 * 6. parse arguments
-	 * 7. switch on command name
-	 *
-	 * Note: "fgetline" can be NULL.
-	 *
-	 * This function may be called recursively!
-	 */
-	public void tabpage_close_other(int forceit) {
-		int done = 0;
-		win_T wp = new win_T();
-		int h = ModernizedCProgram.tabline_height();
-		window_S generatedTp_firstwin = this.getTp_firstwin();
-		while (++done < /* Limit to 1000 windows, autocommands may add a window while we close
-		     * one.  OK, so I'm paranoid... */1000) {
-			wp = generatedTp_firstwin;
-			ModernizedCProgram.ex_win_close(forceit, wp, tp);
-			if (!tp.valid_tabpage() || generatedTp_firstwin == /* Autocommands may delete the tab page under our fingers and we may
-				 * fail to close a window with a modified buffer. */wp) {
-				break;
-			} 
-		}
-		curbuf.apply_autocmds(auto_event.EVENT_TABCLOSED, ((Object)0), ((Object)0), 0);
-		redraw_tabline = 1;
-		if (h != ModernizedCProgram.tabline_height()) {
-			ModernizedCProgram.shell_new_rows();
-		} 
-	}
-	public void python_tabpage_free() {
-		Object generatedTp_python_ref = this.getTp_python_ref();
-		if (generatedTp_python_ref != ((Object)0)) {
-			TabPageObject tp = generatedTp_python_ref;
-			tp.setTab(((tabpage_T)(true)));
-			this.setTp_python_ref(((Object)0));
-		} 
-	}
 	public void popup_close_tabpage(int id) {
 		win_T wp = new win_T();
 		Object generatedTp_first_popupwin = this.getTp_first_popupwin();
@@ -117,7 +60,7 @@ public class tabpage_S {
 						prev.setW_next(generatedW_next);
 				} 
 				wp.popup_free();
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		}
 	}
@@ -136,7 +79,7 @@ public class tabpage_S {
 	}
 	public tabpage_S alloc_tabpage() {
 		tabpage_T tp = new tabpage_T();
-		tp = (tabpage_T)ModernizedCProgram.alloc_clear();
+		tp = (tabpage_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/);
 		if (tp == ((Object)0)) {
 			return ((Object)0);
 		} 
@@ -221,7 +164,7 @@ public class tabpage_S {
 				for (ptp = ModernizedCProgram.first_tabpage; ptp != ((Object)0) && generatedTp_next != tab; ptp = generatedTp_next) {
 					;
 				}
-				((ptp != ((Object)0)) ? (Object)0 : ._assert("ptp != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Vim\\src\\window.c", 3974));
+				((ptp != ((Object)0)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("ptp != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Vim\\src\\window.c", 3974));
 				ptp.setTp_next(generatedTp_next);
 		} 
 		ptp.goto_tabpage_tp(0, 0);
@@ -284,6 +227,14 @@ public class tabpage_S {
 		generatedTp_snapshot[idx].clear_snapshot_rec();
 		generatedTp_snapshot[idx] = ((Object)0);
 	}
+	public void python_tabpage_free() {
+		Object generatedTp_python_ref = this.getTp_python_ref();
+		if (generatedTp_python_ref != ((Object)0)) {
+			TabPageObject tp = generatedTp_python_ref;
+			tp.setTab(((tabpage_T)(true)));
+			this.setTp_python_ref(((Object)0));
+		} 
+	}
 	public void diff_mark_adjust_tp(int idx, Object line1, Object line2, long amount, long amount_after) {
 		diff_T dp = new diff_T();
 		diff_T dprev = new diff_T();
@@ -318,11 +269,11 @@ public class tabpage_S {
 		Object generatedDf_count = dprev.getDf_count();
 		Object generatedTp_diffbuf = this.getTp_diffbuf();
 		Object generatedDf_next = dp.getDf_next();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if ((dp == ((Object)0) || generatedDf_lnum[idx] - 1 > line2 || (line2 == LONG_MAX && generatedDf_lnum[idx] > line1)) && (dprev == ((Object)0) || generatedDf_lnum[idx] + generatedDf_count[idx] < line1) && !ModernizedCProgram.diff_busy) {
 				dnext = ModernizedCProgram.diff_alloc_new(tp, dprev, dp);
 				if (dnext == ((Object)0)) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				generatedDf_lnum[idx] = line1;
 				generatedDf_count[idx] = inserted;
@@ -474,6 +425,55 @@ public class tabpage_S {
 		 * when 'diffopt' doesn't contain "filler").
 		 * This should only be used for windows where 'diff' is set.
 		 */));
+	}
+	public int current_tab_nr() {
+		tabpage_T tp = new tabpage_T();
+		int nr = 0;
+		tabpage_S generatedTp_next = tp.getTp_next();
+		for (tp = ModernizedCProgram.first_tabpage; tp != ((Object)0); tp = generatedTp_next) {
+			++nr;
+			if (tp == tab) {
+				break;
+			} 
+		}
+		return nr;
+	}
+	/*
+	 * Execute one Ex command.
+	 *
+	 * If 'sourcing' is TRUE, the command will be included in the error message.
+	 *
+	 * 1. skip comment lines and leading space
+	 * 2. handle command modifiers
+	 * 3. find the command
+	 * 4. parse range
+	 * 5. Parse the command.
+	 * 6. parse arguments
+	 * 7. switch on command name
+	 *
+	 * Note: "fgetline" can be NULL.
+	 *
+	 * This function may be called recursively!
+	 */
+	public void tabpage_close_other(int forceit) {
+		int done = 0;
+		win_T wp = new win_T();
+		int h = ModernizedCProgram.tabline_height();
+		window_S generatedTp_firstwin = this.getTp_firstwin();
+		while (++done < /* Limit to 1000 windows, autocommands may add a window while we close
+		     * one.  OK, so I'm paranoid... */1000) {
+			wp = generatedTp_firstwin;
+			ModernizedCProgram.ex_win_close(forceit, wp, tp);
+			if (!tp.valid_tabpage() || generatedTp_firstwin == /* Autocommands may delete the tab page under our fingers and we may
+				 * fail to close a window with a modified buffer. */wp) {
+				break;
+			} 
+		}
+		curbuf.apply_autocmds(auto_event.EVENT_TABCLOSED, ((Object)0), ((Object)0), 0);
+		redraw_tabline = 1;
+		if (h != ModernizedCProgram.tabline_height()) {
+			ModernizedCProgram.shell_new_rows();
+		} 
 	}
 	public tabpage_S getTp_next() {
 		return tp_next;

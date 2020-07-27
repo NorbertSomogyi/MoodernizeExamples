@@ -109,9 +109,9 @@ public class afffile_S {
 		do_mapline = generatedGa_len == /* Only do MAP lines when not done in another .aff file already. */0/*
 		     * Allocate and init the afffile_T structure.
 		     */;
-		aff = (afffile_T)spin.getroom(, 1);
+		aff = (afffile_T)spin.getroom(/*Error: Unsupported expression*/, 1);
 		if (aff == ((Object)0)) {
-			.fclose(fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fd);
 			return ((Object)0);
 		} 
 		hashtable_S generatedAf_pref = aff.getAf_pref();
@@ -151,7 +151,7 @@ public class afffile_S {
 		int generatedAf_ignoreextra = aff.getAf_ignoreextra();
 		Object generatedAe_add = aff_entry.getAe_add();
 		Object generatedAe_flags = aff_entry.getAe_flags();
-		Object generatedAe_chop = aff_entry.getAe_chop();
+		Object[] generatedAe_chop = aff_entry.getAe_chop();
 		affentry_S generatedAh_first = cur_aff.getAh_first();
 		regprog regprog = new regprog();
 		regprog generatedAe_prog = aff_entry.getAe_prog();
@@ -185,7 +185,7 @@ public class afffile_S {
 			} 
 			itemcnt = /* Split the line up in white separated items.  Put a NUL after each
 				 * item. */0;
-			for (p = line; ; ) {
+			for (p = line; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				while (p != (byte)'\000' && p <= /* skip white space and CR/NL */(byte)' ') {
 					++p;
 				}
@@ -218,11 +218,11 @@ public class afffile_S {
 					} 
 					generatedSi_conv.setVc_fail(1);
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "FLAG", 2) && generatedAf_flagtype == 0) {
-					if (.strcmp((byte)(items[1]), (byte)("long")) == 0) {
+					if (/*Error: Function owner not recognized*/strcmp((byte)(items[1]), (byte)("long")) == 0) {
 						aff.setAf_flagtype(1);
-					}  else if (.strcmp((byte)(items[1]), (byte)("num")) == 0) {
+					}  else if (/*Error: Function owner not recognized*/strcmp((byte)(items[1]), (byte)("num")) == 0) {
 						aff.setAf_flagtype(3);
-					}  else if (.strcmp((byte)(items[1]), (byte)("caplong")) == 0) {
+					}  else if (/*Error: Function owner not recognized*/strcmp((byte)(items[1]), (byte)("caplong")) == 0) {
 						aff.setAf_flagtype(2);
 					} else {
 							ModernizedCProgram.smsg(((byte)("Invalid value for FLAG in %s line %d: %s")), fname, lnum, items[1]);
@@ -231,15 +231,15 @@ public class afffile_S {
 						ModernizedCProgram.smsg(((byte)("FLAG after using flags in %s line %d: %s")), fname, lnum, items[1]);
 					} 
 				}  else if (ModernizedCProgram.spell_info_item(items[0])) {
-					p = (char_u)spin.getroom((generatedSi_info == ((Object)0) ? 0 : .strlen((byte)(generatedSi_info))) + .strlen((byte)(items[0])) + .strlen((byte)(items[1])) + 3, 0);
+					p = (char_u)spin.getroom((generatedSi_info == ((Object)0) ? 0 : /*Error: Function owner not recognized*/strlen((byte)(generatedSi_info))) + /*Error: Function owner not recognized*/strlen((byte)(items[0])) + /*Error: Function owner not recognized*/strlen((byte)(items[1])) + 3, 0);
 					if (p != ((Object)0)) {
 						if (generatedSi_info != ((Object)0)) {
-							.strcpy((byte)(p), (byte)(generatedSi_info));
-							.strcat((byte)(p), (byte)("\n"));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(p), (byte)(generatedSi_info));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(p), (byte)("\n"));
 						} 
-						.strcat((byte)(p), (byte)(items[0]));
-						.strcat((byte)(p), (byte)(" "));
-						.strcat((byte)(p), (byte)(items[1]));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(p), (byte)(items[0]));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(p), (byte)(" "));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(p), (byte)(items[1]));
 						spin.setSi_info(p);
 					} 
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "MIDWORD", 2) && midword == ((Object)0)) {
@@ -272,47 +272,47 @@ public class afffile_S {
 						ModernizedCProgram.smsg(((byte)("Defining COMPOUNDPERMITFLAG after PFX item may give wrong results in %s line %d")), fname, lnum);
 					} 
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "COMPOUNDFLAG", 2) && compflags == ((Object)0)) {
-					p = spin.getroom(.strlen((byte)(items[1])) + 2, /* Turn flag "c" into COMPOUNDRULE compatible string "c+",
+					p = spin.getroom(/*Error: Function owner not recognized*/strlen((byte)(items[1])) + 2, /* Turn flag "c" into COMPOUNDRULE compatible string "c+",
 							 * "Na" into "Na+", "1234" into "1234+". */0);
 					if (p != ((Object)0)) {
-						.strcpy((byte)(p), (byte)(items[1]));
-						.strcat((byte)(p), (byte)("+"));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(p), (byte)(items[1]));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(p), (byte)("+"));
 						compflags = p;
 					} 
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "COMPOUNDRULES", 2)) {
-					if (.atoi((byte)items[1]) == /* We don't use the count, but do check that it's a number and
+					if (/*Error: Function owner not recognized*/atoi((byte)items[1]) == /* We don't use the count, but do check that it's a number and
 							 * not COMPOUNDRULE mistyped. */0) {
 						ModernizedCProgram.smsg(((byte)("Wrong COMPOUNDRULES value in %s line %d: %s")), fname, lnum, items[1]);
 					} 
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "COMPOUNDRULE", 2)) {
 					if (compflags != ((Object)0) || ModernizedCProgram.skipdigits(items[1]) != /* Don't use the first rule if it is a number. */(byte)'\000') {
-						l = (int).strlen((byte)(items[1])) + /* Concatenate this string to previously defined ones,
+						l = (int)/*Error: Function owner not recognized*/strlen((byte)(items[1])) + /* Concatenate this string to previously defined ones,
 								     * using a slash to separate them. */1;
 						if (compflags != ((Object)0)) {
-							l += (int).strlen((byte)(compflags)) + 1;
+							l += (int)/*Error: Function owner not recognized*/strlen((byte)(compflags)) + 1;
 						} 
 						p = spin.getroom(l, 0);
 						if (p != ((Object)0)) {
 							if (compflags != ((Object)0)) {
-								.strcpy((byte)(p), (byte)(compflags));
-								.strcat((byte)(p), (byte)("/"));
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(p), (byte)(compflags));
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(p), (byte)("/"));
 							} 
-							.strcat((byte)(p), (byte)(items[1]));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcat((byte)(p), (byte)(items[1]));
 							compflags = p;
 						} 
 					} 
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "COMPOUNDWORDMAX", 2) && compmax == 0) {
-					compmax = .atoi((byte)items[1]);
+					compmax = /*Error: Function owner not recognized*/atoi((byte)items[1]);
 					if (compmax == 0) {
 						ModernizedCProgram.smsg(((byte)("Wrong COMPOUNDWORDMAX value in %s line %d: %s")), fname, lnum, items[1]);
 					} 
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "COMPOUNDMIN", 2) && compminlen == 0) {
-					compminlen = .atoi((byte)items[1]);
+					compminlen = /*Error: Function owner not recognized*/atoi((byte)items[1]);
 					if (compminlen == 0) {
 						ModernizedCProgram.smsg(((byte)("Wrong COMPOUNDMIN value in %s line %d: %s")), fname, lnum, items[1]);
 					} 
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "COMPOUNDSYLMAX", 2) && compsylmax == 0) {
-					compsylmax = .atoi((byte)items[1]);
+					compsylmax = /*Error: Function owner not recognized*/atoi((byte)items[1]);
 					if (compsylmax == 0) {
 						ModernizedCProgram.smsg(((byte)("Wrong COMPOUNDSYLMAX value in %s line %d: %s")), fname, lnum, items[1]);
 					} 
@@ -325,14 +325,14 @@ public class afffile_S {
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "CHECKCOMPOUNDTRIPLE", 1)) {
 					compoptions |=  8;
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "CHECKCOMPOUNDPATTERN", 2)) {
-					if (.atoi((byte)items[1]) == 0) {
+					if (/*Error: Function owner not recognized*/atoi((byte)items[1]) == 0) {
 						ModernizedCProgram.smsg(((byte)("Wrong CHECKCOMPOUNDPATTERN value in %s line %d: %s")), fname, lnum, items[1]);
 					} 
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "CHECKCOMPOUNDPATTERN", 3)) {
 					garray_T gap = generatedSi_comppat;
 					int i;
 					for (i = 0; i < generatedGa_len - 1; i += /* Only add the couple if it isn't already there. */2) {
-						if (.strcmp((byte)(((char_u)(generatedGa_data))[i]), (byte)(items[1])) == 0 && .strcmp((byte)(((char_u)(generatedGa_data))[i + 1]), (byte)(items[2])) == 0) {
+						if (/*Error: Function owner not recognized*/strcmp((byte)(((char_u)(generatedGa_data))[i]), (byte)(items[1])) == 0 && /*Error: Function owner not recognized*/strcmp((byte)(((char_u)(generatedGa_data))[i + 1]), (byte)(items[2])) == 0) {
 							break;
 						} 
 					}
@@ -354,7 +354,7 @@ public class afffile_S {
 					aff.setAf_pfxpostpone(1);
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "IGNOREEXTRA", 1)) {
 					aff.setAf_ignoreextra(1);
-				}  else if ((.strcmp((byte)(items[0]), (byte)("PFX")) == 0 || .strcmp((byte)(items[0]), (byte)("SFX")) == 0) && aff_todo == 0 && itemcnt >= 4) {
+				}  else if ((/*Error: Function owner not recognized*/strcmp((byte)(items[0]), (byte)("PFX")) == 0 || /*Error: Function owner not recognized*/strcmp((byte)(items[0]), (byte)("SFX")) == 0) && aff_todo == 0 && itemcnt >= 4) {
 					int lasti = 4;
 					char_u[] key = new char_u();
 					if (items[0] == (byte)'P') {
@@ -373,22 +373,22 @@ public class afffile_S {
 							ModernizedCProgram.smsg(((byte)("Duplicate affix in %s line %d: %s")), fname, lnum, items[1]);
 						} 
 					} else {
-							cur_aff = (affheader_T)/* New affix letter. */spin.getroom(, 1);
+							cur_aff = (affheader_T)/* New affix letter. */spin.getroom(/*Error: Unsupported expression*/, 1);
 							if (cur_aff == ((Object)0)) {
 								break;
 							} 
 							cur_aff.setAh_flag(ModernizedCProgram.affitem2flag(generatedAf_flagtype, items[1], fname, lnum));
-							if (generatedAh_flag == 0 || .strlen((byte)(items[1])) >= 17) {
+							if (generatedAh_flag == 0 || /*Error: Function owner not recognized*/strlen((byte)(items[1])) >= 17) {
 								break;
 							} 
 							if (generatedAh_flag == generatedAf_bad || generatedAh_flag == generatedAf_rare || generatedAh_flag == generatedAf_keepcase || generatedAh_flag == generatedAf_needaffix || generatedAh_flag == generatedAf_circumfix || generatedAh_flag == generatedAf_nosuggest || generatedAh_flag == generatedAf_needcomp || generatedAh_flag == generatedAf_comproot) {
 								ModernizedCProgram.smsg(((byte)("Affix also used for BAD/RARE/KEEPCASE/NEEDAFFIX/NEEDCOMPOUND/NOSUGGEST in %s line %d: %s")), fname, lnum, items[1]);
 							} 
-							.strcpy((byte)(generatedAh_key), (byte)(items[1]));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(generatedAh_key), (byte)(items[1]));
 							tp.hash_add(generatedAh_key);
 							cur_aff.setAh_combine((items[2] == (byte)'Y'));
 					} 
-					if (itemcnt > lasti && .strcmp((byte)(items[lasti]), (byte)("S")) == /* Check for the "S" flag, which apparently means that another
+					if (itemcnt > lasti && /*Error: Function owner not recognized*/strcmp((byte)(items[lasti]), (byte)("S")) == /* Check for the "S" flag, which apparently means that another
 							 * block with the same affix name is following. */0) {
 						++lasti;
 						cur_aff.setAh_follows(1);
@@ -399,7 +399,7 @@ public class afffile_S {
 							 * mean mistakes go unnoticed.  Require a comment-starter. */(byte)'#') {
 						ModernizedCProgram.smsg(((byte)(ModernizedCProgram.e_afftrailing)), fname, lnum, items[lasti]);
 					} 
-					if (.strcmp((byte)(items[2]), (byte)("Y")) != 0 && .strcmp((byte)(items[2]), (byte)("N")) != 0) {
+					if (/*Error: Function owner not recognized*/strcmp((byte)(items[2]), (byte)("Y")) != 0 && /*Error: Function owner not recognized*/strcmp((byte)(items[2]), (byte)("N")) != 0) {
 						ModernizedCProgram.smsg(((byte)("Expected Y or N in %s line %d: %s")), fname, lnum, items[2]);
 					} 
 					if (items[0] == (byte)'P' && generatedAf_pfxpostpone) {
@@ -412,25 +412,25 @@ public class afffile_S {
 								did_postpone_prefix = /* Did use the ID in a previous block. */1;
 						} 
 					} 
-					aff_todo = .atoi((byte)items[3]);
-				}  else if ((.strcmp((byte)(items[0]), (byte)("PFX")) == 0 || .strcmp((byte)(items[0]), (byte)("SFX")) == 0) && aff_todo > 0 && .strcmp((byte)(generatedAh_key), (byte)(items[1])) == 0 && itemcnt >= 5) {
+					aff_todo = /*Error: Function owner not recognized*/atoi((byte)items[3]);
+				}  else if ((/*Error: Function owner not recognized*/strcmp((byte)(items[0]), (byte)("PFX")) == 0 || /*Error: Function owner not recognized*/strcmp((byte)(items[0]), (byte)("SFX")) == 0) && aff_todo > 0 && /*Error: Function owner not recognized*/strcmp((byte)(generatedAh_key), (byte)(items[1])) == 0 && itemcnt >= 5) {
 					affentry_T aff_entry = new affentry_T();
 					int upper = 0;
 					int lasti = 5/* Myspell allows extra text after the item, but that might
 							 * mean mistakes go unnoticed.  Require a comment-starter,
 							 * unless IGNOREEXTRA is used.  Hunspell uses a "-" item. */;
-					if (itemcnt > lasti && !generatedAf_ignoreextra && items[lasti] != (byte)'#' && (.strcmp((byte)(items[lasti]), (byte)("-")) != 0 || itemcnt != lasti + 1)) {
+					if (itemcnt > lasti && !generatedAf_ignoreextra && items[lasti] != (byte)'#' && (/*Error: Function owner not recognized*/strcmp((byte)(items[lasti]), (byte)("-")) != 0 || itemcnt != lasti + 1)) {
 						ModernizedCProgram.smsg(((byte)(ModernizedCProgram.e_afftrailing)), fname, lnum, items[lasti]);
 					} 
 					--/* New item for an affix letter. */aff_todo;
-					aff_entry = (affentry_T)spin.getroom(, 1);
+					aff_entry = (affentry_T)spin.getroom(/*Error: Unsupported expression*/, 1);
 					if (aff_entry == ((Object)0)) {
 						break;
 					} 
-					if (.strcmp((byte)(items[2]), (byte)("0")) != 0) {
+					if (/*Error: Function owner not recognized*/strcmp((byte)(items[2]), (byte)("0")) != 0) {
 						aff_entry.setAe_chop(spin.getroom_save(items[2]));
 					} 
-					if (.strcmp((byte)(items[3]), (byte)("0")) != 0) {
+					if (/*Error: Function owner not recognized*/strcmp((byte)(items[3]), (byte)("0")) != 0) {
 						aff_entry.setAe_add(spin.getroom_save(items[3]));
 						aff_entry.setAe_flags(ModernizedCProgram.vim_strchr(generatedAe_add, /* Recognize flags on the affix: abcd/XYZ */(byte)'/'));
 						if (generatedAe_flags != ((Object)0)) {
@@ -441,13 +441,13 @@ public class afffile_S {
 					if (!generatedSi_ascii || !(ModernizedCProgram.has_non_ascii(generatedAe_chop) || ModernizedCProgram.has_non_ascii(generatedAe_add))) {
 						aff_entry.setAe_next(generatedAh_first);
 						cur_aff.setAh_first(aff_entry);
-						if (.strcmp((byte)(items[4]), (byte)(".")) != 0) {
+						if (/*Error: Function owner not recognized*/strcmp((byte)(items[4]), (byte)(".")) != 0) {
 							char_u[] buf = new char_u();
 							aff_entry.setAe_cond(spin.getroom_save(items[4]));
 							if (items[0] == (byte)'P') {
-								.sprintf((byte)buf, "^%s", items[4]);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)buf, "^%s", items[4]);
 							} else {
-									.sprintf((byte)buf, "%s$", items[4]);
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)buf, "%s$", items[4]);
 							} 
 							aff_entry.setAe_prog(regprog.vim_regcomp(buf, 1 + 2 + 4));
 							if (generatedAe_prog == ((Object)0)) {
@@ -462,15 +462,15 @@ public class afffile_S {
 									 * the "upper" flag, clear "ae_chop" and remove the
 									 * letters from "ae_add".  The condition must either
 									 * be empty or start with the same letter. */)) {
-							if (generatedAe_chop != ((Object)0) && generatedAe_add != ((Object)0) && generatedAe_chop[.UNRECOGNIZEDFUNCTIONNAME(generatedAe_chop)] == (byte)'\000') {
+							if (generatedAe_chop != ((Object)0) && generatedAe_add != ((Object)0) && generatedAe_chop[/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAe_chop)] == (byte)'\000') {
 								int c;
 								int c_up;
-								c = (has_mbyte ? .mb_ptr2char(generatedAe_chop) : (int)(generatedAe_chop));
+								c = (has_mbyte ? /*Error: Function owner not recognized*/mb_ptr2char(generatedAe_chop) : (int)(generatedAe_chop));
 								c_up = (enc_utf8 && (c) >= 128 ? ModernizedCProgram.utf_toupper(c) : (c) < 256 ? (int)generatedSt_upper[c] : (c));
-								if (c_up != c && (generatedAe_cond == ((Object)0) || (has_mbyte ? .mb_ptr2char(generatedAe_cond) : (int)(generatedAe_cond)) == c)) {
-									p = generatedAe_add + .strlen((byte)(generatedAe_add));
-									p -= has_mbyte ? (.UNRECOGNIZEDFUNCTIONNAME(generatedAe_add, p - 1) + 1) : 1;
-									if ((has_mbyte ? .mb_ptr2char(p) : (int)(p)) == c_up) {
+								if (c_up != c && (generatedAe_cond == ((Object)0) || (has_mbyte ? /*Error: Function owner not recognized*/mb_ptr2char(generatedAe_cond) : (int)(generatedAe_cond)) == c)) {
+									p = generatedAe_add + /*Error: Function owner not recognized*/strlen((byte)(generatedAe_add));
+									p -= has_mbyte ? (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAe_add, p - 1) + 1) : 1;
+									if ((has_mbyte ? /*Error: Function owner not recognized*/mb_ptr2char(p) : (int)(p)) == c_up) {
 										upper = 1;
 										aff_entry.setAe_chop(((Object)0));
 										p = (byte)'\000'/* The condition is matched with the
@@ -485,7 +485,7 @@ public class afffile_S {
 													generatedAe_cond = c_up;
 											} 
 											if (generatedAe_cond != ((Object)0)) {
-												.sprintf((byte)buf, "^%s", generatedAe_cond);
+												/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf((byte)buf, "^%s", generatedAe_cond);
 												generatedAe_prog.vim_regfree();
 												aff_entry.setAe_prog(regprog.vim_regcomp(buf, 1 + 2));
 											} 
@@ -548,22 +548,22 @@ public class afffile_S {
 					upp = ModernizedCProgram.vim_strsave(items[1]);
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "REP", 2) || ModernizedCProgram.is_aff_rule(items, itemcnt, "REPSAL", 2)) {
 					;
-					if (!.isdigit(items[1])) {
+					if (!/*Error: Function owner not recognized*/isdigit(items[1])) {
 						ModernizedCProgram.smsg(((byte)("Expected REP(SAL) count in %s line %d")), fname, lnum);
 					} 
-				}  else if ((.strcmp((byte)(items[0]), (byte)("REP")) == 0 || .strcmp((byte)(items[0]), (byte)("REPSAL")) == 0) && itemcnt >= 3/* REP/REPSAL item */) {
+				}  else if ((/*Error: Function owner not recognized*/strcmp((byte)(items[0]), (byte)("REP")) == 0 || /*Error: Function owner not recognized*/strcmp((byte)(items[0]), (byte)("REPSAL")) == 0) && itemcnt >= 3/* REP/REPSAL item */) {
 					if (itemcnt > 3 && items[3][0] != /* Myspell ignores extra arguments, we require it starts with
 							 * # to detect mistakes. */(byte)'#') {
 						ModernizedCProgram.smsg(((byte)(ModernizedCProgram.e_afftrailing)), fname, lnum, items[3]);
 					} 
 					if (items[0][3] == (byte)'S' ? do_repsal : do_rep) {
-						for (p = items[1]; p != (byte)'\000'; p += .UNRECOGNIZEDFUNCTIONNAME(/* Replace underscore with space (can't include a space
+						for (p = items[1]; p != (byte)'\000'; p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(/* Replace underscore with space (can't include a space
 								     * directly). */p)) {
 							if (p == (byte)'_') {
 								p = (byte)' ';
 							} 
 						}
-						for (p = items[2]; p != (byte)'\000'; p += .UNRECOGNIZEDFUNCTIONNAME(p)) {
+						for (p = items[2]; p != (byte)'\000'; p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p)) {
 							if (p == (byte)'_') {
 								p = (byte)' ';
 							} 
@@ -573,12 +573,12 @@ public class afffile_S {
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "MAP", 2)) {
 					if (!/* MAP item or count */found_map) {
 						found_map = /* First line contains the count. */1;
-						if (!.isdigit(items[1])) {
+						if (!/*Error: Function owner not recognized*/isdigit(items[1])) {
 							ModernizedCProgram.smsg(((byte)("Expected MAP count in %s line %d")), fname, lnum);
 						} 
 					}  else if (do_mapline) {
 						int c;
-						for (p = items[1]; p != /* Check that every character appears only once. */(byte)'\000'; ) {
+						for (p = items[1]; p != /* Check that every character appears only once. */(byte)'\000'; /*Error: Unsupported expression*/) {
 							c = ModernizedCProgram.mb_ptr2char_adv(p);
 							if ((generatedGa_len > 0 && ModernizedCProgram.vim_strchr(generatedGa_data, c) != ((Object)0)) || ModernizedCProgram.vim_strchr(p, c) != ((Object)0)) {
 								ModernizedCProgram.smsg(((byte)("Duplicate character in MAP in %s line %d")), fname, lnum);
@@ -590,22 +590,22 @@ public class afffile_S {
 					} 
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "SAL", /* Accept "SAL from to" and "SAL from to  #comment". */3)) {
 					if (do_sal) {
-						if (.strcmp((byte)(items[1]), (byte)("followup")) == /* SAL item (sounds-a-like)
+						if (/*Error: Function owner not recognized*/strcmp((byte)(items[1]), (byte)("followup")) == /* SAL item (sounds-a-like)
 								     * Either one of the known keys or a from-to pair. */0) {
 							spin.setSi_followup(ModernizedCProgram.sal_to_bool(items[2]));
-						}  else if (.strcmp((byte)(items[1]), (byte)("collapse_result")) == 0) {
+						}  else if (/*Error: Function owner not recognized*/strcmp((byte)(items[1]), (byte)("collapse_result")) == 0) {
 							spin.setSi_collapse(ModernizedCProgram.sal_to_bool(items[2]));
-						}  else if (.strcmp((byte)(items[1]), (byte)("remove_accents")) == 0) {
+						}  else if (/*Error: Function owner not recognized*/strcmp((byte)(items[1]), (byte)("remove_accents")) == 0) {
 							spin.setSi_rem_accents(ModernizedCProgram.sal_to_bool(items[2]));
 						} else {
-								ModernizedCProgram.add_fromto(spin, generatedSi_sal, items[/* when "to" is "_" it means empty */1], .strcmp((byte)(items[2]), (byte)("_")) == 0 ? (char_u)"" : items[2]);
+								ModernizedCProgram.add_fromto(spin, generatedSi_sal, items[/* when "to" is "_" it means empty */1], /*Error: Function owner not recognized*/strcmp((byte)(items[2]), (byte)("_")) == 0 ? (char_u)"" : items[2]);
 						} 
 					} 
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "SOFOFROM", 2) && sofofrom == ((Object)0)) {
 					sofofrom = spin.getroom_save(items[1]);
 				}  else if (ModernizedCProgram.is_aff_rule(items, itemcnt, "SOFOTO", 2) && sofoto == ((Object)0)) {
 					sofoto = spin.getroom_save(items[1]);
-				}  else if (.strcmp((byte)(items[0]), (byte)("COMMON")) == 0) {
+				}  else if (/*Error: Function owner not recognized*/strcmp((byte)(items[0]), (byte)("COMMON")) == 0) {
 					int i;
 					for (i = 1; i < itemcnt; ++i) {
 						if ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
@@ -704,7 +704,7 @@ public class afffile_S {
 			spin.setSi_midword(midword);
 		} 
 		ModernizedCProgram.vim_free(pc);
-		.fclose(fd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fd);
 		return aff/*
 		 * Return TRUE when items[0] equals "rulename", there are "mincount" items or
 		 * a comment is following after item "mincount".
@@ -723,10 +723,10 @@ public class afffile_S {
 		regprog generatedAe_prog = ae.getAe_prog();
 		affentry_S generatedAe_next = ae.getAe_next();
 		affentry_S generatedAh_first = ah.getAh_first();
-		hashitem_S generatedHt_array = ht.getHt_array();
+		hashitem_S[] generatedHt_array = ht.getHt_array();
 		hashtable_S generatedAf_suff = this.getAf_suff();
 		hashtable_S generatedAf_pref = this.getAf_pref();
-		for (ht = generatedAf_pref; ; ht = generatedAf_suff) {
+		for (ht = generatedAf_pref; /*Error: Unsupported expression*/; ht = generatedAf_suff) {
 			todo = (int)generatedHt_used;
 			for (hi = generatedHt_array; todo > 0; ++hi) {
 				if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
@@ -780,7 +780,7 @@ public class afffile_S {
 		 * and return the number of affixes.
 		 */;
 	}
-	public int get_pfxlist(Object afflist, Object store_afflist) {
+	public int get_pfxlist(Object afflist, Object[] store_afflist) {
 		char_u p = new char_u();
 		char_u prevp = new char_u();
 		int cnt = 0;
@@ -791,7 +791,7 @@ public class afffile_S {
 		hashtable_S generatedAf_pref = this.getAf_pref();
 		hashitem_S hashitem_S = new hashitem_S();
 		Object generatedHi_key = (hi).getHi_key();
-		for (p = afflist; p != (byte)'\000'; ) {
+		for (p = afflist; p != (byte)'\000'; /*Error: Unsupported expression*/) {
 			prevp = p;
 			if (ModernizedCProgram.get_affitem(generatedAf_flagtype, p) != 0) {
 				ModernizedCProgram.vim_strncpy(key, prevp, p - /* A flag is a postponed prefix flag if it appears in "af_pref"
@@ -815,7 +815,7 @@ public class afffile_S {
 		 * Puts the flags in "store_afflist[]".
 		 */;
 	}
-	public void get_compflags(Object afflist, Object store_afflist) {
+	public void get_compflags(Object afflist, Object[] store_afflist) {
 		char_u p = new char_u();
 		char_u prevp = new char_u();
 		int cnt = 0;
@@ -825,7 +825,7 @@ public class afffile_S {
 		hashtable_S generatedAf_comp = this.getAf_comp();
 		hashitem_S hashitem_S = new hashitem_S();
 		Object generatedHi_key = (hi).getHi_key();
-		for (p = afflist; p != (byte)'\000'; ) {
+		for (p = afflist; p != (byte)'\000'; /*Error: Unsupported expression*/) {
 			prevp = p;
 			if (ModernizedCProgram.get_affitem(generatedAf_flagtype, p) != 0) {
 				ModernizedCProgram.vim_strncpy(key, prevp, p - /* A flag is a compound flag if it appears in "af_comp". */prevp);

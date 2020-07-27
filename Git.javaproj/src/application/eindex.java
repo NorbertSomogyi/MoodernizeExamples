@@ -1,13 +1,13 @@
 package application;
 
 public class eindex {
-	private object objects;
-	private Object hashes;
+	private object[][] objects;
+	private Object[] hashes;
 	private Object count;
 	private Object alloc;
 	private  positions;
 	
-	public eindex(object objects, Object hashes, Object count, Object alloc,  positions) {
+	public eindex(object[][] objects, Object[] hashes, Object count, Object alloc,  positions) {
 		setObjects(objects);
 		setHashes(hashes);
 		setCount(count);
@@ -17,16 +17,16 @@ public class eindex {
 	public eindex() {
 	}
 	
-	public object getObjects() {
+	public object[][] getObjects() {
 		return objects;
 	}
-	public void setObjects(object newObjects) {
+	public void setObjects(object[][] newObjects) {
 		objects = newObjects;
 	}
-	public Object getHashes() {
+	public Object[] getHashes() {
 		return hashes;
 	}
-	public void setHashes(Object newHashes) {
+	public void setHashes(Object[] newHashes) {
 		hashes = newHashes;
 	}
 	public Object getCount() {

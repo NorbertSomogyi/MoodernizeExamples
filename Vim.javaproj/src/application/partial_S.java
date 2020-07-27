@@ -6,10 +6,10 @@ public class partial_S {
 	private  pt_func;
 	private int pt_auto;
 	private int pt_argc;
-	private  pt_argv;
+	private [] pt_argv;
 	private dictvar_S pt_dict;
 	
-	public partial_S(int pt_refcount, Object pt_name,  pt_func, int pt_auto, int pt_argc,  pt_argv, dictvar_S pt_dict) {
+	public partial_S(int pt_refcount, Object pt_name,  pt_func, int pt_auto, int pt_argc, [] pt_argv, dictvar_S pt_dict) {
 		setPt_refcount(pt_refcount);
 		setPt_name(pt_name);
 		setPt_func(pt_func);
@@ -33,7 +33,7 @@ public class partial_S {
 	public void partial_free() {
 		int i;
 		int generatedPt_argc = this.getPt_argc();
-		 generatedPt_argv = this.getPt_argv();
+		[] generatedPt_argv = this.getPt_argv();
 		for (i = 0; i < generatedPt_argc; ++i) {
 			generatedPt_argv[i].clear_tv();
 		}
@@ -59,7 +59,7 @@ public class partial_S {
 			pt.partial_free();
 		} 
 	}
-	public Object deref_func_name(Object name, int lenp, int no_autoload) {
+	public Object deref_func_name(Object[] name, Integer lenp, int no_autoload) {
 		dictitem_T v = new dictitem_T();
 		int cc;
 		char_u s = new char_u();
@@ -80,7 +80,7 @@ public class partial_S {
 				return (char_u)/* just in case */"";
 			} 
 			s = generatedVval.getV_string();
-			lenp = (int).strlen((byte)(s));
+			lenp = (int)/*Error: Function owner not recognized*/strlen((byte)(s));
 			return s;
 		} 
 		if (v != ((Object)0) && generatedV_type == .VAR_PARTIAL) {
@@ -93,7 +93,7 @@ public class partial_S {
 				partialp = pt;
 			} 
 			s = pt.partial_name();
-			lenp = (int).strlen((byte)(s));
+			lenp = (int)/*Error: Function owner not recognized*/strlen((byte)(s));
 			return s;
 		} 
 		return name/*
@@ -131,10 +131,10 @@ public class partial_S {
 	public void setPt_argc(int newPt_argc) {
 		pt_argc = newPt_argc;
 	}
-	public  getPt_argv() {
+	public [] getPt_argv() {
 		return pt_argv;
 	}
-	public void setPt_argv( newPt_argv) {
+	public void setPt_argv([] newPt_argv) {
 		pt_argv = newPt_argv;
 	}
 	public dictvar_S getPt_dict() {

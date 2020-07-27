@@ -8,7 +8,7 @@ public class ft2_source {
 	private Object file_load_failed;
 	private Object from_file;
 	private Byte text_file;
-	private Object text;
+	private Object[] text;
 	private Object m_timestamp;
 	private Object update_file;
 	private Object last_checked;
@@ -19,13 +19,13 @@ public class ft2_source {
 	private Object texbuf_x;
 	private Object texbuf_y;
 	private Object color;
-	private Object colorbuf;
+	private Object[] colorbuf;
 	private Object cur_scroll;
 	private Object scroll_speed;
 	private Object tex;
 	private Object cacheglyphs;
 	private Object font_face;
-	private Object texbuf;
+	private Object[] texbuf;
 	private Object vbuf;
 	private Object draw_effect;
 	private Object outline_text;
@@ -35,7 +35,7 @@ public class ft2_source {
 	private Object log_lines;
 	private obs_source src;
 	
-	public ft2_source(Byte font_name, Byte font_style, Object font_size, Object font_flags, Object file_load_failed, Object from_file, Byte text_file, Object text, Object m_timestamp, Object update_file, Object last_checked, Object cx, Object cy, Object max_h, Object custom_width, Object texbuf_x, Object texbuf_y, Object color, Object colorbuf, Object cur_scroll, Object scroll_speed, Object tex, Object cacheglyphs, Object font_face, Object texbuf, Object vbuf, Object draw_effect, Object outline_text, Object drop_shadow, Object log_mode, Object word_wrap, Object log_lines, obs_source src) {
+	public ft2_source(Byte font_name, Byte font_style, Object font_size, Object font_flags, Object file_load_failed, Object from_file, Byte text_file, Object[] text, Object m_timestamp, Object update_file, Object last_checked, Object cx, Object cy, Object max_h, Object custom_width, Object texbuf_x, Object texbuf_y, Object color, Object[] colorbuf, Object cur_scroll, Object scroll_speed, Object tex, Object cacheglyphs, Object font_face, Object[] texbuf, Object vbuf, Object draw_effect, Object outline_text, Object drop_shadow, Object log_mode, Object word_wrap, Object log_lines, obs_source src) {
 		setFont_name(font_name);
 		setFont_style(font_style);
 		setFont_size(font_size);
@@ -73,18 +73,35 @@ public class ft2_source {
 	public ft2_source() {
 	}
 	
+	public Object init_font() {
+		 index = new ();
+		Byte generatedFont_name = this.getFont_name();
+		Object generatedFont_size = this.getFont_size();
+		Byte generatedFont_style = this.getFont_style();
+		Object generatedFont_flags = this.getFont_flags();
+		byte path = ModernizedCProgram.get_font_path(generatedFont_name, generatedFont_size, generatedFont_style, generatedFont_flags, index);
+		if (!path) {
+			return false;
+		} 
+		Object generatedFont_face = this.getFont_face();
+		if (generatedFont_face != NULL) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FT_Done_Face(generatedFont_face);
+			this.setFont_face(NULL);
+		} 
+		return /*Error: Function owner not recognized*/FT_New_Face(ModernizedCProgram.ft2_lib, path, index, generatedFont_face) == 0;
+	}
 	public void draw_outlines() {
 		// Horrible (hopefully temporary) solution for outlines. tmp = new ();
 		Object generatedVbuf = this.getVbuf();
 		gs_vb_data gs_vb_data = new gs_vb_data();
 		gs_vb_data vdata = gs_vb_data.gs_vertexbuffer_get_data(generatedVbuf);
-		Object generatedText = this.getText();
+		Object[] generatedText = this.getText();
 		if (!generatedText) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedGs_vb_data = vdata.getGs_vb_data();
 		tmp = generatedGs_vb_data;
-		Object generatedColorbuf = this.getColorbuf();
+		Object[] generatedColorbuf = this.getColorbuf();
 		vdata.setGs_vb_data(generatedColorbuf);
 		ModernizedCProgram.gs_matrix_push();
 		Object generatedTex = this.getTex();
@@ -92,7 +109,7 @@ public class ft2_source {
 		for ( i = 0;
 		 i < 8; i++) {
 			ModernizedCProgram.gs_matrix_translate3f(ModernizedCProgram.offsets[i * 2], ModernizedCProgram.offsets[(i * 2) + 1], 0.0);
-			ModernizedCProgram.draw_uv_vbuffer(generatedVbuf, generatedTex, generatedDraw_effect, ().wcslen(generatedText) * 6);
+			ModernizedCProgram.draw_uv_vbuffer(generatedVbuf, generatedTex, generatedDraw_effect, ()/*Error: Function owner not recognized*/wcslen(generatedText) * 6);
 		}
 		ModernizedCProgram.gs_matrix_identity();
 		ModernizedCProgram.gs_matrix_pop();
@@ -103,19 +120,19 @@ public class ft2_source {
 		Object generatedVbuf = this.getVbuf();
 		gs_vb_data gs_vb_data = new gs_vb_data();
 		gs_vb_data vdata = gs_vb_data.gs_vertexbuffer_get_data(generatedVbuf);
-		Object generatedText = this.getText();
+		Object[] generatedText = this.getText();
 		if (!generatedText) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedGs_vb_data = vdata.getGs_vb_data();
 		tmp = generatedGs_vb_data;
-		Object generatedColorbuf = this.getColorbuf();
+		Object[] generatedColorbuf = this.getColorbuf();
 		vdata.setGs_vb_data(generatedColorbuf);
 		ModernizedCProgram.gs_matrix_push();
 		ModernizedCProgram.gs_matrix_translate3f(4.0, 4.0, 0.0);
 		Object generatedTex = this.getTex();
 		Object generatedDraw_effect = this.getDraw_effect();
-		ModernizedCProgram.draw_uv_vbuffer(generatedVbuf, generatedTex, generatedDraw_effect, ().wcslen(generatedText) * 6);
+		ModernizedCProgram.draw_uv_vbuffer(generatedVbuf, generatedTex, generatedDraw_effect, ()/*Error: Function owner not recognized*/wcslen(generatedText) * 6);
 		ModernizedCProgram.gs_matrix_identity();
 		ModernizedCProgram.gs_matrix_pop();
 		vdata.setGs_vb_data(tmp);
@@ -126,9 +143,9 @@ public class ft2_source {
 		 space_pos = 0;
 		 word_width = 0;
 		 len = new ();
-		Object generatedText = this.getText();
+		Object[] generatedText = this.getText();
 		if (!generatedText) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedCustom_width = this.getCustom_width();
 		if (generatedCustom_width >= 100) {
@@ -143,13 +160,13 @@ public class ft2_source {
 		if (generatedVbuf != NULL) {
 			 tmpvbuf = generatedVbuf;
 			this.setVbuf(NULL);
-			ModernizedCProgram.gs_vertexbuffer_destroy(tmpvbuf);
+			tmpvbuf.gs_vertexbuffer_destroy();
 		} 
 		if (generatedText == 0) {
 			ModernizedCProgram.obs_leave_graphics();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		this.setVbuf(ModernizedCProgram.create_uv_vbuffer(().wcslen(generatedText) * 6, true));
+		this.setVbuf(ModernizedCProgram.create_uv_vbuffer(()/*Error: Function owner not recognized*/wcslen(generatedText) * 6, true));
 		if (generatedCustom_width <= 100) {
 			;
 		} 
@@ -157,7 +174,7 @@ public class ft2_source {
 		if (!generatedWord_wrap) {
 			;
 		} 
-		len = .wcslen(generatedText);
+		len = /*Error: Function owner not recognized*/wcslen(generatedText);
 		srcdata.fill_vertex_buffer();
 		ModernizedCProgram.obs_leave_graphics();
 	}
@@ -165,9 +182,9 @@ public class ft2_source {
 		Object generatedVbuf = this.getVbuf();
 		gs_vb_data gs_vb_data = new gs_vb_data();
 		gs_vb_data vdata = gs_vb_data.gs_vertexbuffer_get_data(generatedVbuf);
-		Object generatedText = this.getText();
+		Object[] generatedText = this.getText();
 		if (vdata == NULL || !generatedText) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedGs_vb_data = vdata.getGs_vb_data();
 		vec2 tvarray = (vec2)generatedGs_vb_data[0].getArray();
@@ -178,13 +195,13 @@ public class ft2_source {
 		 dy = generatedMax_h;
 		 max_y = dy;
 		 cur_glyph = 0;
-		 len = .wcslen(generatedText);
-		Object generatedColorbuf = this.getColorbuf();
+		 len = /*Error: Function owner not recognized*/wcslen(generatedText);
+		Object[] generatedColorbuf = this.getColorbuf();
 		if (generatedColorbuf != NULL) {
 			ModernizedCProgram.bfree(generatedColorbuf);
 			this.setColorbuf(NULL);
 		} 
-		this.setColorbuf(ModernizedCProgram.bzalloc( * .wcslen(generatedText) * 6));
+		this.setColorbuf(ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/ * /*Error: Function owner not recognized*/wcslen(generatedText) * 6));
 		for ( i = 0;
 		 i < len * 6; i++) {
 			generatedColorbuf[i] = -1024;
@@ -204,12 +221,12 @@ public class ft2_source {
 		this.setTexbuf_y(0);
 		srcdata.cache_glyphs(L"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+,<.>/?\\|[]{}`~ \'\"\0");
 	}
-	public void cache_glyphs(Object cache_glyphs) {
+	public void cache_glyphs(Object[] cache_glyphs) {
 		 slot = new ();
 		 glyph_index = 0;
 		Object generatedFont_face = this.getFont_face();
 		if (!generatedFont_face || !cache_glyphs) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		slot = generatedFont_face.getGlyph();
 		Object generatedTexbuf_x = this.getTexbuf_x();
@@ -217,10 +234,10 @@ public class ft2_source {
 		 dx = generatedTexbuf_x;
 		 dy = generatedTexbuf_y;
 		 cached_glyphs = 0;
-		 len = .wcslen(cache_glyphs);
+		 len = /*Error: Function owner not recognized*/wcslen(cache_glyphs);
 		Object generatedCacheglyphs = this.getCacheglyphs();
 		Object generatedMax_h = this.getMax_h();
-		Object generatedTexbuf = this.getTexbuf();
+		Object[] generatedTexbuf = this.getTexbuf();
 		this.setTexbuf_x(dx);
 		this.setTexbuf_y(dy);
 		Object generatedTex = this.getTex();
@@ -250,35 +267,35 @@ public class ft2_source {
 				ModernizedCProgram.blog(LOG_WARNING, "Failed to open file %s", filename);
 				this.setFile_load_failed(true);
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.fseek(tmp_file, 0, SEEK_END);
-		filesize = ().ftell(tmp_file);
-		.fseek(tmp_file, 0, SEEK_SET);
-		bytes_read = .fread(header, 2, 1, tmp_file);
-		Object generatedText = this.getText();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fseek(tmp_file, 0, SEEK_END);
+		filesize = ()/*Error: Function owner not recognized*/ftell(tmp_file);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fseek(tmp_file, 0, SEEK_SET);
+		bytes_read = /*Error: Function owner not recognized*/fread(header, 2, 1, tmp_file);
+		Object[] generatedText = this.getText();
 		if (bytes_read == 2 && header == -1024) {
 			if (generatedText != NULL) {
 				ModernizedCProgram.bfree(generatedText);
 				this.setText(NULL);
 			} 
 			this.setText(ModernizedCProgram.bzalloc(filesize));
-			bytes_read = .fread(generatedText, filesize - 2, 1, tmp_file);
+			bytes_read = /*Error: Function owner not recognized*/fread(generatedText, filesize - 2, 1, tmp_file);
 			ModernizedCProgram.bfree(tmp_read);
-			.fclose(tmp_file);
-			return ;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(tmp_file);
+			return /*Error: Unsupported expression*/;
 		} 
 		// File is already in UTF-16 format
-		.fseek(tmp_file, 0, SEEK_SET);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fseek(tmp_file, 0, SEEK_SET);
 		tmp_read = ModernizedCProgram.bzalloc(filesize + 1);
-		bytes_read = .fread(tmp_read, filesize, 1, tmp_file);
-		.fclose(tmp_file);
+		bytes_read = /*Error: Function owner not recognized*/fread(tmp_read, filesize, 1, tmp_file);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(tmp_file);
 		if (generatedText != NULL) {
 			ModernizedCProgram.bfree(generatedText);
 			this.setText(NULL);
 		} 
-		this.setText(ModernizedCProgram.bzalloc((.strlen(tmp_read) + 1) * ));
-		ModernizedCProgram.os_utf8_to_wcs(tmp_read, .strlen(tmp_read), generatedText, (.strlen(tmp_read) + 1));
+		this.setText(ModernizedCProgram.bzalloc((/*Error: Function owner not recognized*/strlen(tmp_read) + 1) * /*Error: Unsupported expression*/));
+		ModernizedCProgram.os_utf8_to_wcs(tmp_read, /*Error: Function owner not recognized*/strlen(tmp_read), generatedText, (/*Error: Function owner not recognized*/strlen(tmp_read) + 1));
 		ModernizedCProgram.remove_cr(generatedText);
 		ModernizedCProgram.bfree(tmp_read);
 	}
@@ -293,21 +310,21 @@ public class ft2_source {
 		 bytes_read = new ();
 		byte bvalue;
 		 utf16 = false;
-		tmp_file = .fopen(filename, "rb");
+		tmp_file = /*Error: Function owner not recognized*/fopen(filename, "rb");
 		Object generatedFile_load_failed = this.getFile_load_failed();
 		if (tmp_file == NULL) {
 			if (!generatedFile_load_failed) {
 				ModernizedCProgram.blog(LOG_WARNING, "Failed to open file %s", filename);
 				this.setFile_load_failed(true);
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		bytes_read = .fread(value, 2, 1, tmp_file);
+		bytes_read = /*Error: Function owner not recognized*/fread(value, 2, 1, tmp_file);
 		if (bytes_read == 2 && value == -1024) {
 			utf16 = true;
 		} 
-		.fseek(tmp_file, 0, SEEK_END);
-		filesize = ().ftell(tmp_file);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fseek(tmp_file, 0, SEEK_END);
+		filesize = ()/*Error: Function owner not recognized*/ftell(tmp_file);
 		cur_pos = filesize;
 		Object generatedLog_lines = this.getLog_lines();
 		log_lines = generatedLog_lines;
@@ -317,14 +334,14 @@ public class ft2_source {
 			} else {
 					cur_pos -= 2;
 			} 
-			.fseek(tmp_file, cur_pos, SEEK_SET);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fseek(tmp_file, cur_pos, SEEK_SET);
 			if (!utf16) {
-				bytes_read = .fread(bvalue, 1, 1, tmp_file);
+				bytes_read = /*Error: Function owner not recognized*/fread(bvalue, 1, 1, tmp_file);
 				if (bytes_read == 1 && bvalue == (byte)'\n') {
 					line_breaks++;
 				} 
 			} else {
-					bytes_read = .fread(value, 2, 1, tmp_file);
+					bytes_read = /*Error: Function owner not recognized*/fread(value, 2, 1, tmp_file);
 					if (bytes_read == 2 && value == (byte)L'\n') {
 						line_breaks++;
 					} 
@@ -333,33 +350,33 @@ public class ft2_source {
 		if (cur_pos != 0) {
 			cur_pos += (utf16) ? 2 : 1;
 		} 
-		.fseek(tmp_file, cur_pos, SEEK_SET);
-		Object generatedText = this.getText();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fseek(tmp_file, cur_pos, SEEK_SET);
+		Object[] generatedText = this.getText();
 		if (utf16) {
 			if (generatedText != NULL) {
 				ModernizedCProgram.bfree(generatedText);
 				this.setText(NULL);
 			} 
 			this.setText(ModernizedCProgram.bzalloc(filesize - cur_pos));
-			bytes_read = .fread(generatedText, (filesize - cur_pos), 1, tmp_file);
+			bytes_read = /*Error: Function owner not recognized*/fread(generatedText, (filesize - cur_pos), 1, tmp_file);
 			ModernizedCProgram.remove_cr(generatedText);
 			ModernizedCProgram.bfree(tmp_read);
-			.fclose(tmp_file);
-			return ;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(tmp_file);
+			return /*Error: Unsupported expression*/;
 		} 
 		tmp_read = ModernizedCProgram.bzalloc((filesize - cur_pos) + 1);
-		bytes_read = .fread(tmp_read, filesize - cur_pos, 1, tmp_file);
-		.fclose(tmp_file);
+		bytes_read = /*Error: Function owner not recognized*/fread(tmp_read, filesize - cur_pos, 1, tmp_file);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(tmp_file);
 		if (generatedText != NULL) {
 			ModernizedCProgram.bfree(generatedText);
 			this.setText(NULL);
 		} 
-		this.setText(ModernizedCProgram.bzalloc((.strlen(tmp_read) + 1) * ));
-		ModernizedCProgram.os_utf8_to_wcs(tmp_read, .strlen(tmp_read), generatedText, (.strlen(tmp_read) + 1));
+		this.setText(ModernizedCProgram.bzalloc((/*Error: Function owner not recognized*/strlen(tmp_read) + 1) * /*Error: Unsupported expression*/));
+		ModernizedCProgram.os_utf8_to_wcs(tmp_read, /*Error: Function owner not recognized*/strlen(tmp_read), generatedText, (/*Error: Function owner not recognized*/strlen(tmp_read) + 1));
 		ModernizedCProgram.remove_cr(generatedText);
 		ModernizedCProgram.bfree(tmp_read);
 	}
-	public Object get_ft2_text_width(Object text) {
+	public Object get_ft2_text_width(Object[] text) {
 		Object generatedFont_face = this.getFont_face();
 		 slot = generatedFont_face.getGlyph();
 		 glyph_index = 0;
@@ -369,11 +386,11 @@ public class ft2_source {
 		if (!text) {
 			return 0;
 		} 
-		len = .wcslen(text);
+		len = /*Error: Function owner not recognized*/wcslen(text);
 		for ( i = 0;
 		 i < len; i++) {
-			glyph_index = .FT_Get_Char_Index(generatedFont_face, text[i]);
-			.FT_Load_Glyph(generatedFont_face, glyph_index, FT_LOAD_DEFAULT);
+			glyph_index = /*Error: Function owner not recognized*/FT_Get_Char_Index(generatedFont_face, text[i]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FT_Load_Glyph(generatedFont_face, glyph_index, FT_LOAD_DEFAULT);
 			if (text[i] == (byte)L'\n') {
 				w = 0;
 			} else {
@@ -384,23 +401,6 @@ public class ft2_source {
 			} 
 		}
 		return max_w;
-	}
-	public Object init_font() {
-		 index = new ();
-		Byte generatedFont_name = this.getFont_name();
-		Object generatedFont_size = this.getFont_size();
-		Byte generatedFont_style = this.getFont_style();
-		Object generatedFont_flags = this.getFont_flags();
-		byte path = ModernizedCProgram.get_font_path(generatedFont_name, generatedFont_size, generatedFont_style, generatedFont_flags, index);
-		if (!path) {
-			return false;
-		} 
-		Object generatedFont_face = this.getFont_face();
-		if (generatedFont_face != NULL) {
-			.FT_Done_Face(generatedFont_face);
-			this.setFont_face(NULL);
-		} 
-		return .FT_New_Face(ModernizedCProgram.ft2_lib, path, index, generatedFont_face) == 0;
 	}
 	public Byte getFont_name() {
 		return font_name;
@@ -444,10 +444,10 @@ public class ft2_source {
 	public void setText_file(Byte newText_file) {
 		text_file = newText_file;
 	}
-	public Object getText() {
+	public Object[] getText() {
 		return text;
 	}
-	public void setText(Object newText) {
+	public void setText(Object[] newText) {
 		text = newText;
 	}
 	public Object getM_timestamp() {
@@ -510,10 +510,10 @@ public class ft2_source {
 	public void setColor(Object newColor) {
 		color = newColor;
 	}
-	public Object getColorbuf() {
+	public Object[] getColorbuf() {
 		return colorbuf;
 	}
-	public void setColorbuf(Object newColorbuf) {
+	public void setColorbuf(Object[] newColorbuf) {
 		colorbuf = newColorbuf;
 	}
 	public Object getCur_scroll() {
@@ -546,10 +546,10 @@ public class ft2_source {
 	public void setFont_face(Object newFont_face) {
 		font_face = newFont_face;
 	}
-	public Object getTexbuf() {
+	public Object[] getTexbuf() {
 		return texbuf;
 	}
-	public void setTexbuf(Object newTexbuf) {
+	public void setTexbuf(Object[] newTexbuf) {
 		texbuf = newTexbuf;
 	}
 	public Object getVbuf() {

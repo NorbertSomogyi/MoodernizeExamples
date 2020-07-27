@@ -69,7 +69,7 @@ public class cleanup_stuff {
 		int generatedPending = this.getPending();
 		int pending = generatedPending;
 		if (pending == /* nothing to do */0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		vim_exception generatedException = this.getException();
 		if (ModernizedCProgram.aborting() || need_rethrow) {

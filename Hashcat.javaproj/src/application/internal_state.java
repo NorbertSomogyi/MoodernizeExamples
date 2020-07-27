@@ -6,7 +6,7 @@ package application;
 public class internal_state {
 	private Object strm;
 	private int status;
-	private Object pending_buf;
+	private Object[] pending_buf;
 	private Object pending_buf_size;
 	private Object pending_out;
 	private Object pending;
@@ -18,10 +18,10 @@ public class internal_state {
 	private Object w_size;
 	private Object w_bits;
 	private Object w_mask;
-	private Object window;
+	private Object[] window;
 	private Object window_size;
-	private Object prev;
-	private Object head;
+	private Object[] prev;
+	private Object[] head;
 	private Object ins_h;
 	private Object hash_size;
 	private Object hash_bits;
@@ -52,10 +52,10 @@ public class internal_state {
 	private int heap_len;
 	private int heap_max;
 	private Object depth;
-	private Object l_buf;
+	private Object[] l_buf;
 	private Object lit_bufsize;
 	private Object last_lit;
-	private Object d_buf;
+	private Object[] d_buf;
 	private Object opt_len;
 	private Object static_len;
 	private Object matches;
@@ -64,7 +64,7 @@ public class internal_state {
 	private int bi_valid;
 	private Object high_water;
 	
-	public internal_state(Object strm, int status, Object pending_buf, Object pending_buf_size, Object pending_out, Object pending, int wrap, Object gzhead, Object gzindex, Object method, int last_flush, Object w_size, Object w_bits, Object w_mask, Object window, Object window_size, Object prev, Object head, Object ins_h, Object hash_size, Object hash_bits, Object hash_mask, Object hash_shift, long block_start, Object match_length, Object prev_match, int match_available, Object strstart, Object match_start, Object lookahead, Object prev_length, Object max_chain_length, Object max_lazy_match, int level, int strategy, Object good_match, int nice_match, Object dyn_ltree, Object dyn_dtree, Object bl_tree, tree_desc_s l_desc, tree_desc_s d_desc, tree_desc_s bl_desc, Object bl_count, Object heap, int heap_len, int heap_max, Object depth, Object l_buf, Object lit_bufsize, Object last_lit, Object d_buf, Object opt_len, Object static_len, Object matches, Object insert, Object bi_buf, int bi_valid, Object high_water) {
+	public internal_state(Object strm, int status, Object[] pending_buf, Object pending_buf_size, Object pending_out, Object pending, int wrap, Object gzhead, Object gzindex, Object method, int last_flush, Object w_size, Object w_bits, Object w_mask, Object[] window, Object window_size, Object[] prev, Object[] head, Object ins_h, Object hash_size, Object hash_bits, Object hash_mask, Object hash_shift, long block_start, Object match_length, Object prev_match, int match_available, Object strstart, Object match_start, Object lookahead, Object prev_length, Object max_chain_length, Object max_lazy_match, int level, int strategy, Object good_match, int nice_match, Object dyn_ltree, Object dyn_dtree, Object bl_tree, tree_desc_s l_desc, tree_desc_s d_desc, tree_desc_s bl_desc, Object bl_count, Object heap, int heap_len, int heap_max, Object depth, Object[] l_buf, Object lit_bufsize, Object last_lit, Object[] d_buf, Object opt_len, Object static_len, Object matches, Object insert, Object bi_buf, int bi_valid, Object high_water) {
 		setStrm(strm);
 		setStatus(status);
 		setPending_buf(pending_buf);
@@ -217,7 +217,7 @@ public class internal_state {
 		;
 		int generatedBi_valid = this.getBi_valid();
 		Object generatedBi_buf = this.getBi_buf();
-		Object generatedPending_buf = this.getPending_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
 		Object generatedPending = this.getPending();
 		{ 
 			int len = 5;
@@ -332,7 +332,7 @@ public class internal_state {
 	public void _tr_stored_block(Object buf, Object stored_len, int last) {
 		int generatedBi_valid = this.getBi_valid();
 		Object generatedBi_buf = this.getBi_buf();
-		Object generatedPending_buf = this.getPending_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
 		Object generatedPending = this.getPending();
 		{ 
 			int len = 3;
@@ -381,7 +381,7 @@ public class internal_state {
 			;
 		}
 		;
-		.memcpy(generatedPending_buf + generatedPending, (Bytef)buf, stored_len);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPending_buf + generatedPending, (Bytef)buf, stored_len);
 		generatedPending += stored_len;
 	}
 	/* input block */
@@ -397,7 +397,7 @@ public class internal_state {
 	public void _tr_align() {
 		int generatedBi_valid = this.getBi_valid();
 		Object generatedBi_buf = this.getBi_buf();
-		Object generatedPending_buf = this.getPending_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
 		Object generatedPending = this.getPending();
 		{ 
 			int len = 3;
@@ -486,7 +486,7 @@ public class internal_state {
 		int generatedStrategy = this.getStrategy();
 		int generatedBi_valid = this.getBi_valid();
 		Object generatedBi_buf = this.getBi_buf();
-		Object generatedPending_buf = this.getPending_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
 		Object generatedPending = this.getPending();
 		int generatedMax_code = generatedL_desc.getMax_code();
 		Object generatedDyn_ltree = this.getDyn_ltree();
@@ -566,10 +566,10 @@ public class internal_state {
 	}
 	/* input block, or NULL if too old */
 	public int _tr_tally(int dist, int lc) {
-		Object generatedD_buf = this.getD_buf();
+		Object[] generatedD_buf = this.getD_buf();
 		Object generatedLast_lit = this.getLast_lit();
 		generatedD_buf[generatedLast_lit] = (ush)/* match length-MIN_MATCH or unmatched char (if dist==0) */dist;
-		Object generatedL_buf = this.getL_buf();
+		Object[] generatedL_buf = this.getL_buf();
 		generatedL_buf[generatedLast_lit++] = (uch)lc;
 		Object generatedDyn_ltree = this.getDyn_ltree();
 		Object generatedMatches = this.getMatches();
@@ -593,18 +593,18 @@ public class internal_state {
 	/* ===========================================================================
 	 * Send the block data compressed using the given Huffman trees
 	 */
-	public void compress_block(Object ltree, Object dtree) {
+	public void compress_block(Object[] ltree, Object[] dtree) {
 		/* distance tree *//* distance of matched string */int dist;
 		/* match length or unmatched char (if dist == 0) */int lc;
 		int lx = /* running index in l_buf */0;
 		/* the code to send */int code;
 		/* number of extra bits to send */int extra;
 		Object generatedLast_lit = this.getLast_lit();
-		Object generatedD_buf = this.getD_buf();
-		Object generatedL_buf = this.getL_buf();
+		Object[] generatedD_buf = this.getD_buf();
+		Object[] generatedL_buf = this.getL_buf();
 		int generatedBi_valid = this.getBi_valid();
 		Object generatedBi_buf = this.getBi_buf();
-		Object generatedPending_buf = this.getPending_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
 		Object generatedPending = this.getPending();
 		if (generatedLast_lit != 0) {
 			do {
@@ -818,7 +818,7 @@ public class internal_state {
 	     */
 	public void bi_flush() {
 		int generatedBi_valid = this.getBi_valid();
-		Object generatedPending_buf = this.getPending_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
 		Object generatedPending = this.getPending();
 		Object generatedBi_buf = this.getBi_buf();
 		if (generatedBi_valid == 16) {
@@ -861,7 +861,7 @@ public class internal_state {
 	 */
 	public void bi_windup() {
 		int generatedBi_valid = this.getBi_valid();
-		Object generatedPending_buf = this.getPending_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
 		Object generatedPending = this.getPending();
 		Object generatedBi_buf = this.getBi_buf();
 		if (generatedBi_valid > 8) {
@@ -902,14 +902,14 @@ public class internal_state {
 		uInt wsize = generatedW_size;
 		Object generatedHash_size = this.getHash_size();
 		n = generatedHash_size;
-		Object generatedHead = this.getHead();
+		Object[] generatedHead = this.getHead();
 		p = generatedHead[n];
 		do {
 			m = --p;
 			p = (Pos)(m >= wsize ? m - wsize : 0);
 		} while (--n);
 		n = wsize;
-		Object generatedPrev = this.getPrev();
+		Object[] generatedPrev = this.getPrev();
 		p = generatedPrev[n];
 		do {
 			m = --p;
@@ -919,7 +919,7 @@ public class internal_state {
 		} while (--n);
 	}
 	public void putShortMSB(Object b) {
-		Object generatedPending_buf = this.getPending_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
 		Object generatedPending = this.getPending();
 		{ 
 			generatedPending_buf[generatedPending++] = (Bytef)((Byte)(b >> 8));
@@ -938,10 +938,10 @@ public class internal_state {
 	public void lm_init() {
 		Object generatedW_size = this.getW_size();
 		this.setWindow_size((ulg)-1024 * generatedW_size);
-		Object generatedHead = this.getHead();
+		Object[] generatedHead = this.getHead();
 		Object generatedHash_size = this.getHash_size();
 		generatedHead[generatedHash_size - 1] = 0;
-		.memset((Bytef)generatedHead, 0, (int)(generatedHash_size - 1) * );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((Bytef)generatedHead, 0, (int)(generatedHash_size - 1) * /*Error: sizeof expression not supported yet*/);
 		;
 		int generatedLevel = this.getLevel();
 		this.setMax_lazy_match(ModernizedCProgram.configuration_table[generatedLevel].getMax_lazy());
@@ -997,7 +997,7 @@ public class internal_state {
 	public Object longest_match(Object cur_match) {
 		Object generatedMax_chain_length = this.getMax_chain_length();
 		int chain_length = generatedMax_chain_length;
-		Object generatedWindow = this.getWindow();
+		Object[] generatedWindow = this.getWindow();
 		Object generatedStrstart = this.getStrstart();
 		Bytef scan = generatedWindow + generatedStrstart;
 		/* matched string */Bytef match = new Bytef();
@@ -1010,7 +1010,7 @@ public class internal_state {
 		IPos limit = generatedStrstart > (IPos)(generatedW_size - (258 + 3 + 1)) ? generatedStrstart - (IPos)(generatedW_size - (258 + 3 + 1)) : 0/* Stop when cur_match becomes <= limit. To simplify the code,
 		     * we prevent matches with the string of window index 0.
 		     */;
-		Object generatedPrev = this.getPrev();
+		Object[] generatedPrev = this.getPrev();
 		Posf prev = generatedPrev;
 		Object generatedW_mask = this.getW_mask();
 		uInt wmask = generatedW_mask;
@@ -1121,19 +1121,19 @@ public class internal_state {
 		Object generatedStrm = this.getStrm();
 		Object generatedWindow_size = this.getWindow_size();
 		Object generatedStrstart = this.getStrstart();
-		Object generatedWindow = this.getWindow();
+		Object[] generatedWindow = this.getWindow();
 		Object generatedMatch_start = this.getMatch_start();
 		long generatedBlock_start = this.getBlock_start();
 		Object generatedInsert = this.getInsert();
 		Object generatedIns_h = this.getIns_h();
 		Object generatedHash_shift = this.getHash_shift();
 		Object generatedHash_mask = this.getHash_mask();
-		Object generatedPrev = this.getPrev();
+		Object[] generatedPrev = this.getPrev();
 		Object generatedW_mask = this.getW_mask();
-		Object generatedHead = this.getHead();
+		Object[] generatedHead = this.getHead();
 		do {
 			more = (int)(generatedWindow_size - (ulg)generatedLookahead - (ulg)generatedStrstart);
-			if ( <= /* Deal with !@#$% 64K limit: */2) {
+			if (/*Error: Unsupported expression*/ <= /* Deal with !@#$% 64K limit: */2) {
 				if (more == 0 && generatedStrstart == 0 && generatedLookahead == 0) {
 					more = wsize;
 				}  else if (more == (int)(true/* Very unlikely, but possible on 16 bit machine if
@@ -1145,7 +1145,7 @@ public class internal_state {
 			if (generatedStrstart >= wsize + (generatedW_size - (258 + 3 + /* If the window is almost full and there is insufficient lookahead,
 			         * move the upper half to the lower one to make room in the upper half.
 			         */1))) {
-				.memcpy(generatedWindow, generatedWindow + wsize, (int)wsize - more);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedWindow, generatedWindow + wsize, (int)wsize - more);
 				generatedMatch_start -= wsize;
 				generatedStrstart -= /* we now have strstart >= MAX_DIST */wsize;
 				generatedBlock_start -= (long)wsize;
@@ -1201,7 +1201,7 @@ public class internal_state {
 				if (init > 258) {
 					init = 258;
 				} 
-				.memset(generatedWindow + curr, 0, (int)init);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedWindow + curr, 0, (int)init);
 				this.setHigh_water(curr + init);
 			}  else if (generatedHigh_water < (ulg)curr + 258/* High water mark at or above current data, but below current data
 			             * plus WIN_INIT -- zero out to current data plus WIN_INIT, or up
@@ -1211,7 +1211,7 @@ public class internal_state {
 				if (init > generatedWindow_size - generatedHigh_water) {
 					init = generatedWindow_size - generatedHigh_water;
 				} 
-				.memset(generatedWindow + generatedHigh_water, 0, (int)init);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedWindow + generatedHigh_water, 0, (int)init);
 				generatedHigh_water += init;
 			} 
 		} 
@@ -1257,9 +1257,9 @@ public class internal_state {
 		int generatedBi_valid = this.getBi_valid();
 		Object generatedStrstart = this.getStrstart();
 		long generatedBlock_start = this.getBlock_start();
-		Object generatedPending_buf = this.getPending_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
 		Object generatedPending = this.getPending();
-		Object generatedWindow = this.getWindow();
+		Object[] generatedWindow = this.getWindow();
 		do {
 			len = /* maximum deflate stored block length */65535;
 			have = (generatedBi_valid + 42) >> /* number of header bytes */3;
@@ -1292,7 +1292,7 @@ public class internal_state {
 				if (left > len) {
 					left = len;
 				} 
-				.memcpy(generatedStrm.getNext_out(), generatedWindow + generatedBlock_start, left);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedStrm.getNext_out(), generatedWindow + generatedBlock_start, left);
 				generatedStrm.getNext_out() += left;
 				generatedStrm.getAvail_out() -= left;
 				generatedStrm.getTotal_out() += left;
@@ -1325,17 +1325,17 @@ public class internal_state {
 		         */) {
 			if (used >= generatedW_size) {
 				this.setMatches(/* clear hash */2);
-				.memcpy(generatedWindow, generatedStrm.getNext_in() - generatedW_size, generatedW_size);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedWindow, generatedStrm.getNext_in() - generatedW_size, generatedW_size);
 				this.setStrstart(generatedW_size);
 			} else {
 					if (generatedWindow_size - generatedStrstart <= used) {
 						generatedStrstart -= generatedW_size;
-						.memcpy(generatedWindow, generatedWindow + generatedW_size, generatedStrstart);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedWindow, generatedWindow + generatedW_size, generatedStrstart);
 						if (generatedMatches < 2) {
 							generatedMatches++;
 						} 
 					} 
-					.memcpy(generatedWindow + generatedStrstart, generatedStrm.getNext_in() - used, used);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedWindow + generatedStrstart, generatedStrm.getNext_in() - used, used);
 					generatedStrstart += used;
 			} 
 			this.setBlock_start(generatedStrstart);
@@ -1355,7 +1355,7 @@ public class internal_state {
 		if (generatedStrm.getAvail_in() > have && generatedBlock_start >= (long)generatedW_size) {
 			generatedBlock_start -= generatedW_size;
 			generatedStrstart -= generatedW_size;
-			.memcpy(generatedWindow, generatedWindow + generatedW_size, generatedStrstart);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedWindow, generatedWindow + generatedW_size, generatedStrstart);
 			if (generatedMatches < 2) {
 				generatedMatches++;
 			} 
@@ -1398,20 +1398,20 @@ public class internal_state {
 		Object generatedW_size = (s).getW_size();
 		Object generatedMatch_length = this.getMatch_length();
 		Object generatedMatch_start = this.getMatch_start();
-		Object generatedD_buf = this.getD_buf();
+		Object[] generatedD_buf = this.getD_buf();
 		Object generatedLast_lit = this.getLast_lit();
-		Object generatedL_buf = this.getL_buf();
+		Object[] generatedL_buf = this.getL_buf();
 		Object generatedDyn_ltree = this.getDyn_ltree();
 		Object generatedDyn_dtree = this.getDyn_dtree();
 		Object generatedLit_bufsize = this.getLit_bufsize();
 		Object generatedMax_lazy_match = this.getMax_lazy_match();
-		Object generatedWindow = this.getWindow();
+		Object[] generatedWindow = this.getWindow();
 		Object generatedIns_h = this.getIns_h();
 		Object generatedHash_shift = this.getHash_shift();
 		Object generatedHash_mask = this.getHash_mask();
 		long generatedBlock_start = this.getBlock_start();
 		Object generatedStrm = this.getStrm();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (generatedLookahead < (258 + 3 + 1)) {
 				s.fill_window();
 				if (generatedLookahead < (258 + 3 + 1) && flush == 0) {
@@ -1545,17 +1545,17 @@ public class internal_state {
 		int generatedStrategy = this.getStrategy();
 		Object generatedMatch_start = this.getMatch_start();
 		Object generatedPrev_match = this.getPrev_match();
-		Object generatedD_buf = this.getD_buf();
+		Object[] generatedD_buf = this.getD_buf();
 		Object generatedLast_lit = this.getLast_lit();
-		Object generatedL_buf = this.getL_buf();
+		Object[] generatedL_buf = this.getL_buf();
 		Object generatedDyn_ltree = this.getDyn_ltree();
 		Object generatedDyn_dtree = this.getDyn_dtree();
 		Object generatedLit_bufsize = this.getLit_bufsize();
 		long generatedBlock_start = this.getBlock_start();
-		Object generatedWindow = this.getWindow();
+		Object[] generatedWindow = this.getWindow();
 		Object generatedStrm = this.getStrm();
 		int generatedMatch_available = this.getMatch_available();
-		/* Process the input block. */for (; ; ) {
+		/* Process the input block. */for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (generatedLookahead < (258 + 3 + 1)) {
 				s.fill_window();
 				if (generatedLookahead < (258 + 3 + 1) && flush == 0) {
@@ -1713,17 +1713,17 @@ public class internal_state {
 		Bytef strend = new Bytef();
 		Object generatedLookahead = this.getLookahead();
 		Object generatedStrstart = this.getStrstart();
-		Object generatedWindow = this.getWindow();
+		Object[] generatedWindow = this.getWindow();
 		Object generatedMatch_length = this.getMatch_length();
-		Object generatedD_buf = this.getD_buf();
+		Object[] generatedD_buf = this.getD_buf();
 		Object generatedLast_lit = this.getLast_lit();
-		Object generatedL_buf = this.getL_buf();
+		Object[] generatedL_buf = this.getL_buf();
 		Object generatedDyn_ltree = this.getDyn_ltree();
 		Object generatedDyn_dtree = this.getDyn_dtree();
 		Object generatedLit_bufsize = this.getLit_bufsize();
 		long generatedBlock_start = this.getBlock_start();
 		Object generatedStrm = this.getStrm();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (generatedLookahead <= 258) {
 				s.fill_window();
 				if (generatedLookahead <= 258 && flush == 0) {
@@ -1832,16 +1832,16 @@ public class internal_state {
 	public  deflate_huff(int flush) {
 		/* set if current block must be flushed */int bflush;
 		Object generatedLookahead = this.getLookahead();
-		Object generatedWindow = this.getWindow();
+		Object[] generatedWindow = this.getWindow();
 		Object generatedStrstart = this.getStrstart();
-		Object generatedD_buf = this.getD_buf();
+		Object[] generatedD_buf = this.getD_buf();
 		Object generatedLast_lit = this.getLast_lit();
-		Object generatedL_buf = this.getL_buf();
+		Object[] generatedL_buf = this.getL_buf();
 		Object generatedDyn_ltree = this.getDyn_ltree();
 		Object generatedLit_bufsize = this.getLit_bufsize();
 		long generatedBlock_start = this.getBlock_start();
 		Object generatedStrm = this.getStrm();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (generatedLookahead == /* Make sure that we have a literal to write. */0) {
 				s.fill_window();
 				if (generatedLookahead == 0) {
@@ -1921,10 +1921,10 @@ public class internal_state {
 	public void setStatus(int newStatus) {
 		status = newStatus;
 	}
-	public Object getPending_buf() {
+	public Object[] getPending_buf() {
 		return pending_buf;
 	}
-	public void setPending_buf(Object newPending_buf) {
+	public void setPending_buf(Object[] newPending_buf) {
 		pending_buf = newPending_buf;
 	}
 	public Object getPending_buf_size() {
@@ -1993,10 +1993,10 @@ public class internal_state {
 	public void setW_mask(Object newW_mask) {
 		w_mask = newW_mask;
 	}
-	public Object getWindow() {
+	public Object[] getWindow() {
 		return window;
 	}
-	public void setWindow(Object newWindow) {
+	public void setWindow(Object[] newWindow) {
 		window = newWindow;
 	}
 	public Object getWindow_size() {
@@ -2005,16 +2005,16 @@ public class internal_state {
 	public void setWindow_size(Object newWindow_size) {
 		window_size = newWindow_size;
 	}
-	public Object getPrev() {
+	public Object[] getPrev() {
 		return prev;
 	}
-	public void setPrev(Object newPrev) {
+	public void setPrev(Object[] newPrev) {
 		prev = newPrev;
 	}
-	public Object getHead() {
+	public Object[] getHead() {
 		return head;
 	}
-	public void setHead(Object newHead) {
+	public void setHead(Object[] newHead) {
 		head = newHead;
 	}
 	public Object getIns_h() {
@@ -2197,10 +2197,10 @@ public class internal_state {
 	public void setDepth(Object newDepth) {
 		depth = newDepth;
 	}
-	public Object getL_buf() {
+	public Object[] getL_buf() {
 		return l_buf;
 	}
-	public void setL_buf(Object newL_buf) {
+	public void setL_buf(Object[] newL_buf) {
 		l_buf = newL_buf;
 	}
 	public Object getLit_bufsize() {
@@ -2215,10 +2215,10 @@ public class internal_state {
 	public void setLast_lit(Object newLast_lit) {
 		last_lit = newLast_lit;
 	}
-	public Object getD_buf() {
+	public Object[] getD_buf() {
 		return d_buf;
 	}
-	public void setD_buf(Object newD_buf) {
+	public void setD_buf(Object[] newD_buf) {
 		d_buf = newD_buf;
 	}
 	public Object getOpt_len() {

@@ -20,7 +20,7 @@ public class cache_tree_sub {
 	public cache_tree_sub find_subtree(cache_tree it, Object path, int pathlen, int create) {
 		cache_tree_sub down = new cache_tree_sub();
 		int pos = it.subtree_pos(path, pathlen);
-		cache_tree_sub generatedDown = it.getDown();
+		cache_tree_sub[][] generatedDown = it.getDown();
 		if (0 <= pos) {
 			return generatedDown[pos];
 		} 
@@ -37,26 +37,26 @@ public class cache_tree_sub {
 				} else {
 						it.setSubtree_alloc((((generatedSubtree_alloc) + 16) * 3 / 2));
 				} 
-				(generatedDown) = ModernizedCProgram.xrealloc((generatedDown), ModernizedCProgram.st_mult(, (generatedSubtree_alloc)));
+				(generatedDown) = ModernizedCProgram.xrealloc((generatedDown), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedSubtree_alloc)));
 			} 
 		} while (0);
 		generatedSubtree_nr++;
 		Object generatedName = (down).getName();
 		do {
 			size_t flex_array_len_ = (pathlen);
-			(down) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedName, (path), flex_array_len_);
+			(down) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedName, (path), flex_array_len_);
 		} while (0);
 		down.setCache_tree(((Object)0));
 		down.setNamelen(pathlen);
 		if (pos < generatedSubtree_nr) {
-			ModernizedCProgram.move_array((generatedDown + pos + 1), (generatedDown + pos), (generatedSubtree_nr - pos - 1),  + ( - 1));
+			ModernizedCProgram.move_array((generatedDown + pos + 1), (generatedDown + pos), (generatedSubtree_nr - pos - 1), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		} 
 		generatedDown[pos] = down;
 		return down;
 	}
 	public cache_tree_sub cache_tree_sub(cache_tree it, Object path) {
-		int pathlen = .strlen(path);
+		int pathlen = /*Error: Function owner not recognized*/strlen(path);
 		cache_tree_sub cache_tree_sub = new cache_tree_sub();
 		return cache_tree_sub.find_subtree(it, path, pathlen, 1);
 	}

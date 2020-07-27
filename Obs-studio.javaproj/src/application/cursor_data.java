@@ -41,7 +41,7 @@ public class cursor_data {
 		cc.setTexture(gs_texture.gs_texture_create(cx, cy, GS_BGRA, 1, ((Object)0), GS_DYNAMIC));
 		cc.setCx(cx);
 		cc.setCy(cy);
-		.da_push_back(ModernizedCProgram.data.getCached_textures(), cc);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(ModernizedCProgram.data.getCached_textures(), cc);
 		return generatedTexture;
 	}
 	public Object cursor_capture_icon(Object icon) {
@@ -52,7 +52,7 @@ public class cursor_data {
 		if (!icon) {
 			return false;
 		} 
-		if (!.GetIconInfo(icon, ii)) {
+		if (!/*Error: Function owner not recognized*/GetIconInfo(icon, ii)) {
 			return false;
 		} 
 		bitmap = ii.cursor_capture_icon_bitmap(width, height);
@@ -70,33 +70,33 @@ public class cursor_data {
 			ModernizedCProgram.data.setY_hotspot(generatedYHotspot);
 		} 
 		Object generatedHbmColor = ii.getHbmColor();
-		.DeleteObject(generatedHbmColor);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteObject(generatedHbmColor);
 		Object generatedHbmMask = ii.getHbmMask();
-		.DeleteObject(generatedHbmMask);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteObject(generatedHbmMask);
 		return !!ModernizedCProgram.data.getTexture();
 	}
 	public void cursor_capture() {
 		CURSORINFO ci = new CURSORINFO(0);
 		HICON icon = new HICON();
-		ci.setCbSize();
-		if (!.GetCursorInfo(ci)) {
+		ci.setCbSize(/*Error: sizeof expression not supported yet*/);
+		if (!/*Error: Function owner not recognized*/GetCursorInfo(ci)) {
 			ModernizedCProgram.data.setVisible(false);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedPtScreenPos = ci.getPtScreenPos();
-		.memcpy(ModernizedCProgram.data.getCursor_pos(), generatedPtScreenPos, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.data.getCursor_pos(), generatedPtScreenPos, /*Error: sizeof expression not supported yet*/);
 		Object generatedHCursor = ci.getHCursor();
 		if (ModernizedCProgram.data.getCurrent_cursor() == generatedHCursor) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		icon = .CopyIcon(generatedHCursor);
+		icon = /*Error: Function owner not recognized*/CopyIcon(generatedHCursor);
 		ModernizedCProgram.data.setVisible(ModernizedCProgram.data.cursor_capture_icon(icon));
 		ModernizedCProgram.data.setCurrent_cursor(generatedHCursor);
 		Object generatedFlags = ci.getFlags();
 		if ((generatedFlags & -1024) == 0) {
 			ModernizedCProgram.data.setVisible(false);
 		} 
-		.DestroyIcon(icon);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DestroyIcon(icon);
 	}
 	public void cursor_draw(long x_offset, long y_offset, double x_scale, double y_scale, long width, long height) {
 		long x = ModernizedCProgram.data.getCursor_pos().getX() + x_offset;
@@ -104,7 +104,7 @@ public class cursor_data {
 		long x_draw = x - ModernizedCProgram.data.getX_hotspot();
 		long y_draw = y - ModernizedCProgram.data.getY_hotspot();
 		if (x < 0 || x > width || y < 0 || y > height) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.data.getVisible() && !!ModernizedCProgram.data.getTexture()) {
 			ModernizedCProgram.gs_blend_state_push();
@@ -125,8 +125,8 @@ public class cursor_data {
 			cached_cursor pcc = ModernizedCProgram.data.getCached_textures().getArray()[i];
 			ModernizedCProgram.gs_texture_destroy(generatedTexture);
 		}
-		.da_free(ModernizedCProgram.data.getCached_textures());
-		.memset(ModernizedCProgram.data, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(ModernizedCProgram.data.getCached_textures());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.data, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public Object getTexture() {
 		return texture;

@@ -2,7 +2,7 @@ package application;
 
 public class ffmpeg_data {
 	private Object video;
-	private Object audio_streams;
+	private Object[][] audio_streams;
 	private Object acodec;
 	private Object vcodec;
 	private Object output;
@@ -25,7 +25,7 @@ public class ffmpeg_data {
 	private Object initialized;
 	private Byte last_error;
 	
-	public ffmpeg_data(Object video, Object audio_streams, Object acodec, Object vcodec, Object output, SwsContext swscale, Object total_frames, Object vframe, int frame_size, Object start_timestamp, Object total_samples, Object audio_samplerate, audio_format audio_format, Object audio_planes, Object audio_size, int num_audio_streams, int audio_tracks, Object excess_frames, Object samples, Object aframe, ffmpeg_cfg config, Object initialized, Byte last_error) {
+	public ffmpeg_data(Object video, Object[][] audio_streams, Object acodec, Object vcodec, Object output, SwsContext swscale, Object total_frames, Object vframe, int frame_size, Object start_timestamp, Object total_samples, Object audio_samplerate, audio_format audio_format, Object audio_planes, Object audio_size, int num_audio_streams, int audio_tracks, Object excess_frames, Object samples, Object aframe, ffmpeg_cfg config, Object initialized, Byte last_error) {
 		setVideo(video);
 		setAudio_streams(audio_streams);
 		setAcodec(acodec);
@@ -63,41 +63,41 @@ public class ffmpeg_data {
 	public void ffmpeg_log_error(int log_level, Object format) {
 		 args = new ();
 		byte[] out = new byte[4096];
-		.va_start(args, format);
-		.vsnprintf(out, , format, args);
-		.va_end(args);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/va_start(args, format);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/vsnprintf(out, /*Error: sizeof expression not supported yet*/, format, args);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/va_end(args);
 		ModernizedCProgram.data.ffmpeg_output_set_last_error(out);
 		ModernizedCProgram.blog(log_level, "%s", out);
 	}
 	public Object new_stream(Object stream, Object codec, Object id, Object name) {
-		codec = (!!name && name) ? .avcodec_find_encoder_by_name(name) : .avcodec_find_encoder(id);
+		codec = (!!name && name) ? /*Error: Function owner not recognized*/avcodec_find_encoder_by_name(name) : /*Error: Function owner not recognized*/avcodec_find_encoder(id);
 		if (!codec) {
-			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Couldn't find encoder '%s'", .avcodec_get_name(id));
+			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Couldn't find encoder '%s'", /*Error: Function owner not recognized*/avcodec_get_name(id));
 			return false;
 		} 
-		stream = .avformat_new_stream(ModernizedCProgram.data.getOutput(), codec);
+		stream = /*Error: Function owner not recognized*/avformat_new_stream(ModernizedCProgram.data.getOutput(), codec);
 		if (!stream) {
-			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Couldn't create stream for encoder '%s'", .avcodec_get_name(id));
+			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Couldn't create stream for encoder '%s'", /*Error: Function owner not recognized*/avcodec_get_name(id));
 			return false;
 		} 
 		(stream).setId(ModernizedCProgram.data.getOutput().getNb_streams() - 1);
 		return true;
-		 desc = .avcodec_descriptor_get_by_name(name);
+		 desc = /*Error: Function owner not recognized*/avcodec_descriptor_get_by_name(name);
 		 codec = new ();
 		if (!desc) {
-			.fprintf((_iob[2]), "Couldn't find encoder '%s'\n", name);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Couldn't find encoder '%s'\n", name);
 			return 0;
 		} 
 		id = desc.getId();
-		codec = .avcodec_find_encoder(desc.getId());
+		codec = /*Error: Function owner not recognized*/avcodec_find_encoder(desc.getId());
 		if (!codec) {
-			.fprintf((_iob[2]), "Couldn't create encoder");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Couldn't create encoder");
 			return 0;
 		} 
 		Object generatedOutput = ffm.getOutput();
-		stream = .avformat_new_stream(generatedOutput, codec);
+		stream = /*Error: Function owner not recognized*/avformat_new_stream(generatedOutput, codec);
 		if (!stream) {
-			.fprintf((_iob[2]), "Couldn't create stream for encoder '%s'\n", name);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Couldn't create stream for encoder '%s'\n", name);
 			return 0;
 		} 
 		(stream).setId(generatedOutput.getNb_streams() - 1);
@@ -107,22 +107,22 @@ public class ffmpeg_data {
 		 context = ModernizedCProgram.data.getVideo().getCodec();
 		byte opts = ModernizedCProgram.strlist_split(ModernizedCProgram.data.getConfig().getVideo_settings(), (byte)' ', false);
 		int ret;
-		if (.strcmp(ModernizedCProgram.data.getVcodec().getName(), "libx264") == 0) {
-			.av_opt_set(context.getPriv_data(), "preset", "veryfast", 0);
+		if (/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.data.getVcodec().getName(), "libx264") == 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_opt_set(context.getPriv_data(), "preset", "veryfast", 0);
 		} 
 		if (opts) {
-			if (!ModernizedCProgram.parse_params(context, opts) && .strcmp(ModernizedCProgram.data.getVcodec().getName(), "libx264") == 0) {
+			if (!opts.parse_params(context) && /*Error: Function owner not recognized*/strcmp(ModernizedCProgram.data.getVcodec().getName(), "libx264") == 0) {
 				ModernizedCProgram.blog(LOG_WARNING, "If you're trying to set x264 parameters, use x264-params=name=value:name=value");
 			} 
 			ModernizedCProgram.strlist_free(opts);
 		} 
 		// libav requires x264 parameters in a special format which may be non-obvious
-		ret = .avcodec_open2(context, ModernizedCProgram.data.getVcodec(), NULL);
+		ret = /*Error: Function owner not recognized*/avcodec_open2(context, ModernizedCProgram.data.getVcodec(), NULL);
 		if (ret < 0) {
-			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to open video codec: %s", .av_err2str(ret));
+			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to open video codec: %s", /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
-		ModernizedCProgram.data.setVframe(.avcodec_alloc_frame());
+		ModernizedCProgram.data.setVframe(/*Error: Function owner not recognized*/avcodec_alloc_frame());
 		if (!ModernizedCProgram.data.getVframe()) {
 			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to allocate video frame");
 			return false;
@@ -132,15 +132,15 @@ public class ffmpeg_data {
 		ModernizedCProgram.data.getVframe().setHeight(context.getHeight());
 		ModernizedCProgram.data.getVframe().setColorspace(ModernizedCProgram.data.getConfig().getColor_space());
 		ModernizedCProgram.data.getVframe().setColor_range(ModernizedCProgram.data.getConfig().getColor_range());
-		ret = .av_frame_get_buffer(ModernizedCProgram.data.getVframe(), ModernizedCProgram.base_get_alignment());
+		ret = /*Error: Function owner not recognized*/av_frame_get_buffer(ModernizedCProgram.data.getVframe(), ModernizedCProgram.base_get_alignment());
 		if (ret < 0) {
-			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to allocate vframe: %s", .av_err2str(ret));
+			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to allocate vframe: %s", /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
 		return true;
 	}
 	public Object init_swscale(Object context) {
-		ModernizedCProgram.data.setSwscale(.sws_getContext(ModernizedCProgram.data.getConfig().getWidth(), ModernizedCProgram.data.getConfig().getHeight(), ModernizedCProgram.data.getConfig().getFormat(), ModernizedCProgram.data.getConfig().getScale_width(), ModernizedCProgram.data.getConfig().getScale_height(), context.getPix_fmt(), SWS_BICUBIC, NULL, NULL, NULL));
+		ModernizedCProgram.data.setSwscale(/*Error: Function owner not recognized*/sws_getContext(ModernizedCProgram.data.getConfig().getWidth(), ModernizedCProgram.data.getConfig().getHeight(), ModernizedCProgram.data.getConfig().getFormat(), ModernizedCProgram.data.getConfig().getScale_width(), ModernizedCProgram.data.getConfig().getScale_height(), context.getPix_fmt(), SWS_BICUBIC, NULL, NULL, NULL));
 		if (!ModernizedCProgram.data.getSwscale()) {
 			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Could not initialize swscale");
 			return false;
@@ -158,12 +158,12 @@ public class ffmpeg_data {
 		if (!ModernizedCProgram.data.new_stream(ModernizedCProgram.data.getVideo(), ModernizedCProgram.data.getVcodec(), ModernizedCProgram.data.getOutput().getOformat().getVideo_codec(), ModernizedCProgram.data.getConfig().getVideo_encoder())) {
 			return false;
 		} 
-		AVPixelFormat.closest_format = .avcodec_find_best_pix_fmt_of_list(ModernizedCProgram.data.getVcodec().getPix_fmts(), ModernizedCProgram.data.getConfig().getFormat(), 0, NULL);
+		AVPixelFormat.closest_format = /*Error: Function owner not recognized*/avcodec_find_best_pix_fmt_of_list(ModernizedCProgram.data.getVcodec().getPix_fmts(), ModernizedCProgram.data.getConfig().getFormat(), 0, NULL);
 		context = ModernizedCProgram.data.getVideo().getCodec();
 		context.setBit_rate(ModernizedCProgram.data.getConfig().getVideo_bitrate() * 1000);
 		context.setWidth(ModernizedCProgram.data.getConfig().getScale_width());
 		context.setHeight(ModernizedCProgram.data.getConfig().getScale_height());
-		context.setTime_base();
+		context.setTime_base(/*Error: Unsupported expression*/);
 		context.setGop_size(ModernizedCProgram.data.getConfig().getGop_size());
 		context.setPix_fmt(AVPixelFormat.closest_format);
 		context.setColorspace(ModernizedCProgram.data.getConfig().getColor_space());
@@ -189,13 +189,13 @@ public class ffmpeg_data {
 		Byte generatedVcodec = generatedParams.getVcodec();
 		Object generatedOutput = ffm.getOutput();
 		if (!ffm.new_stream(generatedVideo_stream, generatedVcodec, generatedOutput.getOformat().getVideo_codec())) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		header generatedVideo_header = ffm.getVideo_header();
 		int generatedSize = generatedVideo_header.getSize();
 		Object generatedData = generatedVideo_header.getData();
 		if (generatedSize) {
-			extradata = .av_memdup(generatedData, generatedSize);
+			extradata = /*Error: Function owner not recognized*/av_memdup(generatedData, generatedSize);
 		} 
 		context = generatedVideo_stream.getCodec();
 		int generatedVbitrate = generatedParams.getVbitrate();
@@ -208,9 +208,9 @@ public class ffmpeg_data {
 		context.setCoded_height(generatedHeight);
 		context.setExtradata(extradata);
 		context.setExtradata_size(generatedSize);
-		context.setTime_base();
+		context.setTime_base(/*Error: Unsupported expression*/);
 		generatedVideo_stream.setTime_base(context.getTime_base());
-		generatedVideo_stream.setAvg_frame_rate(.av_inv_q(context.getTime_base()));
+		generatedVideo_stream.setAvg_frame_rate(/*Error: Function owner not recognized*/av_inv_q(context.getTime_base()));
 		if (generatedOutput.getOformat().getFlags() & AVFMT_GLOBALHEADER) {
 			context.getFlags() |=  CODEC_FLAG_GLOBAL_HEADER;
 		} 
@@ -220,10 +220,10 @@ public class ffmpeg_data {
 		byte opts = ModernizedCProgram.strlist_split(ModernizedCProgram.data.getConfig().getAudio_settings(), (byte)' ', false);
 		int ret;
 		if (opts) {
-			ModernizedCProgram.parse_params(context, opts);
+			opts.parse_params(context);
 			ModernizedCProgram.strlist_free(opts);
 		} 
-		ModernizedCProgram.data.getAframe()[idx] = .avcodec_alloc_frame();
+		ModernizedCProgram.data.getAframe()[idx] = /*Error: Function owner not recognized*/avcodec_alloc_frame();
 		if (!ModernizedCProgram.data.getAframe()[idx]) {
 			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to allocate audio frame");
 			return false;
@@ -233,15 +233,15 @@ public class ffmpeg_data {
 		ModernizedCProgram.data.getAframe()[idx].setChannel_layout(context.getChannel_layout());
 		ModernizedCProgram.data.getAframe()[idx].setSample_rate(context.getSample_rate());
 		context.setStrict_std_compliance(-2);
-		ret = .avcodec_open2(context, ModernizedCProgram.data.getAcodec(), NULL);
+		ret = /*Error: Function owner not recognized*/avcodec_open2(context, ModernizedCProgram.data.getAcodec(), NULL);
 		if (ret < 0) {
-			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to open audio codec: %s", .av_err2str(ret));
+			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to open audio codec: %s", /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
 		ModernizedCProgram.data.setFrame_size(context.getFrame_size() ? context.getFrame_size() : 1024);
-		ret = .av_samples_alloc(ModernizedCProgram.data.getSamples()[idx], NULL, context.getChannels(), ModernizedCProgram.data.getFrame_size(), context.getSample_fmt(), 0);
+		ret = /*Error: Function owner not recognized*/av_samples_alloc(ModernizedCProgram.data.getSamples()[idx], NULL, context.getChannels(), ModernizedCProgram.data.getFrame_size(), context.getSample_fmt(), 0);
 		if (ret < 0) {
-			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to create audio buffer: %s", .av_err2str(ret));
+			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to create audio buffer: %s", /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
 		return true;
@@ -260,14 +260,14 @@ public class ffmpeg_data {
 		ModernizedCProgram.data.getAudio_streams()[idx] = stream;
 		context = ModernizedCProgram.data.getAudio_streams()[idx].getCodec();
 		context.setBit_rate(ModernizedCProgram.data.getConfig().getAudio_bitrate() * 1000);
-		context.setTime_base();
+		context.setTime_base(/*Error: Unsupported expression*/);
 		speaker_layout generatedSpeakers = aoi.getSpeakers();
 		context.setChannels(ModernizedCProgram.get_audio_channels(generatedSpeakers));
 		Object generatedSamples_per_sec = aoi.getSamples_per_sec();
 		context.setSample_rate(generatedSamples_per_sec);
-		context.setChannel_layout(.av_get_default_channel_layout(context.getChannels()));
+		context.setChannel_layout(/*Error: Function owner not recognized*/av_get_default_channel_layout(context.getChannels()));
 		//AVlib default channel layout for 5 channels is 5.0 ; fix for 4.1if (generatedSpeakers == SPEAKERS_4POINT1) {
-			context.setChannel_layout(.av_get_channel_layout("4.1"));
+			context.setChannel_layout(/*Error: Function owner not recognized*/av_get_channel_layout("4.1"));
 		} 
 		context.setSample_fmt(ModernizedCProgram.data.getAcodec().getSample_fmts() ? ModernizedCProgram.data.getAcodec().getSample_fmts()[0] : AV_SAMPLE_FMT_FLTP);
 		ModernizedCProgram.data.getAudio_streams()[idx].setTime_base(context.getTime_base());
@@ -286,16 +286,16 @@ public class ffmpeg_data {
 		Byte generatedAcodec = generatedParams.getAcodec();
 		Object generatedOutput = ffm.getOutput();
 		if (!ffm.new_stream(stream, generatedAcodec, generatedOutput.getOformat().getAudio_codec())) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		Object generatedAudio_streams = ffm.getAudio_streams();
+		Object[][] generatedAudio_streams = ffm.getAudio_streams();
 		generatedAudio_streams[idx] = stream;
-		audio_params generatedAudio = ffm.getAudio();
-		.av_dict_set(stream.getMetadata(), "title", generatedAudio[idx].getName(), 0);
-		stream.setTime_base();
-		header generatedAudio_header = ffm.getAudio_header();
+		audio_params[] generatedAudio = ffm.getAudio();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_set(stream.getMetadata(), "title", generatedAudio[idx].getName(), 0);
+		stream.setTime_base(/*Error: Unsupported expression*/);
+		header[] generatedAudio_header = ffm.getAudio_header();
 		if (generatedAudio_header[idx].getSize()) {
-			extradata = .av_memdup(generatedAudio_header[idx].getData(), generatedAudio_header[idx].getSize());
+			extradata = /*Error: Function owner not recognized*/av_memdup(generatedAudio_header[idx].getData(), generatedAudio_header[idx].getSize());
 		} 
 		context = stream.getCodec();
 		context.setBit_rate(generatedAudio[idx].getAbitrate() * 1000);
@@ -305,12 +305,12 @@ public class ffmpeg_data {
 		context.setTime_base(stream.getTime_base());
 		context.setExtradata(extradata);
 		context.setExtradata_size(generatedAudio_header[idx].getSize());
-		context.setChannel_layout(.av_get_default_channel_layout(context.getChannels()));
+		context.setChannel_layout(/*Error: Function owner not recognized*/av_get_default_channel_layout(context.getChannels()));
 		//AVlib default channel layout for 4 channels is 4.0 ; fix for quadif (context.getChannels() == 4) {
-			context.setChannel_layout(.av_get_channel_layout("quad"));
+			context.setChannel_layout(/*Error: Function owner not recognized*/av_get_channel_layout("quad"));
 		} 
 		if (context.getChannels() == 5) {
-			context.setChannel_layout(.av_get_channel_layout("4.1"));
+			context.setChannel_layout(/*Error: Function owner not recognized*/av_get_channel_layout("4.1"));
 		} 
 		if (generatedOutput.getOformat().getFlags() & AVFMT_GLOBALHEADER) {
 			context.getFlags() |=  CODEC_FLAG_GLOBAL_HEADER;
@@ -326,7 +326,7 @@ public class ffmpeg_data {
 			} 
 		} 
 		if (format.getAudio_codec() != AV_CODEC_ID_NONE && ModernizedCProgram.data.getNum_audio_streams()) {
-			ModernizedCProgram.data.setAudio_streams(.calloc(1, ModernizedCProgram.data.getNum_audio_streams() * ));
+			ModernizedCProgram.data.setAudio_streams(/*Error: Function owner not recognized*/calloc(1, ModernizedCProgram.data.getNum_audio_streams() * /*Error: Unsupported expression*/));
 			for (int i = 0;
 			 i < ModernizedCProgram.data.getNum_audio_streams(); i++) {
 				if (!ModernizedCProgram.data.create_audio_stream(i)) {
@@ -342,7 +342,7 @@ public class ffmpeg_data {
 		} 
 		int generatedTracks = generatedParams.getTracks();
 		if (generatedTracks) {
-			ffm.setAudio_streams(.calloc(1, generatedTracks * ));
+			ffm.setAudio_streams(/*Error: Function owner not recognized*/calloc(1, generatedTracks * /*Error: Unsupported expression*/));
 			for (int i = 0;
 			 i < generatedTracks; i++) {
 				ffm.create_audio_stream(i);
@@ -359,46 +359,46 @@ public class ffmpeg_data {
 		 format = ModernizedCProgram.data.getOutput().getOformat();
 		int ret;
 		 dict = NULL;
-		if ((ret = .av_dict_parse_string(dict, ModernizedCProgram.data.getConfig().getMuxer_settings(), "=", " ", 0))) {
-			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to parse muxer settings: %s\n%s", .av_err2str(ret), ModernizedCProgram.data.getConfig().getMuxer_settings());
-			.av_dict_free(dict);
+		if ((ret = /*Error: Function owner not recognized*/av_dict_parse_string(dict, ModernizedCProgram.data.getConfig().getMuxer_settings(), "=", " ", 0))) {
+			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Failed to parse muxer settings: %s\n%s", /*Error: Function owner not recognized*/av_err2str(ret), ModernizedCProgram.data.getConfig().getMuxer_settings());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_free(dict);
 			return false;
 		} 
 		Object generatedDstr = str.getDstr();
-		if (.av_dict_count(dict) > 0) {
+		if (/*Error: Function owner not recognized*/av_dict_count(dict) > 0) {
 			dstr str = new dstr(0);
 			 entry = NULL;
-			while ((entry = .av_dict_get(dict, "", entry, AV_DICT_IGNORE_SUFFIX))) {
+			while ((entry = /*Error: Function owner not recognized*/av_dict_get(dict, "", entry, AV_DICT_IGNORE_SUFFIX))) {
 				str.dstr_catf("\n\t%s=%s", entry.getKey(), entry.getValue());
 			}
 			ModernizedCProgram.blog(LOG_INFO, "Using muxer settings: %s", generatedDstr);
 			str.dstr_free();
 		} 
 		if ((format.getFlags() & AVFMT_NOFILE) == 0) {
-			ret = .avio_open2(ModernizedCProgram.data.getOutput().getPb(), ModernizedCProgram.data.getConfig().getUrl(), AVIO_FLAG_WRITE, NULL, dict);
+			ret = /*Error: Function owner not recognized*/avio_open2(ModernizedCProgram.data.getOutput().getPb(), ModernizedCProgram.data.getConfig().getUrl(), AVIO_FLAG_WRITE, NULL, dict);
 			if (ret < 0) {
-				ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Couldn't open '%s', %s", ModernizedCProgram.data.getConfig().getUrl(), .av_err2str(ret));
-				.av_dict_free(dict);
+				ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Couldn't open '%s', %s", ModernizedCProgram.data.getConfig().getUrl(), /*Error: Function owner not recognized*/av_err2str(ret));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_free(dict);
 				return false;
 			} 
 		} 
-		.strncpy(ModernizedCProgram.data.getOutput().getFilename(), ModernizedCProgram.data.getConfig().getUrl(), );
-		ModernizedCProgram.data.getOutput().getFilename()[ - 1] = 0;
-		ret = .avformat_write_header(ModernizedCProgram.data.getOutput(), dict);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strncpy(ModernizedCProgram.data.getOutput().getFilename(), ModernizedCProgram.data.getConfig().getUrl(), /*Error: sizeof expression not supported yet*/);
+		ModernizedCProgram.data.getOutput().getFilename()[/*Error: sizeof expression not supported yet*/ - 1] = 0;
+		ret = /*Error: Function owner not recognized*/avformat_write_header(ModernizedCProgram.data.getOutput(), dict);
 		if (ret < 0) {
-			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Error opening '%s': %s", ModernizedCProgram.data.getConfig().getUrl(), .av_err2str(ret));
+			ModernizedCProgram.data.ffmpeg_log_error(LOG_WARNING, "Error opening '%s': %s", ModernizedCProgram.data.getConfig().getUrl(), /*Error: Function owner not recognized*/av_err2str(ret));
 			return false;
 		} 
-		if (.av_dict_count(dict) > 0) {
+		if (/*Error: Function owner not recognized*/av_dict_count(dict) > 0) {
 			dstr str = new dstr(0);
 			 entry = NULL;
-			while ((entry = .av_dict_get(dict, "", entry, AV_DICT_IGNORE_SUFFIX))) {
+			while ((entry = /*Error: Function owner not recognized*/av_dict_get(dict, "", entry, AV_DICT_IGNORE_SUFFIX))) {
 				str.dstr_catf("\n\t%s=%s", entry.getKey(), entry.getValue());
 			}
 			ModernizedCProgram.blog(LOG_INFO, "Invalid muxer settings: %s", generatedDstr);
 			str.dstr_free();
 		} 
-		.av_dict_free(dict);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_free(dict);
 		return true;
 		Object generatedOutput = ffm.getOutput();
 		 format = generatedOutput.getOformat();
@@ -406,44 +406,44 @@ public class ffmpeg_data {
 		main_params generatedParams = ffm.getParams();
 		Byte generatedFile = generatedParams.getFile();
 		if ((format.getFlags() & AVFMT_NOFILE) == 0) {
-			ret = .avio_open(generatedOutput.getPb(), generatedFile, AVIO_FLAG_WRITE);
+			ret = /*Error: Function owner not recognized*/avio_open(generatedOutput.getPb(), generatedFile, AVIO_FLAG_WRITE);
 			if (ret < 0) {
-				.fprintf((_iob[2]), "Couldn't open '%s', %s", generatedFile, .av_err2str(ret));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Couldn't open '%s', %s", generatedFile, /*Error: Function owner not recognized*/av_err2str(ret));
 				return -1;
 			} 
 		} 
-		.strncpy(generatedOutput.getFilename(), generatedFile, );
-		generatedOutput.getFilename()[ - 1] = 0;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strncpy(generatedOutput.getFilename(), generatedFile, /*Error: sizeof expression not supported yet*/);
+		generatedOutput.getFilename()[/*Error: sizeof expression not supported yet*/ - 1] = 0;
 		 dict = ((Object)0);
 		Byte generatedMuxer_settings = generatedParams.getMuxer_settings();
-		if ((ret = .av_dict_parse_string(dict, generatedMuxer_settings, "=", " ", 0))) {
-			.fprintf((_iob[2]), "Failed to parse muxer settings: %s\n%s", .av_err2str(ret), generatedMuxer_settings);
-			.av_dict_free(dict);
+		if ((ret = /*Error: Function owner not recognized*/av_dict_parse_string(dict, generatedMuxer_settings, "=", " ", 0))) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Failed to parse muxer settings: %s\n%s", /*Error: Function owner not recognized*/av_err2str(ret), generatedMuxer_settings);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_free(dict);
 		} 
-		if (.av_dict_count(dict) > 0) {
-			.printf("Using muxer settings:");
+		if (/*Error: Function owner not recognized*/av_dict_count(dict) > 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Using muxer settings:");
 			 entry = ((Object)0);
-			while ((entry = .av_dict_get(dict, "", entry, AV_DICT_IGNORE_SUFFIX))) {
-				.printf("\n\t%s=%s", entry.getKey(), entry.getValue());
+			while ((entry = /*Error: Function owner not recognized*/av_dict_get(dict, "", entry, AV_DICT_IGNORE_SUFFIX))) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("\n\t%s=%s", entry.getKey(), entry.getValue());
 			}
-			.printf("\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("\n");
 		} 
-		ret = .avformat_write_header(generatedOutput, dict);
+		ret = /*Error: Function owner not recognized*/avformat_write_header(generatedOutput, dict);
 		if (ret < 0) {
-			.fprintf((_iob[2]), "Error opening '%s': %s", generatedFile, .av_err2str(ret));
-			.av_dict_free(dict);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Error opening '%s': %s", generatedFile, /*Error: Function owner not recognized*/av_err2str(ret));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_free(dict);
 			return ret == -22 ? -2 : -1;
 		} 
-		.av_dict_free(dict);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_dict_free(dict);
 		return 0;
 	}
 	public void close_video() {
-		.avcodec_close(ModernizedCProgram.data.getVideo().getCodec());
-		.avcodec_get_frame_defaults(ModernizedCProgram.data.getVframe())// This format for some reason derefs video frame;// This format for some reason derefs video frame
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avcodec_close(ModernizedCProgram.data.getVideo().getCodec());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avcodec_get_frame_defaults(ModernizedCProgram.data.getVframe())// This format for some reason derefs video frame;// This format for some reason derefs video frame
 		// too many timesif (ModernizedCProgram.data.getVcodec().getId() == AV_CODEC_ID_A64_MULTI || ModernizedCProgram.data.getVcodec().getId() == AV_CODEC_ID_A64_MULTI5) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.avcodec_free_frame(ModernizedCProgram.data.getVframe());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avcodec_free_frame(ModernizedCProgram.data.getVframe());
 	}
 	public void close_audio() {
 		for (int idx = 0;
@@ -453,38 +453,38 @@ public class ffmpeg_data {
 				ModernizedCProgram.data.getExcess_frames()[idx][i].circlebuf_free();
 			}
 			if (ModernizedCProgram.data.getSamples()[idx][0]) {
-				.av_freep(ModernizedCProgram.data.getSamples()[idx][0]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_freep(ModernizedCProgram.data.getSamples()[idx][0]);
 			} 
 			if (ModernizedCProgram.data.getAudio_streams()[idx]) {
-				.avcodec_close(ModernizedCProgram.data.getAudio_streams()[idx].getCodec());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avcodec_close(ModernizedCProgram.data.getAudio_streams()[idx].getCodec());
 			} 
 			if (ModernizedCProgram.data.getAframe()[idx]) {
-				.avcodec_free_frame(ModernizedCProgram.data.getAframe()[idx]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avcodec_free_frame(ModernizedCProgram.data.getAframe()[idx]);
 			} 
 		}
 	}
 	public void ffmpeg_data_free() {
 		if (ModernizedCProgram.data.getInitialized()) {
-			.av_write_trailer(ModernizedCProgram.data.getOutput());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_write_trailer(ModernizedCProgram.data.getOutput());
 		} 
 		if (ModernizedCProgram.data.getVideo()) {
 			ModernizedCProgram.data.close_video();
 		} 
 		if (ModernizedCProgram.data.getAudio_streams()) {
 			ModernizedCProgram.data.close_audio();
-			.free(ModernizedCProgram.data.getAudio_streams());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(ModernizedCProgram.data.getAudio_streams());
 			ModernizedCProgram.data.setAudio_streams(NULL);
 		} 
 		if (ModernizedCProgram.data.getOutput()) {
 			if ((ModernizedCProgram.data.getOutput().getOformat().getFlags() & AVFMT_NOFILE) == 0) {
-				.avio_close(ModernizedCProgram.data.getOutput().getPb());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avio_close(ModernizedCProgram.data.getOutput().getPb());
 			} 
-			.avformat_free_context(ModernizedCProgram.data.getOutput());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avformat_free_context(ModernizedCProgram.data.getOutput());
 		} 
 		if (ModernizedCProgram.data.getLast_error()) {
 			ModernizedCProgram.bfree(ModernizedCProgram.data.getLast_error());
 		} 
-		.memset(ModernizedCProgram.data, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.data, 0, /*Error: Unsupported expression*/);
 	}
 	public void set_encoder_ids() {
 		ModernizedCProgram.data.getOutput().getOformat().setVideo_codec(ModernizedCProgram.get_codec_id(ModernizedCProgram.data.getConfig().getVideo_encoder(), ModernizedCProgram.data.getConfig().getVideo_encoder_id()));
@@ -496,10 +496,10 @@ public class ffmpeg_data {
 	public void setVideo(Object newVideo) {
 		video = newVideo;
 	}
-	public Object getAudio_streams() {
+	public Object[][] getAudio_streams() {
 		return audio_streams;
 	}
-	public void setAudio_streams(Object newAudio_streams) {
+	public void setAudio_streams(Object[][] newAudio_streams) {
 		audio_streams = newAudio_streams;
 	}
 	public Object getAcodec() {

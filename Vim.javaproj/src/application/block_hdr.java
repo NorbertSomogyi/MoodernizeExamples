@@ -32,7 +32,7 @@ public class block_hdr {
 		int generatedMf_page_size = mfp.getMf_page_size();
 		dp.setDb_txt_start(dp.setDb_txt_end(page_count * generatedMf_page_size));
 		int generatedDb_txt_start = dp.getDb_txt_start();
-		dp.setDb_free(generatedDb_txt_start - ( - ()));
+		dp.setDb_free(generatedDb_txt_start - (/*Error: Unsupported expression*/ - (/*Error: Unsupported expression*/)));
 		dp.setDb_line_count(0);
 		return hp/*
 		 * create a new, empty, pointer block
@@ -50,7 +50,7 @@ public class block_hdr {
 		pp.setPb_id((((byte)'p' << 8) + (byte)'t'));
 		pp.setPb_count(0);
 		int generatedMf_page_size = mfp.getMf_page_size();
-		pp.setPb_count_max((short_u)((generatedMf_page_size - ) /  + 1));
+		pp.setPb_count_max((short_u)((generatedMf_page_size - /*Error: Unsupported expression*/) / /*Error: Unsupported expression*/ + 1));
 		return hp/*
 		 * Lookup line 'lnum' in a memline.
 		 *
@@ -118,7 +118,7 @@ public class block_hdr {
 		low = 1;
 		Object generatedMl_line_count = generatedB_ml.getMl_line_count();
 		high = generatedMl_line_count;
-		info_pointer generatedMl_stack = generatedB_ml.getMl_stack();
+		info_pointer[] generatedMl_stack = generatedB_ml.getMl_stack();
 		Object generatedIp_low = ip.getIp_low();
 		Object generatedIp_high = ip.getIp_high();
 		Object generatedIp_bnum = ip.getIp_bnum();
@@ -148,7 +148,7 @@ public class block_hdr {
 		Object generatedPb_id = pp.getPb_id();
 		Object generatedPb_count = pp.getPb_count();
 		Object generatedPb_pointer = pp.getPb_pointer();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if ((hp = block_hdr.mf_get(mfp, bnum, page_count)) == ((Object)0)) {
 				;
 			} 
@@ -302,7 +302,7 @@ public class block_hdr {
 		     * This also avoids that the passwd file ends up in the swap file!
 		     */);
 		Object generatedBh_data = hp.getBh_data();
-		(Object).memset(((byte)(generatedBh_data)), (false), ((size_t)generatedMf_page_size * page_count));
+		(Object)/*Error: Function owner not recognized*/memset(((byte)(generatedBh_data)), (false), ((size_t)generatedMf_page_size * page_count));
 		return hp/*
 		 * Get existing block "nr" with "page_count" pages.
 		 *
@@ -451,7 +451,7 @@ public class block_hdr {
 	public block_hdr mf_alloc_bhdr(memfile mfp, int page_count) {
 		bhdr_T hp = new bhdr_T();
 		int generatedMf_page_size = mfp.getMf_page_size();
-		if ((hp = (bhdr_T)ModernizedCProgram.alloc()) != ((Object)0)) {
+		if ((hp = (bhdr_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*/)) != ((Object)0)) {
 			if ((hp.setBh_data(ModernizedCProgram.alloc(generatedMf_page_size * page_count))) == ((Object)0)) {
 				ModernizedCProgram.vim_free(/* not enough memory */hp);
 				return ((Object)0);

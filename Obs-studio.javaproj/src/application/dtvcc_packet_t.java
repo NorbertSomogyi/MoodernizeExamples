@@ -17,7 +17,7 @@ public class dtvcc_packet_t {
 	public dtvcc_packet_t dtvcc_packet_start(Object cc_data1, Object cc_data2) {
 		int packet_size = cc_data1 & -1024;
 		packet_size = (0 == packet_size) ? 64 * 8 - 1 : (packet_size * 8 - 1);
-		int packet_size_bytes = dtvcc_packet_t * dvtcc = .malloc( + packet_size * 2 - 1);
+		int packet_size_bytes = dtvcc_packet_t * dvtcc = /*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/ + packet_size * 2 - 1);
 		dvtcc.setPacket_size(packet_size);
 		dvtcc.setService_number(DVTCC_SERVICE_NUMBER_UNKNOWN);
 	}

@@ -19,24 +19,6 @@ public class DWriteRenderingParams {
 	public DWriteRenderingParams() {
 	}
 	
-	public DWriteRenderingParams GetRenderingParams() {
-		if (ModernizedCProgram.params != 0 && mRenderingParams != 0) {
-			ModernizedCProgram.params.setGamma(.UNRECOGNIZEDFUNCTIONNAME());
-			ModernizedCProgram.params.setEnhancedContrast(.UNRECOGNIZEDFUNCTIONNAME());
-			ModernizedCProgram.params.setClearTypeLevel(.UNRECOGNIZEDFUNCTIONNAME());
-			ModernizedCProgram.params.setPixelGeometry(ModernizedCProgram.ToInt(.UNRECOGNIZEDFUNCTIONNAME()));
-			ModernizedCProgram.params.setRenderingMode(ModernizedCProgram.ToInt(.UNRECOGNIZEDFUNCTIONNAME()));
-			ModernizedCProgram.params.setTextAntialiasMode(mTextAntialiasMode);
-		} 
-		return ModernizedCProgram.params;////////////////////////////////////////////////////////////////////////////
-	}
-	public DWriteRenderingParams DWriteContext_GetRenderingParams(DWriteContext ctx) {
-		if (ctx != 0) {
-			return .UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.params);
-		} else {
-				return 0;
-		} 
-	}
 	public double getGamma() {
 		return gamma;
 	}

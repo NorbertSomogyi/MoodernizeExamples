@@ -43,7 +43,7 @@ public class entry {
 	}
 	public entry find_longest_common_sequence(hashmap map) {
 		int generatedNr = map.getNr();
-		entry sequence = (entry)ModernizedCProgram.lalloc((generatedNr * ), 1);
+		entry sequence = (entry)ModernizedCProgram.lalloc((generatedNr * /*Error: Unsupported expression*/), 1);
 		int longest = 0;
 		int i;
 		entry entry = new entry();

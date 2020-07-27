@@ -13,13 +13,132 @@ public class dictitem_S {
 	public dictitem_S() {
 	}
 	
+	public dictitem_S find_var(Object name, hashtable_S htp, int no_autoload) {
+		char_u varname = new char_u();
+		hashtab_T ht = new hashtab_T();
+		dictitem_T ret = ((Object)0);
+		hashtable_S hashtable_S = new hashtable_S();
+		ht = hashtable_S.find_var_ht(name, varname);
+		if (htp != ((Object)0)) {
+			htp = ht;
+		} 
+		if (ht == ((Object)0)) {
+			return ((Object)0);
+		} 
+		dictitem_S dictitem_S = new dictitem_S();
+		ret = dictitem_S.find_var_in_ht(ht, name, varname, no_autoload || htp != ((Object)0));
+		if (ret != ((Object)0)) {
+			return ret;
+		} 
+		dictitem_S dictitem_S = new dictitem_S();
+		// Search in parent scope for lambdareturn dictitem_S.find_var_in_scoped_ht(name, no_autoload || htp != ((Object)0/*
+		 * Find variable "varname" in hashtab "ht" with name "htname".
+		 * Returns NULL if not found.
+		 */));
+	}
+	public dictitem_S find_var_in_ht(hashtable_S ht, int htname, Object varname, int no_autoload) {
+		hashitem_T hi = new hashitem_T();
+		Object generatedSc_sid = current_sctx.getSc_sid();
+		Object generatedB_bufvar = curbuf.getB_bufvar();
+		dictitem_S dictitem_S = new dictitem_S();
+		dictitem_S dictitem_S = new dictitem_S();
+		if (varname == (byte)'\000') {
+			switch (htname) {
+			case (byte)'w':
+					return ModernizedCProgram.curwin.getW_winvar();
+			case (byte)'g':
+					return ModernizedCProgram.globvars_var;
+			case (byte)'b':
+					return generatedB_bufvar;
+			case (byte)'l':
+					return dictitem_S.get_funccal_local_var();
+			case (byte)'v':
+					return ModernizedCProgram.vimvars_var;
+			case (byte)'t':
+					return ModernizedCProgram.curtab.getTp_winvar();
+			case (byte)'a':
+					return dictitem_S.get_funccal_args_var();
+			case (byte)'s':
+					return (((scriptvar_T)ModernizedCProgram.ga_scripts.getGa_data())[(generatedSc_sid) - 1]).getSv_var();
+			}
+			return ((Object)0);
+		} 
+		hashitem_S hashitem_S = new hashitem_S();
+		hi = hashitem_S.hash_find(ht, varname);
+		Object generatedHi_key = (hi).getHi_key();
+		if ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
+			if (ht == ModernizedCProgram.globvardict.getDv_hashtab() && !no_autoload) {
+				if (!ModernizedCProgram.script_autoload(varname, 0) || ModernizedCProgram.aborting()) {
+					return ((Object)0);
+				} 
+				hi = hashitem_S.hash_find(ht, varname);
+			} 
+			if ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
+				return ((Object)0);
+			} 
+		} 
+		// For global variables we may try auto-loading the script.  If it// worked find the variable again.  Don't auto-load a script if it was
+		return ((dictitem_T)(generatedHi_key - ((size_t)((dictitem_T)0).getDi_key())));
+	}
+	public void list_one_var(Byte prefix, Integer first) {
+		char_u tofree = new char_u();
+		char_u s = new char_u();
+		char_u[] numbuf = new char_u();
+		 generatedDi_tv = this.getDi_tv();
+		s = generatedDi_tv.echo_string(tofree, numbuf, ModernizedCProgram.get_copyID());
+		Object generatedDi_key = this.getDi_key();
+		Object generatedV_type = generatedDi_tv.getV_type();
+		ModernizedCProgram.list_one_var_a(prefix, generatedDi_key, generatedV_type, s == ((Object)0) ? (char_u)"" : s, first);
+		ModernizedCProgram.vim_free(tofree);
+	}
+	public dictitem_S get_funccal_local_var() {
+		if (ModernizedCProgram.current_funccal == ((Object)0)) {
+			return ((Object)0);
+		} 
+		return ModernizedCProgram.get_funccal().getL_vars_var();
+	}
+	public dictitem_S get_funccal_args_var() {
+		if (ModernizedCProgram.current_funccal == ((Object)0)) {
+			return ((Object)0);
+		} 
+		return ModernizedCProgram.get_funccal().getL_avars_var();
+	}
+	public dictitem_S find_var_in_scoped_ht(Object name, int no_autoload) {
+		dictitem_T v = ((Object)0);
+		funccall_T old_current_funccal = ModernizedCProgram.current_funccal;
+		hashtab_T ht = new hashtab_T();
+		char_u varname = new char_u();
+		if (ModernizedCProgram.current_funccal == ((Object)0) || ModernizedCProgram.current_funccal.getFunc().getUf_scoped() == ((Object)0)) {
+			return ((Object)0);
+		} 
+		ModernizedCProgram.current_funccal = ModernizedCProgram.current_funccal.getFunc().getUf_scoped();
+		hashtable_S hashtable_S = new hashtable_S();
+		dictitem_S dictitem_S = new dictitem_S();
+		while (ModernizedCProgram.current_funccal) {
+			ht = hashtable_S.find_var_ht(name, varname);
+			if (ht != ((Object)0) && varname != (byte)'\000') {
+				v = dictitem_S.find_var_in_ht(ht, name, varname, no_autoload);
+				if (v != ((Object)0)) {
+					break;
+				} 
+			} 
+			if (ModernizedCProgram.current_funccal == ModernizedCProgram.current_funccal.getFunc().getUf_scoped()) {
+				break;
+			} 
+			ModernizedCProgram.current_funccal = ModernizedCProgram.current_funccal.getFunc().getUf_scoped();
+		}
+		ModernizedCProgram.current_funccal = old_current_funccal;
+		return v/*
+		 * Set "copyID + 1" in previous_funccal and callers.
+		 */;
+	}
 	public dictitem_S dictitem_alloc(Object key) {
 		dictitem_T di = new dictitem_T();
-		di = ModernizedCProgram.alloc(((size_t)((dictitem_T)0).getDi_key()) + .strlen((byte)(key)) + 1);
+		di = ModernizedCProgram.alloc(((size_t)((dictitem_T)0).getDi_key()) + /*Error: Function owner not recognized*/strlen((byte)(key)) + 1);
 		Object generatedDi_key = di.getDi_key();
 		 generatedDi_tv = di.getDi_tv();
 		if (di != ((Object)0)) {
-			.strcpy((byte)(generatedDi_key), (byte)(key));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(generatedDi_key), (byte)(key));
 			di.setDi_flags(16);
 			generatedDi_tv.setV_lock(0);
 		} 
@@ -30,10 +149,10 @@ public class dictitem_S {
 	public dictitem_S dictitem_copy() {
 		dictitem_T di = new dictitem_T();
 		Object generatedDi_key = this.getDi_key();
-		di = ModernizedCProgram.alloc(((size_t)((dictitem_T)0).getDi_key()) + .strlen((byte)(generatedDi_key)) + 1);
+		di = ModernizedCProgram.alloc(((size_t)((dictitem_T)0).getDi_key()) + /*Error: Function owner not recognized*/strlen((byte)(generatedDi_key)) + 1);
 		 generatedDi_tv = this.getDi_tv();
 		if (di != ((Object)0)) {
-			.strcpy((byte)(generatedDi_key), (byte)(generatedDi_key));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(generatedDi_key), (byte)(generatedDi_key));
 			di.setDi_flags(16);
 			generatedDi_tv.copy_tv(generatedDi_tv);
 		} 
@@ -89,125 +208,6 @@ public class dictitem_S {
 	public dictitem_S dict_lookup(hashitem_S hi) {
 		Object generatedHi_key = (hi).getHi_key();
 		return ((dictitem_T)(generatedHi_key - ((size_t)((dictitem_T)0).getDi_key())));
-	}
-	public dictitem_S get_funccal_local_var() {
-		if (ModernizedCProgram.current_funccal == ((Object)0)) {
-			return ((Object)0);
-		} 
-		return ModernizedCProgram.get_funccal().getL_vars_var();
-	}
-	public dictitem_S get_funccal_args_var() {
-		if (ModernizedCProgram.current_funccal == ((Object)0)) {
-			return ((Object)0);
-		} 
-		return ModernizedCProgram.get_funccal().getL_avars_var();
-	}
-	public dictitem_S find_var_in_scoped_ht(Object name, int no_autoload) {
-		dictitem_T v = ((Object)0);
-		funccall_T old_current_funccal = ModernizedCProgram.current_funccal;
-		hashtab_T ht = new hashtab_T();
-		char_u varname = new char_u();
-		if (ModernizedCProgram.current_funccal == ((Object)0) || ModernizedCProgram.current_funccal.getFunc().getUf_scoped() == ((Object)0)) {
-			return ((Object)0);
-		} 
-		ModernizedCProgram.current_funccal = ModernizedCProgram.current_funccal.getFunc().getUf_scoped();
-		hashtable_S hashtable_S = new hashtable_S();
-		dictitem_S dictitem_S = new dictitem_S();
-		while (ModernizedCProgram.current_funccal) {
-			ht = hashtable_S.find_var_ht(name, varname);
-			if (ht != ((Object)0) && varname != (byte)'\000') {
-				v = dictitem_S.find_var_in_ht(ht, name, varname, no_autoload);
-				if (v != ((Object)0)) {
-					break;
-				} 
-			} 
-			if (ModernizedCProgram.current_funccal == ModernizedCProgram.current_funccal.getFunc().getUf_scoped()) {
-				break;
-			} 
-			ModernizedCProgram.current_funccal = ModernizedCProgram.current_funccal.getFunc().getUf_scoped();
-		}
-		ModernizedCProgram.current_funccal = old_current_funccal;
-		return v/*
-		 * Set "copyID + 1" in previous_funccal and callers.
-		 */;
-	}
-	public dictitem_S find_var(Object name, hashtable_S htp, int no_autoload) {
-		char_u varname = new char_u();
-		hashtab_T ht = new hashtab_T();
-		dictitem_T ret = ((Object)0);
-		hashtable_S hashtable_S = new hashtable_S();
-		ht = hashtable_S.find_var_ht(name, varname);
-		if (htp != ((Object)0)) {
-			htp = ht;
-		} 
-		if (ht == ((Object)0)) {
-			return ((Object)0);
-		} 
-		dictitem_S dictitem_S = new dictitem_S();
-		ret = dictitem_S.find_var_in_ht(ht, name, varname, no_autoload || htp != ((Object)0));
-		if (ret != ((Object)0)) {
-			return ret;
-		} 
-		dictitem_S dictitem_S = new dictitem_S();
-		// Search in parent scope for lambdareturn dictitem_S.find_var_in_scoped_ht(name, no_autoload || htp != ((Object)0/*
-		 * Find variable "varname" in hashtab "ht" with name "htname".
-		 * Returns NULL if not found.
-		 */));
-	}
-	public dictitem_S find_var_in_ht(hashtable_S ht, int htname, Object varname, int no_autoload) {
-		hashitem_T hi = new hashitem_T();
-		Object generatedSc_sid = current_sctx.getSc_sid();
-		Object generatedB_bufvar = curbuf.getB_bufvar();
-		dictitem_S dictitem_S = new dictitem_S();
-		dictitem_S dictitem_S = new dictitem_S();
-		if (varname == (byte)'\000') {
-			switch (htname) {
-			case (byte)'g':
-					return ModernizedCProgram.globvars_var;
-			case (byte)'t':
-					return ModernizedCProgram.curtab.getTp_winvar();
-			case (byte)'s':
-					return (((scriptvar_T)ModernizedCProgram.ga_scripts.getGa_data())[(generatedSc_sid) - 1]).getSv_var();
-			case (byte)'l':
-					return dictitem_S.get_funccal_local_var();
-			case (byte)'a':
-					return dictitem_S.get_funccal_args_var();
-			case (byte)'b':
-					return generatedB_bufvar;
-			case (byte)'v':
-					return ModernizedCProgram.vimvars_var;
-			case (byte)'w':
-					return ModernizedCProgram.curwin.getW_winvar();
-			}
-			return ((Object)0);
-		} 
-		hashitem_S hashitem_S = new hashitem_S();
-		hi = hashitem_S.hash_find(ht, varname);
-		Object generatedHi_key = (hi).getHi_key();
-		if ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-			if (ht == ModernizedCProgram.globvardict.getDv_hashtab() && !no_autoload) {
-				if (!ModernizedCProgram.script_autoload(varname, 0) || ModernizedCProgram.aborting()) {
-					return ((Object)0);
-				} 
-				hi = hashitem_S.hash_find(ht, varname);
-			} 
-			if ((generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-				return ((Object)0);
-			} 
-		} 
-		// For global variables we may try auto-loading the script.  If it// worked find the variable again.  Don't auto-load a script if it was
-		return ((dictitem_T)(generatedHi_key - ((size_t)((dictitem_T)0).getDi_key())));
-	}
-	public void list_one_var(Byte prefix, Integer first) {
-		char_u tofree = new char_u();
-		char_u s = new char_u();
-		char_u[] numbuf = new char_u();
-		 generatedDi_tv = this.getDi_tv();
-		s = generatedDi_tv.echo_string(tofree, numbuf, ModernizedCProgram.get_copyID());
-		Object generatedDi_key = this.getDi_key();
-		Object generatedV_type = generatedDi_tv.getV_type();
-		ModernizedCProgram.list_one_var_a(prefix, generatedDi_key, generatedV_type, s == ((Object)0) ? (char_u)"" : s, first);
-		ModernizedCProgram.vim_free(tofree);
 	}
 	public  getDi_tv() {
 		return di_tv;

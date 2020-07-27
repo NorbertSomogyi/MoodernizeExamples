@@ -14,10 +14,10 @@ public class branch_info {
 	}
 	
 	public void setup_branch_path() {
-		strbuf buf = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		buf.strbuf_branchname(ModernizedCProgram.branch.getName(), (1 << 0));
-		byte generatedBuf = buf.getBuf();
-		if (.strcmp(generatedBuf, ModernizedCProgram.branch.getName())) {
+		byte[] generatedBuf = buf.getBuf();
+		if (/*Error: Function owner not recognized*/strcmp(generatedBuf, ModernizedCProgram.branch.getName())) {
 			ModernizedCProgram.branch.setName(ModernizedCProgram.xstrdup(generatedBuf));
 		} 
 		buf.strbuf_splice(0, 0, "refs/heads/", 11);
@@ -40,13 +40,13 @@ public class branch_info {
 			} 
 			new_tree = tree.parse_tree_indirect(ModernizedCProgram.the_repository.getHash_algo().getEmpty_tree());
 		} else {
-				new_tree = .repo_get_commit_tree(ModernizedCProgram.the_repository, generatedCommit);
+				new_tree = /*Error: Function owner not recognized*/repo_get_commit_tree(ModernizedCProgram.the_repository, generatedCommit);
 		} 
 		dir_struct generatedDir = topts.getDir();
 		 generatedFlags = generatedDir.getFlags();
 		Object generatedBuffer = tree.getBuffer();
-		Object generatedSize = tree.getSize();
-		byte generatedBuf = sb.getBuf();
+		long generatedSize = tree.getSize();
+		byte[] generatedBuf = sb.getBuf();
 		tree tree = new tree();
 		Object generatedName = this.getName();
 		strbuf generatedObuf = o.getObuf();
@@ -59,7 +59,7 @@ public class branch_info {
 				tree_desc[] trees = new tree_desc();
 				tree tree = new tree();
 				unpack_trees_options topts = new unpack_trees_options();
-				.memset(topts, 0, );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(topts, 0, /*Error: sizeof expression not supported yet*/);
 				topts.setHead_idx(-1);
 				topts.setSrc_index(ModernizedCProgram.the_index);
 				topts.setDst_index(ModernizedCProgram.the_index);
@@ -76,7 +76,7 @@ public class branch_info {
 				topts.setVerbose_update(opts.getShow_progress());
 				topts.setFn(ModernizedCProgram.twoway_merge);
 				if (opts.getOverwrite_ignore()) {
-					topts.setDir(ModernizedCProgram.xcalloc(1, ));
+					topts.setDir(ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/));
 					generatedFlags |=  .DIR_SHOW_IGNORED;
 					generatedDir.setup_standard_excludes();
 				} 
@@ -95,8 +95,8 @@ public class branch_info {
 					tree work = new tree();
 					tree old_tree = new tree();
 					merge_options o = new merge_options();
-					strbuf sb = new strbuf(, , );
-					strbuf old_commit_shortname = new strbuf(, , );
+					strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+					strbuf old_commit_shortname = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 					if (!opts.getMerge()) {
 						return 1/*
 									 * Without old_branch_info->commit, the below is the same as
@@ -106,7 +106,7 @@ public class branch_info {
 					if (!generatedCommit) {
 						return 1;
 					} 
-					ModernizedCProgram.old_tree = .repo_get_commit_tree(ModernizedCProgram.the_repository, generatedCommit);
+					ModernizedCProgram.old_tree = /*Error: Function owner not recognized*/repo_get_commit_tree(ModernizedCProgram.the_repository, generatedCommit);
 					if (ModernizedCProgram.repo_index_has_changes(ModernizedCProgram.the_repository, ModernizedCProgram.old_tree, sb)) {
 						ModernizedCProgram.die(ModernizedCProgram._("cannot continue with staged changes in the following files:\n%s"), generatedBuf);
 					} 
@@ -127,7 +127,7 @@ public class branch_info {
 								 * a pain; plumb in an option to set
 								 * o.renormalize?
 								 */);
-					.init_merge_options(o, ModernizedCProgram.the_repository);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/init_merge_options(o, ModernizedCProgram.the_repository);
 					o.setVerbosity(0);
 					work = tree.write_in_core_index_as_tree(ModernizedCProgram.the_repository);
 					ret = new_tree.reset_tree(opts, 1, writeout_error);
@@ -143,7 +143,7 @@ public class branch_info {
 					o.setBranch2("local");
 					ret = o.merge_trees(new_tree, work, ModernizedCProgram.old_tree);
 					if (ret < 0) {
-						.exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\checkout.c", 778, (true)));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\checkout.c", 778, (true)));
 					} 
 					ret = new_tree.reset_tree(opts, 0, writeout_error);
 					generatedObuf.strbuf_release();
@@ -169,18 +169,18 @@ public class branch_info {
 		return 0;
 	}
 	public void report_tracking() {
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		Object generatedName = this.getName();
-		branch branch = .branch_get(generatedName);
-		if (!.format_tracking_info(branch, sb, ahead_behind_flags.AHEAD_BEHIND_FULL)) {
-			return ;
+		branch branch = /*Error: Function owner not recognized*/branch_get(generatedName);
+		if (!/*Error: Function owner not recognized*/format_tracking_info(branch, sb, ahead_behind_flags.AHEAD_BEHIND_FULL)) {
+			return /*Error: Unsupported expression*/;
 		} 
-		byte generatedBuf = sb.getBuf();
-		.fputs(generatedBuf, (_iob[1]));
+		byte[] generatedBuf = sb.getBuf();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(generatedBuf, (_iob[1]));
 		sb.strbuf_release();
 	}
 	public void update_refs_for_switch(Object opts, branch_info new_branch_info) {
-		strbuf msg = new strbuf(, , );
+		strbuf msg = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte old_desc;
 		byte reflog_msg;
 		Object generatedName = new_branch_info.getName();
@@ -190,13 +190,13 @@ public class branch_info {
 				refname = ModernizedCProgram.mkpathdup("refs/heads/%s", opts.getNew_orphan_branch());
 				if (opts.getNew_branch_log() && !ModernizedCProgram.should_autocreate_reflog(refname)) {
 					int ret;
-					strbuf err = new strbuf(, , );
+					strbuf err = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 					ret = ModernizedCProgram.err.safe_create_reflog(refname, 1);
 					if (ret) {
-						.fprintf((_iob[2]), ModernizedCProgram._("Can not do reflog for '%s': %s\n"), opts.getNew_orphan_branch(), ModernizedCProgram.err.getBuf());
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("Can not do reflog for '%s': %s\n"), opts.getNew_orphan_branch(), ModernizedCProgram.err.getBuf());
 						ModernizedCProgram.err.strbuf_release();
 						ModernizedCProgram.free(refname);
-						return ;
+						return /*Error: Unsupported expression*/;
 					} 
 					ModernizedCProgram.err.strbuf_release();
 				} 
@@ -212,15 +212,15 @@ public class branch_info {
 		if (!old_desc && generatedCommit) {
 			old_desc = ModernizedCProgram.oid_to_hex(generatedCommit.getObject().getOid());
 		} 
-		reflog_msg = .getenv("GIT_REFLOG_ACTION");
+		reflog_msg = /*Error: Function owner not recognized*/getenv("GIT_REFLOG_ACTION");
 		if (!reflog_msg) {
 			msg.strbuf_addf("checkout: moving from %s to %s", old_desc ? old_desc : "(invalid)", generatedName);
 		} else {
-				msg.strbuf_insert(0, reflog_msg, .strlen(reflog_msg));
+				msg.strbuf_insert(0, reflog_msg, /*Error: Function owner not recognized*/strlen(reflog_msg));
 		} 
 		Object generatedPath = new_branch_info.getPath();
-		byte generatedBuf = msg.getBuf();
-		if (!.strcmp(generatedName, "HEAD") && !generatedPath && !opts.getForce_detach()) {
+		byte[] generatedBuf = msg.getBuf();
+		if (!/*Error: Function owner not recognized*/strcmp(generatedName, "HEAD") && !generatedPath && !opts.getForce_detach()) {
 		}  else if (opts.getForce_detach() || !generatedPath) {
 			ModernizedCProgram.update_ref(generatedBuf, "HEAD", generatedCommit.getObject().getOid(), ((Object)0), (1 << 0), action_on_err.UPDATE_REFS_DIE_ON_ERR);
 			if (!opts.getQuiet()) {
@@ -234,20 +234,20 @@ public class branch_info {
 				ModernizedCProgram.die(ModernizedCProgram._("unable to update HEAD"));
 			} 
 			if (!opts.getQuiet()) {
-				if (generatedPath && !.strcmp(generatedPath, generatedPath)) {
+				if (generatedPath && !/*Error: Function owner not recognized*/strcmp(generatedPath, generatedPath)) {
 					if (opts.getNew_branch_force()) {
-						.fprintf((_iob[2]), ModernizedCProgram._("Reset branch '%s'\n"), generatedName);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("Reset branch '%s'\n"), generatedName);
 					} else {
-							.fprintf((_iob[2]), ModernizedCProgram._("Already on '%s'\n"), generatedName);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("Already on '%s'\n"), generatedName);
 					} 
 				}  else if (opts.getNew_branch()) {
 					if (opts.getBranch_exists()) {
-						.fprintf((_iob[2]), ModernizedCProgram._("Switched to and reset branch '%s'\n"), generatedName);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("Switched to and reset branch '%s'\n"), generatedName);
 					} else {
-							.fprintf((_iob[2]), ModernizedCProgram._("Switched to a new branch '%s'\n"), generatedName);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("Switched to a new branch '%s'\n"), generatedName);
 					} 
 				} else {
-						.fprintf((_iob[2]), ModernizedCProgram._("Switched to branch '%s'\n"), generatedName);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("Switched to branch '%s'\n"), generatedName);
 				} 
 			} 
 			if (generatedPath && generatedName) {
@@ -258,7 +258,7 @@ public class branch_info {
 		} 
 		ModernizedCProgram.the_repository.remove_branch_state(!opts.getQuiet());
 		msg.strbuf_release();
-		if (!opts.getQuiet() && (generatedPath || (!opts.getForce_detach() && !.strcmp(generatedName, "HEAD")))) {
+		if (!opts.getQuiet() && (generatedPath || (!opts.getForce_detach() && !/*Error: Function owner not recognized*/strcmp(generatedName, "HEAD")))) {
 			new_branch_info.report_tracking();
 		} 
 	}
@@ -271,11 +271,11 @@ public class branch_info {
 		int writeout_error = 0;
 		int do_merge = 1;
 		ModernizedCProgram.trace2_cmd_mode_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\checkout.c", 1025, ("branch"));
-		.memset(old_branch_info, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(old_branch_info, 0, /*Error: sizeof expression not supported yet*/);
 		old_branch_info.setPath(path_to_free = rev.resolve_refdup("HEAD", 0, flag));
 		Object generatedPath = old_branch_info.getPath();
 		if (generatedPath) {
-			old_branch_info.setCommit(.lookup_commit_reference_gently(ModernizedCProgram.the_repository, rev, 1));
+			old_branch_info.setCommit(/*Error: Function owner not recognized*/lookup_commit_reference_gently(ModernizedCProgram.the_repository, rev, 1));
 		} 
 		if (!(flag & -1024)) {
 			old_branch_info.setPath(((Object)0));
@@ -299,7 +299,7 @@ public class branch_info {
 			if (!generatedCommit) {
 				ModernizedCProgram.die(ModernizedCProgram._("You are on a branch yet to be born"));
 			} 
-			.parse_commit_or_die(generatedCommit);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/parse_commit_or_die(generatedCommit);
 			if (opts.getOnly_merge_on_switching_branches()) {
 				do_merge = 0;
 			} 

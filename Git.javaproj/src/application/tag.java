@@ -40,25 +40,25 @@ public class tag {
 		Object generatedObject = this.getObject();
 		if (generatedType == object_type.OBJ_TREE) {
 			ModernizedCProgram.warning("Omitting tag %s,\nsince tags of trees (or tags of tags of trees, etc.) are not supported.", ModernizedCProgram.oid_to_hex(generatedObject.getOid()));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		buf = ModernizedCProgram.the_repository.repo_read_object_file(generatedObject.getOid(), object_type.type, size);
 		if (!buf) {
 			ModernizedCProgram.die("could not read tag %s", ModernizedCProgram.oid_to_hex(generatedObject.getOid()));
 		} 
-		message = .memmem(buf, size, "\n\n", 2);
+		message = /*Error: Function owner not recognized*/memmem(buf, size, "\n\n", 2);
 		if (message) {
 			message += 2;
-			message_size = .strlen(message);
+			message_size = /*Error: Function owner not recognized*/strlen(message);
 		} 
-		tagger = .memmem(buf, message ? message - buf : size, "\ntagger ", 8);
+		tagger = /*Error: Function owner not recognized*/memmem(buf, message ? message - buf : size, "\ntagger ", 8);
 		if (!tagger) {
 			if (ModernizedCProgram.fake_missing_tagger) {
 				tagger = "tagger Unspecified Tagger <unspecified-tagger> 0 +0000";
 			} else {
 					tagger = "";
 			} 
-			tagger_end = tagger + .strlen(tagger);
+			tagger_end = tagger + /*Error: Function owner not recognized*/strlen(tagger);
 		} else {
 				tagger++;
 				tagger_end = ModernizedCProgram.gitstrchrnul(tagger, (byte)'\n');
@@ -74,14 +74,14 @@ public class tag {
 			} 
 		} 
 		if (/* handle signed tags */message) {
-			byte signature = .strstr(message, "\n-----BEGIN PGP SIGNATURE-----\n");
+			byte signature = /*Error: Function owner not recognized*/strstr(message, "\n-----BEGIN PGP SIGNATURE-----\n");
 			if (ModernizedCProgram.signature) {
 				switch (.signed_tag_mode) {
-				case .SIGNED_TAG_ABORT:
-						ModernizedCProgram.die("encountered signed tag %s; use --signed-tags=<mode> to handle it", ModernizedCProgram.oid_to_hex(generatedObject.getOid()));
 				case /* fallthru */.STRIP:
 						message_size = ModernizedCProgram.signature + 1 - message;
 						break;
+				case .SIGNED_TAG_ABORT:
+						ModernizedCProgram.die("encountered signed tag %s; use --signed-tags=<mode> to handle it", ModernizedCProgram.oid_to_hex(generatedObject.getOid()));
 				case /* fallthru */.VERBATIM:
 						break;
 				case .WARN_STRIP:
@@ -97,7 +97,7 @@ public class tag {
 			switch (.tag_of_filtered_mode) {
 			case .DROP:
 					ModernizedCProgram.free(/* Ignore this tag altogether */buf);
-					return ;
+					return /*Error: Unsupported expression*/;
 			case .TAG_FILTERING_ABORT:
 					ModernizedCProgram.die("tag %s tags unexported object; use --tag-of-filtered-object=<mode> to handle it", ModernizedCProgram.oid_to_hex(generatedObject.getOid()));
 			case .REWRITE:
@@ -106,9 +106,9 @@ public class tag {
 					}  else if (generatedType == object_type.OBJ_COMMIT) {
 						p = (commit)tagged.rewrite_commit();
 						if (!p) {
-							.printf("reset %s\nfrom %s\n\n", name, ModernizedCProgram.oid_to_hex(ModernizedCProgram.null_oid));
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("reset %s\nfrom %s\n\n", name, ModernizedCProgram.oid_to_hex(ModernizedCProgram.null_oid));
 							ModernizedCProgram.free(buf);
-							return ;
+							return /*Error: Unsupported expression*/;
 						} 
 						tagged_mark = generatedObject.get_object_mark();
 					} else {
@@ -117,26 +117,26 @@ public class tag {
 			}
 		} 
 		if (generatedType == object_type.OBJ_TAG) {
-			.printf("reset %s\nfrom %s\n\n", name, ModernizedCProgram.oid_to_hex(ModernizedCProgram.null_oid));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("reset %s\nfrom %s\n\n", name, ModernizedCProgram.oid_to_hex(ModernizedCProgram.null_oid));
 		} 
 		if (ModernizedCProgram.starts_with(name, "refs/tags/")) {
 			name += 10;
 		} 
-		.printf("tag %s\n", name);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("tag %s\n", name);
 		if (ModernizedCProgram.mark_tags) {
 			generatedObject.mark_next_object();
-			.printf("mark :%u\n", ModernizedCProgram.last_idnum);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("mark :%u\n", ModernizedCProgram.last_idnum);
 		} 
 		object_id generatedOid = tagged.getOid();
 		if (tagged_mark) {
-			.printf("from :%d\n", tagged_mark);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("from :%d\n", tagged_mark);
 		} else {
-				.printf("from %s\n", ModernizedCProgram.oid_to_hex(generatedOid));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("from %s\n", ModernizedCProgram.oid_to_hex(generatedOid));
 		} 
 		if (ModernizedCProgram.show_original_ids) {
-			.printf("original-oid %s\n", ModernizedCProgram.oid_to_hex(generatedOid));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("original-oid %s\n", ModernizedCProgram.oid_to_hex(generatedOid));
 		} 
-		.printf("%.*s%sdata %d\n%.*s\n", (int)(tagger_end - tagger), tagger, tagger == tagger_end ? "" : "\n", (int)message_size, (int)message_size, message ? message : "");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%.*s%sdata %d\n%.*s\n", (int)(tagger_end - tagger), tagger, tagger == tagger_end ? "" : "\n", (int)message_size, (int)message_size, message ? message : "");
 		ModernizedCProgram.free(buf);
 	}
 	public tag getNext_tag() {

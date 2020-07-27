@@ -1,7 +1,7 @@
 package application;
 
 public class hashmap {
-	private hashmap_entry table;
+	private hashmap_entry[][] table;
 	private Object cmpfn;
 	private Object cmpfn_data;
 	private int private_size;
@@ -10,7 +10,7 @@ public class hashmap {
 	private int shrink_at;
 	private int do_count_items;
 	
-	public hashmap(hashmap_entry table, Object cmpfn, Object cmpfn_data, int private_size, int tablesize, int grow_at, int shrink_at, int do_count_items) {
+	public hashmap(hashmap_entry[][] table, Object cmpfn, Object cmpfn_data, int private_size, int tablesize, int grow_at, int shrink_at, int do_count_items) {
 		setTable(table);
 		setCmpfn(cmpfn);
 		setCmpfn_data(cmpfn_data);
@@ -37,11 +37,11 @@ public class hashmap {
 		hashmap_entry hashmap_entry = new hashmap_entry();
 		ret = ModernizedCProgram.container_of_or_null_offset(hashmap_entry.hashmap_get(map, generatedHash, ((Object)0)), ((size_t)generatedHash));
 		if (!ret) {
-			ret = ModernizedCProgram.xmalloc();
+			ret = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 			generatedHash.hashmap_entry_init(generatedHash);
 			ret.setOrig(ModernizedCProgram.xstrdup(orig));
 			ret.setOrig_len(len);
-			ret.setAnon(.generate(orig, len));
+			ret.setAnon(/*Error: Function owner not recognized*/generate(orig, len));
 			ret.setAnon_len(len);
 			generatedHash.hashmap_put(map);
 		} 
@@ -50,10 +50,95 @@ public class hashmap {
 		Object generatedAnon = ret.getAnon();
 		return generatedAnon;
 	}
+	public void refname_hash_init() {
+		map.hashmap_init(refname_hash_entry_cmp, ((Object)0), 0);
+	}
+	public int refname_hash_exists(Object refname) {
+		hashmap_entry hashmap_entry = new hashmap_entry();
+		return !!hashmap_entry.hashmap_get_from_hash(map, ModernizedCProgram.strhash(refname), refname);
+	}
+	public void add_left_or_right(Object path, Object content, int is_right) {
+		pair_entry e = new pair_entry();
+		pair_entry existing = new pair_entry();
+		Object generatedPath = ((e)).getPath();
+		do {
+			size_t flex_array_len_ = (/*Error: Function owner not recognized*/strlen(path));
+			((e)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedPath, ((path)), flex_array_len_);
+		} while (0);
+		hashmap_entry generatedEntry = e.getEntry();
+		generatedEntry.hashmap_entry_init(ModernizedCProgram.strhash(path));
+		hashmap_entry hashmap_entry = new hashmap_entry();
+		existing = ModernizedCProgram.container_of_or_null_offset(hashmap_entry.hashmap_get(map, generatedEntry, ((Object)0)), ((size_t)generatedEntry));
+		Object generatedLeft = e.getLeft();
+		Object generatedRight = e.getRight();
+		if (existing) {
+			ModernizedCProgram.free(e);
+			e = existing;
+		} else {
+				generatedLeft[0] = generatedRight[0] = (byte)'\0';
+				ModernizedCProgram.hashmap_add(map, generatedEntry);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strlcpy(is_right ? generatedRight : generatedLeft, content, 260);
+	}
+	public void changed_files(Object index_path, Object workdir) {
+		child_process update_index = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
+		child_process diff_files = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
+		strbuf index_env = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		byte git_dir = ModernizedCProgram.absolute_path(ModernizedCProgram.get_git_dir());
+		byte[] env = new byte[]{((Object)0), ((Object)0)};
+		FILE fp = new FILE();
+		index_env.strbuf_addf("GIT_INDEX_FILE=%s", index_path);
+		byte[] generatedBuf = index_env.getBuf();
+		env[0] = generatedBuf;
+		argv_array generatedArgs = update_index.getArgs();
+		generatedArgs.argv_array_pushl("--git-dir", git_dir, "--work-tree", workdir, "update-index", "--really-refresh", "-q", "--unmerged", ((Object)0));
+		update_index.setNo_stdin(1);
+		update_index.setNo_stdout(1);
+		update_index.setNo_stderr(1);
+		update_index.setGit_cmd(1);
+		update_index.setUse_shell(0);
+		update_index.setClean_on_exit(1);
+		update_index.setDir(workdir);
+		update_index.setEnv(env);
+		/* Ignore any errors of update-index */update_index.run_command();
+		generatedArgs.argv_array_pushl("--git-dir", git_dir, "--work-tree", workdir, "diff-files", "--name-only", "-z", ((Object)0));
+		diff_files.setNo_stdin(1);
+		diff_files.setGit_cmd(1);
+		diff_files.setUse_shell(0);
+		diff_files.setClean_on_exit(1);
+		diff_files.setOut(-1);
+		diff_files.setDir(workdir);
+		diff_files.setEnv(env);
+		if (diff_files.start_command()) {
+			ModernizedCProgram.die("could not obtain raw diff");
+		} 
+		int generatedOut = diff_files.getOut();
+		fp = ModernizedCProgram.xfdopen(generatedOut, "r");
+		Object generatedPath = ((entry)).getPath();
+		hashmap_entry generatedEntry = entry.getEntry();
+		while (!ModernizedCProgram.strbuf_getline_nul(buf, fp)) {
+			path_entry entry = new path_entry();
+			do {
+				size_t flex_array_len_ = (/*Error: Function owner not recognized*/strlen(generatedBuf));
+				((entry)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedPath, ((generatedBuf)), flex_array_len_);
+			} while (0);
+			generatedEntry.hashmap_entry_init(ModernizedCProgram.strhash(generatedBuf));
+			ModernizedCProgram.hashmap_add(result, generatedEntry);
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fp);
+		if (diff_files.finish_command()) {
+			ModernizedCProgram.die("diff-files did not exit properly");
+		} 
+		index_env.strbuf_release();
+		buf.strbuf_release();
+	}
 	/* load factor in percent */
 	public void alloc_table(int size) {
 		this.setTablesize(size);
-		this.setTable(ModernizedCProgram.xcalloc(size, ));
+		this.setTable(ModernizedCProgram.xcalloc(size, /*Error: Unsupported expression*/));
 		this.setGrow_at((int)((uint64_t)size * 80 / /* calculate resize thresholds for new size */100));
 		int generatedGrow_at = this.getGrow_at();
 		if (size <= 64) {
@@ -70,7 +155,7 @@ public class hashmap {
 		int generatedTablesize = this.getTablesize();
 		int i;
 		int oldsize = generatedTablesize;
-		hashmap_entry generatedTable = this.getTable();
+		hashmap_entry[][] generatedTable = this.getTable();
 		hashmap_entry oldtable = generatedTable;
 		map.alloc_table(newsize);
 		hashmap_entry generatedNext = e.getNext();
@@ -88,7 +173,7 @@ public class hashmap {
 	}
 	public void hashmap_init(Object equals_function, Object cmpfn_data, Object initial_size) {
 		int size = 64;
-		.memset(map, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(map, 0, /*Error: sizeof expression not supported yet*/);
 		this.setCmpfn(equals_function ? equals_function : always_equal);
 		this.setCmpfn_data(cmpfn_data);
 		initial_size = (int)((uint64_t)initial_size * /* calculate initial table size and allocate the table */100 / 80);
@@ -102,9 +187,9 @@ public class hashmap {
 		this.setDo_count_items(1);
 	}
 	public void hashmap_free_(Object entry_offset) {
-		hashmap_entry generatedTable = this.getTable();
+		hashmap_entry[][] generatedTable = this.getTable();
 		if (!map || !generatedTable) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		hashmap_entry hashmap_entry = new hashmap_entry();
 		if (entry_offset >= /* called by hashmap_free_entries */0) {
@@ -119,7 +204,7 @@ public class hashmap {
 			}
 		} 
 		ModernizedCProgram.free(generatedTable);
-		.memset(map, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(map, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public int hashmap_get_size() {
 		int generatedDo_count_items = this.getDo_count_items();
@@ -183,7 +268,7 @@ public class hashmap {
 		hashmap_iter iter = new hashmap_iter();
 		int generatedDo_count_items = this.getDo_count_items();
 		if (generatedDo_count_items) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.hashmap_iter_init(map, iter);
 		hashmap_entry hashmap_entry = new hashmap_entry();
@@ -224,7 +309,7 @@ public class hashmap {
 		Object generatedAlloc = this.getAlloc();
 		int index = (int)((generatedHa << 1) % generatedAlloc);
 		Object generatedEntries = this.getEntries();
-		Object generatedPtr = record.getPtr();
+		Object[] generatedPtr = record.getPtr();
 		long generatedSize = record.getSize();
 		Object generatedXpp = this.getXpp();
 		while (generatedEntries[index].getLine1()) {
@@ -243,10 +328,10 @@ public class hashmap {
 			} else {
 					generatedEntries[index].setLine2(line);
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		}
 		if (pass == 2) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		generatedEntries[index].setLine1(line);
 		generatedEntries[index].setHash(generatedHa);
@@ -268,110 +353,10 @@ public class hashmap {
 		Object generatedEnv = this.getEnv();
 		xrecord_t record1 = generatedEnv.getXdf1().getRecs()[line1 - 1];
 		xrecord_t record2 = generatedEnv.getXdf2().getRecs()[line2 - 1];
-		Object generatedPtr = record1.getPtr();
+		Object[] generatedPtr = record1.getPtr();
 		long generatedSize = record1.getSize();
 		Object generatedXpp = this.getXpp();
 		return ModernizedCProgram.xdl_recmatch(generatedPtr, generatedSize, generatedPtr, generatedSize, generatedXpp.getFlags());
-	}
-	public int fall_back_to_classic_diff(int line1, int count1, int line2, int count2) {
-		xpparam_t xpp = new xpparam_t();
-		Object generatedXpp = this.getXpp();
-		xpp.setFlags(generatedXpp.getFlags() & ~((1 << 14) | (1 << 15)));
-		Object generatedEnv = this.getEnv();
-		return generatedEnv.xdl_fall_back_diff(xpp, line1, count1, line2, count2/*
-		 * Recursively find the longest common sequence of unique lines,
-		 * and if none was found, ask xdl_do_diff() to do the job.
-		 *
-		 * This function assumes that env was prepared with xdl_prepare_env().
-		 */);
-		xpparam_t xpparam = new xpparam_t();
-		xpparam.setFlags(xpp.getFlags() & ~((1 << 14) | (1 << 15)));
-		return env.xdl_fall_back_diff(xpparam, line1, count1, line2, count2);
-	}
-	public void refname_hash_init() {
-		map.hashmap_init(refname_hash_entry_cmp, ((Object)0), 0);
-	}
-	public int refname_hash_exists(Object refname) {
-		hashmap_entry hashmap_entry = new hashmap_entry();
-		return !!hashmap_entry.hashmap_get_from_hash(map, ModernizedCProgram.strhash(refname), refname);
-	}
-	public void add_left_or_right(Object path, Object content, int is_right) {
-		pair_entry e = new pair_entry();
-		pair_entry existing = new pair_entry();
-		Object generatedPath = ((e)).getPath();
-		do {
-			size_t flex_array_len_ = (.strlen(path));
-			((e)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedPath, ((path)), flex_array_len_);
-		} while (0);
-		hashmap_entry generatedEntry = e.getEntry();
-		generatedEntry.hashmap_entry_init(ModernizedCProgram.strhash(path));
-		hashmap_entry hashmap_entry = new hashmap_entry();
-		existing = ModernizedCProgram.container_of_or_null_offset(hashmap_entry.hashmap_get(map, generatedEntry, ((Object)0)), ((size_t)generatedEntry));
-		Object generatedLeft = e.getLeft();
-		Object generatedRight = e.getRight();
-		if (existing) {
-			ModernizedCProgram.free(e);
-			e = existing;
-		} else {
-				generatedLeft[0] = generatedRight[0] = (byte)'\0';
-				ModernizedCProgram.hashmap_add(map, generatedEntry);
-		} 
-		.strlcpy(is_right ? generatedRight : generatedLeft, content, 260);
-	}
-	public void changed_files(Object index_path, Object workdir) {
-		child_process update_index = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		child_process diff_files = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		strbuf index_env = new strbuf(, , );
-		strbuf buf = new strbuf(, , );
-		byte git_dir = ModernizedCProgram.absolute_path(ModernizedCProgram.get_git_dir());
-		byte[] env = new byte[]{((Object)0), ((Object)0)};
-		FILE fp = new FILE();
-		index_env.strbuf_addf("GIT_INDEX_FILE=%s", index_path);
-		byte generatedBuf = index_env.getBuf();
-		env[0] = generatedBuf;
-		argv_array generatedArgs = update_index.getArgs();
-		generatedArgs.argv_array_pushl("--git-dir", git_dir, "--work-tree", workdir, "update-index", "--really-refresh", "-q", "--unmerged", ((Object)0));
-		update_index.setNo_stdin(1);
-		update_index.setNo_stdout(1);
-		update_index.setNo_stderr(1);
-		update_index.setGit_cmd(1);
-		update_index.setUse_shell(0);
-		update_index.setClean_on_exit(1);
-		update_index.setDir(workdir);
-		update_index.setEnv(env);
-		/* Ignore any errors of update-index */update_index.run_command();
-		generatedArgs.argv_array_pushl("--git-dir", git_dir, "--work-tree", workdir, "diff-files", "--name-only", "-z", ((Object)0));
-		diff_files.setNo_stdin(1);
-		diff_files.setGit_cmd(1);
-		diff_files.setUse_shell(0);
-		diff_files.setClean_on_exit(1);
-		diff_files.setOut(-1);
-		diff_files.setDir(workdir);
-		diff_files.setEnv(env);
-		if (diff_files.start_command()) {
-			ModernizedCProgram.die("could not obtain raw diff");
-		} 
-		int generatedOut = diff_files.getOut();
-		fp = ModernizedCProgram.xfdopen(generatedOut, "r");
-		Object generatedPath = ((entry)).getPath();
-		hashmap_entry generatedEntry = entry.getEntry();
-		while (!ModernizedCProgram.strbuf_getline_nul(buf, fp)) {
-			path_entry entry = new path_entry();
-			do {
-				size_t flex_array_len_ = (.strlen(generatedBuf));
-				((entry)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-				.memcpy((Object)generatedPath, ((generatedBuf)), flex_array_len_);
-			} while (0);
-			generatedEntry.hashmap_entry_init(ModernizedCProgram.strhash(generatedBuf));
-			ModernizedCProgram.hashmap_add(result, generatedEntry);
-		}
-		.fclose(fp);
-		if (diff_files.finish_command()) {
-			ModernizedCProgram.die("diff-files did not exit properly");
-		} 
-		index_env.strbuf_release();
-		buf.strbuf_release();
 	}
 	public void paths_and_oids_init() {
 		map.hashmap_init(path_and_oids_cmp, ((Object)0), 0);
@@ -403,7 +388,7 @@ public class hashmap {
 		entry = ModernizedCProgram.container_of_or_null_offset(hashmap_entry.hashmap_get(map, generatedEnt, ((Object)0)), ((size_t)generatedEnt));
 		Byte generatedPath = key.getPath();
 		if (!entry) {
-			entry = ModernizedCProgram.xcalloc(1, );
+			entry = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 			generatedEnt.hashmap_entry_init(hash);
 			entry.setPath(ModernizedCProgram.xstrdup(generatedPath));
 			generatedTrees.oidset_init(16);
@@ -411,10 +396,10 @@ public class hashmap {
 		} 
 		generatedTrees.oidset_insert(oid);
 	}
-	public hashmap_entry getTable() {
+	public hashmap_entry[][] getTable() {
 		return table;
 	}
-	public void setTable(hashmap_entry newTable) {
+	public void setTable(hashmap_entry[][] newTable) {
 		table = newTable;
 	}
 	public Object getCmpfn() {

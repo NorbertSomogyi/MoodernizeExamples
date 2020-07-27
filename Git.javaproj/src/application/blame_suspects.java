@@ -4,9 +4,9 @@ public class blame_suspects {
 	private int slab_size;
 	private int stride;
 	private int slab_count;
-	private blame_origin slab;
+	private blame_origin[][][] slab;
 	
-	public blame_suspects(int slab_size, int stride, int slab_count, blame_origin slab) {
+	public blame_suspects(int slab_size, int stride, int slab_count, blame_origin[][][] slab) {
 		setSlab_size(slab_size);
 		setStride(stride);
 		setSlab_count(slab_count);
@@ -21,7 +21,7 @@ public class blame_suspects {
 			stride = 1;
 		} 
 		this.setStride(stride);
-		elem_size =  * stride;
+		elem_size = /*Error: Unsupported expression*/ * stride;
 		this.setSlab_size((512 * 1024 - 32) / elem_size);
 		this.setSlab_count(0);
 		this.setSlab(((Object)0));
@@ -32,7 +32,7 @@ public class blame_suspects {
 	public void clear_blame_suspects() {
 		int i;
 		int generatedSlab_count = this.getSlab_count();
-		blame_origin generatedSlab = this.getSlab();
+		blame_origin[][][] generatedSlab = this.getSlab();
 		for (i = 0; i < generatedSlab_count; i++) {
 			ModernizedCProgram.free(generatedSlab[i]);
 		}
@@ -60,10 +60,10 @@ public class blame_suspects {
 	public void setSlab_count(int newSlab_count) {
 		slab_count = newSlab_count;
 	}
-	public blame_origin getSlab() {
+	public blame_origin[][][] getSlab() {
 		return slab;
 	}
-	public void setSlab(blame_origin newSlab) {
+	public void setSlab(blame_origin[][][] newSlab) {
 		slab = newSlab;
 	}
 }

@@ -38,6 +38,60 @@ public class timeval {
 	public timeval() {
 	}
 	
+	public timeval tvnow() {
+		timeval now = new timeval();
+		now.setTimeval((long)/*Error: Function owner not recognized*/time(((Object)/* time() returns the value of time in seconds since the epoch */0)));
+		now.setTimeval(0);
+		return now;
+		timeval now = new timeval();
+		DWORD milliseconds = /*Error: Function owner not recognized*/GetTickCount();
+		now.setTv_sec((long)(milliseconds / 1000));
+		now.setTv_usec((long)((milliseconds % 1000) * 1000));
+		return now;
+		timeval now = new timeval();
+		DWORD milliseconds = /*Error: Function owner not recognized*/GetTickCount();
+		now.setTv_sec((long)(milliseconds / 1000));
+		now.setTv_usec((long)((milliseconds % 1000) * 1000));
+		return now;
+		timeval now = new timeval();
+		now.setTimeval((long)/*Error: Function owner not recognized*/time(((Object)/* time() returns the value of time in seconds since the epoch */0)));
+		now.setTimeval(0);
+		return now;
+		timeval now = new timeval();
+		now.setTimeval((long)/*Error: Function owner not recognized*/time(((Object)/* time() returns the value of time in seconds since the epoch */0)));
+		now.setTimeval(0);
+		return now;
+	}
+	public long tvdiff(timeval older) {
+		Object generatedTimeval = this.getTimeval();
+		return (generatedTimeval - generatedTimeval) * 1000 + (generatedTimeval - generatedTimeval) / 1000;
+		long generatedTv_sec = this.getTv_sec();
+		long generatedTv_usec = this.getTv_usec();
+		return (long)(generatedTv_sec - generatedTv_sec) * 1000 + (long)(generatedTv_usec - generatedTv_usec) / 1000;
+		Object generatedTimeval = this.getTimeval();
+		return (generatedTimeval - generatedTimeval) * 1000 + (generatedTimeval - generatedTimeval) / 1000;
+		Object generatedTimeval = this.getTimeval();
+		return (generatedTimeval - generatedTimeval) * 1000 + (generatedTimeval - generatedTimeval) / 1000;
+	}
+	/*
+	  ** gettimeofday() is not granted to be increased monotonically, due to
+	  ** clock drifting and external source time synchronization it can jump
+	  ** forward or backward in time.
+	  */
+	/*
+	  ** time() returns the value of time in seconds since the Epoch.
+	  */
+	public long timediff(timeval older) {
+		long generatedTv_sec = this.getTv_sec();
+		timediff_t diff = generatedTv_sec - generatedTv_sec;
+		if (diff >= (LONG_MAX / 1000)) {
+			return LONG_MAX;
+		}  else if (diff <= (LONG_MIN / 1000)) {
+			return LONG_MIN;
+		} 
+		long generatedTv_usec = this.getTv_usec();
+		return (long)(generatedTv_sec - generatedTv_sec) * 1000 + (long)(generatedTv_usec - generatedTv_usec) / 1000;
+	}
 	public int getMicroSecondTimeout() {
 		timeval now = new timeval();
 		ssize_t result = new ssize_t();
@@ -53,65 +107,12 @@ public class timeval {
 		 * Update a fd_set with all of the sockets in use.
 		 */);
 	}
-	public timeval tvnow() {
-		timeval now = new timeval();
-		now.setTimeval((long).time(((Object)/* time() returns the value of time in seconds since the epoch */0)));
-		now.setTimeval(0);
-		return now;
-		timeval now = new timeval();
-		DWORD milliseconds = .GetTickCount();
-		now.setTv_sec((long)(milliseconds / 1000));
-		now.setTv_usec((long)((milliseconds % 1000) * 1000));
-		return now/*
-		  ** clock_gettime() is granted to be increased monotonically when the
-		  ** monotonic clock is queried. Time starting point is unspecified, it
-		  ** could be the system start-up time, the Epoch, or something else,
-		  ** in any case the time starting point does not change once that the
-		  ** system has started up.
-		  */;
-		timeval now = new timeval();
-		DWORD milliseconds = .GetTickCount();
-		now.setTv_sec((long)(milliseconds / 1000));
-		now.setTv_usec((long)((milliseconds % 1000) * 1000));
-		return now/*
-		  ** clock_gettime() is granted to be increased monotonically when the
-		  ** monotonic clock is queried. Time starting point is unspecified, it
-		  ** could be the system start-up time, the Epoch, or something else,
-		  ** in any case the time starting point does not change once that the
-		  ** system has started up.
-		  */;
-		timeval now = new timeval();
-		now.setTimeval((long).time(((Object)/* time() returns the value of time in seconds since the epoch */0)));
-		now.setTimeval(0);
-		return now;
-		timeval now = new timeval();
-		now.setTimeval((long).time(((Object)/* time() returns the value of time in seconds since the epoch */0)));
-		now.setTimeval(0);
-		return now;
-	}
-	public long tvdiff(timeval older) {
-		Object generatedTimeval = this.getTimeval();
-		return (generatedTimeval - generatedTimeval) * 1000 + (generatedTimeval - generatedTimeval) / 1000;
-		long generatedTv_sec = this.getTv_sec();
-		long generatedTv_usec = this.getTv_usec();
-		return (long)(generatedTv_sec - generatedTv_sec) * 1000 + (long)(generatedTv_usec - generatedTv_usec) / 1000;
-		Object generatedTimeval = this.getTimeval();
-		return (generatedTimeval - generatedTimeval) * 1000 + (generatedTimeval - generatedTimeval) / 1000;
-		Object generatedTimeval = this.getTimeval();
-		return (generatedTimeval - generatedTimeval) * 1000 + (generatedTimeval - generatedTimeval) / 1000;
-	}
 	public timeval tutil_tvnow() {
 		timeval now = new timeval();
-		DWORD milliseconds = .GetTickCount();
+		DWORD milliseconds = /*Error: Function owner not recognized*/GetTickCount();
 		now.setTv_sec(milliseconds / 1000);
 		now.setTv_usec((milliseconds % 1000) * 1000);
-		return now/*
-		  ** clock_gettime() is granted to be increased monotonically when the
-		  ** monotonic clock is queried. Time starting point is unspecified, it
-		  ** could be the system start-up time, the Epoch, or something else,
-		  ** in any case the time starting point does not change once that the
-		  ** system has started up.
-		  */;
+		return now;
 	}
 	/*
 	  ** gettimeofday() is not granted to be increased monotonically, due to
@@ -143,25 +144,6 @@ public class timeval {
 			return (double)(generatedTv_sec - generatedTv_sec) + (double)(generatedTv_usec - generatedTv_usec) / 1000000.0;
 		} 
 		return (double)(generatedTv_usec - generatedTv_usec) / 1000000.0;
-	}
-	/*
-	  ** gettimeofday() is not granted to be increased monotonically, due to
-	  ** clock drifting and external source time synchronization it can jump
-	  ** forward or backward in time.
-	  */
-	/*
-	  ** time() returns the value of time in seconds since the Epoch.
-	  */
-	public long timediff(timeval older) {
-		long generatedTv_sec = this.getTv_sec();
-		timediff_t diff = generatedTv_sec - generatedTv_sec;
-		if (diff >= (LONG_MAX / 1000)) {
-			return LONG_MAX;
-		}  else if (diff <= (LONG_MIN / 1000)) {
-			return LONG_MIN;
-		} 
-		long generatedTv_usec = this.getTv_usec();
-		return (long)(generatedTv_sec - generatedTv_sec) * 1000 + (long)(generatedTv_usec - generatedTv_usec) / 1000;
 	}
 	public long getTv_sec() {
 		return tv_sec;

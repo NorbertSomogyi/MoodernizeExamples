@@ -4,9 +4,9 @@ public class contains_cache {
 	private int slab_size;
 	private int stride;
 	private int slab_count;
-	private contains_result slab;
+	private contains_result[][] slab;
 	
-	public contains_cache(int slab_size, int stride, int slab_count, contains_result slab) {
+	public contains_cache(int slab_size, int stride, int slab_count, contains_result[][] slab) {
 		setSlab_size(slab_size);
 		setStride(stride);
 		setSlab_count(slab_count);
@@ -21,7 +21,7 @@ public class contains_cache {
 			stride = 1;
 		} 
 		this.setStride(stride);
-		elem_size =  * stride;
+		elem_size = /*Error: Unsupported expression*/ * stride;
 		this.setSlab_size((512 * 1024 - 32) / elem_size);
 		this.setSlab_count(0);
 		this.setSlab(((Object)0));
@@ -32,7 +32,7 @@ public class contains_cache {
 	public void clear_contains_cache() {
 		int i;
 		int generatedSlab_count = this.getSlab_count();
-		contains_result generatedSlab = this.getSlab();
+		contains_result[][] generatedSlab = this.getSlab();
 		for (i = 0; i < generatedSlab_count; i++) {
 			ModernizedCProgram.free(generatedSlab[i]);
 		}
@@ -49,13 +49,13 @@ public class contains_cache {
 		nth_slab = c.getIndex() / generatedSlab_size;
 		nth_slot = c.getIndex() % generatedSlab_size;
 		int generatedSlab_count = this.getSlab_count();
-		contains_result generatedSlab = this.getSlab();
+		contains_result[][] generatedSlab = this.getSlab();
 		if (generatedSlab_count <= nth_slab) {
 			int i;
 			if (!add_if_missing) {
 				return ((Object)0);
 			} 
-			(generatedSlab) = ModernizedCProgram.xrealloc((generatedSlab), ModernizedCProgram.st_mult(, (nth_slab + 1)));
+			(generatedSlab) = ModernizedCProgram.xrealloc((generatedSlab), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (nth_slab + 1)));
 			for (i = generatedSlab_count; i <= nth_slab; i++) {
 				generatedSlab[i] = ((Object)0);
 			}
@@ -66,7 +66,7 @@ public class contains_cache {
 			if (!add_if_missing) {
 				return ((Object)0);
 			} 
-			generatedSlab[nth_slab] = ModernizedCProgram.xcalloc(generatedSlab_size,  * generatedStride);
+			generatedSlab[nth_slab] = ModernizedCProgram.xcalloc(generatedSlab_size, /*Error: sizeof expression not supported yet*/ * generatedStride);
 		} 
 		return generatedSlab[nth_slab][nth_slot * generatedStride];
 	}
@@ -94,10 +94,10 @@ public class contains_cache {
 	public void setSlab_count(int newSlab_count) {
 		slab_count = newSlab_count;
 	}
-	public contains_result getSlab() {
+	public contains_result[][] getSlab() {
 		return slab;
 	}
-	public void setSlab(contains_result newSlab) {
+	public void setSlab(contains_result[][] newSlab) {
 		slab = newSlab;
 	}
 }

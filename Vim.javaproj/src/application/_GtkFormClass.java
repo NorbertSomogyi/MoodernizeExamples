@@ -14,7 +14,7 @@ public class _GtkFormClass {
 		 container_class = new ();
 		widget_class = ()klass;
 		container_class = ()klass;
-		ModernizedCProgram.parent_class = .gtk_type_class(.gtk_container_get_type());
+		ModernizedCProgram.parent_class = /*Error: Function owner not recognized*/gtk_type_class(/*Error: Function owner not recognized*/gtk_container_get_type());
 		widget_class.setRealize(ModernizedCProgram.gtk_form_realize);
 		widget_class.setUnrealize(ModernizedCProgram.gtk_form_unrealize);
 		widget_class.setMap(ModernizedCProgram.gtk_form_map);

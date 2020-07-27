@@ -15,20 +15,11 @@ public class cf_token {
 	public cf_token() {
 	}
 	
-	public boolean go_to_newline() {
-		cf_token cur_token = p_cur_token;
-		cf_token_type generatedType = cur_token.getType();
-		while (generatedType != cf_token_type.CFTOKEN_NEWLINE && generatedType != cf_token_type.CFTOKEN_NONE) {
-			cur_token++;
-		}
-		p_cur_token = cur_token;
-		return generatedType != cf_token_type.CFTOKEN_NONE;
-	}
 	public void cf_token_clear() {
-		.memset(t, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(t, 0, /*Error: Unsupported expression*/);
 	}
 	public void cf_token_copy(Object src) {
-		.memcpy(dst, src, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dst, src, /*Error: Unsupported expression*/);
 	}
 	public void cf_token_add(Object add) {
 		strref generatedStr = this.getStr();
@@ -48,6 +39,15 @@ public class cf_token {
 		 generatedTokens = pp.getTokens();
 		Object generatedArray = generatedTokens.getArray();
 		return generatedArray;
+	}
+	public boolean go_to_newline() {
+		cf_token cur_token = p_cur_token;
+		cf_token_type generatedType = cur_token.getType();
+		while (generatedType != cf_token_type.CFTOKEN_NEWLINE && generatedType != cf_token_type.CFTOKEN_NONE) {
+			cur_token++;
+		}
+		p_cur_token = cur_token;
+		return generatedType != cf_token_type.CFTOKEN_NONE;
 	}
 	public Object getLex() {
 		return lex;

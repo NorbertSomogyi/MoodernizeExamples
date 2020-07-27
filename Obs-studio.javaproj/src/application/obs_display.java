@@ -74,7 +74,7 @@ public class obs_display {
 		return true;
 	}
 	public obs_display obs_display_create(Object graphics_data, Object background_color) {
-		obs_display display = ModernizedCProgram.bzalloc();
+		obs_display display = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		ModernizedCProgram.obs.getVideo().getGraphics().gs_enter_context();
 		display.setBackground_color(background_color);
 		obs_display generatedNext = display.getNext();
@@ -100,10 +100,10 @@ public class obs_display {
 		Object generatedDraw_info_mutex = this.getDraw_info_mutex();
 		ModernizedCProgram.pthread_mutex_destroy(generatedDraw_info_mutex);
 		Object generatedDraw_callbacks = this.getDraw_callbacks();
-		.da_free(generatedDraw_callbacks);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedDraw_callbacks);
 		Object generatedSwap = this.getSwap();
 		if (generatedSwap) {
-			ModernizedCProgram.gs_swapchain_destroy(generatedSwap);
+			generatedSwap.gs_swapchain_destroy();
 			this.setSwap(NULL);
 		} 
 	}
@@ -127,7 +127,7 @@ public class obs_display {
 	}
 	public void obs_display_resize(Object cx, Object cy) {
 		if (!display) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedDraw_info_mutex = this.getDraw_info_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedDraw_info_mutex);
@@ -138,24 +138,24 @@ public class obs_display {
 	}
 	public void obs_display_add_draw_callback(Object draw, Object param) {
 		if (!display) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		draw_callback data = new draw_callback(draw, param);
 		Object generatedDraw_callbacks_mutex = this.getDraw_callbacks_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedDraw_callbacks_mutex);
 		Object generatedDraw_callbacks = this.getDraw_callbacks();
-		.da_push_back(generatedDraw_callbacks, data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedDraw_callbacks, data);
 		ModernizedCProgram.pthread_mutex_unlock(generatedDraw_callbacks_mutex);
 	}
 	public void obs_display_remove_draw_callback(Object draw, Object param) {
 		if (!display) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		draw_callback data = new draw_callback(draw, param);
 		Object generatedDraw_callbacks_mutex = this.getDraw_callbacks_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedDraw_callbacks_mutex);
 		Object generatedDraw_callbacks = this.getDraw_callbacks();
-		.da_erase_item(generatedDraw_callbacks, data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase_item(generatedDraw_callbacks, data);
 		ModernizedCProgram.pthread_mutex_unlock(generatedDraw_callbacks_mutex);
 	}
 	public void render_display_begin(Object cx, Object cy, Object size_changed) {
@@ -181,9 +181,9 @@ public class obs_display {
 		 size_changed = new ();
 		Object generatedEnabled = this.getEnabled();
 		if (!display || !generatedEnabled) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.GS_DEBUG_MARKER_BEGIN(GS_DEBUG_COLOR_DISPLAY, "obs_display");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GS_DEBUG_MARKER_BEGIN(GS_DEBUG_COLOR_DISPLAY, "obs_display");
 		Object generatedDraw_info_mutex = this.getDraw_info_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedDraw_info_mutex);
 		Object generatedCx = this.getCx();
@@ -204,11 +204,11 @@ public class obs_display {
 		 i < generatedDraw_callbacks.getNum(); i++) {
 			draw_callback callback = new draw_callback();
 			ModernizedCProgram.callback = generatedDraw_callbacks.getArray() + i;
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.callback.getParam(), cx, cy);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.callback.getParam(), cx, cy);
 		}
 		ModernizedCProgram.pthread_mutex_unlock(generatedDraw_callbacks_mutex);
 		ModernizedCProgram.render_display_end();
-		.GS_DEBUG_MARKER_END();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GS_DEBUG_MARKER_END();
 		ModernizedCProgram.gs_present();
 	}
 	public void obs_display_set_enabled(Object enable) {

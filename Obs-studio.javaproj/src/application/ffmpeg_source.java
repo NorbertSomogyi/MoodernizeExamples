@@ -28,7 +28,7 @@ public class ffmpeg_source {
 	private video_range_type range;
 	private obs_source source;
 	private Object hotkey;
-	private byte input;
+	private Byte input;
 	private Byte input_format;
 	private int buffering_mb;
 	private int speed_percent;
@@ -40,7 +40,7 @@ public class ffmpeg_source {
 	private Object close_when_inactive;
 	private Object seekable;
 	
-	public ffmpeg_source(Object media, Object media_valid, Object destroy_media, SwsContext sws_ctx, int sws_width, int sws_height, AVPixelFormat sws_format, Object sws_data, int sws_linesize, video_range_type range, obs_source source, Object hotkey, byte input, Byte input_format, int buffering_mb, int speed_percent, Object is_looping, Object is_local_file, Object is_hw_decoding, Object is_clear_on_media_end, Object restart_on_activate, Object close_when_inactive, Object seekable) {
+	public ffmpeg_source(Object media, Object media_valid, Object destroy_media, SwsContext sws_ctx, int sws_width, int sws_height, AVPixelFormat sws_format, Object sws_data, int sws_linesize, video_range_type range, obs_source source, Object hotkey, Byte input, Byte input_format, int buffering_mb, int speed_percent, Object is_looping, Object is_local_file, Object is_hw_decoding, Object is_clear_on_media_end, Object restart_on_activate, Object close_when_inactive, Object seekable) {
 		setMedia(media);
 		setMedia_valid(media_valid);
 		setDestroy_media(destroy_media);
@@ -73,7 +73,7 @@ public class ffmpeg_source {
 	}
 	public void ffmpeg_source_open() {
 		if (ModernizedCProgram.s.getInput() && ModernizedCProgram.s.getInput()) {
-			mp_media_info info = new mp_media_info(, , , , , , , , , , , );
+			mp_media_info info = new mp_media_info(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			ModernizedCProgram.s.setMedia_valid(ModernizedCProgram.s.getMedia().mp_media_init(info));
 		} 
 	}
@@ -160,10 +160,10 @@ public class ffmpeg_source {
 	public void setHotkey(Object newHotkey) {
 		hotkey = newHotkey;
 	}
-	public byte getInput() {
+	public Byte getInput() {
 		return input;
 	}
-	public void setInput(byte newInput) {
+	public void setInput(Byte newInput) {
 		input = newInput;
 	}
 	public Byte getInput_format() {

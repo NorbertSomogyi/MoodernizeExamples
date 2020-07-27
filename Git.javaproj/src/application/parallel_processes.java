@@ -7,13 +7,13 @@ public class parallel_processes {
 	private Object get_next_task;
 	private Object start_failure;
 	private Object task_finished;
-	private  children;
-	private compat_pollfd pfd;
+	private [] children;
+	private compat_pollfd[] pfd;
 	private int shutdown;
 	private int output_owner;
 	private strbuf buffered_output;
 	
-	public parallel_processes(Object data, int max_processes, int nr_processes, Object get_next_task, Object start_failure, Object task_finished,  children, compat_pollfd pfd, int shutdown, int output_owner, strbuf buffered_output) {
+	public parallel_processes(Object data, int max_processes, int nr_processes, Object get_next_task, Object start_failure, Object task_finished, [] children, compat_pollfd[] pfd, int shutdown, int output_owner, strbuf buffered_output) {
 		setData(data);
 		setMax_processes(max_processes);
 		setNr_processes(nr_processes);
@@ -33,10 +33,10 @@ public class parallel_processes {
 		int generatedMax_processes = this.getMax_processes();
 		int i;
 		int n = generatedMax_processes;
-		 generatedChildren = this.getChildren();
+		[] generatedChildren = this.getChildren();
 		for (i = 0; i < n; i++) {
 			if (generatedChildren[i].getState() == child_state.GIT_CP_WORKING) {
-				.kill(generatedChildren[i].getProcess().getPid(), signo);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/kill(generatedChildren[i].getProcess().getPid(), signo);
 			} 
 		}
 	}
@@ -61,10 +61,10 @@ public class parallel_processes {
 		this.setNr_processes(0);
 		this.setOutput_owner(0);
 		this.setShutdown(0);
-		 generatedChildren = this.getChildren();
-		this.setChildren(ModernizedCProgram.xcalloc(n, ));
-		compat_pollfd generatedPfd = this.getPfd();
-		this.setPfd(ModernizedCProgram.xcalloc(n, ));
+		[] generatedChildren = this.getChildren();
+		this.setChildren(ModernizedCProgram.xcalloc(n, /*Error: sizeof expression not supported yet*/));
+		compat_pollfd[] generatedPfd = this.getPfd();
+		this.setPfd(ModernizedCProgram.xcalloc(n, /*Error: sizeof expression not supported yet*/));
 		strbuf generatedBuffered_output = this.getBuffered_output();
 		generatedBuffered_output.strbuf_init(0);
 		for (i = 0; i < n; i++) {
@@ -84,13 +84,13 @@ public class parallel_processes {
 			} 
 		} while (0);
 		int generatedMax_processes = this.getMax_processes();
-		 generatedChildren = this.getChildren();
+		[] generatedChildren = this.getChildren();
 		for (i = 0; i < generatedMax_processes; i++) {
 			generatedChildren[i].getErr().strbuf_release();
 			generatedChildren[i].getProcess().child_process_clear();
 		}
 		ModernizedCProgram.free(generatedChildren);
-		compat_pollfd generatedPfd = this.getPfd();
+		compat_pollfd[] generatedPfd = this.getPfd();
 		ModernizedCProgram.free(generatedPfd);
 		strbuf generatedBuffered_output = this.getBuffered_output();
 		ModernizedCProgram.strbuf_write(generatedBuffered_output, (_iob[2]));
@@ -101,7 +101,7 @@ public class parallel_processes {
 		int i;
 		int code;
 		int generatedMax_processes = this.getMax_processes();
-		 generatedChildren = this.getChildren();
+		[] generatedChildren = this.getChildren();
 		for (i = 0; i < generatedMax_processes; i++) {
 			if (generatedChildren[i].getState() == child_state.GIT_CP_FREE) {
 				break;
@@ -111,7 +111,7 @@ public class parallel_processes {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\run-command.c", 1682, "bookkeeping is hard");
 		} 
 		Object generatedData = this.getData();
-		code = .UNRECOGNIZEDFUNCTIONNAME(generatedChildren[i].getProcess(), generatedChildren[i].getErr(), generatedData, generatedData);
+		code = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedChildren[i].getProcess(), generatedChildren[i].getErr(), generatedData, generatedData);
 		strbuf generatedBuffered_output = this.getBuffered_output();
 		if (!code) {
 			generatedBuffered_output.strbuf_addbuf(generatedChildren[i].getErr());
@@ -122,7 +122,7 @@ public class parallel_processes {
 		generatedChildren[i].getProcess().setStdout_to_stderr(1);
 		generatedChildren[i].getProcess().setNo_stdin(1);
 		if (generatedChildren[i].getProcess().start_command()) {
-			code = .UNRECOGNIZEDFUNCTIONNAME(generatedChildren[i].getErr(), generatedData, generatedData);
+			code = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedChildren[i].getErr(), generatedData, generatedData);
 			generatedBuffered_output.strbuf_addbuf(generatedChildren[i].getErr());
 			generatedChildren[i].getErr().strbuf_setlen(0);
 			if (code) {
@@ -133,30 +133,30 @@ public class parallel_processes {
 		int generatedNr_processes = this.getNr_processes();
 		generatedNr_processes++;
 		generatedChildren[i].setState(child_state.GIT_CP_WORKING);
-		compat_pollfd generatedPfd = this.getPfd();
+		compat_pollfd[] generatedPfd = this.getPfd();
 		generatedPfd[i].setFd(generatedChildren[i].getProcess().getErr());
 		return 0;
 	}
 	public void pp_buffer_stderr(int output_timeout) {
 		int i;
-		compat_pollfd generatedPfd = this.getPfd();
+		compat_pollfd[] generatedPfd = this.getPfd();
 		int generatedMax_processes = this.getMax_processes();
 		while ((i = generatedPfd.poll(generatedMax_processes, output_timeout)) < 0) {
-			if ((._errno()) == 4) {
+			if ((/*Error: Function owner not recognized*/_errno()) == 4) {
 				continue;
 			} 
 			pp.pp_cleanup();
 			ModernizedCProgram.die_errno("poll");
 		}
-		 generatedChildren = this.getChildren();
+		[] generatedChildren = this.getChildren();
 		for (i = 0; i < generatedMax_processes; /* Buffer output from all pipes. */i++) {
 			if (generatedChildren[i].getState() == child_state.GIT_CP_WORKING && generatedPfd[i].getRevents() & (-1024 | -1024)) {
 				int n = generatedChildren[i].getErr().strbuf_read_once(generatedChildren[i].getProcess().getErr(), 0);
 				if (n == 0) {
-					.close(generatedChildren[i].getProcess().getErr());
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedChildren[i].getProcess().getErr());
 					generatedChildren[i].setState(child_state.GIT_CP_WAIT_CLEANUP);
 				}  else if (n < 0) {
-					if ((._errno()) != 11) {
+					if ((/*Error: Function owner not recognized*/_errno()) != 11) {
 						ModernizedCProgram.die_errno("read");
 					} 
 				} 
@@ -166,7 +166,7 @@ public class parallel_processes {
 	public void pp_output() {
 		int generatedOutput_owner = this.getOutput_owner();
 		int i = generatedOutput_owner;
-		 generatedChildren = this.getChildren();
+		[] generatedChildren = this.getChildren();
 		if (generatedChildren[i].getState() == child_state.GIT_CP_WORKING && generatedChildren[i].getErr().getLen()) {
 			ModernizedCProgram.strbuf_write(generatedChildren[i].getErr(), (_iob[2]));
 			generatedChildren[i].getErr().strbuf_setlen(0);
@@ -179,9 +179,9 @@ public class parallel_processes {
 		int n = generatedMax_processes;
 		int result = 0;
 		int generatedNr_processes = this.getNr_processes();
-		 generatedChildren = this.getChildren();
+		[] generatedChildren = this.getChildren();
 		Object generatedData = this.getData();
-		compat_pollfd generatedPfd = this.getPfd();
+		compat_pollfd[] generatedPfd = this.getPfd();
 		int generatedOutput_owner = this.getOutput_owner();
 		strbuf generatedBuffered_output = this.getBuffered_output();
 		while (generatedNr_processes > 0) {
@@ -194,7 +194,7 @@ public class parallel_processes {
 				break;
 			} 
 			code = generatedChildren[i].getProcess().finish_command();
-			code = .UNRECOGNIZEDFUNCTIONNAME(code, generatedChildren[i].getErr(), generatedData, generatedData);
+			code = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(code, generatedChildren[i].getErr(), generatedData, generatedData);
 			if (code) {
 				result = code;
 			} 
@@ -266,16 +266,16 @@ public class parallel_processes {
 	public void setTask_finished(Object newTask_finished) {
 		task_finished = newTask_finished;
 	}
-	public  getChildren() {
+	public [] getChildren() {
 		return children;
 	}
-	public void setChildren( newChildren) {
+	public void setChildren([] newChildren) {
 		children = newChildren;
 	}
-	public compat_pollfd getPfd() {
+	public compat_pollfd[] getPfd() {
 		return pfd;
 	}
-	public void setPfd(compat_pollfd newPfd) {
+	public void setPfd(compat_pollfd[] newPfd) {
 		pfd = newPfd;
 	}
 	public int getShutdown() {

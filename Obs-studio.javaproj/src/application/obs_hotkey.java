@@ -26,6 +26,194 @@ public class obs_hotkey {
 	public obs_hotkey() {
 	}
 	
+	public void replay_buffer_hotkey(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(pressed);
+		if (!pressed) {
+			return /*Error: Unsupported expression*/;
+		} 
+		ffmpeg_muxer stream = data;
+		Object generatedActive = stream.getActive();
+		obs_output generatedOutput = stream.getOutput();
+		obs_encoder obs_encoder = new obs_encoder();
+		if (ModernizedCProgram.os_atomic_load_bool(generatedActive)) {
+			obs_encoder_t vencoder = obs_encoder.obs_output_get_video_encoder(generatedOutput);
+			if (ModernizedCProgram.obs_encoder_paused(vencoder)) {
+				ModernizedCProgram.blog(LOG_INFO, "[ffmpeg muxer: '%s'] Could not save buffer because encoders paused", ModernizedCProgram.obs_output_get_name(generatedOutput));
+				return /*Error: Unsupported expression*/;
+			} 
+			stream.setSave_ts(ModernizedCProgram.os_gettime_ns() / -1024);
+		} 
+	}
+	public void hotkey_callback(Object p_cb, Object id, Object pressed) {
+		python_obs_callback cb = p_cb;
+		script_callback generatedBase = cb.getBase();
+		Object generatedRemoved = generatedBase.getRemoved();
+		if (generatedRemoved) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (pressed) {
+			ModernizedCProgram.defer_call_post(defer_hotkey_pressed, cb);
+		} else {
+				ModernizedCProgram.defer_call_post(defer_hotkey_unpressed, cb);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		lua_obs_callback cb = p_cb;
+		script_callback generatedBase = cb.getBase();
+		Object generatedRemoved = generatedBase.getRemoved();
+		if (generatedRemoved) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (pressed) {
+			ModernizedCProgram.defer_call_post(defer_hotkey_pressed, cb);
+		} else {
+				ModernizedCProgram.defer_call_post(defer_hotkey_unpressed, cb);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+	}
+	public void restart_hotkey(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(pressed);
+		ffmpeg_source s = data;
+		obs_source generatedSource = s.getSource();
+		if (ModernizedCProgram.obs_source_active(generatedSource)) {
+			s.ffmpeg_source_start();
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		slideshow ss = data;
+		obs_source generatedSource = ss.getSource();
+		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
+			ModernizedCProgram.ss_restart(ss);
+		} 
+	}
+	public Object obs_source_hotkey_mute(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(ModernizedCProgram.key);
+		obs_source source = data;
+		if (!pressed || ModernizedCProgram.obs_source_muted(source)) {
+			return false;
+		} 
+		source.obs_source_set_muted(true);
+		return true;
+	}
+	public Object obs_source_hotkey_unmute(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(ModernizedCProgram.key);
+		obs_source source = data;
+		if (!pressed || !ModernizedCProgram.obs_source_muted(source)) {
+			return false;
+		} 
+		source.obs_source_set_muted(false);
+		return true;
+	}
+	public void obs_source_hotkey_push_to_mute(Object data, Object id, Object pressed) {
+		audio_action action = new audio_action(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(ModernizedCProgram.key);
+		obs_source source = data;
+		Object generatedAudio_actions_mutex = source.getAudio_actions_mutex();
+		ModernizedCProgram.pthread_mutex_lock(generatedAudio_actions_mutex);
+		Object generatedAudio_actions = source.getAudio_actions();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedAudio_actions, action);
+		ModernizedCProgram.pthread_mutex_unlock(generatedAudio_actions_mutex);
+		source.setUser_push_to_mute_pressed(pressed);
+	}
+	public void obs_source_hotkey_push_to_talk(Object data, Object id, Object pressed) {
+		audio_action action = new audio_action(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(ModernizedCProgram.key);
+		obs_source source = data;
+		Object generatedAudio_actions_mutex = source.getAudio_actions_mutex();
+		ModernizedCProgram.pthread_mutex_lock(generatedAudio_actions_mutex);
+		Object generatedAudio_actions = source.getAudio_actions();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedAudio_actions, action);
+		ModernizedCProgram.pthread_mutex_unlock(generatedAudio_actions_mutex);
+		source.setUser_push_to_talk_pressed(pressed);
+	}
+	public Object hotkey_show_sceneitem(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		obs_sceneitem_t si = data.sceneitem_get_ref();
+		Object generatedUser_visible = si.getUser_visible();
+		if (pressed && si && !generatedUser_visible) {
+			si.obs_sceneitem_set_visible(true);
+			si.obs_sceneitem_release();
+			return true;
+		} 
+		si.obs_sceneitem_release();
+		return false;
+	}
+	public Object hotkey_hide_sceneitem(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		obs_sceneitem_t si = data.sceneitem_get_ref();
+		Object generatedUser_visible = si.getUser_visible();
+		if (pressed && si && generatedUser_visible) {
+			si.obs_sceneitem_set_visible(false);
+			si.obs_sceneitem_release();
+			return true;
+		} 
+		si.obs_sceneitem_release();
+		return false;
+	}
+	public void bast_buffer_audio(Object data, Object id, Object pressed) {
+		buffering_async_sync_test bast = data;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		if (pressed) {
+			bast.setBuffer_audio(true);
+		} 
+	}
+	public void vlcs_play_pause_hotkey(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		vlc_source c = data;
+		obs_source generatedSource = c.getSource();
+		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
+			ModernizedCProgram.vlcs_play_pause(c);
+		} 
+	}
+	public void vlcs_restart_hotkey(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		vlc_source c = data;
+		obs_source generatedSource = c.getSource();
+		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
+			ModernizedCProgram.vlcs_restart(c);
+		} 
+	}
+	public void vlcs_stop_hotkey(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		vlc_source c = data;
+		obs_source generatedSource = c.getSource();
+		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
+			ModernizedCProgram.vlcs_stop(c);
+		} 
+	}
+	public void vlcs_playlist_next_hotkey(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		vlc_source c = data;
+		obs_source generatedSource = c.getSource();
+		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
+			ModernizedCProgram.vlcs_playlist_next(c);
+		} 
+	}
+	public void vlcs_playlist_prev_hotkey(Object data, Object id, Object pressed) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
+		vlc_source c = data;
+		obs_source generatedSource = c.getSource();
+		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
+			ModernizedCProgram.vlcs_playlist_prev(c);
+		} 
+	}
 	public obs_hotkey obs_hotkey_binding_get_hotkey(obs_hotkey_binding binding) {
 		obs_hotkey generatedHotkey = binding.getHotkey();
 		return generatedHotkey;
@@ -34,38 +222,38 @@ public class obs_hotkey {
 		 data = new ();
 		data.calldata_init();
 		data.calldata_set_ptr("key", hotkey);
-		.signal_handler_signal(ModernizedCProgram.obs.getHotkeys().getSignals(), signal, data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_signal(ModernizedCProgram.obs.getHotkeys().getSignals(), signal, data);
 		data.calldata_free();
 	}
 	public void obs_hotkey_pair_first_func(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
 		obs_hotkey_pair_t pair = data;
 		Object generatedPressed1 = pair.getPressed1();
 		if (generatedPressed1) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedPressed0 = pair.getPressed0();
 		Object generatedData = pair.getData();
 		Object generatedPair_id = pair.getPair_id();
 		if (generatedPressed0 && !pressed) {
 			pair.setPressed0(false);
-		}  else if (.UNRECOGNIZEDFUNCTIONNAME(generatedData[0], generatedPair_id, hotkey, pressed)) {
+		}  else if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData[0], generatedPair_id, hotkey, pressed)) {
 			pair.setPressed0(pressed);
 		} 
 	}
 	public void obs_hotkey_pair_second_func(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
 		obs_hotkey_pair_t pair = data;
 		Object generatedPressed0 = pair.getPressed0();
 		if (generatedPressed0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedPressed1 = pair.getPressed1();
 		Object generatedData = pair.getData();
 		Object generatedPair_id = pair.getPair_id();
 		if (generatedPressed1 && !pressed) {
 			pair.setPressed1(false);
-		}  else if (.UNRECOGNIZEDFUNCTIONNAME(generatedData[0], generatedPair_id, hotkey, pressed)) {
+		}  else if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData[0], generatedPair_id, hotkey, pressed)) {
 			pair.setPressed1(pressed);
 		} 
 	}
@@ -80,7 +268,7 @@ public class obs_hotkey {
 		return false;
 	}
 	public Object enum_load_bindings(Object data, Object idx) {
-		.UNUSED_PARAMETER(idx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(idx);
 		Byte generatedName = this.getName();
 		obs_data_array obs_data_array = new obs_data_array();
 		obs_data_array_t hotkey_data = obs_data_array.obs_data_get_array(data, generatedName);
@@ -92,7 +280,7 @@ public class obs_hotkey {
 		return true;
 	}
 	public Object enum_save_hotkey(Object data, Object idx) {
-		.UNUSED_PARAMETER(idx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(idx);
 		obs_data_array obs_data_array = new obs_data_array();
 		obs_data_array_t hotkey_data = obs_data_array.save_hotkey(hotkey);
 		Byte generatedName = this.getName();
@@ -107,128 +295,30 @@ public class obs_hotkey {
 		case obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_SERVICE:
 				generatedRegisterer.obs_weak_service_release();
 				break;
-		case obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_OUTPUT:
-				generatedRegisterer.obs_weak_output_release();
-				break;
 		case obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_ENCODER:
 				generatedRegisterer.obs_weak_encoder_release();
 				break;
-		case obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_SOURCE:
-				generatedRegisterer.obs_weak_source_release();
+		case obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_OUTPUT:
+				generatedRegisterer.obs_weak_output_release();
 				break;
 		case obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_FRONTEND:
+				break;
+		case obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_SOURCE:
+				generatedRegisterer.obs_weak_source_release();
 				break;
 		}
 		this.setRegisterer(NULL);
 	}
 	public Object enum_hotkey(Object data, Object idx) {
-		.UNUSED_PARAMETER(idx);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(idx);
 		obs_hotkey_internal_enum_forward forward = data;
 		Object generatedData = forward.getData();
 		Object generatedId = this.getId();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedData, generatedId, hotkey);
-	}
-	public void hotkey_callback(Object p_cb, Object id, Object pressed) {
-		python_obs_callback cb = p_cb;
-		script_callback generatedBase = cb.getBase();
-		Object generatedRemoved = generatedBase.getRemoved();
-		if (generatedRemoved) {
-			return ;
-		} 
-		if (pressed) {
-			ModernizedCProgram.defer_call_post(defer_hotkey_pressed, cb);
-		} else {
-				ModernizedCProgram.defer_call_post(defer_hotkey_unpressed, cb);
-		} 
-		.UNUSED_PARAMETER(hotkey);
-		.UNUSED_PARAMETER(id);
-		lua_obs_callback cb = p_cb;
-		script_callback generatedBase = cb.getBase();
-		Object generatedRemoved = generatedBase.getRemoved();
-		if (generatedRemoved) {
-			return ;
-		} 
-		if (pressed) {
-			ModernizedCProgram.defer_call_post(defer_hotkey_pressed, cb);
-		} else {
-				ModernizedCProgram.defer_call_post(defer_hotkey_unpressed, cb);
-		} 
-		.UNUSED_PARAMETER(hotkey);
-		.UNUSED_PARAMETER(id);
-	}
-	public void vlcs_play_pause_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		vlc_source c = data;
-		obs_source generatedSource = c.getSource();
-		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
-			ModernizedCProgram.vlcs_play_pause(c);
-		} 
-	}
-	public void vlcs_restart_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		vlc_source c = data;
-		obs_source generatedSource = c.getSource();
-		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
-			ModernizedCProgram.vlcs_restart(c);
-		} 
-	}
-	public void vlcs_stop_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		vlc_source c = data;
-		obs_source generatedSource = c.getSource();
-		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
-			ModernizedCProgram.vlcs_stop(c);
-		} 
-	}
-	public void vlcs_playlist_next_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		vlc_source c = data;
-		obs_source generatedSource = c.getSource();
-		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
-			ModernizedCProgram.vlcs_playlist_next(c);
-		} 
-	}
-	public void vlcs_playlist_prev_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		vlc_source c = data;
-		obs_source generatedSource = c.getSource();
-		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
-			ModernizedCProgram.vlcs_playlist_prev(c);
-		} 
-	}
-	public void bast_buffer_audio(Object data, Object id, Object pressed) {
-		buffering_async_sync_test bast = data;
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		if (pressed) {
-			bast.setBuffer_audio(true);
-		} 
-	}
-	public void restart_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		.UNUSED_PARAMETER(pressed);
-		ffmpeg_source s = data;
-		obs_source generatedSource = s.getSource();
-		if (ModernizedCProgram.obs_source_active(generatedSource)) {
-			s.ffmpeg_source_start();
-		} 
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		slideshow ss = data;
-		obs_source generatedSource = ss.getSource();
-		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
-			ModernizedCProgram.ss_restart(ss);
-		} 
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData, generatedId, hotkey);
 	}
 	public void play_pause_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
 		slideshow ss = data;
 		obs_source generatedSource = ss.getSource();
 		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
@@ -236,8 +326,8 @@ public class obs_hotkey {
 		} 
 	}
 	public void stop_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
 		slideshow ss = data;
 		obs_source generatedSource = ss.getSource();
 		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
@@ -245,12 +335,12 @@ public class obs_hotkey {
 		} 
 	}
 	public void next_slide_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
 		slideshow ss = data;
 		Object generatedManual = ss.getManual();
 		if (!generatedManual) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_source generatedSource = ss.getSource();
 		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
@@ -258,107 +348,17 @@ public class obs_hotkey {
 		} 
 	}
 	public void previous_slide_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(hotkey);
 		slideshow ss = data;
 		Object generatedManual = ss.getManual();
 		if (!generatedManual) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_source generatedSource = ss.getSource();
 		if (pressed && ModernizedCProgram.obs_source_active(generatedSource)) {
 			ModernizedCProgram.ss_previous_slide(ss);
 		} 
-	}
-	public void replay_buffer_hotkey(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		.UNUSED_PARAMETER(pressed);
-		if (!pressed) {
-			return ;
-		} 
-		ffmpeg_muxer stream = data;
-		Object generatedActive = stream.getActive();
-		obs_output generatedOutput = stream.getOutput();
-		obs_encoder obs_encoder = new obs_encoder();
-		if (ModernizedCProgram.os_atomic_load_bool(generatedActive)) {
-			obs_encoder_t vencoder = obs_encoder.obs_output_get_video_encoder(generatedOutput);
-			if (ModernizedCProgram.obs_encoder_paused(vencoder)) {
-				ModernizedCProgram.blog(LOG_INFO, "[ffmpeg muxer: '%s'] Could not save buffer because encoders paused", ModernizedCProgram.obs_output_get_name(generatedOutput));
-				return ;
-			} 
-			stream.setSave_ts(ModernizedCProgram.os_gettime_ns() / -1024);
-		} 
-	}
-	public Object hotkey_show_sceneitem(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		obs_sceneitem_t si = data.sceneitem_get_ref();
-		Object generatedUser_visible = si.getUser_visible();
-		if (pressed && si && !generatedUser_visible) {
-			si.obs_sceneitem_set_visible(true);
-			si.obs_sceneitem_release();
-			return true;
-		} 
-		si.obs_sceneitem_release();
-		return false;
-	}
-	public Object hotkey_hide_sceneitem(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(hotkey);
-		obs_sceneitem_t si = data.sceneitem_get_ref();
-		Object generatedUser_visible = si.getUser_visible();
-		if (pressed && si && generatedUser_visible) {
-			si.obs_sceneitem_set_visible(false);
-			si.obs_sceneitem_release();
-			return true;
-		} 
-		si.obs_sceneitem_release();
-		return false;
-	}
-	public Object obs_source_hotkey_mute(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(ModernizedCProgram.key);
-		obs_source source = data;
-		if (!pressed || ModernizedCProgram.obs_source_muted(source)) {
-			return false;
-		} 
-		source.obs_source_set_muted(true);
-		return true;
-	}
-	public Object obs_source_hotkey_unmute(Object data, Object id, Object pressed) {
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(ModernizedCProgram.key);
-		obs_source source = data;
-		if (!pressed || !ModernizedCProgram.obs_source_muted(source)) {
-			return false;
-		} 
-		source.obs_source_set_muted(false);
-		return true;
-	}
-	public void obs_source_hotkey_push_to_mute(Object data, Object id, Object pressed) {
-		audio_action action = new audio_action(, , );
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(ModernizedCProgram.key);
-		obs_source source = data;
-		Object generatedAudio_actions_mutex = source.getAudio_actions_mutex();
-		ModernizedCProgram.pthread_mutex_lock(generatedAudio_actions_mutex);
-		Object generatedAudio_actions = source.getAudio_actions();
-		.da_push_back(generatedAudio_actions, action);
-		ModernizedCProgram.pthread_mutex_unlock(generatedAudio_actions_mutex);
-		source.setUser_push_to_mute_pressed(pressed);
-	}
-	public void obs_source_hotkey_push_to_talk(Object data, Object id, Object pressed) {
-		audio_action action = new audio_action(, , );
-		.UNUSED_PARAMETER(id);
-		.UNUSED_PARAMETER(ModernizedCProgram.key);
-		obs_source source = data;
-		Object generatedAudio_actions_mutex = source.getAudio_actions_mutex();
-		ModernizedCProgram.pthread_mutex_lock(generatedAudio_actions_mutex);
-		Object generatedAudio_actions = source.getAudio_actions();
-		.da_push_back(generatedAudio_actions, action);
-		ModernizedCProgram.pthread_mutex_unlock(generatedAudio_actions_mutex);
-		source.setUser_push_to_talk_pressed(pressed);
 	}
 	public boolean hotkey_start(Object data, Object id, boolean pressed) {
 		game_capture gc = data;
@@ -370,7 +370,7 @@ public class obs_hotkey {
 		Object generatedActivate_hook_now = gc.getActivate_hook_now();
 		if (pressed && generatedMode == capture_mode.CAPTURE_MODE_HOTKEY) {
 			ModernizedCProgram.blog(LOG_INFO, "[game-capture: '%s'] Activate hotkey pressed", ModernizedCProgram.obs_source_get_name(generatedSource));
-			ModernizedCProgram.os_atomic_set_long(generatedHotkey_window, (long)(uintptr_t).GetForegroundWindow());
+			ModernizedCProgram.os_atomic_set_long(generatedHotkey_window, (long)(uintptr_t)/*Error: Function owner not recognized*/GetForegroundWindow());
 			ModernizedCProgram.os_atomic_set_bool(generatedDeactivate_hook, 1);
 			ModernizedCProgram.os_atomic_set_bool(generatedActivate_hook_now, 1);
 		} 

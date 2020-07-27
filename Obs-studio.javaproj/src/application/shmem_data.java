@@ -15,7 +15,7 @@ public class shmem_data {
 	
 	public boolean capture_init_shmem(Object window, Object base_cx, Object base_cy, Object cx, Object cy, Object pitch, Object format, boolean flip) {
 		uint32_t tex_size = cy * pitch;
-		uint32_t aligned_header = ((() + ((true) - 1)) & ~((true) - 1));
+		uint32_t aligned_header = (((/*Error: Unsupported expression*/) + ((true) - 1)) & ~((true) - 1));
 		uint32_t aligned_tex = (((tex_size) + ((true) - 1)) & ~((true) - 1));
 		uint32_t total_size = aligned_header + aligned_tex * 2 + 32;
 		uintptr_t align_pos = new uintptr_t();
@@ -28,7 +28,7 @@ public class shmem_data {
 		align_pos += aligned_header;
 		align_pos &=  ~(32 - 1);
 		align_pos -= (uintptr_t)ModernizedCProgram.shmem_info;
-		if (align_pos < ) {
+		if (align_pos < /*Error: Unsupported expression*/) {
 			align_pos += 32;
 		} 
 		(ModernizedCProgram.data).setLast_tex(-1);
@@ -48,8 +48,8 @@ public class shmem_data {
 		if (!ModernizedCProgram.init_shmem_thread(pitch, cy)) {
 			return 0;
 		} 
-		if (!.SetEvent(ModernizedCProgram.signal_ready)) {
-			ModernizedCProgram.hlog("capture_init_shmem: Failed to signal ready: %d", .GetLastError());
+		if (!/*Error: Function owner not recognized*/SetEvent(ModernizedCProgram.signal_ready)) {
+			ModernizedCProgram.hlog("capture_init_shmem: Failed to signal ready: %d", /*Error: Function owner not recognized*/GetLastError());
 			return 0;
 		} 
 		ModernizedCProgram.active = 1;

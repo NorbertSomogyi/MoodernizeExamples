@@ -18,11 +18,11 @@ public class TELNET {
 	private int subopt_wsy;
 	private curl_slist telnet_vars;
 	private Object subbuffer;
-	private byte subpointer;
+	private Byte subpointer;
 	private Byte subend;
 	private  telrcv_state;
 	
-	public TELNET(int please_negotiate, int already_negotiated, Object us, Object usq, Object us_preferred, Object him, Object himq, Object him_preferred, Object subnegotiation, Object subopt_ttype, Object subopt_xdisploc, int subopt_wsx, int subopt_wsy, curl_slist telnet_vars, Object subbuffer, byte subpointer, Byte subend,  telrcv_state) {
+	public TELNET(int please_negotiate, int already_negotiated, Object us, Object usq, Object us_preferred, Object him, Object himq, Object him_preferred, Object subnegotiation, Object subopt_ttype, Object subopt_xdisploc, int subopt_wsx, int subopt_wsy, curl_slist telnet_vars, Object subbuffer, Byte subpointer, Byte subend,  telrcv_state) {
 		setPlease_negotiate(please_negotiate);
 		setAlready_negotiated(already_negotiated);
 		setUs(us);
@@ -135,10 +135,10 @@ public class TELNET {
 	public void setSubbuffer(Object newSubbuffer) {
 		subbuffer = newSubbuffer;
 	}
-	public byte getSubpointer() {
+	public Byte getSubpointer() {
 		return subpointer;
 	}
-	public void setSubpointer(byte newSubpointer) {
+	public void setSubpointer(Byte newSubpointer) {
 		subpointer = newSubpointer;
 	}
 	public Byte getSubend() {

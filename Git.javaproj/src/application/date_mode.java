@@ -25,13 +25,13 @@ public class date_mode {
 	public void parse_date_format(Object format) {
 		byte p;
 		if (ModernizedCProgram.skip_prefix(format, "auto:", /* "auto:foo" is "if tty/pager, then foo, otherwise normal" */p)) {
-			if (.isatty(1) || ModernizedCProgram.pager_in_use()) {
+			if (/*Error: Function owner not recognized*/isatty(1) || ModernizedCProgram.pager_in_use()) {
 				format = p;
 			} else {
 					format = "default";
 			} 
 		} 
-		if (!.strcmp(format, /* historical alias */"local")) {
+		if (!/*Error: Function owner not recognized*/strcmp(format, /* historical alias */"local")) {
 			format = "default-local";
 		} 
 		this.setType(ModernizedCProgram.parse_date_type(format, p));

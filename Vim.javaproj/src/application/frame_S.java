@@ -31,40 +31,6 @@ public class frame_S {
 	public frame_S() {
 	}
 	
-	public int ses_do_frame() {
-		frame_T frc = new frame_T();
-		byte generatedFr_layout = this.getFr_layout();
-		window_S generatedFr_win = this.getFr_win();
-		if (generatedFr_layout == 0) {
-			return generatedFr_win.ses_do_win();
-		} 
-		frame_S generatedFr_next = frc.getFr_next();
-		frame_S generatedFr_child = this.getFr_child();
-		for (frc = generatedFr_child; frc != ((Object)0); frc = generatedFr_next) {
-			if (frc.ses_do_frame()) {
-				return 1;
-			} 
-		}
-		return 0/*
-		 * Skip frames that don't contain windows we want to save in the Session.
-		 * Returns NULL when there none.
-		 */;
-	}
-	public frame_S ses_skipframe() {
-		frame_T frc = new frame_T();
-		frame_S generatedFr_next = frc.getFr_next();
-		for (frc = fr; frc != ((Object)0); frc = generatedFr_next) {
-			if (frc.ses_do_frame()) {
-				break;
-			} 
-		}
-		return frc/*
-		 * Write commands to "fd" to recursively create windows for frame "fr",
-		 * horizontally and vertically split.
-		 * After the commands the last window in the frame is the current window.
-		 * Returns FAIL when writing the commands to "fd" fails.
-		 */;
-	}
 	public frame_S win_altframe(window_S win, tabpage_S tp) {
 		/* tab page "win" is in, NULL for current */frame_T frp = new frame_T();
 		frame_T other_fr = new frame_T();
@@ -138,7 +104,7 @@ public class frame_S {
 					while (/* Advance past frames with one window with 'wfh' set. */frp.frame_fixed_height()) {
 						frp = generatedFr_next;
 						if (frp == ((Object)0)) {
-							return ;
+							return /*Error: Unsupported expression*/;
 						} 
 					}
 				} 
@@ -313,7 +279,7 @@ public class frame_S {
 					while (/* Advance past frames with one window with 'wfw' set. */frp.frame_fixed_width()) {
 						frp = generatedFr_next;
 						if (frp == ((Object)0)) {
-							return ;
+							return /*Error: Unsupported expression*/;
 						} 
 					}
 				} 
@@ -432,7 +398,7 @@ public class frame_S {
 			generatedFr_next.setFr_prev(generatedFr_prev);
 		} 
 	}
-	public void frame_comp_pos(int row, int col) {
+	public void frame_comp_pos(Integer row, Integer col) {
 		win_T wp = new win_T();
 		frame_T frp = new frame_T();
 		int startcol;
@@ -487,7 +453,7 @@ public class frame_S {
 		int room_reserved;
 		int generatedFr_height = this.getFr_height();
 		if (generatedFr_height == /* If the height already is the desired value, nothing to do. */height) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		frame_S generatedFr_parent = this.getFr_parent();
 		byte generatedFr_layout = generatedFr_parent.getFr_layout();
@@ -624,11 +590,11 @@ public class frame_S {
 		int room_reserved;
 		int generatedFr_width = this.getFr_width();
 		if (generatedFr_width == /* If the width already is the desired value, nothing to do. */width) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		frame_S generatedFr_parent = this.getFr_parent();
 		if (generatedFr_parent == ((Object)0/* topframe: can't change width */)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		byte generatedFr_layout = generatedFr_parent.getFr_layout();
 		window_S generatedFr_win = frp.getFr_win();
@@ -736,7 +702,7 @@ public class frame_S {
 		int generatedFr_height = this.getFr_height();
 		frp.frame_new_height(generatedFr_height + n, 0, 0);
 		frame_S generatedFr_parent = this.getFr_parent();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			frp = generatedFr_parent;
 			if (frp == ((Object)0)) {
 				break;
@@ -764,13 +730,13 @@ public class frame_S {
 			if (generatedW_status_height != 0 && !statusline) {
 				wp.win_new_height(generatedW_height + /* remove status line */1);
 				wp.setW_status_height(0);
-				.comp_col();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/comp_col();
 			}  else if (generatedW_status_height == 0 && statusline) {
 				fp = /* Find a frame to take a line from. */fr;
 				while (generatedFr_height <= ModernizedCProgram.frame_minheight(fp, ((Object)0))) {
 					if (fp == ModernizedCProgram.topframe) {
 						ModernizedCProgram.emsg(((byte)(e_noroom)));
-						return ;
+						return /*Error: Unsupported expression*/;
 					} 
 					if (generatedFr_layout == 2 && generatedFr_prev != ((Object)/* In a column of frames: go to frame above.  If already at
 							 * the top or in a row of frames: go to parent. */0)) {
@@ -787,7 +753,7 @@ public class frame_S {
 				} else {
 						wp.win_new_height(generatedW_height - 1);
 				} 
-				.comp_col();
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/comp_col();
 				ModernizedCProgram.redraw_all_later(35);
 			} 
 		}  else if (generatedFr_layout == 1) {
@@ -804,9 +770,9 @@ public class frame_S {
 		} 
 	}
 	public void make_snapshot_rec(frame_S frp) {
-		frp = (frame_T)ModernizedCProgram.alloc_clear();
+		frp = (frame_T)ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/);
 		if (frp == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		byte generatedFr_layout = this.getFr_layout();
 		(frp).setFr_layout(generatedFr_layout);
@@ -897,6 +863,40 @@ public class frame_S {
 		} 
 		return 1/*
 		 * Simple int comparison function for use with qsort()
+		 */;
+	}
+	public int ses_do_frame() {
+		frame_T frc = new frame_T();
+		byte generatedFr_layout = this.getFr_layout();
+		window_S generatedFr_win = this.getFr_win();
+		if (generatedFr_layout == 0) {
+			return generatedFr_win.ses_do_win();
+		} 
+		frame_S generatedFr_next = frc.getFr_next();
+		frame_S generatedFr_child = this.getFr_child();
+		for (frc = generatedFr_child; frc != ((Object)0); frc = generatedFr_next) {
+			if (frc.ses_do_frame()) {
+				return 1;
+			} 
+		}
+		return 0/*
+		 * Skip frames that don't contain windows we want to save in the Session.
+		 * Returns NULL when there none.
+		 */;
+	}
+	public frame_S ses_skipframe() {
+		frame_T frc = new frame_T();
+		frame_S generatedFr_next = frc.getFr_next();
+		for (frc = fr; frc != ((Object)0); frc = generatedFr_next) {
+			if (frc.ses_do_frame()) {
+				break;
+			} 
+		}
+		return frc/*
+		 * Write commands to "fd" to recursively create windows for frame "fr",
+		 * horizontally and vertically split.
+		 * After the commands the last window in the frame is the current window.
+		 * Returns FAIL when writing the commands to "fd" fails.
 		 */;
 	}
 	public void win_redraw_last_status() {

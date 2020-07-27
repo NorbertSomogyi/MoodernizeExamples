@@ -6,9 +6,9 @@ public class attr_stack {
 	private Object originlen;
 	private int num_matches;
 	private int alloc;
-	private match_attr attrs;
+	private match_attr[][] attrs;
 	
-	public attr_stack(attr_stack prev, Byte origin, Object originlen, int num_matches, int alloc, match_attr attrs) {
+	public attr_stack(attr_stack prev, Byte origin, Object originlen, int num_matches, int alloc, match_attr[][] attrs) {
 		setPrev(prev);
 		setOrigin(origin);
 		setOriginlen(originlen);
@@ -24,7 +24,7 @@ public class attr_stack {
 		Byte generatedOrigin = this.getOrigin();
 		ModernizedCProgram.free(generatedOrigin);
 		int generatedNum_matches = this.getNum_matches();
-		match_attr generatedAttrs = this.getAttrs();
+		match_attr[][] generatedAttrs = this.getAttrs();
 		int generatedNum_attr = a.getNum_attr();
 		Object generatedState = a.getState();
 		for (i = 0; i < generatedNum_matches; i++) {
@@ -56,11 +56,11 @@ public class attr_stack {
 		match_attr match_attr = new match_attr();
 		a = match_attr.parse_attr_line(line, src, lineno, macro_ok);
 		if (!a) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedNum_matches = this.getNum_matches();
 		int generatedAlloc = this.getAlloc();
-		match_attr generatedAttrs = this.getAttrs();
+		match_attr[][] generatedAttrs = this.getAttrs();
 		do {
 			if ((generatedNum_matches + 1) > generatedAlloc) {
 				if ((((generatedAlloc) + 16) * 3 / 2) < (generatedNum_matches + 1)) {
@@ -68,7 +68,7 @@ public class attr_stack {
 				} else {
 						this.setAlloc((((generatedAlloc) + 16) * 3 / 2));
 				} 
-				(generatedAttrs) = ModernizedCProgram.xrealloc((generatedAttrs), ModernizedCProgram.st_mult(, (generatedAlloc)));
+				(generatedAttrs) = ModernizedCProgram.xrealloc((generatedAttrs), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedAlloc)));
 			} 
 		} while (0);
 		generatedAttrs[generatedNum_matches++] = a;
@@ -77,7 +77,7 @@ public class attr_stack {
 		attr_stack res = new attr_stack();
 		byte line;
 		int lineno = 0;
-		res = ModernizedCProgram.xcalloc(1, );
+		res = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		while ((line = (list++)) != ((Object)0)) {
 			res.handle_attr_line(line, "[builtin]", ++lineno, 1);
 		}
@@ -99,15 +99,15 @@ public class attr_stack {
 		if (!fp) {
 			return ((Object)0);
 		} 
-		res = ModernizedCProgram.xcalloc(1, );
-		while (.fgets(buf, , fp)) {
+		res = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+		while (/*Error: Function owner not recognized*/fgets(buf, /*Error: sizeof expression not supported yet*/, fp)) {
 			byte bufp = buf;
 			if (!lineno) {
-				ModernizedCProgram.skip_utf8_bom(bufp, .strlen(bufp));
+				ModernizedCProgram.skip_utf8_bom(bufp, /*Error: Function owner not recognized*/strlen(bufp));
 			} 
 			res.handle_attr_line(bufp, path, ++lineno, macro_ok);
 		}
-		.fclose(fp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fp);
 		return res;
 	}
 	public attr_stack read_attr_from_index(Object istate, Object path, int macro_ok) {
@@ -122,8 +122,8 @@ public class attr_stack {
 		if (!buf) {
 			return ((Object)0);
 		} 
-		res = ModernizedCProgram.xcalloc(1, );
-		for (sp = buf; sp; ) {
+		res = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+		for (sp = buf; sp; /*Error: Unsupported expression*/) {
 			byte ep;
 			int more;
 			ep = ModernizedCProgram.gitstrchrnul(sp, (byte)'\n');
@@ -160,7 +160,7 @@ public class attr_stack {
 			} 
 		} 
 		if (!res) {
-			res = ModernizedCProgram.xcalloc(1, );
+			res = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		} 
 		return res;
 	}
@@ -177,7 +177,7 @@ public class attr_stack {
 	public void bootstrap_attr_stack(Object istate) {
 		attr_stack e = new attr_stack();
 		if (stack) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		attr_stack attr_stack = new attr_stack();
 		e = attr_stack.read_attr_from_array(/* builtin frame */ModernizedCProgram.builtin_attr);
@@ -200,13 +200,13 @@ public class attr_stack {
 				e = ((Object)0);
 		} 
 		if (!e) {
-			e = ModernizedCProgram.xcalloc(1, );
+			e = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 		} 
 		stack.push_stack(e, ((Object)0), 0);
 	}
-	public void prepare_attr_stack(Object istate, Object path, int dirlen) {
+	public void prepare_attr_stack(Object istate, Object[] path, int dirlen) {
 		attr_stack info = new attr_stack();
-		strbuf pathbuf = new strbuf(, , );
+		strbuf pathbuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		stack/*
 			 * Pop the "info" one that is always at the top of the stack.
 			 */.bootstrap_attr_stack(istate);
@@ -219,7 +219,7 @@ public class attr_stack {
 			int namelen = generatedOriginlen;
 			attr_stack elem = new attr_stack();
 			elem = stack;
-			if (namelen <= dirlen && !.strncmp(generatedOrigin, path, namelen) && (!namelen || path[namelen] == (byte)'/')) {
+			if (namelen <= dirlen && !/*Error: Function owner not recognized*/strncmp(generatedOrigin, path, namelen) && (!namelen || path[namelen] == (byte)'/')) {
 				break;
 			} 
 			do {
@@ -233,10 +233,10 @@ public class attr_stack {
 				 * empty string.
 				 */.attr_stack_free();
 		}
-		((generatedOrigin) ? (Object)0 : ._assert("(*stack)->origin", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\attr.c", 949));
+		((generatedOrigin) ? (Object)0 : /*Error: Function owner not recognized*/_assert("(*stack)->origin", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\attr.c", 949));
 		pathbuf.strbuf_addstr(generatedOrigin);
 		Object generatedLen = pathbuf.getLen();
-		byte generatedBuf = pathbuf.getBuf();
+		byte[] generatedBuf = pathbuf.getBuf();
 		attr_stack attr_stack = new attr_stack();
 		while (generatedLen < /* Build up to the directory 'path' is in */dirlen) {
 			size_t len = generatedLen;
@@ -293,10 +293,10 @@ public class attr_stack {
 	public void setAlloc(int newAlloc) {
 		alloc = newAlloc;
 	}
-	public match_attr getAttrs() {
+	public match_attr[][] getAttrs() {
 		return attrs;
 	}
-	public void setAttrs(match_attr newAttrs) {
+	public void setAttrs(match_attr[][] newAttrs) {
 		attrs = newAttrs;
 	}
 }

@@ -28,13 +28,13 @@ public class rev_name {
 		nth_slab = c.getIndex() / generatedSlab_size;
 		nth_slot = c.getIndex() % generatedSlab_size;
 		int generatedSlab_count = s.getSlab_count();
-		rev_name generatedSlab = s.getSlab();
+		rev_name[][][] generatedSlab = s.getSlab();
 		if (generatedSlab_count <= nth_slab) {
 			int i;
 			if (!add_if_missing) {
 				return ((Object)0);
 			} 
-			(generatedSlab) = ModernizedCProgram.xrealloc((generatedSlab), ModernizedCProgram.st_mult(, (nth_slab + 1)));
+			(generatedSlab) = ModernizedCProgram.xrealloc((generatedSlab), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (nth_slab + 1)));
 			for (i = generatedSlab_count; i <= nth_slab; i++) {
 				generatedSlab[i] = ((Object)0);
 			}
@@ -45,7 +45,7 @@ public class rev_name {
 			if (!add_if_missing) {
 				return ((Object)0);
 			} 
-			generatedSlab[nth_slab] = ModernizedCProgram.xcalloc(generatedSlab_size,  * generatedStride);
+			generatedSlab[nth_slab] = ModernizedCProgram.xcalloc(generatedSlab_size, /*Error: sizeof expression not supported yet*/ * generatedStride);
 		} 
 		return generatedSlab[nth_slab][nth_slot * generatedStride];
 	}

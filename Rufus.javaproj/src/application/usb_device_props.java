@@ -57,33 +57,33 @@ public class usb_device_props {
 		USB_NODE_CONNECTION_INFORMATION_EX conn_info = new USB_NODE_CONNECTION_INFORMATION_EX();
 		USB_NODE_CONNECTION_INFORMATION_EX_V2 conn_info_v2 = new USB_NODE_CONNECTION_INFORMATION_EX_V2();
 		if (pfCM_Get_DevNode_Registry_PropertyA == ((Object)0)) {
-			pfCM_Get_DevNode_Registry_PropertyA = (CM_Get_DevNode_Registry_PropertyA_t).GetProcAddress(ModernizedCProgram.GetLibraryHandle("Cfgmgr32"), "CM_Get_DevNode_Registry_PropertyA");
+			pfCM_Get_DevNode_Registry_PropertyA = (CM_Get_DevNode_Registry_PropertyA_t)/*Error: Function owner not recognized*/GetProcAddress(ModernizedCProgram.GetLibraryHandle("Cfgmgr32"), "CM_Get_DevNode_Registry_PropertyA");
 		} 
 		if ((parent_path == ((Object)0)) || (device_id == ((Object)0)) || (props == ((Object)0)) || (pfCM_Get_DevNode_Registry_PropertyA == ((Object)0))) {
 			;
 		} 
-		cr = .CM_Locate_DevNodeA(device_inst, device_id, 0);
+		cr = /*Error: Function owner not recognized*/CM_Locate_DevNodeA(device_inst, device_id, 0);
 		if (cr != CR_SUCCESS) {
 			ModernizedCProgram._uprintf("Could not get device instance handle for '%s': CR error %d", device_id, cr);
 			;
 		} 
 		this.setPort(0);
 		Object generatedPort = this.getPort();
-		size = ;
-		cr = .pfCM_Get_DevNode_Registry_PropertyA(device_inst, CM_DRP_ADDRESS, ((Object)0), (PVOID)generatedPort, size, 0);
+		size = /*Error: sizeof expression not supported yet*/;
+		cr = /*Error: Function owner not recognized*/pfCM_Get_DevNode_Registry_PropertyA(device_inst, CM_DRP_ADDRESS, ((Object)0), (PVOID)generatedPort, size, 0);
 		if (cr != CR_SUCCESS) {
 			ModernizedCProgram._uprintf("Could not get port for '%s': CR error %d", device_id, cr);
 			;
 		} 
-		handle = .CreateFileA(parent_path, -1024, -1024, ((Object)0), 3, 1073741824, ((Object)0));
+		handle = /*Error: Function owner not recognized*/CreateFileA(parent_path, -1024, -1024, ((Object)0), 3, 1073741824, ((Object)0));
 		if (handle == (HANDLE)(true)) {
 			ModernizedCProgram._uprintf("Could not open hub %s: %s", parent_path, ModernizedCProgram.WindowsErrorString());
 			;
 		} 
-		size = ;
-		.memset(conn_info, 0, size);
+		size = /*Error: sizeof expression not supported yet*/;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(conn_info, 0, size);
 		conn_info.setConnectionIndex((ULONG)generatedPort)// coverity[tainted_data_argument];// coverity[tainted_data_argument]
-		if (!.DeviceIoControl(handle, (((true) << 16) | ((true) << 14) | ((true) << 2) | (false)), conn_info, size, conn_info, size, size, ((Object)0))) {
+		if (!/*Error: Function owner not recognized*/DeviceIoControl(handle, (((true) << 16) | ((true) << 14) | ((true) << 2) | (false)), conn_info, size, conn_info, size, size, ((Object)0))) {
 			ModernizedCProgram._uprintf("Could not get node connection information for '%s': %s", device_id, ModernizedCProgram.WindowsErrorString());
 			;
 		} 
@@ -104,12 +104,12 @@ public class usb_device_props {
 		Object generatedDeviceIsSuperSpeedPlusCapableOrHigher = generatedFlags.getDeviceIsSuperSpeedPlusCapableOrHigher();
 		Object generatedDeviceIsSuperSpeedCapableOrHigher = generatedFlags.getDeviceIsSuperSpeedCapableOrHigher();
 		// In their great wisdom, Microsoft decided to BREAK the USB speed report between Windows 7 and Windows 8if (ModernizedCProgram.nWindowsVersion >= WindowsVersion.WINDOWS_8) {
-			size = ;
-			.memset(conn_info_v2, 0, size);
+			size = /*Error: sizeof expression not supported yet*/;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(conn_info_v2, 0, size);
 			conn_info_v2.setConnectionIndex((ULONG)generatedPort);
 			conn_info_v2.setLength(size);
 			generatedSupportedUsbProtocols.setUsb300(1);
-			if (!.DeviceIoControl(handle, (((true) << 16) | ((true) << 14) | ((true) << 2) | (false)), conn_info_v2, size, conn_info_v2, size, size, ((Object)0))) {
+			if (!/*Error: Function owner not recognized*/DeviceIoControl(handle, (((true) << 16) | ((true) << 14) | ((true) << 2) | (false)), conn_info_v2, size, conn_info_v2, size, size, ((Object)0))) {
 				ModernizedCProgram._uprintf("Could not get node connection information (V2) for device '%s': %s", device_id, ModernizedCProgram.WindowsErrorString());
 			}  else if (generatedDeviceIsOperatingAtSuperSpeedPlusOrHigher) {
 				this.setSpeed(5);

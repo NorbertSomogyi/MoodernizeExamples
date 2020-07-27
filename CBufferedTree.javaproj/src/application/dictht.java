@@ -3,12 +3,12 @@ package application;
 /* This is our hash table structure. Every dictionary has two of this as we
  * implement incremental rehashing, for the old to the new table. */
 public class dictht {
-	private dictEntry table;
+	private dictEntry[][] table;
 	private long size;
 	private long sizemask;
 	private long used;
 	
-	public dictht(dictEntry table, long size, long sizemask, long used) {
+	public dictht(dictEntry[][] table, long size, long sizemask, long used) {
 		setTable(table);
 		setSize(size);
 		setSizemask(sizemask);
@@ -25,10 +25,10 @@ public class dictht {
 		this.setSizemask(0);
 		this.setUsed(0);
 	}
-	public dictEntry getTable() {
+	public dictEntry[][] getTable() {
 		return table;
 	}
-	public void setTable(dictEntry newTable) {
+	public void setTable(dictEntry[][] newTable) {
 		table = newTable;
 	}
 	public long getSize() {

@@ -114,7 +114,7 @@ public class ptw32_thread_t_ {
 		   * Both key->keyLock and thread->threadLock are locked before
 		   * entry to this routine.
 		   */
-		assoc = (ThreadKeyAssoc).calloc(1, );
+		assoc = (ThreadKeyAssoc)/*Error: Function owner not recognized*/calloc(1, /*Error: sizeof expression not supported yet*/);
 		if (assoc == ((Object)0)) {
 			return 12;
 		} 

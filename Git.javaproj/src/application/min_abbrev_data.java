@@ -3,11 +3,11 @@ package application;
 public class min_abbrev_data {
 	private int init_len;
 	private int cur_len;
-	private Byte hex;
+	private byte[] hex;
 	private repository repo;
 	private Object oid;
 	
-	public min_abbrev_data(int init_len, int cur_len, Byte hex, repository repo, Object oid) {
+	public min_abbrev_data(int init_len, int cur_len, byte[] hex, repository repo, Object oid) {
 		setInit_len(init_len);
 		setCur_len(cur_len);
 		setHex(hex);
@@ -43,10 +43,10 @@ public class min_abbrev_data {
 	public void setCur_len(int newCur_len) {
 		cur_len = newCur_len;
 	}
-	public Byte getHex() {
+	public byte[] getHex() {
 		return hex;
 	}
-	public void setHex(Byte newHex) {
+	public void setHex(byte[] newHex) {
 		hex = newHex;
 	}
 	public repository getRepo() {

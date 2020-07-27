@@ -4,9 +4,9 @@ package application;
 public class rev_cmdline_info {
 	private int nr;
 	private int alloc;
-	private rev_cmdline_entry rev;
+	private rev_cmdline_entry[] rev;
 	
-	public rev_cmdline_info(int nr, int alloc, rev_cmdline_entry rev) {
+	public rev_cmdline_info(int nr, int alloc, rev_cmdline_entry[] rev) {
 		setNr(nr);
 		setAlloc(alloc);
 		setRev(rev);
@@ -17,7 +17,7 @@ public class rev_cmdline_info {
 	public void get_tags_and_duplicates() {
 		int i;
 		int generatedNr = this.getNr();
-		rev_cmdline_entry generatedRev = this.getRev();
+		rev_cmdline_entry[] generatedRev = this.getRev();
 		int generatedFlags = e.getFlags();
 		Object generatedName = e.getName();
 		commit commit = new commit();
@@ -25,6 +25,7 @@ public class rev_cmdline_info {
 		int generatedType = generatedItem.getType();
 		object generatedObject = commit.getObject();
 		object_id generatedOid = generatedObject.getOid();
+		string_list_item string_list_item = new string_list_item();
 		for (i = 0; i < generatedNr; i++) {
 			rev_cmdline_entry e = generatedRev + i;
 			object_id oid = new object_id();
@@ -33,12 +34,12 @@ public class rev_cmdline_info {
 			if (generatedFlags & (-1024 << 1)) {
 				continue;
 			} 
-			if (oid.dwim_ref(generatedName, .strlen(generatedName), full_name) != 1) {
+			if (oid.dwim_ref(generatedName, /*Error: Function owner not recognized*/strlen(generatedName), full_name) != 1) {
 				continue;
 			} 
 			if (generatedNr) {
 				byte private;
-				private = .apply_refspecs(ModernizedCProgram.refspecs, full_name);
+				private = /*Error: Function owner not recognized*/apply_refspecs(ModernizedCProgram.refspecs, full_name);
 				if (private) {
 					ModernizedCProgram.free(full_name);
 					full_name = private;
@@ -50,17 +51,17 @@ public class rev_cmdline_info {
 				continue;
 			} 
 			switch (generatedType) {
+			case object_type.OBJ_COMMIT:
+					break;
 			case object_type.OBJ_BLOB:
 					ModernizedCProgram.export_blob(generatedOid);
 					continue;
-			case object_type.OBJ_COMMIT:
-					break;
 			default:
 					ModernizedCProgram.warning("Tag points to object of unexpected type %s, skipping.", ModernizedCProgram.type_name(generatedType));
 					continue;
 			}
 			if (generatedType != object_type.OBJ_TAG) {
-				ModernizedCProgram.extra_refs.string_list_append(full_name).setUtil(commit);
+				string_list_item.string_list_append(ModernizedCProgram.extra_refs, full_name).setUtil(commit);
 			} 
 			if (!ModernizedCProgram.revision_sources.revision_sources_at(commit)) {
 				ModernizedCProgram.revision_sources.revision_sources_at(commit) = full_name;
@@ -81,10 +82,10 @@ public class rev_cmdline_info {
 	public void setAlloc(int newAlloc) {
 		alloc = newAlloc;
 	}
-	public rev_cmdline_entry getRev() {
+	public rev_cmdline_entry[] getRev() {
 		return rev;
 	}
-	public void setRev(rev_cmdline_entry newRev) {
+	public void setRev(rev_cmdline_entry[] newRev) {
 		rev = newRev;
 	}
 }

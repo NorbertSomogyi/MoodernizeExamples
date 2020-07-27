@@ -27,7 +27,7 @@ public class tr2_tbuf {
 		Object generatedTm_min = tm.getTm_min();
 		Object generatedTm_sec = tm.getTm_sec();
 		Object generatedTv_usec = tv.getTv_usec();
-		ModernizedCProgram.xsnprintf(generatedBuf, , "%02d:%02d:%02d.%06ld", generatedTm_hour, generatedTm_min, generatedTm_sec, (long)generatedTv_usec);
+		ModernizedCProgram.xsnprintf(generatedBuf, /*Error: sizeof expression not supported yet*/, "%02d:%02d:%02d.%06ld", generatedTm_hour, generatedTm_min, generatedTm_sec, (long)generatedTv_usec);
 	}
 	public void tr2_tbuf_utc_datetime_extended() {
 		timeval tv = new timeval();
@@ -45,7 +45,7 @@ public class tr2_tbuf {
 		Object generatedTm_min = tm.getTm_min();
 		Object generatedTm_sec = tm.getTm_sec();
 		Object generatedTv_usec = tv.getTv_usec();
-		ModernizedCProgram.xsnprintf(generatedBuf, , "%4d-%02d-%02dT%02d:%02d:%02d.%06ldZ", generatedTm_year + 1900, generatedTm_mon + 1, generatedTm_mday, generatedTm_hour, generatedTm_min, generatedTm_sec, (long)generatedTv_usec);
+		ModernizedCProgram.xsnprintf(generatedBuf, /*Error: sizeof expression not supported yet*/, "%4d-%02d-%02dT%02d:%02d:%02d.%06ldZ", generatedTm_year + 1900, generatedTm_mon + 1, generatedTm_mday, generatedTm_hour, generatedTm_min, generatedTm_sec, (long)generatedTv_usec);
 	}
 	public void tr2_tbuf_utc_datetime() {
 		timeval tv = new timeval();
@@ -63,7 +63,7 @@ public class tr2_tbuf {
 		Object generatedTm_min = tm.getTm_min();
 		Object generatedTm_sec = tm.getTm_sec();
 		Object generatedTv_usec = tv.getTv_usec();
-		ModernizedCProgram.xsnprintf(generatedBuf, , "%4d%02d%02dT%02d%02d%02d.%06ldZ", generatedTm_year + 1900, generatedTm_mon + 1, generatedTm_mday, generatedTm_hour, generatedTm_min, generatedTm_sec, (long)generatedTv_usec);
+		ModernizedCProgram.xsnprintf(generatedBuf, /*Error: sizeof expression not supported yet*/, "%4d%02d%02dT%02d%02d%02d.%06ldZ", generatedTm_year + 1900, generatedTm_mon + 1, generatedTm_mday, generatedTm_hour, generatedTm_min, generatedTm_sec, (long)generatedTv_usec);
 	}
 	public Object getBuf() {
 		return buf;

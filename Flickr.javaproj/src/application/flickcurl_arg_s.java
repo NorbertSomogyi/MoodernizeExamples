@@ -35,36 +35,36 @@ public class flickcurl_arg_s {
 	public void flickcurl_free_arg() {
 		do {
 			if (!arg) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_arg is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\args.c", 40, __func__);
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_arg is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\args.c", 40, __func__);
+				return /*Error: Unsupported expression*/;
 			} 
 		} while (0);
 		Byte generatedName = this.getName();
 		if (generatedName) {
-			.free(generatedName);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedName);
 		} 
 		Byte generatedDescription = this.getDescription();
 		if (generatedDescription) {
-			.free(generatedDescription);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedDescription);
 		} 
-		.free(arg);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(arg);
 	}
-	public flickcurl_arg_s flickcurl_build_args(flickcurl_s fc, Object xpathCtx, Object xpathExpr, int arg_count_p) {
+	public flickcurl_arg_s flickcurl_build_args(flickcurl_s fc, Object xpathCtx, Object xpathExpr, Integer arg_count_p) {
 		flickcurl_arg args = ((Object)0);
 		int nodes_count;
 		int arg_count;
 		int i;
 		 xpathObj = ((Object)0);
 		 nodes = new ();
-		xpathObj = .xmlXPathEvalExpression(xpathExpr, /* Now do args */xpathCtx);
+		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, /* Now do args */xpathCtx);
 		if (!xpathObj) {
 			fc.flickcurl_error("Unable to evaluate XPath expression \"%s\"", xpathExpr);
 			fc.setFailed(1);
 			;
 		} 
 		nodes = xpathObj.getNodesetval();
-		nodes_count = .xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
-		args = (flickcurl_arg).calloc(, nodes_count + 1);
+		nodes_count = /*Error: Function owner not recognized*/xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
+		args = (flickcurl_arg)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, nodes_count + 1);
 		Byte generatedName = arg.getName();
 		Byte generatedDescription = arg.getDescription();
 		for (; i < nodes_count; i++) {
@@ -77,22 +77,22 @@ public class flickcurl_arg_s {
 				fc.setFailed(1);
 				break;
 			} 
-			arg = (flickcurl_arg).calloc(, 1);
+			arg = (flickcurl_arg)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 			for (attr = node.getProperties(); attr; attr = attr.getNext()) {
 				byte attr_name = (byte)attr.getName();
-				if (!.strcmp(attr_name, "name")) {
-					size_t len = .strlen((byte)attr.getChildren().getContent());
-					arg.setName((byte).malloc(len + 1));
-					.memcpy(generatedName, attr.getChildren().getContent(), len + 1);
-				}  else if (!.strcmp(attr_name, "optional")) {
-					arg.setOptional(.atoi((byte)attr.getChildren().getContent()));
+				if (!/*Error: Function owner not recognized*/strcmp(attr_name, "name")) {
+					size_t len = /*Error: Function owner not recognized*/strlen((byte)attr.getChildren().getContent());
+					arg.setName((byte)/*Error: Function owner not recognized*/malloc(len + 1));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, attr.getChildren().getContent(), len + 1);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "optional")) {
+					arg.setOptional(/*Error: Function owner not recognized*/atoi((byte)attr.getChildren().getContent()));
 				} 
 			}
 			for (chnode = node.getChildren(); chnode; chnode = chnode.getNext()) {
 				if (chnode.getType() == XML_TEXT_NODE) {
-					size_t len = .strlen((byte)chnode.getContent());
-					arg.setDescription((byte).malloc(len + 1));
-					.memcpy(generatedDescription, (byte)chnode.getContent(), len + 1);
+					size_t len = /*Error: Function owner not recognized*/strlen((byte)chnode.getContent());
+					arg.setDescription((byte)/*Error: Function owner not recognized*/malloc(len + 1));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedDescription, (byte)chnode.getContent(), len + 1);
 					break;
 				} 
 			}

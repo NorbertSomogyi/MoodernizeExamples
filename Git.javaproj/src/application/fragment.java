@@ -7,14 +7,14 @@ public class fragment {
 	private long oldlines;
 	private long newpos;
 	private long newlines;
-	private Object patch;
+	private Object[] patch;
 	private int free_patch;
 	private int rejected;
 	private int size;
 	private int linenr;
 	private fragment next;
 	
-	public fragment(long leading, long trailing, long oldpos, long oldlines, long newpos, long newlines, Object patch, int free_patch, int rejected, int size, int linenr, fragment next) {
+	public fragment(long leading, long trailing, long oldpos, long oldlines, long newpos, long newlines, Object[] patch, int free_patch, int rejected, int size, int linenr, fragment next) {
 		setLeading(leading);
 		setTrailing(trailing);
 		setOldpos(oldpos);
@@ -47,9 +47,9 @@ public class fragment {
 		int ret = 0;
 		if (size < 1) {
 			ModernizedCProgram.warning("recount: ignore empty hunk");
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			int len = ModernizedCProgram.linelen(line, size);
 			size -= ModernizedCProgram.len;
 			line += ModernizedCProgram.len;
@@ -57,30 +57,30 @@ public class fragment {
 				break;
 			} 
 			switch (line) {
-			case (byte)'d':
-					ret = size < 5 || !ModernizedCProgram.starts_with(line, "diff ");
-					break;
-			case (byte)' ':
 			case (byte)'+':
 					newlines++;
 					continue;
-			case /* fall through */(byte)'-':
-					oldlines++;
+			case (byte)' ':
+			case (byte)'d':
+					ret = size < 5 || !ModernizedCProgram.starts_with(line, "diff ");
+					break;
+			case (byte)'\n':
+					newlines++;
+			case (byte)'\\':
 					continue;
 			case (byte)'@':
 					ret = size < 3 || !ModernizedCProgram.starts_with(line, "@@ ");
 					break;
-			case (byte)'\\':
+			case /* fall through */(byte)'-':
+					oldlines++;
 					continue;
-			case (byte)'\n':
-					newlines++;
 			default:
 					ret = -1;
 					break;
 			}
 			if (ret) {
 				ModernizedCProgram.warning(ModernizedCProgram._("recount: unexpected line: %.*s"), (int)ModernizedCProgram.linelen(line, size), line);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			break;
 		}
@@ -90,7 +90,7 @@ public class fragment {
 		 * form "@@ -a,b +c,d @@"
 		 */);
 	}
-	public int parse_fragment_header(Object line, int len) {
+	public int parse_fragment_header(Object[] line, int len) {
 		int offset;
 		if (!len || line[len - 1] != (byte)'\n') {
 			return -1;
@@ -110,7 +110,7 @@ public class fragment {
 		 *   the size of the header in bytes (called "offset") otherwise
 		 */;
 	}
-	public fragment parse_binary_hunk(apply_state state, byte buf_p, long sz_p, int status_p, int used_p) {
+	public fragment parse_binary_hunk(apply_state state, Byte buf_p, Long sz_p, Integer status_p, Integer used_p) {
 		int llen;
 		int used;
 		long size = sz_p;
@@ -125,10 +125,10 @@ public class fragment {
 		status_p = 0;
 		if (ModernizedCProgram.starts_with(buffer, "delta ")) {
 			patch_method = 1;
-			origlen = .strtoul(buffer + 6, ((Object)0), 10);
+			origlen = /*Error: Function owner not recognized*/strtoul(buffer + 6, ((Object)0), 10);
 		}  else if (ModernizedCProgram.starts_with(buffer, "literal ")) {
 			patch_method = 2;
-			origlen = .strtoul(buffer + 8, ((Object)0), 10);
+			origlen = /*Error: Function owner not recognized*/strtoul(buffer + 8, ((Object)0), 10);
 		} else {
 				return ((Object)0);
 		} 
@@ -171,10 +171,10 @@ public class fragment {
 			buffer += llen;
 			size -= llen;
 		}
-		frag = ModernizedCProgram.xcalloc(1, );
+		frag = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		frag.setPatch(ModernizedCProgram.inflate_it(data, hunk_size, origlen));
 		frag.setFree_patch(1);
-		Object generatedPatch = frag.getPatch();
+		Object[] generatedPatch = frag.getPatch();
 		if (!generatedPatch) {
 			;
 		} 
@@ -229,10 +229,10 @@ public class fragment {
 	public void setNewlines(long newNewlines) {
 		newlines = newNewlines;
 	}
-	public Object getPatch() {
+	public Object[] getPatch() {
 		return patch;
 	}
-	public void setPatch(Object newPatch) {
+	public void setPatch(Object[] newPatch) {
 		patch = newPatch;
 	}
 	public int getFree_patch() {

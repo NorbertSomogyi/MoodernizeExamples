@@ -18,8 +18,8 @@ public class mp_block {
 	public mp_block mem_pool_alloc_block(mem_pool mem_pool, Object block_alloc) {
 		mp_block p = new mp_block();
 		Object generatedPool_alloc = mem_pool.getPool_alloc();
-		generatedPool_alloc +=  + block_alloc;
-		p = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(, block_alloc));
+		generatedPool_alloc += /*Error: Unsupported expression*/ + block_alloc;
+		p = ModernizedCProgram.xmalloc(ModernizedCProgram.st_add(/*Error: Unsupported expression*/, block_alloc));
 		Object generatedSpace = p.getSpace();
 		p.setNext_free((byte)generatedSpace);
 		Byte generatedNext_free = p.getNext_free();

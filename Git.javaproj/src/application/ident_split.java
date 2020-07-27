@@ -33,7 +33,7 @@ public class ident_split {
 		byte cp;
 		size_t span = new size_t();
 		int status = -1;
-		.memset(split, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(split, 0, /*Error: sizeof expression not supported yet*/);
 		this.setName_begin(line);
 		for (cp = line; cp && cp < line + len; cp++) {
 			if (cp == (byte)'<') {
@@ -86,7 +86,7 @@ public class ident_split {
 			;
 		} 
 		this.setDate_begin(cp);
-		span = .strspn(cp, "0123456789");
+		span = /*Error: Function owner not recognized*/strspn(cp, "0123456789");
 		if (!span) {
 			;
 		} 
@@ -100,7 +100,7 @@ public class ident_split {
 			;
 		} 
 		this.setTz_begin(cp);
-		span = .strspn(cp + 1, "0123456789");
+		span = /*Error: Function owner not recognized*/strspn(cp + 1, "0123456789");
 		if (!span) {
 			;
 		} 

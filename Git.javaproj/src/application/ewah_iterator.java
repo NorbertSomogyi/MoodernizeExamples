@@ -1,7 +1,7 @@
 package application;
 
 public class ewah_iterator {
-	private Object buffer;
+	private Object[] buffer;
 	private Object buffer_size;
 	private Object pointer;
 	private Object compressed;
@@ -10,7 +10,7 @@ public class ewah_iterator {
 	private Object lw;
 	private int b;
 	
-	public ewah_iterator(Object buffer, Object buffer_size, Object pointer, Object compressed, Object literals, Object rl, Object lw, int b) {
+	public ewah_iterator(Object[] buffer, Object buffer_size, Object pointer, Object compressed, Object literals, Object rl, Object lw, int b) {
 		setBuffer(buffer);
 		setBuffer_size(buffer_size);
 		setPointer(pointer);
@@ -27,7 +27,7 @@ public class ewah_iterator {
 		eword_t word = ((Object)0);
 		this.setLiterals(0);
 		this.setCompressed(0);
-		Object generatedBuffer = this.getBuffer();
+		Object[] generatedBuffer = this.getBuffer();
 		Object generatedPointer = this.getPointer();
 		Object generatedRl = this.getRl();
 		Object generatedLw = this.getLw();
@@ -38,13 +38,13 @@ public class ewah_iterator {
 			this.setLw(ModernizedCProgram.rlw_get_literal_words(word));
 			this.setB(ModernizedCProgram.rlw_get_run_bit(word));
 			if (generatedRl || generatedLw) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (generatedPointer < generatedBuffer_size - 1) {
 				generatedPointer++;
 			} else {
 					this.setPointer(generatedBuffer_size);
-					return ;
+					return /*Error: Unsupported expression*/;
 			} 
 		}
 	}
@@ -59,15 +59,15 @@ public class ewah_iterator {
 		int generatedB = this.getB();
 		Object generatedLiterals = this.getLiterals();
 		Object generatedLw = this.getLw();
-		Object generatedBuffer = this.getBuffer();
+		Object[] generatedBuffer = this.getBuffer();
 		if (generatedCompressed < generatedRl) {
 			generatedCompressed++;
 			next = generatedB ? (eword_t)(~0) : 0;
 		} else {
-				((generatedLiterals < generatedLw) ? (Object)0 : ._assert("it->literals < it->lw", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\ewah_bitmap.c", 349));
+				((generatedLiterals < generatedLw) ? (Object)0 : /*Error: Function owner not recognized*/_assert("it->literals < it->lw", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\ewah_bitmap.c", 349));
 				generatedLiterals++;
 				generatedPointer++;
-				((generatedPointer < generatedBuffer_size) ? (Object)0 : ._assert("it->pointer < it->buffer_size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\ewah_bitmap.c", 354));
+				((generatedPointer < generatedBuffer_size) ? (Object)0 : /*Error: Function owner not recognized*/_assert("it->pointer < it->buffer_size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\ewah_bitmap.c", 354));
 				next = generatedBuffer[generatedPointer];
 		} 
 		if (generatedCompressed == generatedRl && generatedLiterals == generatedLw) {
@@ -77,10 +77,10 @@ public class ewah_iterator {
 		} 
 		return 1;
 	}
-	public Object getBuffer() {
+	public Object[] getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(Object newBuffer) {
+	public void setBuffer(Object[] newBuffer) {
 		buffer = newBuffer;
 	}
 	public Object getBuffer_size() {

@@ -14,7 +14,7 @@ public class llist {
 	}
 	
 	public void llist_init() {
-		ModernizedCProgram.list = ModernizedCProgram.xmalloc();
+		ModernizedCProgram.list = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
 		(ModernizedCProgram.list).setFront((ModernizedCProgram.list).setBack(((Object)0)));
 		(ModernizedCProgram.list).setSize(0);
 	}

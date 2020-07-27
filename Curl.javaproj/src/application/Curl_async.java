@@ -43,10 +43,10 @@ public class Curl_async {
 			int done;
 			 sock_rd = generatedSock_pair[0];
 			connectdata conn = generatedConn;
-			.EnterCriticalSection(generatedMtx);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/EnterCriticalSection(generatedMtx);
 			done = generatedDone;
 			generatedTsd.setDone(1);
-			.LeaveCriticalSection(generatedMtx);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LeaveCriticalSection(generatedMtx);
 			if (!done) {
 				ModernizedCProgram.Curl_thread_destroy(generatedThread_hnd);
 			} else {
@@ -54,16 +54,16 @@ public class Curl_async {
 						ModernizedCProgram.Curl_thread_join(generatedThread_hnd);
 					} 
 					generatedTsd.destroy_thread_sync_data();
-					.Curl_cfree(generatedOs_specific);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedOs_specific);
 			} 
 			if (conn) {
 				generatedData.Curl_multi_closed(sock_rd);
 			} 
-			.closesocket((sock_rd));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/closesocket((sock_rd));
 		} 
 		this.setOs_specific(((Object)0));
 		Byte generatedHostname = this.getHostname();
-		.Curl_cfree(generatedHostname);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedHostname);
 		this.setHostname(((Object)0/*
 		 * init_resolve_thread() starts a new thread that performs the actual
 		 * resolve. This function returns before the resolve is done.

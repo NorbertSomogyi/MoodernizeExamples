@@ -26,10 +26,10 @@ public class expander_data {
 	private Object gaindB;
 	private Object gaindB_len;
 	private Object gaindB_buf;
-	private Double env_in;
+	private double[] env_in;
 	private Object env_in_len;
 	
-	public expander_data(obs_source context, Object envelope_buf, Object envelope_buf_len, double ratio, double threshold, double attack_gain, double release_gain, double output_gain, Object num_channels, Object sample_rate, Object envelope, double slope, int detector, Object runave, Object is_gate, Object runaverage, Object runaverage_len, Object gaindB, Object gaindB_len, Object gaindB_buf, Double env_in, Object env_in_len) {
+	public expander_data(obs_source context, Object envelope_buf, Object envelope_buf_len, double ratio, double threshold, double attack_gain, double release_gain, double output_gain, Object num_channels, Object sample_rate, Object envelope, double slope, int detector, Object runave, Object is_gate, Object runaverage, Object runaverage_len, Object gaindB, Object gaindB_len, Object gaindB_buf, double[] env_in, Object env_in_len) {
 		setContext(context);
 		setEnvelope_buf(envelope_buf);
 		setEnvelope_buf_len(envelope_buf_len);
@@ -62,14 +62,14 @@ public class expander_data {
 		Object generatedRunaverage_len = this.getRunaverage_len();
 		for (int i = 0;
 		 i < MAX_AUDIO_CHANNELS; i++) {
-			generatedRunaverage[i] = ModernizedCProgram.brealloc(generatedRunaverage[i], generatedRunaverage_len * );
+			generatedRunaverage[i] = ModernizedCProgram.brealloc(generatedRunaverage[i], generatedRunaverage_len * /*Error: Unsupported expression*/);
 		}
 	}
 	public void resize_env_in_buffer(Object len) {
 		this.setEnv_in_len(len);
-		Double generatedEnv_in = this.getEnv_in();
+		double[] generatedEnv_in = this.getEnv_in();
 		Object generatedEnv_in_len = this.getEnv_in_len();
-		this.setEnv_in(ModernizedCProgram.brealloc(generatedEnv_in, generatedEnv_in_len * ));
+		this.setEnv_in(ModernizedCProgram.brealloc(generatedEnv_in, generatedEnv_in_len * /*Error: Unsupported expression*/));
 	}
 	public void resize_gaindB_buffer(Object len) {
 		this.setGaindB_len(len);
@@ -77,11 +77,11 @@ public class expander_data {
 		Object generatedGaindB_len = this.getGaindB_len();
 		for (int i = 0;
 		 i < MAX_AUDIO_CHANNELS; i++) {
-			generatedGaindB[i] = ModernizedCProgram.brealloc(generatedGaindB[i], generatedGaindB_len * );
+			generatedGaindB[i] = ModernizedCProgram.brealloc(generatedGaindB[i], generatedGaindB_len * /*Error: Unsupported expression*/);
 		}
 	}
 	// gain stage and ballistics in dB domain
-	public void process_expansion(Double samples, Object num_samples) {
+	public void process_expansion(double[][] samples, Object num_samples) {
 		double generatedAttack_gain = this.getAttack_gain();
 		double attack_gain = generatedAttack_gain;
 		double generatedRelease_gain = this.getRelease_gain();
@@ -93,7 +93,7 @@ public class expander_data {
 		Object generatedGaindB = this.getGaindB();
 		for (int i = 0;
 		 i < MAX_AUDIO_CHANNELS; i++) {
-			.memset(generatedGaindB[i], 0, num_samples * );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedGaindB[i], 0, num_samples * /*Error: sizeof expression not supported yet*/);
 		}
 		Object generatedNum_channels = this.getNum_channels();
 		Object generatedEnvelope_buf = this.getEnvelope_buf();
@@ -106,7 +106,7 @@ public class expander_data {
 			for ( i = 0;
 			 i < num_samples; ++i) {
 				double env_db = ModernizedCProgram.mul_to_db(generatedEnvelope_buf[chan][i]);
-				double gain = generatedThreshold - env_db > 0.0 ? .fmaxf(generatedSlope * (generatedThreshold - env_db), -60.0) : 0.0;
+				double gain = generatedThreshold - env_db > 0.0 ? /*Error: Function owner not recognized*/fmaxf(generatedSlope * (generatedThreshold - env_db), -60.0) : 0.0;
 				if (i > 0) {
 					if (gain > generatedGaindB[chan][i - 1]) {
 						generatedGaindB[chan][i] = attack_gain * generatedGaindB[chan][i - 1] + (1.0 - attack_gain) * gain;
@@ -120,7 +120,7 @@ public class expander_data {
 								generatedGaindB[chan][i] = release_gain * generatedGaindB_buf[chan] + (1.0 - release_gain) * gain;
 						} 
 				} 
-				gain = ModernizedCProgram.db_to_mul(.fminf(0, generatedGaindB[chan][i]));
+				gain = ModernizedCProgram.db_to_mul(/*Error: Function owner not recognized*/fminf(0, generatedGaindB[chan][i]));
 				if (samples[chan]) {
 					samples[chan][i] *= gain * generatedOutput_gain;
 				} 
@@ -248,10 +248,10 @@ public class expander_data {
 	public void setGaindB_buf(Object newGaindB_buf) {
 		gaindB_buf = newGaindB_buf;
 	}
-	public Double getEnv_in() {
+	public double[] getEnv_in() {
 		return env_in;
 	}
-	public void setEnv_in(Double newEnv_in) {
+	public void setEnv_in(double[] newEnv_in) {
 		env_in = newEnv_in;
 	}
 	public Object getEnv_in_len() {

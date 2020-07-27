@@ -10,9 +10,9 @@ public class ext2_extent_handle {
 	private int level;
 	private int max_depth;
 	private int max_paths;
-	private extent_path path;
+	private extent_path[] path;
 	
-	public ext2_extent_handle(Object magic, Object fs, Object ino, ext2_inode inode, ext2_inode inodebuf, int type, int level, int max_depth, int max_paths, extent_path path) {
+	public ext2_extent_handle(Object magic, Object fs, Object ino, ext2_inode inode, ext2_inode inodebuf, int type, int level, int max_depth, int max_paths, extent_path[] path) {
 		setMagic(magic);
 		setFs(fs);
 		setIno(ino);
@@ -81,10 +81,10 @@ public class ext2_extent_handle {
 	public void setMax_paths(int newMax_paths) {
 		max_paths = newMax_paths;
 	}
-	public extent_path getPath() {
+	public extent_path[] getPath() {
 		return path;
 	}
-	public void setPath(extent_path newPath) {
+	public void setPath(extent_path[] newPath) {
 		path = newPath;
 	}
 }

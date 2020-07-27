@@ -86,7 +86,7 @@ public class bounds {
 		bounds temp = new bounds();
 		 b_init = false;
 		int i;
-		.memset(temp, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(temp, 0, /*Error: sizeof expression not supported yet*/);
 		vec3 generatedMin = temp.getMin();
 		vec3 generatedMax = temp.getMax();
 		double generatedX = p.getX();
@@ -124,7 +124,7 @@ public class bounds {
 		bounds temp = new bounds();
 		 b_init = false;
 		int i;
-		.memset(temp, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(temp, 0, /*Error: sizeof expression not supported yet*/);
 		vec3 generatedMin = temp.getMin();
 		vec3 generatedMax = temp.getMax();
 		double generatedX = p.getX();

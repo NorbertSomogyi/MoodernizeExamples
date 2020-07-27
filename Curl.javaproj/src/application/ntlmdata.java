@@ -21,40 +21,33 @@ public class ntlmdata {
 	public ntlmdata() {
 	}
 	
-	public void Curl_auth_cleanup_ntlm() {
-		Object generatedTarget_info = this.getTarget_info();
-		do {
-			.Curl_cfree((generatedTarget_info));
-			(generatedTarget_info) = ((Object)0);
-		} while (/* Free the target info */0);
-		this.setTarget_info_len(/* Reset any variables */0/* USE_NTLM && !USE_WINDOWS_SSPI */);
-	}
-	public Object Curl_ntlm_core_mk_ntlmv2_resp(Byte ntlmv2hash, Byte challenge_client, byte ntresp, int ntresp_len) {
+	public Object Curl_ntlm_core_mk_ntlmv2_resp(Byte ntlmv2hash, Byte challenge_client, Byte ntresp, Integer ntresp_len) {
 		int len = 0;
 		byte ptr = ((Object)0);
 		byte[] hmac_output = new byte[(true)];
 		 tw = new ();
-		 result = CURLE_OK/* Calculate the timestamp */;
-		tw = (().time(((Object)0)) + .CURL_OFF_T_C(-1024)) * 10000000;
+		 result = CURLE_OK;
+		/* Calculate the timestamp */
+		tw = (()/*Error: Function owner not recognized*/time(((Object)0)) + /*Error: Function owner not recognized*/CURL_OFF_T_C(-1024)) * 10000000;
 		int generatedTarget_info_len = this.getTarget_info_len();
 		len = (true) + (44 - 16 + generatedTarget_info_len + /* Calculate the response len */4);
-		ptr = .Curl_ccalloc(1, /* Allocate the response */len);
+		ptr = /*Error: Function owner not recognized*/Curl_ccalloc(1, /* Allocate the response */len);
 		if (!ptr) {
 			return CURLE_OUT_OF_MEMORY;
 		} 
 		ModernizedCProgram.curl_msnprintf((byte)ptr + (true), (44 - 16 + generatedTarget_info_len + /* Create the BLOB structure */4), /* NTLMv2_BLOB_SIGNATURE */"%c%c%c%c%c%c%c%c", "\x01\x01\x00\x00"[0], "\x01\x01\x00\x00"[/* Reserved = 0 */1], "\x01\x01\x00\x00"[2], "\x01\x01\x00\x00"[3], 0, 0, 0, 0);
 		ModernizedCProgram.Curl_write64_le(tw, ptr + 24);
-		.memcpy(ptr + 32, challenge_client, 8);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr + 32, challenge_client, 8);
 		Object generatedTarget_info = this.getTarget_info();
-		.memcpy(ptr + 44, generatedTarget_info, generatedTarget_info_len);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr + 44, generatedTarget_info, generatedTarget_info_len);
 		Object generatedNonce = this.getNonce();
-		.memcpy(ptr + 8, generatedNonce[0], /* Concatenate the Type 2 challenge with the BLOB and do HMAC MD5 */8);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr + 8, generatedNonce[0], /* Concatenate the Type 2 challenge with the BLOB and do HMAC MD5 */8);
 		result = ModernizedCProgram.hmac_md5(ntlmv2hash, (true), ptr + 8, (44 - 16 + generatedTarget_info_len + 4) + 8, hmac_output);
 		if (result) {
-			.Curl_cfree(ptr);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(ptr);
 			return result;
 		} 
-		.memcpy(ptr, hmac_output, (/* Concatenate the HMAC MD5 output  with the BLOB */true));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr, hmac_output, (/* Concatenate the HMAC MD5 output  with the BLOB */true));
 		ntresp = /* Return the response */ptr;
 		ntresp_len = len;
 		return result/*
@@ -71,6 +64,14 @@ public class ntlmdata {
 		 *
 		 * Returns CURLE_OK on success.
 		 */;
+	}
+	public void Curl_auth_cleanup_ntlm() {
+		Object generatedTarget_info = this.getTarget_info();
+		do {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedTarget_info));
+			(generatedTarget_info) = ((Object)0);
+		} while (/* Free the target info */0);
+		this.setTarget_info_len(/* Reset any variables */0/* USE_NTLM && !USE_WINDOWS_SSPI */);
 	}
 	public int getFlags() {
 		return flags;

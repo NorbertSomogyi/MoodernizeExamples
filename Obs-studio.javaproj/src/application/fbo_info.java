@@ -24,7 +24,7 @@ public class fbo_info {
 	public void fbo_info_destroy() {
 		Object generatedFbo = this.getFbo();
 		if (fbo) {
-			.glDeleteFramebuffers(1, generatedFbo);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glDeleteFramebuffers(1, generatedFbo);
 			ModernizedCProgram.gl_success("glDeleteFramebuffers");
 			ModernizedCProgram.bfree(fbo);
 		} 
@@ -34,11 +34,11 @@ public class fbo_info {
 			return tex.getFbo();
 		} 
 		 fbo = new ();
-		.glGenFramebuffers(1, fbo);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glGenFramebuffers(1, fbo);
 		if (!ModernizedCProgram.gl_success("glGenFramebuffers")) {
 			return NULL;
 		} 
-		tex.setFbo(ModernizedCProgram.bmalloc());
+		tex.setFbo(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/));
 		tex.getFbo().setFbo(fbo);
 		tex.getFbo().setWidth(width);
 		tex.getFbo().setHeight(height);
@@ -79,9 +79,9 @@ public class fbo_info {
 		} 
 		this.setCur_render_target(tex);
 		if (tex.getType() == GS_TEXTURE_2D) {
-			.glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.getTexture(), 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.getTexture(), 0);
 		}  else if (tex.getType() == GS_TEXTURE_CUBE) {
-			.glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + side, tex.getTexture(), 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + side, tex.getTexture(), 0);
 		} else {
 				return false;
 		} 
@@ -99,7 +99,7 @@ public class fbo_info {
 			zsbuffer = zs.getBuffer();
 			zs_attachment = zs.getAttachment();
 		} 
-		.glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER, zs_attachment, GL_RENDERBUFFER, zsbuffer);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER, zs_attachment, GL_RENDERBUFFER, zsbuffer);
 		if (!ModernizedCProgram.gl_success("glFramebufferRenderbuffer")) {
 			return false;
 		} 

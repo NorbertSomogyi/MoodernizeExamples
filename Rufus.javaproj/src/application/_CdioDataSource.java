@@ -36,70 +36,28 @@ public class _CdioDataSource {
 	public _CdioDataSource() {
 	}
 	
-	public void cdio_stdio_destroy() {
-		p_obj.cdio_stream_destroy();
-	}
-	public _CdioDataSource cdio_stdio_new(Object pathname) {
-		CdioDataSource_t new_obj = NULL;
-		cdio_stream_io_functions funcs = new cdio_stream_io_functions(NULL, NULL, NULL, NULL, NULL, NULL);
-		_UserData ud = NULL;
-		stat statbuf = new stat();
-		byte pathdup;
-		if (pathname == NULL) {
-			return NULL;
-		} 
-		pathdup = ModernizedCProgram._cdio_strdup_fixpath(/* MinGW may require a translated path */pathname);
-		if (pathdup == NULL) {
-			return NULL;
-		} 
-		if (.stat(pathdup, statbuf) == -1) {
-			ModernizedCProgram.cdio_warn("could not retrieve file info for `%s': %s", pathdup, .strerror(errno));
-			ModernizedCProgram.cdio_free(pathdup);
-			return NULL;
-		} 
-		ud = .calloc(1, );
-		((ud != NULL) ? (Object)0 : ._assert("ud != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Rufus\\src\\_cdio_stdio.c", 269));
-		ud.setPathname(pathdup);
-		Object generatedStat = statbuf.getStat();
-		ud.setSt_size(generatedStat);
-		funcs.setOpen(_stdio_open);
-		funcs.setSeek(_stdio_seek);
-		funcs.setStat(_stdio_stat);
-		funcs.setRead(_stdio_read);
-		funcs.setClose(_stdio_close);
-		funcs.setFree(_stdio_free);
-		_CdioDataSource _CdioDataSource = new _CdioDataSource();
-		new_obj = _CdioDataSource.cdio_stream_new(ud, funcs);
-		return new_obj/*
-		 * Local variables:
-		 *  c-file-style: "gnu"
-		 *  tab-width: 8
-		 *  indent-tabs-mode: nil
-		 * End:
-		 */;
-	}
 	public void cdio_stream_close() {
 		if (!p_obj) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedIs_open = this.getIs_open();
 		Object generatedUser_data = this.getUser_data();
 		if (generatedIs_open) {
 			ModernizedCProgram.cdio_debug("closed source...");
-			.UNRECOGNIZEDFUNCTIONNAME(generatedUser_data);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedUser_data);
 			this.setIs_open(0);
 			this.setPosition(0);
 		} 
 	}
 	public void cdio_stream_destroy() {
 		if (!p_obj) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		p_obj.cdio_stream_close();
 		Object generatedUser_data = this.getUser_data();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedUser_data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedUser_data);
 		this.setUser_data(NULL);
-		.free(p_obj/**
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(p_obj/**
 		  Like 3 fgetpos.
 		
 		  This function gets the current file position indicator for the stream
@@ -120,11 +78,11 @@ public class _CdioDataSource {
 	}
 	public _CdioDataSource cdio_stream_new(Object user_data, Object funcs) {
 		CdioDataSource_t new_obj = new CdioDataSource_t();
-		new_obj = .calloc(1, );
-		((new_obj != NULL) ? (Object)0 : ._assert("new_obj != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Rufus\\src\\_cdio_stream.c", 102));
+		new_obj = /*Error: Function owner not recognized*/calloc(1, /*Error: Unsupported expression*/);
+		((new_obj != NULL) ? (Object)0 : /*Error: Function owner not recognized*/_assert("new_obj != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Rufus\\src\\_cdio_stream.c", 102));
 		new_obj.setUser_data(user_data);
 		 generatedOp = new_obj.getOp();
-		.memcpy((generatedOp), funcs, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((generatedOp), funcs, /*Error: Unsupported expression*/);
 		return new_obj/*
 		   Open if not already open.
 		   Return false if we hit an error. Errno should be set for that error.
@@ -137,7 +95,7 @@ public class _CdioDataSource {
 		int generatedIs_open = this.getIs_open();
 		Object generatedUser_data = this.getUser_data();
 		if (!generatedIs_open) {
-			if (.UNRECOGNIZEDFUNCTIONNAME(generatedUser_data)) {
+			if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedUser_data)) {
 				ModernizedCProgram.cdio_warn("could not open input stream...");
 				return false;
 			} else {
@@ -173,7 +131,7 @@ public class _CdioDataSource {
 			return 0;
 		} 
 		Object generatedUser_data = this.getUser_data();
-		read_bytes = .UNRECOGNIZEDFUNCTIONNAME(generatedUser_data, ptr, size * nmemb);
+		read_bytes = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedUser_data, ptr, size * nmemb);
 		Object generatedPosition = this.getPosition();
 		generatedPosition += read_bytes;
 		return read_bytes/**
@@ -209,7 +167,7 @@ public class _CdioDataSource {
 		Object generatedUser_data = this.getUser_data();
 		if (generatedPosition != offset) {
 			this.setPosition(offset);
-			return .UNRECOGNIZEDFUNCTIONNAME(generatedUser_data, offset, whence);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedUser_data, offset, whence);
 		} 
 		return 0/**
 		  Return whatever size of stream reports, I guess unit size is bytes.
@@ -224,7 +182,49 @@ public class _CdioDataSource {
 			return -1;
 		} 
 		Object generatedUser_data = this.getUser_data();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedUser_data);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedUser_data);
+	}
+	public void cdio_stdio_destroy() {
+		p_obj.cdio_stream_destroy();
+	}
+	public _CdioDataSource cdio_stdio_new(Object pathname) {
+		CdioDataSource_t new_obj = NULL;
+		cdio_stream_io_functions funcs = new cdio_stream_io_functions(NULL, NULL, NULL, NULL, NULL, NULL);
+		_UserData ud = NULL;
+		stat statbuf = new stat();
+		byte pathdup;
+		if (pathname == NULL) {
+			return NULL;
+		} 
+		pathdup = ModernizedCProgram._cdio_strdup_fixpath(/* MinGW may require a translated path */pathname);
+		if (pathdup == NULL) {
+			return NULL;
+		} 
+		if (/*Error: Function owner not recognized*/stat(pathdup, statbuf) == -1) {
+			ModernizedCProgram.cdio_warn("could not retrieve file info for `%s': %s", pathdup, /*Error: Function owner not recognized*/strerror(errno));
+			ModernizedCProgram.cdio_free(pathdup);
+			return NULL;
+		} 
+		ud = /*Error: Function owner not recognized*/calloc(1, /*Error: Unsupported expression*/);
+		((ud != NULL) ? (Object)0 : /*Error: Function owner not recognized*/_assert("ud != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Rufus\\src\\_cdio_stdio.c", 269));
+		ud.setPathname(pathdup);
+		Object generatedStat = statbuf.getStat();
+		ud.setSt_size(generatedStat);
+		funcs.setOpen(_stdio_open);
+		funcs.setSeek(_stdio_seek);
+		funcs.setStat(_stdio_stat);
+		funcs.setRead(_stdio_read);
+		funcs.setClose(_stdio_close);
+		funcs.setFree(_stdio_free);
+		_CdioDataSource _CdioDataSource = new _CdioDataSource();
+		new_obj = _CdioDataSource.cdio_stream_new(ud, funcs);
+		return new_obj/*
+		 * Local variables:
+		 *  c-file-style: "gnu"
+		 *  tab-width: 8
+		 *  indent-tabs-mode: nil
+		 * End:
+		 */;
 	}
 	public Object getUser_data() {
 		return user_data;

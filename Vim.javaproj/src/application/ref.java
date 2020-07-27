@@ -28,7 +28,7 @@ public class ref {
 	
 	public int tclsetdelcmd(Object interp, Object vimobj, Object delcmd) {
 		if (reflist == ModernizedCProgram.refsdeleted) {
-			.Tcl_SetResult(interp, ((byte)("cannot register callback command: buffer/window is already being deleted")), TCL_STATIC);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Tcl_SetResult(interp, ((byte)("cannot register callback command: buffer/window is already being deleted")), TCL_STATIC);
 			return TCL_ERROR;
 		} 
 		Object generatedInterp = this.getInterp();
@@ -38,16 +38,16 @@ public class ref {
 		while (reflist != ((Object)0)) {
 			if (generatedInterp == interp && generatedVimobj == vimobj) {
 				if (generatedDelcmd) {
-					.Tcl_DecrRefCount(generatedDelcmd);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Tcl_DecrRefCount(generatedDelcmd);
 				} 
-				.Tcl_IncrRefCount(delcmd);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Tcl_IncrRefCount(delcmd);
 				this.setDelcmd(delcmd);
 				return TCL_OK;
 			} 
 			reflist = generatedNext;
 		}
 		ModernizedCProgram.emsg(((byte)(/* This should never happen.  Famous last word? */"E280: TCL FATAL ERROR: reflist corrupt!? Please report this to vim-dev@vim.org")));
-		.Tcl_SetResult(interp, ((byte)("cannot register callback command: buffer/window reference not found")), TCL_STATIC);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Tcl_SetResult(interp, ((byte)("cannot register callback command: buffer/window reference not found")), TCL_STATIC);
 		return TCL_ERROR/*******************************************
 		    I/O Channel
 		********************************************/;
@@ -65,19 +65,19 @@ public class ref {
 			next = generatedNext;
 			if (generatedInterp) {
 				if (generatedDelcmd) {
-					err = .Tcl_GlobalEvalObj(generatedInterp, generatedDelcmd);
+					err = /*Error: Function owner not recognized*/Tcl_GlobalEvalObj(generatedInterp, generatedDelcmd);
 					if (err != TCL_OK) {
-						result = (byte).Tcl_GetStringResult(generatedInterp);
+						result = (byte)/*Error: Function owner not recognized*/Tcl_GetStringResult(generatedInterp);
 						if (result) {
 							ModernizedCProgram.tclerrmsg(result);
 						} 
 					} 
-					.Tcl_DecrRefCount(generatedDelcmd);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Tcl_DecrRefCount(generatedDelcmd);
 					this.setDelcmd(((Object)0));
 				} 
-				.Tcl_DeleteCommandFromToken(generatedInterp, generatedCmd);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Tcl_DeleteCommandFromToken(generatedInterp, generatedCmd);
 			} 
-			.Tcl_Free((byte)ref);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Tcl_Free((byte)ref);
 			ref = next;
 		}
 	}

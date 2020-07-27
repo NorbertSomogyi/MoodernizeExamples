@@ -52,6 +52,115 @@ public class obs_lua_script {
 	public obs_lua_script() {
 	}
 	
+	public Object load_lua_script() {
+		dstr str = new dstr(0);
+		 success = false;
+		int ret;
+		 script = /*Error: Function owner not recognized*/luaL_newstate();
+		if (!script) {
+			ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Failed to create new lua state");
+			;
+		} 
+		ModernizedCProgram.pthread_mutex_lock(ModernizedCProgram.data.getMutex());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/luaL_openlibs(script);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/luaopen_ffi(script);
+		if (/*Error: Function owner not recognized*/luaL_dostring(script, ModernizedCProgram.startup_script) != 0) {
+			ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error executing startup script 1: %s", /*Error: Function owner not recognized*/lua_tostring(script, -1));
+			;
+		} 
+		str.dstr_printf(ModernizedCProgram.get_script_path_func, ModernizedCProgram.data.getDir().getDstr());
+		Object generatedDstr = str.getDstr();
+		ret = /*Error: Function owner not recognized*/luaL_dostring(script, generatedDstr);
+		str.dstr_free();
+		if (ret != 0) {
+			ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error executing startup script 2: %s", /*Error: Function owner not recognized*/lua_tostring(script, -1));
+			;
+		} 
+		ModernizedCProgram.current_lua_script = ModernizedCProgram.data;
+		ModernizedCProgram.add_lua_source_functions(script);
+		ModernizedCProgram.add_hook_functions(script);
+		if (/*Error: Function owner not recognized*/luaL_loadfile(script, generatedDstr) != 0) {
+			ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error loading file: %s", /*Error: Function owner not recognized*/lua_tostring(script, -1));
+			;
+		} 
+		if (/*Error: Function owner not recognized*/lua_pcall(script, 0, LUA_MULTRET, 0) != 0) {
+			ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error running file: %s", /*Error: Function owner not recognized*/lua_tostring(script, -1));
+			;
+		} 
+		ret = /*Error: Function owner not recognized*/lua_gettop(script);
+		if (ret == 1 && /*Error: Function owner not recognized*/lua_isboolean(script, -1)) {
+			 success = /*Error: Function owner not recognized*/lua_toboolean(script, -1);
+			if (!success) {
+				;
+			} 
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_getglobal(script, "script_tick");
+		if (/*Error: Function owner not recognized*/lua_isfunction(script, -1)) {
+			ModernizedCProgram.pthread_mutex_lock(ModernizedCProgram.tick_mutex);
+			obs_lua_script next = ModernizedCProgram.first_tick_script;
+			ModernizedCProgram.data.setNext_tick(next);
+			ModernizedCProgram.data.setP_prev_next_tick(ModernizedCProgram.first_tick_script);
+			if (next) {
+				next.setP_prev_next_tick(ModernizedCProgram.data.getNext_tick());
+			} 
+			ModernizedCProgram.first_tick_script = ModernizedCProgram.data;
+			ModernizedCProgram.data.setTick(/*Error: Function owner not recognized*/luaL_ref(script, LUA_REGISTRYINDEX));
+			ModernizedCProgram.pthread_mutex_unlock(ModernizedCProgram.tick_mutex);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_getglobal(script, "script_properties");
+		if (/*Error: Function owner not recognized*/lua_isfunction(script, -1)) {
+			ModernizedCProgram.data.setGet_properties(/*Error: Function owner not recognized*/luaL_ref(script, LUA_REGISTRYINDEX));
+		} else {
+				ModernizedCProgram.data.setGet_properties(LUA_REFNIL);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_getglobal(script, "script_update");
+		if (/*Error: Function owner not recognized*/lua_isfunction(script, -1)) {
+			ModernizedCProgram.data.setUpdate(/*Error: Function owner not recognized*/luaL_ref(script, LUA_REGISTRYINDEX));
+		} else {
+				ModernizedCProgram.data.setUpdate(LUA_REFNIL);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_getglobal(script, "script_save");
+		if (/*Error: Function owner not recognized*/lua_isfunction(script, -1)) {
+			ModernizedCProgram.data.setSave(/*Error: Function owner not recognized*/luaL_ref(script, LUA_REGISTRYINDEX));
+		} else {
+				ModernizedCProgram.data.setSave(LUA_REFNIL);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_getglobal(script, "script_defaults");
+		if (/*Error: Function owner not recognized*/lua_isfunction(script, -1)) {
+			ModernizedCProgram.ls_push_libobs_obj_(script, "obs_data_t *", ModernizedCProgram.data.getBase().getSettings(), false, NULL, __FUNCTION__, 179);
+			if (/*Error: Function owner not recognized*/lua_pcall(script, 1, 0, 0) != 0) {
+				ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error calling script_defaults: %s", /*Error: Function owner not recognized*/lua_tostring(script, -1));
+			} 
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_getglobal(script, "script_description");
+		if (/*Error: Function owner not recognized*/lua_isfunction(script, -1)) {
+			if (/*Error: Function owner not recognized*/lua_pcall(script, 0, 1, 0) != 0) {
+				ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error calling script_defaults: %s", /*Error: Function owner not recognized*/lua_tostring(script, -1));
+			} else {
+					byte desc = /*Error: Function owner not recognized*/lua_tostring(script, -1);
+					ModernizedCProgram.data.getBase().getDesc().dstr_copy(desc);
+			} 
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_getglobal(script, "script_load");
+		if (/*Error: Function owner not recognized*/lua_isfunction(script, -1)) {
+			ModernizedCProgram.ls_push_libobs_obj_(script, "obs_data_t *", ModernizedCProgram.data.getBase().getSettings(), false, NULL, __FUNCTION__, 203);
+			if (/*Error: Function owner not recognized*/lua_pcall(script, 1, 0, 0) != 0) {
+				ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error calling script_load: %s", /*Error: Function owner not recognized*/lua_tostring(script, -1));
+			} 
+		} 
+		ModernizedCProgram.data.setScript(script);
+		success = true;
+		if (!success && script) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lua_close(script);
+		} 
+		ModernizedCProgram.current_lua_script = NULL;
+		return success;
+	}
+	public obs_lua_script lua_obs_callback_script(lua_obs_callback cb) {
+		script_callback generatedBase = cb.getBase();
+		obs_script generatedScript = generatedBase.getScript();
+		return (obs_lua_script)generatedScript;
+	}
 	public void undef_lua_script_sources() {
 		ModernizedCProgram.pthread_mutex_lock(ModernizedCProgram.lua_source_def_mutex);
 		obs_lua_source def = ModernizedCProgram.first_source_def;
@@ -64,115 +173,6 @@ public class obs_lua_script {
 			def = generatedNext;
 		}
 		ModernizedCProgram.pthread_mutex_unlock(ModernizedCProgram.lua_source_def_mutex);
-	}
-	public obs_lua_script lua_obs_callback_script(lua_obs_callback cb) {
-		script_callback generatedBase = cb.getBase();
-		obs_script generatedScript = generatedBase.getScript();
-		return (obs_lua_script)generatedScript;
-	}
-	public Object load_lua_script() {
-		dstr str = new dstr(0);
-		 success = false;
-		int ret;
-		 script = .luaL_newstate();
-		if (!script) {
-			ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Failed to create new lua state");
-			;
-		} 
-		ModernizedCProgram.pthread_mutex_lock(ModernizedCProgram.data.getMutex());
-		.luaL_openlibs(script);
-		.luaopen_ffi(script);
-		if (.luaL_dostring(script, ModernizedCProgram.startup_script) != 0) {
-			ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error executing startup script 1: %s", .lua_tostring(script, -1));
-			;
-		} 
-		str.dstr_printf(ModernizedCProgram.get_script_path_func, ModernizedCProgram.data.getDir().getDstr());
-		Object generatedDstr = str.getDstr();
-		ret = .luaL_dostring(script, generatedDstr);
-		str.dstr_free();
-		if (ret != 0) {
-			ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error executing startup script 2: %s", .lua_tostring(script, -1));
-			;
-		} 
-		ModernizedCProgram.current_lua_script = ModernizedCProgram.data;
-		ModernizedCProgram.add_lua_source_functions(script);
-		ModernizedCProgram.add_hook_functions(script);
-		if (.luaL_loadfile(script, generatedDstr) != 0) {
-			ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error loading file: %s", .lua_tostring(script, -1));
-			;
-		} 
-		if (.lua_pcall(script, 0, LUA_MULTRET, 0) != 0) {
-			ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error running file: %s", .lua_tostring(script, -1));
-			;
-		} 
-		ret = .lua_gettop(script);
-		if (ret == 1 && .lua_isboolean(script, -1)) {
-			 success = .lua_toboolean(script, -1);
-			if (!success) {
-				;
-			} 
-		} 
-		.lua_getglobal(script, "script_tick");
-		if (.lua_isfunction(script, -1)) {
-			ModernizedCProgram.pthread_mutex_lock(ModernizedCProgram.tick_mutex);
-			obs_lua_script next = ModernizedCProgram.first_tick_script;
-			ModernizedCProgram.data.setNext_tick(next);
-			ModernizedCProgram.data.setP_prev_next_tick(ModernizedCProgram.first_tick_script);
-			if (next) {
-				next.setP_prev_next_tick(ModernizedCProgram.data.getNext_tick());
-			} 
-			ModernizedCProgram.first_tick_script = ModernizedCProgram.data;
-			ModernizedCProgram.data.setTick(.luaL_ref(script, LUA_REGISTRYINDEX));
-			ModernizedCProgram.pthread_mutex_unlock(ModernizedCProgram.tick_mutex);
-		} 
-		.lua_getglobal(script, "script_properties");
-		if (.lua_isfunction(script, -1)) {
-			ModernizedCProgram.data.setGet_properties(.luaL_ref(script, LUA_REGISTRYINDEX));
-		} else {
-				ModernizedCProgram.data.setGet_properties(LUA_REFNIL);
-		} 
-		.lua_getglobal(script, "script_update");
-		if (.lua_isfunction(script, -1)) {
-			ModernizedCProgram.data.setUpdate(.luaL_ref(script, LUA_REGISTRYINDEX));
-		} else {
-				ModernizedCProgram.data.setUpdate(LUA_REFNIL);
-		} 
-		.lua_getglobal(script, "script_save");
-		if (.lua_isfunction(script, -1)) {
-			ModernizedCProgram.data.setSave(.luaL_ref(script, LUA_REGISTRYINDEX));
-		} else {
-				ModernizedCProgram.data.setSave(LUA_REFNIL);
-		} 
-		.lua_getglobal(script, "script_defaults");
-		if (.lua_isfunction(script, -1)) {
-			ModernizedCProgram.ls_push_libobs_obj_(script, "obs_data_t *", ModernizedCProgram.data.getBase().getSettings(), false, NULL, __FUNCTION__, 179);
-			if (.lua_pcall(script, 1, 0, 0) != 0) {
-				ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error calling script_defaults: %s", .lua_tostring(script, -1));
-			} 
-		} 
-		.lua_getglobal(script, "script_description");
-		if (.lua_isfunction(script, -1)) {
-			if (.lua_pcall(script, 0, 1, 0) != 0) {
-				ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error calling script_defaults: %s", .lua_tostring(script, -1));
-			} else {
-					byte desc = .lua_tostring(script, -1);
-					ModernizedCProgram.data.getBase().getDesc().dstr_copy(desc);
-			} 
-		} 
-		.lua_getglobal(script, "script_load");
-		if (.lua_isfunction(script, -1)) {
-			ModernizedCProgram.ls_push_libobs_obj_(script, "obs_data_t *", ModernizedCProgram.data.getBase().getSettings(), false, NULL, __FUNCTION__, 203);
-			if (.lua_pcall(script, 1, 0, 0) != 0) {
-				ModernizedCProgram.data.getBase().script_log(LOG_WARNING, "Error calling script_load: %s", .lua_tostring(script, -1));
-			} 
-		} 
-		ModernizedCProgram.data.setScript(script);
-		success = true;
-		if (!success && script) {
-			.lua_close(script);
-		} 
-		ModernizedCProgram.current_lua_script = NULL;
-		return success;
 	}
 	public obs_script getBase() {
 		return base;

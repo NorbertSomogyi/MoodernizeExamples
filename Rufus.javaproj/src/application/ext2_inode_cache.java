@@ -6,9 +6,9 @@ public class ext2_inode_cache {
 	private int cache_last;
 	private int cache_size;
 	private int refcount;
-	private ext2_inode_cache_ent cache;
+	private ext2_inode_cache_ent[] cache;
 	
-	public ext2_inode_cache(Object buffer, Object buffer_blk, int cache_last, int cache_size, int refcount, ext2_inode_cache_ent cache) {
+	public ext2_inode_cache(Object buffer, Object buffer_blk, int cache_last, int cache_size, int refcount, ext2_inode_cache_ent[] cache) {
 		setBuffer(buffer);
 		setBuffer_blk(buffer_blk);
 		setCache_last(cache_last);
@@ -23,14 +23,14 @@ public class ext2_inode_cache {
 		int i;
 		int generatedRefcount = this.getRefcount();
 		if (--generatedRefcount) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedBuffer = this.getBuffer();
 		if (generatedBuffer) {
 			ModernizedCProgram.ext2fs_free_mem(generatedBuffer);
 		} 
 		int generatedCache_size = this.getCache_size();
-		ext2_inode_cache_ent generatedCache = this.getCache();
+		ext2_inode_cache_ent[] generatedCache = this.getCache();
 		for (i = 0; i < generatedCache_size; i++) {
 			ModernizedCProgram.ext2fs_free_mem(generatedCache[i].getExt2_inode_cache_ent());
 		}
@@ -70,10 +70,10 @@ public class ext2_inode_cache {
 	public void setRefcount(int newRefcount) {
 		refcount = newRefcount;
 	}
-	public ext2_inode_cache_ent getCache() {
+	public ext2_inode_cache_ent[] getCache() {
 		return cache;
 	}
-	public void setCache(ext2_inode_cache_ent newCache) {
+	public void setCache(ext2_inode_cache_ent[] newCache) {
 		cache = newCache;
 	}
 }

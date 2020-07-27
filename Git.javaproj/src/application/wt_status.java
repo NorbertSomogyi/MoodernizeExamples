@@ -104,19 +104,19 @@ public class wt_status {
 	}
 	public void status_init_config(Object fn) {
 		ModernizedCProgram.wt_status_prepare(ModernizedCProgram.the_repository, s);
-		.init_diff_ui_defaults();
-		.git_config(fn, s);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/init_diff_ui_defaults();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config(fn, s);
 		s.determine_whence();
 		this.setHints(/* must come after git_config() */ModernizedCProgram.advice_status_hints);
 	}
 	public void handle_ignored_arg() {
 		if (!ModernizedCProgram.ignored_arg) {
 			;
-		}  else if (!.strcmp(ModernizedCProgram.ignored_arg, "traditional")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ignored_arg, "traditional")) {
 			this.setShow_ignored_mode(show_ignored_type.SHOW_TRADITIONAL_IGNORED);
-		}  else if (!.strcmp(ModernizedCProgram.ignored_arg, "no")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ignored_arg, "no")) {
 			this.setShow_ignored_mode(show_ignored_type.SHOW_NO_IGNORED);
-		}  else if (!.strcmp(ModernizedCProgram.ignored_arg, "matching")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ignored_arg, "matching")) {
 			this.setShow_ignored_mode(show_ignored_type.SHOW_MATCHING_IGNORED);
 		} else {
 				ModernizedCProgram.die(ModernizedCProgram._("Invalid ignored mode '%s'"), ModernizedCProgram.ignored_arg);
@@ -125,11 +125,11 @@ public class wt_status {
 	public void handle_untracked_files_arg() {
 		if (!ModernizedCProgram.untracked_files_arg) {
 			;
-		}  else if (!.strcmp(ModernizedCProgram.untracked_files_arg, "no")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.untracked_files_arg, "no")) {
 			this.setShow_untracked_files(untracked_status_type.SHOW_NO_UNTRACKED_FILES);
-		}  else if (!.strcmp(ModernizedCProgram.untracked_files_arg, "normal")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.untracked_files_arg, "normal")) {
 			this.setShow_untracked_files(untracked_status_type.SHOW_NORMAL_UNTRACKED_FILES);
-		}  else if (!.strcmp(ModernizedCProgram.untracked_files_arg, "all")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.untracked_files_arg, "all")) {
 			this.setShow_untracked_files(untracked_status_type.SHOW_ALL_UNTRACKED_FILES/*
 				 * Please update $__git_untracked_file_modes in
 				 * git-completion.bash when you add new options
@@ -198,8 +198,8 @@ public class wt_status {
 		return c;
 	}
 	public void status_vprintf(int at_bol, Object color, Object fmt, Object ap, Object trail) {
-		strbuf sb = new strbuf(, , );
-		strbuf linebuf = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf linebuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte line;
 		byte eol;
 		sb.strbuf_vaddf(fmt, ap);
@@ -215,14 +215,14 @@ public class wt_status {
 			} 
 			generatedFp.color_print_strbuf(color, sb);
 			if (trail) {
-				.fprintf(generatedFp, "%s", trail);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "%s", trail);
 			} 
 			sb.strbuf_release();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		for (line = generatedBuf; line; line = eol + 1) {
-			eol = .strchr(line, (byte)'\n');
+			eol = /*Error: Function owner not recognized*/strchr(line, (byte)'\n');
 			linebuf.strbuf_setlen(0);
 			if (at_bol && generatedDisplay_comment_prefix) {
 				linebuf.strbuf_addch(ModernizedCProgram.comment_line_char);
@@ -237,35 +237,35 @@ public class wt_status {
 			} 
 			generatedFp.color_print_strbuf(color, linebuf);
 			if (eol) {
-				.fprintf(generatedFp, "\n");
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "\n");
 			} else {
 					break;
 			} 
 			at_bol = 1;
 		}
 		if (trail) {
-			.fprintf(generatedFp, "%s", trail);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "%s", trail);
 		} 
 		linebuf.strbuf_release();
 		sb.strbuf_release();
 	}
 	public void status_printf_ln(Object color, Object fmt) {
 		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
 		s.status_vprintf(1, color, fmt, ap, "\n");
-		.__builtin_va_end(ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
 	}
 	public void status_printf(Object color, Object fmt) {
 		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
 		s.status_vprintf(1, color, fmt, ap, ((Object)0));
-		.__builtin_va_end(ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
 	}
 	public void status_printf_more(Object color, Object fmt) {
 		va_list ap = new va_list();
-		.__builtin_va_start(ap, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
 		s.status_vprintf(0, color, fmt, ap, ((Object)0));
-		.__builtin_va_end(ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
 	}
 	public void wt_longstatus_print_unmerged_header() {
 		int i;
@@ -276,7 +276,7 @@ public class wt_status {
 		s.status_printf_ln(c, ModernizedCProgram._("Unmerged paths:"));
 		string_list generatedChange = this.getChange();
 		int generatedNr = generatedChange.getNr();
-		string_list_item generatedItems = generatedChange.getItems();
+		string_list_item[] generatedItems = generatedChange.getItems();
 		Object generatedUtil = it.getUtil();
 		int generatedStagemask = d.getStagemask();
 		for (i = 0; i < generatedNr; i++) {
@@ -288,10 +288,10 @@ public class wt_status {
 					break;
 			case 0:
 					break;
+			case 3:
 			case 1:
 					both_deleted = 1;
 					break;
-			case 3:
 			default:
 					not_deleted = 1;
 					break;
@@ -299,7 +299,7 @@ public class wt_status {
 		}
 		int generatedHints = this.getHints();
 		if (!generatedHints) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		commit_whence generatedWhence = this.getWhence();
 		int generatedIs_initial = this.getIs_initial();
@@ -307,7 +307,7 @@ public class wt_status {
 		if (generatedWhence != commit_whence.FROM_COMMIT) {
 			;
 		}  else if (!generatedIs_initial) {
-			if (!.strcmp(generatedReference, "HEAD")) {
+			if (!/*Error: Function owner not recognized*/strcmp(generatedReference, "HEAD")) {
 				s.status_printf_ln(c, ModernizedCProgram._("  (use \"git restore --staged <file>...\" to unstage)"));
 			} else {
 					s.status_printf_ln(c, ModernizedCProgram._("  (use \"git restore --source=%s --staged <file>...\" to unstage)"), generatedReference);
@@ -332,7 +332,7 @@ public class wt_status {
 		s.status_printf_ln(c, ModernizedCProgram._("Changes to be committed:"));
 		int generatedHints = this.getHints();
 		if (!generatedHints) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		commit_whence generatedWhence = this.getWhence();
 		int generatedIs_initial = this.getIs_initial();
@@ -340,7 +340,7 @@ public class wt_status {
 		if (generatedWhence != commit_whence.FROM_COMMIT) {
 			;
 		}  else if (!generatedIs_initial) {
-			if (!.strcmp(generatedReference, "HEAD")) {
+			if (!/*Error: Function owner not recognized*/strcmp(generatedReference, "HEAD")) {
 				s.status_printf_ln(c, ModernizedCProgram._("  (use \"git restore --staged <file>...\" to unstage)"));
 			} else {
 					s.status_printf_ln(c, ModernizedCProgram._("  (use \"git restore --source=%s --staged <file>...\" to unstage)"), generatedReference);
@@ -354,7 +354,7 @@ public class wt_status {
 		s.status_printf_ln(c, ModernizedCProgram._("Changes not staged for commit:"));
 		int generatedHints = this.getHints();
 		if (!generatedHints) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!has_deleted) {
 			s.status_printf_ln(c, ModernizedCProgram._("  (use \"git add <file>...\" to update what will be committed)"));
@@ -371,7 +371,7 @@ public class wt_status {
 		s.status_printf_ln(c, "%s:", what);
 		int generatedHints = this.getHints();
 		if (!generatedHints) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		s.status_printf_ln(c, ModernizedCProgram._("  (use \"git %s <file>...\" to include in what will be committed)"), how);
 	}
@@ -416,7 +416,7 @@ public class wt_status {
 		setup_revision_opt opt = new setup_revision_opt();
 		repository generatedRepo = this.getRepo();
 		ModernizedCProgram.repo_init_revisions(generatedRepo, rev, ((Object)0));
-		.memset(opt, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(opt, 0, /*Error: sizeof expression not supported yet*/);
 		int generatedIs_initial = this.getIs_initial();
 		Object generatedReference = this.getReference();
 		opt.setDef(generatedIs_initial ? ModernizedCProgram.empty_tree_oid_hex() : generatedReference);
@@ -452,7 +452,7 @@ public class wt_status {
 		index_state istate = generatedIndex;
 		int i;
 		int generatedCache_nr = istate.getCache_nr();
-		cache_entry generatedCache = istate.getCache();
+		cache_entry[][] generatedCache = istate.getCache();
 		pathspec generatedPathspec = this.getPathspec();
 		string_list generatedChange = this.getChange();
 		string_list_item string_list_item = new string_list_item();
@@ -472,7 +472,7 @@ public class wt_status {
 			it = string_list_item.string_list_insert(generatedChange, ce.getName());
 			d = generatedUtil;
 			if (!d) {
-				d = ModernizedCProgram.xcalloc(1, );
+				d = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 				it.setUtil(d);
 			} 
 			if ((((true) & (ce).getCe_flags()) >> 12)) {
@@ -500,9 +500,9 @@ public class wt_status {
 		index_state istate = generatedIndex;
 		untracked_status_type generatedShow_untracked_files = this.getShow_untracked_files();
 		if (!generatedShow_untracked_files) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.memset(dir, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(dir, 0, /*Error: sizeof expression not supported yet*/);
 		 generatedFlags = dir.getFlags();
 		if (generatedShow_untracked_files != untracked_status_type.SHOW_ALL_UNTRACKED_FILES) {
 			generatedFlags |=  .DIR_SHOW_OTHER_DIRECTORIES | .DIR_HIDE_EMPTY_DIRECTORIES;
@@ -521,9 +521,9 @@ public class wt_status {
 		pathspec generatedPathspec = this.getPathspec();
 		ModernizedCProgram.fill_directory(dir, istate, generatedPathspec);
 		int generatedNr = dir.getNr();
-		dir_entry generatedEntries = dir.getEntries();
+		dir_entry[][] generatedEntries = dir.getEntries();
 		Object generatedName = ent.getName();
-		int generatedLen = ent.getLen();
+		Object generatedLen = ent.getLen();
 		string_list_item string_list_item = new string_list_item();
 		for (i = 0; i < generatedNr; i++) {
 			dir_entry ent = generatedEntries[i];
@@ -533,7 +533,7 @@ public class wt_status {
 			ModernizedCProgram.free(ent);
 		}
 		int generatedIgnored_nr = dir.getIgnored_nr();
-		dir_entry generatedIgnored = dir.getIgnored();
+		dir_entry[][] generatedIgnored = dir.getIgnored();
 		for (i = 0; i < generatedIgnored_nr; i++) {
 			dir_entry ent = generatedIgnored[i];
 			if (ModernizedCProgram.index_name_is_other(istate, generatedName, generatedLen) && ModernizedCProgram.dir_path_match(istate, ent, generatedPathspec, 0, ((Object)0))) {
@@ -552,7 +552,7 @@ public class wt_status {
 		int i;
 		string_list generatedChange = this.getChange();
 		int generatedNr = generatedChange.getNr();
-		string_list_item generatedItems = generatedChange.getItems();
+		string_list_item[] generatedItems = generatedChange.getItems();
 		int generatedStagemask = d.getStagemask();
 		for (i = 0; i < generatedNr; i++) {
 			wt_status_change_data d = new wt_status_change_data();
@@ -583,7 +583,7 @@ public class wt_status {
 		ModernizedCProgram.trace2_region_leave_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\wt-status.c", 778, ("status"), ("untracked"), (generatedRepo));
 		wt_status_state generatedState = this.getState();
 		Byte generatedBranch = this.getBranch();
-		ModernizedCProgram.wt_status_get_state(generatedRepo, generatedState, generatedBranch && !.strcmp(generatedBranch, "HEAD"));
+		ModernizedCProgram.wt_status_get_state(generatedRepo, generatedState, generatedBranch && !/*Error: Function owner not recognized*/strcmp(generatedBranch, "HEAD"));
 		int generatedMerge_in_progress = generatedState.getMerge_in_progress();
 		if (generatedMerge_in_progress && !s.has_unmerged()) {
 			this.setCommittable(1);
@@ -603,7 +603,7 @@ public class wt_status {
 		int i;
 		string_list generatedChange = this.getChange();
 		int generatedNr = generatedChange.getNr();
-		string_list_item generatedItems = generatedChange.getItems();
+		string_list_item[] generatedItems = generatedChange.getItems();
 		Object generatedUtil = it.getUtil();
 		int generatedStagemask = d.getStagemask();
 		for (i = 0; i < generatedNr; i++) {
@@ -629,7 +629,7 @@ public class wt_status {
 		int i;
 		string_list generatedChange = this.getChange();
 		int generatedNr = generatedChange.getNr();
-		string_list_item generatedItems = generatedChange.getItems();
+		string_list_item[] generatedItems = generatedChange.getItems();
 		Object generatedUtil = it.getUtil();
 		int generatedIndex_status = d.getIndex_status();
 		for (i = 0; i < generatedNr; i++) {
@@ -654,13 +654,13 @@ public class wt_status {
 			 */.wt_longstatus_print_trailer();
 		} 
 	}
-	public int wt_status_check_worktree_changes(int dirty_submodules) {
+	public int wt_status_check_worktree_changes(Integer dirty_submodules) {
 		int i;
 		int changes = 0;
 		dirty_submodules = 0;
 		string_list generatedChange = this.getChange();
 		int generatedNr = generatedChange.getNr();
-		string_list_item generatedItems = generatedChange.getItems();
+		string_list_item[] generatedItems = generatedChange.getItems();
 		int generatedWorktree_status = d.getWorktree_status();
 		int generatedDirty_submodule = d.getDirty_submodule();
 		for (i = 0; i < generatedNr; i++) {
@@ -686,12 +686,12 @@ public class wt_status {
 		int dirty_submodules;
 		int worktree_changes = s.wt_status_check_worktree_changes(dirty_submodules);
 		if (!worktree_changes) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		s.wt_longstatus_print_dirty_header(worktree_changes < 0, dirty_submodules);
 		string_list generatedChange = this.getChange();
 		int generatedNr = generatedChange.getNr();
-		string_list_item generatedItems = generatedChange.getItems();
+		string_list_item[] generatedItems = generatedChange.getItems();
 		Object generatedUtil = it.getUtil();
 		int generatedWorktree_status = d.getWorktree_status();
 		for (i = 0; i < generatedNr; i++) {
@@ -715,8 +715,8 @@ public class wt_status {
 	}
 	public void wt_longstatus_print_submodule_summary(int uncommitted) {
 		child_process sm_summary = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		strbuf cmd_stdout = new strbuf(, , );
-		strbuf summary = new strbuf(, , );
+		strbuf cmd_stdout = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf summary = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte summary_content;
 		argv_array generatedEnv_array = sm_summary.getEnv_array();
 		Object generatedIndex_file = this.getIndex_file();
@@ -754,9 +754,9 @@ public class wt_status {
 			summary.strbuf_add_commented_lines(summary_content, ModernizedCProgram.len);
 			ModernizedCProgram.free(summary_content);
 		} 
-		byte generatedBuf = summary.getBuf();
+		byte[] generatedBuf = summary.getBuf();
 		_iobuf generatedFp = this.getFp();
-		.fputs(generatedBuf, generatedFp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs(generatedBuf, generatedFp);
 		summary.strbuf_release();
 	}
 	public void wt_longstatus_print_verbose() {
@@ -770,7 +770,7 @@ public class wt_status {
 		diff_flags generatedFlags = generatedDiffopt.getFlags();
 		generatedFlags.setAllow_textconv(1);
 		generatedDiffopt.setIta_invisible_in_index(1);
-		.memset(opt, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(opt, 0, /*Error: sizeof expression not supported yet*/);
 		int generatedIs_initial = this.getIs_initial();
 		Object generatedReference = this.getReference();
 		opt.setDef(generatedIs_initial ? ModernizedCProgram.empty_tree_oid_hex() : generatedReference);
@@ -818,7 +818,7 @@ public class wt_status {
 		} 
 	}
 	public void wt_longstatus_print_tracking() {
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte cp;
 		byte ep;
 		byte branch_name;
@@ -828,15 +828,15 @@ public class wt_status {
 		uint64_t t_begin = 0;
 		Byte generatedBranch = this.getBranch();
 		int generatedIs_initial = this.getIs_initial();
-		((generatedBranch && !generatedIs_initial) ? (Object)0 : ._assert("s->branch && !s->is_initial", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\wt-status.c", 1100));
+		((generatedBranch && !generatedIs_initial) ? (Object)0 : /*Error: Function owner not recognized*/_assert("s->branch && !s->is_initial", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\wt-status.c", 1100));
 		if (!ModernizedCProgram.skip_prefix(generatedBranch, "refs/heads/", branch_name)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		branch = .branch_get(branch_name);
+		branch = /*Error: Function owner not recognized*/branch_get(branch_name);
 		t_begin = ModernizedCProgram.getnanotime();
 		ahead_behind_flags generatedAhead_behind_flags = this.getAhead_behind_flags();
-		if (!.format_tracking_info(branch, sb, generatedAhead_behind_flags)) {
-			return ;
+		if (!/*Error: Function owner not recognized*/format_tracking_info(branch, sb, generatedAhead_behind_flags)) {
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.advice_status_ahead_behind_warning && generatedAhead_behind_flags == ahead_behind_flags.AHEAD_BEHIND_FULL) {
 			uint64_t t_delta_in_ms = (ModernizedCProgram.getnanotime() - t_begin) / 1000000;
@@ -852,14 +852,14 @@ public class wt_status {
 		} 
 		comment_line_string[i] = (byte)'\0';
 		_iobuf generatedFp = this.getFp();
-		byte generatedBuf = sb.getBuf();
-		for (cp = generatedBuf; (ep = .strchr(cp, (byte)'\n')) != ((Object)0); cp = ep + 1) {
+		byte[] generatedBuf = sb.getBuf();
+		for (cp = generatedBuf; (ep = /*Error: Function owner not recognized*/strchr(cp, (byte)'\n')) != ((Object)0); cp = ep + 1) {
 			generatedFp.color_fprintf_ln(s.color(color_wt_status.WT_STATUS_HEADER), "%s%.*s", comment_line_string, (int)(ep - cp), cp);
 		}
 		if (generatedDisplay_comment_prefix) {
 			generatedFp.color_fprintf_ln(s.color(color_wt_status.WT_STATUS_HEADER), "%c", ModernizedCProgram.comment_line_char);
 		} else {
-				.fputs("\n", generatedFp);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs("\n", generatedFp);
 		} 
 		sb.strbuf_release();
 	}
@@ -906,7 +906,7 @@ public class wt_status {
 		int generatedNowarn = this.getNowarn();
 		int generatedWorkdir_dirty = this.getWorkdir_dirty();
 		Byte generatedBranch = this.getBranch();
-		if ((!generatedAmend && !generatedNowarn && !generatedWorkdir_dirty) || !generatedBranch || .strcmp(generatedBranch, "HEAD")) {
+		if ((!generatedAmend && !generatedNowarn && !generatedWorkdir_dirty) || !generatedBranch || /*Error: Function owner not recognized*/strcmp(generatedBranch, "HEAD")) {
 			return 0;
 		} 
 		head = ModernizedCProgram.read_line_from_git_path("HEAD");
@@ -915,9 +915,9 @@ public class wt_status {
 		rebase_orig_head = ModernizedCProgram.read_line_from_git_path("rebase-merge/orig-head");
 		if (!head || !orig_head || !rebase_amend || !rebase_orig_head) {
 			;
-		}  else if (!.strcmp(rebase_amend, rebase_orig_head)) {
-			split_in_progress = !!.strcmp(head, rebase_amend);
-		}  else if (.strcmp(orig_head, rebase_orig_head)) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(rebase_amend, rebase_orig_head)) {
+			split_in_progress = !!/*Error: Function owner not recognized*/strcmp(head, rebase_amend);
+		}  else if (/*Error: Function owner not recognized*/strcmp(orig_head, rebase_orig_head)) {
 			split_in_progress = 1;
 		} 
 		ModernizedCProgram.free(head);
@@ -938,7 +938,7 @@ public class wt_status {
 		wt_status_state generatedState = this.getState();
 		int generatedRebase_interactive_in_progress = generatedState.getRebase_interactive_in_progress();
 		int generatedNr = have_done.getNr();
-		string_list_item generatedItems = have_done.getItems();
+		string_list_item[] generatedItems = have_done.getItems();
 		int generatedHints = this.getHints();
 		if (generatedRebase_interactive_in_progress) {
 			int i;
@@ -1002,7 +1002,7 @@ public class wt_status {
 				s.status_printf_ln(color, ModernizedCProgram._("  (use \"git rebase --skip\" to skip this patch)"));
 				s.status_printf_ln(color, ModernizedCProgram._("  (use \"git rebase --abort\" to check out the original branch)"));
 			} 
-		}  else if (generatedRebase_in_progress || !.stat(generatedRepo.git_path_merge_msg(), st)) {
+		}  else if (generatedRebase_in_progress || !/*Error: Function owner not recognized*/stat(generatedRepo.git_path_merge_msg(), st)) {
 			s.print_rebase_state(color);
 			if (generatedHints) {
 				s.status_printf_ln(color, ModernizedCProgram._("  (all conflicts fixed: run \"git rebase --continue\")"));
@@ -1103,7 +1103,7 @@ public class wt_status {
 		if (generatedMerge_in_progress) {
 			if (generatedRebase_interactive_in_progress) {
 				s.show_rebase_information(state_color);
-				.fputs("\n", generatedFp);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputs("\n", generatedFp);
 			} 
 			s.show_merge_in_progress(state_color);
 		}  else if (generatedAm_in_progress) {
@@ -1134,7 +1134,7 @@ public class wt_status {
 		if (generatedBranch) {
 			byte on_what = ModernizedCProgram._("On branch ");
 			byte branch_name = generatedBranch;
-			if (!.strcmp(branch_name, "HEAD")) {
+			if (!/*Error: Function owner not recognized*/strcmp(branch_name, "HEAD")) {
 				branch_status_color = s.color(color_wt_status.WT_STATUS_NOBRANCH);
 				if (generatedRebase_in_progress || generatedRebase_interactive_in_progress) {
 					if (generatedRebase_interactive_in_progress) {
@@ -1176,7 +1176,7 @@ public class wt_status {
 		s.wt_longstatus_print_changed();
 		int generatedSubmodule_summary = this.getSubmodule_summary();
 		Object generatedIgnore_submodule_arg = this.getIgnore_submodule_arg();
-		if (generatedSubmodule_summary && (!generatedIgnore_submodule_arg || .strcmp(generatedIgnore_submodule_arg, "all"))) {
+		if (generatedSubmodule_summary && (!generatedIgnore_submodule_arg || /*Error: Function owner not recognized*/strcmp(generatedIgnore_submodule_arg, "all"))) {
 			s.wt_longstatus_print_submodule_summary(/* staged */0);
 			s.wt_longstatus_print_submodule_summary(/* unstaged */1);
 		} 
@@ -1214,30 +1214,30 @@ public class wt_status {
 				;
 			}  else if (generatedWorkdir_dirty) {
 				if (generatedHints) {
-					.printf(ModernizedCProgram._("no changes added to commit (use \"git add\" and/or \"git commit -a\")\n"));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("no changes added to commit (use \"git add\" and/or \"git commit -a\")\n"));
 				} else {
-						.printf(ModernizedCProgram._("no changes added to commit\n"));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("no changes added to commit\n"));
 				} 
 			}  else if (generatedNr) {
 				if (generatedHints) {
-					.printf(ModernizedCProgram._("nothing added to commit but untracked files present (use \"git add\" to track)\n"));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("nothing added to commit but untracked files present (use \"git add\" to track)\n"));
 				} else {
-						.printf(ModernizedCProgram._("nothing added to commit but untracked files present\n"));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("nothing added to commit but untracked files present\n"));
 				} 
 			}  else if (generatedIs_initial) {
 				if (generatedHints) {
-					.printf(ModernizedCProgram._("nothing to commit (create/copy files and use \"git add\" to track)\n"));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("nothing to commit (create/copy files and use \"git add\" to track)\n"));
 				} else {
-						.printf(ModernizedCProgram._("nothing to commit\n"));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("nothing to commit\n"));
 				} 
 			}  else if (!generatedShow_untracked_files) {
 				if (generatedHints) {
-					.printf(ModernizedCProgram._("nothing to commit (use -u to show untracked files)\n"));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("nothing to commit (use -u to show untracked files)\n"));
 				} else {
-						.printf(ModernizedCProgram._("nothing to commit\n"));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("nothing to commit\n"));
 				} 
 			} else {
-					.printf(ModernizedCProgram._("nothing to commit, working tree clean\n"));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("nothing to commit, working tree clean\n"));
 			} 
 		} 
 		int generatedShow_stash = this.getShow_stash();
@@ -1261,7 +1261,7 @@ public class wt_status {
 		generatedFp.color_fprintf(s.color(color_wt_status.WT_STATUS_HEADER), "## ");
 		Byte generatedBranch = this.getBranch();
 		if (!generatedBranch) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		branch_name = generatedBranch;
 		int generatedIs_initial = this.getIs_initial();
@@ -1269,15 +1269,15 @@ public class wt_status {
 		if (generatedIs_initial) {
 			generatedFp.color_fprintf(header_color, (generatedNo_gettext ? (("No commits yet on ")) : ModernizedCProgram._(("No commits yet on "))));
 		} 
-		if (!.strcmp(generatedBranch, "HEAD")) {
+		if (!/*Error: Function owner not recognized*/strcmp(generatedBranch, "HEAD")) {
 			generatedFp.color_fprintf(s.color(color_wt_status.WT_STATUS_NOBRANCH), "%s", (generatedNo_gettext ? (("HEAD (no branch)")) : ModernizedCProgram._(("HEAD (no branch)"))));
 			;
 		} 
 		ModernizedCProgram.skip_prefix(branch_name, "refs/heads/", branch_name);
-		branch = .branch_get(branch_name);
+		branch = /*Error: Function owner not recognized*/branch_get(branch_name);
 		generatedFp.color_fprintf(branch_color_local, "%s", branch_name);
 		ahead_behind_flags generatedAhead_behind_flags = this.getAhead_behind_flags();
-		sti = .stat_tracking_info(branch, num_ours, num_theirs, base, 0, generatedAhead_behind_flags);
+		sti = /*Error: Function owner not recognized*/stat_tracking_info(branch, num_ours, num_theirs, base, 0, generatedAhead_behind_flags);
 		if (sti < 0) {
 			if (!base) {
 				;
@@ -1317,7 +1317,7 @@ public class wt_status {
 			s.wt_shortstatus_print_tracking();
 		} 
 		string_list generatedChange = this.getChange();
-		string_list_item generatedItems = (generatedChange).getItems();
+		string_list_item[] generatedItems = (generatedChange).getItems();
 		int generatedNr = (generatedChange).getNr();
 		Object generatedUtil = it.getUtil();
 		int generatedStagemask = d.getStagemask();
@@ -1387,7 +1387,7 @@ public class wt_status {
 		_iobuf generatedFp = this.getFp();
 		int generatedIs_initial = this.getIs_initial();
 		object_id generatedOid_commit = this.getOid_commit();
-		.fprintf(generatedFp, "# branch.oid %s%c", (generatedIs_initial ? "(initial)" : ModernizedCProgram.oid_to_hex(generatedOid_commit)), eol);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "# branch.oid %s%c", (generatedIs_initial ? "(initial)" : ModernizedCProgram.oid_to_hex(generatedOid_commit)), eol);
 		Byte generatedBranch = this.getBranch();
 		wt_status_state generatedState = this.getState();
 		int generatedRebase_in_progress = generatedState.getRebase_in_progress();
@@ -1396,10 +1396,10 @@ public class wt_status {
 		Byte generatedDetached_from = generatedState.getDetached_from();
 		ahead_behind_flags generatedAhead_behind_flags = this.getAhead_behind_flags();
 		if (!generatedBranch) {
-			.fprintf(generatedFp, "# branch.head %s%c", "(unknown)", eol);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "# branch.head %s%c", "(unknown)", eol);
 		} else {
-				if (!.strcmp(generatedBranch, "HEAD")) {
-					.fprintf(generatedFp, "# branch.head %s%c", "(detached)", eol);
+				if (!/*Error: Function owner not recognized*/strcmp(generatedBranch, "HEAD")) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "# branch.head %s%c", "(detached)", eol);
 					if (generatedRebase_in_progress || generatedRebase_interactive_in_progress) {
 						branch_name = generatedOnto;
 					}  else if (generatedDetached_from) {
@@ -1410,23 +1410,23 @@ public class wt_status {
 				} else {
 						branch_name = ((Object)0);
 						ModernizedCProgram.skip_prefix(generatedBranch, "refs/heads/", branch_name);
-						.fprintf(generatedFp, "# branch.head %s%c", branch_name, eol);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "# branch.head %s%c", branch_name, eol);
 				} 
-				branch = .branch_get(/* Lookup stats on the upstream tracking branch, if set. */branch_name);
+				branch = /*Error: Function owner not recognized*/branch_get(/* Lookup stats on the upstream tracking branch, if set. */branch_name);
 				base = ((Object)0);
-				ab_info = .stat_tracking_info(branch, nr_ahead, nr_behind, base, 0, generatedAhead_behind_flags);
+				ab_info = /*Error: Function owner not recognized*/stat_tracking_info(branch, nr_ahead, nr_behind, base, 0, generatedAhead_behind_flags);
 				if (base) {
 					base = ModernizedCProgram.shorten_unambiguous_ref(base, 0);
-					.fprintf(generatedFp, "# branch.upstream %s%c", base, eol);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "# branch.upstream %s%c", base, eol);
 					ModernizedCProgram.free((byte)base);
 					if (ab_info > 0) {
 						if (nr_ahead || /* different */nr_behind) {
-							.fprintf(generatedFp, "# branch.ab +%d -%d%c", nr_ahead, nr_behind, eol);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "# branch.ab +%d -%d%c", nr_ahead, nr_behind, eol);
 						} else {
-								.fprintf(generatedFp, "# branch.ab +? -?%c", eol);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "# branch.ab +? -?%c", eol);
 						} 
 					}  else if (!ab_info) {
-						.fprintf(generatedFp, "# branch.ab +0 -0%c", /* same */eol);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(generatedFp, "# branch.ab +0 -0%c", /* same */eol);
 					} 
 				} 
 		} 
@@ -1441,7 +1441,7 @@ public class wt_status {
 		} 
 		string_list generatedChange = this.getChange();
 		int generatedNr = generatedChange.getNr();
-		string_list_item generatedItems = generatedChange.getItems();
+		string_list_item[] generatedItems = generatedChange.getItems();
 		Object generatedUtil = it.getUtil();
 		int generatedStagemask = d.getStagemask();
 		for (i = 0; i < generatedNr; i++) {
@@ -1477,18 +1477,18 @@ public class wt_status {
 		ModernizedCProgram.trace2_region_enter_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\wt-status.c", 2374, ("status"), ("print"), (generatedRepo));
 		wt_status_format generatedStatus_format = this.getStatus_format();
 		switch (generatedStatus_format) {
-		case wt_status_format.STATUS_FORMAT_PORCELAIN:
-				s.wt_porcelain_print();
-				break;
-		case wt_status_format.STATUS_FORMAT_LONG:
-				s.wt_longstatus_print();
+		case wt_status_format.STATUS_FORMAT_UNSPECIFIED:
+				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\wt-status.c", 2387, "finalize_deferred_config() should have been called");
 				break;
 		case wt_status_format.STATUS_FORMAT_PORCELAIN_V2:
 				s.wt_porcelain_v2_print();
 				break;
 		case wt_status_format.STATUS_FORMAT_NONE:
-		case wt_status_format.STATUS_FORMAT_UNSPECIFIED:
-				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\wt-status.c", 2387, "finalize_deferred_config() should have been called");
+		case wt_status_format.STATUS_FORMAT_PORCELAIN:
+				s.wt_porcelain_print();
+				break;
+		case wt_status_format.STATUS_FORMAT_LONG:
+				s.wt_longstatus_print();
 				break;
 		case wt_status_format.STATUS_FORMAT_SHORT:
 				s.wt_shortstatus_print();

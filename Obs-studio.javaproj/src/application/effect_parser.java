@@ -30,19 +30,19 @@ public class effect_parser {
 	
 	public void ep_init() {
 		Object generatedParams = this.getParams();
-		.da_init(generatedParams);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedParams);
 		Object generatedStructs = this.getStructs();
-		.da_init(generatedStructs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedStructs);
 		Object generatedFuncs = this.getFuncs();
-		.da_init(generatedFuncs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedFuncs);
 		Object generatedSamplers = this.getSamplers();
-		.da_init(generatedSamplers);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedSamplers);
 		Object generatedTechniques = this.getTechniques();
-		.da_init(generatedTechniques);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedTechniques);
 		Object generatedFiles = this.getFiles();
-		.da_init(generatedFiles);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedFiles);
 		Object generatedTokens = this.getTokens();
-		.da_init(generatedTokens);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedTokens);
 		this.setCur_pass(NULL);
 		cf_parser generatedCfp = this.getCfp();
 		generatedCfp.cf_parser_init();
@@ -72,11 +72,11 @@ public class effect_parser {
 		this.setCur_pass(NULL);
 		cf_parser generatedCfp = this.getCfp();
 		generatedCfp.cf_parser_free();
-		.da_free(generatedParams);
-		.da_free(generatedStructs);
-		.da_free(generatedFuncs);
-		.da_free(generatedSamplers);
-		.da_free(generatedTechniques);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedParams);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedStructs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedFuncs);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedSamplers);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedTechniques);
 	}
 	public void ep_parse_struct() {
 		ep_struct eps = new ep_struct();
@@ -95,32 +95,32 @@ public class effect_parser {
 			ep_var var = new ep_var();
 			var.ep_var_init();
 			switch (ModernizedCProgram.ep_parse_struct_var(ep, var)) {
+			case /* Falls through. */PARSE_CONTINUE:
+					var.ep_var_free();
+					continue;
+			case PARSE_EOF:
+					var.ep_var_free();
+					;
 			case PARSE_UNEXPECTED_CONTINUE:
 					generatedCfp.cf_adderror_syntax_error();
 			case /* Falls through. */PARSE_BREAK:
 					var.ep_var_free();
 					do_break = true;
 					break;
-			case /* Falls through. */PARSE_CONTINUE:
-					var.ep_var_free();
-					continue;
 			case PARSE_UNEXPECTED_BREAK:
 					generatedCfp.cf_adderror_syntax_error();
-			case PARSE_EOF:
-					var.ep_var_free();
-					;
 			}
 			if (do_break) {
 				break;
 			} 
-			.da_push_back(generatedVars, var);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedVars, var);
 		}
 		if (generatedCfp.cf_next_token_should_be(";", NULL, NULL) != PARSE_SUCCESS) {
 			;
 		} 
 		Object generatedStructs = this.getStructs();
-		.da_push_back(generatedStructs, eps);
-		return ;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedStructs, eps);
+		return /*Error: Unsupported expression*/;
 	}
 	public int ep_parse_annotations(Object annotations) {
 		cf_parser generatedCfp = this.getCfp();
@@ -133,25 +133,25 @@ public class effect_parser {
 			ep_param var = new ep_param();
 			var.ep_param_init(ModernizedCProgram.bstrdup(""), ModernizedCProgram.bstrdup(""), false, false, false);
 			switch (ModernizedCProgram.ep_parse_param_annotation_var(ep, var)) {
-			case /* Falls through. */PARSE_BREAK:
-					var.ep_param_free();
-					do_break = true;
-					break;
 			case PARSE_EOF:
 					var.ep_param_free();
 					;
 			case PARSE_UNEXPECTED_BREAK:
 					generatedCfp.cf_adderror_syntax_error();
+			case PARSE_UNEXPECTED_CONTINUE:
+					generatedCfp.cf_adderror_syntax_error();
+			case /* Falls through. */PARSE_BREAK:
+					var.ep_param_free();
+					do_break = true;
+					break;
 			case /* Falls through. */PARSE_CONTINUE:
 					var.ep_param_free();
 					continue;
-			case PARSE_UNEXPECTED_CONTINUE:
-					generatedCfp.cf_adderror_syntax_error();
 			}
 			if (do_break) {
 				break;
 			} 
-			annotations.darray_push_back(, var);
+			annotations.darray_push_back(/*Error: Unsupported expression*/, var);
 		}
 		if (!generatedCfp.cf_token_is(">")) {
 			generatedCfp.cf_adderror_expecting(">");
@@ -172,13 +172,13 @@ public class effect_parser {
 				generatedCfp.cf_adderror_expecting(";");
 				return PARSE_CONTINUE;
 			} 
-			call.darray_push_back(, generatedCf_parser);
+			call.darray_push_back(/*Error: Unsupported expression*/, generatedCf_parser);
 			if (!generatedCfp.cf_next_valid_token()) {
 				return PARSE_EOF;
 			} 
 		}
-		call.darray_push_back(, generatedCf_parser);
-		call.darray_push_back(, end_token);
+		call.darray_push_back(/*Error: Unsupported expression*/, generatedCf_parser);
+		call.darray_push_back(/*Error: Unsupported expression*/, end_token);
 		return PARSE_SUCCESS;
 	}
 	public void ep_parse_technique() {
@@ -190,12 +190,12 @@ public class effect_parser {
 			;
 		} 
 		if (!generatedCfp.cf_next_valid_token()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!generatedCfp.cf_token_is("{")) {
 			if (!generatedCfp.cf_go_to_token(";", NULL)) {
 				generatedCfp.cf_adderror_expecting(";");
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			generatedCfp.cf_adderror_expecting("{");
 			;
@@ -208,25 +208,25 @@ public class effect_parser {
 			ep_pass pass = new ep_pass();
 			pass.ep_pass_init();
 			switch (ModernizedCProgram.ep_parse_pass(ep, pass)) {
+			case PARSE_EOF:
+					pass.ep_pass_free();
+					;
 			case PARSE_UNEXPECTED_CONTINUE:
 					pass.ep_pass_free();
 					if (!generatedCfp.cf_go_to_token("}", NULL)) {
 						;
 					} 
 					continue;
-			case PARSE_EOF:
-					pass.ep_pass_free();
-					;
 			}
-			.da_push_back(generatedPasses, pass);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedPasses, pass);
 			if (!generatedCfp.cf_next_valid_token()) {
 				;
 			} 
 		}
 		generatedCfp.cf_next_token();
 		Object generatedTechniques = this.getTechniques();
-		.da_push_back(generatedTechniques, ept);
-		return ;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedTechniques, ept);
+		return /*Error: Unsupported expression*/;
 		ept.ep_technique_free();
 	}
 	public void ep_parse_sampler_state() {
@@ -261,8 +261,8 @@ public class effect_parser {
 			;
 		} 
 		Object generatedSamplers = this.getSamplers();
-		.da_push_back(generatedSamplers, eps);
-		return ;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedSamplers, eps);
+		return /*Error: Unsupported expression*/;
 	}
 	public int ep_check_for_keyword(Object keyword, Object val) {
 		cf_parser generatedCfp = this.getCfp();
@@ -287,7 +287,7 @@ public class effect_parser {
 		Object generatedStruct_deps = func.getStruct_deps();
 		Byte generatedRet_type = func.getRet_type();
 		if (ep_struct.ep_getstruct(ep, type)) {
-			.da_push_back(generatedStruct_deps, generatedRet_type);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedStruct_deps, generatedRet_type);
 		} 
 		if (!ModernizedCProgram.ep_parse_func_params(ep, func)) {
 			;
@@ -316,8 +316,8 @@ public class effect_parser {
 		} 
 		generatedCfp.cf_next_token();
 		Object generatedFuncs = this.getFuncs();
-		.da_push_back(generatedFuncs, func);
-		return ;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedFuncs, func);
+		return /*Error: Unsupported expression*/;
 	}
 	public void ep_parse_param(Byte type, Byte name, Object is_property, Object is_const, Object is_uniform) {
 		ep_param param = new ep_param();
@@ -338,7 +338,7 @@ public class effect_parser {
 		if (!generatedCfp.cf_token_is(";")) {
 			;
 		} 
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public Object ep_get_var_specifiers(Object is_property, Object is_const, Object is_uniform) {
 		while (true) {
@@ -389,10 +389,10 @@ public class effect_parser {
 			ep.report_invalid_func_keyword("const", is_const);
 			ep.report_invalid_func_keyword("uniform", is_uniform);
 			ep.ep_parse_function(type, name);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} else {
 				ep.ep_parse_param(type, name, is_property, is_const, is_uniform);
-				return ;
+				return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.bfree(name);
 	}
@@ -428,12 +428,12 @@ public class effect_parser {
 		param.setSection(effect_section.EFFECT_PARAM);
 		param.setEffect(generatedEffect);
 		Object generatedDefault_val = param.getDefault_val();
-		.da_move(generatedDefault_val, generatedDefault_val);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_move(generatedDefault_val, generatedDefault_val);
 		Byte generatedType = param_in.getType();
 		param.setType(ModernizedCProgram.get_effect_param_type(generatedType));
-		if (.strcmp(generatedName, "ViewProj") == 0) {
+		if (/*Error: Function owner not recognized*/strcmp(generatedName, "ViewProj") == 0) {
 			generatedEffect.setView_proj(param);
-		}  else if (.strcmp(generatedName, "World") == 0) {
+		}  else if (/*Error: Function owner not recognized*/strcmp(generatedName, "World") == 0) {
 			generatedEffect.setWorld(param);
 		} 
 		ModernizedCProgram.ep_compile_param_annotations(param_in, param, ep);
@@ -452,7 +452,7 @@ public class effect_parser {
 		tech.setSection(effect_section.EFFECT_TECHNIQUE);
 		tech.setEffect(generatedEffect);
 		Object generatedPasses = tech.getPasses();
-		.da_resize(generatedPasses, generatedPasses.getNum());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_resize(generatedPasses, generatedPasses.getNum());
 		for (i = 0; i < generatedPasses.getNum(); i++) {
 			if (!ModernizedCProgram.ep_compile_pass(ep, tech, tech_in, i)) {
 				success = false;
@@ -464,11 +464,11 @@ public class effect_parser {
 		 success = true;
 		 i = new ();
 		gs_effect generatedEffect = this.getEffect();
-		((generatedEffect) ? (Object)0 : ._assert("ep->effect", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\effect-parser.c", 2066));
+		((generatedEffect) ? (Object)0 : /*Error: Function owner not recognized*/_assert("ep->effect", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\effect-parser.c", 2066));
 		Object generatedParams = generatedEffect.getParams();
-		.da_resize(generatedParams, generatedParams.getNum());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_resize(generatedParams, generatedParams.getNum());
 		Object generatedTechniques = generatedEffect.getTechniques();
-		.da_resize(generatedTechniques, generatedTechniques.getNum());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_resize(generatedTechniques, generatedTechniques.getNum());
 		for (i = 0; i < generatedParams.getNum(); i++) {
 			ep.ep_compile_param(i);
 		}

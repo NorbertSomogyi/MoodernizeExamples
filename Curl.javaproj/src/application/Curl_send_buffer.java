@@ -1,11 +1,11 @@
 package application;
 
 public class Curl_send_buffer {
-	private Byte buffer;
+	private byte[] buffer;
 	private Object size_max;
 	private Object size_used;
 	
-	public Curl_send_buffer(Byte buffer, Object size_max, Object size_used) {
+	public Curl_send_buffer(byte[] buffer, Object size_max, Object size_used) {
 		setBuffer(buffer);
 		setSize_max(size_max);
 		setSize_used(size_used);
@@ -17,20 +17,20 @@ public class Curl_send_buffer {
 	 * Curl_add_buffer_init() sets up and returns a fine buffer struct
 	 */
 	public Curl_send_buffer Curl_add_buffer_init() {
-		return .Curl_ccalloc(1, /*
+		return /*Error: Function owner not recognized*/Curl_ccalloc(1, /*Error: Unsupported expression*//*
 		 * Curl_add_buffer_free() frees all associated resources.
 		 */);
 	}
 	public void Curl_add_buffer_free() {
 		Curl_send_buffer in = new Curl_send_buffer();
 		if (!inp) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		in = inp;
-		Byte generatedBuffer = in.getBuffer();
+		byte[] generatedBuffer = in.getBuffer();
 		if (/* deal with NULL input */in) {
-			.Curl_cfree(generatedBuffer);
-			.Curl_cfree(in);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedBuffer);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(in);
 		} 
 		inp = ((Object)0/*
 		 * Curl_add_buffer_send() sends a header buffer and frees all associated
@@ -46,17 +46,17 @@ public class Curl_send_buffer {
 		byte s;
 		va_list ap = new va_list();
 		Curl_send_buffer in = inp;
-		.__builtin_va_start(ap, fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_start(ap, fmt);
 		s = ModernizedCProgram.curl_mvaprintf(fmt, /* this allocs a new string to append */ap);
-		.__builtin_va_end(ap);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__builtin_va_end(ap);
 		if (s) {
-			 result = inp.Curl_add_buffer(s, .strlen(s));
-			.Curl_cfree(s);
+			 result = inp.Curl_add_buffer(s, /*Error: Function owner not recognized*/strlen(s));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(s);
 			return ModernizedCProgram.result;
 		} 
-		Byte generatedBuffer = in.getBuffer();
-		.Curl_cfree(generatedBuffer);
-		.Curl_cfree(in);
+		byte[] generatedBuffer = in.getBuffer();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedBuffer);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(in);
 		inp = ((Object)0);
 		return CURLE_OUT_OF_MEMORY/*
 		 * Curl_add_buffer() appends a memory chunk to the existing buffer
@@ -66,13 +66,13 @@ public class Curl_send_buffer {
 		byte new_rb;
 		Curl_send_buffer in = inp;
 		Object generatedSize_used = in.getSize_used();
-		Byte generatedBuffer = in.getBuffer();
+		byte[] generatedBuffer = in.getBuffer();
 		if (~size < generatedSize_used) {
 			do {
-				.Curl_cfree((generatedBuffer));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree((generatedBuffer));
 				(generatedBuffer) = ((Object)0);
 			} while (0);
-			.Curl_cfree(in);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(in);
 			inp = ((Object)0);
 			return CURLE_OUT_OF_MEMORY;
 		} 
@@ -89,17 +89,17 @@ public class Curl_send_buffer {
 			if (generatedBuffer) {
 				new_rb = ModernizedCProgram.Curl_saferealloc(generatedBuffer, /* we have a buffer, enlarge the existing one */new_size);
 			} else {
-					new_rb = .Curl_cmalloc(/* create a new buffer */new_size);
+					new_rb = /*Error: Function owner not recognized*/Curl_cmalloc(/* create a new buffer */new_size);
 			} 
 			if (!new_rb) {
-				.Curl_cfree(/* If we failed, we cleanup the whole buffer and return error */in);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(/* If we failed, we cleanup the whole buffer and return error */in);
 				inp = ((Object)0);
 				return CURLE_OUT_OF_MEMORY;
 			} 
 			in.setBuffer(new_rb);
 			in.setSize_max(new_size);
 		} 
-		.memcpy(generatedBuffer[generatedSize_used], inptr, size);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedBuffer[generatedSize_used], inptr, size);
 		generatedSize_used += size;
 		return CURLE_OK/* end of the add_buffer functions *//* ------------------------------------------------------------------------- */;
 	}
@@ -110,22 +110,24 @@ public class Curl_send_buffer {
 		 result = new ();
 		byte[] datestr = new byte[80];
 		byte condp;
-		Object generatedSet = data.getSet();
-		if (generatedSet.getTimecondition() == CURL_TIMECOND_NONE) {
+		UserDefined generatedSet = data.getSet();
+		Object generatedTimecondition = generatedSet.getTimecondition();
+		if (generatedTimecondition == CURL_TIMECOND_NONE) {
 			return /* no condition was asked for */CURLE_OK;
 		} 
-		result = keeptime.Curl_gmtime(generatedSet.getTimevalue());
+		Object generatedTimevalue = generatedSet.getTimevalue();
+		result = keeptime.Curl_gmtime(generatedTimevalue);
 		if (result) {
 			data.Curl_failf("Invalid TIMEVALUE");
 			return result;
 		} 
 		tm = keeptime;
-		switch (generatedSet.getTimecondition()) {
-		case CURL_TIMECOND_IFMODSINCE:
-				condp = "If-Modified-Since";
-				break;
+		switch (generatedTimecondition) {
 		case CURL_TIMECOND_IFUNMODSINCE:
 				condp = "If-Unmodified-Since";
+				break;
+		case CURL_TIMECOND_IFMODSINCE:
+				condp = "If-Modified-Since";
 				break;
 		case CURL_TIMECOND_LASTMOD:
 				condp = "Last-Modified";
@@ -141,14 +143,14 @@ public class Curl_send_buffer {
 			   * Time)." (see page 20 of RFC2616).
 			   */;
 		} 
-		ModernizedCProgram.curl_msnprintf(datestr, , "%s: %s, %02d %s %4d %02d:%02d:%02d GMT\r\n", condp, ModernizedCProgram.Curl_wkday[tm.getTm_wday() ? tm.getTm_wday() - 1 : 6], tm.getTm_mday(), ModernizedCProgram.Curl_month[tm.getTm_mon()], tm.getTm_year() + 1900, tm.getTm_hour(), tm.getTm_min(), tm.getTm_sec());
-		result = req_buffer.Curl_add_buffer(datestr, .strlen(datestr));
+		ModernizedCProgram.curl_msnprintf(datestr, /*Error: sizeof expression not supported yet*/, "%s: %s, %02d %s %4d %02d:%02d:%02d GMT\r\n", condp, ModernizedCProgram.Curl_wkday[tm.getTm_wday() ? tm.getTm_wday() - 1 : 6], tm.getTm_mday(), ModernizedCProgram.Curl_month[tm.getTm_mon()], tm.getTm_year() + 1900, tm.getTm_hour(), tm.getTm_min(), tm.getTm_sec());
+		result = req_buffer.Curl_add_buffer(datestr, /*Error: Function owner not recognized*/strlen(datestr));
 		return result/* disabled */;
 	}
-	public Byte getBuffer() {
+	public byte[] getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(Byte newBuffer) {
+	public void setBuffer(byte[] newBuffer) {
 		buffer = newBuffer;
 	}
 	public Object getSize_max() {

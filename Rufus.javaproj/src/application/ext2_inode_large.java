@@ -68,7 +68,7 @@ public class ext2_inode_large {
 		 err = new ();
 		ext2_inode_large i = new ext2_inode_large();
 		if (inode == ((Object)/* Read inode? */0)) {
-			err = (ext2_inode)i.ext2fs_read_inode_full(fs, ino, );
+			err = (ext2_inode)i.ext2fs_read_inode_full(fs, ino, /*Error: Unsupported expression*/);
 			if (err) {
 				return err;
 			} 
@@ -111,7 +111,7 @@ public class ext2_inode_large {
 			;
 		} 
 		if (inode == /* Write inode? */i) {
-			err = (ext2_inode)i.ext2fs_write_inode_full(fs, ino, );
+			err = (ext2_inode)i.ext2fs_write_inode_full(fs, ino, /*Error: Unsupported expression*/);
 			if (err) {
 				;
 			} 
@@ -180,11 +180,11 @@ public class ext2_inode_large {
 			old_hi = generatedI_checksum_hi;
 			this.setI_checksum_hi(0);
 		} 
-		inum = .ext2fs_cpu_to_le32(inum);
+		inum = /*Error: Function owner not recognized*/ext2fs_cpu_to_le32(inum);
 		Object generatedI_generation = this.getI_generation();
 		gen = generatedI_generation;
-		crc = ModernizedCProgram.ext2fs_crc32c_le(fs.getCsum_seed(), (byte)inum, );
-		crc = ModernizedCProgram.ext2fs_crc32c_le(crc, (byte)gen, );
+		crc = ModernizedCProgram.ext2fs_crc32c_le(fs.getCsum_seed(), (byte)inum, /*Error: sizeof expression not supported yet*/);
+		crc = ModernizedCProgram.ext2fs_crc32c_le(crc, (byte)gen, /*Error: sizeof expression not supported yet*/);
 		crc = ModernizedCProgram.ext2fs_crc32c_le(crc, (byte)desc, size);
 		generatedLinux2.setL_i_checksum_lo(old_lo);
 		if (has_hi) {
@@ -203,17 +203,17 @@ public class ext2_inode_large {
 			return 1;
 		} 
 		Object generatedI_extra_isize = this.getI_extra_isize();
-		has_hi = ((((fs.getSuper()).getS_rev_level() == 0) ? 128 : (fs.getSuper()).getS_inode_size()) > 128 && generatedI_extra_isize >= (((size_t)((ext2_inode_large)0).getI_checksum_hi()) +  - 128));
+		has_hi = ((((fs.getSuper()).getS_rev_level() == 0) ? 128 : (fs.getSuper()).getS_inode_size()) > 128 && generatedI_extra_isize >= (((size_t)((ext2_inode_large)0).getI_checksum_hi()) + /*Error: Unsupported expression*/ - 128));
 		 generatedOsd2 = this.getOsd2();
 		Object generatedLinux2 = generatedOsd2.getLinux2();
-		provided = .ext2fs_le16_to_cpu(generatedLinux2.getL_i_checksum_lo());
+		provided = /*Error: Function owner not recognized*/ext2fs_le16_to_cpu(generatedLinux2.getL_i_checksum_lo());
 		retval = inode.ext2fs_inode_csum(fs, inum, calculated, has_hi);
 		if (retval) {
 			return 0;
 		} 
 		Object generatedI_checksum_hi = this.getI_checksum_hi();
 		if (has_hi) {
-			 hi = .ext2fs_le16_to_cpu(generatedI_checksum_hi);
+			 hi = /*Error: Function owner not recognized*/ext2fs_le16_to_cpu(generatedI_checksum_hi);
 			provided |=  hi << 16;
 		} else {
 				calculated &=  -1024;
@@ -228,7 +228,7 @@ public class ext2_inode_large {
 				 * inode, if any, is present.)
 				 */;
 		} 
-		for (; i < ; ) {
+		for (; i < /*Error: Unsupported expression*/; ) {
 			if (cp) {
 				return 0;
 			} 
@@ -243,16 +243,16 @@ public class ext2_inode_large {
 			return 0;
 		} 
 		Object generatedI_extra_isize = this.getI_extra_isize();
-		has_hi = ((((fs.getSuper()).getS_rev_level() == 0) ? 128 : (fs.getSuper()).getS_inode_size()) > 128 && generatedI_extra_isize >= (((size_t)((ext2_inode_large)0).getI_checksum_hi()) +  - 128));
+		has_hi = ((((fs.getSuper()).getS_rev_level() == 0) ? 128 : (fs.getSuper()).getS_inode_size()) > 128 && generatedI_extra_isize >= (((size_t)((ext2_inode_large)0).getI_checksum_hi()) + /*Error: Unsupported expression*/ - 128));
 		retval = inode.ext2fs_inode_csum(fs, inum, crc, has_hi);
 		if (retval) {
 			return retval;
 		} 
 		 generatedOsd2 = this.getOsd2();
 		Object generatedLinux2 = generatedOsd2.getLinux2();
-		generatedLinux2.setL_i_checksum_lo(.ext2fs_cpu_to_le16(crc & -1024));
+		generatedLinux2.setL_i_checksum_lo(/*Error: Function owner not recognized*/ext2fs_cpu_to_le16(crc & -1024));
 		if (has_hi) {
-			this.setI_checksum_hi(.ext2fs_cpu_to_le16(crc >> 16));
+			this.setI_checksum_hi(/*Error: Function owner not recognized*/ext2fs_cpu_to_le16(crc >> 16));
 		} 
 		return 0;
 	}
@@ -269,7 +269,7 @@ public class ext2_inode_large {
 		} 
 		Object generatedI_size = (inode).getI_size();
 		Object generatedI_block = this.getI_block();
-		if ((((generatedI_mode) & 170000) == 120000) && (generatedI_size | (.UNRECOGNIZEDFUNCTIONNAME(inode).getI_size_high() << 32)) <= ) {
+		if ((((generatedI_mode) & 170000) == 120000) && (generatedI_size | (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(inode).getI_size_high() << 32)) <= /*Error: sizeof expression not supported yet*/) {
 			return 0;
 		} 
 		Object generatedI_links_count = this.getI_links_count();
@@ -286,7 +286,7 @@ public class ext2_inode_large {
 	public int extent_head_looks_insane() {
 		Object generatedI_flags = this.getI_flags();
 		Object generatedI_block = this.getI_block();
-		if (!(generatedI_flags & -1024) || ModernizedCProgram.ext2fs_extent_header_verify(generatedI_block, ) == 0) {
+		if (!(generatedI_flags & -1024) || ModernizedCProgram.ext2fs_extent_header_verify(generatedI_block, /*Error: sizeof expression not supported yet*/) == 0) {
 			return 0;
 		} 
 		return 1/*

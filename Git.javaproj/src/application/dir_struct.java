@@ -6,8 +6,8 @@ public class dir_struct {
 	private int ignored_nr;
 	private int ignored_alloc;
 	private  flags;
-	private dir_entry entries;
-	private dir_entry ignored;
+	private dir_entry[][] entries;
+	private dir_entry[][] ignored;
 	private Object exclude_per_dir;
 	private Object exclude_list_group;
 	private exclude_stack exclude_stack;
@@ -18,7 +18,7 @@ public class dir_struct {
 	private oid_stat ss_excludes_file;
 	private int unmanaged_exclude_files;
 	
-	public dir_struct(int nr, int alloc, int ignored_nr, int ignored_alloc,  flags, dir_entry entries, dir_entry ignored, Object exclude_per_dir, Object exclude_list_group, exclude_stack exclude_stack, path_pattern pattern, strbuf basebuf, untracked_cache untracked, oid_stat ss_info_exclude, oid_stat ss_excludes_file, int unmanaged_exclude_files) {
+	public dir_struct(int nr, int alloc, int ignored_nr, int ignored_alloc,  flags, dir_entry[][] entries, dir_entry[][] ignored, Object exclude_per_dir, Object exclude_list_group, exclude_stack exclude_stack, path_pattern pattern, strbuf basebuf, untracked_cache untracked, oid_stat ss_info_exclude, oid_stat ss_excludes_file, int unmanaged_exclude_files) {
 		setNr(nr);
 		setAlloc(alloc);
 		setIgnored_nr(ignored_nr);
@@ -39,33 +39,6 @@ public class dir_struct {
 	public dir_struct() {
 	}
 	
-	public int add_files(int flags) {
-		int i;
-		int exit_status = 0;
-		int generatedIgnored_nr = this.getIgnored_nr();
-		dir_entry generatedIgnored = this.getIgnored();
-		if (generatedIgnored_nr) {
-			.fprintf((_iob[2]), ModernizedCProgram._(ModernizedCProgram.ignore_error));
-			for (i = 0; i < generatedIgnored_nr; i++) {
-				.fprintf((_iob[2]), "%s\n", generatedIgnored[i].getName());
-			}
-			.fprintf((_iob[2]), ModernizedCProgram._("Use -f if you really want to add them.\n"));
-			exit_status = 1;
-		} 
-		int generatedNr = this.getNr();
-		dir_entry generatedEntries = this.getEntries();
-		for (i = 0; i < generatedNr; i++) {
-			if (ModernizedCProgram.the_index.add_file_to_index(generatedEntries[i].getName(), flags)) {
-				if (!ModernizedCProgram.ignore_add_errors) {
-					ModernizedCProgram.die(ModernizedCProgram._("adding files failed"));
-				} 
-				exit_status = 1;
-			} else {
-					ModernizedCProgram.check_embedded_repo(generatedEntries[i].getName());
-			} 
-		}
-		return exit_status;
-	}
 	public void add_patterns_from_file(Object fname) {
 		int generatedUnmanaged_exclude_files = this.getUnmanaged_exclude_files();
 		generatedUnmanaged_exclude_files++;
@@ -97,7 +70,7 @@ public class dir_struct {
 		exclude_stack stk = new exclude_stack();
 		Object generatedExclude_list_group = this.getExclude_list_group();
 		int generatedNr = group.getNr();
-		pattern_list generatedPl = group.getPl();
+		pattern_list[] generatedPl = group.getPl();
 		Object generatedSrc = pl.getSrc();
 		for (i = 0; i <= 2; i++) {
 			group = generatedExclude_list_group[i];
@@ -130,7 +103,7 @@ public class dir_struct {
 		pathspec pathspec = new pathspec();
 		if (!argc) {
 			if (!ModernizedCProgram.quiet) {
-				.fprintf((_iob[2]), "no pathspec given.\n");
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "no pathspec given.\n");
 			} 
 			return 0/*
 				 * check-ignore just needs paths. Magic beyond :/ is really
@@ -145,7 +118,7 @@ public class dir_struct {
 			 */);
 		seen = ModernizedCProgram.find_pathspecs_matching_against_index(pathspec, ModernizedCProgram.the_index);
 		int generatedNr = pathspec.getNr();
-		pathspec_item generatedItems = pathspec.getItems();
+		pathspec_item[] generatedItems = pathspec.getItems();
 		path_pattern path_pattern = new path_pattern();
 		for (i = 0; i < generatedNr; i++) {
 			full_path = generatedItems[i].getMatch();
@@ -165,14 +138,14 @@ public class dir_struct {
 		return num_ignored;
 	}
 	public int check_ignore_stdin_paths(Object prefix) {
-		strbuf buf = new strbuf(, , );
-		strbuf unquoted = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf unquoted = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte[] pathspec = new byte[]{((Object)0), ((Object)0)};
 		strbuf_getline_fn getline_fn = new strbuf_getline_fn();
 		int num_ignored = 0;
 		getline_fn = ModernizedCProgram.nul_term_line ? ModernizedCProgram.strbuf_getline_nul : ModernizedCProgram.strbuf_getline_lf;
-		byte generatedBuf = buf.getBuf();
-		while (.getline_fn(buf, (_iob[0])) != (true)) {
+		byte[] generatedBuf = buf.getBuf();
+		while (/*Error: Function owner not recognized*/getline_fn(buf, (_iob[0])) != (true)) {
 			if (!ModernizedCProgram.nul_term_line && generatedBuf[0] == (byte)'"') {
 				unquoted.strbuf_setlen(0);
 				if (unquoted.unquote_c_style(generatedBuf, ((Object)0))) {
@@ -194,8 +167,8 @@ public class dir_struct {
 		int ign;
 		int generatedNr = this.getNr();
 		int generatedIgnored_nr = this.getIgnored_nr();
-		dir_entry generatedEntries = this.getEntries();
-		dir_entry generatedIgnored = this.getIgnored();
+		dir_entry[][] generatedEntries = this.getEntries();
+		dir_entry[][] generatedIgnored = this.getIgnored();
 		for (src = dst = ign = 0; src < generatedNr; src++) {
 			while (ign < generatedIgnored_nr && 0 <= ModernizedCProgram.cmp_dir_entry(generatedEntries[src], generatedIgnored[ign])) {
 				ign++;
@@ -212,6 +185,33 @@ public class dir_struct {
 			} 
 		}
 		this.setNr(dst);
+	}
+	public int add_files(int flags) {
+		int i;
+		int exit_status = 0;
+		int generatedIgnored_nr = this.getIgnored_nr();
+		dir_entry[][] generatedIgnored = this.getIgnored();
+		if (generatedIgnored_nr) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._(ModernizedCProgram.ignore_error));
+			for (i = 0; i < generatedIgnored_nr; i++) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s\n", generatedIgnored[i].getName());
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), ModernizedCProgram._("Use -f if you really want to add them.\n"));
+			exit_status = 1;
+		} 
+		int generatedNr = this.getNr();
+		dir_entry[][] generatedEntries = this.getEntries();
+		for (i = 0; i < generatedNr; i++) {
+			if (ModernizedCProgram.the_index.add_file_to_index(generatedEntries[i].getName(), flags)) {
+				if (!ModernizedCProgram.ignore_add_errors) {
+					ModernizedCProgram.die(ModernizedCProgram._("adding files failed"));
+				} 
+				exit_status = 1;
+			} else {
+					ModernizedCProgram.check_embedded_repo(generatedEntries[i].getName());
+			} 
+		}
+		return exit_status;
 	}
 	public int getNr() {
 		return nr;
@@ -243,16 +243,16 @@ public class dir_struct {
 	public void setFlags( newFlags) {
 		flags = newFlags;
 	}
-	public dir_entry getEntries() {
+	public dir_entry[][] getEntries() {
 		return entries;
 	}
-	public void setEntries(dir_entry newEntries) {
+	public void setEntries(dir_entry[][] newEntries) {
 		entries = newEntries;
 	}
-	public dir_entry getIgnored() {
+	public dir_entry[][] getIgnored() {
 		return ignored;
 	}
-	public void setIgnored(dir_entry newIgnored) {
+	public void setIgnored(dir_entry[][] newIgnored) {
 		ignored = newIgnored;
 	}
 	public Object getExclude_per_dir() {

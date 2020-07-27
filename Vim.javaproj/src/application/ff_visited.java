@@ -49,11 +49,11 @@ public class ff_visited {
 				} 
 			} 
 		}
-		vp = ModernizedCProgram.alloc( + .strlen((byte)(/*
+		vp = ModernizedCProgram.alloc(/*Error: Unsupported expression*/ + /*Error: Function owner not recognized*/strlen((byte)(/*
 		     * New file/dir.  Add it to the list of visited files/dirs.
 		     */ModernizedCProgram.ff_expand_buffer)));
 		if (vp != ((Object)0)) {
-			.strcpy((byte)(generatedFfv_fname), (byte)(ModernizedCProgram.ff_expand_buffer));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(generatedFfv_fname), (byte)(ModernizedCProgram.ff_expand_buffer));
 			if (wc_path != ((Object)0)) {
 				vp.setFfv_wc_path(ModernizedCProgram.vim_strsave(wc_path));
 			} else {

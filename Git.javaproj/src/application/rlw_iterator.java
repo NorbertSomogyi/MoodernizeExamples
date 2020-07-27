@@ -1,13 +1,13 @@
 package application;
 
 public class rlw_iterator {
-	private Object buffer;
+	private Object[] buffer;
 	private Object size;
 	private Object pointer;
 	private Object literal_word_start;
 	private  rlw;
 	
-	public rlw_iterator(Object buffer, Object size, Object pointer, Object literal_word_start,  rlw) {
+	public rlw_iterator(Object[] buffer, Object size, Object pointer, Object literal_word_start,  rlw) {
 		setBuffer(buffer);
 		setSize(size);
 		setPointer(pointer);
@@ -17,6 +17,18 @@ public class rlw_iterator {
 	public rlw_iterator() {
 	}
 	
+	public Object rlwit_word_size() {
+		 generatedRlw = this.getRlw();
+		Object generatedRunning_len = generatedRlw.getRunning_len();
+		Object generatedLiteral_words = generatedRlw.getLiteral_words();
+		return generatedRunning_len + generatedLiteral_words;
+	}
+	public Object rlwit_literal_words() {
+		Object generatedPointer = this.getPointer();
+		 generatedRlw = this.getRlw();
+		Object generatedLiteral_words = generatedRlw.getLiteral_words();
+		return generatedPointer - generatedLiteral_words;
+	}
 	/**
 	 * Copyright 2013, GitHub, Inc
 	 * Copyright 2009-2013, Daniel Lemire, Cliff Moon,
@@ -41,7 +53,7 @@ public class rlw_iterator {
 		if (generatedPointer >= generatedSize) {
 			return 0;
 		} 
-		Object generatedBuffer = this.getBuffer();
+		Object[] generatedBuffer = this.getBuffer();
 		 generatedRlw = this.getRlw();
 		generatedRlw.setWord(generatedBuffer[generatedPointer]);
 		Object generatedWord = generatedRlw.getWord();
@@ -62,7 +74,7 @@ public class rlw_iterator {
 			size_t discard = new size_t();
 			if (generatedRunning_len > x) {
 				generatedRunning_len -= x;
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			x -= generatedRunning_len;
 			generatedRlw.setRunning_len(0);
@@ -78,22 +90,10 @@ public class rlw_iterator {
 			} 
 		}
 	}
-	public Object rlwit_word_size() {
-		 generatedRlw = this.getRlw();
-		Object generatedRunning_len = generatedRlw.getRunning_len();
-		Object generatedLiteral_words = generatedRlw.getLiteral_words();
-		return generatedRunning_len + generatedLiteral_words;
-	}
-	public Object rlwit_literal_words() {
-		Object generatedPointer = this.getPointer();
-		 generatedRlw = this.getRlw();
-		Object generatedLiteral_words = generatedRlw.getLiteral_words();
-		return generatedPointer - generatedLiteral_words;
-	}
-	public Object getBuffer() {
+	public Object[] getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(Object newBuffer) {
+	public void setBuffer(Object[] newBuffer) {
 		buffer = newBuffer;
 	}
 	public Object getSize() {

@@ -15,10 +15,10 @@ public class VTermScreen {
 	private int global_reverse;
 	private Object buffers;
 	private  buffer;
-	private  sb_buffer;
+	private [] sb_buffer;
 	private  pen;
 	
-	public VTermScreen(VTerm vt, VTermState state, Object callbacks, Object cbdata,  damage_merge,  damaged,  pending_scrollrect, int pending_scroll_downward, int pending_scroll_rightward, int rows, int cols, int global_reverse, Object buffers,  buffer,  sb_buffer,  pen) {
+	public VTermScreen(VTerm vt, VTermState state, Object callbacks, Object cbdata,  damage_merge,  damaged,  pending_scrollrect, int pending_scroll_downward, int pending_scroll_rightward, int rows, int cols, int global_reverse, Object buffers,  buffer, [] sb_buffer,  pen) {
 		setVt(vt);
 		setState(state);
 		setCallbacks(callbacks);
@@ -54,7 +54,7 @@ public class VTermScreen {
 		if (state == ((Object)0)) {
 			return ((Object)0);
 		} 
-		screen = vt.vterm_allocator_malloc();
+		screen = vt.vterm_allocator_malloc(/*Error: Unsupported expression*/);
 		if (screen == ((Object)0)) {
 			return ((Object)0);
 		} 
@@ -74,9 +74,9 @@ public class VTermScreen {
 		generatedBuffers[0] = ModernizedCProgram.realloc_buffer(screen, ((Object)0), rows, cols);
 		screen.setBuffer(generatedBuffers[0]);
 		VTerm generatedVt = screen.getVt();
-		screen.setSb_buffer(generatedVt.vterm_allocator_malloc( * cols));
+		screen.setSb_buffer(generatedVt.vterm_allocator_malloc(/*Error: Unsupported expression*/ * cols));
 		 generatedBuffer = screen.getBuffer();
-		 generatedSb_buffer = screen.getSb_buffer();
+		[] generatedSb_buffer = screen.getSb_buffer();
 		if (generatedBuffer == ((Object)0) || generatedSb_buffer == ((Object)0)) {
 			screen.vterm_screen_free();
 			return ((Object)0);
@@ -133,7 +133,7 @@ public class VTermScreen {
 		} 
 		if (ModernizedCProgram.screen.getDamaged().getStart_row() != -1) {
 			if (ModernizedCProgram.screen.getCallbacks() && ModernizedCProgram.screen.getCallbacks().getDamage()) {
-				.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.screen.getDamaged(), ModernizedCProgram.screen.getCbdata());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.screen.getDamaged(), ModernizedCProgram.screen.getCbdata());
 			} 
 			ModernizedCProgram.screen.getDamaged().setStart_row(-1);
 		} 
@@ -226,10 +226,10 @@ public class VTermScreen {
 	public void setBuffer( newBuffer) {
 		buffer = newBuffer;
 	}
-	public  getSb_buffer() {
+	public [] getSb_buffer() {
 		return sb_buffer;
 	}
-	public void setSb_buffer( newSb_buffer) {
+	public void setSb_buffer([] newSb_buffer) {
 		sb_buffer = newSb_buffer;
 	}
 	public  getPen() {

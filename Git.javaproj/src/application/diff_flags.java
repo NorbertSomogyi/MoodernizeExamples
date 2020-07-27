@@ -82,7 +82,7 @@ public class diff_flags {
 		byte tmp_a = (byte)a;
 		byte tmp_b = (byte)b;
 		int i;
-		for (i = 0; i < ; i++) {
+		for (i = 0; i < /*Error: Unsupported expression*/; i++) {
 			tmp_a[i] |=  tmp_b[i];
 		}
 	}

@@ -22,7 +22,7 @@ public class textprop_S {
 	public textprop_S() {
 	}
 	
-	public void adjust_props_for_join(Object lnum, int prop_length, long col, int removed) {
+	public void adjust_props_for_join(Object lnum, Integer prop_length, long col, int removed) {
 		int proplen;
 		char_u props = new char_u();
 		int ri;
@@ -31,11 +31,11 @@ public class textprop_S {
 		Object generatedTp_col = cp.getTp_col();
 		Object generatedTp_len = cp.getTp_len();
 		if (proplen > 0) {
-			prop_line = (textprop_T)ModernizedCProgram.alloc( * (proplen));
+			prop_line = (textprop_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*/ * (proplen));
 			if (prop_line != ((Object)0)) {
 				for (ri = 0; ri < proplen; ++ri) {
 					textprop_T cp = prop_line + wi;
-					.memmove((byte)(cp), (byte)(props + ri * ), (size_t)());
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(cp), (byte)(props + ri * /*Error: Unsupported expression*/), (size_t)(/*Error: Unsupported expression*/));
 					if (generatedTp_col + generatedTp_len > removed) {
 						if (generatedTp_col > removed) {
 							generatedTp_col += col;
@@ -53,7 +53,7 @@ public class textprop_S {
 			 */;
 		} 
 	}
-	public void join_prop_lines(Object lnum, Object newp, Integer prop_lengths, int count) {
+	public void join_prop_lines(Object lnum, Object newp, int[] prop_lengths, int count) {
 		size_t proplen = 0;
 		size_t oldproplen = new size_t();
 		char_u props = new char_u();
@@ -66,24 +66,24 @@ public class textprop_S {
 		}
 		if (proplen == 0) {
 			ModernizedCProgram.ml_replace(lnum, newp, 0);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		// get existing properties of the joined line// get existing properties of the joined lineoldproplen = curbuf.get_text_props(lnum, props, 0);
-		len = .strlen((byte)(newp)) + 1;
-		line = ModernizedCProgram.alloc(len + (oldproplen + proplen) * );
+		len = /*Error: Function owner not recognized*/strlen((byte)(newp)) + 1;
+		line = ModernizedCProgram.alloc(len + (oldproplen + proplen) * /*Error: Unsupported expression*/);
 		if (line == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.memmove((byte)(line), (byte)(newp), (size_t)(len));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(line), (byte)(newp), (size_t)(len));
 		if (oldproplen > 0) {
-			l = oldproplen * ;
-			.memmove((byte)(line + len), (byte)(props), (size_t)(l));
+			l = oldproplen * /*Error: Unsupported expression*/;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(line + len), (byte)(props), (size_t)(l));
 			len += l;
 		} 
 		for (i = 0; i < count - 1; ++i) {
 			if (prop_lines[i] != ((Object)0)) {
-				l = prop_lengths[i] * ;
-				.memmove((byte)(line + len), (byte)(prop_lines[i]), (size_t)(l));
+				l = prop_lengths[i] * /*Error: Unsupported expression*/;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)(line + len), (byte)(prop_lines[i]), (size_t)(l));
 				len += l;
 				ModernizedCProgram.vim_free(prop_lines[i]);
 			} 

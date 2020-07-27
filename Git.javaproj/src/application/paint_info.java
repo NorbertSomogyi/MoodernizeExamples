@@ -3,12 +3,12 @@ package application;
 public class paint_info {
 	private ref_bitmap ref_bitmap;
 	private int nr_bits;
-	private Byte pools;
+	private byte[][] pools;
 	private Byte free;
 	private Byte end;
 	private int pool_count;
 	
-	public paint_info(ref_bitmap ref_bitmap, int nr_bits, Byte pools, Byte free, Byte end, int pool_count) {
+	public paint_info(ref_bitmap ref_bitmap, int nr_bits, byte[][] pools, Byte free, Byte end, int pool_count) {
 		setRef_bitmap(ref_bitmap);
 		setNr_bits(nr_bits);
 		setPools(pools);
@@ -22,18 +22,18 @@ public class paint_info {
 	public Object paint_alloc() {
 		int generatedNr_bits = this.getNr_bits();
 		int nr = (((generatedNr_bits) + (true) - 1) / (true));
-		int size = nr * ;
+		int size = nr * /*Error: Unsupported expression*/;
 		Object p;
 		int generatedPool_count = this.getPool_count();
 		Byte generatedEnd = this.getEnd();
 		Byte generatedFree = this.getFree();
-		Byte generatedPools = this.getPools();
+		byte[][] generatedPools = this.getPools();
 		if (!generatedPool_count || size > generatedEnd - generatedFree) {
 			if (size > (512 * 1024)) {
 				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\shallow.c", 492, "pool size too small for %d in paint_alloc()", size);
 			} 
 			generatedPool_count++;
-			(generatedPools) = ModernizedCProgram.xrealloc((generatedPools), ModernizedCProgram.st_mult(, (generatedPool_count)));
+			(generatedPools) = ModernizedCProgram.xrealloc((generatedPools), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedPool_count)));
 			this.setFree(ModernizedCProgram.xmalloc((512 * 1024)));
 			generatedPools[generatedPool_count - 1] = generatedFree;
 			this.setEnd(generatedFree + (512 * 1024));
@@ -52,18 +52,18 @@ public class paint_info {
 		commit_list head = ((Object)0);
 		int generatedNr_bits = this.getNr_bits();
 		int bitmap_nr = (((generatedNr_bits) + (true) - 1) / (true));
-		size_t bitmap_size = ModernizedCProgram.st_mult(, bitmap_nr);
-		commit c = .lookup_commit_reference_gently(ModernizedCProgram.the_repository, oid, 1);
+		size_t bitmap_size = ModernizedCProgram.st_mult(/*Error: Unsupported expression*/, bitmap_nr);
+		commit c = /*Error: Function owner not recognized*/lookup_commit_reference_gently(ModernizedCProgram.the_repository, oid, 1);
 		/* to be freed before return */uint32_t tmp = new uint32_t();
 		uint32_t bitmap = new uint32_t();
 		if (!c) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		tmp = ModernizedCProgram.xmalloc(bitmap_size);
 		bitmap = info.paint_alloc();
-		.memset(bitmap, 0, bitmap_size);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(bitmap, 0, bitmap_size);
 		bitmap[id / 32] |=  (-1024 << (id % 32));
-		.commit_list_insert(c, head);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/commit_list_insert(c, head);
 		ref_bitmap generatedRef_bitmap = this.getRef_bitmap();
 		object generatedObject = c.getObject();
 		int generatedFlags = generatedObject.getFlags();
@@ -73,7 +73,7 @@ public class paint_info {
 		commit_list generatedParents = c.getParents();
 		while (head) {
 			commit_list p = new commit_list();
-			commit c = .pop_commit(head);
+			commit c = /*Error: Function owner not recognized*/pop_commit(head);
 			uint32_t refs = generatedRef_bitmap.ref_bitmap_at(c);
 			if (generatedFlags & ((-1024 << 0) | (-1024 << /* XXX check "UNINTERESTING" from pack bitmaps if available */1))) {
 				continue;
@@ -83,13 +83,13 @@ public class paint_info {
 			if (refs == ((Object)0)) {
 				refs = bitmap;
 			} else {
-					.memcpy(tmp, refs, bitmap_size);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(tmp, refs, bitmap_size);
 					for (i = 0; i < bitmap_nr; i++) {
 						tmp[i] |=  bitmap[i];
 					}
-					if (.memcmp(tmp, refs, bitmap_size)) {
+					if (/*Error: Function owner not recognized*/memcmp(tmp, refs, bitmap_size)) {
 						refs = info.paint_alloc();
-						.memcpy(refs, tmp, bitmap_size);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(refs, tmp, bitmap_size);
 					} 
 			} 
 			if (generatedFlags & (-1024 << 10)) {
@@ -102,7 +102,7 @@ public class paint_info {
 				if (generatedFlags & (-1024 << 0)) {
 					continue;
 				} 
-				.commit_list_insert(generatedItem, head);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/commit_list_insert(generatedItem, head);
 			}
 		}
 		nr = ModernizedCProgram.get_max_object_index();
@@ -128,10 +128,10 @@ public class paint_info {
 	public void setNr_bits(int newNr_bits) {
 		nr_bits = newNr_bits;
 	}
-	public Byte getPools() {
+	public byte[][] getPools() {
 		return pools;
 	}
-	public void setPools(Byte newPools) {
+	public void setPools(byte[][] newPools) {
 		pools = newPools;
 	}
 	public Byte getFree() {

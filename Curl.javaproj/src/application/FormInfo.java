@@ -24,7 +24,7 @@ package application;
 /* used by FormAdd for temporary storage */
 /* used by FormAdd for temporary storage */
 public class FormInfo {
-	private Byte name;
+	private byte[] name;
 	private  name_alloc;
 	private Object namelength;
 	private Byte value;
@@ -41,7 +41,7 @@ public class FormInfo {
 	private curl_slist contentheader;
 	private FormInfo more;
 	
-	public FormInfo(Byte name,  name_alloc, Object namelength, Byte value,  value_alloc, Object contentslength, Byte contenttype,  contenttype_alloc, long flags, Byte buffer, Object bufferlength, Byte showfilename,  showfilename_alloc, Byte userp, curl_slist contentheader, FormInfo more) {
+	public FormInfo(byte[] name,  name_alloc, Object namelength, Byte value,  value_alloc, Object contentslength, Byte contenttype,  contenttype_alloc, long flags, Byte buffer, Object bufferlength, Byte showfilename,  showfilename_alloc, Byte userp, curl_slist contentheader, FormInfo more) {
 		setName(name);
 		setName_alloc(name_alloc);
 		setNamelength(namelength);
@@ -64,7 +64,7 @@ public class FormInfo {
 	
 	public FormInfo AddFormInfo(Byte value, Byte contenttype) {
 		FormInfo form_info = new FormInfo();
-		form_info = .Curl_ccalloc(1, );
+		form_info = /*Error: Function owner not recognized*/Curl_ccalloc(1, /*Error: Unsupported expression*/);
 		if (form_info) {
 			if (value) {
 				form_info.setValue(value);
@@ -130,10 +130,10 @@ public class FormInfo {
 		 *
 		 ***************************************************************************/;
 	}
-	public Byte getName() {
+	public byte[] getName() {
 		return name;
 	}
-	public void setName(Byte newName) {
+	public void setName(byte[] newName) {
 		name = newName;
 	}
 	public  getName_alloc() {

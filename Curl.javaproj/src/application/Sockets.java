@@ -22,11 +22,11 @@ package application;
  *
  ***************************************************************************/
 public class Sockets {
-	private Object sockets;
+	private Object[] sockets;
 	private int count;
 	private int max_count;
 	
-	public Sockets(Object sockets, int count, int max_count) {
+	public Sockets(Object[] sockets, int count, int max_count) {
 		setSockets(sockets);
 		setCount(count);
 		setMax_count(max_count);
@@ -42,7 +42,7 @@ public class Sockets {
 		for (i = 0; i < ModernizedCProgram.sockets.getCount(); ++i) {
 			if (ModernizedCProgram.sockets.getSockets()[i] == fd) {
 				if (i < ModernizedCProgram.sockets.getCount() - 1) {
-					.memmove(ModernizedCProgram.sockets.getSockets()[i], ModernizedCProgram.sockets.getSockets()[i + 1],  * (ModernizedCProgram.sockets.getCount() - (i + 1)));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(ModernizedCProgram.sockets.getSockets()[i], ModernizedCProgram.sockets.getSockets()[i + 1], /*Error: Unsupported expression*/ * (ModernizedCProgram.sockets.getCount() - (i + 1)));
 				} 
 				--ModernizedCProgram.sockets.getCount();
 			} 
@@ -57,17 +57,17 @@ public class Sockets {
 		   * Allocate array storage when required.
 		   */);
 		if (!ModernizedCProgram.sockets.getSockets()) {
-			ModernizedCProgram.sockets.setSockets(.malloc( * -1024));
+			ModernizedCProgram.sockets.setSockets(/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/ * -1024));
 			if (!ModernizedCProgram.sockets.getSockets()) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			ModernizedCProgram.sockets.setMax_count(20);
 		}  else if (ModernizedCProgram.sockets.getCount() + 1 > ModernizedCProgram.sockets.getMax_count()) {
 			 oldptr = ModernizedCProgram.sockets.getSockets();
-			ModernizedCProgram.sockets.setSockets(.realloc(oldptr,  * (ModernizedCProgram.sockets.getMax_count() + 20)));
+			ModernizedCProgram.sockets.setSockets(/*Error: Function owner not recognized*/realloc(oldptr, /*Error: Unsupported expression*/ * (ModernizedCProgram.sockets.getMax_count() + 20)));
 			if (!ModernizedCProgram.sockets.getSockets()) {
 				ModernizedCProgram.sockets.setSockets(/* cleanup in test_cleanup */oldptr);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			ModernizedCProgram.sockets.getMax_count() += 20/*
 			   * Add file descriptor to array.
@@ -80,10 +80,10 @@ public class Sockets {
 	   * To ensure we only have each file descriptor once, we remove it then add
 	   * it again.
 	   */
-	public Object getSockets() {
+	public Object[] getSockets() {
 		return sockets;
 	}
-	public void setSockets(Object newSockets) {
+	public void setSockets(Object[] newSockets) {
 		sockets = newSockets;
 	}
 	public int getCount() {

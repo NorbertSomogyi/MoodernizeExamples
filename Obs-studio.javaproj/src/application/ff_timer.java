@@ -41,7 +41,7 @@ public class ff_timer {
 	}
 	
 	public boolean ff_timer_init(Object callback, Object opaque) {
-		.memset(timer, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(timer, 0, /*Error: Unsupported expression*/);
 		this.setAbort(0);
 		this.setCallback(callback);
 		this.setOpaque(opaque);
@@ -68,7 +68,7 @@ public class ff_timer {
 	}
 	public void ff_timer_free() {
 		Object thread_result;
-		((timer != ((Object)0)) ? (Object)0 : ._assert("timer != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\ff-timer.c", 117));
+		((timer != ((Object)0)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("timer != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\ff-timer.c", 117));
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedMutex);
 		this.setAbort(1);
@@ -83,7 +83,7 @@ public class ff_timer {
 		ModernizedCProgram.pthread_cond_destroy(generatedCond);
 	}
 	public void ff_timer_schedule(Object microseconds) {
-		uint64_t cur_time = .av_gettime();
+		uint64_t cur_time = /*Error: Function owner not recognized*/av_gettime();
 		uint64_t new_wake_time = cur_time + microseconds;
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedMutex);

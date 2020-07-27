@@ -43,19 +43,19 @@ public class win_version_info {
 		if (!ModernizedCProgram.ver_initialize_success) {
 			return 0;
 		} 
-		ModernizedCProgram.os_wcs_to_utf8(lib, 0, utf8_lib, );
-		size = .get_file_version_info_size(lib, ((Object)0));
+		ModernizedCProgram.os_wcs_to_utf8(lib, 0, utf8_lib, /*Error: sizeof expression not supported yet*/);
+		size = /*Error: Function owner not recognized*/get_file_version_info_size(lib, ((Object)0));
 		if (!size) {
 			ModernizedCProgram.blog(LOG_ERROR, "Failed to get %s version info size", utf8_lib);
 			return 0;
 		} 
 		data = ModernizedCProgram.bmalloc(size);
-		if (!.get_file_version_info(lib, 0, size, data)) {
+		if (!/*Error: Function owner not recognized*/get_file_version_info(lib, 0, size, data)) {
 			ModernizedCProgram.blog(LOG_ERROR, "Failed to get %s version info", utf8_lib);
 			ModernizedCProgram.bfree(data);
 			return 0;
 		} 
-		success = .ver_query_value(data, L"\\", (LPVOID)info, len);
+		success = /*Error: Function owner not recognized*/ver_query_value(data, L"\\", (LPVOID)info, len);
 		if (!success || !info || !len) {
 			ModernizedCProgram.blog(LOG_ERROR, "Failed to get %s version info value", utf8_lib);
 			ModernizedCProgram.bfree(data);
@@ -74,7 +74,7 @@ public class win_version_info {
 		win_version_info ver = new win_version_info(0);
 		boolean got_version = false;
 		if (!info) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedWin_version_info = ver.getWin_version_info();
 		if (!got_version) {
@@ -85,16 +85,16 @@ public class win_version_info {
 				DWORD size = new DWORD();
 				DWORD win10_revision = new DWORD();
 				 status = new ();
-				status = .RegOpenKeyW(((HKEY)-1024), L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", ModernizedCProgram.key);
+				status = /*Error: Function owner not recognized*/RegOpenKeyW(((HKEY)-1024), L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", ModernizedCProgram.key);
 				if (status != -1024) {
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
-				size = ;
-				status = .RegQueryValueExW(ModernizedCProgram.key, L"UBR", ((Object)0), ((Object)0), (LPBYTE)win10_revision, size);
+				size = /*Error: sizeof expression not supported yet*/;
+				status = /*Error: Function owner not recognized*/RegQueryValueExW(ModernizedCProgram.key, L"UBR", ((Object)0), ((Object)0), (LPBYTE)win10_revision, size);
 				if (status == -1024) {
 					ver.setWin_version_info((int)win10_revision > generatedWin_version_info ? (int)win10_revision : generatedWin_version_info);
 				} 
-				.RegCloseKey(ModernizedCProgram.key);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/RegCloseKey(ModernizedCProgram.key);
 			} 
 		} 
 		info = ver;
@@ -113,13 +113,13 @@ public class win_version_info {
 	public boolean get_32bit_system_dll_ver(Object system_lib) {
 		wchar_t[] path = new wchar_t();
 		UINT ret = new UINT();
-		ret = .GetSystemDirectoryW(path, 260);
+		ret = /*Error: Function owner not recognized*/GetSystemDirectoryW(path, 260);
 		if (!ret) {
-			ModernizedCProgram.blog(LOG_ERROR, "Failed to get windows 32bit system path: %lu", .GetLastError());
+			ModernizedCProgram.blog(LOG_ERROR, "Failed to get windows 32bit system path: %lu", /*Error: Function owner not recognized*/GetLastError());
 			return 0;
 		} 
-		.wcscat(path, L"\\");
-		.wcscat(path, system_lib);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/wcscat(path, L"\\");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/wcscat(path, system_lib);
 		return ver.get_dll_ver(path);
 	}
 	public int getMajor() {

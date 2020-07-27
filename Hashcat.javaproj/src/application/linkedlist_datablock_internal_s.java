@@ -22,7 +22,7 @@ public class linkedlist_datablock_internal_s {
 	
 	public linkedlist_datablock_internal_s allocate_new_datablock() {
 		linkedlist_datablock_internal ldi = new linkedlist_datablock_internal();
-		ldi = (linkedlist_datablock_internal)(.malloc());
+		ldi = (linkedlist_datablock_internal)(/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/));
 		if (ldi != ((Object)0)) {
 			ldi.setNext_datablock(((Object)0));
 			ldi.setFilled_in_this_block(0);
@@ -36,7 +36,7 @@ public class linkedlist_datablock_internal_s {
 			linkedlist_datablock_internal ldinext = generatedNext_datablock;
 			{ 
 				if (ldi) {
-					.free(ldi);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(ldi);
 				} 
 			}
 			;

@@ -22,21 +22,24 @@ public class traversal_context {
 		/* callee's scratch pad */strbuf csp = new strbuf();
 		csp.strbuf_init(260);
 		commit commit = new commit();
-		Object generatedObject = tree.getObject();
+		object generatedObject = tree.getObject();
+		int generatedFlags = generatedObject.getFlags();
+		int generatedParsed = generatedObject.getParsed();
+		object_id generatedOid = generatedObject.getOid();
 		while ((commit = commit.get_revision(ModernizedCProgram.ctx.getRevs())) != ((Object)0/*
 				 * an uninteresting boundary commit may not have its tree
 				 * parsed yet, but we are not going to show them anyway
 				 */)) {
 			if (!ModernizedCProgram.ctx.getRevs().getTree_objects()) {
 				;
-			}  else if (.repo_get_commit_tree(ModernizedCProgram.the_repository, commit)) {
-				tree tree = .repo_get_commit_tree(ModernizedCProgram.the_repository, commit);
-				generatedObject.getFlags() |=  (-1024 << 25);
+			}  else if (/*Error: Function owner not recognized*/repo_get_commit_tree(ModernizedCProgram.the_repository, commit)) {
+				tree tree = /*Error: Function owner not recognized*/repo_get_commit_tree(ModernizedCProgram.the_repository, commit);
+				generatedFlags |=  (-1024 << 25);
 				ModernizedCProgram.add_pending_tree(ModernizedCProgram.ctx.getRevs(), tree);
-			}  else if (generatedObject.getParsed()) {
-				ModernizedCProgram.die(ModernizedCProgram._("unable to load root tree for commit %s"), ModernizedCProgram.oid_to_hex(generatedObject.getOid()));
+			}  else if (generatedParsed) {
+				ModernizedCProgram.die(ModernizedCProgram._("unable to load root tree for commit %s"), ModernizedCProgram.oid_to_hex(generatedOid));
 			} 
-			.UNRECOGNIZEDFUNCTIONNAME(commit, ModernizedCProgram.ctx.getShow_data());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(commit, ModernizedCProgram.ctx.getShow_data());
 			if (ModernizedCProgram.ctx.getRevs().getTree_blobs_in_commit_order()) {
 				ModernizedCProgram.traverse_trees_and_blobs(ModernizedCProgram.ctx, csp);
 			} 

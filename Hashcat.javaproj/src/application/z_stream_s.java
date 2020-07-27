@@ -1,7 +1,7 @@
 package application;
 
 public class z_stream_s {
-	private Object next_in;
+	private Object[] next_in;
 	private Object avail_in;
 	private Object total_in;
 	private Object next_out;
@@ -16,7 +16,7 @@ public class z_stream_s {
 	private Object adler;
 	private Object reserved;
 	
-	public z_stream_s(Object next_in, Object avail_in, Object total_in, Object next_out, Object avail_out, Object total_out, Byte msg, internal_state state, Object zalloc, Object zfree, Object opaque, int data_type, Object adler, Object reserved) {
+	public z_stream_s(Object[] next_in, Object avail_in, Object total_in, Object next_out, Object avail_out, Object total_out, Byte msg, internal_state state, Object zalloc, Object zfree, Object opaque, int data_type, Object adler, Object reserved) {
 		setNext_in(next_in);
 		setAvail_in(avail_in);
 		setTotal_in(total_in);
@@ -35,296 +35,6 @@ public class z_stream_s {
 	public z_stream_s() {
 	}
 	
-	public int gunpipe(int infile, int outfile) {
-		int ret;
-		int first;
-		int last;
-		int have;
-		int flags;
-		int len;
-		byte next = ((Object)0);
-		ind ind = new ind();
-		ind indp = new ind();
-		outd outd = new outd();
-		ind.setInfile(/* setup input buffer */infile);
-		ind.setInbuf(ModernizedCProgram.inbuf);
-		indp = ind;
-		have = /* decompress concatenated gzip streams *//* no input data read in yet */0;
-		first = /* looking for first gzip header */1;
-		this.setNext_in(/* so Z_BUF_ERROR means EOF */0);
-		Object generatedNext_in = this.getNext_in();
-		Object generatedAvail_in = this.getAvail_in();
-		long generatedCrc = outd.getCrc();
-		long generatedTotal = outd.getTotal();
-		for (; ; ) {
-			if (() == -/* look for the two magic header bytes for a gzip stream */1) {
-				ret = 0;
-				break;
-			} 
-			if (last != 31 || (() != 139 && last != 157)) {
-				this.setMsg((byte)"incorrect header check");
-				ret = first ? (true) : (true);
-				break;
-			} 
-			first = /* next non-header is junk */0;
-			if (last == /* process a compress (LZW) file -- can't be concatenated after this */157) {
-				ret = ModernizedCProgram.lunpipe(have, next, indp, outfile, strm);
-				break;
-			} 
-			ret = (/* process remainder of gzip header */true);
-			if (() != /* only deflate method allowed */8) {
-				if (last == -1) {
-					break;
-				} 
-				this.setMsg((byte)"unknown compression method");
-				ret = (true);
-				break;
-			} 
-			flags = ();
-			();
-			();
-			();
-			();
-			();
-			();
-			if (last == -1) {
-				break;
-			} 
-			if (flags & -1024) {
-				this.setMsg((byte)"unknown header flags set");
-				ret = (true);
-				break;
-			} 
-			if (flags & /* extra field */4) {
-				len = ();
-				len += (int)(()) << 8;
-				if (last == -1) {
-					break;
-				} 
-				while (len > have) {
-					len -= have;
-					have = 0;
-					if (() == -1) {
-						break;
-					} 
-					len--;
-				}
-				if (last == -1) {
-					break;
-				} 
-				have -= len;
-				next += len;
-			} 
-			if (flags & /* file name */8) {
-				while (() != 0 && last != -1) {
-					;
-				}
-			} 
-			if (flags & /* comment */16) {
-				while (() != 0 && last != -1) {
-					;
-				}
-			} 
-			if (flags & /* header crc */2) {
-				();
-				();
-			} 
-			if (last == -1) {
-				break;
-			} 
-			outd.setOutfile(/* set up output */outfile);
-			outd.setCheck(1);
-			outd.setCrc(ModernizedCProgram.crc32(-1024, 0, 0));
-			outd.setTotal(0);
-			this.setNext_in(/* decompress data to output */next);
-			this.setAvail_in(have);
-			ret = ModernizedCProgram.inflateBack(strm, in, indp, out, outd);
-			if (ret != 1) {
-				break;
-			} 
-			next = generatedNext_in;
-			have = generatedAvail_in;
-			this.setNext_in(/* so Z_BUF_ERROR means EOF */0);
-			ret = (/* check trailer */true);
-			if (() != (int)(generatedCrc & -1024) || () != (int)((generatedCrc >> 8) & -1024) || () != (int)((generatedCrc >> 16) & -1024) || () != (int)((generatedCrc >> 24) & -1024)) {
-				if (last != -/* crc error */1) {
-					this.setMsg((byte)"incorrect data check");
-					ret = (true);
-				} 
-				break;
-			} 
-			if (() != (int)(generatedTotal & -1024) || () != (int)((generatedTotal >> 8) & -1024) || () != (int)((generatedTotal >> 16) & -1024) || () != (int)((generatedTotal >> 24) & -1024)) {
-				if (last != -/* length error */1) {
-					this.setMsg((byte)"incorrect length check");
-					ret = (true);
-				} 
-				break;
-			} 
-		}
-		return /* clean up and return */ret/* Copy file attributes, from -> to, as best we can.  This is best effort, so
-		   no errors are reported.  The mode bits, including suid, sgid, and the sticky
-		   bit are copied (if allowed), the owner's user id and group id are copied
-		   (again if allowed), and the access and modify times are copied. */;
-	}
-	public int gunzip(byte inname, byte outname, int test) {
-		int ret;
-		int infile;
-		int outfile;
-		if (inname == ((Object)0) || inname == /* open files */0) {
-			inname = "-";
-			infile = /* stdin */0;
-		} else {
-				infile = ModernizedCProgram.open(inname, 0, 0);
-				if (infile == -1) {
-					.fprintf((_iob[2]), "gun cannot open %s\n", inname);
-					return 0;
-				} 
-		} 
-		if (test) {
-			outfile = -1;
-		}  else if (outname == ((Object)0) || outname == 0) {
-			outname = "-";
-			outfile = /* stdout */1;
-		} else {
-				outfile = ModernizedCProgram.open(outname, -1024 | -1024 | 1, 666);
-				if (outfile == -1) {
-					ModernizedCProgram.close(infile);
-					.fprintf((_iob[2]), "gun cannot create %s\n", outname);
-					return 0;
-				} 
-		} 
-		(._errno()) = 0;
-		ret = strm.gunpipe(infile, /* decompress */outfile);
-		if (outfile > 2) {
-			ModernizedCProgram.close(outfile);
-		} 
-		if (infile > 2) {
-			ModernizedCProgram.close(infile);
-		} 
-		Byte generatedMsg = this.getMsg();
-		Object generatedNext_in = this.getNext_in();
-		switch (/* interpret result */ret) {
-		case (true):
-				if (infile > 2 && outfile > 2) {
-					ModernizedCProgram.copymeta(inname, /* copy attributes */outname);
-					.unlink(inname);
-				} 
-				if (ret == (true)) {
-					.fprintf((_iob[2]), "gun warning: trailing garbage ignored in %s\n", inname);
-				} 
-				break;
-		case (true):
-				if (outfile > 2) {
-					.unlink(outname);
-				} 
-				.fprintf((_iob[2]), "gun out of memory error--aborting\n");
-				return 1;
-		case (true):
-				if (outfile > 2) {
-					.unlink(outname);
-				} 
-				if (generatedNext_in != 0) {
-					.fprintf((_iob[2]), "gun write error on %s: %s\n", outname, .strerror((._errno())));
-				}  else if ((._errno())) {
-					.fprintf((_iob[2]), "gun read error on %s: %s\n", inname, .strerror((._errno())));
-				} else {
-						.fprintf((_iob[2]), "gun unexpected end of file on %s\n", inname);
-				} 
-				break;
-		case 0:
-		case (true):
-				if (outfile > 2) {
-					.unlink(outname);
-				} 
-				.fprintf((_iob[2]), "gun data error on %s: %s\n", inname, generatedMsg);
-				break;
-		default:
-				if (outfile > 2) {
-					.unlink(outname);
-				} 
-				.fprintf((_iob[2]), "gun internal error--aborting\n");
-				return 1;
-		}
-		return 0;
-	}
-	/* set up a controlled memory allocation space for monitoring, set the stream
-	   parameters to the controlled routines, with opaque pointing to the space */
-	public void mem_setup() {
-		mem_zone zone = new mem_zone();
-		zone = .malloc();
-		((zone != ((Object)0)) ? (Object)0 : ._assert("zone != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Hashcat\\src\\infcover.c", 163));
-		zone.setFirst(((Object)0));
-		zone.setTotal(0);
-		zone.setHighwater(0);
-		zone.setLimit(0);
-		zone.setNotlifo(0);
-		zone.setRogue(0);
-		this.setOpaque(zone);
-		this.setZalloc(mem_alloc);
-		this.setZfree(mem_free);
-	}
-	/* set a limit on the total memory allocation, or 0 to remove the limit */
-	public void mem_limit(Object limit) {
-		Object generatedOpaque = this.getOpaque();
-		mem_zone zone = generatedOpaque;
-		zone.setLimit(limit);
-	}
-	/* show the current total requested allocations in bytes */
-	public void mem_used(Byte prefix) {
-		Object generatedOpaque = this.getOpaque();
-		mem_zone zone = generatedOpaque;
-		Object generatedTotal = zone.getTotal();
-		.fprintf((_iob[2]), "%s: %lu allocated\n", prefix, generatedTotal);
-	}
-	/* show the high water allocation in bytes */
-	public void mem_high(Byte prefix) {
-		Object generatedOpaque = this.getOpaque();
-		mem_zone zone = generatedOpaque;
-		Object generatedHighwater = zone.getHighwater();
-		.fprintf((_iob[2]), "%s: %lu high water mark\n", prefix, generatedHighwater);
-	}
-	/* release the memory allocation zone -- if there are any surprises, notify */
-	public void mem_done(Byte prefix) {
-		int count = 0;
-		mem_item item = new mem_item();
-		mem_item next = new mem_item();
-		Object generatedOpaque = this.getOpaque();
-		mem_zone zone = generatedOpaque;
-		strm.mem_high(/* show high water mark */prefix);
-		mem_item generatedFirst = zone.getFirst();
-		item = generatedFirst;
-		Object generatedPtr = item.getPtr();
-		mem_item generatedNext = item.getNext();
-		while (item != ((Object)0)) {
-			.free(generatedPtr);
-			next = generatedNext;
-			.free(item);
-			item = next;
-			count++;
-		}
-		Object generatedTotal = zone.getTotal();
-		if (count || generatedTotal) {
-			.fprintf((_iob[2]), "** %s: %lu bytes in %d blocks not freed\n", prefix, generatedTotal, count);
-		} 
-		int generatedNotlifo = zone.getNotlifo();
-		if (generatedNotlifo) {
-			.fprintf((_iob[2]), "** %s: %d frees not LIFO\n", prefix, generatedNotlifo);
-		} 
-		int generatedRogue = zone.getRogue();
-		if (generatedRogue) {
-			.fprintf((_iob[2]), "** %s: %d frees not recognized\n", prefix, generatedRogue);
-		} 
-		.free(/* free the zone and delete from the stream */zone);
-		this.setOpaque(0);
-		this.setZalloc(0);
-		this.setZfree(0/* -- inflate test routines -- *//* Decode a hexadecimal string, set *len to length, in[] to the bytes.  This
-		   decodes liberally, in that hex digits can be adjacent, in which case two in
-		   a row writes a byte.  Or they can be delimited by any non-hex character,
-		   where the delimiters are ignored except when a single hex digit is followed
-		   by a delimiter, where that single digit writes a byte.  The returned data is
-		   allocated and must eventually be freed.  NULL is returned if out of memory.
-		   If the length is not needed, then len can be NULL. */);
-	}
 	public int gzscan(Byte name, int level) {
 		int ret;
 		int lastbit;
@@ -338,12 +48,12 @@ public class z_stream_s {
 		off_t end = new off_t();
 		file gz = new file();
 		gz.setName(/* open gzip file */name);
-		gz.setFd(ModernizedCProgram.open(name, 2, 0));
+		gz.setFd(/*Error: Function owner not recognized*/open(name, 2, 0));
 		Object generatedFd = gz.getFd();
 		if (generatedFd == -1) {
 			ModernizedCProgram.bye("cannot open ", name);
 		} 
-		gz.setBuf(.malloc((-1024 << 14)));
+		gz.setBuf(/*Error: Function owner not recognized*/malloc((-1024 << 14)));
 		Object generatedBuf = gz.getBuf();
 		if (generatedBuf == ((Object)0)) {
 			ModernizedCProgram.bye("out of memory", "");
@@ -351,20 +61,20 @@ public class z_stream_s {
 		gz.setSize(14);
 		gz.setLeft(0);
 		/* skip gzip header */gz.gzheader();
-		window = .malloc(/* prepare to decompress */-1024);
+		window = /*Error: Function owner not recognized*/malloc(/* prepare to decompress */-1024);
 		if (window == ((Object)0)) {
 			ModernizedCProgram.bye("out of memory", "");
 		} 
 		this.setZalloc(0);
 		this.setZfree(0);
 		this.setOpaque(0);
-		ret = ModernizedCProgram.inflateInit2_((strm), (true), "1.2.11", (int));
+		ret = ModernizedCProgram.inflateInit2_((strm), (true), "1.2.11", (int)/*Error: Unsupported expression*/);
 		if (ret != 0) {
 			ModernizedCProgram.bye("out of memory", " or library mismatch");
 		} 
 		lastbit = /* decompress the deflate stream, saving append information */0;
 		Object generatedLeft = gz.getLeft();
-		lastoff = .lseek(generatedFd, -1024, 1) - generatedLeft;
+		lastoff = /*Error: Function owner not recognized*/lseek(generatedFd, -1024, 1) - generatedLeft;
 		left = 0;
 		this.setAvail_in(generatedLeft);
 		Object generatedNext = gz.getNext();
@@ -404,15 +114,15 @@ public class z_stream_s {
 					left = generatedData_type & -1024;
 				} else {
 						lastbit = generatedData_type & -1024;
-						lastoff = .lseek(generatedFd, -1024, 1) - generatedAvail_in;
+						lastoff = /*Error: Function owner not recognized*/lseek(generatedFd, -1024, 1) - generatedAvail_in;
 				} 
 			} 
 		} while (ret != 1);
 		ModernizedCProgram.inflateEnd(strm);
 		gz.setLeft(generatedAvail_in);
-		Object generatedNext_in = this.getNext_in();
+		Object[] generatedNext_in = this.getNext_in();
 		gz.setNext(generatedNext_in);
-		end = .lseek(generatedFd, -1024, 1) - generatedLeft;
+		end = /*Error: Function owner not recognized*/lseek(generatedFd, -1024, 1) - generatedLeft;
 		if (crc != /* check gzip trailer and save total for deflate */gz.read4()) {
 			ModernizedCProgram.bye("invalid compressed data--crc mismatch in ", name);
 		} 
@@ -422,22 +132,22 @@ public class z_stream_s {
 			ModernizedCProgram.bye("invalid compressed data--length mismatch in", name);
 		} 
 		if (generatedLeft || /* if not at end of file, warn */gz.readin()) {
-			.fprintf((_iob[2]), "gzappend warning: junk at end of gzip file overwritten\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gzappend warning: junk at end of gzip file overwritten\n");
 		} 
-		.lseek(generatedFd, lastoff - (lastbit != 0), /* clear last block bit */0);
-		if (.read(generatedFd, generatedBuf, 1) != 1) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lseek(generatedFd, lastoff - (lastbit != 0), /* clear last block bit */0);
+		if (/*Error: Function owner not recognized*/read(generatedFd, generatedBuf, 1) != 1) {
 			ModernizedCProgram.bye("reading after seek on ", name);
 		} 
 		generatedBuf = (byte)(generatedBuf ^ (1 << ((8 - lastbit) & 7)));
-		.lseek(generatedFd, --1024, 1);
-		if (.write(generatedFd, generatedBuf, 1) != 1) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lseek(generatedFd, --1024, 1);
+		if (/*Error: Function owner not recognized*/write(generatedFd, generatedBuf, 1) != 1) {
 			ModernizedCProgram.bye("writing after seek to ", name);
 		} 
 		if (/* if window wrapped, build dictionary from window by rotating */full) {
 			ModernizedCProgram.rotate(window, -1024, have);
 			have = -1024;
 		} 
-		ret = ModernizedCProgram.deflateInit2_((strm), (level), (true), (true), (true), (false), "1.2.11", (int)/* set up deflate stream with window, crc, total_in, and leftover bits */);
+		ret = ModernizedCProgram.deflateInit2_((strm), (level), (true), (true), (true), (false), "1.2.11", (int)/*Error: Unsupported expression*//* set up deflate stream with window, crc, total_in, and leftover bits */);
 		if (ret != 0) {
 			ModernizedCProgram.bye("out of memory", "");
 		} 
@@ -445,15 +155,15 @@ public class z_stream_s {
 		this.setAdler(crc);
 		this.setTotal_in(tot);
 		if (left) {
-			.lseek(generatedFd, --end, 0);
-			if (.read(generatedFd, generatedBuf, 1) != 1) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lseek(generatedFd, --end, 0);
+			if (/*Error: Function owner not recognized*/read(generatedFd, generatedBuf, 1) != 1) {
 				ModernizedCProgram.bye("reading after seek on ", name);
 			} 
 			ModernizedCProgram.deflatePrime(strm, 8 - left, generatedBuf);
 		} 
-		.lseek(generatedFd, end, 0);
-		.free(/* clean up and return */window);
-		.free(generatedBuf);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/lseek(generatedFd, end, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(/* clean up and return */window);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuf);
 		return generatedFd;
 	}
 	/* append file "name" to gzip file gd using deflate stream strm -- if last
@@ -467,22 +177,22 @@ public class z_stream_s {
 		byte out;
 		fd = /* open file to compress and append */0;
 		if (name != ((Object)0)) {
-			fd = ModernizedCProgram.open(name, 0, 0);
+			fd = /*Error: Function owner not recognized*/open(name, 0, 0);
 			if (fd == -1) {
-				.fprintf((_iob[2]), "gzappend warning: %s not found, skipping ...\n", name);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gzappend warning: %s not found, skipping ...\n", name);
 			} 
 		} 
-		in = .malloc((-1024 << /* allocate buffers */14));
-		out = .malloc((-1024 << 14));
+		in = /*Error: Function owner not recognized*/malloc((-1024 << /* allocate buffers */14));
+		out = /*Error: Function owner not recognized*/malloc((-1024 << 14));
 		if (in == ((Object)0) || out == ((Object)0)) {
 			ModernizedCProgram.bye("out of memory", "");
 		} 
 		Object generatedAdler = this.getAdler();
 		Object generatedAvail_out = this.getAvail_out();
 		/* compress input file and append to gzip file */do {
-			len = .read(fd, in, (-1024 << /* get more input */14));
+			len = /*Error: Function owner not recognized*/read(fd, in, (-1024 << /* get more input */14));
 			if (len == -1) {
-				.fprintf((_iob[2]), "gzappend warning: error reading %s, skipping rest ...\n", name);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gzappend warning: error reading %s, skipping rest ...\n", name);
 				len = 0;
 			} 
 			this.setAvail_in((int)len);
@@ -496,7 +206,7 @@ public class z_stream_s {
 				ret = ModernizedCProgram.deflate(strm, last && len == 0 ? 4 : 0);
 				left = (-1024 << 14) - generatedAvail_out;
 				while (left) {
-					len = .write(gd, out + (-1024 << 14) - generatedAvail_out - left, left);
+					len = /*Error: Function owner not recognized*/write(gd, out + (-1024 << 14) - generatedAvail_out - left, left);
 					if (len == -1) {
 						ModernizedCProgram.bye("writing gzip file", "");
 					} 
@@ -517,22 +227,100 @@ public class z_stream_s {
 			out[7] = (byte)(generatedTotal_in >> 24);
 			len = 8;
 			do {
-				ret = .write(gd, out + 8 - len, len);
+				ret = /*Error: Function owner not recognized*/write(gd, out + 8 - len, len);
 				if (ret == -1) {
 					ModernizedCProgram.bye("writing gzip file", "");
 				} 
 				len -= ret;
 			} while (len);
-			ModernizedCProgram.close(gd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(gd);
 		} 
-		.free(/* clean up and return */out);
-		.free(in);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(/* clean up and return */out);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(in);
 		if (fd > 0) {
-			ModernizedCProgram.close(fd/* process the compression level option if present, scan the gzip file, and
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd/* process the compression level option if present, scan the gzip file, and
 			   append the specified files, or append the data from stdin if no other file
 			   names are provided on the command line -- the gzip file must be writable
 			   and seekable */);
 		} 
+	}
+	/* set up a controlled memory allocation space for monitoring, set the stream
+	   parameters to the controlled routines, with opaque pointing to the space */
+	public void mem_setup() {
+		mem_zone zone = new mem_zone();
+		zone = /*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
+		((zone != ((Object)0)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("zone != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Hashcat\\src\\infcover.c", 163));
+		zone.setFirst(((Object)0));
+		zone.setTotal(0);
+		zone.setHighwater(0);
+		zone.setLimit(0);
+		zone.setNotlifo(0);
+		zone.setRogue(0);
+		this.setOpaque(zone);
+		this.setZalloc(mem_alloc);
+		this.setZfree(mem_free);
+	}
+	/* set a limit on the total memory allocation, or 0 to remove the limit */
+	public void mem_limit(Object limit) {
+		Object generatedOpaque = this.getOpaque();
+		mem_zone zone = generatedOpaque;
+		zone.setLimit(limit);
+	}
+	/* show the current total requested allocations in bytes */
+	public void mem_used(Byte prefix) {
+		Object generatedOpaque = this.getOpaque();
+		mem_zone zone = generatedOpaque;
+		Object generatedTotal = zone.getTotal();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s: %lu allocated\n", prefix, generatedTotal);
+	}
+	/* show the high water allocation in bytes */
+	public void mem_high(Byte prefix) {
+		Object generatedOpaque = this.getOpaque();
+		mem_zone zone = generatedOpaque;
+		Object generatedHighwater = zone.getHighwater();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s: %lu high water mark\n", prefix, generatedHighwater);
+	}
+	/* release the memory allocation zone -- if there are any surprises, notify */
+	public void mem_done(Byte prefix) {
+		int count = 0;
+		mem_item item = new mem_item();
+		mem_item next = new mem_item();
+		Object generatedOpaque = this.getOpaque();
+		mem_zone zone = generatedOpaque;
+		strm.mem_high(/* show high water mark */prefix);
+		mem_item generatedFirst = zone.getFirst();
+		item = generatedFirst;
+		Object generatedPtr = item.getPtr();
+		mem_item generatedNext = item.getNext();
+		while (item != ((Object)0)) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedPtr);
+			next = generatedNext;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(item);
+			item = next;
+			count++;
+		}
+		Object generatedTotal = zone.getTotal();
+		if (count || generatedTotal) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "** %s: %lu bytes in %d blocks not freed\n", prefix, generatedTotal, count);
+		} 
+		int generatedNotlifo = zone.getNotlifo();
+		if (generatedNotlifo) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "** %s: %d frees not LIFO\n", prefix, generatedNotlifo);
+		} 
+		int generatedRogue = zone.getRogue();
+		if (generatedRogue) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "** %s: %d frees not recognized\n", prefix, generatedRogue);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(/* free the zone and delete from the stream */zone);
+		this.setOpaque(0);
+		this.setZalloc(0);
+		this.setZfree(0/* -- inflate test routines -- *//* Decode a hexadecimal string, set *len to length, in[] to the bytes.  This
+		   decodes liberally, in that hex digits can be adjacent, in which case two in
+		   a row writes a byte.  Or they can be delimited by any non-hex character,
+		   where the delimiters are ignored except when a single hex digit is followed
+		   by a delimiter, where that single digit writes a byte.  The returned data is
+		   allocated and must eventually be freed.  NULL is returned if out of memory.
+		   If the length is not needed, then len can be NULL. */);
 	}
 	/* infback9.c -- inflate deflate64 data using a call-back interface
 	 * Copyright (C) 1995-2008 Mark Adler
@@ -544,9 +332,9 @@ public class z_stream_s {
 	
 	   window is a user-supplied window and output buffer that is 64K bytes.
 	 */
-	public int inflateBack9Init_(Byte window, Object version, int stream_size) {
+	public int inflateBack9Init_(Byte window, Object[] version, int stream_size) {
 		inflate_state state = new inflate_state();
-		if (version == 0 || version[0] != "1.2.11"[0] || stream_size != (int)()) {
+		if (version == 0 || version[0] != "1.2.11"[0] || stream_size != (int)(/*Error: Unsupported expression*/)) {
 			return (true);
 		} 
 		if (strm == 0 || window == 0) {
@@ -563,7 +351,7 @@ public class z_stream_s {
 			this.setZfree(ModernizedCProgram.zcfree);
 		} 
 		Object generatedOpaque = (strm).getOpaque();
-		state = (inflate_state).UNRECOGNIZEDFUNCTIONNAME(generatedOpaque, (true), ());
+		state = (inflate_state)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOpaque, (true), (/*Error: Unsupported expression*/));
 		if (state == 0) {
 			return (true);
 		} 
@@ -660,7 +448,7 @@ public class z_stream_s {
 		wrap = 0;
 		Object generatedWindow = state.getWindow();
 		window = generatedWindow;
-		Object generatedNext_in = this.getNext_in();
+		Object[] generatedNext_in = this.getNext_in();
 		next = generatedNext_in;
 		Object generatedAvail_in = this.getAvail_in();
 		have = next != 0 ? generatedAvail_in : 0;
@@ -681,7 +469,7 @@ public class z_stream_s {
 		Object generatedBits = here.getBits();
 		Object generatedVal = here.getVal();
 		Object generatedOp = here.getOp();
-		/* Inflate until end of block marked as last */for (; ; ) {
+		/* Inflate until end of block marked as last */for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			switch (mode) {
 			case .STORED:
 					do {
@@ -747,7 +535,7 @@ public class z_stream_s {
 						if (copy > left) {
 							copy = left;
 						} 
-						.memcpy(put, next, copy);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(put, next, copy);
 						have -= copy;
 						next += copy;
 						left -= copy;
@@ -757,11 +545,67 @@ public class z_stream_s {
 					;
 					mode = .TYPE;
 					break;
-			case .BAD:
-					ret = (true);
-					;
+			case .TYPE:
+					if (/* determine and dispatch block type */lastblock) {
+						do {
+							hold >>=  bits & 7;
+							bits -= bits & 7;
+						} while (0);
+						mode = .DONE;
+						break;
+					} 
+					do {
+						while (bits < (int)(true)) {
+							do {
+								do {
+									if (have == 0) {
+										have = ModernizedCProgram.in(in_desc, next);
+										if (have == 0) {
+											next = 0;
+											ret = (true);
+											;
+										} 
+									} 
+								} while (0);
+								have--;
+								hold += (long)(next++) << bits;
+								bits += 8;
+							} while (0);
+						}
+					} while (0);
+					lastblock = ((int)hold & ((-1024 << (true)) - 1));
+					do {
+						hold >>=  (true);
+						bits -= (int)(true);
+					} while (0);
+					switch (((int)hold & ((-1024 << (true)) - 1))) {
+					case /* fixed block */1:
+							lencode = lenfix;
+							lenbits = 9;
+							distcode = distfix;
+							distbits = 5;
+							;
+							mode = /* decode codes */.LEN;
+							break;
+					case 3:
+							this.setMsg((byte)"invalid block type");
+							mode = .BAD;
+					case /* stored block */0:
+							;
+							mode = .STORED;
+							break;
+					case /* dynamic block */2:
+							;
+							mode = .TABLE;
+							break;
+					}
+					do {
+						hold >>=  (true);
+						bits -= (int)(true);
+					} while (0);
+					break;
 			case .LEN/* get a literal, length, or end-of-block code */:
-					for (; ; ) {
+					for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 						here = lencode[((int)hold & ((-1024 << (lenbits)) - 1))];
 						if ((int)(generatedBits) <= bits) {
 							break;
@@ -784,7 +628,7 @@ public class z_stream_s {
 					}
 					if (generatedOp && (generatedOp & -1024) == 0) {
 						last = here;
-						for (; ; ) {
+						for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 							here = lencode[generatedVal + (((int)hold & ((-1024 << (generatedBits + generatedOp)) - 1)) >> generatedBits)];
 							if ((int)(generatedBits + generatedBits) <= bits) {
 								break;
@@ -871,7 +715,7 @@ public class z_stream_s {
 						} while (0);
 					} 
 					;
-					for (; ; ) {
+					for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 						here = distcode[((int)hold & ((-1024 << (distbits)) - 1))];
 						if ((int)(generatedBits) <= bits) {
 							break;
@@ -894,7 +738,7 @@ public class z_stream_s {
 					}
 					if ((generatedOp & -1024) == 0) {
 						last = here;
-						for (; ; ) {
+						for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 							here = distcode[generatedVal + (((int)hold & ((-1024 << (generatedBits + generatedOp)) - 1)) >> generatedBits)];
 							if ((int)(generatedBits + generatedBits) <= bits) {
 								break;
@@ -993,73 +837,9 @@ public class z_stream_s {
 						} while (--copy);
 					} while (length != 0);
 					break;
-			case .DONE:
-					ret = /* inflate stream terminated properly -- write leftover output */1;
-					if (left < -1024) {
-						if (ModernizedCProgram.out(out_desc, window, (int)(-1024 - left))) {
-							ret = (true);
-						} 
-					} 
+			case .BAD:
+					ret = (true);
 					;
-			case .TYPE:
-					if (/* determine and dispatch block type */lastblock) {
-						do {
-							hold >>=  bits & 7;
-							bits -= bits & 7;
-						} while (0);
-						mode = .DONE;
-						break;
-					} 
-					do {
-						while (bits < (int)(true)) {
-							do {
-								do {
-									if (have == 0) {
-										have = ModernizedCProgram.in(in_desc, next);
-										if (have == 0) {
-											next = 0;
-											ret = (true);
-											;
-										} 
-									} 
-								} while (0);
-								have--;
-								hold += (long)(next++) << bits;
-								bits += 8;
-							} while (0);
-						}
-					} while (0);
-					lastblock = ((int)hold & ((-1024 << (true)) - 1));
-					do {
-						hold >>=  (true);
-						bits -= (int)(true);
-					} while (0);
-					switch (((int)hold & ((-1024 << (true)) - 1))) {
-					case /* stored block */0:
-							;
-							mode = .STORED;
-							break;
-					case /* dynamic block */2:
-							;
-							mode = .TABLE;
-							break;
-					case 3:
-							this.setMsg((byte)"invalid block type");
-							mode = .BAD;
-					case /* fixed block */1:
-							lencode = lenfix;
-							lenbits = 9;
-							distcode = distfix;
-							distbits = 5;
-							;
-							mode = /* decode codes */.LEN;
-							break;
-					}
-					do {
-						hold >>=  (true);
-						bits -= (int)(true);
-					} while (0);
-					break;
 			case .TABLE:
 					do {
 						while (bits < (int)(true)) {
@@ -1143,7 +923,7 @@ public class z_stream_s {
 					;
 					state.setHave(/* get length and distance code code lengths */0);
 					while (generatedHave < generatedNlen + generatedNdist) {
-						for (; ; ) {
+						for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 							here = lencode[((int)hold & ((-1024 << (lenbits)) - 1))];
 							if ((int)(generatedBits) <= bits) {
 								break;
@@ -1323,6 +1103,14 @@ public class z_stream_s {
 					} 
 					;
 					mode = .LEN;
+			case .DONE:
+					ret = /* inflate stream terminated properly -- write leftover output */1;
+					if (left < -1024) {
+						if (ModernizedCProgram.out(out_desc, window, (int)(-1024 - left))) {
+							ret = (true);
+						} 
+					} 
+					;
 			default:
 					ret = (true);
 					;
@@ -1338,15 +1126,227 @@ public class z_stream_s {
 			return (true);
 		} 
 		Object generatedOpaque = (strm).getOpaque();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedOpaque, (voidpf)(generatedState));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOpaque, (voidpf)(generatedState));
 		this.setState(0);
 		;
 		return 0;
 	}
-	public Object getNext_in() {
+	public int gunpipe(int infile, int outfile) {
+		int ret;
+		int first;
+		int last;
+		int have;
+		int flags;
+		int len;
+		byte next = ((Object)0);
+		ind ind = new ind();
+		ind indp = new ind();
+		outd outd = new outd();
+		ind.setInfile(/* setup input buffer */infile);
+		ind.setInbuf(ModernizedCProgram.inbuf);
+		indp = ind;
+		have = /* decompress concatenated gzip streams *//* no input data read in yet */0;
+		first = /* looking for first gzip header */1;
+		this.setNext_in(/* so Z_BUF_ERROR means EOF */0);
+		Object[] generatedNext_in = this.getNext_in();
+		Object generatedAvail_in = this.getAvail_in();
+		long generatedCrc = outd.getCrc();
+		long generatedTotal = outd.getTotal();
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+			if (() == -/* look for the two magic header bytes for a gzip stream */1) {
+				ret = 0;
+				break;
+			} 
+			if (last != 31 || (() != 139 && last != 157)) {
+				this.setMsg((byte)"incorrect header check");
+				ret = first ? (true) : (true);
+				break;
+			} 
+			first = /* next non-header is junk */0;
+			if (last == /* process a compress (LZW) file -- can't be concatenated after this */157) {
+				ret = ModernizedCProgram.lunpipe(have, next, indp, outfile, strm);
+				break;
+			} 
+			ret = (/* process remainder of gzip header */true);
+			if (() != /* only deflate method allowed */8) {
+				if (last == -1) {
+					break;
+				} 
+				this.setMsg((byte)"unknown compression method");
+				ret = (true);
+				break;
+			} 
+			flags = ();
+			();
+			();
+			();
+			();
+			();
+			();
+			if (last == -1) {
+				break;
+			} 
+			if (flags & -1024) {
+				this.setMsg((byte)"unknown header flags set");
+				ret = (true);
+				break;
+			} 
+			if (flags & /* extra field */4) {
+				len = ();
+				len += (int)(()) << 8;
+				if (last == -1) {
+					break;
+				} 
+				while (len > have) {
+					len -= have;
+					have = 0;
+					if (() == -1) {
+						break;
+					} 
+					len--;
+				}
+				if (last == -1) {
+					break;
+				} 
+				have -= len;
+				next += len;
+			} 
+			if (flags & /* file name */8) {
+				while (() != 0 && last != -1) {
+					;
+				}
+			} 
+			if (flags & /* comment */16) {
+				while (() != 0 && last != -1) {
+					;
+				}
+			} 
+			if (flags & /* header crc */2) {
+				();
+				();
+			} 
+			if (last == -1) {
+				break;
+			} 
+			outd.setOutfile(/* set up output */outfile);
+			outd.setCheck(1);
+			outd.setCrc(ModernizedCProgram.crc32(-1024, 0, 0));
+			outd.setTotal(0);
+			this.setNext_in(/* decompress data to output */next);
+			this.setAvail_in(have);
+			ret = ModernizedCProgram.inflateBack(strm, in, indp, out, outd);
+			if (ret != 1) {
+				break;
+			} 
+			next = generatedNext_in;
+			have = generatedAvail_in;
+			this.setNext_in(/* so Z_BUF_ERROR means EOF */0);
+			ret = (/* check trailer */true);
+			if (() != (int)(generatedCrc & -1024) || () != (int)((generatedCrc >> 8) & -1024) || () != (int)((generatedCrc >> 16) & -1024) || () != (int)((generatedCrc >> 24) & -1024)) {
+				if (last != -/* crc error */1) {
+					this.setMsg((byte)"incorrect data check");
+					ret = (true);
+				} 
+				break;
+			} 
+			if (() != (int)(generatedTotal & -1024) || () != (int)((generatedTotal >> 8) & -1024) || () != (int)((generatedTotal >> 16) & -1024) || () != (int)((generatedTotal >> 24) & -1024)) {
+				if (last != -/* length error */1) {
+					this.setMsg((byte)"incorrect length check");
+					ret = (true);
+				} 
+				break;
+			} 
+		}
+		return /* clean up and return */ret/* Copy file attributes, from -> to, as best we can.  This is best effort, so
+		   no errors are reported.  The mode bits, including suid, sgid, and the sticky
+		   bit are copied (if allowed), the owner's user id and group id are copied
+		   (again if allowed), and the access and modify times are copied. */;
+	}
+	public int gunzip(Byte inname, Byte outname, int test) {
+		int ret;
+		int infile;
+		int outfile;
+		if (inname == ((Object)0) || inname == /* open files */0) {
+			inname = "-";
+			infile = /* stdin */0;
+		} else {
+				infile = /*Error: Function owner not recognized*/open(inname, 0, 0);
+				if (infile == -1) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun cannot open %s\n", inname);
+					return 0;
+				} 
+		} 
+		if (test) {
+			outfile = -1;
+		}  else if (outname == ((Object)0) || outname == 0) {
+			outname = "-";
+			outfile = /* stdout */1;
+		} else {
+				outfile = /*Error: Function owner not recognized*/open(outname, -1024 | -1024 | 1, 666);
+				if (outfile == -1) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(infile);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun cannot create %s\n", outname);
+					return 0;
+				} 
+		} 
+		(/*Error: Function owner not recognized*/_errno()) = 0;
+		ret = strm.gunpipe(infile, /* decompress */outfile);
+		if (outfile > 2) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(outfile);
+		} 
+		if (infile > 2) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(infile);
+		} 
+		Byte generatedMsg = this.getMsg();
+		Object[] generatedNext_in = this.getNext_in();
+		switch (/* interpret result */ret) {
+		case (true):
+				if (outfile > 2) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(outname);
+				} 
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun data error on %s: %s\n", inname, generatedMsg);
+				break;
+		case (true):
+				if (outfile > 2) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(outname);
+				} 
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun out of memory error--aborting\n");
+				return 1;
+		case (true):
+				if (outfile > 2) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(outname);
+				} 
+				if (generatedNext_in != 0) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun write error on %s: %s\n", outname, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+				}  else if ((/*Error: Function owner not recognized*/_errno())) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun read error on %s: %s\n", inname, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
+				} else {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun unexpected end of file on %s\n", inname);
+				} 
+				break;
+		case 0:
+		case (true):
+				if (infile > 2 && outfile > 2) {
+					ModernizedCProgram.copymeta(inname, /* copy attributes */outname);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(inname);
+				} 
+				if (ret == (true)) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun warning: trailing garbage ignored in %s\n", inname);
+				} 
+				break;
+		default:
+				if (outfile > 2) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(outname);
+				} 
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun internal error--aborting\n");
+				return 1;
+		}
+		return 0;
+	}
+	public Object[] getNext_in() {
 		return next_in;
 	}
-	public void setNext_in(Object newNext_in) {
+	public void setNext_in(Object[] newNext_in) {
 		next_in = newNext_in;
 	}
 	public Object getAvail_in() {

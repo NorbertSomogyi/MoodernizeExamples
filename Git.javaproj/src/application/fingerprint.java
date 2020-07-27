@@ -17,7 +17,7 @@ public class fingerprint {
 		int c1;
 		byte p;
 		int max_map_entry_count = 1 + line_end - line_begin;
-		fingerprint_entry entry = ModernizedCProgram.xcalloc(max_map_entry_count, );
+		fingerprint_entry entry = ModernizedCProgram.xcalloc(max_map_entry_count, /*Error: Unsupported expression*/);
 		fingerprint_entry found_entry = new fingerprint_entry();
 		hashmap generatedMap = this.getMap();
 		generatedMap.hashmap_init(((Object)0), ((Object)0), max_map_entry_count);
@@ -97,7 +97,7 @@ public class fingerprint {
 	 * Puts the fingerprints in the fingerprints array, which must have been
 	 * preallocated to allow storing line_count elements.
 	 */
-	public void get_line_fingerprints(Object content, Object line_starts, long first_line, long line_count) {
+	public void get_line_fingerprints(Object content, Object[] line_starts, long first_line, long line_count) {
 		int i;
 		byte linestart;
 		byte lineend;
@@ -117,7 +117,7 @@ public class fingerprint {
 			 */].free_fingerprint();
 		}
 	}
-	public void find_best_line_matches(int start_a, int length_a, int start_b, int local_line_b, fingerprint fingerprints_b, Integer similarities, Integer certainties, Integer second_best_result, Integer result, Object max_search_distance_a, Object map_line_number_in_b_to_a) {
+	public void find_best_line_matches(int start_a, int length_a, int start_b, int local_line_b, fingerprint fingerprints_b, Integer similarities, int[] certainties, int[] second_best_result, int[] result, Object max_search_distance_a, Object map_line_number_in_b_to_a) {
 		int i;
 		int search_start;
 		int search_end;
@@ -128,7 +128,7 @@ public class fingerprint {
 		int best_similarity_index = 0;
 		int second_best_similarity_index = 0;
 		if (certainties[local_line_b] != -/* certainty has already been calculated so no need to redo the work */1) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		closest_local_line_a = ModernizedCProgram.map_line_number(local_line_b + start_b, map_line_number_in_b_to_a) - start_a;
 		search_start = closest_local_line_a - max_search_distance_a;
@@ -144,11 +144,11 @@ public class fingerprint {
 			if (similarity == -1/* This value will never exceed 10 but assert just in
 						 * case
 						 */) {
-				((.abs(i - closest_local_line_a) < 1000) ? (Object)0 : ._assert("abs(i - closest_local_line_a) < 1000", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\blame.c", 663/* scale the similarity by (1000 - distance from
+				((/*Error: Function owner not recognized*/abs(i - closest_local_line_a) < 1000) ? (Object)0 : /*Error: Function owner not recognized*/_assert("abs(i - closest_local_line_a) < 1000", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\blame.c", 663/* scale the similarity by (1000 - distance from
 							 * closest line) to act as a tie break between lines
 							 * that otherwise are equally similar.
 							 */));
-				similarity = fingerprints_b + local_line_b.fingerprint_similarity(fingerprints_a + i) * (1000 - .abs(i - closest_local_line_a));
+				similarity = fingerprints_b + local_line_b.fingerprint_similarity(fingerprints_a + i) * (1000 - /*Error: Function owner not recognized*/abs(i - closest_local_line_a));
 			} 
 			if (similarity > best_similarity) {
 				second_best_similarity = best_similarity;
@@ -217,7 +217,7 @@ public class fingerprint {
 				 */;
 		} 
 	}
-	public void fuzzy_find_matching_lines_recurse(int start_a, int start_b, int length_a, int length_b, fingerprint fingerprints_b, Integer similarities, Integer certainties, Integer second_best_result, Integer result, int max_search_distance_a, int max_search_distance_b, Object map_line_number_in_b_to_a) {
+	public void fuzzy_find_matching_lines_recurse(int start_a, int start_b, int length_a, int length_b, fingerprint fingerprints_b, Integer similarities, int[] certainties, int[] second_best_result, int[] result, int max_search_distance_a, int max_search_distance_b, Object map_line_number_in_b_to_a) {
 		int i;
 		int invalidate_min;
 		int invalidate_max;
@@ -238,7 +238,7 @@ public class fingerprint {
 			} 
 		}
 		if (most_certain_local_line_b == -/* No matches. */1) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		most_certain_line_a = result[most_certain_local_line_b/*
 			 * Subtract the most certain line's fingerprint in B from the matched
@@ -262,7 +262,7 @@ public class fingerprint {
 			closest_local_line_a = ModernizedCProgram.map_line_number(i + start_b, map_line_number_in_b_to_a) - start_a/* Check that the lines in A and B are close enough that there
 					 * is a similarity value for them.
 					 */;
-			if (.abs(most_certain_line_a - start_a - closest_local_line_a) > max_search_distance_a) {
+			if (/*Error: Function owner not recognized*/abs(most_certain_line_a - start_a - closest_local_line_a) > max_search_distance_a) {
 				continue;
 			} 
 			ModernizedCProgram.get_similarity(similarities, most_certain_line_a - start_a, i, closest_local_line_a, max_search_distance_a) = -1/* More invalidating of results that may be affected by the choice of
@@ -310,7 +310,7 @@ public class fingerprint {
 			 */);
 		} 
 	}
-	public int scan_parent_range(fingerprint t_fps, int t_idx, int from, int nr_lines) {
+	public int scan_parent_range(fingerprint[] t_fps, int t_idx, int from, int nr_lines) {
 		int sim;
 		int p_idx;
 		int best_sim_val = 10;
@@ -320,7 +320,7 @@ public class fingerprint {
 			if (sim < best_sim_val) {
 				continue;
 			} 
-			if (sim == best_sim_val && best_sim_idx != -/* Break ties with the closest-to-target line number */1 && .abs(best_sim_idx - t_idx) < .abs(p_idx - t_idx)) {
+			if (sim == best_sim_val && best_sim_idx != -/* Break ties with the closest-to-target line number */1 && /*Error: Function owner not recognized*/abs(best_sim_idx - t_idx) < /*Error: Function owner not recognized*/abs(p_idx - t_idx)) {
 				continue;
 			} 
 			best_sim_val = sim;

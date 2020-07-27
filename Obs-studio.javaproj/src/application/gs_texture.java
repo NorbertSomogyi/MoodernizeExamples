@@ -37,19 +37,6 @@ public class gs_texture {
 	public gs_texture() {
 	}
 	
-	public gs_texture gs_texrender_get_texture(Object texrender) {
-		return texrender ? texrender.getTarget() : NULL;
-	}
-	public void apply_swizzle() {
-		gs_color_format generatedFormat = this.getFormat();
-		Object generatedGl_target = this.getGl_target();
-		if (generatedFormat == GS_A8) {
-			ModernizedCProgram.gl_tex_param_i(generatedGl_target, GL_TEXTURE_SWIZZLE_R, GL_ONE);
-			ModernizedCProgram.gl_tex_param_i(generatedGl_target, GL_TEXTURE_SWIZZLE_G, GL_ONE);
-			ModernizedCProgram.gl_tex_param_i(generatedGl_target, GL_TEXTURE_SWIZZLE_B, GL_ONE);
-			ModernizedCProgram.gl_tex_param_i(generatedGl_target, GL_TEXTURE_SWIZZLE_A, GL_RED);
-		} 
-	}
 	public Object gl_copy_fbo(Object dst_x, Object dst_y, gs_texture src, Object src_x, Object src_y, Object width, Object height) {
 		fbo_info fbo_info = new fbo_info();
 		fbo_info fbo = fbo_info.get_fbo(src, width, height);
@@ -70,15 +57,15 @@ public class gs_texture {
 		if (!ModernizedCProgram.gl_bind_texture(generatedGl_target, generatedTexture)) {
 			;
 		} 
-		.glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 0, generatedGl_target, generatedTexture, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 0, generatedGl_target, generatedTexture, 0);
 		if (!ModernizedCProgram.gl_success("glFrameBufferTexture2D")) {
 			;
 		} 
-		.glReadBuffer(GL_COLOR_ATTACHMENT0 + 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glReadBuffer(GL_COLOR_ATTACHMENT0 + 0);
 		if (!ModernizedCProgram.gl_success("glReadBuffer")) {
 			;
 		} 
-		.glCopyTexSubImage2D(generatedGl_target, 0, dst_x, dst_y, src_x, src_y, width, height);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glCopyTexSubImage2D(generatedGl_target, 0, dst_x, dst_y, src_x, src_y, width, height);
 		if (!ModernizedCProgram.gl_success("glCopyTexSubImage2D")) {
 			;
 		} 
@@ -109,12 +96,12 @@ public class gs_texture {
 		if (tex) {
 			if (ModernizedCProgram.gs_get_texture_type(tex) != gs_texture_type.GS_TEXTURE_2D) {
 				ModernizedCProgram.blog(LOG_ERROR, "A sprite must be a 2D texture");
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} else {
 				if (!width || !height) {
 					ModernizedCProgram.blog(LOG_ERROR, "A sprite cannot be drawn without a width/height");
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 		} 
 		fcx = width ? (double)width : (double)ModernizedCProgram.gs_texture_get_width(tex);
@@ -127,7 +114,7 @@ public class gs_texture {
 		} else {
 				data.build_sprite_norm(fcx, fcy, flip);
 		} 
-		ModernizedCProgram.gs_vertexbuffer_flush(generatedSprite_buffer);
+		generatedSprite_buffer.gs_vertexbuffer_flush();
 		generatedSprite_buffer.gs_load_vertexbuffer();
 		((Object)0).gs_load_indexbuffer();
 		ModernizedCProgram.gs_draw(gs_draw_mode.GS_TRISTRIP, 0, 0);
@@ -140,7 +127,7 @@ public class gs_texture {
 		if (tex) {
 			if (ModernizedCProgram.gs_get_texture_type(tex) != gs_texture_type.GS_TEXTURE_2D) {
 				ModernizedCProgram.blog(LOG_ERROR, "A sprite must be a 2D texture");
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 		} 
 		fcx = (double)ModernizedCProgram.gs_texture_get_width(tex);
@@ -149,19 +136,19 @@ public class gs_texture {
 		gs_vb_data gs_vb_data = new gs_vb_data();
 		data = gs_vb_data.gs_vertexbuffer_get_data(generatedSprite_buffer);
 		data.build_subsprite_norm((double)sub_x, (double)sub_y, (double)sub_cx, (double)sub_cy, fcx, fcy, flip);
-		ModernizedCProgram.gs_vertexbuffer_flush(generatedSprite_buffer);
+		generatedSprite_buffer.gs_vertexbuffer_flush();
 		generatedSprite_buffer.gs_load_vertexbuffer();
 		((Object)0).gs_load_indexbuffer();
 		ModernizedCProgram.gs_draw(gs_draw_mode.GS_TRISTRIP, 0, 0);
 	}
 	public void gs_draw_cube_backdrop(Object rot, double left, double right, double top, double bottom, double znear) {
-		.UNUSED_PARAMETER(/* TODO */cubetex);
-		.UNUSED_PARAMETER(rot);
-		.UNUSED_PARAMETER(left);
-		.UNUSED_PARAMETER(right);
-		.UNUSED_PARAMETER(top);
-		.UNUSED_PARAMETER(bottom);
-		.UNUSED_PARAMETER(znear);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(/* TODO */cubetex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(rot);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(left);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(right);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(top);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(bottom);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(znear);
 	}
 	public void gs_texture_set_image(Object data, Object linesize, Object flip) {
 		 ptr = new ();
@@ -170,32 +157,32 @@ public class gs_texture {
 		 height = new ();
 		 y = new ();
 		if (!(ModernizedCProgram.gs_valid("gs_texture_set_image") && ModernizedCProgram.gs_obj_valid(tex, "gs_texture_set_image", "tex") && ModernizedCProgram.gs_obj_valid(data, "gs_texture_set_image", "data"))) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		height = ()ModernizedCProgram.gs_texture_get_height(tex);
 		if (!ModernizedCProgram.gs_texture_map(tex, ptr, linesize_out)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		row_copy = (linesize < linesize_out) ? linesize : linesize_out;
 		if (flip) {
 			for (y = height - 1; y >= 0; y--) {
-				.memcpy(ptr + ()y * linesize_out, data + .UNRECOGNIZEDFUNCTIONNAME(height - y - 1) * linesize, row_copy);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr + ()y * linesize_out, data + /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(height - y - 1) * linesize, row_copy);
 			}
 		}  else if (linesize == linesize_out) {
-			.memcpy(ptr, data, row_copy * height);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr, data, row_copy * height);
 		} else {
 				for (y = 0; y < height; y++) {
-					.memcpy(ptr + ()y * linesize_out, data + ()y * linesize, row_copy);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr + ()y * linesize_out, data + ()y * linesize, row_copy);
 				}
 		} 
 		ModernizedCProgram.gs_texture_unmap(tex);
 	}
 	public void gs_cubetexture_set_image(Object side, Object data, Object linesize, Object invert) {
-		.UNUSED_PARAMETER(/* TODO */cubetex);
-		.UNUSED_PARAMETER(side);
-		.UNUSED_PARAMETER(data);
-		.UNUSED_PARAMETER(linesize);
-		.UNUSED_PARAMETER(invert);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(/* TODO */cubetex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(side);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(linesize);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(invert);
 	}
 	public gs_texture gs_texture_create(Object width, Object height, gs_color_format color_format, Object levels, Object data, Object flags) {
 		graphics_t graphics = thread_graphics;
@@ -216,7 +203,7 @@ public class gs_texture {
 			levels = 1;
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, width, height, gs_color_format.color_format, levels, data, flags);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, width, height, gs_color_format.color_format, levels, data, flags);
 	}
 	public gs_texture gs_cubetexture_create(Object size, gs_color_format color_format, Object levels, Object data, Object flags) {
 		graphics_t graphics = thread_graphics;
@@ -238,7 +225,7 @@ public class gs_texture {
 			data = ((Object)0);
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, size, gs_color_format.color_format, levels, data, flags);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, size, gs_color_format.color_format, levels, data, flags);
 	}
 	public gs_texture gs_voltexture_create(Object width, Object height, Object depth, gs_color_format color_format, Object levels, Object data, Object flags) {
 		graphics_t graphics = thread_graphics;
@@ -246,15 +233,15 @@ public class gs_texture {
 			return ((Object)0);
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, width, height, depth, gs_color_format.color_format, levels, data, flags);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, width, height, depth, gs_color_format.color_format, levels, data, flags);
 	}
 	public void gs_load_texture(int unit) {
 		graphics_t graphics = thread_graphics;
 		if (!ModernizedCProgram.gs_valid("gs_load_texture")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedDevice, tex, unit);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, tex, unit);
 	}
 	public gs_texture gs_get_render_target() {
 		graphics_t graphics = thread_graphics;
@@ -262,43 +249,34 @@ public class gs_texture {
 			return ((Object)0);
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice);
 	}
 	public void gs_copy_texture(gs_texture src) {
 		graphics_t graphics = thread_graphics;
 		if (!(ModernizedCProgram.gs_valid("gs_copy_texture") && ModernizedCProgram.gs_obj_valid(dst, "gs_copy_texture", "dst") && ModernizedCProgram.gs_obj_valid(src, "gs_copy_texture", "src"))) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedDevice, dst, src);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, dst, src);
 	}
 	public void gs_copy_texture_region(Object dst_x, Object dst_y, gs_texture src, Object src_x, Object src_y, Object src_w, Object src_h) {
 		graphics_t graphics = thread_graphics;
 		if (!(ModernizedCProgram.gs_valid("gs_copy_texture_region") && ModernizedCProgram.gs_obj_valid(dst, "gs_copy_texture_region", "dst"))) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedDevice, dst, dst_x, dst_y, src, src_x, src_y, src_w, src_h);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, dst, dst_x, dst_y, src, src_x, src_y, src_w, src_h);
 	}
-	public void gs_cubetexture_destroy() {
+	public void gs_voltexture_destroy() {
 		graphics_t graphics = thread_graphics;
-		if (!ModernizedCProgram.gs_valid("gs_cubetexture_destroy")) {
-			return ;
+		if (!ModernizedCProgram.gs_valid("gs_voltexture_destroy")) {
+			return /*Error: Unsupported expression*/;
 		} 
-		if (!cubetex) {
-			return ;
+		if (!voltex) {
+			return /*Error: Unsupported expression*/;
 		} 
-		.UNRECOGNIZEDFUNCTIONNAME(cubetex);
-		if (!tex) {
-			return ;
-		} 
-		if (tex.getTexture()) {
-			ModernizedCProgram.gl_delete_textures(1, tex.getTexture());
-		} 
-		if (tex.getFbo()) {
-			tex.getFbo().fbo_info_destroy();
-		} 
-		ModernizedCProgram.bfree(tex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(voltex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UNUSED_PARAMETER(/* TODO */voltex);
 	}
 	public gs_texture gs_duplicator_get_texture(gs_duplicator duplicator) {
 		if (!(ModernizedCProgram.gs_valid("gs_duplicator_get_texture") && ModernizedCProgram.gs_obj_valid(duplicator, "gs_duplicator_get_texture", "duplicator"))) {
@@ -307,7 +285,7 @@ public class gs_texture {
 		if (!thread_graphics.getExports().getGs_duplicator_get_texture()) {
 			return ((Object)0);
 		} 
-		return .UNRECOGNIZEDFUNCTIONNAME(duplicator);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(duplicator);
 	}
 	/** creates a windows GDI-lockable texture */
 	public gs_texture gs_texture_create_gdi(Object width, Object height) {
@@ -319,7 +297,7 @@ public class gs_texture {
 		Object generatedDevice_texture_create_gdi = generatedExports.getDevice_texture_create_gdi();
 		gs_device generatedDevice = graphics.getDevice();
 		if (generatedDevice_texture_create_gdi) {
-			return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, width, height);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, width, height);
 		} 
 		return ((Object)0);
 	}
@@ -328,16 +306,16 @@ public class gs_texture {
 			return ((Object)0);
 		} 
 		if (thread_graphics.getExports().getGs_texture_get_dc()) {
-			return .UNRECOGNIZEDFUNCTIONNAME(gdi_tex);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(gdi_tex);
 		} 
 		return ((Object)0);
 	}
 	public void gs_texture_release_dc() {
 		if (!(ModernizedCProgram.gs_valid("gs_texture_release_dc") && ModernizedCProgram.gs_obj_valid(gdi_tex, "gs_texture_release_dc", "gdi_tex"))) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (thread_graphics.getExports().getGs_texture_release_dc()) {
-			.UNRECOGNIZEDFUNCTIONNAME(gdi_tex);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(gdi_tex);
 		} 
 	}
 	public gs_texture gs_texture_open_shared(Object handle) {
@@ -349,7 +327,7 @@ public class gs_texture {
 		Object generatedDevice_texture_open_shared = generatedExports.getDevice_texture_open_shared();
 		gs_device generatedDevice = graphics.getDevice();
 		if (generatedDevice_texture_open_shared) {
-			return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, handle);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, handle);
 		} 
 		return ((Object)0);
 	}
@@ -361,7 +339,7 @@ public class gs_texture {
 		gs_exports generatedExports = graphics.getExports();
 		Object generatedDevice_texture_get_shared_handle = generatedExports.getDevice_texture_get_shared_handle();
 		if (generatedDevice_texture_get_shared_handle) {
-			return .UNRECOGNIZEDFUNCTIONNAME(tex);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(tex);
 		} 
 		return (ModernizedCProgram.uint32_t) - 1;
 	}
@@ -373,7 +351,7 @@ public class gs_texture {
 		gs_exports generatedExports = graphics.getExports();
 		Object generatedDevice_texture_acquire_sync = generatedExports.getDevice_texture_acquire_sync();
 		if (generatedDevice_texture_acquire_sync) {
-			return .UNRECOGNIZEDFUNCTIONNAME(tex, key, ms);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(tex, key, ms);
 		} 
 		return -1;
 	}
@@ -385,7 +363,7 @@ public class gs_texture {
 		gs_exports generatedExports = graphics.getExports();
 		Object generatedDevice_texture_release_sync = generatedExports.getDevice_texture_release_sync();
 		if (generatedDevice_texture_release_sync) {
-			return .UNRECOGNIZEDFUNCTIONNAME(tex, key);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(tex, key);
 		} 
 		return -1;
 	}
@@ -403,7 +381,7 @@ public class gs_texture {
 		Object generatedDevice_texture_create_nv12 = generatedExports.getDevice_texture_create_nv12();
 		gs_device generatedDevice = graphics.getDevice();
 		if (generatedDevice_texture_create_nv12) {
-			success = .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, tex_y, tex_uv, width, height, flags);
+			success = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, tex_y, tex_uv, width, height, flags);
 			if (success) {
 				return true;
 			} 
@@ -423,6 +401,19 @@ public class gs_texture {
 			return false;
 		} 
 		return true;
+	}
+	public void apply_swizzle() {
+		gs_color_format generatedFormat = this.getFormat();
+		Object generatedGl_target = this.getGl_target();
+		if (generatedFormat == GS_A8) {
+			ModernizedCProgram.gl_tex_param_i(generatedGl_target, GL_TEXTURE_SWIZZLE_R, GL_ONE);
+			ModernizedCProgram.gl_tex_param_i(generatedGl_target, GL_TEXTURE_SWIZZLE_G, GL_ONE);
+			ModernizedCProgram.gl_tex_param_i(generatedGl_target, GL_TEXTURE_SWIZZLE_B, GL_ONE);
+			ModernizedCProgram.gl_tex_param_i(generatedGl_target, GL_TEXTURE_SWIZZLE_A, GL_RED);
+		} 
+	}
+	public gs_texture gs_texrender_get_texture(Object texrender) {
+		return texrender ? texrender.getTarget() : NULL;
 	}
 	public Object getDevice() {
 		return device;

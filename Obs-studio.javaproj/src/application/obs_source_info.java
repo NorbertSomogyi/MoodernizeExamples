@@ -86,7 +86,7 @@ public class obs_source_info {
 		for ( i = 0;
 		 i < ModernizedCProgram.obs.getSource_types().getNum(); i++) {
 			obs_source_info info = ModernizedCProgram.obs.getSource_types().getArray()[i];
-			if (.strcmp(generatedId, id) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedId, id) == 0) {
 				return info;
 			} 
 		}

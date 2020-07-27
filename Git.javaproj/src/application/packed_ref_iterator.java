@@ -45,12 +45,12 @@ public class packed_ref_iterator {
 		if (generatedEof - p < ModernizedCProgram.the_repository.getHash_algo().getHexsz() + 2 || generatedOid.parse_oid_hex(p, p) || !((ModernizedCProgram.sane_ctype[(byte)(p++)] & (true)) != 0)) {
 			ModernizedCProgram.die_invalid_line(generatedPath, generatedPos, generatedEof - generatedPos);
 		} 
-		eol = .memchr(p, (byte)'\n', generatedEof - p);
+		eol = /*Error: Function owner not recognized*/memchr(p, (byte)'\n', generatedEof - p);
 		if (!eol) {
 			ModernizedCProgram.die_unterminated_line(generatedPath, generatedPos, generatedEof - generatedPos);
 		} 
 		generatedRefname_buf.strbuf_add(p, eol - p);
-		byte generatedBuf = generatedRefname_buf.getBuf();
+		byte[] generatedBuf = generatedRefname_buf.getBuf();
 		generatedBase.setRefname(generatedBuf);
 		Object generatedRefname = generatedBase.getRefname();
 		int generatedFlags = generatedBase.getFlags();

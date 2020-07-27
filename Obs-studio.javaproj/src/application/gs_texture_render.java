@@ -47,7 +47,7 @@ public class gs_texture_render {
 	
 	public gs_texture_render gs_texrender_create(gs_color_format format, gs_zstencil_format zsformat) {
 		gs_texture_render texrender = new gs_texture_render();
-		texrender = ModernizedCProgram.bzalloc();
+		texrender = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		texrender.setFormat(gs_color_format.format);
 		texrender.setZsformat(gs_zstencil_format.zsformat);
 		return texrender;
@@ -125,7 +125,7 @@ public class gs_texture_render {
 	}
 	public void gs_texrender_end() {
 		if (!texrender) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		gs_texture generatedPrev_target = this.getPrev_target();
 		gs_zstencil_buffer generatedPrev_zs = this.getPrev_zs();

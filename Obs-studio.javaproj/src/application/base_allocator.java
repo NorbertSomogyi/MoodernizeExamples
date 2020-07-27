@@ -29,7 +29,7 @@ public class base_allocator {
 	}
 	
 	public void base_set_allocator() {
-		.memcpy(ModernizedCProgram.alloc, defs, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ModernizedCProgram.alloc, defs, /*Error: Unsupported expression*/);
 	}
 	public Object getMalloc() {
 		return malloc;

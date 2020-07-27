@@ -19,7 +19,7 @@ public class lline {
 	public lline() {
 	}
 	
-	public lline coalesce_lines(int lenbase, lline newline, int lennew, long parent, long flags) {
+	public lline coalesce_lines(Integer lenbase, lline newline, int lennew, long parent, long flags) {
 		int lcs;
 		coalesce_direction directions;
 		lline baseend = new lline();
@@ -44,11 +44,11 @@ public class lline {
 				 *   consume newend
 				 */;
 		} 
-		lcs = ModernizedCProgram.xcalloc(ModernizedCProgram.st_add(origbaselen, 1), );
-		directions = ModernizedCProgram.xcalloc(ModernizedCProgram.st_add(origbaselen, 1), );
+		lcs = ModernizedCProgram.xcalloc(ModernizedCProgram.st_add(origbaselen, 1), /*Error: Unsupported expression*/);
+		directions = ModernizedCProgram.xcalloc(ModernizedCProgram.st_add(origbaselen, 1), /*Error: Unsupported expression*/);
 		for (i = 0; i < origbaselen + 1; i++) {
-			lcs[i] = ModernizedCProgram.xcalloc(ModernizedCProgram.st_add(lennew, 1), );
-			directions[i] = ModernizedCProgram.xcalloc(ModernizedCProgram.st_add(lennew, 1), );
+			lcs[i] = ModernizedCProgram.xcalloc(ModernizedCProgram.st_add(lennew, 1), /*Error: Unsupported expression*/);
+			directions[i] = ModernizedCProgram.xcalloc(ModernizedCProgram.st_add(lennew, 1), /*Error: Unsupported expression*/);
 			directions[i][0] = coalesce_direction.BASE;
 		}
 		for (j = 1; j < lennew + 1; j++) {

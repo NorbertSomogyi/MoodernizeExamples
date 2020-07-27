@@ -13,11 +13,11 @@ public class attr_hashmap {
 	
 	public void hashmap_lock() {
 		Object generatedMutex = this.getMutex();
-		.pthread_mutex_lock(generatedMutex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_mutex_lock(generatedMutex);
 	}
 	public void hashmap_unlock() {
 		Object generatedMutex = this.getMutex();
-		.pthread_mutex_unlock(generatedMutex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_mutex_unlock(generatedMutex);
 	}
 	/* Initialize an 'attr_hashmap' object */
 	public void attr_hashmap_init() {
@@ -52,7 +52,7 @@ public class attr_hashmap {
 		if (!generatedTablesize) {
 			map.attr_hashmap_init();
 		} 
-		e = ModernizedCProgram.xmalloc();
+		e = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
 		hashmap_entry generatedEnt = e.getEnt();
 		generatedEnt.hashmap_entry_init(ModernizedCProgram.memhash(key, keylen));
 		e.setKey(key);

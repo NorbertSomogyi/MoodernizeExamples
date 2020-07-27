@@ -3,14 +3,14 @@ package application;
 public class snapshot {
 	private packed_ref_store refs;
 	private int mmapped;
-	private byte buf;
+	private Byte buf;
 	private Byte start;
 	private Byte eof;
 	private  peeled;
 	private int referrers;
 	private stat_validity validity;
 	
-	public snapshot(packed_ref_store refs, int mmapped, byte buf, Byte start, Byte eof,  peeled, int referrers, stat_validity validity) {
+	public snapshot(packed_ref_store refs, int mmapped, Byte buf, Byte start, Byte eof,  peeled, int referrers, stat_validity validity) {
 		setRefs(refs);
 		setMmapped(mmapped);
 		setBuf(buf);
@@ -29,12 +29,12 @@ public class snapshot {
 	}
 	public void clear_snapshot_buffer() {
 		int generatedMmapped = this.getMmapped();
-		byte generatedBuf = this.getBuf();
+		Byte generatedBuf = this.getBuf();
 		Byte generatedEof = this.getEof();
 		packed_ref_store generatedRefs = this.getRefs();
 		Byte generatedPath = generatedRefs.getPath();
 		if (generatedMmapped) {
-			if (.munmap(generatedBuf, generatedEof - generatedBuf)) {
+			if (/*Error: Function owner not recognized*/munmap(generatedBuf, generatedEof - generatedBuf)) {
 				ModernizedCProgram.die_errno("error ummapping packed-refs file %s", generatedPath);
 			} 
 			this.setMmapped(0);
@@ -75,7 +75,7 @@ public class snapshot {
 		Byte generatedEof = this.getEof();
 		eof = generatedEof;
 		if (pos == eof) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		len = eof - pos/*
 			 * Initialize records based on a crude estimate of the number
@@ -88,13 +88,13 @@ public class snapshot {
 				} else {
 						alloc = (((alloc) + 16) * 3 / 2);
 				} 
-				(records) = ModernizedCProgram.xrealloc((records), ModernizedCProgram.st_mult(, (alloc)));
+				(records) = ModernizedCProgram.xrealloc((records), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (alloc)));
 			} 
 		} while (0);
 		packed_ref_store generatedRefs = this.getRefs();
 		Byte generatedPath = generatedRefs.getPath();
 		while (pos < eof) {
-			eol = .memchr(pos, (byte)'\n', eof - pos);
+			eol = /*Error: Function owner not recognized*/memchr(pos, (byte)'\n', eof - pos);
 			if (!eol) {
 				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\packed-backend.c", 346, /* The safety check should prevent this. */"unterminated line found in packed-refs");
 			} 
@@ -107,7 +107,7 @@ public class snapshot {
 						 * reference:
 						 */) {
 				byte peeled_start = eol;
-				eol = .memchr(peeled_start, (byte)'\n', eof - peeled_start);
+				eol = /*Error: Function owner not recognized*/memchr(peeled_start, (byte)'\n', eof - peeled_start);
 				if (!eol) {
 					ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\packed-backend.c", 361, /* The safety check should prevent this. */"unterminated peeled line found in packed-refs");
 				} 
@@ -120,7 +120,7 @@ public class snapshot {
 					} else {
 							alloc = (((alloc) + 16) * 3 / 2);
 					} 
-					(records) = ModernizedCProgram.xrealloc((records), ModernizedCProgram.st_mult(, (alloc)));
+					(records) = ModernizedCProgram.xrealloc((records), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (alloc)));
 				} 
 			} while (0);
 			records[nr].setStart(pos);
@@ -134,14 +134,14 @@ public class snapshot {
 		if (sorted) {
 			;
 		} 
-		ModernizedCProgram.sane_qsort((records), (nr), , /* We need to sort the memory. First we sort the records array: */cmp_packed_ref_records/*
+		ModernizedCProgram.sane_qsort((records), (nr), /*Error: sizeof expression not supported yet*/, /* We need to sort the memory. First we sort the records array: */cmp_packed_ref_records/*
 			 * Allocate a new chunk of memory, and copy the old memory to
 			 * the new in the order indicated by `records` (not bothering
 			 * with the header line):
 			 */);
 		new_buffer = ModernizedCProgram.xmalloc(len);
 		for (; i < nr; i++) {
-			.memcpy(dst, generatedStart, records[i].getLen());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dst, generatedStart, records[i].getLen());
 			dst += records[i].getLen();
 		}
 		snapshot.clear_snapshot_buffer();
@@ -155,7 +155,7 @@ public class snapshot {
 		byte eof = generatedEof;
 		byte last_line;
 		if (start == eof) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		last_line = ModernizedCProgram.find_start_of_record(start, eof - 1);
 		packed_ref_store generatedRefs = this.getRefs();
@@ -176,9 +176,9 @@ public class snapshot {
 		ssize_t bytes_read = new ssize_t();
 		packed_ref_store generatedRefs = this.getRefs();
 		Byte generatedPath = generatedRefs.getPath();
-		fd = .open(generatedPath, 0);
+		fd = /*Error: Function owner not recognized*/open(generatedPath, 0);
 		if (fd < 0) {
-			if ((._errno()) == 2/*
+			if ((/*Error: Function owner not recognized*/_errno()) == 2/*
 						 * This is OK; it just means that no
 						 * "packed-refs" file has been written yet,
 						 * which is equivalent to it being empty,
@@ -192,14 +192,14 @@ public class snapshot {
 		} 
 		stat_validity generatedValidity = this.getValidity();
 		generatedValidity.stat_validity_update(fd);
-		if (.fstat(fd, st) < 0) {
+		if (/*Error: Function owner not recognized*/fstat(fd, st) < 0) {
 			ModernizedCProgram.die_errno("couldn't stat %s", generatedPath);
 		} 
 		Object generatedSt_size = st.getSt_size();
 		size = ModernizedCProgram.xsize_t(generatedSt_size);
-		byte generatedBuf = this.getBuf();
+		Byte generatedBuf = this.getBuf();
 		if (!size) {
-			.close(fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
 			return 0;
 		}  else if (mmap_strategy.mmap_strategy == mmap_strategy.MMAP_NONE || size <= (32 * 1024)) {
 			this.setBuf(ModernizedCProgram.xmalloc(size));
@@ -212,7 +212,7 @@ public class snapshot {
 				this.setBuf(ModernizedCProgram.xmmap(((Object)0), size, PROT_READ, MAP_PRIVATE, fd, 0));
 				this.setMmapped(1);
 		} 
-		.close(fd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
 		this.setStart(generatedBuf);
 		this.setEof(generatedBuf + size);
 		return 1/*
@@ -297,7 +297,7 @@ public class snapshot {
 		 * loop invariant is described in the next two comments.
 		 */
 	public snapshot create_snapshot(packed_ref_store refs) {
-		snapshot snapshot = ModernizedCProgram.xcalloc(1, );
+		snapshot snapshot = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		int sorted = 0;
 		snapshot.setRefs(refs);
 		snapshot.acquire_snapshot();
@@ -305,7 +305,7 @@ public class snapshot {
 		if (!snapshot.load_contents()) {
 			return snapshot;
 		} 
-		byte generatedBuf = snapshot.getBuf();
+		Byte generatedBuf = snapshot.getBuf();
 		Byte generatedEof = snapshot.getEof();
 		Byte generatedPath = refs.getPath();
 		if (generatedBuf < generatedEof && generatedBuf == /* If the file has a header line, process it: */(byte)'#') {
@@ -313,7 +313,7 @@ public class snapshot {
 			byte p;
 			byte eol;
 			string_list traits = new string_list(((Object)0), 0, 0, 0, ((Object)0));
-			eol = .memchr(generatedBuf, (byte)'\n', generatedEof - generatedBuf);
+			eol = /*Error: Function owner not recognized*/memchr(generatedBuf, (byte)'\n', generatedEof - generatedBuf);
 			if (!eol) {
 				ModernizedCProgram.die_unterminated_line(generatedPath, generatedBuf, generatedEof - generatedBuf);
 			} 
@@ -346,7 +346,7 @@ public class snapshot {
 		if (mmap_strategy.mmap_strategy != mmap_strategy.MMAP_OK && generatedMmapped) {
 			size_t size = generatedEof - generatedStart;
 			byte buf_copy = ModernizedCProgram.xmalloc(size);
-			.memcpy(buf_copy, generatedStart, size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf_copy, generatedStart, size);
 			snapshot.clear_snapshot_buffer();
 			snapshot.setBuf(snapshot.setStart(buf_copy));
 			snapshot.setEof(buf_copy + size);
@@ -380,10 +380,10 @@ public class snapshot {
 	public void setMmapped(int newMmapped) {
 		mmapped = newMmapped;
 	}
-	public byte getBuf() {
+	public Byte getBuf() {
 		return buf;
 	}
-	public void setBuf(byte newBuf) {
+	public void setBuf(Byte newBuf) {
 		buf = newBuf;
 	}
 	public Byte getStart() {

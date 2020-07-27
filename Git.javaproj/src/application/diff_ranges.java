@@ -30,12 +30,12 @@ public class diff_ranges {
 		 xpp = new ();
 		 xecfg = new ();
 		 ecb = new ();
-		.memset(xpp, 0, );
-		.memset(xecfg, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(xpp, 0, /*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(xecfg, 0, /*Error: sizeof expression not supported yet*/);
 		xecfg.setCtxlen(xecfg.setInterhunkctxlen(0));
 		cbdata.setDiff(out);
 		xecfg.setHunk_func(collect_diff_cb);
-		.memset(ecb, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ecb, 0, /*Error: sizeof expression not supported yet*/);
 		ecb.setPriv(cbdata);
 		return ModernizedCProgram.xdi_diff(parent, target, xpp, xecfg, ecb/*
 		 * These are handy for debugging.  Removing them with #if 0 silences

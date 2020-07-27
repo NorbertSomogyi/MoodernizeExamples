@@ -38,11 +38,11 @@ public class axisang {
 		double leni;
 		len = q.getX() * q.getX() + q.getY() * q.getY() + q.getZ() * q.getZ();
 		if (!ModernizedCProgram.close_float(len, 0.0, 1.0E-4)) {
-			leni = 1.0 / .sqrtf(len);
+			leni = 1.0 / /*Error: Function owner not recognized*/sqrtf(len);
 			this.setX(q.getX() * leni);
 			this.setY(q.getY() * leni);
 			this.setZ(q.getZ() * leni);
-			this.setW(.acosf(q.getW()) * 2.0);
+			this.setW(/*Error: Function owner not recognized*/acosf(q.getW()) * 2.0);
 		} else {
 				this.setX(0.0);
 				this.setY(0.0);

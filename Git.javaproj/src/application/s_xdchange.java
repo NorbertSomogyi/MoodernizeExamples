@@ -19,27 +19,6 @@ public class s_xdchange {
 	public s_xdchange() {
 	}
 	
-	public s_xdchange xdl_add_change(long i1, long i2, long chg1, long chg2) {
-		xdchange_t xch = new xdchange_t();
-		if (!(xch = (xdchange_t)ModernizedCProgram.xmalloc())) {
-			return ((Object)0);
-		} 
-		xch.setNext(xscr);
-		xch.setI1(i1);
-		xch.setI2(i2);
-		xch.setChg1(chg1);
-		xch.setChg2(chg2);
-		xch.setIgnore(0);
-		return xch;
-	}
-	public void xdl_free_script() {
-		xdchange_t xch = new xdchange_t();
-		s_xdchange generatedNext = this.getNext();
-		while ((xch = xscr) != ((Object)0)) {
-			xscr = generatedNext;
-			ModernizedCProgram.free(xch);
-		}
-	}
 	public s_xdchange xdl_get_hunk(Object xecfg) {
 		xdchange_t xch = new xdchange_t();
 		xdchange_t xchp = new xdchange_t();
@@ -82,6 +61,27 @@ public class s_xdchange {
 			} 
 		}
 		return lxch;
+	}
+	public s_xdchange xdl_add_change(long i1, long i2, long chg1, long chg2) {
+		xdchange_t xch = new xdchange_t();
+		if (!(xch = (xdchange_t)ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/))) {
+			return ((Object)0);
+		} 
+		xch.setNext(xscr);
+		xch.setI1(i1);
+		xch.setI2(i2);
+		xch.setChg1(chg1);
+		xch.setChg2(chg2);
+		xch.setIgnore(0);
+		return xch;
+	}
+	public void xdl_free_script() {
+		xdchange_t xch = new xdchange_t();
+		s_xdchange generatedNext = this.getNext();
+		while ((xch = xscr) != ((Object)0)) {
+			xscr = generatedNext;
+			ModernizedCProgram.free(xch);
+		}
 	}
 	public s_xdchange getNext() {
 		return next;

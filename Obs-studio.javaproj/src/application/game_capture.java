@@ -125,7 +125,7 @@ public class game_capture {
 	}
 	public Object open_mutex_plus_id(Object name, Object id) {
 		wchar_t[] new_name = new wchar_t();
-		._snwprintf(new_name, 64, L"%s%lu", name, id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_snwprintf(new_name, 64, L"%s%lu", name, id);
 		boolean generatedIs_app = this.getIs_app();
 		Object generatedApp_sid = this.getApp_sid();
 		return generatedIs_app ? ModernizedCProgram.open_app_mutex(generatedApp_sid, new_name) : ModernizedCProgram.open_mutex(new_name);
@@ -136,7 +136,7 @@ public class game_capture {
 	}
 	public Object open_event_plus_id(Object name, Object id) {
 		wchar_t[] new_name = new wchar_t();
-		._snwprintf(new_name, 64, L"%s%lu", name, id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_snwprintf(new_name, 64, L"%s%lu", name, id);
 		boolean generatedIs_app = this.getIs_app();
 		Object generatedApp_sid = this.getApp_sid();
 		return generatedIs_app ? ModernizedCProgram.open_app_event(generatedApp_sid, new_name) : ModernizedCProgram.open_event(new_name);
@@ -147,12 +147,12 @@ public class game_capture {
 	}
 	public Object open_map_plus_id(Object name, Object id) {
 		wchar_t[] new_name = new wchar_t();
-		._snwprintf(new_name, 64, L"%s%lu", name, id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_snwprintf(new_name, 64, L"%s%lu", name, id);
 		obs_source generatedSource = this.getSource();
 		ModernizedCProgram.blog(LOG_DEBUG, "[game-capture: '%s'] map id: %S", ModernizedCProgram.obs_source_get_name(generatedSource), new_name);
 		boolean generatedIs_app = this.getIs_app();
 		Object generatedApp_sid = this.getApp_sid();
-		return generatedIs_app ? ModernizedCProgram.open_app_map(generatedApp_sid, new_name) : .OpenFileMappingW((4 | 2), 0, new_name);
+		return generatedIs_app ? ModernizedCProgram.open_app_map(generatedApp_sid, new_name) : /*Error: Function owner not recognized*/OpenFileMappingW((4 | 2), 0, new_name);
 	}
 	public Object open_hook_info() {
 		Object generatedProcess_id = this.getProcess_id();
@@ -163,21 +163,21 @@ public class game_capture {
 		generatedPipe.ipc_pipe_server_free();
 		Object generatedHook_stop = this.getHook_stop();
 		if (generatedHook_stop) {
-			.SetEvent(generatedHook_stop);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SetEvent(generatedHook_stop);
 		} 
 		hook_info generatedGlobal_hook_info = this.getGlobal_hook_info();
 		if (generatedGlobal_hook_info) {
-			.UnmapViewOfFile(generatedGlobal_hook_info);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UnmapViewOfFile(generatedGlobal_hook_info);
 			this.setGlobal_hook_info(((Object)0));
 		} 
 		Object generatedData = this.getData();
 		if (generatedData) {
-			.UnmapViewOfFile(generatedData);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UnmapViewOfFile(generatedData);
 			this.setData(((Object)0));
 		} 
 		Object generatedApp_sid = this.getApp_sid();
 		if (generatedApp_sid) {
-			.LocalFree(generatedApp_sid);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/LocalFree(generatedApp_sid);
 			this.setApp_sid(((Object)0));
 		} 
 		Object generatedHook_restart = this.getHook_restart();
@@ -234,13 +234,13 @@ public class game_capture {
 			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] Could not convert file name to wide string", ModernizedCProgram.obs_source_get_name(generatedSource));
 			return 0;
 		} 
-		handle = .CreateFileW(w_file, -1024 | -1024, -1024, ((Object)0), 3, 0, ((Object)0));
+		handle = /*Error: Function owner not recognized*/CreateFileW(w_file, -1024 | -1024, -1024, ((Object)0), 3, 0, ((Object)0));
 		ModernizedCProgram.bfree(w_file);
 		if (handle != (HANDLE)(true)) {
-			.CloseHandle(handle);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(handle);
 			return 1;
 		} 
-		error = .GetLastError();
+		error = /*Error: Function owner not recognized*/GetLastError();
 		if (error == -1024) {
 			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] Game capture file '%s' not found.  This is most likely due to security software. Please make sure that the OBS installation folder is excluded/ignored in the settings of the security software you are using.", ModernizedCProgram.obs_source_get_name(generatedSource), file);
 		}  else if (error == -1024) {
@@ -272,12 +272,12 @@ public class game_capture {
 	public boolean init_keepalive() {
 		wchar_t[] new_name = new wchar_t();
 		Object generatedProcess_id = this.getProcess_id();
-		._snwprintf(new_name, 64, L"%s%lu", L"CaptureHook_KeepAlive", generatedProcess_id);
-		this.setKeepalive_mutex(.CreateMutexW(((Object)0), 0, new_name));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_snwprintf(new_name, 64, L"%s%lu", L"CaptureHook_KeepAlive", generatedProcess_id);
+		this.setKeepalive_mutex(/*Error: Function owner not recognized*/CreateMutexW(((Object)0), 0, new_name));
 		Object generatedKeepalive_mutex = this.getKeepalive_mutex();
 		obs_source generatedSource = this.getSource();
 		if (!generatedKeepalive_mutex) {
-			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] Failed to create keepalive mutex: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), .GetLastError());
+			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] Failed to create keepalive mutex: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
 			return 0;
 		} 
 		return 1;
@@ -289,14 +289,14 @@ public class game_capture {
 		int generatedRetrying = this.getRetrying();
 		obs_source generatedSource = this.getSource();
 		if (!generatedTexture_mutexes[0] || !generatedTexture_mutexes[1]) {
-			DWORD error = .GetLastError();
+			DWORD error = /*Error: Function owner not recognized*/GetLastError();
 			if (error == 2) {
 				if (!generatedRetrying) {
 					this.setRetrying(2);
 					ModernizedCProgram.blog(LOG_INFO, "[game-capture: '%s'] hook not loaded yet, retrying..", ModernizedCProgram.obs_source_get_name(generatedSource));
 				} 
 			} else {
-					ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] failed to open texture mutexes: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), .GetLastError());
+					ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] failed to open texture mutexes: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
 			} 
 			return 0;
 		} 
@@ -311,7 +311,7 @@ public class game_capture {
 		Byte generatedExecutable = generatedConfig.getExecutable();
 		if (generatedHook_restart) {
 			ModernizedCProgram.blog(LOG_DEBUG, "[game-capture: '%s'] existing hook found, signaling process: %s", ModernizedCProgram.obs_source_get_name(generatedSource), generatedExecutable);
-			.SetEvent(generatedHook_restart);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SetEvent(generatedHook_restart);
 			return 1;
 		} 
 		return 0;
@@ -332,6 +332,79 @@ public class game_capture {
 		hook_info generatedGlobal_hook_info = this.getGlobal_hook_info();
 		generatedGlobal_hook_info.setFrame_interval(interval);
 	}
+	public boolean init_hook_info() {
+		this.setGlobal_hook_info_map(gc.open_hook_info());
+		Object generatedGlobal_hook_info_map = this.getGlobal_hook_info_map();
+		obs_source generatedSource = this.getSource();
+		if (!generatedGlobal_hook_info_map) {
+			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_hook_info: get_hook_info failed: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
+			return 0;
+		} 
+		hook_info generatedGlobal_hook_info = this.getGlobal_hook_info();
+		this.setGlobal_hook_info(/*Error: Function owner not recognized*/MapViewOfFile(generatedGlobal_hook_info_map, -1024, 0, 0, /*Error: sizeof expression not supported yet*/));
+		if (!generatedGlobal_hook_info) {
+			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_hook_info: failed to map data view: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
+			return 0;
+		} 
+		game_capture_config generatedConfig = this.getConfig();
+		boolean generatedForce_shmem = generatedConfig.getForce_shmem();
+		if (generatedForce_shmem) {
+			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_hook_info: user is forcing shared memory (multi-adapter compatibility mode)", ModernizedCProgram.obs_source_get_name(generatedSource));
+		} 
+		boolean generatedProcess_is_64bit = this.getProcess_is_64bit();
+		generatedGlobal_hook_info.setOffsets(generatedProcess_is_64bit ? ModernizedCProgram.offsets64 : ModernizedCProgram.offsets32);
+		boolean generatedCapture_overlays = generatedConfig.getCapture_overlays();
+		generatedGlobal_hook_info.setCapture_overlay(generatedCapture_overlays);
+		generatedGlobal_hook_info.setForce_shmem(generatedForce_shmem);
+		boolean generatedForce_scaling = generatedConfig.getForce_scaling();
+		generatedGlobal_hook_info.setUse_scale(generatedForce_scaling);
+		Object generatedScale_cx = generatedConfig.getScale_cx();
+		if (generatedScale_cx) {
+			generatedGlobal_hook_info.setCx(generatedScale_cx);
+		} 
+		Object generatedScale_cy = generatedConfig.getScale_cy();
+		if (generatedScale_cy) {
+			generatedGlobal_hook_info.setCy(generatedScale_cy);
+		} 
+		gc.reset_frame_interval();
+		ModernizedCProgram.obs_enter_graphics();
+		if (!ModernizedCProgram.gs_shared_texture_available()) {
+			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_hook_info: shared texture capture unavailable", ModernizedCProgram.obs_source_get_name(generatedSource));
+			generatedGlobal_hook_info.setForce_shmem(1);
+		} 
+		ModernizedCProgram.obs_leave_graphics();
+		return 1;
+		ModernizedCProgram.filemap_hook_info = ModernizedCProgram.create_hook_info(/*Error: Function owner not recognized*/GetCurrentProcessId());
+		if (!ModernizedCProgram.filemap_hook_info) {
+			ModernizedCProgram.hlog("Failed to create hook info file mapping: %lu", /*Error: Function owner not recognized*/GetLastError());
+			return 0;
+		} 
+		ModernizedCProgram.global_hook_info = /*Error: Function owner not recognized*/MapViewOfFile(ModernizedCProgram.filemap_hook_info, -1024, 0, 0, /*Error: Unsupported expression*/);
+		if (!ModernizedCProgram.global_hook_info) {
+			ModernizedCProgram.hlog("Failed to map the hook info file mapping: %lu", /*Error: Function owner not recognized*/GetLastError());
+			return 0;
+		} 
+		return 1;
+	}
+	public boolean init_pipe() {
+		byte[] name = new byte[64];
+		Object generatedProcess_id = this.getProcess_id();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(name, "%s%lu", "CaptureHook_Pipe", generatedProcess_id);
+		Object generatedPipe = this.getPipe();
+		obs_source generatedSource = this.getSource();
+		if (!generatedPipe.ipc_pipe_server_start(name, pipe_log, gc)) {
+			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_pipe: failed to start pipe", ModernizedCProgram.obs_source_get_name(generatedSource));
+			return 0;
+		} 
+		return 1;
+		byte[] new_name = new byte[64];
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(new_name, "%s%lu", "CaptureHook_Pipe", /*Error: Function owner not recognized*/GetCurrentProcessId());
+		if (!ModernizedCProgram.pipe.ipc_pipe_client_open(new_name)) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/OutputDebugStringA("Failed to open pipe\n");
+			return 0;
+		} 
+		return 1;
+	}
 	public boolean hook_direct(Object hook_path_rel) {
 		wchar_t[] hook_path_abs_w = new wchar_t();
 		wchar_t hook_path_rel_w = new wchar_t();
@@ -344,7 +417,7 @@ public class game_capture {
 			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] hook_direct: could not convert string", ModernizedCProgram.obs_source_get_name(generatedSource));
 			return 0;
 		} 
-		path_ret = ._wfullpath(hook_path_abs_w, hook_path_rel_w, 260);
+		path_ret = /*Error: Function owner not recognized*/_wfullpath(hook_path_abs_w, hook_path_rel_w, 260);
 		ModernizedCProgram.bfree(hook_path_rel_w);
 		if (path_ret == ((Object)0)) {
 			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] hook_direct: could not make absolute path", ModernizedCProgram.obs_source_get_name(generatedSource));
@@ -355,11 +428,11 @@ public class game_capture {
 		game_capture_config generatedConfig = this.getConfig();
 		Byte generatedExecutable = generatedConfig.getExecutable();
 		if (!process) {
-			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] hook_direct: could not open process: %s (%lu)", ModernizedCProgram.obs_source_get_name(generatedSource), generatedExecutable, .GetLastError());
+			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] hook_direct: could not open process: %s (%lu)", ModernizedCProgram.obs_source_get_name(generatedSource), generatedExecutable, /*Error: Function owner not recognized*/GetLastError());
 			return 0;
 		} 
 		ret = ModernizedCProgram.inject_library(process, hook_path_abs_w);
-		.CloseHandle(process);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(process);
 		if (ret != 0) {
 			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] hook_direct: inject failed: %d", ModernizedCProgram.obs_source_get_name(generatedSource), ret);
 			return 0;
@@ -367,7 +440,7 @@ public class game_capture {
 		return 1;
 	}
 	public boolean create_inject_process(Object inject_path, Object hook_dll) {
-		wchar_t command_line_w = .malloc(4096 * );
+		wchar_t command_line_w = /*Error: Function owner not recognized*/malloc(4096 * /*Error: Unsupported expression*/);
 		wchar_t inject_path_w = new wchar_t();
 		wchar_t hook_dll_w = new wchar_t();
 		boolean anti_cheat = gc.use_anticheat();
@@ -376,21 +449,21 @@ public class game_capture {
 		boolean success = false;
 		ModernizedCProgram.os_utf8_to_wcs_ptr(inject_path, 0, inject_path_w);
 		ModernizedCProgram.os_utf8_to_wcs_ptr(hook_dll, 0, hook_dll_w);
-		si.setCb();
+		si.setCb(/*Error: sizeof expression not supported yet*/);
 		Object generatedThread_id = this.getThread_id();
 		Object generatedProcess_id = this.getProcess_id();
-		.swprintf(command_line_w, 4096, L"\"%s\" \"%s\" %lu %lu", inject_path_w, hook_dll_w, (long)anti_cheat, anti_cheat ? generatedThread_id : generatedProcess_id);
-		success = !!.CreateProcessW(inject_path_w, command_line_w, ((Object)0), ((Object)0), 0, -1024, ((Object)0), ((Object)0), si, pi);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/swprintf(command_line_w, 4096, L"\"%s\" \"%s\" %lu %lu", inject_path_w, hook_dll_w, (long)anti_cheat, anti_cheat ? generatedThread_id : generatedProcess_id);
+		success = !!/*Error: Function owner not recognized*/CreateProcessW(inject_path_w, command_line_w, ((Object)0), ((Object)0), 0, -1024, ((Object)0), ((Object)0), si, pi);
 		Object generatedHThread = pi.getHThread();
 		Object generatedHProcess = pi.getHProcess();
 		obs_source generatedSource = this.getSource();
 		if (success) {
-			.CloseHandle(generatedHThread);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(generatedHThread);
 			this.setInjector_process(generatedHProcess);
 		} else {
-				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] Failed to create inject helper process: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), .GetLastError());
+				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] Failed to create inject helper process: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
 		} 
-		.free(command_line_w);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(command_line_w);
 		ModernizedCProgram.bfree(inject_path_w);
 		ModernizedCProgram.bfree(hook_dll_w);
 		return success;
@@ -434,11 +507,78 @@ public class game_capture {
 		Object generatedThread_id = this.getThread_id();
 		return ModernizedCProgram.thread_is_suspended(generatedProcess_id, generatedThread_id);
 	}
+	public boolean init_hook() {
+		dstr exe = new dstr(0);
+		boolean blacklisted_process = false;
+		game_capture_config generatedConfig = this.getConfig();
+		capture_mode generatedMode = generatedConfig.getMode();
+		Object generatedNext_window = this.getNext_window();
+		obs_source generatedSource = this.getSource();
+		Object generatedDstr = exe.getDstr();
+		if (generatedMode == capture_mode.CAPTURE_MODE_ANY) {
+			if (exe.get_window_exe(generatedNext_window)) {
+				ModernizedCProgram.blog(LOG_INFO, "[game-capture: '%s'] attempting to hook fullscreen process: %s", ModernizedCProgram.obs_source_get_name(generatedSource), generatedDstr);
+			} 
+		} else {
+				if (exe.get_window_exe(generatedNext_window)) {
+					ModernizedCProgram.blog(LOG_INFO, "[game-capture: '%s'] attempting to hook process: %s", ModernizedCProgram.obs_source_get_name(generatedSource), generatedDstr);
+				} 
+		} 
+		blacklisted_process = ModernizedCProgram.is_blacklisted_exe(generatedDstr);
+		if (blacklisted_process) {
+			ModernizedCProgram.blog(LOG_INFO, "[game-capture: '%s'] cannot capture %s due to being blacklisted", ModernizedCProgram.obs_source_get_name(generatedSource), generatedDstr);
+		} 
+		exe.dstr_free();
+		if (blacklisted_process) {
+			return 0;
+		} 
+		if (gc.target_suspended()) {
+			return 0;
+		} 
+		if (!gc.open_target_process()) {
+			return 0;
+		} 
+		if (!gc.init_keepalive()) {
+			return 0;
+		} 
+		if (!gc.init_pipe()) {
+			return 0;
+		} 
+		if (!gc.attempt_existing_hook()) {
+			if (!gc.inject_hook()) {
+				return 0;
+			} 
+		} 
+		if (!gc.init_texture_mutexes()) {
+			return 0;
+		} 
+		if (!gc.init_hook_info()) {
+			return 0;
+		} 
+		if (!gc.init_events()) {
+			return 0;
+		} 
+		Object generatedHook_init = this.getHook_init();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SetEvent(generatedHook_init);
+		this.setWindow(generatedNext_window);
+		this.setNext_window(((Object)0));
+		this.setActive(1);
+		this.setRetrying(0);
+		return 1;
+		ModernizedCProgram.wait_for_dll_main_finish(thread_handle);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_snwprintf(ModernizedCProgram.keepalive_name, /*Error: sizeof expression not supported yet*/ / /*Error: Unsupported expression*/, L"%s%lu", L"CaptureHook_KeepAlive", /*Error: Function owner not recognized*/GetCurrentProcessId());
+		game_capture game_capture = new game_capture();
+		game_capture.init_pipe();
+		ModernizedCProgram.init_dummy_window_thread();
+		ModernizedCProgram.log_current_process();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/SetEvent(ModernizedCProgram.signal_restart);
+		return 1;
+	}
 	public void setup_window(Object window) {
 		HANDLE hook_restart = new HANDLE();
 		HANDLE process = new HANDLE();
 		Object generatedProcess_id = this.getProcess_id();
-		.GetWindowThreadProcessId(window, generatedProcess_id);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GetWindowThreadProcessId(window, generatedProcess_id);
 		boolean generatedIs_app = this.getIs_app();
 		if (generatedProcess_id) {
 			process = ModernizedCProgram.open_process(1024, 0, generatedProcess_id);
@@ -447,13 +587,13 @@ public class game_capture {
 				if (generatedIs_app) {
 					this.setApp_sid(ModernizedCProgram.get_app_sid(process));
 				} 
-				.CloseHandle(process);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(process);
 			} 
 		} 
 		hook_restart = gc.open_event_gc(/* do not wait if we're re-hooking a process */L"CaptureHook_Restart");
 		if (hook_restart) {
 			this.setWait_for_target_startup(0);
-			.CloseHandle(hook_restart/* otherwise if it's an unhooked process, always wait a bit for the
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(hook_restart/* otherwise if it's an unhooked process, always wait a bit for the
 				 * target process to start up before starting the hook process;
 				 * sometimes they have important modules to load first or other hooks
 				 * (such as steam) need a little bit of time to load.  ultimately this
@@ -470,29 +610,29 @@ public class game_capture {
 		} 
 	}
 	public void get_fullscreen_window() {
-		HWND window = .GetForegroundWindow();
+		HWND window = /*Error: Function owner not recognized*/GetForegroundWindow();
 		MONITORINFO mi = new MONITORINFO(0);
 		HMONITOR monitor = new HMONITOR();
 		DWORD styles = new DWORD();
 		RECT rect = new RECT();
 		this.setNext_window(((Object)0));
 		if (!window) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		if (!.GetWindowRect(window, rect)) {
-			return ;
+		if (!/*Error: Function owner not recognized*/GetWindowRect(window, rect)) {
+			return /*Error: Unsupported expression*/;
 		} 
-		styles = (DWORD).GetWindowLongA(window, (/* ignore regular maximized windows */true));
+		styles = (DWORD)/*Error: Function owner not recognized*/GetWindowLongA(window, (/* ignore regular maximized windows */true));
 		if ((styles & -1024) != 0 && (styles & -1024) != 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		monitor = .MonitorFromRect(rect, MONITOR_DEFAULTTONEAREST);
+		monitor = /*Error: Function owner not recognized*/MonitorFromRect(rect, MONITOR_DEFAULTTONEAREST);
 		if (!monitor) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		mi.setCbSize();
-		if (!.GetMonitorInfoA(monitor, mi)) {
-			return ;
+		mi.setCbSize(/*Error: sizeof expression not supported yet*/);
+		if (!/*Error: Function owner not recognized*/GetMonitorInfoA(monitor, mi)) {
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedLeft = rect.getLeft();
 		Object generatedRight = rect.getRight();
@@ -512,7 +652,7 @@ public class game_capture {
 		if (ModernizedCProgram.dstr_cmpi(generatedClass, "dwm") == 0) {
 			wchar_t[] class_w = new wchar_t();
 			ModernizedCProgram.os_utf8_to_wcs(generatedDstr, 0, class_w, 512);
-			window = .FindWindowW(class_w, ((Object)0));
+			window = /*Error: Function owner not recognized*/FindWindowW(class_w, ((Object)0));
 		} else {
 				window = ModernizedCProgram.find_window(window_search_mode.INCLUDE_MINIMIZED, generatedPriority, generatedDstr, generatedDstr, generatedDstr);
 		} 
@@ -535,19 +675,19 @@ public class game_capture {
 		Object generatedThread_id = this.getThread_id();
 		obs_source generatedSource = this.getSource();
 		if (generatedNext_window) {
-			this.setThread_id(.GetWindowThreadProcessId(generatedNext_window, generatedProcess_id));
-			if (generatedProcess_id == .GetCurrentProcessId()) {
-				return ;
+			this.setThread_id(/*Error: Function owner not recognized*/GetWindowThreadProcessId(generatedNext_window, generatedProcess_id));
+			if (generatedProcess_id == /*Error: Function owner not recognized*/GetCurrentProcessId()) {
+				return /*Error: Unsupported expression*/;
 			} 
 			if (!generatedThread_id && generatedProcess_id) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (!generatedProcess_id) {
-				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] error acquiring, failed to get window thread/process ids: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), .GetLastError());
+				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] error acquiring, failed to get window thread/process ids: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
 				this.setError_acquiring(1);
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
-			if (!ModernizedCProgram.init_hook(gc)) {
+			if (!gc.init_hook()) {
 				gc.stop_capture();
 			} 
 		} else {
@@ -560,7 +700,7 @@ public class game_capture {
 		if (!generatedHook_restart) {
 			this.setHook_restart(gc.open_event_gc(L"CaptureHook_Restart"));
 			if (!generatedHook_restart) {
-				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_events: failed to get hook_restart event: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), .GetLastError());
+				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_events: failed to get hook_restart event: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
 				return 0;
 			} 
 		} 
@@ -568,7 +708,7 @@ public class game_capture {
 		if (!generatedHook_stop) {
 			this.setHook_stop(gc.open_event_gc(L"CaptureHook_Stop"));
 			if (!generatedHook_stop) {
-				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_events: failed to get hook_stop event: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), .GetLastError());
+				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_events: failed to get hook_stop event: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
 				return 0;
 			} 
 		} 
@@ -576,7 +716,7 @@ public class game_capture {
 		if (!generatedHook_init) {
 			this.setHook_init(gc.open_event_gc(L"CaptureHook_Initialize"));
 			if (!generatedHook_init) {
-				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_events: failed to get hook_init event: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), .GetLastError());
+				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_events: failed to get hook_init event: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
 				return 0;
 			} 
 		} 
@@ -584,7 +724,7 @@ public class game_capture {
 		if (!generatedHook_ready) {
 			this.setHook_ready(gc.open_event_gc(L"CaptureHook_HookReady"));
 			if (!generatedHook_ready) {
-				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_events: failed to get hook_ready event: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), .GetLastError());
+				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_events: failed to get hook_ready event: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
 				return 0;
 			} 
 		} 
@@ -592,7 +732,7 @@ public class game_capture {
 		if (!generatedHook_exit) {
 			this.setHook_exit(gc.open_event_gc(L"CaptureHook_Exit"));
 			if (!generatedHook_exit) {
-				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_events: failed to get hook_exit event: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), .GetLastError());
+				ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_events: failed to get hook_exit event: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
 				return 0;
 			} 
 		} 
@@ -608,16 +748,16 @@ public class game_capture {
 		this.setPitch(generatedPitch);
 		Object generatedData = this.getData();
 		if (generatedData) {
-			.UnmapViewOfFile(generatedData);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/UnmapViewOfFile(generatedData);
 			this.setData(((Object)0));
 		} 
 		Object generatedHook_data_map = this.getHook_data_map();
-		.CloseHandle(generatedHook_data_map);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(generatedHook_data_map);
 		Object generatedMap_id = generatedGlobal_hook_info.getMap_id();
 		this.setHook_data_map(gc.open_map_plus_id(L"CaptureHook_Texture", generatedMap_id));
 		obs_source generatedSource = this.getSource();
 		if (!generatedHook_data_map) {
-			DWORD error = .GetLastError();
+			DWORD error = /*Error: Function owner not recognized*/GetLastError();
 			if (error == 2) {
 				return capture_result.CAPTURE_RETRY;
 			} else {
@@ -626,9 +766,9 @@ public class game_capture {
 			return capture_result.CAPTURE_FAIL;
 		} 
 		Object generatedMap_size = generatedGlobal_hook_info.getMap_size();
-		this.setData(.MapViewOfFile(generatedHook_data_map, -1024, 0, 0, generatedMap_size));
+		this.setData(/*Error: Function owner not recognized*/MapViewOfFile(generatedHook_data_map, -1024, 0, 0, generatedMap_size));
 		if (!generatedData) {
-			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_capture_data: failed to map data view: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), .GetLastError());
+			ModernizedCProgram.blog(LOG_WARNING, "[game-capture: '%s'] init_capture_data: failed to map data view: %lu", ModernizedCProgram.obs_source_get_name(generatedSource), /*Error: Function owner not recognized*/GetLastError());
 			return capture_result.CAPTURE_FAIL;
 		} 
 		return capture_result.CAPTURE_SUCCESS;
@@ -653,47 +793,47 @@ public class game_capture {
 				__m128i pixels_red = new __m128i();
 				__m128i pixels_result = new __m128i();
 				__m128i pixels_dest = new __m128i();
-				__m128i pixels_src = (__m128i)(row + x * );
-				__m128i pixels = ._mm_load_si128(pixels_src);
-				__m128i zero = ._mm_setzero_si128();
-				__m128i pixels_low = ._mm_unpacklo_epi16(pixels, ModernizedCProgram.zero);
-				__m128i pixels_high = ._mm_unpackhi_epi16(pixels, ModernizedCProgram.zero);
-				__m128i blue_channel_mask = ._mm_set1_epi32(-1024);
-				__m128i blue_offset = ._mm_set1_epi32(-1024);
-				__m128i green_channel_mask = ._mm_set1_epi32(-1024);
-				__m128i green_offset = ._mm_set1_epi32(-1024);
-				__m128i red_channel_mask = ._mm_set1_epi32(-1024);
-				__m128i red_offset = ._mm_set1_epi32(-1024);
-				pixels_blue = ._mm_and_si128(pixels_low, blue_channel_mask);
-				pixels_blue = ._mm_slli_epi32(pixels_blue, 3);
-				pixels_blue = ._mm_add_epi32(pixels_blue, blue_offset);
-				pixels_green = ._mm_and_si128(pixels_low, green_channel_mask);
-				pixels_green = ._mm_add_epi32(pixels_green, green_offset);
-				pixels_green = ._mm_slli_epi32(pixels_green, 5);
-				pixels_red = ._mm_and_si128(pixels_low, red_channel_mask);
-				pixels_red = ._mm_add_epi32(pixels_red, red_offset);
-				pixels_red = ._mm_slli_epi32(pixels_red, 8);
-				pixels_result = ._mm_set1_epi32(-1024);
-				pixels_result = ._mm_or_si128(pixels_result, pixels_blue);
-				pixels_result = ._mm_or_si128(pixels_result, pixels_green);
-				pixels_result = ._mm_or_si128(pixels_result, pixels_red);
-				pixels_dest = (__m128i)(out + x * );
-				._mm_store_si128(pixels_dest, pixels_result);
-				pixels_blue = ._mm_and_si128(pixels_high, blue_channel_mask);
-				pixels_blue = ._mm_slli_epi32(pixels_blue, 3);
-				pixels_blue = ._mm_add_epi32(pixels_blue, blue_offset);
-				pixels_green = ._mm_and_si128(pixels_high, green_channel_mask);
-				pixels_green = ._mm_add_epi32(pixels_green, green_offset);
-				pixels_green = ._mm_slli_epi32(pixels_green, 5);
-				pixels_red = ._mm_and_si128(pixels_high, red_channel_mask);
-				pixels_red = ._mm_add_epi32(pixels_red, red_offset);
-				pixels_red = ._mm_slli_epi32(pixels_red, 8);
-				pixels_result = ._mm_set1_epi32(-1024);
-				pixels_result = ._mm_or_si128(pixels_result, pixels_blue);
-				pixels_result = ._mm_or_si128(pixels_result, pixels_green);
-				pixels_result = ._mm_or_si128(pixels_result, pixels_red);
-				pixels_dest = (__m128i)(out + (x + 4) * );
-				._mm_store_si128(pixels_dest, pixels_result);
+				__m128i pixels_src = (__m128i)(row + x * /*Error: Unsupported expression*/);
+				__m128i pixels = /*Error: Function owner not recognized*/_mm_load_si128(pixels_src);
+				__m128i zero = /*Error: Function owner not recognized*/_mm_setzero_si128();
+				__m128i pixels_low = /*Error: Function owner not recognized*/_mm_unpacklo_epi16(pixels, ModernizedCProgram.zero);
+				__m128i pixels_high = /*Error: Function owner not recognized*/_mm_unpackhi_epi16(pixels, ModernizedCProgram.zero);
+				__m128i blue_channel_mask = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i blue_offset = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i green_channel_mask = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i green_offset = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i red_channel_mask = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i red_offset = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_and_si128(pixels_low, blue_channel_mask);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_blue, 3);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_blue, blue_offset);
+				pixels_green = /*Error: Function owner not recognized*/_mm_and_si128(pixels_low, green_channel_mask);
+				pixels_green = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_green, green_offset);
+				pixels_green = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_green, 5);
+				pixels_red = /*Error: Function owner not recognized*/_mm_and_si128(pixels_low, red_channel_mask);
+				pixels_red = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_red, red_offset);
+				pixels_red = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_red, 8);
+				pixels_result = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_blue);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_green);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_red);
+				pixels_dest = (__m128i)(out + x * /*Error: Unsupported expression*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_store_si128(pixels_dest, pixels_result);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_and_si128(pixels_high, blue_channel_mask);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_blue, 3);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_blue, blue_offset);
+				pixels_green = /*Error: Function owner not recognized*/_mm_and_si128(pixels_high, green_channel_mask);
+				pixels_green = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_green, green_offset);
+				pixels_green = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_green, 5);
+				pixels_red = /*Error: Function owner not recognized*/_mm_and_si128(pixels_high, red_channel_mask);
+				pixels_red = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_red, red_offset);
+				pixels_red = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_red, 8);
+				pixels_result = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_blue);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_green);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_red);
+				pixels_dest = (__m128i)(out + (x + 4) * /*Error: Unsupported expression*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_store_si128(pixels_dest, pixels_result);
 			}
 		}
 	}
@@ -718,58 +858,58 @@ public class game_capture {
 				__m128i pixels_alpha = new __m128i();
 				__m128i pixels_result = new __m128i();
 				__m128i pixels_dest = new __m128i();
-				__m128i pixels_src = (__m128i)(row + x * );
-				__m128i pixels = ._mm_load_si128(pixels_src);
-				__m128i zero = ._mm_setzero_si128();
-				__m128i pixels_low = ._mm_unpacklo_epi16(pixels, ModernizedCProgram.zero);
-				__m128i pixels_high = ._mm_unpackhi_epi16(pixels, ModernizedCProgram.zero);
-				__m128i blue_channel_mask = ._mm_set1_epi32(-1024);
-				__m128i blue_offset = ._mm_set1_epi32(-1024);
-				__m128i green_channel_mask = ._mm_set1_epi32(-1024);
-				__m128i green_offset = ._mm_set1_epi32(-1024);
-				__m128i red_channel_mask = ._mm_set1_epi32(-1024);
-				__m128i red_offset = ._mm_set1_epi32(-1024);
-				__m128i alpha_channel_mask = ._mm_set1_epi32(-1024);
-				__m128i alpha_offset = ._mm_set1_epi32(-1024);
-				__m128i alpha_mask32 = ._mm_set1_epi32(-1024);
-				pixels_blue = ._mm_and_si128(pixels_low, blue_channel_mask);
-				pixels_blue = ._mm_slli_epi32(pixels_blue, 3);
-				pixels_blue = ._mm_add_epi32(pixels_blue, blue_offset);
-				pixels_green = ._mm_and_si128(pixels_low, green_channel_mask);
-				pixels_green = ._mm_add_epi32(pixels_green, green_offset);
-				pixels_green = ._mm_slli_epi32(pixels_green, 6);
-				pixels_red = ._mm_and_si128(pixels_low, red_channel_mask);
-				pixels_red = ._mm_add_epi32(pixels_red, red_offset);
-				pixels_red = ._mm_slli_epi32(pixels_red, 9);
-				pixels_alpha = ._mm_and_si128(pixels_low, alpha_channel_mask);
-				pixels_alpha = ._mm_srli_epi32(pixels_alpha, 15);
-				pixels_alpha = ._mm_sub_epi32(pixels_alpha, alpha_offset);
-				pixels_alpha = ._mm_andnot_si128(pixels_alpha, alpha_mask32);
+				__m128i pixels_src = (__m128i)(row + x * /*Error: Unsupported expression*/);
+				__m128i pixels = /*Error: Function owner not recognized*/_mm_load_si128(pixels_src);
+				__m128i zero = /*Error: Function owner not recognized*/_mm_setzero_si128();
+				__m128i pixels_low = /*Error: Function owner not recognized*/_mm_unpacklo_epi16(pixels, ModernizedCProgram.zero);
+				__m128i pixels_high = /*Error: Function owner not recognized*/_mm_unpackhi_epi16(pixels, ModernizedCProgram.zero);
+				__m128i blue_channel_mask = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i blue_offset = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i green_channel_mask = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i green_offset = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i red_channel_mask = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i red_offset = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i alpha_channel_mask = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i alpha_offset = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				__m128i alpha_mask32 = /*Error: Function owner not recognized*/_mm_set1_epi32(-1024);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_and_si128(pixels_low, blue_channel_mask);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_blue, 3);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_blue, blue_offset);
+				pixels_green = /*Error: Function owner not recognized*/_mm_and_si128(pixels_low, green_channel_mask);
+				pixels_green = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_green, green_offset);
+				pixels_green = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_green, 6);
+				pixels_red = /*Error: Function owner not recognized*/_mm_and_si128(pixels_low, red_channel_mask);
+				pixels_red = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_red, red_offset);
+				pixels_red = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_red, 9);
+				pixels_alpha = /*Error: Function owner not recognized*/_mm_and_si128(pixels_low, alpha_channel_mask);
+				pixels_alpha = /*Error: Function owner not recognized*/_mm_srli_epi32(pixels_alpha, 15);
+				pixels_alpha = /*Error: Function owner not recognized*/_mm_sub_epi32(pixels_alpha, alpha_offset);
+				pixels_alpha = /*Error: Function owner not recognized*/_mm_andnot_si128(pixels_alpha, alpha_mask32);
 				pixels_result = pixels_red;
-				pixels_result = ._mm_or_si128(pixels_result, pixels_alpha);
-				pixels_result = ._mm_or_si128(pixels_result, pixels_blue);
-				pixels_result = ._mm_or_si128(pixels_result, pixels_green);
-				pixels_dest = (__m128i)(out + x * );
-				._mm_store_si128(pixels_dest, pixels_result);
-				pixels_blue = ._mm_and_si128(pixels_high, blue_channel_mask);
-				pixels_blue = ._mm_slli_epi32(pixels_blue, 3);
-				pixels_blue = ._mm_add_epi32(pixels_blue, blue_offset);
-				pixels_green = ._mm_and_si128(pixels_high, green_channel_mask);
-				pixels_green = ._mm_add_epi32(pixels_green, green_offset);
-				pixels_green = ._mm_slli_epi32(pixels_green, 6);
-				pixels_red = ._mm_and_si128(pixels_high, red_channel_mask);
-				pixels_red = ._mm_add_epi32(pixels_red, red_offset);
-				pixels_red = ._mm_slli_epi32(pixels_red, 9);
-				pixels_alpha = ._mm_and_si128(pixels_high, alpha_channel_mask);
-				pixels_alpha = ._mm_srli_epi32(pixels_alpha, 15);
-				pixels_alpha = ._mm_sub_epi32(pixels_alpha, alpha_offset);
-				pixels_alpha = ._mm_andnot_si128(pixels_alpha, alpha_mask32);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_alpha);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_blue);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_green);
+				pixels_dest = (__m128i)(out + x * /*Error: Unsupported expression*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_store_si128(pixels_dest, pixels_result);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_and_si128(pixels_high, blue_channel_mask);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_blue, 3);
+				pixels_blue = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_blue, blue_offset);
+				pixels_green = /*Error: Function owner not recognized*/_mm_and_si128(pixels_high, green_channel_mask);
+				pixels_green = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_green, green_offset);
+				pixels_green = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_green, 6);
+				pixels_red = /*Error: Function owner not recognized*/_mm_and_si128(pixels_high, red_channel_mask);
+				pixels_red = /*Error: Function owner not recognized*/_mm_add_epi32(pixels_red, red_offset);
+				pixels_red = /*Error: Function owner not recognized*/_mm_slli_epi32(pixels_red, 9);
+				pixels_alpha = /*Error: Function owner not recognized*/_mm_and_si128(pixels_high, alpha_channel_mask);
+				pixels_alpha = /*Error: Function owner not recognized*/_mm_srli_epi32(pixels_alpha, 15);
+				pixels_alpha = /*Error: Function owner not recognized*/_mm_sub_epi32(pixels_alpha, alpha_offset);
+				pixels_alpha = /*Error: Function owner not recognized*/_mm_andnot_si128(pixels_alpha, alpha_mask32);
 				pixels_result = pixels_red;
-				pixels_result = ._mm_or_si128(pixels_result, pixels_alpha);
-				pixels_result = ._mm_or_si128(pixels_result, pixels_blue);
-				pixels_result = ._mm_or_si128(pixels_result, pixels_green);
-				pixels_dest = (__m128i)(out + (x + 4) * );
-				._mm_store_si128(pixels_dest, pixels_result);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_alpha);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_blue);
+				pixels_result = /*Error: Function owner not recognized*/_mm_or_si128(pixels_result, pixels_green);
+				pixels_dest = (__m128i)(out + (x + 4) * /*Error: Unsupported expression*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_store_si128(pixels_dest, pixels_result);
 			}
 		}
 	}
@@ -790,12 +930,12 @@ public class game_capture {
 		uint8_t data = new uint8_t();
 		shmem_data generatedShmem_data = this.getShmem_data();
 		if (!generatedShmem_data) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedLast_tex = generatedShmem_data.getLast_tex();
 		cur_texture = generatedLast_tex;
 		if (cur_texture < 0 || cur_texture > 1) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		next_texture = cur_texture == 1 ? 0 : 1;
 		Object generatedTexture_mutexes = this.getTexture_mutexes();
@@ -805,7 +945,7 @@ public class game_capture {
 			mutex = generatedTexture_mutexes[next_texture];
 			cur_texture = next_texture;
 		} else {
-				return ;
+				return /*Error: Unsupported expression*/;
 		} 
 		Object generatedTexture = this.getTexture();
 		boolean generatedConvert_16bit = this.getConvert_16bit();
@@ -816,7 +956,7 @@ public class game_capture {
 			if (generatedConvert_16bit) {
 				gc.copy_16bit_tex(cur_texture, data, pitch);
 			}  else if (pitch == generatedPitch) {
-				.memcpy(data, generatedTexture_buffers[cur_texture], pitch * generatedCy);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(data, generatedTexture_buffers[cur_texture], pitch * generatedCy);
 			} else {
 					uint8_t input = generatedTexture_buffers[cur_texture];
 					uint32_t best_pitch = pitch < generatedPitch ? pitch : generatedPitch;
@@ -824,12 +964,12 @@ public class game_capture {
 					 y < generatedCy; y++) {
 						uint8_t line_in = input + generatedPitch * y;
 						uint8_t line_out = data + pitch * y;
-						.memcpy(line_out, line_in, best_pitch);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(line_out, line_in, best_pitch);
 					}
 			} 
 			ModernizedCProgram.gs_texture_unmap(generatedTexture);
 		} 
-		.ReleaseMutex(mutex);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ReleaseMutex(mutex);
 	}
 	public boolean init_shmem_capture() {
 		gs_color_format format;
@@ -898,7 +1038,7 @@ public class game_capture {
 	public boolean capture_valid() {
 		boolean generatedDwm_capture = this.getDwm_capture();
 		Object generatedWindow = this.getWindow();
-		if (!generatedDwm_capture && !.IsWindow(generatedWindow)) {
+		if (!generatedDwm_capture && !/*Error: Function owner not recognized*/IsWindow(generatedWindow)) {
 			return 0;
 		} 
 		Object generatedTarget_process = this.getTarget_process();
@@ -910,7 +1050,7 @@ public class game_capture {
 		Object generatedProcess_id = this.getProcess_id();
 		if (generatedCursor_check_time >= 0.1) {
 			DWORD foreground_process_id = new DWORD();
-			.GetWindowThreadProcessId(.GetForegroundWindow(), foreground_process_id);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GetWindowThreadProcessId(/*Error: Function owner not recognized*/GetForegroundWindow(), foreground_process_id);
 			if (generatedProcess_id != foreground_process_id) {
 				this.setCursor_hidden(1);
 			} else {
@@ -926,11 +1066,11 @@ public class game_capture {
 		Object generatedBase_cx = generatedGlobal_hook_info.getBase_cx();
 		Object generatedBase_cy = generatedGlobal_hook_info.getBase_cy();
 		if (!generatedBase_cx || !generatedBase_cy) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedWindow = generatedGlobal_hook_info.getWindow();
 		window = !!generatedWindow ? (HWND)(uintptr_t)generatedWindow : generatedWindow;
-		.ClientToScreen(window, p);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ClientToScreen(window, p);
 		Object generatedCx = generatedGlobal_hook_info.getCx();
 		double x_scale = (double)generatedCx / (double)generatedBase_cx;
 		Object generatedCy = generatedGlobal_hook_info.getCy();

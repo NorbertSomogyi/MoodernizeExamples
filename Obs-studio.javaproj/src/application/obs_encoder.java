@@ -81,22 +81,20 @@ public class obs_encoder {
 	public obs_encoder() {
 	}
 	
-	public Object obs_hotkey_register_encoder(Object name, Object description, Object func, Object data) {
-		if (!encoder || !ModernizedCProgram.lock()) {
-			return (~(obs_hotkey_id)0);
+	public void cap_resolution(Object info) {
+		qsv_cpu_platform qsv_platform = /*Error: Function owner not recognized*/qsv_get_cpu_platform();
+		uint32_t width = ModernizedCProgram.obs_encoder_get_width(encoder);
+		uint32_t height = ModernizedCProgram.obs_encoder_get_height(encoder);
+		info.setHeight(height);
+		info.setWidth(width);
+		if (qsv_cpu_platform.qsv_platform <= qsv_cpu_platform.QSV_CPU_PLATFORM_IVB) {
+			if (width > 1920) {
+				info.setWidth(1920);
+			} 
+			if (height > 1200) {
+				info.setHeight(1200);
+			} 
 		} 
-		obs_weak_encoder obs_weak_encoder = new obs_weak_encoder();
-		obs_context_data generatedContext = this.getContext();
-		obs_hotkey_id id = generatedContext.obs_hotkey_register_internal(obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_ENCODER, obs_weak_encoder.obs_encoder_get_weak_encoder(encoder), name, description, func, data);
-		ModernizedCProgram.unlock();
-		return id;
-	}
-	public Object obs_hotkey_pair_register_encoder(Object name0, Object description0, Object name1, Object description1, Object func0, Object func1, Object data0, Object data1) {
-		if (!encoder) {
-			return (~(obs_hotkey_pair_id)0);
-		} 
-		obs_context_data generatedContext = this.getContext();
-		return generatedContext.register_hotkey_pair_internal(obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_ENCODER, encoder, weak_encoder_ref, name0, description0, name1, description1, func0, func1, data0, data1);
 	}
 	/******************************************************************************
 	    Copyright (C) 2014 by Hugh Bailey <obs.jim@gmail.com>
@@ -125,6 +123,111 @@ public class obs_encoder {
 		settings.obs_data_release();
 		return bitrate;
 	}
+	public obs_encoder obs_output_get_video_encoder(Object output) {
+		return ModernizedCProgram.obs_object_valid(output, "obs_output_get_video_encoder", "output") ? output.getVideo_encoder() : NULL;
+	}
+	public obs_encoder obs_output_get_audio_encoder(Object output, Object idx) {
+		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_get_audio_encoder", "output")) {
+			return NULL;
+		} 
+		if ((output.getInfo().getFlags() & (1 << 4)) != 0) {
+			if (idx >= MAX_AUDIO_MIXES) {
+				return NULL;
+			} 
+		} else {
+				if (idx > 0) {
+					return NULL;
+				} 
+		} 
+		return output.getAudio_encoders()[idx];
+	}
+	public obs_encoder find_inactive_audio_encoder(obs_output output, Object num_mixes) {
+		Object generatedAudio_encoders = output.getAudio_encoders();
+		Object generatedActive = audio.getActive();
+		obs_encoder generatedPaired_encoder = audio.getPaired_encoder();
+		for ( i = 0;
+		 i < num_mixes; i++) {
+			obs_encoder audio = generatedAudio_encoders[i];
+			if (audio && !generatedActive && !generatedPaired_encoder) {
+				return audio;
+			} 
+		}
+		return NULL;
+	}
+	public obs_encoder obs_get_encoder_by_name(Object name) {
+		if (!ModernizedCProgram.obs) {
+			return NULL;
+		} 
+		return ModernizedCProgram.get_context_by_name(ModernizedCProgram.obs.getData().getFirst_encoder(), name, ModernizedCProgram.obs.getData().getEncoders_mutex(), obs_encoder_addref_safe_);
+	}
+	public Object start_gpu_encode() {
+		obs_core_video video = ModernizedCProgram.obs.getVideo();
+		 success = true;
+		ModernizedCProgram.obs_enter_graphics();
+		Object generatedGpu_encoder_mutex = video.getGpu_encoder_mutex();
+		ModernizedCProgram.pthread_mutex_lock(generatedGpu_encoder_mutex);
+		Object generatedGpu_encoders = video.getGpu_encoders();
+		if (!generatedGpu_encoders.getNum()) {
+			success = video.init_gpu_encoding();
+		} 
+		if (success) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedGpu_encoders, encoder);
+		} else {
+				video.free_gpu_encoding();
+		} 
+		ModernizedCProgram.pthread_mutex_unlock(generatedGpu_encoder_mutex);
+		ModernizedCProgram.obs_leave_graphics();
+		long generatedGpu_encoder_active = video.getGpu_encoder_active();
+		Object generatedVideo = video.getVideo();
+		if (success) {
+			ModernizedCProgram.os_atomic_inc_long(generatedGpu_encoder_active);
+			generatedVideo.video_output_inc_texture_encoders();
+		} 
+		return success;
+	}
+	public void stop_gpu_encode() {
+		obs_core_video video = ModernizedCProgram.obs.getVideo();
+		 call_free = false;
+		long generatedGpu_encoder_active = video.getGpu_encoder_active();
+		ModernizedCProgram.os_atomic_dec_long(generatedGpu_encoder_active);
+		Object generatedVideo = video.getVideo();
+		generatedVideo.video_output_dec_texture_encoders();
+		Object generatedGpu_encoder_mutex = video.getGpu_encoder_mutex();
+		ModernizedCProgram.pthread_mutex_lock(generatedGpu_encoder_mutex);
+		Object generatedGpu_encoders = video.getGpu_encoders();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase_item(generatedGpu_encoders, encoder);
+		if (!generatedGpu_encoders.getNum()) {
+			call_free = true;
+		} 
+		ModernizedCProgram.pthread_mutex_unlock(generatedGpu_encoder_mutex);
+		Object generatedGpu_encode_inactive = video.getGpu_encode_inactive();
+		generatedGpu_encode_inactive.os_event_wait();
+		if (call_free) {
+			video.stop_gpu_encoding_thread();
+			ModernizedCProgram.obs_enter_graphics();
+			ModernizedCProgram.pthread_mutex_lock(generatedGpu_encoder_mutex);
+			video.free_gpu_encoding();
+			ModernizedCProgram.pthread_mutex_unlock(generatedGpu_encoder_mutex);
+			ModernizedCProgram.obs_leave_graphics();
+		} 
+	}
+	public Object obs_hotkey_register_encoder(Object name, Object description, Object func, Object data) {
+		if (!encoder || !ModernizedCProgram.lock()) {
+			return (~(obs_hotkey_id)0);
+		} 
+		obs_weak_encoder obs_weak_encoder = new obs_weak_encoder();
+		obs_context_data generatedContext = this.getContext();
+		obs_hotkey_id id = generatedContext.obs_hotkey_register_internal(obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_ENCODER, obs_weak_encoder.obs_encoder_get_weak_encoder(encoder), name, description, func, data);
+		ModernizedCProgram.unlock();
+		return id;
+	}
+	public Object obs_hotkey_pair_register_encoder(Object name0, Object description0, Object name1, Object description1, Object func0, Object func1, Object data0, Object data1) {
+		if (!encoder) {
+			return (~(obs_hotkey_pair_id)0);
+		} 
+		obs_context_data generatedContext = this.getContext();
+		return generatedContext.register_hotkey_pair_internal(obs_hotkey_registerer_type.OBS_HOTKEY_REGISTERER_ENCODER, encoder, weak_encoder_ref, name0, description0, name1, description1, func0, func1, data0, data1);
+	}
 	public obs_encoder obs_video_encoder_create(Object id, Object name, obs_data settings, obs_data hotkey_data) {
 		if (!name || !id) {
 			return NULL;
@@ -149,9 +252,9 @@ public class obs_encoder {
 		obs_encoder_info generatedInfo = this.getInfo();
 		Object generatedGet_video_info = generatedInfo.getGet_video_info();
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (generatedGet_video_info) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedData, info);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData, info);
 		} 
 		if (info.getWidth() != voi.getVideo_output_info() || info.getHeight() != voi.getVideo_output_info()) {
 			encoder.obs_encoder_set_scaled_size(info.getWidth(), info.getHeight());
@@ -217,7 +320,7 @@ public class obs_encoder {
 		Object generatedOutputs = this.getOutputs();
 		obs_context_data generatedContext = this.getContext();
 		Byte generatedName = generatedContext.getName();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		Object generatedCallbacks = this.getCallbacks();
 		Object generatedInit_mutex = this.getInit_mutex();
 		Object generatedCallbacks_mutex = this.getCallbacks_mutex();
@@ -233,14 +336,14 @@ public class obs_encoder {
 				obs_output output = generatedOutputs.getArray()[i];
 				ModernizedCProgram.obs_output_remove_encoder(output, encoder);
 			}
-			.da_free(generatedOutputs);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedOutputs);
 			ModernizedCProgram.pthread_mutex_unlock(generatedOutputs_mutex);
 			ModernizedCProgram.blog(LOG_DEBUG, "encoder '%s' destroyed", generatedName);
 			encoder.free_audio_buffers();
 			if (generatedData) {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedData);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData);
 			} 
-			.da_free(generatedCallbacks);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedCallbacks);
 			ModernizedCProgram.pthread_mutex_destroy(generatedInit_mutex);
 			ModernizedCProgram.pthread_mutex_destroy(generatedCallbacks_mutex);
 			ModernizedCProgram.pthread_mutex_destroy(generatedOutputs_mutex);
@@ -277,11 +380,11 @@ public class obs_encoder {
 	}
 	public void obs_encoder_set_name(Object name) {
 		if (!ModernizedCProgram.obs_object_valid(encoder, "obs_encoder_set_name", "encoder")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_context_data generatedContext = this.getContext();
 		Byte generatedName = generatedContext.getName();
-		if (name && name && .strcmp(name, generatedName) != 0) {
+		if (name && name && /*Error: Function owner not recognized*/strcmp(name, generatedName) != 0) {
 			generatedContext.obs_context_data_setname(name);
 		} 
 	}
@@ -303,8 +406,8 @@ public class obs_encoder {
 		this.setPlanes(ModernizedCProgram.get_audio_planes(generatedAudio_convert_info, generatedAudio_convert_info));
 		this.setBlocksize(ModernizedCProgram.get_audio_size(generatedAudio_convert_info, generatedAudio_convert_info, 1));
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
-		this.setFramesize(.UNRECOGNIZEDFUNCTIONNAME(generatedData));
+		Object[] generatedData = generatedContext.getData();
+		this.setFramesize(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData));
 		Object generatedBlocksize = this.getBlocksize();
 		Object generatedFramesize = this.getFramesize();
 		this.setFramesize_bytes(generatedBlocksize * generatedFramesize);
@@ -327,10 +430,10 @@ public class obs_encoder {
 		if (generatedCreate) {
 			can_reroute = true;
 			this.setInfo(generatedOrig_info);
-			generatedContext.setData(.UNRECOGNIZEDFUNCTIONNAME(generatedSettings, encoder));
+			generatedContext.setData(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSettings, encoder));
 			can_reroute = false;
 		} 
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (!generatedData) {
 			return false;
 		} 
@@ -363,7 +466,7 @@ public class obs_encoder {
 				return NULL;
 			} 
 			this.setInfo(ei);
-			return .UNRECOGNIZEDFUNCTIONNAME(generatedSettings, encoder);
+			return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSettings, encoder);
 		} 
 		return NULL;
 	}
@@ -382,9 +485,9 @@ public class obs_encoder {
 		Object generatedInit_mutex = this.getInit_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedInit_mutex);
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (generatedData) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedData);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData);
 			generatedContext.setData(NULL);
 			this.setPaired_encoder(NULL);
 			this.setFirst_received(false);
@@ -397,9 +500,9 @@ public class obs_encoder {
 		encoder_callback cb = new encoder_callback(false, new_packet, param);
 		 first = false;
 		obs_context_data generatedContext = this.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		if (!generatedData) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedCallbacks_mutex = this.getCallbacks_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedCallbacks_mutex);
@@ -407,7 +510,7 @@ public class obs_encoder {
 		first = (generatedCallbacks.getNum() == 0);
 		 idx = ModernizedCProgram.get_callback_idx(encoder, new_packet, param);
 		if (idx == DARRAY_INVALID) {
-			.da_push_back(generatedCallbacks, cb);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedCallbacks, cb);
 		} 
 		ModernizedCProgram.pthread_mutex_unlock(generatedCallbacks_mutex);
 		Object generatedPaused = this.getPaused();
@@ -421,10 +524,10 @@ public class obs_encoder {
 	}
 	public void obs_encoder_start(Object new_packet, Object param) {
 		if (!ModernizedCProgram.obs_object_valid(encoder, "obs_encoder_start", "encoder")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ModernizedCProgram.obs_object_valid(new_packet, "obs_encoder_start", "new_packet")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedInit_mutex = this.getInit_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedInit_mutex);
@@ -439,7 +542,7 @@ public class obs_encoder {
 		idx = ModernizedCProgram.get_callback_idx(encoder, new_packet, param);
 		Object generatedCallbacks = this.getCallbacks();
 		if (idx != DARRAY_INVALID) {
-			.da_erase(generatedCallbacks, idx);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase(generatedCallbacks, idx);
 			last = (generatedCallbacks.getNum() == 0);
 		} 
 		ModernizedCProgram.pthread_mutex_unlock(generatedCallbacks_mutex);
@@ -459,10 +562,10 @@ public class obs_encoder {
 	public void obs_encoder_stop(Object new_packet, Object param) {
 		 destroyed = new ();
 		if (!ModernizedCProgram.obs_object_valid(encoder, "obs_encoder_stop", "encoder")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ModernizedCProgram.obs_object_valid(new_packet, "obs_encoder_stop", "new_packet")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedInit_mutex = this.getInit_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedInit_mutex);
@@ -473,18 +576,18 @@ public class obs_encoder {
 	}
 	public void obs_encoder_set_scaled_size(Object width, Object height) {
 		if (!ModernizedCProgram.obs_object_valid(encoder, "obs_encoder_set_scaled_size", "encoder")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_encoder_info generatedInfo = this.getInfo();
 		obs_encoder_type generatedType = generatedInfo.getType();
 		if (generatedType != obs_encoder_type.OBS_ENCODER_VIDEO) {
 			ModernizedCProgram.blog(LOG_WARNING, "obs_encoder_set_scaled_size: encoder '%s' is not a video encoder", ModernizedCProgram.obs_encoder_get_name(encoder));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedActive = this.getActive();
 		if (ModernizedCProgram.os_atomic_load_bool(generatedActive)) {
 			ModernizedCProgram.blog(LOG_WARNING, "encoder '%s': Cannot set the scaled resolution while the encoder is active", ModernizedCProgram.obs_encoder_get_name(encoder));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setScaled_width(width);
 		this.setScaled_height(height);
@@ -492,16 +595,16 @@ public class obs_encoder {
 	public void obs_encoder_set_video(Object video) {
 		video_output_info voi = new video_output_info();
 		if (!ModernizedCProgram.obs_object_valid(encoder, "obs_encoder_set_video", "encoder")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_encoder_info generatedInfo = this.getInfo();
 		obs_encoder_type generatedType = generatedInfo.getType();
 		if (generatedType != obs_encoder_type.OBS_ENCODER_VIDEO) {
 			ModernizedCProgram.blog(LOG_WARNING, "obs_encoder_set_video: encoder '%s' is not a video encoder", ModernizedCProgram.obs_encoder_get_name(encoder));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!video) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		voi = ModernizedCProgram.video_output_get_info(video);
 		this.setMedia(video);
@@ -510,16 +613,16 @@ public class obs_encoder {
 	}
 	public void obs_encoder_set_audio(Object audio) {
 		if (!ModernizedCProgram.obs_object_valid(encoder, "obs_encoder_set_audio", "encoder")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_encoder_info generatedInfo = this.getInfo();
 		obs_encoder_type generatedType = generatedInfo.getType();
 		if (generatedType != obs_encoder_type.OBS_ENCODER_AUDIO) {
 			ModernizedCProgram.blog(LOG_WARNING, "obs_encoder_set_audio: encoder '%s' is not an audio encoder", ModernizedCProgram.obs_encoder_get_name(encoder));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!audio) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setMedia(audio);
 		this.setTimebase_num(1);
@@ -530,7 +633,7 @@ public class obs_encoder {
 		Object generatedOutputs = this.getOutputs();
 		Object generatedInterleaved_mutex = output.getInterleaved_mutex();
 		obs_context_data generatedContext = output.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		Object generatedCallbacks_mutex = this.getCallbacks_mutex();
 		Object generatedCallbacks = this.getCallbacks();
 		if (encoder) {
@@ -540,12 +643,12 @@ public class obs_encoder {
 				obs_output output = generatedOutputs.getArray()[i];
 				output.obs_output_force_stop();
 				ModernizedCProgram.pthread_mutex_lock(generatedInterleaved_mutex);
-				.UNRECOGNIZEDFUNCTIONNAME(generatedData, NULL);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData, NULL);
 				ModernizedCProgram.pthread_mutex_unlock(generatedInterleaved_mutex);
 			}
 			ModernizedCProgram.pthread_mutex_unlock(generatedOutputs_mutex);
 			ModernizedCProgram.pthread_mutex_lock(generatedCallbacks_mutex);
-			.da_free(generatedCallbacks);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedCallbacks);
 			ModernizedCProgram.pthread_mutex_unlock(generatedCallbacks_mutex);
 			encoder.remove_connection(false);
 			this.setInitialized(false);
@@ -586,7 +689,7 @@ public class obs_encoder {
 		for ( i = 0;
 		 i < MAX_AV_PLANES; i++) {
 			generatedAudio_data[i] = generatedAudio_input_buffer[i].getCirclebuf();
-			.memset(generatedAudio_input_buffer[i], 0, );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedAudio_input_buffer[i], 0, /*Error: Unsupported expression*/);
 		}
 		Object generatedFirst_raw_ts = this.getFirst_raw_ts();
 		if (generatedFirst_raw_ts < v_start_ts) {
@@ -600,7 +703,7 @@ public class obs_encoder {
 	}
 	public Object send_audio_data() {
 		encoder_frame enc_frame = new encoder_frame();
-		.memset(enc_frame, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(enc_frame, 0, /*Error: Unsupported expression*/);
 		Object generatedPlanes = this.getPlanes();
 		Object generatedAudio_input_buffer = this.getAudio_input_buffer();
 		Object generatedAudio_output_buffer = this.getAudio_output_buffer();
@@ -627,13 +730,13 @@ public class obs_encoder {
 		obs_encoder_info generatedInfo = this.getInfo();
 		obs_encoder_type generatedType = generatedInfo.getType();
 		if (!encoder || generatedType != obs_encoder_type.OBS_ENCODER_VIDEO) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setPreferred_format(video_format.format);
 	}
 	public void obs_encoder_addref() {
 		if (!encoder) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_weak_encoder generatedControl = this.getControl();
 		obs_weak_ref generatedRef = generatedControl.getRef();
@@ -641,7 +744,7 @@ public class obs_encoder {
 	}
 	public void obs_encoder_release() {
 		if (!encoder) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_weak_encoder generatedControl = this.getControl();
 		obs_weak_encoder_t control = generatedControl;
@@ -675,109 +778,6 @@ public class obs_encoder {
 		obs_encoder_info generatedOrig_info = this.getOrig_info();
 		Object generatedType_data = generatedOrig_info.getType_data();
 		return ModernizedCProgram.obs_object_valid(encoder, "obs_encoder_get_type_data", "encoder") ? generatedType_data : NULL;
-	}
-	public obs_encoder obs_get_encoder_by_name(Object name) {
-		if (!ModernizedCProgram.obs) {
-			return NULL;
-		} 
-		return ModernizedCProgram.get_context_by_name(ModernizedCProgram.obs.getData().getFirst_encoder(), name, ModernizedCProgram.obs.getData().getEncoders_mutex(), obs_encoder_addref_safe_);
-	}
-	public Object start_gpu_encode() {
-		obs_core_video video = ModernizedCProgram.obs.getVideo();
-		 success = true;
-		ModernizedCProgram.obs_enter_graphics();
-		Object generatedGpu_encoder_mutex = video.getGpu_encoder_mutex();
-		ModernizedCProgram.pthread_mutex_lock(generatedGpu_encoder_mutex);
-		Object generatedGpu_encoders = video.getGpu_encoders();
-		if (!generatedGpu_encoders.getNum()) {
-			success = video.init_gpu_encoding();
-		} 
-		if (success) {
-			.da_push_back(generatedGpu_encoders, encoder);
-		} else {
-				video.free_gpu_encoding();
-		} 
-		ModernizedCProgram.pthread_mutex_unlock(generatedGpu_encoder_mutex);
-		ModernizedCProgram.obs_leave_graphics();
-		long generatedGpu_encoder_active = video.getGpu_encoder_active();
-		Object generatedVideo = video.getVideo();
-		if (success) {
-			ModernizedCProgram.os_atomic_inc_long(generatedGpu_encoder_active);
-			generatedVideo.video_output_inc_texture_encoders();
-		} 
-		return success;
-	}
-	public void stop_gpu_encode() {
-		obs_core_video video = ModernizedCProgram.obs.getVideo();
-		 call_free = false;
-		long generatedGpu_encoder_active = video.getGpu_encoder_active();
-		ModernizedCProgram.os_atomic_dec_long(generatedGpu_encoder_active);
-		Object generatedVideo = video.getVideo();
-		generatedVideo.video_output_dec_texture_encoders();
-		Object generatedGpu_encoder_mutex = video.getGpu_encoder_mutex();
-		ModernizedCProgram.pthread_mutex_lock(generatedGpu_encoder_mutex);
-		Object generatedGpu_encoders = video.getGpu_encoders();
-		.da_erase_item(generatedGpu_encoders, encoder);
-		if (!generatedGpu_encoders.getNum()) {
-			call_free = true;
-		} 
-		ModernizedCProgram.pthread_mutex_unlock(generatedGpu_encoder_mutex);
-		Object generatedGpu_encode_inactive = video.getGpu_encode_inactive();
-		generatedGpu_encode_inactive.os_event_wait();
-		if (call_free) {
-			video.stop_gpu_encoding_thread();
-			ModernizedCProgram.obs_enter_graphics();
-			ModernizedCProgram.pthread_mutex_lock(generatedGpu_encoder_mutex);
-			video.free_gpu_encoding();
-			ModernizedCProgram.pthread_mutex_unlock(generatedGpu_encoder_mutex);
-			ModernizedCProgram.obs_leave_graphics();
-		} 
-	}
-	public obs_encoder obs_output_get_video_encoder(Object output) {
-		return ModernizedCProgram.obs_object_valid(output, "obs_output_get_video_encoder", "output") ? output.getVideo_encoder() : NULL;
-	}
-	public obs_encoder obs_output_get_audio_encoder(Object output, Object idx) {
-		if (!ModernizedCProgram.obs_object_valid(output, "obs_output_get_audio_encoder", "output")) {
-			return NULL;
-		} 
-		if ((output.getInfo().getFlags() & (1 << 4)) != 0) {
-			if (idx >= MAX_AUDIO_MIXES) {
-				return NULL;
-			} 
-		} else {
-				if (idx > 0) {
-					return NULL;
-				} 
-		} 
-		return output.getAudio_encoders()[idx];
-	}
-	public obs_encoder find_inactive_audio_encoder(obs_output output, Object num_mixes) {
-		Object generatedAudio_encoders = output.getAudio_encoders();
-		Object generatedActive = audio.getActive();
-		obs_encoder generatedPaired_encoder = audio.getPaired_encoder();
-		for ( i = 0;
-		 i < num_mixes; i++) {
-			obs_encoder audio = generatedAudio_encoders[i];
-			if (audio && !generatedActive && !generatedPaired_encoder) {
-				return audio;
-			} 
-		}
-		return NULL;
-	}
-	public void cap_resolution(Object info) {
-		qsv_cpu_platform qsv_platform = .qsv_get_cpu_platform();
-		uint32_t width = ModernizedCProgram.obs_encoder_get_width(encoder);
-		uint32_t height = ModernizedCProgram.obs_encoder_get_height(encoder);
-		info.setHeight(height);
-		info.setWidth(width);
-		if (qsv_cpu_platform.qsv_platform <= qsv_cpu_platform.QSV_CPU_PLATFORM_IVB) {
-			if (width > 1920) {
-				info.setWidth(1920);
-			} 
-			if (height > 1200) {
-				info.setHeight(1200);
-			} 
-		} 
 	}
 	public obs_context_data getContext() {
 		return context;

@@ -25,9 +25,9 @@ public class ptw32_srwl_node_t_ {
 		ptw32_srwl_node_t currNodePtr = generatedRNodePtr;
 		int generatedAllocState = currNodePtr.getAllocState();
 		Object generatedNext = currNodePtr.getNext();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (generatedAllocState == .ptw32_srwl_free) {
-				if ( == (long).ptw32_srwl_in_use) {
+				if (/*Error: Unsupported expression*/ == (long).ptw32_srwl_in_use) {
 					return currNodePtr;
 				} 
 			} 

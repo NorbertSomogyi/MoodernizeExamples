@@ -77,29 +77,29 @@ public class duplicator_capture {
 		POINT win_pos = new POINT(generatedX, generatedY);
 		Object generatedFlags = generatedCi.getFlags();
 		if (!(generatedFlags & -1024)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedHCursor = generatedCi.getHCursor();
-		icon = .CopyIcon(generatedHCursor);
+		icon = /*Error: Function owner not recognized*/CopyIcon(generatedHCursor);
 		if (!icon) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedXHotspot = ii.getXHotspot();
 		Object generatedYHotspot = ii.getYHotspot();
 		Object generatedHbmColor = ii.getHbmColor();
 		Object generatedHbmMask = ii.getHbmMask();
-		if (.GetIconInfo(icon, ii)) {
+		if (/*Error: Function owner not recognized*/GetIconInfo(icon, ii)) {
 			POINT pos = new POINT();
 			if (window) {
-				.ClientToScreen(window, win_pos);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ClientToScreen(window, win_pos);
 			} 
 			pos.setX(generatedX - (int)generatedXHotspot - generatedX);
 			pos.setY(generatedY - (int)generatedYHotspot - generatedY);
-			.DrawIconEx(hdc, generatedX, generatedY, icon, 0, 0, 0, ((Object)0), 3);
-			.DeleteObject(generatedHbmColor);
-			.DeleteObject(generatedHbmMask);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DrawIconEx(hdc, generatedX, generatedY, icon, 0, 0, 0, ((Object)0), 3);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteObject(generatedHbmColor);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DeleteObject(generatedHbmMask);
 		} 
-		.DestroyIcon(icon);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DestroyIcon(icon);
 	}
 	public obs_source getSource() {
 		return source;

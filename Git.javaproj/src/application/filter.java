@@ -20,7 +20,7 @@ public class filter {
 	public filter list_objects_filter__init(oidset omitted, list_objects_filter_options filter_options) {
 		filter filter = new filter();
 		filter_init_fn init_fn = new filter_init_fn();
-		((( / ) == list_objects_filter_choice.LOFC__COUNT) ? (Object)0 : ._assert("(sizeof(s_filters) / sizeof(s_filters[0])) == LOFC__COUNT", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\list-objects-filter.c", 664));
+		(((/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/) == list_objects_filter_choice.LOFC__COUNT) ? (Object)0 : /*Error: Function owner not recognized*/_assert("(sizeof(s_filters) / sizeof(s_filters[0])) == LOFC__COUNT", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\list-objects-filter.c", 664));
 		list_objects_filter_choice generatedChoice = filter_options.getChoice();
 		if (generatedChoice >= list_objects_filter_choice.LOFC__COUNT) {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\list-objects-filter.c", 668, "invalid list-objects filter choice: %d", generatedChoice);
@@ -29,19 +29,19 @@ public class filter {
 		if (!init_fn) {
 			return ((Object)0);
 		} 
-		filter = ModernizedCProgram.xcalloc(1, );
+		filter = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		filter.setOmits(omitted);
-		.init_fn(filter_options, filter);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/init_fn(filter_options, filter);
 		return filter;
 	}
 	public void list_objects_filter__free() {
 		if (!ModernizedCProgram.filter) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (ModernizedCProgram.filter.getFinalize_omits_fn() && ModernizedCProgram.filter.getOmits()) {
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.filter.getOmits(), ModernizedCProgram.filter.getFilter_data());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.filter.getOmits(), ModernizedCProgram.filter.getFilter_data());
 		} 
-		.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.filter.getFilter_data());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.filter.getFilter_data());
 		ModernizedCProgram.free(ModernizedCProgram.filter);
 	}
 	public Object getFilter_object_fn() {

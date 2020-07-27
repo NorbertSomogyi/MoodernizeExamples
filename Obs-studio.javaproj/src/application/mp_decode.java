@@ -88,13 +88,13 @@ public class mp_decode {
 		 c = new ();
 		int ret;
 		Object generatedCodec = this.getCodec();
-		c = .avcodec_alloc_context3(generatedCodec);
+		c = /*Error: Function owner not recognized*/avcodec_alloc_context3(generatedCodec);
 		if (!c) {
 			ModernizedCProgram.blog(LOG_WARNING, "MP: Failed to allocate context");
 			return -1;
 		} 
 		Object generatedStream = this.getStream();
-		ret = .avcodec_parameters_to_context(c, generatedStream.getCodecpar());
+		ret = /*Error: Function owner not recognized*/avcodec_parameters_to_context(c, generatedStream.getCodecpar());
 		if (ret < 0) {
 			;
 		} 
@@ -102,29 +102,29 @@ public class mp_decode {
 		if (c.getThread_count() == 1 && c.getCodec_id() != AV_CODEC_ID_PNG && c.getCodec_id() != AV_CODEC_ID_TIFF && c.getCodec_id() != AV_CODEC_ID_JPEG2000 && c.getCodec_id() != AV_CODEC_ID_MPEG4 && c.getCodec_id() != AV_CODEC_ID_WEBP) {
 			c.setThread_count(0);
 		} 
-		ret = .avcodec_open2(c, generatedCodec, NULL);
+		ret = /*Error: Function owner not recognized*/avcodec_open2(c, generatedCodec, NULL);
 		if (ret < 0) {
 			;
 		} 
 		this.setDecoder(c);
 		return ret;
 		Object generatedDecoder = this.getDecoder();
-		.av_free(generatedDecoder);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(generatedDecoder);
 		return ret;
 	}
 	public void mp_decode_clear_packets() {
 		Object generatedPacket_pending = this.getPacket_pending();
 		Object generatedOrig_pkt = this.getOrig_pkt();
 		if (generatedPacket_pending) {
-			.av_packet_unref(generatedOrig_pkt);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_packet_unref(generatedOrig_pkt);
 			this.setPacket_pending(false);
 		} 
 		circlebuf generatedPackets = this.getPackets();
 		Object generatedCirclebuf = generatedPackets.getCirclebuf();
 		while (generatedCirclebuf) {
 			 pkt = new ();
-			generatedPackets.circlebuf_pop_front(pkt, );
-			.av_packet_unref(pkt);
+			generatedPackets.circlebuf_pop_front(pkt, /*Error: sizeof expression not supported yet*/);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_packet_unref(pkt);
 		}
 	}
 	public void mp_decode_free() {
@@ -133,23 +133,23 @@ public class mp_decode {
 		generatedPackets.circlebuf_free();
 		Object generatedHw_frame = this.getHw_frame();
 		if (generatedHw_frame) {
-			.av_frame_unref(generatedHw_frame);
-			.av_free(generatedHw_frame);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_frame_unref(generatedHw_frame);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(generatedHw_frame);
 		} 
 		Object generatedDecoder = this.getDecoder();
 		if (generatedDecoder) {
-			.avcodec_free_context(generatedDecoder);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avcodec_free_context(generatedDecoder);
 		} 
 		Object generatedSw_frame = this.getSw_frame();
 		if (generatedSw_frame) {
-			.av_frame_unref(generatedSw_frame);
-			.av_free(generatedSw_frame);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_frame_unref(generatedSw_frame);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_free(generatedSw_frame);
 		} 
-		.memset(d, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(d, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public void mp_decode_push_packet(Object packet) {
 		circlebuf generatedPackets = this.getPackets();
-		generatedPackets.circlebuf_push_back(packet, );
+		generatedPackets.circlebuf_push_back(packet, /*Error: sizeof expression not supported yet*/);
 	}
 	public Object get_estimated_duration(Object last_pts) {
 		Object generatedFrame_pts = this.getFrame_pts();
@@ -161,21 +161,21 @@ public class mp_decode {
 		Object generatedLast_duration = this.getLast_duration();
 		Object generatedDecoder = this.getDecoder();
 		if (generatedAudio) {
-			return .av_rescale_q(generatedIn_frame.getNb_samples(), , );
+			return /*Error: Function owner not recognized*/av_rescale_q(generatedIn_frame.getNb_samples(), /*Error: Unsupported expression*/, /*Error: Unsupported expression*/);
 		} else {
 				if (generatedLast_duration) {
 					return generatedLast_duration;
 				} 
-				return .av_rescale_q(generatedDecoder.getTime_base().getNum(), generatedDecoder.getTime_base(), );
+				return /*Error: Function owner not recognized*/av_rescale_q(generatedDecoder.getTime_base().getNum(), generatedDecoder.getTime_base(), /*Error: Unsupported expression*/);
 		} 
 	}
-	public int decode_packet(int got_frame) {
+	public int decode_packet(Integer got_frame) {
 		int ret;
 		got_frame = 0;
 		Object generatedDecoder = this.getDecoder();
 		Object generatedIn_frame = this.getIn_frame();
-		ret = .avcodec_receive_frame(generatedDecoder, generatedIn_frame);
-		if (ret != 0 && ret != .AVERROR(EAGAIN)) {
+		ret = /*Error: Function owner not recognized*/avcodec_receive_frame(generatedDecoder, generatedIn_frame);
+		if (ret != 0 && ret != /*Error: Function owner not recognized*/AVERROR(EAGAIN)) {
 			if (ret == AVERROR_EOF) {
 				ret = 0;
 			} 
@@ -183,15 +183,15 @@ public class mp_decode {
 		} 
 		Object generatedPkt = this.getPkt();
 		if (ret != 0) {
-			ret = .avcodec_send_packet(generatedDecoder, generatedPkt);
-			if (ret != 0 && ret != .AVERROR(EAGAIN)) {
+			ret = /*Error: Function owner not recognized*/avcodec_send_packet(generatedDecoder, generatedPkt);
+			if (ret != 0 && ret != /*Error: Function owner not recognized*/AVERROR(EAGAIN)) {
 				if (ret == AVERROR_EOF) {
 					ret = 0;
 				} 
 				return ret;
 			} 
-			ret = .avcodec_receive_frame(generatedDecoder, generatedIn_frame);
-			if (ret != 0 && ret != .AVERROR(EAGAIN)) {
+			ret = /*Error: Function owner not recognized*/avcodec_receive_frame(generatedDecoder, generatedIn_frame);
+			if (ret != 0 && ret != /*Error: Function owner not recognized*/AVERROR(EAGAIN)) {
 				if (ret == AVERROR_EOF) {
 					ret = 0;
 				} 
@@ -233,7 +233,7 @@ public class mp_decode {
 							return true;
 					} 
 				} else {
-						generatedPackets.circlebuf_pop_front(generatedOrig_pkt, );
+						generatedPackets.circlebuf_pop_front(generatedOrig_pkt, /*Error: sizeof expression not supported yet*/);
 						this.setPkt(generatedOrig_pkt);
 						this.setPacket_pending(true);
 				} 
@@ -245,9 +245,9 @@ public class mp_decode {
 			} 
 			if (ret < 0) {
 				if (generatedPacket_pending) {
-					.av_packet_unref(generatedOrig_pkt);
-					.av_init_packet(generatedOrig_pkt);
-					.av_init_packet(generatedPkt);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_packet_unref(generatedOrig_pkt);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_init_packet(generatedOrig_pkt);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_init_packet(generatedPkt);
 					this.setPacket_pending(false);
 				} 
 				return true;
@@ -259,9 +259,9 @@ public class mp_decode {
 					generatedPkt.getSize() -= ret;
 				} 
 				if (generatedPkt.getSize() <= 0) {
-					.av_packet_unref(generatedOrig_pkt);
-					.av_init_packet(generatedOrig_pkt);
-					.av_init_packet(generatedPkt);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_packet_unref(generatedOrig_pkt);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_init_packet(generatedOrig_pkt);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/av_init_packet(generatedPkt);
 					this.setPacket_pending(false);
 				} 
 			} 
@@ -276,17 +276,17 @@ public class mp_decode {
 			if (generatedIn_frame.getBest_effort_timestamp() == AV_NOPTS_VALUE) {
 				this.setFrame_pts(generatedNext_pts);
 			} else {
-					this.setFrame_pts(.av_rescale_q(generatedIn_frame.getBest_effort_timestamp(), generatedStream.getTime_base(), ));
+					this.setFrame_pts(/*Error: Function owner not recognized*/av_rescale_q(generatedIn_frame.getBest_effort_timestamp(), generatedStream.getTime_base(), /*Error: Unsupported expression*/));
 			} 
 			 duration = generatedIn_frame.getPkt_duration();
 			if (!duration) {
 				duration = d.get_estimated_duration(last_pts);
 			} else {
-					duration = .av_rescale_q(duration, generatedStream.getTime_base(), );
+					duration = /*Error: Function owner not recognized*/av_rescale_q(duration, generatedStream.getTime_base(), /*Error: Unsupported expression*/);
 			} 
 			if (generatedSpeed != 100) {
-				this.setFrame_pts(.av_rescale_q(generatedFrame_pts, , ));
-				duration = .av_rescale_q(duration, , );
+				this.setFrame_pts(/*Error: Function owner not recognized*/av_rescale_q(generatedFrame_pts, /*Error: Unsupported expression*/, /*Error: Unsupported expression*/));
+				duration = /*Error: Function owner not recognized*/av_rescale_q(duration, /*Error: Unsupported expression*/, /*Error: Unsupported expression*/);
 			} 
 			this.setLast_duration(duration);
 			this.setNext_pts(generatedFrame_pts + duration);
@@ -295,7 +295,7 @@ public class mp_decode {
 	}
 	public void mp_decode_flush() {
 		Object generatedDecoder = this.getDecoder();
-		.avcodec_flush_buffers(generatedDecoder);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/avcodec_flush_buffers(generatedDecoder);
 		d.mp_decode_clear_packets();
 		this.setEof(false);
 		this.setFrame_pts(0);

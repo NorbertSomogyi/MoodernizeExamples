@@ -36,7 +36,7 @@ public class tree_content {
 			} 
 		} else {
 				cnt = cnt & 7 ? ((cnt / 8) + 1) * 8 : cnt;
-				f = ModernizedCProgram.fi_mem_pool.mem_pool_alloc( +  * cnt);
+				f = ModernizedCProgram.fi_mem_pool.mem_pool_alloc(/*Error: sizeof expression not supported yet*/ + /*Error: sizeof expression not supported yet*/ * cnt);
 				f.setEntry_capacity(cnt);
 		} 
 		t = (tree_content)f;
@@ -68,7 +68,7 @@ public class tree_content {
 		int generatedDelta_depth = this.getDelta_depth();
 		r.setDelta_depth(generatedDelta_depth);
 		Object generatedEntries = r.getEntries();
-		ModernizedCProgram.copy_array((generatedEntries), (generatedEntries), (generatedEntry_count),  + ( - 1));
+		ModernizedCProgram.copy_array((generatedEntries), (generatedEntries), (generatedEntry_count), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
 		t.release_tree_content();
 		return r;
 	}
@@ -90,7 +90,7 @@ public class tree_content {
 		for (i = 0; i < generatedEntry_count; i++) {
 			a = generatedEntries[i];
 			b = tree_entry.new_tree_entry();
-			.memcpy(b, a, );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(b, a, /*Error: sizeof expression not supported yet*/);
 			if (generatedTree && ModernizedCProgram.is_null_oid(generatedVersions[1].getOid())) {
 				b.setTree(generatedTree.dup_tree_content());
 			} else {

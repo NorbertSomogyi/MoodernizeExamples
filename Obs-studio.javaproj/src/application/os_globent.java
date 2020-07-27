@@ -17,8 +17,8 @@ public class os_globent {
 		byte slash;
 		name.dstr_from_wcs(wfd.getCFileName());
 		path.dstr_copy(pattern);
-		byte generatedArray = path.getArray();
-		slash = .strrchr(generatedArray, (byte)'/');
+		byte[] generatedArray = path.getArray();
+		slash = /*Error: Function owner not recognized*/strrchr(generatedArray, (byte)'/');
 		if (slash) {
 			path.dstr_resize(slash + 1 - generatedArray);
 		} else {

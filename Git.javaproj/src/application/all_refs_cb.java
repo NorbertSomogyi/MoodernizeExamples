@@ -20,7 +20,7 @@ public class all_refs_cb {
 	public void add_other_reflogs_to_pending() {
 		worktree worktrees = new worktree();
 		worktree p = new worktree();
-		worktrees = .get_worktrees(0);
+		worktrees = /*Error: Function owner not recognized*/get_worktrees(0);
 		int generatedIs_current = wt.getIs_current();
 		ref_store ref_store = new ref_store();
 		for (p = worktrees; p; p++) {
@@ -31,7 +31,7 @@ public class all_refs_cb {
 			this.setWt(wt);
 			ref_store.get_worktree_ref_store(wt).refs_for_each_reflog(handle_one_reflog, cb);
 		}
-		.free_worktrees(worktrees);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free_worktrees(worktrees);
 	}
 	public int getAll_flags() {
 		return all_flags;

@@ -44,7 +44,7 @@ package application;
 public class hashmap {
 	private int nr;
 	private int alloc;
-	private entry entries;
+	private entry[] entries;
 	private entry first;
 	private entry last;
 	private long has_matches;
@@ -53,7 +53,7 @@ public class hashmap {
 	private s_xdfenv env;
 	private Object xpp;
 	
-	public hashmap(int nr, int alloc, entry entries, entry first, entry last, long has_matches, s_mmfile file1, s_mmfile file2, s_xdfenv env, Object xpp) {
+	public hashmap(int nr, int alloc, entry[] entries, entry first, entry last, long has_matches, s_mmfile file1, s_mmfile file2, s_xdfenv env, Object xpp) {
 		setNr(nr);
 		setAlloc(alloc);
 		setEntries(entries);
@@ -72,7 +72,7 @@ public class hashmap {
 	public void insert_record(Object xpp, int line, int pass) {
 		s_xdfenv generatedEnv = this.getEnv();
 		s_xdfile generatedXdf1 = generatedEnv.getXdf1();
-		s_xrecord generatedRecs = generatedXdf1.getRecs();
+		s_xrecord[][] generatedRecs = generatedXdf1.getRecs();
 		xrecord_t records = pass == 1 ? generatedRecs : generatedRecs;
 		xrecord_t record = records[line - 1/*
 			 * After xdl_prepare_env() (or more precisely, due to
@@ -88,8 +88,8 @@ public class hashmap {
 		long generatedHa = record.getHa();
 		int generatedAlloc = this.getAlloc();
 		int index = (int)((generatedHa << 1) % generatedAlloc);
-		entry generatedEntries = this.getEntries();
-		Object generatedPtr = record.getPtr();
+		entry[] generatedEntries = this.getEntries();
+		Object[] generatedPtr = record.getPtr();
 		long generatedSize = record.getSize();
 		Object generatedXpp = this.getXpp();
 		while (generatedEntries[index].getLine1()) {
@@ -108,10 +108,10 @@ public class hashmap {
 			} else {
 					generatedEntries[index].setLine2(line);
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		}
 		if (pass == 2) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		generatedEntries[index].setLine1(line);
 		generatedEntries[index].setHash(generatedHa);
@@ -132,26 +132,26 @@ public class hashmap {
 	public int match(int line1, int line2) {
 		s_xdfenv generatedEnv = this.getEnv();
 		s_xdfile generatedXdf1 = generatedEnv.getXdf1();
-		s_xrecord generatedRecs = generatedXdf1.getRecs();
+		s_xrecord[][] generatedRecs = generatedXdf1.getRecs();
 		xrecord_t record1 = generatedRecs[line1 - 1];
 		xrecord_t record2 = generatedRecs[line2 - 1];
-		Object generatedPtr = record1.getPtr();
+		Object[] generatedPtr = record1.getPtr();
 		long generatedSize = record1.getSize();
 		Object generatedXpp = this.getXpp();
 		return ModernizedCProgram.xdl_recmatch(generatedPtr, generatedSize, generatedPtr, generatedSize, generatedXpp.getFlags());
 		byte[] buf = new byte[256];
 		Object generatedSel = data.getSel();
-		if (!generatedSel[ListSpecifier.l] || !.strcmp(generatedSel[ListSpecifier.l], /* An empty selection or a wild card matches anything.
+		if (!generatedSel[ListSpecifier.l] || !/*Error: Function owner not recognized*/strcmp(generatedSel[ListSpecifier.l], /* An empty selection or a wild card matches anything.
 		     */ModernizedCProgram.wild)) {
 			return True;
 		} 
 		Object generatedIn_pixels = data.getIn_pixels();
 		switch (/* chunk out the desired part... */ListSpecifier.l) {
-		case ListSpecifier.NAME:
-				ModernizedCProgram.name_part(data.fn(i), buf);
-				break;
 		case :
 				ModernizedCProgram.size_part(data.fn(i), buf, generatedIn_pixels);
+				break;
+		case ListSpecifier.NAME:
+				ModernizedCProgram.name_part(data.fn(i), buf);
 				break;
 		case ListSpecifier.STYLE:
 				ModernizedCProgram.style_part(data.fn(i), buf);
@@ -162,7 +162,7 @@ public class hashmap {
 		default:
 				;
 		}
-		return !.strcmp(buf, generatedSel[/* ...and chew it now */ListSpecifier.l]);
+		return !/*Error: Function owner not recognized*/strcmp(buf, generatedSel[/* ...and chew it now */ListSpecifier.l]);
 	}
 	public int getNr() {
 		return nr;
@@ -176,10 +176,10 @@ public class hashmap {
 	public void setAlloc(int newAlloc) {
 		alloc = newAlloc;
 	}
-	public entry getEntries() {
+	public entry[] getEntries() {
 		return entries;
 	}
-	public void setEntries(entry newEntries) {
+	public void setEntries(entry[] newEntries) {
 		entries = newEntries;
 	}
 	public entry getFirst() {

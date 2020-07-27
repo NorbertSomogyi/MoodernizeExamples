@@ -52,7 +52,7 @@ public class wt_status_change_data {
 	 * Convert various submodule status values into a
 	 * fixed-length string of characters in the buffer provided.
 	 */
-	public void wt_porcelain_v2_submodule_state(Byte sub) {
+	public void wt_porcelain_v2_submodule_state(byte[] sub) {
 		int generatedMode_head = this.getMode_head();
 		int generatedMode_index = this.getMode_index();
 		int generatedMode_worktree = this.getMode_worktree();

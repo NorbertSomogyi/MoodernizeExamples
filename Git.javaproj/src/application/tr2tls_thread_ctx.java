@@ -21,10 +21,10 @@ public class tr2tls_thread_ctx {
 	}
 	
 	public tr2tls_thread_ctx tr2tls_create_self(Object thread_name, Object us_thread_start) {
-		tr2tls_thread_ctx ctx = ModernizedCProgram.xcalloc(1, );
+		tr2tls_thread_ctx ctx = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		ctx.setTr2tls_thread_ctx((true));
 		Object generatedTr2tls_thread_ctx = ctx.getTr2tls_thread_ctx();
-		ctx.setTr2tls_thread_ctx((uint64_t)ModernizedCProgram.xcalloc(generatedTr2tls_thread_ctx, ));
+		ctx.setTr2tls_thread_ctx((uint64_t)ModernizedCProgram.xcalloc(generatedTr2tls_thread_ctx, /*Error: Unsupported expression*/));
 		generatedTr2tls_thread_ctx[generatedTr2tls_thread_ctx++] = us_thread_start;
 		ctx.setTr2tls_thread_ctx(ModernizedCProgram.tr2tls_locked_increment(ModernizedCProgram.tr2_next_thread_id));
 		generatedTr2tls_thread_ctx.strbuf_init(0);

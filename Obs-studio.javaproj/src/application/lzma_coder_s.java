@@ -2,105 +2,351 @@ package application;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-/// \file       block_decoder.c
-/// \brief      Decodes .xz Blocks
-//
-//  Author:     Lasse Collin
+/// \file       lz_decoder.c
+/// \brief      LZ out window
+///
+//  Authors:    Igor Pavlov
+//              Lasse Collin
 //
 //  This file has been put into the public domain.
 //  You can do whatever you want with this file.
 //
 ///////////////////////////////////////////////////////////////////////////////
+// liblzma supports multiple LZ77-based filters. The LZ part is shared
+// between these filters. The LZ code takes care of dictionary handling
+// and passing the data between filters in the chain. The filter-specific
+// part decodes from the input buffer to the dictionary.
 public class lzma_coder_s {
-	private  sequence;
+	private  dict;
+	private  lz;
 	private lzma_next_coder_s next;
-	private Object block;
-	private Object compressed_size;
-	private Object uncompressed_size;
-	private Object compressed_limit;
-	private Object check_pos;
-	private Object check;
+	private boolean next_finished;
+	private boolean this_finished;
+	private  temp;
 	
-	public lzma_coder_s( sequence, lzma_next_coder_s next, Object block, Object compressed_size, Object uncompressed_size, Object compressed_limit, Object check_pos, Object check) {
-		setSequence(sequence);
+	public lzma_coder_s( dict,  lz, lzma_next_coder_s next, boolean next_finished, boolean this_finished,  temp) {
+		setDict(dict);
+		setLz(lz);
 		setNext(next);
-		setBlock(block);
-		setCompressed_size(compressed_size);
-		setUncompressed_size(uncompressed_size);
-		setCompressed_limit(compressed_limit);
-		setCheck_pos(check_pos);
-		setCheck(check);
+		setNext_finished(next_finished);
+		setThis_finished(this_finished);
+		setTemp(temp);
 	}
 	public lzma_coder_s() {
 	}
 	
-	public Object block_decode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
-		lzma_next_coder_s generatedNext = this.getNext();
-		lzma_coder_s generatedCoder = generatedNext.getCoder();
-		Object generatedCompressed_size = this.getCompressed_size();
-		Object generatedCompressed_limit = this.getCompressed_limit();
-		Object generatedUncompressed_size = this.getUncompressed_size();
-		Object generatedCheck = this.getCheck();
-		Object generatedBlock = this.getBlock();
-		Object generatedCheck_pos = this.getCheck_pos();
-		 generatedSequence = this.getSequence();
-		switch (generatedSequence) {
-		case .SEQ_CHECK:
-				{ 
-					size_t check_size = ModernizedCProgram.lzma_check_size(generatedCheck);
-					ModernizedCProgram.lzma_bufcpy(in, in_pos, in_size, generatedBlock.getRaw_check(), generatedCheck_pos, check_size);
-					if (generatedCheck_pos < check_size) {
-						return LZMA_OK;
-					} 
-					if (ModernizedCProgram.lzma_check_is_supported(generatedCheck) && .memcmp(generatedBlock.getRaw_check(), generatedCheck.getBuffer().getU8(), check_size) != 0) {
-						return LZMA_DATA_ERROR;
-					} 
-					return LZMA_STREAM_END;
-				}
-		case .SEQ_CODE:
-				{ 
-					size_t in_start = in_pos;
-					size_t out_start = out_pos;
-					 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
-					size_t in_used = in_pos - in_start;
-					size_t out_used = out_pos - out_start;
-					if (ModernizedCProgram.update_size(generatedCompressed_size, in_used, generatedCompressed_limit) || ModernizedCProgram.update_size(generatedUncompressed_size, out_used, generatedUncompressed_size)) {
-						return LZMA_DATA_ERROR;
-					} 
-					ModernizedCProgram.lzma_check_update(generatedCheck, generatedCheck, out + out_start, out_used);
-					if (ret != LZMA_STREAM_END) {
+	public void lz_decoder_reset() {
+		 generatedDict = this.getDict();
+		generatedDict.setPos(0);
+		generatedDict.setFull(0);
+		Object generatedBuf = generatedDict.getBuf();
+		Object generatedSize = generatedDict.getSize();
+		generatedBuf[generatedSize - 1] = (byte)'\0';
+		generatedDict.setNeed_reset(0);
+		return /*Error: Unsupported expression*/;
+	}
+	public Object decode_buffer(Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size) {
+		 generatedDict = this.getDict();
+		Object generatedPos = generatedDict.getPos();
+		Object generatedSize = generatedDict.getSize();
+		 generatedLz = this.getLz();
+		Object generatedCoder = generatedLz.getCoder();
+		Object generatedBuf = generatedDict.getBuf();
+		Object generatedNeed_reset = generatedDict.getNeed_reset();
+		while (1) {
+			if (generatedPos == generatedSize) {
+				generatedDict.setPos(0);
+			} 
+			size_t dict_start = generatedPos;
+			generatedDict.setLimit(generatedPos + ((out_size - out_pos) < (generatedSize - generatedPos) ? (out_size - out_pos) : (generatedSize - generatedPos)));
+			 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, generatedDict, in, in_pos, in_size);
+			size_t copy_size = generatedPos - dict_start;
+			((copy_size <= out_size - out_pos) ? (Object)0 : /*Error: Function owner not recognized*/_assert("copy_size <= out_size - *out_pos", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lz_decoder.c", 96));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(out + out_pos, generatedBuf + dict_start, copy_size);
+			out_pos += copy_size;
+			if (generatedNeed_reset) {
+				coder.lz_decoder_reset();
+				if (ret != LZMA_OK || out_pos == out_size) {
+					return ret;
+				} 
+			} else {
+					if (ret != LZMA_OK || out_pos == out_size || generatedPos < generatedSize) {
 						return ret;
 					} 
-					if (!ModernizedCProgram.is_size_valid(generatedCompressed_size, generatedCompressed_size) || !ModernizedCProgram.is_size_valid(generatedUncompressed_size, generatedUncompressed_size)) {
-						return LZMA_DATA_ERROR;
-					} 
-					generatedBlock.setCompressed_size(generatedCompressed_size);
-					generatedBlock.setUncompressed_size(generatedUncompressed_size);
-					this.setSequence(.SEQ_PADDING);
-				}
-		case .SEQ_PADDING:
-				while (generatedCompressed_size & 3) {
-					if (in_pos >= in_size) {
-						return LZMA_OK;
-					} 
-					++generatedCompressed_size;
-					if (in[(in_pos)++] != -1024) {
-						return LZMA_DATA_ERROR;
-					} 
-				}
-				if (generatedCheck == .LZMA_CHECK_NONE) {
+			} 
+		}// Wrap the dictionary if needed.
+		Object generatedDistance = this.getDistance();
+		size_t distance = generatedDistance;
+		Object generatedHistory = this.getHistory();
+		Object generatedPos = this.getPos();
+		for (size_t i = 0;
+		 i < size; ++i) {
+			buffer[i] += generatedHistory[(distance + generatedPos) & -1024];
+			generatedHistory[generatedPos-- & -1024] = buffer[i];
+		}
+	}
+	public Object lz_decode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		Object generatedCode = generatedNext.getCode();
+		if (generatedCode == ((Object)0)) {
+			return coder.decode_buffer(in, in_pos, in_size, out, out_pos, out_size);
+		} 
+		boolean generatedNext_finished = this.getNext_finished();
+		 generatedTemp = this.getTemp();
+		Object generatedPos = generatedTemp.getPos();
+		Object generatedSize = generatedTemp.getSize();
+		lzma_coder_s generatedCoder = generatedNext.getCoder();
+		Object generatedBuffer = generatedTemp.getBuffer();
+		boolean generatedThis_finished = this.getThis_finished();
+		// We aren't the last coder in the chain, we need to decode// our input to a temporary buffer.while (out_pos < out_size) {
+			if (!generatedNext_finished && generatedPos == generatedSize) {
+				generatedTemp.setPos(0);
+				generatedTemp.setSize(0);
+				 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, generatedBuffer, generatedSize, 4096, action);
+				if (ret == LZMA_STREAM_END) {
+					this.setNext_finished(1);
+				}  else if (ret != LZMA_OK || generatedSize == 0) {
+					return ret;
+				} 
+			} 
+			if (generatedThis_finished) {
+				if (generatedSize != 0) {
+					return LZMA_DATA_ERROR;
+				} 
+				if (generatedNext_finished) {
 					return LZMA_STREAM_END;
 				} 
-				ModernizedCProgram.lzma_check_finish(generatedCheck, generatedCheck);
-				this.setSequence(.SEQ_CHECK);
-		}
-		return LZMA_PROG_ERROR;
+				return LZMA_OK;
+			} 
+			 ret = coder.decode_buffer(generatedBuffer, generatedPos, generatedSize, out, out_pos, out_size);
+			if (ret == LZMA_STREAM_END) {
+				this.setThis_finished(1);
+			}  else if (ret != LZMA_OK) {
+				return ret;
+			}  else if (generatedNext_finished && out_pos < out_size) {
+				return LZMA_DATA_ERROR;
+			} 
+		}// Fill the temporary buffer if it is empty.
+		return LZMA_OK;
 	}
-	public void block_decoder_end(Object allocator) {
+	public void lz_decoder_end(Object allocator) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		generatedNext.lzma_next_end(allocator);
+		 generatedDict = this.getDict();
+		Object generatedBuf = generatedDict.getBuf();
+		ModernizedCProgram.lzma_free(generatedBuf, allocator);
+		 generatedLz = this.getLz();
+		Object generatedEnd = generatedLz.getEnd();
+		Object generatedCoder = generatedLz.getCoder();
+		if (generatedEnd != ((Object)0)) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator);
+		} else {
+				ModernizedCProgram.lzma_free(generatedCoder, allocator);
+		} 
+		ModernizedCProgram.lzma_free(coder, allocator);
+		return /*Error: Unsupported expression*/;
+	}
+	public void lzma_lz_decoder_uncompressed(Object uncompressed_size) {
+		 generatedLz = this.getLz();
+		Object generatedCoder = generatedLz.getCoder();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, uncompressed_size);
+	}
+	public Object delta_decode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		Object generatedCode = generatedNext.getCode();
+		((generatedCode != ((Object)0)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->next.code != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\delta_decoder.c", 35));
+		size_t out_start = out_pos;
+		lzma_coder_s generatedCoder = generatedNext.getCoder();
+		 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
+		coder.decode_buffer(out + out_start, out_pos - out_start);
+		return ret;
+	}
+	///////////////////////////////////////////////////////////////////////////////
+	//
+	/// \file       delta_encoder.c
+	/// \brief      Delta filter encoder
+	//
+	//  Author:     Lasse Collin
+	//
+	//  This file has been put into the public domain.
+	//  You can do whatever you want with this file.
+	//
+	///////////////////////////////////////////////////////////////////////////////
+	/// Copies and encodes the data at the same time. This is used when Delta
+	/// is the first filter in the chain (and thus the last filter in the
+	/// encoder's filter stack).
+	public void copy_and_encode(Object[] in, Object[] out, Object size) {
+		Object generatedDistance = this.getDistance();
+		size_t distance = generatedDistance;
+		Object generatedHistory = this.getHistory();
+		Object generatedPos = this.getPos();
+		for (size_t i = 0;
+		 i < size; ++i) {
+			uint8_t tmp = generatedHistory[(distance + generatedPos) & -1024];
+			generatedHistory[generatedPos-- & -1024] = in[i];
+			out[i] = in[i] - tmp;
+		}
+	}
+	/// Encodes the data in place. This is used when we are the last filter
+	/// in the chain (and thus non-last filter in the encoder's filter stack).
+	public void encode_in_place(Object[] buffer, Object size) {
+		Object generatedDistance = this.getDistance();
+		size_t distance = generatedDistance;
+		Object generatedHistory = this.getHistory();
+		Object generatedPos = this.getPos();
+		for (size_t i = 0;
+		 i < size; ++i) {
+			uint8_t tmp = generatedHistory[(distance + generatedPos) & -1024];
+			generatedHistory[generatedPos-- & -1024] = buffer[i];
+			buffer[i] -= tmp;
+		}
+	}
+	public Object delta_encode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+		 ret = new ();
+		lzma_next_coder_s generatedNext = this.getNext();
+		Object generatedCode = generatedNext.getCode();
+		lzma_coder_s generatedCoder = generatedNext.getCoder();
+		if (generatedCode == ((Object)0)) {
+			size_t in_avail = in_size - in_pos;
+			size_t out_avail = out_size - out_pos;
+			size_t size = ((in_avail) < (out_avail) ? (in_avail) : (out_avail));
+			coder.copy_and_encode(in + in_pos, out + out_pos, size);
+			in_pos += size;
+			out_pos += size;
+			ret = action != LZMA_RUN && in_pos == in_size ? LZMA_STREAM_END : LZMA_OK;
+		} else {
+				size_t out_start = out_pos;
+				ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
+				coder.encode_in_place(out + out_start, out_pos - out_start);
+		} 
+		return ret;
+	}
+	public Object delta_encoder_update(Object allocator, Object filters_null, Object reversed_filters) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		// Delta doesn't and will never support changing the options in// the middle of encoding. If the app tries to change them, we// simply ignore them.return generatedNext.lzma_next_filter_update(allocator, reversed_filters + 1);
+	}
+	public Object auto_decode(Object allocator, Object[] in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		Object generatedMemlimit = this.getMemlimit();
+		Object generatedFlags = this.getFlags();
+		lzma_coder_s generatedCoder = generatedNext.getCoder();
+		Object generatedSequence = this.getSequence();
+		switch (generatedSequence) {
+		case .SEQ_CODE:
+				{ 
+					 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
+					if (ret != LZMA_STREAM_END || (generatedFlags & LZMA_CONCATENATED) == 0) {
+						return ret;
+					} 
+					this.setSequence(.SEQ_FINISH);
+				}
+		case .SEQ_FINISH:
+				if (in_pos < in_size) {
+					return LZMA_DATA_ERROR;
+				} 
+				return action == LZMA_FINISH ? LZMA_STREAM_END : LZMA_OK;
+		case .SEQ_INIT:
+				if (in_pos >= in_size) {
+					return LZMA_OK;
+				} 
+				this.setSequence(.SEQ_CODE);
+				if (in[in_pos] == -1024) {
+					do {
+						 ret_ = (generatedNext.lzma_stream_decoder_init(allocator, generatedMemlimit, generatedFlags));
+						if (ret_ != LZMA_OK) {
+							return ret_;
+						} 
+					} while (0);
+				} else {
+						do {
+							 ret_ = (generatedNext.lzma_alone_decoder_init(allocator, generatedMemlimit, 1));
+							if (ret_ != LZMA_OK) {
+								return ret_;
+							} 
+						} while (0);
+						if (generatedFlags & LZMA_TELL_NO_CHECK) {
+							return LZMA_NO_CHECK;
+						} 
+						if (generatedFlags & LZMA_TELL_ANY_CHECK) {
+							return LZMA_GET_CHECK;
+						} 
+				} 
+		default:
+				((false) ? (Object)0 : /*Error: Function owner not recognized*/_assert("0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\auto_decoder.c", 96));
+				return LZMA_PROG_ERROR;
+		}
+	}
+	public void auto_decoder_end(Object allocator) {
 		lzma_next_coder_s generatedNext = this.getNext();
 		generatedNext.lzma_next_end(allocator);
 		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
+		return /*Error: Unsupported expression*/;
+	}
+	public Object auto_decoder_memconfig(Object memusage, Object old_memlimit, Object new_memlimit) {
+		 ret = new ();
+		lzma_next_coder_s generatedNext = this.getNext();
+		Object generatedMemconfig = generatedNext.getMemconfig();
+		lzma_coder_s generatedCoder = generatedNext.getCoder();
+		Object generatedMemlimit = this.getMemlimit();
+		if (generatedMemconfig != ((Object)0)) {
+			ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, memusage, old_memlimit, new_memlimit);
+			((old_memlimit == generatedMemlimit) ? (Object)0 : /*Error: Function owner not recognized*/_assert("*old_memlimit == coder->memlimit", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\auto_decoder.c", 129));
+		} else {
+				memusage = (-1024 << 15);
+				old_memlimit = generatedMemlimit;
+				ret = LZMA_OK;
+		} 
+		if (ret == LZMA_OK && new_memlimit != 0) {
+			this.setMemlimit(new_memlimit);
+		} 
+		return ret;
+	}
+	///////////////////////////////////////////////////////////////////////////////
+	//
+	/// \file       delta_common.c
+	/// \brief      Common stuff for Delta encoder and decoder
+	//
+	//  Author:     Lasse Collin
+	//
+	//  This file has been put into the public domain.
+	//  You can do whatever you want with this file.
+	//
+	///////////////////////////////////////////////////////////////////////////////
+	public void delta_coder_end(Object allocator) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		generatedNext.lzma_next_end(allocator);
+		ModernizedCProgram.lzma_free(coder, allocator);
+		return /*Error: Unsupported expression*/;
+	}
+	public Object alone_encode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+		Object generatedHeader = this.getHeader();
+		Object generatedHeader_pos = this.getHeader_pos();
+		lzma_next_coder_s generatedNext = this.getNext();
+		lzma_coder_s generatedCoder = generatedNext.getCoder();
+		Object generatedSequence = this.getSequence();
+		while (out_pos < out_size) {
+			switch (generatedSequence) {
+			case .SEQ_HEADER:
+					ModernizedCProgram.lzma_bufcpy(generatedHeader, generatedHeader_pos, (1 + 4 + 8), out, out_pos, out_size);
+					if (generatedHeader_pos < (1 + 4 + 8)) {
+						return LZMA_OK;
+					} 
+					this.setSequence(.SEQ_CODE);
+					break;
+			case .SEQ_CODE:
+					return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
+			default:
+					((false) ? (Object)0 : /*Error: Function owner not recognized*/_assert("0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\alone_encoder.c", 59));
+					return LZMA_PROG_ERROR;
+			}
+		}
+		return LZMA_OK;
+	}
+	public void alone_encoder_end(Object allocator) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		generatedNext.lzma_next_end(allocator);
+		ModernizedCProgram.lzma_free(coder, allocator);
+		return /*Error: Unsupported expression*/;
 	}
 	public Object stream_decoder_reset(Object allocator) {
 		Object generatedIndex_hash = this.getIndex_hash();
@@ -112,7 +358,7 @@ public class lzma_coder_s {
 		this.setPos(0);
 		return LZMA_OK;
 	}
-	public Object stream_decode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+	public Object stream_decode(Object allocator, Object[] in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
 		Object generatedBuffer = this.getBuffer();
 		Object generatedPos = this.getPos();
 		Object generatedStream_flags = this.getStream_flags();
@@ -125,35 +371,9 @@ public class lzma_coder_s {
 		Object generatedBlock_decoder = this.getBlock_decoder();
 		Object generatedIndex_hash = this.getIndex_hash();
 		Object generatedConcatenated = this.getConcatenated();
-		 generatedSequence = this.getSequence();
+		Object generatedSequence = this.getSequence();
 		// When decoding the actual Block, it may be able to produce more// output even if we don't give it any new input.while (1) {
 			switch (generatedSequence) {
-			case .SEQ_STREAM_PADDING:
-					((generatedConcatenated) ? (Object)0 : ._assert("coder->concatenated", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\stream_decoder.c", 322));
-					while (1) {
-						if (in_pos >= in_size) {
-							if (action != LZMA_FINISH) {
-								return LZMA_OK;
-							} 
-							return generatedPos == 0 ? LZMA_STREAM_END : LZMA_DATA_ERROR;
-						} 
-						if (in[in_pos] != -1024) {
-							break;
-						} 
-						++in_pos;
-						this.setPos((generatedPos + 1) & 3);
-					}
-					if (generatedPos != 0) {
-						++in_pos;
-						return LZMA_DATA_ERROR;
-					} 
-					do {
-						 ret_ = (coder.stream_decoder_reset(allocator));
-						if (ret_ != LZMA_OK) {
-							return ret_;
-						} 
-					} while (0);
-					break;
 			case .SEQ_STREAM_HEADER:
 					{ 
 						ModernizedCProgram.lzma_bufcpy(in, in_pos, in_size, generatedBuffer, generatedPos, LZMA_STREAM_HEADER_SIZE);
@@ -177,6 +397,17 @@ public class lzma_coder_s {
 						if (generatedTell_any_check) {
 							return LZMA_GET_CHECK;
 						} 
+					}
+			case .SEQ_INDEX:
+					{ 
+						if (in_pos >= in_size) {
+							return LZMA_OK;
+						} 
+						 ret = ModernizedCProgram.lzma_index_hash_decode(generatedIndex_hash, in, in_pos, in_size);
+						if (ret != LZMA_STREAM_END) {
+							return ret;
+						} 
+						this.setSequence(.SEQ_STREAM_FOOTER);
 					}
 			case .SEQ_STREAM_FOOTER:
 					{ 
@@ -214,7 +445,7 @@ public class lzma_coder_s {
 								this.setSequence(.SEQ_INDEX);
 								break;
 							} 
-							generatedBlock_options.setHeader_size(.lzma_block_header_size_decode(in[in_pos]));
+							generatedBlock_options.setHeader_size(/*Error: Function owner not recognized*/lzma_block_header_size_decode(in[in_pos]));
 						} 
 						ModernizedCProgram.lzma_bufcpy(in, in_pos, in_size, generatedBuffer, generatedPos, generatedBlock_options.getHeader_size());
 						if (generatedPos < generatedBlock_options.getHeader_size()) {
@@ -252,20 +483,35 @@ public class lzma_coder_s {
 						} 
 						this.setSequence(.SEQ_BLOCK);
 					}
-			case .SEQ_INDEX:
-					{ 
+			case .SEQ_STREAM_PADDING:
+					((generatedConcatenated) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->concatenated", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\stream_decoder.c", 322));
+					while (1) {
 						if (in_pos >= in_size) {
-							return LZMA_OK;
+							if (action != LZMA_FINISH) {
+								return LZMA_OK;
+							} 
+							return generatedPos == 0 ? LZMA_STREAM_END : LZMA_DATA_ERROR;
 						} 
-						 ret = ModernizedCProgram.lzma_index_hash_decode(generatedIndex_hash, in, in_pos, in_size);
-						if (ret != LZMA_STREAM_END) {
-							return ret;
+						if (in[in_pos] != -1024) {
+							break;
 						} 
-						this.setSequence(.SEQ_STREAM_FOOTER);
+						++in_pos;
+						this.setPos((generatedPos + 1) & 3);
 					}
+					if (generatedPos != 0) {
+						++in_pos;
+						return LZMA_DATA_ERROR;
+					} 
+					do {
+						 ret_ = (coder.stream_decoder_reset(allocator));
+						if (ret_ != LZMA_OK) {
+							return ret_;
+						} 
+					} while (0);
+					break;
 			case .SEQ_BLOCK:
 					{ 
-						 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedBlock_decoder.getCoder(), allocator, in, in_pos, in_size, out, out_pos, out_size, action);
+						 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedBlock_decoder.getCoder(), allocator, in, in_pos, in_size, out, out_pos, out_size, action);
 						if (ret != LZMA_STREAM_END) {
 							return ret;
 						} 
@@ -279,7 +525,7 @@ public class lzma_coder_s {
 						break;
 					}
 			default:
-					((false) ? (Object)0 : ._assert("0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\stream_decoder.c", 360));
+					((false) ? (Object)0 : /*Error: Function owner not recognized*/_assert("0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\stream_decoder.c", 360));
 					return LZMA_PROG_ERROR;
 			}
 		}
@@ -290,7 +536,7 @@ public class lzma_coder_s {
 		Object generatedIndex_hash = this.getIndex_hash();
 		ModernizedCProgram.lzma_index_hash_end(generatedIndex_hash, allocator);
 		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public Object stream_decoder_memconfig(Object memusage, Object old_memlimit, Object new_memlimit) {
 		Object generatedMemusage = this.getMemusage();
@@ -305,153 +551,91 @@ public class lzma_coder_s {
 		} 
 		return LZMA_OK;
 	}
-	public Object alone_decode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
-		 generatedSequence = this.getSequence();
-		Object generatedOptions = this.getOptions();
+	public Object index_encode(Object allocator, Object in, Object in_pos, Object in_size, Object[] out, Object out_pos, Object out_size, Object action) {
+		// Position where to start calculating CRC32. The idea is that we// need to call lzma_crc32() only once per call to index_encode().size_t out_start = out_pos;
+		// Return value to use if we return at the end of this function.// We use "goto out" to jump out of the while-switch construct
+		// instead of returning directly, because that way we don't need// to copypaste the lzma_crc32() call to many places. ret = LZMA_OK;
+		Object generatedIndex = this.getIndex();
 		Object generatedPos = this.getPos();
-		Object generatedPicky = this.getPicky();
-		Object generatedUncompressed_size = this.getUncompressed_size();
-		Object generatedMemusage = this.getMemusage();
-		Object generatedMemlimit = this.getMemlimit();
-		lzma_next_coder_s generatedNext = this.getNext();
-		lzma_coder_s generatedCoder = generatedNext.getCoder();
-		while (out_pos < out_size && (generatedSequence == .SEQ_CODE || in_pos < in_size)) {
-			switch (generatedSequence) {
-			case .SEQ_CODE:
-					{ 
-						return .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
-					}
-			case .SEQ_UNCOMPRESSED_SIZE:
-					generatedUncompressed_size |=  .UNRECOGNIZEDFUNCTIONNAME(in[in_pos]) << (generatedPos * 8);
-					++in_pos;
-					if (++generatedPos < 8) {
-						break;
-					} 
-					if (generatedPicky && generatedUncompressed_size != LZMA_VLI_UNKNOWN && generatedUncompressed_size >= (.LZMA_VLI_C(1) << 38)) {
-						return LZMA_FORMAT_ERROR;
-					} 
-					this.setMemusage(ModernizedCProgram.lzma_lzma_decoder_memusage(generatedOptions) + (-1024 << 15));
-					this.setPos(0);
-					this.setSequence(.SEQ_CODER_INIT);
-			case .SEQ_CODER_INIT:
-					{ 
-						if (generatedMemusage > generatedMemlimit) {
-							return LZMA_MEMLIMIT_ERROR;
-						} 
-						lzma_filter_info[] filters = new lzma_filter_info[]{new lzma_filter_info(, ), new lzma_filter_info()};
-						 ret = generatedNext.lzma_next_filter_init(allocator, filters);
-						if (ret != LZMA_OK) {
-							return ret;
-						} 
-						generatedCoder.lzma_lz_decoder_uncompressed(generatedUncompressed_size);
-						this.setSequence(.SEQ_CODE);
-						break;
-					}
-			case .SEQ_PROPERTIES:
-					if (ModernizedCProgram.lzma_lzma_lclppb_decode(generatedOptions, in[in_pos])) {
-						return LZMA_FORMAT_ERROR;
-					} 
-					this.setSequence(.SEQ_DICTIONARY_SIZE);
-					++in_pos;
-					break;
-			case .SEQ_DICTIONARY_SIZE:
-					generatedOptions.getDict_size() |=  (size_t)(in[in_pos]) << (generatedPos * 8);
-					if (++generatedPos == 4) {
-						if (generatedPicky && generatedOptions.getDict_size() != -1024) {
-							uint32_t d = generatedOptions.getDict_size() - 1;
-							d |=  d >> 2;
-							d |=  d >> 3;
-							d |=  d >> 4;
-							d |=  d >> 8;
-							d |=  d >> 16;
-							++d;
-							if (d != generatedOptions.getDict_size()) {
-								return LZMA_FORMAT_ERROR;
-							} 
-						} 
-						this.setPos(0);
-						this.setSequence(.SEQ_UNCOMPRESSED_SIZE);
-					} 
-					++in_pos;
-					break;
-			default:
-					return LZMA_PROG_ERROR;
-			}
-		}
-		return LZMA_OK;
-	}
-	public void alone_decoder_end(Object allocator) {
-		lzma_next_coder_s generatedNext = this.getNext();
-		generatedNext.lzma_next_end(allocator);
-		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
-	}
-	public Object alone_decoder_memconfig(Object memusage, Object old_memlimit, Object new_memlimit) {
-		Object generatedMemusage = this.getMemusage();
-		memusage = generatedMemusage;
-		Object generatedMemlimit = this.getMemlimit();
-		old_memlimit = generatedMemlimit;
-		if (new_memlimit != 0) {
-			if (new_memlimit < generatedMemusage) {
-				return LZMA_MEMLIMIT_ERROR;
-			} 
-			this.setMemlimit(new_memlimit);
-		} 
-		return LZMA_OK;
-	}
-	public void lzma2_decoder_end(Object allocator) {
-		Object generatedLzma = this.getLzma();
-		((generatedLzma.getEnd() == ((Object)0)) ? (Object)0 : ._assert("coder->lzma.end == NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_decoder.c", 214));
-		ModernizedCProgram.lzma_free(generatedLzma.getCoder(), allocator);
-		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
-	}
-	public Object alone_encode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
-		Object generatedHeader = this.getHeader();
-		Object generatedHeader_pos = this.getHeader_pos();
-		lzma_next_coder_s generatedNext = this.getNext();
-		lzma_coder_s generatedCoder = generatedNext.getCoder();
-		 generatedSequence = this.getSequence();
+		Object generatedIter = this.getIter();
+		Object generatedSequence = this.getSequence();
+		Object generatedCrc32 = this.getCrc32();
 		while (out_pos < out_size) {
 			switch (generatedSequence) {
-			case .SEQ_CODE:
-					return .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
-			case .SEQ_HEADER:
-					ModernizedCProgram.lzma_bufcpy(generatedHeader, generatedHeader_pos, (1 + 4 + 8), out, out_pos, out_size);
-					if (generatedHeader_pos < (1 + 4 + 8)) {
-						return LZMA_OK;
+			case .SEQ_COUNT:
+					{ 
+						 count = ModernizedCProgram.lzma_index_block_count(generatedIndex);
+						ret = ModernizedCProgram.lzma_vli_encode(count, generatedPos, out, out_pos, out_size);
+						if (ret != LZMA_STREAM_END) {
+							;
+						} 
+						ret = LZMA_OK;
+						this.setPos(0);
+						this.setSequence(.SEQ_NEXT);
+						break;
+					}
+			case .SEQ_PADDING:
+					if (generatedPos > 0) {
+						--generatedPos;
+						out[(out_pos)++] = -1024;
+						break;
 					} 
-					this.setSequence(.SEQ_CODE);
+					this.setCrc32(ModernizedCProgram.lzma_crc32(out + out_start, out_pos - out_start, generatedCrc32));
+					this.setSequence(.SEQ_CRC32);
+			case .SEQ_UNCOMPRESSED:
+					{ 
+						 size = generatedSequence == .SEQ_UNPADDED ? generatedIter.getBlock().getUnpadded_size() : generatedIter.getBlock().getUncompressed_size();
+						ret = ModernizedCProgram.lzma_vli_encode(size, generatedPos, out, out_pos, out_size);
+						if (ret != LZMA_STREAM_END) {
+							;
+						} 
+						ret = LZMA_OK;
+						this.setPos(0);
+						++generatedSequence;
+						break;
+					}
+			case .SEQ_INDICATOR:
+					out[out_pos] = -1024;
+					++out_pos;
+					this.setSequence(.SEQ_COUNT);
 					break;
+			case .SEQ_UNPADDED:
+			case .SEQ_CRC32:
+					do {
+						if (out_pos == out_size) {
+							return LZMA_OK;
+						} 
+						out[out_pos] = (generatedCrc32 >> (generatedPos * 8)) & -1024;
+						++out_pos;
+					} while (++generatedPos < 4);
+					return LZMA_STREAM_END;
+			case .SEQ_NEXT:
+					if (generatedIter.lzma_index_iter_next(.LZMA_INDEX_ITER_BLOCK)) {
+						this.setPos(ModernizedCProgram.lzma_index_padding_size(generatedIndex));
+						((generatedPos <= 3) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->pos <= 3", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index_encoder.c", 89));
+						this.setSequence(.SEQ_PADDING);
+						break;
+					} 
+					this.setSequence(.SEQ_UNPADDED);
 			default:
-					((false) ? (Object)0 : ._assert("0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\alone_encoder.c", 59));
+					((false) ? (Object)0 : /*Error: Function owner not recognized*/_assert("0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index_encoder.c", 148));
 					return LZMA_PROG_ERROR;
 			}
 		}
-		return LZMA_OK;
+		return ret;
 	}
-	public void alone_encoder_end(Object allocator) {
-		lzma_next_coder_s generatedNext = this.getNext();
-		generatedNext.lzma_next_end(allocator);
+	public void index_encoder_end(Object allocator) {
 		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
-	///////////////////////////////////////////////////////////////////////////////
-	//
-	/// \file       delta_common.c
-	/// \brief      Common stuff for Delta encoder and decoder
-	//
-	//  Author:     Lasse Collin
-	//
-	//  This file has been put into the public domain.
-	//  You can do whatever you want with this file.
-	//
-	///////////////////////////////////////////////////////////////////////////////
-	public void delta_coder_end(Object allocator) {
-		lzma_next_coder_s generatedNext = this.getNext();
-		generatedNext.lzma_next_end(allocator);
-		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
+	public void index_encoder_reset(Object i) {
+		Object generatedIter = this.getIter();
+		generatedIter.lzma_index_iter_init(i);
+		this.setSequence(.SEQ_INDICATOR);
+		this.setIndex(i);
+		this.setPos(0);
+		this.setCrc32(0);
+		return /*Error: Unsupported expression*/;
 	}
 	// Match //
 	///////////
@@ -603,69 +787,12 @@ public class lzma_coder_s {
 		this.setOpts_current_index(0);
 		return LZMA_OK;
 	}
-	///////////////////////////////////////////////////////////////////////////////
-	//
-	/// \file       delta_encoder.c
-	/// \brief      Delta filter encoder
-	//
-	//  Author:     Lasse Collin
-	//
-	//  This file has been put into the public domain.
-	//  You can do whatever you want with this file.
-	//
-	///////////////////////////////////////////////////////////////////////////////
-	/// Copies and encodes the data at the same time. This is used when Delta
-	/// is the first filter in the chain (and thus the last filter in the
-	/// encoder's filter stack).
-	public void copy_and_encode(Object in, Object out, Object size) {
-		Object generatedDistance = this.getDistance();
-		size_t distance = generatedDistance;
-		Object generatedHistory = this.getHistory();
-		Object generatedPos = this.getPos();
-		for (size_t i = 0;
-		 i < size; ++i) {
-			uint8_t tmp = generatedHistory[(distance + generatedPos) & -1024];
-			generatedHistory[generatedPos-- & -1024] = in[i];
-			out[i] = in[i] - tmp;
-		}
-	}
-	/// Encodes the data in place. This is used when we are the last filter
-	/// in the chain (and thus non-last filter in the encoder's filter stack).
-	public void encode_in_place(Object buffer, Object size) {
-		Object generatedDistance = this.getDistance();
-		size_t distance = generatedDistance;
-		Object generatedHistory = this.getHistory();
-		Object generatedPos = this.getPos();
-		for (size_t i = 0;
-		 i < size; ++i) {
-			uint8_t tmp = generatedHistory[(distance + generatedPos) & -1024];
-			generatedHistory[generatedPos-- & -1024] = buffer[i];
-			buffer[i] -= tmp;
-		}
-	}
-	public Object delta_encode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
-		 ret = new ();
-		lzma_next_coder_s generatedNext = this.getNext();
-		Object generatedCode = generatedNext.getCode();
-		lzma_coder_s generatedCoder = generatedNext.getCoder();
-		if (generatedCode == ((Object)0)) {
-			size_t in_avail = in_size - in_pos;
-			size_t out_avail = out_size - out_pos;
-			size_t size = ((in_avail) < (out_avail) ? (in_avail) : (out_avail));
-			coder.copy_and_encode(in + in_pos, out + out_pos, size);
-			in_pos += size;
-			out_pos += size;
-			ret = action != LZMA_RUN && in_pos == in_size ? LZMA_STREAM_END : LZMA_OK;
-		} else {
-				size_t out_start = out_pos;
-				ret = .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
-				coder.encode_in_place(out + out_start, out_pos - out_start);
-		} 
-		return ret;
-	}
-	public Object delta_encoder_update(Object allocator, Object filters_null, Object reversed_filters) {
-		lzma_next_coder_s generatedNext = this.getNext();
-		// Delta doesn't and will never support changing the options in// the middle of encoding. If the app tries to change them, we// simply ignore them.return generatedNext.lzma_next_filter_update(allocator, reversed_filters + 1);
+	public void lzma2_decoder_end(Object allocator) {
+		Object generatedLzma = this.getLzma();
+		((generatedLzma.getEnd() == ((Object)0)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->lzma.end == NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_decoder.c", 214));
+		ModernizedCProgram.lzma_free(generatedLzma.getCoder(), allocator);
+		ModernizedCProgram.lzma_free(coder, allocator);
+		return /*Error: Unsupported expression*/;
 	}
 	public void lzma_decoder_uncompressed(Object uncompressed_size) {
 		this.setUncompressed_size(uncompressed_size/*
@@ -774,7 +901,101 @@ public class lzma_coder_s {
 		this.setLimit(0);
 		this.setOffset(0);
 		this.setLen(0);
-		return ;
+		return /*Error: Unsupported expression*/;
+	}
+	public Object alone_decode(Object allocator, Object[] in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+		Object generatedSequence = this.getSequence();
+		Object generatedOptions = this.getOptions();
+		Object generatedPos = this.getPos();
+		Object generatedPicky = this.getPicky();
+		Object generatedUncompressed_size = this.getUncompressed_size();
+		Object generatedMemusage = this.getMemusage();
+		Object generatedMemlimit = this.getMemlimit();
+		lzma_next_coder_s generatedNext = this.getNext();
+		lzma_coder_s generatedCoder = generatedNext.getCoder();
+		while (out_pos < out_size && (generatedSequence == .SEQ_CODE || in_pos < in_size)) {
+			switch (generatedSequence) {
+			case .SEQ_CODER_INIT:
+					{ 
+						if (generatedMemusage > generatedMemlimit) {
+							return LZMA_MEMLIMIT_ERROR;
+						} 
+						lzma_filter_info[] filters = new lzma_filter_info[]{new lzma_filter_info(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/), new lzma_filter_info(/*Error: Invalid initializer*/)};
+						 ret = generatedNext.lzma_next_filter_init(allocator, filters);
+						if (ret != LZMA_OK) {
+							return ret;
+						} 
+						generatedCoder.lzma_lz_decoder_uncompressed(generatedUncompressed_size);
+						this.setSequence(.SEQ_CODE);
+						break;
+					}
+			case .SEQ_PROPERTIES:
+					if (ModernizedCProgram.lzma_lzma_lclppb_decode(generatedOptions, in[in_pos])) {
+						return LZMA_FORMAT_ERROR;
+					} 
+					this.setSequence(.SEQ_DICTIONARY_SIZE);
+					++in_pos;
+					break;
+			case .SEQ_CODE:
+					{ 
+						return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
+					}
+			case .SEQ_DICTIONARY_SIZE:
+					generatedOptions.getDict_size() |=  (size_t)(in[in_pos]) << (generatedPos * 8);
+					if (++generatedPos == 4) {
+						if (generatedPicky && generatedOptions.getDict_size() != -1024) {
+							uint32_t d = generatedOptions.getDict_size() - 1;
+							d |=  d >> 2;
+							d |=  d >> 3;
+							d |=  d >> 4;
+							d |=  d >> 8;
+							d |=  d >> 16;
+							++d;
+							if (d != generatedOptions.getDict_size()) {
+								return LZMA_FORMAT_ERROR;
+							} 
+						} 
+						this.setPos(0);
+						this.setSequence(.SEQ_UNCOMPRESSED_SIZE);
+					} 
+					++in_pos;
+					break;
+			case .SEQ_UNCOMPRESSED_SIZE:
+					generatedUncompressed_size |=  /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(in[in_pos]) << (generatedPos * 8);
+					++in_pos;
+					if (++generatedPos < 8) {
+						break;
+					} 
+					if (generatedPicky && generatedUncompressed_size != LZMA_VLI_UNKNOWN && generatedUncompressed_size >= (/*Error: Function owner not recognized*/LZMA_VLI_C(1) << 38)) {
+						return LZMA_FORMAT_ERROR;
+					} 
+					this.setMemusage(ModernizedCProgram.lzma_lzma_decoder_memusage(generatedOptions) + (-1024 << 15));
+					this.setPos(0);
+					this.setSequence(.SEQ_CODER_INIT);
+			default:
+					return LZMA_PROG_ERROR;
+			}
+		}
+		return LZMA_OK;
+	}
+	public void alone_decoder_end(Object allocator) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		generatedNext.lzma_next_end(allocator);
+		ModernizedCProgram.lzma_free(coder, allocator);
+		return /*Error: Unsupported expression*/;
+	}
+	public Object alone_decoder_memconfig(Object memusage, Object old_memlimit, Object new_memlimit) {
+		Object generatedMemusage = this.getMemusage();
+		memusage = generatedMemusage;
+		Object generatedMemlimit = this.getMemlimit();
+		old_memlimit = generatedMemlimit;
+		if (new_memlimit != 0) {
+			if (new_memlimit < generatedMemusage) {
+				return LZMA_MEMLIMIT_ERROR;
+			} 
+			this.setMemlimit(new_memlimit);
+		} 
+		return LZMA_OK;
 	}
 	///////////////////////////////////////////////////////////////////////////////
 	//
@@ -793,7 +1014,7 @@ public class lzma_coder_s {
 	/// Copied or encodes/decodes more data to out[].
 	public Object copy_or_code(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
 		Object generatedEnd_was_reached = this.getEnd_was_reached();
-		((!generatedEnd_was_reached) ? (Object)0 : ._assert("!coder->end_was_reached", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 26));
+		((!generatedEnd_was_reached) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!coder->end_was_reached", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 26));
 		lzma_next_coder_s generatedNext = this.getNext();
 		Object generatedCode = generatedNext.getCode();
 		Object generatedIs_encoder = this.getIs_encoder();
@@ -804,9 +1025,9 @@ public class lzma_coder_s {
 				this.setEnd_was_reached(1);
 			} 
 		} else {
-				 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
+				 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
 				if (ret == LZMA_STREAM_END) {
-					((!generatedIs_encoder || action == LZMA_FINISH) ? (Object)0 : ._assert("!coder->is_encoder || action == LZMA_FINISH", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 45));
+					((!generatedIs_encoder || action == LZMA_FINISH) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!coder->is_encoder || action == LZMA_FINISH", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 45));
 					this.setEnd_was_reached(1);
 				}  else if (ret != LZMA_OK) {
 					return ret;
@@ -818,7 +1039,7 @@ public class lzma_coder_s {
 		Object generatedSimple = this.getSimple();
 		Object generatedNow_pos = this.getNow_pos();
 		Object generatedIs_encoder = this.getIs_encoder();
-		size_t filtered = .UNRECOGNIZEDFUNCTIONNAME(generatedSimple, generatedNow_pos, generatedIs_encoder, buffer, size);
+		size_t filtered = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSimple, generatedNow_pos, generatedIs_encoder, buffer, size);
 		generatedNow_pos += filtered;
 		return filtered;
 	}
@@ -837,22 +1058,22 @@ public class lzma_coder_s {
 				return LZMA_OK;
 			} 
 			if (generatedEnd_was_reached) {
-				((generatedFiltered == generatedSize) ? (Object)0 : ._assert("coder->filtered == coder->size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 93));
+				((generatedFiltered == generatedSize) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->filtered == coder->size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 93));
 				return LZMA_STREAM_END;
 			} 
 		} 
 		// If we get here, there is no filtered data left in the buffer.// If we get here, there is no filtered data left in the buffer.this.setFiltered(0);
-		((!generatedEnd_was_reached) ? (Object)0 : ._assert("!coder->end_was_reached", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 101))// If there is more output space left than there is unfiltered data// in coder->buffer[], flush coder->buffer[] to out[], and copy/code;// If there is more output space left than there is unfiltered data// in coder->buffer[], flush coder->buffer[] to out[], and copy/code
+		((!generatedEnd_was_reached) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!coder->end_was_reached", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 101))// If there is more output space left than there is unfiltered data// in coder->buffer[], flush coder->buffer[] to out[], and copy/code;// If there is more output space left than there is unfiltered data// in coder->buffer[], flush coder->buffer[] to out[], and copy/code
 		// more data to out[] hopefully filling it completely. Then filter// the data in out[]. This step is where most of the data gets// filtered if the buffer sizes used by the application are reasonable.size_t out_avail = out_size - out_pos;
 		size_t buf_avail = generatedSize - generatedPos;
 		Object generatedAllocated = this.getAllocated();
 		if (out_avail > buf_avail || buf_avail == 0) {
 			size_t out_start = out_pos;
-			.memcpy(out + out_pos, generatedBuffer + generatedPos, buf_avail);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(out + out_pos, generatedBuffer + generatedPos, buf_avail);
 			out_pos += buf_avail;
 			{ 
 				 ret = coder.copy_or_code(allocator, in, in_pos, in_size, out, out_pos, out_size, action);
-				((ret != LZMA_STREAM_END) ? (Object)0 : ._assert("ret != LZMA_STREAM_END", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 127));
+				((ret != LZMA_STREAM_END) ? (Object)0 : /*Error: Function owner not recognized*/_assert("ret != LZMA_STREAM_END", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 127));
 				if (ret != LZMA_OK) {
 					return ret;
 				} 
@@ -860,26 +1081,26 @@ public class lzma_coder_s {
 			size_t size = out_pos - out_start;
 			size_t filtered = coder.call_filter(out + out_start, size);
 			size_t unfiltered = size - filtered;
-			((unfiltered <= generatedAllocated / 2) ? (Object)0 : ._assert("unfiltered <= coder->allocated / 2", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 138));
+			((unfiltered <= generatedAllocated / 2) ? (Object)0 : /*Error: Function owner not recognized*/_assert("unfiltered <= coder->allocated / 2", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 138));
 			this.setPos(0);
 			this.setSize(unfiltered);
 			if (generatedEnd_was_reached) {
 				this.setSize(0);
 			}  else if (unfiltered > 0) {
 				out_pos -= unfiltered;
-				.memcpy(generatedBuffer, out + out_pos, unfiltered);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedBuffer, out + out_pos, unfiltered);
 			} 
 		}  else if (generatedPos > 0) {
-			.memmove(generatedBuffer, generatedBuffer + generatedPos, buf_avail);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(generatedBuffer, generatedBuffer + generatedPos, buf_avail);
 			generatedSize -= generatedPos;
 			this.setPos(0);
 		} 
 		// Store the old position so that we know from which byte
-		((generatedPos == 0) ? (Object)0 : ._assert("coder->pos == 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 162))// If coder->buffer[] isn't empty, try to fill it by copying/decoding// more data. Then filter coder->buffer[] and copy the successfully;// If coder->buffer[] isn't empty, try to fill it by copying/decoding// more data. Then filter coder->buffer[] and copy the successfully
+		((generatedPos == 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->pos == 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 162))// If coder->buffer[] isn't empty, try to fill it by copying/decoding// more data. Then filter coder->buffer[] and copy the successfully;// If coder->buffer[] isn't empty, try to fill it by copying/decoding// more data. Then filter coder->buffer[] and copy the successfully
 		// filtered data to out[]. It is probable, that some filtered and// unfiltered data will be left to coder->buffer[].if (generatedSize > 0) {
 			{ 
 				 ret = coder.copy_or_code(allocator, in, in_pos, in_size, generatedBuffer, generatedSize, generatedAllocated, action);
-				((ret != LZMA_STREAM_END) ? (Object)0 : ._assert("ret != LZMA_STREAM_END", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 174));
+				((ret != LZMA_STREAM_END) ? (Object)0 : /*Error: Function owner not recognized*/_assert("ret != LZMA_STREAM_END", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\simple_coder.c", 174));
 				if (ret != LZMA_OK) {
 					return ret;
 				} 
@@ -901,109 +1122,175 @@ public class lzma_coder_s {
 		Object generatedSimple = this.getSimple();
 		ModernizedCProgram.lzma_free(generatedSimple, allocator);
 		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public Object simple_coder_update(Object allocator, Object filters_null, Object reversed_filters) {
 		lzma_next_coder_s generatedNext = this.getNext();
 		// No update support, just call the next filter in the chain.return generatedNext.lzma_next_filter_update(allocator, reversed_filters + 1);
 	}
-	/// Otherwise we call the next filter in the chain to process in[] and
-	/// write its output to mf->buffer.
-	///
-	/// This function must not be called once it has returned LZMA_STREAM_END.
-	///
-	public Object fill_window(Object allocator, Object in, Object in_pos, Object in_size, Object action) {
-		Object generatedMf = this.getMf();
-		((generatedMf.getRead_pos() <= generatedMf.getWrite_pos()) ? (Object)0 : ._assert("coder->mf.read_pos <= coder->mf.write_pos", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lz_encoder.c", 82));
-		// Move the sliding window if needed.if (generatedMf.getRead_pos() >= generatedMf.getSize() - generatedMf.getKeep_size_after()) {
-			generatedMf.move_window();
-		} 
-		// (which I find cleanest), but we need size_t here when filling// the history window.size_t write_pos = generatedMf.getWrite_pos();
-		 ret = new ();
-		lzma_next_coder_s generatedNext = this.getNext();
-		Object generatedCode = generatedNext.getCode();
-		lzma_coder_s generatedCoder = generatedNext.getCoder();
-		if (generatedCode == ((Object)0)) {
-			ModernizedCProgram.lzma_bufcpy(in, in_pos, in_size, generatedMf.getBuffer(), write_pos, generatedMf.getSize());
-			ret = action != LZMA_RUN && in_pos == in_size ? LZMA_STREAM_END : LZMA_OK;
-		} else {
-				ret = .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, generatedMf.getBuffer(), write_pos, generatedMf.getSize(), action);
-		} 
-		// Not using a filter, simply memcpy() as much as possible.
-		generatedMf.setWrite_pos(write_pos)// If end of stream has been reached or flushing completed, we allow// the encoder to process all the input (that is, read_pos is allowed;// If end of stream has been reached or flushing completed, we allow// the encoder to process all the input (that is, read_pos is allowed
-		// to reach write_pos). Otherwise we keep keep_size_after bytes// available as prebuffer.if (ret == LZMA_STREAM_END) {
-			((in_pos == in_size) ? (Object)0 : ._assert("*in_pos == in_size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lz_encoder.c", 115));
-			ret = LZMA_OK;
-			generatedMf.setAction(action);
-			generatedMf.setRead_limit(generatedMf.getWrite_pos());
-		}  else if (generatedMf.getWrite_pos() > generatedMf.getKeep_size_after()) {
-			generatedMf.setRead_limit(generatedMf.getWrite_pos() - generatedMf.getKeep_size_after());
-		} 
-		// Restart the match finder after finished LZMA_SYNC_FLUSH.if (generatedMf.getPending() > 0 && generatedMf.getRead_pos() < generatedMf.getRead_limit()) {
-			size_t pending = generatedMf.getPending();
-			generatedMf.setPending(0);
-			((generatedMf.getRead_pos() >= pending) ? (Object)0 : ._assert("coder->mf.read_pos >= pending", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lz_encoder.c", 138));
-			generatedMf.getRead_pos() -= pending;
-			.UNRECOGNIZEDFUNCTIONNAME(generatedMf, pending);
-		} 
-		return ret;
-	}
-	public Object lz_encode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
-		Object generatedMf = this.getMf();
-		Object generatedLz = this.getLz();
-		while (out_pos < out_size && (in_pos < in_size || action != LZMA_RUN)) {
-			if (generatedMf.getAction() == LZMA_RUN && generatedMf.getRead_pos() >= generatedMf.getRead_limit()) {
-				do {
-					 ret_ = (coder.fill_window(allocator, in, in_pos, in_size, action));
-					if (ret_ != LZMA_OK) {
-						return ret_;
-					} 
-				} while (0);
-			} 
-			 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedLz.getCoder(), generatedMf, out, out_pos, out_size);
-			if (ret != LZMA_OK) {
-				generatedMf.setAction(LZMA_RUN);
-				return ret;
-			} 
-		}
-		return LZMA_OK;
-	}
-	public void lz_encoder_end(Object allocator) {
-		lzma_next_coder_s generatedNext = this.getNext();
-		generatedNext.lzma_next_end(allocator);
-		Object generatedMf = this.getMf();
-		ModernizedCProgram.lzma_free(generatedMf.getHash(), allocator);
-		ModernizedCProgram.lzma_free(generatedMf.getBuffer(), allocator);
-		Object generatedLz = this.getLz();
-		if (generatedLz.getEnd() != ((Object)0)) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedLz.getCoder(), allocator);
-		} else {
-				ModernizedCProgram.lzma_free(generatedLz.getCoder(), allocator);
-		} 
-		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
-	}
-	public Object lz_encoder_update(Object allocator, Object filters_null, Object reversed_filters) {
-		Object generatedLz = this.getLz();
-		if (generatedLz.getOptions_update() == ((Object)0)) {
-			return LZMA_PROG_ERROR;
-		} 
+	public Object block_encoder_init(Object allocator) {
+		Object generatedBlock_options = this.getBlock_options();
+		// initialized, it is a good idea to do it here, because this way// we catch if someone gave us Filter ID that cannot be used in// Blocks/Streams.// initialized, it is a good idea to do it here, because this way// we catch if someone gave us Filter ID that cannot be used in// Blocks/Streams.generatedBlock_options.setCompressed_size(LZMA_VLI_UNKNOWN);
+		generatedBlock_options.setUncompressed_size(LZMA_VLI_UNKNOWN);
 		do {
-			 ret_ = (.UNRECOGNIZEDFUNCTIONNAME(generatedLz.getCoder(), reversed_filters));
+			 ret_ = (ModernizedCProgram.lzma_block_header_size(generatedBlock_options));
 			if (ret_ != LZMA_OK) {
 				return ret_;
 			} 
 		} while (0);
-		lzma_next_coder_s generatedNext = this.getNext();
-		return generatedNext.lzma_next_filter_update(allocator, reversed_filters + 1);
+		Object generatedBlock_encoder = this.getBlock_encoder();
+		// Initialize the actual Block encoder.return generatedBlock_encoder.lzma_block_encoder_init(allocator, generatedBlock_options);
+	}
+	// Prepare the Block options. Even though Block encoder doesn't need
+	// compressed_size, uncompressed_size, and header_size to be
+	public Object stream_encode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+		Object generatedBuffer = this.getBuffer();
+		Object generatedBuffer_pos = this.getBuffer_pos();
+		Object generatedBuffer_size = this.getBuffer_size();
+		Object generatedSequence = this.getSequence();
+		Object generatedIndex_encoder = this.getIndex_encoder();
+		Object generatedIndex = this.getIndex();
+		Object generatedBlock_encoder_is_initialized = this.getBlock_encoder_is_initialized();
+		Object generatedBlock_options = this.getBlock_options();
+		Object generatedBlock_encoder = this.getBlock_encoder();
+		// Main loopwhile (out_pos < out_size) {
+			switch (generatedSequence) {
+			case .SEQ_STREAM_HEADER:
+			case .SEQ_BLOCK_ENCODE:
+					{ 
+						[] convert = new []{LZMA_RUN, LZMA_SYNC_FLUSH, LZMA_FINISH, LZMA_FINISH};
+						 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedBlock_encoder.getCoder(), allocator, in, in_pos, in_size, out, out_pos, out_size, convert[action]);
+						if (ret != LZMA_STREAM_END || action == LZMA_SYNC_FLUSH) {
+							return ret;
+						} 
+						 unpadded_size = ModernizedCProgram.lzma_block_unpadded_size(generatedBlock_options);
+						((unpadded_size != 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("unpadded_size != 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\stream_encoder.c", 167));
+						do {
+							 ret_ = (generatedIndex.lzma_index_append(allocator, unpadded_size, generatedBlock_options.getUncompressed_size()));
+							if (ret_ != LZMA_OK) {
+								return ret_;
+							} 
+						} while (0);
+						this.setSequence(.SEQ_BLOCK_INIT);
+						break;
+					}
+			case .SEQ_INDEX_ENCODE:
+					{ 
+						 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedIndex_encoder.getCoder(), allocator, ((Object)0), ((Object)0), 0, out, out_pos, out_size, LZMA_RUN);
+						if (ret != LZMA_STREAM_END) {
+							return ret;
+						} 
+						 stream_flags = new (/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+						if (ModernizedCProgram.lzma_stream_footer_encode(stream_flags, generatedBuffer) != LZMA_OK) {
+							return LZMA_PROG_ERROR;
+						} 
+						this.setBuffer_size(LZMA_STREAM_HEADER_SIZE);
+						this.setSequence(.SEQ_STREAM_FOOTER);
+						break;
+					}
+			case .SEQ_STREAM_FOOTER:
+					ModernizedCProgram.lzma_bufcpy(generatedBuffer, generatedBuffer_pos, generatedBuffer_size, out, out_pos, out_size);
+					if (generatedBuffer_pos < generatedBuffer_size) {
+						return LZMA_OK;
+					} 
+					if (generatedSequence == .SEQ_STREAM_FOOTER) {
+						return LZMA_STREAM_END;
+					} 
+					this.setBuffer_pos(0);
+					++generatedSequence;
+					break;
+			case .SEQ_BLOCK_INIT:
+					{ 
+						if (in_pos == in_size) {
+							if (action != LZMA_FINISH) {
+								return action == LZMA_RUN ? LZMA_OK : LZMA_STREAM_END;
+							} 
+							do {
+								 ret_ = (generatedIndex_encoder.lzma_index_encoder_init(allocator, generatedIndex));
+								if (ret_ != LZMA_OK) {
+									return ret_;
+								} 
+							} while (0);
+							this.setSequence(.SEQ_INDEX_ENCODE);
+							break;
+						} 
+						if (!generatedBlock_encoder_is_initialized) {
+							do {
+								 ret_ = (coder.block_encoder_init(allocator));
+								if (ret_ != LZMA_OK) {
+									return ret_;
+								} 
+							} while (0);
+						} 
+						this.setBlock_encoder_is_initialized(0);
+						if (ModernizedCProgram.lzma_block_header_encode(generatedBlock_options, generatedBuffer) != LZMA_OK) {
+							return LZMA_PROG_ERROR;
+						} 
+						this.setBuffer_size(generatedBlock_options.getHeader_size());
+						this.setSequence(.SEQ_BLOCK_HEADER);
+						break;
+					}
+			case .SEQ_BLOCK_HEADER:
+			default:
+					((false) ? (Object)0 : /*Error: Function owner not recognized*/_assert("0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\stream_encoder.c", 203));
+					return LZMA_PROG_ERROR;
+			}
+		}
+		return LZMA_OK;
+	}
+	public void stream_encoder_end(Object allocator) {
+		Object generatedBlock_encoder = this.getBlock_encoder();
+		generatedBlock_encoder.lzma_next_end(allocator);
+		Object generatedIndex_encoder = this.getIndex_encoder();
+		generatedIndex_encoder.lzma_next_end(allocator);
+		Object generatedIndex = this.getIndex();
+		generatedIndex.lzma_index_end(allocator);
+		Object generatedFilters = this.getFilters();
+		for (size_t i = 0;
+		 generatedFilters[i].getId() != LZMA_VLI_UNKNOWN; ++i) {
+			ModernizedCProgram.lzma_free(generatedFilters[i].getOptions(), allocator);
+		}
+		ModernizedCProgram.lzma_free(coder, allocator);
+		return /*Error: Unsupported expression*/;
+	}
+	public Object stream_encoder_update(Object allocator, Object filters, Object reversed_filters) {
+		Object generatedSequence = this.getSequence();
+		Object generatedBlock_options = this.getBlock_options();
+		Object generatedFilters = this.getFilters();
+		Object generatedBlock_encoder = this.getBlock_encoder();
+		if (generatedSequence <= .SEQ_BLOCK_INIT) {
+			this.setBlock_encoder_is_initialized(0);
+			generatedBlock_options.setFilters(()(filters));
+			 ret = coder.block_encoder_init(allocator);
+			generatedBlock_options.setFilters(generatedFilters);
+			if (ret != LZMA_OK) {
+				return ret;
+			} 
+			this.setBlock_encoder_is_initialized(1);
+		}  else if (generatedSequence <= .SEQ_BLOCK_ENCODE) {
+			do {
+				 ret_ = (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedBlock_encoder.getCoder(), allocator, filters, reversed_filters));
+				if (ret_ != LZMA_OK) {
+					return ret_;
+				} 
+			} while (0);
+		} else {
+				return LZMA_PROG_ERROR;
+		} 
+		// There is no incomplete Block waiting to be finished,// thus we can change the whole filter chain. Start by
+		// Free the copy of the old chain and make a copy of the new chain.for (size_t i = 0;
+		 generatedFilters[i].getId() != LZMA_VLI_UNKNOWN; ++i) {
+			ModernizedCProgram.lzma_free(generatedFilters[i].getOptions(), allocator);
+		}
+		return ModernizedCProgram.lzma_filters_copy(filters, generatedFilters, allocator);
 	}
 	public void lzma2_header_lzma() {
 		Object generatedUncompressed_size = this.getUncompressed_size();
-		((generatedUncompressed_size > 0) ? (Object)0 : ._assert("coder->uncompressed_size > 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 57));
-		((generatedUncompressed_size <= (-1024 << 21)) ? (Object)0 : ._assert("coder->uncompressed_size <= LZMA2_UNCOMPRESSED_MAX", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 58));
+		((generatedUncompressed_size > 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->uncompressed_size > 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 57));
+		((generatedUncompressed_size <= (-1024 << 21)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->uncompressed_size <= LZMA2_UNCOMPRESSED_MAX", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 58));
 		Object generatedCompressed_size = this.getCompressed_size();
-		((generatedCompressed_size > 0) ? (Object)0 : ._assert("coder->compressed_size > 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 59));
-		((generatedCompressed_size <= (-1024 << 16)) ? (Object)0 : ._assert("coder->compressed_size <= LZMA2_CHUNK_MAX", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 60));
+		((generatedCompressed_size > 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->compressed_size > 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 59));
+		((generatedCompressed_size <= (-1024 << 16)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->compressed_size <= LZMA2_CHUNK_MAX", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 60));
 		size_t pos = new size_t();
 		Object generatedNeed_properties = this.getNeed_properties();
 		Object generatedNeed_dictionary_reset = this.getNeed_dictionary_reset();
@@ -1040,12 +1327,12 @@ public class lzma_coder_s {
 		this.setNeed_state_reset(0);
 		this.setNeed_dictionary_reset(0)// The copying code uses coder->compressed_size to indicate the end;// The copying code uses coder->compressed_size to indicate the end
 		// of coder->buf[], so we need add the maximum size of the header here.// of coder->buf[], so we need add the maximum size of the header here.generatedCompressed_size += 6;
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public void lzma2_header_uncompressed() {
 		Object generatedUncompressed_size = this.getUncompressed_size();
-		((generatedUncompressed_size > 0) ? (Object)0 : ._assert("coder->uncompressed_size > 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 113));
-		((generatedUncompressed_size <= (-1024 << 16)) ? (Object)0 : ._assert("coder->uncompressed_size <= LZMA2_CHUNK_MAX", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 114))// If this is the first chunk, we need to include dictionary;// If this is the first chunk, we need to include dictionary
+		((generatedUncompressed_size > 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->uncompressed_size > 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 113));
+		((generatedUncompressed_size <= (-1024 << 16)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->uncompressed_size <= LZMA2_CHUNK_MAX", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lzma2_encoder.c", 114))// If this is the first chunk, we need to include dictionary;// If this is the first chunk, we need to include dictionary
 		Object generatedNeed_dictionary_reset = this.getNeed_dictionary_reset();
 		Object generatedBuf = this.getBuf();
 		// reset indicator.if (generatedNeed_dictionary_reset) {
@@ -1057,16 +1344,16 @@ public class lzma_coder_s {
 		// "Compressed" size// "Compressed" sizegeneratedBuf[1] = (generatedUncompressed_size - 1) >> 8;
 		generatedBuf[2] = (generatedUncompressed_size - 1) & -1024;
 		// Set the start position for copying.// Set the start position for copying.this.setBuf_pos(0);
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public void lzma2_encoder_end(Object allocator) {
 		Object generatedLzma = this.getLzma();
 		ModernizedCProgram.lzma_free(generatedLzma, allocator);
 		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public Object lzma2_encoder_options_update(Object filter) {
-		 generatedSequence = this.getSequence();
+		Object generatedSequence = this.getSequence();
 		// This is the case at the beginning of the raw stream and right// after LZMA_SYNC_FLUSH.if (filter.getOptions() == ((Object)0) || generatedSequence != .SEQ_INIT) {
 			return LZMA_PROG_ERROR;
 		} 
@@ -1085,82 +1372,6 @@ public class lzma_coder_s {
 		return LZMA_OK;
 	}
 	// New options can be set only when there is no incomplete chunk.
-	public Object auto_decode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
-		lzma_next_coder_s generatedNext = this.getNext();
-		Object generatedMemlimit = this.getMemlimit();
-		Object generatedFlags = this.getFlags();
-		lzma_coder_s generatedCoder = generatedNext.getCoder();
-		 generatedSequence = this.getSequence();
-		switch (generatedSequence) {
-		case .SEQ_FINISH:
-				if (in_pos < in_size) {
-					return LZMA_DATA_ERROR;
-				} 
-				return action == LZMA_FINISH ? LZMA_STREAM_END : LZMA_OK;
-		case .SEQ_CODE:
-				{ 
-					 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
-					if (ret != LZMA_STREAM_END || (generatedFlags & LZMA_CONCATENATED) == 0) {
-						return ret;
-					} 
-					this.setSequence(.SEQ_FINISH);
-				}
-		case .SEQ_INIT:
-				if (in_pos >= in_size) {
-					return LZMA_OK;
-				} 
-				this.setSequence(.SEQ_CODE);
-				if (in[in_pos] == -1024) {
-					do {
-						 ret_ = (generatedNext.lzma_stream_decoder_init(allocator, generatedMemlimit, generatedFlags));
-						if (ret_ != LZMA_OK) {
-							return ret_;
-						} 
-					} while (0);
-				} else {
-						do {
-							 ret_ = (generatedNext.lzma_alone_decoder_init(allocator, generatedMemlimit, 1));
-							if (ret_ != LZMA_OK) {
-								return ret_;
-							} 
-						} while (0);
-						if (generatedFlags & LZMA_TELL_NO_CHECK) {
-							return LZMA_NO_CHECK;
-						} 
-						if (generatedFlags & LZMA_TELL_ANY_CHECK) {
-							return LZMA_GET_CHECK;
-						} 
-				} 
-		default:
-				((false) ? (Object)0 : ._assert("0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\auto_decoder.c", 96));
-				return LZMA_PROG_ERROR;
-		}
-	}
-	public void auto_decoder_end(Object allocator) {
-		lzma_next_coder_s generatedNext = this.getNext();
-		generatedNext.lzma_next_end(allocator);
-		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
-	}
-	public Object auto_decoder_memconfig(Object memusage, Object old_memlimit, Object new_memlimit) {
-		 ret = new ();
-		lzma_next_coder_s generatedNext = this.getNext();
-		Object generatedMemconfig = generatedNext.getMemconfig();
-		lzma_coder_s generatedCoder = generatedNext.getCoder();
-		Object generatedMemlimit = this.getMemlimit();
-		if (generatedMemconfig != ((Object)0)) {
-			ret = .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, memusage, old_memlimit, new_memlimit);
-			((old_memlimit == generatedMemlimit) ? (Object)0 : ._assert("*old_memlimit == coder->memlimit", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\auto_decoder.c", 129));
-		} else {
-				memusage = (-1024 << 15);
-				old_memlimit = generatedMemlimit;
-				ret = LZMA_OK;
-		} 
-		if (ret == LZMA_OK && new_memlimit != 0) {
-			this.setMemlimit(new_memlimit);
-		} 
-		return ret;
-	}
 	public void fill_distances_prices() {
 		Object generatedPos_slot_prices = this.getPos_slot_prices();
 		Object generatedDist_table_size = this.getDist_table_size();
@@ -1195,7 +1406,7 @@ public class lzma_coder_s {
 			}
 		}
 		this.setMatch_price_count(0);
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public void fill_align_prices() {
 		Object generatedAlign_prices = this.getAlign_prices();
@@ -1205,7 +1416,7 @@ public class lzma_coder_s {
 			generatedAlign_prices[i] = ModernizedCProgram.rc_bittree_reverse_price(generatedPos_align, 4, i);
 		}
 		this.setAlign_price_count(0);
-		return ;/////////////
+		return /*Error: Unsupported expression*/;/////////////
 	}
 	public void backward(Object len_res, Object back_res, Object cur) {
 		this.setOpts_end_index(cur);
@@ -1233,9 +1444,9 @@ public class lzma_coder_s {
 		this.setOpts_current_index(generatedOpts[0].getPos_prev());
 		len_res = generatedOpts[0].getPos_prev();
 		back_res = generatedOpts[0].getBack_prev();
-		return ;//////////
+		return /*Error: Unsupported expression*/;//////////
 	}
-	public Object helper2(Object reps, Object buf, Object len_end, Object position, Object cur, Object nice_len, Object buf_avail_full) {
+	public Object helper2(Object[] reps, Object[] buf, Object len_end, Object position, Object cur, Object nice_len, Object buf_avail_full) {
 		Object generatedMatches_count = this.getMatches_count();
 		uint32_t matches_count = generatedMatches_count;
 		Object generatedLongest_match_length = this.getLongest_match_length();
@@ -1438,7 +1649,7 @@ public class lzma_coder_s {
 				++i;
 			}
 			for (uint32_t len_test = start_len;
-			 ; ++len_test) {
+			 /*Error: Unsupported expression*/; ++len_test) {
 				uint32_t cur_back = generatedMatches[i].getDist();
 				uint32_t cur_and_len_price = normal_match_price + ModernizedCProgram.get_pos_len_price(coder, cur_back, len_test, pos_state);
 				if (cur_and_len_price < generatedOpts[cur + len_test].getPrice()) {
@@ -1486,351 +1697,75 @@ public class lzma_coder_s {
 		} 
 		return len_end;
 	}
-	public void lz_decoder_reset() {
-		Object generatedDict = this.getDict();
-		generatedDict.setPos(0);
-		generatedDict.setFull(0);
-		generatedDict.getBuf()[generatedDict.getSize() - 1] = (byte)'\0';
-		generatedDict.setNeed_reset(0);
-		return ;
-	}
-	public Object decode_buffer(Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size) {
-		Object generatedDict = this.getDict();
-		Object generatedLz = this.getLz();
-		while (1) {
-			if (generatedDict.getPos() == generatedDict.getSize()) {
-				generatedDict.setPos(0);
-			} 
-			size_t dict_start = generatedDict.getPos();
-			generatedDict.setLimit(generatedDict.getPos() + ((out_size - out_pos) < (generatedDict.getSize() - generatedDict.getPos()) ? (out_size - out_pos) : (generatedDict.getSize() - generatedDict.getPos())));
-			 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedLz.getCoder(), generatedDict, in, in_pos, in_size);
-			size_t copy_size = generatedDict.getPos() - dict_start;
-			((copy_size <= out_size - out_pos) ? (Object)0 : ._assert("copy_size <= out_size - *out_pos", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lz_decoder.c", 96));
-			.memcpy(out + out_pos, generatedDict.getBuf() + dict_start, copy_size);
-			out_pos += copy_size;
-			if (generatedDict.getNeed_reset()) {
-				coder.lz_decoder_reset();
-				if (ret != LZMA_OK || out_pos == out_size) {
-					return ret;
-				} 
-			} else {
-					if (ret != LZMA_OK || out_pos == out_size || generatedDict.getPos() < generatedDict.getSize()) {
+	public Object block_decode(Object allocator, Object[] in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		lzma_coder_s generatedCoder = generatedNext.getCoder();
+		Object generatedCompressed_size = this.getCompressed_size();
+		Object generatedCompressed_limit = this.getCompressed_limit();
+		Object generatedUncompressed_size = this.getUncompressed_size();
+		Object generatedCheck = this.getCheck();
+		Object generatedBlock = this.getBlock();
+		Object generatedCheck_pos = this.getCheck_pos();
+		Object generatedSequence = this.getSequence();
+		switch (generatedSequence) {
+		case .SEQ_CODE:
+				{ 
+					size_t in_start = in_pos;
+					size_t out_start = out_pos;
+					 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
+					size_t in_used = in_pos - in_start;
+					size_t out_used = out_pos - out_start;
+					if (ModernizedCProgram.update_size(generatedCompressed_size, in_used, generatedCompressed_limit) || ModernizedCProgram.update_size(generatedUncompressed_size, out_used, generatedUncompressed_size)) {
+						return LZMA_DATA_ERROR;
+					} 
+					ModernizedCProgram.lzma_check_update(generatedCheck, generatedCheck, out + out_start, out_used);
+					if (ret != LZMA_STREAM_END) {
 						return ret;
 					} 
-			} 
-		}// Wrap the dictionary if needed.
-		Object generatedDistance = this.getDistance();
-		size_t distance = generatedDistance;
-		Object generatedHistory = this.getHistory();
-		Object generatedPos = this.getPos();
-		for (size_t i = 0;
-		 i < size; ++i) {
-			buffer[i] += generatedHistory[(distance + generatedPos) & -1024];
-			generatedHistory[generatedPos-- & -1024] = buffer[i];
-		}
-	}
-	public Object lz_decode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
-		lzma_next_coder_s generatedNext = this.getNext();
-		Object generatedCode = generatedNext.getCode();
-		if (generatedCode == ((Object)0)) {
-			return coder.decode_buffer(in, in_pos, in_size, out, out_pos, out_size);
-		} 
-		Object generatedNext_finished = this.getNext_finished();
-		Object generatedTemp = this.getTemp();
-		lzma_coder_s generatedCoder = generatedNext.getCoder();
-		Object generatedThis_finished = this.getThis_finished();
-		// We aren't the last coder in the chain, we need to decode// our input to a temporary buffer.while (out_pos < out_size) {
-			if (!generatedNext_finished && generatedTemp.getPos() == generatedTemp.getSize()) {
-				generatedTemp.setPos(0);
-				generatedTemp.setSize(0);
-				 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, generatedTemp.getBuffer(), generatedTemp.getSize(), 4096, action);
-				if (ret == LZMA_STREAM_END) {
-					this.setNext_finished(1);
-				}  else if (ret != LZMA_OK || generatedTemp.getSize() == 0) {
-					return ret;
-				} 
-			} 
-			if (generatedThis_finished) {
-				if (generatedTemp.getSize() != 0) {
-					return LZMA_DATA_ERROR;
-				} 
-				if (generatedNext_finished) {
-					return LZMA_STREAM_END;
-				} 
-				return LZMA_OK;
-			} 
-			 ret = coder.decode_buffer(generatedTemp.getBuffer(), generatedTemp.getPos(), generatedTemp.getSize(), out, out_pos, out_size);
-			if (ret == LZMA_STREAM_END) {
-				this.setThis_finished(1);
-			}  else if (ret != LZMA_OK) {
-				return ret;
-			}  else if (generatedNext_finished && out_pos < out_size) {
-				return LZMA_DATA_ERROR;
-			} 
-		}// Fill the temporary buffer if it is empty.
-		return LZMA_OK;
-	}
-	public void lz_decoder_end(Object allocator) {
-		lzma_next_coder_s generatedNext = this.getNext();
-		generatedNext.lzma_next_end(allocator);
-		Object generatedDict = this.getDict();
-		ModernizedCProgram.lzma_free(generatedDict.getBuf(), allocator);
-		Object generatedLz = this.getLz();
-		if (generatedLz.getEnd() != ((Object)0)) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedLz.getCoder(), allocator);
-		} else {
-				ModernizedCProgram.lzma_free(generatedLz.getCoder(), allocator);
-		} 
-		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
-	}
-	public void lzma_lz_decoder_uncompressed(Object uncompressed_size) {
-		Object generatedLz = this.getLz();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedLz.getCoder(), uncompressed_size);
-	}
-	public Object index_encode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
-		// Position where to start calculating CRC32. The idea is that we// need to call lzma_crc32() only once per call to index_encode().size_t out_start = out_pos;
-		// Return value to use if we return at the end of this function.// We use "goto out" to jump out of the while-switch construct
-		// instead of returning directly, because that way we don't need// to copypaste the lzma_crc32() call to many places. ret = LZMA_OK;
-		Object generatedIndex = this.getIndex();
-		Object generatedPos = this.getPos();
-		Object generatedIter = this.getIter();
-		 generatedSequence = this.getSequence();
-		Object generatedCrc32 = this.getCrc32();
-		while (out_pos < out_size) {
-			switch (generatedSequence) {
-			case .SEQ_INDICATOR:
-					out[out_pos] = -1024;
-					++out_pos;
-					this.setSequence(.SEQ_COUNT);
-					break;
-			case .SEQ_COUNT:
-					{ 
-						 count = ModernizedCProgram.lzma_index_block_count(generatedIndex);
-						ret = ModernizedCProgram.lzma_vli_encode(count, generatedPos, out, out_pos, out_size);
-						if (ret != LZMA_STREAM_END) {
-							;
-						} 
-						ret = LZMA_OK;
-						this.setPos(0);
-						this.setSequence(.SEQ_NEXT);
-						break;
-					}
-			case .SEQ_NEXT:
-					if (generatedIter.lzma_index_iter_next(.LZMA_INDEX_ITER_BLOCK)) {
-						this.setPos(ModernizedCProgram.lzma_index_padding_size(generatedIndex));
-						((generatedPos <= 3) ? (Object)0 : ._assert("coder->pos <= 3", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index_encoder.c", 89));
-						this.setSequence(.SEQ_PADDING);
-						break;
+					if (!ModernizedCProgram.is_size_valid(generatedCompressed_size, generatedCompressed_size) || !ModernizedCProgram.is_size_valid(generatedUncompressed_size, generatedUncompressed_size)) {
+						return LZMA_DATA_ERROR;
 					} 
-					this.setSequence(.SEQ_UNPADDED);
-			case .SEQ_UNPADDED:
-			case .SEQ_CRC32:
-					do {
-						if (out_pos == out_size) {
-							return LZMA_OK;
-						} 
-						out[out_pos] = (generatedCrc32 >> (generatedPos * 8)) & -1024;
-						++out_pos;
-					} while (++generatedPos < 4);
-					return LZMA_STREAM_END;
-			case .SEQ_UNCOMPRESSED:
-					{ 
-						 size = generatedSequence == .SEQ_UNPADDED ? generatedIter.getBlock().getUnpadded_size() : generatedIter.getBlock().getUncompressed_size();
-						ret = ModernizedCProgram.lzma_vli_encode(size, generatedPos, out, out_pos, out_size);
-						if (ret != LZMA_STREAM_END) {
-							;
-						} 
-						ret = LZMA_OK;
-						this.setPos(0);
-						++generatedSequence;
-						break;
-					}
-			case .SEQ_PADDING:
-					if (generatedPos > 0) {
-						--generatedPos;
-						out[(out_pos)++] = -1024;
-						break;
-					} 
-					this.setCrc32(ModernizedCProgram.lzma_crc32(out + out_start, out_pos - out_start, generatedCrc32));
-					this.setSequence(.SEQ_CRC32);
-			default:
-					((false) ? (Object)0 : ._assert("0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\index_encoder.c", 148));
-					return LZMA_PROG_ERROR;
-			}
-		}
-		return ret;
-	}
-	public void index_encoder_end(Object allocator) {
-		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
-	}
-	public void index_encoder_reset(Object i) {
-		Object generatedIter = this.getIter();
-		generatedIter.lzma_index_iter_init(i);
-		this.setSequence(.SEQ_INDICATOR);
-		this.setIndex(i);
-		this.setPos(0);
-		this.setCrc32(0);
-		return ;
-	}
-	public Object block_encoder_init(Object allocator) {
-		Object generatedBlock_options = this.getBlock_options();
-		// initialized, it is a good idea to do it here, because this way// we catch if someone gave us Filter ID that cannot be used in// Blocks/Streams.// initialized, it is a good idea to do it here, because this way// we catch if someone gave us Filter ID that cannot be used in// Blocks/Streams.generatedBlock_options.setCompressed_size(LZMA_VLI_UNKNOWN);
-		generatedBlock_options.setUncompressed_size(LZMA_VLI_UNKNOWN);
-		do {
-			 ret_ = (ModernizedCProgram.lzma_block_header_size(generatedBlock_options));
-			if (ret_ != LZMA_OK) {
-				return ret_;
-			} 
-		} while (0);
-		Object generatedBlock_encoder = this.getBlock_encoder();
-		// Initialize the actual Block encoder.return generatedBlock_encoder.lzma_block_encoder_init(allocator, generatedBlock_options);
-	}
-	// Prepare the Block options. Even though Block encoder doesn't need
-	// compressed_size, uncompressed_size, and header_size to be
-	public Object stream_encode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
-		Object generatedBuffer = this.getBuffer();
-		Object generatedBuffer_pos = this.getBuffer_pos();
-		Object generatedBuffer_size = this.getBuffer_size();
-		 generatedSequence = this.getSequence();
-		Object generatedIndex_encoder = this.getIndex_encoder();
-		Object generatedIndex = this.getIndex();
-		Object generatedBlock_encoder_is_initialized = this.getBlock_encoder_is_initialized();
-		Object generatedBlock_options = this.getBlock_options();
-		Object generatedBlock_encoder = this.getBlock_encoder();
-		// Main loopwhile (out_pos < out_size) {
-			switch (generatedSequence) {
-			case .SEQ_STREAM_FOOTER:
-					ModernizedCProgram.lzma_bufcpy(generatedBuffer, generatedBuffer_pos, generatedBuffer_size, out, out_pos, out_size);
-					if (generatedBuffer_pos < generatedBuffer_size) {
+					generatedBlock.setCompressed_size(generatedCompressed_size);
+					generatedBlock.setUncompressed_size(generatedUncompressed_size);
+					this.setSequence(.SEQ_PADDING);
+				}
+		case .SEQ_CHECK:
+				{ 
+					size_t check_size = ModernizedCProgram.lzma_check_size(generatedCheck);
+					ModernizedCProgram.lzma_bufcpy(in, in_pos, in_size, generatedBlock.getRaw_check(), generatedCheck_pos, check_size);
+					if (generatedCheck_pos < check_size) {
 						return LZMA_OK;
 					} 
-					if (generatedSequence == .SEQ_STREAM_FOOTER) {
-						return LZMA_STREAM_END;
+					if (ModernizedCProgram.lzma_check_is_supported(generatedCheck) && /*Error: Function owner not recognized*/memcmp(generatedBlock.getRaw_check(), generatedCheck.getBuffer().getU8(), check_size) != 0) {
+						return LZMA_DATA_ERROR;
 					} 
-					this.setBuffer_pos(0);
-					++generatedSequence;
-					break;
-			case .SEQ_INDEX_ENCODE:
-					{ 
-						 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedIndex_encoder.getCoder(), allocator, ((Object)0), ((Object)0), 0, out, out_pos, out_size, LZMA_RUN);
-						if (ret != LZMA_STREAM_END) {
-							return ret;
-						} 
-						 stream_flags = new (, , );
-						if (ModernizedCProgram.lzma_stream_footer_encode(stream_flags, generatedBuffer) != LZMA_OK) {
-							return LZMA_PROG_ERROR;
-						} 
-						this.setBuffer_size(LZMA_STREAM_HEADER_SIZE);
-						this.setSequence(.SEQ_STREAM_FOOTER);
-						break;
-					}
-			case .SEQ_STREAM_HEADER:
-			case .SEQ_BLOCK_ENCODE:
-					{ 
-						[] convert = new []{LZMA_RUN, LZMA_SYNC_FLUSH, LZMA_FINISH, LZMA_FINISH};
-						 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedBlock_encoder.getCoder(), allocator, in, in_pos, in_size, out, out_pos, out_size, convert[action]);
-						if (ret != LZMA_STREAM_END || action == LZMA_SYNC_FLUSH) {
-							return ret;
-						} 
-						 unpadded_size = ModernizedCProgram.lzma_block_unpadded_size(generatedBlock_options);
-						((unpadded_size != 0) ? (Object)0 : ._assert("unpadded_size != 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\stream_encoder.c", 167));
-						do {
-							 ret_ = (generatedIndex.lzma_index_append(allocator, unpadded_size, generatedBlock_options.getUncompressed_size()));
-							if (ret_ != LZMA_OK) {
-								return ret_;
-							} 
-						} while (0);
-						this.setSequence(.SEQ_BLOCK_INIT);
-						break;
-					}
-			case .SEQ_BLOCK_INIT:
-					{ 
-						if (in_pos == in_size) {
-							if (action != LZMA_FINISH) {
-								return action == LZMA_RUN ? LZMA_OK : LZMA_STREAM_END;
-							} 
-							do {
-								 ret_ = (generatedIndex_encoder.lzma_index_encoder_init(allocator, generatedIndex));
-								if (ret_ != LZMA_OK) {
-									return ret_;
-								} 
-							} while (0);
-							this.setSequence(.SEQ_INDEX_ENCODE);
-							break;
-						} 
-						if (!generatedBlock_encoder_is_initialized) {
-							do {
-								 ret_ = (coder.block_encoder_init(allocator));
-								if (ret_ != LZMA_OK) {
-									return ret_;
-								} 
-							} while (0);
-						} 
-						this.setBlock_encoder_is_initialized(0);
-						if (ModernizedCProgram.lzma_block_header_encode(generatedBlock_options, generatedBuffer) != LZMA_OK) {
-							return LZMA_PROG_ERROR;
-						} 
-						this.setBuffer_size(generatedBlock_options.getHeader_size());
-						this.setSequence(.SEQ_BLOCK_HEADER);
-						break;
-					}
-			case .SEQ_BLOCK_HEADER:
-			default:
-					((false) ? (Object)0 : ._assert("0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\stream_encoder.c", 203));
-					return LZMA_PROG_ERROR;
-			}
-		}
-		return LZMA_OK;
-	}
-	public void stream_encoder_end(Object allocator) {
-		Object generatedBlock_encoder = this.getBlock_encoder();
-		generatedBlock_encoder.lzma_next_end(allocator);
-		Object generatedIndex_encoder = this.getIndex_encoder();
-		generatedIndex_encoder.lzma_next_end(allocator);
-		Object generatedIndex = this.getIndex();
-		generatedIndex.lzma_index_end(allocator);
-		Object generatedFilters = this.getFilters();
-		for (size_t i = 0;
-		 generatedFilters[i].getId() != LZMA_VLI_UNKNOWN; ++i) {
-			ModernizedCProgram.lzma_free(generatedFilters[i].getOptions(), allocator);
-		}
-		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
-	}
-	public Object stream_encoder_update(Object allocator, Object filters, Object reversed_filters) {
-		 generatedSequence = this.getSequence();
-		Object generatedBlock_options = this.getBlock_options();
-		Object generatedFilters = this.getFilters();
-		Object generatedBlock_encoder = this.getBlock_encoder();
-		if (generatedSequence <= .SEQ_BLOCK_INIT) {
-			this.setBlock_encoder_is_initialized(0);
-			generatedBlock_options.setFilters(()(filters));
-			 ret = coder.block_encoder_init(allocator);
-			generatedBlock_options.setFilters(generatedFilters);
-			if (ret != LZMA_OK) {
-				return ret;
-			} 
-			this.setBlock_encoder_is_initialized(1);
-		}  else if (generatedSequence <= .SEQ_BLOCK_ENCODE) {
-			do {
-				 ret_ = (.UNRECOGNIZEDFUNCTIONNAME(generatedBlock_encoder.getCoder(), allocator, filters, reversed_filters));
-				if (ret_ != LZMA_OK) {
-					return ret_;
+					return LZMA_STREAM_END;
+				}
+		case .SEQ_PADDING:
+				while (generatedCompressed_size & 3) {
+					if (in_pos >= in_size) {
+						return LZMA_OK;
+					} 
+					++generatedCompressed_size;
+					if (in[(in_pos)++] != -1024) {
+						return LZMA_DATA_ERROR;
+					} 
+				}
+				if (generatedCheck == .LZMA_CHECK_NONE) {
+					return LZMA_STREAM_END;
 				} 
-			} while (0);
-		} else {
-				return LZMA_PROG_ERROR;
-		} 
-		// There is no incomplete Block waiting to be finished,// thus we can change the whole filter chain. Start by
-		// Free the copy of the old chain and make a copy of the new chain.for (size_t i = 0;
-		 generatedFilters[i].getId() != LZMA_VLI_UNKNOWN; ++i) {
-			ModernizedCProgram.lzma_free(generatedFilters[i].getOptions(), allocator);
+				ModernizedCProgram.lzma_check_finish(generatedCheck, generatedCheck);
+				this.setSequence(.SEQ_CHECK);
 		}
-		return ModernizedCProgram.lzma_filters_copy(filters, generatedFilters, allocator);
+		return LZMA_PROG_ERROR;
 	}
-	public Object block_encode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+	public void block_decoder_end(Object allocator) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		generatedNext.lzma_next_end(allocator);
+		ModernizedCProgram.lzma_free(coder, allocator);
+		return /*Error: Unsupported expression*/;
+	}
+	public Object block_encode(Object allocator, Object in, Object in_pos, Object in_size, Object[] out, Object out_pos, Object out_size, Object action) {
 		Object generatedUncompressed_size = this.getUncompressed_size();
 		// Check that our amount of input stays in proper limits.if (LZMA_VLI_MAX - generatedUncompressed_size < in_size - in_pos) {
 			return LZMA_DATA_ERROR;
@@ -1841,40 +1776,8 @@ public class lzma_coder_s {
 		Object generatedCheck = this.getCheck();
 		Object generatedBlock = this.getBlock();
 		Object generatedPos = this.getPos();
-		 generatedSequence = this.getSequence();
+		Object generatedSequence = this.getSequence();
 		switch (generatedSequence) {
-		case .SEQ_CODE:
-				{ 
-					size_t in_start = in_pos;
-					size_t out_start = out_pos;
-					 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
-					size_t in_used = in_pos - in_start;
-					size_t out_used = out_pos - out_start;
-					if (((LZMA_VLI_MAX - LZMA_BLOCK_HEADER_SIZE_MAX - 64) & ~.LZMA_VLI_C(3)) - generatedCompressed_size < out_used) {
-						return LZMA_DATA_ERROR;
-					} 
-					generatedCompressed_size += out_used;
-					generatedUncompressed_size += in_used;
-					ModernizedCProgram.lzma_check_update(generatedCheck, generatedCheck, in + in_start, in_used);
-					if (ret != LZMA_STREAM_END || action == LZMA_SYNC_FLUSH) {
-						return ret;
-					} 
-					((in_pos == in_size) ? (Object)0 : ._assert("*in_pos == in_size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\block_encoder.c", 84));
-					((action == LZMA_FINISH) ? (Object)0 : ._assert("action == LZMA_FINISH", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\block_encoder.c", 85));
-					generatedBlock.setCompressed_size(generatedCompressed_size);
-					generatedBlock.setUncompressed_size(generatedUncompressed_size);
-					this.setSequence(.SEQ_PADDING);
-				}
-		case .SEQ_CHECK:
-				{ 
-					size_t check_size = ModernizedCProgram.lzma_check_size(generatedCheck);
-					ModernizedCProgram.lzma_bufcpy(generatedCheck.getBuffer().getU8(), generatedPos, check_size, out, out_pos, out_size);
-					if (generatedPos < check_size) {
-						return LZMA_OK;
-					} 
-					.memcpy(generatedBlock.getRaw_check(), generatedCheck.getBuffer().getU8(), check_size);
-					return LZMA_STREAM_END;
-				}
 		case .SEQ_PADDING:
 				while (generatedCompressed_size & 3) {
 					if (out_pos >= out_size) {
@@ -1889,6 +1792,38 @@ public class lzma_coder_s {
 				} 
 				ModernizedCProgram.lzma_check_finish(generatedCheck, generatedCheck);
 				this.setSequence(.SEQ_CHECK);
+		case .SEQ_CODE:
+				{ 
+					size_t in_start = in_pos;
+					size_t out_start = out_pos;
+					 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
+					size_t in_used = in_pos - in_start;
+					size_t out_used = out_pos - out_start;
+					if (((LZMA_VLI_MAX - LZMA_BLOCK_HEADER_SIZE_MAX - 64) & ~/*Error: Function owner not recognized*/LZMA_VLI_C(3)) - generatedCompressed_size < out_used) {
+						return LZMA_DATA_ERROR;
+					} 
+					generatedCompressed_size += out_used;
+					generatedUncompressed_size += in_used;
+					ModernizedCProgram.lzma_check_update(generatedCheck, generatedCheck, in + in_start, in_used);
+					if (ret != LZMA_STREAM_END || action == LZMA_SYNC_FLUSH) {
+						return ret;
+					} 
+					((in_pos == in_size) ? (Object)0 : /*Error: Function owner not recognized*/_assert("*in_pos == in_size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\block_encoder.c", 84));
+					((action == LZMA_FINISH) ? (Object)0 : /*Error: Function owner not recognized*/_assert("action == LZMA_FINISH", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\block_encoder.c", 85));
+					generatedBlock.setCompressed_size(generatedCompressed_size);
+					generatedBlock.setUncompressed_size(generatedUncompressed_size);
+					this.setSequence(.SEQ_PADDING);
+				}
+		case .SEQ_CHECK:
+				{ 
+					size_t check_size = ModernizedCProgram.lzma_check_size(generatedCheck);
+					ModernizedCProgram.lzma_bufcpy(generatedCheck.getBuffer().getU8(), generatedPos, check_size, out, out_pos, out_size);
+					if (generatedPos < check_size) {
+						return LZMA_OK;
+					} 
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedBlock.getRaw_check(), generatedCheck.getBuffer().getU8(), check_size);
+					return LZMA_STREAM_END;
+				}
 		}
 		return LZMA_PROG_ERROR;
 	}
@@ -1896,31 +1831,122 @@ public class lzma_coder_s {
 		lzma_next_coder_s generatedNext = this.getNext();
 		generatedNext.lzma_next_end(allocator);
 		ModernizedCProgram.lzma_free(coder, allocator);
-		return ;
+		return /*Error: Unsupported expression*/;
 	}
 	public Object block_encoder_update(Object allocator, Object filters, Object reversed_filters) {
-		 generatedSequence = this.getSequence();
+		Object generatedSequence = this.getSequence();
 		if (generatedSequence != .SEQ_CODE) {
 			return LZMA_PROG_ERROR;
 		} 
 		lzma_next_coder_s generatedNext = this.getNext();
 		return generatedNext.lzma_next_filter_update(allocator, reversed_filters);
 	}
-	public Object delta_decode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+	/// Otherwise we call the next filter in the chain to process in[] and
+	/// write its output to mf->buffer.
+	///
+	/// This function must not be called once it has returned LZMA_STREAM_END.
+	///
+	public Object fill_window(Object allocator, Object in, Object in_pos, Object in_size, Object action) {
+		Object generatedMf = this.getMf();
+		((generatedMf.getRead_pos() <= generatedMf.getWrite_pos()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->mf.read_pos <= coder->mf.write_pos", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lz_encoder.c", 82));
+		// Move the sliding window if needed.if (generatedMf.getRead_pos() >= generatedMf.getSize() - generatedMf.getKeep_size_after()) {
+			generatedMf.move_window();
+		} 
+		// (which I find cleanest), but we need size_t here when filling// the history window.size_t write_pos = generatedMf.getWrite_pos();
+		 ret = new ();
 		lzma_next_coder_s generatedNext = this.getNext();
 		Object generatedCode = generatedNext.getCode();
-		((generatedCode != ((Object)0)) ? (Object)0 : ._assert("coder->next.code != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\delta_decoder.c", 35));
-		size_t out_start = out_pos;
 		lzma_coder_s generatedCoder = generatedNext.getCoder();
-		 ret = .UNRECOGNIZEDFUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, out, out_pos, out_size, action);
-		coder.decode_buffer(out + out_start, out_pos - out_start);
+		if (generatedCode == ((Object)0)) {
+			ModernizedCProgram.lzma_bufcpy(in, in_pos, in_size, generatedMf.getBuffer(), write_pos, generatedMf.getSize());
+			ret = action != LZMA_RUN && in_pos == in_size ? LZMA_STREAM_END : LZMA_OK;
+		} else {
+				ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator, in, in_pos, in_size, generatedMf.getBuffer(), write_pos, generatedMf.getSize(), action);
+		} 
+		// Not using a filter, simply memcpy() as much as possible.
+		generatedMf.setWrite_pos(write_pos)// If end of stream has been reached or flushing completed, we allow// the encoder to process all the input (that is, read_pos is allowed;// If end of stream has been reached or flushing completed, we allow// the encoder to process all the input (that is, read_pos is allowed
+		// to reach write_pos). Otherwise we keep keep_size_after bytes// available as prebuffer.if (ret == LZMA_STREAM_END) {
+			((in_pos == in_size) ? (Object)0 : /*Error: Function owner not recognized*/_assert("*in_pos == in_size", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lz_encoder.c", 115));
+			ret = LZMA_OK;
+			generatedMf.setAction(action);
+			generatedMf.setRead_limit(generatedMf.getWrite_pos());
+		}  else if (generatedMf.getWrite_pos() > generatedMf.getKeep_size_after()) {
+			generatedMf.setRead_limit(generatedMf.getWrite_pos() - generatedMf.getKeep_size_after());
+		} 
+		// Restart the match finder after finished LZMA_SYNC_FLUSH.if (generatedMf.getPending() > 0 && generatedMf.getRead_pos() < generatedMf.getRead_limit()) {
+			size_t pending = generatedMf.getPending();
+			generatedMf.setPending(0);
+			((generatedMf.getRead_pos() >= pending) ? (Object)0 : /*Error: Function owner not recognized*/_assert("coder->mf.read_pos >= pending", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Obs-studio\\src\\lz_encoder.c", 138));
+			generatedMf.getRead_pos() -= pending;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedMf, pending);
+		} 
 		return ret;
 	}
-	public  getSequence() {
-		return sequence;
+	public Object lz_encode(Object allocator, Object in, Object in_pos, Object in_size, Object out, Object out_pos, Object out_size, Object action) {
+		Object generatedMf = this.getMf();
+		 generatedLz = this.getLz();
+		Object generatedCoder = generatedLz.getCoder();
+		while (out_pos < out_size && (in_pos < in_size || action != LZMA_RUN)) {
+			if (generatedMf.getAction() == LZMA_RUN && generatedMf.getRead_pos() >= generatedMf.getRead_limit()) {
+				do {
+					 ret_ = (coder.fill_window(allocator, in, in_pos, in_size, action));
+					if (ret_ != LZMA_OK) {
+						return ret_;
+					} 
+				} while (0);
+			} 
+			 ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, generatedMf, out, out_pos, out_size);
+			if (ret != LZMA_OK) {
+				generatedMf.setAction(LZMA_RUN);
+				return ret;
+			} 
+		}
+		return LZMA_OK;
 	}
-	public void setSequence( newSequence) {
-		sequence = newSequence;
+	public void lz_encoder_end(Object allocator) {
+		lzma_next_coder_s generatedNext = this.getNext();
+		generatedNext.lzma_next_end(allocator);
+		Object generatedMf = this.getMf();
+		ModernizedCProgram.lzma_free(generatedMf.getHash(), allocator);
+		ModernizedCProgram.lzma_free(generatedMf.getBuffer(), allocator);
+		 generatedLz = this.getLz();
+		Object generatedEnd = generatedLz.getEnd();
+		Object generatedCoder = generatedLz.getCoder();
+		if (generatedEnd != ((Object)0)) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, allocator);
+		} else {
+				ModernizedCProgram.lzma_free(generatedCoder, allocator);
+		} 
+		ModernizedCProgram.lzma_free(coder, allocator);
+		return /*Error: Unsupported expression*/;
+	}
+	public Object lz_encoder_update(Object allocator, Object filters_null, Object reversed_filters) {
+		 generatedLz = this.getLz();
+		Object generatedOptions_update = generatedLz.getOptions_update();
+		if (generatedOptions_update == ((Object)0)) {
+			return LZMA_PROG_ERROR;
+		} 
+		Object generatedCoder = generatedLz.getCoder();
+		do {
+			 ret_ = (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedCoder, reversed_filters));
+			if (ret_ != LZMA_OK) {
+				return ret_;
+			} 
+		} while (0);
+		lzma_next_coder_s generatedNext = this.getNext();
+		return generatedNext.lzma_next_filter_update(allocator, reversed_filters + 1);
+	}
+	public  getDict() {
+		return dict;
+	}
+	public void setDict( newDict) {
+		dict = newDict;
+	}
+	public  getLz() {
+		return lz;
+	}
+	public void setLz( newLz) {
+		lz = newLz;
 	}
 	public lzma_next_coder_s getNext() {
 		return next;
@@ -1928,40 +1954,23 @@ public class lzma_coder_s {
 	public void setNext(lzma_next_coder_s newNext) {
 		next = newNext;
 	}
-	public Object getBlock() {
-		return block;
+	public boolean getNext_finished() {
+		return next_finished;
 	}
-	public void setBlock(Object newBlock) {
-		block = newBlock;
+	public void setNext_finished(boolean newNext_finished) {
+		next_finished = newNext_finished;
 	}
-	public Object getCompressed_size() {
-		return compressed_size;
+	public boolean getThis_finished() {
+		return this_finished;
 	}
-	public void setCompressed_size(Object newCompressed_size) {
-		compressed_size = newCompressed_size;
+	public void setThis_finished(boolean newThis_finished) {
+		this_finished = newThis_finished;
 	}
-	public Object getUncompressed_size() {
-		return uncompressed_size;
+	public  getTemp() {
+		return temp;
 	}
-	public void setUncompressed_size(Object newUncompressed_size) {
-		uncompressed_size = newUncompressed_size;
-	}
-	public Object getCompressed_limit() {
-		return compressed_limit;
-	}
-	public void setCompressed_limit(Object newCompressed_limit) {
-		compressed_limit = newCompressed_limit;
-	}
-	public Object getCheck_pos() {
-		return check_pos;
-	}
-	public void setCheck_pos(Object newCheck_pos) {
-		check_pos = newCheck_pos;
-	}
-	public Object getCheck() {
-		return check;
-	}
-	public void setCheck(Object newCheck) {
-		check = newCheck;
+	public void setTemp( newTemp) {
+		temp = newTemp;
 	}
 }
+/// Dictionary (history buffer)

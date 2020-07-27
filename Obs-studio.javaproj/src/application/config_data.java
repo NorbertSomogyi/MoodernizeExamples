@@ -15,6 +15,22 @@ public class config_data {
 	public config_data() {
 	}
 	
+	public boolean init_mutex() {
+		pthread_mutexattr_t attr = new pthread_mutexattr_t();
+		if (ModernizedCProgram.pthread_mutexattr_init(attr) != 0) {
+			return 0;
+		} 
+		if (ModernizedCProgram.pthread_mutexattr_settype(attr, 2) != 0) {
+			return 0;
+		} 
+		Object generatedMutex = this.getMutex();
+		return ModernizedCProgram.pthread_mutex_init(generatedMutex, attr) == 0;
+		HANDLE handle = ModernizedCProgram.create_mutex_plus_id(name, pid);
+		if (!handle) {
+			ModernizedCProgram.hlog("Failed to open mutex '%s': %lu", name, /*Error: Function owner not recognized*/GetLastError());
+		} 
+		return handle;
+	}
 	public config_data config_create(Object file) {
 		config_data config = new config_data();
 		FILE f = new FILE();
@@ -22,9 +38,9 @@ public class config_data {
 		if (!f) {
 			return ((Object)0);
 		} 
-		.fclose(f);
-		config = ModernizedCProgram.bzalloc();
-		if (!ModernizedCProgram.init_mutex(config)) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(f);
+		config = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
+		if (!config.init_mutex()) {
 			ModernizedCProgram.bfree(config);
 			return ((Object)0);
 		} 
@@ -37,11 +53,11 @@ public class config_data {
 		if (!config) {
 			return -2;
 		} 
-		config = ModernizedCProgram.bzalloc();
+		config = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		if (!config) {
 			return -2;
 		} 
-		if (!ModernizedCProgram.init_mutex(config)) {
+		if (!config.init_mutex()) {
 			ModernizedCProgram.bfree(config);
 			return -2;
 		} 
@@ -59,11 +75,11 @@ public class config_data {
 		if (!config) {
 			return -2;
 		} 
-		config = ModernizedCProgram.bzalloc();
+		config = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		if (!config) {
 			return -2;
 		} 
-		if (!ModernizedCProgram.init_mutex(config)) {
+		if (!config.init_mutex()) {
 			ModernizedCProgram.bfree(config);
 			return -2;
 		} 
@@ -110,9 +126,9 @@ public class config_data {
 		Byte generatedName = section.getName();
 		darray generatedItems = section.getItems();
 		Byte generatedValue = item.getValue();
-		byte generatedArray = tmp.getArray();
+		byte[] generatedArray = tmp.getArray();
 		for (i = 0; i < generatedNum; i++) {
-			config_section section = ModernizedCProgram.darray_item(, generatedSections, i);
+			config_section section = ModernizedCProgram.darray_item(/*Error: Unsupported expression*/, generatedSections, i);
 			if (i) {
 				str.dstr_cat("\n");
 			} 
@@ -120,7 +136,7 @@ public class config_data {
 			str.dstr_cat(generatedName);
 			str.dstr_cat("]\n");
 			for (j = 0; j < generatedNum; j++) {
-				config_item item = ModernizedCProgram.darray_item(, generatedItems, j);
+				config_item item = ModernizedCProgram.darray_item(/*Error: Unsupported expression*/, generatedItems, j);
 				tmp.dstr_copy(generatedValue ? generatedValue : "");
 				tmp.dstr_replace("\\", "\\\\");
 				tmp.dstr_replace("\r", "\\r");
@@ -131,11 +147,11 @@ public class config_data {
 				str.dstr_cat("\n");
 			}
 		}
-		if (.fwrite("\xEF\xBB\xBF", 3, 1, f) != 1) {
+		if (/*Error: Function owner not recognized*/fwrite("\xEF\xBB\xBF", 3, 1, f) != 1) {
 			;
 		} 
 		Object generatedLen = str.getLen();
-		if (.fwrite(generatedArray, generatedLen, 1, f) != 1) {
+		if (/*Error: Function owner not recognized*/fwrite(generatedArray, generatedLen, 1, f) != 1) {
 			;
 		} 
 		ret = 0;
@@ -161,7 +177,7 @@ public class config_data {
 			temp_file.dstr_cat(".");
 		} 
 		temp_file.dstr_cat(temp_ext);
-		byte generatedArray = temp_file.getArray();
+		byte[] generatedArray = temp_file.getArray();
 		this.setFile(generatedArray);
 		ret = config.config_save();
 		this.setFile(file);
@@ -188,7 +204,7 @@ public class config_data {
 		config_section sections = new config_section();
 		size_t i = new size_t();
 		if (!config) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		darray generatedDefaults = this.getDefaults();
 		Object generatedArray = generatedDefaults.getArray();
@@ -225,7 +241,7 @@ public class config_data {
 		if (idx >= generatedNum) {
 			;
 		} 
-		section = ModernizedCProgram.darray_item(, generatedSections, idx);
+		section = ModernizedCProgram.darray_item(/*Error: Unsupported expression*/, generatedSections, idx);
 		Byte generatedName = section.getName();
 		name = generatedName;
 		return name;
@@ -242,7 +258,7 @@ public class config_data {
 		str.dstr_init();
 		str.dstr_printf("%I64d", value);
 		darray generatedSections = this.getSections();
-		byte generatedArray = str.getArray();
+		byte[] generatedArray = str.getArray();
 		ModernizedCProgram.config_set_item(config, generatedSections, section, name, generatedArray);
 	}
 	public void config_set_uint(Object section, Object name, Object value) {
@@ -250,7 +266,7 @@ public class config_data {
 		str.dstr_init();
 		str.dstr_printf("%I64u", value);
 		darray generatedSections = this.getSections();
-		byte generatedArray = str.getArray();
+		byte[] generatedArray = str.getArray();
 		ModernizedCProgram.config_set_item(config, generatedSections, section, name, generatedArray);
 	}
 	public void config_set_bool(Object section, Object name, boolean value) {
@@ -276,7 +292,7 @@ public class config_data {
 		str.dstr_init();
 		str.dstr_printf("%I64d", value);
 		darray generatedDefaults = this.getDefaults();
-		byte generatedArray = str.getArray();
+		byte[] generatedArray = str.getArray();
 		ModernizedCProgram.config_set_item(config, generatedDefaults, section, name, generatedArray);
 	}
 	public void config_set_default_uint(Object section, Object name, Object value) {
@@ -284,7 +300,7 @@ public class config_data {
 		str.dstr_init();
 		str.dstr_printf("%I64u", value);
 		darray generatedDefaults = this.getDefaults();
-		byte generatedArray = str.getArray();
+		byte[] generatedArray = str.getArray();
 		ModernizedCProgram.config_set_item(config, generatedDefaults, section, name, generatedArray);
 	}
 	public void config_set_default_bool(Object section, Object name, boolean value) {
@@ -297,7 +313,7 @@ public class config_data {
 		str.dstr_init();
 		str.dstr_printf("%g", value);
 		darray generatedDefaults = this.getDefaults();
-		byte generatedArray = str.getArray();
+		byte[] generatedArray = str.getArray();
 		ModernizedCProgram.config_set_item(config, generatedDefaults, section, name, generatedArray);
 	}
 	public Object config_get_string(Object section, Object name) {
@@ -356,16 +372,16 @@ public class config_data {
 		darray generatedItems = sec.getItems();
 		for (size_t i = 0;
 		 i < generatedNum; i++) {
-			config_section sec = ModernizedCProgram.darray_item(, sections, i);
+			config_section sec = ModernizedCProgram.darray_item(/*Error: Unsupported expression*/, sections, i);
 			if (ModernizedCProgram.astrcmpi(generatedName, section) != 0) {
 				continue;
 			} 
 			for (size_t j = 0;
 			 j < generatedNum; j++) {
-				config_item item = ModernizedCProgram.darray_item(, generatedItems, j);
+				config_item item = ModernizedCProgram.darray_item(/*Error: Unsupported expression*/, generatedItems, j);
 				if (ModernizedCProgram.astrcmpi(generatedName, name) == 0) {
 					item.config_item_free();
-					generatedItems.darray_erase(, j);
+					generatedItems.darray_erase(/*Error: Unsupported expression*/, j);
 					success = true;
 					;
 				} 

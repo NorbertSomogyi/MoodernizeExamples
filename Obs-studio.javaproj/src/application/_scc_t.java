@@ -64,7 +64,7 @@ public class _scc_t {
 	public _scc_t scc_relloc(int cc_count) {
 		int generatedCc_aloc = this.getCc_aloc();
 		if (0 == scc || generatedCc_aloc < cc_count) {
-			scc = (scc_t).realloc(scc,  + ((cc_count * 15 / 10) * ));
+			scc = (scc_t)/*Error: Function owner not recognized*/realloc(scc, /*Error: Unsupported expression*/ + ((cc_count * 15 / 10) * /*Error: Unsupported expression*/));
 			this.setCc_aloc(cc_count);
 		} 
 		// alloc 1.5 time what is asked for.
@@ -77,7 +77,7 @@ public class _scc_t {
 		return scc;
 	}
 	public _scc_t scc_free() {
-		.free(scc);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(scc);
 		return ((Object)0);
 	}
 	// 00:00:25:16  9420 9440 aeae ae79 ef75 2068 6176 e520 79ef 75f2 20f2 ef62 eff4 e9e3 732c 2061 6e64 2049 94fe 9723 ea75 73f4 20f7 616e f420 f4ef 2062 e520 61f7 e573 ef6d e520 e96e 2073 7061 e3e5 ae80 942c 8080 8080 942f
@@ -97,13 +97,13 @@ public class _scc_t {
 		if ((scc)) {
 			(scc).setCc_size(0);
 		} 
-		// skip 'Scenarist_SCC V1.0' headerif (2 == .sscanf(data, "Scenarist_SCC V%1d.%1d", v1, v2)) {
+		// skip 'Scenarist_SCC V1.0' headerif (2 == /*Error: Function owner not recognized*/sscanf(data, "Scenarist_SCC V%1d.%1d", v1, v2)) {
 			;
 			if (1 != v1 || 0 != v2) {
 				return 0;
 			} 
 		} 
-		// Skip blank linesfor (; ; ) {
+		// Skip blank linesfor (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			llen = ModernizedCProgram.utf8_line_length(data);
 			if (0 == llen || 0 != ModernizedCProgram.utf8_trimmed_length(data, llen)) {
 				break;
@@ -113,7 +113,7 @@ public class _scc_t {
 		}
 		int generatedCc_size = (scc).getCc_size();
 		Object generatedCc_data = (scc).getCc_data();
-		if (4 == .sscanf(data, "%2d:%2d:%2d%*1[:;]%2d", hh, mm, ss, ff)) {
+		if (4 == /*Error: Function owner not recognized*/sscanf(data, "%2d:%2d:%2d%*1[:;]%2d", hh, mm, ss, ff)) {
 			;
 			llen = ModernizedCProgram.utf8_line_length(data);
 			llen = ModernizedCProgram.utf8_trimmed_length(data, llen);
@@ -121,7 +121,7 @@ public class _scc_t {
 			(scc) = (scc).scc_relloc(max_cc_count * 15 / 10);
 			(scc).setTimestamp(ModernizedCProgram.scc_time_to_timestamp(hh, mm, ss, ff));
 			(scc).setCc_size(0);
-			while (generatedCc_size < max_cc_count && 1 == .sscanf(data, "%04x", cc_data)) {
+			while (generatedCc_size < max_cc_count && 1 == /*Error: Function owner not recognized*/sscanf(data, "%04x", cc_data)) {
 				generatedCc_data[generatedCc_size] = (uint16_t)cc_data;
 				generatedCc_size += 1;
 				;

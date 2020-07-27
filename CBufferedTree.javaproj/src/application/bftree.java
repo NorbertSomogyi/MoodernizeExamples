@@ -26,7 +26,7 @@ public class bftree {
 	public bftree bftree_create(bftree_opts opts) {
 		node root = new node();
 		bftree tree = new bftree();
-		tree = .malloc();
+		tree = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		root = ((Object)0).node_create();
 		tree.setRoot(root);
 		tree.setHeight(1);
@@ -35,13 +35,13 @@ public class bftree {
 		tree.setDel_payload_count(tree.setPut_payload_count(0));
 		Object generatedKey_destructor = opts.getKey_destructor();
 		Object generatedVal_destructor = opts.getVal_destructor();
-		((generatedKey_destructor && generatedVal_destructor) ? (Object)0 : ._assert("opts->key_destructor && opts->val_destructor", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\buffered_tree.c", 448));
+		((generatedKey_destructor && generatedVal_destructor) ? (Object)0 : /*Error: Function owner not recognized*/_assert("opts->key_destructor && opts->val_destructor", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\buffered_tree.c", 448));
 		return tree;
 	}
 	public void bftree_free() {
 		node generatedRoot = this.getRoot();
 		ModernizedCProgram.bftree_free_node(tree, generatedRoot);
-		.free(tree);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(tree);
 	}
 	public int bftree_put(Object key, Object val) {
 		payload new_payload = new payload();
@@ -176,11 +176,11 @@ public class bftree {
 		sds key = new sds();
 		sds val = new sds();
 		for (i = 0; i < times; ++i) {
-			.snprintf(buf, 20, "key%d", i);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "key%d", i);
 			key = ModernizedCProgram.sdsnew(buf);
-			.snprintf(buf, 20, "val%d", i);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "val%d", i);
 			val = ModernizedCProgram.sdsnew(buf);
-			((tree.bftree_put(key, val) == 0) ? (Object)0 : ._assert("bftree_put(tree, key, val) == BF_OK", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\performance.c", 81));
+			((tree.bftree_put(key, val) == 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("bftree_put(tree, key, val) == BF_OK", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\performance.c", 81));
 		}
 		return tree;
 	}
@@ -190,12 +190,12 @@ public class bftree {
 		byte[] buf = new byte[20];
 		sds key = new sds();
 		sds val = new sds();
-		.srand(1992);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/srand(1992);
 		for (i = 0; i < times; ++i) {
-			j = .rand() % times;
-			.snprintf(buf, 20, "key%d", j);
+			j = /*Error: Function owner not recognized*/rand() % times;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "key%d", j);
 			key = ModernizedCProgram.sdsnew(buf);
-			((tree.bftree_get(key)) ? (Object)0 : ._assert("bftree_get(tree, key)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\performance.c", 98));
+			((tree.bftree_get(key)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("bftree_get(tree, key)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\performance.c", 98));
 			ModernizedCProgram.sdsfree(key);
 		}
 	}
@@ -205,10 +205,10 @@ public class bftree {
 		byte[] buf = new byte[20];
 		sds key = new sds();
 		sds val = new sds();
-		.srand(1992);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/srand(1992);
 		for (i = 0; i < times; ++i) {
-			j = .rand() % times;
-			.snprintf(buf, 20, "key%d", j);
+			j = /*Error: Function owner not recognized*/rand() % times;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "key%d", j);
 			key = ModernizedCProgram.sdsnew(buf);
 			tree.bftree_del(key);
 		}

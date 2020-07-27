@@ -1,14 +1,14 @@
 package application;
 
 public class convert_driver {
-	private Object name;
+	private Object[] name;
 	private convert_driver next;
 	private Object smudge;
 	private Object clean;
 	private Object process;
 	private int required;
 	
-	public convert_driver(Object name, convert_driver next, Object smudge, Object clean, Object process, int required) {
+	public convert_driver(Object[] name, convert_driver next, Object smudge, Object clean, Object process, int required) {
 		setName(name);
 		setNext(next);
 		setSmudge(smudge);
@@ -26,19 +26,19 @@ public class convert_driver {
 		if (((value) == ModernizedCProgram.git_attr__true) || ((value) == ModernizedCProgram.git_attr__false) || ((value) == ((Object)0))) {
 			return ((Object)0);
 		} 
-		Object generatedName = drv.getName();
+		Object[] generatedName = drv.getName();
 		convert_driver generatedNext = drv.getNext();
 		for (drv = user_convert; drv; drv = generatedNext) {
-			if (!.strcmp(value, generatedName)) {
+			if (!/*Error: Function owner not recognized*/strcmp(value, generatedName)) {
 				return drv;
 			} 
 		}
 		return ((Object)0);
 	}
-	public Object getName() {
+	public Object[] getName() {
 		return name;
 	}
-	public void setName(Object newName) {
+	public void setName(Object[] newName) {
 		name = newName;
 	}
 	public convert_driver getNext() {

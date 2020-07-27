@@ -25,6 +25,160 @@ public class gs_vertex_buffer {
 	public gs_vertex_buffer() {
 	}
 	
+	public gs_vertex_buffer gs_render_save() {
+		graphics_t graphics = thread_graphics;
+		size_t num_tex = new size_t();
+		size_t i = new size_t();
+		if (!ModernizedCProgram.gs_valid("gs_render_save")) {
+			return ((Object)0);
+		} 
+		Object generatedUsing_immediate = graphics.getUsing_immediate();
+		if (generatedUsing_immediate) {
+			return ((Object)0);
+		} 
+		Object generatedVerts = graphics.getVerts();
+		gs_vb_data generatedVbd = graphics.getVbd();
+		if (!generatedVerts.getNum()) {
+			generatedVbd.gs_vbdata_destroy();
+			return ((Object)0);
+		} 
+		Object generatedTexverts = graphics.getTexverts();
+		for (num_tex = 0; num_tex < 16; num_tex++) {
+			if (!generatedTexverts[num_tex].getNum()) {
+				break;
+			} 
+		}
+		generatedVbd.setPoints(generatedVerts.getArray());
+		Object generatedNorms = graphics.getNorms();
+		generatedVbd.setNormals(generatedNorms.getArray());
+		Object generatedColors = graphics.getColors();
+		generatedVbd.setColors(generatedColors.getArray());
+		generatedVbd.setNum(generatedVerts.getNum());
+		generatedVbd.setNum_tex(num_tex);
+		Object generatedNum_tex = generatedVbd.getNum_tex();
+		gs_tvertarray[] generatedTvarray = generatedVbd.getTvarray();
+		if (generatedNum_tex) {
+			generatedVbd.setTvarray(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/ * num_tex));
+			for (i = 0; i < num_tex; i++) {
+				generatedTvarray[i].setWidth(2);
+				generatedTvarray[i].setArray(generatedTexverts[i].getArray());
+			}
+		} 
+		graphics.reset_immediate_arrays();
+		gs_vertex_buffer gs_vertex_buffer = new gs_vertex_buffer();
+		return gs_vertex_buffer.gs_vertexbuffer_create(generatedVbd, 0);
+	}
+	public gs_vertex_buffer gs_vertexbuffer_create(gs_vb_data data, Object flags) {
+		graphics_t graphics = thread_graphics;
+		if (!ModernizedCProgram.gs_valid("gs_vertexbuffer_create")) {
+			return ((Object)0);
+		} 
+		Object generatedNum = data.getNum();
+		gs_vb_data gs_vb_data = new gs_vb_data();
+		vec3 generatedPoints = data.getPoints();
+		vec3 generatedNormals = data.getNormals();
+		vec3 generatedTangents = data.getTangents();
+		Object generatedColors = data.getColors();
+		gs_tvertarray[] generatedTvarray = data.getTvarray();
+		Object generatedNum_tex = data.getNum_tex();
+		Object generatedWidth = tv.getWidth();
+		Object generatedArray = tv.getArray();
+		if (data && generatedNum && (flags & (1 << 4)) != 0) {
+			gs_vb_data new_data = gs_vb_data.gs_vbdata_create();
+			new_data.setNum(generatedNum);
+			do {
+				if (generatedPoints) {
+					new_data.setPoints(ModernizedCProgram.bmemdup(generatedPoints, /*Error: sizeof expression not supported yet*/ * generatedNum));
+				} 
+			} while (false);
+			do {
+				if (generatedNormals) {
+					new_data.setNormals(ModernizedCProgram.bmemdup(generatedNormals, /*Error: sizeof expression not supported yet*/ * generatedNum));
+				} 
+			} while (false);
+			do {
+				if (generatedTangents) {
+					new_data.setTangents(ModernizedCProgram.bmemdup(generatedTangents, /*Error: sizeof expression not supported yet*/ * generatedNum));
+				} 
+			} while (false);
+			do {
+				if (generatedColors) {
+					new_data.setColors(ModernizedCProgram.bmemdup(generatedColors, /*Error: sizeof expression not supported yet*/ * generatedNum));
+				} 
+			} while (false);
+			if (generatedTvarray && generatedNum_tex) {
+				new_data.setNum_tex(generatedNum_tex);
+				new_data.setTvarray(ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/ * generatedNum_tex));
+				for (size_t i = 0;
+				 i < generatedNum_tex; i++) {
+					gs_tvertarray tv = generatedTvarray[i];
+					gs_tvertarray new_tv = generatedTvarray[i];
+					size_t size = generatedWidth * /*Error: Unsupported expression*/;
+					new_tv.setWidth(generatedWidth);
+					new_tv.setArray(ModernizedCProgram.bmemdup(generatedArray, size * generatedNum));
+				}
+			} 
+			data = new_data;
+		} 
+		gs_device generatedDevice = graphics.getDevice();
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, data, flags);
+	}
+	public void gs_load_vertexbuffer() {
+		graphics_t graphics = thread_graphics;
+		if (!ModernizedCProgram.gs_valid("gs_load_vertexbuffer")) {
+			return /*Error: Unsupported expression*/;
+		} 
+		gs_device generatedDevice = graphics.getDevice();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, vertbuffer);
+	}
+	public void gs_vertexbuffer_destroy() {
+		graphics_t graphics = thread_graphics;
+		if (!ModernizedCProgram.gs_valid("gs_vertexbuffer_destroy")) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (!vertbuffer) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(vertbuffer);
+		if (vb) {
+			if (vb.getVertex_buffer()) {
+				ModernizedCProgram.gl_delete_buffers(1, vb.getVertex_buffer());
+			} 
+			if (vb.getNormal_buffer()) {
+				ModernizedCProgram.gl_delete_buffers(1, vb.getNormal_buffer());
+			} 
+			if (vb.getTangent_buffer()) {
+				ModernizedCProgram.gl_delete_buffers(1, vb.getTangent_buffer());
+			} 
+			if (vb.getColor_buffer()) {
+				ModernizedCProgram.gl_delete_buffers(1, vb.getColor_buffer());
+			} 
+			if (vb.getUv_buffers().getNum()) {
+				ModernizedCProgram.gl_delete_buffers(()vb.getUv_buffers().getNum(), vb.getUv_buffers().getArray());
+			} 
+			if (vb.getVao()) {
+				ModernizedCProgram.gl_delete_vertex_arrays(1, vb.getVao());
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(vb.getUv_sizes());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(vb.getUv_buffers());
+			vb.getData().gs_vbdata_destroy();
+			ModernizedCProgram.bfree(vb);
+		} 
+	}
+	public void gs_vertexbuffer_flush() {
+		if (!(ModernizedCProgram.gs_valid("gs_vertexbuffer_flush") && ModernizedCProgram.gs_obj_valid(vertbuffer, "gs_vertexbuffer_flush", "vertbuffer"))) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(vertbuffer);
+		ModernizedCProgram.gs_vertexbuffer_flush_internal(vb, vb.getData());
+	}
+	public void gs_vertexbuffer_flush_direct(Object data) {
+		if (!(ModernizedCProgram.gs_valid("gs_vertexbuffer_flush_direct") && ModernizedCProgram.gs_obj_valid(vertbuffer, "gs_vertexbuffer_flush_direct", "vertbuffer") && ModernizedCProgram.gs_obj_valid(data, "gs_vertexbuffer_flush_direct", "data"))) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(vertbuffer, data);
+		ModernizedCProgram.gs_vertexbuffer_flush_internal(vb, data);
+	}
 	/******************************************************************************
 	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
 	
@@ -48,41 +202,41 @@ public class gs_vertex_buffer {
 		Object generatedVertex_buffer = this.getVertex_buffer();
 		gs_vb_data generatedData = this.getData();
 		Object generatedGs_vb_data = generatedData.getGs_vb_data();
-		if (!ModernizedCProgram.gl_create_buffer(GL_ARRAY_BUFFER, generatedVertex_buffer, generatedGs_vb_data * , generatedGs_vb_data, usage)) {
+		if (!ModernizedCProgram.gl_create_buffer(GL_ARRAY_BUFFER, generatedVertex_buffer, generatedGs_vb_data * /*Error: Unsupported expression*/, generatedGs_vb_data, usage)) {
 			return false;
 		} 
 		Object generatedNormal_buffer = this.getNormal_buffer();
 		if (generatedGs_vb_data) {
-			if (!ModernizedCProgram.gl_create_buffer(GL_ARRAY_BUFFER, generatedNormal_buffer, generatedGs_vb_data * , generatedGs_vb_data, usage)) {
+			if (!ModernizedCProgram.gl_create_buffer(GL_ARRAY_BUFFER, generatedNormal_buffer, generatedGs_vb_data * /*Error: Unsupported expression*/, generatedGs_vb_data, usage)) {
 				return false;
 			} 
 		} 
 		Object generatedTangent_buffer = this.getTangent_buffer();
 		if (generatedGs_vb_data) {
-			if (!ModernizedCProgram.gl_create_buffer(GL_ARRAY_BUFFER, generatedTangent_buffer, generatedGs_vb_data * , generatedGs_vb_data, usage)) {
+			if (!ModernizedCProgram.gl_create_buffer(GL_ARRAY_BUFFER, generatedTangent_buffer, generatedGs_vb_data * /*Error: Unsupported expression*/, generatedGs_vb_data, usage)) {
 				return false;
 			} 
 		} 
 		Object generatedColor_buffer = this.getColor_buffer();
 		if (generatedGs_vb_data) {
-			if (!ModernizedCProgram.gl_create_buffer(GL_ARRAY_BUFFER, generatedColor_buffer, generatedGs_vb_data * , generatedGs_vb_data, usage)) {
+			if (!ModernizedCProgram.gl_create_buffer(GL_ARRAY_BUFFER, generatedColor_buffer, generatedGs_vb_data * /*Error: Unsupported expression*/, generatedGs_vb_data, usage)) {
 				return false;
 			} 
 		} 
 		Object generatedUv_buffers = this.getUv_buffers();
-		.da_reserve(generatedUv_buffers, generatedGs_vb_data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_reserve(generatedUv_buffers, generatedGs_vb_data);
 		Object generatedUv_sizes = this.getUv_sizes();
-		.da_reserve(generatedUv_sizes, generatedGs_vb_data);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_reserve(generatedUv_sizes, generatedGs_vb_data);
 		Object generatedGs_tvertarray = tv.getGs_tvertarray();
 		for (i = 0; i < generatedGs_vb_data; i++) {
 			 tex_buffer = new ();
 			gs_tvertarray tv = generatedGs_vb_data + i;
-			 size = generatedGs_vb_data *  * generatedGs_tvertarray;
+			 size = generatedGs_vb_data * /*Error: Unsupported expression*/ * generatedGs_tvertarray;
 			if (!ModernizedCProgram.gl_create_buffer(GL_ARRAY_BUFFER, tex_buffer, size, generatedGs_tvertarray, usage)) {
 				return false;
 			} 
-			.da_push_back(generatedUv_buffers, tex_buffer);
-			.da_push_back(generatedUv_sizes, generatedGs_tvertarray);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedUv_buffers, tex_buffer);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedUv_sizes, generatedGs_tvertarray);
 		}
 		if (!generatedDynamic) {
 			generatedData.gs_vbdata_destroy();
@@ -120,112 +274,6 @@ public class gs_vertex_buffer {
 			return generatedUv_buffers.getArray()[index];
 		} 
 		return 0;
-	}
-	public gs_vertex_buffer gs_render_save() {
-		graphics_t graphics = thread_graphics;
-		size_t num_tex = new size_t();
-		size_t i = new size_t();
-		if (!ModernizedCProgram.gs_valid("gs_render_save")) {
-			return ((Object)0);
-		} 
-		Object generatedUsing_immediate = graphics.getUsing_immediate();
-		if (generatedUsing_immediate) {
-			return ((Object)0);
-		} 
-		Object generatedVerts = graphics.getVerts();
-		gs_vb_data generatedVbd = graphics.getVbd();
-		if (!generatedVerts.getNum()) {
-			generatedVbd.gs_vbdata_destroy();
-			return ((Object)0);
-		} 
-		Object generatedTexverts = graphics.getTexverts();
-		for (num_tex = 0; num_tex < 16; num_tex++) {
-			if (!generatedTexverts[num_tex].getNum()) {
-				break;
-			} 
-		}
-		generatedVbd.setPoints(generatedVerts.getArray());
-		Object generatedNorms = graphics.getNorms();
-		generatedVbd.setNormals(generatedNorms.getArray());
-		Object generatedColors = graphics.getColors();
-		generatedVbd.setColors(generatedColors.getArray());
-		generatedVbd.setNum(generatedVerts.getNum());
-		generatedVbd.setNum_tex(num_tex);
-		Object generatedNum_tex = generatedVbd.getNum_tex();
-		gs_tvertarray generatedTvarray = generatedVbd.getTvarray();
-		if (generatedNum_tex) {
-			generatedVbd.setTvarray(ModernizedCProgram.bmalloc( * num_tex));
-			for (i = 0; i < num_tex; i++) {
-				generatedTvarray[i].setWidth(2);
-				generatedTvarray[i].setArray(generatedTexverts[i].getArray());
-			}
-		} 
-		graphics.reset_immediate_arrays();
-		gs_vertex_buffer gs_vertex_buffer = new gs_vertex_buffer();
-		return gs_vertex_buffer.gs_vertexbuffer_create(generatedVbd, 0);
-	}
-	public gs_vertex_buffer gs_vertexbuffer_create(gs_vb_data data, Object flags) {
-		graphics_t graphics = thread_graphics;
-		if (!ModernizedCProgram.gs_valid("gs_vertexbuffer_create")) {
-			return ((Object)0);
-		} 
-		Object generatedNum = data.getNum();
-		gs_vb_data gs_vb_data = new gs_vb_data();
-		vec3 generatedPoints = data.getPoints();
-		vec3 generatedNormals = data.getNormals();
-		vec3 generatedTangents = data.getTangents();
-		Object generatedColors = data.getColors();
-		gs_tvertarray generatedTvarray = data.getTvarray();
-		Object generatedNum_tex = data.getNum_tex();
-		Object generatedWidth = tv.getWidth();
-		Object generatedArray = tv.getArray();
-		if (data && generatedNum && (flags & (1 << 4)) != 0) {
-			gs_vb_data new_data = gs_vb_data.gs_vbdata_create();
-			new_data.setNum(generatedNum);
-			do {
-				if (generatedPoints) {
-					new_data.setPoints(ModernizedCProgram.bmemdup(generatedPoints,  * generatedNum));
-				} 
-			} while (false);
-			do {
-				if (generatedNormals) {
-					new_data.setNormals(ModernizedCProgram.bmemdup(generatedNormals,  * generatedNum));
-				} 
-			} while (false);
-			do {
-				if (generatedTangents) {
-					new_data.setTangents(ModernizedCProgram.bmemdup(generatedTangents,  * generatedNum));
-				} 
-			} while (false);
-			do {
-				if (generatedColors) {
-					new_data.setColors(ModernizedCProgram.bmemdup(generatedColors,  * generatedNum));
-				} 
-			} while (false);
-			if (generatedTvarray && generatedNum_tex) {
-				new_data.setNum_tex(generatedNum_tex);
-				new_data.setTvarray(ModernizedCProgram.bzalloc( * generatedNum_tex));
-				for (size_t i = 0;
-				 i < generatedNum_tex; i++) {
-					gs_tvertarray tv = generatedTvarray[i];
-					gs_tvertarray new_tv = generatedTvarray[i];
-					size_t size = generatedWidth * ;
-					new_tv.setWidth(generatedWidth);
-					new_tv.setArray(ModernizedCProgram.bmemdup(generatedArray, size * generatedNum));
-				}
-			} 
-			data = new_data;
-		} 
-		gs_device generatedDevice = graphics.getDevice();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, data, flags);
-	}
-	public void gs_load_vertexbuffer() {
-		graphics_t graphics = thread_graphics;
-		if (!ModernizedCProgram.gs_valid("gs_load_vertexbuffer")) {
-			return ;
-		} 
-		gs_device generatedDevice = graphics.getDevice();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedDevice, vertbuffer);
 	}
 	public Object getVao() {
 		return vao;

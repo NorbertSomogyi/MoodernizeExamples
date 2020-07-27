@@ -56,7 +56,7 @@ public class token {
 							len_left -= len + 1;
 						} 
 					} 
-					u8 next_pos = (u8).strchr((byte)generatedBuf[token_idx], generatedSep[token_idx]);
+					u8 next_pos = (u8)/*Error: Function owner not recognized*/strchr((byte)generatedBuf[token_idx], generatedSep[token_idx]);
 					if (next_pos == ((Object)0)) {
 						return (parser_rc.PARSER_SEPARATOR_UNMATCHED);
 					} 
@@ -83,7 +83,7 @@ public class token {
 				boolean matched = false;
 				for (int signature_idx = 0;
 				 signature_idx < generatedSignatures_cnt; signature_idx++) {
-					if (.memcmp(generatedBuf[token_idx], generatedSignatures_buf[signature_idx], generatedLen[token_idx]) == 0) {
+					if (/*Error: Function owner not recognized*/memcmp(generatedBuf[token_idx], generatedSignatures_buf[signature_idx], generatedLen[token_idx]) == 0) {
 						matched = true;
 					} 
 				}

@@ -18,14 +18,14 @@ public class git_istream {
 	}
 	
 	public int close_istream() {
-		int r = .UNRECOGNIZEDFUNCTIONNAME(st);
+		int r = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(st);
 		ModernizedCProgram.free(st);
 		return r;
 	}
 	public Object read_istream(Object buf, Object sz) {
-		return .UNRECOGNIZEDFUNCTIONNAME(st, buf, sz);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(st, buf, sz);
 	}
-	public git_istream open_istream(Object oid, object_type type, long size, stream_filter filter) {
+	public git_istream open_istream(Object oid, object_type type, Long size, stream_filter filter) {
 		git_istream st = new git_istream();
 		object_info oi = new object_info(((Object)0));
 		object_id real = ModernizedCProgram.the_repository.lookup_replace_object(oid);
@@ -33,8 +33,8 @@ public class git_istream {
 		if (input_source.src < 0) {
 			return ((Object)0);
 		} 
-		st = ModernizedCProgram.xmalloc();
-		if (.UNRECOGNIZEDFUNCTIONNAME(st, oi, real, type)) {
+		st = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
+		if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(st, oi, real, type)) {
 			if (ModernizedCProgram.open_istream_incore(st, oi, real, type)) {
 				ModernizedCProgram.free(st);
 				return ((Object)0);
@@ -89,7 +89,7 @@ public class git_istream {
 				if (sz < to_move) {
 					to_move = sz;
 				} 
-				.memcpy(buf + filled, generatedObuf + generatedO_ptr, to_move);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf + filled, generatedObuf + generatedO_ptr, to_move);
 				generatedO_ptr += to_move;
 				sz -= to_move;
 				filled += to_move;
@@ -132,7 +132,7 @@ public class git_istream {
 		return filled;
 	}
 	public git_istream attach_stream_filter(stream_filter filter) {
-		git_istream ifs = ModernizedCProgram.xmalloc();
+		git_istream ifs = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		 generatedU = ifs.getU();
 		Object generatedFiltered = generatedU.getFiltered();
 		filtered_istream fs = (generatedFiltered);
@@ -167,7 +167,7 @@ public class git_istream {
 			if (sz < to_copy) {
 				to_copy = sz;
 			} 
-			.memcpy(buf, generatedLoose.getHdr() + generatedLoose.getHdr_used(), to_copy);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf, generatedLoose.getHdr() + generatedLoose.getHdr_used(), to_copy);
 			generatedLoose.getHdr_used() += to_copy;
 			total_read += to_copy;
 		} 
@@ -196,7 +196,7 @@ public class git_istream {
 		st.close_deflated_stream();
 		 generatedU = this.getU();
 		Object generatedLoose = generatedU.getLoose();
-		.munmap(generatedLoose.getMapped(), generatedLoose.getMapsize());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/munmap(generatedLoose.getMapped(), generatedLoose.getMapsize());
 		return 0;
 	}
 	public Object read_istream_pack_non_delta(Byte buf, Object sz) {
@@ -204,17 +204,17 @@ public class git_istream {
 		git_zstream generatedZ = this.getZ();
 		 generatedZ_state = this.getZ_state();
 		switch (generatedZ_state) {
-		case .z_error:
-				return -1;
 		case .z_done:
 				return 0;
 		case .z_used:
 				break;
 		case .z_unused:
-				.memset(generatedZ, 0, );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedZ, 0, /*Error: sizeof expression not supported yet*/);
 				generatedZ.git_inflate_init();
 				this.setZ_state(.z_used);
 				break;
+		case .z_error:
+				return -1;
 		}
 		 generatedU = this.getU();
 		Object generatedIn_pack = generatedU.getIn_pack();
@@ -266,7 +266,7 @@ public class git_istream {
 			read_size = remainder;
 		} 
 		if (read_size) {
-			.memcpy(buf, generatedIncore.getBuf() + generatedIncore.getRead_ptr(), read_size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf, generatedIncore.getBuf() + generatedIncore.getRead_ptr(), read_size);
 			generatedIncore.getRead_ptr() += read_size;
 		} 
 		return read_size;

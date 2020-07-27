@@ -26,12 +26,12 @@ public class flickcurl_note_s {
 	public void command_print_notes(Object label, Object value) {
 		int i;
 		if (!notes) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (label) {
-			.fprintf((_iob[1]), "%s: %s %s notes\n", ModernizedCProgram.program, label, (value ? value : "(none)"));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%s: %s %s notes\n", ModernizedCProgram.program, label, (value ? value : "(none)"));
 		} else {
-				.fprintf((_iob[1]), "notes:\n");
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "notes:\n");
 		} 
 		int generatedId = note.getId();
 		Byte generatedAuthor = note.getAuthor();
@@ -43,7 +43,7 @@ public class flickcurl_note_s {
 		Byte generatedText = note.getText();
 		for (i = 0; notes[i]; i++) {
 			flickcurl_note note = notes[i];
-			.fprintf((_iob[1]), "%d) id %d note: author ID %s name %s  x %d y %d w %d h %d text '%s'\n", i, generatedId, generatedAuthor, (generatedAuthorname ? generatedAuthorname : "(Unknown)"), generatedX, generatedY, generatedW, generatedH, generatedText);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%d) id %d note: author ID %s name %s  x %d y %d w %d h %d text '%s'\n", i, generatedId, generatedAuthor, (generatedAuthorname ? generatedAuthorname : "(Unknown)"), generatedX, generatedY, generatedW, generatedH, generatedText);
 		}
 	}
 	/* -*- Mode: c; c-basic-offset: 2 -*-
@@ -74,40 +74,40 @@ public class flickcurl_note_s {
 	public void flickcurl_free_note() {
 		do {
 			if (!note) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_note is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\note.c", 46, __func__);
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_note is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\note.c", 46, __func__);
+				return /*Error: Unsupported expression*/;
 			} 
 		} while (0);
 		Byte generatedAuthor = this.getAuthor();
 		if (generatedAuthor) {
-			.free(generatedAuthor);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAuthor);
 		} 
 		Byte generatedAuthorname = this.getAuthorname();
 		if (generatedAuthorname) {
-			.free(generatedAuthorname);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAuthorname);
 		} 
 		Byte generatedText = this.getText();
 		if (generatedText) {
-			.free(generatedText);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedText);
 		} 
-		.free(note);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(note);
 	}
-	public flickcurl_note_s flickcurl_build_notes(flickcurl_s fc, flickcurl_photo_s photo, Object xpathCtx, Object xpathExpr, int note_count_p) {
+	public flickcurl_note_s flickcurl_build_notes(flickcurl_s fc, flickcurl_photo_s photo, Object xpathCtx, Object xpathExpr, Integer note_count_p) {
 		flickcurl_note notes = ((Object)0);
 		int nodes_count;
 		int note_count;
 		int i;
 		 xpathObj = ((Object)0);
 		 nodes = new ();
-		xpathObj = .xmlXPathEvalExpression(xpathExpr, /* Now do notes */xpathCtx);
+		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, /* Now do notes */xpathCtx);
 		if (!xpathObj) {
 			fc.flickcurl_error("Unable to evaluate XPath expression \"%s\"", xpathExpr);
 			fc.setFailed(1);
 			;
 		} 
 		nodes = xpathObj.getNodesetval();
-		nodes_count = .xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
-		notes = (flickcurl_note).calloc(, nodes_count + 1);
+		nodes_count = /*Error: Function owner not recognized*/xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
+		notes = (flickcurl_note)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, nodes_count + 1);
 		Byte generatedText = n.getText();
 		for (; i < nodes_count; i++) {
 			 node = nodes.getNodeTab()[i];
@@ -119,41 +119,41 @@ public class flickcurl_note_s {
 				fc.setFailed(1);
 				break;
 			} 
-			n = (flickcurl_note).calloc(, 1);
+			n = (flickcurl_note)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 			for (attr = node.getProperties(); attr; attr = attr.getNext()) {
-				size_t attr_len = .strlen((byte)attr.getChildren().getContent());
+				size_t attr_len = /*Error: Function owner not recognized*/strlen((byte)attr.getChildren().getContent());
 				byte attr_name = (byte)attr.getName();
 				byte attr_value;
-				attr_value = (byte).malloc(attr_len + 1);
-				.memcpy(attr_value, attr.getChildren().getContent(), attr_len + 1);
-				if (!.strcmp(attr_name, "id")) {
-					n.setId(.atoi(attr_value));
-					.free(attr_value);
-				}  else if (!.strcmp(attr_name, "author")) {
+				attr_value = (byte)/*Error: Function owner not recognized*/malloc(attr_len + 1);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(attr_value, attr.getChildren().getContent(), attr_len + 1);
+				if (!/*Error: Function owner not recognized*/strcmp(attr_name, "id")) {
+					n.setId(/*Error: Function owner not recognized*/atoi(attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "author")) {
 					n.setAuthor(attr_value);
-				}  else if (!.strcmp(attr_name, "authorname")) {
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "authorname")) {
 					n.setAuthorname(attr_value);
-				}  else if (!.strcmp(attr_name, "x")) {
-					n.setX(.atoi(attr_value));
-					.free(attr_value);
-				}  else if (!.strcmp(attr_name, "y")) {
-					n.setY(.atoi(attr_value));
-					.free(attr_value);
-				}  else if (!.strcmp(attr_name, "w")) {
-					n.setW(.atoi(attr_value));
-					.free(attr_value);
-				}  else if (!.strcmp(attr_name, "h")) {
-					n.setH(.atoi(attr_value));
-					.free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "x")) {
+					n.setX(/*Error: Function owner not recognized*/atoi(attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "y")) {
+					n.setY(/*Error: Function owner not recognized*/atoi(attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "w")) {
+					n.setW(/*Error: Function owner not recognized*/atoi(attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
+				}  else if (!/*Error: Function owner not recognized*/strcmp(attr_name, "h")) {
+					n.setH(/*Error: Function owner not recognized*/atoi(attr_value));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
 				} else {
-						.free(attr_value);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(attr_value);
 				} 
 			}
 			for (chnode = node.getChildren(); chnode; chnode = chnode.getNext()) {
 				if (chnode.getType() == XML_TEXT_NODE) {
-					size_t len = .strlen((byte)chnode.getContent());
-					n.setText((byte).malloc(len + 1));
-					.memcpy(generatedText, chnode.getContent(), len + 1);
+					size_t len = /*Error: Function owner not recognized*/strlen((byte)chnode.getContent());
+					n.setText((byte)/*Error: Function owner not recognized*/malloc(len + 1));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedText, chnode.getContent(), len + 1);
 				} 
 			}
 			notes[note_count++] = n/* for nodes */;

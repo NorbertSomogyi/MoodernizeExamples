@@ -15,16 +15,16 @@ public class ident_filter {
 	public ident_filter() {
 	}
 	
-	public void ident_drain(byte output_p, Object osize_p) {
+	public void ident_drain(Byte output_p, Object osize_p) {
 		strbuf generatedLeft = this.getLeft();
 		Object generatedLen = generatedLeft.getLen();
 		size_t to_drain = generatedLen;
 		if (osize_p < to_drain) {
 			to_drain = osize_p;
 		} 
-		byte generatedBuf = generatedLeft.getBuf();
+		byte[] generatedBuf = generatedLeft.getBuf();
 		if (to_drain) {
-			.memcpy(output_p, generatedBuf, to_drain);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(output_p, generatedBuf, to_drain);
 			generatedLeft.strbuf_remove(0, to_drain);
 			output_p += to_drain;
 			osize_p -= to_drain;

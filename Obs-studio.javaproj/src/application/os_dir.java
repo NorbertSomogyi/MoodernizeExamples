@@ -23,12 +23,12 @@ public class os_dir {
 		wchar_t w_path = new wchar_t();
 		path_str.dstr_copy(path);
 		path_str.dstr_cat("/*.*");
-		byte generatedArray = path_str.getArray();
+		byte[] generatedArray = path_str.getArray();
 		Object generatedLen = path_str.getLen();
 		if (ModernizedCProgram.os_utf8_to_wcs_ptr(generatedArray, generatedLen, w_path) > 0) {
-			handle = .FindFirstFileW(w_path, wfd);
+			handle = /*Error: Function owner not recognized*/FindFirstFileW(w_path, wfd);
 			if (handle != (HANDLE)(true)) {
-				dir = ModernizedCProgram.bzalloc();
+				dir = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 				dir.setHandle(handle);
 				dir.setFirst(1);
 				dir.setWfd(wfd);
@@ -39,11 +39,11 @@ public class os_dir {
 		return dir;
 		os_dir dir = new os_dir();
 		DIR dir_val = new DIR();
-		dir_val = .opendir(path);
+		dir_val = /*Error: Function owner not recognized*/opendir(path);
 		if (!dir_val) {
 			return ((Object)0);
 		} 
-		dir = ModernizedCProgram.bzalloc();
+		dir = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		dir.setDir(dir_val);
 		dir.setPath(path);
 		return dir;
@@ -51,12 +51,12 @@ public class os_dir {
 	public void os_closedir() {
 		Object generatedHandle = this.getHandle();
 		if (dir) {
-			.FindClose(generatedHandle);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FindClose(generatedHandle);
 			ModernizedCProgram.bfree(dir);
 		} 
 		Object generatedDir = this.getDir();
 		if (dir) {
-			.closedir(generatedDir);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/closedir(generatedDir);
 			ModernizedCProgram.bfree(dir);
 		} 
 	}

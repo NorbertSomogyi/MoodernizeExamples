@@ -21,8 +21,8 @@ public class rev_note {
 			if (ModernizedCProgram.starts_with(msg, key)) {
 				long i;
 				byte end;
-				value = msg + .strlen(key);
-				i = .strtol(value, end, 0);
+				value = msg + /*Error: Function owner not recognized*/strlen(key);
+				i = /*Error: Function owner not recognized*/strtol(value, end, 0);
 				if (end == value || i < 0 || i > -1024) {
 					return -1;
 				} 

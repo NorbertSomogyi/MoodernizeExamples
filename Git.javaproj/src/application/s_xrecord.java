@@ -2,11 +2,11 @@ package application;
 
 public class s_xrecord {
 	private s_xrecord next;
-	private Object ptr;
+	private Object[] ptr;
 	private long size;
 	private long ha;
 	
-	public s_xrecord(s_xrecord next, Object ptr, long size, long ha) {
+	public s_xrecord(s_xrecord next, Object[] ptr, long size, long ha) {
 		setNext(next);
 		setPtr(ptr);
 		setSize(size);
@@ -15,9 +15,15 @@ public class s_xrecord {
 	public s_xrecord() {
 	}
 	
+	public int cmp_recs(Object xpp, s_xrecord r2) {
+		long generatedHa = this.getHa();
+		Object[] generatedPtr = this.getPtr();
+		long generatedSize = this.getSize();
+		return generatedHa == generatedHa && ModernizedCProgram.xdl_recmatch(generatedPtr, generatedSize, generatedPtr, generatedSize, xpp.getFlags());
+	}
 	public int recs_match(s_xrecord rec2, long flags) {
 		long generatedHa = this.getHa();
-		Object generatedPtr = this.getPtr();
+		Object[] generatedPtr = this.getPtr();
 		long generatedSize = this.getSize();
 		return (generatedHa == generatedHa && ModernizedCProgram.xdl_recmatch(generatedPtr, generatedSize, generatedPtr, generatedSize, flags/*
 		 * If a line is indented more than this, get_indent() just returns this value.
@@ -35,7 +41,7 @@ public class s_xrecord {
 		long i;
 		int ret = 0;
 		long generatedSize = this.getSize();
-		Object generatedPtr = this.getPtr();
+		Object[] generatedPtr = this.getPtr();
 		for (i = 0; i < generatedSize; i++) {
 			byte c = generatedPtr[i];
 			if (!(((ModernizedCProgram.sane_ctype[(byte)((byte)(c))] & (true)) != 0))) {
@@ -55,22 +61,16 @@ public class s_xrecord {
 		 * also ensures that the output of score_split fits in an int.
 		 */;
 	}
-	public int cmp_recs(Object xpp, s_xrecord r2) {
-		long generatedHa = this.getHa();
-		Object generatedPtr = this.getPtr();
-		long generatedSize = this.getSize();
-		return generatedHa == generatedHa && ModernizedCProgram.xdl_recmatch(generatedPtr, generatedSize, generatedPtr, generatedSize, xpp.getFlags());
-	}
 	public s_xrecord getNext() {
 		return next;
 	}
 	public void setNext(s_xrecord newNext) {
 		next = newNext;
 	}
-	public Object getPtr() {
+	public Object[] getPtr() {
 		return ptr;
 	}
-	public void setPtr(Object newPtr) {
+	public void setPtr(Object[] newPtr) {
 		ptr = newPtr;
 	}
 	public long getSize() {

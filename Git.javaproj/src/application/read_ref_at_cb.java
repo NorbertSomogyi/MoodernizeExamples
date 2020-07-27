@@ -11,12 +11,12 @@ public class read_ref_at_cb {
 	private object_id noid;
 	private int tz;
 	private Object date;
-	private byte msg;
+	private Byte msg;
 	private Object cutoff_time;
-	private int cutoff_tz;
-	private int cutoff_cnt;
+	private Integer cutoff_tz;
+	private Integer cutoff_cnt;
 	
-	public read_ref_at_cb(Object refname, Object at_time, int cnt, int reccnt, object_id oid, int found_it, object_id ooid, object_id noid, int tz, Object date, byte msg, Object cutoff_time, int cutoff_tz, int cutoff_cnt) {
+	public read_ref_at_cb(Object refname, Object at_time, int cnt, int reccnt, object_id oid, int found_it, object_id ooid, object_id noid, int tz, Object date, Byte msg, Object cutoff_time, Integer cutoff_tz, Integer cutoff_cnt) {
 		setRefname(refname);
 		setAt_time(at_time);
 		setCnt(cnt);
@@ -95,10 +95,10 @@ public class read_ref_at_cb {
 	public void setDate(Object newDate) {
 		date = newDate;
 	}
-	public byte getMsg() {
+	public Byte getMsg() {
 		return msg;
 	}
-	public void setMsg(byte newMsg) {
+	public void setMsg(Byte newMsg) {
 		msg = newMsg;
 	}
 	public Object getCutoff_time() {
@@ -107,16 +107,16 @@ public class read_ref_at_cb {
 	public void setCutoff_time(Object newCutoff_time) {
 		cutoff_time = newCutoff_time;
 	}
-	public int getCutoff_tz() {
+	public Integer getCutoff_tz() {
 		return cutoff_tz;
 	}
-	public void setCutoff_tz(int newCutoff_tz) {
+	public void setCutoff_tz(Integer newCutoff_tz) {
 		cutoff_tz = newCutoff_tz;
 	}
-	public int getCutoff_cnt() {
+	public Integer getCutoff_cnt() {
 		return cutoff_cnt;
 	}
-	public void setCutoff_cnt(int newCutoff_cnt) {
+	public void setCutoff_cnt(Integer newCutoff_cnt) {
 		cutoff_cnt = newCutoff_cnt;
 	}
 }

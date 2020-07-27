@@ -58,7 +58,7 @@ public class proptype_S {
 		// a binary search.// a binary search.todo = (long)generatedHt_used;
 		Object generatedHi_key = (hi).getHi_key();
 		int generatedPt_id = prop.getPt_id();
-		hashitem_S generatedHt_array = ht.getHt_array();
+		hashitem_S[] generatedHt_array = ht.getHt_array();
 		for (hi = generatedHt_array; todo > 0; ++hi) {
 			if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
 				proptype_T prop = ((proptype_T)((generatedHi_key) - ((size_t)((proptype_T)0).getPt_name())));

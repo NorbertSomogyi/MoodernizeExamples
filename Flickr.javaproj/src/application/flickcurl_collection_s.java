@@ -10,14 +10,14 @@ public class flickcurl_collection_s {
 	private Byte secret;
 	private Byte title;
 	private Byte description;
-	private flickcurl_photo_s photos;
+	private flickcurl_photo_s[][] photos;
 	private int photos_count;
-	private flickcurl_collection_s collections;
+	private flickcurl_collection_s[][] collections;
 	private int collections_count;
 	private flickcurl_photoset_s sets;
 	private int sets_count;
 	
-	public flickcurl_collection_s(Byte id, int child_count, int date_created, Byte iconlarge, Byte iconsmall, int server, Byte secret, Byte title, Byte description, flickcurl_photo_s photos, int photos_count, flickcurl_collection_s collections, int collections_count, flickcurl_photoset_s sets, int sets_count) {
+	public flickcurl_collection_s(Byte id, int child_count, int date_created, Byte iconlarge, Byte iconsmall, int server, Byte secret, Byte title, Byte description, flickcurl_photo_s[][] photos, int photos_count, flickcurl_collection_s[][] collections, int collections_count, flickcurl_photoset_s sets, int sets_count) {
 		setId(id);
 		setChild_count(child_count);
 		setDate_created(date_created);
@@ -85,7 +85,7 @@ public class flickcurl_collection_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -132,7 +132,7 @@ public class flickcurl_collection_s {
 		if (!doc) {
 			;
 		} 
-		xpathCtx = .xmlXPathNewContext(doc);
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
 		if (!xpathCtx) {
 			fc.flickcurl_error("Failed to create XPath context for document");
 			fc.setFailed(1);
@@ -177,48 +177,48 @@ public class flickcurl_collection_s {
 	public void flickcurl_free_collection() {
 		do {
 			if (!collection) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_collection is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\collection.c", 46, __func__);
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_collection is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\collection.c", 46, __func__);
+				return /*Error: Unsupported expression*/;
 			} 
 		} while (0);
-		flickcurl_collection_s generatedCollections = this.getCollections();
+		flickcurl_collection_s[][] generatedCollections = this.getCollections();
 		if (generatedCollections) {
 			int i;
 			for (i = 0; generatedCollections[i]; i++) {
 				generatedCollections[i].flickcurl_free_collection();
 			}
 		} 
-		flickcurl_photo_s generatedPhotos = this.getPhotos();
+		flickcurl_photo_s[][] generatedPhotos = this.getPhotos();
 		if (generatedPhotos) {
 			generatedPhotos.flickcurl_free_photos();
 		} 
 		Byte generatedDescription = this.getDescription();
 		if (generatedDescription) {
-			.free(generatedDescription);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedDescription);
 		} 
 		Byte generatedTitle = this.getTitle();
 		if (generatedTitle) {
-			.free(generatedTitle);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedTitle);
 		} 
 		Byte generatedSecret = this.getSecret();
 		if (generatedSecret) {
-			.free(generatedSecret);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedSecret);
 		} 
 		Byte generatedIconsmall = this.getIconsmall();
 		if (generatedIconsmall) {
-			.free(generatedIconsmall);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedIconsmall);
 		} 
 		Byte generatedIconlarge = this.getIconlarge();
 		if (generatedIconlarge) {
-			.free(generatedIconlarge);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedIconlarge);
 		} 
 		Byte generatedId = this.getId();
 		if (generatedId) {
-			.free(generatedId);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedId);
 		} 
-		.free(collection);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(collection);
 	}
-	public flickcurl_collection_s flickcurl_build_collections(flickcurl_s fc, Object xpathCtx, Object xpathExpr, int collection_count_p) {
+	public flickcurl_collection_s flickcurl_build_collections(flickcurl_s fc, Object xpathCtx, Object xpathExpr, Integer collection_count_p) {
 		flickcurl_collection collections = ((Object)0);
 		int nodes_count;
 		int collection_count;
@@ -227,17 +227,17 @@ public class flickcurl_collection_s {
 		[] full_xpath = new ();
 		size_t xpathExpr_len = new size_t();
 		int i;
-		xpathExpr_len = .strlen((byte)xpathExpr);
-		.memcpy(full_xpath, xpathExpr, xpathExpr_len + 1);
-		xpathObj = .xmlXPathEvalExpression(xpathExpr, xpathCtx);
+		xpathExpr_len = /*Error: Function owner not recognized*/strlen((byte)xpathExpr);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(full_xpath, xpathExpr, xpathExpr_len + 1);
+		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, xpathCtx);
 		if (!xpathObj) {
 			fc.flickcurl_error("Unable to evaluate XPath expression \"%s\"", xpathExpr);
 			fc.setFailed(1);
 			;
 		} 
 		nodes = xpathObj.getNodesetval();
-		nodes_count = .xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
-		collections = (flickcurl_collection).calloc(, nodes_count + 1);
+		nodes_count = /*Error: Function owner not recognized*/xmlXPathNodeSetGetLength(/* This is a max size - it can include nodes that are CDATA */nodes);
+		collections = (flickcurl_collection)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, nodes_count + 1);
 		int generatedPhotos_count = collection.getPhotos_count();
 		flickcurl_photo_s flickcurl_photo_s = new flickcurl_photo_s();
 		int generatedFailed = fc.getFailed();
@@ -251,8 +251,8 @@ public class flickcurl_collection_s {
 				fc.setFailed(1);
 				break;
 			} 
-			collection = (flickcurl_collection).calloc(, 1);
-			xpathNodeCtx = .xmlXPathNewContext(xpathCtx.getDoc());
+			collection = (flickcurl_collection)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
+			xpathNodeCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(xpathCtx.getDoc());
 			xpathNodeCtx.setNode(node);
 			for (expri = 0; collection_fields_table[expri].getXpath(); expri++) {
 				flickcurl_collection_field_type field = collection_fields_table[expri].getField();
@@ -270,12 +270,29 @@ public class flickcurl_collection_s {
 					continue;
 				} 
 				switch (datatype) {
+				case .VALUE_TYPE_URI:
+						break;
+				case .VALUE_TYPE_TAG_STRING:
+				case .VALUE_TYPE_PERSON_ID:
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
+				case .VALUE_TYPE_STRING:
 				case .VALUE_TYPE_UNIXTIME:
+				case /* This case is handled above */.VALUE_TYPE_ICON_PHOTOS:
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
+				case .VALUE_TYPE_NONE:
+				case .VALUE_TYPE_PHOTO_ID:
+				case .VALUE_TYPE_BOOLEAN:
+						int_value = /*Error: Function owner not recognized*/atoi(string_value);
+						break;
+				case .VALUE_TYPE_COLLECTION_ID:
+				case .VALUE_TYPE_FLOAT:
+				case .VALUE_TYPE_INTEGER:
+				case .VALUE_TYPE_MEDIA_TYPE:
 				case .VALUE_TYPE_DATETIME:
 						if (datatype == .VALUE_TYPE_UNIXTIME) {
-							unix_time = .atoi(string_value);
+							unix_time = /*Error: Function owner not recognized*/atoi(string_value);
 						} else {
-								unix_time = .curl_getdate((byte)string_value, ((Object)0));
+								unix_time = /*Error: Function owner not recognized*/curl_getdate((byte)string_value, ((Object)0));
 						} 
 						if (unix_time >= 0) {
 							int_value = (int)unix_time;
@@ -283,35 +300,15 @@ public class flickcurl_collection_s {
 								int_value = -/* else failed to convert */1;
 						} 
 						break;
-				case .VALUE_TYPE_PHOTO_ID:
-				case .VALUE_TYPE_COLLECTION_ID:
-				case .VALUE_TYPE_NONE:
-				case .VALUE_TYPE_INTEGER:
-				case /* This case is handled above */.VALUE_TYPE_ICON_PHOTOS:
-						.abort();
-				case .VALUE_TYPE_BOOLEAN:
-						int_value = .atoi(string_value);
-						break;
-				case .VALUE_TYPE_PERSON_ID:
-						.abort();
 				case .VALUE_TYPE_PHOTO_URI:
-				case .VALUE_TYPE_URI:
-						break;
-				case .VALUE_TYPE_MEDIA_TYPE:
-				case .VALUE_TYPE_FLOAT:
-				case .VALUE_TYPE_TAG_STRING:
-				case .VALUE_TYPE_STRING:
 				}
 				switch (field) {
-				case .COLLECTION_FIELD_date_created:
-						collection.setDate_created(int_value);
+				case .COLLECTION_FIELD_child_count:
+						collection.setChild_count(int_value);
 						break;
-				case .COLLECTION_FIELD_iconlarge:
-						collection.setIconlarge(string_value);
+				case .COLLECTION_FIELD_secret:
+						collection.setSecret(string_value);
 						string_value = ((Object)0);
-						break;
-				case .COLLECTION_FIELD_server:
-						collection.setServer(int_value);
 						break;
 				case .COLLECTION_FIELD_iconsmall:
 						collection.setIconsmall(string_value);
@@ -325,23 +322,26 @@ public class flickcurl_collection_s {
 						collection.setId(string_value);
 						string_value = ((Object)0);
 						break;
-				case .COLLECTION_FIELD_iconphotos:
-						.fprintf((_iob[2]), "Do not know how to handle iconphotos field yet\n");
-						break;
-				case .COLLECTION_FIELD_secret:
-						collection.setSecret(string_value);
+				case .COLLECTION_FIELD_iconlarge:
+						collection.setIconlarge(string_value);
 						string_value = ((Object)0);
 						break;
-				case .COLLECTION_FIELD_child_count:
-						collection.setChild_count(int_value);
+				case .COLLECTION_FIELD_iconphotos:
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Do not know how to handle iconphotos field yet\n");
+						break;
+				case .COLLECTION_FIELD_date_created:
+						collection.setDate_created(int_value);
 						break;
 				case .COLLECTION_FIELD_description:
 						collection.setDescription(string_value);
 						string_value = ((Object)0);
 						break;
+				case .COLLECTION_FIELD_server:
+						collection.setServer(int_value);
+						break;
 				}
 				if (string_value) {
-					.free(string_value);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(string_value);
 				} 
 				if (generatedFailed) {
 					if (collection) {
@@ -370,7 +370,7 @@ public class flickcurl_collection_s {
 		collections = flickcurl_collection_s.flickcurl_build_collections(fc, xpathCtx, root_xpathExpr, ((Object)0));
 		if (collections) {
 			result = collections[0];
-			.free(collections);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(collections);
 		} 
 		return result/**
 		 * flickcurl_free_collections:
@@ -383,14 +383,14 @@ public class flickcurl_collection_s {
 		int i;
 		do {
 			if (!collections) {
-				.fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_collection_array is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\collection.c", 393, __func__);
-				return ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: (%s) assertion failed: object pointer of type flickcurl_collection_array is NULL.\n", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Flickr\\src\\collection.c", 393, __func__);
+				return /*Error: Unsupported expression*/;
 			} 
 		} while (0);
 		for (i = 0; collections[i]; i++) {
 			collections[i].flickcurl_free_collection();
 		}
-		.free(collections);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(collections);
 	}
 	public void command_print_collection() {
 		Byte generatedId = this.getId();
@@ -400,20 +400,20 @@ public class flickcurl_collection_s {
 		Byte generatedDescription = this.getDescription();
 		Byte generatedIconlarge = this.getIconlarge();
 		Byte generatedIconsmall = this.getIconsmall();
-		.fprintf((_iob[1]), "Collection id %s  secret %s  server %d\n  Title %s\n  Description %s\n  Large icon %s\n  Small Icon %s\n", generatedId, generatedSecret, generatedServer, generatedTitle, (generatedDescription ? generatedDescription : "(None)"), generatedIconlarge, generatedIconsmall);
-		flickcurl_photo_s generatedPhotos = this.getPhotos();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "Collection id %s  secret %s  server %d\n  Title %s\n  Description %s\n  Large icon %s\n  Small Icon %s\n", generatedId, generatedSecret, generatedServer, generatedTitle, (generatedDescription ? generatedDescription : "(None)"), generatedIconlarge, generatedIconsmall);
+		flickcurl_photo_s[][] generatedPhotos = this.getPhotos();
 		if (generatedPhotos) {
 			int i;
 			for (i = 0; generatedPhotos[i]; i++) {
-				.fprintf((_iob[1]), "  icon photo %d) ", i);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "  icon photo %d) ", i);
 				generatedPhotos[i].command_print_photo();
 			}
 		} 
-		flickcurl_collection_s generatedCollections = this.getCollections();
+		flickcurl_collection_s[][] generatedCollections = this.getCollections();
 		if (generatedCollections) {
 			int i;
 			for (i = 0; generatedCollections[i]; i++) {
-				.fprintf((_iob[1]), "  Sub-Collection %d)", i);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "  Sub-Collection %d)", i);
 				generatedCollections[i].command_print_collection();
 			}
 		} 
@@ -472,10 +472,10 @@ public class flickcurl_collection_s {
 	public void setDescription(Byte newDescription) {
 		description = newDescription;
 	}
-	public flickcurl_photo_s getPhotos() {
+	public flickcurl_photo_s[][] getPhotos() {
 		return photos;
 	}
-	public void setPhotos(flickcurl_photo_s newPhotos) {
+	public void setPhotos(flickcurl_photo_s[][] newPhotos) {
 		photos = newPhotos;
 	}
 	public int getPhotos_count() {
@@ -484,10 +484,10 @@ public class flickcurl_collection_s {
 	public void setPhotos_count(int newPhotos_count) {
 		photos_count = newPhotos_count;
 	}
-	public flickcurl_collection_s getCollections() {
+	public flickcurl_collection_s[][] getCollections() {
 		return collections;
 	}
-	public void setCollections(flickcurl_collection_s newCollections) {
+	public void setCollections(flickcurl_collection_s[][] newCollections) {
 		collections = newCollections;
 	}
 	public int getCollections_count() {

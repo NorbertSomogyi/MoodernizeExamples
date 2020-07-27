@@ -26,23 +26,23 @@ public class log_context {
 		 cnt = ModernizedCProgram.cached_log_contexts.getNum();
 		if (!!cnt) {
 			new_log_context = ModernizedCProgram.cached_log_contexts.getArray()[cnt - 1];
-			.da_pop_back(ModernizedCProgram.cached_log_contexts);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_pop_back(ModernizedCProgram.cached_log_contexts);
 		} 
 		if (!new_log_context) {
-			new_log_context = ModernizedCProgram.bzalloc();
+			new_log_context = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		} 
 		new_log_context.setLog_context(context);
 		Object generatedLog_context = new_log_context.getLog_context();
 		generatedLog_context[0] = (byte)'\0';
 		new_log_context.setLog_context(1);
-		.da_push_back(ModernizedCProgram.active_log_contexts, new_log_context);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(ModernizedCProgram.active_log_contexts, new_log_context);
 		ModernizedCProgram.pthread_mutex_unlock(ModernizedCProgram.log_contexts_mutex);
 		return new_log_context;
 	}
 	public void destroy_log_context() {
 		ModernizedCProgram.pthread_mutex_lock(ModernizedCProgram.log_contexts_mutex);
-		.da_erase_item(ModernizedCProgram.active_log_contexts, log_context);
-		.da_push_back(ModernizedCProgram.cached_log_contexts, log_context);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase_item(ModernizedCProgram.active_log_contexts, log_context);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(ModernizedCProgram.cached_log_contexts, log_context);
 		ModernizedCProgram.pthread_mutex_unlock(ModernizedCProgram.log_contexts_mutex);
 	}
 	public Object getContext() {

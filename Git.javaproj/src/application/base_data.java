@@ -26,7 +26,7 @@ public class base_data {
 	}
 	
 	public base_data alloc_base_data() {
-		base_data base = ModernizedCProgram.xcalloc(1, );
+		base_data base = ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/);
 		base.setRef_last(-1);
 		base.setOfs_last(-1);
 		return base;
@@ -87,9 +87,9 @@ public class base_data {
 	public Object get_base_data() {
 		Object generatedData = this.getData();
 		object_entry generatedObj = this.getObj();
-		Object generatedType = generatedObj.getType();
+		byte generatedType = generatedObj.getType();
 		base_data generatedBase = this.getBase();
-		Object generatedSize = obj.getSize();
+		long generatedSize = obj.getSize();
 		thread_local thread_local = new thread_local();
 		pack_idx_entry generatedIdx = obj.getIdx();
 		Object generatedOffset = generatedIdx.getOffset();
@@ -106,7 +106,7 @@ public class base_data {
 						} else {
 								delta_alloc = (((delta_alloc) + 16) * 3 / 2);
 						} 
-						(delta) = ModernizedCProgram.xrealloc((delta), ModernizedCProgram.st_mult(, (delta_alloc)));
+						(delta) = ModernizedCProgram.xrealloc((delta), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (delta_alloc)));
 					} 
 				} while (0);
 				delta[delta_nr++] = c;
@@ -157,7 +157,7 @@ public class base_data {
 			prev_base.link_base_data(base);
 		} 
 		base_data base_data = new base_data();
-		Object generatedReal_type = child.getReal_type();
+		byte generatedReal_type = child.getReal_type();
 		if (generatedRef_first <= generatedRef_last) {
 			object_entry child = ModernizedCProgram.objects + ModernizedCProgram.ref_deltas[generatedRef_first].getObj_no();
 			base_data result = base_data.alloc_base_data();
@@ -174,7 +174,7 @@ public class base_data {
 		if (generatedOfs_first <= generatedOfs_last) {
 			object_entry child = ModernizedCProgram.objects + ModernizedCProgram.ofs_deltas[generatedOfs_first].getObj_no();
 			base_data result = base_data.alloc_base_data();
-			((generatedReal_type == object_type.OBJ_OFS_DELTA) ? (Object)0 : ._assert("child->real_type == OBJ_OFS_DELTA", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\index-pack.c", 1020));
+			((generatedReal_type == object_type.OBJ_OFS_DELTA) ? (Object)0 : /*Error: Function owner not recognized*/_assert("child->real_type == OBJ_OFS_DELTA", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\index-pack.c", 1020));
 			child.setReal_type(generatedReal_type);
 			ModernizedCProgram.resolve_delta(child, base, result);
 			if (generatedOfs_first == generatedOfs_last) {
@@ -190,7 +190,7 @@ public class base_data {
 		base_data new_base = new base_data();
 		base_data prev_base = ((Object)0);
 		base_data generatedBase = this.getBase();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			new_base = base.find_unresolved_deltas_1(prev_base);
 			if (new_base) {
 				prev_base = base;
@@ -199,7 +199,7 @@ public class base_data {
 					ModernizedCProgram.free(base);
 					base = prev_base;
 					if (!base) {
-						return ;
+						return /*Error: Unsupported expression*/;
 					} 
 					prev_base = generatedBase;
 			} 

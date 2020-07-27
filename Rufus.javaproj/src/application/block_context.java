@@ -52,7 +52,7 @@ public class block_context {
 		Object generatedPriv_data = this.getPriv_data();
 		if (!(generatedFlags & 2) && !(generatedFlags & 4)) {
 			blk64 = ind_block;
-			ret = .UNRECOGNIZEDFUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
+			ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
 			ind_block = blk64;
 		} 
 		do {
@@ -96,7 +96,7 @@ public class block_context {
 		} 
 		if ((generatedFlags & 2) && !(generatedFlags & 4) && !(ret & 2)) {
 			blk64 = ind_block;
-			ret |=  .UNRECOGNIZEDFUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
+			ret |=  /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
 			ind_block = blk64;
 		} 
 		do {
@@ -123,7 +123,7 @@ public class block_context {
 		Object generatedPriv_data = this.getPriv_data();
 		if (!(generatedFlags & (2 | 4))) {
 			blk64 = dind_block;
-			ret = .UNRECOGNIZEDFUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
+			ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
 			dind_block = blk64;
 		} 
 		do {
@@ -160,7 +160,7 @@ public class block_context {
 					ret |=  flags & (2 | 4);
 					break;
 				} 
-				offset += ;
+				offset += /*Error: Unsupported expression*/;
 			}
 		} else {
 				for (i = 0; i < limit; ) {
@@ -174,7 +174,7 @@ public class block_context {
 						ret |=  flags & (2 | 4);
 						break;
 					} 
-					offset += ;
+					offset += /*Error: Unsupported expression*/;
 				}
 		} 
 		do {
@@ -192,7 +192,7 @@ public class block_context {
 		} 
 		if ((generatedFlags & 2) && !(generatedFlags & 4) && !(ret & 2)) {
 			blk64 = dind_block;
-			ret |=  .UNRECOGNIZEDFUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
+			ret |=  /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
 			dind_block = blk64;
 		} 
 		do {
@@ -219,7 +219,7 @@ public class block_context {
 		Object generatedPriv_data = this.getPriv_data();
 		if (!(generatedFlags & (2 | 4))) {
 			blk64 = tind_block;
-			ret = .UNRECOGNIZEDFUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
+			ret = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
 			tind_block = blk64;
 		} 
 		do {
@@ -256,7 +256,7 @@ public class block_context {
 					ret |=  flags & (2 | 4);
 					break;
 				} 
-				offset += ;
+				offset += /*Error: Unsupported expression*/;
 			}
 		} else {
 				for (i = 0; i < limit; ) {
@@ -270,7 +270,7 @@ public class block_context {
 						ret |=  flags & (2 | 4);
 						break;
 					} 
-					offset += ;
+					offset += /*Error: Unsupported expression*/;
 				}
 		} 
 		do {
@@ -288,7 +288,7 @@ public class block_context {
 		} 
 		if ((generatedFlags & 2) && !(generatedFlags & 4) && !(ret & 2)) {
 			blk64 = tind_block;
-			ret |=  .UNRECOGNIZEDFUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
+			ret |=  /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedFs, blk64, (true), ref_block, ref_offset, generatedPriv_data);
 			tind_block = blk64;
 		} 
 		do {

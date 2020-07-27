@@ -85,7 +85,7 @@ public class obs_scene_item {
 	public void signal_item_remove() {
 		calldata params = new calldata();
 		[] stack = new ();
-		params.calldata_init_fixed(stack, );
+		params.calldata_init_fixed(stack, /*Error: sizeof expression not supported yet*/);
 		params.calldata_set_ptr("item", item);
 		obs_scene generatedParent = this.getParent();
 		generatedParent.signal_parent("item_remove", params);
@@ -122,7 +122,7 @@ public class obs_scene_item {
 		[] stack = new ();
 		Object generatedDefer_update = this.getDefer_update();
 		if (ModernizedCProgram.os_atomic_load_long(generatedDefer_update) > 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_source generatedSource = this.getSource();
 		width = generatedSource.obs_source_get_width();
@@ -142,8 +142,8 @@ public class obs_scene_item {
 		if (generatedBounds_type != /* ----------------------- */obs_bounds_type.OBS_BOUNDS_NONE) {
 			ModernizedCProgram.calculate_bounds_data(item, origin, scale, cx, cy);
 		} else {
-				cx = .UNRECOGNIZEDFUNCTIONNAME((double)cx * generatedVec2);
-				cy = .UNRECOGNIZEDFUNCTIONNAME((double)cy * generatedVec2);
+				cx = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((double)cx * generatedVec2);
+				cy = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((double)cy * generatedVec2);
 		} 
 		Object generatedAlign = this.getAlign();
 		origin.add_alignment(generatedAlign, (int)cx, (int)cy);
@@ -152,7 +152,7 @@ public class obs_scene_item {
 		generatedDraw_transform.matrix4_scale3f(generatedDraw_transform, generatedVec2, generatedVec2, 1.0);
 		generatedDraw_transform.matrix4_translate3f(generatedDraw_transform, -generatedVec2, -generatedVec2, 0.0);
 		double generatedRot = this.getRot();
-		generatedDraw_transform.matrix4_rotate_aa4f(generatedDraw_transform, 0.0, 0.0, 1.0, .RAD(generatedRot));
+		generatedDraw_transform.matrix4_rotate_aa4f(generatedDraw_transform, 0.0, 0.0, 1.0, /*Error: Function owner not recognized*/RAD(generatedRot));
 		generatedDraw_transform.matrix4_translate3f(generatedDraw_transform, generatedVec2, generatedVec2, 0.0);
 		this.setOutput_scale(scale);
 		vec2 generatedBounds = this.getBounds();
@@ -168,14 +168,14 @@ public class obs_scene_item {
 		generatedBox_transform.matrix4_identity();
 		generatedBox_transform.matrix4_scale3f(generatedBox_transform, generatedVec2, generatedVec2, 1.0);
 		generatedBox_transform.matrix4_translate3f(generatedBox_transform, -generatedVec2, -generatedVec2, 0.0);
-		generatedBox_transform.matrix4_rotate_aa4f(generatedBox_transform, 0.0, 0.0, 1.0, .RAD(generatedRot));
+		generatedBox_transform.matrix4_rotate_aa4f(generatedBox_transform, 0.0, 0.0, 1.0, /*Error: Function owner not recognized*/RAD(generatedRot));
 		generatedBox_transform.matrix4_translate3f(generatedBox_transform, generatedVec2, generatedVec2, 0.0);
-		params.calldata_init_fixed(stack, );
+		params.calldata_init_fixed(stack, /*Error: sizeof expression not supported yet*/);
 		params.calldata_set_ptr("item", item);
 		obs_scene generatedParent = this.getParent();
 		generatedParent.signal_parent("item_transform", params);
 		if (!update_tex) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedItem_render = this.getItem_render();
 		gs_texture_render gs_texture_render = new gs_texture_render();
@@ -205,9 +205,9 @@ public class obs_scene_item {
 		gs_texture gs_texture = new gs_texture();
 		 tex = gs_texture.gs_texrender_get_texture(generatedItem_render);
 		if (!tex) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.GS_DEBUG_MARKER_BEGIN(GS_DEBUG_COLOR_ITEM_TEXTURE, "render_item_texture");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GS_DEBUG_MARKER_BEGIN(GS_DEBUG_COLOR_ITEM_TEXTURE, "render_item_texture");
 		 effect = ModernizedCProgram.obs.getVideo().getDefault_effect();
 		obs_scale_type generatedScale_filter = this.getScale_filter();
 		obs_scale_type type = generatedScale_filter;
@@ -254,11 +254,11 @@ public class obs_scene_item {
 			ModernizedCProgram.obs_source_draw(tex, 0, 0, 0, 0, 0);
 		}
 		ModernizedCProgram.gs_blend_state_pop();
-		.GS_DEBUG_MARKER_END();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GS_DEBUG_MARKER_END();
 	}
 	public void render_item() {
 		obs_source generatedSource = this.getSource();
-		.GS_DEBUG_MARKER_BEGIN_FORMAT(GS_DEBUG_COLOR_ITEM, "Item: %s", ModernizedCProgram.obs_source_get_name(generatedSource));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GS_DEBUG_MARKER_BEGIN_FORMAT(GS_DEBUG_COLOR_ITEM, "Item: %s", ModernizedCProgram.obs_source_get_name(generatedSource));
 		Object generatedItem_render = this.getItem_render();
 		obs_sceneitem_crop generatedCrop = this.getCrop();
 		int generatedLeft = generatedCrop.getLeft();
@@ -298,7 +298,7 @@ public class obs_scene_item {
 		Object generatedActions_mutex = this.getActions_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedActions_mutex);
 		Object generatedAudio_actions = this.getAudio_actions();
-		.da_resize(generatedAudio_actions, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_resize(generatedAudio_actions, 0);
 		Object generatedActive_refs = this.getActive_refs();
 		obs_scene generatedParent = this.getParent();
 		obs_source generatedSource = generatedParent.getSource();
@@ -314,7 +314,7 @@ public class obs_scene_item {
 		this.setUser_visible(vis);
 		ModernizedCProgram.pthread_mutex_unlock(generatedActions_mutex);
 	}
-	public void apply_scene_item_audio_actions(double p_buf, Object ts, Object sample_rate) {
+	public void apply_scene_item_audio_actions(Double p_buf, Object ts, Object sample_rate) {
 		Object generatedVisible = this.getVisible();
 		 cur_visible = generatedVisible;
 		 frame_num = 0;
@@ -322,7 +322,7 @@ public class obs_scene_item {
 		double buf = NULL;
 		if (p_buf) {
 			if (!p_buf) {
-				p_buf = .malloc(AUDIO_OUTPUT_FRAMES * );
+				p_buf = /*Error: Function owner not recognized*/malloc(AUDIO_OUTPUT_FRAMES * /*Error: Unsupported expression*/);
 			} 
 			buf = p_buf;
 		} 
@@ -342,7 +342,7 @@ public class obs_scene_item {
 			if (ts && new_frame_num >= AUDIO_OUTPUT_FRAMES) {
 				break;
 			} 
-			.da_erase(generatedAudio_actions, i--);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase(generatedAudio_actions, i--);
 			this.setVisible(generatedVisible);
 			if (!generatedVisible) {
 				deref_count++;
@@ -476,7 +476,7 @@ public class obs_scene_item {
 		Byte generatedName = generatedContext.getName();
 		obs_scene_item generatedNext = item.getNext();
 		while (item) {
-			if (.strcmp(generatedName, name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, name) == 0) {
 				break;
 			} 
 			item = generatedNext;
@@ -518,7 +518,7 @@ public class obs_scene_item {
 		obs_scene_item last = new obs_scene_item();
 		obs_scene_item item = new obs_scene_item();
 		 mutex = new ();
-		item_action action = new item_action(, );
+		item_action action = new item_action(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		if (!scene) {
 			return NULL;
 		} 
@@ -536,7 +536,7 @@ public class obs_scene_item {
 			ModernizedCProgram.pthread_mutex_destroy(mutex);
 			return NULL;
 		} 
-		item = ModernizedCProgram.bzalloc();
+		item = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		item.setSource(source);
 		Object generatedId_counter = scene.getId_counter();
 		item.setId(++generatedId_counter);
@@ -564,7 +564,7 @@ public class obs_scene_item {
 		Object generatedAudio_actions = item.getAudio_actions();
 		if (source.source_has_audio()) {
 			item.setVisible(false);
-			.da_push_back(generatedAudio_actions, action);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedAudio_actions, action);
 		} else {
 				item.setVisible(true);
 		} 
@@ -603,20 +603,20 @@ public class obs_scene_item {
 		if (!generatedPrivate) {
 			ModernizedCProgram.init_hotkeys(scene, item, ModernizedCProgram.obs_source_get_name(source));
 		} 
-		.signal_handler_connect(ModernizedCProgram.obs_source_get_signal_handler(source), "rename", sceneitem_renamed, item);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_connect(ModernizedCProgram.obs_source_get_signal_handler(source), "rename", sceneitem_renamed, item);
 		return item;
 	}
 	public obs_scene_item obs_scene_add(obs_scene scene, obs_source source) {
 		obs_sceneitem_t item = NULL.obs_scene_add_internal(scene, source);
 		calldata params = new calldata();
 		[] stack = new ();
-		params.calldata_init_fixed(stack, );
+		params.calldata_init_fixed(stack, /*Error: sizeof expression not supported yet*/);
 		params.calldata_set_ptr("scene", scene);
 		params.calldata_set_ptr("item", item);
 		obs_source generatedSource = scene.getSource();
 		obs_context_data generatedContext = generatedSource.getContext();
 		Object generatedSignals = generatedContext.getSignals();
-		.signal_handler_signal(generatedSignals, "item_add", params);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_signal(generatedSignals, "item_add", params);
 		return item;
 	}
 	public void obs_sceneitem_destroy() {
@@ -635,11 +635,11 @@ public class obs_scene_item {
 			generatedPrivate_settings.obs_data_release();
 			ModernizedCProgram.obs_hotkey_pair_unregister(generatedToggle_visibility);
 			ModernizedCProgram.pthread_mutex_destroy(generatedActions_mutex);
-			.signal_handler_disconnect(ModernizedCProgram.obs_source_get_signal_handler(generatedSource), "rename", sceneitem_renamed, item);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/signal_handler_disconnect(ModernizedCProgram.obs_source_get_signal_handler(generatedSource), "rename", sceneitem_renamed, item);
 			if (generatedSource) {
 				generatedSource.obs_source_release();
 			} 
-			.da_free(generatedAudio_actions);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedAudio_actions);
 			ModernizedCProgram.bfree(item);
 		} 
 	}
@@ -651,7 +651,7 @@ public class obs_scene_item {
 	}
 	public void obs_sceneitem_release() {
 		if (!item) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedRef = this.getRef();
 		if (ModernizedCProgram.os_atomic_dec_long(generatedRef) == 0) {
@@ -661,7 +661,7 @@ public class obs_scene_item {
 	public void obs_sceneitem_remove() {
 		obs_scene_t scene = new obs_scene_t();
 		if (!item) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_scene generatedParent = this.getParent();
 		scene = generatedParent;
@@ -671,12 +671,12 @@ public class obs_scene_item {
 			if (scene) {
 				scene.full_unlock();
 			} 
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setRemoved(true);
-		.assert(scene != NULL);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/assert(scene != NULL);
 		obs_source generatedSource = scene.getSource();
-		.assert(generatedSource != NULL);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/assert(generatedSource != NULL);
 		item.set_visibility(false);
 		item.signal_item_remove();
 		item.detach_sceneitem();
@@ -690,10 +690,10 @@ public class obs_scene_item {
 		Object generatedSelected = this.getSelected();
 		obs_scene generatedParent = this.getParent();
 		if (!item || generatedSelected == select || !generatedParent) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setSelected(select);
-		params.calldata_init_fixed(stack, );
+		params.calldata_init_fixed(stack, /*Error: sizeof expression not supported yet*/);
 		params.calldata_set_ptr("item", item);
 		generatedParent.signal_parent(command, params);
 	}
@@ -764,13 +764,13 @@ public class obs_scene_item {
 		calldata params = new calldata();
 		[] stack = new ();
 		command = "reorder";
-		params.calldata_init_fixed(stack, );
+		params.calldata_init_fixed(stack, /*Error: sizeof expression not supported yet*/);
 		obs_scene generatedParent = this.getParent();
 		generatedParent.signal_parent(command, params);
 	}
 	public void obs_sceneitem_set_order(obs_order_movement movement) {
 		if (!item) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_scene_item next = new obs_scene_item();
 		obs_scene_item prev = new obs_scene_item();
@@ -806,7 +806,7 @@ public class obs_scene_item {
 	}
 	public void obs_sceneitem_set_order_position(int position) {
 		if (!item) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_scene generatedParent = this.getParent();
 		obs_scene scene = generatedParent;
@@ -902,7 +902,7 @@ public class obs_scene_item {
 	public Object obs_sceneitem_set_visible(Object visible) {
 		calldata cd = new calldata();
 		[] stack = new ();
-		item_action action = new item_action(, );
+		item_action action = new item_action(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		if (!item) {
 			return false;
 		} 
@@ -925,7 +925,7 @@ public class obs_scene_item {
 			} 
 		} 
 		this.setUser_visible(visible);
-		cd.calldata_init_fixed(stack, );
+		cd.calldata_init_fixed(stack, /*Error: sizeof expression not supported yet*/);
 		cd.calldata_set_ptr("item", item);
 		cd.calldata_set_bool("visible", visible);
 		generatedParent.signal_parent("item_visible", cd);
@@ -933,7 +933,7 @@ public class obs_scene_item {
 		Object generatedAudio_actions = this.getAudio_actions();
 		if (generatedSource.source_has_audio()) {
 			ModernizedCProgram.pthread_mutex_lock(generatedActions_mutex);
-			.da_push_back(generatedAudio_actions, action);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedAudio_actions, action);
 			ModernizedCProgram.pthread_mutex_unlock(generatedActions_mutex);
 		} else {
 				item.set_visibility(visible);
@@ -955,7 +955,7 @@ public class obs_scene_item {
 			return false;
 		} 
 		this.setLocked(lock);
-		cd.calldata_init_fixed(stack, );
+		cd.calldata_init_fixed(stack, /*Error: sizeof expression not supported yet*/);
 		cd.calldata_set_ptr("item", item);
 		cd.calldata_set_bool("locked", lock);
 		generatedParent.signal_parent("item_locked", cd);
@@ -963,16 +963,16 @@ public class obs_scene_item {
 	}
 	public void obs_sceneitem_set_crop(Object crop) {
 		if (!ModernizedCProgram.obs_object_valid(item, "obs_sceneitem_set_crop", "item")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ModernizedCProgram.obs_object_valid(crop, "obs_sceneitem_set_crop", "crop")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_sceneitem_crop generatedCrop = this.getCrop();
 		if (ModernizedCProgram.crop_equal(crop, generatedCrop)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.memcpy(generatedCrop, crop, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedCrop, crop, /*Error: sizeof expression not supported yet*/);
 		int generatedLeft = generatedCrop.getLeft();
 		if (generatedLeft < 0) {
 			generatedCrop.setLeft(0);
@@ -994,7 +994,7 @@ public class obs_scene_item {
 	}
 	public void obs_sceneitem_set_scale_filter(obs_scale_type filter) {
 		if (!ModernizedCProgram.obs_object_valid(item, "obs_sceneitem_set_scale_filter", "item")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setScale_filter(obs_scale_type.filter);
 		Object generatedUpdate_transform = this.getUpdate_transform();
@@ -1006,14 +1006,14 @@ public class obs_scene_item {
 	}
 	public void obs_sceneitem_defer_update_begin() {
 		if (!ModernizedCProgram.obs_object_valid(item, "obs_sceneitem_defer_update_begin", "item")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedDefer_update = this.getDefer_update();
 		ModernizedCProgram.os_atomic_inc_long(generatedDefer_update);
 	}
 	public void obs_sceneitem_defer_update_end() {
 		if (!ModernizedCProgram.obs_object_valid(item, "obs_sceneitem_defer_update_end", "item")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedDefer_update = this.getDefer_update();
 		obs_scene generatedParent = this.getParent();
@@ -1031,14 +1031,14 @@ public class obs_scene_item {
 	}
 	public void obs_sceneitem_defer_group_resize_begin() {
 		if (!ModernizedCProgram.obs_object_valid(item, "obs_sceneitem_defer_group_resize_begin", "item")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedDefer_group_resize = this.getDefer_group_resize();
 		ModernizedCProgram.os_atomic_inc_long(generatedDefer_group_resize);
 	}
 	public void obs_sceneitem_defer_group_resize_end() {
 		if (!ModernizedCProgram.obs_object_valid(item, "obs_sceneitem_defer_group_resize_end", "item")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedDefer_group_resize = this.getDefer_group_resize();
 		Object generatedUpdate_group_resize = this.getUpdate_group_resize();
@@ -1050,7 +1050,7 @@ public class obs_scene_item {
 		obs_scene generatedParent = item.getParent();
 		obs_scene_t parent = generatedParent;
 		if (!parent || !group) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		vec2 generatedPos = item.getPos();
 		vec2 generatedScale = item.getScale();
@@ -1086,17 +1086,17 @@ public class obs_scene_item {
 	public void resize_group() {
 		obs_source generatedSource = this.getSource();
 		obs_context_data generatedContext = generatedSource.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		obs_scene_t scene = generatedData;
 		vec2 minv = new vec2();
 		vec2 maxv = new vec2();
 		vec2 scale = new vec2();
 		Object generatedDefer_group_resize = this.getDefer_group_resize();
 		if (ModernizedCProgram.os_atomic_load_long(generatedDefer_group_resize) > 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (!ModernizedCProgram.resize_scene_base(scene, minv, maxv, scale)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_bounds_type generatedBounds_type = this.getBounds_type();
 		Object generatedAlign = this.getAlign();
@@ -1195,7 +1195,7 @@ public class obs_scene_item {
 		obs_scene_item generatedNext = item.getNext();
 		while (item) {
 			if (generatedIs_group && generatedName) {
-				if (.strcmp(generatedName, name) == 0) {
+				if (/*Error: Function owner not recognized*/strcmp(generatedName, name) == 0) {
 					group = item;
 					break;
 				} 
@@ -1212,13 +1212,13 @@ public class obs_scene_item {
 	public void obs_sceneitem_group_ungroup() {
 		Object generatedIs_group = this.getIs_group();
 		if (!item || !generatedIs_group) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_scene generatedParent = this.getParent();
 		obs_scene_t scene = generatedParent;
 		obs_source generatedSource = this.getSource();
 		obs_context_data generatedContext = generatedSource.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		obs_scene_t subscene = generatedData;
 		obs_sceneitem_t insert_after = item;
 		obs_sceneitem_t first = new obs_sceneitem_t();
@@ -1249,17 +1249,17 @@ public class obs_scene_item {
 	public void obs_sceneitem_group_add_item(obs_scene_item item) {
 		Object generatedIs_group = this.getIs_group();
 		if (!group || !generatedIs_group || !item) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_scene generatedParent = this.getParent();
 		obs_scene_t scene = generatedParent;
 		obs_source generatedSource = this.getSource();
 		obs_context_data generatedContext = generatedSource.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		obs_scene_t groupscene = generatedData;
 		obs_sceneitem_t last = new obs_sceneitem_t();
 		if (generatedParent != scene) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		/* ------------------------- */scene.full_lock();
 		group.remove_group_transform(item);
@@ -1269,7 +1269,7 @@ public class obs_scene_item {
 		last = generatedFirst_item;
 		obs_scene_item generatedNext = last.getNext();
 		if (last) {
-			for (; ; ) {
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				if (!generatedNext) {
 					break;
 				} 
@@ -1290,7 +1290,7 @@ public class obs_scene_item {
 	public void obs_sceneitem_group_remove_item(obs_scene_item item) {
 		Object generatedIs_group = this.getIs_group();
 		if (!item || !group || !generatedIs_group) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_scene generatedParent = item.getParent();
 		obs_scene_t groupscene = generatedParent;
@@ -1323,7 +1323,7 @@ public class obs_scene_item {
 		obs_sceneitem_t item = generatedFirst_item;
 		obs_source generatedSource = item.getSource();
 		obs_context_data generatedContext = generatedSource.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		obs_scene generatedParent = this.getParent();
 		obs_scene_item generatedNext = item.getNext();
 		while (item) {
@@ -1347,11 +1347,11 @@ public class obs_scene_item {
 	public void obs_sceneitem_group_enum_items(Object callback, Object param) {
 		Object generatedIs_group = this.getIs_group();
 		if (!group || !generatedIs_group) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_source generatedSource = this.getSource();
 		obs_context_data generatedContext = generatedSource.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		obs_scene_t scene = generatedData;
 		if (scene) {
 			scene.obs_scene_enum_items(callback, param);
@@ -1359,7 +1359,7 @@ public class obs_scene_item {
 	}
 	public void obs_sceneitem_force_update_transform() {
 		if (!item) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedUpdate_transform = this.getUpdate_transform();
 		if (ModernizedCProgram.os_atomic_set_bool(generatedUpdate_transform, false)) {

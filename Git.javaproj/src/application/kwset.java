@@ -9,11 +9,11 @@ public class kwset {
 	private int maxd;
 	private Object delta;
 	private Object next;
-	private Byte target;
+	private byte[] target;
 	private int mind2;
-	private Object trans;
+	private Object[] trans;
 	
-	public kwset(obstack obstack, int words, trie trie, int mind, int maxd, Object delta, Object next, Byte target, int mind2, Object trans) {
+	public kwset(obstack obstack, int words, trie trie, int mind, int maxd, Object delta, Object next, byte[] target, int mind2, Object[] trans) {
 		setObstack(obstack);
 		setWords(words);
 		setTrie(trie);
@@ -70,10 +70,10 @@ public class kwset {
 	public void setNext(Object newNext) {
 		next = newNext;
 	}
-	public Byte getTarget() {
+	public byte[] getTarget() {
 		return target;
 	}
-	public void setTarget(Byte newTarget) {
+	public void setTarget(byte[] newTarget) {
 		target = newTarget;
 	}
 	public int getMind2() {
@@ -82,10 +82,10 @@ public class kwset {
 	public void setMind2(int newMind2) {
 		mind2 = newMind2;
 	}
-	public Object getTrans() {
+	public Object[] getTrans() {
 		return trans;
 	}
-	public void setTrans(Object newTrans) {
+	public void setTrans(Object[] newTrans) {
 		trans = newTrans;
 	}
 }

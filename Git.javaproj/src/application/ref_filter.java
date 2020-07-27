@@ -59,9 +59,9 @@ public class ref_filter {
 			return ModernizedCProgram.for_each_fullref_in("", cb, cb_data, /* no patterns; we have to look at everything */broken);
 		} 
 		prefixes.find_longest_prefixes(ModernizedCProgram.filter.getName_patterns());
-		string_list_item generatedItems = (prefixes).getItems();
+		string_list_item[] generatedItems = (prefixes).getItems();
 		int generatedNr = (prefixes).getNr();
-		byte generatedString = prefix.getString();
+		byte[] generatedString = prefix.getString();
 		for (prefix = generatedItems; prefix && prefix < generatedItems + generatedNr; ++prefix) {
 			ret = ModernizedCProgram.for_each_fullref_in(generatedString, cb, cb_data, broken);
 			if (ret) {

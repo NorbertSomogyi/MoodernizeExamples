@@ -170,10 +170,10 @@ public class matchinf_S {
 				} 
 		} 
 		if (byts == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedMi_fend = this.getMi_fend();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (flen <= 0 && generatedMi_fend != (byte)'\000') {
 				flen = mip.fold_more();
 			} 
@@ -182,7 +182,7 @@ public class matchinf_S {
 				 * Remember this index, we first check for the longest word. */0) {
 				if (endidxcnt == 254) {
 					ModernizedCProgram.emsg(((byte)(/* Must be a corrupted spell file. */e_format)));
-					return ;
+					return /*Error: Unsupported expression*/;
 				} 
 				endlen[endidxcnt] = wlen;
 				endidx[endidxcnt++] = arridx++;
@@ -224,7 +224,7 @@ public class matchinf_S {
 			--flen;
 			if (c == /* One space in the good word may stand for several spaces in the
 				 * checked word. */(byte)' ') {
-				for (; ; ) {
+				for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 					if (flen <= 0 && generatedMi_fend != (byte)'\000') {
 						flen = mip.fold_more();
 					} 
@@ -267,7 +267,7 @@ public class matchinf_S {
 			--endidxcnt;
 			arridx = endidx[endidxcnt];
 			wlen = endlen[endidxcnt];
-			if (.UNRECOGNIZEDFUNCTIONNAME(ptr, ptr + wlen) > 0) {
+			if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ptr, ptr + wlen) > 0) {
 				continue;
 			} 
 			if (generatedMi_win.spell_iswordp(ptr + wlen)) {
@@ -284,9 +284,9 @@ public class matchinf_S {
 				     * when folding case.  This can be slow, take a shortcut when the
 				     * case-folded word is equal to the keep-case word. */) {
 				p = generatedMi_word;
-				if (.strncmp((byte)(ptr), (byte)(p), (size_t)(wlen)) != 0) {
-					for (s = ptr; s < ptr + wlen; s += .UNRECOGNIZEDFUNCTIONNAME(s)) {
-						p += .UNRECOGNIZEDFUNCTIONNAME(p);
+				if (/*Error: Function owner not recognized*/strncmp((byte)(ptr), (byte)(p), (size_t)(wlen)) != 0) {
+					for (s = ptr; s < ptr + wlen; s += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s)) {
+						p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
 					}
 					wlen = (int)(p - generatedMi_word);
 				} 
@@ -357,10 +357,10 @@ public class matchinf_S {
 					} 
 					if (mode == 3) {
 						int capflags;
-						if (has_mbyte && .strncmp((byte)(ptr), (byte)(generatedMi_word), (size_t)(generatedMi_compoff)) != 0) {
+						if (has_mbyte && /*Error: Function owner not recognized*/strncmp((byte)(ptr), (byte)(generatedMi_word), (size_t)(generatedMi_compoff)) != 0) {
 							p = generatedMi_word;
-							for (s = ptr; s < ptr + generatedMi_compoff; s += .UNRECOGNIZEDFUNCTIONNAME(s)) {
-								p += .UNRECOGNIZEDFUNCTIONNAME(p);
+							for (s = ptr; s < ptr + generatedMi_compoff; s += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s)) {
+								p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
 							}
 						} else {
 								p = generatedMi_word + generatedMi_compoff;
@@ -373,7 +373,7 @@ public class matchinf_S {
 									 * character we do not accept a Onecap word.  We do
 									 * accept a no-caps word, even when the dictionary
 									 * word specifies ONECAP. */) {
-							p -= has_mbyte ? (.UNRECOGNIZEDFUNCTIONNAME(generatedMi_word, p - 1) + 1) : 1;
+							p -= has_mbyte ? (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedMi_word, p - 1) + 1) : 1;
 							if (generatedMi_win.spell_iswordp_nmw(p) ? capflags == -1024 : (flags & -1024) != 0 && capflags != -1024) {
 								continue;
 							} 
@@ -416,9 +416,9 @@ public class matchinf_S {
 							     * folding case.  This can be slow, take a shortcut when
 							     * the case-folded word is equal to the keep-case word. */) {
 						p = generatedMi_fword;
-						if (.strncmp((byte)(ptr), (byte)(p), (size_t)(wlen)) != 0) {
-							for (s = ptr; s < ptr + wlen; s += .UNRECOGNIZEDFUNCTIONNAME(s)) {
-								p += .UNRECOGNIZEDFUNCTIONNAME(p);
+						if (/*Error: Function owner not recognized*/strncmp((byte)(ptr), (byte)(p), (size_t)(wlen)) != 0) {
+							for (s = ptr; s < ptr + wlen; s += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s)) {
+								p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p);
 							}
 							this.setMi_compoff((int)(p - generatedMi_fword));
 						} 
@@ -521,7 +521,7 @@ public class matchinf_S {
 		Object generatedSl_pbyts = slang.getSl_pbyts();
 		byts = generatedSl_pbyts;
 		if (byts == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedMi_fword = this.getMi_fword();
 		ptr = generatedMi_fword;
@@ -532,13 +532,13 @@ public class matchinf_S {
 			ptr += generatedMi_compoff;
 			flen -= generatedMi_compoff;
 		} 
-		Object generatedSl_pidxs = slang.getSl_pidxs();
+		Object[] generatedSl_pidxs = slang.getSl_pidxs();
 		idxs = generatedSl_pidxs;
 		Object generatedMi_fend = this.getMi_fend();
 		int generatedMi_prefcnt = this.getMi_prefcnt();
 		int generatedMi_prefixlen = this.getMi_prefixlen();
 		Object generatedMi_word = this.getMi_word();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (flen == 0 && generatedMi_fend != (byte)'\000') {
 				flen = mip.fold_more();
 			} 
@@ -605,15 +605,15 @@ public class matchinf_S {
 		p = generatedMi_fend;
 		window_S generatedMi_win = this.getMi_win();
 		do {
-			generatedMi_fend += .UNRECOGNIZEDFUNCTIONNAME(generatedMi_fend);
+			generatedMi_fend += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedMi_fend);
 		} while (generatedMi_fend != (byte)'\000' && generatedMi_win.spell_iswordp(generatedMi_fend));
 		if (generatedMi_fend != /* Include the non-word character so that we can check for the word end. */(byte)'\000') {
-			generatedMi_fend += .UNRECOGNIZEDFUNCTIONNAME(generatedMi_fend);
+			generatedMi_fend += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedMi_fend);
 		} 
 		Object generatedMi_fword = this.getMi_fword();
 		int generatedMi_fwordlen = this.getMi_fwordlen();
 		(Object)ModernizedCProgram.spell_casefold(p, (int)(generatedMi_fend - p), generatedMi_fword + generatedMi_fwordlen, 254 - generatedMi_fwordlen);
-		flen = (int).strlen((byte)(generatedMi_fword + generatedMi_fwordlen));
+		flen = (int)/*Error: Function owner not recognized*/strlen((byte)(generatedMi_fword + generatedMi_fwordlen));
 		generatedMi_fwordlen += flen;
 		return flen/*
 		 * Check case flags for a word.  Return TRUE if the word has the requested

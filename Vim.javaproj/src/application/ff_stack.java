@@ -60,15 +60,15 @@ package application;
 public class ff_stack {
 	private ff_stack ffs_prev;
 	private Object ffs_fix_path;
-	private Object ffs_wc_path;
-	private Object ffs_filearray;
+	private Object[] ffs_wc_path;
+	private Object[][] ffs_filearray;
 	private int ffs_filearray_size;
 	private Object ffs_filearray_cur;
 	private int ffs_stage;
 	private int ffs_level;
 	private int ffs_star_star_empty;
 	
-	public ff_stack(ff_stack ffs_prev, Object ffs_fix_path, Object ffs_wc_path, Object ffs_filearray, int ffs_filearray_size, Object ffs_filearray_cur, int ffs_stage, int ffs_level, int ffs_star_star_empty) {
+	public ff_stack(ff_stack ffs_prev, Object ffs_fix_path, Object[] ffs_wc_path, Object[][] ffs_filearray, int ffs_filearray_size, Object ffs_filearray_cur, int ffs_stage, int ffs_level, int ffs_star_star_empty) {
 		setFfs_prev(ffs_prev);
 		setFfs_fix_path(ffs_fix_path);
 		setFfs_wc_path(ffs_wc_path);
@@ -84,7 +84,7 @@ public class ff_stack {
 	
 	public ff_stack ff_create_stack_element(Object fix_part, Object wc_part, int level, int star_star_empty) {
 		ff_stack_T new = new ff_stack_T();
-		new = (ff_stack_T)ModernizedCProgram.alloc();
+		new = (ff_stack_T)ModernizedCProgram.alloc(/*Error: Unsupported expression*/);
 		if (new == ((Object)0)) {
 			return ((Object)0);
 		} 
@@ -104,7 +104,7 @@ public class ff_stack {
 		} 
 		new.setFfs_wc_path(ModernizedCProgram.vim_strsave(wc_part));
 		Object generatedFfs_fix_path = new.getFfs_fix_path();
-		Object generatedFfs_wc_path = new.getFfs_wc_path();
+		Object[] generatedFfs_wc_path = new.getFfs_wc_path();
 		if (generatedFfs_fix_path == ((Object)0) || generatedFfs_wc_path == ((Object)0)) {
 			new.ff_free_stack_element();
 			new = ((Object)0);
@@ -128,9 +128,9 @@ public class ff_stack {
 	public void ff_free_stack_element() {
 		Object generatedFfs_fix_path = this.getFfs_fix_path();
 		// vim_free handles possible NULL pointers// vim_free handles possible NULL pointersModernizedCProgram.vim_free(generatedFfs_fix_path);
-		Object generatedFfs_wc_path = this.getFfs_wc_path();
+		Object[] generatedFfs_wc_path = this.getFfs_wc_path();
 		ModernizedCProgram.vim_free(generatedFfs_wc_path);
-		Object generatedFfs_filearray = this.getFfs_filearray();
+		Object[][] generatedFfs_filearray = this.getFfs_filearray();
 		int generatedFfs_filearray_size = this.getFfs_filearray_size();
 		if (generatedFfs_filearray != ((Object)0)) {
 			ModernizedCProgram.FreeWild(generatedFfs_filearray_size, generatedFfs_filearray);
@@ -151,16 +151,16 @@ public class ff_stack {
 	public void setFfs_fix_path(Object newFfs_fix_path) {
 		ffs_fix_path = newFfs_fix_path;
 	}
-	public Object getFfs_wc_path() {
+	public Object[] getFfs_wc_path() {
 		return ffs_wc_path;
 	}
-	public void setFfs_wc_path(Object newFfs_wc_path) {
+	public void setFfs_wc_path(Object[] newFfs_wc_path) {
 		ffs_wc_path = newFfs_wc_path;
 	}
-	public Object getFfs_filearray() {
+	public Object[][] getFfs_filearray() {
 		return ffs_filearray;
 	}
-	public void setFfs_filearray(Object newFfs_filearray) {
+	public void setFfs_filearray(Object[][] newFfs_filearray) {
 		ffs_filearray = newFfs_filearray;
 	}
 	public int getFfs_filearray_size() {

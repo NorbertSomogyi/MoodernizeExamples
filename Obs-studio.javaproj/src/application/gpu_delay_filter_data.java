@@ -30,7 +30,7 @@ public class gpu_delay_filter_data {
 		Object generatedRender = frame.getRender();
 		while (generatedCirclebuf) {
 			frame frame = new frame();
-			generatedFrames.circlebuf_pop_front(frame, );
+			generatedFrames.circlebuf_pop_front(frame, /*Error: sizeof expression not supported yet*/);
 			generatedRender.gs_texrender_destroy();
 		}
 		generatedFrames.circlebuf_free();
@@ -40,21 +40,21 @@ public class gpu_delay_filter_data {
 		Object generatedTarget_valid = this.getTarget_valid();
 		if (!generatedTarget_valid) {
 			f.free_textures();
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setInterval_ns(new_interval_ns);
 		Object generatedDelay_ns = this.getDelay_ns();
-		 num = .UNRECOGNIZEDFUNCTIONNAME(generatedDelay_ns / new_interval_ns);
+		 num = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDelay_ns / new_interval_ns);
 		circlebuf generatedFrames = this.getFrames();
 		gs_texture_render gs_texture_render = new gs_texture_render();
 		Object generatedRender = frame.getRender();
 		if (num > generatedFrames.num_frames()) {
 			 prev_num = generatedFrames.num_frames();
 			ModernizedCProgram.obs_enter_graphics();
-			generatedFrames.circlebuf_upsize(num * );
+			generatedFrames.circlebuf_upsize(num * /*Error: Unsupported expression*/);
 			for ( i = prev_num;
 			 i < num; i++) {
-				frame frame = generatedFrames.circlebuf_data(i * );
+				frame frame = generatedFrames.circlebuf_data(i * /*Error: sizeof expression not supported yet*/);
 				frame.setRender(gs_texture_render.gs_texrender_create(GS_RGBA, GS_ZS_NONE));
 			}
 			ModernizedCProgram.obs_leave_graphics();
@@ -62,7 +62,7 @@ public class gpu_delay_filter_data {
 			ModernizedCProgram.obs_enter_graphics();
 			while (generatedFrames.num_frames() > num) {
 				frame frame = new frame();
-				generatedFrames.circlebuf_pop_front(frame, );
+				generatedFrames.circlebuf_pop_front(frame, /*Error: sizeof expression not supported yet*/);
 				generatedRender.gs_texrender_destroy();
 			}
 			ModernizedCProgram.obs_leave_graphics();
@@ -115,7 +115,7 @@ public class gpu_delay_filter_data {
 	public void draw_frame() {
 		frame frame = new frame();
 		circlebuf generatedFrames = this.getFrames();
-		generatedFrames.circlebuf_peek_front(frame, );
+		generatedFrames.circlebuf_peek_front(frame, /*Error: sizeof expression not supported yet*/);
 		 effect = ModernizedCProgram.obs_get_base_effect(obs_base_effect.OBS_EFFECT_DEFAULT);
 		Object generatedRender = frame.getRender();
 		gs_texture gs_texture = new gs_texture();

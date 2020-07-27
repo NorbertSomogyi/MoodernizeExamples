@@ -12,7 +12,7 @@ public class shader_struct {
 	}
 	
 	public void shader_struct_init() {
-		.memset(ss, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ss, 0, /*Error: Unsupported expression*/);
 	}
 	public void shader_struct_free() {
 		 i = new ();
@@ -22,7 +22,7 @@ public class shader_struct {
 		}
 		Byte generatedName = this.getName();
 		ModernizedCProgram.bfree(generatedName);
-		.da_free(generatedVars);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedVars);
 	}
 	public shader_struct shader_parser_getstruct(shader_parser sp, Object struct_name) {
 		 i = new ();
@@ -30,7 +30,7 @@ public class shader_struct {
 		Byte generatedName = st.getName();
 		for (i = 0; i < generatedStructs.getNum(); i++) {
 			shader_struct st = generatedStructs.getArray() + i;
-			if (.strcmp(generatedName, struct_name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, struct_name) == 0) {
 				return st;
 			} 
 		}

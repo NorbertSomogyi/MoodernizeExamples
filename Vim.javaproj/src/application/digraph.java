@@ -66,7 +66,7 @@ public class digraph {
 				if (enc_utf8 && ModernizedCProgram.utf_iscomposing(generatedResult)) {
 					p++ = (byte)' ';
 				} 
-				p += .UNRECOGNIZEDFUNCTIONNAME(generatedResult, p);
+				p += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedResult, p);
 			} else {
 					p++ = (char_u)generatedResult;
 			} 
@@ -76,7 +76,7 @@ public class digraph {
 			if (ModernizedCProgram.char2cells(generatedResult) == 1) {
 				p++ = (byte)' ';
 			} 
-			ModernizedCProgram.vim_snprintf((byte)p,  - (p - buf), " %3d", generatedResult);
+			ModernizedCProgram.vim_snprintf((byte)p, /*Error: sizeof expression not supported yet*/ - (p - buf), " %3d", generatedResult);
 			ModernizedCProgram.msg_outtrans(buf/* FEAT_DIGRAPHS */);
 		} 
 	}

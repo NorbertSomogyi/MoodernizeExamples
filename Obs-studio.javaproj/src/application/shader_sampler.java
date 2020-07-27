@@ -15,7 +15,7 @@ public class shader_sampler {
 	}
 	
 	public void shader_sampler_init() {
-		.memset(ss, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ss, 0, /*Error: Unsupported expression*/);
 	}
 	public void shader_sampler_free() {
 		 i = new ();
@@ -29,8 +29,8 @@ public class shader_sampler {
 		}
 		Byte generatedName = this.getName();
 		ModernizedCProgram.bfree(generatedName);
-		.da_free(generatedStates);
-		.da_free(generatedValues);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedStates);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedValues);
 	}
 	public shader_sampler shader_parser_getsampler(shader_parser sp, Object sampler_name) {
 		 i = new ();
@@ -38,7 +38,7 @@ public class shader_sampler {
 		Byte generatedName = sampler.getName();
 		for (i = 0; i < generatedSamplers.getNum(); i++) {
 			shader_sampler sampler = generatedSamplers.getArray() + i;
-			if (.strcmp(generatedName, sampler_name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, sampler_name) == 0) {
 				return sampler;
 			} 
 		}

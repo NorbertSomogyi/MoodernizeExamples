@@ -40,7 +40,7 @@ public class blake2b_state__ {
 	}
 	public void blake2b_init0() {
 		size_t i = new size_t();
-		.memset(S, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(S, 0, /*Error: Unsupported expression*/);
 		Object generatedH = this.getH();
 		for (i = 0; i < 8; ++i) {
 			generatedH[i] = ModernizedCProgram.blake2b_IV[i];
@@ -53,7 +53,7 @@ public class blake2b_state__ {
 		S.blake2b_init0();
 		Object generatedH = this.getH();
 		for (i = 0; i < 8; ++/* IV XOR ParamBlock */i) {
-			generatedH[i] ^=  ModernizedCProgram.load64(p +  * i);
+			generatedH[i] ^=  ModernizedCProgram.load64(p + /*Error: sizeof expression not supported yet*/ * i);
 		}
 		this.setOutlen(P.getDigest_length());
 		return 0;
@@ -72,9 +72,9 @@ public class blake2b_state__ {
 		ModernizedCProgram.store32(P.getXof_length(), 0);
 		P.setNode_depth(0);
 		P.setInner_length(0);
-		.memset(P.getReserved(), 0, );
-		.memset(P.getSalt(), 0, );
-		.memset(P.getPersonal(), 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(P.getReserved(), 0, /*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(P.getSalt(), 0, /*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(P.getPersonal(), 0, /*Error: sizeof expression not supported yet*/);
 		return S.blake2b_init_param(P);
 	}
 	public int blake2b_init_key(Object outlen, Object key, Object keylen) {
@@ -94,16 +94,16 @@ public class blake2b_state__ {
 		ModernizedCProgram.store32(P.getXof_length(), 0);
 		P.setNode_depth(0);
 		P.setInner_length(0);
-		.memset(P.getReserved(), 0, );
-		.memset(P.getSalt(), 0, );
-		.memset(P.getPersonal(), 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(P.getReserved(), 0, /*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(P.getSalt(), 0, /*Error: sizeof expression not supported yet*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(P.getPersonal(), 0, /*Error: sizeof expression not supported yet*/);
 		if (S.blake2b_init_param(P) < 0) {
 			return -1;
 		} 
 		{ 
 			uint8_t[] block = new uint8_t();
-			.memset(block, 0, blake2b_constant.BLAKE2B_BLOCKBYTES);
-			.memcpy(block, key, keylen);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(block, 0, blake2b_constant.BLAKE2B_BLOCKBYTES);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(block, key, keylen);
 			S.blake2b_update(block, blake2b_constant.BLAKE2B_BLOCKBYTES);
 			ModernizedCProgram.secure_zero_memory(block, /* Burn the key from stack */blake2b_constant.BLAKE2B_BLOCKBYTES);
 		}
@@ -114,7 +114,7 @@ public class blake2b_state__ {
 		uint64_t[] v = new uint64_t();
 		size_t i = new size_t();
 		for (i = 0; i < 16; ++i) {
-			m[i] = ModernizedCProgram.load64(block + i * );
+			m[i] = ModernizedCProgram.load64(block + i * /*Error: sizeof expression not supported yet*/);
 		}
 		Object generatedH = this.getH();
 		for (i = 0; i < 8; ++i) {
@@ -1127,7 +1127,7 @@ public class blake2b_state__ {
 			size_t fill = blake2b_constant.BLAKE2B_BLOCKBYTES - left;
 			if (inlen > fill) {
 				this.setBuflen(0);
-				.memcpy(generatedBuf + left, in, /* Fill buffer */fill);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedBuf + left, in, /* Fill buffer */fill);
 				S.blake2b_increment_counter(blake2b_constant.BLAKE2B_BLOCKBYTES);
 				S.blake2b_compress(generatedBuf);
 				in += fill;
@@ -1139,7 +1139,7 @@ public class blake2b_state__ {
 					inlen -= blake2b_constant.BLAKE2B_BLOCKBYTES;
 				}
 			} 
-			.memcpy(generatedBuf + generatedBuflen, in, inlen);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedBuf + generatedBuflen, in, inlen);
 			generatedBuflen += inlen;
 		} 
 		return 0;
@@ -1158,14 +1158,14 @@ public class blake2b_state__ {
 		S.blake2b_increment_counter(generatedBuflen);
 		S.blake2b_set_lastblock();
 		Object generatedBuf = this.getBuf();
-		.memset(generatedBuf + generatedBuflen, 0, blake2b_constant.BLAKE2B_BLOCKBYTES - generatedBuflen);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedBuf + generatedBuflen, 0, blake2b_constant.BLAKE2B_BLOCKBYTES - generatedBuflen);
 		S.blake2b_compress(generatedBuf);
 		Object generatedH = this.getH();
 		for (i = 0; i < 8; ++/* Output full hash to temp buffer */i) {
-			ModernizedCProgram.store64(buffer +  * i, generatedH[i]);
+			ModernizedCProgram.store64(buffer + /*Error: sizeof expression not supported yet*/ * i, generatedH[i]);
 		}
-		.memcpy(out, buffer, generatedOutlen);
-		ModernizedCProgram.secure_zero_memory(buffer, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(out, buffer, generatedOutlen);
+		ModernizedCProgram.secure_zero_memory(buffer, /*Error: sizeof expression not supported yet*/);
 		return 0;
 	}
 	public Object getH() {

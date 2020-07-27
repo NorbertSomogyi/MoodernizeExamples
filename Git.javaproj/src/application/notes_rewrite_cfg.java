@@ -1,7 +1,7 @@
 package application;
 
 public class notes_rewrite_cfg {
-	private notes_tree trees;
+	private notes_tree[][] trees;
 	private Object cmd;
 	private int enabled;
 	private Object combine;
@@ -9,7 +9,7 @@ public class notes_rewrite_cfg {
 	private int refs_from_env;
 	private int mode_from_env;
 	
-	public notes_rewrite_cfg(notes_tree trees, Object cmd, int enabled, Object combine, string_list refs, int refs_from_env, int mode_from_env) {
+	public notes_rewrite_cfg(notes_tree[][] trees, Object cmd, int enabled, Object combine, string_list refs, int refs_from_env, int mode_from_env) {
 		setTrees(trees);
 		setCmd(cmd);
 		setEnabled(enabled);
@@ -22,13 +22,13 @@ public class notes_rewrite_cfg {
 	}
 	
 	public notes_rewrite_cfg init_copy_notes_for_rewrite(Object cmd) {
-		notes_rewrite_cfg c = ModernizedCProgram.xmalloc();
-		byte rewrite_mode_env = .getenv("GIT_NOTES_REWRITE_MODE");
-		byte rewrite_refs_env = .getenv("GIT_NOTES_REWRITE_REF");
+		notes_rewrite_cfg c = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
+		byte rewrite_mode_env = /*Error: Function owner not recognized*/getenv("GIT_NOTES_REWRITE_MODE");
+		byte rewrite_refs_env = /*Error: Function owner not recognized*/getenv("GIT_NOTES_REWRITE_REF");
 		c.setCmd(cmd);
 		c.setEnabled(1);
 		c.setCombine(ModernizedCProgram.combine_notes_concatenate);
-		c.setRefs(ModernizedCProgram.xcalloc(1, ));
+		c.setRefs(ModernizedCProgram.xcalloc(1, /*Error: Unsupported expression*/));
 		string_list generatedRefs = c.getRefs();
 		generatedRefs.setStrdup_strings(1);
 		c.setRefs_from_env(0);
@@ -43,9 +43,9 @@ public class notes_rewrite_cfg {
 		} 
 		if (rewrite_refs_env) {
 			c.setRefs_from_env(1);
-			.string_list_add_refs_from_colon_sep(generatedRefs, rewrite_refs_env);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/string_list_add_refs_from_colon_sep(generatedRefs, rewrite_refs_env);
 		} 
-		.git_config(notes_rewrite_config, c);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config(notes_rewrite_config, c);
 		int generatedEnabled = c.getEnabled();
 		int generatedNr = generatedRefs.getNr();
 		if (!generatedEnabled || !generatedNr) {
@@ -54,7 +54,7 @@ public class notes_rewrite_cfg {
 			ModernizedCProgram.free(c);
 			return ((Object)0);
 		} 
-		c.setTrees(.load_notes_trees(generatedRefs, 2));
+		c.setTrees(/*Error: Function owner not recognized*/load_notes_trees(generatedRefs, 2));
 		generatedRefs.string_list_clear(0);
 		ModernizedCProgram.free(generatedRefs);
 		return c;
@@ -62,17 +62,17 @@ public class notes_rewrite_cfg {
 	public int copy_note_for_rewrite(Object from_obj, Object to_obj) {
 		int ret = 0;
 		int i;
-		notes_tree generatedTrees = this.getTrees();
+		notes_tree[][] generatedTrees = this.getTrees();
 		Object generatedCombine = this.getCombine();
 		for (i = 0; generatedTrees[i]; i++) {
-			ret = .copy_note(generatedTrees[i], from_obj, to_obj, 1, generatedCombine) || ret;
+			ret = /*Error: Function owner not recognized*/copy_note(generatedTrees[i], from_obj, to_obj, 1, generatedCombine) || ret;
 		}
 		return ret;
 	}
-	public notes_tree getTrees() {
+	public notes_tree[][] getTrees() {
 		return trees;
 	}
-	public void setTrees(notes_tree newTrees) {
+	public void setTrees(notes_tree[][] newTrees) {
 		trees = newTrees;
 	}
 	public Object getCmd() {

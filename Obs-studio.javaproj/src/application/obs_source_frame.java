@@ -34,26 +34,6 @@ public class obs_source_frame {
 	public obs_source_frame() {
 	}
 	
-	public void obs_source_frame_free() {
-		Object generatedData = this.getData();
-		if (frame) {
-			ModernizedCProgram.bfree(generatedData[0]);
-			.memset(frame, 0, );
-		} 
-	}
-	public obs_source_frame obs_source_frame_create(video_format format, Object width, Object height) {
-		obs_source_frame frame = new obs_source_frame();
-		frame = (obs_source_frame)ModernizedCProgram.bzalloc();
-		frame.obs_source_frame_init(video_format.format, width, height);
-		return frame;
-	}
-	public void obs_source_frame_destroy() {
-		Object generatedData = this.getData();
-		if (frame) {
-			ModernizedCProgram.bfree(generatedData[0]);
-			ModernizedCProgram.bfree(frame);
-		} 
-	}
 	public void get_frame(Object opaque) {
 		ffmpeg_source s = opaque;
 		obs_source generatedSource = s.getSource();
@@ -63,7 +43,7 @@ public class obs_source_frame {
 		ffmpeg_source s = opaque;
 		Object generatedClose_when_inactive = s.getClose_when_inactive();
 		if (generatedClose_when_inactive) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedIs_clear_on_media_end = s.getIs_clear_on_media_end();
 		Object generatedIs_looping = s.getIs_looping();
@@ -72,42 +52,26 @@ public class obs_source_frame {
 			generatedSource.obs_source_preload_video(f);
 		} 
 	}
-	public obs_source_frame async_delay_filter_video(Object data) {
-		async_delay_data filter = data;
-		obs_source generatedContext = filter.getContext();
-		obs_source obs_source = new obs_source();
-		obs_source_t parent = obs_source.obs_filter_get_parent(generatedContext);
-		obs_source_frame output = new obs_source_frame();
-		 cur_interval = new ();
-		Object generatedReset_video = filter.getReset_video();
-		Object generatedTimestamp = this.getTimestamp();
-		Object generatedLast_video_ts = filter.getLast_video_ts();
-		if (generatedReset_video || ModernizedCProgram.is_timestamp_jump(generatedTimestamp, generatedLast_video_ts)) {
-			ModernizedCProgram.free_video_data(filter, parent);
-			filter.setVideo_delay_reached(false);
-			filter.setReset_video(false);
+	public obs_source_frame get_prev_frame(obs_source source, Object updated) {
+		obs_source_frame frame = NULL;
+		Object generatedAsync_mutex = source.getAsync_mutex();
+		ModernizedCProgram.pthread_mutex_lock(generatedAsync_mutex);
+		obs_source_frame generatedCur_async_frame = source.getCur_async_frame();
+		updated = generatedCur_async_frame != NULL;
+		obs_source_frame generatedPrev_async_frame = source.getPrev_async_frame();
+		frame = generatedPrev_async_frame;
+		source.setPrev_async_frame(NULL);
+		Object generatedRefs = frame.getRefs();
+		if (frame) {
+			ModernizedCProgram.os_atomic_inc_long(generatedRefs);
 		} 
-		filter.setLast_video_ts(generatedTimestamp);
-		circlebuf generatedVideo_frames = filter.getVideo_frames();
-		generatedVideo_frames.circlebuf_push_back(frame, );
-		generatedVideo_frames.circlebuf_peek_front(output, );
-		cur_interval = generatedTimestamp - generatedTimestamp;
-		Object generatedVideo_delay_reached = filter.getVideo_delay_reached();
-		Object generatedInterval = filter.getInterval();
-		if (!generatedVideo_delay_reached && cur_interval < generatedInterval) {
-			return NULL;
-		} 
-		generatedVideo_frames.circlebuf_pop_front(NULL, );
-		if (!generatedVideo_delay_reached) {
-			filter.setVideo_delay_reached(true);
-		} 
-		return output/* NOTE: Delaying audio shouldn't be necessary because the audio subsystem will
-		 * automatically sync audio to video frames */;/* #define DELAY_AUDIO */
+		ModernizedCProgram.pthread_mutex_unlock(generatedAsync_mutex);
+		return frame;
 	}
 	public void obs_source_frame_init(video_format format, Object width, Object height) {
 		video_frame vid_frame = new video_frame();
 		if (!ModernizedCProgram.obs_object_valid(frame, "obs_source_frame_init", "frame")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		vid_frame.video_frame_init(video_format.format, width, height);
 		this.setFormat(video_format.format);
@@ -135,7 +99,7 @@ public class obs_source_frame {
 		Object generatedFilters = source.getFilters();
 		Object generatedEnabled = filter.getEnabled();
 		obs_context_data generatedContext = filter.getContext();
-		Object generatedData = generatedContext.getData();
+		Object[] generatedData = generatedContext.getData();
 		obs_source_info generatedInfo = filter.getInfo();
 		Object generatedFilter_video = generatedInfo.getFilter_video();
 		for (i = generatedFilters.getNum(); i > 0; i--) {
@@ -144,7 +108,7 @@ public class obs_source_frame {
 				continue;
 			} 
 			if (generatedData && generatedFilter_video) {
-				in = .UNRECOGNIZEDFUNCTIONNAME(generatedData, in);
+				in = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedData, in);
 				if (!in) {
 					break;
 				} 
@@ -159,7 +123,7 @@ public class obs_source_frame {
 		uint32_t pos_dst = y * generatedLinesize[plane];
 		uint32_t bytes = generatedLinesize[plane] < generatedLinesize[plane] ? generatedLinesize[plane] : generatedLinesize[plane];
 		Object generatedData = this.getData();
-		.memcpy(generatedData[plane] + pos_dst, generatedData[plane] + pos_src, bytes);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedData[plane] + pos_dst, generatedData[plane] + pos_src, bytes);
 	}
 	public void copy_frame_data_plane(Object src, Object plane, Object lines) {
 		Object generatedLinesize = this.getLinesize();
@@ -170,7 +134,7 @@ public class obs_source_frame {
 				dst.copy_frame_data_line(src, plane, y);
 			}
 		} else {
-				.memcpy(generatedData[plane], generatedData[plane], generatedLinesize[plane] * lines);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedData[plane], generatedData[plane], generatedLinesize[plane] * lines);
 		} 
 	}
 	public void copy_frame_data(Object src) {
@@ -178,45 +142,32 @@ public class obs_source_frame {
 		this.setFull_range(src.getFull_range());
 		this.setTimestamp(src.getTimestamp());
 		Object generatedColor_matrix = this.getColor_matrix();
-		.memcpy(generatedColor_matrix, generatedColor_matrix,  * 16);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedColor_matrix, generatedColor_matrix, /*Error: Unsupported expression*/ * 16);
 		Object generatedFull_range = this.getFull_range();
 		Object generatedColor_range_min = this.getColor_range_min();
 		Object generatedColor_range_max = this.getColor_range_max();
 		if (!generatedFull_range) {
-			 size =  * 3;
-			.memcpy(generatedColor_range_min, generatedColor_range_min, size);
-			.memcpy(generatedColor_range_max, generatedColor_range_max, size);
+			 size = /*Error: Unsupported expression*/ * 3;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedColor_range_min, generatedColor_range_min, size);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedColor_range_max, generatedColor_range_max, size);
 		} 
 		Object generatedHeight = this.getHeight();
 		switch (src.getFormat()) {
-		case VIDEO_FORMAT_AYUV:
-				dst.copy_frame_data_plane(src, 0, generatedHeight);
-				break;
-		case VIDEO_FORMAT_YVYU:
-		case VIDEO_FORMAT_UYVY:
-		case VIDEO_FORMAT_BGRX:
 		case VIDEO_FORMAT_YUY2:
+		case VIDEO_FORMAT_BGRX:
 		case VIDEO_FORMAT_I420:
 				dst.copy_frame_data_plane(src, 0, generatedHeight);
 				dst.copy_frame_data_plane(src, 1, generatedHeight / 2);
 				dst.copy_frame_data_plane(src, 2, generatedHeight / 2);
 				break;
-		case VIDEO_FORMAT_Y800:
-		case VIDEO_FORMAT_BGRA:
-		case VIDEO_FORMAT_I42A:
-		case VIDEO_FORMAT_I444:
+		case VIDEO_FORMAT_BGR3:
+		case VIDEO_FORMAT_UYVY:
 		case VIDEO_FORMAT_RGBA:
 		case VIDEO_FORMAT_NONE:
-		case VIDEO_FORMAT_YUVA:
+		case VIDEO_FORMAT_BGRA:
+		case VIDEO_FORMAT_Y800:
+		case VIDEO_FORMAT_AYUV:
 				dst.copy_frame_data_plane(src, 0, generatedHeight);
-				dst.copy_frame_data_plane(src, 1, generatedHeight);
-				dst.copy_frame_data_plane(src, 2, generatedHeight);
-				dst.copy_frame_data_plane(src, 3, generatedHeight);
-				break;
-		case VIDEO_FORMAT_BGR3:
-		case VIDEO_FORMAT_NV12:
-				dst.copy_frame_data_plane(src, 0, generatedHeight);
-				dst.copy_frame_data_plane(src, 1, generatedHeight / 2);
 				break;
 		case VIDEO_FORMAT_I422:
 				dst.copy_frame_data_plane(src, 0, generatedHeight);
@@ -229,6 +180,19 @@ public class obs_source_frame {
 				dst.copy_frame_data_plane(src, 2, generatedHeight / 2);
 				dst.copy_frame_data_plane(src, 3, generatedHeight);
 				break;
+		case VIDEO_FORMAT_YUVA:
+				dst.copy_frame_data_plane(src, 0, generatedHeight);
+				dst.copy_frame_data_plane(src, 1, generatedHeight);
+				dst.copy_frame_data_plane(src, 2, generatedHeight);
+				dst.copy_frame_data_plane(src, 3, generatedHeight);
+				break;
+		case VIDEO_FORMAT_I42A:
+		case VIDEO_FORMAT_NV12:
+				dst.copy_frame_data_plane(src, 0, generatedHeight);
+				dst.copy_frame_data_plane(src, 1, generatedHeight / 2);
+				break;
+		case VIDEO_FORMAT_YVYU:
+		case VIDEO_FORMAT_I444:
 		}
 	}
 	public void obs_source_frame_copy(Object src) {
@@ -276,7 +240,7 @@ public class obs_source_frame {
 			new_af.setUsed(true);
 			new_af.setUnused_count(0);
 			new_frame.setRefs(1);
-			.da_push_back(generatedAsync_cache, new_af);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedAsync_cache, new_af);
 		} 
 		Object generatedRefs = new_frame.getRefs();
 		ModernizedCProgram.os_atomic_inc_long(generatedRefs);
@@ -293,7 +257,7 @@ public class obs_source_frame {
 		Object generatedTimestamp = frame.getTimestamp();
 		if (!generatedLast_frame_ts || source.ready_async_frame(sys_time)) {
 			obs_source_frame frame = generatedAsync_frames.getArray()[0];
-			.da_erase(generatedAsync_frames, 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_erase(generatedAsync_frames, 0);
 			if (!generatedLast_frame_ts) {
 				source.setLast_frame_ts(generatedTimestamp);
 			} 
@@ -323,21 +287,57 @@ public class obs_source_frame {
 		ModernizedCProgram.pthread_mutex_unlock(generatedAsync_mutex);
 		return frame;
 	}
-	public obs_source_frame get_prev_frame(obs_source source, Object updated) {
-		obs_source_frame frame = NULL;
-		Object generatedAsync_mutex = source.getAsync_mutex();
-		ModernizedCProgram.pthread_mutex_lock(generatedAsync_mutex);
-		obs_source_frame generatedCur_async_frame = source.getCur_async_frame();
-		updated = generatedCur_async_frame != NULL;
-		obs_source_frame generatedPrev_async_frame = source.getPrev_async_frame();
-		frame = generatedPrev_async_frame;
-		source.setPrev_async_frame(NULL);
-		Object generatedRefs = frame.getRefs();
+	public void obs_source_frame_free() {
+		Object generatedData = this.getData();
 		if (frame) {
-			ModernizedCProgram.os_atomic_inc_long(generatedRefs);
+			ModernizedCProgram.bfree(generatedData[0]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(frame, 0, /*Error: sizeof expression not supported yet*/);
 		} 
-		ModernizedCProgram.pthread_mutex_unlock(generatedAsync_mutex);
+	}
+	public obs_source_frame obs_source_frame_create(video_format format, Object width, Object height) {
+		obs_source_frame frame = new obs_source_frame();
+		frame = (obs_source_frame)ModernizedCProgram.bzalloc(/*Error: sizeof expression not supported yet*/);
+		frame.obs_source_frame_init(video_format.format, width, height);
 		return frame;
+	}
+	public void obs_source_frame_destroy() {
+		Object generatedData = this.getData();
+		if (frame) {
+			ModernizedCProgram.bfree(generatedData[0]);
+			ModernizedCProgram.bfree(frame);
+		} 
+	}
+	public obs_source_frame async_delay_filter_video(Object data) {
+		async_delay_data filter = data;
+		obs_source generatedContext = filter.getContext();
+		obs_source obs_source = new obs_source();
+		obs_source_t parent = obs_source.obs_filter_get_parent(generatedContext);
+		obs_source_frame output = new obs_source_frame();
+		 cur_interval = new ();
+		Object generatedReset_video = filter.getReset_video();
+		Object generatedTimestamp = this.getTimestamp();
+		Object generatedLast_video_ts = filter.getLast_video_ts();
+		if (generatedReset_video || ModernizedCProgram.is_timestamp_jump(generatedTimestamp, generatedLast_video_ts)) {
+			ModernizedCProgram.free_video_data(filter, parent);
+			filter.setVideo_delay_reached(false);
+			filter.setReset_video(false);
+		} 
+		filter.setLast_video_ts(generatedTimestamp);
+		circlebuf generatedVideo_frames = filter.getVideo_frames();
+		generatedVideo_frames.circlebuf_push_back(frame, /*Error: Unsupported expression*/);
+		generatedVideo_frames.circlebuf_peek_front(output, /*Error: Unsupported expression*/);
+		cur_interval = generatedTimestamp - generatedTimestamp;
+		Object generatedVideo_delay_reached = filter.getVideo_delay_reached();
+		Object generatedInterval = filter.getInterval();
+		if (!generatedVideo_delay_reached && cur_interval < generatedInterval) {
+			return NULL;
+		} 
+		generatedVideo_frames.circlebuf_pop_front(NULL, /*Error: Unsupported expression*/);
+		if (!generatedVideo_delay_reached) {
+			filter.setVideo_delay_reached(true);
+		} 
+		return output/* NOTE: Delaying audio shouldn't be necessary because the audio subsystem will
+		 * automatically sync audio to video frames */;/* #define DELAY_AUDIO */
 	}
 	public Object getData() {
 		return data;

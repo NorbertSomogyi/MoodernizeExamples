@@ -20,12 +20,12 @@ public class curl_forms {
 			if (nargs != skip) {
 				if (ModernizedCProgram.Curl_is_formadd_string(forms[nargs].getOption())) {
 					if (forms[nargs].getValue()) {
-						.free((byte)forms[nargs].getValue());
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((byte)forms[nargs].getValue());
 					} 
 				} 
 			} 
 		}
-		.free((byte)forms);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((byte)forms);
 	}
 	public int Curl_formadd_convert(int formx, int lengthx, int ccsid) {
 		int l;
@@ -37,18 +37,18 @@ public class curl_forms {
 		if (lengthx >= 0) {
 			l = (int)forms[lengthx].getValue();
 		} else {
-				l = .strlen(forms[formx].getValue()) + 1;
+				l = /*Error: Function owner not recognized*/strlen(forms[formx].getValue()) + 1;
 		} 
-		cp = .malloc(4 * l);
+		cp = /*Error: Function owner not recognized*/malloc(4 * l);
 		if (!cp) {
 			return -1;
 		} 
 		l = ModernizedCProgram.convert(cp, 4 * l, 819, forms[formx].getValue(), l, ccsid);
 		if (l < 0) {
-			.free(cp);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(cp);
 			return -1;
 		} 
-		cp2 = .realloc(cp, /* Shorten buffer to the string size. */l);
+		cp2 = /*Error: Function owner not recognized*/realloc(cp, /* Shorten buffer to the string size. */l);
 		if (cp2) {
 			cp = cp2;
 		} 

@@ -22,7 +22,7 @@ public class shader_func {
 	
 	public void shader_func_init(Byte return_type, Byte name) {
 		Object generatedParams = this.getParams();
-		.da_init(generatedParams);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedParams);
 		this.setReturn_type(return_type);
 		this.setMapping(NULL);
 		this.setName(name);
@@ -41,7 +41,7 @@ public class shader_func {
 		ModernizedCProgram.bfree(generatedReturn_type);
 		Byte generatedMapping = this.getMapping();
 		ModernizedCProgram.bfree(generatedMapping);
-		.da_free(generatedParams);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedParams);
 	}
 	public shader_func shader_parser_getfunc(shader_parser sp, Object func_name) {
 		 i = new ();
@@ -49,7 +49,7 @@ public class shader_func {
 		Byte generatedName = func.getName();
 		for (i = 0; i < generatedFuncs.getNum(); i++) {
 			shader_func func = generatedFuncs.getArray() + i;
-			if (.strcmp(generatedName, func_name) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, func_name) == 0) {
 				return func;
 			} 
 		}

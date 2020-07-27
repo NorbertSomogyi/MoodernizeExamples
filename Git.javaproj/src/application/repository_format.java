@@ -27,13 +27,30 @@ public class repository_format {
 	public repository_format() {
 	}
 	
-	public int check_repository_format_gently(Object gitdir, int nongit_ok) {
-		strbuf sb = new strbuf(, , );
-		strbuf err = new strbuf(, , );
+	public int read_and_verify_repository_format(Object commondir) {
+		int ret = 0;
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		sb.strbuf_addf("%s/config", commondir);
+		byte[] generatedBuf = sb.getBuf();
+		format.read_repository_format(generatedBuf);
+		sb.strbuf_setlen(0);
+		if (sb.verify_repository_format(format) < 0) {
+			ModernizedCProgram.warning("%s", generatedBuf);
+			ret = -1;
+		} 
+		sb.strbuf_release();
+		return ret/*
+		 * Initialize 'repo' based on the provided 'gitdir'.
+		 * Return 0 upon success and a non-zero value upon failure.
+		 */;
+	}
+	public int check_repository_format_gently(Object gitdir, Integer nongit_ok) {
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf err = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int has_common;
 		has_common = sb.get_common_dir(gitdir);
 		sb.strbuf_addstr("/config");
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		candidate.read_repository_format(generatedBuf);
 		sb/*
 			 * For historical use of check_repository_format() in git-init,
@@ -66,7 +83,7 @@ public class repository_format {
 				 * config if present
 				 */) {
 			sb.strbuf_addf("%s/config.worktree", gitdir);
-			.git_config_from_file(read_worktree_config, generatedBuf, candidate);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_from_file(read_worktree_config, generatedBuf, candidate);
 			sb.strbuf_release();
 			has_common = 0;
 		} 
@@ -88,12 +105,12 @@ public class repository_format {
 		return 0;
 	}
 	public void init_repository_format() {
-		repository_format fresh = new repository_format(, , , );
-		.memcpy(format, fresh, );
+		repository_format fresh = new repository_format(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(format, fresh, /*Error: sizeof expression not supported yet*/);
 	}
 	public int read_repository_format(Object path) {
 		format.clear_repository_format();
-		.git_config_from_file(check_repo_format, path, format);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_from_file(check_repo_format, path, format);
 		int generatedVersion = this.getVersion();
 		if (generatedVersion == -1) {
 			format.clear_repository_format();
@@ -108,23 +125,6 @@ public class repository_format {
 		Byte generatedPartial_clone = this.getPartial_clone();
 		ModernizedCProgram.free(generatedPartial_clone);
 		format.init_repository_format();
-	}
-	public int read_and_verify_repository_format(Object commondir) {
-		int ret = 0;
-		strbuf sb = new strbuf(, , );
-		sb.strbuf_addf("%s/config", commondir);
-		byte generatedBuf = sb.getBuf();
-		format.read_repository_format(generatedBuf);
-		sb.strbuf_setlen(0);
-		if (sb.verify_repository_format(format) < 0) {
-			ModernizedCProgram.warning("%s", generatedBuf);
-			ret = -1;
-		} 
-		sb.strbuf_release();
-		return ret/*
-		 * Initialize 'repo' based on the provided 'gitdir'.
-		 * Return 0 upon success and a non-zero value upon failure.
-		 */;
 	}
 	public int getVersion() {
 		return version;

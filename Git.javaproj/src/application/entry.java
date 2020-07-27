@@ -1,32 +1,20 @@
 package application;
 
-/* Remember to update object flag allocation in object.h */
-/*
- * Both us and the server know that both parties have this object.
- */
-/*
- * The server has told us that it has this object. We still need to tell the
- * server that we have this object (or one of its descendants), but since we are
- * going to do that, we do not need to tell the server about its ancestors.
- */
-/*
- * This commit has entered the priority queue.
- */
-/*
- * This commit has left the priority queue.
- */
-/*
- * An entry in the priority queue.
- */
 public class entry {
-	private commit commit;
-	private Object original_ttl;
-	private Object ttl;
+	private long hash;
+	private long line1;
+	private long line2;
+	private entry next;
+	private entry previous;
+	private int anchor;
 	
-	public entry(commit commit, Object original_ttl, Object ttl) {
-		setCommit(commit);
-		setOriginal_ttl(original_ttl);
-		setTtl(ttl);
+	public entry(long hash, long line1, long line2, entry next, entry previous, int anchor) {
+		setHash(hash);
+		setLine1(line1);
+		setLine2(line2);
+		setNext(next);
+		setPrevious(previous);
+		setAnchor(anchor);
 	}
 	public entry() {
 	}
@@ -34,7 +22,7 @@ public class entry {
 	public int binary_search(int longest, entry entry) {
 		int left = -1;
 		int right = longest;
-		Object generatedLine2 = entry.getLine2();
+		long generatedLine2 = entry.getLine2();
 		while (left + 1 < right) {
 			int middle = left + (right - left) / 2;
 			if (sequence[middle].getLine2() > generatedLine2) {
@@ -55,7 +43,7 @@ public class entry {
 	}
 	public entry find_longest_common_sequence(hashmap map) {
 		Object generatedNr = map.getNr();
-		entry sequence = ModernizedCProgram.xmalloc(generatedNr * );
+		entry sequence = ModernizedCProgram.xmalloc(generatedNr * /*Error: Unsupported expression*/);
 		int longest = 0;
 		int i;
 		entry entry = new entry();
@@ -65,9 +53,9 @@ public class entry {
 			 * do not do that either.
 			 */
 		int anchor_i = -1;
-		Object generatedLine2 = entry.getLine2();
-		Object generatedAnchor = entry.getAnchor();
-		Object generatedNext = entry.getNext();
+		long generatedLine2 = entry.getLine2();
+		int generatedAnchor = entry.getAnchor();
+		entry generatedNext = entry.getNext();
 		Object generatedFirst = map.getFirst();
 		for (entry = generatedFirst; entry; entry = generatedNext) {
 			if (!generatedLine2 || generatedLine2 == -1024) {
@@ -93,7 +81,7 @@ public class entry {
 		} 
 		entry = sequence[longest - /* Iterate starting at the last element, adjusting the "next" members */1];
 		entry.setNext(((Object)0));
-		Object generatedPrevious = entry.getPrevious();
+		entry generatedPrevious = entry.getPrevious();
 		while (generatedPrevious) {
 			generatedPrevious.setNext(entry);
 			entry = generatedPrevious;
@@ -101,22 +89,44 @@ public class entry {
 		ModernizedCProgram.free(sequence);
 		return entry;
 	}
-	public commit getCommit() {
-		return commit;
+	public long getHash() {
+		return hash;
 	}
-	public void setCommit(commit newCommit) {
-		commit = newCommit;
+	public void setHash(long newHash) {
+		hash = newHash;
 	}
-	public Object getOriginal_ttl() {
-		return original_ttl;
+	public long getLine1() {
+		return line1;
 	}
-	public void setOriginal_ttl(Object newOriginal_ttl) {
-		original_ttl = newOriginal_ttl;
+	public void setLine1(long newLine1) {
+		line1 = newLine1;
 	}
-	public Object getTtl() {
-		return ttl;
+	public long getLine2() {
+		return line2;
 	}
-	public void setTtl(Object newTtl) {
-		ttl = newTtl;
+	public void setLine2(long newLine2) {
+		line2 = newLine2;
+	}
+	public entry getNext() {
+		return next;
+	}
+	public void setNext(entry newNext) {
+		next = newNext;
+	}
+	public entry getPrevious() {
+		return previous;
+	}
+	public void setPrevious(entry newPrevious) {
+		previous = newPrevious;
+	}
+	public int getAnchor() {
+		return anchor;
+	}
+	public void setAnchor(int newAnchor) {
+		anchor = newAnchor;
 	}
 }
+/*
+		 * If 1, this entry can serve as an anchor. See
+		 * Documentation/diff-options.txt for more information.
+		 */

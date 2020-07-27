@@ -124,12 +124,12 @@ public class state_item {
 		int end_idx;
 		int generatedSi_idx = this.getSi_idx();
 		if (generatedSi_idx < /* return quickly for a keyword */0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 generatedSi_m_endpos = this.getSi_m_endpos();
 		Object generatedLnum = generatedSi_m_endpos.getLnum();
 		if (!force && generatedLnum >= ModernizedCProgram.current_lnum) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		end_idx = 0;
 		startpos.setLnum(ModernizedCProgram.current_lnum);
@@ -141,7 +141,7 @@ public class state_item {
 			if (((synpat_T)((ModernizedCProgram.syn_block).getB_syn_patterns().getGa_data()))[generatedSi_idx].getSp_flags() & /* No end pattern matched. */-1024) {
 				this.setSi_ends(/* a "oneline" never continues in the next line */1);
 				generatedSi_m_endpos.setLnum(ModernizedCProgram.current_lnum);
-				generatedSi_m_endpos.setCol((colnr_T).strlen((byte)(ModernizedCProgram.syn_getcurline())));
+				generatedSi_m_endpos.setCol((colnr_T)/*Error: Function owner not recognized*/strlen((byte)(ModernizedCProgram.syn_getcurline())));
 			} else {
 					this.setSi_ends(/* continues in the next line */0);
 					generatedSi_m_endpos.setLnum(0);
@@ -160,7 +160,7 @@ public class state_item {
 		} 
 	}
 	/* where to start searching for the end */
-	public int check_keyword_id(Object line, int startcol, int endcolp, long flagsp, int next_listp, int ccharp) {
+	public int check_keyword_id(Object line, int startcol, Integer endcolp, Long flagsp, Integer next_listp, Integer ccharp) {
 		/* return: next_list of matching keyword *//* item at the top of the stack *//* conceal substitution char */keyentry_T kp = new keyentry_T();
 		char_u kwp = new char_u();
 		int round;
@@ -173,7 +173,7 @@ public class state_item {
 		kwlen = 0;
 		do {
 			if (has_mbyte) {
-				kwlen += .UNRECOGNIZEDFUNCTIONNAME(kwp + kwlen);
+				kwlen += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(kwp + kwlen);
 			} else {
 					++kwlen;
 			} 

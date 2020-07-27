@@ -49,9 +49,9 @@ public class vt_h264_encoder {
 	
 	public void log_osstatus(int log_level, Object context, Object code) {
 		byte c_str = NULL;
-		 err = .CFErrorCreate(kCFAllocatorDefault, kCFErrorDomainOSStatus, code, NULL);
-		 str = .CFErrorCopyDescription(err);
-		c_str = .cfstr_copy_cstr(str, kCFStringEncodingUTF8);
+		 err = /*Error: Function owner not recognized*/CFErrorCreate(kCFAllocatorDefault, kCFErrorDomainOSStatus, code, NULL);
+		 str = /*Error: Function owner not recognized*/CFErrorCopyDescription(err);
+		c_str = /*Error: Function owner not recognized*/cfstr_copy_cstr(str, kCFStringEncodingUTF8);
 		obs_encoder generatedEncoder = this.getEncoder();
 		if (c_str) {
 			if (enc) {
@@ -61,23 +61,23 @@ public class vt_h264_encoder {
 			} 
 		} 
 		ModernizedCProgram.bfree(c_str);
-		.CFRelease(str);
-		.CFRelease(err);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(str);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(err);
 	}
 	public Object create_pixbuf_spec() {
-		 pixbuf_spec = .CFDictionaryCreateMutable(kCFAllocatorDefault, 3, kCFTypeDictionaryKeyCallBacks, kCFTypeDictionaryValueCallBacks);
+		 pixbuf_spec = /*Error: Function owner not recognized*/CFDictionaryCreateMutable(kCFAllocatorDefault, 3, kCFTypeDictionaryKeyCallBacks, kCFTypeDictionaryValueCallBacks);
 		int generatedVt_pix_fmt = this.getVt_pix_fmt();
-		 n = .CFNumberCreate(NULL, kCFNumberSInt32Type, generatedVt_pix_fmt);
-		.CFDictionaryAddValue(pixbuf_spec, kCVPixelBufferPixelFormatTypeKey, n);
-		.CFRelease(n);
+		 n = /*Error: Function owner not recognized*/CFNumberCreate(NULL, kCFNumberSInt32Type, generatedVt_pix_fmt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFDictionaryAddValue(pixbuf_spec, kCVPixelBufferPixelFormatTypeKey, n);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(n);
 		Object generatedWidth = this.getWidth();
-		n = .CFNumberCreate(NULL, kCFNumberSInt32Type, generatedWidth);
-		.CFDictionaryAddValue(pixbuf_spec, kCVPixelBufferWidthKey, n);
-		.CFRelease(n);
+		n = /*Error: Function owner not recognized*/CFNumberCreate(NULL, kCFNumberSInt32Type, generatedWidth);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFDictionaryAddValue(pixbuf_spec, kCVPixelBufferWidthKey, n);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(n);
 		Object generatedHeight = this.getHeight();
-		n = .CFNumberCreate(NULL, kCFNumberSInt32Type, generatedHeight);
-		.CFDictionaryAddValue(pixbuf_spec, kCVPixelBufferHeightKey, n);
-		.CFRelease(n);
+		n = /*Error: Function owner not recognized*/CFNumberCreate(NULL, kCFNumberSInt32Type, generatedHeight);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFDictionaryAddValue(pixbuf_spec, kCVPixelBufferHeightKey, n);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(n);
 		return pixbuf_spec;
 	}
 	public Object create_encoder() {
@@ -89,24 +89,24 @@ public class vt_h264_encoder {
 		Object generatedWidth = this.getWidth();
 		Object generatedHeight = this.getHeight();
 		Object generatedQueue = this.getQueue();
-		code = .VTCompressionSessionCreate(kCFAllocatorDefault, generatedWidth, generatedHeight, kCMVideoCodecType_H264, encoder_spec, pixbuf_spec, NULL, sample_encoded_callback, generatedQueue, s);
+		code = /*Error: Function owner not recognized*/VTCompressionSessionCreate(kCFAllocatorDefault, generatedWidth, generatedHeight, kCMVideoCodecType_H264, encoder_spec, pixbuf_spec, NULL, sample_encoded_callback, generatedQueue, s);
 		if (code) {
 			enc.log_osstatus(LOG_ERROR, "VTCompressionSessionCreate( kCFAllocatorDefault, enc->width, enc->height, kCMVideoCodecType_H264, encoder_spec, pixbuf_spec, NULL, &sample_encoded_callback, enc->queue, &s)", code);
 			;
 		} 
 		;
-		.CFRelease(encoder_spec);
-		.CFRelease(pixbuf_spec);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(encoder_spec);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(pixbuf_spec);
 		 b = NULL;
-		code = .VTSessionCopyProperty(s, kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder, NULL, b);
+		code = /*Error: Function owner not recognized*/VTSessionCopyProperty(s, kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder, NULL, b);
 		obs_encoder generatedEncoder = this.getEncoder();
-		if (code == noErr && (this.setHw_enc(.CFBooleanGetValue(b)))) {
+		if (code == noErr && (this.setHw_enc(/*Error: Function owner not recognized*/CFBooleanGetValue(b)))) {
 			ModernizedCProgram.blog(LOG_INFO, "[VideoToolbox %s: 'h264']: session created with hardware encoding", ModernizedCProgram.obs_encoder_get_name(generatedEncoder));
 		} else {
 				this.setHw_enc(false);
 		} 
 		if (b != NULL) {
-			.CFRelease(b);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(b);
 		} 
 		Object generatedKeyint = this.getKeyint();
 		code = ModernizedCProgram.session_set_prop_int(s, kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration, generatedKeyint);
@@ -123,7 +123,7 @@ public class vt_h264_encoder {
 			;
 		} 
 		;
-		code = ModernizedCProgram.session_set_prop_int(s, kVTCompressionPropertyKey_ExpectedFrameRate, .ceil((double)generatedFps_num / generatedFps_den));
+		code = ModernizedCProgram.session_set_prop_int(s, kVTCompressionPropertyKey_ExpectedFrameRate, /*Error: Function owner not recognized*/ceil((double)generatedFps_num / generatedFps_den));
 		if (code) {
 			enc.log_osstatus(LOG_ERROR, "session_set_prop_int( s, kVTCompressionPropertyKey_ExpectedFrameRate, ceil((float)enc->fps_num / enc->fps_den))", code);
 			;
@@ -164,7 +164,7 @@ public class vt_h264_encoder {
 			;
 		} 
 		;
-		code = .VTCompressionSessionPrepareToEncodeFrames(s);
+		code = /*Error: Function owner not recognized*/VTCompressionSessionPrepareToEncodeFrames(s);
 		if (code) {
 			enc.log_osstatus(LOG_ERROR, "VTCompressionSessionPrepareToEncodeFrames(s)", code);
 			;
@@ -173,7 +173,7 @@ public class vt_h264_encoder {
 		this.setSession(s);
 		return true;
 		if (pixbuf_spec != NULL) {
-			.CFRelease(pixbuf_spec);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CFRelease(pixbuf_spec);
 		} 
 		return false;
 		obs_encoder encoder = new obs_encoder();
@@ -184,7 +184,7 @@ public class vt_h264_encoder {
 		if (ei && generatedType != obs_encoder_type.type) {
 			return NULL;
 		} 
-		encoder = ModernizedCProgram.bzalloc();
+		encoder = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		encoder.setMixer_idx(mixer_idx);
 		obs_encoder_info generatedInfo = encoder.getInfo();
 		if (!ei) {
@@ -203,7 +203,7 @@ public class vt_h264_encoder {
 			encoder.obs_encoder_destroy();
 			return NULL;
 		} 
-		encoder.setControl(ModernizedCProgram.bzalloc());
+		encoder.setControl(ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/));
 		obs_weak_encoder generatedControl = encoder.getControl();
 		generatedControl.setEncoder(encoder);
 		obs_context_data generatedContext = encoder.getContext();
@@ -225,12 +225,12 @@ public class vt_h264_encoder {
 		double generatedRc_max_bitrate_window = this.getRc_max_bitrate_window();
 		Object generatedHw_enc = this.getHw_enc();
 		Object generatedProfile = this.getProfile();
-		ModernizedCProgram.blog(LOG_INFO, "[VideoToolbox %s: 'h264']: settings:\n\tvt_encoder_id          %s\n\tbitrate:               %d (kbps)\n\tfps_num:               %d\n\tfps_den:               %d\n\twidth:                 %d\n\theight:                %d\n\tkeyint:                %d (s)\n\tlimit_bitrate:         %s\n\trc_max_bitrate:        %d (kbps)\n\trc_max_bitrate_window: %f (s)\n\thw_enc:                %s\n\tprofile:               %s\n", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), generatedVt_encoder_id, generatedBitrate, generatedFps_num, generatedFps_den, generatedWidth, generatedHeight, generatedKeyint, generatedLimit_bitrate ? "on" : "off", generatedRc_max_bitrate, generatedRc_max_bitrate_window, generatedHw_enc ? "on" : "off", (generatedProfile != NULL && !!.strlen(generatedProfile)) ? generatedProfile : "default");
+		ModernizedCProgram.blog(LOG_INFO, "[VideoToolbox %s: 'h264']: settings:\n\tvt_encoder_id          %s\n\tbitrate:               %d (kbps)\n\tfps_num:               %d\n\tfps_den:               %d\n\twidth:                 %d\n\theight:                %d\n\tkeyint:                %d (s)\n\tlimit_bitrate:         %s\n\trc_max_bitrate:        %d (kbps)\n\trc_max_bitrate_window: %f (s)\n\thw_enc:                %s\n\tprofile:               %s\n", ModernizedCProgram.obs_encoder_get_name(generatedEncoder), generatedVt_encoder_id, generatedBitrate, generatedFps_num, generatedFps_den, generatedWidth, generatedHeight, generatedKeyint, generatedLimit_bitrate ? "on" : "off", generatedRc_max_bitrate, generatedRc_max_bitrate_window, generatedHw_enc ? "on" : "off", (generatedProfile != NULL && !!/*Error: Function owner not recognized*/strlen(generatedProfile)) ? generatedProfile : "default");
 	}
 	public void convert_block_nals_to_annexb(Object packet, Object block, int nal_length_bytes) {
 		 block_size = new ();
 		 block_buf = new ();
-		.CMBlockBufferGetDataPointer(block, 0, NULL, block_size, (byte)block_buf);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CMBlockBufferGetDataPointer(block, 0, NULL, block_size, (byte)block_buf);
 		 bytes_remaining = block_size;
 		obs_encoder generatedEncoder = this.getEncoder();
 		while (bytes_remaining > 0) {
@@ -238,17 +238,17 @@ public class vt_h264_encoder {
 			if (nal_length_bytes == 1) {
 				nal_size = block_buf[0];
 			}  else if (nal_length_bytes == 2) {
-				nal_size = .CFSwapInt16BigToHost((()block_buf)[0]);
+				nal_size = /*Error: Function owner not recognized*/CFSwapInt16BigToHost((()block_buf)[0]);
 			}  else if (nal_length_bytes == 4) {
-				nal_size = .CFSwapInt32BigToHost((()block_buf)[0]);
+				nal_size = /*Error: Function owner not recognized*/CFSwapInt32BigToHost((()block_buf)[0]);
 			} else {
-					return ;
+					return /*Error: Unsupported expression*/;
 			} 
 			bytes_remaining -= nal_length_bytes;
 			block_buf += nal_length_bytes;
 			if (bytes_remaining < nal_size) {
 				ModernizedCProgram.blog(LOG_ERROR, "[VideoToolbox %s: 'h264']: invalid nal block", ModernizedCProgram.obs_encoder_get_name(generatedEncoder));
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			ModernizedCProgram.packet_put_startcode(packet, 3);
 			ModernizedCProgram.packet_put(packet, block_buf, nal_size);
@@ -262,7 +262,7 @@ public class vt_h264_encoder {
 		 param_size = new ();
 		for ( i = 0;
 		 i < param_count; i++) {
-			code = .CMVideoFormatDescriptionGetH264ParameterSetAtIndex(format_desc, i, param, param_size, NULL, NULL);
+			code = /*Error: Function owner not recognized*/CMVideoFormatDescriptionGetH264ParameterSetAtIndex(format_desc, i, param, param_size, NULL, NULL);
 			if (code != noErr) {
 				enc.log_osstatus(LOG_ERROR, "getting NAL parameter at index", code);
 				return false;
@@ -277,10 +277,10 @@ public class vt_h264_encoder {
 	}
 	public Object convert_sample_to_annexb(Object packet, Object extra_data, Object buffer, Object keyframe) {
 		 code = new ();
-		 format_desc = .CMSampleBufferGetFormatDescription(buffer);
+		 format_desc = /*Error: Function owner not recognized*/CMSampleBufferGetFormatDescription(buffer);
 		 param_count = new ();
 		int nal_length_bytes;
-		code = .CMVideoFormatDescriptionGetH264ParameterSetAtIndex(format_desc, 0, NULL, NULL, param_count, nal_length_bytes)// it is not clear what errors this function can return;// it is not clear what errors this function can return
+		code = /*Error: Function owner not recognized*/CMVideoFormatDescriptionGetH264ParameterSetAtIndex(format_desc, 0, NULL, NULL, param_count, nal_length_bytes)// it is not clear what errors this function can return;// it is not clear what errors this function can return
 		obs_encoder generatedEncoder = this.getEncoder();
 		// so we check the two most reasonableif (code == .kCMFormatDescriptionBridgeError_InvalidParameter_ || code == kCMFormatDescriptionError_InvalidParameter) {
 			ModernizedCProgram.blog(LOG_WARNING, "[VideoToolbox %s: 'h264']: assuming 2 parameter sets and 4 byte NAL length header", ModernizedCProgram.obs_encoder_get_name(generatedEncoder));
@@ -293,19 +293,19 @@ public class vt_h264_encoder {
 		if (keyframe && !enc.handle_keyframe(format_desc, param_count, packet, extra_data)) {
 			return false;
 		} 
-		 block = .CMSampleBufferGetDataBuffer(buffer);
+		 block = /*Error: Function owner not recognized*/CMSampleBufferGetDataBuffer(buffer);
 		enc.convert_block_nals_to_annexb(packet, block, nal_length_bytes);
 		return true;
 	}
 	public Object get_cached_pixel_buffer(Object buf) {
 		 code = new ();
 		Object generatedSession = this.getSession();
-		 pool = .VTCompressionSessionGetPixelBufferPool(generatedSession);
+		 pool = /*Error: Function owner not recognized*/VTCompressionSessionGetPixelBufferPool(generatedSession);
 		if (!pool) {
 			return kCVReturnError;
 		} 
 		 pixbuf = new ();
-		code = .CVPixelBufferPoolCreatePixelBuffer(NULL, pool, pixbuf)// Why aren't these already set on the pixel buffer?// I would have expected pixel buffers from the session's;// Why aren't these already set on the pixel buffer?// I would have expected pixel buffers from the session's
+		code = /*Error: Function owner not recognized*/CVPixelBufferPoolCreatePixelBuffer(NULL, pool, pixbuf)// Why aren't these already set on the pixel buffer?// I would have expected pixel buffers from the session's;// Why aren't these already set on the pixel buffer?// I would have expected pixel buffers from the session's
 		if (code) {
 			enc.log_osstatus(LOG_ERROR, "CVPixelBufferPoolCreatePixelBuffer(NULL, pool, &pixbuf)", code);
 			;
@@ -313,9 +313,9 @@ public class vt_h264_encoder {
 		;
 		video_colorspace generatedColorspace = this.getColorspace();
 		// pool to have the correct color space stuff set matrix = ModernizedCProgram.obs_to_vt_colorspace(generatedColorspace);
-		.CVBufferSetAttachment(pixbuf, kCVImageBufferYCbCrMatrixKey, matrix, kCVAttachmentMode_ShouldPropagate);
-		.CVBufferSetAttachment(pixbuf, kCVImageBufferColorPrimariesKey, kCVImageBufferColorPrimaries_ITU_R_709_2, kCVAttachmentMode_ShouldPropagate);
-		.CVBufferSetAttachment(pixbuf, kCVImageBufferTransferFunctionKey, kCVImageBufferTransferFunction_ITU_R_709_2, kCVAttachmentMode_ShouldPropagate);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CVBufferSetAttachment(pixbuf, kCVImageBufferYCbCrMatrixKey, matrix, kCVAttachmentMode_ShouldPropagate);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CVBufferSetAttachment(pixbuf, kCVImageBufferColorPrimariesKey, kCVImageBufferColorPrimaries_ITU_R_709_2, kCVAttachmentMode_ShouldPropagate);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CVBufferSetAttachment(pixbuf, kCVImageBufferTransferFunctionKey, kCVImageBufferTransferFunction_ITU_R_709_2, kCVAttachmentMode_ShouldPropagate);
 		buf = pixbuf;
 		return true;
 	}

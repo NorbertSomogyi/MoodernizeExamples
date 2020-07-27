@@ -54,16 +54,16 @@ public class graphics_subsystem {
 		gs_vb_data gs_vb_data = new gs_vb_data();
 		vbd = gs_vb_data.gs_vbdata_create();
 		vbd.setNum(512);
-		vbd.setPoints(ModernizedCProgram.bmalloc( * 512));
-		vbd.setNormals(ModernizedCProgram.bmalloc( * 512));
-		vbd.setColors(ModernizedCProgram.bmalloc( * 512));
+		vbd.setPoints(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/ * 512));
+		vbd.setNormals(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/ * 512));
+		vbd.setColors(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/ * 512));
 		vbd.setNum_tex(1);
-		vbd.setTvarray(ModernizedCProgram.bmalloc());
-		gs_tvertarray generatedTvarray = vbd.getTvarray();
+		vbd.setTvarray(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/));
+		gs_tvertarray[] generatedTvarray = vbd.getTvarray();
 		generatedTvarray[0].setWidth(2);
-		generatedTvarray[0].setArray(ModernizedCProgram.bmalloc( * 512));
+		generatedTvarray[0].setArray(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/ * 512));
 		gs_device generatedDevice = this.getDevice();
-		this.setImmediate_vertbuffer(.UNRECOGNIZEDFUNCTIONNAME(generatedDevice, vbd, (1 << 1)));
+		this.setImmediate_vertbuffer(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, vbd, (1 << 1)));
 		gs_vertex_buffer generatedImmediate_vertbuffer = this.getImmediate_vertbuffer();
 		if (!generatedImmediate_vertbuffer) {
 			return false;
@@ -75,17 +75,17 @@ public class graphics_subsystem {
 		gs_vb_data gs_vb_data = new gs_vb_data();
 		vbd = gs_vb_data.gs_vbdata_create();
 		vbd.setNum(4);
-		vbd.setPoints(ModernizedCProgram.bmalloc( * 4));
+		vbd.setPoints(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/ * 4));
 		vbd.setNum_tex(1);
-		vbd.setTvarray(ModernizedCProgram.bmalloc());
-		gs_tvertarray generatedTvarray = vbd.getTvarray();
+		vbd.setTvarray(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/));
+		gs_tvertarray[] generatedTvarray = vbd.getTvarray();
 		generatedTvarray[0].setWidth(2);
-		generatedTvarray[0].setArray(ModernizedCProgram.bmalloc( * 4));
+		generatedTvarray[0].setArray(ModernizedCProgram.bmalloc(/*Error: Unsupported expression*/ * 4));
 		vec3 generatedPoints = vbd.getPoints();
-		.memset(generatedPoints, 0,  * 4);
-		.memset(generatedTvarray[0].getArray(), 0,  * 4);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedPoints, 0, /*Error: Unsupported expression*/ * 4);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedTvarray[0].getArray(), 0, /*Error: Unsupported expression*/ * 4);
 		gs_device generatedDevice = this.getDevice();
-		this.setSprite_buffer(.UNRECOGNIZEDFUNCTIONNAME(generatedDevice, vbd, (1 << 1)));
+		this.setSprite_buffer(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, vbd, (1 << 1)));
 		gs_vertex_buffer generatedSprite_buffer = this.getSprite_buffer();
 		if (!generatedSprite_buffer) {
 			return false;
@@ -96,9 +96,9 @@ public class graphics_subsystem {
 		matrix4 top_mat = new matrix4();
 		top_mat.matrix4_identity();
 		Object generatedMatrix_stack = this.getMatrix_stack();
-		.da_push_back(generatedMatrix_stack, top_mat);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_push_back(generatedMatrix_stack, top_mat);
 		gs_device generatedDevice = this.getDevice();
-		.UNRECOGNIZEDFUNCTIONNAME(generatedDevice);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice);
 		if (!graphics.graphics_init_immediate_vb()) {
 			return false;
 		} 
@@ -113,20 +113,20 @@ public class graphics_subsystem {
 		if (ModernizedCProgram.pthread_mutex_init(generatedEffect_mutex, ((Object)0)) != 0) {
 			return false;
 		} 
-		.UNRECOGNIZEDFUNCTIONNAME(generatedDevice, gs_blend_type.GS_BLEND_SRCALPHA, gs_blend_type.GS_BLEND_INVSRCALPHA, gs_blend_type.GS_BLEND_ONE, gs_blend_type.GS_BLEND_INVSRCALPHA);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, gs_blend_type.GS_BLEND_SRCALPHA, gs_blend_type.GS_BLEND_INVSRCALPHA, gs_blend_type.GS_BLEND_ONE, gs_blend_type.GS_BLEND_INVSRCALPHA);
 		blend_state generatedCur_blend_state = this.getCur_blend_state();
 		generatedCur_blend_state.setEnabled(true);
 		generatedCur_blend_state.setSrc_c(gs_blend_type.GS_BLEND_SRCALPHA);
 		generatedCur_blend_state.setDest_c(gs_blend_type.GS_BLEND_INVSRCALPHA);
 		generatedCur_blend_state.setSrc_a(gs_blend_type.GS_BLEND_ONE);
 		generatedCur_blend_state.setDest_a(gs_blend_type.GS_BLEND_INVSRCALPHA);
-		.UNRECOGNIZEDFUNCTIONNAME(generatedDevice);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice);
 		ModernizedCProgram.gs_init_image_deps();
 		return true;
 	}
 	public int gs_create(Object module, Object adapter) {
 		int errcode = -1;
-		graphics_t graphics = ModernizedCProgram.bzalloc();
+		graphics_t graphics = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		Object generatedMutex = graphics.getMutex();
 		ModernizedCProgram.pthread_mutex_init_value(generatedMutex);
 		Object generatedEffect_mutex = graphics.getEffect_mutex();
@@ -142,7 +142,7 @@ public class graphics_subsystem {
 			;
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		errcode = .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, adapter);
+		errcode = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, adapter);
 		if (errcode != 0) {
 			;
 		} 
@@ -156,7 +156,7 @@ public class graphics_subsystem {
 	}
 	public void gs_destroy() {
 		if (!ModernizedCProgram.gs_obj_valid(graphics, "gs_destroy", "graphics")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		while (thread_graphics) {
 			ModernizedCProgram.gs_leave_context();
@@ -169,15 +169,15 @@ public class graphics_subsystem {
 		if (generatedDevice) {
 			gs_effect effect = generatedFirst_effect;
 			thread_graphics = graphics;
-			.UNRECOGNIZEDFUNCTIONNAME(generatedDevice);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice);
 			while (effect) {
 				gs_effect next = generatedNext;
 				effect.gs_effect_actually_destroy();
 				effect = next;
 			}
-			.UNRECOGNIZEDFUNCTIONNAME(generatedSprite_buffer);
-			.UNRECOGNIZEDFUNCTIONNAME(generatedImmediate_vertbuffer);
-			.UNRECOGNIZEDFUNCTIONNAME(generatedDevice);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSprite_buffer);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedImmediate_vertbuffer);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice);
 			thread_graphics = ((Object)0);
 		} 
 		Object generatedMutex = this.getMutex();
@@ -185,11 +185,11 @@ public class graphics_subsystem {
 		Object generatedEffect_mutex = this.getEffect_mutex();
 		ModernizedCProgram.pthread_mutex_destroy(generatedEffect_mutex);
 		Object generatedMatrix_stack = this.getMatrix_stack();
-		.da_free(generatedMatrix_stack);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedMatrix_stack);
 		Object generatedViewport_stack = this.getViewport_stack();
-		.da_free(generatedViewport_stack);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedViewport_stack);
 		Object generatedBlend_state_stack = this.getBlend_state_stack();
-		.da_free(generatedBlend_state_stack);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedBlend_state_stack);
 		Object generatedModule = this.getModule();
 		if (generatedModule) {
 			ModernizedCProgram.os_dlclose(generatedModule);
@@ -199,7 +199,7 @@ public class graphics_subsystem {
 	}
 	public void gs_enter_context() {
 		if (!ModernizedCProgram.gs_obj_valid(graphics, "gs_enter_context", "graphics")) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		 is_current = thread_graphics == graphics;
 		if (thread_graphics && !is_current) {
@@ -211,7 +211,7 @@ public class graphics_subsystem {
 		gs_device generatedDevice = this.getDevice();
 		if (!is_current) {
 			ModernizedCProgram.pthread_mutex_lock(generatedMutex);
-			.UNRECOGNIZEDFUNCTIONNAME(generatedDevice);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice);
 			thread_graphics = graphics;
 		} 
 		Object generatedRef = this.getRef();
@@ -222,15 +222,15 @@ public class graphics_subsystem {
 	}
 	public void reset_immediate_arrays() {
 		Object generatedVerts = this.getVerts();
-		.da_init(generatedVerts);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedVerts);
 		Object generatedNorms = this.getNorms();
-		.da_init(generatedNorms);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedNorms);
 		Object generatedColors = this.getColors();
-		.da_init(generatedColors);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedColors);
 		Object generatedTexverts = this.getTexverts();
 		for (size_t i = 0;
 		 i < 16; i++) {
-			.da_init(generatedTexverts[i]);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_init(generatedTexverts[i]);
 		}
 	}
 	public Object validvertsize(Object num, Object name) {

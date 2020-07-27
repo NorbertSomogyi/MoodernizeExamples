@@ -9,14 +9,14 @@ package application;
  * Structure used for reading in json_decode().
  */
 public class js_reader {
-	private Object js_buf;
+	private Object[] js_buf;
 	private Object js_end;
 	private int js_used;
 	private Object js_fill;
 	private Object js_cookie;
 	private int js_cookie_arg;
 	
-	public js_reader(Object js_buf, Object js_end, int js_used, Object js_fill, Object js_cookie, int js_cookie_arg) {
+	public js_reader(Object[] js_buf, Object js_end, int js_used, Object js_fill, Object js_cookie, int js_cookie_arg) {
 		setJs_buf(js_buf);
 		setJs_end(js_end);
 		setJs_used(js_used);
@@ -30,24 +30,24 @@ public class js_reader {
 	public void fill_numbuflen() {
 		Object generatedJs_fill = this.getJs_fill();
 		Object generatedJs_end = this.getJs_end();
-		Object generatedJs_buf = this.getJs_buf();
+		Object[] generatedJs_buf = this.getJs_buf();
 		int generatedJs_used = this.getJs_used();
 		if (generatedJs_fill != ((Object)0) && (int)(generatedJs_end - generatedJs_buf) - generatedJs_used < 65) {
-			if (.UNRECOGNIZEDFUNCTIONNAME(reader)) {
-				this.setJs_end(generatedJs_buf + .strlen((byte)(generatedJs_buf)));
+			if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(reader)) {
+				this.setJs_end(generatedJs_buf + /*Error: Function owner not recognized*/strlen((byte)(generatedJs_buf)));
 			} 
 		} 
 	}
 	public void json_skip_white() {
 		int c;
-		Object generatedJs_buf = this.getJs_buf();
+		Object[] generatedJs_buf = this.getJs_buf();
 		int generatedJs_used = this.getJs_used();
 		Object generatedJs_fill = this.getJs_fill();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			c = generatedJs_buf[generatedJs_used];
 			if (generatedJs_fill != ((Object)0) && c == (byte)'\000') {
-				if (.UNRECOGNIZEDFUNCTIONNAME(reader)) {
-					this.setJs_end(generatedJs_buf + .strlen((byte)(generatedJs_buf)));
+				if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(reader)) {
+					this.setJs_end(generatedJs_buf + /*Error: Function owner not recognized*/strlen((byte)(generatedJs_buf)));
 					continue;
 				} 
 			} 
@@ -73,8 +73,8 @@ public class js_reader {
 		int generatedJs_used = this.getJs_used();
 		int used_save = generatedJs_used;
 		int ret;
-		Object generatedJs_buf = this.getJs_buf();
-		this.setJs_end(generatedJs_buf + .strlen((byte)(generatedJs_buf)));
+		Object[] generatedJs_buf = this.getJs_buf();
+		this.setJs_end(generatedJs_buf + /*Error: Function owner not recognized*/strlen((byte)(generatedJs_buf)));
 		reader.json_skip_white();
 		ret = ModernizedCProgram.json_decode_item(reader, ((Object)0), options);
 		this.setJs_used(used_save);
@@ -89,10 +89,10 @@ public class js_reader {
 		 * Test json_find_end with an incomplete array, calling the fill function.
 		 */;
 	}
-	public Object getJs_buf() {
+	public Object[] getJs_buf() {
 		return js_buf;
 	}
-	public void setJs_buf(Object newJs_buf) {
+	public void setJs_buf(Object[] newJs_buf) {
 		js_buf = newJs_buf;
 	}
 	public Object getJs_end() {

@@ -4,9 +4,9 @@ public class base_tree_info {
 	private object_id base_commit;
 	private int nr_patch_id;
 	private int alloc_patch_id;
-	private object_id patch_id;
+	private object_id[] patch_id;
 	
-	public base_tree_info(object_id base_commit, int nr_patch_id, int alloc_patch_id, object_id patch_id) {
+	public base_tree_info(object_id base_commit, int nr_patch_id, int alloc_patch_id, object_id[] patch_id) {
 		setBase_commit(base_commit);
 		setNr_patch_id(nr_patch_id);
 		setAlloc_patch_id(alloc_patch_id);
@@ -33,10 +33,10 @@ public class base_tree_info {
 	public void setAlloc_patch_id(int newAlloc_patch_id) {
 		alloc_patch_id = newAlloc_patch_id;
 	}
-	public object_id getPatch_id() {
+	public object_id[] getPatch_id() {
 		return patch_id;
 	}
-	public void setPatch_id(object_id newPatch_id) {
+	public void setPatch_id(object_id[] newPatch_id) {
 		patch_id = newPatch_id;
 	}
 }

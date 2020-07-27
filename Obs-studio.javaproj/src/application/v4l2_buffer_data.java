@@ -2,9 +2,9 @@ package application;
 
 public class v4l2_buffer_data {
 	private Object count;
-	private v4l2_mmap_info info;
+	private v4l2_mmap_info[] info;
 	
-	public v4l2_buffer_data(Object count, v4l2_mmap_info info) {
+	public v4l2_buffer_data(Object count, v4l2_mmap_info[] info) {
 		setCount(count);
 		setInfo(info);
 	}
@@ -30,19 +30,19 @@ public class v4l2_buffer_data {
 	public Object v4l2_start_capture(Object dev) {
 		v4l2_buf_type type;
 		v4l2_buffer enq = new v4l2_buffer();
-		.memset(enq, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(enq, 0, /*Error: sizeof expression not supported yet*/);
 		enq.setV4l2_buffer(V4L2_BUF_TYPE_VIDEO_CAPTURE);
 		enq.setV4l2_buffer(V4L2_MEMORY_MMAP);
 		Object generatedV4l2_buffer = enq.getV4l2_buffer();
 		Object generatedCount = this.getCount();
 		for (enq.setV4l2_buffer(0); generatedV4l2_buffer < generatedCount; ++generatedV4l2_buffer) {
-			if (.v4l2_ioctl(dev, VIDIOC_QBUF, enq) < 0) {
+			if (/*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_QBUF, enq) < 0) {
 				ModernizedCProgram.blog(LOG_ERROR, "v4l2-helpers: unable to queue buffer");
 				return -1;
 			} 
 		}
 		v4l2_buf_type.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-		if (.v4l2_ioctl(dev, VIDIOC_STREAMON, v4l2_buf_type.type) < 0) {
+		if (/*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_STREAMON, v4l2_buf_type.type) < 0) {
 			ModernizedCProgram.blog(LOG_ERROR, "v4l2-helpers: unable to start stream");
 			return -1;
 		} 
@@ -51,11 +51,11 @@ public class v4l2_buffer_data {
 	public Object v4l2_create_mmap(Object dev) {
 		v4l2_requestbuffers req = new v4l2_requestbuffers();
 		v4l2_buffer map = new v4l2_buffer();
-		.memset(req, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(req, 0, /*Error: sizeof expression not supported yet*/);
 		req.setV4l2_requestbuffers(4);
 		req.setV4l2_requestbuffers(V4L2_BUF_TYPE_VIDEO_CAPTURE);
 		req.setV4l2_requestbuffers(V4L2_MEMORY_MMAP);
-		if (.v4l2_ioctl(dev, VIDIOC_REQBUFS, req) < 0) {
+		if (/*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_REQBUFS, req) < 0) {
 			ModernizedCProgram.blog(LOG_ERROR, "v4l2-helpers: Request for buffers failed !");
 			return -1;
 		} 
@@ -65,19 +65,19 @@ public class v4l2_buffer_data {
 			return -1;
 		} 
 		this.setCount(generatedV4l2_requestbuffers);
-		this.setInfo(ModernizedCProgram.bzalloc(generatedV4l2_requestbuffers * ));
-		.memset(map, 0, );
+		this.setInfo(ModernizedCProgram.bzalloc(generatedV4l2_requestbuffers * /*Error: Unsupported expression*/));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(map, 0, /*Error: sizeof expression not supported yet*/);
 		map.setV4l2_buffer(generatedV4l2_requestbuffers);
 		map.setV4l2_buffer(generatedV4l2_requestbuffers);
 		Object generatedV4l2_buffer = map.getV4l2_buffer();
-		v4l2_mmap_info generatedInfo = this.getInfo();
+		v4l2_mmap_info[] generatedInfo = this.getInfo();
 		for (map.setV4l2_buffer(0); generatedV4l2_buffer < generatedV4l2_requestbuffers; ++generatedV4l2_buffer) {
-			if (.v4l2_ioctl(dev, VIDIOC_QUERYBUF, map) < 0) {
+			if (/*Error: Function owner not recognized*/v4l2_ioctl(dev, VIDIOC_QUERYBUF, map) < 0) {
 				ModernizedCProgram.blog(LOG_ERROR, "v4l2-helpers: Failed to query buffer details");
 				return -1;
 			} 
 			generatedInfo[generatedV4l2_buffer].setLength(generatedV4l2_buffer);
-			generatedInfo[generatedV4l2_buffer].setStart(.v4l2_mmap(NULL, generatedV4l2_buffer, PROT_READ | PROT_WRITE, MAP_SHARED, dev, generatedV4l2_buffer.getOffset()));
+			generatedInfo[generatedV4l2_buffer].setStart(/*Error: Function owner not recognized*/v4l2_mmap(NULL, generatedV4l2_buffer, PROT_READ | PROT_WRITE, MAP_SHARED, dev, generatedV4l2_buffer.getOffset()));
 			if (generatedInfo[generatedV4l2_buffer].getStart() == MAP_FAILED) {
 				ModernizedCProgram.blog(LOG_ERROR, "v4l2-helpers: mmap for buffer failed");
 				return -1;
@@ -87,11 +87,11 @@ public class v4l2_buffer_data {
 	}
 	public Object v4l2_destroy_mmap() {
 		Object generatedCount = this.getCount();
-		v4l2_mmap_info generatedInfo = this.getInfo();
+		v4l2_mmap_info[] generatedInfo = this.getInfo();
 		for ( i = 0;
 		 i < generatedCount; ++i) {
 			if (generatedInfo[i].getStart() != MAP_FAILED && generatedInfo[i].getStart() != 0) {
-				.v4l2_munmap(generatedInfo[i].getStart(), generatedInfo[i].getLength());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/v4l2_munmap(generatedInfo[i].getStart(), generatedInfo[i].getLength());
 			} 
 		}
 		if (generatedCount) {
@@ -106,10 +106,10 @@ public class v4l2_buffer_data {
 	public void setCount(Object newCount) {
 		count = newCount;
 	}
-	public v4l2_mmap_info getInfo() {
+	public v4l2_mmap_info[] getInfo() {
 		return info;
 	}
-	public void setInfo(v4l2_mmap_info newInfo) {
+	public void setInfo(v4l2_mmap_info[] newInfo) {
 		info = newInfo;
 	}
 }

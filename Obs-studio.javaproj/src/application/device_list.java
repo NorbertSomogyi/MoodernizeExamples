@@ -19,7 +19,7 @@ public class device_list {
 		 i < generatedItems.getNum(); i++) {
 			generatedItems.getArray() + i.device_item_free();
 		}
-		.da_free(generatedItems);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedItems);
 	}
 	public Object get() {
 		return ;

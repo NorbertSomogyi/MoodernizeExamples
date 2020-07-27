@@ -39,9 +39,9 @@ public class script_callback {
 		python_obs_callback cb = (python_obs_callback)p_cb;
 		Object generatedRemoved = this.getRemoved();
 		if (generatedRemoved) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		 gstate = .Import_PyGILState_Ensure();
+		 gstate = /*Error: Function owner not recognized*/Import_PyGILState_Ensure();
 		obs_python_script __last_script = ModernizedCProgram.cur_python_script;
 		python_obs_callback __last_cb = ModernizedCProgram.cur_python_cb;
 		script_callback generatedBase = cb.getBase();
@@ -49,16 +49,16 @@ public class script_callback {
 		ModernizedCProgram.cur_python_script = (obs_python_script)generatedScript;
 		ModernizedCProgram.cur_python_cb = cb;
 		Object generatedFunc = cb.getFunc();
-		 py_ret = .Import_PyObject_CallObject(generatedFunc, NULL);
+		 py_ret = /*Error: Function owner not recognized*/Import_PyObject_CallObject(generatedFunc, NULL);
 		ModernizedCProgram.py_error_(__FUNCTION__, 433);
-		.Py_XDECREF(py_ret);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Py_XDECREF(py_ret);
 		ModernizedCProgram.cur_python_cb = __last_cb;
 		ModernizedCProgram.cur_python_script = __last_script;
-		.Import_PyGILState_Release(gstate);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Import_PyGILState_Release(gstate);
 		lua_obs_callback cb = (lua_obs_callback)p_cb;
 		Object generatedRemoved = this.getRemoved();
 		if (generatedRemoved) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		obs_lua_script __last_script = ModernizedCProgram.current_lua_script;
 		lua_obs_callback __last_callback = ModernizedCProgram.current_lua_cb;
@@ -92,7 +92,7 @@ public class script_callback {
 		ModernizedCProgram.detached_callbacks = ModernizedCProgram.cb;
 		ModernizedCProgram.pthread_mutex_unlock(ModernizedCProgram.detach_mutex);
 		if (ModernizedCProgram.cb.getOn_remove()) {
-			.UNRECOGNIZEDFUNCTIONNAME(ModernizedCProgram.cb);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ModernizedCProgram.cb);
 		} 
 	}
 	public void just_free_script_callback() {

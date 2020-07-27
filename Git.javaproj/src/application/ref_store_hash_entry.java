@@ -17,9 +17,9 @@ public class ref_store_hash_entry {
 		ref_store_hash_entry entry = new ref_store_hash_entry();
 		Object generatedName = ((entry)).getName();
 		do {
-			size_t flex_array_len_ = (.strlen(name));
-			((entry)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedName, ((name)), flex_array_len_);
+			size_t flex_array_len_ = (/*Error: Function owner not recognized*/strlen(name));
+			((entry)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedName, ((name)), flex_array_len_);
 		} while (0);
 		hashmap_entry generatedEnt = entry.getEnt();
 		generatedEnt.hashmap_entry_init(ModernizedCProgram.strhash(name));

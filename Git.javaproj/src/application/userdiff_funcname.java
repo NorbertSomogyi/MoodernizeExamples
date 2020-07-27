@@ -13,7 +13,7 @@ public class userdiff_funcname {
 	
 	public int parse_funcname(Object k, Object v, int cflags) {
 		Object generatedPattern = this.getPattern();
-		if (.git_config_string(generatedPattern, k, v) < 0) {
+		if (/*Error: Function owner not recognized*/git_config_string(generatedPattern, k, v) < 0) {
 			return -1;
 		} 
 		this.setCflags(cflags);

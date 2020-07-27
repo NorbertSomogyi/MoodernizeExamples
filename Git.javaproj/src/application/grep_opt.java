@@ -106,20 +106,20 @@ public class grep_opt {
 	/* Signalled when we are finished with everything. */
 	public void add_work(Object gs) {
 		ModernizedCProgram.grep_lock();
-		while ((ModernizedCProgram.todo_end + 1) % ( /  + ( - 1)) == ModernizedCProgram.todo_done) {
-			.pthread_cond_wait(ModernizedCProgram.cond_write, ModernizedCProgram.grep_mutex);
+		while ((ModernizedCProgram.todo_end + 1) % (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)) == ModernizedCProgram.todo_done) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_cond_wait(ModernizedCProgram.cond_write, ModernizedCProgram.grep_mutex);
 		}
 		ModernizedCProgram.todo[ModernizedCProgram.todo_end].setSource(gs);
 		int generatedBinary = this.getBinary();
 		repository generatedRepo = this.getRepo();
 		index_state generatedIndex = generatedRepo.getIndex();
 		if (generatedBinary != 2) {
-			.grep_source_load_driver(ModernizedCProgram.todo[ModernizedCProgram.todo_end].getSource(), generatedIndex);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/grep_source_load_driver(ModernizedCProgram.todo[ModernizedCProgram.todo_end].getSource(), generatedIndex);
 		} 
 		ModernizedCProgram.todo[ModernizedCProgram.todo_end].setDone(0);
 		ModernizedCProgram.todo[ModernizedCProgram.todo_end].getOut().strbuf_setlen(0);
-		ModernizedCProgram.todo_end = (ModernizedCProgram.todo_end + 1) % ( /  + ( - 1));
-		.pthread_cond_signal(ModernizedCProgram.cond_add);
+		ModernizedCProgram.todo_end = (ModernizedCProgram.todo_end + 1) % (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_cond_signal(ModernizedCProgram.cond_add);
 		ModernizedCProgram.grep_unlock();
 	}
 	public void strbuf_out(Object buf, Object size) {
@@ -130,33 +130,33 @@ public class grep_opt {
 	}
 	public void start_threads() {
 		int i;
-		.pthread_mutex_init(ModernizedCProgram.grep_mutex, ((Object)0));
-		.pthread_mutex_init(ModernizedCProgram.grep_read_mutex, ((Object)0));
-		.pthread_mutex_init(ModernizedCProgram.grep_attr_mutex, ((Object)0));
-		.pthread_cond_init(ModernizedCProgram.cond_add, ((Object)0));
-		.pthread_cond_init(ModernizedCProgram.cond_write, ((Object)0));
-		.pthread_cond_init(ModernizedCProgram.cond_result, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_mutex_init(ModernizedCProgram.grep_mutex, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_mutex_init(ModernizedCProgram.grep_read_mutex, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_mutex_init(ModernizedCProgram.grep_attr_mutex, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_cond_init(ModernizedCProgram.cond_add, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_cond_init(ModernizedCProgram.cond_write, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/pthread_cond_init(ModernizedCProgram.cond_result, ((Object)0));
 		ModernizedCProgram.grep_use_locks = 1;
-		for (i = 0; i < ( /  + ( - 1)); i++) {
+		for (i = 0; i < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1)); i++) {
 			ModernizedCProgram.todo[i].getOut().strbuf_init(0);
 		}
-		ModernizedCProgram.threads = ModernizedCProgram.xcalloc(ModernizedCProgram.num_threads, );
+		ModernizedCProgram.threads = ModernizedCProgram.xcalloc(ModernizedCProgram.num_threads, /*Error: sizeof expression not supported yet*/);
 		for (i = 0; i < ModernizedCProgram.num_threads; i++) {
 			int err;
-			grep_opt o = .grep_opt_dup(opt);
+			grep_opt o = /*Error: Function owner not recognized*/grep_opt_dup(opt);
 			o.setOutput(strbuf_out);
 			if (i) {
 				o.setDebug(0);
 			} 
-			.compile_grep_patterns(o);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/compile_grep_patterns(o);
 			ModernizedCProgram.err = ModernizedCProgram.threads[i].pthread_create(((Object)0), run, o);
 			if (ModernizedCProgram.err) {
-				ModernizedCProgram.die(ModernizedCProgram._("grep: failed to create thread: %s"), .strerror(ModernizedCProgram.err));
+				ModernizedCProgram.die(ModernizedCProgram._("grep: failed to create thread: %s"), /*Error: Function owner not recognized*/strerror(ModernizedCProgram.err));
 			} 
 		}
 	}
 	public int grep_oid(Object oid, Object filename, int tree_name_len, Object path) {
-		strbuf pathbuf = new strbuf(, , );
+		strbuf pathbuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		grep_source gs = new grep_source();
 		int generatedRelative = this.getRelative();
 		int generatedPrefix_length = this.getPrefix_length();
@@ -167,8 +167,8 @@ public class grep_opt {
 		} else {
 				pathbuf.strbuf_addstr(filename);
 		} 
-		byte generatedBuf = pathbuf.getBuf();
-		.grep_source_init(gs, grep_source_type.GREP_SOURCE_OID, generatedBuf, path, oid);
+		byte[] generatedBuf = pathbuf.getBuf();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/grep_source_init(gs, grep_source_type.GREP_SOURCE_OID, generatedBuf, path, oid);
 		pathbuf.strbuf_release();
 		if (ModernizedCProgram.num_threads > 1/*
 				 * add_work() copies gs and thus assumes ownership of
@@ -178,13 +178,13 @@ public class grep_opt {
 			return 0;
 		} else {
 				int hit;
-				hit = .grep_source(opt, gs);
-				.grep_source_clear(gs);
+				hit = /*Error: Function owner not recognized*/grep_source(opt, gs);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/grep_source_clear(gs);
 				return hit;
 		} 
 	}
 	public int grep_file(Object filename) {
-		strbuf buf = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		grep_source gs = new grep_source();
 		int generatedRelative = this.getRelative();
 		int generatedPrefix_length = this.getPrefix_length();
@@ -194,8 +194,8 @@ public class grep_opt {
 		} else {
 				buf.strbuf_addstr(filename);
 		} 
-		byte generatedBuf = buf.getBuf();
-		.grep_source_init(gs, grep_source_type.GREP_SOURCE_FILE, generatedBuf, filename, filename);
+		byte[] generatedBuf = buf.getBuf();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/grep_source_init(gs, grep_source_type.GREP_SOURCE_FILE, generatedBuf, filename, filename);
 		buf.strbuf_release();
 		if (ModernizedCProgram.num_threads > 1/*
 				 * add_work() copies gs and thus assumes ownership of
@@ -205,8 +205,8 @@ public class grep_opt {
 			return 0;
 		} else {
 				int hit;
-				hit = .grep_source(opt, gs);
-				.grep_source_clear(gs);
+				hit = /*Error: Function owner not recognized*/grep_source(opt, gs);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/grep_source_clear(gs);
 				return hit;
 		} 
 	}
@@ -214,9 +214,10 @@ public class grep_opt {
 		Object generatedOutput_priv = this.getOutput_priv();
 		string_list path_list = generatedOutput_priv;
 		if (len == 1 && (byte)data == (byte)'\0') {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		path_list.string_list_append(ModernizedCProgram.xstrndup(data, len));
+		string_list_item string_list_item = new string_list_item();
+		string_list_item.string_list_append(path_list, ModernizedCProgram.xstrndup(data, len));
 	}
 	public void run_pager(Object prefix) {
 		Object generatedOutput_priv = this.getOutput_priv();
@@ -226,7 +227,7 @@ public class grep_opt {
 		int status;
 		int generatedNr = path_list.getNr();
 		argv_array generatedArgs = child.getArgs();
-		string_list_item generatedItems = path_list.getItems();
+		string_list_item[] generatedItems = path_list.getItems();
 		for (i = 0; i < generatedNr; i++) {
 			generatedArgs.argv_array_push(generatedItems[i].getString());
 		}
@@ -234,7 +235,7 @@ public class grep_opt {
 		child.setUse_shell(1);
 		status = child.run_command();
 		if (status) {
-			.exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\grep.c", 394, (status)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\grep.c", 394, (status)));
 		} 
 	}
 	public int grep_submodule(Object pathspec, Object oid, Object filename, Object path, int cached) {
@@ -274,7 +275,7 @@ public class grep_opt {
 		Byte generatedPath = generatedOdb.getPath();
 		ModernizedCProgram.add_to_alternates_memory(generatedPath);
 		ModernizedCProgram.grep_read_unlock();
-		.memcpy(subopt, opt, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(subopt, opt, /*Error: sizeof expression not supported yet*/);
 		subopt.setRepo(subrepo);
 		object object = new object();
 		object_id generatedOid = object.getOid();
@@ -285,7 +286,7 @@ public class grep_opt {
 			tree_desc tree = new tree_desc();
 			Object data;
 			long size;
-			strbuf base = new strbuf(, , );
+			strbuf base = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			object = object.parse_object_or_die(oid, ModernizedCProgram.oid_to_hex(oid));
 			ModernizedCProgram.grep_read_lock();
 			data = ModernizedCProgram.read_object_with_reference(subrepo, generatedOid, ModernizedCProgram.tree_type, size, ((Object)0));
@@ -310,11 +311,11 @@ public class grep_opt {
 		repository repo = generatedRepo;
 		int hit = 0;
 		int nr;
-		strbuf name = new strbuf(, , );
+		strbuf name = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int name_base_len = 0;
 		Byte generatedSubmodule_prefix = repo.getSubmodule_prefix();
 		if (generatedSubmodule_prefix) {
-			name_base_len = .strlen(generatedSubmodule_prefix);
+			name_base_len = /*Error: Function owner not recognized*/strlen(generatedSubmodule_prefix);
 			name.strbuf_addstr(generatedSubmodule_prefix);
 		} 
 		if (repo.repo_read_index() < 0) {
@@ -322,8 +323,8 @@ public class grep_opt {
 		} 
 		index_state generatedIndex = repo.getIndex();
 		int generatedCache_nr = generatedIndex.getCache_nr();
-		cache_entry generatedCache = generatedIndex.getCache();
-		byte generatedBuf = name.getBuf();
+		cache_entry[][] generatedCache = generatedIndex.getCache();
+		byte[] generatedBuf = name.getBuf();
 		Object generatedLen = name.getLen();
 		int generatedStatus_only = this.getStatus_only();
 		for (nr = 0; nr < generatedCache_nr; nr++) {
@@ -351,7 +352,7 @@ public class grep_opt {
 			if ((((true) & (ce).getCe_flags()) >> 12)) {
 				do {
 					nr++;
-				} while (nr < generatedCache_nr && !.strcmp(ce.getName(), generatedCache[nr].getName()));
+				} while (nr < generatedCache_nr && !/*Error: Function owner not recognized*/strcmp(ce.getName(), generatedCache[nr].getName()));
 				/* compensate for loop control */nr--;
 			} 
 			if (hit && generatedStatus_only) {
@@ -370,7 +371,7 @@ public class grep_opt {
 		int generatedStatus_only = this.getStatus_only();
 		for (i = 0; i < nr; i++) {
 			object real_obj = new object();
-			real_obj = .deref_tag(generatedRepo, list.getObjects()[i].getItem(), ((Object)0), 0);
+			real_obj = /*Error: Function owner not recognized*/deref_tag(generatedRepo, list.getObjects()[i].getItem(), ((Object)0), 0);
 			if (/* load the gitmodules file for this rev */ModernizedCProgram.recurse_submodules) {
 				generatedRepo.submodule_free();
 				ModernizedCProgram.gitmodules_config_oid(generatedOid);
@@ -388,7 +389,7 @@ public class grep_opt {
 		dir_struct dir = new dir_struct();
 		int i;
 		int hit = 0;
-		.memset(dir, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(dir, 0, /*Error: sizeof expression not supported yet*/);
 		 generatedFlags = dir.getFlags();
 		if (!use_index) {
 			generatedFlags |=  .DIR_NO_GITLINKS;
@@ -400,7 +401,7 @@ public class grep_opt {
 		index_state generatedIndex = generatedRepo.getIndex();
 		ModernizedCProgram.fill_directory(dir, generatedIndex, pathspec);
 		int generatedNr = dir.getNr();
-		dir_entry generatedEntries = dir.getEntries();
+		dir_entry[][] generatedEntries = dir.getEntries();
 		int generatedStatus_only = this.getStatus_only();
 		for (i = 0; i < generatedNr; i++) {
 			if (!ModernizedCProgram.dir_path_match(generatedIndex, generatedEntries[i], pathspec, 0, ((Object)0))) {

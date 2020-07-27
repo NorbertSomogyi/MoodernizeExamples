@@ -35,9 +35,9 @@ public class proc_addr {
 		if (!generatedInitialized) {
 			 hnd = new ();
 			this.setInitialized(1);
-			hnd = .LoadLibraryExA(generatedDll, NULL, LOAD_LIBRARY_SEARCH_SYSTEM32);
+			hnd = /*Error: Function owner not recognized*/LoadLibraryExA(generatedDll, NULL, LOAD_LIBRARY_SEARCH_SYSTEM32);
 			if (hnd) {
-				this.setPfunction(.GetProcAddress(hnd, generatedFunction));
+				this.setPfunction(/*Error: Function owner not recognized*/GetProcAddress(hnd, generatedFunction));
 			} 
 		} 
 		Object generatedPfunction = this.getPfunction();

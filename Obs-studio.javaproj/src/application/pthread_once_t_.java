@@ -64,7 +64,7 @@ public class pthread_once_t_ {
 		Object generatedLock = this.getLock();
 		int generatedDone = this.getDone();
 		ptw32_cleanup_t ptw32_cleanup_t = new ptw32_cleanup_t();
-		if ((long).PTW32_FALSE == (long)) {
+		if ((long).PTW32_FALSE == (long)/*Error: Unsupported expression*/) {
 			ptw32_mcs_local_node_t node = new ptw32_mcs_local_node_t();
 			node.ptw32_mcs_lock_acquire((ptw32_mcs_lock_t)generatedLock);
 			if (!generatedDone) {
@@ -72,7 +72,7 @@ public class pthread_once_t_ {
 					ptw32_cleanup_t _cleanup = new ptw32_cleanup_t();
 					_cleanup.ptw32_push_cleanup((ptw32_cleanup_callback_t)(ModernizedCProgram.ptw32_mcs_lock_release), (node));
 					;
-					.UNRECOGNIZEDFUNCTIONNAME();
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME();
 					(Object)ptw32_cleanup_t.ptw32_pop_cleanup(0);
 				}
 				;

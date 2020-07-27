@@ -29,15 +29,15 @@ public class merge_list {
 		merge_list generatedLink = this.getLink();
 		int generatedStage = this.getStage();
 		switch (generatedStage) {
+		case 0:
+				return "merged";
+		case 3:
+				return "added in remote";
 		case 2:
 				if (generatedLink) {
 					return "added in both";
 				} 
 				return "added in local";
-		case 3:
-				return "added in remote";
-		case 0:
-				return "merged";
 		}
 		entry = generatedLink;
 		if (!entry) {
@@ -105,7 +105,7 @@ public class merge_list {
 		 xecfg = new ();
 		 ecb = new ();
 		xpp.setFlags(0);
-		.memset(xecfg, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(xecfg, 0, /*Error: sizeof expression not supported yet*/);
 		xecfg.setCtxlen(3);
 		ecb.setOut_hunk(((Object)0));
 		ecb.setOut_line(show_outf);
@@ -127,7 +127,7 @@ public class merge_list {
 		ModernizedCProgram.free(dst.getPtr());
 	}
 	public void show_result_list() {
-		.printf("%s\n", entry.explanation());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s\n", entry.explanation());
 		merge_list generatedLink = this.getLink();
 		int generatedStage = this.getStage();
 		int generatedMode = this.getMode();
@@ -138,12 +138,12 @@ public class merge_list {
 		do {
 			merge_list link = generatedLink;
 			byte[] desc = new byte[]{"result", "base", "our", "their"};
-			.printf("  %-6s %o %s %s\n", desc[generatedStage], generatedMode, ModernizedCProgram.oid_to_hex(generatedOid), generatedPath);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("  %-6s %o %s %s\n", desc[generatedStage], generatedMode, ModernizedCProgram.oid_to_hex(generatedOid), generatedPath);
 			entry = ModernizedCProgram.link;
 		} while (entry);
 	}
 	public merge_list create_entry(int stage, int mode, Object oid, Object path) {
-		merge_list res = ModernizedCProgram.xcalloc(1, );
+		merge_list res = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		res.setStage(stage);
 		res.setPath(path);
 		res.setMode(mode);

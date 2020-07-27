@@ -63,7 +63,7 @@ public class ptw32_cleanup_t {
 		ptw32_cleanup_t generatedPrev = cleanup.getPrev();
 		if (cleanup != ((Object)0)) {
 			if (execute && (generatedRoutine != ((Object)0))) {
-				.UNRECOGNIZEDFUNCTIONNAME(generatedArg);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedArg);
 			} 
 			ModernizedCProgram.pthread_setspecific(ModernizedCProgram.ptw32_cleanupKey, (Object)generatedPrev);
 		} 

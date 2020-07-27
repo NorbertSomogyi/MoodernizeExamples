@@ -102,7 +102,7 @@ public class ref_iterator {
 		ref_iterator ref_iterator = new ref_iterator();
 		packed_iter = ref_iterator.refs_ref_iterator_begin(generatedPacked_ref_store, prefix, 0, -1024);
 		overlay_iter = loose_iter.overlay_ref_iterator_begin(packed_iter);
-		iter = ModernizedCProgram.xcalloc(1, );
+		iter = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		ref_iterator generatedBase = iter.getBase();
 		ref_iterator = generatedBase;
 		int generatedOrdered = overlay_iter.getOrdered();
@@ -123,7 +123,7 @@ public class ref_iterator {
 		int ok;
 		stat generatedSt = diter.getSt();
 		Object generatedSt_mode = generatedSt.getSt_mode();
-		Object generatedBasename = diter.getBasename();
+		Object[] generatedBasename = diter.getBasename();
 		ref_store generatedRef_store = iter.getRef_store();
 		Object generatedRelative_path = diter.getRelative_path();
 		object_id generatedOid = iter.getOid();
@@ -168,9 +168,9 @@ public class ref_iterator {
 		dir_iterator diter = new dir_iterator();
 		files_reflog_iterator iter = new files_reflog_iterator();
 		ref_iterator ref_iterator = new ref_iterator();
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		sb.strbuf_addf("%s/logs", gitdir);
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		dir_iterator dir_iterator = new dir_iterator();
 		diter = dir_iterator.dir_iterator_begin(generatedBuf, 0);
 		ref_iterator ref_iterator = new ref_iterator();
@@ -178,7 +178,7 @@ public class ref_iterator {
 			sb.strbuf_release();
 			return ref_iterator.empty_ref_iterator_begin();
 		} 
-		iter = ModernizedCProgram.xcalloc(1, );
+		iter = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		ref_iterator generatedBase = iter.getBase();
 		ref_iterator = generatedBase;
 		ModernizedCProgram.base_ref_iterator_init(ref_iterator, ModernizedCProgram.files_reflog_iterator_vtable, 0);
@@ -213,7 +213,7 @@ public class ref_iterator {
 		Byte generatedGitdir = refs.getGitdir();
 		Byte generatedGitcommondir = refs.getGitcommondir();
 		ref_iterator ref_iterator = new ref_iterator();
-		if (!.strcmp(generatedGitdir, generatedGitcommondir)) {
+		if (!/*Error: Function owner not recognized*/strcmp(generatedGitdir, generatedGitcommondir)) {
 			return ref_iterator.reflog_iterator_begin(ref_store, generatedGitcommondir);
 		} else {
 				return ref_iterator.reflog_iterator_begin(ref_store, generatedGitdir).merge_ref_iterator_begin(0, ref_iterator.reflog_iterator_begin(ref_store, generatedGitcommondir), reflog_iterator_select, refs/*
@@ -221,6 +221,369 @@ public class ref_iterator {
 				 * by HEAD), then add an extra REF_LOG_ONLY update for HEAD.
 				 */);
 		} 
+	}
+	public int empty_ref_iterator_advance() {
+		return ModernizedCProgram.ref_iterator_abort(ref_iterator);
+	}
+	public int empty_ref_iterator_abort() {
+		ModernizedCProgram.base_ref_iterator_free(ref_iterator);
+		return -1;
+	}
+	public ref_iterator empty_ref_iterator_begin() {
+		empty_ref_iterator iter = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+		ref_iterator generatedBase = iter.getBase();
+		ref_iterator ref_iterator = generatedBase;
+		ModernizedCProgram.base_ref_iterator_init(ref_iterator, ModernizedCProgram.empty_ref_iterator_vtable, 1);
+		return ref_iterator;
+	}
+	public int is_empty_ref_iterator() {
+		Object generatedRef_iterator = this.getRef_iterator();
+		return generatedRef_iterator == ModernizedCProgram.empty_ref_iterator_vtable;
+	}
+	public int merge_ref_iterator_advance() {
+		merge_ref_iterator iter = (merge_ref_iterator)ref_iterator;
+		int ok;
+		ref_iterator generatedCurrent = iter.getCurrent();
+		ref_iterator generatedIter0 = iter.getIter0();
+		ref_iterator generatedIter1 = iter.getIter1();
+		if (!generatedCurrent) {
+			if ((ok = ModernizedCProgram.ref_iterator_advance(generatedIter0)) != /* Initialize: advance both iterators to their first entries */0) {
+				iter.setIter0(((Object)0));
+				if (ok == -2) {
+					;
+				} 
+			} 
+			if ((ok = ModernizedCProgram.ref_iterator_advance(generatedIter1)) != 0) {
+				iter.setIter1(((Object)0));
+				if (ok == -2) {
+					;
+				} 
+			} 
+		} else {
+				if ((ok = ModernizedCProgram.ref_iterator_advance(generatedCurrent)) != 0) {
+					generatedCurrent = ((Object)0);
+					if (ok == -2) {
+						;
+					} 
+				} 
+		} 
+		Object generatedCb_data = iter.getCb_data();
+		Object generatedRef_iterator = (generatedCurrent).getRef_iterator();
+		ref_iterator generatedBase = iter.getBase();
+		while (/* Loop until we find an entry that we can yield. */1) {
+			ref_iterator secondary = new ref_iterator();
+			iterator_selection selection = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedIter0, generatedIter1, generatedCb_data);
+			if (iterator_selection.selection == iterator_selection.ITER_SELECT_DONE) {
+				return ModernizedCProgram.ref_iterator_abort(ref_iterator);
+			}  else if (iterator_selection.selection == iterator_selection.ITER_SELECT_ERROR) {
+				ModernizedCProgram.ref_iterator_abort(ref_iterator);
+				return -2;
+			} 
+			if ((iterator_selection.selection & iterator_selection.ITER_CURRENT_SELECTION_MASK) == 0) {
+				iter.setCurrent(generatedIter0);
+				secondary = generatedIter1;
+			} else {
+					iter.setCurrent(generatedIter1);
+					secondary = generatedIter0;
+			} 
+			if (iterator_selection.selection & iterator_selection.ITER_SKIP_SECONDARY) {
+				if ((ok = ModernizedCProgram.ref_iterator_advance(secondary)) != 0) {
+					secondary = ((Object)0);
+					if (ok == -2) {
+						;
+					} 
+				} 
+			} 
+			if (iterator_selection.selection & iterator_selection.ITER_YIELD_CURRENT) {
+				generatedBase.setRef_iterator(generatedRef_iterator);
+				generatedBase.setRef_iterator(generatedRef_iterator);
+				generatedBase.setRef_iterator(generatedRef_iterator);
+				return 0;
+			} 
+		}
+		return -2;
+	}
+	public int merge_ref_iterator_abort() {
+		merge_ref_iterator iter = (merge_ref_iterator)ref_iterator;
+		int ok = -1;
+		ref_iterator generatedIter0 = iter.getIter0();
+		if (generatedIter0) {
+			if (ModernizedCProgram.ref_iterator_abort(generatedIter0) != -1) {
+				ok = -2;
+			} 
+		} 
+		ref_iterator generatedIter1 = iter.getIter1();
+		if (generatedIter1) {
+			if (ModernizedCProgram.ref_iterator_abort(generatedIter1) != -1) {
+				ok = -2;
+			} 
+		} 
+		ModernizedCProgram.base_ref_iterator_free(ref_iterator);
+		return ok;
+	}
+	public ref_iterator merge_ref_iterator_begin(int ordered, ref_iterator iter1, Object select, Object cb_data) {
+		merge_ref_iterator iter = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+		ref_iterator generatedBase = iter.getBase();
+		ref_iterator ref_iterator = generatedBase;
+		ModernizedCProgram.base_ref_iterator_init(ref_iterator, ModernizedCProgram.merge_ref_iterator_vtable, ordered);
+		iter.setIter0(iter0);
+		iter.setIter1(iter1);
+		iter.setSelect(select);
+		iter.setCb_data(cb_data);
+		iter.setCurrent(((Object)0));
+		return ref_iterator/*
+		 * A ref_iterator_select_fn that overlays the items from front on top
+		 * of those from back (like loose refs over packed refs). See
+		 * overlay_ref_iterator_begin().
+		 */;
+	}
+	public iterator_selection overlay_iterator_select(ref_iterator back, Object cb_data) {
+		int cmp;
+		if (!back) {
+			return front ? iterator_selection.ITER_SELECT_0 : iterator_selection.ITER_SELECT_DONE;
+		}  else if (!front) {
+			return iterator_selection.ITER_SELECT_1;
+		} 
+		Object generatedRef_iterator = this.getRef_iterator();
+		cmp = /*Error: Function owner not recognized*/strcmp(generatedRef_iterator, generatedRef_iterator);
+		if (cmp < 0) {
+			return iterator_selection.ITER_SELECT_0;
+		}  else if (cmp > 0) {
+			return iterator_selection.ITER_SELECT_1;
+		} else {
+				return iterator_selection.ITER_SELECT_0_SKIP_1;
+		} 
+	}
+	public ref_iterator overlay_ref_iterator_begin(ref_iterator back) {
+		Object generatedRef_iterator = this.getRef_iterator();
+		if (front.is_empty_ref_iterator()) {
+			ModernizedCProgram.ref_iterator_abort(front);
+			return back;
+		}  else if (back.is_empty_ref_iterator()) {
+			ModernizedCProgram.ref_iterator_abort(back);
+			return front;
+		}  else if (!generatedRef_iterator || !generatedRef_iterator) {
+			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\iterator.c", 275, "overlay_ref_iterator requires ordered inputs");
+		} 
+		return front.merge_ref_iterator_begin(1, back, overlay_iterator_select, ((Object)0));
+	}
+	public int prefix_ref_iterator_advance() {
+		prefix_ref_iterator iter = (prefix_ref_iterator)ref_iterator;
+		int ok;
+		ref_iterator generatedIter0 = iter.getIter0();
+		Object generatedRef_iterator = generatedIter0.getRef_iterator();
+		Byte generatedPrefix = iter.getPrefix();
+		int generatedTrim = iter.getTrim();
+		ref_iterator generatedBase = iter.getBase();
+		while ((ok = ModernizedCProgram.ref_iterator_advance(generatedIter0)) == 0) {
+			int cmp = ModernizedCProgram.compare_prefix(generatedRef_iterator, generatedPrefix);
+			if (cmp < 0) {
+				continue;
+			} 
+			if (cmp > 0/*
+						 * If the source iterator is ordered, then we
+						 * can stop the iteration as soon as we see a
+						 * refname that comes after the prefix:
+						 */) {
+				if (generatedRef_iterator) {
+					ok = ModernizedCProgram.ref_iterator_abort(generatedIter0);
+					break;
+				} else {
+						continue;
+				} 
+			} 
+			if (generatedTrim) {
+				if (/*Error: Function owner not recognized*/strlen(generatedRef_iterator) <= generatedTrim) {
+					ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\iterator.c", 341, "attempt to trim too many characters");
+				} 
+				generatedBase.setRef_iterator(generatedRef_iterator + generatedTrim);
+			} else {
+					generatedBase.setRef_iterator(generatedRef_iterator);
+			} 
+			generatedBase.setRef_iterator(generatedRef_iterator);
+			generatedBase.setRef_iterator(generatedRef_iterator);
+			return 0;
+		}
+		iter.setIter0(((Object)0));
+		if (ModernizedCProgram.ref_iterator_abort(ref_iterator) != -1) {
+			return -2;
+		} 
+		return ok;
+	}
+	public int prefix_ref_iterator_abort() {
+		prefix_ref_iterator iter = (prefix_ref_iterator)ref_iterator;
+		int ok = -1;
+		ref_iterator generatedIter0 = iter.getIter0();
+		if (generatedIter0) {
+			ok = ModernizedCProgram.ref_iterator_abort(generatedIter0);
+		} 
+		Byte generatedPrefix = iter.getPrefix();
+		ModernizedCProgram.free(generatedPrefix);
+		ModernizedCProgram.base_ref_iterator_free(ref_iterator);
+		return ok;
+	}
+	public ref_iterator prefix_ref_iterator_begin(Object prefix, int trim) {
+		prefix_ref_iterator iter = new prefix_ref_iterator();
+		ref_iterator ref_iterator = new ref_iterator();
+		if (!prefix && !trim) {
+			return /* optimization: no need to wrap iterator */iter0;
+		} 
+		iter = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+		ref_iterator generatedBase = iter.getBase();
+		ref_iterator = generatedBase;
+		Object generatedRef_iterator = this.getRef_iterator();
+		ModernizedCProgram.base_ref_iterator_init(ref_iterator, ModernizedCProgram.prefix_ref_iterator_vtable, generatedRef_iterator);
+		iter.setIter0(iter0);
+		iter.setPrefix(ModernizedCProgram.xstrdup(prefix));
+		iter.setTrim(trim);
+		return ref_iterator;
+	}
+	public ref_iterator refs_ref_iterator_begin(ref_store refs, Object prefix, int trim, int flags) {
+		ref_iterator iter = new ref_iterator();
+		if (ModernizedCProgram.ref_paranoia < 0) {
+			ModernizedCProgram.ref_paranoia = /*Error: Function owner not recognized*/git_env_bool("GIT_REF_PARANOIA", 0);
+		} 
+		if (ModernizedCProgram.ref_paranoia) {
+			flags |=  DO_FOR_EACH_INCLUDE_BROKEN;
+		} 
+		iter = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(refs, prefix, flags/*
+			 * `iterator_begin()` already takes care of prefix, but we
+			 * might need to do some trimming:
+			 */);
+		if (trim) {
+			iter = iter.prefix_ref_iterator_begin("", trim);
+		} 
+		Object generatedRef_iterator = iter.getRef_iterator();
+		if (!generatedRef_iterator) {
+			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\refs.c", 1510, "reference iterator is not ordered");
+		} 
+		return iter/*
+		 * Call fn for each reference in the specified submodule for which the
+		 * refname begins with prefix. If trim is non-zero, then trim that
+		 * many characters off the beginning of each refname before passing
+		 * the refname to fn. flags can be DO_FOR_EACH_INCLUDE_BROKEN to
+		 * include broken references in the iteration. If fn ever returns a
+		 * non-zero value, stop the iteration and return that value;
+		 * otherwise, return 0.
+		 */;
+	}
+	public int cache_ref_iterator_advance() {
+		cache_ref_iterator iter = (cache_ref_iterator)ref_iterator;
+		cache_ref_iterator_level[] generatedLevels = iter.getLevels();
+		Object generatedLevels_nr = iter.getLevels_nr();
+		ref_dir generatedDir = level.getDir();
+		int generatedIndex = level.getIndex();
+		int generatedNr = generatedDir.getNr();
+		ref_entry[][] generatedEntries = dir.getEntries();
+		prefix_state generatedPrefix_state = level.getPrefix_state();
+		Object generatedName = entry.getName();
+		Object generatedPrefix = iter.getPrefix();
+		byte generatedFlag = entry.getFlag();
+		Object generatedLevels_alloc = iter.getLevels_alloc();
+		ref_dir ref_dir = new ref_dir();
+		ref_iterator generatedBase = iter.getBase();
+		 generatedU = entry.getU();
+		Object generatedValue = generatedU.getValue();
+		while (1) {
+			cache_ref_iterator_level level = generatedLevels[generatedLevels_nr - 1];
+			ref_dir dir = generatedDir;
+			ref_entry entry = new ref_entry();
+			prefix_state entry_prefix_state;
+			if (generatedIndex == -1) {
+				dir.sort_ref_dir();
+			} 
+			if (++generatedIndex == generatedNr) {
+				if (--generatedLevels_nr == /* This level is exhausted; pop up a level */0) {
+					return ModernizedCProgram.ref_iterator_abort(ref_iterator);
+				} 
+				continue;
+			} 
+			entry = generatedEntries[generatedIndex];
+			if (generatedPrefix_state == prefix_state.PREFIX_WITHIN_DIR) {
+				prefix_state.entry_prefix_state = ModernizedCProgram.overlaps_prefix(generatedName, generatedPrefix);
+				if (prefix_state.entry_prefix_state == prefix_state.PREFIX_EXCLUDES_DIR) {
+					continue;
+				} 
+			} else {
+					prefix_state.entry_prefix_state = generatedPrefix_state;
+			} 
+			if (generatedFlag & -1024) {
+				do {
+					if ((generatedLevels_nr + 1) > generatedLevels_alloc) {
+						if ((((generatedLevels_alloc) + 16) * 3 / 2) < (generatedLevels_nr + 1)) {
+							iter.setLevels_alloc((generatedLevels_nr + 1));
+						} else {
+								iter.setLevels_alloc((((generatedLevels_alloc) + 16) * 3 / 2));
+						} 
+						(generatedLevels) = ModernizedCProgram.xrealloc((generatedLevels), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedLevels_alloc)));
+					} 
+				} while (/* push down a level */0);
+				level = generatedLevels[generatedLevels_nr++];
+				level.setDir(ref_dir.get_ref_dir(entry));
+				level.setPrefix_state(prefix_state.entry_prefix_state);
+				level.setIndex(-1);
+			} else {
+					generatedBase.setRefname(generatedName);
+					generatedBase.setOid(generatedValue.getOid());
+					generatedBase.setFlags(generatedFlag);
+					return 0;
+			} 
+		}
+	}
+	public int cache_ref_iterator_abort() {
+		cache_ref_iterator iter = (cache_ref_iterator)ref_iterator;
+		Object generatedPrefix = iter.getPrefix();
+		ModernizedCProgram.free((byte)generatedPrefix);
+		cache_ref_iterator_level[] generatedLevels = iter.getLevels();
+		ModernizedCProgram.free(generatedLevels);
+		ModernizedCProgram.base_ref_iterator_free(ref_iterator);
+		return -1;
+	}
+	public ref_iterator cache_ref_iterator_begin(ref_cache cache, Object prefix, int prime_dir) {
+		ref_dir dir = new ref_dir();
+		cache_ref_iterator iter = new cache_ref_iterator();
+		ref_iterator ref_iterator = new ref_iterator();
+		cache_ref_iterator_level level = new cache_ref_iterator_level();
+		ref_entry generatedRoot = cache.getRoot();
+		ref_dir ref_dir = new ref_dir();
+		dir = ref_dir.get_ref_dir(generatedRoot);
+		if (prefix && prefix) {
+			dir = dir.find_containing_dir(prefix, 0);
+		} 
+		ref_iterator ref_iterator = new ref_iterator();
+		if (!dir) {
+			return ref_iterator.empty_ref_iterator_begin();
+		} 
+		if (prime_dir) {
+			dir.prime_ref_dir(prefix);
+		} 
+		iter = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
+		ref_iterator generatedBase = iter.getBase();
+		ref_iterator = generatedBase;
+		ModernizedCProgram.base_ref_iterator_init(ref_iterator, ModernizedCProgram.cache_ref_iterator_vtable, 1);
+		Object generatedLevels_alloc = iter.getLevels_alloc();
+		cache_ref_iterator_level[] generatedLevels = iter.getLevels();
+		do {
+			if ((true) > generatedLevels_alloc) {
+				if ((((generatedLevels_alloc) + 16) * 3 / 2) < (true)) {
+					iter.setLevels_alloc((true));
+				} else {
+						iter.setLevels_alloc((((generatedLevels_alloc) + 16) * 3 / 2));
+				} 
+				(generatedLevels) = ModernizedCProgram.xrealloc((generatedLevels), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedLevels_alloc)));
+			} 
+		} while (0);
+		iter.setLevels_nr(1);
+		level = generatedLevels[0];
+		level.setIndex(-1);
+		level.setDir(dir);
+		if (prefix && prefix) {
+			iter.setPrefix(ModernizedCProgram.xstrdup(prefix));
+			level.setPrefix_state(prefix_state.PREFIX_WITHIN_DIR);
+		} else {
+				level.setPrefix_state(prefix_state.PREFIX_CONTAINS_DIR);
+		} 
+		return ref_iterator;
 	}
 	public int packed_ref_iterator_advance() {
 		packed_ref_iterator iter = (packed_ref_iterator)ref_iterator;
@@ -282,7 +645,7 @@ public class ref_iterator {
 		if (start == generatedEof) {
 			return ref_iterator.empty_ref_iterator_begin();
 		} 
-		iter = ModernizedCProgram.xcalloc(1, );
+		iter = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		ref_iterator generatedBase = iter.getBase();
 		ref_iterator = generatedBase;
 		ModernizedCProgram.base_ref_iterator_init(ref_iterator, ModernizedCProgram.packed_ref_iterator_vtable, 1);
@@ -308,369 +671,6 @@ public class ref_iterator {
 	public ref_iterator packed_reflog_iterator_begin(ref_store ref_store) {
 		ref_iterator ref_iterator = new ref_iterator();
 		return ref_iterator.empty_ref_iterator_begin();
-	}
-	public int cache_ref_iterator_advance() {
-		cache_ref_iterator iter = (cache_ref_iterator)ref_iterator;
-		cache_ref_iterator_level generatedLevels = iter.getLevels();
-		Object generatedLevels_nr = iter.getLevels_nr();
-		ref_dir generatedDir = level.getDir();
-		int generatedIndex = level.getIndex();
-		int generatedNr = generatedDir.getNr();
-		ref_entry generatedEntries = dir.getEntries();
-		prefix_state generatedPrefix_state = level.getPrefix_state();
-		Object generatedName = entry.getName();
-		Object generatedPrefix = iter.getPrefix();
-		byte generatedFlag = entry.getFlag();
-		Object generatedLevels_alloc = iter.getLevels_alloc();
-		ref_dir ref_dir = new ref_dir();
-		ref_iterator generatedBase = iter.getBase();
-		 generatedU = entry.getU();
-		Object generatedValue = generatedU.getValue();
-		while (1) {
-			cache_ref_iterator_level level = generatedLevels[generatedLevels_nr - 1];
-			ref_dir dir = generatedDir;
-			ref_entry entry = new ref_entry();
-			prefix_state entry_prefix_state;
-			if (generatedIndex == -1) {
-				dir.sort_ref_dir();
-			} 
-			if (++generatedIndex == generatedNr) {
-				if (--generatedLevels_nr == /* This level is exhausted; pop up a level */0) {
-					return ModernizedCProgram.ref_iterator_abort(ref_iterator);
-				} 
-				continue;
-			} 
-			entry = generatedEntries[generatedIndex];
-			if (generatedPrefix_state == prefix_state.PREFIX_WITHIN_DIR) {
-				prefix_state.entry_prefix_state = ModernizedCProgram.overlaps_prefix(generatedName, generatedPrefix);
-				if (prefix_state.entry_prefix_state == prefix_state.PREFIX_EXCLUDES_DIR) {
-					continue;
-				} 
-			} else {
-					prefix_state.entry_prefix_state = generatedPrefix_state;
-			} 
-			if (generatedFlag & -1024) {
-				do {
-					if ((generatedLevels_nr + 1) > generatedLevels_alloc) {
-						if ((((generatedLevels_alloc) + 16) * 3 / 2) < (generatedLevels_nr + 1)) {
-							iter.setLevels_alloc((generatedLevels_nr + 1));
-						} else {
-								iter.setLevels_alloc((((generatedLevels_alloc) + 16) * 3 / 2));
-						} 
-						(generatedLevels) = ModernizedCProgram.xrealloc((generatedLevels), ModernizedCProgram.st_mult(, (generatedLevels_alloc)));
-					} 
-				} while (/* push down a level */0);
-				level = generatedLevels[generatedLevels_nr++];
-				level.setDir(ref_dir.get_ref_dir(entry));
-				level.setPrefix_state(prefix_state.entry_prefix_state);
-				level.setIndex(-1);
-			} else {
-					generatedBase.setRefname(generatedName);
-					generatedBase.setOid(generatedValue.getOid());
-					generatedBase.setFlags(generatedFlag);
-					return 0;
-			} 
-		}
-	}
-	public int cache_ref_iterator_abort() {
-		cache_ref_iterator iter = (cache_ref_iterator)ref_iterator;
-		Object generatedPrefix = iter.getPrefix();
-		ModernizedCProgram.free((byte)generatedPrefix);
-		cache_ref_iterator_level generatedLevels = iter.getLevels();
-		ModernizedCProgram.free(generatedLevels);
-		ModernizedCProgram.base_ref_iterator_free(ref_iterator);
-		return -1;
-	}
-	public ref_iterator cache_ref_iterator_begin(ref_cache cache, Object prefix, int prime_dir) {
-		ref_dir dir = new ref_dir();
-		cache_ref_iterator iter = new cache_ref_iterator();
-		ref_iterator ref_iterator = new ref_iterator();
-		cache_ref_iterator_level level = new cache_ref_iterator_level();
-		ref_entry generatedRoot = cache.getRoot();
-		ref_dir ref_dir = new ref_dir();
-		dir = ref_dir.get_ref_dir(generatedRoot);
-		if (prefix && prefix) {
-			dir = dir.find_containing_dir(prefix, 0);
-		} 
-		ref_iterator ref_iterator = new ref_iterator();
-		if (!dir) {
-			return ref_iterator.empty_ref_iterator_begin();
-		} 
-		if (prime_dir) {
-			dir.prime_ref_dir(prefix);
-		} 
-		iter = ModernizedCProgram.xcalloc(1, );
-		ref_iterator generatedBase = iter.getBase();
-		ref_iterator = generatedBase;
-		ModernizedCProgram.base_ref_iterator_init(ref_iterator, ModernizedCProgram.cache_ref_iterator_vtable, 1);
-		Object generatedLevels_alloc = iter.getLevels_alloc();
-		cache_ref_iterator_level generatedLevels = iter.getLevels();
-		do {
-			if ((true) > generatedLevels_alloc) {
-				if ((((generatedLevels_alloc) + 16) * 3 / 2) < (true)) {
-					iter.setLevels_alloc((true));
-				} else {
-						iter.setLevels_alloc((((generatedLevels_alloc) + 16) * 3 / 2));
-				} 
-				(generatedLevels) = ModernizedCProgram.xrealloc((generatedLevels), ModernizedCProgram.st_mult(, (generatedLevels_alloc)));
-			} 
-		} while (0);
-		iter.setLevels_nr(1);
-		level = generatedLevels[0];
-		level.setIndex(-1);
-		level.setDir(dir);
-		if (prefix && prefix) {
-			iter.setPrefix(ModernizedCProgram.xstrdup(prefix));
-			level.setPrefix_state(prefix_state.PREFIX_WITHIN_DIR);
-		} else {
-				level.setPrefix_state(prefix_state.PREFIX_CONTAINS_DIR);
-		} 
-		return ref_iterator;
-	}
-	public ref_iterator refs_ref_iterator_begin(ref_store refs, Object prefix, int trim, int flags) {
-		ref_iterator iter = new ref_iterator();
-		if (ModernizedCProgram.ref_paranoia < 0) {
-			ModernizedCProgram.ref_paranoia = .git_env_bool("GIT_REF_PARANOIA", 0);
-		} 
-		if (ModernizedCProgram.ref_paranoia) {
-			flags |=  DO_FOR_EACH_INCLUDE_BROKEN;
-		} 
-		iter = .UNRECOGNIZEDFUNCTIONNAME(refs, prefix, flags/*
-			 * `iterator_begin()` already takes care of prefix, but we
-			 * might need to do some trimming:
-			 */);
-		if (trim) {
-			iter = iter.prefix_ref_iterator_begin("", trim);
-		} 
-		Object generatedRef_iterator = iter.getRef_iterator();
-		if (!generatedRef_iterator) {
-			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\refs.c", 1510, "reference iterator is not ordered");
-		} 
-		return iter/*
-		 * Call fn for each reference in the specified submodule for which the
-		 * refname begins with prefix. If trim is non-zero, then trim that
-		 * many characters off the beginning of each refname before passing
-		 * the refname to fn. flags can be DO_FOR_EACH_INCLUDE_BROKEN to
-		 * include broken references in the iteration. If fn ever returns a
-		 * non-zero value, stop the iteration and return that value;
-		 * otherwise, return 0.
-		 */;
-	}
-	public int empty_ref_iterator_advance() {
-		return ModernizedCProgram.ref_iterator_abort(ref_iterator);
-	}
-	public int empty_ref_iterator_abort() {
-		ModernizedCProgram.base_ref_iterator_free(ref_iterator);
-		return -1;
-	}
-	public ref_iterator empty_ref_iterator_begin() {
-		empty_ref_iterator iter = ModernizedCProgram.xcalloc(1, );
-		ref_iterator generatedBase = iter.getBase();
-		ref_iterator ref_iterator = generatedBase;
-		ModernizedCProgram.base_ref_iterator_init(ref_iterator, ModernizedCProgram.empty_ref_iterator_vtable, 1);
-		return ref_iterator;
-	}
-	public int is_empty_ref_iterator() {
-		Object generatedRef_iterator = this.getRef_iterator();
-		return generatedRef_iterator == ModernizedCProgram.empty_ref_iterator_vtable;
-	}
-	public int merge_ref_iterator_advance() {
-		merge_ref_iterator iter = (merge_ref_iterator)ref_iterator;
-		int ok;
-		ref_iterator generatedCurrent = iter.getCurrent();
-		ref_iterator generatedIter0 = iter.getIter0();
-		ref_iterator generatedIter1 = iter.getIter1();
-		if (!generatedCurrent) {
-			if ((ok = ModernizedCProgram.ref_iterator_advance(generatedIter0)) != /* Initialize: advance both iterators to their first entries */0) {
-				iter.setIter0(((Object)0));
-				if (ok == -2) {
-					;
-				} 
-			} 
-			if ((ok = ModernizedCProgram.ref_iterator_advance(generatedIter1)) != 0) {
-				iter.setIter1(((Object)0));
-				if (ok == -2) {
-					;
-				} 
-			} 
-		} else {
-				if ((ok = ModernizedCProgram.ref_iterator_advance(generatedCurrent)) != 0) {
-					generatedCurrent = ((Object)0);
-					if (ok == -2) {
-						;
-					} 
-				} 
-		} 
-		Object generatedCb_data = iter.getCb_data();
-		Object generatedRef_iterator = (generatedCurrent).getRef_iterator();
-		ref_iterator generatedBase = iter.getBase();
-		while (/* Loop until we find an entry that we can yield. */1) {
-			ref_iterator secondary = new ref_iterator();
-			iterator_selection selection = .UNRECOGNIZEDFUNCTIONNAME(generatedIter0, generatedIter1, generatedCb_data);
-			if (iterator_selection.selection == iterator_selection.ITER_SELECT_DONE) {
-				return ModernizedCProgram.ref_iterator_abort(ref_iterator);
-			}  else if (iterator_selection.selection == iterator_selection.ITER_SELECT_ERROR) {
-				ModernizedCProgram.ref_iterator_abort(ref_iterator);
-				return -2;
-			} 
-			if ((iterator_selection.selection & iterator_selection.ITER_CURRENT_SELECTION_MASK) == 0) {
-				iter.setCurrent(generatedIter0);
-				secondary = generatedIter1;
-			} else {
-					iter.setCurrent(generatedIter1);
-					secondary = generatedIter0;
-			} 
-			if (iterator_selection.selection & iterator_selection.ITER_SKIP_SECONDARY) {
-				if ((ok = ModernizedCProgram.ref_iterator_advance(secondary)) != 0) {
-					secondary = ((Object)0);
-					if (ok == -2) {
-						;
-					} 
-				} 
-			} 
-			if (iterator_selection.selection & iterator_selection.ITER_YIELD_CURRENT) {
-				generatedBase.setRef_iterator(generatedRef_iterator);
-				generatedBase.setRef_iterator(generatedRef_iterator);
-				generatedBase.setRef_iterator(generatedRef_iterator);
-				return 0;
-			} 
-		}
-		return -2;
-	}
-	public int merge_ref_iterator_abort() {
-		merge_ref_iterator iter = (merge_ref_iterator)ref_iterator;
-		int ok = -1;
-		ref_iterator generatedIter0 = iter.getIter0();
-		if (generatedIter0) {
-			if (ModernizedCProgram.ref_iterator_abort(generatedIter0) != -1) {
-				ok = -2;
-			} 
-		} 
-		ref_iterator generatedIter1 = iter.getIter1();
-		if (generatedIter1) {
-			if (ModernizedCProgram.ref_iterator_abort(generatedIter1) != -1) {
-				ok = -2;
-			} 
-		} 
-		ModernizedCProgram.base_ref_iterator_free(ref_iterator);
-		return ok;
-	}
-	public ref_iterator merge_ref_iterator_begin(int ordered, ref_iterator iter1, Object select, Object cb_data) {
-		merge_ref_iterator iter = ModernizedCProgram.xcalloc(1, );
-		ref_iterator generatedBase = iter.getBase();
-		ref_iterator ref_iterator = generatedBase;
-		ModernizedCProgram.base_ref_iterator_init(ref_iterator, ModernizedCProgram.merge_ref_iterator_vtable, ordered);
-		iter.setIter0(iter0);
-		iter.setIter1(iter1);
-		iter.setSelect(select);
-		iter.setCb_data(cb_data);
-		iter.setCurrent(((Object)0));
-		return ref_iterator/*
-		 * A ref_iterator_select_fn that overlays the items from front on top
-		 * of those from back (like loose refs over packed refs). See
-		 * overlay_ref_iterator_begin().
-		 */;
-	}
-	public iterator_selection overlay_iterator_select(ref_iterator back, Object cb_data) {
-		int cmp;
-		if (!back) {
-			return front ? iterator_selection.ITER_SELECT_0 : iterator_selection.ITER_SELECT_DONE;
-		}  else if (!front) {
-			return iterator_selection.ITER_SELECT_1;
-		} 
-		Object generatedRef_iterator = this.getRef_iterator();
-		cmp = .strcmp(generatedRef_iterator, generatedRef_iterator);
-		if (cmp < 0) {
-			return iterator_selection.ITER_SELECT_0;
-		}  else if (cmp > 0) {
-			return iterator_selection.ITER_SELECT_1;
-		} else {
-				return iterator_selection.ITER_SELECT_0_SKIP_1;
-		} 
-	}
-	public ref_iterator overlay_ref_iterator_begin(ref_iterator back) {
-		Object generatedRef_iterator = this.getRef_iterator();
-		if (front.is_empty_ref_iterator()) {
-			ModernizedCProgram.ref_iterator_abort(front);
-			return back;
-		}  else if (back.is_empty_ref_iterator()) {
-			ModernizedCProgram.ref_iterator_abort(back);
-			return front;
-		}  else if (!generatedRef_iterator || !generatedRef_iterator) {
-			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\iterator.c", 275, "overlay_ref_iterator requires ordered inputs");
-		} 
-		return front.merge_ref_iterator_begin(1, back, overlay_iterator_select, ((Object)0));
-	}
-	public int prefix_ref_iterator_advance() {
-		prefix_ref_iterator iter = (prefix_ref_iterator)ref_iterator;
-		int ok;
-		ref_iterator generatedIter0 = iter.getIter0();
-		Object generatedRef_iterator = generatedIter0.getRef_iterator();
-		Byte generatedPrefix = iter.getPrefix();
-		int generatedTrim = iter.getTrim();
-		ref_iterator generatedBase = iter.getBase();
-		while ((ok = ModernizedCProgram.ref_iterator_advance(generatedIter0)) == 0) {
-			int cmp = ModernizedCProgram.compare_prefix(generatedRef_iterator, generatedPrefix);
-			if (cmp < 0) {
-				continue;
-			} 
-			if (cmp > 0/*
-						 * If the source iterator is ordered, then we
-						 * can stop the iteration as soon as we see a
-						 * refname that comes after the prefix:
-						 */) {
-				if (generatedRef_iterator) {
-					ok = ModernizedCProgram.ref_iterator_abort(generatedIter0);
-					break;
-				} else {
-						continue;
-				} 
-			} 
-			if (generatedTrim) {
-				if (.strlen(generatedRef_iterator) <= generatedTrim) {
-					ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\iterator.c", 341, "attempt to trim too many characters");
-				} 
-				generatedBase.setRef_iterator(generatedRef_iterator + generatedTrim);
-			} else {
-					generatedBase.setRef_iterator(generatedRef_iterator);
-			} 
-			generatedBase.setRef_iterator(generatedRef_iterator);
-			generatedBase.setRef_iterator(generatedRef_iterator);
-			return 0;
-		}
-		iter.setIter0(((Object)0));
-		if (ModernizedCProgram.ref_iterator_abort(ref_iterator) != -1) {
-			return -2;
-		} 
-		return ok;
-	}
-	public int prefix_ref_iterator_abort() {
-		prefix_ref_iterator iter = (prefix_ref_iterator)ref_iterator;
-		int ok = -1;
-		ref_iterator generatedIter0 = iter.getIter0();
-		if (generatedIter0) {
-			ok = ModernizedCProgram.ref_iterator_abort(generatedIter0);
-		} 
-		Byte generatedPrefix = iter.getPrefix();
-		ModernizedCProgram.free(generatedPrefix);
-		ModernizedCProgram.base_ref_iterator_free(ref_iterator);
-		return ok;
-	}
-	public ref_iterator prefix_ref_iterator_begin(Object prefix, int trim) {
-		prefix_ref_iterator iter = new prefix_ref_iterator();
-		ref_iterator ref_iterator = new ref_iterator();
-		if (!prefix && !trim) {
-			return /* optimization: no need to wrap iterator */iter0;
-		} 
-		iter = ModernizedCProgram.xcalloc(1, );
-		ref_iterator generatedBase = iter.getBase();
-		ref_iterator = generatedBase;
-		Object generatedRef_iterator = this.getRef_iterator();
-		ModernizedCProgram.base_ref_iterator_init(ref_iterator, ModernizedCProgram.prefix_ref_iterator_vtable, generatedRef_iterator);
-		iter.setIter0(iter0);
-		iter.setPrefix(ModernizedCProgram.xstrdup(prefix));
-		iter.setTrim(trim);
-		return ref_iterator;
 	}
 	public ref_iterator_vtable getVtable() {
 		return vtable;

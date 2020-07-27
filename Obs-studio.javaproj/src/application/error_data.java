@@ -10,37 +10,6 @@ public class error_data {
 	public error_data() {
 	}
 	
-	/* ------------------------------------------------------------------------- */
-	public void error_data_add(Object file, Object row, Object column, Object msg, int level) {
-		error_item item = new error_item();
-		if (!ModernizedCProgram.data) {
-			return ;
-		} 
-		item.setFile(file);
-		item.setRow(row);
-		item.setColumn(column);
-		item.setLevel(level);
-		item.setError(ModernizedCProgram.bstrdup(msg));
-		ModernizedCProgram.data.getErrors().getDa().darray_push_back(, item);
-	}
-	public Byte error_data_buildstring() {
-		dstr str = new dstr();
-		 generatedErrors = this.getErrors();
-		Object generatedArray = generatedErrors.getArray();
-		error_item items = generatedArray;
-		size_t i = new size_t();
-		str.dstr_init();
-		Object generatedNum = generatedErrors.getNum();
-		Object generatedFile = item.getFile();
-		Object generatedRow = item.getRow();
-		Object generatedColumn = item.getColumn();
-		Byte generatedError = item.getError();
-		for (i = 0; i < generatedNum; i++) {
-			error_item item = items + i;
-			str.dstr_catf("%s (%u, %u): %s\n", generatedFile, generatedRow, generatedColumn, generatedError);
-		}
-		return generatedArray;
-	}
 	public void error_data_init() {
 		ModernizedCProgram.data.getErrors().getDa().darray_init();
 	}
@@ -77,6 +46,37 @@ public class error_data {
 			} 
 		}
 		return 0;
+	}
+	/* ------------------------------------------------------------------------- */
+	public void error_data_add(Object file, Object row, Object column, Object msg, int level) {
+		error_item item = new error_item();
+		if (!ModernizedCProgram.data) {
+			return /*Error: Unsupported expression*/;
+		} 
+		item.setFile(file);
+		item.setRow(row);
+		item.setColumn(column);
+		item.setLevel(level);
+		item.setError(ModernizedCProgram.bstrdup(msg));
+		ModernizedCProgram.data.getErrors().getDa().darray_push_back(/*Error: sizeof expression not supported yet*/, item);
+	}
+	public Byte error_data_buildstring() {
+		dstr str = new dstr();
+		 generatedErrors = this.getErrors();
+		Object generatedArray = generatedErrors.getArray();
+		error_item items = generatedArray;
+		size_t i = new size_t();
+		str.dstr_init();
+		Object generatedNum = generatedErrors.getNum();
+		Object generatedFile = item.getFile();
+		Object generatedRow = item.getRow();
+		Object generatedColumn = item.getColumn();
+		Byte generatedError = item.getError();
+		for (i = 0; i < generatedNum; i++) {
+			error_item item = items + i;
+			str.dstr_catf("%s (%u, %u): %s\n", generatedFile, generatedRow, generatedColumn, generatedError);
+		}
+		return generatedArray;
 	}
 	public  getErrors() {
 		return errors;

@@ -22,7 +22,7 @@ public class object_request {
 	public void finish_object_request() {
 		http_object_request generatedReq = this.getReq();
 		if (generatedReq.finish_http_object_request()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		int generatedRename = generatedReq.getRename();
 		walker generatedWalker = this.getWalker();

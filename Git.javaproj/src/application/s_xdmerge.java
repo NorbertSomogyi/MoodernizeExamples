@@ -60,7 +60,7 @@ public class s_xdmerge {
 			m.setChg1(i1 + chg1 - generatedI1);
 			m.setChg2(i2 + chg2 - generatedI2);
 		} else {
-				m = ModernizedCProgram.xmalloc();
+				m = ModernizedCProgram.xmalloc(/*Error: Unsupported expression*/);
 				if (!m) {
 					return -1;
 				} 

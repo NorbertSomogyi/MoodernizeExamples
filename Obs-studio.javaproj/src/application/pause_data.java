@@ -17,6 +17,32 @@ public class pause_data {
 	public pause_data() {
 	}
 	
+	public void end_pause(Object ts) {
+		Object generatedTs_end = this.getTs_end();
+		Object generatedTs_offset = this.getTs_offset();
+		Object generatedTs_start = this.getTs_start();
+		if (!generatedTs_end) {
+			this.setTs_end(ts);
+			generatedTs_offset += generatedTs_end - generatedTs_start;
+		} 
+	}
+	public Object get_closest_v_ts() {
+		uint64_t interval = ModernizedCProgram.obs.getVideo().getVideo_frame_interval_ns();
+		uint64_t i2 = interval * 2;
+		uint64_t ts = ModernizedCProgram.os_gettime_ns();
+		Object generatedLast_video_ts = this.getLast_video_ts();
+		return generatedLast_video_ts + ((ts - generatedLast_video_ts + i2) / interval) * interval;
+	}
+	public Object pause_can_start() {
+		Object generatedTs_start = this.getTs_start();
+		Object generatedTs_end = this.getTs_end();
+		return !generatedTs_start && !generatedTs_end;
+	}
+	public Object pause_can_stop() {
+		Object generatedTs_start = this.getTs_start();
+		Object generatedTs_end = this.getTs_end();
+		return !!generatedTs_start && !generatedTs_end;
+	}
 	public void pause_reset() {
 		Object generatedMutex = this.getMutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedMutex);
@@ -48,32 +74,6 @@ public class pause_data {
 		ignore_frame = pause.video_pause_check_internal(timestamp);
 		ModernizedCProgram.pthread_mutex_unlock(generatedMutex);
 		return ignore_frame;
-	}
-	public void end_pause(Object ts) {
-		Object generatedTs_end = this.getTs_end();
-		Object generatedTs_offset = this.getTs_offset();
-		Object generatedTs_start = this.getTs_start();
-		if (!generatedTs_end) {
-			this.setTs_end(ts);
-			generatedTs_offset += generatedTs_end - generatedTs_start;
-		} 
-	}
-	public Object get_closest_v_ts() {
-		uint64_t interval = ModernizedCProgram.obs.getVideo().getVideo_frame_interval_ns();
-		uint64_t i2 = interval * 2;
-		uint64_t ts = ModernizedCProgram.os_gettime_ns();
-		Object generatedLast_video_ts = this.getLast_video_ts();
-		return generatedLast_video_ts + ((ts - generatedLast_video_ts + i2) / interval) * interval;
-	}
-	public Object pause_can_start() {
-		Object generatedTs_start = this.getTs_start();
-		Object generatedTs_end = this.getTs_end();
-		return !generatedTs_start && !generatedTs_end;
-	}
-	public Object pause_can_stop() {
-		Object generatedTs_start = this.getTs_start();
-		Object generatedTs_end = this.getTs_end();
-		return !!generatedTs_start && !generatedTs_end;
 	}
 	public Object getMutex() {
 		return mutex;

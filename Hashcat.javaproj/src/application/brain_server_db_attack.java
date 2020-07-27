@@ -5,7 +5,7 @@ public class brain_server_db_attack {
 	private brain_server_attack_short short_buf;
 	private Object short_alloc;
 	private Object short_cnt;
-	private brain_server_attack_long long_buf;
+	private brain_server_attack_long[] long_buf;
 	private Object long_alloc;
 	private Object long_cnt;
 	private int ab;
@@ -13,7 +13,7 @@ public class brain_server_db_attack {
 	private Object mux_ag;
 	private Object write_attacks;
 	
-	public brain_server_db_attack(Object brain_attack, brain_server_attack_short short_buf, Object short_alloc, Object short_cnt, brain_server_attack_long long_buf, Object long_alloc, Object long_cnt, int ab, Object mux_ar, Object mux_ag, Object write_attacks) {
+	public brain_server_db_attack(Object brain_attack, brain_server_attack_short short_buf, Object short_alloc, Object short_cnt, brain_server_attack_long[] long_buf, Object long_alloc, Object long_cnt, int ab, Object mux_ar, Object mux_ag, Object write_attacks) {
 		setBrain_attack(brain_attack);
 		setShort_buf(short_buf);
 		setShort_alloc(short_alloc);
@@ -39,16 +39,16 @@ public class brain_server_db_attack {
 		this.setLong_buf(((Object)0));
 		this.setLong_alloc(0);
 		this.setWrite_attacks(0);
-		this.setMux_ar(.CreateMutexA(((Object)0), 0, ((Object)0)));
-		this.setMux_ag(.CreateMutexA(((Object)0), 0, ((Object)0)));
+		this.setMux_ar(/*Error: Function owner not recognized*/CreateMutexA(((Object)0), 0, ((Object)0)));
+		this.setMux_ag(/*Error: Function owner not recognized*/CreateMutexA(((Object)0), 0, ((Object)0)));
 	}
 	public boolean brain_server_db_attack_realloc(Object new_long_cnt, Object new_short_cnt) {
 		Object generatedLong_cnt = this.getLong_cnt();
 		Object generatedLong_alloc = this.getLong_alloc();
-		brain_server_attack_long generatedLong_buf = this.getLong_buf();
+		brain_server_attack_long[] generatedLong_buf = this.getLong_buf();
 		if ((generatedLong_cnt + new_long_cnt) > generatedLong_alloc) {
 			i64 realloc_size_total = (i64)ModernizedCProgram.mydivc64((u64)new_long_cnt, (u64)ModernizedCProgram.BRAIN_SERVER_REALLOC_ATTACK_SIZE) * ModernizedCProgram.BRAIN_SERVER_REALLOC_ATTACK_SIZE;
-			brain_server_attack_long_t long_buf = (brain_server_attack_long_t)ModernizedCProgram.hcrealloc(generatedLong_buf, generatedLong_alloc * , realloc_size_total * );
+			brain_server_attack_long_t long_buf = (brain_server_attack_long_t)ModernizedCProgram.hcrealloc(generatedLong_buf, generatedLong_alloc * /*Error: Unsupported expression*/, realloc_size_total * /*Error: Unsupported expression*/);
 			if (long_buf == ((Object)0)) {
 				return 0;
 			} 
@@ -60,7 +60,7 @@ public class brain_server_db_attack {
 		brain_server_attack_short generatedShort_buf = this.getShort_buf();
 		if ((generatedShort_cnt + new_short_cnt) > generatedShort_alloc) {
 			i64 realloc_size_total = (i64)ModernizedCProgram.mydivc64((u64)new_short_cnt, (u64)ModernizedCProgram.BRAIN_SERVER_REALLOC_ATTACK_SIZE) * ModernizedCProgram.BRAIN_SERVER_REALLOC_ATTACK_SIZE;
-			brain_server_attack_short_t short_buf = (brain_server_attack_short_t)ModernizedCProgram.hcrealloc(generatedShort_buf, generatedShort_alloc * , realloc_size_total * );
+			brain_server_attack_short_t short_buf = (brain_server_attack_short_t)ModernizedCProgram.hcrealloc(generatedShort_buf, generatedShort_alloc * /*Error: Unsupported expression*/, realloc_size_total * /*Error: Unsupported expression*/);
 			if (short_buf == ((Object)0)) {
 				return 0;
 			} 
@@ -71,10 +71,10 @@ public class brain_server_db_attack {
 	}
 	public void brain_server_db_attack_free() {
 		Object generatedMux_ag = this.getMux_ag();
-		.CloseHandle(generatedMux_ag);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(generatedMux_ag);
 		Object generatedMux_ar = this.getMux_ar();
-		.CloseHandle(generatedMux_ar);
-		brain_server_attack_long generatedLong_buf = this.getLong_buf();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle(generatedMux_ar);
+		brain_server_attack_long[] generatedLong_buf = this.getLong_buf();
 		ModernizedCProgram.hcfree(generatedLong_buf);
 		brain_server_attack_short generatedShort_buf = this.getShort_buf();
 		ModernizedCProgram.hcfree(generatedShort_buf);
@@ -92,27 +92,27 @@ public class brain_server_db_attack {
 		hc_timer_t timer_dump = new hc_timer_t();
 		ModernizedCProgram.hc_timer_set(timer_dump)// read from file;// read from file
 		stat sb = new stat();
-		.memset(sb, 0, );
-		if (.stat(file, sb) == -1) {
-			(_iob[2]).brain_logging(0, "%s: %s\n", file, .strerror((._errno())));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(sb, 0, /*Error: Unsupported expression*/);
+		if (/*Error: Function owner not recognized*/stat(file, sb) == -1) {
+			(_iob[2]).brain_logging(0, "%s: %s\n", file, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			return 0;
 		} 
 		HCFILE fp = new HCFILE();
 		if (fp.hc_fopen(file, "rb") == 0) {
-			(_iob[2]).brain_logging(0, "%s: %s\n", file, .strerror((._errno())));
+			(_iob[2]).brain_logging(0, "%s: %s\n", file, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			return 0;
 		} 
 		Object generatedSt_size = sb.getSt_size();
-		i64 temp_cnt = (u64)generatedSt_size / ;
+		i64 temp_cnt = (u64)generatedSt_size / /*Error: Unsupported expression*/;
 		if (brain_server_db_attack.brain_server_db_attack_realloc(temp_cnt, 0) == 0) {
 			(_iob[2]).brain_logging(0, "%s\n", "Insufficient memory available");
 			fp.hc_fclose();
 			return 0;
 		} 
-		brain_server_attack_long generatedLong_buf = this.getLong_buf();
-		size_t nread = fp.hc_fread(generatedLong_buf, , temp_cnt);
+		brain_server_attack_long[] generatedLong_buf = this.getLong_buf();
+		size_t nread = fp.hc_fread(generatedLong_buf, /*Error: Unsupported expression*/, temp_cnt);
 		if (nread != (size_t)temp_cnt) {
-			(_iob[2]).brain_logging(0, "%s: only %I64u bytes read\n", file, (u64)nread * );
+			(_iob[2]).brain_logging(0, "%s: only %I64u bytes read\n", file, (u64)nread * /*Error: Unsupported expression*/);
 			fp.hc_fclose();
 			return 0;
 		} 
@@ -133,14 +133,14 @@ public class brain_server_db_attack {
 		ModernizedCProgram.hc_timer_set(timer_dump)// write to file;// write to file
 		HCFILE fp = new HCFILE();
 		if (fp.hc_fopen(file, "wb") == 0) {
-			(_iob[2]).brain_logging(0, "%s: %s\n", file, .strerror((._errno())));
+			(_iob[2]).brain_logging(0, "%s: %s\n", file, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			return 0;
 		} 
-		brain_server_attack_long generatedLong_buf = this.getLong_buf();
+		brain_server_attack_long[] generatedLong_buf = this.getLong_buf();
 		Object generatedLong_cnt = this.getLong_cnt();
-		// storing should not include reserved attacks only finishedsize_t nwrite = fp.hc_fwrite(generatedLong_buf, , generatedLong_cnt);
+		// storing should not include reserved attacks only finishedsize_t nwrite = fp.hc_fwrite(generatedLong_buf, /*Error: Unsupported expression*/, generatedLong_cnt);
 		if (nwrite != (size_t)generatedLong_cnt) {
-			(_iob[2]).brain_logging(0, "%s: only %I64u bytes written\n", file, (u64)nwrite * );
+			(_iob[2]).brain_logging(0, "%s: only %I64u bytes written\n", file, (u64)nwrite * /*Error: Unsupported expression*/);
 			fp.hc_fclose();
 			return 0;
 		} 
@@ -148,9 +148,9 @@ public class brain_server_db_attack {
 		this.setWrite_attacks(0)// stats;// stats
 		double ms = ModernizedCProgram.hc_timer_get(timer_dump);
 		stat sb = new stat();
-		.memset(sb, 0, );
-		if (.stat(file, sb) == -1) {
-			(_iob[2]).brain_logging(0, "%s: %s\n", file, .strerror((._errno())));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(sb, 0, /*Error: Unsupported expression*/);
+		if (/*Error: Function owner not recognized*/stat(file, sb) == -1) {
+			(_iob[2]).brain_logging(0, "%s: %s\n", file, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			return 0;
 		} 
 		Object generatedSt_size = sb.getSt_size();
@@ -182,10 +182,10 @@ public class brain_server_db_attack {
 	public void setShort_cnt(Object newShort_cnt) {
 		short_cnt = newShort_cnt;
 	}
-	public brain_server_attack_long getLong_buf() {
+	public brain_server_attack_long[] getLong_buf() {
 		return long_buf;
 	}
-	public void setLong_buf(brain_server_attack_long newLong_buf) {
+	public void setLong_buf(brain_server_attack_long[] newLong_buf) {
 		long_buf = newLong_buf;
 	}
 	public Object getLong_alloc() {

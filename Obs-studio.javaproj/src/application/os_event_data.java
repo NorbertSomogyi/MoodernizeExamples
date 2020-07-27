@@ -32,7 +32,7 @@ public class os_event_data {
 	
 	public int os_event_init(os_event_type type) {
 		int code = 0;
-		os_event_data data = ModernizedCProgram.bzalloc();
+		os_event_data data = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		Object generatedMutex = data.getMutex();
 		if ((code = ModernizedCProgram.pthread_mutex_init(generatedMutex, ((Object)0))) < 0) {
 			ModernizedCProgram.bfree(data);
@@ -49,7 +49,7 @@ public class os_event_data {
 		event = data;
 		return 0;
 		HANDLE handle = new HANDLE();
-		handle = .CreateEventA(((Object)0), (os_event_type.type == os_event_type.OS_EVENT_TYPE_MANUAL), 0, ((Object)0));
+		handle = /*Error: Function owner not recognized*/CreateEventA(((Object)0), (os_event_type.type == os_event_type.OS_EVENT_TYPE_MANUAL), 0, ((Object)0));
 		if (!handle) {
 			return -1;
 		} 
@@ -65,7 +65,7 @@ public class os_event_data {
 			ModernizedCProgram.bfree(event);
 		} 
 		if (event) {
-			.CloseHandle((HANDLE)event);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/CloseHandle((HANDLE)event);
 		} 
 	}
 	public int os_event_wait() {
@@ -89,7 +89,7 @@ public class os_event_data {
 		if (!event) {
 			return 22;
 		} 
-		code = .WaitForSingleObject((HANDLE)event, -1024);
+		code = /*Error: Function owner not recognized*/WaitForSingleObject((HANDLE)event, -1024);
 		if (code != 0) {
 			return 22;
 		} 
@@ -106,7 +106,7 @@ public class os_event_data {
 		if (!generatedSignalled) {
 			timespec ts = new timespec();
 			timeval tv = new timeval();
-			.gettimeofday(tv, ((Object)0));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/gettimeofday(tv, ((Object)0));
 			ts.setTv_sec(generatedTv_sec);
 			ts.setTv_nsec(generatedTv_usec * 1000);
 			ts.add_ms_to_ts(milliseconds);
@@ -124,7 +124,7 @@ public class os_event_data {
 		if (!event) {
 			return 22;
 		} 
-		code = .WaitForSingleObject((HANDLE)event, milliseconds);
+		code = /*Error: Function owner not recognized*/WaitForSingleObject((HANDLE)event, milliseconds);
 		if (code == -1024) {
 			return 138;
 		}  else if (code != 0) {
@@ -150,7 +150,7 @@ public class os_event_data {
 		if (!event) {
 			return 22;
 		} 
-		code = .WaitForSingleObject((HANDLE)event, 0);
+		code = /*Error: Function owner not recognized*/WaitForSingleObject((HANDLE)event, 0);
 		if (code == -1024) {
 			return 11;
 		}  else if (code != 0) {
@@ -170,7 +170,7 @@ public class os_event_data {
 		if (!event) {
 			return 22;
 		} 
-		if (!.SetEvent((HANDLE)event)) {
+		if (!/*Error: Function owner not recognized*/SetEvent((HANDLE)event)) {
 			return 22;
 		} 
 		return 0;
@@ -181,9 +181,9 @@ public class os_event_data {
 		this.setSignalled(0);
 		ModernizedCProgram.pthread_mutex_unlock(generatedMutex);
 		if (!event) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.ResetEvent((HANDLE)event);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ResetEvent((HANDLE)event);
 	}
 	public Object getMutex() {
 		return mutex;

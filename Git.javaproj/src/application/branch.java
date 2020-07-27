@@ -28,19 +28,19 @@ public class branch {
 	}
 	
 	public branch lookup_branch(Object name) {
-		int hc = ModernizedCProgram.hc_str(name, .strlen(name)) % ModernizedCProgram.branch_table_sz;
+		int hc = ModernizedCProgram.hc_str(name, /*Error: Function owner not recognized*/strlen(name)) % ModernizedCProgram.branch_table_sz;
 		branch b = new branch();
 		Object generatedName = b.getName();
 		branch generatedTable_next_branch = b.getTable_next_branch();
 		for (b = ModernizedCProgram.branch_table[hc]; b; b = generatedTable_next_branch) {
-			if (!.strcmp(name, generatedName)) {
+			if (!/*Error: Function owner not recognized*/strcmp(name, generatedName)) {
 				return b;
 			} 
 		}
 		return ((Object)0);
 	}
 	public branch new_branch(Object name) {
-		int hc = ModernizedCProgram.hc_str(name, .strlen(name)) % ModernizedCProgram.branch_table_sz;
+		int hc = ModernizedCProgram.hc_str(name, /*Error: Function owner not recognized*/strlen(name)) % ModernizedCProgram.branch_table_sz;
 		branch branch = new branch();
 		branch b = branch.lookup_branch(name);
 		if (b) {
@@ -49,7 +49,7 @@ public class branch {
 		if (ModernizedCProgram.check_refname_format(name, 1)) {
 			ModernizedCProgram.die("Branch name doesn't conform to GIT standards: %s", name);
 		} 
-		b = ModernizedCProgram.fi_mem_pool.mem_pool_calloc(1, );
+		b = ModernizedCProgram.fi_mem_pool.mem_pool_calloc(1, /*Error: Unsupported expression*/);
 		b.setName(ModernizedCProgram.pool_strdup(name));
 		b.setTable_next_branch(ModernizedCProgram.branch_table[hc]);
 		tree_entry generatedBranch_tree = b.getBranch_tree();
@@ -67,7 +67,7 @@ public class branch {
 		byte msg = "fast-import";
 		ref_transaction transaction = new ref_transaction();
 		object_id old_oid = new object_id();
-		strbuf err = new strbuf(, , );
+		strbuf err = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		object_id generatedOid = this.getOid();
 		int generatedDelete = this.getDelete();
 		Object generatedName = this.getName();
@@ -83,8 +83,8 @@ public class branch {
 		if (!ModernizedCProgram.force_update && !ModernizedCProgram.is_null_oid(old_oid)) {
 			commit old_cmit = new commit();
 			commit new_cmit = new commit();
-			old_cmit = .lookup_commit_reference_gently(ModernizedCProgram.the_repository, old_oid, 0);
-			new_cmit = .lookup_commit_reference_gently(ModernizedCProgram.the_repository, generatedOid, 0);
+			old_cmit = /*Error: Function owner not recognized*/lookup_commit_reference_gently(ModernizedCProgram.the_repository, old_oid, 0);
+			new_cmit = /*Error: Function owner not recognized*/lookup_commit_reference_gently(ModernizedCProgram.the_repository, generatedOid, 0);
 			if (!old_cmit || !new_cmit) {
 				return ();
 			} 
@@ -118,7 +118,7 @@ public class branch {
 		} 
 	}
 	public void file_change_m(Object p) {
-		strbuf uq = new strbuf(, , );
+		strbuf uq = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte endp;
 		object_entry oe = new object_entry();
 		object_id oid = new object_id();
@@ -129,15 +129,15 @@ public class branch {
 			ModernizedCProgram.die("Corrupt mode: %s", ModernizedCProgram.command_buf.getBuf());
 		} 
 		switch (mode) {
-		case 644:
+		case -1024:
+		case S_IFLNK:
 		case 160000/* ok */:
 				break;
 		case -1024 | 644:
-		case -1024:
 		case -1024 | 755:
-		case S_IFLNK:
 		case 755:
 				mode |=  -1024;
+		case 644:
 		default:
 				ModernizedCProgram.die("Corrupt mode: %s", ModernizedCProgram.command_buf.getBuf());
 		}
@@ -161,7 +161,7 @@ public class branch {
 				} 
 		} 
 		uq.strbuf_setlen(0);
-		byte generatedBuf = uq.getBuf();
+		byte[] generatedBuf = uq.getBuf();
 		if (!uq.unquote_c_style(p, endp)) {
 			if (endp) {
 				ModernizedCProgram.die("Garbage after path in: %s", ModernizedCProgram.command_buf.getBuf());
@@ -171,9 +171,9 @@ public class branch {
 		tree_entry generatedBranch_tree = this.getBranch_tree();
 		if ((((mode) & -1024) == -1024) && ModernizedCProgram.is_empty_tree_oid(oid) && /* Git does not track empty, non-toplevel directories. */p) {
 			generatedBranch_tree.tree_content_remove(p, ((Object)0), 0);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		Object generatedType = oe.getType();
+		byte generatedType = oe.getType();
 		if ((((mode) & -1024) == 160000)) {
 			if (inline_data) {
 				ModernizedCProgram.die("Git links cannot be specified 'inline': %s", generatedBuf);
@@ -211,15 +211,15 @@ public class branch {
 		} 
 		if (!p) {
 			ModernizedCProgram.tree_content_replace(generatedBranch_tree, oid, mode, ((Object)0));
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.tree_content_set(generatedBranch_tree, p, oid, mode, ((Object)0));
 	}
 	public void file_change_d(Object p) {
-		strbuf uq = new strbuf(, , );
+		strbuf uq = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte endp;
 		uq.strbuf_setlen(0);
-		byte generatedBuf = uq.getBuf();
+		byte[] generatedBuf = uq.getBuf();
 		if (!uq.unquote_c_style(p, endp)) {
 			if (endp) {
 				ModernizedCProgram.die("Garbage after path in: %s", ModernizedCProgram.command_buf.getBuf());
@@ -231,8 +231,8 @@ public class branch {
 	}
 	public void file_change_cr(Object s, int rename) {
 		byte d;
-		strbuf s_uq = new strbuf(, , );
-		strbuf d_uq = new strbuf(, , );
+		strbuf s_uq = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf d_uq = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte endp;
 		tree_entry leaf = new tree_entry();
 		s_uq.strbuf_setlen(0);
@@ -241,13 +241,13 @@ public class branch {
 				ModernizedCProgram.die("Missing space after source: %s", ModernizedCProgram.command_buf.getBuf());
 			} 
 		} else {
-				endp = .strchr(s, (byte)' ');
+				endp = /*Error: Function owner not recognized*/strchr(s, (byte)' ');
 				if (!endp) {
 					ModernizedCProgram.die("Missing space after source: %s", ModernizedCProgram.command_buf.getBuf());
 				} 
 				s_uq.strbuf_add(s, endp - s);
 		} 
-		byte generatedBuf = s_uq.getBuf();
+		byte[] generatedBuf = s_uq.getBuf();
 		s = generatedBuf;
 		endp++;
 		if (!endp) {
@@ -261,7 +261,7 @@ public class branch {
 			} 
 			d = generatedBuf;
 		} 
-		.memset(leaf, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(leaf, 0, /*Error: sizeof expression not supported yet*/);
 		tree_entry generatedBranch_tree = this.getBranch_tree();
 		if (rename) {
 			generatedBranch_tree.tree_content_remove(s, leaf, 1);
@@ -275,12 +275,12 @@ public class branch {
 		tree_content generatedTree = leaf.getTree();
 		if (!/* C "path/to/subdir" "" */d) {
 			ModernizedCProgram.tree_content_replace(generatedBranch_tree, generatedVersions[1].getOid(), generatedVersions[1].getMode(), generatedTree);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.tree_content_set(generatedBranch_tree, d, generatedVersions[1].getOid(), generatedVersions[1].getMode(), generatedTree);
 	}
-	public void note_change_n(Object p, byte old_fanout) {
-		strbuf uq = new strbuf(, , );
+	public void note_change_n(Object p, Byte old_fanout) {
+		strbuf uq = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		object_entry oe = new object_entry();
 		branch s = new branch();
 		object_id oid = new object_id();
@@ -325,7 +325,7 @@ public class branch {
 		} 
 		branch branch = new branch();
 		s = branch.lookup_branch(/* <commit-ish> */p);
-		Object generatedType = commit_oe.getType();
+		byte generatedType = commit_oe.getType();
 		if (s) {
 			if (ModernizedCProgram.is_null_oid(generatedOid)) {
 				ModernizedCProgram.die("Can't add a note on empty branch.");
@@ -348,7 +348,7 @@ public class branch {
 		} else {
 				ModernizedCProgram.die("Invalid ref name or SHA1 expression: %s", p);
 		} 
-		byte generatedBuf = uq.getBuf();
+		byte[] generatedBuf = uq.getBuf();
 		if (inline_data) {
 			if (p != generatedBuf) {
 				uq.strbuf_addstr(p);
@@ -374,7 +374,7 @@ public class branch {
 			generatedNum_notes--;
 		} 
 		if (ModernizedCProgram.is_null_oid(oid)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		generatedNum_notes++;
 		new_fanout = ModernizedCProgram.convert_num_notes_to_fanout(generatedNum_notes);
@@ -396,7 +396,7 @@ public class branch {
 		if (!buf || size < ModernizedCProgram.the_repository.getHash_algo().getHexsz() + 6) {
 			ModernizedCProgram.die("Not a valid commit: %s", ModernizedCProgram.oid_to_hex(generatedOid));
 		} 
-		if (.memcmp("tree ", buf, 5) || generatedOid.get_oid_hex(buf + 5)) {
+		if (/*Error: Function owner not recognized*/memcmp("tree ", buf, 5) || generatedOid.get_oid_hex(buf + 5)) {
 			ModernizedCProgram.die("The commit %s is corrupt", ModernizedCProgram.oid_to_hex(generatedOid));
 		} 
 		generatedOid.oidcpy(generatedOid);
@@ -425,7 +425,7 @@ public class branch {
 		Object generatedName = this.getName();
 		object_id generatedOid = this.getOid();
 		object_entry object_entry = new object_entry();
-		Object generatedType = oe.getType();
+		byte generatedType = oe.getType();
 		Object generatedPack_id = oe.getPack_id();
 		if (b == s) {
 			ModernizedCProgram.die("Can't create a branch from itself: %s", generatedName);
@@ -504,9 +504,9 @@ public class branch {
 				} 
 				root.load_tree();
 		} 
-		byte generatedBuf = uq.getBuf();
+		byte[] generatedBuf = uq.getBuf();
 		if (p == (byte)'"') {
-			strbuf uq = new strbuf(, , );
+			strbuf uq = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			byte endp;
 			uq.strbuf_setlen(0);
 			if (uq.unquote_c_style(p, endp)) {

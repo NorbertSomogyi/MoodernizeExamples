@@ -31,172 +31,6 @@ public class archiver_args {
 	public archiver_args() {
 	}
 	
-	public void write_extended_header(Object oid, Object buffer, long size) {
-		ustar_header header = new ustar_header();
-		int mode;
-		.memset(header, 0, );
-		Object generatedTypeflag = header.getTypeflag();
-		generatedTypeflag = (byte)'x';
-		mode = 100666;
-		Object generatedName = header.getName();
-		ModernizedCProgram.xsnprintf(generatedName, , "%s.paxheader", ModernizedCProgram.oid_to_hex(oid));
-		ModernizedCProgram.prepare_header(ModernizedCProgram.args, header, mode, size);
-		ModernizedCProgram.write_blocked(header, );
-		ModernizedCProgram.write_blocked(buffer, size);
-	}
-	public int write_tar_entry(Object oid, Object path, Object pathlen, int mode) {
-		ustar_header header = new ustar_header();
-		strbuf ext_header = new strbuf(, , );
-		int old_mode = mode;
-		long size;
-		long size_in_header;
-		Object buffer;
-		int err = 0;
-		.memset(header, 0, );
-		Object generatedTypeflag = header.getTypeflag();
-		if ((((mode) & -1024) == -1024) || (((mode) & -1024) == 160000)) {
-			generatedTypeflag = (byte)'5';
-			mode = (mode | 777) & ~ModernizedCProgram.tar_umask;
-		}  else if (.S_ISLNK(mode)) {
-			generatedTypeflag = (byte)'2';
-			mode |=  777;
-		}  else if ((((mode) & -1024) == -1024)) {
-			generatedTypeflag = (byte)'0';
-			mode = (mode | ((mode & 100) ? 777 : 666)) & ~ModernizedCProgram.tar_umask;
-		} else {
-				return ();
-		} 
-		Object generatedName = header.getName();
-		Object generatedPrefix = header.getPrefix();
-		if (pathlen > ) {
-			size_t plen = ModernizedCProgram.get_path_prefix(path, pathlen, );
-			size_t rest = pathlen - plen - 1;
-			if (plen > 0 && rest <= ) {
-				.memcpy(generatedPrefix, path, plen);
-				.memcpy(generatedName, path + plen + 1, rest);
-			} else {
-					ModernizedCProgram.xsnprintf(generatedName, , "%s.data", ModernizedCProgram.oid_to_hex(oid));
-					ext_header.strbuf_append_ext_header("path", path, pathlen);
-			} 
-		} else {
-				.memcpy(generatedName, path, pathlen);
-		} 
-		if ((((mode) & -1024) == -1024) && !ModernizedCProgram.args.getConvert() && ModernizedCProgram.args.getRepo().oid_object_info(oid, size) == object_type.OBJ_BLOB && size > ModernizedCProgram.big_file_threshold) {
-			buffer = ((Object)0);
-		}  else if (.S_ISLNK(mode) || (((mode) & -1024) == -1024)) {
-			object_type type;
-			buffer = ModernizedCProgram.object_file_to_archive(ModernizedCProgram.args, path, oid, old_mode, object_type.type, size);
-			if (!buffer) {
-				return ();
-			} 
-		} else {
-				buffer = ((Object)0);
-				size = 0;
-		} 
-		Object generatedLinkname = header.getLinkname();
-		if (.S_ISLNK(mode)) {
-			if (size > ) {
-				ModernizedCProgram.xsnprintf(generatedLinkname, , "see %s.paxheader", ModernizedCProgram.oid_to_hex(oid));
-				ext_header.strbuf_append_ext_header("linkpath", buffer, size);
-			} else {
-					.memcpy(generatedLinkname, buffer, size);
-			} 
-		} 
-		size_in_header = size;
-		if ((((mode) & -1024) == -1024) && size > -1024) {
-			size_in_header = 0;
-			ext_header.strbuf_append_ext_header_uint("size", size);
-		} 
-		ModernizedCProgram.prepare_header(ModernizedCProgram.args, header, mode, size_in_header);
-		Object generatedLen = ext_header.getLen();
-		byte generatedBuf = ext_header.getBuf();
-		if (generatedLen > 0) {
-			ModernizedCProgram.args.write_extended_header(oid, generatedBuf, generatedLen);
-		} 
-		ext_header.strbuf_release();
-		ModernizedCProgram.write_blocked(header, );
-		if ((((mode) & -1024) == -1024) && size > 0) {
-			if (buffer) {
-				ModernizedCProgram.write_blocked(buffer, size);
-			} else {
-					err = ModernizedCProgram.stream_blocked(oid);
-			} 
-		} 
-		ModernizedCProgram.free(buffer);
-		return err;
-	}
-	public void write_global_extended_header() {
-		object_id oid = ModernizedCProgram.args.getCommit_oid();
-		strbuf ext_header = new strbuf(, , );
-		ustar_header header = new ustar_header();
-		int mode;
-		if (oid) {
-			ext_header.strbuf_append_ext_header("comment", ModernizedCProgram.oid_to_hex(oid), ModernizedCProgram.the_repository.getHash_algo().getHexsz());
-		} 
-		if (ModernizedCProgram.args.getTime() > -1024) {
-			ext_header.strbuf_append_ext_header_uint("mtime", ModernizedCProgram.args.getTime());
-			ModernizedCProgram.args.setTime(-1024);
-		} 
-		Object generatedLen = ext_header.getLen();
-		if (!generatedLen) {
-			return ;
-		} 
-		.memset(header, 0, );
-		Object generatedTypeflag = header.getTypeflag();
-		generatedTypeflag = (byte)'g';
-		mode = 100666;
-		Object generatedName = header.getName();
-		ModernizedCProgram.xsnprintf(generatedName, , "pax_global_header");
-		ModernizedCProgram.prepare_header(ModernizedCProgram.args, header, mode, generatedLen);
-		ModernizedCProgram.write_blocked(header, );
-		byte generatedBuf = ext_header.getBuf();
-		ModernizedCProgram.write_blocked(generatedBuf, generatedLen);
-		ext_header.strbuf_release();
-	}
-	public int write_tar_archive(Object ar) {
-		int err = 0;
-		ModernizedCProgram.args.write_global_extended_header();
-		err = ModernizedCProgram.args.write_archive_entries(write_tar_entry);
-		if (!err) {
-			ModernizedCProgram.write_trailer();
-		} 
-		return err;
-	}
-	public int write_tar_filter_archive(Object ar) {
-		strbuf cmd = new strbuf(, , );
-		child_process filter = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		byte[] argv = new byte[2];
-		int r;
-		if (!ar.getData()) {
-			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\archive-tar.c", 452, "tar-filter archiver called with no filter defined");
-		} 
-		cmd.strbuf_addstr(ar.getData());
-		if (ModernizedCProgram.args.getCompression_level() >= 0) {
-			cmd.strbuf_addf(" -%d", ModernizedCProgram.args.getCompression_level());
-		} 
-		byte generatedBuf = cmd.getBuf();
-		argv[0] = generatedBuf;
-		argv[1] = ((Object)0);
-		filter.setArgv(argv);
-		filter.setUse_shell(1);
-		filter.setIn(-1);
-		if (filter.start_command() < 0) {
-			ModernizedCProgram.die_errno(ModernizedCProgram._("unable to start '%s' filter"), argv[0]);
-		} 
-		.close(1);
-		int generatedIn = filter.getIn();
-		if (.dup2(generatedIn, 1) < 0) {
-			ModernizedCProgram.die_errno(ModernizedCProgram._("unable to redirect descriptor"));
-		} 
-		.close(generatedIn);
-		r = ModernizedCProgram.args.write_tar_archive(ar);
-		.close(1);
-		if (filter.finish_command() != 0) {
-			ModernizedCProgram.die(ModernizedCProgram._("'%s' filter reported error"), argv[0]);
-		} 
-		cmd.strbuf_release();
-		return r;
-	}
 	public int write_archive_entries(Object write_entry) {
 		archiver_context context = new archiver_context();
 		unpack_trees_options opts = new unpack_trees_options();
@@ -208,20 +42,20 @@ public class archiver_args {
 				ModernizedCProgram.len--;
 			}
 			if (ModernizedCProgram.args.getVerbose()) {
-				.fprintf((_iob[2]), "%.*s\n", (int)ModernizedCProgram.len, ModernizedCProgram.args.getBase());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%.*s\n", (int)ModernizedCProgram.len, ModernizedCProgram.args.getBase());
 			} 
 			err = ModernizedCProgram.args.write_entry(ModernizedCProgram.args.getTree().getObject().getOid(), ModernizedCProgram.args.getBase(), ModernizedCProgram.len, 40777);
 			if (err) {
 				return err;
 			} 
 		} 
-		.memset(context, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(context, 0, /*Error: sizeof expression not supported yet*/);
 		context.setArgs(ModernizedCProgram.args);
 		context.setWrite_entry(write_entry/*
 			 * Setup index and instruct attr to read index only
 			 */);
 		if (!ModernizedCProgram.args.getWorktree_attributes()) {
-			.memset(opts, 0, );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(opts, 0, /*Error: sizeof expression not supported yet*/);
 			opts.setIndex_only(1);
 			opts.setHead_idx(-1);
 			opts.setSrc_index(ModernizedCProgram.args.getRepo().getIndex());
@@ -271,7 +105,7 @@ public class archiver_args {
 			}
 		} 
 	}
-	public void parse_treeish_arg(Object argv, Object prefix, int remote) {
+	public void parse_treeish_arg(Object[][] argv, Object prefix, int remote) {
 		byte name = argv[0];
 		object_id commit_oid = new object_id();
 		time_t archive_time = new time_t();
@@ -291,25 +125,26 @@ public class archiver_args {
 			ModernizedCProgram.die(ModernizedCProgram._("not a valid object name: %s"), name);
 		} 
 		repository generatedRepo = this.getRepo();
-		commit = .lookup_commit_reference_gently(generatedRepo, oid, 1);
+		commit = /*Error: Function owner not recognized*/lookup_commit_reference_gently(generatedRepo, oid, 1);
 		if (commit) {
 			commit_oid = commit.getObject().getOid();
 			archive_time = commit.getDate();
 		} else {
 				commit_oid = ((Object)0);
-				archive_time = .time(((Object)0));
+				archive_time = /*Error: Function owner not recognized*/time(((Object)0));
 		} 
 		tree tree = new tree();
 		tree = tree.parse_tree_indirect(oid);
 		if (tree == ((Object)0)) {
 			ModernizedCProgram.die(ModernizedCProgram._("not a tree object: %s"), ModernizedCProgram.oid_to_hex(oid));
 		} 
-		Object generatedObject = tree.getObject();
+		object generatedObject = tree.getObject();
+		object_id generatedOid = generatedObject.getOid();
 		if (prefix) {
 			object_id tree_oid = new object_id();
 			int mode;
 			int err;
-			ModernizedCProgram.err = ModernizedCProgram.get_tree_entry(generatedRepo, generatedObject.getOid(), prefix, tree_oid, mode);
+			ModernizedCProgram.err = ModernizedCProgram.get_tree_entry(generatedRepo, generatedOid, prefix, tree_oid, mode);
 			if (ModernizedCProgram.err || !(((mode) & -1024) == -1024)) {
 				ModernizedCProgram.die(ModernizedCProgram._("current working directory is untracked"));
 			} 
@@ -348,10 +183,10 @@ public class archiver_args {
 		if (list) {
 			for (i = 0; i < ModernizedCProgram.nr_archivers; i++) {
 				if (!is_remote || ModernizedCProgram.archivers[i].getFlags() & 2) {
-					.printf("%s\n", ModernizedCProgram.archivers[i].getName());
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s\n", ModernizedCProgram.archivers[i].getName());
 				} 
 			}
-			.exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\archive.c", 502, (false)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\archive.c", 502, (false)));
 		} 
 		if (!format && name_hint) {
 			format = ModernizedCProgram.archive_format_from_filename(name_hint);
@@ -376,9 +211,175 @@ public class archiver_args {
 		} 
 		ModernizedCProgram.args.setVerbose(verbose);
 		ModernizedCProgram.args.setBase(base);
-		ModernizedCProgram.args.setBaselen(.strlen(base));
+		ModernizedCProgram.args.setBaselen(/*Error: Function owner not recognized*/strlen(base));
 		ModernizedCProgram.args.setWorktree_attributes(worktree_attributes);
 		return argc;
+	}
+	public void write_extended_header(Object oid, Object buffer, long size) {
+		ustar_header header = new ustar_header();
+		int mode;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(header, 0, /*Error: sizeof expression not supported yet*/);
+		Object generatedTypeflag = header.getTypeflag();
+		generatedTypeflag = (byte)'x';
+		mode = 100666;
+		Object generatedName = header.getName();
+		ModernizedCProgram.xsnprintf(generatedName, /*Error: sizeof expression not supported yet*/, "%s.paxheader", ModernizedCProgram.oid_to_hex(oid));
+		ModernizedCProgram.prepare_header(ModernizedCProgram.args, header, mode, size);
+		ModernizedCProgram.write_blocked(header, /*Error: sizeof expression not supported yet*/);
+		ModernizedCProgram.write_blocked(buffer, size);
+	}
+	public int write_tar_entry(Object oid, Object path, Object pathlen, int mode) {
+		ustar_header header = new ustar_header();
+		strbuf ext_header = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		int old_mode = mode;
+		long size;
+		long size_in_header;
+		Object buffer;
+		int err = 0;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(header, 0, /*Error: sizeof expression not supported yet*/);
+		Object generatedTypeflag = header.getTypeflag();
+		if ((((mode) & -1024) == -1024) || (((mode) & -1024) == 160000)) {
+			generatedTypeflag = (byte)'5';
+			mode = (mode | 777) & ~ModernizedCProgram.tar_umask;
+		}  else if (/*Error: Function owner not recognized*/S_ISLNK(mode)) {
+			generatedTypeflag = (byte)'2';
+			mode |=  777;
+		}  else if ((((mode) & -1024) == -1024)) {
+			generatedTypeflag = (byte)'0';
+			mode = (mode | ((mode & 100) ? 777 : 666)) & ~ModernizedCProgram.tar_umask;
+		} else {
+				return ();
+		} 
+		Object generatedName = header.getName();
+		Object generatedPrefix = header.getPrefix();
+		if (pathlen > /*Error: sizeof expression not supported yet*/) {
+			size_t plen = ModernizedCProgram.get_path_prefix(path, pathlen, /*Error: sizeof expression not supported yet*/);
+			size_t rest = pathlen - plen - 1;
+			if (plen > 0 && rest <= /*Error: sizeof expression not supported yet*/) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPrefix, path, plen);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, path + plen + 1, rest);
+			} else {
+					ModernizedCProgram.xsnprintf(generatedName, /*Error: sizeof expression not supported yet*/, "%s.data", ModernizedCProgram.oid_to_hex(oid));
+					ext_header.strbuf_append_ext_header("path", path, pathlen);
+			} 
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, path, pathlen);
+		} 
+		if ((((mode) & -1024) == -1024) && !ModernizedCProgram.args.getConvert() && ModernizedCProgram.args.getRepo().oid_object_info(oid, size) == object_type.OBJ_BLOB && size > ModernizedCProgram.big_file_threshold) {
+			buffer = ((Object)0);
+		}  else if (/*Error: Function owner not recognized*/S_ISLNK(mode) || (((mode) & -1024) == -1024)) {
+			object_type type;
+			buffer = ModernizedCProgram.object_file_to_archive(ModernizedCProgram.args, path, oid, old_mode, object_type.type, size);
+			if (!buffer) {
+				return ();
+			} 
+		} else {
+				buffer = ((Object)0);
+				size = 0;
+		} 
+		Object generatedLinkname = header.getLinkname();
+		if (/*Error: Function owner not recognized*/S_ISLNK(mode)) {
+			if (size > /*Error: sizeof expression not supported yet*/) {
+				ModernizedCProgram.xsnprintf(generatedLinkname, /*Error: sizeof expression not supported yet*/, "see %s.paxheader", ModernizedCProgram.oid_to_hex(oid));
+				ext_header.strbuf_append_ext_header("linkpath", buffer, size);
+			} else {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedLinkname, buffer, size);
+			} 
+		} 
+		size_in_header = size;
+		if ((((mode) & -1024) == -1024) && size > -1024) {
+			size_in_header = 0;
+			ext_header.strbuf_append_ext_header_uint("size", size);
+		} 
+		ModernizedCProgram.prepare_header(ModernizedCProgram.args, header, mode, size_in_header);
+		Object generatedLen = ext_header.getLen();
+		byte[] generatedBuf = ext_header.getBuf();
+		if (generatedLen > 0) {
+			ModernizedCProgram.args.write_extended_header(oid, generatedBuf, generatedLen);
+		} 
+		ext_header.strbuf_release();
+		ModernizedCProgram.write_blocked(header, /*Error: sizeof expression not supported yet*/);
+		if ((((mode) & -1024) == -1024) && size > 0) {
+			if (buffer) {
+				ModernizedCProgram.write_blocked(buffer, size);
+			} else {
+					err = ModernizedCProgram.stream_blocked(oid);
+			} 
+		} 
+		ModernizedCProgram.free(buffer);
+		return err;
+	}
+	public void write_global_extended_header() {
+		object_id oid = ModernizedCProgram.args.getCommit_oid();
+		strbuf ext_header = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		ustar_header header = new ustar_header();
+		int mode;
+		if (oid) {
+			ext_header.strbuf_append_ext_header("comment", ModernizedCProgram.oid_to_hex(oid), ModernizedCProgram.the_repository.getHash_algo().getHexsz());
+		} 
+		if (ModernizedCProgram.args.getTime() > -1024) {
+			ext_header.strbuf_append_ext_header_uint("mtime", ModernizedCProgram.args.getTime());
+			ModernizedCProgram.args.setTime(-1024);
+		} 
+		Object generatedLen = ext_header.getLen();
+		if (!generatedLen) {
+			return /*Error: Unsupported expression*/;
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(header, 0, /*Error: sizeof expression not supported yet*/);
+		Object generatedTypeflag = header.getTypeflag();
+		generatedTypeflag = (byte)'g';
+		mode = 100666;
+		Object generatedName = header.getName();
+		ModernizedCProgram.xsnprintf(generatedName, /*Error: sizeof expression not supported yet*/, "pax_global_header");
+		ModernizedCProgram.prepare_header(ModernizedCProgram.args, header, mode, generatedLen);
+		ModernizedCProgram.write_blocked(header, /*Error: sizeof expression not supported yet*/);
+		byte[] generatedBuf = ext_header.getBuf();
+		ModernizedCProgram.write_blocked(generatedBuf, generatedLen);
+		ext_header.strbuf_release();
+	}
+	public int write_tar_archive(Object ar) {
+		int err = 0;
+		ModernizedCProgram.args.write_global_extended_header();
+		err = ModernizedCProgram.args.write_archive_entries(write_tar_entry);
+		if (!err) {
+			ModernizedCProgram.write_trailer();
+		} 
+		return err;
+	}
+	public int write_tar_filter_archive(Object ar) {
+		strbuf cmd = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		child_process filter = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
+		byte[] argv = new byte[2];
+		int r;
+		if (!ar.getData()) {
+			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\archive-tar.c", 452, "tar-filter archiver called with no filter defined");
+		} 
+		cmd.strbuf_addstr(ar.getData());
+		if (ModernizedCProgram.args.getCompression_level() >= 0) {
+			cmd.strbuf_addf(" -%d", ModernizedCProgram.args.getCompression_level());
+		} 
+		byte[] generatedBuf = cmd.getBuf();
+		argv[0] = generatedBuf;
+		argv[1] = ((Object)0);
+		filter.setArgv(argv);
+		filter.setUse_shell(1);
+		filter.setIn(-1);
+		if (filter.start_command() < 0) {
+			ModernizedCProgram.die_errno(ModernizedCProgram._("unable to start '%s' filter"), argv[0]);
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(1);
+		int generatedIn = filter.getIn();
+		if (/*Error: Function owner not recognized*/dup2(generatedIn, 1) < 0) {
+			ModernizedCProgram.die_errno(ModernizedCProgram._("unable to redirect descriptor"));
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedIn);
+		r = ModernizedCProgram.args.write_tar_archive(ar);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(1);
+		if (filter.finish_command() != 0) {
+			ModernizedCProgram.die(ModernizedCProgram._("'%s' filter reported error"), argv[0]);
+		} 
+		cmd.strbuf_release();
+		return r;
 	}
 	public int write_zip_entry(Object oid, Object path, Object pathlen, int mode) {
 		zip_local_header header = new zip_local_header();
@@ -403,7 +404,7 @@ public class archiver_args {
 		int version_needed = 10;
 		size_t zip_dir_extra_size = ((size_t)((zip_extra_mtime)0).get_end());
 		size_t zip64_dir_extra_payload_size = 0;
-		crc = .crc32(0, ((Object)0), 0);
+		crc = /*Error: Function owner not recognized*/crc32(0, ((Object)0), 0);
 		if (!ModernizedCProgram.has_only_ascii(path)) {
 			if (ModernizedCProgram.is_utf8(path)) {
 				flags |=  (1 << 11);
@@ -422,11 +423,11 @@ public class archiver_args {
 			size = 0;
 			compressed_size = 0;
 			buffer = ((Object)0);
-		}  else if ((((mode) & -1024) == -1024) || .S_ISLNK(mode)) {
+		}  else if ((((mode) & -1024) == -1024) || /*Error: Function owner not recognized*/S_ISLNK(mode)) {
 			object_type type = ModernizedCProgram.args.getRepo().oid_object_info(oid, size);
 			method = 0;
-			attr2 = .S_ISLNK(mode) ? ((mode | 777) << 16) : (mode & 111) ? ((mode) << 16) : 0;
-			if (.S_ISLNK(mode) || (mode & 111)) {
+			attr2 = /*Error: Function owner not recognized*/S_ISLNK(mode) ? ((mode | 777) << 16) : (mode & 111) ? ((mode) << 16) : 0;
+			if (/*Error: Function owner not recognized*/S_ISLNK(mode) || (mode & 111)) {
 				creator_version = -1024;
 			} 
 			if ((((mode) & -1024) == -1024) && ModernizedCProgram.args.getCompression_level() != 0 && size > 0) {
@@ -444,7 +445,7 @@ public class archiver_args {
 					if (!buffer) {
 						return ();
 					} 
-					crc = .crc32(crc, buffer, size);
+					crc = /*Error: Function owner not recognized*/crc32(crc, buffer, size);
 					is_binary = ModernizedCProgram.args.getRepo().getIndex().entry_is_binary(path_without_prefix, buffer, size);
 					out = buffer;
 			} 
@@ -519,12 +520,12 @@ public class archiver_args {
 		if (stream && method == 0) {
 			byte[] buf = new byte[(1024 * 16)];
 			ssize_t readlen = new ssize_t();
-			for (; ; ) {
-				readlen = stream.read_istream(ModernizedCProgram.buf, );
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+				readlen = stream.read_istream(ModernizedCProgram.buf, /*Error: sizeof expression not supported yet*/);
 				if (readlen <= 0) {
 					break;
 				} 
-				crc = .crc32(crc, ModernizedCProgram.buf, readlen);
+				crc = /*Error: Function owner not recognized*/crc32(crc, ModernizedCProgram.buf, readlen);
 				if (is_binary == -1) {
 					is_binary = ModernizedCProgram.args.getRepo().getIndex().entry_is_binary(path_without_prefix, ModernizedCProgram.buf, readlen);
 				} 
@@ -547,13 +548,13 @@ public class archiver_args {
 			zstream.git_deflate_init_raw(ModernizedCProgram.args.getCompression_level());
 			compressed_size = 0;
 			zstream.setNext_out(compressed);
-			zstream.setAvail_out();
-			for (; ; ) {
-				readlen = stream.read_istream(ModernizedCProgram.buf, );
+			zstream.setAvail_out(/*Error: sizeof expression not supported yet*/);
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+				readlen = stream.read_istream(ModernizedCProgram.buf, /*Error: sizeof expression not supported yet*/);
 				if (readlen <= 0) {
 					break;
 				} 
-				crc = .crc32(crc, ModernizedCProgram.buf, readlen);
+				crc = /*Error: Function owner not recognized*/crc32(crc, ModernizedCProgram.buf, readlen);
 				if (is_binary == -1) {
 					is_binary = ModernizedCProgram.args.getRepo().getIndex().entry_is_binary(path_without_prefix, ModernizedCProgram.buf, readlen);
 				} 
@@ -568,7 +569,7 @@ public class archiver_args {
 					ModernizedCProgram.write_or_die(1, compressed, out_len);
 					compressed_size += out_len;
 					zstream.setNext_out(compressed);
-					zstream.setAvail_out();
+					zstream.setAvail_out(/*Error: sizeof expression not supported yet*/);
 				} 
 			}
 			stream.close_istream();
@@ -642,7 +643,7 @@ public class archiver_args {
 	}
 	public int write_zip_archive(Object ar) {
 		int err;
-		.git_config(archive_zip_config, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config(archive_zip_config, ((Object)0));
 		ModernizedCProgram.dos_time(ModernizedCProgram.args.getTime(), ModernizedCProgram.zip_date, ModernizedCProgram.zip_time);
 		ModernizedCProgram.zip_dir.strbuf_init(0);
 		err = ModernizedCProgram.args.write_archive_entries(write_zip_entry);

@@ -3,14 +3,14 @@ package application;
 public class ext2_xattr_handle {
 	private Object magic;
 	private Object fs;
-	private ext2_xattr attrs;
+	private ext2_xattr[] attrs;
 	private int capacity;
 	private int count;
 	private int ibody_count;
 	private Object ino;
 	private int flags;
 	
-	public ext2_xattr_handle(Object magic, Object fs, ext2_xattr attrs, int capacity, int count, int ibody_count, Object ino, int flags) {
+	public ext2_xattr_handle(Object magic, Object fs, ext2_xattr[] attrs, int capacity, int count, int ibody_count, Object ino, int flags) {
 		setMagic(magic);
 		setFs(fs);
 		setAttrs(attrs);
@@ -27,12 +27,12 @@ public class ext2_xattr_handle {
 		ext2_xattr new_attrs = new ext2_xattr();
 		 err = new ();
 		int generatedCapacity = this.getCapacity();
-		err = ModernizedCProgram.ext2fs_get_arrayzero(generatedCapacity + expandby, , new_attrs);
+		err = ModernizedCProgram.ext2fs_get_arrayzero(generatedCapacity + expandby, /*Error: Unsupported expression*/, new_attrs);
 		if (err) {
 			return err;
 		} 
-		ext2_xattr generatedAttrs = this.getAttrs();
-		.memcpy(new_attrs, generatedAttrs, generatedCapacity * );
+		ext2_xattr[] generatedAttrs = this.getAttrs();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(new_attrs, generatedAttrs, generatedCapacity * /*Error: Unsupported expression*/);
 		ModernizedCProgram.ext2fs_free_mem(generatedAttrs);
 		generatedCapacity += expandby;
 		this.setAttrs(new_attrs);
@@ -56,8 +56,8 @@ public class ext2_xattr_handle {
 			return (EXT2_ET_MAGIC_EA_HANDLE);
 		} 
 		i = inode_size;
-		if (i < ) {
-			i = ;
+		if (i < /*Error: sizeof expression not supported yet*/) {
+			i = /*Error: sizeof expression not supported yet*/;
 		} 
 		err = ModernizedCProgram.ext2fs_get_memzero(i, inode);
 		if (err) {
@@ -74,23 +74,23 @@ public class ext2_xattr_handle {
 			byte p = (byte)inode;
 			size_t extra = fs.getSuper().getS_want_extra_isize();
 			if (extra == 0) {
-				extra = ;
+				extra = /*Error: Unsupported expression*/;
 			} 
-			.memset(p + 128, 0, extra);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(p + 128, 0, extra);
 			inode.setI_extra_isize(extra);
 		} 
 		if (generatedI_extra_isize & 3) {
 			err = EXT2_ET_INODE_CORRUPTED;
 			;
 		} 
-		if (generatedI_extra_isize <  || inode_size <= 128 + generatedI_extra_isize + ) {
+		if (generatedI_extra_isize < /*Error: sizeof expression not supported yet*/ || inode_size <= 128 + generatedI_extra_isize + /*Error: Unsupported expression*/) {
 			;
 		} 
 		ea_inode_magic = /* Write the inode EA */-1024;
-		.memcpy(((byte)inode) + 128 + generatedI_extra_isize, ea_inode_magic, );
-		storage_size = inode_size - 128 - generatedI_extra_isize - ;
-		start = ((byte)inode) + 128 + generatedI_extra_isize + ;
-		ext2_xattr generatedAttrs = this.getAttrs();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(((byte)inode) + 128 + generatedI_extra_isize, ea_inode_magic, /*Error: Unsupported expression*/);
+		storage_size = inode_size - 128 - generatedI_extra_isize - /*Error: Unsupported expression*/;
+		start = ((byte)inode) + 128 + generatedI_extra_isize + /*Error: Unsupported expression*/;
+		ext2_xattr[] generatedAttrs = this.getAttrs();
 		int generatedIbody_count = this.getIbody_count();
 		err = generatedAttrs.write_xattrs_to_buffer(fs, generatedIbody_count, start, storage_size, 0, 0);
 		if (err) {
@@ -100,8 +100,8 @@ public class ext2_xattr_handle {
 		if (err) {
 			;
 		} 
-		storage_size = fs.getBlocksize() - ;
-		start = block_buf + ;
+		storage_size = fs.getBlocksize() - /*Error: Unsupported expression*/;
+		start = block_buf + /*Error: Unsupported expression*/;
 		int generatedCount = this.getCount();
 		err = generatedAttrs + generatedIbody_count.write_xattrs_to_buffer(fs, generatedCount - generatedIbody_count, start, storage_size, start - block_buf, 1);
 		if (err) {
@@ -133,7 +133,7 @@ public class ext2_xattr_handle {
 		return err;
 	}
 	public void xattrs_free_keys() {
-		ext2_xattr generatedAttrs = this.getAttrs();
+		ext2_xattr[] generatedAttrs = this.getAttrs();
 		ext2_xattr a = generatedAttrs;
 		int i;
 		int generatedCapacity = this.getCapacity();
@@ -164,8 +164,8 @@ public class ext2_xattr_handle {
 		} 
 		Object generatedFs = this.getFs();
 		i = (((generatedFs.getSuper()).getS_rev_level() == 0) ? 128 : (generatedFs.getSuper()).getS_inode_size());
-		if (i < ) {
-			i = ;
+		if (i < /*Error: sizeof expression not supported yet*/) {
+			i = /*Error: sizeof expression not supported yet*/;
 		} 
 		err = ModernizedCProgram.ext2fs_get_memzero(i, inode);
 		if (err) {
@@ -178,18 +178,18 @@ public class ext2_xattr_handle {
 		} 
 		handle.xattrs_free_keys();
 		Object generatedI_extra_isize = inode.getI_extra_isize();
-		if (generatedI_extra_isize <  || (((generatedFs.getSuper()).getS_rev_level() == 0) ? 128 : (generatedFs.getSuper()).getS_inode_size()) <= 128 + generatedI_extra_isize + ) {
+		if (generatedI_extra_isize < /*Error: sizeof expression not supported yet*/ || (((generatedFs.getSuper()).getS_rev_level() == 0) ? 128 : (generatedFs.getSuper()).getS_inode_size()) <= 128 + generatedI_extra_isize + /*Error: Unsupported expression*/) {
 			;
 		} 
 		if (generatedI_extra_isize & 3) {
 			err = EXT2_ET_INODE_CORRUPTED;
 			;
 		} 
-		.memcpy(ea_inode_magic, ((byte)inode) + /* Look for EA in the inode */128 + generatedI_extra_isize, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ea_inode_magic, ((byte)inode) + /* Look for EA in the inode */128 + generatedI_extra_isize, /*Error: Unsupported expression*/);
 		int generatedCount = this.getCount();
 		if (ea_inode_magic == -1024) {
-			storage_size = (((generatedFs.getSuper()).getS_rev_level() == 0) ? 128 : (generatedFs.getSuper()).getS_inode_size()) - 128 - generatedI_extra_isize - ;
-			start = ((byte)inode) + 128 + generatedI_extra_isize + ;
+			storage_size = (((generatedFs.getSuper()).getS_rev_level() == 0) ? 128 : (generatedFs.getSuper()).getS_inode_size()) - 128 - generatedI_extra_isize - /*Error: Unsupported expression*/;
+			start = ((byte)inode) + 128 + generatedI_extra_isize + /*Error: Unsupported expression*/;
 			err = ModernizedCProgram.read_xattrs_from_buffer(handle, inode, (ext2_ext_attr_entry)start, storage_size, start);
 			if (err) {
 				;
@@ -215,8 +215,8 @@ public class ext2_xattr_handle {
 				err = EXT2_ET_BAD_EA_HEADER;
 				;
 			} 
-			storage_size = generatedFs.getBlocksize() - ;
-			start = block_buf + ;
+			storage_size = generatedFs.getBlocksize() - /*Error: Unsupported expression*/;
+			start = block_buf + /*Error: Unsupported expression*/;
 			err = ModernizedCProgram.read_xattrs_from_buffer(handle, inode, (ext2_ext_attr_entry)start, storage_size, block_buf);
 			if (err) {
 				;
@@ -236,13 +236,13 @@ public class ext2_xattr_handle {
 		if (!(h) || generatedMagic != (EXT2_ET_MAGIC_EA_HANDLE)) {
 			return (EXT2_ET_MAGIC_EA_HANDLE);
 		} 
-		ext2_xattr generatedAttrs = this.getAttrs();
+		ext2_xattr[] generatedAttrs = this.getAttrs();
 		int generatedCount = this.getCount();
 		Byte generatedName = x.getName();
 		Object generatedValue = x.getValue();
 		int generatedValue_len = x.getValue_len();
 		for (x = generatedAttrs; x < generatedAttrs + generatedCount; x++) {
-			ret = .func(generatedName, generatedValue, generatedValue_len, data);
+			ret = /*Error: Function owner not recognized*/func(generatedName, generatedValue, generatedValue_len, data);
 			if (ret & 2) {
 				dirty = 1;
 			} 
@@ -263,17 +263,17 @@ public class ext2_xattr_handle {
 		if (!(h) || generatedMagic != (EXT2_ET_MAGIC_EA_HANDLE)) {
 			return (EXT2_ET_MAGIC_EA_HANDLE);
 		} 
-		ext2_xattr generatedAttrs = this.getAttrs();
+		ext2_xattr[] generatedAttrs = this.getAttrs();
 		int generatedCount = this.getCount();
 		Byte generatedName = x.getName();
 		int generatedFlags = this.getFlags();
 		Object generatedValue = x.getValue();
 		int generatedValue_len = x.getValue_len();
 		for (x = generatedAttrs; x < generatedAttrs + generatedCount; x++) {
-			if (.strcmp(generatedName, key)) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, key)) {
 				continue;
 			} 
-			if (!(generatedFlags & -1024) && ((.strcmp(key, "system.posix_acl_default") == 0) || (.strcmp(key, "system.posix_acl_access") == 0))) {
+			if (!(generatedFlags & -1024) && ((/*Error: Function owner not recognized*/strcmp(key, "system.posix_acl_default") == 0) || (/*Error: Function owner not recognized*/strcmp(key, "system.posix_acl_access") == 0))) {
 				err = ModernizedCProgram.convert_disk_buffer_to_posix_acl(generatedValue, generatedValue_len, value, value_len);
 				return err;
 			} else {
@@ -281,7 +281,7 @@ public class ext2_xattr_handle {
 					if (err) {
 						return err;
 					} 
-					.memcpy(val, generatedValue, generatedValue_len);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(val, generatedValue, generatedValue_len);
 					value = val;
 					value_len = generatedValue_len;
 					return 0;
@@ -299,15 +299,15 @@ public class ext2_xattr_handle {
 		int new_idx;
 		int ret;
 		ModernizedCProgram.find_ea_index(name, shortname, name_idx);
-		name_len = .strlen(shortname);
-		needed = (((name_len) + (((int)1 << 2) - 1) + ) & ~(((int)1 << 2) - 1));
+		name_len = /*Error: Function owner not recognized*/strlen(shortname);
+		needed = (((name_len) + (((int)1 << 2) - 1) + /*Error: Unsupported expression*/) & ~(((int)1 << 2) - 1));
 		if (!in_inode) {
 			needed += (((value_len) + (((int)1 << 2) - 1)) & ~(((int)1 << 2) - 1));
 		} 
 		int generatedIbody_count = this.getIbody_count();
-		ext2_xattr generatedAttrs = this.getAttrs();
+		ext2_xattr[] generatedAttrs = this.getAttrs();
 		if (old_idx >= 0 && old_idx < generatedIbody_count) {
-			ibody_free += (((name_len) + (((int)1 << 2) - 1) + ) & ~(((int)1 << 2) - 1));
+			ibody_free += (((name_len) + (((int)1 << 2) - 1) + /*Error: Unsupported expression*/) & ~(((int)1 << 2) - 1));
 			if (!generatedAttrs[old_idx].getEa_ino()) {
 				ibody_free += (((generatedAttrs[old_idx].getValue_len()) + (((int)1 << 2) - 1)) & ~(((int)1 << 2) - 1));
 			} 
@@ -325,14 +325,14 @@ public class ext2_xattr_handle {
 			} 
 			if (generatedIbody_count <= old_idx) {
 				tmp = generatedAttrs[/* Move entry from block to the end of ibody. */old_idx];
-				.memmove(generatedAttrs + generatedIbody_count + 1, generatedAttrs + generatedIbody_count, (old_idx - generatedIbody_count) * );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(generatedAttrs + generatedIbody_count + 1, generatedAttrs + generatedIbody_count, (old_idx - generatedIbody_count) * /*Error: sizeof expression not supported yet*/);
 				generatedAttrs[generatedIbody_count] = tmp;
 				generatedIbody_count++;
 			} 
 			return 0;
 		} 
 		if (generatedIbody_count <= old_idx) {
-			block_free += (((name_len) + (((int)1 << 2) - 1) + ) & ~(((int)1 << 2) - 1));
+			block_free += (((name_len) + (((int)1 << 2) - 1) + /*Error: Unsupported expression*/) & ~(((int)1 << 2) - 1));
 			if (!generatedAttrs[old_idx].getEa_ino()) {
 				block_free += (((generatedAttrs[old_idx].getValue_len()) + (((int)1 << 2) - 1)) & ~(((int)1 << 2) - 1));
 			} 
@@ -350,7 +350,7 @@ public class ext2_xattr_handle {
 				new_idx = generatedAttrs + generatedIbody_count.xattr_find_position(generatedCount - generatedIbody_count, name);
 				new_idx += generatedIbody_count - 1;
 				tmp = generatedAttrs[old_idx];
-				.memmove(generatedAttrs + old_idx, generatedAttrs + old_idx + 1, (new_idx - old_idx) * );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(generatedAttrs + old_idx, generatedAttrs + old_idx + 1, (new_idx - old_idx) * /*Error: sizeof expression not supported yet*/);
 				generatedAttrs[new_idx] = tmp;
 				generatedIbody_count--;
 			} 
@@ -364,7 +364,7 @@ public class ext2_xattr_handle {
 			return ret;
 		} 
 		tmp = generatedAttrs[generatedCount];
-		.memmove(generatedAttrs + new_idx + 1, generatedAttrs + new_idx, (generatedCount - new_idx) * );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(generatedAttrs + new_idx + 1, generatedAttrs + new_idx, (generatedCount - new_idx) * /*Error: sizeof expression not supported yet*/);
 		generatedAttrs[new_idx] = tmp;
 		if (add_to_ibody) {
 			generatedIbody_count++;
@@ -394,23 +394,23 @@ public class ext2_xattr_handle {
 			return ret;
 		} 
 		int generatedFlags = this.getFlags();
-		if (!(generatedFlags & -1024) && ((.strcmp(name, "system.posix_acl_default") == 0) || (.strcmp(name, "system.posix_acl_access") == 0))) {
+		if (!(generatedFlags & -1024) && ((/*Error: Function owner not recognized*/strcmp(name, "system.posix_acl_default") == 0) || (/*Error: Function owner not recognized*/strcmp(name, "system.posix_acl_access") == 0))) {
 			ret = ModernizedCProgram.convert_posix_acl_to_disk_buffer(value, value_len, new_value, value_len);
 			if (ret) {
 				;
 			} 
 		} else {
-				.memcpy(new_value, value, value_len);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(new_value, value, value_len);
 		} 
-		ext2_xattr generatedAttrs = this.getAttrs();
+		ext2_xattr[] generatedAttrs = this.getAttrs();
 		int generatedCount = this.getCount();
 		Byte generatedName = x.getName();
 		Object generatedEa_ino = x.getEa_ino();
 		int generatedValue_len = x.getValue_len();
 		Object generatedValue = x.getValue();
 		for (x = generatedAttrs; x < generatedAttrs + generatedCount; /* Imitate kernel behavior by skipping update if value is the same. */x++) {
-			if (!.strcmp(generatedName, name)) {
-				if (!generatedEa_ino && generatedValue_len == value_len && !.memcmp(generatedValue, new_value, value_len)) {
+			if (!/*Error: Function owner not recognized*/strcmp(generatedName, name)) {
+				if (!generatedEa_ino && generatedValue_len == value_len && !/*Error: Function owner not recognized*/memcmp(generatedValue, new_value, value_len)) {
 					ret = 0;
 					;
 				} 
@@ -434,17 +434,17 @@ public class ext2_xattr_handle {
 			if (extra_isize == 0) {
 				extra_isize = fs.getSuper().getS_want_extra_isize();
 				if (extra_isize == 0) {
-					extra_isize = ;
+					extra_isize = /*Error: Unsupported expression*/;
 				} 
 			} 
 			ibody_free = inode_size - 128;
 			ibody_free -= extra_isize;
-			ibody_free -=  * /* Extended attribute magic and final null entry. */2;
+			ibody_free -= /*Error: Unsupported expression*/ * /* Extended attribute magic and final null entry. */2;
 			ibody_free -= generatedAttrs.space_used(generatedIbody_count);
 		} else {
 				ibody_free = 0;
 		} 
-		if (.strcmp(name, "system.data") == /* Inline data can only go to ibody. */0) {
+		if (/*Error: Function owner not recognized*/strcmp(name, "system.data") == /* Inline data can only go to ibody. */0) {
 			if (generatedIbody_count <= old_idx) {
 				ret = EXT2_ET_FILESYSTEM_CORRUPTED;
 				;
@@ -456,10 +456,10 @@ public class ext2_xattr_handle {
 			;
 		} 
 		block_free = fs.getBlocksize();
-		block_free -= ;
-		block_free -= /* Final null entry. */;
+		block_free -= /*Error: Unsupported expression*/;
+		block_free -= /*Error: Unsupported expression*//* Final null entry. */;
 		block_free -= generatedAttrs + generatedIbody_count.space_used(generatedCount - generatedIbody_count);
-		if (fs.getSuper().ext2fs_has_feature_ea_inode() && value_len > ((fs.getBlocksize()) - (((true) + (((int)1 << 2) - 1) + ) & ~(((int)1 << 2) - 1)) -  - 4)) {
+		if (fs.getSuper().ext2fs_has_feature_ea_inode() && value_len > ((fs.getBlocksize()) - (((true) + (((int)1 << 2) - 1) + /*Error: Unsupported expression*/) & ~(((int)1 << 2) - 1)) - /*Error: Unsupported expression*/ - 4)) {
 			in_inode = 1;
 		} 
 		ret = h.xattr_array_update(name, new_value, value_len, ibody_free, block_free, old_idx, in_inode);
@@ -474,7 +474,7 @@ public class ext2_xattr_handle {
 	}
 	public Object ext2fs_xattr_remove(Object key) {
 		ext2_xattr x = new ext2_xattr();
-		ext2_xattr generatedAttrs = this.getAttrs();
+		ext2_xattr[] generatedAttrs = this.getAttrs();
 		int generatedCount = this.getCount();
 		ext2_xattr end = generatedAttrs + generatedCount;
 		Object generatedMagic = (handle).getMagic();
@@ -487,14 +487,14 @@ public class ext2_xattr_handle {
 		Object generatedFs = this.getFs();
 		int generatedIbody_count = this.getIbody_count();
 		for (x = generatedAttrs; x < end; x++) {
-			if (.strcmp(generatedName, key) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedName, key) == 0) {
 				ModernizedCProgram.ext2fs_free_mem(generatedName);
 				ModernizedCProgram.ext2fs_free_mem(generatedValue);
 				if (generatedEa_ino) {
 					ModernizedCProgram.xattr_inode_dec_ref(generatedFs, generatedEa_ino);
 				} 
-				.memmove(x, x + 1, (end - x - 1) * );
-				.memset(end - 1, 0, );
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove(x, x + 1, (end - x - 1) * /*Error: sizeof expression not supported yet*/);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(end - 1, 0, /*Error: sizeof expression not supported yet*/);
 				if (x < generatedAttrs + generatedIbody_count) {
 					generatedIbody_count--;
 				} 
@@ -510,15 +510,15 @@ public class ext2_xattr_handle {
 		if (!fs.getSuper().ext2fs_has_feature_xattr() && !fs.getSuper().ext2fs_has_feature_inline_data()) {
 			return EXT2_ET_MISSING_EA_FEATURE;
 		} 
-		err = ModernizedCProgram.ext2fs_get_memzero(, h);
+		err = ModernizedCProgram.ext2fs_get_memzero(/*Error: sizeof expression not supported yet*/, h);
 		if (err) {
 			return err;
 		} 
 		h.setMagic(EXT2_ET_MAGIC_EA_HANDLE);
 		h.setCapacity(4);
 		int generatedCapacity = h.getCapacity();
-		ext2_xattr generatedAttrs = h.getAttrs();
-		err = ModernizedCProgram.ext2fs_get_arrayzero(generatedCapacity, , generatedAttrs);
+		ext2_xattr[] generatedAttrs = h.getAttrs();
+		err = ModernizedCProgram.ext2fs_get_arrayzero(generatedCapacity, /*Error: Unsupported expression*/, generatedAttrs);
 		if (err) {
 			ModernizedCProgram.ext2fs_free_mem(h);
 			return err;
@@ -536,7 +536,7 @@ public class ext2_xattr_handle {
 			return (EXT2_ET_MAGIC_EA_HANDLE);
 		} 
 		h.xattrs_free_keys();
-		ext2_xattr generatedAttrs = h.getAttrs();
+		ext2_xattr[] generatedAttrs = h.getAttrs();
 		ModernizedCProgram.ext2fs_free_mem(generatedAttrs);
 		ModernizedCProgram.ext2fs_free_mem(handle);
 		return 0;
@@ -550,7 +550,7 @@ public class ext2_xattr_handle {
 		count = generatedCount;
 		return 0;
 	}
-	public Object ext2fs_xattrs_flags(int new_flags, int old_flags) {
+	public Object ext2fs_xattrs_flags(Integer new_flags, Integer old_flags) {
 		Object generatedMagic = (handle).getMagic();
 		if (!(handle) || generatedMagic != (EXT2_ET_MAGIC_EA_HANDLE)) {
 			return (EXT2_ET_MAGIC_EA_HANDLE);
@@ -576,10 +576,10 @@ public class ext2_xattr_handle {
 	public void setFs(Object newFs) {
 		fs = newFs;
 	}
-	public ext2_xattr getAttrs() {
+	public ext2_xattr[] getAttrs() {
 		return attrs;
 	}
-	public void setAttrs(ext2_xattr newAttrs) {
+	public void setAttrs(ext2_xattr[] newAttrs) {
 		attrs = newAttrs;
 	}
 	public int getCapacity() {

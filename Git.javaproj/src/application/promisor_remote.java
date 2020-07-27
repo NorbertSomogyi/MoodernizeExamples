@@ -21,9 +21,9 @@ public class promisor_remote {
 		} 
 		Object generatedName = ((r)).getName();
 		do {
-			size_t flex_array_len_ = (.strlen(remote_name));
-			((r)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((), (flex_array_len_)), (true)));
-			.memcpy((Object)generatedName, ((remote_name)), flex_array_len_);
+			size_t flex_array_len_ = (/*Error: Function owner not recognized*/strlen(remote_name));
+			((r)) = ModernizedCProgram.xcalloc(1, ModernizedCProgram.st_add(ModernizedCProgram.st_add((/*Error: sizeof expression not supported yet*/), (flex_array_len_)), (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((Object)generatedName, ((remote_name)), flex_array_len_);
 		} while (0);
 		ModernizedCProgram.promisors_tail = r;
 		promisor_remote generatedNext = r.getNext();
@@ -35,7 +35,7 @@ public class promisor_remote {
 		promisor_remote p = new promisor_remote();
 		Object generatedName = r.getName();
 		for (; r; ) {
-			if (!.strcmp(generatedName, remote_name)) {
+			if (!/*Error: Function owner not recognized*/strcmp(generatedName, remote_name)) {
 				if (previous) {
 					previous = p;
 				} 
@@ -47,7 +47,7 @@ public class promisor_remote {
 	public void promisor_remote_move_to_tail(promisor_remote previous) {
 		promisor_remote generatedNext = this.getNext();
 		if (generatedNext == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		if (previous) {
 			previous.setNext(generatedNext);

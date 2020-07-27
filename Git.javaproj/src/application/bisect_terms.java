@@ -38,7 +38,7 @@ public class bisect_terms {
 		} 
 		Byte generatedTerm_bad = this.getTerm_bad();
 		Byte generatedTerm_good = this.getTerm_good();
-		if (has_term_file && .strcmp(cmd, generatedTerm_bad) && .strcmp(cmd, generatedTerm_good)) {
+		if (has_term_file && /*Error: Function owner not recognized*/strcmp(cmd, generatedTerm_bad) && /*Error: Function owner not recognized*/strcmp(cmd, generatedTerm_good)) {
 			return ();
 		} 
 		if (!has_term_file) {
@@ -54,10 +54,10 @@ public class bisect_terms {
 		return 0;
 	}
 	public int get_terms() {
-		strbuf str = new strbuf(, , );
+		strbuf str = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		FILE fp = ((Object)0);
 		int res = 0;
-		fp = .fopen(ModernizedCProgram.git_path_bisect_terms(), "r");
+		fp = /*Error: Function owner not recognized*/fopen(ModernizedCProgram.git_path_bisect_terms(), "r");
 		if (!fp) {
 			res = -1;
 			;
@@ -77,19 +77,19 @@ public class bisect_terms {
 		Byte generatedTerm_good = this.getTerm_good();
 		Byte generatedTerm_bad = this.getTerm_bad();
 		if (option == ((Object)0)) {
-			.printf(ModernizedCProgram._("Your current terms are %s for the old state\nand %s for the new state.\n"), generatedTerm_good, generatedTerm_bad);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("Your current terms are %s for the old state\nand %s for the new state.\n"), generatedTerm_good, generatedTerm_bad);
 			return 0;
 		} 
 		if (ModernizedCProgram.one_of(option, "--term-good", "--term-old", ((Object)0))) {
-			.printf("%s\n", generatedTerm_good);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s\n", generatedTerm_good);
 		}  else if (ModernizedCProgram.one_of(option, "--term-bad", "--term-new", ((Object)0))) {
-			.printf("%s\n", generatedTerm_bad);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s\n", generatedTerm_bad);
 		} else {
 				return ();
 		} 
 		return 0;
 	}
-	public int bisect_start(int no_checkout, Object argv, int argc) {
+	public int bisect_start(int no_checkout, Object[][] argv, int argc) {
 		int i;
 		int has_double_dash = 0;
 		int must_write_terms = 0;
@@ -99,8 +99,8 @@ public class bisect_terms {
 		int retval = 0;
 		string_list revs = new string_list(((Object)0), 0, 0, 1, ((Object)0));
 		string_list states = new string_list(((Object)0), 0, 0, 1, ((Object)0));
-		strbuf start_head = new strbuf(, , );
-		strbuf bisect_names = new strbuf(, , );
+		strbuf start_head = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf bisect_names = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		object_id head_oid = new object_id();
 		object_id oid = new object_id();
 		byte head;
@@ -110,20 +110,21 @@ public class bisect_terms {
 				 */;
 		} 
 		for (i = 0; i < argc; i++) {
-			if (!.strcmp(argv[i], "--")) {
+			if (!/*Error: Function owner not recognized*/strcmp(argv[i], "--")) {
 				has_double_dash = 1;
 				break;
 			} 
 		}
 		Byte generatedTerm_good = this.getTerm_good();
 		Byte generatedTerm_bad = this.getTerm_bad();
+		string_list_item string_list_item = new string_list_item();
 		for (i = 0; i < argc; i++) {
 			byte arg = argv[i];
-			if (!.strcmp(argv[i], "--")) {
+			if (!/*Error: Function owner not recognized*/strcmp(argv[i], "--")) {
 				break;
-			}  else if (!.strcmp(arg, "--no-checkout")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--no-checkout")) {
 				no_checkout = 1;
-			}  else if (!.strcmp(arg, "--term-good") || !.strcmp(arg, "--term-old")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--term-good") || !/*Error: Function owner not recognized*/strcmp(arg, "--term-old")) {
 				must_write_terms = 1;
 				ModernizedCProgram.free((Object)generatedTerm_good);
 				this.setTerm_good(ModernizedCProgram.xstrdup(argv[++i]));
@@ -131,7 +132,7 @@ public class bisect_terms {
 				must_write_terms = 1;
 				ModernizedCProgram.free((Object)generatedTerm_good);
 				this.setTerm_good(ModernizedCProgram.xstrdup(arg));
-			}  else if (!.strcmp(arg, "--term-bad") || !.strcmp(arg, "--term-new")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(arg, "--term-bad") || !/*Error: Function owner not recognized*/strcmp(arg, "--term-new")) {
 				must_write_terms = 1;
 				ModernizedCProgram.free((Object)generatedTerm_bad);
 				this.setTerm_bad(ModernizedCProgram.xstrdup(argv[++i]));
@@ -146,7 +147,7 @@ public class bisect_terms {
 					if (ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, commit_id, oid) && has_double_dash) {
 						ModernizedCProgram.die(ModernizedCProgram._("'%s' does not appear to be a valid revision"), arg);
 					} 
-					revs.string_list_append(ModernizedCProgram.oid_to_hex(oid));
+					string_list_item.string_list_append(revs, ModernizedCProgram.oid_to_hex(oid));
 					ModernizedCProgram.free(commit_id);
 			} 
 		}
@@ -162,10 +163,10 @@ public class bisect_terms {
 		} 
 		for (i = 0; i < generatedNr; i++) {
 			if (bad_seen) {
-				states.string_list_append(generatedTerm_good);
+				string_list_item.string_list_append(states, generatedTerm_good);
 			} else {
 					bad_seen = 1;
-					states.string_list_append(generatedTerm_bad);
+					string_list_item.string_list_append(states, generatedTerm_bad);
 			} 
 		}
 		head = head_oid.resolve_ref_unsafe("HEAD", 0, /*
@@ -176,8 +177,8 @@ public class bisect_terms {
 				return ();
 			} 
 		} 
-		byte generatedBuf = start_head.getBuf();
-		Object generatedArgv = argv.getArgv();
+		byte[] generatedBuf = start_head.getBuf();
+		Object[][] generatedArgv = argv.getArgv();
 		if (!ModernizedCProgram.is_empty_or_missing_file(ModernizedCProgram.git_path_bisect_start())) {
 			start_head.strbuf_read_file(ModernizedCProgram.git_path_bisect_start(), /* Reset to the rev from where we started */0);
 			start_head.strbuf_trim();
@@ -229,7 +230,7 @@ public class bisect_terms {
 			bisect_names.sq_quote_argv(argv + pathspec_pos);
 		} 
 		ModernizedCProgram.write_file(ModernizedCProgram.git_path_bisect_names(), "%s\n", generatedBuf);
-		string_list_item generatedItems = states.getItems();
+		string_list_item[] generatedItems = states.getItems();
 		for (i = 0; i < generatedNr; i++) {
 			if (ModernizedCProgram.bisect_write(generatedItems[i].getString(), generatedItems[i].getString(), terms, 1)) {
 				retval = -1;

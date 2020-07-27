@@ -98,7 +98,7 @@ public class ThreadKeyAssoc {
 			if (generatedKey.getThreads() == assoc) {
 				generatedKey.setThreads(/* We're at the head of the key's threads chain */next);
 			} 
-			.free(assoc/* ptw32_tkAssocDestroy */);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(assoc/* ptw32_tkAssocDestroy */);
 		} 
 	}
 	/*

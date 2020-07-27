@@ -10,7 +10,7 @@ public class pretty_print_context {
 	private int print_email_subject;
 	private int expand_tabs_in_log;
 	private int need_8bit_cte;
-	private byte notes_message;
+	private Byte notes_message;
 	private reflog_walk_info reflog_info;
 	private rev_info rev;
 	private Object output_encoding;
@@ -20,7 +20,7 @@ public class pretty_print_context {
 	private string_list in_body_headers;
 	private int graph_width;
 	
-	public pretty_print_context(cmit_fmt fmt, int abbrev, Object after_subject, int preserve_subject, date_mode date_mode, int date_mode_explicit, int print_email_subject, int expand_tabs_in_log, int need_8bit_cte, byte notes_message, reflog_walk_info reflog_info, rev_info rev, Object output_encoding, string_list mailmap, int color, ident_split from_ident, string_list in_body_headers, int graph_width) {
+	public pretty_print_context(cmit_fmt fmt, int abbrev, Object after_subject, int preserve_subject, date_mode date_mode, int date_mode_explicit, int print_email_subject, int expand_tabs_in_log, int need_8bit_cte, Byte notes_message, reflog_walk_info reflog_info, rev_info rev, Object output_encoding, string_list mailmap, int color, ident_split from_ident, string_list in_body_headers, int graph_width) {
 		setFmt(fmt);
 		setAbbrev(abbrev);
 		setAfter_subject(after_subject);
@@ -97,10 +97,10 @@ public class pretty_print_context {
 	public void setNeed_8bit_cte(int newNeed_8bit_cte) {
 		need_8bit_cte = newNeed_8bit_cte;
 	}
-	public byte getNotes_message() {
+	public Byte getNotes_message() {
 		return notes_message;
 	}
-	public void setNotes_message(byte newNotes_message) {
+	public void setNotes_message(Byte newNotes_message) {
 		notes_message = newNotes_message;
 	}
 	public reflog_walk_info getReflog_info() {

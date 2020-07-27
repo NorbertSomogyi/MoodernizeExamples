@@ -8,7 +8,7 @@ public class UrlState {
 	private connectdata lastconnect;
 	private Byte headerbuff;
 	private Object headersize;
-	private Byte buffer;
+	private byte[] buffer;
 	private Byte ulbuf;
 	private Object current_speed;
 	private Byte first_host;
@@ -17,7 +17,7 @@ public class UrlState {
 	private long sessionage;
 	private int tempcount;
 	private Object tempwrite;
-	private Byte scratch;
+	private byte[] scratch;
 	private int os_errno;
 	private digestdata digest;
 	private digestdata proxydigest;
@@ -62,7 +62,7 @@ public class UrlState {
 	private Object previouslypending;
 	private Object cookie_engine;
 	
-	public UrlState(conncache conn_cache, curltime keeps_speed, connectdata lastconnect, Byte headerbuff, Object headersize, Byte buffer, Byte ulbuf, Object current_speed, Byte first_host, int first_remote_port, curl_ssl_session session, long sessionage, int tempcount, Object tempwrite, Byte scratch, int os_errno, digestdata digest, digestdata proxydigest, auth authhost, auth authproxy, Object resolver, curltime expiretime, Curl_tree timenode, curl_llist timeoutlist, Object expires, Byte most_recent_ftp_entrypath, int httpversion, Byte range, Object resume_from, long rtsp_next_client_CSeq, long rtsp_next_server_CSeq, long rtsp_CSeq_recv, Object infilesize, Object drain, Object fread_func, Object in, Curl_easy stream_depends_on, int stream_weight, Object uh, urlpieces up, Object trailers_bytes_sent, Curl_send_buffer trailers_buf,  trailers_state, Object multi_owned_by_easy, Object this_is_a_follow, Object refused_stream, Object errorbuf, Object allow_port, Object authproblem, Object ftp_trying_alternative, Object wildcardmatch, Object expect100header, Object use_range, Object rangestringalloc, Object done, Object stream_depends_e, Object previouslypending, Object cookie_engine) {
+	public UrlState(conncache conn_cache, curltime keeps_speed, connectdata lastconnect, Byte headerbuff, Object headersize, byte[] buffer, Byte ulbuf, Object current_speed, Byte first_host, int first_remote_port, curl_ssl_session session, long sessionage, int tempcount, Object tempwrite, byte[] scratch, int os_errno, digestdata digest, digestdata proxydigest, auth authhost, auth authproxy, Object resolver, curltime expiretime, Curl_tree timenode, curl_llist timeoutlist, Object expires, Byte most_recent_ftp_entrypath, int httpversion, Byte range, Object resume_from, long rtsp_next_client_CSeq, long rtsp_next_server_CSeq, long rtsp_CSeq_recv, Object infilesize, Object drain, Object fread_func, Object in, Curl_easy stream_depends_on, int stream_weight, Object uh, urlpieces up, Object trailers_bytes_sent, Curl_send_buffer trailers_buf,  trailers_state, Object multi_owned_by_easy, Object this_is_a_follow, Object refused_stream, Object errorbuf, Object allow_port, Object authproblem, Object ftp_trying_alternative, Object wildcardmatch, Object expect100header, Object use_range, Object rangestringalloc, Object done, Object stream_depends_e, Object previouslypending, Object cookie_engine) {
 		setConn_cache(conn_cache);
 		setKeeps_speed(keeps_speed);
 		setLastconnect(lastconnect);
@@ -155,10 +155,10 @@ public class UrlState {
 	public void setHeadersize(Object newHeadersize) {
 		headersize = newHeadersize;
 	}
-	public Byte getBuffer() {
+	public byte[] getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(Byte newBuffer) {
+	public void setBuffer(byte[] newBuffer) {
 		buffer = newBuffer;
 	}
 	public Byte getUlbuf() {
@@ -209,10 +209,10 @@ public class UrlState {
 	public void setTempwrite(Object newTempwrite) {
 		tempwrite = newTempwrite;
 	}
-	public Byte getScratch() {
+	public byte[] getScratch() {
 		return scratch;
 	}
-	public void setScratch(Byte newScratch) {
+	public void setScratch(byte[] newScratch) {
 		scratch = newScratch;
 	}
 	public int getOs_errno() {

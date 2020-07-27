@@ -12,19 +12,6 @@ public class obs_view {
 	public obs_view() {
 	}
 	
-	public void obs_main_view_free() {
-		if (!view) {
-			return ;
-		} 
-		Object generatedChannels = this.getChannels();
-		for ( i = 0;
-		 i < 64; i++) {
-			generatedChannels[i].obs_source_release();
-		}
-		.memset(generatedChannels, 0, );
-		Object generatedChannels_mutex = this.getChannels_mutex();
-		ModernizedCProgram.pthread_mutex_destroy(generatedChannels_mutex);
-	}
 	/******************************************************************************
 	    Copyright (C) 2014 by Hugh Bailey <obs.jim@gmail.com>
 	
@@ -54,7 +41,7 @@ public class obs_view {
 		return true;
 	}
 	public obs_view obs_view_create() {
-		obs_view view = ModernizedCProgram.bzalloc();
+		obs_view view = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		if (!view.obs_view_init()) {
 			ModernizedCProgram.bfree(view);
 			view = NULL;
@@ -63,7 +50,7 @@ public class obs_view {
 	}
 	public void obs_view_free() {
 		if (!view) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedChannels = this.getChannels();
 		for ( i = 0;
@@ -74,7 +61,7 @@ public class obs_view {
 				source.obs_source_release();
 			} 
 		}
-		.memset(generatedChannels, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedChannels, 0, /*Error: sizeof expression not supported yet*/);
 		Object generatedChannels_mutex = this.getChannels_mutex();
 		ModernizedCProgram.pthread_mutex_destroy(generatedChannels_mutex);
 	}
@@ -86,7 +73,7 @@ public class obs_view {
 	}
 	public void obs_view_render() {
 		if (!view) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedChannels_mutex = this.getChannels_mutex();
 		ModernizedCProgram.pthread_mutex_lock(generatedChannels_mutex);
@@ -106,6 +93,19 @@ public class obs_view {
 			} 
 		}
 		ModernizedCProgram.pthread_mutex_unlock(generatedChannels_mutex);
+	}
+	public void obs_main_view_free() {
+		if (!view) {
+			return /*Error: Unsupported expression*/;
+		} 
+		Object generatedChannels = this.getChannels();
+		for ( i = 0;
+		 i < 64; i++) {
+			generatedChannels[i].obs_source_release();
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedChannels, 0, /*Error: sizeof expression not supported yet*/);
+		Object generatedChannels_mutex = this.getChannels_mutex();
+		ModernizedCProgram.pthread_mutex_destroy(generatedChannels_mutex);
 	}
 	public Object getChannels_mutex() {
 		return channels_mutex;

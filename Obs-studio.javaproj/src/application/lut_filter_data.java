@@ -7,10 +7,10 @@ public class lut_filter_data {
 	private Object effect;
 	private Object target;
 	private Object image;
-	private byte file;
+	private Byte file;
 	private double clut_amount;
 	
-	public lut_filter_data(obs_source context, Object effect, Object target, Object image, byte file, double clut_amount) {
+	public lut_filter_data(obs_source context, Object effect, Object target, Object image, Byte file, double clut_amount) {
 		setContext(context);
 		setEffect(effect);
 		setTarget(target);
@@ -45,10 +45,10 @@ public class lut_filter_data {
 	public void setImage(Object newImage) {
 		image = newImage;
 	}
-	public byte getFile() {
+	public Byte getFile() {
 		return file;
 	}
-	public void setFile(byte newFile) {
+	public void setFile(Byte newFile) {
 		file = newFile;
 	}
 	public double getClut_amount() {

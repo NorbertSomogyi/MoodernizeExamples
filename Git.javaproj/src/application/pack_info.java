@@ -18,7 +18,7 @@ public class pack_info {
 		int i;
 		for (i = 0; i < ModernizedCProgram.num_pack; i++) {
 			packed_git p = info[i].getP();
-			if (!.strcmp(p.pack_basename(), name)) {
+			if (!/*Error: Function owner not recognized*/strcmp(p.pack_basename(), name)) {
 				return info[i];
 			} 
 		}

@@ -83,11 +83,11 @@ public class tm_zip_s {
 			FILETIME ftLocal = new FILETIME();
 			HANDLE hFind = new HANDLE();
 			WIN32_FIND_DATAA ff32 = new WIN32_FIND_DATAA();
-			hFind = .FindFirstFileA(f, ff32);
+			hFind = /*Error: Function owner not recognized*/FindFirstFileA(f, ff32);
 			if (hFind != (HANDLE)(true)) {
-				.FileTimeToLocalFileTime((generatedFtLastWriteTime), ftLocal);
-				.FileTimeToDosDateTime(ftLocal, ((LPWORD)dt) + 1, ((LPWORD)dt) + 0);
-				.FindClose(hFind);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FileTimeToLocalFileTime((generatedFtLastWriteTime), ftLocal);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FileTimeToDosDateTime(ftLocal, ((LPWORD)dt) + 1, ((LPWORD)dt) + 0);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FindClose(hFind);
 				ret = 1;
 			} 
 		}

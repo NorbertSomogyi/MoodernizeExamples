@@ -17,24 +17,24 @@ public class connectbundle {
 	
 	public void bundle_destroy() {
 		if (!cb_ptr) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		curl_llist generatedConn_list = this.getConn_list();
 		generatedConn_list.Curl_llist_destroy(((Object)0));
-		.Curl_cfree(cb_ptr);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(cb_ptr);
 	}
 	public connectbundle Curl_conncache_find_bundle(connectdata conn, conncache connc, Object hostp) {
 		connectbundle bundle = ((Object)0);
 		Curl_easy generatedData = conn.getData();
-		Object generatedShare = (generatedData).getShare();
+		Curl_share generatedShare = (generatedData).getShare();
 		if (generatedShare) {
 			(generatedData).Curl_share_lock(CURL_LOCK_DATA_CONNECT, CURL_LOCK_ACCESS_SINGLE);
 		} 
 		curl_hash generatedHash = connc.getHash();
 		if (connc) {
 			byte[] key = new byte[128];
-			conn.hashkey(key, , hostp);
-			bundle = generatedHash.Curl_hash_pick(key, .strlen(key));
+			conn.hashkey(key, /*Error: sizeof expression not supported yet*/, hostp);
+			bundle = generatedHash.Curl_hash_pick(key, /*Error: Function owner not recognized*/strlen(key));
 		} 
 		return bundle;
 	}

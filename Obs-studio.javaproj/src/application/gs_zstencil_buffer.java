@@ -33,7 +33,7 @@ public class gs_zstencil_buffer {
 	******************************************************************************/
 	public Object gl_init_zsbuffer(Object width, Object height) {
 		Object generatedBuffer = this.getBuffer();
-		.glGenRenderbuffers(1, generatedBuffer);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glGenRenderbuffers(1, generatedBuffer);
 		if (!ModernizedCProgram.gl_success("glGenRenderbuffers")) {
 			return false;
 		} 
@@ -41,7 +41,7 @@ public class gs_zstencil_buffer {
 			return false;
 		} 
 		Object generatedFormat = this.getFormat();
-		.glRenderbufferStorage(GL_RENDERBUFFER, generatedFormat, width, height);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/glRenderbufferStorage(GL_RENDERBUFFER, generatedFormat, width, height);
 		if (!ModernizedCProgram.gl_success("glRenderbufferStorage")) {
 			return false;
 		} 
@@ -54,7 +54,7 @@ public class gs_zstencil_buffer {
 			return ((Object)0);
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice, width, height, gs_zstencil_format.format);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice, width, height, gs_zstencil_format.format);
 	}
 	public gs_zstencil_buffer gs_get_zstencil_target() {
 		graphics_t graphics = thread_graphics;
@@ -62,7 +62,7 @@ public class gs_zstencil_buffer {
 			return ((Object)0);
 		} 
 		gs_device generatedDevice = graphics.getDevice();
-		return .UNRECOGNIZEDFUNCTIONNAME(generatedDevice);
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedDevice);
 	}
 	public Object getDevice() {
 		return device;

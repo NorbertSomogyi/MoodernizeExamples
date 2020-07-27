@@ -157,7 +157,7 @@ public class spellinfo_S {
 			if (rline == /* Skip comment lines. */(byte)'#') {
 				continue;
 			} 
-			l = (int).strlen((byte)(/* Remove CR, LF and white space from the end. */rline));
+			l = (int)/*Error: Function owner not recognized*/strlen((byte)(/* Remove CR, LF and white space from the end. */rline));
 			while (l > 0 && rline[l - 1] <= (byte)' ') {
 				--l;
 			}
@@ -179,7 +179,7 @@ public class spellinfo_S {
 			} 
 			if (line == (byte)'/') {
 				++line;
-				if (.strncmp((byte)(line), (byte)("encoding="), (size_t)(true)) == 0) {
+				if (/*Error: Function owner not recognized*/strncmp((byte)(line), (byte)("encoding="), (size_t)(true)) == 0) {
 					if (generatedVc_type != 0) {
 						ModernizedCProgram.smsg(((byte)("Duplicate /encoding= line ignored in %s line %d: %s")), fname, lnum, line - 1);
 					}  else if (did_word) {
@@ -196,16 +196,16 @@ public class spellinfo_S {
 					} 
 					continue;
 				} 
-				if (.strncmp((byte)(line), (byte)("regions="), (size_t)(true)) == 0) {
+				if (/*Error: Function owner not recognized*/strncmp((byte)(line), (byte)("regions="), (size_t)(true)) == 0) {
 					if (generatedSi_region_count > 1) {
 						ModernizedCProgram.smsg(((byte)("Duplicate /regions= line ignored in %s line %d: %s")), fname, lnum, line);
 					} else {
 							line += 8;
-							if (.strlen((byte)(line)) > 8 * 2) {
+							if (/*Error: Function owner not recognized*/strlen((byte)(line)) > 8 * 2) {
 								ModernizedCProgram.smsg(((byte)("Too many regions in %s line %d: %s")), fname, lnum, line);
 							} else {
-									this.setSi_region_count((int).strlen((byte)(line)) / 2);
-									.strcpy((byte)(generatedSi_region_name), (byte)(line));
+									this.setSi_region_count((int)/*Error: Function owner not recognized*/strlen((byte)(line)) / 2);
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(generatedSi_region_name), (byte)(line));
 									this.setSi_region((1 << generatedSi_region_count) - /* Adjust the mask for a word valid in all regions. */1);
 							} 
 					} 
@@ -255,7 +255,7 @@ public class spellinfo_S {
 			did_word = 1;
 		}
 		ModernizedCProgram.vim_free(pc);
-		.fclose(fd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fd);
 		if (generatedSi_ascii && non_ascii > 0) {
 			ModernizedCProgram.vim_snprintf((byte)ModernizedCProgram.IObuff, (1024 + 1), ((byte)("Ignored %d words with non-ASCII characters")), non_ascii);
 			spin.spell_message(ModernizedCProgram.IObuff);
@@ -275,7 +275,7 @@ public class spellinfo_S {
 		int generatedSb_used = bl.getSb_used();
 		if (align && bl != ((Object)0/* Round size up for alignment.  On some systems structures need to be
 			 * aligned to the size of a pointer (e.g., SPARC). */)) {
-			bl.setSb_used((generatedSb_used +  - 1) & ~( - 1));
+			bl.setSb_used((generatedSb_used + /*Error: Unsupported expression*/ - 1) & ~(/*Error: Unsupported expression*/ - 1));
 		} 
 		int generatedSi_did_emsg = this.getSi_did_emsg();
 		long generatedSi_blocks_cnt = this.getSi_blocks_cnt();
@@ -283,7 +283,7 @@ public class spellinfo_S {
 			if (len >= 16000) {
 				bl = ((Object)0);
 			} else {
-					bl = ModernizedCProgram.alloc_clear( + /* Allocate a block of memory. It is not freed until much later. */16000);
+					bl = ModernizedCProgram.alloc_clear(/*Error: Unsupported expression*/ + /* Allocate a block of memory. It is not freed until much later. */16000);
 			} 
 			if (bl == ((Object)0)) {
 				if (!generatedSi_did_emsg) {
@@ -308,16 +308,16 @@ public class spellinfo_S {
 	/* length needed */
 	public Object getroom_save(Object s) {
 		char_u sc = new char_u();
-		sc = (char_u)spin.getroom(.strlen((byte)(s)) + 1, 0);
+		sc = (char_u)spin.getroom(/*Error: Function owner not recognized*/strlen((byte)(s)) + 1, 0);
 		if (sc != ((Object)0)) {
-			.strcpy((byte)(sc), (byte)(s));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(sc), (byte)(s));
 		} 
 		return sc/*
 		 * Free the list of allocated sblock_T.
 		 */;
 	}
 	public int store_word(Object word, int flags, int region, Object pfxlist, int need_affix) {
-		int len = (int).strlen((byte)(/* supported region(s) *//* list of prefix IDs or NULL *//* only store word with affix ID */word));
+		int len = (int)/*Error: Function owner not recognized*/strlen((byte)(/* supported region(s) *//* list of prefix IDs or NULL *//* only store word with affix ID */word));
 		int ct = ModernizedCProgram.captype(word, word + len);
 		char_u[] foldword = new char_u();
 		int res = 1;
@@ -375,30 +375,30 @@ public class spellinfo_S {
 			ModernizedCProgram.semsg(((byte)(e_notopen)), fname);
 			return 0;
 		} 
-		fwv &=  .fwrite("VIMspell", 8, (size_t)1, /* <HEADER>: <fileID> <versionnr> *//* <fileID> */fd);
+		fwv &=  /*Error: Function owner not recognized*/fwrite("VIMspell", 8, (size_t)1, /* <HEADER>: <fileID> <versionnr> *//* <fileID> */fd);
 		if (fwv != (size_t)1/* Catch first write error, don't try writing more. */) {
 			;
 		} 
-		.putc(50, /* <versionnr> */fd/*
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(50, /* <versionnr> */fd/*
 		     * <SECTIONS>: <section> ... <sectionend>
 		     */);
 		Object generatedSi_info = this.getSi_info();
 		if (generatedSi_info != ((Object)/* SN_INFO: <infotext> */0)) {
-			.putc(15, /* <sectionID> */fd);
-			.putc(0, /* <sectionflags> */fd);
-			i = (int).strlen((byte)(generatedSi_info));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(15, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionflags> */fd);
+			i = (int)/*Error: Function owner not recognized*/strlen((byte)(generatedSi_info));
 			fd.put_bytes((long_u)i, /* <sectionlen> */4);
-			fwv &=  .fwrite(generatedSi_info, (size_t)i, (size_t)1, /* <infotext> */fd);
+			fwv &=  /*Error: Function owner not recognized*/fwrite(generatedSi_info, (size_t)i, (size_t)1, /* <infotext> */fd);
 		} 
 		int generatedSi_region_count = this.getSi_region_count();
 		Object generatedSi_region_name = this.getSi_region_name();
 		if (generatedSi_region_count > /* SN_REGION: <regionname> ...
 		     * Write the region names only if there is more than one. */1) {
-			.putc(0, /* <sectionID> */fd);
-			.putc(1, /* <sectionflags> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(1, /* <sectionflags> */fd);
 			l = generatedSi_region_count * 2;
 			fd.put_bytes((long_u)l, /* <sectionlen> */4);
-			fwv &=  .fwrite(generatedSi_region_name, (size_t)l, (size_t)1, fd);
+			fwv &=  /*Error: Function owner not recognized*/fwrite(generatedSi_region_name, (size_t)l, (size_t)1, fd);
 			regionmask = (1 << generatedSi_region_count) - /* <regionname> ... */1;
 		} else {
 				regionmask = 0/* SN_CHARFLAGS: <charflagslen> <charflags> <folcharslen> <folchars>
@@ -420,18 +420,18 @@ public class spellinfo_S {
 		if (!generatedSi_ascii && !generatedSi_add) {
 			char_u[] folchars = new char_u();
 			int flags;
-			.putc(1, /* <sectionID> */fd);
-			.putc(1, /* <sectionflags> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(1, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(1, /* <sectionflags> */fd);
 			l = /* Form the <folchars> string first, we need to know its length. */0;
 			for (i = 128; i < 256; ++i) {
 				if (has_mbyte) {
-					l += .mb_char2bytes(generatedSt_fold[i], folchars + l);
+					l += /*Error: Function owner not recognized*/mb_char2bytes(generatedSt_fold[i], folchars + l);
 				} else {
 						folchars[l++] = generatedSt_fold[i];
 				} 
 			}
 			fd.put_bytes((long_u)(1 + 128 + 2 + l), /* <sectionlen> */4);
-			.fputc(128, /* <charflagslen> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc(128, /* <charflagslen> */fd);
 			for (i = 128; i < 256; ++i) {
 				flags = 0;
 				if (generatedSt_isw[i]) {
@@ -440,24 +440,24 @@ public class spellinfo_S {
 				if (generatedSt_isu[i]) {
 					flags |=  -1024;
 				} 
-				.fputc(flags, /* <charflags> */fd);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fputc(flags, /* <charflags> */fd);
 			}
 			fd.put_bytes((long_u)l, /* <folcharslen> */2);
-			fwv &=  .fwrite(folchars, (size_t)l, (size_t)1, /* <folchars> */fd);
+			fwv &=  /*Error: Function owner not recognized*/fwrite(folchars, (size_t)l, (size_t)1, /* <folchars> */fd);
 		} 
 		Object generatedSi_midword = this.getSi_midword();
 		if (generatedSi_midword != ((Object)/* SN_MIDWORD: <midword> */0)) {
-			.putc(2, /* <sectionID> */fd);
-			.putc(1, /* <sectionflags> */fd);
-			i = (int).strlen((byte)(generatedSi_midword));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(2, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(1, /* <sectionflags> */fd);
+			i = (int)/*Error: Function owner not recognized*/strlen((byte)(generatedSi_midword));
 			fd.put_bytes((long_u)i, /* <sectionlen> */4);
-			fwv &=  .fwrite(generatedSi_midword, (size_t)i, (size_t)1, fd/* <midword> */);
+			fwv &=  /*Error: Function owner not recognized*/fwrite(generatedSi_midword, (size_t)i, (size_t)1, fd/* <midword> */);
 		} 
 		growarray generatedSi_prefcond = this.getSi_prefcond();
 		int generatedGa_len = generatedSi_prefcond.getGa_len();
 		if (generatedGa_len > /* SN_PREFCOND: <prefcondcnt> <prefcond> ... */0) {
-			.putc(3, /* <sectionID> */fd);
-			.putc(1, /* <sectionflags> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(3, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(1, /* <sectionflags> */fd);
 			l = ModernizedCProgram.write_spell_prefcond(((Object)0), generatedSi_prefcond);
 			fd.put_bytes((long_u)l, /* <sectionlen> */4);
 			ModernizedCProgram.write_spell_prefcond(fd, generatedSi_prefcond);
@@ -490,16 +490,16 @@ public class spellinfo_S {
 				continue;
 			} 
 			if (round != /* Sort the REP/REPSAL items. */2) {
-				.qsort(generatedGa_data, (size_t)generatedGa_len, , ModernizedCProgram.rep_compare);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/qsort(generatedGa_data, (size_t)generatedGa_len, /*Error: Unsupported expression*/, ModernizedCProgram.rep_compare);
 			} 
 			i = round == 1 ? 4 : (round == 2 ? 5 : 12);
-			.putc(i, /* <sectionID> */fd);
-			.putc(0, /* This is for making suggestions, section is not required. *//* <sectionflags> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(i, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* This is for making suggestions, section is not required. *//* <sectionflags> */fd);
 			l = /* Compute the length of what follows. *//* count <repcount> or <salcount> */2;
 			for (i = 0; i < generatedGa_len; ++i) {
 				ftp = ((fromto_T)generatedGa_data)[i];
-				l += 1 + (int).strlen((byte)(generatedFt_from));
-				l += 1 + (int).strlen((byte)(generatedFt_to));
+				l += 1 + (int)/*Error: Function owner not recognized*/strlen((byte)(generatedFt_from));
+				l += 1 + (int)/*Error: Function owner not recognized*/strlen((byte)(generatedFt_to));
 			}
 			if (round == 2) {
 				++/* count <salflags> */l;
@@ -516,41 +516,41 @@ public class spellinfo_S {
 				if (generatedSi_rem_accents) {
 					i |=  4;
 				} 
-				.putc(i, /* <salflags> */fd);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(i, /* <salflags> */fd);
 			} 
 			fd.put_bytes((long_u)generatedGa_len, /* <repcount> or <salcount> */2);
 			for (i = 0; i < generatedGa_len; ++i) {
 				ftp = ((fromto_T)generatedGa_data)[/* <rep> : <repfromlen> <repfrom> <reptolen> <repto> *//* <sal> : <salfromlen> <salfrom> <saltolen> <salto> */i];
 				for (rr = 1; rr <= 2; ++rr) {
 					p = rr == 1 ? generatedFt_from : generatedFt_to;
-					l = (int).strlen((byte)(p));
-					.putc(l, fd);
+					l = (int)/*Error: Function owner not recognized*/strlen((byte)(p));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(l, fd);
 					if (l > 0) {
-						fwv &=  .fwrite(p, l, (size_t)1, fd);
+						fwv &=  /*Error: Function owner not recognized*/fwrite(p, l, (size_t)1, fd);
 					} 
 				}
 			}
 		}
 		if (generatedSi_sofofr != ((Object)0) && generatedSi_sofoto != ((Object)/* SN_SOFO: <sofofromlen> <sofofrom> <sofotolen> <sofoto>
 		     * This is for making suggestions, section is not required. */0)) {
-			.putc(6, /* <sectionID> */fd);
-			.putc(0, /* <sectionflags> */fd);
-			l = (int).strlen((byte)(generatedSi_sofofr));
-			fd.put_bytes((long_u)(l + .strlen((byte)(generatedSi_sofoto)) + 4), 4/* <sectionlen> */);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(6, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionflags> */fd);
+			l = (int)/*Error: Function owner not recognized*/strlen((byte)(generatedSi_sofofr));
+			fd.put_bytes((long_u)(l + /*Error: Function owner not recognized*/strlen((byte)(generatedSi_sofoto)) + 4), 4/* <sectionlen> */);
 			fd.put_bytes((long_u)l, /* <sofofromlen> */2);
-			fwv &=  .fwrite(generatedSi_sofofr, l, (size_t)1, /* <sofofrom> */fd);
-			l = (int).strlen((byte)(generatedSi_sofoto));
+			fwv &=  /*Error: Function owner not recognized*/fwrite(generatedSi_sofofr, l, (size_t)1, /* <sofofrom> */fd);
+			l = (int)/*Error: Function owner not recognized*/strlen((byte)(generatedSi_sofoto));
 			fd.put_bytes((long_u)l, /* <sofotolen> */2);
-			fwv &=  .fwrite(generatedSi_sofoto, l, (size_t)1, /* <sofoto> */fd);
+			fwv &=  /*Error: Function owner not recognized*/fwrite(generatedSi_sofoto, l, (size_t)1, /* <sofoto> */fd);
 		} 
 		hashtable_S generatedSi_commonwords = this.getSi_commonwords();
 		Object generatedHt_used = generatedSi_commonwords.getHt_used();
 		Object generatedHi_key = (hi).getHi_key();
-		hashitem_S generatedHt_array = generatedSi_commonwords.getHt_array();
+		hashitem_S[] generatedHt_array = generatedSi_commonwords.getHt_array();
 		if (generatedHt_used > /* SN_WORDS: <word> ...
 		     * This is for making suggestions, section is not required. */0) {
-			.putc(13, /* <sectionID> */fd);
-			.putc(0, /* <sectionflags> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(13, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionflags> */fd);
 			for (round = 1; round <= 2; ++/* round 1: count the bytes
 				 * round 2: write the bytes */round) {
 				int todo;
@@ -559,10 +559,10 @@ public class spellinfo_S {
 				todo = (int)generatedHt_used;
 				for (hi = generatedHt_array; todo > 0; ++hi) {
 					if (!(generatedHi_key == ((Object)0) || generatedHi_key == ModernizedCProgram.hash_removed)) {
-						l = (int).strlen((byte)(generatedHi_key)) + 1;
+						l = (int)/*Error: Function owner not recognized*/strlen((byte)(generatedHi_key)) + 1;
 						len += l;
 						if (round == /* <word> */2) {
-							fwv &=  .fwrite(generatedHi_key, (size_t)l, (size_t)1, fd);
+							fwv &=  /*Error: Function owner not recognized*/fwrite(generatedHi_key, (size_t)l, (size_t)1, fd);
 						} 
 						--todo;
 					} 
@@ -574,11 +574,11 @@ public class spellinfo_S {
 		} 
 		if (generatedGa_len > /* SN_MAP: <mapstr>
 		     * This is for making suggestions, section is not required. */0) {
-			.putc(7, /* <sectionID> */fd);
-			.putc(0, /* <sectionflags> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(7, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionflags> */fd);
 			l = generatedGa_len;
 			fd.put_bytes((long_u)l, /* <sectionlen> */4);
-			fwv &=  .fwrite(generatedGa_data, (size_t)l, (size_t)1, fd/* <mapstr> *//* SN_SUGFILE: <timestamp>
+			fwv &=  /*Error: Function owner not recognized*/fwrite(generatedGa_data, (size_t)l, (size_t)1, fd/* <mapstr> *//* SN_SUGFILE: <timestamp>
 			     * This is used to notify that a .sug file may be available and at the
 			     * same time allows for checking that a .sug file that is found matches
 			     * with this .spl file.  That's because the word numbers must be exactly
@@ -587,22 +587,22 @@ public class spellinfo_S {
 		int generatedSi_nosugfile = this.getSi_nosugfile();
 		Object generatedSi_sugtime = this.getSi_sugtime();
 		if (!generatedSi_nosugfile && (generatedGa_len > 0 || (generatedSi_sofofr != ((Object)0) && generatedSi_sofoto != ((Object)0)))) {
-			.putc(11, /* <sectionID> */fd);
-			.putc(0, /* <sectionflags> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(11, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionflags> */fd);
 			fd.put_bytes((long_u)8, /* <sectionlen> */4);
-			this.setSi_sugtime(.time(((Object)/* Set si_sugtime and write it to the file. */0)));
+			this.setSi_sugtime(/*Error: Function owner not recognized*/time(((Object)/* Set si_sugtime and write it to the file. */0)));
 			fd.put_time(generatedSi_sugtime);
 		} 
 		int generatedSi_nosplitsugs = this.getSi_nosplitsugs();
 		if (generatedSi_nosplitsugs) {
-			.putc(14, /* <sectionID> */fd);
-			.putc(0, /* <sectionflags> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(14, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionflags> */fd);
 			fd.put_bytes((long_u)0, /* <sectionlen> */4);
 		} 
 		int generatedSi_nocompoundsugs = this.getSi_nocompoundsugs();
 		if (generatedSi_nocompoundsugs) {
-			.putc(16, /* <sectionID> */fd);
-			.putc(0, /* <sectionflags> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(16, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionflags> */fd);
 			fd.put_bytes((long_u)0, /* <sectionlen> */4);
 		} 
 		Object generatedSi_compflags = this.getSi_compflags();
@@ -613,43 +613,43 @@ public class spellinfo_S {
 		if (generatedSi_compflags != ((Object)/* SN_COMPOUND: compound info.
 		     * We don't mark it required, when not supported all compound words will
 		     * be bad words. */0)) {
-			.putc(8, /* <sectionID> */fd);
-			.putc(0, /* <sectionflags> */fd);
-			l = (int).strlen((byte)(generatedSi_compflags));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(8, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionflags> */fd);
+			l = (int)/*Error: Function owner not recognized*/strlen((byte)(generatedSi_compflags));
 			for (i = 0; i < generatedGa_len; ++i) {
-				l += (int).strlen((byte)(((char_u)(generatedGa_data))[i])) + 1;
+				l += (int)/*Error: Function owner not recognized*/strlen((byte)(((char_u)(generatedGa_data))[i])) + 1;
 			}
 			fd.put_bytes((long_u)(l + 7), /* <sectionlen> */4);
-			.putc(generatedSi_compmax, /* <compmax> */fd);
-			.putc(generatedSi_compminlen, /* <compminlen> */fd);
-			.putc(generatedSi_compsylmax, /* <compsylmax> */fd);
-			.putc(0, /* for Vim 7.0b compatibility */fd);
-			.putc(generatedSi_compoptions, /* <compoptions> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(generatedSi_compmax, /* <compmax> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(generatedSi_compminlen, /* <compminlen> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(generatedSi_compsylmax, /* <compsylmax> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* for Vim 7.0b compatibility */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(generatedSi_compoptions, /* <compoptions> */fd);
 			fd.put_bytes((long_u)generatedGa_len, 2);
 			for (i = 0; i < generatedGa_len; ++/* <comppatcount> */i) {
 				p = ((char_u)(generatedGa_data))[i];
-				.putc((int).strlen((byte)(p)), /* <comppatlen> */fd);
-				fwv &=  .fwrite(p, (size_t).strlen((byte)(p)), (size_t)1, fd/* <comppattext> */);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc((int)/*Error: Function owner not recognized*/strlen((byte)(p)), /* <comppatlen> */fd);
+				fwv &=  /*Error: Function owner not recognized*/fwrite(p, (size_t)/*Error: Function owner not recognized*/strlen((byte)(p)), (size_t)1, fd/* <comppattext> */);
 			}
-			fwv &=  .fwrite(generatedSi_compflags, (size_t).strlen((byte)(generatedSi_compflags)), (size_t)1, fd);
+			fwv &=  /*Error: Function owner not recognized*/fwrite(generatedSi_compflags, (size_t)/*Error: Function owner not recognized*/strlen((byte)(generatedSi_compflags)), (size_t)1, fd);
 		} 
 		Object generatedSi_nobreak = this.getSi_nobreak();
 		if (generatedSi_nobreak) {
-			.putc(10, /* <sectionID> */fd);
-			.putc(0, /* <sectionflags> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(10, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionflags> */fd);
 			fd.put_bytes((long_u)0, /* It's empty, the presence of the section flags the feature. *//* <sectionlen> */4);
 		} 
 		Object generatedSi_syllable = this.getSi_syllable();
 		if (generatedSi_syllable != ((Object)/* SN_SYLLABLE: syllable info.
 		     * We don't mark it required, when not supported syllables will not be
 		     * counted. */0)) {
-			.putc(9, /* <sectionID> */fd);
-			.putc(0, /* <sectionflags> */fd);
-			l = (int).strlen((byte)(generatedSi_syllable));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(9, /* <sectionID> */fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(0, /* <sectionflags> */fd);
+			l = (int)/*Error: Function owner not recognized*/strlen((byte)(generatedSi_syllable));
 			fd.put_bytes((long_u)l, /* <sectionlen> */4);
-			fwv &=  .fwrite(generatedSi_syllable, (size_t)l, (size_t)1, fd/* <syllable> */);
+			fwv &=  /*Error: Function owner not recognized*/fwrite(generatedSi_syllable, (size_t)l, (size_t)1, fd/* <syllable> */);
 		} 
-		.putc(255, /* end of <SECTIONS> *//* <sectionend> */fd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(255, /* end of <SECTIONS> *//* <sectionend> */fd);
 		this.setSi_memtot(/*
 		     * <LWORDTREE>  <KWORDTREE>  <PREFIXTREE>
 		     */0);
@@ -669,10 +669,10 @@ public class spellinfo_S {
 				 * nodes. */.clear_node();
 			nodecount = ModernizedCProgram.put_node(((Object)0), tree, 0, regionmask, round == 3);
 			fd.put_bytes((long_u)nodecount, /* number of nodes in 4 bytes *//* <nodecount> */4);
-			generatedSi_memtot += nodecount + nodecount * ;
+			generatedSi_memtot += nodecount + nodecount * /*Error: Unsupported expression*/;
 			(Object)ModernizedCProgram.put_node(fd, tree, 0, regionmask, round == /* Write the nodes. */3);
 		}
-		if (.putc(0, fd) == (/* Write another byte to check for errors (file system full). */true)) {
+		if (/*Error: Function owner not recognized*/putc(0, fd) == (/* Write another byte to check for errors (file system full). */true)) {
 			retval = 0;
 		} 
 		if (fwv != (size_t)1) {
@@ -709,7 +709,7 @@ public class spellinfo_S {
 			spin.spell_message((char_u)((byte)("Reading back spell file...")));
 			slang = ((Object)0).spell_load_file(wfname, ((Object)0), 0);
 			if (slang == ((Object)0)) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			free_slang = 1;
 		} 
@@ -743,7 +743,7 @@ public class spellinfo_S {
 			;
 		} 
 		ModernizedCProgram.vim_strncpy(fname, wfname, 1024 - 1);
-		len = (int).strlen((byte)(fname));
+		len = (int)/*Error: Function owner not recognized*/strlen((byte)(fname));
 		fname[len - 2] = (byte)'u';
 		fname[len - 1] = (byte)'g';
 		spin.sug_write(fname);
@@ -788,17 +788,17 @@ public class spellinfo_S {
 		fd = ModernizedCProgram.mch_fopen((byte)fname, /* Create the file.  Note that an existing file is silently overwritten! */"w");
 		if (fd == ((Object)0)) {
 			ModernizedCProgram.semsg(((byte)(e_notopen)), fname);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.vim_snprintf((byte)ModernizedCProgram.IObuff, (1024 + 1), ((byte)("Writing suggestion file %s...")), fname);
 		spin.spell_message(ModernizedCProgram.IObuff/*
 		     * <SUGHEADER>: <fileID> <versionnr> <timestamp>
 		     */);
-		if (.fwrite("VIMsug", 6, (size_t)1, fd) != /* <fileID> */1) {
+		if (/*Error: Function owner not recognized*/fwrite("VIMsug", 6, (size_t)1, fd) != /* <fileID> */1) {
 			ModernizedCProgram.emsg(((byte)(e_write)));
 			;
 		} 
-		.putc(1, /* <versionnr> */fd);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putc(1, /* <versionnr> */fd);
 		Object generatedSi_sugtime = this.getSi_sugtime();
 		fd.put_time(generatedSi_sugtime);
 		this.setSi_memtot(0);
@@ -811,7 +811,7 @@ public class spellinfo_S {
 		nodecount = ModernizedCProgram.put_node(((Object)0), tree, 0, 0, 0);
 		fd.put_bytes((long_u)nodecount, /* number of nodes in 4 bytes *//* <nodecount> */4);
 		int generatedSi_memtot = this.getSi_memtot();
-		generatedSi_memtot += nodecount + nodecount * ;
+		generatedSi_memtot += nodecount + nodecount * /*Error: Unsupported expression*/;
 		(Object)ModernizedCProgram.put_node(fd, tree, 0, 0, /* Write the nodes. */0/*
 		     * <SUGTABLE>: <sugwcount> <sugline> ...
 		     */);
@@ -822,14 +822,14 @@ public class spellinfo_S {
 		fd.put_bytes((long_u)wcount, /* <sugwcount> */4);
 		for (lnum = 1; lnum <= (linenr_T)wcount; ++lnum) {
 			line = generatedSi_spellbuf.ml_get_buf(lnum, /* <sugline>: <sugnr> ... NUL */0);
-			len = (int).strlen((byte)(line)) + 1;
-			if (.fwrite(line, (size_t)len, (size_t)1, fd) == 0) {
+			len = (int)/*Error: Function owner not recognized*/strlen((byte)(line)) + 1;
+			if (/*Error: Function owner not recognized*/fwrite(line, (size_t)len, (size_t)1, fd) == 0) {
 				ModernizedCProgram.emsg(((byte)(e_write)));
 				;
 			} 
 			generatedSi_memtot += len;
 		}
-		if (.putc(0, fd) == (/* Write another byte to check for errors. */true)) {
+		if (/*Error: Function owner not recognized*/putc(0, fd) == (/* Write another byte to check for errors. */true)) {
 			ModernizedCProgram.emsg(((byte)(e_write)));
 		} 
 		ModernizedCProgram.vim_snprintf((byte)ModernizedCProgram.IObuff, (1024 + 1), ((byte)("Estimated runtime memory use: %d bytes")), generatedSi_memtot);

@@ -16,10 +16,10 @@ public class curl_hash_element {
 	}
 	
 	public curl_hash_element mk_hash_element(Object key, Object key_len, Object p) {
-		curl_hash_element he = .Curl_cmalloc( + /* allocate the struct plus memory after it to store the key */key_len);
+		curl_hash_element he = /*Error: Function owner not recognized*/Curl_cmalloc(/*Error: Unsupported expression*/ + /* allocate the struct plus memory after it to store the key */key_len);
 		Object generatedKey = he.getKey();
 		if (he) {
-			.memcpy(generatedKey, key, /* copy the key */key_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedKey, key, /* copy the key */key_len);
 			he.setKey_len(key_len);
 			he.setPtr((Object)p);
 		} 
@@ -40,7 +40,7 @@ public class curl_hash_element {
 			iter.setCurrent_element(generatedNext);
 		} 
 		int generatedSlots = h.getSlots();
-		curl_llist generatedTable = h.getTable();
+		curl_llist[] generatedTable = h.getTable();
 		int generatedSlot_index = iter.getSlot_index();
 		if (!generatedCurrent_element) {
 			int i;

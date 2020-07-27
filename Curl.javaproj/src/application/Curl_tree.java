@@ -44,39 +44,6 @@ public class Curl_tree {
 	public Curl_tree() {
 	}
 	
-	public void splayprint(int d, byte output) {
-		Curl_tree node = new Curl_tree();
-		int i;
-		int count;
-		if (t == ((Object)0)) {
-			return ;
-		} 
-		Curl_tree generatedLarger = this.getLarger();
-		generatedLarger.splayprint(d + 1, output);
-		for (i = 0; i < d; i++) {
-			if (output) {
-				ModernizedCProgram.curl_mprintf("  ");
-			} 
-		}
-		curltime generatedKey = this.getKey();
-		Object generatedTv_sec = generatedKey.getTv_sec();
-		int generatedTv_usec = generatedKey.getTv_usec();
-		if (output) {
-			ModernizedCProgram.curl_mprintf("%ld.%ld[%d]", (long)generatedTv_sec, (long)generatedTv_usec, i);
-		} 
-		for (; node != t; ) {
-			;
-		}
-		if (output) {
-			if (count) {
-				ModernizedCProgram.curl_mprintf(" [%d more]\n", count);
-			} else {
-					ModernizedCProgram.curl_mprintf("\n");
-			} 
-		} 
-		Curl_tree generatedSmaller = this.getSmaller();
-		generatedSmaller.splayprint(d + 1, output);
-	}
 	public Curl_tree Curl_splay(curltime i) {
 		Curl_tree N = new Curl_tree();
 		Curl_tree l = new Curl_tree();
@@ -91,7 +58,7 @@ public class Curl_tree {
 		int generatedTv_usec = (i).getTv_usec();
 		Curl_tree generatedSmaller = this.getSmaller();
 		Curl_tree generatedLarger = y.getLarger();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			long comp = (((generatedTv_sec) < (generatedTv_sec)) ? -1 : (((generatedTv_sec) > (generatedTv_sec)) ? 1 : (((generatedTv_usec) < (generatedTv_usec)) ? -1 : (((generatedTv_usec) > (generatedTv_usec)) ? 1 : 0))));
 			if (comp < 0) {
 				if (generatedSmaller == ((Object)0)) {
@@ -276,6 +243,39 @@ public class Curl_tree {
 		} 
 		newroot = /* store new root pointer */x;
 		return 0;
+	}
+	public void splayprint(int d, byte output) {
+		Curl_tree node = new Curl_tree();
+		int i;
+		int count;
+		if (t == ((Object)0)) {
+			return /*Error: Unsupported expression*/;
+		} 
+		Curl_tree generatedLarger = this.getLarger();
+		generatedLarger.splayprint(d + 1, output);
+		for (i = 0; i < d; i++) {
+			if (output) {
+				ModernizedCProgram.curl_mprintf("  ");
+			} 
+		}
+		curltime generatedKey = this.getKey();
+		Object generatedTv_sec = generatedKey.getTv_sec();
+		int generatedTv_usec = generatedKey.getTv_usec();
+		if (output) {
+			ModernizedCProgram.curl_mprintf("%ld.%ld[%d]", (long)generatedTv_sec, (long)generatedTv_usec, i);
+		} 
+		for (; node != t; ) {
+			;
+		}
+		if (output) {
+			if (count) {
+				ModernizedCProgram.curl_mprintf(" [%d more]\n", count);
+			} else {
+					ModernizedCProgram.curl_mprintf("\n");
+			} 
+		} 
+		Curl_tree generatedSmaller = this.getSmaller();
+		generatedSmaller.splayprint(d + 1, output);
 	}
 	public Curl_tree getSmaller() {
 		return smaller;

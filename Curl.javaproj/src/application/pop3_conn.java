@@ -11,10 +11,10 @@ public class pop3_conn {
 	private SASL sasl;
 	private int authtypes;
 	private int preftype;
-	private Byte apoptimestamp;
+	private byte[] apoptimestamp;
 	private  tls_supported;
 	
-	public pop3_conn(pingpong pp,  state,  ssldone, Object eob, Object strip, SASL sasl, int authtypes, int preftype, Byte apoptimestamp,  tls_supported) {
+	public pop3_conn(pingpong pp,  state,  ssldone, Object eob, Object strip, SASL sasl, int authtypes, int preftype, byte[] apoptimestamp,  tls_supported) {
 		setPp(pp);
 		setState(state);
 		setSsldone(ssldone);
@@ -77,10 +77,10 @@ public class pop3_conn {
 	public void setPreftype(int newPreftype) {
 		preftype = newPreftype;
 	}
-	public Byte getApoptimestamp() {
+	public byte[] getApoptimestamp() {
 		return apoptimestamp;
 	}
-	public void setApoptimestamp(Byte newApoptimestamp) {
+	public void setApoptimestamp(byte[] newApoptimestamp) {
 		apoptimestamp = newApoptimestamp;
 	}
 	public  getTls_supported() {

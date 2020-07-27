@@ -29,6 +29,27 @@ public class progress {
 	public progress() {
 	}
 	
+	public progress get_progress(unpack_trees_options o) {
+		int cnt = 0;
+		int total = 0;
+		index_state generatedResult = o.getResult();
+		index_state index = generatedResult;
+		int generatedUpdate = o.getUpdate();
+		int generatedVerbose_update = o.getVerbose_update();
+		if (!generatedUpdate || !generatedVerbose_update) {
+			return ((Object)0);
+		} 
+		int generatedCache_nr = index.getCache_nr();
+		cache_entry[][] generatedCache = index.getCache();
+		for (; cnt < generatedCache_nr; cnt++) {
+			cache_entry ce = generatedCache[cnt];
+			if (ce.getCe_flags() & ((1 << 16) | (1 << 22))) {
+				total++;
+			} 
+		}
+		progress progress = new progress();
+		return progress.start_delayed_progress(ModernizedCProgram._("Updating files"), total);
+	}
 	public void display(Object n, Object done) {
 		byte tp;
 		strbuf counters_sb = ModernizedCProgram.progress.getCounters_sb();
@@ -36,7 +57,7 @@ public class progress {
 		Object generatedLen = counters_sb.getLen();
 		int last_count_len = generatedLen;
 		if (ModernizedCProgram.progress.getDelay() && (!ModernizedCProgram.progress_update || --ModernizedCProgram.progress.getDelay())) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.progress.setLast_value(n);
 		tp = (ModernizedCProgram.progress.getThroughput()) ? ModernizedCProgram.progress.getThroughput().getDisplay().getBuf() : "";
@@ -53,7 +74,7 @@ public class progress {
 			counters_sb.strbuf_addf("%llu%s", (uintmax_t)n, tp);
 			show_update = 1;
 		} 
-		byte generatedBuf = counters_sb.getBuf();
+		byte[] generatedBuf = counters_sb.getBuf();
 		if (show_update) {
 			if (ModernizedCProgram.is_foreground_fd((((_iob[2])).get_file())) || done) {
 				byte eol = done ? done : "\r";
@@ -61,15 +82,15 @@ public class progress {
 				size_t progress_line_len = ModernizedCProgram.progress.getTitle_len() + generatedLen + 2;
 				int cols = ModernizedCProgram.term_columns();
 				if (ModernizedCProgram.progress.getSplit()) {
-					.fprintf((_iob[2]), "  %s%*s", generatedBuf, (int)clear_len, eol);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "  %s%*s", generatedBuf, (int)clear_len, eol);
 				}  else if (!done && cols < progress_line_len) {
 					clear_len = ModernizedCProgram.progress.getTitle_len() + 1 < cols ? cols - ModernizedCProgram.progress.getTitle_len() - 1 : 0;
-					.fprintf((_iob[2]), "%s:%*s\n  %s%s", ModernizedCProgram.progress.getTitle(), (int)clear_len, "", generatedBuf, eol);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%*s\n  %s%s", ModernizedCProgram.progress.getTitle(), (int)clear_len, "", generatedBuf, eol);
 					ModernizedCProgram.progress.setSplit(1);
 				} else {
-						.fprintf((_iob[2]), "%s: %s%*s", ModernizedCProgram.progress.getTitle(), generatedBuf, (int)clear_len, eol);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s: %s%*s", ModernizedCProgram.progress.getTitle(), generatedBuf, (int)clear_len, eol);
 				} 
-				.fflush((_iob[2]));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fflush((_iob[2]));
 			} 
 			ModernizedCProgram.progress_update = 0;
 		} 
@@ -88,22 +109,22 @@ public class progress {
 		int count;
 		int rate;
 		if (!ModernizedCProgram.progress) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		tp = ModernizedCProgram.progress.getThroughput();
 		now_ns = ModernizedCProgram.progress.progress_getnanotime();
 		strbuf generatedDisplay = tp.getDisplay();
 		if (!tp) {
-			ModernizedCProgram.progress.setThroughput(tp = ModernizedCProgram.xcalloc(1, ));
+			ModernizedCProgram.progress.setThroughput(tp = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/));
 			tp.setPrev_total(tp.setCurr_total(total));
 			tp.setPrev_ns(now_ns);
 			generatedDisplay.strbuf_init(0);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		tp.setCurr_total(total);
 		Object generatedPrev_ns = tp.getPrev_ns();
 		if (now_ns - generatedPrev_ns <= /* only update throughput every 0.5 s */500000000) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		misecs = ((now_ns - generatedPrev_ns) * 4398) >> 32;
 		Object generatedPrev_total = tp.getPrev_total();
@@ -134,7 +155,7 @@ public class progress {
 		} 
 	}
 	public progress start_progress_delay(Object title, Object total, int delay, int sparse) {
-		progress progress = ModernizedCProgram.xmalloc();
+		progress progress = ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/);
 		progress.setTitle(title);
 		progress.setTotal(total);
 		progress.setLast_value(-1);
@@ -186,7 +207,7 @@ public class progress {
 	public void stop_progress_msg(Object msg) {
 		progress progress = p_progress;
 		if (!progress) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		p_progress = ((Object)0);
 		Object generatedLast_value = progress.getLast_value();
@@ -218,27 +239,6 @@ public class progress {
 		} 
 		ModernizedCProgram.free(generatedThroughput);
 		ModernizedCProgram.free(progress);
-	}
-	public progress get_progress(unpack_trees_options o) {
-		int cnt = 0;
-		int total = 0;
-		index_state generatedResult = o.getResult();
-		index_state index = generatedResult;
-		int generatedUpdate = o.getUpdate();
-		int generatedVerbose_update = o.getVerbose_update();
-		if (!generatedUpdate || !generatedVerbose_update) {
-			return ((Object)0);
-		} 
-		int generatedCache_nr = index.getCache_nr();
-		cache_entry generatedCache = index.getCache();
-		for (; cnt < generatedCache_nr; cnt++) {
-			cache_entry ce = generatedCache[cnt];
-			if (ce.getCe_flags() & ((1 << 16) | (1 << 22))) {
-				total++;
-			} 
-		}
-		progress progress = new progress();
-		return progress.start_delayed_progress(ModernizedCProgram._("Updating files"), total);
 	}
 	public Object getTitle() {
 		return title;

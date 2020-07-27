@@ -4,10 +4,10 @@ public class dir_iterator_int {
 	private dir_iterator base;
 	private Object levels_nr;
 	private Object levels_alloc;
-	private dir_iterator_level levels;
+	private dir_iterator_level[] levels;
 	private int flags;
 	
-	public dir_iterator_int(dir_iterator base, Object levels_nr, Object levels_alloc, dir_iterator_level levels, int flags) {
+	public dir_iterator_int(dir_iterator base, Object levels_nr, Object levels_alloc, dir_iterator_level[] levels, int flags) {
 		setBase(base);
 		setLevels_nr(levels_nr);
 		setLevels_alloc(levels_alloc);
@@ -21,7 +21,7 @@ public class dir_iterator_int {
 		dir_iterator_level level = new dir_iterator_level();
 		Object generatedLevels_nr = this.getLevels_nr();
 		Object generatedLevels_alloc = this.getLevels_alloc();
-		dir_iterator_level generatedLevels = this.getLevels();
+		dir_iterator_level[] generatedLevels = this.getLevels();
 		do {
 			if ((generatedLevels_nr + 1) > generatedLevels_alloc) {
 				if ((((generatedLevels_alloc) + 16) * 3 / 2) < (generatedLevels_nr + 1)) {
@@ -29,13 +29,13 @@ public class dir_iterator_int {
 				} else {
 						this.setLevels_alloc((((generatedLevels_alloc) + 16) * 3 / 2));
 				} 
-				(generatedLevels) = ModernizedCProgram.xrealloc((generatedLevels), ModernizedCProgram.st_mult(, (generatedLevels_alloc)));
+				(generatedLevels) = ModernizedCProgram.xrealloc((generatedLevels), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (generatedLevels_alloc)));
 			} 
 		} while (0);
 		level = generatedLevels[generatedLevels_nr++];
 		dir_iterator generatedBase = this.getBase();
 		strbuf generatedPath = generatedBase.getPath();
-		byte generatedBuf = generatedPath.getBuf();
+		byte[] generatedBuf = generatedPath.getBuf();
 		Object generatedLen = generatedPath.getLen();
 		if (!ModernizedCProgram.git_is_dir_sep(generatedBuf[generatedLen - 1])) {
 			generatedPath.strbuf_addch((byte)'/');
@@ -44,12 +44,12 @@ public class dir_iterator_int {
 		level.setDir(ModernizedCProgram.opendir(generatedBuf));
 		 generatedDir = level.getDir();
 		if (!generatedDir) {
-			int saved_errno = (._errno());
-			if ((._errno()) != 2) {
+			int saved_errno = (/*Error: Function owner not recognized*/_errno());
+			if ((/*Error: Function owner not recognized*/_errno()) != 2) {
 				ModernizedCProgram.warning_errno("error opening directory '%s'", generatedBuf);
 			} 
 			generatedLevels_nr--;
-			(._errno()) = saved_errno;
+			(/*Error: Function owner not recognized*/_errno()) = saved_errno;
 			return -1;
 		} 
 		return 0/*
@@ -58,13 +58,13 @@ public class dir_iterator_int {
 		 */;
 	}
 	public int pop_level() {
-		dir_iterator_level generatedLevels = this.getLevels();
+		dir_iterator_level[] generatedLevels = this.getLevels();
 		Object generatedLevels_nr = this.getLevels_nr();
 		dir_iterator_level level = generatedLevels[generatedLevels_nr - 1];
 		 generatedDir = level.getDir();
 		dir_iterator generatedBase = this.getBase();
 		strbuf generatedPath = generatedBase.getPath();
-		byte generatedBuf = generatedPath.getBuf();
+		byte[] generatedBuf = generatedPath.getBuf();
 		if (generatedDir && generatedDir.closedir()) {
 			ModernizedCProgram.warning_errno("error closing directory '%s'", generatedBuf);
 		} 
@@ -89,10 +89,10 @@ public class dir_iterator_int {
 	public void setLevels_alloc(Object newLevels_alloc) {
 		levels_alloc = newLevels_alloc;
 	}
-	public dir_iterator_level getLevels() {
+	public dir_iterator_level[] getLevels() {
 		return levels;
 	}
-	public void setLevels(dir_iterator_level newLevels) {
+	public void setLevels(dir_iterator_level[] newLevels) {
 		levels = newLevels;
 	}
 	public int getFlags() {

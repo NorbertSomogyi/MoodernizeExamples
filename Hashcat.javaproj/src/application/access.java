@@ -6,9 +6,9 @@ package application;
 public class access {
 	private int have;
 	private int size;
-	private point list;
+	private point[] list;
 	
-	public access(int have, int size, point list) {
+	public access(int have, int size, point[] list) {
 		setHave(have);
 		setSize(size);
 		setList(list);
@@ -18,32 +18,32 @@ public class access {
 	
 	/* Deallocate an index built by build_index() */
 	public void free_index() {
-		point generatedList = this.getList();
+		point[] generatedList = this.getList();
 		if (index != ((Object)0)) {
-			.free(generatedList);
-			.free(index);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedList);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(index);
 		} 
 	}
 	public access addpoint(int bits, Object in, Object out, int left, Byte window) {
 		point next = new point();
-		point generatedList = this.getList();
+		point[] generatedList = this.getList();
 		int generatedHave = this.getHave();
 		int generatedSize = this.getSize();
 		if (index == ((Object)/* if list is empty, create it (start with eight points) */0)) {
-			index = .malloc();
+			index = /*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
 			if (index == ((Object)0)) {
 				return ((Object)0);
 			} 
-			this.setList(.malloc( << 3));
+			this.setList(/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/ << 3));
 			if (generatedList == ((Object)0)) {
-				.free(index);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(index);
 				return ((Object)0);
 			} 
 			this.setSize(8);
 			this.setHave(0);
 		}  else if (generatedHave == generatedSize) {
 			generatedSize <<=  1;
-			next = .realloc(generatedList,  * generatedSize);
+			next = /*Error: Function owner not recognized*/realloc(generatedList, /*Error: Unsupported expression*/ * generatedSize);
 			if (next == ((Object)0)) {
 				index.free_index();
 				return ((Object)0);
@@ -56,10 +56,10 @@ public class access {
 		next.setOut(out);
 		Object generatedWindow = next.getWindow();
 		if (left) {
-			.memcpy(generatedWindow, window + -1024 - left, left);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedWindow, window + -1024 - left, left);
 		} 
 		if (left < -1024) {
-			.memcpy(generatedWindow + left, window, -1024 - left);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedWindow + left, window, -1024 - left);
 		} 
 		generatedHave++;
 		return /* return list, possibly reallocated */index/* Make one entire pass through the compressed stream and build an index, with
@@ -83,10 +83,10 @@ public class access {
 	public void setSize(int newSize) {
 		size = newSize;
 	}
-	public point getList() {
+	public point[] getList() {
 		return list;
 	}
-	public void setList(point newList) {
+	public void setList(point[] newList) {
 		list = newList;
 	}
 }

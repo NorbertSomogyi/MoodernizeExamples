@@ -98,24 +98,24 @@ public class apply_state {
 			ModernizedCProgram.state.setWs_error_action(apply_ws_error_action.warn_on_ws_error);
 			return 0;
 		} 
-		if (!.strcmp(option, "warn")) {
+		if (!/*Error: Function owner not recognized*/strcmp(option, "warn")) {
 			ModernizedCProgram.state.setWs_error_action(apply_ws_error_action.warn_on_ws_error);
 			return 0;
 		} 
-		if (!.strcmp(option, "nowarn")) {
+		if (!/*Error: Function owner not recognized*/strcmp(option, "nowarn")) {
 			ModernizedCProgram.state.setWs_error_action(apply_ws_error_action.nowarn_ws_error);
 			return 0;
 		} 
-		if (!.strcmp(option, "error")) {
+		if (!/*Error: Function owner not recognized*/strcmp(option, "error")) {
 			ModernizedCProgram.state.setWs_error_action(apply_ws_error_action.die_on_ws_error);
 			return 0;
 		} 
-		if (!.strcmp(option, "error-all")) {
+		if (!/*Error: Function owner not recognized*/strcmp(option, "error-all")) {
 			ModernizedCProgram.state.setWs_error_action(apply_ws_error_action.die_on_ws_error);
 			ModernizedCProgram.state.setSquelch_whitespace_errors(0);
 			return 0;
 		} 
-		if (!.strcmp(option, "strip") || !.strcmp(option, "fix")) {
+		if (!/*Error: Function owner not recognized*/strcmp(option, "strip") || !/*Error: Function owner not recognized*/strcmp(option, "fix")) {
 			ModernizedCProgram.state.setWs_error_action(apply_ws_error_action.correct_ws_error);
 			return 0/*
 				 * Please update $__git_whitespacelist in git-completion.bash
@@ -125,11 +125,11 @@ public class apply_state {
 		return ();
 	}
 	public int parse_ignorewhitespace_option(Object option) {
-		if (!option || !.strcmp(option, "no") || !.strcmp(option, "false") || !.strcmp(option, "never") || !.strcmp(option, "none")) {
+		if (!option || !/*Error: Function owner not recognized*/strcmp(option, "no") || !/*Error: Function owner not recognized*/strcmp(option, "false") || !/*Error: Function owner not recognized*/strcmp(option, "never") || !/*Error: Function owner not recognized*/strcmp(option, "none")) {
 			ModernizedCProgram.state.setWs_ignore_action(apply_ws_ignore.ignore_ws_none);
 			return 0;
 		} 
-		if (!.strcmp(option, "change")) {
+		if (!/*Error: Function owner not recognized*/strcmp(option, "change")) {
 			ModernizedCProgram.state.setWs_ignore_action(apply_ws_ignore.ignore_ws_change);
 			return 0;
 		} 
@@ -179,8 +179,8 @@ public class apply_state {
 			ModernizedCProgram.state.setUnsafe_paths(0);
 		} 
 		if (ModernizedCProgram.state.getApply_verbosity() <= apply_verbosity.verbosity_silent) {
-			ModernizedCProgram.state.setSaved_error_routine(.get_error_routine());
-			ModernizedCProgram.state.setSaved_warn_routine(.get_warn_routine());
+			ModernizedCProgram.state.setSaved_error_routine(/*Error: Function owner not recognized*/get_error_routine());
+			ModernizedCProgram.state.setSaved_warn_routine(/*Error: Function owner not recognized*/get_warn_routine());
 			ModernizedCProgram.set_error_routine(mute_routine);
 			ModernizedCProgram.set_warn_routine(mute_routine);
 		} 
@@ -208,7 +208,7 @@ public class apply_state {
 		if (!name) {
 			return -1;
 		} 
-		cp = .strchr(name, (byte)'/');
+		cp = /*Error: Function owner not recognized*/strchr(name, (byte)'/');
 		if (!cp) {
 			val = 0;
 		}  else if (ModernizedCProgram.state.getPrefix()) {
@@ -231,15 +231,15 @@ public class apply_state {
 	public void record_ws_error(int result, Object line, int len, int linenr) {
 		byte err;
 		if (!result) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.state.getWhitespace_error()++;
 		if (ModernizedCProgram.state.getSquelch_whitespace_errors() && ModernizedCProgram.state.getSquelch_whitespace_errors() < ModernizedCProgram.state.getWhitespace_error()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		err = ModernizedCProgram.whitespace_error_string(result);
 		if (ModernizedCProgram.state.getApply_verbosity() > apply_verbosity.verbosity_silent) {
-			.fprintf((_iob[2]), "%s:%d: %s.\n%.*s\n", ModernizedCProgram.state.getPatch_input_file(), linenr, err, len, line);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "%s:%d: %s.\n%.*s\n", ModernizedCProgram.state.getPatch_input_file(), linenr, err, len, line);
 		} 
 		ModernizedCProgram.free(err);
 	}
@@ -247,29 +247,30 @@ public class apply_state {
 		int result = ModernizedCProgram.ws_check(line + 1, len - 1, ws_rule);
 		ModernizedCProgram.state.record_ws_error(result, line + 1, len - 2, ModernizedCProgram.state.getLinenr());
 	}
-	public void prefix_one(byte name) {
+	public void prefix_one(Byte name) {
 		byte old_name = name;
 		if (!old_name) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		name = ModernizedCProgram.prefix_filename(ModernizedCProgram.state.getPrefix(), name);
 		ModernizedCProgram.free(old_name);
 	}
 	public void add_name_limit(Object name, int exclude) {
 		string_list_item it = new string_list_item();
-		it = ModernizedCProgram.state.getLimit_by_name().string_list_append(name);
+		string_list_item string_list_item = new string_list_item();
+		it = string_list_item.string_list_append(ModernizedCProgram.state.getLimit_by_name(), name);
 		it.setUtil(exclude ? ((Object)0) : (Object)1);
 	}
 	public int check_to_create(Object new_name, int ok_if_exists) {
 		stat nst = new stat();
-		if (ModernizedCProgram.state.getCheck_index() && ModernizedCProgram.index_name_pos(ModernizedCProgram.state.getRepo().getIndex(), new_name, .strlen(new_name)) >= 0 && !ok_if_exists) {
+		if (ModernizedCProgram.state.getCheck_index() && ModernizedCProgram.index_name_pos(ModernizedCProgram.state.getRepo().getIndex(), new_name, /*Error: Function owner not recognized*/strlen(new_name)) >= 0 && !ok_if_exists) {
 			return 1;
 		} 
 		if (ModernizedCProgram.state.getCached()) {
 			return 0;
 		} 
 		Object generatedSt_mode = nst.getSt_mode();
-		if (!.lstat(new_name, nst)) {
+		if (!/*Error: Function owner not recognized*/lstat(new_name, nst)) {
 			if ((((generatedSt_mode) & -1024) == -1024) || ok_if_exists) {
 				return 0/*
 						 * A leading component of new_name might be a symlink
@@ -279,11 +280,11 @@ public class apply_state {
 						 * far as git is concerned.
 						 */;
 			} 
-			if (ModernizedCProgram.has_symlink_leading_path(new_name, .strlen(new_name))) {
+			if (ModernizedCProgram.has_symlink_leading_path(new_name, /*Error: Function owner not recognized*/strlen(new_name))) {
 				return 0;
 			} 
 			return 2;
-		}  else if (!ModernizedCProgram.is_missing_file_error((._errno()))) {
+		}  else if (!ModernizedCProgram.is_missing_file_error((/*Error: Function owner not recognized*/_errno()))) {
 			return ();
 		} 
 		return 0;
@@ -313,8 +314,8 @@ public class apply_state {
 	}
 	public int path_is_beyond_symlink(Object name_) {
 		int ret;
-		strbuf name = new strbuf(, , );
-		((name_ != (byte)'\0') ? (Object)0 : ._assert("*name_ != '\\0'", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\apply.c", 3846));
+		strbuf name = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		((name_ != (byte)'\0') ? (Object)0 : /*Error: Function owner not recognized*/_assert("*name_ != '\\0'", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\apply.c", 3846));
 		name.strbuf_addstr(name_);
 		ret = ModernizedCProgram.path_is_beyond_symlink_1(ModernizedCProgram.state, name);
 		name.strbuf_release();
@@ -330,11 +331,11 @@ public class apply_state {
 	public int add_index_file(Object path, int mode, Object buf, long size) {
 		stat st = new stat();
 		cache_entry ce = new cache_entry();
-		int namelen = .strlen(path);
+		int namelen = /*Error: Function owner not recognized*/strlen(path);
 		cache_entry cache_entry = new cache_entry();
 		ce = cache_entry.make_empty_cache_entry(ModernizedCProgram.state.getRepo().getIndex(), namelen);
 		Object generatedName = ce.getName();
-		.memcpy(generatedName, path, namelen);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedName, path, namelen);
 		ce.setCe_mode(ModernizedCProgram.create_ce_mode(mode));
 		ce.setCe_flags(ModernizedCProgram.create_ce_flags(0));
 		ce.setCe_namelen(namelen);
@@ -351,7 +352,7 @@ public class apply_state {
 			} 
 		} else {
 				if (!ModernizedCProgram.state.getCached()) {
-					if (.lstat(path, st) < 0) {
+					if (/*Error: Function owner not recognized*/lstat(path, st) < 0) {
 						ce.discard_cache_entry();
 						return ();
 					} 
@@ -376,26 +377,26 @@ public class apply_state {
 	public int try_create_file(Object path, int mode, Object buf, long size) {
 		int fd;
 		int res;
-		strbuf nbuf = new strbuf(, , );
+		strbuf nbuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		Object generatedSt_mode = st.getSt_mode();
 		if ((((mode) & -1024) == 160000)) {
 			stat st = new stat();
-			if (!.lstat(path, st) && (((generatedSt_mode) & -1024) == -1024)) {
+			if (!/*Error: Function owner not recognized*/lstat(path, st) && (((generatedSt_mode) & -1024) == -1024)) {
 				return 0;
 			} 
-			return !!.mkdir(path, 777);
+			return !!/*Error: Function owner not recognized*/mkdir(path, 777);
 		} 
-		if (ModernizedCProgram.has_symlinks && .S_ISLNK(mode/* Although buf:size is counted string, it also is NUL
+		if (ModernizedCProgram.has_symlinks && /*Error: Function owner not recognized*/S_ISLNK(mode/* Although buf:size is counted string, it also is NUL
 				 * terminated.
 				 */)) {
 			return !!ModernizedCProgram.symlink(buf, path);
 		} 
-		fd = .open(path, -1024 | -1024 | 1, (mode & 100) ? 777 : 666);
+		fd = /*Error: Function owner not recognized*/open(path, -1024 | -1024 | 1, (mode & 100) ? 777 : 666);
 		if (fd < 0) {
 			return 1;
 		} 
 		Object generatedLen = nbuf.getLen();
-		byte generatedBuf = nbuf.getBuf();
+		byte[] generatedBuf = nbuf.getBuf();
 		if (nbuf.convert_to_working_tree(ModernizedCProgram.state.getRepo().getIndex(), path, buf, size)) {
 			size = generatedLen;
 			buf = generatedBuf;
@@ -405,7 +406,7 @@ public class apply_state {
 			();
 		} 
 		nbuf.strbuf_release();
-		if (.close(fd) < 0 && !res) {
+		if (/*Error: Function owner not recognized*/close(fd) < 0 && !res) {
 			return ();
 		} 
 		return res ? -1 : 0/*
@@ -430,7 +431,7 @@ public class apply_state {
 		if (!res) {
 			return 0;
 		} 
-		if ((._errno()) == 2) {
+		if ((/*Error: Function owner not recognized*/_errno()) == 2) {
 			if (ModernizedCProgram.safe_create_leading_directories(path)) {
 				return 0;
 			} 
@@ -443,31 +444,31 @@ public class apply_state {
 			} 
 		} 
 		Object generatedSt_mode = st.getSt_mode();
-		if ((._errno()) == 17 || (._errno()) == 13/* We may be trying to create a file where a directory
+		if ((/*Error: Function owner not recognized*/_errno()) == 17 || (/*Error: Function owner not recognized*/_errno()) == 13/* We may be trying to create a file where a directory
 				 * used to be.
 				 */) {
 			stat st = new stat();
-			if (!.lstat(path, st) && (!(((generatedSt_mode) & -1024) == -1024) || !.rmdir(path))) {
-				(._errno()) = 17;
+			if (!/*Error: Function owner not recognized*/lstat(path, st) && (!(((generatedSt_mode) & -1024) == -1024) || !/*Error: Function owner not recognized*/rmdir(path))) {
+				(/*Error: Function owner not recognized*/_errno()) = 17;
 			} 
 		} 
-		if ((._errno()) == 17) {
-			int nr = .getpid();
-			for (; ; ) {
+		if ((/*Error: Function owner not recognized*/_errno()) == 17) {
+			int nr = /*Error: Function owner not recognized*/getpid();
+			for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 				byte[] newpath = new byte[260];
-				ModernizedCProgram.mksnpath(newpath, , "%s~%u", path, nr);
+				ModernizedCProgram.mksnpath(newpath, /*Error: sizeof expression not supported yet*/, "%s~%u", path, nr);
 				res = ModernizedCProgram.state.try_create_file(newpath, mode, buf, size);
 				if (res < 0) {
 					return -1;
 				} 
 				if (!res) {
-					if (!.rename(newpath, path)) {
+					if (!/*Error: Function owner not recognized*/rename(newpath, path)) {
 						return 0;
 					} 
 					ModernizedCProgram.unlink_or_warn(newpath);
 					break;
 				} 
-				if ((._errno()) != 17) {
+				if ((/*Error: Function owner not recognized*/_errno()) != 17) {
 					break;
 				} 
 				++nr;
@@ -477,7 +478,7 @@ public class apply_state {
 	}
 	public int apply_patch(int fd, Object filename, int options) {
 		size_t offset = new size_t();
-		strbuf buf = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		patch list = ((Object)0);
 		patch listp = ModernizedCProgram.list;
 		int skipped_patch = 0;
@@ -489,14 +490,14 @@ public class apply_state {
 		} 
 		offset = 0;
 		Object generatedLen = buf.getLen();
-		byte generatedBuf = buf.getBuf();
+		byte[] generatedBuf = buf.getBuf();
 		patch generatedNext = patch.getNext();
 		Byte generatedNew_name = patch.getNew_name();
 		Byte generatedOld_name = patch.getOld_name();
 		while (offset < generatedLen) {
 			patch patch = new patch();
 			int nr;
-			patch = ModernizedCProgram.xcalloc(1, );
+			patch = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 			patch.setInaccurate_eof(!!(options & (1 << 0)));
 			patch.setRecount(!!(options & (1 << 1)));
 			nr = ModernizedCProgram.parse_chunk(ModernizedCProgram.state, generatedBuf + offset, generatedLen - offset, patch);
@@ -590,7 +591,7 @@ public class apply_state {
 		ModernizedCProgram.state.getFn_table().string_list_clear(0);
 		return res;
 	}
-	public int apply_all_patches(int argc, Object argv, int options) {
+	public int apply_all_patches(int argc, Object[][] argv, int options) {
 		int i;
 		int res;
 		int errs = 0;
@@ -599,7 +600,7 @@ public class apply_state {
 			byte arg = argv[i];
 			byte to_free = ((Object)0);
 			int fd;
-			if (!.strcmp(arg, "-")) {
+			if (!/*Error: Function owner not recognized*/strcmp(arg, "-")) {
 				res = ModernizedCProgram.state.apply_patch(0, "<stdin>", options);
 				if (res < 0) {
 					;
@@ -610,7 +611,7 @@ public class apply_state {
 			} else {
 					arg = to_free = ModernizedCProgram.prefix_filename(ModernizedCProgram.state.getPrefix(), arg);
 			} 
-			fd = .open(arg, 0);
+			fd = /*Error: Function owner not recognized*/open(arg, 0);
 			if (fd < 0) {
 				();
 				res = -128;
@@ -620,7 +621,7 @@ public class apply_state {
 			read_stdin = 0;
 			ModernizedCProgram.state.set_default_whitespace_mode();
 			res = ModernizedCProgram.state.apply_patch(fd, arg, options);
-			.close(fd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
 			ModernizedCProgram.free(to_free);
 			if (res < 0) {
 				;

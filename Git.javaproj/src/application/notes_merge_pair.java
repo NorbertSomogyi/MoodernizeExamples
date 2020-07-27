@@ -15,7 +15,7 @@ public class notes_merge_pair {
 	public notes_merge_pair() {
 	}
 	
-	public notes_merge_pair find_notes_merge_pair_pos(int len, object_id obj, int insert_new, int occupied) {
+	public notes_merge_pair find_notes_merge_pair_pos(int len, object_id obj, int insert_new, Integer occupied) {
 		int last_index;
 		int i = last_index < len ? last_index : len - 1;
 		int prev_cmp = 0;
@@ -44,14 +44,14 @@ public class notes_merge_pair {
 		} else {
 				occupied = 0;
 				if (insert_new && i < len) {
-					ModernizedCProgram.move_array((ModernizedCProgram.list + i + 1), (ModernizedCProgram.list + i), (len - i),  + ( - 1));
-					.memset(ModernizedCProgram.list + i, 0, );
+					ModernizedCProgram.move_array((ModernizedCProgram.list + i + 1), (ModernizedCProgram.list + i), (len - i), /*Error: sizeof expression not supported yet*/ + (/*Error: Unsupported expression*/ - 1));
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.list + i, 0, /*Error: Unsupported expression*/);
 				} 
 		} 
 		last_index = i;
 		return ModernizedCProgram.list + i;
 	}
-	public notes_merge_pair diff_tree_remote(notes_merge_options o, Object base, Object remote, int num_changes) {
+	public notes_merge_pair diff_tree_remote(notes_merge_options o, Object base, Object remote, Integer num_changes) {
 		diff_options opt = new diff_options();
 		notes_merge_pair changes = new notes_merge_pair();
 		int i;
@@ -62,16 +62,16 @@ public class notes_merge_pair {
 			} 
 		} while (0);
 		repository generatedRepo = o.getRepo();
-		.repo_diff_setup(generatedRepo, opt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/repo_diff_setup(generatedRepo, opt);
 		diff_flags generatedFlags = opt.getFlags();
 		generatedFlags.setRecursive(1);
 		opt.setOutput_format(-1024);
-		.diff_setup_done(opt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_setup_done(opt);
 		opt.diff_tree_oid(base, remote, "");
-		.diffcore_std(opt);
-		changes = ModernizedCProgram.xcalloc(ModernizedCProgram.diff_queued_diff.getNr(), );
-		diff_filespec generatedOne = p.getOne();
-		Byte generatedPath = generatedOne.getPath();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diffcore_std(opt);
+		changes = ModernizedCProgram.xcalloc(ModernizedCProgram.diff_queued_diff.getNr(), /*Error: Unsupported expression*/);
+		diff_filespec[] generatedOne = p.getOne();
+		byte[] generatedPath = generatedOne.getPath();
 		byte generatedStatus = p.getStatus();
 		object_id generatedOid = generatedOne.getOid();
 		object_id generatedObj = mp.getObj();
@@ -93,15 +93,15 @@ public class notes_merge_pair {
 			} 
 			mp = changes.find_notes_merge_pair_pos(len, obj, 1, occupied);
 			if (occupied) {
-				((ModernizedCProgram.oideq(generatedObj, obj)) ? (Object)0 : ._assert("oideq(&mp->obj, &obj)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\notes-merge.c", /* We've found an addition/deletion pair */157));
+				((ModernizedCProgram.oideq(generatedObj, obj)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("oideq(&mp->obj, &obj)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\notes-merge.c", /* We've found an addition/deletion pair */157));
 				if (ModernizedCProgram.is_null_oid(generatedOid)) {
-					((ModernizedCProgram.is_null_oid(generatedRemote)) ? (Object)0 : ._assert("is_null_oid(&mp->remote)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\notes-merge.c", 159));
+					((ModernizedCProgram.is_null_oid(generatedRemote)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("is_null_oid(&mp->remote)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\notes-merge.c", 159));
 					generatedRemote.oidcpy(generatedOid);
 				}  else if (ModernizedCProgram.is_null_oid(generatedOid)) {
-					((ModernizedCProgram.is_null_oid(generatedBase)) ? (Object)0 : ._assert("is_null_oid(&mp->base)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\notes-merge.c", 162));
+					((ModernizedCProgram.is_null_oid(generatedBase)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("is_null_oid(&mp->base)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\notes-merge.c", 162));
 					generatedBase.oidcpy(generatedOid);
 				} else {
-						((!"Invalid existing change recorded") ? (Object)0 : ._assert("!\"Invalid existing change recorded\"", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\notes-merge.c", 165));
+						((!"Invalid existing change recorded") ? (Object)0 : /*Error: Function owner not recognized*/_assert("!\"Invalid existing change recorded\"", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\notes-merge.c", 165));
 				} 
 			} else {
 					generatedObj.oidcpy(obj);
@@ -116,7 +116,7 @@ public class notes_merge_pair {
 				} 
 			} while (0);
 		}
-		.diff_flush(opt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/diff_flush(opt);
 		pathspec generatedPathspec = opt.getPathspec();
 		generatedPathspec.clear_pathspec();
 		num_changes = len;

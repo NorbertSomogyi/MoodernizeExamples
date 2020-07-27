@@ -35,24 +35,24 @@ public class callback_data {
 	}
 	
 	public long file_is_coming(Object finfo, int remains) {
-		.printf("%3d %40s %10luB ", remains, finfo.getFilename(), (long)finfo.getSize());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%3d %40s %10luB ", remains, finfo.getFilename(), (long)finfo.getSize());
 		switch (finfo.getFiletype()) {
 		case CURLFILETYPE_FILE:
-				.printf("FILE ");
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("FILE ");
 				break;
 		case CURLFILETYPE_DIRECTORY:
-				.printf(" DIR\n");
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(" DIR\n");
 				break;
 		default:
-				.printf("OTHER\n");
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("OTHER\n");
 				break;
 		}
 		if (finfo.getFiletype() == CURLFILETYPE_FILE) {
 			if (finfo.getSize() > /* do not transfer files >= 50B */50) {
-				.printf("SKIPPED\n");
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("SKIPPED\n");
 				return CURL_CHUNK_BGN_FUNC_SKIP;
 			} 
-			ModernizedCProgram.data.setOutput(.fopen(finfo.getFilename(), "wb"));
+			ModernizedCProgram.data.setOutput(/*Error: Function owner not recognized*/fopen(finfo.getFilename(), "wb"));
 			if (!ModernizedCProgram.data.getOutput()) {
 				return CURL_CHUNK_BGN_FUNC_FAIL;
 			} 
@@ -61,8 +61,8 @@ public class callback_data {
 	}
 	public long file_is_downloaded() {
 		if (ModernizedCProgram.data.getOutput()) {
-			.printf("DOWNLOADED\n");
-			.fclose(ModernizedCProgram.data.getOutput());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("DOWNLOADED\n");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(ModernizedCProgram.data.getOutput());
 			ModernizedCProgram.data.setOutput(-1024);
 		} 
 		return CURL_CHUNK_END_FUNC_OK;

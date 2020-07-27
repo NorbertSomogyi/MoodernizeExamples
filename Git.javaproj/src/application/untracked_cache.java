@@ -53,7 +53,7 @@ public class untracked_cache {
 		ssize_t len = new ssize_t();
 		byte exclude_per_dir;
 		int hashsz = ModernizedCProgram.the_repository.getHash_algo().getRawsz();
-		int offset = ;
+		int offset = /*Error: Unsupported expression*/;
 		int exclude_per_dir_offset = offset + 2 * hashsz;
 		if (sz <= 1 || end[-1] != (byte)'\0') {
 			return ((Object)0);
@@ -68,7 +68,7 @@ public class untracked_cache {
 		if (next + exclude_per_dir_offset + 1 > end) {
 			return ((Object)0);
 		} 
-		uc = ModernizedCProgram.xcalloc(1, );
+		uc = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		strbuf generatedIdent = uc.getIdent();
 		generatedIdent.strbuf_init(ident_len);
 		generatedIdent.strbuf_add(ident, ident_len);
@@ -76,10 +76,10 @@ public class untracked_cache {
 		generatedSs_info_exclude.load_oid_stat(next + ((size_t)((ondisk_untracked_cache)0).getInfo_exclude_stat()), next + offset);
 		oid_stat generatedSs_excludes_file = uc.getSs_excludes_file();
 		generatedSs_excludes_file.load_oid_stat(next + ((size_t)((ondisk_untracked_cache)0).getExcludes_file_stat()), next + offset + hashsz);
-		uc.setDir_flags(.get_be32(next + ((size_t)((ondisk_untracked_cache)0).getDir_flags())));
+		uc.setDir_flags(/*Error: Function owner not recognized*/get_be32(next + ((size_t)((ondisk_untracked_cache)0).getDir_flags())));
 		exclude_per_dir = (byte)next + exclude_per_dir_offset;
 		uc.setExclude_per_dir(ModernizedCProgram.xstrdup(exclude_per_dir));
-		next += exclude_per_dir_offset + .strlen(exclude_per_dir) + /* NUL after exclude_per_dir is covered by sizeof(*ouc) */1;
+		next += exclude_per_dir_offset + /*Error: Function owner not recognized*/strlen(exclude_per_dir) + /* NUL after exclude_per_dir is covered by sizeof(*ouc) */1;
 		if (next >= end) {
 			;
 		} 
@@ -94,8 +94,8 @@ public class untracked_cache {
 		rd.setData(next);
 		rd.setEnd(end);
 		rd.setIndex(0);
-		untracked_cache_dir generatedUcd = rd.getUcd();
-		(generatedUcd) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(, (len)));
+		untracked_cache_dir[][] generatedUcd = rd.getUcd();
+		(generatedUcd) = ModernizedCProgram.xmalloc(ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (len)));
 		untracked_cache_dir generatedRoot = uc.getRoot();
 		int generatedIndex = rd.getIndex();
 		if (ModernizedCProgram.read_one_dir(generatedRoot, rd) || generatedIndex != len) {

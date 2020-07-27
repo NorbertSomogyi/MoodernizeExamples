@@ -26,12 +26,12 @@ public class RTMP {
 	private Object m_bSendChunkSizeInfo;
 	private int m_numInvokes;
 	private int m_numCalls;
-	private RTMP_METHOD m_methodCalls;
+	private RTMP_METHOD[] m_methodCalls;
 	private int m_channelsAllocatedIn;
 	private int m_channelsAllocatedOut;
-	private RTMPPacket m_vecChannelsIn;
-	private RTMPPacket m_vecChannelsOut;
-	private Integer m_channelTimestamp;
+	private RTMPPacket[][] m_vecChannelsIn;
+	private RTMPPacket[][] m_vecChannelsOut;
+	private int[] m_channelTimestamp;
 	private double m_fAudioCodecs;
 	private double m_fVideoCodecs;
 	private double m_fEncoding;
@@ -48,7 +48,7 @@ public class RTMP {
 	private int connect_time_ms;
 	private int last_error_code;
 	
-	public RTMP(int m_inChunkSize, int m_outChunkSize, int m_nBWCheckCounter, int m_nBytesIn, int m_nBytesInSent, int m_nBufferMS, int m_stream_id, int m_mediaChannel, Object m_mediaStamp, Object m_pauseStamp, int m_pausing, int m_nServerBW, int m_nClientBW, Object m_nClientBW2, Object m_bPlaying, Object m_bSendEncoding, Object m_bSendCounter, Object m_bUseNagle, Object m_bCustomSend, Object m_customSendParam, Object m_customSendFunc, RTMP_BINDINFO m_bindIP, Object m_bSendChunkSizeInfo, int m_numInvokes, int m_numCalls, RTMP_METHOD m_methodCalls, int m_channelsAllocatedIn, int m_channelsAllocatedOut, RTMPPacket m_vecChannelsIn, RTMPPacket m_vecChannelsOut, Integer m_channelTimestamp, double m_fAudioCodecs, double m_fVideoCodecs, double m_fEncoding, double m_fDuration, int m_msgCounter, int m_polling, int m_resplen, int m_unackd, AVal m_clientID, RTMP_READ m_read, RTMPPacket m_write, RTMPSockBuf m_sb, RTMP_LNK Link, int connect_time_ms, int last_error_code) {
+	public RTMP(int m_inChunkSize, int m_outChunkSize, int m_nBWCheckCounter, int m_nBytesIn, int m_nBytesInSent, int m_nBufferMS, int m_stream_id, int m_mediaChannel, Object m_mediaStamp, Object m_pauseStamp, int m_pausing, int m_nServerBW, int m_nClientBW, Object m_nClientBW2, Object m_bPlaying, Object m_bSendEncoding, Object m_bSendCounter, Object m_bUseNagle, Object m_bCustomSend, Object m_customSendParam, Object m_customSendFunc, RTMP_BINDINFO m_bindIP, Object m_bSendChunkSizeInfo, int m_numInvokes, int m_numCalls, RTMP_METHOD[] m_methodCalls, int m_channelsAllocatedIn, int m_channelsAllocatedOut, RTMPPacket[][] m_vecChannelsIn, RTMPPacket[][] m_vecChannelsOut, int[] m_channelTimestamp, double m_fAudioCodecs, double m_fVideoCodecs, double m_fEncoding, double m_fDuration, int m_msgCounter, int m_polling, int m_resplen, int m_unackd, AVal m_clientID, RTMP_READ m_read, RTMPPacket m_write, RTMPSockBuf m_sb, RTMP_LNK Link, int connect_time_ms, int last_error_code) {
 		setM_inChunkSize(m_inChunkSize);
 		setM_outChunkSize(m_outChunkSize);
 		setM_nBWCheckCounter(m_nBWCheckCounter);
@@ -100,16 +100,16 @@ public class RTMP {
 	}
 	
 	public RTMP RTMP_Alloc() {
-		return .calloc(1, );
+		return /*Error: Function owner not recognized*/calloc(1, /*Error: Unsupported expression*/);
 	}
 	public void RTMP_Free() {
-		.free(r);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(r);
 	}
 	public void RTMP_Init() {
 		if (!ModernizedCProgram.RTMP_TLS_ctx) {
 			ModernizedCProgram.RTMP_TLS_Init();
 		} 
-		.memset(r, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(r, 0, /*Error: Unsupported expression*/);
 		RTMPSockBuf generatedM_sb = this.getM_sb();
 		generatedM_sb.setSb_socket(-1);
 		this.setM_inChunkSize(128);
@@ -163,7 +163,7 @@ public class RTMP {
 		int ret;
 		int len;
 		int port = 0;
-		len = (int).strlen(url);
+		len = (int)/*Error: Function owner not recognized*/strlen(url);
 		RTMP_LNK generatedLink = this.getLink();
 		int generatedProtocol = generatedLink.getProtocol();
 		AVal generatedHostname = generatedLink.getHostname();
@@ -175,7 +175,7 @@ public class RTMP {
 		generatedLink.setPort(port);
 		AVal generatedTcUrl = generatedLink.getTcUrl();
 		int generatedAv_len = generatedTcUrl.getAv_len();
-		Byte generatedAv_val = generatedApp.getAv_val();
+		byte[] generatedAv_val = generatedApp.getAv_val();
 		int generatedPort = generatedLink.getPort();
 		int generatedLFlags = generatedLink.getLFlags();
 		if (!generatedAv_len) {
@@ -184,13 +184,13 @@ public class RTMP {
 				if (generatedAv_val < url + len) {
 					generatedTcUrl.setAv_len(generatedAv_len + (generatedAv_val - /* if app is part of original url, just use it */url));
 				} else {
-						len = generatedAv_len + generatedAv_len + ;
-						generatedTcUrl.setAv_val(.malloc(len));
-						generatedTcUrl.setAv_len(.snprintf(generatedAv_val, len, "%s://%.*s:%d/%.*s", ModernizedCProgram.RTMPProtocolStringsLower[generatedProtocol], generatedAv_len, generatedAv_val, generatedPort, generatedAv_len, generatedAv_val));
+						len = generatedAv_len + generatedAv_len + /*Error: sizeof expression not supported yet*/;
+						generatedTcUrl.setAv_val(/*Error: Function owner not recognized*/malloc(len));
+						generatedTcUrl.setAv_len(/*Error: Function owner not recognized*/snprintf(generatedAv_val, len, "%s://%.*s:%d/%.*s", ModernizedCProgram.RTMPProtocolStringsLower[generatedProtocol], generatedAv_len, generatedAv_val, generatedPort, generatedAv_len, generatedAv_val));
 						generatedLFlags |=  -1024;
 				} 
 			} else {
-					generatedTcUrl.setAv_len((int).strlen(url));
+					generatedTcUrl.setAv_len((int)/*Error: Function owner not recognized*/strlen(url));
 			} 
 		} 
 		Object generatedSWFSize = generatedLink.getSWFSize();
@@ -214,7 +214,7 @@ public class RTMP {
 	}
 	public int RTMP_AddStream(Object playpath) {
 		int idx = -1;
-		AVal pp = new AVal((byte)playpath, playpath ? (int).strlen(playpath) : 0);
+		AVal pp = new AVal((byte)playpath, playpath ? (int)/*Error: Function owner not recognized*/strlen(playpath) : 0);
 		RTMP_LNK generatedLink = this.getLink();
 		Object generatedStreams = generatedLink.getStreams();
 		int generatedNStreams = generatedLink.getNStreams();
@@ -228,10 +228,10 @@ public class RTMP {
 		 srv_ctx = ctx;
 		RTMPSockBuf generatedM_sb = this.getM_sb();
 		Object generatedSb_ssl = generatedM_sb.getSb_ssl();
-		.TLS_server(srv_ctx, generatedSb_ssl);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/TLS_server(srv_ctx, generatedSb_ssl);
 		Object generatedSb_socket = generatedM_sb.getSb_socket();
-		.TLS_setfd(generatedSb_ssl, generatedSb_socket);
-		int connect_return = .TLS_connect(generatedSb_ssl);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/TLS_setfd(generatedSb_ssl, generatedSb_socket);
+		int connect_return = /*Error: Function owner not recognized*/TLS_connect(generatedSb_ssl);
 		if (connect_return < 0) {
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "%s, TLS_Connect failed", __FUNCTION__);
 			return 0;
@@ -243,7 +243,7 @@ public class RTMP {
 		sockaddr_storage service = new sockaddr_storage();
 		socklen_t addrlen = 0;
 		int socket_error = 0;
-		.memset(service, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(service, 0, /*Error: sizeof expression not supported yet*/);
 		RTMP_LNK generatedLink = this.getLink();
 		AVal generatedHostname = generatedLink.getHostname();
 		int generatedPort = generatedLink.getPort();
@@ -252,10 +252,10 @@ public class RTMP {
 		// not doing IPv6 socksif (generatedSs_family == 23) {
 			return 0;
 		} 
-		addr = .htonl(((sockaddr_in)service).getSin_addr().getS_un().getS_addr());
+		addr = /*Error: Function owner not recognized*/htonl(((sockaddr_in)service).getSin_addr().getS_un().getS_addr());
 		{ 
 			byte[] packet = new byte[]{4, /* SOCKS 4, connect */1, (generatedPort >> 8) & -1024, (generatedPort) & -1024, (byte)(addr >> 24) & -1024, (byte)(addr >> 16) & -1024, (byte)(addr >> 8) & -1024, (byte)addr & -1024, 0/* NULL terminate */};
-			r.WriteN(packet, );
+			r.WriteN(packet, /*Error: sizeof expression not supported yet*/);
 			if (r.ReadN(packet, 8) != 8) {
 				return 0;
 			} 
@@ -316,7 +316,7 @@ public class RTMP {
 				return res;
 			} 
 			this.setM_pausing(1);
-			.Sleep(1 * 1000);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Sleep(1 * 1000);
 		} 
 		res = r.RTMP_SendPause(0, generatedM_pauseStamp);
 		this.setM_pausing(3);
@@ -325,7 +325,7 @@ public class RTMP {
 	public void RTMP_DeleteStream(int streamIdx) {
 		int generatedM_stream_id = this.getM_stream_id();
 		if (generatedM_stream_id < 0) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		this.setM_bPlaying(0);
 		RTMP_LNK generatedLink = this.getLink();
@@ -349,7 +349,7 @@ public class RTMP {
 		int generatedSb_size = generatedM_sb.getSb_size();
 		int generatedM_unackd = this.getM_unackd();
 		int generatedSb_timedout = generatedM_sb.getSb_timedout();
-		byte generatedSb_start = generatedM_sb.getSb_start();
+		byte[] generatedSb_start = generatedM_sb.getSb_start();
 		int generatedM_nBytesIn = this.getM_nBytesIn();
 		Object generatedM_bSendCounter = this.getM_bSendCounter();
 		int generatedM_nBytesInSent = this.getM_nBytesInSent();
@@ -404,7 +404,7 @@ public class RTMP {
 			} 
 			nRead = ((n < avail) ? n : avail);
 			if (nRead > 0) {
-				.memcpy(ptr, generatedSb_start, nRead);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr, generatedSb_start, nRead);
 				generatedSb_start += nRead;
 				generatedSb_size -= nRead;
 				nBytes = nRead;
@@ -424,7 +424,7 @@ public class RTMP {
 				generatedM_resplen -= nBytes;
 			} 
 			if (generatedRc4keyIn) {
-				.RC4(generatedRc4keyIn, nBytes, (uint8_t)ptr, (uint8_t)ptr);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/RC4(generatedRc4keyIn, nBytes, (uint8_t)ptr, (uint8_t)ptr);
 			} 
 			n -= nBytes;
 			ptr += nBytes;
@@ -438,13 +438,13 @@ public class RTMP {
 		RTMP_LNK generatedLink = this.getLink();
 		Object generatedRc4keyOut = generatedLink.getRc4keyOut();
 		if (generatedRc4keyOut) {
-			if (n > (int)) {
-				encrypted = (byte).malloc(n);
+			if (n > (int)/*Error: sizeof expression not supported yet*/) {
+				encrypted = (byte)/*Error: Function owner not recognized*/malloc(n);
 			} else {
 					encrypted = (byte)buf;
 			} 
 			ptr = encrypted;
-			.RC4(generatedRc4keyOut, n, (uint8_t)buffer, (uint8_t)ptr);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/RC4(generatedRc4keyOut, n, (uint8_t)buffer, (uint8_t)ptr);
 		} 
 		int generatedProtocol = generatedLink.getProtocol();
 		Object generatedM_bCustomSend = this.getM_bCustomSend();
@@ -456,12 +456,12 @@ public class RTMP {
 			if (generatedProtocol & -1024) {
 				nBytes = r.HTTP_Post(.RTMPT_SEND, ptr, n);
 			}  else if (generatedM_bCustomSend && generatedM_customSendFunc) {
-				nBytes = .UNRECOGNIZEDFUNCTIONNAME(generatedM_sb, ptr, n, generatedM_customSendParam);
+				nBytes = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedM_sb, ptr, n, generatedM_customSendParam);
 			} else {
 					nBytes = generatedM_sb.RTMPSockBuf_Send(ptr, n/*RTMP_Log(RTMP_LOGDEBUG, "%s: %d\n", __FUNCTION__, nBytes); */);
 			} 
 			if (nBytes < 0) {
-				int sockerr = .WSAGetLastError();
+				int sockerr = /*Error: Function owner not recognized*/WSAGetLastError();
 				ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "%s, RTMP send error %d (%d bytes)", __FUNCTION__, sockerr, n);
 				if (sockerr == 4 && !ModernizedCProgram.RTMP_ctrlC) {
 					continue;
@@ -478,14 +478,14 @@ public class RTMP {
 			ptr += nBytes;
 		}
 		if (encrypted && encrypted != buf) {
-			.free(encrypted);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(encrypted);
 		} 
 		return n == 0;
 	}
 	public int RTMP_SendCreateStream() {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(1);
@@ -494,7 +494,7 @@ public class RTMP {
 		packet.setM_nInfoField2(0);
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_createStream);
 		int generatedM_numInvokes = this.getM_numInvokes();
@@ -506,7 +506,7 @@ public class RTMP {
 	public int SendReleaseStream(int streamIdx) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[1024];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(1);
@@ -515,7 +515,7 @@ public class RTMP {
 		packet.setM_nInfoField2(0);
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_releaseStream);
 		int generatedM_numInvokes = this.getM_numInvokes();
@@ -533,7 +533,7 @@ public class RTMP {
 	public int SendFCPublish(int streamIdx) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[1024];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(1);
@@ -542,7 +542,7 @@ public class RTMP {
 		packet.setM_nInfoField2(0);
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_FCPublish);
 		int generatedM_numInvokes = this.getM_numInvokes();
@@ -560,7 +560,7 @@ public class RTMP {
 	public int SendFCUnpublish(int streamIdx) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[1024];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(1);
@@ -569,7 +569,7 @@ public class RTMP {
 		packet.setM_nInfoField2(0);
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_FCUnpublish);
 		int generatedM_numInvokes = this.getM_numInvokes();
@@ -589,7 +589,7 @@ public class RTMP {
 	public int SendPublish(int streamIdx) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[1024];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* source channel (invoke) */-1024);
 		packet.setM_headerType(0);
@@ -600,7 +600,7 @@ public class RTMP {
 		packet.setM_nInfoField2(generatedStreams[streamIdx].getId());
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_publish);
 		int generatedM_numInvokes = this.getM_numInvokes();
@@ -620,7 +620,7 @@ public class RTMP {
 	public int SendDeleteStream(double dStreamId) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(1);
@@ -629,7 +629,7 @@ public class RTMP {
 		packet.setM_nInfoField2(0);
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_deleteStream);
 		int generatedM_numInvokes = this.getM_numInvokes();
@@ -642,7 +642,7 @@ public class RTMP {
 	public int RTMP_SendPause(int DoPause, int iTime) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* video channel */-1024);
 		packet.setM_headerType(1);
@@ -651,7 +651,7 @@ public class RTMP {
 		packet.setM_nInfoField2(0);
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_pause);
 		int generatedM_numInvokes = this.getM_numInvokes();
@@ -666,7 +666,7 @@ public class RTMP {
 	public int RTMP_Pause(int DoPause) {
 		int generatedM_mediaChannel = this.getM_mediaChannel();
 		int generatedM_channelsAllocatedIn = this.getM_channelsAllocatedIn();
-		Integer generatedM_channelTimestamp = this.getM_channelTimestamp();
+		int[] generatedM_channelTimestamp = this.getM_channelTimestamp();
 		if (DoPause) {
 			this.setM_pauseStamp(generatedM_mediaChannel < generatedM_channelsAllocatedIn ? generatedM_channelTimestamp[generatedM_mediaChannel] : 0);
 		} 
@@ -676,7 +676,7 @@ public class RTMP {
 	public int RTMP_SendSeek(int iTime) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* video channel */-1024);
 		packet.setM_headerType(1);
@@ -685,7 +685,7 @@ public class RTMP {
 		packet.setM_nInfoField2(0);
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_seek);
 		int generatedM_numInvokes = this.getM_numInvokes();
@@ -702,7 +702,7 @@ public class RTMP {
 	public int RTMP_SendServerBW() {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(0);
 		packet.setM_packetType(-1024);
@@ -711,7 +711,7 @@ public class RTMP {
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
 		packet.setM_nBodySize(4);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		int generatedM_nServerBW = this.getM_nServerBW();
 		ModernizedCProgram.AMF_EncodeInt32(generatedM_body, pend, generatedM_nServerBW);
 		return ModernizedCProgram.RTMP_SendPacket(r, packet, 0);
@@ -719,7 +719,7 @@ public class RTMP {
 	public int RTMP_SendClientBW() {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(0);
 		packet.setM_packetType(-1024);
@@ -728,7 +728,7 @@ public class RTMP {
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
 		packet.setM_nBodySize(5);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		int generatedM_nClientBW = this.getM_nClientBW();
 		ModernizedCProgram.AMF_EncodeInt32(generatedM_body, pend, generatedM_nClientBW);
 		Object generatedM_nClientBW2 = this.getM_nClientBW2();
@@ -738,7 +738,7 @@ public class RTMP {
 	public int SendBytesReceived() {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(1);
 		packet.setM_packetType(-1024);
@@ -747,7 +747,7 @@ public class RTMP {
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
 		packet.setM_nBodySize(4);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		int generatedM_nBytesIn = this.getM_nBytesIn();
 		ModernizedCProgram.AMF_EncodeInt32(generatedM_body, pend, generatedM_nBytesIn);
 		this.setM_nBytesInSent(generatedM_nBytesIn);
@@ -756,7 +756,7 @@ public class RTMP {
 	public int SendCheckBW() {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(0);
@@ -765,7 +765,7 @@ public class RTMP {
 		packet.setM_nInfoField2(0);
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av__checkbw);
 		int generatedM_numInvokes = this.getM_numInvokes();
@@ -777,7 +777,7 @@ public class RTMP {
 	public int SendCheckBWResult(double txn) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(1);
@@ -787,7 +787,7 @@ public class RTMP {
 		packet.setM_nInfoField2(0);
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av__result);
 		enc = ModernizedCProgram.AMF_EncodeNumber(enc, pend, txn);
@@ -799,7 +799,7 @@ public class RTMP {
 	public int SendPong(double txn) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* control channel (invoke) */-1024);
 		packet.setM_headerType(1);
@@ -809,7 +809,7 @@ public class RTMP {
 		packet.setM_nInfoField2(0);
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_pong);
 		enc = ModernizedCProgram.AMF_EncodeNumber(enc, pend, txn);
@@ -820,7 +820,7 @@ public class RTMP {
 	public int SendPlay(int streamIdx) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[1024];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* we make 8 our stream channel */-1024);
 		packet.setM_headerType(0);
@@ -831,7 +831,7 @@ public class RTMP {
 		packet.setM_nInfoField2(generatedStreams[streamIdx].getId());
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_play);
 		int generatedM_numInvokes = this.getM_numInvokes();
@@ -880,7 +880,7 @@ public class RTMP {
 	public int SendPlaylist(int streamIdx) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[1024];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		byte enc;
 		packet.setM_nChannel(/* we make 8 our stream channel */-1024);
 		packet.setM_headerType(0);
@@ -891,7 +891,7 @@ public class RTMP {
 		packet.setM_nInfoField2(generatedStreams[streamIdx].getId());
 		packet.setM_hasAbsTimestamp(0);
 		packet.setM_body(pbuf + 18);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		enc = generatedM_body;
 		enc = ModernizedCProgram.AMF_EncodeString(enc, pend, ModernizedCProgram.av_set_playlist);
 		enc = ModernizedCProgram.AMF_EncodeNumber(enc, pend, 0);
@@ -917,7 +917,7 @@ public class RTMP {
 	public int RTMP_SendCtrl(int nType, int nObject, int nTime) {
 		RTMPPacket packet = new RTMPPacket();
 		byte[] pbuf = new byte[256];
-		byte pend = pbuf + ;
+		byte pend = pbuf + /*Error: sizeof expression not supported yet*/;
 		int nSize;
 		byte buf;
 		ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "sending ctrl. type: 0x%04x", (int)nType);
@@ -943,14 +943,14 @@ public class RTMP {
 				break;
 		}
 		packet.setM_nBodySize(nSize);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		buf = generatedM_body;
 		buf = ModernizedCProgram.AMF_EncodeInt16(buf, pend, nType);
 		RTMP_LNK generatedLink = this.getLink();
 		Object generatedSWFVerificationResponse = generatedLink.getSWFVerificationResponse();
 		Object generatedM_nBodySize = packet.getM_nBodySize();
 		if (nType == -1024) {
-			.memcpy(buf, generatedSWFVerificationResponse, 42);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf, generatedSWFVerificationResponse, 42);
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "Sending SWFVerification response: ");
 			ModernizedCProgram.RTMP_LogHex(.RTMP_LOGDEBUG, (uint8_t)generatedM_body, generatedM_nBodySize);
 		}  else if (nType == -1024) {
@@ -966,11 +966,11 @@ public class RTMP {
 		return ModernizedCProgram.RTMP_SendPacket(r, packet, 0);
 	}
 	public void RTMP_DropRequest(int i, int freeit) {
-		RTMP_METHOD generatedM_methodCalls = this.getM_methodCalls();
+		RTMP_METHOD[] generatedM_methodCalls = this.getM_methodCalls();
 		int generatedM_numCalls = this.getM_numCalls();
 		generatedM_methodCalls.AV_erase(generatedM_numCalls, i, freeit);
 	}
-	public int HandleInvoke(Object body, int nBodySize) {
+	public int HandleInvoke(Object[] body, int nBodySize) {
 		AMFObject obj = new AMFObject();
 		AVal method = new AVal();
 		double txn;
@@ -989,11 +989,11 @@ public class RTMP {
 		AMFObjectProperty aMFObjectProperty = new AMFObjectProperty();
 		ModernizedCProgram.AMFProp_GetString(aMFObjectProperty.AMF_GetProp(obj, ((Object)0), 0), method);
 		txn = aMFObjectProperty.AMF_GetProp(obj, ((Object)0), 1).AMFProp_GetNumber();
-		Byte generatedAv_val = method.getAv_val();
+		byte[] generatedAv_val = method.getAv_val();
 		ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, server invoking <%s>", __FUNCTION__, generatedAv_val);
 		int generatedAv_len = (method).getAv_len();
 		int generatedM_numCalls = this.getM_numCalls();
-		RTMP_METHOD generatedM_methodCalls = this.getM_methodCalls();
+		RTMP_METHOD[] generatedM_methodCalls = this.getM_methodCalls();
 		RTMP_LNK generatedLink = this.getLink();
 		AVal generatedToken = generatedLink.getToken();
 		 generatedP_vu = p.getP_vu();
@@ -1013,7 +1013,7 @@ public class RTMP {
 		Object generatedFlags = generatedM_read.getFlags();
 		int generatedM_pausing = this.getM_pausing();
 		Object generatedM_pauseStamp = this.getM_pauseStamp();
-		if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+		if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			AVal methodInvoked = new AVal(0);
 			int i;
 			for (i = 0; i < generatedM_numCalls; i++) {
@@ -1028,7 +1028,7 @@ public class RTMP {
 				;
 			} 
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, received result for method call <%s>", __FUNCTION__, generatedAv_val);
-			if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 				if (generatedAv_len) {
 					AMFObjectProperty p = new AMFObjectProperty();
 					if (ModernizedCProgram.RTMP_FindFirstMatchingProperty(obj, ModernizedCProgram.av_secureToken, p)) {
@@ -1066,7 +1066,7 @@ public class RTMP {
 						}
 					} 
 				} 
-			}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 				int id = (int)aMFObjectProperty.AMF_GetProp(obj, ((Object)0), 3).AMFProp_GetNumber();
 				generatedStreams[generatedCurStreamIdx].setId(id);
 				if (generatedProtocol & -1024) {
@@ -1079,32 +1079,32 @@ public class RTMP {
 						r.RTMP_SendCtrl(3, id, generatedM_nBufferMS);
 				} 
 				generatedCurStreamIdx++;
-			}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 				this.setM_bPlaying(1);
 				generatedPlayingStreams++;
 			} 
-			.free(generatedAv_val);
-		}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAv_val);
+		}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			if (!generatedM_nBWCheckCounter) {
 				r.SendCheckBW();
 			} 
-		}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
-		}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+		}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+		}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			r.RTMP_Close();
 			ret = 1;
-		}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+		}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			r.SendPong(txn);
-		}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+		}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			r.SendCheckBWResult(txn);
-		}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+		}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			int i;
 			for (i = 0; i < generatedM_numCalls; i++) {
-				if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+				if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 					generatedM_methodCalls.AV_erase(generatedM_numCalls, i, 1);
 					break;
 				} 
 			}
-		}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+		}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			AVal methodInvoked = new AVal(0);
 			int i;
 			if (generatedProtocol & -1024) {
@@ -1120,7 +1120,7 @@ public class RTMP {
 					;
 				} 
 				ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, received error for method call <%s>", __FUNCTION__, generatedAv_val);
-				if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+				if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 					AMFObject obj2 = new AMFObject();
 					AVal code = new AVal();
 					AVal level = new AVal();
@@ -1143,11 +1143,11 @@ public class RTMP {
 			} else {
 					ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "rtmp server sent error");
 			} 
-			.free(generatedAv_val);
-		}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAv_val);
+		}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "rtmp server requested close");
 			r.RTMP_Close();
-		}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+		}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			AMFObject obj2 = new AMFObject();
 			AVal code = new AVal();
 			AVal level = new AVal();
@@ -1157,7 +1157,7 @@ public class RTMP {
 			ModernizedCProgram.AMFProp_GetString(aMFObjectProperty.AMF_GetProp(obj2, ModernizedCProgram.av_level, -1), level);
 			ModernizedCProgram.AMFProp_GetString(aMFObjectProperty.AMF_GetProp(obj2, ModernizedCProgram.av_description, -1), description);
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, onStatus: %s", __FUNCTION__, generatedAv_val);
-			if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 				this.setM_stream_id(-1);
 				r.RTMP_Close();
 				if (generatedAv_len) {
@@ -1165,39 +1165,39 @@ public class RTMP {
 				} else {
 						ModernizedCProgram.RTMP_Log(.RTMP_LOGERROR, "%s:\n%s", generatedAv_val, generatedAv_val);
 				} 
-			}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 				int i;
 				this.setM_bPlaying(1);
 				for (i = 0; i < generatedM_numCalls; i++) {
-					if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+					if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 						generatedM_methodCalls.AV_erase(generatedM_numCalls, i, 1);
 						break;
 					} 
 				}
-			}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 				int i;
 				this.setM_bPlaying(1);
 				for (i = 0; i < generatedM_numCalls; i++) {
-					if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+					if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 						generatedM_methodCalls.AV_erase(generatedM_numCalls, i, 1);
 						break;
 					} 
 				}
-			}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len)) || (generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 				r.RTMP_Close();
 				ret = 1;
-			}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 				generatedFlags &=  ~-1024;
-			}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+			}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 				if (generatedM_pausing == 1 || generatedM_pausing == 2) {
 					r.RTMP_SendPause(0, generatedM_pauseStamp);
 					this.setM_pausing(3);
 				} 
 			} 
-		}  else if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+		}  else if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			int i;
 			for (i = 0; i < generatedM_numCalls; i++) {
-				if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+				if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 					generatedM_methodCalls.AV_erase(generatedM_numCalls, i, 1);
 					break;
 				} 
@@ -1218,12 +1218,12 @@ public class RTMP {
 		AMFObjectProperty aMFObjectProperty = new AMFObjectProperty();
 		ModernizedCProgram.AMFProp_GetString(aMFObjectProperty.AMF_GetProp(obj, ((Object)0), 0), metastring);
 		int generatedAv_len = (metastring).getAv_len();
-		Byte generatedAv_val = (metastring).getAv_val();
+		byte[] generatedAv_val = (metastring).getAv_val();
 		 generatedP_vu = prop.getP_vu();
 		Object generatedP_number = generatedP_vu.getP_number();
 		RTMP_READ generatedM_read = this.getM_read();
 		Object generatedDataType = generatedM_read.getDataType();
-		if ((generatedAv_len == generatedAv_len && !.memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
+		if ((generatedAv_len == generatedAv_len && !/*Error: Function owner not recognized*/memcmp(generatedAv_val, generatedAv_val, generatedAv_len))) {
 			AMFObjectProperty prop = new AMFObjectProperty();
 			ModernizedCProgram.RTMP_Log(.RTMP_LOGINFO, /* Show metadata */"Metadata:");
 			obj.DumpMetaData();
@@ -1269,24 +1269,17 @@ public class RTMP {
 		int generatedLFlags = generatedLink.getLFlags();
 		int generatedM_mediaChannel = this.getM_mediaChannel();
 		int generatedM_channelsAllocatedIn = this.getM_channelsAllocatedIn();
-		Integer generatedM_channelTimestamp = this.getM_channelTimestamp();
+		int[] generatedM_channelTimestamp = this.getM_channelTimestamp();
 		Object generatedM_pauseStamp = this.getM_pauseStamp();
 		if (packet.getM_nBodySize() >= 6) {
 			switch (nType) {
-			case 2:
+			case 0:
 					tmp = ModernizedCProgram.AMF_DecodeInt32(packet.getM_body() + 2);
-					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Stream Dry %d", __FUNCTION__, tmp);
+					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Stream Begin %d", __FUNCTION__, tmp);
 					break;
-			case 32:
+			case 4:
 					tmp = ModernizedCProgram.AMF_DecodeInt32(packet.getM_body() + 2);
-					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Stream BufferReady %d", __FUNCTION__, tmp);
-					break;
-			case 1:
-					tmp = ModernizedCProgram.AMF_DecodeInt32(packet.getM_body() + 2);
-					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Stream EOF %d", __FUNCTION__, tmp);
-					if (generatedM_pausing == 1) {
-						this.setM_pausing(2);
-					} 
+					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Stream IsRecorded %d", __FUNCTION__, tmp);
 					break;
 			case 31:
 					tmp = ModernizedCProgram.AMF_DecodeInt32(packet.getM_body() + 2);
@@ -1303,18 +1296,25 @@ public class RTMP {
 						this.setM_pausing(3);
 					} 
 					break;
-			case 4:
+			case 2:
 					tmp = ModernizedCProgram.AMF_DecodeInt32(packet.getM_body() + 2);
-					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Stream IsRecorded %d", __FUNCTION__, tmp);
+					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Stream Dry %d", __FUNCTION__, tmp);
 					break;
-			case 0:
+			case 32:
 					tmp = ModernizedCProgram.AMF_DecodeInt32(packet.getM_body() + 2);
-					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Stream Begin %d", __FUNCTION__, tmp);
+					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Stream BufferReady %d", __FUNCTION__, tmp);
 					break;
 			case /* server ping. reply with pong. */6:
 					tmp = ModernizedCProgram.AMF_DecodeInt32(packet.getM_body() + 2);
 					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Ping %d", __FUNCTION__, tmp);
 					r.RTMP_SendCtrl(-1024, tmp, 0);
+					break;
+			case 1:
+					tmp = ModernizedCProgram.AMF_DecodeInt32(packet.getM_body() + 2);
+					ModernizedCProgram.RTMP_Log(.RTMP_LOGDEBUG, "%s, Stream EOF %d", __FUNCTION__, tmp);
+					if (generatedM_pausing == 1) {
+						this.setM_pausing(2);
+					} 
 					break;
 			default:
 					tmp = ModernizedCProgram.AMF_DecodeInt32(packet.getM_body() + 2);
@@ -1360,7 +1360,7 @@ public class RTMP {
 		Object generatedStreams = generatedLink.getStreams();
 		int generatedProtocol = generatedLink.getProtocol();
 		AVal generatedM_clientID = this.getM_clientID();
-		Byte generatedAv_val = generatedM_clientID.getAv_val();
+		byte[] generatedAv_val = generatedM_clientID.getAv_val();
 		RTMPSockBuf generatedM_sb = this.getM_sb();
 		if (r.RTMP_IsConnected()) {
 			for (int idx = 0;
@@ -1376,7 +1376,7 @@ public class RTMP {
 			}
 			if (generatedAv_val) {
 				r.HTTP_Post(.RTMPT_CLOSE, "", 1);
-				.free(generatedAv_val);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAv_val);
 				generatedM_clientID.setAv_val(((Object)0));
 				generatedM_clientID.setAv_len(0);
 			} 
@@ -1395,7 +1395,7 @@ public class RTMP {
 		Object generatedFlags = generatedM_read.getFlags();
 		Byte generatedBuf = generatedM_read.getBuf();
 		if (generatedFlags & -1024) {
-			.free(generatedBuf);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuf);
 			generatedM_read.setBuf(((Object)0));
 		} 
 		generatedM_read.setDataType(0);
@@ -1408,32 +1408,32 @@ public class RTMP {
 		generatedM_write.setM_nBytesRead(0);
 		generatedM_write.RTMPPacket_Free();
 		int generatedM_channelsAllocatedIn = this.getM_channelsAllocatedIn();
-		RTMPPacket generatedM_vecChannelsIn = this.getM_vecChannelsIn();
+		RTMPPacket[][] generatedM_vecChannelsIn = this.getM_vecChannelsIn();
 		for (i = 0; i < generatedM_channelsAllocatedIn; i++) {
 			if (generatedM_vecChannelsIn[i]) {
 				generatedM_vecChannelsIn[i].RTMPPacket_Free();
-				.free(generatedM_vecChannelsIn[i]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedM_vecChannelsIn[i]);
 				generatedM_vecChannelsIn[i] = ((Object)0);
 			} 
 		}
-		.free(generatedM_vecChannelsIn);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedM_vecChannelsIn);
 		this.setM_vecChannelsIn(((Object)0));
-		Integer generatedM_channelTimestamp = this.getM_channelTimestamp();
-		.free(generatedM_channelTimestamp);
+		int[] generatedM_channelTimestamp = this.getM_channelTimestamp();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedM_channelTimestamp);
 		this.setM_channelTimestamp(((Object)0));
 		this.setM_channelsAllocatedIn(0);
 		int generatedM_channelsAllocatedOut = this.getM_channelsAllocatedOut();
-		RTMPPacket generatedM_vecChannelsOut = this.getM_vecChannelsOut();
+		RTMPPacket[][] generatedM_vecChannelsOut = this.getM_vecChannelsOut();
 		for (i = 0; i < generatedM_channelsAllocatedOut; i++) {
 			if (generatedM_vecChannelsOut[i]) {
-				.free(generatedM_vecChannelsOut[i]);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedM_vecChannelsOut[i]);
 				generatedM_vecChannelsOut[i] = ((Object)0);
 			} 
 		}
-		.free(generatedM_vecChannelsOut);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedM_vecChannelsOut);
 		this.setM_vecChannelsOut(((Object)0));
 		this.setM_channelsAllocatedOut(0);
-		RTMP_METHOD generatedM_methodCalls = this.getM_methodCalls();
+		RTMP_METHOD[] generatedM_methodCalls = this.getM_methodCalls();
 		int generatedM_numCalls = this.getM_numCalls();
 		generatedM_methodCalls.AV_clear(generatedM_numCalls);
 		this.setM_methodCalls(((Object)0));
@@ -1448,12 +1448,12 @@ public class RTMP {
 		int generatedLFlags = generatedLink.getLFlags();
 		AVal generatedTcUrl = generatedLink.getTcUrl();
 		if (generatedLFlags & -1024) {
-			.free(generatedAv_val);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAv_val);
 			generatedTcUrl.setAv_val(((Object)0));
 			generatedLFlags ^=  -1024;
 		} 
 		RTMP_BINDINFO generatedM_bindIP = this.getM_bindIP();
-		.memset(generatedM_bindIP, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedM_bindIP, 0, /*Error: sizeof expression not supported yet*/);
 		this.setM_bCustomSend(0);
 		this.setM_customSendFunc(((Object)0));
 		this.setM_customSendParam(((Object)0));
@@ -1461,7 +1461,7 @@ public class RTMP {
 		if (!(generatedProtocol & -1024) || (generatedPFlags & -1024)) {
 			for (int idx = 0;
 			 idx < generatedNStreams; idx++) {
-				.free(generatedAv_val);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAv_val);
 				generatedStreams[idx].getPlaypath().setAv_val(((Object)0));
 			}
 			generatedLink.setCurStreamIdx(0);
@@ -1469,22 +1469,22 @@ public class RTMP {
 		} 
 		AVal generatedApp = generatedLink.getApp();
 		if ((generatedProtocol & -1024) && (generatedPFlags & -1024) && (generatedPFlags & -1024)) {
-			.free(generatedAv_val);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAv_val);
 			generatedApp.setAv_val(((Object)0));
-			.free(generatedAv_val);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedAv_val);
 			generatedTcUrl.setAv_val(((Object)0));
 		} 
 	}
 	public int HTTP_Post( cmd, Object buf, int len) {
 		byte[] hbuf = new byte[512];
 		AVal generatedM_clientID = this.getM_clientID();
-		Byte generatedAv_val = generatedM_clientID.getAv_val();
+		byte[] generatedAv_val = generatedM_clientID.getAv_val();
 		int generatedM_msgCounter = this.getM_msgCounter();
 		RTMP_LNK generatedLink = this.getLink();
 		AVal generatedHostname = generatedLink.getHostname();
 		int generatedAv_len = generatedHostname.getAv_len();
 		int generatedPort = generatedLink.getPort();
-		int hlen = .snprintf(hbuf, , "POST /%s%s/%d HTTP/1.1\r\nHost: %.*s:%d\r\nAccept: */*\r\nUser-Agent: Shockwave Flash\r\nConnection: Keep-Alive\r\nCache-Control: no-cache\r\nContent-type: application/x-fcs\r\nContent-length: %d\r\n\r\n", ModernizedCProgram.RTMPT_cmds[cmd], generatedAv_val ? generatedAv_val : "", generatedM_msgCounter, generatedAv_len, generatedAv_val, generatedPort, len);
+		int hlen = /*Error: Function owner not recognized*/snprintf(hbuf, /*Error: sizeof expression not supported yet*/, "POST /%s%s/%d HTTP/1.1\r\nHost: %.*s:%d\r\nAccept: */*\r\nUser-Agent: Shockwave Flash\r\nConnection: Keep-Alive\r\nCache-Control: no-cache\r\nContent-type: application/x-fcs\r\nContent-length: %d\r\n\r\n", ModernizedCProgram.RTMPT_cmds[cmd], generatedAv_val ? generatedAv_val : "", generatedM_msgCounter, generatedAv_len, generatedAv_val, generatedPort, len);
 		RTMPSockBuf generatedM_sb = this.getM_sb();
 		generatedM_sb.RTMPSockBuf_Send(hbuf, hlen);
 		hlen = generatedM_sb.RTMPSockBuf_Send(buf, len);
@@ -1504,20 +1504,20 @@ public class RTMP {
 			} 
 			return -2;
 		} 
-		byte generatedSb_start = generatedM_sb.getSb_start();
-		if (.strncmp(generatedSb_start, "HTTP/1.1 200 ", 13)) {
+		byte[] generatedSb_start = generatedM_sb.getSb_start();
+		if (/*Error: Function owner not recognized*/strncmp(generatedSb_start, "HTTP/1.1 200 ", 13)) {
 			return -1;
 		} 
 		generatedSb_start[generatedSb_size] = (byte)'\0';
-		if (!.strstr(generatedSb_start, "\r\n\r\n")) {
+		if (!/*Error: Function owner not recognized*/strstr(generatedSb_start, "\r\n\r\n")) {
 			if (fill) {
 				;
 			} 
 			return -2;
 		} 
-		ptr = generatedSb_start + ;
-		while ((ptr = .strstr(ptr, "Content-"))) {
-			if (!.strncasecmp(ptr + 8, "length:", 7)) {
+		ptr = generatedSb_start + /*Error: sizeof expression not supported yet*/;
+		while ((ptr = /*Error: Function owner not recognized*/strstr(ptr, "Content-"))) {
+			if (!/*Error: Function owner not recognized*/strncasecmp(ptr + 8, "length:", 7)) {
 				break;
 			} 
 			ptr += 8;
@@ -1525,14 +1525,14 @@ public class RTMP {
 		if (!ptr) {
 			return -1;
 		} 
-		hlen = .atoi(ptr + 16);
-		ptr = .strstr(ptr + 16, "\r\n\r\n");
+		hlen = /*Error: Function owner not recognized*/atoi(ptr + 16);
+		ptr = /*Error: Function owner not recognized*/strstr(ptr + 16, "\r\n\r\n");
 		if (!ptr) {
 			return -1;
 		} 
 		ptr += 4;
 		AVal generatedM_clientID = this.getM_clientID();
-		Byte generatedAv_val = generatedM_clientID.getAv_val();
+		byte[] generatedAv_val = generatedM_clientID.getAv_val();
 		if (ptr + (generatedAv_val ? 1 : hlen) > generatedSb_start + generatedSb_size) {
 			if (fill) {
 				;
@@ -1545,12 +1545,12 @@ public class RTMP {
 		generatedM_unackd--;
 		if (!generatedAv_val) {
 			generatedM_clientID.setAv_len(hlen);
-			generatedM_clientID.setAv_val(.malloc(hlen + 1));
+			generatedM_clientID.setAv_val(/*Error: Function owner not recognized*/malloc(hlen + 1));
 			if (!generatedAv_val) {
 				return -1;
 			} 
 			generatedAv_val[0] = (byte)'/';
-			.memcpy(generatedAv_val + 1, ptr, hlen - 1);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedAv_val + 1, ptr, hlen - 1);
 			generatedAv_val[hlen] = 0;
 			generatedM_sb.setSb_size(0);
 		} else {
@@ -1576,7 +1576,7 @@ public class RTMP {
 		uint32_t nTimeStamp = 0;
 		int len;
 		rtnGetNextMediaPacket = ModernizedCProgram.RTMP_GetNextMediaPacket(r, packet);
-		Byte generatedM_body = packet.getM_body();
+		byte[] generatedM_body = packet.getM_body();
 		Object generatedM_nBodySize = packet.getM_nBodySize();
 		RTMP_READ generatedM_read = this.getM_read();
 		Object generatedDataType = generatedM_read.getDataType();
@@ -1586,7 +1586,7 @@ public class RTMP {
 		Object generatedNMetaHeaderSize = generatedM_read.getNMetaHeaderSize();
 		AMFObjectProperty aMFObjectProperty = new AMFObjectProperty();
 		int generatedAv_len = (metastring).getAv_len();
-		Byte generatedAv_val = (metastring).getAv_val();
+		byte[] generatedAv_val = (metastring).getAv_val();
 		Byte generatedMetaHeader = generatedM_read.getMetaHeader();
 		Object generatedNInitialFrameSize = generatedM_read.getNInitialFrameSize();
 		Object generatedInitialFrameType = generatedM_read.getInitialFrameType();
@@ -1598,7 +1598,7 @@ public class RTMP {
 		Byte generatedBuf = generatedM_read.getBuf();
 		if (recopy) {
 			len = ret > (int)(buflen) ? buflen : (int)(ret);
-			.memcpy(buf, generatedBuf, len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf, generatedBuf, len);
 			generatedM_read.setBufpos(generatedBuf + len);
 			generatedM_read.setBuflen(ret - len);
 		} 
@@ -1615,28 +1615,28 @@ public class RTMP {
 		Object generatedDataType = generatedM_read.getDataType();
 		if (!(generatedFlags & /* first time thru */-1024)) {
 			if (!(generatedFlags & -1024)) {
-				byte mybuf = .malloc((128 * 1024));
+				byte mybuf = /*Error: Function owner not recognized*/malloc((128 * 1024));
 				byte end = mybuf + (128 * 1024);
 				int cnt = 0;
 				generatedM_read.setBuf(mybuf);
 				generatedM_read.setBuflen((128 * 1024));
-				.memcpy(mybuf, ModernizedCProgram.flvHeader, );
-				generatedBuf += ;
-				generatedBuflen -= ;
-				cnt += ;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(mybuf, ModernizedCProgram.flvHeader, /*Error: sizeof expression not supported yet*/);
+				generatedBuf += /*Error: sizeof expression not supported yet*/;
+				generatedBuflen -= /*Error: sizeof expression not supported yet*/;
+				cnt += /*Error: sizeof expression not supported yet*/;
 				while (generatedTimestamp == 0) {
 					nRead = r.Read_1_Packet(generatedBuf, generatedBuflen);
 					if (nRead < 0) {
-						.free(mybuf);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(mybuf);
 						generatedM_read.setBuf(((Object)0));
 						generatedM_read.setBuflen(0);
 						generatedM_read.setStatus(nRead);
 						;
 					} 
 					if (generatedBuf < mybuf || generatedBuf > /* buffer overflow, fix buffer and give up */end) {
-						mybuf = .realloc(mybuf, cnt + nRead);
-						.memcpy(mybuf + cnt, generatedBuf, nRead);
-						.free(generatedBuf);
+						mybuf = /*Error: Function owner not recognized*/realloc(mybuf, cnt + nRead);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(mybuf + cnt, generatedBuf, nRead);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuf);
 						generatedM_read.setBuf(mybuf + cnt + nRead);
 						break;
 					} 
@@ -1655,7 +1655,7 @@ public class RTMP {
 			generatedFlags |=  -1024;
 		} 
 		if ((generatedFlags & -1024) && generatedBuf) {
-			.free(generatedBuf);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuf);
 			generatedM_read.setBuf(((Object)0));
 			generatedM_read.setBufpos(((Object)0));
 			generatedM_read.setBuflen(0);
@@ -1666,10 +1666,10 @@ public class RTMP {
 			if (nRead > size) {
 				nRead = size;
 			} 
-			.memcpy(buf, generatedBufpos, nRead);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf, generatedBufpos, nRead);
 			generatedBuflen -= nRead;
 			if (!generatedBuflen) {
-				.free(generatedBuf);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuf);
 				generatedM_read.setBuf(((Object)0));
 				generatedM_read.setBufpos(((Object)0));
 			} else {
@@ -1696,7 +1696,7 @@ public class RTMP {
 		} 
 		return total;
 	}
-	public int RTMP_Write(Object buf, int size, int streamIdx) {
+	public int RTMP_Write(Object[] buf, int size, int streamIdx) {
 		RTMPPacket generatedM_write = this.getM_write();
 		RTMPPacket pkt = generatedM_write;
 		byte pend;
@@ -1712,7 +1712,7 @@ public class RTMP {
 		Object generatedM_nTimeStamp = pkt.getM_nTimeStamp();
 		Object generatedM_packetType = pkt.getM_packetType();
 		Object generatedM_nBodySize = pkt.getM_nBodySize();
-		Byte generatedM_body = pkt.getM_body();
+		byte[] generatedM_body = pkt.getM_body();
 		while (s2) {
 			if (!generatedM_nBytesRead) {
 				if (size < 11) {
@@ -1755,7 +1755,7 @@ public class RTMP {
 			if (num > s2) {
 				num = s2;
 			} 
-			.memcpy(enc, buf, num);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(enc, buf, num);
 			generatedM_nBytesRead += num;
 			s2 -= num;
 			buf += num;
@@ -1925,10 +1925,10 @@ public class RTMP {
 	public void setM_numCalls(int newM_numCalls) {
 		m_numCalls = newM_numCalls;
 	}
-	public RTMP_METHOD getM_methodCalls() {
+	public RTMP_METHOD[] getM_methodCalls() {
 		return m_methodCalls;
 	}
-	public void setM_methodCalls(RTMP_METHOD newM_methodCalls) {
+	public void setM_methodCalls(RTMP_METHOD[] newM_methodCalls) {
 		m_methodCalls = newM_methodCalls;
 	}
 	public int getM_channelsAllocatedIn() {
@@ -1943,22 +1943,22 @@ public class RTMP {
 	public void setM_channelsAllocatedOut(int newM_channelsAllocatedOut) {
 		m_channelsAllocatedOut = newM_channelsAllocatedOut;
 	}
-	public RTMPPacket getM_vecChannelsIn() {
+	public RTMPPacket[][] getM_vecChannelsIn() {
 		return m_vecChannelsIn;
 	}
-	public void setM_vecChannelsIn(RTMPPacket newM_vecChannelsIn) {
+	public void setM_vecChannelsIn(RTMPPacket[][] newM_vecChannelsIn) {
 		m_vecChannelsIn = newM_vecChannelsIn;
 	}
-	public RTMPPacket getM_vecChannelsOut() {
+	public RTMPPacket[][] getM_vecChannelsOut() {
 		return m_vecChannelsOut;
 	}
-	public void setM_vecChannelsOut(RTMPPacket newM_vecChannelsOut) {
+	public void setM_vecChannelsOut(RTMPPacket[][] newM_vecChannelsOut) {
 		m_vecChannelsOut = newM_vecChannelsOut;
 	}
-	public Integer getM_channelTimestamp() {
+	public int[] getM_channelTimestamp() {
 		return m_channelTimestamp;
 	}
-	public void setM_channelTimestamp(Integer newM_channelTimestamp) {
+	public void setM_channelTimestamp(int[] newM_channelTimestamp) {
 		m_channelTimestamp = newM_channelTimestamp;
 	}
 	public double getM_fAudioCodecs() {

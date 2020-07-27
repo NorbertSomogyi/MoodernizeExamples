@@ -16,24 +16,24 @@ public class os_cpu_usage_info {
 	}
 	
 	public os_cpu_usage_info os_cpu_usage_info_start() {
-		os_cpu_usage_info info = ModernizedCProgram.bzalloc();
+		os_cpu_usage_info info = ModernizedCProgram.bzalloc(/*Error: sizeof expression not supported yet*/);
 		SYSTEM_INFO si = new SYSTEM_INFO();
 		FILETIME dummy = new FILETIME();
-		.GetSystemInfo(si);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GetSystemInfo(si);
 		time_data generatedLast_time = info.getLast_time();
 		Object generatedFt = generatedLast_time.getFt();
-		.GetSystemTimeAsFileTime(generatedFt);
-		.GetProcessTimes(.GetCurrentProcess(), dummy, dummy, generatedFt, generatedFt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GetSystemTimeAsFileTime(generatedFt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GetProcessTimes(/*Error: Function owner not recognized*/GetCurrentProcess(), dummy, dummy, generatedFt, generatedFt);
 		Object generatedDwNumberOfProcessors = si.getDwNumberOfProcessors();
 		info.setCore_count(generatedDwNumberOfProcessors);
 		return info;
-		os_cpu_usage_info info = ModernizedCProgram.bmalloc();
+		os_cpu_usage_info info = ModernizedCProgram.bmalloc(/*Error: sizeof expression not supported yet*/);
 		tms time_sample = new tms();
-		info.setLast_cpu_time(.times(time_sample));
+		info.setLast_cpu_time(/*Error: Function owner not recognized*/times(time_sample));
 		Object generatedTms = time_sample.getTms();
 		info.setLast_sys_time(generatedTms);
 		info.setLast_user_time(generatedTms);
-		info.setCore_count(.sysconf(_SC_NPROCESSORS_ONLN));
+		info.setCore_count(/*Error: Function owner not recognized*/sysconf(_SC_NPROCESSORS_ONLN));
 		return info;
 	}
 	public double os_cpu_usage_info_query() {
@@ -46,8 +46,8 @@ public class os_cpu_usage_info {
 			return 0.0;
 		} 
 		Object generatedFt = cur_time.getFt();
-		.GetSystemTimeAsFileTime(generatedFt);
-		.GetProcessTimes(.GetCurrentProcess(), dummy, dummy, generatedFt, generatedFt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GetSystemTimeAsFileTime(generatedFt);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/GetProcessTimes(/*Error: Function owner not recognized*/GetCurrentProcess(), dummy, dummy, generatedFt, generatedFt);
 		Object generatedVal = cur_sys_time.getVal();
 		percent = (double)(generatedVal - generatedVal + (generatedVal - generatedVal));
 		percent /= (double)(generatedVal - generatedVal);
@@ -66,7 +66,7 @@ public class os_cpu_usage_info {
 		if (!info) {
 			return 0.0;
 		} 
-		cur_cpu_time = .times(time_sample);
+		cur_cpu_time = /*Error: Function owner not recognized*/times(time_sample);
 		Object generatedLast_cpu_time = this.getLast_cpu_time();
 		Object generatedTms = time_sample.getTms();
 		time_data generatedLast_sys_time = this.getLast_sys_time();

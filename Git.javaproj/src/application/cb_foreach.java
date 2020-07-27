@@ -2,12 +2,12 @@ package application;
 
 public class cb_foreach {
 	private int argc;
-	private Object argv;
+	private Object[][] argv;
 	private Object prefix;
 	private int quiet;
 	private int recursive;
 	
-	public cb_foreach(int argc, Object argv, Object prefix, int quiet, int recursive) {
+	public cb_foreach(int argc, Object[][] argv, Object prefix, int quiet, int recursive) {
 		setArgc(argc);
 		setArgv(argv);
 		setPrefix(prefix);
@@ -23,10 +23,10 @@ public class cb_foreach {
 	public void setArgc(int newArgc) {
 		argc = newArgc;
 	}
-	public Object getArgv() {
+	public Object[][] getArgv() {
 		return argv;
 	}
-	public void setArgv(Object newArgv) {
+	public void setArgv(Object[][] newArgv) {
 		argv = newArgv;
 	}
 	public Object getPrefix() {

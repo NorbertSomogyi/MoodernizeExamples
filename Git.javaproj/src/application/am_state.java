@@ -59,15 +59,15 @@ public class am_state {
 	
 	public void am_state_init() {
 		int gpgsign;
-		.memset(ModernizedCProgram.state, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.state, 0, /*Error: sizeof expression not supported yet*/);
 		ModernizedCProgram.state.setDir(ModernizedCProgram.git_pathdup("rebase-apply"));
 		ModernizedCProgram.state.setPrec(4);
-		.git_config_get_bool("am.threeway", ModernizedCProgram.state.getThreeway());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_get_bool("am.threeway", ModernizedCProgram.state.getThreeway());
 		ModernizedCProgram.state.setUtf8(1);
-		.git_config_get_bool("am.messageid", ModernizedCProgram.state.getMessage_id());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_get_bool("am.messageid", ModernizedCProgram.state.getMessage_id());
 		ModernizedCProgram.state.setScissors(scissors_type.SCISSORS_UNSET);
 		ModernizedCProgram.state.getGit_apply_opts().argv_array_init();
-		if (!.git_config_get_bool("commit.gpgsign", gpgsign)) {
+		if (!/*Error: Function owner not recognized*/git_config_get_bool("commit.gpgsign", gpgsign)) {
 			ModernizedCProgram.state.setSign_commit(gpgsign ? "" : ((Object)0/**
 			 * Releases memory allocated by an am_state.
 			 */));
@@ -83,17 +83,17 @@ public class am_state {
 	}
 	public int read_am_author_script() {
 		byte filename = ModernizedCProgram.am_path(ModernizedCProgram.state, "author-script");
-		((!ModernizedCProgram.state.getAuthor_name()) ? (Object)0 : ._assert("!state->author_name", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 267));
-		((!ModernizedCProgram.state.getAuthor_email()) ? (Object)0 : ._assert("!state->author_email", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 268));
-		((!ModernizedCProgram.state.getAuthor_date()) ? (Object)0 : ._assert("!state->author_date", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 269));
+		((!ModernizedCProgram.state.getAuthor_name()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!state->author_name", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 267));
+		((!ModernizedCProgram.state.getAuthor_email()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!state->author_email", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 268));
+		((!ModernizedCProgram.state.getAuthor_date()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!state->author_date", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 269));
 		return ModernizedCProgram.read_author_script(filename, ModernizedCProgram.state.getAuthor_name(), ModernizedCProgram.state.getAuthor_email(), ModernizedCProgram.state.getAuthor_date(), 1/**
 		 * Saves state->author_name, state->author_email and state->author_date in the
 		 * state directory's "author-script" file.
 		 */);
 	}
 	public int read_commit_msg() {
-		strbuf sb = new strbuf(, , );
-		((!ModernizedCProgram.state.getMsg()) ? (Object)0 : ._assert("!state->msg", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 311));
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		((!ModernizedCProgram.state.getMsg()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!state->msg", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 311));
 		if (sb.read_state_file(ModernizedCProgram.state, "final-commit", 0) < 0) {
 			sb.strbuf_release();
 			return -1;
@@ -104,16 +104,16 @@ public class am_state {
 		 */;
 	}
 	public void am_load() {
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		if (sb.read_state_file(ModernizedCProgram.state, "next", 1) < 0) {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 339, "state file 'next' does not exist");
 		} 
-		byte generatedBuf = sb.getBuf();
-		ModernizedCProgram.state.setCur(.strtol(generatedBuf, ((Object)0), 10));
+		byte[] generatedBuf = sb.getBuf();
+		ModernizedCProgram.state.setCur(/*Error: Function owner not recognized*/strtol(generatedBuf, ((Object)0), 10));
 		if (sb.read_state_file(ModernizedCProgram.state, "last", 1) < 0) {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 343, "state file 'last' does not exist");
 		} 
-		ModernizedCProgram.state.setLast(.strtol(generatedBuf, ((Object)0), 10));
+		ModernizedCProgram.state.setLast(/*Error: Function owner not recognized*/strtol(generatedBuf, ((Object)0), 10));
 		if (ModernizedCProgram.state.read_am_author_script() < 0) {
 			ModernizedCProgram.die(ModernizedCProgram._("could not parse author script"));
 		} 
@@ -124,33 +124,33 @@ public class am_state {
 			ModernizedCProgram.die(ModernizedCProgram._("could not parse %s"), ModernizedCProgram.am_path(ModernizedCProgram.state, "original-commit"));
 		} 
 		sb.read_state_file(ModernizedCProgram.state, "threeway", 1);
-		ModernizedCProgram.state.setThreeway(!.strcmp(generatedBuf, "t"));
+		ModernizedCProgram.state.setThreeway(!/*Error: Function owner not recognized*/strcmp(generatedBuf, "t"));
 		sb.read_state_file(ModernizedCProgram.state, "quiet", 1);
-		ModernizedCProgram.state.setQuiet(!.strcmp(generatedBuf, "t"));
+		ModernizedCProgram.state.setQuiet(!/*Error: Function owner not recognized*/strcmp(generatedBuf, "t"));
 		sb.read_state_file(ModernizedCProgram.state, "sign", 1);
-		ModernizedCProgram.state.setSignoff(!.strcmp(generatedBuf, "t"));
+		ModernizedCProgram.state.setSignoff(!/*Error: Function owner not recognized*/strcmp(generatedBuf, "t"));
 		sb.read_state_file(ModernizedCProgram.state, "utf8", 1);
-		ModernizedCProgram.state.setUtf8(!.strcmp(generatedBuf, "t"));
+		ModernizedCProgram.state.setUtf8(!/*Error: Function owner not recognized*/strcmp(generatedBuf, "t"));
 		if (ModernizedCProgram.file_exists(ModernizedCProgram.am_path(ModernizedCProgram.state, "rerere-autoupdate"))) {
 			sb.read_state_file(ModernizedCProgram.state, "rerere-autoupdate", 1);
-			ModernizedCProgram.state.setAllow_rerere_autoupdate(.strcmp(generatedBuf, "t") ? 2 : 1);
+			ModernizedCProgram.state.setAllow_rerere_autoupdate(/*Error: Function owner not recognized*/strcmp(generatedBuf, "t") ? 2 : 1);
 		} else {
 				ModernizedCProgram.state.setAllow_rerere_autoupdate(0);
 		} 
 		sb.read_state_file(ModernizedCProgram.state, "keep", 1);
-		if (!.strcmp(generatedBuf, "t")) {
+		if (!/*Error: Function owner not recognized*/strcmp(generatedBuf, "t")) {
 			ModernizedCProgram.state.setKeep(keep_type.KEEP_TRUE);
-		}  else if (!.strcmp(generatedBuf, "b")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(generatedBuf, "b")) {
 			ModernizedCProgram.state.setKeep(keep_type.KEEP_NON_PATCH);
 		} else {
 				ModernizedCProgram.state.setKeep(keep_type.KEEP_FALSE);
 		} 
 		sb.read_state_file(ModernizedCProgram.state, "messageid", 1);
-		ModernizedCProgram.state.setMessage_id(!.strcmp(generatedBuf, "t"));
+		ModernizedCProgram.state.setMessage_id(!/*Error: Function owner not recognized*/strcmp(generatedBuf, "t"));
 		sb.read_state_file(ModernizedCProgram.state, "scissors", 1);
-		if (!.strcmp(generatedBuf, "t")) {
+		if (!/*Error: Function owner not recognized*/strcmp(generatedBuf, "t")) {
 			ModernizedCProgram.state.setScissors(scissors_type.SCISSORS_TRUE);
-		}  else if (!.strcmp(generatedBuf, "f")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(generatedBuf, "f")) {
 			ModernizedCProgram.state.setScissors(scissors_type.SCISSORS_FALSE);
 		} else {
 				ModernizedCProgram.state.setScissors(scissors_type.SCISSORS_UNSET);
@@ -168,7 +168,7 @@ public class am_state {
 	}
 	public int run_applypatch_msg_hook() {
 		int ret;
-		((ModernizedCProgram.state.getMsg()) ? (Object)0 : ._assert("state->msg", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 425));
+		((ModernizedCProgram.state.getMsg()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("state->msg", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 425));
 		ret = ModernizedCProgram.run_hook_le(((Object)0), "applypatch-msg", ModernizedCProgram.am_path(ModernizedCProgram.state, "final-commit"), ((Object)0));
 		if (!ret) {
 			do {
@@ -185,7 +185,7 @@ public class am_state {
 	}
 	public int split_mail_mbox(Object paths, int keep_cr, int mboxrd) {
 		child_process cp = new child_process(((Object)0), new child_process(ModernizedCProgram.empty_argv, 0, 0), new child_process(ModernizedCProgram.empty_argv, 0, 0));
-		strbuf last = new strbuf(, , );
+		strbuf last = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int ret;
 		cp.setGit_cmd(1);
 		argv_array generatedArgs = cp.getArgs();
@@ -206,8 +206,8 @@ public class am_state {
 			;
 		} 
 		ModernizedCProgram.state.setCur(1);
-		byte generatedBuf = last.getBuf();
-		ModernizedCProgram.state.setLast(.strtol(generatedBuf, ((Object)0), 10));
+		byte[] generatedBuf = last.getBuf();
+		ModernizedCProgram.state.setLast(/*Error: Function owner not recognized*/strtol(generatedBuf, ((Object)0), 10));
 		return ret ? -1 : 0/**
 		 * Callback signature for split_mail_conv(). The foreign patch should be
 		 * read from `in`, and the converted patch (in RFC2822 mail format) should be
@@ -231,26 +231,26 @@ public class am_state {
 			FILE out = new FILE();
 			byte mail;
 			int ret;
-			if (!.strcmp(paths, "-")) {
+			if (!/*Error: Function owner not recognized*/strcmp(paths, "-")) {
 				in = (_iob[0]);
 			} else {
-					in = .fopen(paths, "r");
+					in = /*Error: Function owner not recognized*/fopen(paths, "r");
 			} 
 			if (!in) {
 				return ();
 			} 
 			mail = ModernizedCProgram.mkpath("%s/%0*d", ModernizedCProgram.state.getDir(), ModernizedCProgram.state.getPrec(), i + 1);
-			out = .fopen(mail, "w");
+			out = /*Error: Function owner not recognized*/fopen(mail, "w");
 			if (!out) {
 				if (in != (_iob[0])) {
-					.fclose(in);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(in);
 				} 
 				return ();
 			} 
-			ret = .fn(out, in, keep_cr);
-			.fclose(out);
+			ret = /*Error: Function owner not recognized*/fn(out, in, keep_cr);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(out);
 			if (in != (_iob[0])) {
-				.fclose(in);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(in);
 			} 
 			if (ret) {
 				return ();
@@ -263,33 +263,33 @@ public class am_state {
 		 * message suitable for parsing with git-mailinfo.
 		 */;
 	}
-	public int split_mail_stgit_series(Object paths, int keep_cr) {
+	public int split_mail_stgit_series(Object[][] paths, int keep_cr) {
 		byte series_dir;
 		byte series_dir_buf;
 		FILE fp = new FILE();
 		argv_array patches = new argv_array(ModernizedCProgram.empty_argv, 0, 0);
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int ret;
 		if (!paths[0] || paths[1]) {
 			return ();
 		} 
 		series_dir_buf = ModernizedCProgram.xstrdup(paths);
-		series_dir = .dirname(series_dir_buf);
-		fp = .fopen(paths, "r");
+		series_dir = /*Error: Function owner not recognized*/dirname(series_dir_buf);
+		fp = /*Error: Function owner not recognized*/fopen(paths, "r");
 		if (!fp) {
 			return ();
 		} 
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		while (!ModernizedCProgram.strbuf_getline_lf(sb, fp)) {
 			if (generatedBuf == (byte)'#') {
 				continue;
 			} 
 			patches.argv_array_push(ModernizedCProgram.mkpath("%s/%s", series_dir, generatedBuf));
 		}
-		.fclose(fp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fp);
 		sb.strbuf_release();
 		ModernizedCProgram.free(series_dir_buf);
-		Object generatedArgv = patches.getArgv();
+		Object[][] generatedArgv = patches.getArgv();
 		ret = ModernizedCProgram.state.split_mail_conv(stgit_patch_to_mail, generatedArgv, keep_cr);
 		patches.argv_array_clear();
 		return ret/**
@@ -300,17 +300,17 @@ public class am_state {
 	public int split_mail(patch_format patch_format, Object paths, int keep_cr) {
 		if (keep_cr < 0) {
 			keep_cr = 0;
-			.git_config_get_bool("am.keepcr", keep_cr);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_get_bool("am.keepcr", keep_cr);
 		} 
 		switch (patch_format.patch_format) {
 		case patch_format.PATCH_FORMAT_STGIT_SERIES:
 				return ModernizedCProgram.state.split_mail_stgit_series(paths, keep_cr);
 		case patch_format.PATCH_FORMAT_STGIT:
 				return ModernizedCProgram.state.split_mail_conv(stgit_patch_to_mail, paths, keep_cr);
-		case patch_format.PATCH_FORMAT_MBOX:
-				return ModernizedCProgram.state.split_mail_mbox(paths, keep_cr, 0);
 		case patch_format.PATCH_FORMAT_MBOXRD:
 				return ModernizedCProgram.state.split_mail_mbox(paths, keep_cr, 1);
+		case patch_format.PATCH_FORMAT_MBOX:
+				return ModernizedCProgram.state.split_mail_mbox(paths, keep_cr, 0);
 		case patch_format.PATCH_FORMAT_HG:
 				return ModernizedCProgram.state.split_mail_conv(hg_patch_to_mail, paths, keep_cr);
 		default:
@@ -323,15 +323,15 @@ public class am_state {
 	public void am_setup(patch_format patch_format, Object paths, int keep_cr) {
 		object_id curr_head = new object_id();
 		byte str;
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		if (!patch_format.patch_format) {
 			patch_format.patch_format = ModernizedCProgram.detect_patch_format(paths);
 		} 
 		if (!patch_format.patch_format) {
 			(_iob[2]).fprintf_ln(ModernizedCProgram._("Patch format detection failed."));
-			.exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 944, (true)));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/exit(ModernizedCProgram.trace2_cmd_exit_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 944, (true)));
 		} 
-		if (.mkdir(ModernizedCProgram.state.getDir(), 777) < 0 && (._errno()) != 17) {
+		if (/*Error: Function owner not recognized*/mkdir(ModernizedCProgram.state.getDir(), 777) < 0 && (/*Error: Function owner not recognized*/_errno()) != 17) {
 			ModernizedCProgram.die_errno(ModernizedCProgram._("failed to create directory '%s'"), ModernizedCProgram.state.getDir());
 		} 
 		ModernizedCProgram.delete_ref(((Object)0), "REBASE_HEAD", ((Object)0), (1 << 0));
@@ -350,11 +350,11 @@ public class am_state {
 			ModernizedCProgram.write_state_bool(ModernizedCProgram.state, "rerere-autoupdate", ModernizedCProgram.state.getAllow_rerere_autoupdate() == 1);
 		} 
 		switch (ModernizedCProgram.state.getKeep()) {
-		case keep_type.KEEP_FALSE:
-				str = "f";
-				break;
 		case keep_type.KEEP_TRUE:
 				str = "t";
+				break;
+		case keep_type.KEEP_FALSE:
+				str = "f";
 				break;
 		case keep_type.KEEP_NON_PATCH:
 				str = "b";
@@ -365,21 +365,21 @@ public class am_state {
 		ModernizedCProgram.write_state_text(ModernizedCProgram.state, "keep", str);
 		ModernizedCProgram.write_state_bool(ModernizedCProgram.state, "messageid", ModernizedCProgram.state.getMessage_id());
 		switch (ModernizedCProgram.state.getScissors()) {
+		case scissors_type.SCISSORS_UNSET:
+				str = "";
+				break;
 		case scissors_type.SCISSORS_FALSE:
 				str = "f";
 				break;
 		case scissors_type.SCISSORS_TRUE:
 				str = "t";
 				break;
-		case scissors_type.SCISSORS_UNSET:
-				str = "";
-				break;
 		default:
 				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 996, "invalid value for state->scissors");
 		}
 		ModernizedCProgram.write_state_text(ModernizedCProgram.state, "scissors", str);
 		sb.sq_quote_argv(ModernizedCProgram.state.getGit_apply_opts().getArgv());
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		ModernizedCProgram.write_state_text(ModernizedCProgram.state, "apply-opt", generatedBuf);
 		if (ModernizedCProgram.state.getRebasing()) {
 			ModernizedCProgram.write_state_text(ModernizedCProgram.state, "rebasing", "");
@@ -426,10 +426,10 @@ public class am_state {
 			(ModernizedCProgram.state.getMsg()) = ((Object)0);
 		} while (0);
 		ModernizedCProgram.state.setMsg_len(0);
-		.unlink(ModernizedCProgram.am_path(ModernizedCProgram.state, "author-script"));
-		.unlink(ModernizedCProgram.am_path(ModernizedCProgram.state, "final-commit"));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(ModernizedCProgram.am_path(ModernizedCProgram.state, "author-script"));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(ModernizedCProgram.am_path(ModernizedCProgram.state, "final-commit"));
 		ModernizedCProgram.state.getOrig_commit().oidclr();
-		.unlink(ModernizedCProgram.am_path(ModernizedCProgram.state, "original-commit"));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(ModernizedCProgram.am_path(ModernizedCProgram.state, "original-commit"));
 		ModernizedCProgram.delete_ref(((Object)0), "REBASE_HEAD", ((Object)0), (1 << 0));
 		if (!ModernizedCProgram.repo_get_oid(ModernizedCProgram.the_repository, "HEAD", head)) {
 			ModernizedCProgram.write_state_text(ModernizedCProgram.state, "abort-safety", ModernizedCProgram.oid_to_hex(head));
@@ -440,34 +440,34 @@ public class am_state {
 		ModernizedCProgram.write_state_count(ModernizedCProgram.state, "next", ModernizedCProgram.state.getCur());
 	}
 	public void am_append_signoff() {
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		sb.strbuf_attach(ModernizedCProgram.state.getMsg(), ModernizedCProgram.state.getMsg_len(), ModernizedCProgram.state.getMsg_len());
 		sb.append_signoff(0, 0);
 		ModernizedCProgram.state.setMsg(sb.strbuf_detach(ModernizedCProgram.state.getMsg_len()));
 	}
 	public int parse_mail(Object mail) {
 		FILE fp = new FILE();
-		strbuf sb = new strbuf(, , );
-		strbuf msg = new strbuf(, , );
-		strbuf author_name = new strbuf(, , );
-		strbuf author_date = new strbuf(, , );
-		strbuf author_email = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf msg = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf author_name = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf author_date = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		strbuf author_email = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int ret = 0;
 		mailinfo mi = new mailinfo();
-		.setup_mailinfo(mi);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/setup_mailinfo(mi);
 		if (ModernizedCProgram.state.getUtf8()) {
 			mi.setMetainfo_charset(ModernizedCProgram.get_commit_output_encoding());
 		} else {
 				mi.setMetainfo_charset(((Object)0));
 		} 
 		switch (ModernizedCProgram.state.getKeep()) {
-		case keep_type.KEEP_FALSE:
-				break;
 		case keep_type.KEEP_NON_PATCH:
 				mi.setKeep_non_patch_brackets_in_subject(1);
 				break;
 		case keep_type.KEEP_TRUE:
 				mi.setKeep_subject(1);
+				break;
+		case keep_type.KEEP_FALSE:
 				break;
 		default:
 				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1141, "invalid value for state->keep");
@@ -476,32 +476,32 @@ public class am_state {
 			mi.setAdd_message_id(1);
 		} 
 		switch (ModernizedCProgram.state.getScissors()) {
+		case scissors_type.SCISSORS_FALSE:
+				mi.setUse_scissors(0);
+				break;
 		case scissors_type.SCISSORS_UNSET:
 				break;
 		case scissors_type.SCISSORS_TRUE:
 				mi.setUse_scissors(1);
-				break;
-		case scissors_type.SCISSORS_FALSE:
-				mi.setUse_scissors(0);
 				break;
 		default:
 				ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1157, "invalid value for state->scissors");
 		}
 		mi.setInput(ModernizedCProgram.xfopen(mail, "r"));
 		mi.setOutput(ModernizedCProgram.xfopen(ModernizedCProgram.am_path(ModernizedCProgram.state, "info"), "w"));
-		if (.mailinfo(mi, ModernizedCProgram.am_path(ModernizedCProgram.state, "msg"), ModernizedCProgram.am_path(ModernizedCProgram.state, "patch"))) {
+		if (/*Error: Function owner not recognized*/mailinfo(mi, ModernizedCProgram.am_path(ModernizedCProgram.state, "msg"), ModernizedCProgram.am_path(ModernizedCProgram.state, "patch"))) {
 			ModernizedCProgram.die("could not parse patch");
 		} 
 		Object generatedInput = mi.getInput();
-		.fclose(generatedInput);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(generatedInput);
 		Object generatedOutput = mi.getOutput();
-		.fclose(generatedOutput);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(generatedOutput);
 		int generatedFormat_flowed = mi.getFormat_flowed();
 		if (generatedFormat_flowed) {
 			ModernizedCProgram.warning(ModernizedCProgram._("Patch sent with format=flowed; space at the end of lines might be lost."));
 		} 
 		fp = ModernizedCProgram.xfopen(ModernizedCProgram.am_path(ModernizedCProgram.state, "info"), /* Extract message and author information */"r");
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		Object generatedLen = msg.getLen();
 		while (!ModernizedCProgram.strbuf_getline_lf(sb, fp)) {
 			byte x;
@@ -518,8 +518,8 @@ public class am_state {
 				author_date.strbuf_addstr(x);
 			} 
 		}
-		.fclose(fp);
-		if (!.strcmp(generatedBuf, /* Skip pine's internal folder data */"Mail System Internal Data")) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fp);
+		if (!/*Error: Function owner not recognized*/strcmp(generatedBuf, /* Skip pine's internal folder data */"Mail System Internal Data")) {
 			ret = 1;
 			;
 		} 
@@ -531,19 +531,19 @@ public class am_state {
 		strbuf generatedLog_message = mi.getLog_message();
 		msg.strbuf_addbuf(generatedLog_message);
 		msg.strbuf_stripspace(0);
-		((!ModernizedCProgram.state.getAuthor_name()) ? (Object)0 : ._assert("!state->author_name", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1205));
+		((!ModernizedCProgram.state.getAuthor_name()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!state->author_name", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1205));
 		ModernizedCProgram.state.setAuthor_name(author_name.strbuf_detach(((Object)0)));
-		((!ModernizedCProgram.state.getAuthor_email()) ? (Object)0 : ._assert("!state->author_email", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1208));
+		((!ModernizedCProgram.state.getAuthor_email()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!state->author_email", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1208));
 		ModernizedCProgram.state.setAuthor_email(author_email.strbuf_detach(((Object)0)));
-		((!ModernizedCProgram.state.getAuthor_date()) ? (Object)0 : ._assert("!state->author_date", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1211));
+		((!ModernizedCProgram.state.getAuthor_date()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!state->author_date", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1211));
 		ModernizedCProgram.state.setAuthor_date(author_date.strbuf_detach(((Object)0)));
-		((!ModernizedCProgram.state.getMsg()) ? (Object)0 : ._assert("!state->msg", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1214));
+		((!ModernizedCProgram.state.getMsg()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!state->msg", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1214));
 		ModernizedCProgram.state.setMsg(msg.strbuf_detach(ModernizedCProgram.state.getMsg_len()));
 		author_date.strbuf_release();
 		author_email.strbuf_release();
 		author_name.strbuf_release();
 		sb.strbuf_release();
-		.clear_mailinfo(mi);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/clear_mailinfo(mi);
 		return ret/**
 		 * Sets commit_id to the commit hash where the mail was generated from.
 		 * Returns 0 on success, -1 on failure.
@@ -555,7 +555,7 @@ public class am_state {
 		if (commit_oid.get_mail_commit_oid(mail) < 0) {
 			ModernizedCProgram.die(ModernizedCProgram._("could not parse %s"), mail);
 		} 
-		commit = .lookup_commit_or_die(commit_oid, mail);
+		commit = /*Error: Function owner not recognized*/lookup_commit_or_die(commit_oid, mail);
 		ModernizedCProgram.get_commit_info(ModernizedCProgram.state, commit);
 		commit.write_commit_patch(ModernizedCProgram.state);
 		ModernizedCProgram.state.getOrig_commit().oidcpy(commit_oid);
@@ -567,20 +567,20 @@ public class am_state {
 		 */;
 	}
 	public int do_interactive() {
-		((ModernizedCProgram.state.getMsg()) ? (Object)0 : ._assert("state->msg", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1633));
+		((ModernizedCProgram.state.getMsg()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("state->msg", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1633));
 		argv_array generatedArgs = cp.getArgs();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			byte[] reply = new byte[64];
-			.puts(ModernizedCProgram._("Commit Body is:"));
-			.puts("--------------------------");
-			.printf("%s", ModernizedCProgram.state.getMsg());
-			.puts("--------------------------"/*
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/puts(ModernizedCProgram._("Commit Body is:"));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/puts("--------------------------");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s", ModernizedCProgram.state.getMsg());
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/puts("--------------------------"/*
 					 * TRANSLATORS: Make sure to include [y], [n], [e], [v] and [a]
 					 * in your translation. The program will only accept English
 					 * input at this point.
 					 */);
-			.printf(ModernizedCProgram._("Apply? [y]es/[n]o/[e]dit/[v]iew patch/[a]ccept all: "));
-			if (!.fgets(reply, , (_iob[0]))) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf(ModernizedCProgram._("Apply? [y]es/[n]o/[e]dit/[v]iew patch/[a]ccept all: "));
+			if (!/*Error: Function owner not recognized*/fgets(reply, /*Error: sizeof expression not supported yet*/, (_iob[0]))) {
 				ModernizedCProgram.die("unable to read from stdin; aborting");
 			} 
 			if (reply == (byte)'y' || reply == (byte)'Y') {
@@ -591,7 +591,7 @@ public class am_state {
 			}  else if (reply == (byte)'n' || reply == (byte)'N') {
 				return 1;
 			}  else if (reply == (byte)'e' || reply == (byte)'E') {
-				strbuf msg = new strbuf(, , );
+				strbuf msg = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 				if (!ModernizedCProgram.msg.launch_editor(ModernizedCProgram.am_path(ModernizedCProgram.state, "final-commit"), ((Object)0))) {
 					ModernizedCProgram.free(ModernizedCProgram.state.getMsg());
 					ModernizedCProgram.state.setMsg(ModernizedCProgram.msg.strbuf_detach(ModernizedCProgram.state.getMsg_len()));
@@ -617,19 +617,19 @@ public class am_state {
 	}
 	public void am_run(int resume) {
 		byte[] argv_gc_auto = new byte[]{"gc", "--auto", ((Object)0)};
-		strbuf sb = new strbuf(, , );
-		.unlink(ModernizedCProgram.am_path(ModernizedCProgram.state, "dirtyindex"));
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(ModernizedCProgram.am_path(ModernizedCProgram.state, "dirtyindex"));
 		if (ModernizedCProgram.the_repository.repo_refresh_and_write_index((true), (false), (false), ((Object)0), ((Object)0), ((Object)0)) < 0) {
 			ModernizedCProgram.die(ModernizedCProgram._("unable to write index file"));
 		} 
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		if (ModernizedCProgram.repo_index_has_changes(ModernizedCProgram.the_repository, ((Object)0), sb)) {
 			ModernizedCProgram.write_state_bool(ModernizedCProgram.state, "dirtyindex", 1);
 			ModernizedCProgram.die(ModernizedCProgram._("Dirty index: cannot apply patches (dirty: %s)"), generatedBuf);
 		} 
 		sb.strbuf_release();
 		if (!ModernizedCProgram.is_empty_or_missing_file(ModernizedCProgram.am_path(ModernizedCProgram.state, "rewritten"))) {
-			((ModernizedCProgram.state.getRebasing()) ? (Object)0 : ._assert("state->rebasing", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1782));
+			((ModernizedCProgram.state.getRebasing()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("state->rebasing", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1782));
 			ModernizedCProgram.copy_notes_for_rebase(ModernizedCProgram.state);
 			ModernizedCProgram.run_post_rewrite_hook(ModernizedCProgram.state/*
 				 * In rebasing mode, it's up to the caller to take care of
@@ -663,7 +663,7 @@ public class am_state {
 				;
 			} 
 		} 
-		.repo_rerere(ModernizedCProgram.the_repository, 0);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/repo_rerere(ModernizedCProgram.the_repository, 0);
 		ModernizedCProgram.do_commit(ModernizedCProgram.state);
 		ModernizedCProgram.state.am_load();
 		ModernizedCProgram.state.am_run(0/**
@@ -683,10 +683,10 @@ public class am_state {
 		} 
 		if (ModernizedCProgram.state.getRebasing()) {
 			FILE fp = ModernizedCProgram.xfopen(ModernizedCProgram.am_path(ModernizedCProgram.state, "rewritten"), "a");
-			((!ModernizedCProgram.is_null_oid(ModernizedCProgram.state.getOrig_commit())) ? (Object)0 : ._assert("!is_null_oid(&state->orig_commit)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1981));
-			.fprintf(fp, "%s ", ModernizedCProgram.oid_to_hex(ModernizedCProgram.state.getOrig_commit()));
-			.fprintf(fp, "%s\n", ModernizedCProgram.oid_to_hex(head));
-			.fclose(fp);
+			((!ModernizedCProgram.is_null_oid(ModernizedCProgram.state.getOrig_commit())) ? (Object)0 : /*Error: Function owner not recognized*/_assert("!is_null_oid(&state->orig_commit)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\am.c", 1981));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(fp, "%s ", ModernizedCProgram.oid_to_hex(ModernizedCProgram.state.getOrig_commit()));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(fp, "%s\n", ModernizedCProgram.oid_to_hex(head));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(fp);
 		} 
 		ModernizedCProgram.state.am_next();
 		ModernizedCProgram.state.am_load();
@@ -706,7 +706,7 @@ public class am_state {
 		byte curr_branch;
 		if (!ModernizedCProgram.safe_to_abort(ModernizedCProgram.state)) {
 			ModernizedCProgram.am_destroy(ModernizedCProgram.state);
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.am_rerere_clear();
 		curr_branch = curr_head.resolve_refdup("HEAD", 0, ((Object)0));
@@ -728,7 +728,7 @@ public class am_state {
 		ModernizedCProgram.am_destroy(ModernizedCProgram.state);
 	}
 	public int show_patch() {
-		strbuf sb = new strbuf(, , );
+		strbuf sb = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		byte patch_path;
 		int len;
 		if (!ModernizedCProgram.is_null_oid(ModernizedCProgram.state.getOrig_commit())) {
@@ -746,7 +746,7 @@ public class am_state {
 			ModernizedCProgram.die_errno(ModernizedCProgram._("failed to read '%s'"), patch_path);
 		} 
 		ModernizedCProgram.setup_pager();
-		byte generatedBuf = sb.getBuf();
+		byte[] generatedBuf = sb.getBuf();
 		Object generatedLen = sb.getLen();
 		ModernizedCProgram.write_in_full(1, generatedBuf, generatedLen);
 		sb.strbuf_release();

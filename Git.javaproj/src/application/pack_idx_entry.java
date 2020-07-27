@@ -13,41 +13,6 @@ public class pack_idx_entry {
 	public pack_idx_entry() {
 	}
 	
-	public void bitmap_writer_finish(Object index_nr, Object filename, Object options) {
-		uint16_t default_version = 1;
-		uint16_t flags = pack_bitmap_opts.BITMAP_OPT_FULL_DAG;
-		strbuf tmp_file = new strbuf(, , );
-		hashfile f = new hashfile();
-		bitmap_disk_header header = new bitmap_disk_header();
-		int fd = tmp_file.odb_mkstemp("pack/tmp_bitmap_XXXXXX");
-		byte generatedBuf = tmp_file.getBuf();
-		hashfile hashfile = new hashfile();
-		f = hashfile.hashfd(fd, generatedBuf);
-		Object generatedMagic = header.getMagic();
-		.memcpy(generatedMagic, ModernizedCProgram.BITMAP_IDX_SIGNATURE, );
-		header.setVersion(.htons(default_version));
-		header.setOptions(.htons(flags | options));
-		header.setEntry_count(.htonl(ModernizedCProgram.writer.getSelected_nr()));
-		Object generatedChecksum = header.getChecksum();
-		ModernizedCProgram.hashcpy(generatedChecksum, ModernizedCProgram.writer.getPack_checksum());
-		f.hashwrite(header,  - 32 + ModernizedCProgram.the_repository.getHash_algo().getRawsz());
-		ModernizedCProgram.dump_bitmap(f, ModernizedCProgram.writer.getCommits());
-		ModernizedCProgram.dump_bitmap(f, ModernizedCProgram.writer.getTrees());
-		ModernizedCProgram.dump_bitmap(f, ModernizedCProgram.writer.getBlobs());
-		ModernizedCProgram.dump_bitmap(f, ModernizedCProgram.writer.getTags());
-		ModernizedCProgram.write_selected_commits_v1(f, index, index_nr);
-		if (options & pack_bitmap_opts.BITMAP_OPT_HASH_CACHE) {
-			ModernizedCProgram.write_hash_cache(f, index, index_nr);
-		} 
-		f.finalize_hashfile(((Object)0), 4 | 2 | 1);
-		if (ModernizedCProgram.adjust_shared_perm(generatedBuf)) {
-			ModernizedCProgram.die_errno("unable to make temporary bitmap file readable");
-		} 
-		if (.rename(generatedBuf, filename)) {
-			ModernizedCProgram.die_errno("unable to rename temporary bitmap file to '%s'", filename);
-		} 
-		tmp_file.strbuf_release();
-	}
 	public Object write_idx_file(Object index_name, int nr_objects, Object opts, Object sha1) {
 		hashfile f = new hashfile();
 		pack_idx_entry sorted_by_sha = new pack_idx_entry();
@@ -67,23 +32,23 @@ public class pack_idx_entry {
 					last_obj_offset = ModernizedCProgram.objects[i].getOffset();
 				} 
 			}
-			ModernizedCProgram.sane_qsort((sorted_by_sha), (nr_objects), , sha1_compare);
+			ModernizedCProgram.sane_qsort((sorted_by_sha), (nr_objects), /*Error: sizeof expression not supported yet*/, sha1_compare);
 		} else {
 				sorted_by_sha = list = last = ((Object)0);
 		} 
 		hashfile hashfile = new hashfile();
 		hashfile hashfile = new hashfile();
 		if (opts.getFlags() & 1) {
-			((index_name) ? (Object)0 : ._assert("index_name", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\pack-write.c", 70));
+			((index_name) ? (Object)0 : /*Error: Function owner not recognized*/_assert("index_name", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\pack-write.c", 70));
 			f = hashfile.hashfd_check(index_name);
 		} else {
 				if (!index_name) {
-					strbuf tmp_file = new strbuf(, , );
+					strbuf tmp_file = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 					fd = tmp_file.odb_mkstemp("pack/tmp_idx_XXXXXX");
 					index_name = tmp_file.strbuf_detach(((Object)0));
 				} else {
-						.unlink(index_name);
-						fd = .open(index_name, -1024 | -1024 | 1, 600);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(index_name);
+						fd = /*Error: Function owner not recognized*/open(index_name, -1024 | -1024 | 1, 600);
 						if (fd < 0) {
 							ModernizedCProgram.die_errno("unable to create '%s'", index_name);
 						} 
@@ -93,9 +58,9 @@ public class pack_idx_entry {
 		index_version = ModernizedCProgram.need_large_offset(last_obj_offset, opts) ? 2 : opts.getVersion();
 		if (index_version >= /* index versions 2 and above need a header */2) {
 			pack_idx_header hdr = new pack_idx_header();
-			hdr.setIdx_signature(.htonl(-1024));
-			hdr.setIdx_version(.htonl(index_version));
-			f.hashwrite(hdr, );
+			hdr.setIdx_signature(/*Error: Function owner not recognized*/htonl(-1024));
+			hdr.setIdx_version(/*Error: Function owner not recognized*/htonl(index_version));
+			f.hashwrite(hdr, /*Error: sizeof expression not supported yet*/);
 		} 
 		object_id generatedOid = obj.getOid();
 		Object generatedHash = generatedOid.getHash();
@@ -108,7 +73,7 @@ public class pack_idx_entry {
 				} 
 				next++;
 			}
-			array[i] = .htonl(next - sorted_by_sha);
+			array[i] = /*Error: Function owner not recognized*/htonl(next - sorted_by_sha);
 			list = next;
 		}
 		f.hashwrite(array, 256 * 4/*
@@ -119,7 +84,7 @@ public class pack_idx_entry {
 		for (i = 0; i < nr_objects; i++) {
 			pack_idx_entry obj = list++;
 			if (index_version < 2) {
-				uint32_t offset = .htonl(generatedOffset);
+				uint32_t offset = /*Error: Function owner not recognized*/htonl(generatedOffset);
 				f.hashwrite(ModernizedCProgram.offset, 4);
 			} 
 			f.hashwrite(generatedHash, ModernizedCProgram.the_repository.getHash_algo().getRawsz());
@@ -133,7 +98,7 @@ public class pack_idx_entry {
 			list = /* write the crc32 table */sorted_by_sha;
 			for (i = 0; i < nr_objects; i++) {
 				pack_idx_entry obj = list++;
-				uint32_t crc32_val = .htonl(generatedCrc32);
+				uint32_t crc32_val = /*Error: Function owner not recognized*/htonl(generatedCrc32);
 				f.hashwrite(crc32_val, 4);
 			}
 			list = /* write the 32-bit offset table */sorted_by_sha;
@@ -141,7 +106,7 @@ public class pack_idx_entry {
 				pack_idx_entry obj = list++;
 				uint32_t offset = new uint32_t();
 				ModernizedCProgram.offset = (ModernizedCProgram.need_large_offset(generatedOffset, opts) ? (-1024 | nr_large_offset++) : generatedOffset);
-				ModernizedCProgram.offset = .htonl(ModernizedCProgram.offset);
+				ModernizedCProgram.offset = /*Error: Function owner not recognized*/htonl(ModernizedCProgram.offset);
 				f.hashwrite(ModernizedCProgram.offset, 4);
 			}
 			list = /* write the large offset table */sorted_by_sha;
@@ -152,8 +117,8 @@ public class pack_idx_entry {
 				if (!ModernizedCProgram.need_large_offset(ModernizedCProgram.offset, opts)) {
 					continue;
 				} 
-				split[0] = .htonl(ModernizedCProgram.offset >> 32);
-				split[1] = .htonl(ModernizedCProgram.offset & -1024);
+				split[0] = /*Error: Function owner not recognized*/htonl(ModernizedCProgram.offset >> 32);
+				split[1] = /*Error: Function owner not recognized*/htonl(ModernizedCProgram.offset & -1024);
 				f.hashwrite(split, 8);
 				nr_large_offset--;
 			}
@@ -161,6 +126,41 @@ public class pack_idx_entry {
 		f.hashwrite(sha1, ModernizedCProgram.the_repository.getHash_algo().getRawsz());
 		f.finalize_hashfile(((Object)0), 4 | 1 | ((opts.getFlags() & 1) ? 0 : 2));
 		return index_name;
+	}
+	public void bitmap_writer_finish(Object index_nr, Object filename, Object options) {
+		uint16_t default_version = 1;
+		uint16_t flags = pack_bitmap_opts.BITMAP_OPT_FULL_DAG;
+		strbuf tmp_file = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
+		hashfile f = new hashfile();
+		bitmap_disk_header header = new bitmap_disk_header();
+		int fd = tmp_file.odb_mkstemp("pack/tmp_bitmap_XXXXXX");
+		byte[] generatedBuf = tmp_file.getBuf();
+		hashfile hashfile = new hashfile();
+		f = hashfile.hashfd(fd, generatedBuf);
+		Object generatedMagic = header.getMagic();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedMagic, ModernizedCProgram.BITMAP_IDX_SIGNATURE, /*Error: sizeof expression not supported yet*/);
+		header.setVersion(/*Error: Function owner not recognized*/htons(default_version));
+		header.setOptions(/*Error: Function owner not recognized*/htons(flags | options));
+		header.setEntry_count(/*Error: Function owner not recognized*/htonl(ModernizedCProgram.writer.getSelected_nr()));
+		Object generatedChecksum = header.getChecksum();
+		ModernizedCProgram.hashcpy(generatedChecksum, ModernizedCProgram.writer.getPack_checksum());
+		f.hashwrite(header, /*Error: sizeof expression not supported yet*/ - 32 + ModernizedCProgram.the_repository.getHash_algo().getRawsz());
+		ModernizedCProgram.dump_bitmap(f, ModernizedCProgram.writer.getCommits());
+		ModernizedCProgram.dump_bitmap(f, ModernizedCProgram.writer.getTrees());
+		ModernizedCProgram.dump_bitmap(f, ModernizedCProgram.writer.getBlobs());
+		ModernizedCProgram.dump_bitmap(f, ModernizedCProgram.writer.getTags());
+		ModernizedCProgram.write_selected_commits_v1(f, index, index_nr);
+		if (options & pack_bitmap_opts.BITMAP_OPT_HASH_CACHE) {
+			ModernizedCProgram.write_hash_cache(f, index, index_nr);
+		} 
+		f.finalize_hashfile(((Object)0), 4 | 2 | 1);
+		if (ModernizedCProgram.adjust_shared_perm(generatedBuf)) {
+			ModernizedCProgram.die_errno("unable to make temporary bitmap file readable");
+		} 
+		if (/*Error: Function owner not recognized*/rename(generatedBuf, filename)) {
+			ModernizedCProgram.die_errno("unable to rename temporary bitmap file to '%s'", filename);
+		} 
+		tmp_file.strbuf_release();
 	}
 	public object_id getOid() {
 		return oid;

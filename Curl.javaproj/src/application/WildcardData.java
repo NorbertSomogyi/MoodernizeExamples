@@ -30,12 +30,12 @@ public class WildcardData {
 	}
 	public void Curl_wildcard_dtor() {
 		if (!wc) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedDtor = this.getDtor();
 		Object generatedProtdata = this.getProtdata();
 		if (generatedDtor) {
-			.UNRECOGNIZEDFUNCTIONNAME(generatedProtdata);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedProtdata);
 			this.setDtor(0);
 			this.setProtdata(((Object)0));
 		} 
@@ -44,10 +44,10 @@ public class WildcardData {
 		curl_llist generatedFilelist = this.getFilelist();
 		generatedFilelist.Curl_llist_destroy(((Object)0));
 		Byte generatedPath = this.getPath();
-		.Curl_cfree(generatedPath);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedPath);
 		this.setPath(((Object)0));
 		Byte generatedPattern = this.getPattern();
-		.Curl_cfree(generatedPattern);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/Curl_cfree(generatedPattern);
 		this.setPattern(((Object)0));
 		this.setCustomptr(((Object)0));
 		this.setState(.CURLWC_INIT/* if disabled */);

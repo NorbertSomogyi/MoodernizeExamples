@@ -52,11 +52,11 @@ public class huft_t {
 		huft_t q = new huft_t();
 		while (/* Go through linked list, freeing from the malloced (t[-1]) address. */p) {
 			q = (--p).getV().getT();
-			.free(p);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(p);
 			p = q;
 		}
 	}
-	public int huft_build(Object b, Object n, Object s, Object d, Object e, int m) {
+	public int huft_build(Object[] b, Object n, Object s, Object[] d, Object[] e, Integer m) {
 		/* counter for codes of length k */int a;
 		int[] c = new int[.BMAX + /* bit length count table */1];
 		/* length of end-of-block code (value 256) */int eob_len;
@@ -79,7 +79,7 @@ public class huft_t {
 		/* number of entries in current table */int z;
 		eob_len = n > 256 ? b[256] : /* Length of EOB code, if any */.BMAX;
 		t = ((Object)0);
-		.memset(c, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(c, 0, /*Error: sizeof expression not supported yet*/);
 		p = (int)/* cast allows us to reuse p for pointing to b */b;
 		i = n;
 		do {
@@ -157,7 +157,7 @@ public class huft_t {
 					j = ((w + j) > (int)eob_len && w < (int)eob_len) ? eob_len - w : /* make EOB code end at table */j;
 					z = 1 << /* table entries for j-bit table */j;
 					ws[htl + 1] = w + /* set bits decoded in stack */j;
-					q = .calloc((z + 1) * , /* allocate and link in new table */1);
+					q = /*Error: Function owner not recognized*/calloc((z + 1) * /*Error: Unsupported expression*/, /* allocate and link in new table */1);
 					t = q + /* link to list for huft_free() */1;
 					t = (generatedT);
 					u[htl] = ++/* table starts after link */q;
@@ -200,7 +200,7 @@ public class huft_t {
 		 *
 		 * tl, td: literal/length and distance decoder tables
 		 * bl, bd: number of bits decoded by tl[] and td[]
-		 */;/* called once from inflate_block */
+		 */;
 	}
 	public byte getE() {
 		return e;

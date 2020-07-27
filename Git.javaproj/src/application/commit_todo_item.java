@@ -4,9 +4,9 @@ public class commit_todo_item {
 	private int slab_size;
 	private int stride;
 	private int slab_count;
-	private todo_item slab;
+	private todo_item[][][] slab;
 	
-	public commit_todo_item(int slab_size, int stride, int slab_count, todo_item slab) {
+	public commit_todo_item(int slab_size, int stride, int slab_count, todo_item[][][] slab) {
 		setSlab_size(slab_size);
 		setStride(stride);
 		setSlab_count(slab_count);
@@ -21,7 +21,7 @@ public class commit_todo_item {
 			stride = 1;
 		} 
 		this.setStride(stride);
-		elem_size =  * stride;
+		elem_size = /*Error: Unsupported expression*/ * stride;
 		this.setSlab_size((512 * 1024 - 32) / elem_size);
 		this.setSlab_count(0);
 		this.setSlab(((Object)0));
@@ -32,7 +32,7 @@ public class commit_todo_item {
 	public void clear_commit_todo_item() {
 		int i;
 		int generatedSlab_count = this.getSlab_count();
-		todo_item generatedSlab = this.getSlab();
+		todo_item[][][] generatedSlab = this.getSlab();
 		for (i = 0; i < generatedSlab_count; i++) {
 			ModernizedCProgram.free(generatedSlab[i]);
 		}
@@ -60,10 +60,10 @@ public class commit_todo_item {
 	public void setSlab_count(int newSlab_count) {
 		slab_count = newSlab_count;
 	}
-	public todo_item getSlab() {
+	public todo_item[][][] getSlab() {
 		return slab;
 	}
-	public void setSlab(todo_item newSlab) {
+	public void setSlab(todo_item[][][] newSlab) {
 		slab = newSlab;
 	}
 }

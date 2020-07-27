@@ -38,28 +38,6 @@ public class gs_effect {
 	public gs_effect() {
 	}
 	
-	public void effect_init() {
-		.memset(effect, 0, );
-	}
-	public void effect_free() {
-		 i = new ();
-		Object generatedParams = this.getParams();
-		for (i = 0; i < generatedParams.getNum(); i++) {
-			generatedParams.getArray() + i.effect_param_free();
-		}
-		Object generatedTechniques = this.getTechniques();
-		for (i = 0; i < generatedTechniques.getNum(); i++) {
-			generatedTechniques.getArray() + i.effect_technique_free();
-		}
-		.da_free(generatedParams);
-		.da_free(generatedTechniques);
-		Byte generatedEffect_path = this.getEffect_path();
-		ModernizedCProgram.bfree(generatedEffect_path);
-		Byte generatedEffect_dir = this.getEffect_dir();
-		ModernizedCProgram.bfree(generatedEffect_dir);
-		this.setEffect_path(NULL);
-		this.setEffect_dir(NULL);
-	}
 	public gs_effect gs_get_effect() {
 		if (!ModernizedCProgram.gs_valid("gs_get_effect")) {
 			return ((Object)0);
@@ -71,7 +49,7 @@ public class gs_effect {
 		Byte generatedEffect_path = effect.getEffect_path();
 		gs_effect generatedNext = effect.getNext();
 		while (effect) {
-			if (.strcmp(generatedEffect_path, filename) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp(generatedEffect_path, filename) == 0) {
 				break;
 			} 
 			effect = generatedNext;
@@ -99,11 +77,11 @@ public class gs_effect {
 		ModernizedCProgram.bfree(file_string);
 		return effect;
 	}
-	public gs_effect gs_effect_create(Object effect_string, Object filename, byte error_string) {
+	public gs_effect gs_effect_create(Object effect_string, Object filename, Byte error_string) {
 		if (!(ModernizedCProgram.gs_valid("gs_effect_create") && ModernizedCProgram.gs_obj_valid(effect_string, "gs_effect_create", "effect_string"))) {
 			return ((Object)0);
 		} 
-		gs_effect effect = ModernizedCProgram.bzalloc();
+		gs_effect effect = ModernizedCProgram.bzalloc(/*Error: Unsupported expression*/);
 		effect_parser parser = new effect_parser();
 		 success = new ();
 		effect.setGraphics(thread_graphics);
@@ -131,6 +109,28 @@ public class gs_effect {
 		} 
 		parser.ep_free();
 		return effect;
+	}
+	public void effect_init() {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(effect, 0, /*Error: Unsupported expression*/);
+	}
+	public void effect_free() {
+		 i = new ();
+		Object generatedParams = this.getParams();
+		for (i = 0; i < generatedParams.getNum(); i++) {
+			generatedParams.getArray() + i.effect_param_free();
+		}
+		Object generatedTechniques = this.getTechniques();
+		for (i = 0; i < generatedTechniques.getNum(); i++) {
+			generatedTechniques.getArray() + i.effect_technique_free();
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedParams);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/da_free(generatedTechniques);
+		Byte generatedEffect_path = this.getEffect_path();
+		ModernizedCProgram.bfree(generatedEffect_path);
+		Byte generatedEffect_dir = this.getEffect_dir();
+		ModernizedCProgram.bfree(generatedEffect_dir);
+		this.setEffect_path(NULL);
+		this.setEffect_dir(NULL);
 	}
 	/******************************************************************************
 	    Copyright (C) 2013 by Hugh Bailey <obs.jim@gmail.com>
@@ -198,7 +198,7 @@ public class gs_effect {
 		darray pshader_params = new darray();
 		gs_effect_pass generatedCur_pass = this.getCur_pass();
 		if (!generatedCur_pass) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedVertshader_params = generatedCur_pass.getVertshader_params();
 		vshader_params = generatedVertshader_params.getDa();

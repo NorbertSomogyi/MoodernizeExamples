@@ -10,9 +10,9 @@ public class list_objects_filter_options {
 	private long tree_exclude_depth;
 	private Object sub_nr;
 	private Object sub_alloc;
-	private list_objects_filter_options sub;
+	private list_objects_filter_options[] sub;
 	
-	public list_objects_filter_options(string_list filter_spec, list_objects_filter_choice choice, int no_filter, Byte sparse_oid_name, long blob_limit_value, long tree_exclude_depth, Object sub_nr, Object sub_alloc, list_objects_filter_options sub) {
+	public list_objects_filter_options(string_list filter_spec, list_objects_filter_choice choice, int no_filter, Byte sparse_oid_name, long blob_limit_value, long tree_exclude_depth, Object sub_nr, Object sub_alloc, list_objects_filter_options[] sub) {
 		setFilter_spec(filter_spec);
 		setChoice(choice);
 		setNo_filter(no_filter);
@@ -31,35 +31,37 @@ public class list_objects_filter_options {
 		ModernizedCProgram.filter_options.setNo_filter(1);
 	}
 	public void filter_spec_append_urlencode(Object raw) {
-		strbuf buf = new strbuf(, , );
+		strbuf buf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		buf.strbuf_addstr_urlencode(raw, allow_unencoded);
-		byte generatedBuf = buf.getBuf();
+		byte[] generatedBuf = buf.getBuf();
 		do {
 			if (ModernizedCProgram.trace_default_key.trace_pass_fl()) {
 				ModernizedCProgram.trace_default_key.trace_printf_key_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\list-objects-filter-options.c", 186, "Add to combine filter-spec: %s\n", generatedBuf);
 			} 
 		} while (0);
-		ModernizedCProgram.filter.getFilter_spec().string_list_append(buf.strbuf_detach(((Object)0/*
+		string_list_item string_list_item = new string_list_item();
+		string_list_item.string_list_append(ModernizedCProgram.filter.getFilter_spec(), buf.strbuf_detach(((Object)0/*
 		 * Changes filter_options into an equivalent LOFC_COMBINE filter options
 		 * instance. Does not do anything if filter_options is already LOFC_COMBINE.
 		 */)));
 	}
 	public void transform_to_combine_type() {
-		((ModernizedCProgram.filter_options.getChoice()) ? (Object)0 : ._assert("filter_options->choice", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\list-objects-filter-options.c", 197));
+		((ModernizedCProgram.filter_options.getChoice()) ? (Object)0 : /*Error: Function owner not recognized*/_assert("filter_options->choice", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\list-objects-filter-options.c", 197));
 		if (ModernizedCProgram.filter_options.getChoice() == list_objects_filter_choice.LOFC_COMBINE) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		{ 
 			int initial_sub_alloc = 2;
-			list_objects_filter_options sub_array = ModernizedCProgram.xcalloc(initial_sub_alloc, );
+			list_objects_filter_options sub_array = ModernizedCProgram.xcalloc(initial_sub_alloc, /*Error: sizeof expression not supported yet*/);
 			sub_array[0] = ModernizedCProgram.filter_options;
-			.memset(ModernizedCProgram.filter_options, 0, );
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.filter_options, 0, /*Error: sizeof expression not supported yet*/);
 			ModernizedCProgram.filter_options.setSub(sub_array);
 			ModernizedCProgram.filter_options.setSub_alloc(initial_sub_alloc);
 		}
 		ModernizedCProgram.filter_options.setSub_nr(1);
 		ModernizedCProgram.filter_options.setChoice(list_objects_filter_choice.LOFC_COMBINE);
-		ModernizedCProgram.filter_options.getFilter_spec().string_list_append(ModernizedCProgram.xstrdup("combine:"));
+		string_list_item string_list_item = new string_list_item();
+		string_list_item.string_list_append(ModernizedCProgram.filter_options.getFilter_spec(), ModernizedCProgram.xstrdup("combine:"));
 		ModernizedCProgram.filter_options.filter_spec_append_urlencode(ModernizedCProgram.filter_options.getSub()[0/*
 			 * We don't need the filter_spec strings for subfilter specs, only the
 			 * top level.
@@ -72,17 +74,18 @@ public class list_objects_filter_options {
 		} 
 	}
 	public void parse_list_objects_filter(Object arg) {
-		strbuf errbuf = new strbuf(, , );
+		strbuf errbuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		int parse_error;
+		string_list_item string_list_item = new string_list_item();
 		if (!ModernizedCProgram.filter_options.getChoice()) {
-			ModernizedCProgram.filter_options.getFilter_spec().string_list_append(ModernizedCProgram.xstrdup(arg));
+			string_list_item.string_list_append(ModernizedCProgram.filter_options.getFilter_spec(), ModernizedCProgram.xstrdup(arg));
 			parse_error = ModernizedCProgram.gently_parse_list_objects_filter(ModernizedCProgram.filter_options, arg, errbuf/*
 					 * Make filter_options an LOFC_COMBINE spec so we can trivially
 					 * add subspecs to it.
 					 */);
 		} else {
 				ModernizedCProgram.filter_options.transform_to_combine_type();
-				ModernizedCProgram.filter_options.getFilter_spec().string_list_append(ModernizedCProgram.xstrdup("+"));
+				string_list_item.string_list_append(ModernizedCProgram.filter_options.getFilter_spec(), ModernizedCProgram.xstrdup("+"));
 				ModernizedCProgram.filter_options.filter_spec_append_urlencode(arg);
 				do {
 					if (1) {
@@ -97,16 +100,16 @@ public class list_objects_filter_options {
 								} else {
 										ModernizedCProgram.filter_options.setSub_alloc((((ModernizedCProgram.filter_options.getSub_alloc()) + 16) * 3 / 2));
 								} 
-								(ModernizedCProgram.filter_options.getSub()) = ModernizedCProgram.xrealloc((ModernizedCProgram.filter_options.getSub()), ModernizedCProgram.st_mult(, (ModernizedCProgram.filter_options.getSub_alloc())));
+								(ModernizedCProgram.filter_options.getSub()) = ModernizedCProgram.xrealloc((ModernizedCProgram.filter_options.getSub()), ModernizedCProgram.st_mult(/*Error: sizeof expression not supported yet*/, (ModernizedCProgram.filter_options.getSub_alloc())));
 							} 
 						} while (0);
-						.memset((ModernizedCProgram.filter_options.getSub()) + ModernizedCProgram.filter_options.getSub_nr(), 0,  * (true));
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset((ModernizedCProgram.filter_options.getSub()) + ModernizedCProgram.filter_options.getSub_nr(), 0, /*Error: sizeof expression not supported yet*/ * (true));
 						ModernizedCProgram.filter_options.setSub_nr(new_nr);
 					} 
 				} while (0);
 				parse_error = ModernizedCProgram.gently_parse_list_objects_filter(ModernizedCProgram.filter_options.getSub()[ModernizedCProgram.filter_options.getSub_nr() - 1], arg, errbuf);
 		} 
-		byte generatedBuf = errbuf.getBuf();
+		byte[] generatedBuf = errbuf.getBuf();
 		if (parse_error) {
 			ModernizedCProgram.die("%s", generatedBuf);
 		} 
@@ -115,27 +118,29 @@ public class list_objects_filter_options {
 		if (!ModernizedCProgram.filter.getFilter_spec().getNr()) {
 			ModernizedCProgram.BUG_fl("E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Git\\src\\list-objects-filter-options.c", 276, "no filter_spec available for this filter");
 		} 
+		string_list_item string_list_item = new string_list_item();
 		if (ModernizedCProgram.filter.getFilter_spec().getNr() != 1) {
-			strbuf concatted = new strbuf(, , );
+			strbuf concatted = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			ModernizedCProgram.strbuf_add_separated_string_list(concatted, "", ModernizedCProgram.filter.getFilter_spec());
 			ModernizedCProgram.filter.getFilter_spec().string_list_clear(/*free_util=*/0);
-			ModernizedCProgram.filter.getFilter_spec().string_list_append(concatted.strbuf_detach(((Object)0)));
+			string_list_item.string_list_append(ModernizedCProgram.filter.getFilter_spec(), concatted.strbuf_detach(((Object)0)));
 		} 
 		return ModernizedCProgram.filter.getFilter_spec().getItems()[0].getString();
 	}
 	public Object expand_list_objects_filter_spec() {
+		string_list_item string_list_item = new string_list_item();
 		if (ModernizedCProgram.filter.getChoice() == list_objects_filter_choice.LOFC_BLOB_LIMIT) {
-			strbuf expanded_spec = new strbuf(, , );
+			strbuf expanded_spec = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 			expanded_spec.strbuf_addf("blob:limit=%lu", ModernizedCProgram.filter.getBlob_limit_value());
 			ModernizedCProgram.filter.getFilter_spec().string_list_clear(/*free_util=*/0);
-			ModernizedCProgram.filter.getFilter_spec().string_list_append(expanded_spec.strbuf_detach(((Object)0)));
+			string_list_item.string_list_append(ModernizedCProgram.filter.getFilter_spec(), expanded_spec.strbuf_detach(((Object)0)));
 		} 
 		return ModernizedCProgram.filter.list_objects_filter_spec();
 	}
 	public void list_objects_filter_release() {
 		size_t sub = new size_t();
 		if (!ModernizedCProgram.filter_options) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		ModernizedCProgram.filter_options.getFilter_spec().string_list_clear(/*free_util=*/0);
 		ModernizedCProgram.free(ModernizedCProgram.filter_options.getSparse_oid_name());
@@ -143,35 +148,36 @@ public class list_objects_filter_options {
 			ModernizedCProgram.filter_options.getSub()[sub].list_objects_filter_release();
 		}
 		ModernizedCProgram.free(ModernizedCProgram.filter_options.getSub());
-		.memset(ModernizedCProgram.filter_options, 0, );
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(ModernizedCProgram.filter_options, 0, /*Error: sizeof expression not supported yet*/);
 	}
 	public void partial_clone_register(Object remote) {
 		byte cfg_name;
 		byte filter_name;
 		promisor_remote promisor_remote = new promisor_remote();
 		if (!promisor_remote.promisor_remote_find(/* Check if it is already registered */remote)) {
-			.git_config_set("core.repositoryformatversion", "1");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_set("core.repositoryformatversion", "1");
 			cfg_name = ModernizedCProgram.xstrfmt("remote.%s.promisor", /* Add promisor config for the remote */remote);
-			.git_config_set(cfg_name, "true");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_set(cfg_name, "true");
 			ModernizedCProgram.free(cfg_name/*
 				 * Record the initial filter-spec in the config as
 				 * the default for subsequent fetches from this remote.
 				 */);
 		} 
 		filter_name = ModernizedCProgram.xstrfmt("remote.%s.partialclonefilter", remote);
-		.git_config_set(/* NEEDSWORK: 'expand' result leaking??? */filter_name, ModernizedCProgram.filter_options.expand_list_objects_filter_spec());
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/git_config_set(/* NEEDSWORK: 'expand' result leaking??? */filter_name, ModernizedCProgram.filter_options.expand_list_objects_filter_spec());
 		ModernizedCProgram.free(filter_name);
 		ModernizedCProgram.promisor_remote_reinit();
 	}
 	public void partial_clone_get_default_filter_spec(Object remote) {
 		promisor_remote promisor_remote = new promisor_remote();
 		promisor_remote promisor = promisor_remote.promisor_remote_find(remote);
-		strbuf errbuf = new strbuf(, , );
+		strbuf errbuf = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		if (!promisor) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedPartial_clone_filter = promisor.getPartial_clone_filter();
-		ModernizedCProgram.filter_options.getFilter_spec().string_list_append(generatedPartial_clone_filter);
+		string_list_item string_list_item = new string_list_item();
+		string_list_item.string_list_append(ModernizedCProgram.filter_options.getFilter_spec(), generatedPartial_clone_filter);
 		ModernizedCProgram.gently_parse_list_objects_filter(ModernizedCProgram.filter_options, generatedPartial_clone_filter, errbuf);
 		errbuf.strbuf_release();
 	}
@@ -223,10 +229,10 @@ public class list_objects_filter_options {
 	public void setSub_alloc(Object newSub_alloc) {
 		sub_alloc = newSub_alloc;
 	}
-	public list_objects_filter_options getSub() {
+	public list_objects_filter_options[] getSub() {
 		return sub;
 	}
-	public void setSub(list_objects_filter_options newSub) {
+	public void setSub(list_objects_filter_options[] newSub) {
 		sub = newSub;
 	}
 }

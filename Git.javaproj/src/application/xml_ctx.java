@@ -20,14 +20,14 @@ public class xml_ctx {
 	public void handle_lockprop_ctx(int tag_closed) {
 		int lock_flags = (int)ModernizedCProgram.ctx.getUserData();
 		if (tag_closed) {
-			if (!.strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response.propstat.prop.supportedlock.lockentry")) {
+			if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response.propstat.prop.supportedlock.lockentry")) {
 				if ((lock_flags & (-1024 << 1)) && (lock_flags & (-1024 << 0))) {
 					lock_flags |=  (-1024 << 2);
 				} 
 				lock_flags &=  (-1024 << 2);
-			}  else if (!.strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response.propstat.prop.supportedlock.lockentry.locktype.write")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response.propstat.prop.supportedlock.lockentry.locktype.write")) {
 				lock_flags |=  (-1024 << 0);
-			}  else if (!.strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response.propstat.prop.supportedlock.lockentry.lockscope.exclusive")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response.propstat.prop.supportedlock.lockentry.lockscope.exclusive")) {
 				lock_flags |=  (-1024 << 1);
 			} 
 		} 
@@ -39,20 +39,20 @@ public class xml_ctx {
 		Byte generatedToken = lock.getToken();
 		Object generatedTmpfile_suffix = lock.getTmpfile_suffix();
 		if (tag_closed && ModernizedCProgram.ctx.getCdata()) {
-			if (!.strcmp(ModernizedCProgram.ctx.getName(), ".prop.lockdiscovery.activelock.owner.href")) {
+			if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ctx.getName(), ".prop.lockdiscovery.activelock.owner.href")) {
 				lock.setOwner(ModernizedCProgram.xstrdup(ModernizedCProgram.ctx.getCdata()));
-			}  else if (!.strcmp(ModernizedCProgram.ctx.getName(), ".prop.lockdiscovery.activelock.timeout")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ctx.getName(), ".prop.lockdiscovery.activelock.timeout")) {
 				byte arg;
 				if (ModernizedCProgram.skip_prefix(ModernizedCProgram.ctx.getCdata(), "Second-", arg)) {
-					lock.setTimeout(.strtol(arg, ((Object)0), 10));
+					lock.setTimeout(/*Error: Function owner not recognized*/strtol(arg, ((Object)0), 10));
 				} 
-			}  else if (!.strcmp(ModernizedCProgram.ctx.getName(), ".prop.lockdiscovery.activelock.locktoken.href")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ctx.getName(), ".prop.lockdiscovery.activelock.locktoken.href")) {
 				lock.setToken(ModernizedCProgram.xstrdup(ModernizedCProgram.ctx.getCdata()));
-				.UNRECOGNIZEDFUNCTIONNAME(hash_ctx);
-				.UNRECOGNIZEDFUNCTIONNAME(hash_ctx, generatedToken, .strlen(generatedToken));
-				.UNRECOGNIZEDFUNCTIONNAME(lock_token_hash, hash_ctx);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(hash_ctx);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(hash_ctx, generatedToken, /*Error: Function owner not recognized*/strlen(generatedToken));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(lock_token_hash, hash_ctx);
 				generatedTmpfile_suffix[0] = (byte)'_';
-				.memcpy(generatedTmpfile_suffix + 1, ModernizedCProgram.hash_to_hex(lock_token_hash), ModernizedCProgram.the_repository.getHash_algo().getHexsz());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedTmpfile_suffix + 1, ModernizedCProgram.hash_to_hex(lock_token_hash), ModernizedCProgram.the_repository.getHash_algo().getHexsz());
 			} 
 		} 
 	}
@@ -65,24 +65,24 @@ public class xml_ctx {
 		Object generatedUserFunc = ls.getUserFunc();
 		Object generatedUserData = ls.getUserData();
 		if (tag_closed) {
-			if (!.strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response") && generatedDentry_name) {
+			if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response") && generatedDentry_name) {
 				if (generatedDentry_flags & (-1024 << 0)) {
 					ModernizedCProgram.str_end_url_with_slash(generatedDentry_name, generatedDentry_name);
 					if (generatedFlags & (-1024 << 1)) {
-						.UNRECOGNIZEDFUNCTIONNAME(ls);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ls);
 					} 
-					if (.strcmp(generatedDentry_name, generatedPath) && generatedFlags & (-1024 << 2)) {
+					if (/*Error: Function owner not recognized*/strcmp(generatedDentry_name, generatedPath) && generatedFlags & (-1024 << 2)) {
 						ModernizedCProgram.remote_ls(generatedDentry_name, generatedFlags, generatedUserFunc, generatedUserData);
 					} 
 				}  else if (generatedFlags & (-1024 << 0)) {
-					.UNRECOGNIZEDFUNCTIONNAME(ls);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(ls);
 				} 
-			}  else if (!.strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response.href") && ModernizedCProgram.ctx.getCdata()) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response.href") && ModernizedCProgram.ctx.getCdata()) {
 				byte path = ModernizedCProgram.ctx.getCdata();
 				if (ModernizedCProgram.ctx.getCdata() == (byte)'h') {
-					ModernizedCProgram.path = .strstr(ModernizedCProgram.path, "//");
+					ModernizedCProgram.path = /*Error: Function owner not recognized*/strstr(ModernizedCProgram.path, "//");
 					if (ModernizedCProgram.path) {
-						ModernizedCProgram.path = .strchr(ModernizedCProgram.path + 2, (byte)'/');
+						ModernizedCProgram.path = /*Error: Function owner not recognized*/strchr(ModernizedCProgram.path + 2, (byte)'/');
 					} 
 				} 
 				if (ModernizedCProgram.path) {
@@ -90,17 +90,17 @@ public class xml_ctx {
 					if (generatedPath) {
 						ModernizedCProgram.url = generatedPath;
 					} 
-					if (.strncmp(ModernizedCProgram.path, ModernizedCProgram.url, ModernizedCProgram.repo.getPath_len())) {
+					if (/*Error: Function owner not recognized*/strncmp(ModernizedCProgram.path, ModernizedCProgram.url, ModernizedCProgram.repo.getPath_len())) {
 						();
 					} else {
 							ModernizedCProgram.path += ModernizedCProgram.repo.getPath_len();
 							ls.setDentry_name(ModernizedCProgram.xstrdup(ModernizedCProgram.path));
 					} 
 				} 
-			}  else if (!.strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response.propstat.prop.resourcetype.collection")) {
+			}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response.propstat.prop.resourcetype.collection")) {
 				generatedDentry_flags |=  (-1024 << 0);
 			} 
-		}  else if (!.strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(ModernizedCProgram.ctx.getName(), ".multistatus.response")) {
 			do {
 				ModernizedCProgram.free(generatedDentry_name);
 				(generatedDentry_name) = ((Object)0);

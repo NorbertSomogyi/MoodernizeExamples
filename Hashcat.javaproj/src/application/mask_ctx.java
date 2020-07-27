@@ -5,21 +5,21 @@ public class mask_ctx {
 	private  mp_sys;
 	private  mp_usr;
 	private Object bfs_cnt;
-	private  css_buf;
+	private [] css_buf;
 	private Object css_cnt;
 	private  root_table_buf;
 	private  markov_table_buf;
 	private  root_css_buf;
 	private  markov_css_buf;
 	private boolean mask_from_file;
-	private Byte masks;
+	private byte[][] masks;
 	private Object masks_pos;
 	private Object masks_cnt;
 	private Object masks_avail;
 	private Byte mask;
 	private mf mfs;
 	
-	public mask_ctx(boolean enabled,  mp_sys,  mp_usr, Object bfs_cnt,  css_buf, Object css_cnt,  root_table_buf,  markov_table_buf,  root_css_buf,  markov_css_buf, boolean mask_from_file, Byte masks, Object masks_pos, Object masks_cnt, Object masks_avail, Byte mask, mf mfs) {
+	public mask_ctx(boolean enabled,  mp_sys,  mp_usr, Object bfs_cnt, [] css_buf, Object css_cnt,  root_table_buf,  markov_table_buf,  root_css_buf,  markov_css_buf, boolean mask_from_file, byte[][] masks, Object masks_pos, Object masks_cnt, Object masks_avail, Byte mask, mf mfs) {
 		setEnabled(enabled);
 		setMp_sys(mp_sys);
 		setMp_usr(mp_usr);
@@ -65,10 +65,10 @@ public class mask_ctx {
 	public void setBfs_cnt(Object newBfs_cnt) {
 		bfs_cnt = newBfs_cnt;
 	}
-	public  getCss_buf() {
+	public [] getCss_buf() {
 		return css_buf;
 	}
-	public void setCss_buf( newCss_buf) {
+	public void setCss_buf([] newCss_buf) {
 		css_buf = newCss_buf;
 	}
 	public Object getCss_cnt() {
@@ -107,10 +107,10 @@ public class mask_ctx {
 	public void setMask_from_file(boolean newMask_from_file) {
 		mask_from_file = newMask_from_file;
 	}
-	public Byte getMasks() {
+	public byte[][] getMasks() {
 		return masks;
 	}
-	public void setMasks(Byte newMasks) {
+	public void setMasks(byte[][] newMasks) {
 		masks = newMasks;
 	}
 	public Object getMasks_pos() {

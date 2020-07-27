@@ -287,21 +287,21 @@ public class log {
 		int fd;
 		stat st = new stat();
 		Byte generatedEnd = this.getEnd();
-		.strcpy(generatedEnd, ".lock");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".lock");
 		Byte generatedPath = this.getPath();
 		Object generatedSt_mtime = st.getSt_mtime();
-		while ((fd = ModernizedCProgram.open(generatedPath, -1024 | -1024, 644)) < 0) {
-			if ((._errno()) != 17) {
+		while ((fd = /*Error: Function owner not recognized*/open(generatedPath, -1024 | -1024, 644)) < 0) {
+			if ((/*Error: Function owner not recognized*/_errno()) != 17) {
 				return -1;
 			} 
-			if (.stat(generatedPath, st) == 0 && .time(((Object)0)) - generatedSt_mtime > 300) {
-				.unlink(generatedPath);
+			if (/*Error: Function owner not recognized*/stat(generatedPath, st) == 0 && /*Error: Function owner not recognized*/time(((Object)0)) - generatedSt_mtime > 300) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(generatedPath);
 				continue;
 			} 
-			.sleep(/* relinquish the CPU for two seconds while waiting */2);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sleep(/* relinquish the CPU for two seconds while waiting */2);
 		}
-		ModernizedCProgram.close(fd);
-		if (.stat(generatedPath, st) == 0) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
+		if (/*Error: Function owner not recognized*/stat(generatedPath, st) == 0) {
 			this.setLock(generatedSt_mtime);
 		} 
 		return 0/* Update the modify time of the lock file to now, in order to prevent another
@@ -311,11 +311,11 @@ public class log {
 	public void log_touch() {
 		stat st = new stat();
 		Byte generatedEnd = this.getEnd();
-		.strcpy(generatedEnd, ".lock");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".lock");
 		Byte generatedPath = this.getPath();
-		.utimes(generatedPath, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/utimes(generatedPath, ((Object)0));
 		Object generatedSt_mtime = st.getSt_mtime();
-		if (.stat(generatedPath, st) == 0) {
+		if (/*Error: Function owner not recognized*/stat(generatedPath, st) == 0) {
 			this.setLock(generatedSt_mtime);
 		} 
 	}
@@ -324,11 +324,11 @@ public class log {
 	public int log_check() {
 		stat st = new stat();
 		Byte generatedEnd = this.getEnd();
-		.strcpy(generatedEnd, ".lock");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".lock");
 		Byte generatedPath = this.getPath();
 		Object generatedSt_mtime = st.getSt_mtime();
 		Object generatedLock = this.getLock();
-		if (.stat(generatedPath, st) || generatedSt_mtime != generatedLock) {
+		if (/*Error: Function owner not recognized*/stat(generatedPath, st) || generatedSt_mtime != generatedLock) {
 			return 1;
 		} 
 		log.log_touch();
@@ -337,12 +337,12 @@ public class log {
 	/* Unlock a previously acquired lock, but only if it's ours. */
 	public void log_unlock() {
 		if (log.log_check()) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
 		Byte generatedEnd = this.getEnd();
-		.strcpy(generatedEnd, ".lock");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".lock");
 		Byte generatedPath = this.getPath();
-		.unlink(generatedPath);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(generatedPath);
 		this.setLock(0/* Check the gzip header and read in the extra field, filling in the values in
 		   the log structure.  Return op on success or -1 if the gzip header was not as
 		   expected.  op is the current operation in progress last written to the extra
@@ -351,20 +351,20 @@ public class log {
 	}
 	public int log_head() {
 		int op;
-		byte[] buf = new byte[ + ];
+		byte[] buf = new byte[/*Error: sizeof expression not supported yet*/ + /*Error: sizeof expression not supported yet*/];
 		int generatedFd = this.getFd();
-		if (.lseek(generatedFd, 0, 0) < 0 || .read(generatedFd, buf,  + ) !=  +  || .memcmp(buf, ModernizedCProgram.log_gzhead, )) {
+		if (/*Error: Function owner not recognized*/lseek(generatedFd, 0, 0) < 0 || /*Error: Function owner not recognized*/read(generatedFd, buf, /*Error: sizeof expression not supported yet*/ + /*Error: sizeof expression not supported yet*/) != /*Error: sizeof expression not supported yet*/ + /*Error: sizeof expression not supported yet*/ || /*Error: Function owner not recognized*/memcmp(buf, ModernizedCProgram.log_gzhead, /*Error: sizeof expression not supported yet*/)) {
 			return -1;
 		} 
-		this.setFirst(((((buf + )[0] + ((uint)((buf + )[1]) << 8)) + ((ulong)((buf +  + 2)[0] + ((uint)((buf +  + 2)[1]) << 8)) << 16)) + ((off_t)(((buf +  + 4)[0] + ((uint)((buf +  + 4)[1]) << 8)) + ((ulong)((buf +  + 4 + 2)[0] + ((uint)((buf +  + 4 + 2)[1]) << 8)) << 16)) << 32)));
-		this.setLast(((((buf +  + 8)[0] + ((uint)((buf +  + 8)[1]) << 8)) + ((ulong)((buf +  + 8 + 2)[0] + ((uint)((buf +  + 8 + 2)[1]) << 8)) << 16)) + ((off_t)(((buf +  + 8 + 4)[0] + ((uint)((buf +  + 8 + 4)[1]) << 8)) + ((ulong)((buf +  + 8 + 4 + 2)[0] + ((uint)((buf +  + 8 + 4 + 2)[1]) << 8)) << 16)) << 32)));
-		this.setCcrc((((buf +  + 16)[0] + ((uint)((buf +  + 16)[1]) << 8)) + ((ulong)((buf +  + 16 + 2)[0] + ((uint)((buf +  + 16 + 2)[1]) << 8)) << 16)));
-		this.setClen((((buf +  + 20)[0] + ((uint)((buf +  + 20)[1]) << 8)) + ((ulong)((buf +  + 20 + 2)[0] + ((uint)((buf +  + 20 + 2)[1]) << 8)) << 16)));
-		this.setTcrc((((buf +  + 24)[0] + ((uint)((buf +  + 24)[1]) << 8)) + ((ulong)((buf +  + 24 + 2)[0] + ((uint)((buf +  + 24 + 2)[1]) << 8)) << 16)));
-		this.setTlen((((buf +  + 28)[0] + ((uint)((buf +  + 28)[1]) << 8)) + ((ulong)((buf +  + 28 + 2)[0] + ((uint)((buf +  + 28 + 2)[1]) << 8)) << 16)));
-		this.setStored(((buf +  + 32)[0] + ((uint)((buf +  + 32)[1]) << 8)));
-		this.setBack(3 + (buf[ + 34] & 7));
-		op = (buf[ + 34] >> 3) & 3;
+		this.setFirst(((((buf + /*Error: sizeof expression not supported yet*/)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/)[1]) << 8)) + ((ulong)((buf + /*Error: sizeof expression not supported yet*/ + 2)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 2)[1]) << 8)) << 16)) + ((off_t)(((buf + /*Error: sizeof expression not supported yet*/ + 4)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 4)[1]) << 8)) + ((ulong)((buf + /*Error: sizeof expression not supported yet*/ + 4 + 2)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 4 + 2)[1]) << 8)) << 16)) << 32)));
+		this.setLast(((((buf + /*Error: sizeof expression not supported yet*/ + 8)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 8)[1]) << 8)) + ((ulong)((buf + /*Error: sizeof expression not supported yet*/ + 8 + 2)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 8 + 2)[1]) << 8)) << 16)) + ((off_t)(((buf + /*Error: sizeof expression not supported yet*/ + 8 + 4)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 8 + 4)[1]) << 8)) + ((ulong)((buf + /*Error: sizeof expression not supported yet*/ + 8 + 4 + 2)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 8 + 4 + 2)[1]) << 8)) << 16)) << 32)));
+		this.setCcrc((((buf + /*Error: sizeof expression not supported yet*/ + 16)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 16)[1]) << 8)) + ((ulong)((buf + /*Error: sizeof expression not supported yet*/ + 16 + 2)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 16 + 2)[1]) << 8)) << 16)));
+		this.setClen((((buf + /*Error: sizeof expression not supported yet*/ + 20)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 20)[1]) << 8)) + ((ulong)((buf + /*Error: sizeof expression not supported yet*/ + 20 + 2)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 20 + 2)[1]) << 8)) << 16)));
+		this.setTcrc((((buf + /*Error: sizeof expression not supported yet*/ + 24)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 24)[1]) << 8)) + ((ulong)((buf + /*Error: sizeof expression not supported yet*/ + 24 + 2)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 24 + 2)[1]) << 8)) << 16)));
+		this.setTlen((((buf + /*Error: sizeof expression not supported yet*/ + 28)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 28)[1]) << 8)) + ((ulong)((buf + /*Error: sizeof expression not supported yet*/ + 28 + 2)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 28 + 2)[1]) << 8)) << 16)));
+		this.setStored(((buf + /*Error: sizeof expression not supported yet*/ + 32)[0] + ((uint)((buf + /*Error: sizeof expression not supported yet*/ + 32)[1]) << 8)));
+		this.setBack(3 + (buf[/*Error: sizeof expression not supported yet*/ + 34] & 7));
+		op = (buf[/*Error: sizeof expression not supported yet*/ + 34] >> 3) & 3;
 		return op/* Write over the extra field contents, marking the operation as op.  Use fsync
 		   to assure that the device is written to, and in the requested order.  This
 		   operation, and only this operation, is assumed to be atomic in order to
@@ -373,7 +373,7 @@ public class log {
 	}
 	public int log_mark(int op) {
 		int ret;
-		byte[] ext = new byte[];
+		byte[] ext = new byte[/*Error: sizeof expression not supported yet*/];
 		Object generatedFirst = this.getFirst();
 		do {
 			do {
@@ -473,7 +473,7 @@ public class log {
 		ext[34] = generatedBack - 3 + (op << 3);
 		int generatedFd = this.getFd();
 		ModernizedCProgram.fsync(generatedFd);
-		ret = .lseek(generatedFd, , 0) < 0 || .write(generatedFd, ext, ) !=  ? -1 : 0;
+		ret = /*Error: Function owner not recognized*/lseek(generatedFd, /*Error: sizeof expression not supported yet*/, 0) < 0 || /*Error: Function owner not recognized*/write(generatedFd, ext, /*Error: sizeof expression not supported yet*/) != /*Error: sizeof expression not supported yet*/ ? -1 : 0;
 		ModernizedCProgram.fsync(generatedFd);
 		return ret/* Rewrite the last block header bits and subsequent zero bits to get to a byte
 		   boundary, setting the last block bit if last is true, and then write the
@@ -496,7 +496,7 @@ public class log {
 		       the entire byte will be modified */);
 		buf[0] = 0;
 		int generatedFd = this.getFd();
-		if (back != 8 && (.lseek(generatedFd, generatedLast - len, 0) < 0 || .read(generatedFd, buf, 1) != 1)) {
+		if (back != 8 && (/*Error: Function owner not recognized*/lseek(generatedFd, generatedLast - len, 0) < 0 || /*Error: Function owner not recognized*/read(generatedFd, buf, 1) != 1)) {
 			return -1/* change the last-bit of the last stored block as requested -- note
 			       that all bits above the last-bit are set to zero, per the type bits
 			       of a stored block being 00 and per the convention that the bits to
@@ -514,7 +514,7 @@ public class log {
 			(buf + 4)[0] = generatedStored ^ -1024;
 			(buf + 4)[1] = (generatedStored ^ -1024) >> 8;
 		} while (0);
-		return .lseek(generatedFd, generatedLast - len, 0) < 0 || .write(generatedFd, buf + 2 - len, len + 4) != len + 4 || .lseek(generatedFd, generatedStored, 1) < 0 ? -1 : 0/* Append len bytes from data to the locked and open log file.  len may be zero
+		return /*Error: Function owner not recognized*/lseek(generatedFd, generatedLast - len, 0) < 0 || /*Error: Function owner not recognized*/write(generatedFd, buf + 2 - len, len + 4) != len + 4 || /*Error: Function owner not recognized*/lseek(generatedFd, generatedStored, 1) < 0 ? -1 : 0/* Append len bytes from data to the locked and open log file.  len may be zero
 		   if recovering and no .add file was found.  In that case, the previous state
 		   of the foo.gz file is restored.  The data is appended uncompressed in
 		   deflate stored blocks.  Return -1 if there was an error reading or writing
@@ -541,7 +541,7 @@ public class log {
 				put = (uint)len;
 			} 
 			if (put) {
-				if (.write(generatedFd, data, put) != put) {
+				if (/*Error: Function owner not recognized*/write(generatedFd, data, put) != put) {
 					return -1;
 				} 
 				;
@@ -584,16 +584,16 @@ public class log {
 				(buf + 4 + 2)[1] = (generatedTlen >> 16) >> 8;
 			} while (0);
 		} while (0);
-		if (.write(generatedFd, buf, 8) != 8 || (end = .lseek(generatedFd, 0, 1)) < 0 || .ftruncate(generatedFd, end)) {
+		if (/*Error: Function owner not recognized*/write(generatedFd, buf, 8) != 8 || (end = /*Error: Function owner not recognized*/lseek(generatedFd, 0, 1)) < 0 || /*Error: Function owner not recognized*/ftruncate(generatedFd, end)) {
 			return -1;
 		} 
 		if (log.log_mark(/* write the extra field, marking the log file as done, delete .add file */0)) {
 			return -1;
 		} 
 		Byte generatedEnd = this.getEnd();
-		.strcpy(generatedEnd, ".add");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".add");
 		Byte generatedPath = this.getPath();
-		.unlink(generatedPath);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(generatedPath);
 		return 0/* Replace the foo.dict file with the foo.temp file.  Also delete the foo.add
 		   file, since the compress operation may have been interrupted before that was
 		   done.  Returns 1 if memory could not be allocated, or -1 if reading or
@@ -606,20 +606,20 @@ public class log {
 		int ret;
 		byte dest;
 		Byte generatedEnd = this.getEnd();
-		.strcpy(generatedEnd, /* delete foo.add file */".add");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, /* delete foo.add file */".add");
 		Byte generatedPath = this.getPath();
-		.unlink(generatedPath);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(generatedPath);
 		;
-		.strcpy(generatedEnd, /* rename foo.name to foo.dict, replacing foo.dict if it exists */".dict");
-		dest = .malloc(.strlen(generatedPath) + 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, /* rename foo.name to foo.dict, replacing foo.dict if it exists */".dict");
+		dest = /*Error: Function owner not recognized*/malloc(/*Error: Function owner not recognized*/strlen(generatedPath) + 1);
 		if (dest == ((Object)0)) {
 			return -2;
 		} 
-		.strcpy(dest, generatedPath);
-		.strcpy(generatedEnd, ".temp");
-		ret = .rename(generatedPath, dest);
-		.free(dest);
-		if (ret && (._errno()) != 2) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(dest, generatedPath);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".temp");
+		ret = /*Error: Function owner not recognized*/rename(generatedPath, dest);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(dest);
+		if (ret && (/*Error: Function owner not recognized*/_errno()) != 2) {
 			return -1;
 		} 
 		;
@@ -657,14 +657,14 @@ public class log {
 			strm.setZalloc(/* set up for deflate, allocating memory */0);
 			strm.setZfree(0);
 			strm.setOpaque(0);
-			if (ModernizedCProgram.deflateInit2_((strm), ((true)), (true), (true), (true), (false), "1.2.11", (int)) != 0) {
+			if (ModernizedCProgram.deflateInit2_((strm), ((true)), (true), (true), (true), (false), "1.2.11", (int)/*Error: Unsupported expression*/) != 0) {
 				return -2;
 			} 
-			.strcpy(generatedEnd, /* read in dictionary (last 32K of data that was compressed) */".dict");
-			fd = ModernizedCProgram.open(generatedPath, 0, 0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, /* read in dictionary (last 32K of data that was compressed) */".dict");
+			fd = /*Error: Function owner not recognized*/open(generatedPath, 0, 0);
 			if (fd >= 0) {
-				dict = .read(fd, buf, -1024);
-				ModernizedCProgram.close(fd);
+				dict = /*Error: Function owner not recognized*/read(fd, buf, -1024);
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
 				if (dict < 0) {
 					ModernizedCProgram.deflateEnd(strm);
 					return -1;
@@ -674,8 +674,8 @@ public class log {
 				} 
 			} 
 			log.log_touch();
-			if (.lseek(generatedFd, generatedFirst - (generatedBack > 8 ? 2 : /* prime deflate with last bits of previous block, position write
-			           pointer to write those bits and overwrite what follows */1), 0) < 0 || .read(generatedFd, buf, 1) != 1 || .lseek(generatedFd, -1, 1) < 0) {
+			if (/*Error: Function owner not recognized*/lseek(generatedFd, generatedFirst - (generatedBack > 8 ? 2 : /* prime deflate with last bits of previous block, position write
+			           pointer to write those bits and overwrite what follows */1), 0) < 0 || /*Error: Function owner not recognized*/read(generatedFd, buf, 1) != 1 || /*Error: Function owner not recognized*/lseek(generatedFd, -1, 1) < 0) {
 				ModernizedCProgram.deflateEnd(strm);
 				return -1;
 			} 
@@ -690,7 +690,7 @@ public class log {
 					strm.setNext_out(buf);
 					ModernizedCProgram.deflate(strm, len ? 0 : 1);
 					got = -1024 - generatedAvail_out;
-					if (got && .write(generatedFd, buf, got) != got) {
+					if (got && /*Error: Function owner not recognized*/write(generatedFd, buf, got) != got) {
 						ModernizedCProgram.deflateEnd(strm);
 						return -1;
 					} 
@@ -699,7 +699,7 @@ public class log {
 			} while (len);
 			ModernizedCProgram.deflateEnd(strm);
 			;
-			if ((this.setFirst(.lseek(generatedFd, -1, 1))) < 0 || .read(generatedFd, buf, 1) != 1) {
+			if ((this.setFirst(/*Error: Function owner not recognized*/lseek(generatedFd, -1, 1))) < 0 || /*Error: Function owner not recognized*/read(generatedFd, buf, 1) != 1) {
 				return -1;
 			} 
 			generatedFirst++;
@@ -739,7 +739,7 @@ public class log {
 				(buf + 4 + 2)[1] = (generatedTlen >> 16) >> 8;
 			} while (0);
 		} while (0);
-		if (log.log_last(1) || .write(generatedFd, buf, 8) != 8 || (end = .lseek(generatedFd, 0, 1)) < 0 || .ftruncate(generatedFd, end)) {
+		if (log.log_last(1) || /*Error: Function owner not recognized*/write(generatedFd, buf, 8) != 8 || (end = /*Error: Function owner not recognized*/lseek(generatedFd, 0, 1)) < 0 || /*Error: Function owner not recognized*/ftruncate(generatedFd, end)) {
 			return -1;
 		} 
 		;
@@ -752,17 +752,17 @@ public class log {
 	public void log_log(int op, Byte record) {
 		time_t now = new time_t();
 		FILE rec = new FILE();
-		now = .time(((Object)0));
+		now = /*Error: Function owner not recognized*/time(((Object)0));
 		Byte generatedEnd = this.getEnd();
-		.strcpy(generatedEnd, ".repairs");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".repairs");
 		Byte generatedPath = this.getPath();
-		rec = .fopen(generatedPath, "a");
+		rec = /*Error: Function owner not recognized*/fopen(generatedPath, "a");
 		if (rec == ((Object)0)) {
-			return ;
+			return /*Error: Unsupported expression*/;
 		} 
-		.fprintf(rec, "%.24s %s recovery: %s\n", .ctime(now), op == 1 ? "append" : (op == 2 ? "compress" : "replace"), record);
-		.fclose(rec);
-		return ;/* Recover the interrupted operation op.  First read foo.add for recovering an
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(rec, "%.24s %s recovery: %s\n", /*Error: Function owner not recognized*/ctime(now), op == 1 ? "append" : (op == 2 ? "compress" : "replace"), record);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fclose(rec);
+		return /*Error: Unsupported expression*/;/* Recover the interrupted operation op.  First read foo.add for recovering an
 		   append or compress operation.  Return -1 if there was an error reading or
 		   writing foo.gz or reading an existing foo.add, or -2 if there was a memory
 		   allocation failure. */
@@ -778,19 +778,19 @@ public class log {
 		Byte generatedPath = this.getPath();
 		Object generatedSt_size = st.getSt_size();
 		if (op == 1 || op == /* load foo.add file if expected and present */2) {
-			.strcpy(generatedEnd, ".add");
-			if (.stat(generatedPath, st) == 0 && generatedSt_size) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".add");
+			if (/*Error: Function owner not recognized*/stat(generatedPath, st) == 0 && generatedSt_size) {
 				len = (size_t)(generatedSt_size);
-				if ((off_t)len != generatedSt_size || (data = .malloc(generatedSt_size)) == ((Object)0)) {
+				if ((off_t)len != generatedSt_size || (data = /*Error: Function owner not recognized*/malloc(generatedSt_size)) == ((Object)0)) {
 					log.log_log(op, "allocation failure");
 					return -2;
 				} 
-				if ((fd = ModernizedCProgram.open(generatedPath, 0, 0)) < 0) {
+				if ((fd = /*Error: Function owner not recognized*/open(generatedPath, 0, 0)) < 0) {
 					log.log_log(op, ".add file read failure");
 					return -1;
 				} 
-				ret = (size_t).read(fd, data, len) != len;
-				ModernizedCProgram.close(fd);
+				ret = (size_t)/*Error: Function owner not recognized*/read(fd, data, len) != len;
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(fd);
 				if (ret) {
 					log.log_log(op, ".add file read failure");
 					return -1;
@@ -801,18 +801,18 @@ public class log {
 			} 
 		} 
 		switch (/* recover the interrupted operation */op) {
+		case 1:
+				ret = log.log_append(data, len);
+				break;
 		case 3:
 				ret = log.log_replace();
 		case 2:
 				ret = log.log_compress(data, len);
 				break;
-		case 1:
-				ret = log.log_append(data, len);
-				break;
 		}
 		log.log_log(op, ret ? "failure" : /* log status */"complete");
 		if (data != ((Object)/* clean up */0)) {
-			.free(data);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(data);
 		} 
 		return ret;
 	}
@@ -820,7 +820,7 @@ public class log {
 	public void log_close() {
 		int generatedFd = this.getFd();
 		if (generatedFd >= 0) {
-			ModernizedCProgram.close(generatedFd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd);
 		} 
 		this.setFd(-1);
 		log/* Open foo.gz, verify the header, and load the extra field contents, after
@@ -838,27 +838,27 @@ public class log {
 		int generatedFd = this.getFd();
 		if (generatedFd >= /* release open file resource if left over -- can occur if lock lost
 		       between gzlog_open() and gzlog_write() */0) {
-			ModernizedCProgram.close(generatedFd);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd);
 		} 
 		this.setFd(-1);
 		if (log.log_lock() < /* negotiate exclusive access */0) {
 			return -1;
 		} 
 		Byte generatedEnd = this.getEnd();
-		.strcpy(generatedEnd, /* open the log file, foo.gz */".gz");
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, /* open the log file, foo.gz */".gz");
 		Byte generatedPath = this.getPath();
-		this.setFd(ModernizedCProgram.open(generatedPath, 2 | -1024, 644));
+		this.setFd(/*Error: Function owner not recognized*/open(generatedPath, 2 | -1024, 644));
 		if (generatedFd < 0) {
 			log.log_close();
 			return -1;
 		} 
-		if (.lseek(generatedFd, 0, 2) == /* if new, initialize foo.gz with an empty log, delete old dictionary */0) {
-			if (.write(generatedFd, ModernizedCProgram.log_gzhead, ) !=  || .write(generatedFd, ModernizedCProgram.log_gzext, ) !=  || .write(generatedFd, ModernizedCProgram.log_gzbody, ) != ) {
+		if (/*Error: Function owner not recognized*/lseek(generatedFd, 0, 2) == /* if new, initialize foo.gz with an empty log, delete old dictionary */0) {
+			if (/*Error: Function owner not recognized*/write(generatedFd, ModernizedCProgram.log_gzhead, /*Error: sizeof expression not supported yet*/) != /*Error: sizeof expression not supported yet*/ || /*Error: Function owner not recognized*/write(generatedFd, ModernizedCProgram.log_gzext, /*Error: sizeof expression not supported yet*/) != /*Error: sizeof expression not supported yet*/ || /*Error: Function owner not recognized*/write(generatedFd, ModernizedCProgram.log_gzbody, /*Error: sizeof expression not supported yet*/) != /*Error: sizeof expression not supported yet*/) {
 				log.log_close();
 				return -1;
 			} 
-			.strcpy(generatedEnd, ".dict");
-			.unlink(generatedPath);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".dict");
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(generatedPath);
 		} 
 		if ((op = log.log_head()) < /* verify log file and load extra field information */0) {
 			log.log_close();

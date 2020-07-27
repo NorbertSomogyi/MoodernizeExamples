@@ -1,12 +1,12 @@
 package application;
 
 public class rtmp_common {
-	private byte service;
+	private Byte service;
 	private Byte server;
 	private Byte key;
 	private Byte output;
 	
-	public rtmp_common(byte service, Byte server, Byte key, Byte output) {
+	public rtmp_common(Byte service, Byte server, Byte key, Byte output) {
 		setService(service);
 		setServer(server);
 		setKey(key);
@@ -15,10 +15,10 @@ public class rtmp_common {
 	public rtmp_common() {
 	}
 	
-	public byte getService() {
+	public Byte getService() {
 		return service;
 	}
-	public void setService(byte newService) {
+	public void setService(Byte newService) {
 		service = newService;
 	}
 	public Byte getServer() {

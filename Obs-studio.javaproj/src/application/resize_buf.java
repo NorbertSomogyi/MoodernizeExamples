@@ -33,14 +33,14 @@ public class resize_buf {
 		Object generatedBuf = this.getBuf();
 		Object generatedCapacity = this.getCapacity();
 		if (!generatedBuf) {
-			this.setBuf(.malloc(size));
+			this.setBuf(/*Error: Function owner not recognized*/malloc(size));
 			this.setSize(size);
 			this.setCapacity(size);
 		} else {
 				if (generatedCapacity < size) {
 					size_t capx2 = generatedCapacity * 2;
 					size_t new_cap = capx2 > size ? capx2 : size;
-					this.setBuf(.realloc(generatedBuf, new_cap));
+					this.setBuf(/*Error: Function owner not recognized*/realloc(generatedBuf, new_cap));
 					this.setCapacity(new_cap);
 				} 
 				this.setSize(size);
@@ -48,7 +48,7 @@ public class resize_buf {
 	}
 	public void resize_buf_free() {
 		Object generatedBuf = this.getBuf();
-		.free(generatedBuf);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuf);
 	}
 	public Object getBuf() {
 		return buf;

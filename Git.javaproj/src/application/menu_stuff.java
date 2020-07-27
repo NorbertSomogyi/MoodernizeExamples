@@ -13,9 +13,9 @@ public class menu_stuff {
 	public menu_stuff() {
 	}
 	
-	public void print_highlight_menu_stuff(int chosen) {
+	public void print_highlight_menu_stuff(Integer chosen) {
 		string_list menu_list = new string_list(((Object)0), 0, 0, 1, ((Object)0));
-		strbuf menu = new strbuf(, , );
+		strbuf menu = new strbuf(/*Error: Invalid initializer*/, /*Error: Invalid initializer*/, /*Error: Invalid initializer*/);
 		menu_item menu_item = new menu_item();
 		string_list_item string_list_item = new string_list_item();
 		int i;
@@ -24,8 +24,9 @@ public class menu_stuff {
 		Object generatedTitle = menu_item.getTitle();
 		int generatedSelected = menu_item.getSelected();
 		byte generatedHotkey = menu_item.getHotkey();
-		byte generatedBuf = menu.getBuf();
-		byte generatedString = string_list_item.getString();
+		byte[] generatedBuf = menu.getBuf();
+		string_list_item string_list_item = new string_list_item();
+		byte[] generatedString = string_list_item.getString();
 		menu_stuff_type generatedType = this.getType();
 		switch (generatedType) {
 		case menu_stuff_type.MENU_STUFF_TYPE_MENU_ITEM:
@@ -48,7 +49,7 @@ public class menu_stuff {
 								menu.strbuf_addch(p);
 						} 
 					}
-					menu_list.string_list_append(generatedBuf);
+					string_list_item.string_list_append(menu_list, generatedBuf);
 					menu.strbuf_setlen(0);
 				}
 				break;
@@ -59,7 +60,7 @@ public class menu_stuff {
 						(chosen)[i] = 0;
 					} 
 					menu.strbuf_addf("%s%2d: %s", (chosen)[i] ? "*" : " ", i + 1, generatedString);
-					menu_list.string_list_append(generatedBuf);
+					string_list_item.string_list_append(menu_list, generatedBuf);
 					menu.strbuf_setlen(0);
 					i++;
 				}
@@ -77,26 +78,14 @@ public class menu_stuff {
 		int i;
 		int len;
 		int found = 0;
-		len = .strlen(choice);
+		len = /*Error: Function owner not recognized*/strlen(choice);
 		Object generatedStuff = this.getStuff();
 		int generatedNr = this.getNr();
 		byte generatedHotkey = menu_item.getHotkey();
 		Object generatedTitle = menu_item.getTitle();
-		byte generatedString = string_list_item.getString();
+		byte[] generatedString = string_list_item.getString();
 		menu_stuff_type generatedType = this.getType();
 		switch (generatedType) {
-		case menu_stuff_type.MENU_STUFF_TYPE_STRING_LIST:
-				string_list_item = ((string_list)generatedStuff).getItems();
-				for (i = 0; i < generatedNr; ) {
-					if (!.strncasecmp(choice, generatedString, len)) {
-						if (found) {
-							found = 0;
-							break;
-						} 
-						found = i + 1;
-					} 
-				}
-				break;
 		case menu_stuff_type.MENU_STUFF_TYPE_MENU_ITEM:
 				menu_item = (menu_item)generatedStuff;
 				for (i = 0; i < generatedNr; ) {
@@ -104,7 +93,7 @@ public class menu_stuff {
 						found = i + 1;
 						break;
 					} 
-					if (!.strncasecmp(choice, generatedTitle, len)) {
+					if (!/*Error: Function owner not recognized*/strncasecmp(choice, generatedTitle, len)) {
 						if (found) {
 							if (len == 1) {
 								found = -/* continue for hotkey matching */1;
@@ -115,6 +104,18 @@ public class menu_stuff {
 						} else {
 								found = i + 1;
 						} 
+					} 
+				}
+				break;
+		case menu_stuff_type.MENU_STUFF_TYPE_STRING_LIST:
+				string_list_item = ((string_list)generatedStuff).getItems();
+				for (i = 0; i < generatedNr; ) {
+					if (!/*Error: Function owner not recognized*/strncasecmp(choice, generatedString, len)) {
+						if (found) {
+							found = 0;
+							break;
+						} 
+						found = i + 1;
 					} 
 				}
 				break;

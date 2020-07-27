@@ -26,11 +26,11 @@ public class dirent_prec_psx {
 		byte generatedD_type = res.getD_type();
 		Object generatedIc_precompose = prec_dir.getIc_precompose();
 		if (res) {
-			size_t namelenz = .strlen(generatedD_name) + /* \0 */1;
+			size_t namelenz = /*Error: Function owner not recognized*/strlen(generatedD_name) + /* \0 */1;
 			size_t new_maxlen = namelenz;
-			int ret_errno = (._errno());
+			int ret_errno = (/*Error: Function owner not recognized*/_errno());
 			if (new_maxlen > generatedDirent_nfc.getMax_name_len()) {
-				size_t new_len =  + new_maxlen - ;
+				size_t new_len = /*Error: Unsupported expression*/ + new_maxlen - /*Error: sizeof expression not supported yet*/;
 				prec_dir.setDirent_nfc(ModernizedCProgram.xrealloc(generatedDirent_nfc, new_len));
 				generatedDirent_nfc.setMax_name_len(new_maxlen);
 			} 
@@ -44,9 +44,9 @@ public class dirent_prec_psx {
 						size_t inleft = namelenz;
 						byte outpos = generatedD_name[0];
 						size_t outsz = generatedDirent_nfc.getMax_name_len();
-						(._errno()) = 0;
-						.iconv(generatedIc_precompose, cp, inleft, outpos, outsz);
-						if ((._errno()) || inleft/*
+						(/*Error: Function owner not recognized*/_errno()) = 0;
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/iconv(generatedIc_precompose, cp, inleft, outpos, outsz);
+						if ((/*Error: Function owner not recognized*/_errno()) || inleft/*
 											 * iconv() failed and errno could be E2BIG, EILSEQ, EINVAL, EBADF
 											 * MacOS X avoids illegal byte sequences.
 											 * If they occur on a mounted drive (e.g. NFS) it is not worth to
@@ -59,9 +59,9 @@ public class dirent_prec_psx {
 					namelenz = 0;
 			} 
 			if (!namelenz) {
-				.strlcpy(generatedD_name, generatedD_name, generatedDirent_nfc.getMax_name_len());
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strlcpy(generatedD_name, generatedD_name, generatedDirent_nfc.getMax_name_len());
 			} 
-			(._errno()) = ret_errno;
+			(/*Error: Function owner not recognized*/_errno()) = ret_errno;
 			return generatedDirent_nfc;
 		} 
 		return ((Object)0);

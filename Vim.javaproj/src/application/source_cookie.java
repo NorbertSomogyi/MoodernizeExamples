@@ -47,15 +47,15 @@ public class source_cookie {
 		Object generatedGa_data = ga.getGa_data();
 		int generatedGa_len = ga.getGa_len();
 		int generatedGa_maxlen = ga.getGa_maxlen();
-		for (; ; ) {
+		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			if (ga.ga_grow(120) == 0) {
 				break;
 			} 
 			buf = (char_u)generatedGa_data;
-			if (.fgets((byte)buf + generatedGa_len, generatedGa_maxlen - generatedGa_len, ModernizedCProgram.sp.getFp()) == ((Object)0)) {
+			if (/*Error: Function owner not recognized*/fgets((byte)buf + generatedGa_len, generatedGa_maxlen - generatedGa_len, ModernizedCProgram.sp.getFp()) == ((Object)0)) {
 				break;
 			} 
-			len = generatedGa_len + (int).strlen((byte)(buf + generatedGa_len));
+			len = generatedGa_len + (int)/*Error: Function owner not recognized*/strlen((byte)(buf + generatedGa_len));
 			if ((len == 1 || (len >= 2 && buf[len - 2] == (byte)'\n')) && ModernizedCProgram.sp.getFileformat() == 1 && buf[len - 1] == 26) {
 				buf[len - 1] = (byte)'\000';
 				break;

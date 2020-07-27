@@ -56,7 +56,7 @@ public class sign {
 		Object generatedSn_name = sp.getSn_name();
 		sign generatedSn_next = sp.getSn_next();
 		for (sp = ModernizedCProgram.first_sign; sp != ((Object)0); sp = generatedSn_next) {
-			if (.strcmp((byte)(generatedSn_name), (byte)(name)) == 0) {
+			if (/*Error: Function owner not recognized*/strcmp((byte)(generatedSn_name), (byte)(name)) == 0) {
 				break;
 			} 
 			if (sp_prev != ((Object)0)) {
@@ -71,13 +71,13 @@ public class sign {
 		sign_T sp = new sign_T();
 		sign_T lp = new sign_T();
 		int start = ModernizedCProgram.next_sign_typenr;
-		// Allocate a new sign.// Allocate a new sign.sp = ModernizedCProgram.alloc_clear_id(, .aid_sign_define_by_name);
+		// Allocate a new sign.// Allocate a new sign.sp = ModernizedCProgram.alloc_clear_id(/*Error: Unsupported expression*/, .aid_sign_define_by_name);
 		if (sp == ((Object)0)) {
 			return ((Object)0);
 		} 
 		int generatedSn_typenr = lp.getSn_typenr();
 		sign generatedSn_next = lp.getSn_next();
-		// This only happens after wrapping around.  Hopefully// another one got deleted and we can use its number.for (lp = ModernizedCProgram.first_sign; lp != ((Object)0); ) {
+		// This only happens after wrapping around.  Hopefully// another one got deleted and we can use its number.for (lp = ModernizedCProgram.first_sign; lp != ((Object)0); /*Error: Unsupported expression*/) {
 			if (generatedSn_typenr == ModernizedCProgram.next_sign_typenr) {
 				++ModernizedCProgram.next_sign_typenr;
 				if (ModernizedCProgram.next_sign_typenr == 65535) {
@@ -120,20 +120,20 @@ public class sign {
 		char_u endp = new char_u();
 		int cells;
 		int len;
-		endp = text + (int).strlen((byte)(text));
+		endp = text + (int)/*Error: Function owner not recognized*/strlen((byte)(text));
 		// Remove backslashes so that it is possible to use a space.for (s = text; s + 1 < endp; ++s) {
 			if (s == (byte)'\\') {
-				.memmove((byte)((s)), (byte)((s + 1)), (size_t)(.strlen((byte)(s + 1)) + 1));
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memmove((byte)((s)), (byte)((s + 1)), (size_t)(/*Error: Function owner not recognized*/strlen((byte)(s + 1)) + 1));
 				--endp;
 			} 
 		}
 		// Count cells and check for non-printable charsif (has_mbyte) {
 			cells = 0;
-			for (s = text; s < endp; s += .UNRECOGNIZEDFUNCTIONNAME(s)) {
-				if (!ModernizedCProgram.vim_isprintc(.UNRECOGNIZEDFUNCTIONNAME(s))) {
+			for (s = text; s < endp; s += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s)) {
+				if (!ModernizedCProgram.vim_isprintc(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s))) {
 					break;
 				} 
-				cells += .UNRECOGNIZEDFUNCTIONNAME(s);
+				cells += /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(s);
 			}
 		} else {
 				for (s = text; s < endp; ++s) {
@@ -151,7 +151,7 @@ public class sign {
 		// with a space.// with a space.len = (int)(endp - text + ((cells == 1) ? 1 : 0));
 		ModernizedCProgram.sp.setSn_text(ModernizedCProgram.vim_strnsave(text, len));
 		// For single character sign text, pad with a space.if (ModernizedCProgram.sp.getSn_text() != ((Object)0) && cells == 1) {
-			.strcpy((byte)(ModernizedCProgram.sp.getSn_text() + len - 1), (byte)(" "));
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy((byte)(ModernizedCProgram.sp.getSn_text() + len - 1), (byte)(" "));
 		} 
 		return 1/*
 		 * Define a new sign or update an existing sign

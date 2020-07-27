@@ -27,7 +27,7 @@ public class checkout {
 	
 	public void enable_delayed_checkout() {
 		if (!ModernizedCProgram.state.getDelayed_checkout()) {
-			ModernizedCProgram.state.setDelayed_checkout(ModernizedCProgram.xmalloc());
+			ModernizedCProgram.state.setDelayed_checkout(ModernizedCProgram.xmalloc(/*Error: sizeof expression not supported yet*/));
 			ModernizedCProgram.state.getDelayed_checkout().setState(ce_delay_state.CE_CAN_DELAY);
 			ModernizedCProgram.state.getDelayed_checkout().getFilters().string_list_init(0);
 			ModernizedCProgram.state.getDelayed_checkout().getPaths().string_list_init(0);
@@ -51,8 +51,8 @@ public class checkout {
 		progress progress = new progress();
 		progress = progress.start_delayed_progress(ModernizedCProgram._("Filtering content"), delayed_object_count);
 		string_list generatedFilters = dco.getFilters();
-		string_list_item generatedItems = (generatedFilters).getItems();
-		byte generatedString = filter.getString();
+		string_list_item[] generatedItems = (generatedFilters).getItems();
+		byte[] generatedString = filter.getString();
 		Object generatedUtil = path.getUtil();
 		cache_entry cache_entry = new cache_entry();
 		stat_data generatedCe_stat_data = ce.getCe_stat_data();
@@ -87,7 +87,7 @@ public class checkout {
 						filter.setString("");
 						continue;
 					} 
-					ce = cache_entry.index_file_exists(ModernizedCProgram.state.getIstate(), generatedString, .strlen(generatedString), 0);
+					ce = cache_entry.index_file_exists(ModernizedCProgram.state.getIstate(), generatedString, /*Error: Function owner not recognized*/strlen(generatedString), 0);
 					if (ce) {
 						errs |=  ce.checkout_entry(ModernizedCProgram.state, ((Object)0), nr_checkouts);
 						filtered_bytes += generatedSd_size;

@@ -44,7 +44,7 @@ public class git_transport_options {
 	}
 	
 	public void add_negotiation_tips() {
-		oid_array oids = ModernizedCProgram.xcalloc(1, );
+		oid_array oids = ModernizedCProgram.xcalloc(1, /*Error: sizeof expression not supported yet*/);
 		int i;
 		int generatedNr = oids.getNr();
 		for (i = 0; i < ModernizedCProgram.negotiation_tip.getNr(); i++) {
@@ -68,51 +68,51 @@ public class git_transport_options {
 	}
 	public int set_git_option(Object name, Object value) {
 		list_objects_filter_options generatedFilter_options = this.getFilter_options();
-		if (!.strcmp(name, "uploadpack")) {
+		if (!/*Error: Function owner not recognized*/strcmp(name, "uploadpack")) {
 			this.setUploadpack(value);
 			return 0;
-		}  else if (!.strcmp(name, "receivepack")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "receivepack")) {
 			this.setReceivepack(value);
 			return 0;
-		}  else if (!.strcmp(name, "thin")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "thin")) {
 			this.setThin(!!value);
 			return 0;
-		}  else if (!.strcmp(name, "followtags")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "followtags")) {
 			this.setFollowtags(!!value);
 			return 0;
-		}  else if (!.strcmp(name, "keep")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "keep")) {
 			this.setKeep(!!value);
 			return 0;
-		}  else if (!.strcmp(name, "updateshallow")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "updateshallow")) {
 			this.setUpdate_shallow(!!value);
 			return 0;
-		}  else if (!.strcmp(name, "depth")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "depth")) {
 			if (!value) {
 				this.setDepth(0);
 			} else {
 					byte end;
-					this.setDepth(.strtol(value, end, 0));
+					this.setDepth(/*Error: Function owner not recognized*/strtol(value, end, 0));
 					if (end) {
 						ModernizedCProgram.die(ModernizedCProgram._("transport: invalid depth option '%s'"), value);
 					} 
 			} 
 			return 0;
-		}  else if (!.strcmp(name, "deepen-since")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "deepen-since")) {
 			this.setDeepen_since(value);
 			return 0;
-		}  else if (!.strcmp(name, "deepen-not")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "deepen-not")) {
 			this.setDeepen_not((string_list)value);
 			return 0;
-		}  else if (!.strcmp(name, "deepen-relative")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "deepen-relative")) {
 			this.setDeepen_relative(!!value);
 			return 0;
-		}  else if (!.strcmp(name, "from-promisor")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "from-promisor")) {
 			this.setFrom_promisor(!!value);
 			return 0;
-		}  else if (!.strcmp(name, "no-dependents")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "no-dependents")) {
 			this.setNo_dependents(!!value);
 			return 0;
-		}  else if (!.strcmp(name, "filter")) {
+		}  else if (!/*Error: Function owner not recognized*/strcmp(name, "filter")) {
 			generatedFilter_options.list_objects_filter_die_if_populated();
 			generatedFilter_options.parse_list_objects_filter(value);
 			return 0;

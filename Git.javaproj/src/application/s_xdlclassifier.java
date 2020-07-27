@@ -3,14 +3,14 @@ package application;
 public class s_xdlclassifier {
 	private int hbits;
 	private long hsize;
-	private s_xdlclass rchash;
+	private s_xdlclass[][] rchash;
 	private s_chastore ncha;
-	private s_xdlclass rcrecs;
+	private s_xdlclass[][] rcrecs;
 	private long alloc;
 	private long count;
 	private long flags;
 	
-	public s_xdlclassifier(int hbits, long hsize, s_xdlclass rchash, s_chastore ncha, s_xdlclass rcrecs, long alloc, long count, long flags) {
+	public s_xdlclassifier(int hbits, long hsize, s_xdlclass[][] rchash, s_chastore ncha, s_xdlclass[][] rcrecs, long alloc, long count, long flags) {
 		setHbits(hbits);
 		setHsize(hsize);
 		setRchash(rchash);
@@ -29,19 +29,19 @@ public class s_xdlclassifier {
 		int generatedHbits = this.getHbits();
 		this.setHsize(1 << generatedHbits);
 		s_chastore generatedNcha = this.getNcha();
-		if (generatedNcha.xdl_cha_init(, size / 4 + 1) < 0) {
+		if (generatedNcha.xdl_cha_init(/*Error: Unsupported expression*/, size / 4 + 1) < 0) {
 			return -1;
 		} 
 		long generatedHsize = this.getHsize();
-		if (!(this.setRchash((xdlclass_t)ModernizedCProgram.xmalloc(generatedHsize * )))) {
+		if (!(this.setRchash((xdlclass_t)ModernizedCProgram.xmalloc(generatedHsize * /*Error: Unsupported expression*/)))) {
 			generatedNcha.xdl_cha_free();
 			return -1;
 		} 
-		s_xdlclass generatedRchash = this.getRchash();
-		.memset(generatedRchash, 0, generatedHsize * );
+		s_xdlclass[][] generatedRchash = this.getRchash();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(generatedRchash, 0, generatedHsize * /*Error: Unsupported expression*/);
 		this.setAlloc(size);
 		long generatedAlloc = this.getAlloc();
-		if (!(this.setRcrecs((xdlclass_t)ModernizedCProgram.xmalloc(generatedAlloc * )))) {
+		if (!(this.setRcrecs((xdlclass_t)ModernizedCProgram.xmalloc(generatedAlloc * /*Error: Unsupported expression*/)))) {
 			ModernizedCProgram.free(generatedRchash);
 			generatedNcha.xdl_cha_free();
 			return -1;
@@ -50,9 +50,9 @@ public class s_xdlclassifier {
 		return 0;
 	}
 	public void xdl_free_classifier() {
-		s_xdlclass generatedRcrecs = this.getRcrecs();
+		s_xdlclass[][] generatedRcrecs = this.getRcrecs();
 		ModernizedCProgram.free(generatedRcrecs);
-		s_xdlclass generatedRchash = this.getRchash();
+		s_xdlclass[][] generatedRchash = this.getRchash();
 		ModernizedCProgram.free(generatedRchash);
 		s_chastore generatedNcha = this.getNcha();
 		generatedNcha.xdl_cha_free();
@@ -69,10 +69,10 @@ public class s_xdlclassifier {
 	public void setHsize(long newHsize) {
 		hsize = newHsize;
 	}
-	public s_xdlclass getRchash() {
+	public s_xdlclass[][] getRchash() {
 		return rchash;
 	}
-	public void setRchash(s_xdlclass newRchash) {
+	public void setRchash(s_xdlclass[][] newRchash) {
 		rchash = newRchash;
 	}
 	public s_chastore getNcha() {
@@ -81,10 +81,10 @@ public class s_xdlclassifier {
 	public void setNcha(s_chastore newNcha) {
 		ncha = newNcha;
 	}
-	public s_xdlclass getRcrecs() {
+	public s_xdlclass[][] getRcrecs() {
 		return rcrecs;
 	}
-	public void setRcrecs(s_xdlclass newRcrecs) {
+	public void setRcrecs(s_xdlclass[][] newRcrecs) {
 		rcrecs = newRcrecs;
 	}
 	public long getAlloc() {

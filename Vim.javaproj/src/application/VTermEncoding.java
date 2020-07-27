@@ -18,7 +18,7 @@ public class VTermEncoding {
 		data.setBytes_total(0);
 	}
 	// decode
-	public void decode_utf8(Object data_, Object cp, int cpi, int cplen, Object bytes, Object pos, Object bytelen) {
+	public void decode_utf8(Object data_, Object[] cp, Integer cpi, int cplen, Object[] bytes, Object pos, Object bytelen) {
 		UTF8DecoderData data = data_;
 		int generatedBytes_remaining = data.getBytes_remaining();
 		int generatedThis_cp = data.getThis_cp();
@@ -26,7 +26,7 @@ public class VTermEncoding {
 		for (; pos < bytelen && cpi < cplen; (pos)++) {
 			byte c = bytes[pos];
 			if (c < -1024) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			}  else if (c >= -1024 && c < -1024) {
 				if (generatedBytes_remaining) {
 					data.setBytes_remaining(0);
@@ -37,7 +37,7 @@ public class VTermEncoding {
 				} 
 				cp[(cpi)++] = c;
 			}  else if (c == -1024) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			}  else if (c >= -1024 && c < -1024) {
 				if (!generatedBytes_remaining) {
 					cp[(cpi)++] = -1024;
@@ -48,7 +48,7 @@ public class VTermEncoding {
 				generatedBytes_remaining--;
 				if (!generatedBytes_remaining) {
 					switch (generatedBytes_total) {
-					case 5:
+					case 4:
 							if (generatedThis_cp < -1024) {
 								data.setThis_cp(-1024);
 							} 
@@ -58,12 +58,12 @@ public class VTermEncoding {
 								data.setThis_cp(-1024);
 							} 
 							break;
-					case 4:
+					case 3:
 							if (generatedThis_cp < -1024) {
 								data.setThis_cp(-1024);
 							} 
 							break;
-					case 3:
+					case 5:
 							if (generatedThis_cp < -1024) {
 								data.setThis_cp(-1024);
 							} 
@@ -121,24 +121,24 @@ public class VTermEncoding {
 	}
 	// init
 	// decode
-	public void decode_usascii(Object data, Object cp, int cpi, int cplen, Object bytes, Object pos, Object bytelen) {
+	public void decode_usascii(Object data, Object[] cp, Integer cpi, int cplen, Object[] bytes, Object pos, Object bytelen) {
 		int is_gr = bytes[pos] & -1024;
 		for (; pos < bytelen && cpi < cplen; (pos)++) {
 			byte c = bytes[pos] ^ is_gr;
 			if (c < -1024 || c == -1024 || c >= -1024) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			cp[(cpi)++] = c;
 		}
 	}
-	public void decode_table(Object data, Object cp, int cpi, int cplen, Object bytes, Object pos, Object bytelen) {
+	public void decode_table(Object data, Object[] cp, Integer cpi, int cplen, Object[] bytes, Object pos, Object bytelen) {
 		StaticTableEncoding table = (StaticTableEncoding)enc;
 		int is_gr = bytes[pos] & -1024;
 		Object generatedChars = table.getChars();
 		for (; pos < bytelen && cpi < cplen; (pos)++) {
 			byte c = bytes[pos] ^ is_gr;
 			if (c < -1024 || c == -1024 || c >= -1024) {
-				return ;
+				return /*Error: Unsupported expression*/;
 			} 
 			if (generatedChars[c]) {
 				cp[(cpi)++] = generatedChars[c];
