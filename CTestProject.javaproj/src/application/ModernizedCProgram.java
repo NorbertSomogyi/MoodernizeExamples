@@ -10,11 +10,9 @@ public class ModernizedCProgram {
 	
 	
 	public static void testApiTransform() {
-		System.out.println("Some text!");
 		java.io.FileReader in = new java.io.FileReader("asd.txt");
 		java.io.BufferedReader br = new java.io.BufferedReader(in);
-		FILE f;
-		while (br.readLine() != (true)) {
+		while (br.readLine() != null) {
 			System.out.print(br.readLine());
 		}
 		in.close();

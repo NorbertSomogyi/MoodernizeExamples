@@ -4,13 +4,13 @@ public class F1ToF8 {
 	
 	
 	public static void f1() {
-		ModernizedCProgram.f2();
-		ModernizedCProgram.f3();
-		ModernizedCProgram.f4();
-		ModernizedCProgram.f5();
-		ModernizedCProgram.f6();
-		ModernizedCProgram.f7();
-		ModernizedCProgram.f8();
+		f2();
+		f3();
+		f4();
+		f5();
+		f6();
+		f7();
+		f8();
 	}
 	private static void f2() {
 	}

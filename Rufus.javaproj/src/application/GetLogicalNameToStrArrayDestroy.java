@@ -40,7 +40,7 @@ public class GetLogicalNameToStrArrayDestroy {
 				if (hVolume == (HANDLE)(true)) {
 					do {
 						if (!bSilent) {
-							ModernizedCProgram._uprintf("Could not access first GUID volume: %s", ModernizedCProgram.WindowsErrorString());
+							_uprintf("Could not access first GUID volume: %s", WindowsErrorString());
 						} 
 					} while (0);
 					;
@@ -50,7 +50,7 @@ public class GetLogicalNameToStrArrayDestroy {
 						if (/*Error: Function owner not recognized*/GetLastError() != -1024) {
 							do {
 								if (!bSilent) {
-									ModernizedCProgram._uprintf("Could not access next GUID volume: %s", ModernizedCProgram.WindowsErrorString());
+									_uprintf("Could not access next GUID volume: %s", WindowsErrorString());
 								} 
 							} while (0);
 						} 
@@ -69,7 +69,7 @@ public class GetLogicalNameToStrArrayDestroy {
 			if (/*Error: Function owner not recognized*/QueryDosDeviceA(volume_name[4], path, /*Error: sizeof expression not supported yet*/) == 0) {
 				do {
 					if (!bSilent) {
-						ModernizedCProgram._uprintf("Failed to get device path for GUID volume '%s': %s", volume_name, ModernizedCProgram.WindowsErrorString());
+						_uprintf("Failed to get device path for GUID volume '%s': %s", volume_name, WindowsErrorString());
 					} 
 				} while (0);
 				continue;
@@ -80,7 +80,7 @@ public class GetLogicalNameToStrArrayDestroy {
 			if (j < (/*Error: sizeof expression not supported yet*/ / /*Error: sizeof expression not supported yet*/)) {
 				do {
 					if (!bSilent) {
-						ModernizedCProgram._uprintf("Skipping GUID volume for '%s'", path);
+						_uprintf("Skipping GUID volume for '%s'", path);
 					} 
 				} while (0);
 				continue;
@@ -89,7 +89,7 @@ public class GetLogicalNameToStrArrayDestroy {
 			if (hDrive == (HANDLE)(true)) {
 				do {
 					if (!bSilent) {
-						ModernizedCProgram._uprintf("Could not open GUID volume '%s': %s", volume_name, ModernizedCProgram.WindowsErrorString());
+						_uprintf("Could not open GUID volume '%s': %s", volume_name, WindowsErrorString());
 					} 
 				} while (0);
 				continue;
@@ -97,7 +97,7 @@ public class GetLogicalNameToStrArrayDestroy {
 			if ((!/*Error: Function owner not recognized*/DeviceIoControl(hDrive, (((((ULONG)(byte)'V')) << 16) | ((true) << 14) | ((false) << 2) | (false)), (null), 0, DiskExtents, /*Error: sizeof expression not supported yet*/, size, (null))) || (size <= 0)) {
 				do {
 					if (!bSilent) {
-						ModernizedCProgram._uprintf("Could not get Disk Extents: %s", ModernizedCProgram.WindowsErrorString());
+						_uprintf("Could not get Disk Extents: %s", WindowsErrorString());
 					} 
 				} while (0);
 				do {
@@ -117,7 +117,7 @@ public class GetLogicalNameToStrArrayDestroy {
 			if (generatedNumberOfDiskExtents == 0) {
 				do {
 					if (!bSilent) {
-						ModernizedCProgram._uprintf("Ignoring volume '%s' because it has no extents...", volume_name);
+						_uprintf("Ignoring volume '%s' because it has no extents...", volume_name);
 					} 
 				} while (0);
 				continue;
@@ -125,7 +125,7 @@ public class GetLogicalNameToStrArrayDestroy {
 			if (generatedNumberOfDiskExtents != 1) {
 				do {
 					if (!bSilent) {
-						ModernizedCProgram._uprintf("Ignoring volume '%s' because it has more than one extent (RAID?)...", volume_name);
+						_uprintf("Ignoring volume '%s' because it has more than one extent (RAID?)...", volume_name);
 					} 
 				} while (0);
 				continue;
@@ -134,7 +134,7 @@ public class GetLogicalNameToStrArrayDestroy {
 				continue;
 			} 
 			if (generatedIndex == 16) {
-				ModernizedCProgram._uprintf("Error: Trying to process a disk with more than %d partitions!", 16);
+				_uprintf("Error: Trying to process a disk with more than %d partitions!", 16);
 				;
 			} 
 			if (bKeepTrailingBackslash) {
@@ -146,14 +146,14 @@ public class GetLogicalNameToStrArrayDestroy {
 				if (bPrintHeader) {
 					bPrintHeader = 0;
 					do {
-						if (ModernizedCProgram.usb_debug) {
-							ModernizedCProgram._uprintf("Windows volumes from this device:");
+						if (usb_debug) {
+							_uprintf("Windows volumes from this device:");
 						} 
 					} while (0);
 				} 
 				do {
-					if (ModernizedCProgram.usb_debug) {
-						ModernizedCProgram._uprintf("â—? %s @%lld", volume_name, generatedExtents[0].getStartingOffset().getQuadPart());
+					if (usb_debug) {
+						_uprintf("â—? %s @%lld", volume_name, generatedExtents[0].getStartingOffset().getQuadPart());
 					} 
 				} while (0);
 			} 
@@ -168,9 +168,9 @@ public class GetLogicalNameToStrArrayDestroy {
 		if (i < generatedIndex) {
 			ret = /*Error: Function owner not recognized*/_strdup(generatedString[i]);
 		} else {
-				ret = ModernizedCProgram.AltGetLogicalName(DriveIndex + -1024, PartitionOffset, bKeepTrailingBackslash, bSilent);
+				ret = AltGetLogicalName(DriveIndex + -1024, PartitionOffset, bKeepTrailingBackslash, bSilent);
 				if ((ret != (null)) && (/*Error: Function owner not recognized*/strchr(ret, (byte)' ') != (null))) {
-					ModernizedCProgram._uprintf("Warning: Using physical device to access partition data");
+					_uprintf("Warning: Using physical device to access partition data");
 				} 
 		} 
 		found_name.StrArrayDestroy();
@@ -195,7 +195,7 @@ public class GetLogicalNameToStrArrayDestroy {
 		this.setString((byte)/*Error: Function owner not recognized*/calloc(generatedMax, /*Error: Unsupported expression*/));
 		Object generatedString = this.getString();
 		if (generatedString == (null)) {
-			ModernizedCProgram._uprintf("Could not allocate string array\n");
+			_uprintf("Could not allocate string array\n");
 		} 
 	}
 	public static void StrArrayDestroy() {

@@ -16,8 +16,8 @@ public class _exit_localizationToMtab_destroy {
 				} while (0);
 			} 
 		} 
-		ModernizedCProgram.free_dialog_list();
-		ModernizedCProgram.mtab_destroy(reinit);
+		free_dialog_list();
+		mtab_destroy(reinit);
 		ModernizedCProgram.htab_loc/*
 		 * Validate and store localization command data
 		 */.htab_destroy();
