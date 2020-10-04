@@ -1,13 +1,13 @@
 package application;
 
 public class salt {
-	private Object salt_buf;
-	private Object salt_buf_pc;
+	private Object[] salt_buf;
+	private Object[] salt_buf_pc;
 	private Object salt_len;
 	private Object salt_len_pc;
 	private Object salt_iter;
 	private Object salt_iter2;
-	private Object salt_sign;
+	private Object[] salt_sign;
 	private Object digests_cnt;
 	private Object digests_done;
 	private Object digests_offset;
@@ -15,7 +15,7 @@ public class salt {
 	private Object scrypt_r;
 	private Object scrypt_p;
 	
-	public salt(Object salt_buf, Object salt_buf_pc, Object salt_len, Object salt_len_pc, Object salt_iter, Object salt_iter2, Object salt_sign, Object digests_cnt, Object digests_done, Object digests_offset, Object scrypt_N, Object scrypt_r, Object scrypt_p) {
+	public salt(Object[] salt_buf, Object[] salt_buf_pc, Object salt_len, Object salt_len_pc, Object salt_iter, Object salt_iter2, Object[] salt_sign, Object digests_cnt, Object digests_done, Object digests_offset, Object scrypt_N, Object scrypt_r, Object scrypt_p) {
 		setSalt_buf(salt_buf);
 		setSalt_buf_pc(salt_buf_pc);
 		setSalt_len(salt_len);
@@ -35,12 +35,12 @@ public class salt {
 	
 	public salt module_benchmark_salt(Object hashconfig, Object user_options, Object user_options_extra) {
 		salt_t salt = (salt_t)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
-		salt.setSalt_iter(1);
+		salt.setSalt_iter(10000000 - 1);
+		salt.setSalt_iter2(10000 - 1);
 		salt.setSalt_len(16);
 		return salt;
 		salt_t salt = (salt_t)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
-		salt.setSalt_iter(10000000 - 1);
-		salt.setSalt_iter2(10000 - 1);
+		salt.setSalt_iter(1);
 		salt.setSalt_len(16);
 		return salt;
 		salt_t salt = (salt_t)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
@@ -48,16 +48,16 @@ public class salt {
 		salt.setSalt_iter(ROUNDS_LUKS);
 		return salt;
 	}
-	public Object getSalt_buf() {
+	public Object[] getSalt_buf() {
 		return salt_buf;
 	}
-	public void setSalt_buf(Object newSalt_buf) {
+	public void setSalt_buf(Object[] newSalt_buf) {
 		salt_buf = newSalt_buf;
 	}
-	public Object getSalt_buf_pc() {
+	public Object[] getSalt_buf_pc() {
 		return salt_buf_pc;
 	}
-	public void setSalt_buf_pc(Object newSalt_buf_pc) {
+	public void setSalt_buf_pc(Object[] newSalt_buf_pc) {
 		salt_buf_pc = newSalt_buf_pc;
 	}
 	public Object getSalt_len() {
@@ -84,10 +84,10 @@ public class salt {
 	public void setSalt_iter2(Object newSalt_iter2) {
 		salt_iter2 = newSalt_iter2;
 	}
-	public Object getSalt_sign() {
+	public Object[] getSalt_sign() {
 		return salt_sign;
 	}
-	public void setSalt_sign(Object newSalt_sign) {
+	public void setSalt_sign(Object[] newSalt_sign) {
 		salt_sign = newSalt_sign;
 	}
 	public Object getDigests_cnt() {

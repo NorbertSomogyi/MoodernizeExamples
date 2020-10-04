@@ -43,7 +43,7 @@ public class z_stream_s {
 		int have;
 		long crc;
 		long tot;
-		byte window;
+		Byte window;
 		off_t lastoff = new off_t();
 		off_t end = new off_t();
 		file gz = new file();
@@ -55,14 +55,14 @@ public class z_stream_s {
 		} 
 		gz.setBuf(/*Error: Function owner not recognized*/malloc((-1024 << 14)));
 		Object generatedBuf = gz.getBuf();
-		if (generatedBuf == ((Object)0)) {
+		if (generatedBuf == (null)) {
 			ModernizedCProgram.bye("out of memory", "");
 		} 
 		gz.setSize(14);
 		gz.setLeft(0);
 		/* skip gzip header */gz.gzheader();
 		window = /*Error: Function owner not recognized*/malloc(/* prepare to decompress */-1024);
-		if (window == ((Object)0)) {
+		if (window == (null)) {
 			ModernizedCProgram.bye("out of memory", "");
 		} 
 		this.setZalloc(0);
@@ -173,10 +173,10 @@ public class z_stream_s {
 		int len;
 		int ret;
 		int left;
-		byte in;
-		byte out;
+		Byte in;
+		byte[] out;
 		fd = /* open file to compress and append */0;
-		if (name != ((Object)0)) {
+		if (name != (null)) {
 			fd = /*Error: Function owner not recognized*/open(name, 0, 0);
 			if (fd == -1) {
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gzappend warning: %s not found, skipping ...\n", name);
@@ -184,7 +184,7 @@ public class z_stream_s {
 		} 
 		in = /*Error: Function owner not recognized*/malloc((-1024 << /* allocate buffers */14));
 		out = /*Error: Function owner not recognized*/malloc((-1024 << 14));
-		if (in == ((Object)0) || out == ((Object)0)) {
+		if (in == (null) || out == (null)) {
 			ModernizedCProgram.bye("out of memory", "");
 		} 
 		Object generatedAdler = this.getAdler();
@@ -249,8 +249,8 @@ public class z_stream_s {
 	public void mem_setup() {
 		mem_zone zone = new mem_zone();
 		zone = /*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
-		((zone != ((Object)0)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("zone != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Hashcat\\src\\infcover.c", 163));
-		zone.setFirst(((Object)0));
+		((zone != (null)) ? null : /*Error: Function owner not recognized*/_assert("zone != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Hashcat\\src\\infcover.c", 163));
+		zone.setFirst((null));
 		zone.setTotal(0);
 		zone.setHighwater(0);
 		zone.setLimit(0);
@@ -292,7 +292,7 @@ public class z_stream_s {
 		item = generatedFirst;
 		Object generatedPtr = item.getPtr();
 		mem_item generatedNext = item.getNext();
-		while (item != ((Object)0)) {
+		while (item != (null)) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedPtr);
 			next = generatedNext;
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(item);
@@ -411,23 +411,23 @@ public class z_stream_s {
 	 */
 	public int inflateBack9(Object in, Object in_desc, Object out, Object out_desc) {
 		inflate_state state = new inflate_state();
-		/* next input */byte next;
-		/* next output */byte put;
+		/* next input */Byte next;
+		/* next output */Byte put;
 		/* available input */int have;
 		/* available output */long left;
 		/* current inflate mode */inflate_mode mode = new inflate_mode();
 		/* true if processing last block */int lastblock;
 		/* true if the window has wrapped */int wrap;
-		/* allocated sliding window, if needed */byte window;
+		/* allocated sliding window, if needed */Byte window;
 		/* bit buffer */long hold;
 		/* bits in bit buffer */int bits;
 		/* extra bits needed */int extra;
 		/* literal or length of data to copy */long length;
 		/* distance back to copy string from */long offset;
 		/* number of stored or match bytes to copy */long copy;
-		/* where to copy match bytes from */byte from;
-		/* starting table for length/literal codes */code lencode = new code();
-		/* starting table for distance codes */code distcode = new code();
+		/* where to copy match bytes from */Byte from;
+		/* starting table for length/literal codes */code[] lencode = new code();
+		/* starting table for distance codes */code[] distcode = new code();
 		/* index bits for lencode */int lenbits;
 		/* index bits for distcode */int distbits;
 		/* current decoding table entry */code here = new code();
@@ -461,385 +461,16 @@ public class z_stream_s {
 		int generatedNlen = state.getNlen();
 		int generatedHave = state.getHave();
 		int generatedNcode = state.getNcode();
-		Object generatedLens = state.getLens();
-		Object generatedCodes = state.getCodes();
+		Object[] generatedLens = state.getLens();
+		Object[] generatedCodes = state.getCodes();
 		Object generatedNext = state.getNext();
-		Object generatedWork = state.getWork();
+		Object[] generatedWork = state.getWork();
 		int generatedNdist = state.getNdist();
 		Object generatedBits = here.getBits();
 		Object generatedVal = here.getVal();
 		Object generatedOp = here.getOp();
 		/* Inflate until end of block marked as last */for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			switch (mode) {
-			case .STORED:
-					do {
-						hold >>=  bits & 7;
-						bits -= bits & 7;
-					} while (/* get and verify stored block length *//* go to byte boundary */0);
-					do {
-						while (bits < (int)(true)) {
-							do {
-								do {
-									if (have == 0) {
-										have = ModernizedCProgram.in(in_desc, next);
-										if (have == 0) {
-											next = 0;
-											ret = (true);
-											;
-										} 
-									} 
-								} while (0);
-								have--;
-								hold += (long)(next++) << bits;
-								bits += 8;
-							} while (0);
-						}
-					} while (0);
-					if ((hold & -1024) != ((hold >> 16) ^ -1024)) {
-						this.setMsg((byte)"invalid stored block lengths");
-						mode = .BAD;
-						break;
-					} 
-					length = (int)hold & -1024;
-					;
-					do {
-						hold = 0;
-						bits = 0;
-					} while (0);
-					while (length != /* copy stored block from input to output */0) {
-						copy = length;
-						do {
-							if (have == 0) {
-								have = ModernizedCProgram.in(in_desc, next);
-								if (have == 0) {
-									next = 0;
-									ret = (true);
-									;
-								} 
-							} 
-						} while (0);
-						do {
-							if (left == 0) {
-								put = window;
-								left = -1024;
-								wrap = 1;
-								if (ModernizedCProgram.out(out_desc, put, (int)left)) {
-									ret = (true);
-									;
-								} 
-							} 
-						} while (0);
-						if (copy > have) {
-							copy = have;
-						} 
-						if (copy > left) {
-							copy = left;
-						} 
-						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(put, next, copy);
-						have -= copy;
-						next += copy;
-						left -= copy;
-						put += copy;
-						length -= copy;
-					}
-					;
-					mode = .TYPE;
-					break;
-			case .TYPE:
-					if (/* determine and dispatch block type */lastblock) {
-						do {
-							hold >>=  bits & 7;
-							bits -= bits & 7;
-						} while (0);
-						mode = .DONE;
-						break;
-					} 
-					do {
-						while (bits < (int)(true)) {
-							do {
-								do {
-									if (have == 0) {
-										have = ModernizedCProgram.in(in_desc, next);
-										if (have == 0) {
-											next = 0;
-											ret = (true);
-											;
-										} 
-									} 
-								} while (0);
-								have--;
-								hold += (long)(next++) << bits;
-								bits += 8;
-							} while (0);
-						}
-					} while (0);
-					lastblock = ((int)hold & ((-1024 << (true)) - 1));
-					do {
-						hold >>=  (true);
-						bits -= (int)(true);
-					} while (0);
-					switch (((int)hold & ((-1024 << (true)) - 1))) {
-					case /* fixed block */1:
-							lencode = lenfix;
-							lenbits = 9;
-							distcode = distfix;
-							distbits = 5;
-							;
-							mode = /* decode codes */.LEN;
-							break;
-					case 3:
-							this.setMsg((byte)"invalid block type");
-							mode = .BAD;
-					case /* stored block */0:
-							;
-							mode = .STORED;
-							break;
-					case /* dynamic block */2:
-							;
-							mode = .TABLE;
-							break;
-					}
-					do {
-						hold >>=  (true);
-						bits -= (int)(true);
-					} while (0);
-					break;
-			case .LEN/* get a literal, length, or end-of-block code */:
-					for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
-						here = lencode[((int)hold & ((-1024 << (lenbits)) - 1))];
-						if ((int)(generatedBits) <= bits) {
-							break;
-						} 
-						do {
-							do {
-								if (have == 0) {
-									have = ModernizedCProgram.in(in_desc, next);
-									if (have == 0) {
-										next = 0;
-										ret = (true);
-										;
-									} 
-								} 
-							} while (0);
-							have--;
-							hold += (long)(next++) << bits;
-							bits += 8;
-						} while (0);
-					}
-					if (generatedOp && (generatedOp & -1024) == 0) {
-						last = here;
-						for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
-							here = lencode[generatedVal + (((int)hold & ((-1024 << (generatedBits + generatedOp)) - 1)) >> generatedBits)];
-							if ((int)(generatedBits + generatedBits) <= bits) {
-								break;
-							} 
-							do {
-								do {
-									if (have == 0) {
-										have = ModernizedCProgram.in(in_desc, next);
-										if (have == 0) {
-											next = 0;
-											ret = (true);
-											;
-										} 
-									} 
-								} while (0);
-								have--;
-								hold += (long)(next++) << bits;
-								bits += 8;
-							} while (0);
-						}
-						do {
-							hold >>=  (generatedBits);
-							bits -= (int)(generatedBits);
-						} while (0);
-					} 
-					do {
-						hold >>=  (generatedBits);
-						bits -= (int)(generatedBits);
-					} while (0);
-					length = (int)generatedVal;
-					if (generatedOp == /* process literal */0) {
-						;
-						do {
-							if (left == 0) {
-								put = window;
-								left = -1024;
-								wrap = 1;
-								if (ModernizedCProgram.out(out_desc, put, (int)left)) {
-									ret = (true);
-									;
-								} 
-							} 
-						} while (0);
-						put++ = (byte)(length);
-						left--;
-						mode = .LEN;
-						break;
-					} 
-					if (generatedOp & /* process end of block */32) {
-						;
-						mode = .TYPE;
-						break;
-					} 
-					if (generatedOp & /* invalid code */64) {
-						this.setMsg((byte)"invalid literal/length code");
-						mode = .BAD;
-						break;
-					} 
-					extra = (int)(generatedOp) & /* length code -- get extra bits, if any */31;
-					if (extra != 0) {
-						do {
-							while (bits < (int)(extra)) {
-								do {
-									do {
-										if (have == 0) {
-											have = ModernizedCProgram.in(in_desc, next);
-											if (have == 0) {
-												next = 0;
-												ret = (true);
-												;
-											} 
-										} 
-									} while (0);
-									have--;
-									hold += (long)(next++) << bits;
-									bits += 8;
-								} while (0);
-							}
-						} while (0);
-						length += ((int)hold & ((-1024 << (extra)) - 1));
-						do {
-							hold >>=  (extra);
-							bits -= (int)(extra);
-						} while (0);
-					} 
-					;
-					for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
-						here = distcode[((int)hold & ((-1024 << (distbits)) - 1))];
-						if ((int)(generatedBits) <= bits) {
-							break;
-						} 
-						do {
-							do {
-								if (have == 0) {
-									have = ModernizedCProgram.in(in_desc, next);
-									if (have == 0) {
-										next = 0;
-										ret = (true);
-										;
-									} 
-								} 
-							} while (0);
-							have--;
-							hold += (long)(next++) << bits;
-							bits += 8;
-						} while (0);
-					}
-					if ((generatedOp & -1024) == 0) {
-						last = here;
-						for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
-							here = distcode[generatedVal + (((int)hold & ((-1024 << (generatedBits + generatedOp)) - 1)) >> generatedBits)];
-							if ((int)(generatedBits + generatedBits) <= bits) {
-								break;
-							} 
-							do {
-								do {
-									if (have == 0) {
-										have = ModernizedCProgram.in(in_desc, next);
-										if (have == 0) {
-											next = 0;
-											ret = (true);
-											;
-										} 
-									} 
-								} while (0);
-								have--;
-								hold += (long)(next++) << bits;
-								bits += 8;
-							} while (0);
-						}
-						do {
-							hold >>=  (generatedBits);
-							bits -= (int)(generatedBits);
-						} while (0);
-					} 
-					do {
-						hold >>=  (generatedBits);
-						bits -= (int)(generatedBits);
-					} while (0);
-					if (generatedOp & 64) {
-						this.setMsg((byte)"invalid distance code");
-						mode = .BAD;
-						break;
-					} 
-					offset = (int)generatedVal;
-					extra = (int)(generatedOp) & /* get distance extra bits, if any */15;
-					if (extra != 0) {
-						do {
-							while (bits < (int)(extra)) {
-								do {
-									do {
-										if (have == 0) {
-											have = ModernizedCProgram.in(in_desc, next);
-											if (have == 0) {
-												next = 0;
-												ret = (true);
-												;
-											} 
-										} 
-									} while (0);
-									have--;
-									hold += (long)(next++) << bits;
-									bits += 8;
-								} while (0);
-							}
-						} while (0);
-						offset += ((int)hold & ((-1024 << (extra)) - 1));
-						do {
-							hold >>=  (extra);
-							bits -= (int)(extra);
-						} while (0);
-					} 
-					if (offset > -1024 - (wrap ? 0 : left)) {
-						this.setMsg((byte)"invalid distance too far back");
-						mode = .BAD;
-						break;
-					} 
-					;
-					do {
-						do {
-							if (left == 0) {
-								put = window;
-								left = -1024;
-								wrap = 1;
-								if (ModernizedCProgram.out(out_desc, put, (int)left)) {
-									ret = (true);
-									;
-								} 
-							} 
-						} while (0);
-						copy = -1024 - offset;
-						if (copy < left) {
-							from = put + copy;
-							copy = left - copy;
-						} else {
-								from = put - offset;
-								copy = left;
-						} 
-						if (copy > length) {
-							copy = length;
-						} 
-						length -= copy;
-						left -= copy;
-						do {
-							put++ = from++;
-						} while (--copy);
-					} while (length != 0);
-					break;
-			case .BAD:
-					ret = (true);
-					;
 			case .TABLE:
 					do {
 						while (bits < (int)(true)) {
@@ -1111,6 +742,375 @@ public class z_stream_s {
 						} 
 					} 
 					;
+			case .BAD:
+					ret = (true);
+					;
+			case .TYPE:
+					if (/* determine and dispatch block type */lastblock) {
+						do {
+							hold >>=  bits & 7;
+							bits -= bits & 7;
+						} while (0);
+						mode = .DONE;
+						break;
+					} 
+					do {
+						while (bits < (int)(true)) {
+							do {
+								do {
+									if (have == 0) {
+										have = ModernizedCProgram.in(in_desc, next);
+										if (have == 0) {
+											next = 0;
+											ret = (true);
+											;
+										} 
+									} 
+								} while (0);
+								have--;
+								hold += (long)(next++) << bits;
+								bits += 8;
+							} while (0);
+						}
+					} while (0);
+					lastblock = ((int)hold & ((-1024 << (true)) - 1));
+					do {
+						hold >>=  (true);
+						bits -= (int)(true);
+					} while (0);
+					switch (((int)hold & ((-1024 << (true)) - 1))) {
+					case /* stored block */0:
+							;
+							mode = .STORED;
+							break;
+					case /* dynamic block */2:
+							;
+							mode = .TABLE;
+							break;
+					case /* fixed block */1:
+							lencode = lenfix;
+							lenbits = 9;
+							distcode = distfix;
+							distbits = 5;
+							;
+							mode = /* decode codes */.LEN;
+							break;
+					case 3:
+							this.setMsg((byte)"invalid block type");
+							mode = .BAD;
+					}
+					do {
+						hold >>=  (true);
+						bits -= (int)(true);
+					} while (0);
+					break;
+			case .LEN/* get a literal, length, or end-of-block code */:
+					for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+						here = lencode[((int)hold & ((-1024 << (lenbits)) - 1))];
+						if ((int)(generatedBits) <= bits) {
+							break;
+						} 
+						do {
+							do {
+								if (have == 0) {
+									have = ModernizedCProgram.in(in_desc, next);
+									if (have == 0) {
+										next = 0;
+										ret = (true);
+										;
+									} 
+								} 
+							} while (0);
+							have--;
+							hold += (long)(next++) << bits;
+							bits += 8;
+						} while (0);
+					}
+					if (generatedOp && (generatedOp & -1024) == 0) {
+						last = here;
+						for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+							here = lencode[generatedVal + (((int)hold & ((-1024 << (generatedBits + generatedOp)) - 1)) >> generatedBits)];
+							if ((int)(generatedBits + generatedBits) <= bits) {
+								break;
+							} 
+							do {
+								do {
+									if (have == 0) {
+										have = ModernizedCProgram.in(in_desc, next);
+										if (have == 0) {
+											next = 0;
+											ret = (true);
+											;
+										} 
+									} 
+								} while (0);
+								have--;
+								hold += (long)(next++) << bits;
+								bits += 8;
+							} while (0);
+						}
+						do {
+							hold >>=  (generatedBits);
+							bits -= (int)(generatedBits);
+						} while (0);
+					} 
+					do {
+						hold >>=  (generatedBits);
+						bits -= (int)(generatedBits);
+					} while (0);
+					length = (int)generatedVal;
+					if (generatedOp == /* process literal */0) {
+						;
+						do {
+							if (left == 0) {
+								put = window;
+								left = -1024;
+								wrap = 1;
+								if (ModernizedCProgram.out(out_desc, put, (int)left)) {
+									ret = (true);
+									;
+								} 
+							} 
+						} while (0);
+						put++ = (byte)(length);
+						left--;
+						mode = .LEN;
+						break;
+					} 
+					if (generatedOp & /* process end of block */32) {
+						;
+						mode = .TYPE;
+						break;
+					} 
+					if (generatedOp & /* invalid code */64) {
+						this.setMsg((byte)"invalid literal/length code");
+						mode = .BAD;
+						break;
+					} 
+					extra = (int)(generatedOp) & /* length code -- get extra bits, if any */31;
+					if (extra != 0) {
+						do {
+							while (bits < (int)(extra)) {
+								do {
+									do {
+										if (have == 0) {
+											have = ModernizedCProgram.in(in_desc, next);
+											if (have == 0) {
+												next = 0;
+												ret = (true);
+												;
+											} 
+										} 
+									} while (0);
+									have--;
+									hold += (long)(next++) << bits;
+									bits += 8;
+								} while (0);
+							}
+						} while (0);
+						length += ((int)hold & ((-1024 << (extra)) - 1));
+						do {
+							hold >>=  (extra);
+							bits -= (int)(extra);
+						} while (0);
+					} 
+					;
+					for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+						here = distcode[((int)hold & ((-1024 << (distbits)) - 1))];
+						if ((int)(generatedBits) <= bits) {
+							break;
+						} 
+						do {
+							do {
+								if (have == 0) {
+									have = ModernizedCProgram.in(in_desc, next);
+									if (have == 0) {
+										next = 0;
+										ret = (true);
+										;
+									} 
+								} 
+							} while (0);
+							have--;
+							hold += (long)(next++) << bits;
+							bits += 8;
+						} while (0);
+					}
+					if ((generatedOp & -1024) == 0) {
+						last = here;
+						for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
+							here = distcode[generatedVal + (((int)hold & ((-1024 << (generatedBits + generatedOp)) - 1)) >> generatedBits)];
+							if ((int)(generatedBits + generatedBits) <= bits) {
+								break;
+							} 
+							do {
+								do {
+									if (have == 0) {
+										have = ModernizedCProgram.in(in_desc, next);
+										if (have == 0) {
+											next = 0;
+											ret = (true);
+											;
+										} 
+									} 
+								} while (0);
+								have--;
+								hold += (long)(next++) << bits;
+								bits += 8;
+							} while (0);
+						}
+						do {
+							hold >>=  (generatedBits);
+							bits -= (int)(generatedBits);
+						} while (0);
+					} 
+					do {
+						hold >>=  (generatedBits);
+						bits -= (int)(generatedBits);
+					} while (0);
+					if (generatedOp & 64) {
+						this.setMsg((byte)"invalid distance code");
+						mode = .BAD;
+						break;
+					} 
+					offset = (int)generatedVal;
+					extra = (int)(generatedOp) & /* get distance extra bits, if any */15;
+					if (extra != 0) {
+						do {
+							while (bits < (int)(extra)) {
+								do {
+									do {
+										if (have == 0) {
+											have = ModernizedCProgram.in(in_desc, next);
+											if (have == 0) {
+												next = 0;
+												ret = (true);
+												;
+											} 
+										} 
+									} while (0);
+									have--;
+									hold += (long)(next++) << bits;
+									bits += 8;
+								} while (0);
+							}
+						} while (0);
+						offset += ((int)hold & ((-1024 << (extra)) - 1));
+						do {
+							hold >>=  (extra);
+							bits -= (int)(extra);
+						} while (0);
+					} 
+					if (offset > -1024 - (wrap ? 0 : left)) {
+						this.setMsg((byte)"invalid distance too far back");
+						mode = .BAD;
+						break;
+					} 
+					;
+					do {
+						do {
+							if (left == 0) {
+								put = window;
+								left = -1024;
+								wrap = 1;
+								if (ModernizedCProgram.out(out_desc, put, (int)left)) {
+									ret = (true);
+									;
+								} 
+							} 
+						} while (0);
+						copy = -1024 - offset;
+						if (copy < left) {
+							from = put + copy;
+							copy = left - copy;
+						} else {
+								from = put - offset;
+								copy = left;
+						} 
+						if (copy > length) {
+							copy = length;
+						} 
+						length -= copy;
+						left -= copy;
+						do {
+							put++ = from++;
+						} while (--copy);
+					} while (length != 0);
+					break;
+			case .STORED:
+					do {
+						hold >>=  bits & 7;
+						bits -= bits & 7;
+					} while (/* get and verify stored block length *//* go to byte boundary */0);
+					do {
+						while (bits < (int)(true)) {
+							do {
+								do {
+									if (have == 0) {
+										have = ModernizedCProgram.in(in_desc, next);
+										if (have == 0) {
+											next = 0;
+											ret = (true);
+											;
+										} 
+									} 
+								} while (0);
+								have--;
+								hold += (long)(next++) << bits;
+								bits += 8;
+							} while (0);
+						}
+					} while (0);
+					if ((hold & -1024) != ((hold >> 16) ^ -1024)) {
+						this.setMsg((byte)"invalid stored block lengths");
+						mode = .BAD;
+						break;
+					} 
+					length = (int)hold & -1024;
+					;
+					do {
+						hold = 0;
+						bits = 0;
+					} while (0);
+					while (length != /* copy stored block from input to output */0) {
+						copy = length;
+						do {
+							if (have == 0) {
+								have = ModernizedCProgram.in(in_desc, next);
+								if (have == 0) {
+									next = 0;
+									ret = (true);
+									;
+								} 
+							} 
+						} while (0);
+						do {
+							if (left == 0) {
+								put = window;
+								left = -1024;
+								wrap = 1;
+								if (ModernizedCProgram.out(out_desc, put, (int)left)) {
+									ret = (true);
+									;
+								} 
+							} 
+						} while (0);
+						if (copy > have) {
+							copy = have;
+						} 
+						if (copy > left) {
+							copy = left;
+						} 
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(put, next, copy);
+						have -= copy;
+						next += copy;
+						left -= copy;
+						put += copy;
+						length -= copy;
+					}
+					;
+					mode = .TYPE;
+					break;
 			default:
 					ret = (true);
 					;
@@ -1138,7 +1138,7 @@ public class z_stream_s {
 		int have;
 		int flags;
 		int len;
-		byte next = ((Object)0);
+		Byte next = (null);
 		ind ind = new ind();
 		ind indp = new ind();
 		outd outd = new outd();
@@ -1266,7 +1266,7 @@ public class z_stream_s {
 		int ret;
 		int infile;
 		int outfile;
-		if (inname == ((Object)0) || inname == /* open files */0) {
+		if (inname == (null) || inname == /* open files */0) {
 			inname = "-";
 			infile = /* stdin */0;
 		} else {
@@ -1278,7 +1278,7 @@ public class z_stream_s {
 		} 
 		if (test) {
 			outfile = -1;
-		}  else if (outname == ((Object)0) || outname == 0) {
+		}  else if (outname == (null) || outname == 0) {
 			outname = "-";
 			outfile = /* stdout */1;
 		} else {
@@ -1304,12 +1304,6 @@ public class z_stream_s {
 				if (outfile > 2) {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(outname);
 				} 
-				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun data error on %s: %s\n", inname, generatedMsg);
-				break;
-		case (true):
-				if (outfile > 2) {
-					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(outname);
-				} 
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun out of memory error--aborting\n");
 				return 1;
 		case (true):
@@ -1325,6 +1319,12 @@ public class z_stream_s {
 				} 
 				break;
 		case 0:
+		case (true):
+				if (outfile > 2) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(outname);
+				} 
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "gun data error on %s: %s\n", inname, generatedMsg);
+				break;
 		case (true):
 				if (infile > 2 && outfile > 2) {
 					ModernizedCProgram.copymeta(inname, /* copy attributes */outname);

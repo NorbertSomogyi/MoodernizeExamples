@@ -17,8 +17,8 @@ public class ext2fs_rb_private {
 	
 	public int rb_test_bit(Object bit) {
 		bmap_rb_extent rcursor = new bmap_rb_extent();
-		bmap_rb_extent next_ext = ((Object)0);
-		rb_node parent = ((Object)0);
+		bmap_rb_extent next_ext = (null);
+		rb_node parent = (null);
 		rb_node next = new rb_node();
 		rb_root generatedRoot = this.getRoot();
 		rb_node generatedRb_node = generatedRoot.getRb_node();
@@ -50,8 +50,8 @@ public class ext2fs_rb_private {
 				return 0;
 			} 
 		} 
-		this.setRcursor(((Object)0));
-		this.setRcursor_next(((Object)0));
+		this.setRcursor((null));
+		this.setRcursor_next((null));
 		bmap_rb_extent generatedWcursor = this.getWcursor();
 		rcursor = generatedWcursor;
 		if (!rcursor) {
@@ -66,7 +66,7 @@ public class ext2fs_rb_private {
 		rb_root generatedRoot = this.getRoot();
 		rb_root root = generatedRoot;
 		rb_node generatedRb_node = root.getRb_node();
-		rb_node parent = ((Object)0);
+		rb_node parent = (null);
 		rb_node n = generatedRb_node;
 		rb_node new_node = new rb_node();
 		rb_node node = new rb_node();
@@ -77,7 +77,7 @@ public class ext2fs_rb_private {
 		if (count == 0) {
 			return 0;
 		} 
-		this.setRcursor_next(((Object)0));
+		this.setRcursor_next((null));
 		bmap_rb_extent generatedWcursor = this.getWcursor();
 		ext = generatedWcursor;
 		Object generatedStart = ext.getStart();
@@ -114,7 +114,7 @@ public class ext2fs_rb_private {
 		rb_root generatedRoot = this.getRoot();
 		rb_root root = generatedRoot;
 		rb_node generatedRb_node = root.getRb_node();
-		rb_node parent = ((Object)0);
+		rb_node parent = (null);
 		rb_node n = generatedRb_node;
 		rb_node node = new rb_node();
 		bmap_rb_extent ext = new bmap_rb_extent();
@@ -163,7 +163,7 @@ public class ext2fs_rb_private {
 				return 1;
 			} 
 		}
-		for (; parent != ((Object)0); parent = /* See if we should delete or truncate extent on the right */node) {
+		for (; parent != (null); parent = /* See if we should delete or truncate extent on the right */node) {
 			node = parent.ext2fs_rb_next();
 			ext = bmap_rb_extent.node_to_extent(parent);
 			if ((generatedStart + generatedCount) <= start) {

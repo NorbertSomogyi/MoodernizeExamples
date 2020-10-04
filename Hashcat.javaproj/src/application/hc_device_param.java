@@ -3,7 +3,7 @@ package application;
 public class hc_device_param {
 	private int device_id;
 	private int device_id_alias_cnt;
-	private Object device_id_alias_buf;
+	private Object[] device_id_alias_buf;
 	private Object pcie_bus;
 	private Object pcie_device;
 	private Object pcie_function;
@@ -143,20 +143,20 @@ public class hc_device_param {
 	private Object innerloop_pos;
 	private Object innerloop_left;
 	private Object exec_pos;
-	private Object exec_msec;
-	private Object exec_us_prev1;
-	private Object exec_us_prev2;
-	private Object exec_us_prev3;
-	private Object exec_us_prev4;
-	private Object exec_us_prev_init2;
-	private Object exec_us_prev_loop2;
-	private Object exec_us_prev_aux1;
-	private Object exec_us_prev_aux2;
-	private Object exec_us_prev_aux3;
-	private Object exec_us_prev_aux4;
+	private Object[] exec_msec;
+	private Object[] exec_us_prev1;
+	private Object[] exec_us_prev2;
+	private Object[] exec_us_prev3;
+	private Object[] exec_us_prev4;
+	private Object[] exec_us_prev_init2;
+	private Object[] exec_us_prev_loop2;
+	private Object[] exec_us_prev_aux1;
+	private Object[] exec_us_prev_aux2;
+	private Object[] exec_us_prev_aux3;
+	private Object[] exec_us_prev_aux4;
 	private Object speed_pos;
-	private Object speed_cnt;
-	private Object speed_msec;
+	private Object[] speed_cnt;
+	private Object[] speed_msec;
 	private boolean speed_only_finish;
 	private Object timer_speed;
 	private boolean has_vadd3;
@@ -167,31 +167,31 @@ public class hc_device_param {
 	private boolean has_mov64;
 	private boolean has_prmt;
 	private double spin_damp;
-	private Object kernel_params;
-	private Object kernel_params_mp;
-	private Object kernel_params_mp_r;
-	private Object kernel_params_mp_l;
-	private Object kernel_params_amp;
-	private Object kernel_params_tm;
-	private Object kernel_params_memset;
-	private Object kernel_params_atinit;
-	private Object kernel_params_decompress;
-	private Object kernel_params_buf32;
-	private Object kernel_params_buf64;
-	private Object kernel_params_mp_buf32;
-	private Object kernel_params_mp_buf64;
-	private Object kernel_params_mp_r_buf32;
-	private Object kernel_params_mp_r_buf64;
-	private Object kernel_params_mp_l_buf32;
-	private Object kernel_params_mp_l_buf64;
-	private Object kernel_params_amp_buf32;
-	private Object kernel_params_amp_buf64;
-	private Object kernel_params_memset_buf32;
-	private Object kernel_params_memset_buf64;
-	private Object kernel_params_atinit_buf32;
-	private Object kernel_params_atinit_buf64;
-	private Object kernel_params_decompress_buf32;
-	private Object kernel_params_decompress_buf64;
+	private Object[] kernel_params;
+	private Object[] kernel_params_mp;
+	private Object[] kernel_params_mp_r;
+	private Object[] kernel_params_mp_l;
+	private Object[] kernel_params_amp;
+	private Object[] kernel_params_tm;
+	private Object[] kernel_params_memset;
+	private Object[] kernel_params_atinit;
+	private Object[] kernel_params_decompress;
+	private Object[] kernel_params_buf32;
+	private Object[] kernel_params_buf64;
+	private Object[] kernel_params_mp_buf32;
+	private Object[] kernel_params_mp_buf64;
+	private Object[] kernel_params_mp_r_buf32;
+	private Object[] kernel_params_mp_r_buf64;
+	private Object[] kernel_params_mp_l_buf32;
+	private Object[] kernel_params_mp_l_buf64;
+	private Object[] kernel_params_amp_buf32;
+	private Object[] kernel_params_amp_buf64;
+	private Object[] kernel_params_memset_buf32;
+	private Object[] kernel_params_memset_buf64;
+	private Object[] kernel_params_atinit_buf32;
+	private Object[] kernel_params_atinit_buf64;
+	private Object[] kernel_params_decompress_buf32;
+	private Object[] kernel_params_decompress_buf64;
 	private boolean is_cuda;
 	private int cuda_warp_size;
 	private Object cuda_device;
@@ -270,7 +270,7 @@ public class hc_device_param {
 	private Object opencl_platform_vendor_id;
 	private Object opencl_device;
 	
-	public hc_device_param(int device_id, int device_id_alias_cnt, Object device_id_alias_buf, Object pcie_bus, Object pcie_device, Object pcie_function, boolean skipped, boolean skipped_warning, Object device_processors, Object device_maxmem_alloc, Object device_global_mem, Object device_available_mem, Object device_maxclock_frequency, Object device_maxworkgroup_size, Object device_local_mem_size, int device_local_mem_type, Byte device_name, int sm_major, int sm_minor, Object kernel_exec_timeout, st_status_rc st_status, int vector_width, Object kernel_wgs1, Object kernel_wgs12, Object kernel_wgs2, Object kernel_wgs23, Object kernel_wgs3, Object kernel_wgs4, Object kernel_wgs_init2, Object kernel_wgs_loop2, Object kernel_wgs_mp, Object kernel_wgs_mp_l, Object kernel_wgs_mp_r, Object kernel_wgs_amp, Object kernel_wgs_tm, Object kernel_wgs_memset, Object kernel_wgs_atinit, Object kernel_wgs_decompress, Object kernel_wgs_aux1, Object kernel_wgs_aux2, Object kernel_wgs_aux3, Object kernel_wgs_aux4, Object kernel_preferred_wgs_multiple1, Object kernel_preferred_wgs_multiple12, Object kernel_preferred_wgs_multiple2, Object kernel_preferred_wgs_multiple23, Object kernel_preferred_wgs_multiple3, Object kernel_preferred_wgs_multiple4, Object kernel_preferred_wgs_multiple_init2, Object kernel_preferred_wgs_multiple_loop2, Object kernel_preferred_wgs_multiple_mp, Object kernel_preferred_wgs_multiple_mp_l, Object kernel_preferred_wgs_multiple_mp_r, Object kernel_preferred_wgs_multiple_amp, Object kernel_preferred_wgs_multiple_tm, Object kernel_preferred_wgs_multiple_memset, Object kernel_preferred_wgs_multiple_atinit, Object kernel_preferred_wgs_multiple_decompress, Object kernel_preferred_wgs_multiple_aux1, Object kernel_preferred_wgs_multiple_aux2, Object kernel_preferred_wgs_multiple_aux3, Object kernel_preferred_wgs_multiple_aux4, Object kernel_local_mem_size1, Object kernel_local_mem_size12, Object kernel_local_mem_size2, Object kernel_local_mem_size23, Object kernel_local_mem_size3, Object kernel_local_mem_size4, Object kernel_local_mem_size_init2, Object kernel_local_mem_size_loop2, Object kernel_local_mem_size_mp, Object kernel_local_mem_size_mp_l, Object kernel_local_mem_size_mp_r, Object kernel_local_mem_size_amp, Object kernel_local_mem_size_tm, Object kernel_local_mem_size_memset, Object kernel_local_mem_size_atinit, Object kernel_local_mem_size_decompress, Object kernel_local_mem_size_aux1, Object kernel_local_mem_size_aux2, Object kernel_local_mem_size_aux3, Object kernel_local_mem_size_aux4, Object kernel_accel, Object kernel_accel_prev, Object kernel_accel_min, Object kernel_accel_max, Object kernel_loops, Object kernel_loops_prev, Object kernel_loops_min, Object kernel_loops_max, Object kernel_loops_min_sav, Object kernel_loops_max_sav, Object kernel_threads, Object kernel_threads_min, Object kernel_threads_max, Object kernel_power, Object hardware_power, Object size_pws, Object size_pws_amp, Object size_pws_comp, Object size_pws_idx, Object size_pws_pre, Object size_pws_base, Object size_tmps, Object size_hooks, Object size_bfs, Object size_combs, Object size_rules, Object size_rules_c, Object size_root_css, Object size_markov_css, Object size_digests, Object size_salts, Object size_esalts, Object size_shown, Object size_results, Object size_plains, Object size_st_digests, Object size_st_salts, Object size_st_esalts, Object size_tm, Object extra_buffer_size, Byte scratch_buf, hc_fp combs_fp, pw[] combs_buf, Object hooks_buf, pw_idx pws_idx, Object pws_comp, Object pws_cnt, pw_pre pws_pre_buf, Object pws_pre_cnt, pw_pre pws_base_buf, Object pws_base_cnt, Object words_off, Object words_done, Object outerloop_pos, Object outerloop_left, double outerloop_msec, double outerloop_multi, Object innerloop_pos, Object innerloop_left, Object exec_pos, Object exec_msec, Object exec_us_prev1, Object exec_us_prev2, Object exec_us_prev3, Object exec_us_prev4, Object exec_us_prev_init2, Object exec_us_prev_loop2, Object exec_us_prev_aux1, Object exec_us_prev_aux2, Object exec_us_prev_aux3, Object exec_us_prev_aux4, Object speed_pos, Object speed_cnt, Object speed_msec, boolean speed_only_finish, Object timer_speed, boolean has_vadd3, boolean has_vbfe, boolean has_vperm, boolean has_bfe, boolean has_lop3, boolean has_mov64, boolean has_prmt, double spin_damp, Object kernel_params, Object kernel_params_mp, Object kernel_params_mp_r, Object kernel_params_mp_l, Object kernel_params_amp, Object kernel_params_tm, Object kernel_params_memset, Object kernel_params_atinit, Object kernel_params_decompress, Object kernel_params_buf32, Object kernel_params_buf64, Object kernel_params_mp_buf32, Object kernel_params_mp_buf64, Object kernel_params_mp_r_buf32, Object kernel_params_mp_r_buf64, Object kernel_params_mp_l_buf32, Object kernel_params_mp_l_buf64, Object kernel_params_amp_buf32, Object kernel_params_amp_buf64, Object kernel_params_memset_buf32, Object kernel_params_memset_buf64, Object kernel_params_atinit_buf32, Object kernel_params_atinit_buf64, Object kernel_params_decompress_buf32, Object kernel_params_decompress_buf64, boolean is_cuda, int cuda_warp_size, Object cuda_device, Object cuda_context, Object cuda_stream, Object cuda_event1, Object cuda_event2, Object cuda_module, Object cuda_module_mp, Object cuda_module_amp, Object cuda_function1, Object cuda_function12, Object cuda_function2, Object cuda_function23, Object cuda_function3, Object cuda_function4, Object cuda_function_init2, Object cuda_function_loop2, Object cuda_function_mp, Object cuda_function_mp_l, Object cuda_function_mp_r, Object cuda_function_amp, Object cuda_function_tm, Object cuda_function_memset, Object cuda_function_atinit, Object cuda_function_decompress, Object cuda_function_aux1, Object cuda_function_aux2, Object cuda_function_aux3, Object cuda_function_aux4, Object cuda_d_pws_buf, Object cuda_d_pws_amp_buf, Object cuda_d_pws_comp_buf, Object cuda_d_pws_idx, Object cuda_d_words_buf_l, Object cuda_d_words_buf_r, Object cuda_d_rules, Object cuda_d_rules_c, Object cuda_d_combs, Object cuda_d_combs_c, Object cuda_d_bfs, Object cuda_d_bfs_c, Object cuda_d_tm_c, Object cuda_d_bitmap_s1_a, Object cuda_d_bitmap_s1_b, Object cuda_d_bitmap_s1_c, Object cuda_d_bitmap_s1_d, Object cuda_d_bitmap_s2_a, Object cuda_d_bitmap_s2_b, Object cuda_d_bitmap_s2_c, Object cuda_d_bitmap_s2_d, Object cuda_d_plain_bufs, Object cuda_d_digests_buf, Object cuda_d_digests_shown, Object cuda_d_salt_bufs, Object cuda_d_esalt_bufs, Object cuda_d_tmps, Object cuda_d_hooks, Object cuda_d_result, Object cuda_d_extra0_buf, Object cuda_d_extra1_buf, Object cuda_d_extra2_buf, Object cuda_d_extra3_buf, Object cuda_d_root_css_buf, Object cuda_d_markov_css_buf, Object cuda_d_st_digests_buf, Object cuda_d_st_salts_buf, Object cuda_d_st_esalts_buf, boolean is_opencl, Byte opencl_driver_version, Byte opencl_device_vendor, Byte opencl_device_version, Byte opencl_device_c_version, Object opencl_device_type, Object opencl_device_vendor_id, Object opencl_platform_vendor_id, Object opencl_device) {
+	public hc_device_param(int device_id, int device_id_alias_cnt, Object[] device_id_alias_buf, Object pcie_bus, Object pcie_device, Object pcie_function, boolean skipped, boolean skipped_warning, Object device_processors, Object device_maxmem_alloc, Object device_global_mem, Object device_available_mem, Object device_maxclock_frequency, Object device_maxworkgroup_size, Object device_local_mem_size, int device_local_mem_type, Byte device_name, int sm_major, int sm_minor, Object kernel_exec_timeout, st_status_rc st_status, int vector_width, Object kernel_wgs1, Object kernel_wgs12, Object kernel_wgs2, Object kernel_wgs23, Object kernel_wgs3, Object kernel_wgs4, Object kernel_wgs_init2, Object kernel_wgs_loop2, Object kernel_wgs_mp, Object kernel_wgs_mp_l, Object kernel_wgs_mp_r, Object kernel_wgs_amp, Object kernel_wgs_tm, Object kernel_wgs_memset, Object kernel_wgs_atinit, Object kernel_wgs_decompress, Object kernel_wgs_aux1, Object kernel_wgs_aux2, Object kernel_wgs_aux3, Object kernel_wgs_aux4, Object kernel_preferred_wgs_multiple1, Object kernel_preferred_wgs_multiple12, Object kernel_preferred_wgs_multiple2, Object kernel_preferred_wgs_multiple23, Object kernel_preferred_wgs_multiple3, Object kernel_preferred_wgs_multiple4, Object kernel_preferred_wgs_multiple_init2, Object kernel_preferred_wgs_multiple_loop2, Object kernel_preferred_wgs_multiple_mp, Object kernel_preferred_wgs_multiple_mp_l, Object kernel_preferred_wgs_multiple_mp_r, Object kernel_preferred_wgs_multiple_amp, Object kernel_preferred_wgs_multiple_tm, Object kernel_preferred_wgs_multiple_memset, Object kernel_preferred_wgs_multiple_atinit, Object kernel_preferred_wgs_multiple_decompress, Object kernel_preferred_wgs_multiple_aux1, Object kernel_preferred_wgs_multiple_aux2, Object kernel_preferred_wgs_multiple_aux3, Object kernel_preferred_wgs_multiple_aux4, Object kernel_local_mem_size1, Object kernel_local_mem_size12, Object kernel_local_mem_size2, Object kernel_local_mem_size23, Object kernel_local_mem_size3, Object kernel_local_mem_size4, Object kernel_local_mem_size_init2, Object kernel_local_mem_size_loop2, Object kernel_local_mem_size_mp, Object kernel_local_mem_size_mp_l, Object kernel_local_mem_size_mp_r, Object kernel_local_mem_size_amp, Object kernel_local_mem_size_tm, Object kernel_local_mem_size_memset, Object kernel_local_mem_size_atinit, Object kernel_local_mem_size_decompress, Object kernel_local_mem_size_aux1, Object kernel_local_mem_size_aux2, Object kernel_local_mem_size_aux3, Object kernel_local_mem_size_aux4, Object kernel_accel, Object kernel_accel_prev, Object kernel_accel_min, Object kernel_accel_max, Object kernel_loops, Object kernel_loops_prev, Object kernel_loops_min, Object kernel_loops_max, Object kernel_loops_min_sav, Object kernel_loops_max_sav, Object kernel_threads, Object kernel_threads_min, Object kernel_threads_max, Object kernel_power, Object hardware_power, Object size_pws, Object size_pws_amp, Object size_pws_comp, Object size_pws_idx, Object size_pws_pre, Object size_pws_base, Object size_tmps, Object size_hooks, Object size_bfs, Object size_combs, Object size_rules, Object size_rules_c, Object size_root_css, Object size_markov_css, Object size_digests, Object size_salts, Object size_esalts, Object size_shown, Object size_results, Object size_plains, Object size_st_digests, Object size_st_salts, Object size_st_esalts, Object size_tm, Object extra_buffer_size, Byte scratch_buf, hc_fp combs_fp, pw[] combs_buf, Object hooks_buf, pw_idx pws_idx, Object pws_comp, Object pws_cnt, pw_pre pws_pre_buf, Object pws_pre_cnt, pw_pre pws_base_buf, Object pws_base_cnt, Object words_off, Object words_done, Object outerloop_pos, Object outerloop_left, double outerloop_msec, double outerloop_multi, Object innerloop_pos, Object innerloop_left, Object exec_pos, Object[] exec_msec, Object[] exec_us_prev1, Object[] exec_us_prev2, Object[] exec_us_prev3, Object[] exec_us_prev4, Object[] exec_us_prev_init2, Object[] exec_us_prev_loop2, Object[] exec_us_prev_aux1, Object[] exec_us_prev_aux2, Object[] exec_us_prev_aux3, Object[] exec_us_prev_aux4, Object speed_pos, Object[] speed_cnt, Object[] speed_msec, boolean speed_only_finish, Object timer_speed, boolean has_vadd3, boolean has_vbfe, boolean has_vperm, boolean has_bfe, boolean has_lop3, boolean has_mov64, boolean has_prmt, double spin_damp, Object[] kernel_params, Object[] kernel_params_mp, Object[] kernel_params_mp_r, Object[] kernel_params_mp_l, Object[] kernel_params_amp, Object[] kernel_params_tm, Object[] kernel_params_memset, Object[] kernel_params_atinit, Object[] kernel_params_decompress, Object[] kernel_params_buf32, Object[] kernel_params_buf64, Object[] kernel_params_mp_buf32, Object[] kernel_params_mp_buf64, Object[] kernel_params_mp_r_buf32, Object[] kernel_params_mp_r_buf64, Object[] kernel_params_mp_l_buf32, Object[] kernel_params_mp_l_buf64, Object[] kernel_params_amp_buf32, Object[] kernel_params_amp_buf64, Object[] kernel_params_memset_buf32, Object[] kernel_params_memset_buf64, Object[] kernel_params_atinit_buf32, Object[] kernel_params_atinit_buf64, Object[] kernel_params_decompress_buf32, Object[] kernel_params_decompress_buf64, boolean is_cuda, int cuda_warp_size, Object cuda_device, Object cuda_context, Object cuda_stream, Object cuda_event1, Object cuda_event2, Object cuda_module, Object cuda_module_mp, Object cuda_module_amp, Object cuda_function1, Object cuda_function12, Object cuda_function2, Object cuda_function23, Object cuda_function3, Object cuda_function4, Object cuda_function_init2, Object cuda_function_loop2, Object cuda_function_mp, Object cuda_function_mp_l, Object cuda_function_mp_r, Object cuda_function_amp, Object cuda_function_tm, Object cuda_function_memset, Object cuda_function_atinit, Object cuda_function_decompress, Object cuda_function_aux1, Object cuda_function_aux2, Object cuda_function_aux3, Object cuda_function_aux4, Object cuda_d_pws_buf, Object cuda_d_pws_amp_buf, Object cuda_d_pws_comp_buf, Object cuda_d_pws_idx, Object cuda_d_words_buf_l, Object cuda_d_words_buf_r, Object cuda_d_rules, Object cuda_d_rules_c, Object cuda_d_combs, Object cuda_d_combs_c, Object cuda_d_bfs, Object cuda_d_bfs_c, Object cuda_d_tm_c, Object cuda_d_bitmap_s1_a, Object cuda_d_bitmap_s1_b, Object cuda_d_bitmap_s1_c, Object cuda_d_bitmap_s1_d, Object cuda_d_bitmap_s2_a, Object cuda_d_bitmap_s2_b, Object cuda_d_bitmap_s2_c, Object cuda_d_bitmap_s2_d, Object cuda_d_plain_bufs, Object cuda_d_digests_buf, Object cuda_d_digests_shown, Object cuda_d_salt_bufs, Object cuda_d_esalt_bufs, Object cuda_d_tmps, Object cuda_d_hooks, Object cuda_d_result, Object cuda_d_extra0_buf, Object cuda_d_extra1_buf, Object cuda_d_extra2_buf, Object cuda_d_extra3_buf, Object cuda_d_root_css_buf, Object cuda_d_markov_css_buf, Object cuda_d_st_digests_buf, Object cuda_d_st_salts_buf, Object cuda_d_st_esalts_buf, boolean is_opencl, Byte opencl_driver_version, Byte opencl_device_vendor, Byte opencl_device_version, Byte opencl_device_c_version, Object opencl_device_type, Object opencl_device_vendor_id, Object opencl_platform_vendor_id, Object opencl_device) {
 		setDevice_id(device_id);
 		setDevice_id_alias_cnt(device_id_alias_cnt);
 		setDevice_id_alias_buf(device_id_alias_buf);
@@ -543,8 +543,229 @@ public class hc_device_param {
 	public hc_device_param() {
 	}
 	
+	public void rebuild_pws_compressed_append(Object pws_cnt, Object chr) {
+		Object generatedSize_pws_comp = this.getSize_pws_comp();
+		// append some data to each password candidateu32 tmp_pws_comp = (u32)ModernizedCProgram.hcmalloc(generatedSize_pws_comp);
+		Object generatedSize_pws_idx = this.getSize_pws_idx();
+		pw_idx_t tmp_pws_idx = (pw_idx_t)ModernizedCProgram.hcmalloc(generatedSize_pws_idx);
+		pw_idx generatedPws_idx = this.getPws_idx();
+		Object generatedOff = pw_idx_src.getOff();
+		Object generatedLen = pw_idx_src.getLen();
+		Object generatedPws_comp = this.getPws_comp();
+		Object generatedCnt = pw_idx_dst.getCnt();
+		for (u32 i = 0;
+		 i < pws_cnt; i++) {
+			pw_idx_t pw_idx_src = generatedPws_idx + i;
+			pw_idx_t pw_idx_dst = tmp_pws_idx + i;
+			u32 src_off = generatedOff;
+			u32 src_len = generatedLen;
+			u8[] buf = new u8();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf, generatedPws_comp + src_off, src_len);
+			buf[src_len] = chr;
+			u32 dst_len = src_len + 1;
+			u32 dst_pw_len4 = (dst_len + 3) & ~3;
+			u32 dst_pw_len4_cnt = dst_pw_len4 / 4;
+			pw_idx_dst.setCnt(dst_pw_len4_cnt);
+			pw_idx_dst.setLen(src_len);
+			u8 dst = (u8)(tmp_pws_comp + generatedOff);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dst, buf, dst_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(dst + dst_len, 0, dst_pw_len4 - dst_len);
+			pw_idx_t pw_idx_dst_next = pw_idx_dst + 1;
+			pw_idx_dst_next.setOff(generatedOff + generatedCnt);
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPws_comp, tmp_pws_comp, generatedSize_pws_comp);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPws_idx, tmp_pws_idx, generatedSize_pws_idx);
+		ModernizedCProgram.hcfree(tmp_pws_comp);
+		ModernizedCProgram.hcfree(tmp_pws_idx);
+	}
+	// this function is used if we have to modify the compressed pws buffer in order to
+	public void module_hook23(Object hook_salts_buf, Object salt_pos, Object pws_cnt) {
+		Object generatedHooks_buf = this.getHooks_buf();
+		seven_zip_hook_t[] hook_items = (seven_zip_hook_t)generatedHooks_buf;
+		seven_zip_hook_salt_t[] seven_zips = (seven_zip_hook_salt_t)hook_salts_buf;
+		seven_zip_hook_salt_t seven_zip = seven_zips[salt_pos];
+		Object generatedData_type = seven_zip.getData_type();
+		u8 data_type = generatedData_type;
+		Object[] generatedData_buf = seven_zip.getData_buf();
+		u32[] data_buf = generatedData_buf;
+		Object generatedUnpack_size = seven_zip.getUnpack_size();
+		u32 unpack_size = generatedUnpack_size;
+		Object[] generatedUkey = hook_item.getUkey();
+		int generatedAes_len = seven_zip.getAes_len();
+		Object[] generatedIv_buf = seven_zip.getIv_buf();
+		Object generatedCrc = seven_zip.getCrc();
+		Object generatedCrc_len = seven_zip.getCrc_len();
+		Object[] generatedCoder_attributes = seven_zip.getCoder_attributes();
+		for (u64 pw_pos = 0;
+		 pw_pos < pws_cnt; pw_pos++) {
+			seven_zip_hook_t hook_item = hook_items[pw_pos];
+			u32 ukey = (u32)generatedUkey;
+			AES_KEY aes_key = new AES_KEY();
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(aes_key, 0, /*Error: sizeof expression not supported yet*/);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/aes256_set_decrypt_key(aes_key.getRdk(), ukey, (u32)ModernizedCProgram.te0, (u32)ModernizedCProgram.te1, (u32)ModernizedCProgram.te2, (u32)ModernizedCProgram.te3, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3);
+			int aes_len = generatedAes_len;
+			u32[] data = new u32();
+			u32[] out = new u32();
+			u32[] iv = new u32();
+			iv[0] = generatedIv_buf[0];
+			iv[1] = generatedIv_buf[1];
+			iv[2] = generatedIv_buf[2];
+			iv[3] = generatedIv_buf[3];
+			u32[] out_full = new u32();
+			int i = 0;
+			int j = 0;
+			for (; i < aes_len - 16; ) {
+				data[0] = data_buf[j + 0];
+				data[1] = data_buf[j + 1];
+				data[2] = data_buf[j + 2];
+				data[3] = data_buf[j + 3];
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/aes256_decrypt(aes_key.getRdk(), data, out, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3, (u32)ModernizedCProgram.td4);
+				out[0] ^=  iv[0];
+				out[1] ^=  iv[1];
+				out[2] ^=  iv[2];
+				out[3] ^=  iv[3];
+				iv[0] = data[0];
+				iv[1] = data[1];
+				iv[2] = data[2];
+				iv[3] = data[3];
+				out_full[j + 0] = out[0];
+				out_full[j + 1] = out[1];
+				out_full[j + 2] = out[2];
+				out_full[j + 3] = out[3];
+			}
+			data[0] = data_buf[j + 0];
+			data[1] = data_buf[j + 1];
+			data[2] = data_buf[j + 2];
+			data[3] = data_buf[j + 3];
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/aes256_decrypt(aes_key.getRdk(), data, out, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3, (u32)ModernizedCProgram.td4);
+			out[0] ^=  iv[0];
+			out[1] ^=  iv[1];
+			out[2] ^=  iv[2];
+			out[3] ^=  iv[3];
+			out_full[j + 0] = out[0];
+			out_full[j + 1] = out[1];
+			out_full[j + 2] = out[2];
+			out_full[j + 3] = out[3/*
+			     * check the CRC32 "hash"
+			     */];
+			u32 seven_zip_crc = generatedCrc;
+			u32 crc = new u32();
+			if (data_type == 0) {
+				crc = ModernizedCProgram.cpu_crc32_buffer((u8)out_full, unpack_size);
+			} else {
+					u32 crc_len = generatedCrc_len;
+					Byte coder_attributes = generatedCoder_attributes;
+					u8 compressed_data = (u8)out_full;
+					SizeT compressed_data_len = aes_len;
+					Byte decompressed_data;
+					decompressed_data = (byte)ModernizedCProgram.hcmalloc(crc_len);
+					SizeT decompressed_data_len = crc_len;
+					int ret;
+					if (data_type == 1) {
+						ret = ModernizedCProgram.hc_lzma1_decompress(compressed_data, compressed_data_len, decompressed_data, decompressed_data_len, coder_attributes);
+					}  else if (data_type == 7) {
+						ret = 1;
+						z_stream inf = new z_stream();
+						inf.setZalloc(0);
+						inf.setZfree(0);
+						inf.setOpaque(0);
+						inf.setAvail_in(compressed_data_len);
+						inf.setNext_in(compressed_data);
+						inf.setAvail_out(decompressed_data_len);
+						inf.setNext_out(decompressed_data);
+						ModernizedCProgram.inflateInit2_((inf), (true), "1.2.11", (int)/*Error: Unsupported expression*/);
+						int zlib_ret = ModernizedCProgram.inflate(inf, 0);
+						ModernizedCProgram.inflateEnd(inf);
+						if ((zlib_ret == 0) || (zlib_ret == 1)) {
+							ret = 0;
+						} 
+					} else {
+							ret = ModernizedCProgram.hc_lzma2_decompress(compressed_data, compressed_data_len, decompressed_data, decompressed_data_len, coder_attributes);
+					} 
+					if (ret != 0) {
+						hook_item.setHook_success(0);
+						ModernizedCProgram.hcfree(decompressed_data);
+						continue;
+					} 
+					crc = ModernizedCProgram.cpu_crc32_buffer(decompressed_data, crc_len);
+					ModernizedCProgram.hcfree(decompressed_data);
+			} 
+			if (crc == seven_zip_crc) {
+				hook_item.setHook_success(1);
+			} else {
+					hook_item.setHook_success(0);
+			} 
+		}// this hook data needs to be updated (the "hook_success" variable):
+	}
+	public void pw_pre_add(Object pw_buf, Object pw_len, Object base_buf, Object base_len, Object rule_idx) {
+		Object generatedPws_pre_cnt = this.getPws_pre_cnt();
+		Object generatedKernel_power = this.getKernel_power();
+		pw_pre generatedPws_pre_buf = this.getPws_pre_buf();
+		Object[] generatedPw_buf = pw_pre.getPw_buf();
+		Object[] generatedBase_buf = pw_pre.getBase_buf();
+		if (generatedPws_pre_cnt < generatedKernel_power) {
+			pw_pre_t pw_pre = generatedPws_pre_buf + generatedPws_pre_cnt;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPw_buf, pw_buf, pw_len);
+			pw_pre.setPw_len(pw_len);
+			if (base_buf != (null)) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedBase_buf, base_buf, base_len);
+				pw_pre.setBase_len(base_len);
+			} 
+			pw_pre.setRule_idx(rule_idx);
+			generatedPws_pre_cnt++;
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "BUG pw_pre_add()!!\n");
+				return /*Error: Unsupported expression*/;
+		} 
+	}
+	public void pw_add(Object pw_buf, Object pw_len) {
+		Object generatedPws_cnt = this.getPws_cnt();
+		Object generatedKernel_power = this.getKernel_power();
+		pw_idx generatedPws_idx = this.getPws_idx();
+		Object generatedPws_comp = this.getPws_comp();
+		Object generatedOff = pw_idx.getOff();
+		Object generatedCnt = pw_idx.getCnt();
+		if (generatedPws_cnt < generatedKernel_power) {
+			pw_idx_t pw_idx = generatedPws_idx + generatedPws_cnt;
+			u32 pw_len4 = (pw_len + 3) & ~3;
+			u32 pw_len4_cnt = pw_len4 / 4;
+			pw_idx.setCnt(pw_len4_cnt);
+			pw_idx.setLen(pw_len);
+			u8 dst = (u8)(generatedPws_comp + generatedOff);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dst, pw_buf, pw_len);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(dst + pw_len, 0, pw_len4 - pw_len);
+			pw_idx_t pw_idx_next = pw_idx + 1;
+			pw_idx_next.setOff(generatedOff + generatedCnt);
+			generatedPws_cnt++;
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "BUG pw_add()!!\n");
+				return /*Error: Unsupported expression*/;
+		} 
+	}
+	public double get_avg_exec_time(Object last_num_entries) {
+		Object generatedExec_pos = this.getExec_pos();
+		int exec_pos = (int)generatedExec_pos - last_num_entries;
+		if (exec_pos < 0) {
+			exec_pos += 128;
+		} 
+		double exec_msec_sum = 0;
+		int exec_msec_cnt = 0;
+		Object[] generatedExec_msec = this.getExec_msec();
+		for (int i = 0;
+		 i < last_num_entries; i++) {
+			double exec_msec = generatedExec_msec[(exec_pos + i) % 128];
+			if (exec_msec > 0) {
+				exec_msec_sum += exec_msec;
+				exec_msec_cnt++;
+			} 
+		}
+		if (exec_msec_cnt == 0) {
+			return 0;
+		} 
+		return exec_msec_sum / exec_msec_cnt;
+	}
 	public boolean brain_send(int sockfd, Object buf, Object len, int flags, Object status_ctx) {
-		byte ptr = (byte)buf;
+		Byte ptr = (byte)buf;
 		ssize_t s_pos = new ssize_t();
 		ssize_t s_len = len;
 		for (s_pos = 0; s_pos < s_len - ModernizedCProgram.BRAIN_LINK_CHUNK_SIZE; s_pos += ModernizedCProgram.BRAIN_LINK_CHUNK_SIZE) {
@@ -568,7 +789,7 @@ public class hc_device_param {
 		return 1;
 	}
 	public boolean brain_recv(int sockfd, Object buf, Object len, int flags, Object status_ctx) {
-		byte ptr = (byte)buf;
+		Byte ptr = (byte)buf;
 		ssize_t s_pos = new ssize_t();
 		ssize_t s_len = len;
 		for (s_pos = 0; s_pos < s_len - ModernizedCProgram.BRAIN_LINK_CHUNK_SIZE; s_pos += ModernizedCProgram.BRAIN_LINK_CHUNK_SIZE) {
@@ -594,14 +815,14 @@ public class hc_device_param {
 	public boolean brain_send_all(int sockfd, Object buf, Object len, int flags, Object status_ctx) {
 		Object generatedBrain_link_send_speed = this.getBrain_link_send_speed();
 		link_speed_t link_speed = generatedBrain_link_send_speed;
-		Object generatedTimer = link_speed.getTimer();
+		Object[] generatedTimer = link_speed.getTimer();
 		int generatedPos = link_speed.getPos();
 		if (device_param) {
 			this.setBrain_link_send_active(1);
 			ModernizedCProgram.hc_timer_set(generatedTimer[generatedPos]);
 		} 
 		ssize_t nsend = /*Error: Function owner not recognized*/send(sockfd, buf, len, flags);
-		Object generatedBytes = link_speed.getBytes();
+		Object[] generatedBytes = link_speed.getBytes();
 		Object generatedBrain_link_send_bytes = this.getBrain_link_send_bytes();
 		if (device_param) {
 			generatedBytes[generatedPos] = nsend;
@@ -617,7 +838,7 @@ public class hc_device_param {
 			return 0;
 		} 
 		while (nsend < (ssize_t)len) {
-			byte buf_new = (byte)buf;
+			Byte buf_new = (byte)buf;
 			if (device_param) {
 				ModernizedCProgram.hc_timer_set(generatedTimer[generatedPos]);
 			} 
@@ -645,14 +866,14 @@ public class hc_device_param {
 	public boolean brain_recv_all(int sockfd, Object buf, Object len, int flags, Object status_ctx) {
 		Object generatedBrain_link_recv_speed = this.getBrain_link_recv_speed();
 		link_speed_t link_speed = generatedBrain_link_recv_speed;
-		Object generatedTimer = link_speed.getTimer();
+		Object[] generatedTimer = link_speed.getTimer();
 		int generatedPos = link_speed.getPos();
 		if (device_param) {
 			this.setBrain_link_recv_active(1);
 			ModernizedCProgram.hc_timer_set(generatedTimer[generatedPos]);
 		} 
 		ssize_t nrecv = /*Error: Function owner not recognized*/recv(sockfd, buf, len, flags);
-		Object generatedBytes = link_speed.getBytes();
+		Object[] generatedBytes = link_speed.getBytes();
 		Object generatedBrain_link_recv_bytes = this.getBrain_link_recv_bytes();
 		if (device_param) {
 			generatedBytes[generatedPos] = nrecv;
@@ -668,7 +889,7 @@ public class hc_device_param {
 			return 0;
 		} 
 		while (nrecv < (ssize_t)len) {
-			byte buf_new = (byte)buf;
+			Byte buf_new = (byte)buf;
 			if (device_param) {
 				ModernizedCProgram.hc_timer_set(generatedTimer[generatedPos]);
 			} 
@@ -715,7 +936,7 @@ public class hc_device_param {
 		byte[] port_str = new byte[8];
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(port_str, 0, /*Error: sizeof expression not supported yet*/);
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(port_str, /*Error: sizeof expression not supported yet*/, "%i", port);
-		byte host_real = (host == ((Object)0)) ? "127.0.0.1" : host;
+		Byte host_real = (host == (null)) ? "127.0.0.1" : host;
 		boolean connected = false;
 		addrinfo address_info = new addrinfo();
 		int rc_getaddrinfo = /*Error: Function owner not recognized*/getaddrinfo(host_real, port_str, hints, address_info);
@@ -724,7 +945,7 @@ public class hc_device_param {
 		Object generatedAi_next = address_info_ptr.getAi_next();
 		if (rc_getaddrinfo == 0) {
 			addrinfo address_info_ptr = new addrinfo();
-			for (address_info_ptr = address_info; address_info_ptr != ((Object)0); address_info_ptr = generatedAi_next) {
+			for (address_info_ptr = address_info; address_info_ptr != (null); address_info_ptr = generatedAi_next) {
 				if (ModernizedCProgram.brain_connect(brain_link_client_fd, generatedAi_addr, generatedAi_addrlen, ModernizedCProgram.BRAIN_CLIENT_CONNECT_TIMEOUT) == 0) {
 					connected = true;
 					break;
@@ -742,13 +963,13 @@ public class hc_device_param {
 		} 
 		this.setBrain_link_client_fd(brain_link_client_fd);
 		u32 brain_link_version = ModernizedCProgram.BRAIN_LINK_VERSION_CUR;
-		if (((Object)0).brain_send(brain_link_client_fd, brain_link_version, /*Error: sizeof expression not supported yet*/, 0, ((Object)0)) == 0) {
+		if ((null).brain_send(brain_link_client_fd, brain_link_version, /*Error: sizeof expression not supported yet*/, 0, (null)) == 0) {
 			(_iob[2]).brain_logging(0, "brain_send: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
 		u32 brain_link_version_ok = 0;
-		if (((Object)0).brain_recv(brain_link_client_fd, brain_link_version_ok, /*Error: sizeof expression not supported yet*/, 0, ((Object)0)) == 0) {
+		if ((null).brain_recv(brain_link_client_fd, brain_link_version_ok, /*Error: sizeof expression not supported yet*/, 0, (null)) == 0) {
 			(_iob[2]).brain_logging(0, "brain_recv: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
@@ -759,19 +980,19 @@ public class hc_device_param {
 			return 0;
 		} 
 		u32 challenge = 0;
-		if (((Object)0).brain_recv(brain_link_client_fd, challenge, /*Error: sizeof expression not supported yet*/, 0, ((Object)0)) == 0) {
+		if ((null).brain_recv(brain_link_client_fd, challenge, /*Error: sizeof expression not supported yet*/, 0, (null)) == 0) {
 			(_iob[2]).brain_logging(0, "brain_recv: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
 		u64 response = ModernizedCProgram.brain_auth_hash(challenge, password, /*Error: Function owner not recognized*/strlen(password));
-		if (((Object)0).brain_send(brain_link_client_fd, response, /*Error: sizeof expression not supported yet*/, 0, ((Object)0)) == 0) {
+		if ((null).brain_send(brain_link_client_fd, response, /*Error: sizeof expression not supported yet*/, 0, (null)) == 0) {
 			(_iob[2]).brain_logging(0, "brain_send: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
 		u32 password_ok = 0;
-		if (((Object)0).brain_recv(brain_link_client_fd, password_ok, /*Error: sizeof expression not supported yet*/, 0, ((Object)0)) == 0) {
+		if ((null).brain_recv(brain_link_client_fd, password_ok, /*Error: sizeof expression not supported yet*/, 0, (null)) == 0) {
 			(_iob[2]).brain_logging(0, "brain_recv: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
@@ -796,7 +1017,7 @@ public class hc_device_param {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
 		} 
-		if (((Object)0).brain_recv(brain_link_client_fd, highest, /*Error: Unsupported expression*/, 0, ((Object)0)) == 0) {
+		if ((null).brain_recv(brain_link_client_fd, highest, /*Error: Unsupported expression*/, 0, (null)) == 0) {
 			(_iob[2]).brain_logging(0, "brain_recv: %s\n", /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(brain_link_client_fd);
 			return 0;
@@ -858,9 +1079,9 @@ public class hc_device_param {
 			return 0;
 		} 
 		Object generatedBrain_link_in_buf = this.getBrain_link_in_buf();
-		byte recvbuf = (byte)generatedBrain_link_in_buf;
+		Byte recvbuf = (byte)generatedBrain_link_in_buf;
 		Object generatedBrain_link_out_buf = this.getBrain_link_out_buf();
-		byte sendbuf = (byte)generatedBrain_link_out_buf;
+		Byte sendbuf = (byte)generatedBrain_link_out_buf;
 		int in_size = 0;
 		int out_size = generatedPws_pre_cnt * ModernizedCProgram.BRAIN_HASH_SIZE;
 		u8 operation = brain_operation.BRAIN_OPERATION_HASH_LOOKUP;
@@ -885,227 +1106,6 @@ public class hc_device_param {
 		} 
 		return 1;
 	}
-	public void pw_pre_add(Object pw_buf, Object pw_len, Object base_buf, Object base_len, Object rule_idx) {
-		Object generatedPws_pre_cnt = this.getPws_pre_cnt();
-		Object generatedKernel_power = this.getKernel_power();
-		pw_pre generatedPws_pre_buf = this.getPws_pre_buf();
-		Object generatedPw_buf = pw_pre.getPw_buf();
-		Object generatedBase_buf = pw_pre.getBase_buf();
-		if (generatedPws_pre_cnt < generatedKernel_power) {
-			pw_pre_t pw_pre = generatedPws_pre_buf + generatedPws_pre_cnt;
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPw_buf, pw_buf, pw_len);
-			pw_pre.setPw_len(pw_len);
-			if (base_buf != ((Object)0)) {
-				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedBase_buf, base_buf, base_len);
-				pw_pre.setBase_len(base_len);
-			} 
-			pw_pre.setRule_idx(rule_idx);
-			generatedPws_pre_cnt++;
-		} else {
-				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "BUG pw_pre_add()!!\n");
-				return /*Error: Unsupported expression*/;
-		} 
-	}
-	public void pw_add(Object pw_buf, Object pw_len) {
-		Object generatedPws_cnt = this.getPws_cnt();
-		Object generatedKernel_power = this.getKernel_power();
-		pw_idx generatedPws_idx = this.getPws_idx();
-		Object generatedPws_comp = this.getPws_comp();
-		Object generatedOff = pw_idx.getOff();
-		Object generatedCnt = pw_idx.getCnt();
-		if (generatedPws_cnt < generatedKernel_power) {
-			pw_idx_t pw_idx = generatedPws_idx + generatedPws_cnt;
-			u32 pw_len4 = (pw_len + 3) & ~3;
-			u32 pw_len4_cnt = pw_len4 / 4;
-			pw_idx.setCnt(pw_len4_cnt);
-			pw_idx.setLen(pw_len);
-			u8 dst = (u8)(generatedPws_comp + generatedOff);
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dst, pw_buf, pw_len);
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(dst + pw_len, 0, pw_len4 - pw_len);
-			pw_idx_t pw_idx_next = pw_idx + 1;
-			pw_idx_next.setOff(generatedOff + generatedCnt);
-			generatedPws_cnt++;
-		} else {
-				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "BUG pw_add()!!\n");
-				return /*Error: Unsupported expression*/;
-		} 
-	}
-	public void rebuild_pws_compressed_append(Object pws_cnt, Object chr) {
-		Object generatedSize_pws_comp = this.getSize_pws_comp();
-		// append some data to each password candidateu32 tmp_pws_comp = (u32)ModernizedCProgram.hcmalloc(generatedSize_pws_comp);
-		Object generatedSize_pws_idx = this.getSize_pws_idx();
-		pw_idx_t tmp_pws_idx = (pw_idx_t)ModernizedCProgram.hcmalloc(generatedSize_pws_idx);
-		pw_idx generatedPws_idx = this.getPws_idx();
-		Object generatedOff = pw_idx_src.getOff();
-		Object generatedLen = pw_idx_src.getLen();
-		Object generatedPws_comp = this.getPws_comp();
-		Object generatedCnt = pw_idx_dst.getCnt();
-		for (u32 i = 0;
-		 i < pws_cnt; i++) {
-			pw_idx_t pw_idx_src = generatedPws_idx + i;
-			pw_idx_t pw_idx_dst = tmp_pws_idx + i;
-			u32 src_off = generatedOff;
-			u32 src_len = generatedLen;
-			u8[] buf = new u8();
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(buf, generatedPws_comp + src_off, src_len);
-			buf[src_len] = chr;
-			u32 dst_len = src_len + 1;
-			u32 dst_pw_len4 = (dst_len + 3) & ~3;
-			u32 dst_pw_len4_cnt = dst_pw_len4 / 4;
-			pw_idx_dst.setCnt(dst_pw_len4_cnt);
-			pw_idx_dst.setLen(src_len);
-			u8 dst = (u8)(tmp_pws_comp + generatedOff);
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(dst, buf, dst_len);
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(dst + dst_len, 0, dst_pw_len4 - dst_len);
-			pw_idx_t pw_idx_dst_next = pw_idx_dst + 1;
-			pw_idx_dst_next.setOff(generatedOff + generatedCnt);
-		}
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPws_comp, tmp_pws_comp, generatedSize_pws_comp);
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPws_idx, tmp_pws_idx, generatedSize_pws_idx);
-		ModernizedCProgram.hcfree(tmp_pws_comp);
-		ModernizedCProgram.hcfree(tmp_pws_idx);
-	}
-	// this function is used if we have to modify the compressed pws buffer in order to
-	public double get_avg_exec_time(Object last_num_entries) {
-		Object generatedExec_pos = this.getExec_pos();
-		int exec_pos = (int)generatedExec_pos - last_num_entries;
-		if (exec_pos < 0) {
-			exec_pos += 128;
-		} 
-		double exec_msec_sum = 0;
-		int exec_msec_cnt = 0;
-		Object generatedExec_msec = this.getExec_msec();
-		for (int i = 0;
-		 i < last_num_entries; i++) {
-			double exec_msec = generatedExec_msec[(exec_pos + i) % 128];
-			if (exec_msec > 0) {
-				exec_msec_sum += exec_msec;
-				exec_msec_cnt++;
-			} 
-		}
-		if (exec_msec_cnt == 0) {
-			return 0;
-		} 
-		return exec_msec_sum / exec_msec_cnt;
-	}
-	public void module_hook23(Object hook_salts_buf, Object salt_pos, Object pws_cnt) {
-		Object generatedHooks_buf = this.getHooks_buf();
-		seven_zip_hook_t hook_items = (seven_zip_hook_t)generatedHooks_buf;
-		seven_zip_hook_salt_t seven_zips = (seven_zip_hook_salt_t)hook_salts_buf;
-		seven_zip_hook_salt_t seven_zip = seven_zips[salt_pos];
-		Object generatedData_type = seven_zip.getData_type();
-		u8 data_type = generatedData_type;
-		Object generatedData_buf = seven_zip.getData_buf();
-		u32 data_buf = generatedData_buf;
-		Object generatedUnpack_size = seven_zip.getUnpack_size();
-		u32 unpack_size = generatedUnpack_size;
-		Object generatedUkey = hook_item.getUkey();
-		int generatedAes_len = seven_zip.getAes_len();
-		Object generatedIv_buf = seven_zip.getIv_buf();
-		Object generatedCrc = seven_zip.getCrc();
-		Object generatedCrc_len = seven_zip.getCrc_len();
-		Object generatedCoder_attributes = seven_zip.getCoder_attributes();
-		for (u64 pw_pos = 0;
-		 pw_pos < pws_cnt; pw_pos++) {
-			seven_zip_hook_t hook_item = hook_items[pw_pos];
-			u32 ukey = (u32)generatedUkey;
-			AES_KEY aes_key = new AES_KEY();
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(aes_key, 0, /*Error: sizeof expression not supported yet*/);
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/aes256_set_decrypt_key(aes_key.getRdk(), ukey, (u32)ModernizedCProgram.te0, (u32)ModernizedCProgram.te1, (u32)ModernizedCProgram.te2, (u32)ModernizedCProgram.te3, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3);
-			int aes_len = generatedAes_len;
-			u32[] data = new u32();
-			u32[] out = new u32();
-			u32[] iv = new u32();
-			iv[0] = generatedIv_buf[0];
-			iv[1] = generatedIv_buf[1];
-			iv[2] = generatedIv_buf[2];
-			iv[3] = generatedIv_buf[3];
-			u32[] out_full = new u32();
-			int i = 0;
-			int j = 0;
-			for (; i < aes_len - 16; ) {
-				data[0] = data_buf[j + 0];
-				data[1] = data_buf[j + 1];
-				data[2] = data_buf[j + 2];
-				data[3] = data_buf[j + 3];
-				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/aes256_decrypt(aes_key.getRdk(), data, out, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3, (u32)ModernizedCProgram.td4);
-				out[0] ^=  iv[0];
-				out[1] ^=  iv[1];
-				out[2] ^=  iv[2];
-				out[3] ^=  iv[3];
-				iv[0] = data[0];
-				iv[1] = data[1];
-				iv[2] = data[2];
-				iv[3] = data[3];
-				out_full[j + 0] = out[0];
-				out_full[j + 1] = out[1];
-				out_full[j + 2] = out[2];
-				out_full[j + 3] = out[3];
-			}
-			data[0] = data_buf[j + 0];
-			data[1] = data_buf[j + 1];
-			data[2] = data_buf[j + 2];
-			data[3] = data_buf[j + 3];
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/aes256_decrypt(aes_key.getRdk(), data, out, (u32)ModernizedCProgram.td0, (u32)ModernizedCProgram.td1, (u32)ModernizedCProgram.td2, (u32)ModernizedCProgram.td3, (u32)ModernizedCProgram.td4);
-			out[0] ^=  iv[0];
-			out[1] ^=  iv[1];
-			out[2] ^=  iv[2];
-			out[3] ^=  iv[3];
-			out_full[j + 0] = out[0];
-			out_full[j + 1] = out[1];
-			out_full[j + 2] = out[2];
-			out_full[j + 3] = out[3/*
-			     * check the CRC32 "hash"
-			     */];
-			u32 seven_zip_crc = generatedCrc;
-			u32 crc = new u32();
-			if (data_type == 0) {
-				crc = ModernizedCProgram.cpu_crc32_buffer((u8)out_full, unpack_size);
-			} else {
-					u32 crc_len = generatedCrc_len;
-					byte coder_attributes = generatedCoder_attributes;
-					u8 compressed_data = (u8)out_full;
-					SizeT compressed_data_len = aes_len;
-					byte decompressed_data;
-					decompressed_data = (byte)ModernizedCProgram.hcmalloc(crc_len);
-					SizeT decompressed_data_len = crc_len;
-					int ret;
-					if (data_type == 1) {
-						ret = ModernizedCProgram.hc_lzma1_decompress(compressed_data, compressed_data_len, decompressed_data, decompressed_data_len, coder_attributes);
-					}  else if (data_type == 7) {
-						ret = 1;
-						z_stream inf = new z_stream();
-						inf.setZalloc(0);
-						inf.setZfree(0);
-						inf.setOpaque(0);
-						inf.setAvail_in(compressed_data_len);
-						inf.setNext_in(compressed_data);
-						inf.setAvail_out(decompressed_data_len);
-						inf.setNext_out(decompressed_data);
-						ModernizedCProgram.inflateInit2_((inf), (true), "1.2.11", (int)/*Error: Unsupported expression*/);
-						int zlib_ret = ModernizedCProgram.inflate(inf, 0);
-						ModernizedCProgram.inflateEnd(inf);
-						if ((zlib_ret == 0) || (zlib_ret == 1)) {
-							ret = 0;
-						} 
-					} else {
-							ret = ModernizedCProgram.hc_lzma2_decompress(compressed_data, compressed_data_len, decompressed_data, decompressed_data_len, coder_attributes);
-					} 
-					if (ret != 0) {
-						hook_item.setHook_success(0);
-						ModernizedCProgram.hcfree(decompressed_data);
-						continue;
-					} 
-					crc = ModernizedCProgram.cpu_crc32_buffer(decompressed_data, crc_len);
-					ModernizedCProgram.hcfree(decompressed_data);
-			} 
-			if (crc == seven_zip_crc) {
-				hook_item.setHook_success(1);
-			} else {
-					hook_item.setHook_success(0);
-			} 
-		}// this hook data needs to be updated (the "hook_success" variable):
-	}
 	public int getDevice_id() {
 		return device_id;
 	}
@@ -1118,10 +1118,10 @@ public class hc_device_param {
 	public void setDevice_id_alias_cnt(int newDevice_id_alias_cnt) {
 		device_id_alias_cnt = newDevice_id_alias_cnt;
 	}
-	public Object getDevice_id_alias_buf() {
+	public Object[] getDevice_id_alias_buf() {
 		return device_id_alias_buf;
 	}
-	public void setDevice_id_alias_buf(Object newDevice_id_alias_buf) {
+	public void setDevice_id_alias_buf(Object[] newDevice_id_alias_buf) {
 		device_id_alias_buf = newDevice_id_alias_buf;
 	}
 	public Object getPcie_bus() {
@@ -1958,70 +1958,70 @@ public class hc_device_param {
 	public void setExec_pos(Object newExec_pos) {
 		exec_pos = newExec_pos;
 	}
-	public Object getExec_msec() {
+	public Object[] getExec_msec() {
 		return exec_msec;
 	}
-	public void setExec_msec(Object newExec_msec) {
+	public void setExec_msec(Object[] newExec_msec) {
 		exec_msec = newExec_msec;
 	}
-	public Object getExec_us_prev1() {
+	public Object[] getExec_us_prev1() {
 		return exec_us_prev1;
 	}
-	public void setExec_us_prev1(Object newExec_us_prev1) {
+	public void setExec_us_prev1(Object[] newExec_us_prev1) {
 		exec_us_prev1 = newExec_us_prev1;
 	}
-	public Object getExec_us_prev2() {
+	public Object[] getExec_us_prev2() {
 		return exec_us_prev2;
 	}
-	public void setExec_us_prev2(Object newExec_us_prev2) {
+	public void setExec_us_prev2(Object[] newExec_us_prev2) {
 		exec_us_prev2 = newExec_us_prev2;
 	}
-	public Object getExec_us_prev3() {
+	public Object[] getExec_us_prev3() {
 		return exec_us_prev3;
 	}
-	public void setExec_us_prev3(Object newExec_us_prev3) {
+	public void setExec_us_prev3(Object[] newExec_us_prev3) {
 		exec_us_prev3 = newExec_us_prev3;
 	}
-	public Object getExec_us_prev4() {
+	public Object[] getExec_us_prev4() {
 		return exec_us_prev4;
 	}
-	public void setExec_us_prev4(Object newExec_us_prev4) {
+	public void setExec_us_prev4(Object[] newExec_us_prev4) {
 		exec_us_prev4 = newExec_us_prev4;
 	}
-	public Object getExec_us_prev_init2() {
+	public Object[] getExec_us_prev_init2() {
 		return exec_us_prev_init2;
 	}
-	public void setExec_us_prev_init2(Object newExec_us_prev_init2) {
+	public void setExec_us_prev_init2(Object[] newExec_us_prev_init2) {
 		exec_us_prev_init2 = newExec_us_prev_init2;
 	}
-	public Object getExec_us_prev_loop2() {
+	public Object[] getExec_us_prev_loop2() {
 		return exec_us_prev_loop2;
 	}
-	public void setExec_us_prev_loop2(Object newExec_us_prev_loop2) {
+	public void setExec_us_prev_loop2(Object[] newExec_us_prev_loop2) {
 		exec_us_prev_loop2 = newExec_us_prev_loop2;
 	}
-	public Object getExec_us_prev_aux1() {
+	public Object[] getExec_us_prev_aux1() {
 		return exec_us_prev_aux1;
 	}
-	public void setExec_us_prev_aux1(Object newExec_us_prev_aux1) {
+	public void setExec_us_prev_aux1(Object[] newExec_us_prev_aux1) {
 		exec_us_prev_aux1 = newExec_us_prev_aux1;
 	}
-	public Object getExec_us_prev_aux2() {
+	public Object[] getExec_us_prev_aux2() {
 		return exec_us_prev_aux2;
 	}
-	public void setExec_us_prev_aux2(Object newExec_us_prev_aux2) {
+	public void setExec_us_prev_aux2(Object[] newExec_us_prev_aux2) {
 		exec_us_prev_aux2 = newExec_us_prev_aux2;
 	}
-	public Object getExec_us_prev_aux3() {
+	public Object[] getExec_us_prev_aux3() {
 		return exec_us_prev_aux3;
 	}
-	public void setExec_us_prev_aux3(Object newExec_us_prev_aux3) {
+	public void setExec_us_prev_aux3(Object[] newExec_us_prev_aux3) {
 		exec_us_prev_aux3 = newExec_us_prev_aux3;
 	}
-	public Object getExec_us_prev_aux4() {
+	public Object[] getExec_us_prev_aux4() {
 		return exec_us_prev_aux4;
 	}
-	public void setExec_us_prev_aux4(Object newExec_us_prev_aux4) {
+	public void setExec_us_prev_aux4(Object[] newExec_us_prev_aux4) {
 		exec_us_prev_aux4 = newExec_us_prev_aux4;
 	}
 	public Object getSpeed_pos() {
@@ -2030,16 +2030,16 @@ public class hc_device_param {
 	public void setSpeed_pos(Object newSpeed_pos) {
 		speed_pos = newSpeed_pos;
 	}
-	public Object getSpeed_cnt() {
+	public Object[] getSpeed_cnt() {
 		return speed_cnt;
 	}
-	public void setSpeed_cnt(Object newSpeed_cnt) {
+	public void setSpeed_cnt(Object[] newSpeed_cnt) {
 		speed_cnt = newSpeed_cnt;
 	}
-	public Object getSpeed_msec() {
+	public Object[] getSpeed_msec() {
 		return speed_msec;
 	}
-	public void setSpeed_msec(Object newSpeed_msec) {
+	public void setSpeed_msec(Object[] newSpeed_msec) {
 		speed_msec = newSpeed_msec;
 	}
 	public boolean getSpeed_only_finish() {
@@ -2102,154 +2102,154 @@ public class hc_device_param {
 	public void setSpin_damp(double newSpin_damp) {
 		spin_damp = newSpin_damp;
 	}
-	public Object getKernel_params() {
+	public Object[] getKernel_params() {
 		return kernel_params;
 	}
-	public void setKernel_params(Object newKernel_params) {
+	public void setKernel_params(Object[] newKernel_params) {
 		kernel_params = newKernel_params;
 	}
-	public Object getKernel_params_mp() {
+	public Object[] getKernel_params_mp() {
 		return kernel_params_mp;
 	}
-	public void setKernel_params_mp(Object newKernel_params_mp) {
+	public void setKernel_params_mp(Object[] newKernel_params_mp) {
 		kernel_params_mp = newKernel_params_mp;
 	}
-	public Object getKernel_params_mp_r() {
+	public Object[] getKernel_params_mp_r() {
 		return kernel_params_mp_r;
 	}
-	public void setKernel_params_mp_r(Object newKernel_params_mp_r) {
+	public void setKernel_params_mp_r(Object[] newKernel_params_mp_r) {
 		kernel_params_mp_r = newKernel_params_mp_r;
 	}
-	public Object getKernel_params_mp_l() {
+	public Object[] getKernel_params_mp_l() {
 		return kernel_params_mp_l;
 	}
-	public void setKernel_params_mp_l(Object newKernel_params_mp_l) {
+	public void setKernel_params_mp_l(Object[] newKernel_params_mp_l) {
 		kernel_params_mp_l = newKernel_params_mp_l;
 	}
-	public Object getKernel_params_amp() {
+	public Object[] getKernel_params_amp() {
 		return kernel_params_amp;
 	}
-	public void setKernel_params_amp(Object newKernel_params_amp) {
+	public void setKernel_params_amp(Object[] newKernel_params_amp) {
 		kernel_params_amp = newKernel_params_amp;
 	}
-	public Object getKernel_params_tm() {
+	public Object[] getKernel_params_tm() {
 		return kernel_params_tm;
 	}
-	public void setKernel_params_tm(Object newKernel_params_tm) {
+	public void setKernel_params_tm(Object[] newKernel_params_tm) {
 		kernel_params_tm = newKernel_params_tm;
 	}
-	public Object getKernel_params_memset() {
+	public Object[] getKernel_params_memset() {
 		return kernel_params_memset;
 	}
-	public void setKernel_params_memset(Object newKernel_params_memset) {
+	public void setKernel_params_memset(Object[] newKernel_params_memset) {
 		kernel_params_memset = newKernel_params_memset;
 	}
-	public Object getKernel_params_atinit() {
+	public Object[] getKernel_params_atinit() {
 		return kernel_params_atinit;
 	}
-	public void setKernel_params_atinit(Object newKernel_params_atinit) {
+	public void setKernel_params_atinit(Object[] newKernel_params_atinit) {
 		kernel_params_atinit = newKernel_params_atinit;
 	}
-	public Object getKernel_params_decompress() {
+	public Object[] getKernel_params_decompress() {
 		return kernel_params_decompress;
 	}
-	public void setKernel_params_decompress(Object newKernel_params_decompress) {
+	public void setKernel_params_decompress(Object[] newKernel_params_decompress) {
 		kernel_params_decompress = newKernel_params_decompress;
 	}
-	public Object getKernel_params_buf32() {
+	public Object[] getKernel_params_buf32() {
 		return kernel_params_buf32;
 	}
-	public void setKernel_params_buf32(Object newKernel_params_buf32) {
+	public void setKernel_params_buf32(Object[] newKernel_params_buf32) {
 		kernel_params_buf32 = newKernel_params_buf32;
 	}
-	public Object getKernel_params_buf64() {
+	public Object[] getKernel_params_buf64() {
 		return kernel_params_buf64;
 	}
-	public void setKernel_params_buf64(Object newKernel_params_buf64) {
+	public void setKernel_params_buf64(Object[] newKernel_params_buf64) {
 		kernel_params_buf64 = newKernel_params_buf64;
 	}
-	public Object getKernel_params_mp_buf32() {
+	public Object[] getKernel_params_mp_buf32() {
 		return kernel_params_mp_buf32;
 	}
-	public void setKernel_params_mp_buf32(Object newKernel_params_mp_buf32) {
+	public void setKernel_params_mp_buf32(Object[] newKernel_params_mp_buf32) {
 		kernel_params_mp_buf32 = newKernel_params_mp_buf32;
 	}
-	public Object getKernel_params_mp_buf64() {
+	public Object[] getKernel_params_mp_buf64() {
 		return kernel_params_mp_buf64;
 	}
-	public void setKernel_params_mp_buf64(Object newKernel_params_mp_buf64) {
+	public void setKernel_params_mp_buf64(Object[] newKernel_params_mp_buf64) {
 		kernel_params_mp_buf64 = newKernel_params_mp_buf64;
 	}
-	public Object getKernel_params_mp_r_buf32() {
+	public Object[] getKernel_params_mp_r_buf32() {
 		return kernel_params_mp_r_buf32;
 	}
-	public void setKernel_params_mp_r_buf32(Object newKernel_params_mp_r_buf32) {
+	public void setKernel_params_mp_r_buf32(Object[] newKernel_params_mp_r_buf32) {
 		kernel_params_mp_r_buf32 = newKernel_params_mp_r_buf32;
 	}
-	public Object getKernel_params_mp_r_buf64() {
+	public Object[] getKernel_params_mp_r_buf64() {
 		return kernel_params_mp_r_buf64;
 	}
-	public void setKernel_params_mp_r_buf64(Object newKernel_params_mp_r_buf64) {
+	public void setKernel_params_mp_r_buf64(Object[] newKernel_params_mp_r_buf64) {
 		kernel_params_mp_r_buf64 = newKernel_params_mp_r_buf64;
 	}
-	public Object getKernel_params_mp_l_buf32() {
+	public Object[] getKernel_params_mp_l_buf32() {
 		return kernel_params_mp_l_buf32;
 	}
-	public void setKernel_params_mp_l_buf32(Object newKernel_params_mp_l_buf32) {
+	public void setKernel_params_mp_l_buf32(Object[] newKernel_params_mp_l_buf32) {
 		kernel_params_mp_l_buf32 = newKernel_params_mp_l_buf32;
 	}
-	public Object getKernel_params_mp_l_buf64() {
+	public Object[] getKernel_params_mp_l_buf64() {
 		return kernel_params_mp_l_buf64;
 	}
-	public void setKernel_params_mp_l_buf64(Object newKernel_params_mp_l_buf64) {
+	public void setKernel_params_mp_l_buf64(Object[] newKernel_params_mp_l_buf64) {
 		kernel_params_mp_l_buf64 = newKernel_params_mp_l_buf64;
 	}
-	public Object getKernel_params_amp_buf32() {
+	public Object[] getKernel_params_amp_buf32() {
 		return kernel_params_amp_buf32;
 	}
-	public void setKernel_params_amp_buf32(Object newKernel_params_amp_buf32) {
+	public void setKernel_params_amp_buf32(Object[] newKernel_params_amp_buf32) {
 		kernel_params_amp_buf32 = newKernel_params_amp_buf32;
 	}
-	public Object getKernel_params_amp_buf64() {
+	public Object[] getKernel_params_amp_buf64() {
 		return kernel_params_amp_buf64;
 	}
-	public void setKernel_params_amp_buf64(Object newKernel_params_amp_buf64) {
+	public void setKernel_params_amp_buf64(Object[] newKernel_params_amp_buf64) {
 		kernel_params_amp_buf64 = newKernel_params_amp_buf64;
 	}
-	public Object getKernel_params_memset_buf32() {
+	public Object[] getKernel_params_memset_buf32() {
 		return kernel_params_memset_buf32;
 	}
-	public void setKernel_params_memset_buf32(Object newKernel_params_memset_buf32) {
+	public void setKernel_params_memset_buf32(Object[] newKernel_params_memset_buf32) {
 		kernel_params_memset_buf32 = newKernel_params_memset_buf32;
 	}
-	public Object getKernel_params_memset_buf64() {
+	public Object[] getKernel_params_memset_buf64() {
 		return kernel_params_memset_buf64;
 	}
-	public void setKernel_params_memset_buf64(Object newKernel_params_memset_buf64) {
+	public void setKernel_params_memset_buf64(Object[] newKernel_params_memset_buf64) {
 		kernel_params_memset_buf64 = newKernel_params_memset_buf64;
 	}
-	public Object getKernel_params_atinit_buf32() {
+	public Object[] getKernel_params_atinit_buf32() {
 		return kernel_params_atinit_buf32;
 	}
-	public void setKernel_params_atinit_buf32(Object newKernel_params_atinit_buf32) {
+	public void setKernel_params_atinit_buf32(Object[] newKernel_params_atinit_buf32) {
 		kernel_params_atinit_buf32 = newKernel_params_atinit_buf32;
 	}
-	public Object getKernel_params_atinit_buf64() {
+	public Object[] getKernel_params_atinit_buf64() {
 		return kernel_params_atinit_buf64;
 	}
-	public void setKernel_params_atinit_buf64(Object newKernel_params_atinit_buf64) {
+	public void setKernel_params_atinit_buf64(Object[] newKernel_params_atinit_buf64) {
 		kernel_params_atinit_buf64 = newKernel_params_atinit_buf64;
 	}
-	public Object getKernel_params_decompress_buf32() {
+	public Object[] getKernel_params_decompress_buf32() {
 		return kernel_params_decompress_buf32;
 	}
-	public void setKernel_params_decompress_buf32(Object newKernel_params_decompress_buf32) {
+	public void setKernel_params_decompress_buf32(Object[] newKernel_params_decompress_buf32) {
 		kernel_params_decompress_buf32 = newKernel_params_decompress_buf32;
 	}
-	public Object getKernel_params_decompress_buf64() {
+	public Object[] getKernel_params_decompress_buf64() {
 		return kernel_params_decompress_buf64;
 	}
-	public void setKernel_params_decompress_buf64(Object newKernel_params_decompress_buf64) {
+	public void setKernel_params_decompress_buf64(Object[] newKernel_params_decompress_buf64) {
 		kernel_params_decompress_buf64 = newKernel_params_decompress_buf64;
 	}
 	public boolean getIs_cuda() {

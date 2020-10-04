@@ -4,21 +4,21 @@ package application;
 /* Actually we need only 37, but we don't want struct autoaligning to kick in */
 /* Offset to keyslot area [in bytes] */
 public class luks_phdr {
-	private Object magic;
+	private Object[] magic;
 	private Object version;
-	private Object cipherName;
-	private Object cipherMode;
-	private Object hashSpec;
+	private Object[] cipherName;
+	private Object[] cipherMode;
+	private Object[] hashSpec;
 	private Object payloadOffset;
 	private Object keyBytes;
-	private Object mkDigest;
-	private Object mkDigestSalt;
+	private Object[] mkDigest;
+	private Object[] mkDigestSalt;
 	private Object mkDigestIterations;
-	private Object uuid;
-	private Object keyblock;
-	private Object _padding;
+	private Object[] uuid;
+	private Object[] keyblock;
+	private Object[] _padding;
 	
-	public luks_phdr(Object magic, Object version, Object cipherName, Object cipherMode, Object hashSpec, Object payloadOffset, Object keyBytes, Object mkDigest, Object mkDigestSalt, Object mkDigestIterations, Object uuid, Object keyblock, Object _padding) {
+	public luks_phdr(Object[] magic, Object version, Object[] cipherName, Object[] cipherMode, Object[] hashSpec, Object payloadOffset, Object keyBytes, Object[] mkDigest, Object[] mkDigestSalt, Object mkDigestIterations, Object[] uuid, Object[] keyblock, Object[] _padding) {
 		setMagic(magic);
 		setVersion(version);
 		setCipherName(cipherName);
@@ -36,10 +36,10 @@ public class luks_phdr {
 	public luks_phdr() {
 	}
 	
-	public Object getMagic() {
+	public Object[] getMagic() {
 		return magic;
 	}
-	public void setMagic(Object newMagic) {
+	public void setMagic(Object[] newMagic) {
 		magic = newMagic;
 	}
 	public Object getVersion() {
@@ -48,22 +48,22 @@ public class luks_phdr {
 	public void setVersion(Object newVersion) {
 		version = newVersion;
 	}
-	public Object getCipherName() {
+	public Object[] getCipherName() {
 		return cipherName;
 	}
-	public void setCipherName(Object newCipherName) {
+	public void setCipherName(Object[] newCipherName) {
 		cipherName = newCipherName;
 	}
-	public Object getCipherMode() {
+	public Object[] getCipherMode() {
 		return cipherMode;
 	}
-	public void setCipherMode(Object newCipherMode) {
+	public void setCipherMode(Object[] newCipherMode) {
 		cipherMode = newCipherMode;
 	}
-	public Object getHashSpec() {
+	public Object[] getHashSpec() {
 		return hashSpec;
 	}
-	public void setHashSpec(Object newHashSpec) {
+	public void setHashSpec(Object[] newHashSpec) {
 		hashSpec = newHashSpec;
 	}
 	public Object getPayloadOffset() {
@@ -78,16 +78,16 @@ public class luks_phdr {
 	public void setKeyBytes(Object newKeyBytes) {
 		keyBytes = newKeyBytes;
 	}
-	public Object getMkDigest() {
+	public Object[] getMkDigest() {
 		return mkDigest;
 	}
-	public void setMkDigest(Object newMkDigest) {
+	public void setMkDigest(Object[] newMkDigest) {
 		mkDigest = newMkDigest;
 	}
-	public Object getMkDigestSalt() {
+	public Object[] getMkDigestSalt() {
 		return mkDigestSalt;
 	}
-	public void setMkDigestSalt(Object newMkDigestSalt) {
+	public void setMkDigestSalt(Object[] newMkDigestSalt) {
 		mkDigestSalt = newMkDigestSalt;
 	}
 	public Object getMkDigestIterations() {
@@ -96,22 +96,22 @@ public class luks_phdr {
 	public void setMkDigestIterations(Object newMkDigestIterations) {
 		mkDigestIterations = newMkDigestIterations;
 	}
-	public Object getUuid() {
+	public Object[] getUuid() {
 		return uuid;
 	}
-	public void setUuid(Object newUuid) {
+	public void setUuid(Object[] newUuid) {
 		uuid = newUuid;
 	}
-	public Object getKeyblock() {
+	public Object[] getKeyblock() {
 		return keyblock;
 	}
-	public void setKeyblock(Object newKeyblock) {
+	public void setKeyblock(Object[] newKeyblock) {
 		keyblock = newKeyblock;
 	}
-	public Object get_padding() {
+	public Object[] get_padding() {
 		return _padding;
 	}
-	public void set_padding(Object new_padding) {
+	public void set_padding(Object[] new_padding) {
 		_padding = new_padding;
 	}
 }

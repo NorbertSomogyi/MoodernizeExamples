@@ -221,6 +221,172 @@ public class state {
 		 * seen in the function decode() below.
 		 */;
 	}
+	/* current number of bits in code */
+	/* len bits being decoded */
+	/* first code of length len */
+	/* number of codes of length len */
+	/* index of first code of length len in symbol table */
+	/* get next bit */
+	/* if length len, return symbol */
+	/* else update for next length */
+	/* ran out of codes */
+	/*
+	 * A faster version of decode() for real applications of this code.   It's not
+	 * as readable, but it makes puff() twice as fast.  And it only makes the code
+	 * a few percent larger.
+	 */
+	/* !SLOW */
+	public int decode(Object h) {
+		/* current number of bits in code */int len;
+		/* len bits being decoded */int code;
+		/* first code of length len */int first;
+		/* number of codes of length len */int count;
+		/* index of first code of length len in symbol table */int index;
+		/* bits from stream */int bitbuf;
+		/* bits left in next or left to process */int left;
+		/* next number of codes */Integer next;
+		int generatedBitbuf = this.getBitbuf();
+		bitbuf = generatedBitbuf;
+		int generatedBitcnt = this.getBitcnt();
+		left = generatedBitcnt;
+		code = first = index = 0;
+		len = 1;
+		next = h.getCount() + 1;
+		long generatedIncnt = this.getIncnt();
+		long generatedInlen = this.getInlen();
+		Object generatedEnv = this.getEnv();
+		Object[] generatedIn = this.getIn();
+		while (1) {
+			while (left--) {
+				code |=  bitbuf & 1;
+				bitbuf >>=  1;
+				count = next++;
+				if (code - count < /* if length len, return symbol */first) {
+					this.setBitbuf(bitbuf);
+					this.setBitcnt((generatedBitcnt - len) & 7);
+					return h.getSymbol()[index + (code - first)];
+				} 
+				index += /* else update for next length */count;
+				first += count;
+				first <<=  1;
+				code <<=  1;
+				len++;
+			}
+			left = (15 + 1) - len;
+			if (left == 0) {
+				break;
+			} 
+			if (generatedIncnt == generatedInlen) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(generatedEnv, /* out of input */1);
+			} 
+			bitbuf = generatedIn[generatedIncnt++];
+			if (left > 8) {
+				left = 8;
+			} 
+		}
+		return -/* ran out of codes */10/* SLOW *//*
+		 * Given the list of code lengths length[0..n-1] representing a canonical
+		 * Huffman code for n symbols, construct the tables required to decode those
+		 * codes.  Those tables are the number of codes of each length, and the symbols
+		 * sorted by length, retaining their original order within each length.  The
+		 * return value is zero for a complete code set, negative for an over-
+		 * subscribed code set, and positive for an incomplete code set.  The tables
+		 * can be used if the return value is zero or positive, but they cannot be used
+		 * if the return value is negative.  If the return value is zero, it is not
+		 * possible for decode() using that table to return an error--any stream of
+		 * enough bits will resolve to a symbol.  If the return value is positive, then
+		 * it is possible for decode() using that table to return an error for received
+		 * codes past the end of the incomplete lengths.
+		 *
+		 * Not used by decode(), but used for error checking, h->count[0] is the number
+		 * of the n symbols not in the code.  So n - h->count[0] is the number of
+		 * codes.  This is useful for checking for incomplete codes that have more than
+		 * one symbol, which is an error in a dynamic block.
+		 *
+		 * Assumption: for all i in 0..n-1, 0 <= length[i] <= MAXBITS
+		 * This is assured by the construction of the length arrays in dynamic() and
+		 * fixed() and is not verified by construct().
+		 *
+		 * Format notes:
+		 *
+		 * - Permitted and expected examples of incomplete codes are one of the fixed
+		 *   codes and any code with a single symbol which in deflate is coded as one
+		 *   bit instead of zero bits.  See the format notes for fixed() and dynamic().
+		 *
+		 * - Within a given code length, the symbols are kept in ascending order for
+		 *   the code bits definition.
+		 */;
+		/* current number of bits in code */int len;
+		/* len bits being decoded */int code;
+		/* first code of length len */int first;
+		/* number of codes of length len */int count;
+		/* index of first code of length len in symbol table */int index;
+		/* bits from stream */int bitbuf;
+		/* bits left in next or left to process */int left;
+		/* next number of codes */Integer next;
+		int generatedBitbuf = this.getBitbuf();
+		bitbuf = generatedBitbuf;
+		int generatedBitcnt = this.getBitcnt();
+		left = generatedBitcnt;
+		code = first = index = 0;
+		len = 1;
+		int[] generatedCount = h.getCount();
+		next = generatedCount + 1;
+		int[] generatedSymbol = h.getSymbol();
+		Object generatedLeft = this.getLeft();
+		Object generatedInhow = this.getInhow();
+		Object[] generatedIn = this.getIn();
+		Object generatedEnv = this.getEnv();
+		while (1) {
+			while (left--) {
+				code |=  (bitbuf & 1) ^ /* invert code */1;
+				bitbuf >>=  1;
+				count = next++;
+				if (code < first + /* if length len, return symbol */count) {
+					this.setBitbuf(bitbuf);
+					this.setBitcnt((generatedBitcnt - len) & 7);
+					return generatedSymbol[index + (code - first)];
+				} 
+				index += /* else update for next length */count;
+				first += count;
+				first <<=  1;
+				code <<=  1;
+				len++;
+			}
+			left = (13 + 1) - len;
+			if (left == 0) {
+				break;
+			} 
+			if (generatedLeft == 0) {
+				this.setLeft(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedInhow, (generatedIn)));
+				if (generatedLeft == 0) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(generatedEnv, /* out of input */1);
+				} 
+			} 
+			bitbuf = (generatedIn)++;
+			generatedLeft--;
+			if (left > 8) {
+				left = 8;
+			} 
+		}
+		return -/* ran out of codes */9/*
+		 * Given a list of repeated code lengths rep[0..n-1], where each byte is a
+		 * count (high four bits + 1) and a code length (low four bits), generate the
+		 * list of code lengths.  This compaction reduces the size of the object code.
+		 * Then given the list of code lengths length[0..n-1] representing a canonical
+		 * Huffman code for n symbols, construct the tables required to decode those
+		 * codes.  Those tables are the number of codes of each length, and the symbols
+		 * sorted by length, retaining their original order within each length.  The
+		 * return value is zero for a complete code set, negative for an over-
+		 * subscribed code set, and positive for an incomplete code set.  The tables
+		 * can be used if the return value is zero or positive, but they cannot be used
+		 * if the return value is negative.  If the return value is zero, it is not
+		 * possible for decode() using that table to return an error--any stream of
+		 * enough bits will resolve to a symbol.  If the return value is positive, then
+		 * it is possible for decode() using that table to return an error for received
+		 * codes past the end of the incomplete lengths.
+		 */;
+	}
 	public int codes(Object lencode, Object distcode) {
 		/* decoded symbol */int symbol;
 		/* length for copy */int len;
@@ -233,7 +399,7 @@ public class state {
 		long generatedOutcnt = this.getOutcnt();
 		long generatedOutlen = this.getOutlen();
 		/* decode literals and length/distance pairs */do {
-			symbol = /*Error: Function owner not recognized*/decode(s, lencode);
+			symbol = s.decode(lencode);
 			if (symbol < 0) {
 				return /* invalid symbol */symbol;
 			} 
@@ -251,7 +417,7 @@ public class state {
 					return -/* invalid fixed code */10;
 				} 
 				len = lens[symbol] + s.bits(lext[symbol]);
-				symbol = /*Error: Function owner not recognized*/decode(s, /* get and check distance */distcode);
+				symbol = s.decode(/* get and check distance */distcode);
 				if (symbol < 0) {
 					return /* invalid symbol */symbol;
 				} 
@@ -457,7 +623,7 @@ public class state {
 		while (index < nlen + ndist) {
 			int symbol;
 			int len;
-			symbol = /*Error: Function owner not recognized*/decode(s, lencode);
+			symbol = s.decode(lencode);
 			if (symbol < 0) {
 				return /* invalid symbol */symbol;
 			} 
@@ -548,8 +714,8 @@ public class state {
 		/* length for copy */int len;
 		/* distance for copy */int dist;
 		/* copy counter */int copy;
-		/* copy pointers */byte from;
-		byte to;
+		/* copy pointers */Byte from;
+		Byte to;
 		int virgin = /* build tables once */1;
 		int[] litcnt = new int[13 + 1];
 		int[] litsym = new int[/* litcode memory */256];
@@ -585,13 +751,13 @@ public class state {
 		Object generatedOuthow = this.getOuthow();
 		/* decode literals and length/distance pairs */do {
 			if (s.bits(1)) {
-				symbol = /*Error: Function owner not recognized*/decode(s, /* get length */lencode);
+				symbol = s.decode(/* get length */lencode);
 				len = base[symbol] + s.bits(extra[symbol]);
 				if (len == /* end code */519) {
 					break;
 				} 
 				symbol = len == 2 ? 2 : /* get distance */dict;
-				dist = /*Error: Function owner not recognized*/decode(s, distcode) << symbol;
+				dist = s.decode(distcode) << symbol;
 				dist += s.bits(symbol);
 				dist++;
 				if (generatedFirst && dist > generatedNext) {
@@ -623,7 +789,7 @@ public class state {
 					} 
 				} while (len != 0);
 			} else {
-					symbol = lit ? /*Error: Function owner not recognized*/decode(s, litcode) : s.bits(/* get literal and write it */8);
+					symbol = lit ? s.decode(litcode) : s.bits(/* get literal and write it */8);
 					generatedOut[generatedNext++] = symbol;
 					if (generatedNext == 4096) {
 						if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedOuthow, generatedOut, generatedNext)) {

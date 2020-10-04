@@ -3,10 +3,10 @@ package application;
 /* AES context.  */
 public class aes_context {
 	private int bits;
-	private Object rek;
-	private Object rdk;
+	private Object[] rek;
+	private Object[] rdk;
 	
-	public aes_context(int bits, Object rek, Object rdk) {
+	public aes_context(int bits, Object[] rek, Object[] rdk) {
 		setBits(bits);
 		setRek(rek);
 		setRdk(rdk);
@@ -20,16 +20,16 @@ public class aes_context {
 	public void setBits(int newBits) {
 		bits = newBits;
 	}
-	public Object getRek() {
+	public Object[] getRek() {
 		return rek;
 	}
-	public void setRek(Object newRek) {
+	public void setRek(Object[] newRek) {
 		rek = newRek;
 	}
-	public Object getRdk() {
+	public Object[] getRdk() {
 		return rdk;
 	}
-	public void setRdk(Object newRdk) {
+	public void setRdk(Object[] newRdk) {
 		rdk = newRdk;
 	}
 }

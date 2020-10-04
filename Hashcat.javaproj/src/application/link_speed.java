@@ -1,11 +1,11 @@
 package application;
 
 public class link_speed {
-	private Object timer;
-	private Object bytes;
+	private Object[] timer;
+	private Object[] bytes;
 	private int pos;
 	
-	public link_speed(Object timer, Object bytes, int pos) {
+	public link_speed(Object[] timer, Object[] bytes, int pos) {
 		setTimer(timer);
 		setBytes(bytes);
 		setPos(pos);
@@ -13,16 +13,16 @@ public class link_speed {
 	public link_speed() {
 	}
 	
-	public Object getTimer() {
+	public Object[] getTimer() {
 		return timer;
 	}
-	public void setTimer(Object newTimer) {
+	public void setTimer(Object[] newTimer) {
 		timer = newTimer;
 	}
-	public Object getBytes() {
+	public Object[] getBytes() {
 		return bytes;
 	}
-	public void setBytes(Object newBytes) {
+	public void setBytes(Object[] newBytes) {
 		bytes = newBytes;
 	}
 	public int getPos() {

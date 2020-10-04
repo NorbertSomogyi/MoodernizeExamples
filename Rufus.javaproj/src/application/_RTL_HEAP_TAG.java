@@ -6,9 +6,9 @@ public class _RTL_HEAP_TAG {
 	private Object BytesAllocated;
 	private Object TagIndex;
 	private Object CreatorBackTraceIndex;
-	private Object TagName;
+	private Object[] TagName;
 	
-	public _RTL_HEAP_TAG(Object NumberOfAllocations, Object NumberOfFrees, Object BytesAllocated, Object TagIndex, Object CreatorBackTraceIndex, Object TagName) {
+	public _RTL_HEAP_TAG(Object NumberOfAllocations, Object NumberOfFrees, Object BytesAllocated, Object TagIndex, Object CreatorBackTraceIndex, Object[] TagName) {
 		setNumberOfAllocations(NumberOfAllocations);
 		setNumberOfFrees(NumberOfFrees);
 		setBytesAllocated(BytesAllocated);
@@ -49,10 +49,10 @@ public class _RTL_HEAP_TAG {
 	public void setCreatorBackTraceIndex(Object newCreatorBackTraceIndex) {
 		CreatorBackTraceIndex = newCreatorBackTraceIndex;
 	}
-	public Object getTagName() {
+	public Object[] getTagName() {
 		return TagName;
 	}
-	public void setTagName(Object newTagName) {
+	public void setTagName(Object[] newTagName) {
 		TagName = newTagName;
 	}
 }

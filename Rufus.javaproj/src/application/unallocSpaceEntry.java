@@ -5,9 +5,9 @@ public class unallocSpaceEntry {
 	private udf_tag_s tag;
 	private udf_icbtag_s icb_tag;
 	private Object lengthAllocDescs;
-	private Object allocDescs;
+	private Object[] allocDescs;
 	
-	public unallocSpaceEntry(udf_tag_s tag, udf_icbtag_s icb_tag, Object lengthAllocDescs, Object allocDescs) {
+	public unallocSpaceEntry(udf_tag_s tag, udf_icbtag_s icb_tag, Object lengthAllocDescs, Object[] allocDescs) {
 		setTag(tag);
 		setIcb_tag(icb_tag);
 		setLengthAllocDescs(lengthAllocDescs);
@@ -34,10 +34,10 @@ public class unallocSpaceEntry {
 	public void setLengthAllocDescs(Object newLengthAllocDescs) {
 		lengthAllocDescs = newLengthAllocDescs;
 	}
-	public Object getAllocDescs() {
+	public Object[] getAllocDescs() {
 		return allocDescs;
 	}
-	public void setAllocDescs(Object newAllocDescs) {
+	public void setAllocDescs(Object[] newAllocDescs) {
 		allocDescs = newAllocDescs;
 	}
 }

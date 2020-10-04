@@ -1,11 +1,11 @@
 package application;
 
 public class bsdicrypt_tmp {
-	private Object Kc;
-	private Object Kd;
-	private Object iv;
+	private Object[] Kc;
+	private Object[] Kd;
+	private Object[] iv;
 	
-	public bsdicrypt_tmp(Object Kc, Object Kd, Object iv) {
+	public bsdicrypt_tmp(Object[] Kc, Object[] Kd, Object[] iv) {
 		setKc(Kc);
 		setKd(Kd);
 		setIv(iv);
@@ -13,22 +13,22 @@ public class bsdicrypt_tmp {
 	public bsdicrypt_tmp() {
 	}
 	
-	public Object getKc() {
+	public Object[] getKc() {
 		return Kc;
 	}
-	public void setKc(Object newKc) {
+	public void setKc(Object[] newKc) {
 		Kc = newKc;
 	}
-	public Object getKd() {
+	public Object[] getKd() {
 		return Kd;
 	}
-	public void setKd(Object newKd) {
+	public void setKd(Object[] newKd) {
 		Kd = newKd;
 	}
-	public Object getIv() {
+	public Object[] getIv() {
 		return iv;
 	}
-	public void setIv(Object newIv) {
+	public void setIv(Object[] newIv) {
 		iv = newIv;
 	}
 }

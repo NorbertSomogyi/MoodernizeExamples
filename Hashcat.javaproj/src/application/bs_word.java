@@ -1,18 +1,18 @@
 package application;
 
 public class bs_word {
-	private Object b;
+	private Object[] b;
 	
-	public bs_word(Object b) {
+	public bs_word(Object[] b) {
 		setB(b);
 	}
 	public bs_word() {
 	}
 	
-	public Object getB() {
+	public Object[] getB() {
 		return b;
 	}
-	public void setB(Object newB) {
+	public void setB(Object[] newB) {
 		b = newB;
 	}
 }

@@ -25,7 +25,7 @@ public class hash {
 	
 	public int module_hash_init_selftest(Object hashconfig) {
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {
@@ -41,7 +41,7 @@ public class hash {
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {
@@ -57,7 +57,7 @@ public class hash {
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {
@@ -73,7 +73,7 @@ public class hash {
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {
@@ -89,7 +89,7 @@ public class hash {
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {
@@ -105,7 +105,7 @@ public class hash {
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {
@@ -121,7 +121,7 @@ public class hash {
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {
@@ -137,7 +137,27 @@ public class hash {
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		 wpa_eapol = ()generatedEsalt;
+		wpa_eapol.setDetected_le(1);
+		wpa_eapol.setDetected_be(0);
+		wpa_eapol.setNonce_error_corrections(3);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {
@@ -153,7 +173,7 @@ public class hash {
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {
@@ -168,359 +188,7 @@ public class hash {
 		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
 		for (size_t i = 0;
 		size_t j = 0;
@@ -541,27 +209,7 @@ public class hash {
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
-		for (size_t i = 0;
-		size_t j = 0;
-		 j < st_hash_len; ) {
-			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
-			tmpdata[i] = c;
-		}
-		Object generatedDigest = this.getDigest();
-		salt generatedSalt = this.getSalt();
-		Object generatedEsalt = this.getEsalt();
-		Object generatedHook_salt = this.getHook_salt();
-		hashinfo generatedHash_info = this.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
-		 wpa_eapol = ()generatedEsalt;
-		wpa_eapol.setDetected_le(1);
-		wpa_eapol.setDetected_be(0);
-		wpa_eapol.setNonce_error_corrections(3);
-		ModernizedCProgram.hcfree(tmpdata);
-		return parser_status;
-		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {
@@ -577,7 +225,359 @@ public class hash {
 		ModernizedCProgram.hcfree(tmpdata);
 		return parser_status;
 		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
-		byte tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
+		for (size_t i = 0;
+		size_t j = 0;
+		 j < st_hash_len; ) {
+			u8 c = ModernizedCProgram.hex_to_u8((u8)hashconfig.getSt_hash() + j);
+			tmpdata[i] = c;
+		}
+		Object generatedDigest = this.getDigest();
+		salt generatedSalt = this.getSalt();
+		Object generatedEsalt = this.getEsalt();
+		Object generatedHook_salt = this.getHook_salt();
+		hashinfo generatedHash_info = this.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, tmpdata, st_hash_len / 2);
+		ModernizedCProgram.hcfree(tmpdata);
+		return parser_status;
+		size_t st_hash_len = /*Error: Function owner not recognized*/strlen(hashconfig.getSt_hash());
+		byte[] tmpdata = (byte)ModernizedCProgram.hcmalloc(st_hash_len / 2);
 		for (size_t i = 0;
 		size_t j = 0;
 		 j < st_hash_len; ) {

@@ -3,7 +3,7 @@ package application;
 //
 //
 public class _DIR_ENTRY {
-	private Object FileName;
+	private Object[] FileName;
 	private Object Attributes;
 	private Object Case;
 	private Object CreationTimeTenMs;
@@ -15,7 +15,7 @@ public class _DIR_ENTRY {
 	private Object FirstCluster;
 	private Object FileSize;
 	
-	public _DIR_ENTRY(Object FileName, Object Attributes, Object Case, Object CreationTimeTenMs, _FAT_DATETIME CreationDateTime, _FAT_DATE LastAccessDate, Object ExtendedAttributes, Object FirstClusterOfFileHi, _FAT_DATETIME LastWriteDateTime, Object FirstCluster, Object FileSize) {
+	public _DIR_ENTRY(Object[] FileName, Object Attributes, Object Case, Object CreationTimeTenMs, _FAT_DATETIME CreationDateTime, _FAT_DATE LastAccessDate, Object ExtendedAttributes, Object FirstClusterOfFileHi, _FAT_DATETIME LastWriteDateTime, Object FirstCluster, Object FileSize) {
 		setFileName(FileName);
 		setAttributes(Attributes);
 		setCase(Case);
@@ -31,10 +31,10 @@ public class _DIR_ENTRY {
 	public _DIR_ENTRY() {
 	}
 	
-	public Object getFileName() {
+	public Object[] getFileName() {
 		return FileName;
 	}
-	public void setFileName(Object newFileName) {
+	public void setFileName(Object[] newFileName) {
 		FileName = newFileName;
 	}
 	public Object getAttributes() {

@@ -13,7 +13,7 @@ public class ext2_inode_large {
 	private Object i_blocks;
 	private Object i_flags;
 	private  osd1;
-	private Object i_block;
+	private Object[] i_block;
 	private Object i_generation;
 	private Object i_file_acl;
 	private Object i_size_high;
@@ -29,7 +29,7 @@ public class ext2_inode_large {
 	private Object i_version_hi;
 	private Object i_projid;
 	
-	public ext2_inode_large(Object i_mode, Object i_uid, Object i_size, Object i_atime, Object i_ctime, Object i_mtime, Object i_dtime, Object i_gid, Object i_links_count, Object i_blocks, Object i_flags,  osd1, Object i_block, Object i_generation, Object i_file_acl, Object i_size_high, Object i_faddr,  osd2, Object i_extra_isize, Object i_checksum_hi, Object i_ctime_extra, Object i_mtime_extra, Object i_atime_extra, Object i_crtime, Object i_crtime_extra, Object i_version_hi, Object i_projid) {
+	public ext2_inode_large(Object i_mode, Object i_uid, Object i_size, Object i_atime, Object i_ctime, Object i_mtime, Object i_dtime, Object i_gid, Object i_links_count, Object i_blocks, Object i_flags,  osd1, Object[] i_block, Object i_generation, Object i_file_acl, Object i_size_high, Object i_faddr,  osd2, Object i_extra_isize, Object i_checksum_hi, Object i_ctime_extra, Object i_mtime_extra, Object i_atime_extra, Object i_crtime, Object i_crtime_extra, Object i_version_hi, Object i_projid) {
 		setI_mode(i_mode);
 		setI_uid(i_uid);
 		setI_size(i_size);
@@ -61,110 +61,6 @@ public class ext2_inode_large {
 	public ext2_inode_large() {
 	}
 	
-	public Object ext2fs_free_ext_attr(Object fs, Object ino) {
-		ext2_ext_attr_header header = new ext2_ext_attr_header();
-		Object block_buf = ((Object)0);
-		 blk = new ();
-		 err = new ();
-		ext2_inode_large i = new ext2_inode_large();
-		if (inode == ((Object)/* Read inode? */0)) {
-			err = (ext2_inode)i.ext2fs_read_inode_full(fs, ino, /*Error: Unsupported expression*/);
-			if (err) {
-				return err;
-			} 
-			inode = i;
-		} 
-		blk = ModernizedCProgram.ext2fs_file_acl_block(fs, (ext2_inode)/* Do we already have an EA block? */inode);
-		if (blk == 0) {
-			return 0;
-		} 
-		if ((blk < fs.getSuper().getS_first_data_block()) || (blk >= fs.getSuper().ext2fs_blocks_count())) {
-			err = EXT2_ET_BAD_EA_BLOCK_NUM;
-			;
-		} 
-		err = ModernizedCProgram.ext2fs_get_mem(fs.getBlocksize(), block_buf);
-		if (err) {
-			;
-		} 
-		err = ModernizedCProgram.ext2fs_read_ext_attr3(fs, blk, block_buf, ino);
-		if (err) {
-			;
-		} 
-		header = (ext2_ext_attr_header)/* We only know how to deal with v2 EA blocks */block_buf;
-		Object generatedH_magic = header.getH_magic();
-		if (generatedH_magic != -1024) {
-			err = EXT2_ET_BAD_EA_HEADER;
-			;
-		} 
-		Object generatedH_refcount = header.getH_refcount();
-		generatedH_refcount--;
-		err = ModernizedCProgram.ext2fs_write_ext_attr3(fs, blk, block_buf, ino);
-		if (err) {
-			;
-		} 
-		(ext2_inode)inode.ext2fs_file_acl_block_set(fs, /* Erase link to block */0);
-		if (generatedH_refcount == 0) {
-			ModernizedCProgram.ext2fs_block_alloc_stats2(fs, blk, -1);
-		} 
-		err = (ext2_inode)inode.ext2fs_iblk_sub_blocks(fs, 1);
-		if (err) {
-			;
-		} 
-		if (inode == /* Write inode? */i) {
-			err = (ext2_inode)i.ext2fs_write_inode_full(fs, ino, /*Error: Unsupported expression*/);
-			if (err) {
-				;
-			} 
-		} 
-	}
-	public Object prep_ea_block_for_write(Object fs, Object ino) {
-		ext2_ext_attr_header header = new ext2_ext_attr_header();
-		Object block_buf = ((Object)0);
-		 blk = new ();
-		 goal = new ();
-		 err = new ();
-		blk = ModernizedCProgram.ext2fs_file_acl_block(fs, (ext2_inode)/* Do we already have an EA block? */inode);
-		Object generatedH_magic = header.getH_magic();
-		Object generatedH_refcount = header.getH_refcount();
-		if (blk != 0) {
-			if ((blk < fs.getSuper().getS_first_data_block()) || (blk >= fs.getSuper().ext2fs_blocks_count())) {
-				err = EXT2_ET_BAD_EA_BLOCK_NUM;
-				;
-			} 
-			err = ModernizedCProgram.ext2fs_get_mem(fs.getBlocksize(), block_buf);
-			if (err) {
-				;
-			} 
-			err = ModernizedCProgram.ext2fs_read_ext_attr3(fs, blk, block_buf, ino);
-			if (err) {
-				;
-			} 
-			header = (ext2_ext_attr_header)/* We only know how to deal with v2 EA blocks */block_buf;
-			if (generatedH_magic != -1024) {
-				err = EXT2_ET_BAD_EA_HEADER;
-				;
-			} 
-			if (generatedH_refcount == /* Single-user block.  We're done here. */1) {
-				;
-			} 
-			generatedH_refcount--;
-			err = ModernizedCProgram.ext2fs_write_ext_attr3(fs, blk, block_buf, ino);
-			if (err) {
-				;
-			} 
-		} else {
-				err = (ext2_inode)/* No block, we must increment i_blocks */inode.ext2fs_iblk_add_blocks(fs, 1);
-				if (err) {
-					;
-				} 
-		} 
-		goal = (ext2_inode)inode.ext2fs_find_inode_goal(fs, ino, /* Allocate a block */0);
-		err = ModernizedCProgram.ext2fs_alloc_block2(fs, goal, ((Object)0), blk);
-		if (err) {
-			;
-		} 
-		(ext2_inode)inode.ext2fs_file_acl_block_set(fs, blk);
-	}
 	public Object ext2fs_inode_csum(Object fs, Object inum, Object crc, int has_hi) {
 		 gen = new ();
 		ext2_inode_large desc = inode;
@@ -198,7 +94,7 @@ public class ext2_inode_large {
 		 calculated = new ();
 		int i;
 		int has_hi;
-		byte cp;
+		Byte cp;
 		if (!fs.getSuper().ext2fs_has_feature_metadata_csum()) {
 			return 1;
 		} 
@@ -268,7 +164,7 @@ public class ext2_inode_large {
 			return 0;
 		} 
 		Object generatedI_size = (inode).getI_size();
-		Object generatedI_block = this.getI_block();
+		Object[] generatedI_block = this.getI_block();
 		if ((((generatedI_mode) & 170000) == 120000) && (generatedI_size | (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(inode).getI_size_high() << 32)) <= /*Error: sizeof expression not supported yet*/) {
 			return 0;
 		} 
@@ -285,7 +181,7 @@ public class ext2_inode_large {
 	}
 	public int extent_head_looks_insane() {
 		Object generatedI_flags = this.getI_flags();
-		Object generatedI_block = this.getI_block();
+		Object[] generatedI_block = this.getI_block();
 		if (!(generatedI_flags & -1024) || ModernizedCProgram.ext2fs_extent_header_verify(generatedI_block, /*Error: sizeof expression not supported yet*/) == 0) {
 			return 0;
 		} 
@@ -294,6 +190,110 @@ public class ext2_inode_large {
 		 * find here -- currently, we can observe that all checksums are ok; more
 		 * than half the inodes are insane; or no conclusions at all.
 		 */;
+	}
+	public Object ext2fs_free_ext_attr(Object fs, Object ino) {
+		ext2_ext_attr_header header = new ext2_ext_attr_header();
+		Object block_buf = (null);
+		 blk = new ();
+		 err = new ();
+		ext2_inode_large i = new ext2_inode_large();
+		if (inode == (null)) {
+			err = (ext2_inode)i.ext2fs_read_inode_full(fs, ino, /*Error: Unsupported expression*/);
+			if (err) {
+				return err;
+			} 
+			inode = i;
+		} 
+		blk = ModernizedCProgram.ext2fs_file_acl_block(fs, (ext2_inode)/* Do we already have an EA block? */inode);
+		if (blk == 0) {
+			return 0;
+		} 
+		if ((blk < fs.getSuper().getS_first_data_block()) || (blk >= fs.getSuper().ext2fs_blocks_count())) {
+			err = EXT2_ET_BAD_EA_BLOCK_NUM;
+			;
+		} 
+		err = ModernizedCProgram.ext2fs_get_mem(fs.getBlocksize(), block_buf);
+		if (err) {
+			;
+		} 
+		err = ModernizedCProgram.ext2fs_read_ext_attr3(fs, blk, block_buf, ino);
+		if (err) {
+			;
+		} 
+		header = (ext2_ext_attr_header)/* We only know how to deal with v2 EA blocks */block_buf;
+		Object generatedH_magic = header.getH_magic();
+		if (generatedH_magic != -1024) {
+			err = EXT2_ET_BAD_EA_HEADER;
+			;
+		} 
+		Object generatedH_refcount = header.getH_refcount();
+		generatedH_refcount--;
+		err = ModernizedCProgram.ext2fs_write_ext_attr3(fs, blk, block_buf, ino);
+		if (err) {
+			;
+		} 
+		(ext2_inode)inode.ext2fs_file_acl_block_set(fs, /* Erase link to block */0);
+		if (generatedH_refcount == 0) {
+			ModernizedCProgram.ext2fs_block_alloc_stats2(fs, blk, -1);
+		} 
+		err = (ext2_inode)inode.ext2fs_iblk_sub_blocks(fs, 1);
+		if (err) {
+			;
+		} 
+		if (inode == /* Write inode? */i) {
+			err = (ext2_inode)i.ext2fs_write_inode_full(fs, ino, /*Error: Unsupported expression*/);
+			if (err) {
+				;
+			} 
+		} 
+	}
+	public Object prep_ea_block_for_write(Object fs, Object ino) {
+		ext2_ext_attr_header header = new ext2_ext_attr_header();
+		Object block_buf = (null);
+		 blk = new ();
+		 goal = new ();
+		 err = new ();
+		blk = ModernizedCProgram.ext2fs_file_acl_block(fs, (ext2_inode)/* Do we already have an EA block? */inode);
+		Object generatedH_magic = header.getH_magic();
+		Object generatedH_refcount = header.getH_refcount();
+		if (blk != 0) {
+			if ((blk < fs.getSuper().getS_first_data_block()) || (blk >= fs.getSuper().ext2fs_blocks_count())) {
+				err = EXT2_ET_BAD_EA_BLOCK_NUM;
+				;
+			} 
+			err = ModernizedCProgram.ext2fs_get_mem(fs.getBlocksize(), block_buf);
+			if (err) {
+				;
+			} 
+			err = ModernizedCProgram.ext2fs_read_ext_attr3(fs, blk, block_buf, ino);
+			if (err) {
+				;
+			} 
+			header = (ext2_ext_attr_header)/* We only know how to deal with v2 EA blocks */block_buf;
+			if (generatedH_magic != -1024) {
+				err = EXT2_ET_BAD_EA_HEADER;
+				;
+			} 
+			if (generatedH_refcount == /* Single-user block.  We're done here. */1) {
+				;
+			} 
+			generatedH_refcount--;
+			err = ModernizedCProgram.ext2fs_write_ext_attr3(fs, blk, block_buf, ino);
+			if (err) {
+				;
+			} 
+		} else {
+				err = (ext2_inode)/* No block, we must increment i_blocks */inode.ext2fs_iblk_add_blocks(fs, 1);
+				if (err) {
+					;
+				} 
+		} 
+		goal = (ext2_inode)inode.ext2fs_find_inode_goal(fs, ino, /* Allocate a block */0);
+		err = ModernizedCProgram.ext2fs_alloc_block2(fs, goal, (null), blk);
+		if (err) {
+			;
+		} 
+		(ext2_inode)inode.ext2fs_file_acl_block_set(fs, blk);
 	}
 	public Object getI_mode() {
 		return i_mode;
@@ -367,10 +367,10 @@ public class ext2_inode_large {
 	public void setOsd1( newOsd1) {
 		osd1 = newOsd1;
 	}
-	public Object getI_block() {
+	public Object[] getI_block() {
 		return i_block;
 	}
-	public void setI_block(Object newI_block) {
+	public void setI_block(Object[] newI_block) {
 		i_block = newI_block;
 	}
 	public Object getI_generation() {

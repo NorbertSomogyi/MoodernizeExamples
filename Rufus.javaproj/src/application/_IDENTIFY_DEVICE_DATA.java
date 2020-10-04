@@ -7,19 +7,19 @@ public class _IDENTIFY_DEVICE_DATA {
 	private Object NumCylinders;
 	private Object ReservedWord2;
 	private Object NumHeads;
-	private Object Retired1;
+	private Object[] Retired1;
 	private Object NumSectorsPerTrack;
-	private Object VendorUnique1;
-	private Object SerialNumber;
-	private Object Retired2;
+	private Object[] VendorUnique1;
+	private Object[] SerialNumber;
+	private Object[] Retired2;
 	private Object Obsolete1;
-	private Object FirmwareRevision;
-	private Object ModelNumber;
+	private Object[] FirmwareRevision;
+	private Object[] ModelNumber;
 	private Object MaximumBlockTransfer;
 	private Object VendorUnique2;
 	private Object ReservedWord48;
 	private  Capabilities;
-	private Object ObsoleteWords51;
+	private Object[] ObsoleteWords51;
 	private Object TranslationFieldsValid;
 	private Object Reserved3;
 	private Object NumberOfCurrentCylinders;
@@ -39,58 +39,58 @@ public class _IDENTIFY_DEVICE_DATA {
 	private Object RecommendedMWXferCycleTime;
 	private Object MinimumPIOCycleTime;
 	private Object MinimumPIOCycleTimeIORDY;
-	private Object ReservedWords69;
+	private Object[] ReservedWords69;
 	private Object QueueDepth;
 	private Object ReservedWord75;
-	private Object ReservedWords76;
+	private Object[] ReservedWords76;
 	private Object MajorRevision;
 	private Object MinorRevision;
 	private  CommandSetSupport;
 	private  CommandSetActive;
 	private Object UltraDMASupport;
 	private Object UltraDMAActive;
-	private Object ReservedWord89;
+	private Object[] ReservedWord89;
 	private Object HardwareResetResult;
 	private Object CurrentAcousticValue;
 	private Object RecommendedAcousticValue;
-	private Object ReservedWord95;
-	private Object Max48BitLBA;
+	private Object[] ReservedWord95;
+	private Object[] Max48BitLBA;
 	private Object StreamingTransferTime;
 	private Object ReservedWord105;
 	private  PhysicalLogicalSectorSize;
 	private Object InterSeekDelay;
-	private Object WorldWideName;
-	private Object ReservedForWorldWideName128;
+	private Object[] WorldWideName;
+	private Object[] ReservedForWorldWideName128;
 	private Object ReservedForTlcTechnicalReport;
-	private Object WordsPerLogicalSector;
+	private Object[] WordsPerLogicalSector;
 	private  CommandSetSupportExt;
 	private  CommandSetActiveExt;
-	private Object ReservedForExpandedSupportandActive;
+	private Object[] ReservedForExpandedSupportandActive;
 	private Object MsnSupport;
 	private Object ReservedWord1274;
 	private  SecurityStatus;
-	private Object ReservedWord129;
+	private Object[] ReservedWord129;
 	private  CfaPowerModel;
-	private Object ReservedForCfaWord161;
+	private Object[] ReservedForCfaWord161;
 	private  DataSetManagementFeature;
-	private Object ReservedForCfaWord170;
-	private Object CurrentMediaSerialNumber;
+	private Object[] ReservedForCfaWord170;
+	private Object[] CurrentMediaSerialNumber;
 	private Object ReservedWord206;
-	private Object ReservedWord207;
+	private Object[] ReservedWord207;
 	private  BlockAlignment;
-	private Object WriteReadVerifySectorCountMode3Only;
-	private Object WriteReadVerifySectorCountMode2Only;
+	private Object[] WriteReadVerifySectorCountMode3Only;
+	private Object[] WriteReadVerifySectorCountMode2Only;
 	private  NVCacheCapabilities;
 	private Object NVCacheSizeLSW;
 	private Object NVCacheSizeMSW;
 	private Object NominalMediaRotationRate;
 	private Object ReservedWord218;
 	private  NVCacheOptions;
-	private Object ReservedWord220;
+	private Object[] ReservedWord220;
 	private Object Signature;
 	private Object CheckSum;
 	
-	public _IDENTIFY_DEVICE_DATA( GeneralConfiguration, Object NumCylinders, Object ReservedWord2, Object NumHeads, Object Retired1, Object NumSectorsPerTrack, Object VendorUnique1, Object SerialNumber, Object Retired2, Object Obsolete1, Object FirmwareRevision, Object ModelNumber, Object MaximumBlockTransfer, Object VendorUnique2, Object ReservedWord48,  Capabilities, Object ObsoleteWords51, Object TranslationFieldsValid, Object Reserved3, Object NumberOfCurrentCylinders, Object NumberOfCurrentHeads, Object CurrentSectorsPerTrack, Object CurrentSectorCapacity, Object CurrentMultiSectorSetting, Object MultiSectorSettingValid, Object ReservedByte59, Object UserAddressableSectors, Object ObsoleteWord62, Object MultiWordDMASupport, Object MultiWordDMAActive, Object AdvancedPIOModes, Object ReservedByte64, Object MinimumMWXferCycleTime, Object RecommendedMWXferCycleTime, Object MinimumPIOCycleTime, Object MinimumPIOCycleTimeIORDY, Object ReservedWords69, Object QueueDepth, Object ReservedWord75, Object ReservedWords76, Object MajorRevision, Object MinorRevision,  CommandSetSupport,  CommandSetActive, Object UltraDMASupport, Object UltraDMAActive, Object ReservedWord89, Object HardwareResetResult, Object CurrentAcousticValue, Object RecommendedAcousticValue, Object ReservedWord95, Object Max48BitLBA, Object StreamingTransferTime, Object ReservedWord105,  PhysicalLogicalSectorSize, Object InterSeekDelay, Object WorldWideName, Object ReservedForWorldWideName128, Object ReservedForTlcTechnicalReport, Object WordsPerLogicalSector,  CommandSetSupportExt,  CommandSetActiveExt, Object ReservedForExpandedSupportandActive, Object MsnSupport, Object ReservedWord1274,  SecurityStatus, Object ReservedWord129,  CfaPowerModel, Object ReservedForCfaWord161,  DataSetManagementFeature, Object ReservedForCfaWord170, Object CurrentMediaSerialNumber, Object ReservedWord206, Object ReservedWord207,  BlockAlignment, Object WriteReadVerifySectorCountMode3Only, Object WriteReadVerifySectorCountMode2Only,  NVCacheCapabilities, Object NVCacheSizeLSW, Object NVCacheSizeMSW, Object NominalMediaRotationRate, Object ReservedWord218,  NVCacheOptions, Object ReservedWord220, Object Signature, Object CheckSum) {
+	public _IDENTIFY_DEVICE_DATA( GeneralConfiguration, Object NumCylinders, Object ReservedWord2, Object NumHeads, Object[] Retired1, Object NumSectorsPerTrack, Object[] VendorUnique1, Object[] SerialNumber, Object[] Retired2, Object Obsolete1, Object[] FirmwareRevision, Object[] ModelNumber, Object MaximumBlockTransfer, Object VendorUnique2, Object ReservedWord48,  Capabilities, Object[] ObsoleteWords51, Object TranslationFieldsValid, Object Reserved3, Object NumberOfCurrentCylinders, Object NumberOfCurrentHeads, Object CurrentSectorsPerTrack, Object CurrentSectorCapacity, Object CurrentMultiSectorSetting, Object MultiSectorSettingValid, Object ReservedByte59, Object UserAddressableSectors, Object ObsoleteWord62, Object MultiWordDMASupport, Object MultiWordDMAActive, Object AdvancedPIOModes, Object ReservedByte64, Object MinimumMWXferCycleTime, Object RecommendedMWXferCycleTime, Object MinimumPIOCycleTime, Object MinimumPIOCycleTimeIORDY, Object[] ReservedWords69, Object QueueDepth, Object ReservedWord75, Object[] ReservedWords76, Object MajorRevision, Object MinorRevision,  CommandSetSupport,  CommandSetActive, Object UltraDMASupport, Object UltraDMAActive, Object[] ReservedWord89, Object HardwareResetResult, Object CurrentAcousticValue, Object RecommendedAcousticValue, Object[] ReservedWord95, Object[] Max48BitLBA, Object StreamingTransferTime, Object ReservedWord105,  PhysicalLogicalSectorSize, Object InterSeekDelay, Object[] WorldWideName, Object[] ReservedForWorldWideName128, Object ReservedForTlcTechnicalReport, Object[] WordsPerLogicalSector,  CommandSetSupportExt,  CommandSetActiveExt, Object[] ReservedForExpandedSupportandActive, Object MsnSupport, Object ReservedWord1274,  SecurityStatus, Object[] ReservedWord129,  CfaPowerModel, Object[] ReservedForCfaWord161,  DataSetManagementFeature, Object[] ReservedForCfaWord170, Object[] CurrentMediaSerialNumber, Object ReservedWord206, Object[] ReservedWord207,  BlockAlignment, Object[] WriteReadVerifySectorCountMode3Only, Object[] WriteReadVerifySectorCountMode2Only,  NVCacheCapabilities, Object NVCacheSizeLSW, Object NVCacheSizeMSW, Object NominalMediaRotationRate, Object ReservedWord218,  NVCacheOptions, Object[] ReservedWord220, Object Signature, Object CheckSum) {
 		setGeneralConfiguration(GeneralConfiguration);
 		setNumCylinders(NumCylinders);
 		setReservedWord2(ReservedWord2);
@@ -205,10 +205,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setNumHeads(Object newNumHeads) {
 		NumHeads = newNumHeads;
 	}
-	public Object getRetired1() {
+	public Object[] getRetired1() {
 		return Retired1;
 	}
-	public void setRetired1(Object newRetired1) {
+	public void setRetired1(Object[] newRetired1) {
 		Retired1 = newRetired1;
 	}
 	public Object getNumSectorsPerTrack() {
@@ -217,22 +217,22 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setNumSectorsPerTrack(Object newNumSectorsPerTrack) {
 		NumSectorsPerTrack = newNumSectorsPerTrack;
 	}
-	public Object getVendorUnique1() {
+	public Object[] getVendorUnique1() {
 		return VendorUnique1;
 	}
-	public void setVendorUnique1(Object newVendorUnique1) {
+	public void setVendorUnique1(Object[] newVendorUnique1) {
 		VendorUnique1 = newVendorUnique1;
 	}
-	public Object getSerialNumber() {
+	public Object[] getSerialNumber() {
 		return SerialNumber;
 	}
-	public void setSerialNumber(Object newSerialNumber) {
+	public void setSerialNumber(Object[] newSerialNumber) {
 		SerialNumber = newSerialNumber;
 	}
-	public Object getRetired2() {
+	public Object[] getRetired2() {
 		return Retired2;
 	}
-	public void setRetired2(Object newRetired2) {
+	public void setRetired2(Object[] newRetired2) {
 		Retired2 = newRetired2;
 	}
 	public Object getObsolete1() {
@@ -241,16 +241,16 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setObsolete1(Object newObsolete1) {
 		Obsolete1 = newObsolete1;
 	}
-	public Object getFirmwareRevision() {
+	public Object[] getFirmwareRevision() {
 		return FirmwareRevision;
 	}
-	public void setFirmwareRevision(Object newFirmwareRevision) {
+	public void setFirmwareRevision(Object[] newFirmwareRevision) {
 		FirmwareRevision = newFirmwareRevision;
 	}
-	public Object getModelNumber() {
+	public Object[] getModelNumber() {
 		return ModelNumber;
 	}
-	public void setModelNumber(Object newModelNumber) {
+	public void setModelNumber(Object[] newModelNumber) {
 		ModelNumber = newModelNumber;
 	}
 	public Object getMaximumBlockTransfer() {
@@ -277,10 +277,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setCapabilities( newCapabilities) {
 		Capabilities = newCapabilities;
 	}
-	public Object getObsoleteWords51() {
+	public Object[] getObsoleteWords51() {
 		return ObsoleteWords51;
 	}
-	public void setObsoleteWords51(Object newObsoleteWords51) {
+	public void setObsoleteWords51(Object[] newObsoleteWords51) {
 		ObsoleteWords51 = newObsoleteWords51;
 	}
 	public Object getTranslationFieldsValid() {
@@ -397,10 +397,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setMinimumPIOCycleTimeIORDY(Object newMinimumPIOCycleTimeIORDY) {
 		MinimumPIOCycleTimeIORDY = newMinimumPIOCycleTimeIORDY;
 	}
-	public Object getReservedWords69() {
+	public Object[] getReservedWords69() {
 		return ReservedWords69;
 	}
-	public void setReservedWords69(Object newReservedWords69) {
+	public void setReservedWords69(Object[] newReservedWords69) {
 		ReservedWords69 = newReservedWords69;
 	}
 	public Object getQueueDepth() {
@@ -415,10 +415,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setReservedWord75(Object newReservedWord75) {
 		ReservedWord75 = newReservedWord75;
 	}
-	public Object getReservedWords76() {
+	public Object[] getReservedWords76() {
 		return ReservedWords76;
 	}
-	public void setReservedWords76(Object newReservedWords76) {
+	public void setReservedWords76(Object[] newReservedWords76) {
 		ReservedWords76 = newReservedWords76;
 	}
 	public Object getMajorRevision() {
@@ -457,10 +457,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setUltraDMAActive(Object newUltraDMAActive) {
 		UltraDMAActive = newUltraDMAActive;
 	}
-	public Object getReservedWord89() {
+	public Object[] getReservedWord89() {
 		return ReservedWord89;
 	}
-	public void setReservedWord89(Object newReservedWord89) {
+	public void setReservedWord89(Object[] newReservedWord89) {
 		ReservedWord89 = newReservedWord89;
 	}
 	public Object getHardwareResetResult() {
@@ -481,16 +481,16 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setRecommendedAcousticValue(Object newRecommendedAcousticValue) {
 		RecommendedAcousticValue = newRecommendedAcousticValue;
 	}
-	public Object getReservedWord95() {
+	public Object[] getReservedWord95() {
 		return ReservedWord95;
 	}
-	public void setReservedWord95(Object newReservedWord95) {
+	public void setReservedWord95(Object[] newReservedWord95) {
 		ReservedWord95 = newReservedWord95;
 	}
-	public Object getMax48BitLBA() {
+	public Object[] getMax48BitLBA() {
 		return Max48BitLBA;
 	}
-	public void setMax48BitLBA(Object newMax48BitLBA) {
+	public void setMax48BitLBA(Object[] newMax48BitLBA) {
 		Max48BitLBA = newMax48BitLBA;
 	}
 	public Object getStreamingTransferTime() {
@@ -517,16 +517,16 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setInterSeekDelay(Object newInterSeekDelay) {
 		InterSeekDelay = newInterSeekDelay;
 	}
-	public Object getWorldWideName() {
+	public Object[] getWorldWideName() {
 		return WorldWideName;
 	}
-	public void setWorldWideName(Object newWorldWideName) {
+	public void setWorldWideName(Object[] newWorldWideName) {
 		WorldWideName = newWorldWideName;
 	}
-	public Object getReservedForWorldWideName128() {
+	public Object[] getReservedForWorldWideName128() {
 		return ReservedForWorldWideName128;
 	}
-	public void setReservedForWorldWideName128(Object newReservedForWorldWideName128) {
+	public void setReservedForWorldWideName128(Object[] newReservedForWorldWideName128) {
 		ReservedForWorldWideName128 = newReservedForWorldWideName128;
 	}
 	public Object getReservedForTlcTechnicalReport() {
@@ -535,10 +535,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setReservedForTlcTechnicalReport(Object newReservedForTlcTechnicalReport) {
 		ReservedForTlcTechnicalReport = newReservedForTlcTechnicalReport;
 	}
-	public Object getWordsPerLogicalSector() {
+	public Object[] getWordsPerLogicalSector() {
 		return WordsPerLogicalSector;
 	}
-	public void setWordsPerLogicalSector(Object newWordsPerLogicalSector) {
+	public void setWordsPerLogicalSector(Object[] newWordsPerLogicalSector) {
 		WordsPerLogicalSector = newWordsPerLogicalSector;
 	}
 	public  getCommandSetSupportExt() {
@@ -553,10 +553,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setCommandSetActiveExt( newCommandSetActiveExt) {
 		CommandSetActiveExt = newCommandSetActiveExt;
 	}
-	public Object getReservedForExpandedSupportandActive() {
+	public Object[] getReservedForExpandedSupportandActive() {
 		return ReservedForExpandedSupportandActive;
 	}
-	public void setReservedForExpandedSupportandActive(Object newReservedForExpandedSupportandActive) {
+	public void setReservedForExpandedSupportandActive(Object[] newReservedForExpandedSupportandActive) {
 		ReservedForExpandedSupportandActive = newReservedForExpandedSupportandActive;
 	}
 	public Object getMsnSupport() {
@@ -577,10 +577,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setSecurityStatus( newSecurityStatus) {
 		SecurityStatus = newSecurityStatus;
 	}
-	public Object getReservedWord129() {
+	public Object[] getReservedWord129() {
 		return ReservedWord129;
 	}
-	public void setReservedWord129(Object newReservedWord129) {
+	public void setReservedWord129(Object[] newReservedWord129) {
 		ReservedWord129 = newReservedWord129;
 	}
 	public  getCfaPowerModel() {
@@ -589,10 +589,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setCfaPowerModel( newCfaPowerModel) {
 		CfaPowerModel = newCfaPowerModel;
 	}
-	public Object getReservedForCfaWord161() {
+	public Object[] getReservedForCfaWord161() {
 		return ReservedForCfaWord161;
 	}
-	public void setReservedForCfaWord161(Object newReservedForCfaWord161) {
+	public void setReservedForCfaWord161(Object[] newReservedForCfaWord161) {
 		ReservedForCfaWord161 = newReservedForCfaWord161;
 	}
 	public  getDataSetManagementFeature() {
@@ -601,16 +601,16 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setDataSetManagementFeature( newDataSetManagementFeature) {
 		DataSetManagementFeature = newDataSetManagementFeature;
 	}
-	public Object getReservedForCfaWord170() {
+	public Object[] getReservedForCfaWord170() {
 		return ReservedForCfaWord170;
 	}
-	public void setReservedForCfaWord170(Object newReservedForCfaWord170) {
+	public void setReservedForCfaWord170(Object[] newReservedForCfaWord170) {
 		ReservedForCfaWord170 = newReservedForCfaWord170;
 	}
-	public Object getCurrentMediaSerialNumber() {
+	public Object[] getCurrentMediaSerialNumber() {
 		return CurrentMediaSerialNumber;
 	}
-	public void setCurrentMediaSerialNumber(Object newCurrentMediaSerialNumber) {
+	public void setCurrentMediaSerialNumber(Object[] newCurrentMediaSerialNumber) {
 		CurrentMediaSerialNumber = newCurrentMediaSerialNumber;
 	}
 	public Object getReservedWord206() {
@@ -619,10 +619,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setReservedWord206(Object newReservedWord206) {
 		ReservedWord206 = newReservedWord206;
 	}
-	public Object getReservedWord207() {
+	public Object[] getReservedWord207() {
 		return ReservedWord207;
 	}
-	public void setReservedWord207(Object newReservedWord207) {
+	public void setReservedWord207(Object[] newReservedWord207) {
 		ReservedWord207 = newReservedWord207;
 	}
 	public  getBlockAlignment() {
@@ -631,16 +631,16 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setBlockAlignment( newBlockAlignment) {
 		BlockAlignment = newBlockAlignment;
 	}
-	public Object getWriteReadVerifySectorCountMode3Only() {
+	public Object[] getWriteReadVerifySectorCountMode3Only() {
 		return WriteReadVerifySectorCountMode3Only;
 	}
-	public void setWriteReadVerifySectorCountMode3Only(Object newWriteReadVerifySectorCountMode3Only) {
+	public void setWriteReadVerifySectorCountMode3Only(Object[] newWriteReadVerifySectorCountMode3Only) {
 		WriteReadVerifySectorCountMode3Only = newWriteReadVerifySectorCountMode3Only;
 	}
-	public Object getWriteReadVerifySectorCountMode2Only() {
+	public Object[] getWriteReadVerifySectorCountMode2Only() {
 		return WriteReadVerifySectorCountMode2Only;
 	}
-	public void setWriteReadVerifySectorCountMode2Only(Object newWriteReadVerifySectorCountMode2Only) {
+	public void setWriteReadVerifySectorCountMode2Only(Object[] newWriteReadVerifySectorCountMode2Only) {
 		WriteReadVerifySectorCountMode2Only = newWriteReadVerifySectorCountMode2Only;
 	}
 	public  getNVCacheCapabilities() {
@@ -679,10 +679,10 @@ public class _IDENTIFY_DEVICE_DATA {
 	public void setNVCacheOptions( newNVCacheOptions) {
 		NVCacheOptions = newNVCacheOptions;
 	}
-	public Object getReservedWord220() {
+	public Object[] getReservedWord220() {
 		return ReservedWord220;
 	}
-	public void setReservedWord220(Object newReservedWord220) {
+	public void setReservedWord220(Object[] newReservedWord220) {
 		ReservedWord220 = newReservedWord220;
 	}
 	public Object getSignature() {

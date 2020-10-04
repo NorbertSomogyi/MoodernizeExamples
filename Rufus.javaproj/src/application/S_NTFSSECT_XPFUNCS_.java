@@ -50,13 +50,13 @@ public class S_NTFSSECT_XPFUNCS_ {
 		if (!XpFuncs) {
 			return /*Error: Unsupported expression*/;
 		} 
-		this.setGetDiskFreeSpaceA(((Object)0));
-		this.setGetVolumePathNameA(((Object)0));
+		this.setGetDiskFreeSpaceA((null));
+		this.setGetVolumePathNameA((null));
 		Object generatedKernel32 = this.getKernel32();
 		if (generatedKernel32) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/FreeLibrary(generatedKernel32);
 		} 
-		this.setKernel32(((Object)0));
+		this.setKernel32((null));
 		this.setSize(0);
 		return /*Error: Unsupported expression*/;
 	}

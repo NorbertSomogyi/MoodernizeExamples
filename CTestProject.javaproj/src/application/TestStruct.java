@@ -17,6 +17,7 @@ public class TestStruct {
 		return t;
 	}
 	public void testFieldReference() {
+		ModernizedCProgram.f1();
 		int[] x = new int[]{1, 2};
 		TestStruct e = new TestStruct(0, /*falsey*/(byte)'A');
 		int generatedX = this.getX();

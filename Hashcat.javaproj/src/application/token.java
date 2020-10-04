@@ -3,17 +3,17 @@ package application;
 public class token {
 	private int token_cnt;
 	private int signatures_cnt;
-	private Object signatures_buf;
-	private Object sep;
-	private Object buf;
-	private Object len;
-	private Object len_min;
-	private Object len_max;
-	private Object attr;
+	private Object[] signatures_buf;
+	private Object[] sep;
+	private Object[] buf;
+	private Object[] len;
+	private Object[] len_min;
+	private Object[] len_max;
+	private Object[] attr;
 	private Object opt_buf;
 	private int opt_len;
 	
-	public token(int token_cnt, int signatures_cnt, Object signatures_buf, Object sep, Object buf, Object len, Object len_min, Object len_max, Object attr, Object opt_buf, int opt_len) {
+	public token(int token_cnt, int signatures_cnt, Object[] signatures_buf, Object[] sep, Object[] buf, Object[] len, Object[] len_min, Object[] len_max, Object[] attr, Object opt_buf, int opt_len) {
 		setToken_cnt(token_cnt);
 		setSignatures_cnt(signatures_cnt);
 		setSignatures_buf(signatures_buf);
@@ -31,13 +31,13 @@ public class token {
 	
 	public int input_tokenizer(Object input_buf, Object input_len) {
 		int len_left = input_len;
-		Object generatedBuf = this.getBuf();
+		Object[] generatedBuf = this.getBuf();
 		generatedBuf[0] = input_buf;
 		int token_idx;
 		int generatedToken_cnt = this.getToken_cnt();
-		Object generatedAttr = this.getAttr();
-		Object generatedLen = this.getLen();
-		Object generatedSep = this.getSep();
+		Object[] generatedAttr = this.getAttr();
+		Object[] generatedLen = this.getLen();
+		Object[] generatedSep = this.getSep();
 		for (token_idx = 0; token_idx < generatedToken_cnt - 1; token_idx++) {
 			if (generatedAttr[token_idx] & token_attr.TOKEN_ATTR_FIXED_LENGTH) {
 				int len = generatedLen[token_idx];
@@ -57,7 +57,7 @@ public class token {
 						} 
 					} 
 					u8 next_pos = (u8)/*Error: Function owner not recognized*/strchr((byte)generatedBuf[token_idx], generatedSep[token_idx]);
-					if (next_pos == ((Object)0)) {
+					if (next_pos == (null)) {
 						return (parser_rc.PARSER_SEPARATOR_UNMATCHED);
 					} 
 					int len = next_pos - generatedBuf[token_idx];
@@ -75,9 +75,9 @@ public class token {
 				generatedLen[token_idx] = len_left;
 		} 
 		int generatedSignatures_cnt = this.getSignatures_cnt();
-		Object generatedSignatures_buf = this.getSignatures_buf();
-		Object generatedLen_min = this.getLen_min();
-		Object generatedLen_max = this.getLen_max();
+		Object[] generatedSignatures_buf = this.getSignatures_buf();
+		Object[] generatedLen_min = this.getLen_min();
+		Object[] generatedLen_max = this.getLen_max();
 		// verify datafor (token_idx = 0; token_idx < generatedToken_cnt; token_idx++) {
 			if (generatedAttr[token_idx] & token_attr.TOKEN_ATTR_VERIFY_SIGNATURE) {
 				boolean matched = false;
@@ -144,46 +144,46 @@ public class token {
 	public void setSignatures_cnt(int newSignatures_cnt) {
 		signatures_cnt = newSignatures_cnt;
 	}
-	public Object getSignatures_buf() {
+	public Object[] getSignatures_buf() {
 		return signatures_buf;
 	}
-	public void setSignatures_buf(Object newSignatures_buf) {
+	public void setSignatures_buf(Object[] newSignatures_buf) {
 		signatures_buf = newSignatures_buf;
 	}
-	public Object getSep() {
+	public Object[] getSep() {
 		return sep;
 	}
-	public void setSep(Object newSep) {
+	public void setSep(Object[] newSep) {
 		sep = newSep;
 	}
-	public Object getBuf() {
+	public Object[] getBuf() {
 		return buf;
 	}
-	public void setBuf(Object newBuf) {
+	public void setBuf(Object[] newBuf) {
 		buf = newBuf;
 	}
-	public Object getLen() {
+	public Object[] getLen() {
 		return len;
 	}
-	public void setLen(Object newLen) {
+	public void setLen(Object[] newLen) {
 		len = newLen;
 	}
-	public Object getLen_min() {
+	public Object[] getLen_min() {
 		return len_min;
 	}
-	public void setLen_min(Object newLen_min) {
+	public void setLen_min(Object[] newLen_min) {
 		len_min = newLen_min;
 	}
-	public Object getLen_max() {
+	public Object[] getLen_max() {
 		return len_max;
 	}
-	public void setLen_max(Object newLen_max) {
+	public void setLen_max(Object[] newLen_max) {
 		len_max = newLen_max;
 	}
-	public Object getAttr() {
+	public Object[] getAttr() {
 		return attr;
 	}
-	public void setAttr(Object newAttr) {
+	public void setAttr(Object[] newAttr) {
 		attr = newAttr;
 	}
 	public Object getOpt_buf() {

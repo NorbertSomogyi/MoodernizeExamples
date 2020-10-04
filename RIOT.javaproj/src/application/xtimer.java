@@ -71,17 +71,7 @@ public class xtimer {
 	public int _xtimer_set_absolute(Object target) {
 		uint32_t now = ModernizedCProgram._xtimer_now();
 		int res = 0;
-		this.setNext(((Object)0/* Ensure that offset is bigger than 'XTIMER_BACKOFF',
-		     * 'target - now' will allways be the offset no matter if target < or > now.
-		     *
-		     * This expects that target was not set too close to now and overrun now, so
-		     * from setting target up until the call of '_xtimer_now()' above now has not
-		     * become equal or bigger than target.
-		     * This is crucial when using low CPU frequencies so reaching the '_xtimer_now()'
-		     * call needs multiple xtimer ticks.
-		     *
-		     * '_xtimer_set()' and `_xtimer_periodic_wakeup()` ensure this by already
-		     * backing off for small values. */));
+		this.setNext((null));
 		uint32_t offset = (target - now);
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DEBUG("timer_set_absolute(): now=%u target=%u offset=%u\n", now, target, offset);
 		if (offset <= 30) {

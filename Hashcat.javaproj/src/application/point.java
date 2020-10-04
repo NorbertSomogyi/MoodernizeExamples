@@ -60,9 +60,9 @@ public class point {
 	private Object out;
 	private Object in;
 	private int bits;
-	private Object window;
+	private Object[] window;
 	
-	public point(Object out, Object in, int bits, Object window) {
+	public point(Object out, Object in, int bits, Object[] window) {
 		setOut(out);
 		setIn(in);
 		setBits(bits);
@@ -89,10 +89,10 @@ public class point {
 	public void setBits(int newBits) {
 		bits = newBits;
 	}
-	public Object getWindow() {
+	public Object[] getWindow() {
 		return window;
 	}
-	public void setWindow(Object newWindow) {
+	public void setWindow(Object[] newWindow) {
 		window = newWindow;
 	}
 }

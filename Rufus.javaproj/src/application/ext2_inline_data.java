@@ -64,7 +64,7 @@ public class ext2_inline_data {
 		retval = handle.ext2fs_xattr_get("system.data", (Object)generatedEa_data, generatedEa_size);
 		if (retval == EXT2_ET_EA_KEY_NOT_FOUND) {
 			this.setEa_size(0);
-			this.setEa_data(((Object)0));
+			this.setEa_data((null));
 			retval = 0;
 		}  else if (retval) {
 			;

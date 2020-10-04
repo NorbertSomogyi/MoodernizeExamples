@@ -11,11 +11,11 @@ public class _RTL_HEAP_INFORMATION {
 	private Object NumberOfEntries;
 	private Object NumberOfPseudoTags;
 	private Object PseudoTagGranularity;
-	private Object Reserved;
+	private Object[] Reserved;
 	private Object Tags;
 	private Object Entries;
 	
-	public _RTL_HEAP_INFORMATION(Object BaseAddress, Object Flags, Object EntryOverhead, Object CreatorBackTraceIndex, Object BytesAllocated, Object BytesCommitted, Object NumberOfTags, Object NumberOfEntries, Object NumberOfPseudoTags, Object PseudoTagGranularity, Object Reserved, Object Tags, Object Entries) {
+	public _RTL_HEAP_INFORMATION(Object BaseAddress, Object Flags, Object EntryOverhead, Object CreatorBackTraceIndex, Object BytesAllocated, Object BytesCommitted, Object NumberOfTags, Object NumberOfEntries, Object NumberOfPseudoTags, Object PseudoTagGranularity, Object[] Reserved, Object Tags, Object Entries) {
 		setBaseAddress(BaseAddress);
 		setFlags(Flags);
 		setEntryOverhead(EntryOverhead);
@@ -93,10 +93,10 @@ public class _RTL_HEAP_INFORMATION {
 	public void setPseudoTagGranularity(Object newPseudoTagGranularity) {
 		PseudoTagGranularity = newPseudoTagGranularity;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return Reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		Reserved = newReserved;
 	}
 	public Object getTags() {

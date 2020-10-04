@@ -4,13 +4,13 @@ package application;
 public class appUseExtAttr {
 	private Object attr_type;
 	private Object attr_subtype;
-	private Object reserved;
+	private Object[] reserved;
 	private Object attrLength;
 	private Object appUseLength;
 	private udf_regid_s app_id;
-	private Object appUse;
+	private Object[] appUse;
 	
-	public appUseExtAttr(Object attr_type, Object attr_subtype, Object reserved, Object attrLength, Object appUseLength, udf_regid_s app_id, Object appUse) {
+	public appUseExtAttr(Object attr_type, Object attr_subtype, Object[] reserved, Object attrLength, Object appUseLength, udf_regid_s app_id, Object[] appUse) {
 		setAttr_type(attr_type);
 		setAttr_subtype(attr_subtype);
 		setReserved(reserved);
@@ -34,10 +34,10 @@ public class appUseExtAttr {
 	public void setAttr_subtype(Object newAttr_subtype) {
 		attr_subtype = newAttr_subtype;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public Object getAttrLength() {
@@ -58,10 +58,10 @@ public class appUseExtAttr {
 	public void setApp_id(udf_regid_s newApp_id) {
 		app_id = newApp_id;
 	}
-	public Object getAppUse() {
+	public Object[] getAppUse() {
 		return appUse;
 	}
-	public void setAppUse(Object newAppUse) {
+	public void setAppUse(Object[] newAppUse) {
 		appUse = newAppUse;
 	}
 }

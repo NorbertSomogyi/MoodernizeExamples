@@ -30,7 +30,7 @@ public class node {
 		int middle;
 		int result;
 		int compared;
-		container containers = new container();
+		container[][] containers = new container();
 		left = start_container;
 		Object generatedContainer_size = this.getContainer_size();
 		right = generatedContainer_size - 1;
@@ -75,14 +75,14 @@ public class node {
 			prev = generatedContainers[i].getPayload_first();
 			curr = generatedNext;
 			while (curr) {
-				((/*Error: Function owner not recognized*/compare(generatedKey, generatedKey) < 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("compare(prev->key, curr->key) < 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\buffered_tree.c", 601));
+				((/*Error: Function owner not recognized*/compare(generatedKey, generatedKey) < 0) ? null : /*Error: Function owner not recognized*/_assert("compare(prev->key, curr->key) < 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\buffered_tree.c", 601));
 				prev = curr;
 				curr = generatedNext;
 			}
 			if (i == 0) {
 				continue;
 			} 
-			((/*Error: Function owner not recognized*/compare(generatedKey, generatedKey) < 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("compare(node->containers[i-1]->payload_first->key, node->containers[i]->payload_first->key) < 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\buffered_tree.c", 608));
+			((/*Error: Function owner not recognized*/compare(generatedKey, generatedKey) < 0) ? null : /*Error: Function owner not recognized*/_assert("compare(node->containers[i-1]->payload_first->key, node->containers[i]->payload_first->key) < 0", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\buffered_tree.c", 608));
 		}
 	}
 	public void bftree_node_print() {
@@ -94,15 +94,15 @@ public class node {
 		Object generatedVal = payload.getVal();
 		payload generatedNext = payload.getNext();
 		for (i = 0; i < generatedContainer_size; ++i) {
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("container%d %d %s\t", i, generatedContainers[i].getPayload_size(), generatedContainers[i].getPayload_first().getKey());
+			System.out.println("container%d %d %s\t");
 			payload = generatedContainers[i].getPayload_first();
 			while (payload) {
-				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("%s => %s ", generatedKey, generatedVal);
+				System.out.println("%s => %s ");
 				payload = generatedNext;
 			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("\n");
+			System.out.println("\n");
 		}
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("\n")// ================================================================// ========================== Map Type Area =======================;// ================================================================// ========================== Map Type Area =======================
+		System.out.println("\n")// ================================================================// ========================== Map Type Area =======================;// ================================================================// ========================== Map Type Area =======================
 	}
 	public node getParent() {
 		return parent;

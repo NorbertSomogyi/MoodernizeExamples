@@ -223,25 +223,25 @@ public class xz_dec {
 	}
 	public xz_dec xz_dec_init(xz_mode mode, Object dict_max) {
 		xz_dec s = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
-		if (s == ((Object)0)) {
-			return ((Object)0);
+		if (s == (null)) {
+			return (null);
 		} 
 		s.setMode(xz_mode.mode);
 		xz_dec_bcj xz_dec_bcj = new xz_dec_bcj();
 		s.setBcj(xz_dec_bcj.xz_dec_bcj_create(((xz_mode.mode) == xz_mode.XZ_SINGLE)));
 		xz_dec_bcj generatedBcj = s.getBcj();
-		if (generatedBcj == ((Object)0)) {
+		if (generatedBcj == (null)) {
 			;
 		} 
 		xz_dec_lzma2 xz_dec_lzma2 = new xz_dec_lzma2();
 		s.setLzma2(xz_dec_lzma2.xz_dec_lzma2_create(xz_mode.mode, dict_max));
 		xz_dec_lzma2 generatedLzma2 = s.getLzma2();
-		if (generatedLzma2 == ((Object)0)) {
+		if (generatedLzma2 == (null)) {
 			;
 		} 
 		s.xz_dec_reset();
 		return s;
-		return ((Object)0);
+		return (null);
 	}
 	public void xz_dec_reset() {
 		this.setSequence(.SEQ_STREAM_HEADER);
@@ -259,7 +259,7 @@ public class xz_dec {
 	public void xz_dec_end() {
 		xz_dec_lzma2 generatedLzma2 = this.getLzma2();
 		xz_dec_bcj generatedBcj = this.getBcj();
-		if (s != ((Object)0)) {
+		if (s != (null)) {
 			generatedLzma2.xz_dec_lzma2_end();
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBcj);
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(s);

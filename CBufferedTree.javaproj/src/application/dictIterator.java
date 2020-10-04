@@ -25,8 +25,8 @@ public class dictIterator {
 		iter.setTable(0);
 		iter.setIndex(-1);
 		iter.setSafe(0);
-		iter.setEntry(((Object)0));
-		iter.setNextEntry(((Object)0));
+		iter.setEntry((null));
+		iter.setNextEntry((null));
 		return iter;
 	}
 	public dictIterator dictGetSafeIterator(dict d) {

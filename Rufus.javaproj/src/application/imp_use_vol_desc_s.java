@@ -5,9 +5,9 @@ public class imp_use_vol_desc_s {
 	private udf_tag_s tag;
 	private Object vol_desc_seq_num;
 	private udf_regid_s imp_id;
-	private Object imp_use;
+	private Object[] imp_use;
 	
-	public imp_use_vol_desc_s(udf_tag_s tag, Object vol_desc_seq_num, udf_regid_s imp_id, Object imp_use) {
+	public imp_use_vol_desc_s(udf_tag_s tag, Object vol_desc_seq_num, udf_regid_s imp_id, Object[] imp_use) {
 		setTag(tag);
 		setVol_desc_seq_num(vol_desc_seq_num);
 		setImp_id(imp_id);
@@ -34,10 +34,10 @@ public class imp_use_vol_desc_s {
 	public void setImp_id(udf_regid_s newImp_id) {
 		imp_id = newImp_id;
 	}
-	public Object getImp_use() {
+	public Object[] getImp_use() {
 		return imp_use;
 	}
-	public void setImp_use(Object newImp_use) {
+	public void setImp_use(Object[] newImp_use) {
 		imp_use = newImp_use;
 	}
 }

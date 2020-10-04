@@ -2,10 +2,10 @@ package application;
 
 public class out {
 	private hc_fp fp;
-	private Object buf;
+	private Object[] buf;
 	private int len;
 	
-	public out(hc_fp fp, Object buf, int len) {
+	public out(hc_fp fp, Object[] buf, int len) {
 		setFp(fp);
 		setBuf(buf);
 		setLen(len);
@@ -22,15 +22,15 @@ public class out {
 		if (generatedLen == 0) {
 			return /*Error: Unsupported expression*/;
 		} 
-		Object generatedBuf = this.getBuf();
+		Object[] generatedBuf = this.getBuf();
 		hc_fp generatedFp = this.getFp();
 		generatedFp.hc_fwrite(generatedBuf, 1, generatedLen);
 		this.setLen(0);
 	}
 	public void out_push(Object pw_buf, Object pw_len) {
-		Object generatedBuf = this.getBuf();
+		Object[] generatedBuf = this.getBuf();
 		int generatedLen = this.getLen();
-		byte ptr = generatedBuf + generatedLen;
+		byte[] ptr = generatedBuf + generatedLen;
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(ptr, pw_buf, pw_len);
 		ptr[pw_len + 0] = (byte)'\r';
 		ptr[pw_len + 1] = (byte)'\n';
@@ -45,10 +45,10 @@ public class out {
 	public void setFp(hc_fp newFp) {
 		fp = newFp;
 	}
-	public Object getBuf() {
+	public Object[] getBuf() {
 		return buf;
 	}
-	public void setBuf(Object newBuf) {
+	public void setBuf(Object[] newBuf) {
 		buf = newBuf;
 	}
 	public int getLen() {

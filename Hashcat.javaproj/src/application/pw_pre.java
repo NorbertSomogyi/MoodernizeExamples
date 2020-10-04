@@ -1,13 +1,13 @@
 package application;
 
 public class pw_pre {
-	private Object pw_buf;
+	private Object[] pw_buf;
 	private Object pw_len;
-	private Object base_buf;
+	private Object[] base_buf;
 	private Object base_len;
 	private Object rule_idx;
 	
-	public pw_pre(Object pw_buf, Object pw_len, Object base_buf, Object base_len, Object rule_idx) {
+	public pw_pre(Object[] pw_buf, Object pw_len, Object[] base_buf, Object base_len, Object rule_idx) {
 		setPw_buf(pw_buf);
 		setPw_len(pw_len);
 		setBase_buf(base_buf);
@@ -17,10 +17,10 @@ public class pw_pre {
 	public pw_pre() {
 	}
 	
-	public Object getPw_buf() {
+	public Object[] getPw_buf() {
 		return pw_buf;
 	}
-	public void setPw_buf(Object newPw_buf) {
+	public void setPw_buf(Object[] newPw_buf) {
 		pw_buf = newPw_buf;
 	}
 	public Object getPw_len() {
@@ -29,10 +29,10 @@ public class pw_pre {
 	public void setPw_len(Object newPw_len) {
 		pw_len = newPw_len;
 	}
-	public Object getBase_buf() {
+	public Object[] getBase_buf() {
 		return base_buf;
 	}
-	public void setBase_buf(Object newBase_buf) {
+	public void setBase_buf(Object[] newBase_buf) {
 		base_buf = newBase_buf;
 	}
 	public Object getBase_len() {

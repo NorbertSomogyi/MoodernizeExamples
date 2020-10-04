@@ -7,12 +7,12 @@ public class extra_info_combi {
 	private Object comb_pos_prev;
 	private Object comb_pos;
 	private Byte scratch_buf;
-	private Object base_buf;
+	private Object[] base_buf;
 	private Object base_len;
-	private Object out_buf;
+	private Object[] out_buf;
 	private Object out_len;
 	
-	public extra_info_combi(Object pos, Object base_fp, Object combs_fp, Object comb_pos_prev, Object comb_pos, Byte scratch_buf, Object base_buf, Object base_len, Object out_buf, Object out_len) {
+	public extra_info_combi(Object pos, Object base_fp, Object combs_fp, Object comb_pos_prev, Object comb_pos, Byte scratch_buf, Object[] base_buf, Object base_len, Object[] out_buf, Object out_len) {
 		setPos(pos);
 		setBase_fp(base_fp);
 		setCombs_fp(combs_fp);
@@ -63,10 +63,10 @@ public class extra_info_combi {
 	public void setScratch_buf(Byte newScratch_buf) {
 		scratch_buf = newScratch_buf;
 	}
-	public Object getBase_buf() {
+	public Object[] getBase_buf() {
 		return base_buf;
 	}
-	public void setBase_buf(Object newBase_buf) {
+	public void setBase_buf(Object[] newBase_buf) {
 		base_buf = newBase_buf;
 	}
 	public Object getBase_len() {
@@ -75,10 +75,10 @@ public class extra_info_combi {
 	public void setBase_len(Object newBase_len) {
 		base_len = newBase_len;
 	}
-	public Object getOut_buf() {
+	public Object[] getOut_buf() {
 		return out_buf;
 	}
-	public void setOut_buf(Object newOut_buf) {
+	public void setOut_buf(Object[] newOut_buf) {
 		out_buf = newOut_buf;
 	}
 	public Object getOut_len() {

@@ -36,7 +36,7 @@ public class libfat_filesystem {
 		int32_t nextcluster = new int32_t();
 		uint32_t fatoffset = new uint32_t();
 		libfat_sector_t fatsect = new libfat_sector_t();
-		uint8_t fsdata = new uint8_t();
+		uint8_t[] fsdata = new uint8_t();
 		int generatedClustsize = this.getClustsize();
 		uint32_t clustmask = generatedClustsize - 1;
 		libfat_sector_t rs = new libfat_sector_t();
@@ -62,18 +62,6 @@ public class libfat_filesystem {
 		Object generatedFat = this.getFat();
 		fat_type generatedFat_type = this.getFat_type();
 		switch (generatedFat_type) {
-		case fat_type.FAT16:
-				fatoffset = cluster << 1;
-				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
-				fsdata = fs.libfat_get_sector(fatsect);
-				if (!fsdata) {
-					return -1;
-				} 
-				nextcluster = ModernizedCProgram.read16((le16_t)fsdata[fatoffset & ModernizedCProgram.LIBFAT_SECTOR_MASK]);
-				if (nextcluster >= -1024) {
-					return 0;
-				} 
-				break;
 		case fat_type.FAT28:
 				fatoffset = cluster << 2;
 				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
@@ -111,13 +99,90 @@ public class libfat_filesystem {
 					return 0;
 				} 
 				break;
+		case fat_type.FAT16:
+				fatoffset = cluster << 1;
+				fatsect = generatedFat + (fatoffset >> ModernizedCProgram.LIBFAT_SECTOR_SHIFT);
+				fsdata = fs.libfat_get_sector(fatsect);
+				if (!fsdata) {
+					return -1;
+				} 
+				nextcluster = ModernizedCProgram.read16((le16_t)fsdata[fatoffset & ModernizedCProgram.LIBFAT_SECTOR_MASK]);
+				if (nextcluster >= -1024) {
+					return 0;
+				} 
+				break;
 		default:
 				return -/* WTF? */1;
 		}
 		return ModernizedCProgram.libfat_clustertosector(fs, nextcluster);
 	}
+	/* ----------------------------------------------------------------------- *
+	 *
+	 *   Copyright 2004-2008 H. Peter Anvin - All Rights Reserved
+	 *
+	 *   This program is free software; you can redistribute it and/or modify
+	 *   it under the terms of the GNU General Public License as published by
+	 *   the Free Software Foundation, Inc., 53 Temple Place Ste 330,
+	 *   Boston MA 02111-1307, USA; either version 2 of the License, or
+	 *   (at your option) any later version; incorporated herein by reference.
+	 *
+	 * ----------------------------------------------------------------------- */
+	/*
+	 * cache.c
+	 *
+	 * Simple sector cache
+	 */
+	/*
+	 * NB: We need to align our sector buffers to at least the 8-byte mark, as some Windows
+	 * disk devices, notably O2Micro PCI-E SD card readers, return ERROR_INVALID_PARAMETER
+	 * when attempting to use ReadFile() against a non 8-byte aligned buffer.
+	 * For good measure, we'll go further and align our buffers on a 16-byte boundary.
+	 * Also, since struct libfat_sector's data[0] is our buffer, this means we must BOTH
+	 * align that member in the struct declaration, and use aligned malloc/free.
+	 */
+	public Object libfat_get_sector(Object n) {
+		libfat_sector ls = new libfat_sector();
+		Object generatedN = ls.getN();
+		Object[] generatedData = ls.getData();
+		libfat_sector generatedNext = ls.getNext();
+		libfat_sector generatedSectors = this.getSectors();
+		for (ls = generatedSectors; ls; ls = generatedNext) {
+			if (generatedN == n) {
+				return generatedData;
+			} 
+		}
+		ls = /*Error: Function owner not recognized*/_mm_malloc(/*Error: Unsupported expression*/ + ModernizedCProgram.LIBFAT_SECTOR_SIZE, /* Not found in cache */16);
+		if (!ls) {
+			fs.libfat_flush();
+			ls = /*Error: Function owner not recognized*/_mm_malloc(/*Error: Unsupported expression*/ + ModernizedCProgram.LIBFAT_SECTOR_SIZE, 16);
+			if (!ls) {
+				return (null);
+			} 
+		} 
+		Object generatedReadptr = this.getReadptr();
+		if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedReadptr, generatedData, ModernizedCProgram.LIBFAT_SECTOR_SIZE, n) != ModernizedCProgram.LIBFAT_SECTOR_SIZE) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_free(ls);
+			return (null);
+		} 
+		ls.setN(n);
+		ls.setNext(generatedSectors);
+		this.setSectors(ls);
+		return generatedData;
+	}
+	public void libfat_flush() {
+		libfat_sector ls = new libfat_sector();
+		libfat_sector lsnext = new libfat_sector();
+		libfat_sector generatedSectors = this.getSectors();
+		lsnext = generatedSectors;
+		this.setSectors((null));
+		libfat_sector generatedNext = ls.getNext();
+		for (ls = lsnext; ls; ls = lsnext) {
+			lsnext = generatedNext;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_free(ls);
+		}
+	}
 	public libfat_filesystem libfat_open(Object readfunc, Object readptr) {
-		libfat_filesystem fs = ((Object)0);
+		libfat_filesystem fs = (null);
 		fat_bootsect bs = new fat_bootsect();
 		int i;
 		uint32_t sectors = new uint32_t();
@@ -129,7 +194,7 @@ public class libfat_filesystem {
 		if (!fs) {
 			;
 		} 
-		fs.setSectors(((Object)0));
+		fs.setSectors((null));
 		fs.setRead(readfunc);
 		fs.setReadptr(readptr);
 		bs = fs.libfat_get_sector(0);
@@ -206,76 +271,11 @@ public class libfat_filesystem {
 				fs.setRootcluster(0);
 		} 
 		return /* All good */fs;
-		return ((Object)0);
+		return (null);
 	}
 	public void libfat_close() {
 		fs.libfat_flush();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(fs);
-	}
-	/* ----------------------------------------------------------------------- *
-	 *
-	 *   Copyright 2004-2008 H. Peter Anvin - All Rights Reserved
-	 *
-	 *   This program is free software; you can redistribute it and/or modify
-	 *   it under the terms of the GNU General Public License as published by
-	 *   the Free Software Foundation, Inc., 53 Temple Place Ste 330,
-	 *   Boston MA 02111-1307, USA; either version 2 of the License, or
-	 *   (at your option) any later version; incorporated herein by reference.
-	 *
-	 * ----------------------------------------------------------------------- */
-	/*
-	 * cache.c
-	 *
-	 * Simple sector cache
-	 */
-	/*
-	 * NB: We need to align our sector buffers to at least the 8-byte mark, as some Windows
-	 * disk devices, notably O2Micro PCI-E SD card readers, return ERROR_INVALID_PARAMETER
-	 * when attempting to use ReadFile() against a non 8-byte aligned buffer.
-	 * For good measure, we'll go further and align our buffers on a 16-byte boundary.
-	 * Also, since struct libfat_sector's data[0] is our buffer, this means we must BOTH
-	 * align that member in the struct declaration, and use aligned malloc/free.
-	 */
-	public Object libfat_get_sector(Object n) {
-		libfat_sector ls = new libfat_sector();
-		Object generatedN = ls.getN();
-		Object generatedData = ls.getData();
-		libfat_sector generatedNext = ls.getNext();
-		libfat_sector generatedSectors = this.getSectors();
-		for (ls = generatedSectors; ls; ls = generatedNext) {
-			if (generatedN == n) {
-				return generatedData;
-			} 
-		}
-		ls = /*Error: Function owner not recognized*/_mm_malloc(/*Error: Unsupported expression*/ + ModernizedCProgram.LIBFAT_SECTOR_SIZE, /* Not found in cache */16);
-		if (!ls) {
-			fs.libfat_flush();
-			ls = /*Error: Function owner not recognized*/_mm_malloc(/*Error: Unsupported expression*/ + ModernizedCProgram.LIBFAT_SECTOR_SIZE, 16);
-			if (!ls) {
-				return ((Object)/* Can't allocate memory */0);
-			} 
-		} 
-		Object generatedReadptr = this.getReadptr();
-		if (/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedReadptr, generatedData, ModernizedCProgram.LIBFAT_SECTOR_SIZE, n) != ModernizedCProgram.LIBFAT_SECTOR_SIZE) {
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_free(ls);
-			return ((Object)/* I/O error */0);
-		} 
-		ls.setN(n);
-		ls.setNext(generatedSectors);
-		this.setSectors(ls);
-		return generatedData;
-	}
-	public void libfat_flush() {
-		libfat_sector ls = new libfat_sector();
-		libfat_sector lsnext = new libfat_sector();
-		libfat_sector generatedSectors = this.getSectors();
-		lsnext = generatedSectors;
-		this.setSectors(((Object)0));
-		libfat_sector generatedNext = ls.getNext();
-		for (ls = lsnext; ls; ls = lsnext) {
-			lsnext = generatedNext;
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_mm_free(ls);
-		}
 	}
 	public Object getRead() {
 		return read;

@@ -2,9 +2,9 @@ package application;
 
 public class _FILE_PROCESS_IDS_USING_FILE_INFORMATION {
 	private Object NumberOfProcessIdsInList;
-	private Object ProcessIdList;
+	private Object[] ProcessIdList;
 	
-	public _FILE_PROCESS_IDS_USING_FILE_INFORMATION(Object NumberOfProcessIdsInList, Object ProcessIdList) {
+	public _FILE_PROCESS_IDS_USING_FILE_INFORMATION(Object NumberOfProcessIdsInList, Object[] ProcessIdList) {
 		setNumberOfProcessIdsInList(NumberOfProcessIdsInList);
 		setProcessIdList(ProcessIdList);
 	}
@@ -17,10 +17,10 @@ public class _FILE_PROCESS_IDS_USING_FILE_INFORMATION {
 	public void setNumberOfProcessIdsInList(Object newNumberOfProcessIdsInList) {
 		NumberOfProcessIdsInList = newNumberOfProcessIdsInList;
 	}
-	public Object getProcessIdList() {
+	public Object[] getProcessIdList() {
 		return ProcessIdList;
 	}
-	public void setProcessIdList(Object newProcessIdList) {
+	public void setProcessIdList(Object[] newProcessIdList) {
 		ProcessIdList = newProcessIdList;
 	}
 }

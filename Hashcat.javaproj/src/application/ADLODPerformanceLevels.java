@@ -3,9 +3,9 @@ package application;
 public class ADLODPerformanceLevels {
 	private int iSize;
 	private int iReserved;
-	private Object aLevels;
+	private Object[] aLevels;
 	
-	public ADLODPerformanceLevels(int iSize, int iReserved, Object aLevels) {
+	public ADLODPerformanceLevels(int iSize, int iReserved, Object[] aLevels) {
 		setISize(iSize);
 		setIReserved(iReserved);
 		setALevels(aLevels);
@@ -25,10 +25,10 @@ public class ADLODPerformanceLevels {
 	public void setIReserved(int newIReserved) {
 		iReserved = newIReserved;
 	}
-	public Object getALevels() {
+	public Object[] getALevels() {
 		return aLevels;
 	}
-	public void setALevels(Object newALevels) {
+	public void setALevels(Object[] newALevels) {
 		aLevels = newALevels;
 	}
 }

@@ -20,13 +20,13 @@ public class flickcurl_comment_s {
 	}
 	
 	public flickcurl_comment_s flickcurl_photosets_comments_getList(flickcurl_s fc, Object photoset_id) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_comment comments = ((Object)0);
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_comment comments = (null);
 		int comments_count = 0;
 		fc.flickcurl_init_params(0);
 		if (!photoset_id) {
-			return ((Object)0);
+			return (null);
 		} 
 		fc.flickcurl_add_param("photoset_id", photoset_id);
 		fc.flickcurl_end_params();
@@ -50,7 +50,7 @@ public class flickcurl_comment_s {
 			if (comments) {
 				comments.flickcurl_free_comments();
 			} 
-			comments = ((Object)0);
+			comments = (null);
 		} 
 		return comments;
 	}
@@ -143,11 +143,11 @@ public class flickcurl_comment_s {
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(comments_object);
 	}
 	public flickcurl_comment_s flickcurl_build_comments(flickcurl_s fc, Object xpathCtx, Object xpathExpr, Integer comment_count_p) {
-		flickcurl_comment comments = ((Object)0);
+		flickcurl_comment[][] comments = (null);
 		int nodes_count;
 		int comment_count;
 		int i;
-		 xpathObj = ((Object)0);
+		 xpathObj = (null);
 		 nodes = new ();
 		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, /* Now do comments */xpathCtx);
 		if (!xpathObj) {
@@ -172,8 +172,8 @@ public class flickcurl_comment_s {
 			comment_object = (flickcurl_comment)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 			for (attr = node.getProperties(); attr; attr = attr.getNext()) {
 				size_t attr_len = /*Error: Function owner not recognized*/strlen((byte)attr.getChildren().getContent());
-				byte attr_name = (byte)attr.getName();
-				byte attr_value;
+				Byte attr_name = (byte)attr.getName();
+				Byte attr_value;
 				attr_value = (byte)/*Error: Function owner not recognized*/malloc(attr_len + 1);
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(attr_value, attr.getChildren().getContent(), attr_len + 1);
 				if (!/*Error: Function owner not recognized*/strcmp(attr_name, "id")) {
@@ -207,13 +207,13 @@ public class flickcurl_comment_s {
 		return comments;
 	}
 	public flickcurl_comment_s flickcurl_photos_comments_getList(flickcurl_s fc, Object photo_id) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_comment comments = ((Object)0);
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_comment comments = (null);
 		int comments_count = 0;
 		fc.flickcurl_init_params(0);
 		if (!photo_id) {
-			return ((Object)0);
+			return (null);
 		} 
 		fc.flickcurl_add_param("photo_id", photo_id);
 		fc.flickcurl_end_params();
@@ -237,7 +237,7 @@ public class flickcurl_comment_s {
 			if (comments) {
 				comments.flickcurl_free_comments();
 			} 
-			comments = ((Object)0);
+			comments = (null);
 		} 
 		return comments/**
 		 * flickcurl_photos_comments_getRecentForContacts_params:

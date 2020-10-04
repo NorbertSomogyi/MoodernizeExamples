@@ -4,8 +4,8 @@ public class usbus {
 	private usbus_string manuf;
 	private usbus_string product;
 	private usbus_string config;
-	private Object ep_out;
-	private Object ep_in;
+	private Object[] ep_out;
+	private Object[] ep_in;
 	private Object queue;
 	private Object dev;
 	private usbus_handler control;
@@ -20,7 +20,7 @@ public class usbus {
 	private  pstate;
 	private Object addr;
 	
-	public usbus(usbus_string manuf, usbus_string product, usbus_string config, Object ep_out, Object ep_in, Object queue, Object dev, usbus_handler control, usbus_hdr_gen hdr_gen, usbus_string strings, usbus_interface iface, usbus_handler handlers, Object ep_events, Object pid, Object str_idx,  state,  pstate, Object addr) {
+	public usbus(usbus_string manuf, usbus_string product, usbus_string config, Object[] ep_out, Object[] ep_in, Object queue, Object dev, usbus_handler control, usbus_hdr_gen hdr_gen, usbus_string strings, usbus_interface iface, usbus_handler handlers, Object ep_events, Object pid, Object str_idx,  state,  pstate, Object addr) {
 		setManuf(manuf);
 		setProduct(product);
 		setConfig(config);
@@ -73,16 +73,16 @@ public class usbus {
 	public void setConfig(usbus_string newConfig) {
 		config = newConfig;
 	}
-	public Object getEp_out() {
+	public Object[] getEp_out() {
 		return ep_out;
 	}
-	public void setEp_out(Object newEp_out) {
+	public void setEp_out(Object[] newEp_out) {
 		ep_out = newEp_out;
 	}
-	public Object getEp_in() {
+	public Object[] getEp_in() {
 		return ep_in;
 	}
-	public void setEp_in(Object newEp_in) {
+	public void setEp_in(Object[] newEp_in) {
 		ep_in = newEp_in;
 	}
 	public Object getQueue() {

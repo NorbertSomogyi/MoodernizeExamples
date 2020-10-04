@@ -26,6 +26,222 @@ public class transformer_state_t {
 	public transformer_state_t() {
 	}
 	
+	public int unpack_xz_stream() {
+		long n = 0;
+		xz_buf b = new xz_buf();
+		xz_dec s = new xz_dec();
+		xz_ret ret = xz_ret.XZ_STREAM_END;
+		uint8_t in = (null);
+		uint8_t out = (null);
+		ssize_t nwrote = new ssize_t();
+		ModernizedCProgram.xz_crc32_init();
+		xz_dec xz_dec = new xz_dec();
+		s = xz_dec.xz_dec_init(xz_mode.XZ_DYNALLOC, 1 << 26);
+		if (!s) {
+			do {
+				do {
+					if (ModernizedCProgram.bled_printf != (null)) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: memory allocation error");
+					} else {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: memory allocation error");
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+					} 
+				} while (0);
+				;
+			} while (0);
+		} 
+		in = /*Error: Function owner not recognized*/malloc(65536);
+		out = /*Error: Function owner not recognized*/malloc(65536);
+		b.setIn(in);
+		b.setIn_pos(0);
+		b.setIn_size(0);
+		b.setOut(out);
+		b.setOut_pos(0);
+		b.setOut_size(65536);
+		Object generatedIn_pos = b.getIn_pos();
+		Object generatedIn_size = b.getIn_size();
+		Object generatedSrc_fd = this.getSrc_fd();
+		Object generatedOut_pos = b.getOut_pos();
+		Object generatedOut = b.getOut();
+		while (1) {
+			if (generatedIn_pos == generatedIn_size) {
+				b.setIn_size(ModernizedCProgram.full_read(generatedSrc_fd, in, 65536));
+				if ((int)generatedIn_size < 0) {
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: read error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: read error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						;
+					} while (0);
+				} 
+				b.setIn_pos(0);
+			} 
+			xz_ret.ret = ModernizedCProgram.xz_dec_run(s, b);
+			if (generatedOut_pos == 65536) {
+				nwrote = xstate.transformer_write(generatedOut, generatedOut_pos);
+				if (nwrote == -28) {
+					xz_ret.ret = xz_ret.XZ_BUF_FULL;
+					;
+				} 
+				if (nwrote < 0) {
+					xz_ret.ret = xz_ret.XZ_DATA_ERROR;
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: write error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: write error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						;
+					} while (0);
+				} 
+				n += nwrote;
+				b.setOut_pos(0);
+			} 
+			if (xz_ret.ret == xz_ret.XZ_OK) {
+				continue;
+			} 
+			if (xz_ret.ret == xz_ret.XZ_UNSUPPORTED_CHECK) {
+				do {
+					if (ModernizedCProgram.bled_printf != (null)) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: unsupported check; not verifying file integrity");
+					} else {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: unsupported check; not verifying file integrity");
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+					} 
+				} while (0);
+				continue;
+			} 
+			nwrote = xstate.transformer_write(generatedOut, generatedOut_pos);
+			if (nwrote == -28) {
+				xz_ret.ret = xz_ret.XZ_BUF_FULL;
+				;
+			} 
+			if (nwrote < 0) {
+				xz_ret.ret = xz_ret.XZ_DATA_ERROR;
+				do {
+					do {
+						if (ModernizedCProgram.bled_printf != (null)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: write error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: write error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+					;
+				} while (0);
+			} 
+			n += nwrote;
+			switch (xz_ret.ret) {
+			case xz_ret.XZ_DATA_ERROR:
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: corrupted archive");
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: corrupted archive");
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						;
+					} while (0);
+			case xz_ret.XZ_FORMAT_ERROR:
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: not a .xz file");
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: not a .xz file");
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						;
+					} while (0);
+			case xz_ret.XZ_MEMLIMIT_ERROR:
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: memory usage limit error");
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: memory usage limit error");
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						;
+					} while (0);
+			case xz_ret.XZ_BUF_ERROR:
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: corrupted buffer");
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: corrupted buffer");
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						;
+					} while (0);
+			case xz_ret.XZ_BUF_FULL:
+					break;
+			case xz_ret.XZ_STREAM_END:
+					xz_ret.ret = xz_ret.XZ_OK;
+					;
+			case xz_ret.XZ_MEM_ERROR:
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: memory allocation error");
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: memory allocation error");
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						;
+					} while (0);
+			case xz_ret.XZ_OPTIONS_ERROR:
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: unsupported XZ header option");
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: unsupported XZ header option");
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						;
+					} while (0);
+			default:
+					do {
+						do {
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: XZ decompression bug!");
+							} else {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: XZ decompression bug!");
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+							} 
+						} while (0);
+						;
+					} while (0);
+			}
+		}
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(in);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(out);
+		Object generatedMem_output_size_max = this.getMem_output_size_max();
+		if (xz_ret.ret == xz_ret.XZ_OK) {
+			return n;
+		}  else if (xz_ret.ret == xz_ret.XZ_BUF_FULL) {
+			return generatedMem_output_size_max;
+		} else {
+				return -xz_ret.ret;
+		} 
+	}
 	/* vi: set sw=4 ts=4: */
 	/* uncompress for busybox -- (c) 2002 Robert Griebl
 	 *
@@ -77,7 +293,7 @@ public class transformer_state_t {
 	public int unpack_Z_stream() {
 		long total_written = 0;
 		long retval = -1;
-		byte stackp;
+		Byte stackp;
 		int finchar;
 		long oldcode;
 		long incode;
@@ -91,10 +307,10 @@ public class transformer_state_t {
 		long maxmaxcode;
 		int n_bits;
 		int rsize = 0;
-		/* were eating insane amounts of stack - */byte inbuf;
-		/* bad for some embedded targets */byte outbuf;
-		byte htab;
-		int codetab;
+		/* were eating insane amounts of stack - */byte[] inbuf;
+		/* bad for some embedded targets */Byte outbuf;
+		Byte htab;
+		int[] codetab;
 		/* Hmm, these were statics - why?! */
 		/* user settable max # bits/code *//* = BITS; */int maxbits;
 		/* block compress mode -C compatible with 2.0 */
@@ -111,7 +327,7 @@ public class transformer_state_t {
 		if (ModernizedCProgram.full_read(generatedSrc_fd, inbuf, 1) != /* xread isn't good here, we have to return - caller may want
 			 * to do some cleanup (e.g. delete incomplete unpacked file etc) */1) {
 			do {
-				if (ModernizedCProgram.bled_printf != ((Object)0)) {
+				if (ModernizedCProgram.bled_printf != (null)) {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: short read");
 				} else {
 						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: short read");
@@ -125,7 +341,7 @@ public class transformer_state_t {
 		maxmaxcode = (-1024 << (maxbits));
 		if (maxbits > 16) {
 			do {
-				if (ModernizedCProgram.bled_printf != ((Object)0)) {
+				if (ModernizedCProgram.bled_printf != (null)) {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: compressed with %d bits, can only handle 16 bits", maxbits);
 				} else {
 						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: compressed with %d bits, can only handle 16 bits", maxbits);
@@ -162,227 +378,143 @@ public class transformer_state_t {
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(codetab);
 		return retval;
 	}
-	public int unpack_xz_stream() {
-		long n = 0;
-		xz_buf b = new xz_buf();
-		xz_dec s = new xz_dec();
-		xz_ret ret = xz_ret.XZ_STREAM_END;
-		uint8_t in = ((Object)0);
-		uint8_t out = ((Object)0);
-		ssize_t nwrote = new ssize_t();
-		ModernizedCProgram.xz_crc32_init();
-		xz_dec xz_dec = new xz_dec();
-		s = xz_dec.xz_dec_init(xz_mode.XZ_DYNALLOC, 1 << 26);
-		if (!s) {
-			do {
-				do {
-					if (ModernizedCProgram.bled_printf != ((Object)0)) {
-						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: memory allocation error");
-					} else {
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: memory allocation error");
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-					} 
-				} while (0);
-				;
-			} while (0);
-		} 
-		in = /*Error: Function owner not recognized*/malloc(65536);
-		out = /*Error: Function owner not recognized*/malloc(65536);
-		b.setIn(in);
-		b.setIn_pos(0);
-		b.setIn_size(0);
-		b.setOut(out);
-		b.setOut_pos(0);
-		b.setOut_size(65536);
-		Object generatedIn_pos = b.getIn_pos();
-		Object generatedIn_size = b.getIn_size();
+	public int unpack_none() {
+		do {
+			if (ModernizedCProgram.bled_printf != (null)) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: This compression type is not supported");
+			} else {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: This compression type is not supported");
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+			} 
+		} while (0);
+		return -1;
+	}
+	public int unpack_zip_stream() {
+		long n = -14;
+		zip_header_t zip_header = new zip_header_t();
+		Byte filename = (null);
 		Object generatedSrc_fd = this.getSrc_fd();
-		Object generatedOut_pos = b.getOut_pos();
-		Object generatedOut = b.getOut();
+		Object generatedRaw = zip_header.getRaw();
+		Object generatedFormatted = (zip_header).getFormatted();
+		Object generatedBytes_out = this.getBytes_out();
+		Object generatedCrc32 = this.getCrc32();
 		while (1) {
-			if (generatedIn_pos == generatedIn_size) {
-				b.setIn_size(ModernizedCProgram.full_read(generatedSrc_fd, in, 65536));
-				if ((int)generatedIn_size < 0) {
-					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: read error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
-							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: read error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-							} 
-						} while (0);
-						;
-					} while (0);
-				} 
-				b.setIn_pos(0);
+			uint32_t magic = new uint32_t();
+			ModernizedCProgram.full_read(generatedSrc_fd, magic, /* Check magic number */4);
+			if (magic == /* Central directory? It's at the end, so exit */.ZIP_CDF_MAGIC) {
+				break;
 			} 
-			xz_ret.ret = ModernizedCProgram.xz_dec_run(s, b);
-			if (generatedOut_pos == 65536) {
-				nwrote = xstate.transformer_write(generatedOut, generatedOut_pos);
-				if (nwrote == -28) {
-					xz_ret.ret = xz_ret.XZ_BUF_FULL;
-					;
-				} 
-				if (nwrote < 0) {
-					xz_ret.ret = xz_ret.XZ_DATA_ERROR;
-					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: write error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
-							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: write error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-							} 
-						} while (0);
-						;
-					} while (0);
-				} 
-				n += nwrote;
-				b.setOut_pos(0);
-			} 
-			if (xz_ret.ret == xz_ret.XZ_OK) {
-				continue;
-			} 
-			if (xz_ret.ret == xz_ret.XZ_UNSUPPORTED_CHECK) {
-				do {
-					if (ModernizedCProgram.bled_printf != ((Object)0)) {
-						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: unsupported check; not verifying file integrity");
-					} else {
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: unsupported check; not verifying file integrity");
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-					} 
-				} while (0);
-				continue;
-			} 
-			nwrote = xstate.transformer_write(generatedOut, generatedOut_pos);
-			if (nwrote == -28) {
-				xz_ret.ret = xz_ret.XZ_BUF_FULL;
-				;
-			} 
-			if (nwrote < 0) {
-				xz_ret.ret = xz_ret.XZ_DATA_ERROR;
+			if (magic != .ZIP_FILEHEADER_MAGIC) {
 				do {
 					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: write error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
+						if (ModernizedCProgram.bled_printf != (null)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: invalid zip magic %08X", (int)magic);
 						} else {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: write error (errno: %d)", (/*Error: Function owner not recognized*/_errno()));
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: invalid zip magic %08X", (int)magic);
 								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
 						} 
 					} while (0);
 					;
 				} while (0);
 			} 
-			n += nwrote;
-			switch (xz_ret.ret) {
-			case xz_ret.XZ_BUF_FULL:
-					break;
-			case xz_ret.XZ_DATA_ERROR:
+			ModernizedCProgram.full_read(generatedSrc_fd, generatedRaw, /* Read the file header */26);
+			do {
+				generatedFormatted.setVersion((generatedFormatted.getVersion()));
+				generatedFormatted.setMethod((generatedFormatted.getMethod()));
+				generatedFormatted.setModtime((generatedFormatted.getModtime()));
+				generatedFormatted.setModdate((generatedFormatted.getModdate()));
+				generatedFormatted.setCrc32((generatedFormatted.getCrc32()));
+				generatedFormatted.setCmpsize((generatedFormatted.getCmpsize()));
+				generatedFormatted.setUcmpsize((generatedFormatted.getUcmpsize()));
+				generatedFormatted.setFilename_len((generatedFormatted.getFilename_len()));
+				generatedFormatted.setExtra_len((generatedFormatted.getExtra_len()));
+			} while (0);
+			if (generatedFormatted.getMethod() != 8) {
+				do {
 					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: corrupted archive");
-							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: corrupted archive");
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-							} 
-						} while (0);
-						;
+						if (ModernizedCProgram.bled_printf != (null)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: zip method method %d is not supported", generatedFormatted.getMethod());
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: zip method method %d is not supported", generatedFormatted.getMethod());
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
 					} while (0);
-			case xz_ret.XZ_STREAM_END:
-					xz_ret.ret = xz_ret.XZ_OK;
 					;
-			case xz_ret.XZ_OPTIONS_ERROR:
+				} while (0);
+			} 
+			if (generatedFormatted.getZip_flags() & (true)) {
+				do {
+					do {
+						if (ModernizedCProgram.bled_printf != (null)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: zip flags 1 and 8 are not supported");
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: zip flags 1 and 8 are not supported");
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+					;
+				} while (0/* 0x0001 - encrypted */);
+			} 
+			filename = /*Error: Function owner not recognized*/calloc(generatedFormatted.getFilename_len() + 1, /* Read filename */1);
+			ModernizedCProgram.full_read(generatedSrc_fd, filename, generatedFormatted.getFilename_len());
+			do {
+				if (ModernizedCProgram.bled_printf != (null)) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Processing archive file '%s'", filename);
+				} else {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Processing archive file '%s'", filename);
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+				} 
+			} while (0);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(filename);
+			ModernizedCProgram.unzip_skip(generatedSrc_fd, generatedFormatted.getExtra_len());
+			this.setBytes_in(generatedFormatted.getCmpsize());
+			n = xstate.inflate_unzip();
+			if (n >= /* Validate decompression */0) {
+				if (generatedFormatted.getUcmpsize() != generatedBytes_out) {
 					do {
 						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: unsupported XZ header option");
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: bad length");
 							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: unsupported XZ header option");
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: bad length");
 									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
 							} 
 						} while (0);
 						;
 					} while (0);
-			case xz_ret.XZ_MEMLIMIT_ERROR:
+				}  else if (generatedFormatted.getCrc32() != (generatedCrc32 ^ -1024)) {
 					do {
 						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: memory usage limit error");
+							if (ModernizedCProgram.bled_printf != (null)) {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: crc error");
 							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: memory usage limit error");
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: crc error");
 									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
 							} 
 						} while (0);
 						;
 					} while (0);
-			case xz_ret.XZ_FORMAT_ERROR:
+				} 
+			}  else if (n != -28) {
+				do {
 					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: not a .xz file");
-							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: not a .xz file");
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-							} 
-						} while (0);
-						;
+						if (ModernizedCProgram.bled_printf != (null)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: inflate error");
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: inflate error");
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
 					} while (0);
-			case xz_ret.XZ_BUF_ERROR:
-					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: corrupted buffer");
-							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: corrupted buffer");
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-							} 
-						} while (0);
-						;
-					} while (0);
-			case xz_ret.XZ_MEM_ERROR:
-					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: memory allocation error");
-							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: memory allocation error");
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-							} 
-						} while (0);
-						;
-					} while (0);
-			default:
-					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: XZ decompression bug!");
-							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: XZ decompression bug!");
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-							} 
-						} while (0);
-						;
-					} while (0);
-			}
+					;
+				} while (0);
+			} 
 		}
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(in);
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(out);
-		Object generatedMem_output_size_max = this.getMem_output_size_max();
-		if (xz_ret.ret == xz_ret.XZ_OK) {
-			return n;
-		}  else if (xz_ret.ret == xz_ret.XZ_BUF_FULL) {
-			return generatedMem_output_size_max;
-		} else {
-				return -xz_ret.ret;
-		} 
 	}
 	/* Decompress src_fd to dst_fd.  Stops at end of bzip data, not end of file. */
 	public int unpack_bz2_stream() {
 		long total_written = 0;
 		bunzip_data bd = new bunzip_data();
-		byte outbuf;
+		Byte outbuf;
 		int i;
 		int nwrote;
 		int len;
@@ -420,7 +552,7 @@ public class transformer_state_t {
 			} 
 			if (i != () && i != 0) {
 				do {
-					if (ModernizedCProgram.bled_printf != ((Object)0)) {
+					if (ModernizedCProgram.bled_printf != (null)) {
 						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: bunzip error %d", i);
 					} else {
 							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: bunzip error %d", i);
@@ -431,7 +563,7 @@ public class transformer_state_t {
 			} 
 			if (generatedHeaderCRC != generatedTotalCRC) {
 				do {
-					if (ModernizedCProgram.bled_printf != ((Object)0)) {
+					if (ModernizedCProgram.bled_printf != (null)) {
 						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: CRC error");
 					} else {
 							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: CRC error");
@@ -461,264 +593,6 @@ public class transformer_state_t {
 		return i ? i : total_written + 0;
 	}
 	/* Dumb little test thing, decompress stdin to stdout */
-	public int unpack_lzma_stream() {
-		long total_written = 0;
-		lzma_header_t header = new lzma_header_t();
-		int lc;
-		int pb;
-		int lp;
-		uint32_t pos_state_mask = new uint32_t();
-		uint32_t literal_pos_mask = new uint32_t();
-		uint16_t p = new uint16_t();
-		rc_t rc = new rc_t();
-		int i;
-		uint8_t buffer = new uint8_t();
-		uint8_t previous_byte = 0;
-		size_t buffer_pos = 0;
-		size_t global_pos = 0;
-		ssize_t nwrote = new ssize_t();
-		int len = 0;
-		int state = 0;
-		uint32_t rep0 = 1;
-		uint32_t rep1 = 1;
-		uint32_t rep2 = 1;
-		uint32_t rep3 = 1;
-		Object generatedSrc_fd = this.getSrc_fd();
-		Object generatedPos = header.getPos();
-		if (ModernizedCProgram.full_read(generatedSrc_fd, header, /*Error: sizeof expression not supported yet*/) != /*Error: sizeof expression not supported yet*/ || generatedPos >= (9 * 5 * 5)) {
-			do {
-				if (ModernizedCProgram.bled_printf != ((Object)0)) {
-					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: bad lzma header");
-				} else {
-						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: bad lzma header");
-						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-				} 
-			} while (0);
-			return -1;
-		} 
-		i = generatedPos / 9;
-		lc = generatedPos % 9;
-		pb = i / 5;
-		lp = i % 5;
-		pos_state_mask = (1 << pb) - 1;
-		literal_pos_mask = (1 << lp) - 1/* Example values from linux-3.3.4.tar.lzma:
-			 * dict_size: 64M, dst_size: 2^64-1
-			 */;
-		Object generatedDict_size = header.getDict_size();
-		header.setDict_size((generatedDict_size));
-		Object generatedDst_size = header.getDst_size();
-		header.setDst_size((generatedDst_size));
-		if (generatedDict_size == 0) {
-			generatedDict_size++;
-		} 
-		buffer = /*Error: Function owner not recognized*/malloc((size_t)(((generatedDst_size) < (generatedDict_size)) ? (generatedDst_size) : (generatedDict_size)));
-		{ 
-			int num_probs;
-			num_probs = .LZMA_BASE_SIZE + (.LZMA_LIT_SIZE << (lc + lp));
-			p = /*Error: Function owner not recognized*/malloc(num_probs * /*Error: sizeof expression not supported yet*/);
-			num_probs += .LZMA_LITERAL - .LZMA_BASE_SIZE;
-			for (i = 0; i < num_probs; i++) {
-				p[i] = (1 << 11) >> 1;
-			}
-		}
-		rc = ModernizedCProgram.rc_init(generatedSrc_fd);
-	}
-	public int unpack_none() {
-		do {
-			if (ModernizedCProgram.bled_printf != ((Object)0)) {
-				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: This compression type is not supported");
-			} else {
-					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: This compression type is not supported");
-					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-			} 
-		} while (0);
-		return -1;
-	}
-	/* vi: set sw=4 ts=4: */
-	/*
-	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
-	 */
-	public void init_transformer_state() {
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(xstate, 0, /*Error: sizeof expression not supported yet*/);
-	}
-	public int check_signature16(int magic16) {
-		Object generatedCheck_signature = this.getCheck_signature();
-		Object generatedSrc_fd = this.getSrc_fd();
-		if (generatedCheck_signature) {
-			uint16_t magic2 = new uint16_t();
-			if (ModernizedCProgram.full_read(generatedSrc_fd, magic2, 2) != 2 || magic2 != magic16) {
-				do {
-					if (ModernizedCProgram.bled_printf != ((Object)0)) {
-						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: invalid magic");
-					} else {
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: invalid magic");
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-					} 
-				} while (0/* possible future extension *//* possible future extension */);
-				return -1;
-			} 
-		} 
-		return 0;
-	}
-	public Object transformer_write(Object buf, Object bufsize) {
-		ssize_t nwrote = new ssize_t();
-		Object generatedMem_output_size_max = this.getMem_output_size_max();
-		Object generatedMem_output_size = this.getMem_output_size();
-		Byte generatedMem_output_buf = this.getMem_output_buf();
-		int generatedDst_fd = this.getDst_fd();
-		if (generatedMem_output_size_max != 0) {
-			size_t pos = generatedMem_output_size;
-			nwrote = bufsize;
-			if ((pos + bufsize) > generatedMem_output_size_max) {
-				bufsize = generatedMem_output_size_max - pos;
-				nwrote = -28;
-			} 
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedMem_output_buf + pos, buf, bufsize);
-			generatedMem_output_size += bufsize;
-		} else {
-				nwrote = /*Error: Function owner not recognized*/_write(generatedDst_fd, buf, (int)bufsize);
-				if (nwrote != (ssize_t)bufsize) {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: write error - %d bytes written but %d expected", (int)nwrote, (int)bufsize);
-						} else {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: write error - %d bytes written but %d expected", (int)nwrote, (int)bufsize);
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-						} 
-					} while (0);
-					nwrote = -1;
-					;
-				} 
-		} 
-	}
-	public Object xtransformer_write(Object buf, Object bufsize) {
-		ssize_t nwrote = xstate.transformer_write(buf, bufsize);
-		if (nwrote != (ssize_t)bufsize) {
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(ModernizedCProgram.bb_error_jmp, 1);
-		} 
-		return nwrote;
-	}
-	public int unpack_zip_stream() {
-		long n = -14;
-		zip_header_t zip_header = new zip_header_t();
-		byte filename = ((Object)0);
-		Object generatedSrc_fd = this.getSrc_fd();
-		Object generatedRaw = zip_header.getRaw();
-		Object generatedFormatted = (zip_header).getFormatted();
-		Object generatedBytes_out = this.getBytes_out();
-		Object generatedCrc32 = this.getCrc32();
-		while (1) {
-			uint32_t magic = new uint32_t();
-			ModernizedCProgram.full_read(generatedSrc_fd, magic, /* Check magic number */4);
-			if (magic == /* Central directory? It's at the end, so exit */.ZIP_CDF_MAGIC) {
-				break;
-			} 
-			if (magic != .ZIP_FILEHEADER_MAGIC) {
-				do {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: invalid zip magic %08X", (int)magic);
-						} else {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: invalid zip magic %08X", (int)magic);
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-						} 
-					} while (0);
-					;
-				} while (0);
-			} 
-			ModernizedCProgram.full_read(generatedSrc_fd, generatedRaw, /* Read the file header */26);
-			do {
-				generatedFormatted.setVersion((generatedFormatted.getVersion()));
-				generatedFormatted.setMethod((generatedFormatted.getMethod()));
-				generatedFormatted.setModtime((generatedFormatted.getModtime()));
-				generatedFormatted.setModdate((generatedFormatted.getModdate()));
-				generatedFormatted.setCrc32((generatedFormatted.getCrc32()));
-				generatedFormatted.setCmpsize((generatedFormatted.getCmpsize()));
-				generatedFormatted.setUcmpsize((generatedFormatted.getUcmpsize()));
-				generatedFormatted.setFilename_len((generatedFormatted.getFilename_len()));
-				generatedFormatted.setExtra_len((generatedFormatted.getExtra_len()));
-			} while (0);
-			if (generatedFormatted.getMethod() != 8) {
-				do {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: zip method method %d is not supported", generatedFormatted.getMethod());
-						} else {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: zip method method %d is not supported", generatedFormatted.getMethod());
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-						} 
-					} while (0);
-					;
-				} while (0);
-			} 
-			if (generatedFormatted.getZip_flags() & (true)) {
-				do {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: zip flags 1 and 8 are not supported");
-						} else {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: zip flags 1 and 8 are not supported");
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-						} 
-					} while (0);
-					;
-				} while (0/* 0x0001 - encrypted */);
-			} 
-			filename = /*Error: Function owner not recognized*/calloc(generatedFormatted.getFilename_len() + 1, /* Read filename */1);
-			ModernizedCProgram.full_read(generatedSrc_fd, filename, generatedFormatted.getFilename_len());
-			do {
-				if (ModernizedCProgram.bled_printf != ((Object)0)) {
-					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Processing archive file '%s'", filename);
-				} else {
-						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Processing archive file '%s'", filename);
-						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-				} 
-			} while (0);
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(filename);
-			ModernizedCProgram.unzip_skip(generatedSrc_fd, generatedFormatted.getExtra_len());
-			this.setBytes_in(generatedFormatted.getCmpsize());
-			n = xstate.inflate_unzip();
-			if (n >= /* Validate decompression */0) {
-				if (generatedFormatted.getUcmpsize() != generatedBytes_out) {
-					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: bad length");
-							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: bad length");
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-							} 
-						} while (0);
-						;
-					} while (0);
-				}  else if (generatedFormatted.getCrc32() != (generatedCrc32 ^ -1024)) {
-					do {
-						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: crc error");
-							} else {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: crc error");
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-							} 
-						} while (0);
-						;
-					} while (0);
-				} 
-			}  else if (n != -28) {
-				do {
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: inflate error");
-						} else {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: inflate error");
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-						} 
-					} while (0);
-					;
-				} while (0);
-			} 
-		}
-	}
 	/* For unzip */
 	public int inflate_unzip() {
 		long n;
@@ -766,7 +640,7 @@ public class transformer_state_t {
 		total += n;
 		if (!state.top_up(8)) {
 			do {
-				if (ModernizedCProgram.bled_printf != ((Object)0)) {
+				if (ModernizedCProgram.bled_printf != (null)) {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: corrupted data");
 				} else {
 						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: corrupted data");
@@ -780,7 +654,7 @@ public class transformer_state_t {
 		Object generatedGunzip_crc = state.getGunzip_crc();
 		if ((~(generatedGunzip_crc)) != v32) {
 			do {
-				if (ModernizedCProgram.bled_printf != ((Object)0)) {
+				if (ModernizedCProgram.bled_printf != (null)) {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: crc error");
 				} else {
 						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: crc error");
@@ -794,7 +668,7 @@ public class transformer_state_t {
 		Object generatedGunzip_bytes_out = state.getGunzip_bytes_out();
 		if ((uint32_t)(generatedGunzip_bytes_out) != v32) {
 			do {
-				if (ModernizedCProgram.bled_printf != ((Object)0)) {
+				if (ModernizedCProgram.bled_printf != (null)) {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: incorrect length");
 				} else {
 						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: incorrect length");
@@ -813,6 +687,132 @@ public class transformer_state_t {
 		} 
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(state);
 		return total;
+	}
+	/* vi: set sw=4 ts=4: */
+	/*
+	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
+	 */
+	public void init_transformer_state() {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(xstate, 0, /*Error: sizeof expression not supported yet*/);
+	}
+	public int check_signature16(int magic16) {
+		Object generatedCheck_signature = this.getCheck_signature();
+		Object generatedSrc_fd = this.getSrc_fd();
+		if (generatedCheck_signature) {
+			uint16_t magic2 = new uint16_t();
+			if (ModernizedCProgram.full_read(generatedSrc_fd, magic2, 2) != 2 || magic2 != magic16) {
+				do {
+					if (ModernizedCProgram.bled_printf != (null)) {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: invalid magic");
+					} else {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: invalid magic");
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+					} 
+				} while (0/* possible future extension *//* possible future extension */);
+				return -1;
+			} 
+		} 
+		return 0;
+	}
+	public Object transformer_write(Object buf, Object bufsize) {
+		ssize_t nwrote = new ssize_t();
+		Object generatedMem_output_size_max = this.getMem_output_size_max();
+		Object generatedMem_output_size = this.getMem_output_size();
+		Byte generatedMem_output_buf = this.getMem_output_buf();
+		int generatedDst_fd = this.getDst_fd();
+		if (generatedMem_output_size_max != 0) {
+			size_t pos = generatedMem_output_size;
+			nwrote = bufsize;
+			if ((pos + bufsize) > generatedMem_output_size_max) {
+				bufsize = generatedMem_output_size_max - pos;
+				nwrote = -28;
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedMem_output_buf + pos, buf, bufsize);
+			generatedMem_output_size += bufsize;
+		} else {
+				nwrote = /*Error: Function owner not recognized*/_write(generatedDst_fd, buf, (int)bufsize);
+				if (nwrote != (ssize_t)bufsize) {
+					do {
+						if (ModernizedCProgram.bled_printf != (null)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: write error - %d bytes written but %d expected", (int)nwrote, (int)bufsize);
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: write error - %d bytes written but %d expected", (int)nwrote, (int)bufsize);
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+					nwrote = -1;
+					;
+				} 
+		} 
+	}
+	public Object xtransformer_write(Object buf, Object bufsize) {
+		ssize_t nwrote = xstate.transformer_write(buf, bufsize);
+		if (nwrote != (ssize_t)bufsize) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(ModernizedCProgram.bb_error_jmp, 1);
+		} 
+		return nwrote;
+	}
+	public int unpack_lzma_stream() {
+		long total_written = 0;
+		lzma_header_t header = new lzma_header_t();
+		int lc;
+		int pb;
+		int lp;
+		uint32_t pos_state_mask = new uint32_t();
+		uint32_t literal_pos_mask = new uint32_t();
+		uint16_t[] p = new uint16_t();
+		rc_t rc = new rc_t();
+		int i;
+		uint8_t[] buffer = new uint8_t();
+		uint8_t previous_byte = 0;
+		size_t buffer_pos = 0;
+		size_t global_pos = 0;
+		ssize_t nwrote = new ssize_t();
+		int len = 0;
+		int state = 0;
+		uint32_t rep0 = 1;
+		uint32_t rep1 = 1;
+		uint32_t rep2 = 1;
+		uint32_t rep3 = 1;
+		Object generatedSrc_fd = this.getSrc_fd();
+		Object generatedPos = header.getPos();
+		if (ModernizedCProgram.full_read(generatedSrc_fd, header, /*Error: sizeof expression not supported yet*/) != /*Error: sizeof expression not supported yet*/ || generatedPos >= (9 * 5 * 5)) {
+			do {
+				if (ModernizedCProgram.bled_printf != (null)) {
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: bad lzma header");
+				} else {
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: bad lzma header");
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+				} 
+			} while (0);
+			return -1;
+		} 
+		i = generatedPos / 9;
+		lc = generatedPos % 9;
+		pb = i / 5;
+		lp = i % 5;
+		pos_state_mask = (1 << pb) - 1;
+		literal_pos_mask = (1 << lp) - 1/* Example values from linux-3.3.4.tar.lzma:
+			 * dict_size: 64M, dst_size: 2^64-1
+			 */;
+		Object generatedDict_size = header.getDict_size();
+		header.setDict_size((generatedDict_size));
+		Object generatedDst_size = header.getDst_size();
+		header.setDst_size((generatedDst_size));
+		if (generatedDict_size == 0) {
+			generatedDict_size++;
+		} 
+		buffer = /*Error: Function owner not recognized*/malloc((size_t)(((generatedDst_size) < (generatedDict_size)) ? (generatedDst_size) : (generatedDict_size)));
+		{ 
+			int num_probs;
+			num_probs = .LZMA_BASE_SIZE + (.LZMA_LIT_SIZE << (lc + lp));
+			p = /*Error: Function owner not recognized*/malloc(num_probs * /*Error: sizeof expression not supported yet*/);
+			num_probs += .LZMA_LITERAL - .LZMA_BASE_SIZE;
+			for (i = 0; i < num_probs; i++) {
+				p[i] = (1 << 11) >> 1;
+			}
+		}
+		rc = ModernizedCProgram.rc_init(generatedSrc_fd);
 	}
 	public Object getCheck_signature() {
 		return check_signature;

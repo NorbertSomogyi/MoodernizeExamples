@@ -9,12 +9,12 @@ public class struct_io_channel {
 	private Object write_error;
 	private int refcount;
 	private int flags;
-	private Object reserved;
+	private Object[] reserved;
 	private Object private_data;
 	private Object app_data;
 	private int align;
 	
-	public struct_io_channel(Object magic, Object manager, Byte name, int block_size, Object read_error, Object write_error, int refcount, int flags, Object reserved, Object private_data, Object app_data, int align) {
+	public struct_io_channel(Object magic, Object manager, Byte name, int block_size, Object read_error, Object write_error, int refcount, int flags, Object[] reserved, Object private_data, Object app_data, int align) {
 		setMagic(magic);
 		setManager(manager);
 		setName(name);
@@ -79,10 +79,10 @@ public class struct_io_channel {
 	public void setFlags(int newFlags) {
 		flags = newFlags;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public Object getPrivate_data() {

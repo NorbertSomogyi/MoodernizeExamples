@@ -41,7 +41,7 @@ public class hc_fp {
 	 */
 	// workaround for zlib with cygwin build
 	public boolean hc_fopen(Object path, Byte mode) {
-		if (path == ((Object)0) || mode == ((Object)0)) {
+		if (path == (null) || mode == (null)) {
 			return 0;
 		} 
 		int oflag = -1;
@@ -65,7 +65,7 @@ public class hc_fp {
 		} else {
 				return 0;
 		} 
-		this.setPfp(((Object)0));
+		this.setPfp((null));
 		this.setIs_gzip(0);
 		this.setIs_zip(0);
 		byte[] check = new byte[]{0};
@@ -95,18 +95,18 @@ public class hc_fp {
 		boolean generatedIs_gzip = this.getIs_gzip();
 		Object generatedUfp = this.getUfp();
 		if (generatedIs_gzip) {
-			if ((this.setGfp(ModernizedCProgram.gzdopen(generatedFd, mode))) == ((Object)0)) {
+			if ((this.setGfp(ModernizedCProgram.gzdopen(generatedFd, mode))) == (null)) {
 				return 0;
 			} 
 		}  else if (generatedIs_zip) {
-			if ((this.setUfp(ModernizedCProgram.unzOpen64(path))) == ((Object)0)) {
+			if ((this.setUfp(ModernizedCProgram.unzOpen64(path))) == (null)) {
 				return 0;
 			} 
 			if (ModernizedCProgram.unzOpenCurrentFile(generatedUfp) != UNZ_OK) {
 				return 0;
 			} 
 		} else {
-				if ((this.setPfp(/*Error: Function owner not recognized*/fdopen(generatedFd, mode))) == ((Object)0)) {
+				if ((this.setPfp(/*Error: Function owner not recognized*/fdopen(generatedFd, mode))) == (null)) {
 					return 0;
 				} 
 		} 
@@ -116,7 +116,7 @@ public class hc_fp {
 	}
 	public Object hc_fread(Object ptr, Object size, Object nmemb) {
 		size_t n = -1;
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return n;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -136,7 +136,7 @@ public class hc_fp {
 	}
 	public Object hc_fwrite(Object ptr, Object size, Object nmemb) {
 		size_t n = -1;
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return n;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -156,7 +156,7 @@ public class hc_fp {
 	}
 	public int hc_fseek(Object offset, int whence) {
 		int r = -1;
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return r;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -172,7 +172,7 @@ public class hc_fp {
 		return r;
 	}
 	public void hc_rewind() {
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return /*Error: Unsupported expression*/;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -190,7 +190,7 @@ public class hc_fp {
 	}
 	public Object hc_ftell() {
 		off_t n = 0;
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return -1;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -209,7 +209,7 @@ public class hc_fp {
 	}
 	public int hc_fputc(int c) {
 		int r = -1;
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return r;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -226,7 +226,7 @@ public class hc_fp {
 	}
 	public int hc_fgetc() {
 		int r = -1;
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return r;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -247,8 +247,8 @@ public class hc_fp {
 		return r;
 	}
 	public Byte hc_fgets(Byte buf, int len) {
-		byte r = ((Object)0);
-		if (fp == ((Object)0)) {
+		Byte r = (null);
+		if (fp == (null)) {
 			return r;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -269,7 +269,7 @@ public class hc_fp {
 	}
 	public int hc_vfprintf(Object format, Object ap) {
 		int r = -1;
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return r;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -286,7 +286,7 @@ public class hc_fp {
 	}
 	public int hc_fprintf(Object format) {
 		int r = -1;
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return r;
 		} 
 		va_list ap = new va_list();
@@ -305,15 +305,15 @@ public class hc_fp {
 		return r;
 	}
 	public int hc_fscanf(Object format, Object ptr) {
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return -1;
 		} 
-		byte buf = (byte)ModernizedCProgram.hcmalloc(-1024);
-		if (buf == ((Object)0)) {
+		Byte buf = (byte)ModernizedCProgram.hcmalloc(-1024);
+		if (buf == (null)) {
 			return -1;
 		} 
-		byte b = fp.hc_fgets(buf, -1024 - 1);
-		if (b == ((Object)0)) {
+		Byte b = fp.hc_fgets(buf, -1024 - 1);
+		if (b == (null)) {
 			ModernizedCProgram.hcfree(buf);
 			return -1;
 		} 
@@ -322,7 +322,7 @@ public class hc_fp {
 		return 1;
 	}
 	public int hc_fileno() {
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return 1;
 		} 
 		int generatedFd = this.getFd();
@@ -330,7 +330,7 @@ public class hc_fp {
 	}
 	public int hc_feof() {
 		int r = -1;
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return r;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -349,7 +349,7 @@ public class hc_fp {
 		return r;
 	}
 	public void hc_fflush() {
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return /*Error: Unsupported expression*/;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -364,7 +364,7 @@ public class hc_fp {
 		} 
 	}
 	public void hc_fclose() {
-		if (fp == ((Object)0)) {
+		if (fp == (null)) {
 			return /*Error: Unsupported expression*/;
 		} 
 		boolean generatedIs_gzip = this.getIs_gzip();
@@ -383,11 +383,11 @@ public class hc_fp {
 		int generatedFd = this.getFd();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/close(generatedFd);
 		this.setFd(-1);
-		this.setPfp(((Object)0));
+		this.setPfp((null));
 		this.setIs_gzip(0);
 		this.setIs_zip(0);
-		this.setPath(((Object)0));
-		this.setMode(((Object)0));
+		this.setPath((null));
+		this.setMode((null));
 	}
 	public Object fgetl(byte[] line_buf, Object line_sz) {
 		size_t line_truncated = 0;
@@ -429,7 +429,7 @@ public class hc_fp {
 	}
 	public Object count_lines() {
 		u64 cnt = 0;
-		byte buf = (byte)ModernizedCProgram.hcmalloc(-1024 + 1);
+		byte[] buf = (byte)ModernizedCProgram.hcmalloc(-1024 + 1);
 		byte prev = (byte)'\n';
 		while (!fp.hc_feof()) {
 			size_t nread = fp.hc_fread(buf, /*Error: Unsupported expression*/, -1024);

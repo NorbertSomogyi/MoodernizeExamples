@@ -3,15 +3,15 @@ package application;
 public class ADLDisplayInfo {
 	private ADLDisplayID displayID;
 	private int iDisplayControllerIndex;
-	private Object strDisplayName;
-	private Object strDisplayManufacturerName;
+	private Object[] strDisplayName;
+	private Object[] strDisplayManufacturerName;
 	private int iDisplayType;
 	private int iDisplayOutputType;
 	private int iDisplayConnector;
 	private int iDisplayInfoMask;
 	private int iDisplayInfoValue;
 	
-	public ADLDisplayInfo(ADLDisplayID displayID, int iDisplayControllerIndex, Object strDisplayName, Object strDisplayManufacturerName, int iDisplayType, int iDisplayOutputType, int iDisplayConnector, int iDisplayInfoMask, int iDisplayInfoValue) {
+	public ADLDisplayInfo(ADLDisplayID displayID, int iDisplayControllerIndex, Object[] strDisplayName, Object[] strDisplayManufacturerName, int iDisplayType, int iDisplayOutputType, int iDisplayConnector, int iDisplayInfoMask, int iDisplayInfoValue) {
 		setDisplayID(displayID);
 		setIDisplayControllerIndex(iDisplayControllerIndex);
 		setStrDisplayName(strDisplayName);
@@ -37,16 +37,16 @@ public class ADLDisplayInfo {
 	public void setIDisplayControllerIndex(int newIDisplayControllerIndex) {
 		iDisplayControllerIndex = newIDisplayControllerIndex;
 	}
-	public Object getStrDisplayName() {
+	public Object[] getStrDisplayName() {
 		return strDisplayName;
 	}
-	public void setStrDisplayName(Object newStrDisplayName) {
+	public void setStrDisplayName(Object[] newStrDisplayName) {
 		strDisplayName = newStrDisplayName;
 	}
-	public Object getStrDisplayManufacturerName() {
+	public Object[] getStrDisplayManufacturerName() {
 		return strDisplayManufacturerName;
 	}
-	public void setStrDisplayManufacturerName(Object newStrDisplayManufacturerName) {
+	public void setStrDisplayManufacturerName(Object[] newStrDisplayManufacturerName) {
 		strDisplayManufacturerName = newStrDisplayManufacturerName;
 	}
 	public int getIDisplayType() {

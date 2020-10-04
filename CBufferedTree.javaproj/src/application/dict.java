@@ -3,11 +3,11 @@ package application;
 public class dict {
 	private dictType type;
 	private Object privdata;
-	private Object ht;
+	private Object[] ht;
 	private int rehashidx;
 	private int iterators;
 	
-	public dict(dictType type, Object privdata, Object ht, int rehashidx, int iterators) {
+	public dict(dictType type, Object privdata, Object[] ht, int rehashidx, int iterators) {
 		setType(type);
 		setPrivdata(privdata);
 		setHt(ht);
@@ -17,6 +17,49 @@ public class dict {
 	public dict() {
 	}
 	
+	public void redis_add(int times) {
+		int i;
+		sds key = new sds();
+		sds val = new sds();
+		byte[] buf = new byte[20];
+		for (i = 0; i < times; ++i) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "key%d", i);
+			key = ModernizedCProgram.sdsnew(buf);
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "val%d", i);
+			val = ModernizedCProgram.sdsnew(buf);
+			((d.dictAdd(key, val) == 0) ? null : /*Error: Function owner not recognized*/_assert("dictAdd(d, key, val) == DICT_OK", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\performance.c", 55));
+		}
+	}
+	public void redis_fetch(int times) {
+		int i;
+		int j;
+		byte[] buf = new byte[20];
+		sds key = new sds();
+		sds val = new sds();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/srand(1992);
+		for (i = 0; i < times; ++i) {
+			j = /*Error: Function owner not recognized*/rand() % times;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "key%d", j);
+			key = ModernizedCProgram.sdsnew(buf);
+			((d.dictFetchValue(key)) ? null : /*Error: Function owner not recognized*/_assert("dictFetchValue(d, key)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\performance.c", 115));
+			ModernizedCProgram.sdsfree(key);
+		}
+	}
+	public void redis_del(int times) {
+		int i;
+		int j;
+		byte[] buf = new byte[20];
+		sds key = new sds();
+		sds val = new sds();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/srand(1992);
+		for (i = 0; i < times; ++i) {
+			j = /*Error: Function owner not recognized*/rand() % times;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "key%d", j);
+			key = ModernizedCProgram.sdsnew(buf);
+			d.dictDelete(key);
+			ModernizedCProgram.sdsfree(key);
+		}
+	}
 	/* Create a new hash table */
 	public dict dictCreate(dictType type, Object privDataPtr) {
 		dict d = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
@@ -31,7 +74,7 @@ public class dict {
 		if (!ModernizedCProgram.dict_can_resize || (generatedRehashidx != -1)) {
 			return 1;
 		} 
-		Object generatedHt = this.getHt();
+		Object[] generatedHt = this.getHt();
 		minimal = generatedHt[0].getUsed();
 		if (minimal < 4) {
 			minimal = 4;
@@ -43,7 +86,7 @@ public class dict {
 		/* the new hash table */dictht n = new dictht();
 		long realsize = ModernizedCProgram._dictNextPower(size);
 		int generatedRehashidx = (d).getRehashidx();
-		Object generatedHt = this.getHt();
+		Object[] generatedHt = this.getHt();
 		if ((generatedRehashidx != -1) || generatedHt[0].getUsed() > /* the size is invalid if it is smaller than the number of
 		     * elements already inside the hash table */size) {
 			return 1;
@@ -52,8 +95,7 @@ public class dict {
 		n.setSizemask(realsize - 1);
 		n.setTable(/*Error: Function owner not recognized*/malloc(realsize * /*Error: Unsupported expression*/));
 		n.setUsed(0);
-		if (generatedHt[0].getTable() == ((Object)/* Is this the first initialization? If so it's not really a rehashing
-		     * we just set the first hash table so that it can accept keys. */0)) {
+		if (generatedHt[0].getTable() == (null)) {
 			generatedHt[0] = n;
 			return 0;
 		} 
@@ -69,7 +111,7 @@ public class dict {
 		if (!(generatedRehashidx != -1)) {
 			return 0;
 		} 
-		Object generatedHt = this.getHt();
+		Object[] generatedHt = this.getHt();
 		dictEntry generatedNext = de.getNext();
 		Object generatedKey = de.getKey();
 		while (n--) {
@@ -82,9 +124,9 @@ public class dict {
 				this.setRehashidx(-1);
 				return 0;
 			} 
-			((generatedHt[0].getSize() > (int)generatedRehashidx) ? (Object)0 : /*Error: Function owner not recognized*/_assert("d->ht[0].size > (unsigned)d->rehashidx", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\redis-dict.c", /* Note that rehashidx can't overflow as we are sure there are more
+			((generatedHt[0].getSize() > (int)generatedRehashidx) ? null : /*Error: Function owner not recognized*/_assert("d->ht[0].size > (unsigned)d->rehashidx", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\redis-dict.c", /* Note that rehashidx can't overflow as we are sure there are more
 			         * elements because ht[0].used != 0 */257));
-			while (generatedHt[0].getTable()[generatedRehashidx] == ((Object)0)) {
+			while (generatedHt[0].getTable()[generatedRehashidx] == (null)) {
 				generatedRehashidx++;
 			}
 			de = generatedHt[0].getTable()[generatedRehashidx];
@@ -98,7 +140,7 @@ public class dict {
 				generatedHt[1].getUsed()++;
 				de = nextde;
 			}
-			generatedHt[0].getTable()[generatedRehashidx] = ((Object)0);
+			generatedHt[0].getTable()[generatedRehashidx] = (null);
 			generatedRehashidx++;
 		}
 		return 1;
@@ -206,7 +248,7 @@ public class dict {
 		dictEntry he = new dictEntry();
 		dictEntry prevHe = new dictEntry();
 		int table;
-		Object generatedHt = this.getHt();
+		Object[] generatedHt = this.getHt();
 		if (generatedHt[0].getSize() == 0) {
 			return /* d->ht[0].table is NULL */1;
 		} 
@@ -227,7 +269,7 @@ public class dict {
 		for (table = 0; table <= 1; table++) {
 			idx = h & generatedHt[table].getSizemask();
 			he = generatedHt[table].getTable()[idx];
-			prevHe = ((Object)0);
+			prevHe = (null);
 			while (he) {
 				if (((generatedKeyCompare) ? /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedPrivdata, key, generatedKey) : (key) == (generatedKey))) {
 					if (/* Unlink the element from the list */prevHe) {
@@ -264,7 +306,7 @@ public class dict {
 	}
 	/* Clear & Release the hash table */
 	public void dictRelease() {
-		Object generatedHt = this.getHt();
+		Object[] generatedHt = this.getHt();
 		ModernizedCProgram._dictClear(d, generatedHt[0]);
 		ModernizedCProgram._dictClear(d, generatedHt[1]);
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(d);
@@ -275,7 +317,7 @@ public class dict {
 		he = dictEntry.dictFind(d, key);
 		 generatedV = (he).getV();
 		Object generatedVal = generatedV.getVal();
-		return he ? (generatedVal) : ((Object)0);
+		return he ? (generatedVal) : (null);
 	}
 	/* Expand the hash table if needed */
 	public int _dictExpandIfNeeded() {
@@ -283,7 +325,7 @@ public class dict {
 		if ((generatedRehashidx != -1)) {
 			return /* Incremental rehashing already in progress. Return. */0;
 		} 
-		Object generatedHt = this.getHt();
+		Object[] generatedHt = this.getHt();
 		if (generatedHt[0].getSize() == 0) {
 			return d.dictExpand(/* If the hash table is empty expand it to the initial size. */4/* If we reached the 1:1 ratio, and we are allowed to resize the hash
 			     * table (global setting) or we should avoid it but the ratio between
@@ -304,7 +346,7 @@ public class dict {
 			return -1;
 		} 
 		h = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(/* Compute the key hash value */key);
-		Object generatedHt = this.getHt();
+		Object[] generatedHt = this.getHt();
 		dictType generatedType = (d).getType();
 		Object generatedKeyCompare = generatedType.getKeyCompare();
 		Object generatedPrivdata = (d).getPrivdata();
@@ -327,54 +369,11 @@ public class dict {
 		return idx;
 	}
 	public void dictEmpty() {
-		Object generatedHt = this.getHt();
+		Object[] generatedHt = this.getHt();
 		ModernizedCProgram._dictClear(d, generatedHt[0]);
 		ModernizedCProgram._dictClear(d, generatedHt[1]);
 		this.setRehashidx(-1);
 		this.setIterators(0);
-	}
-	public void redis_add(int times) {
-		int i;
-		sds key = new sds();
-		sds val = new sds();
-		byte[] buf = new byte[20];
-		for (i = 0; i < times; ++i) {
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "key%d", i);
-			key = ModernizedCProgram.sdsnew(buf);
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "val%d", i);
-			val = ModernizedCProgram.sdsnew(buf);
-			((d.dictAdd(key, val) == 0) ? (Object)0 : /*Error: Function owner not recognized*/_assert("dictAdd(d, key, val) == DICT_OK", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\performance.c", 55));
-		}
-	}
-	public void redis_fetch(int times) {
-		int i;
-		int j;
-		byte[] buf = new byte[20];
-		sds key = new sds();
-		sds val = new sds();
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/srand(1992);
-		for (i = 0; i < times; ++i) {
-			j = /*Error: Function owner not recognized*/rand() % times;
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "key%d", j);
-			key = ModernizedCProgram.sdsnew(buf);
-			((d.dictFetchValue(key)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("dictFetchValue(d, key)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\CBufferedTree\\src\\performance.c", 115));
-			ModernizedCProgram.sdsfree(key);
-		}
-	}
-	public void redis_del(int times) {
-		int i;
-		int j;
-		byte[] buf = new byte[20];
-		sds key = new sds();
-		sds val = new sds();
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/srand(1992);
-		for (i = 0; i < times; ++i) {
-			j = /*Error: Function owner not recognized*/rand() % times;
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/snprintf(buf, 20, "key%d", j);
-			key = ModernizedCProgram.sdsnew(buf);
-			d.dictDelete(key);
-			ModernizedCProgram.sdsfree(key);
-		}
 	}
 	public dictType getType() {
 		return type;
@@ -388,10 +387,10 @@ public class dict {
 	public void setPrivdata(Object newPrivdata) {
 		privdata = newPrivdata;
 	}
-	public Object getHt() {
+	public Object[] getHt() {
 		return ht;
 	}
-	public void setHt(Object newHt) {
+	public void setHt(Object[] newHt) {
 		ht = newHt;
 	}
 	public int getRehashidx() {

@@ -30,14 +30,14 @@ public class mmp_struct {
 	private Object mmp_magic;
 	private Object mmp_seq;
 	private Object mmp_time;
-	private Object mmp_nodename;
-	private Object mmp_bdevname;
+	private Object[] mmp_nodename;
+	private Object[] mmp_bdevname;
 	private Object mmp_check_interval;
 	private Object mmp_pad1;
-	private Object mmp_pad2;
+	private Object[] mmp_pad2;
 	private Object mmp_checksum;
 	
-	public mmp_struct(Object mmp_magic, Object mmp_seq, Object mmp_time, Object mmp_nodename, Object mmp_bdevname, Object mmp_check_interval, Object mmp_pad1, Object mmp_pad2, Object mmp_checksum) {
+	public mmp_struct(Object mmp_magic, Object mmp_seq, Object mmp_time, Object[] mmp_nodename, Object[] mmp_bdevname, Object mmp_check_interval, Object mmp_pad1, Object[] mmp_pad2, Object mmp_checksum) {
 		setMmp_magic(mmp_magic);
 		setMmp_seq(mmp_seq);
 		setMmp_time(mmp_time);
@@ -91,16 +91,16 @@ public class mmp_struct {
 	public void setMmp_time(Object newMmp_time) {
 		mmp_time = newMmp_time;
 	}
-	public Object getMmp_nodename() {
+	public Object[] getMmp_nodename() {
 		return mmp_nodename;
 	}
-	public void setMmp_nodename(Object newMmp_nodename) {
+	public void setMmp_nodename(Object[] newMmp_nodename) {
 		mmp_nodename = newMmp_nodename;
 	}
-	public Object getMmp_bdevname() {
+	public Object[] getMmp_bdevname() {
 		return mmp_bdevname;
 	}
-	public void setMmp_bdevname(Object newMmp_bdevname) {
+	public void setMmp_bdevname(Object[] newMmp_bdevname) {
 		mmp_bdevname = newMmp_bdevname;
 	}
 	public Object getMmp_check_interval() {
@@ -115,10 +115,10 @@ public class mmp_struct {
 	public void setMmp_pad1(Object newMmp_pad1) {
 		mmp_pad1 = newMmp_pad1;
 	}
-	public Object getMmp_pad2() {
+	public Object[] getMmp_pad2() {
 		return mmp_pad2;
 	}
-	public void setMmp_pad2(Object newMmp_pad2) {
+	public void setMmp_pad2(Object[] newMmp_pad2) {
 		mmp_pad2 = newMmp_pad2;
 	}
 	public Object getMmp_checksum() {

@@ -7,9 +7,9 @@ public class partition_header_desc_s {
 	private udf_short_ad_s partition_integrity_table;
 	private udf_short_ad_s freed_space_table;
 	private udf_short_ad_s freed_space_bitmap;
-	private Object reserved;
+	private Object[] reserved;
 	
-	public partition_header_desc_s(udf_short_ad_s unalloc_space_table, udf_short_ad_s unalloc_space_bitmap, udf_short_ad_s partition_integrity_table, udf_short_ad_s freed_space_table, udf_short_ad_s freed_space_bitmap, Object reserved) {
+	public partition_header_desc_s(udf_short_ad_s unalloc_space_table, udf_short_ad_s unalloc_space_bitmap, udf_short_ad_s partition_integrity_table, udf_short_ad_s freed_space_table, udf_short_ad_s freed_space_bitmap, Object[] reserved) {
 		setUnalloc_space_table(unalloc_space_table);
 		setUnalloc_space_bitmap(unalloc_space_bitmap);
 		setPartition_integrity_table(partition_integrity_table);
@@ -50,10 +50,10 @@ public class partition_header_desc_s {
 	public void setFreed_space_bitmap(udf_short_ad_s newFreed_space_bitmap) {
 		freed_space_bitmap = newFreed_space_bitmap;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }

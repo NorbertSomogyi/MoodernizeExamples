@@ -15,15 +15,15 @@ public class iso9660_stat_s {
 	private tm tm;
 	private Object size;
 	private Object extents;
-	private Object lsn;
-	private Object extsize;
-	private Object secsize;
+	private Object[] lsn;
+	private Object[] extsize;
+	private Object[] secsize;
 	private Object xa;
 	private  type;
 	private Object b_xa;
-	private Object filename;
+	private Object[] filename;
 	
-	public iso9660_stat_s(Object rr, tm tm, Object size, Object extents, Object lsn, Object extsize, Object secsize, Object xa,  type, Object b_xa, Object filename) {
+	public iso9660_stat_s(Object rr, tm tm, Object size, Object extents, Object[] lsn, Object[] extsize, Object[] secsize, Object xa,  type, Object b_xa, Object[] filename) {
 		setRr(rr);
 		setTm(tm);
 		setSize(size);
@@ -63,22 +63,22 @@ public class iso9660_stat_s {
 	public void setExtents(Object newExtents) {
 		extents = newExtents;
 	}
-	public Object getLsn() {
+	public Object[] getLsn() {
 		return lsn;
 	}
-	public void setLsn(Object newLsn) {
+	public void setLsn(Object[] newLsn) {
 		lsn = newLsn;
 	}
-	public Object getExtsize() {
+	public Object[] getExtsize() {
 		return extsize;
 	}
-	public void setExtsize(Object newExtsize) {
+	public void setExtsize(Object[] newExtsize) {
 		extsize = newExtsize;
 	}
-	public Object getSecsize() {
+	public Object[] getSecsize() {
 		return secsize;
 	}
-	public void setSecsize(Object newSecsize) {
+	public void setSecsize(Object[] newSecsize) {
 		secsize = newSecsize;
 	}
 	public Object getXa() {
@@ -99,10 +99,10 @@ public class iso9660_stat_s {
 	public void setB_xa(Object newB_xa) {
 		b_xa = newB_xa;
 	}
-	public Object getFilename() {
+	public Object[] getFilename() {
 		return filename;
 	}
-	public void setFilename(Object newFilename) {
+	public void setFilename(Object[] newFilename) {
 		filename = newFilename;
 	}
 }

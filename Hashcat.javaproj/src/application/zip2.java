@@ -5,15 +5,15 @@ public class zip2 {
 	private Object mode;
 	private Object magic;
 	private Object salt_len;
-	private Object salt_buf;
+	private Object[] salt_buf;
 	private Object verify_bytes;
 	private Object compress_length;
 	private Object data_len;
-	private Object data_buf;
+	private Object[] data_buf;
 	private Object auth_len;
-	private Object auth_buf;
+	private Object[] auth_buf;
 	
-	public zip2(Object type, Object mode, Object magic, Object salt_len, Object salt_buf, Object verify_bytes, Object compress_length, Object data_len, Object data_buf, Object auth_len, Object auth_buf) {
+	public zip2(Object type, Object mode, Object magic, Object salt_len, Object[] salt_buf, Object verify_bytes, Object compress_length, Object data_len, Object[] data_buf, Object auth_len, Object[] auth_buf) {
 		setType(type);
 		setMode(mode);
 		setMagic(magic);
@@ -53,10 +53,10 @@ public class zip2 {
 	public void setSalt_len(Object newSalt_len) {
 		salt_len = newSalt_len;
 	}
-	public Object getSalt_buf() {
+	public Object[] getSalt_buf() {
 		return salt_buf;
 	}
-	public void setSalt_buf(Object newSalt_buf) {
+	public void setSalt_buf(Object[] newSalt_buf) {
 		salt_buf = newSalt_buf;
 	}
 	public Object getVerify_bytes() {
@@ -77,10 +77,10 @@ public class zip2 {
 	public void setData_len(Object newData_len) {
 		data_len = newData_len;
 	}
-	public Object getData_buf() {
+	public Object[] getData_buf() {
 		return data_buf;
 	}
-	public void setData_buf(Object newData_buf) {
+	public void setData_buf(Object[] newData_buf) {
 		data_buf = newData_buf;
 	}
 	public Object getAuth_len() {
@@ -89,10 +89,10 @@ public class zip2 {
 	public void setAuth_len(Object newAuth_len) {
 		auth_len = newAuth_len;
 	}
-	public Object getAuth_buf() {
+	public Object[] getAuth_buf() {
 		return auth_buf;
 	}
-	public void setAuth_buf(Object newAuth_buf) {
+	public void setAuth_buf(Object[] newAuth_buf) {
 		auth_buf = newAuth_buf;
 	}
 }

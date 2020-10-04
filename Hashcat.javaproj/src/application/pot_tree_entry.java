@@ -18,7 +18,7 @@ public class pot_tree_entry {
 	// 2. use tdelete () <- this is what we currently use, but this could be slower!
 	public void pot_tree_destroy() {
 		pot_tree_entry_t entry = tree;
-		while (tree != ((Object)0)) {
+		while (tree != (null)) {
 			entry = (pot_tree_entry_t)tree;
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/tdelete(entry, (Object)tree, ModernizedCProgram.sort_pot_tree_by_hash);
 		}

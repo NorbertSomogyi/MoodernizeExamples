@@ -251,7 +251,7 @@ package application;
 /* internal structure for log information */
 /* should be three non-zero characters */
 public class log {
-	private Object id;
+	private Object[] id;
 	private int fd;
 	private Byte path;
 	private Byte end;
@@ -265,7 +265,7 @@ public class log {
 	private Object tlen;
 	private Object lock;
 	
-	public log(Object id, int fd, Byte path, Byte end, Object first, int back, Object stored, Object last, Object ccrc, Object clen, Object tcrc, Object tlen, Object lock) {
+	public log(Object[] id, int fd, Byte path, Byte end, Object first, int back, Object stored, Object last, Object ccrc, Object clen, Object tcrc, Object tlen, Object lock) {
 		setId(id);
 		setFd(fd);
 		setPath(path);
@@ -294,7 +294,7 @@ public class log {
 			if ((/*Error: Function owner not recognized*/_errno()) != 17) {
 				return -1;
 			} 
-			if (/*Error: Function owner not recognized*/stat(generatedPath, st) == 0 && /*Error: Function owner not recognized*/time(((Object)0)) - generatedSt_mtime > 300) {
+			if (/*Error: Function owner not recognized*/stat(generatedPath, st) == 0 && /*Error: Function owner not recognized*/time((null)) - generatedSt_mtime > 300) {
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/unlink(generatedPath);
 				continue;
 			} 
@@ -313,7 +313,7 @@ public class log {
 		Byte generatedEnd = this.getEnd();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".lock");
 		Byte generatedPath = this.getPath();
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/utimes(generatedPath, ((Object)0));
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/utimes(generatedPath, (null));
 		Object generatedSt_mtime = st.getSt_mtime();
 		if (/*Error: Function owner not recognized*/stat(generatedPath, st) == 0) {
 			this.setLock(generatedSt_mtime);
@@ -604,7 +604,7 @@ public class log {
 	}
 	public int log_replace() {
 		int ret;
-		byte dest;
+		Byte dest;
 		Byte generatedEnd = this.getEnd();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, /* delete foo.add file */".add");
 		Byte generatedPath = this.getPath();
@@ -612,7 +612,7 @@ public class log {
 		;
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, /* rename foo.name to foo.dict, replacing foo.dict if it exists */".dict");
 		dest = /*Error: Function owner not recognized*/malloc(/*Error: Function owner not recognized*/strlen(generatedPath) + 1);
-		if (dest == ((Object)0)) {
+		if (dest == (null)) {
 			return -2;
 		} 
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(dest, generatedPath);
@@ -752,12 +752,12 @@ public class log {
 	public void log_log(int op, Byte record) {
 		time_t now = new time_t();
 		FILE rec = new FILE();
-		now = /*Error: Function owner not recognized*/time(((Object)0));
+		now = /*Error: Function owner not recognized*/time((null));
 		Byte generatedEnd = this.getEnd();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".repairs");
 		Byte generatedPath = this.getPath();
 		rec = /*Error: Function owner not recognized*/fopen(generatedPath, "a");
-		if (rec == ((Object)0)) {
+		if (rec == (null)) {
 			return /*Error: Unsupported expression*/;
 		} 
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf(rec, "%.24s %s recovery: %s\n", /*Error: Function owner not recognized*/ctime(now), op == 1 ? "append" : (op == 2 ? "compress" : "replace"), record);
@@ -770,7 +770,7 @@ public class log {
 	public int log_recover(int op) {
 		int fd;
 		int ret = 0;
-		byte data = ((Object)0);
+		Byte data = (null);
 		size_t len = 0;
 		stat st = new stat();
 		log.log_log(op, /* log recovery */"start");
@@ -781,7 +781,7 @@ public class log {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(generatedEnd, ".add");
 			if (/*Error: Function owner not recognized*/stat(generatedPath, st) == 0 && generatedSt_size) {
 				len = (size_t)(generatedSt_size);
-				if ((off_t)len != generatedSt_size || (data = /*Error: Function owner not recognized*/malloc(generatedSt_size)) == ((Object)0)) {
+				if ((off_t)len != generatedSt_size || (data = /*Error: Function owner not recognized*/malloc(generatedSt_size)) == (null)) {
 					log.log_log(op, "allocation failure");
 					return -2;
 				} 
@@ -801,17 +801,17 @@ public class log {
 			} 
 		} 
 		switch (/* recover the interrupted operation */op) {
+		case 2:
+				ret = log.log_compress(data, len);
+				break;
 		case 1:
 				ret = log.log_append(data, len);
 				break;
 		case 3:
 				ret = log.log_replace();
-		case 2:
-				ret = log.log_compress(data, len);
-				break;
 		}
 		log.log_log(op, ret ? "failure" : /* log status */"complete");
-		if (data != ((Object)/* clean up */0)) {
+		if (data != (null)) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(data);
 		} 
 		return ret;
@@ -871,10 +871,10 @@ public class log {
 		/* touch the lock file to prevent another process from grabbing it */log.log_touch();
 		return 0;
 	}
-	public Object getId() {
+	public Object[] getId() {
 		return id;
 	}
-	public void setId(Object newId) {
+	public void setId(Object[] newId) {
 		id = newId;
 	}
 	public int getFd() {

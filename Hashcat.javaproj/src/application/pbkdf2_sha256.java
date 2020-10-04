@@ -1,18 +1,18 @@
 package application;
 
 public class pbkdf2_sha256 {
-	private Object salt_buf;
+	private Object[] salt_buf;
 	
-	public pbkdf2_sha256(Object salt_buf) {
+	public pbkdf2_sha256(Object[] salt_buf) {
 		setSalt_buf(salt_buf);
 	}
 	public pbkdf2_sha256() {
 	}
 	
-	public Object getSalt_buf() {
+	public Object[] getSalt_buf() {
 		return salt_buf;
 	}
-	public void setSalt_buf(Object newSalt_buf) {
+	public void setSalt_buf(Object[] newSalt_buf) {
 		salt_buf = newSalt_buf;
 	}
 }

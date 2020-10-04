@@ -79,31 +79,31 @@ public class flickcurl_method_s {
 	}
 	public flickcurl_method_s flickcurl_build_method(flickcurl_s fc, Object xpathCtx) {
 		int expri;
-		flickcurl_method method = ((Object)0);
+		flickcurl_method method = (null);
 		method = (flickcurl_method)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 		int generatedFailed = fc.getFailed();
 		for (expri = 0; method_fields_table[expri].getXpath(); expri++) {
 			flickcurl_method_field_type mft = method_fields_table[expri].getField();
-			byte string_value = fc.flickcurl_xpath_eval(xpathCtx, method_fields_table[expri].getXpath());
+			Byte string_value = fc.flickcurl_xpath_eval(xpathCtx, method_fields_table[expri].getXpath());
 			switch (mft) {
-			case .METHOD_FIELD_name:
-					method.setName(string_value);
-					string_value = ((Object)0);
+			case .METHOD_FIELD_description:
+					method.setDescription(string_value);
+					string_value = (null);
 					break;
-			case .METHOD_FIELD_explanation:
-					method.setExplanation(string_value);
-					string_value = ((Object)0);
+			case .METHOD_FIELD_response:
+					method.setResponse(string_value);
+					string_value = (null);
 					break;
 			case .METHOD_FIELD_needslogin:
 					method.setNeedslogin(/*Error: Function owner not recognized*/atoi(string_value));
 					break;
-			case .METHOD_FIELD_description:
-					method.setDescription(string_value);
-					string_value = ((Object)0);
+			case .METHOD_FIELD_name:
+					method.setName(string_value);
+					string_value = (null);
 					break;
-			case .METHOD_FIELD_response:
-					method.setResponse(string_value);
-					string_value = ((Object)0);
+			case .METHOD_FIELD_explanation:
+					method.setExplanation(string_value);
+					string_value = (null);
 					break;
 			default:
 					fc.flickcurl_error("Unknown method field %d", (int)mft);
@@ -124,9 +124,9 @@ public class flickcurl_method_s {
 		return method;
 	}
 	public flickcurl_method_s flickcurl_reflection_getMethodInfo(flickcurl_s fc, Object name) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_method method = ((Object)0);
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_method method = (null);
 		fc.flickcurl_init_params(0);
 		fc.flickcurl_add_param("method_name", name);
 		fc.flickcurl_end_params();
@@ -150,7 +150,7 @@ public class flickcurl_method_s {
 			if (method) {
 				method.flickcurl_free_method();
 			} 
-			method = ((Object)0);
+			method = (null);
 		} 
 		return method;
 	}

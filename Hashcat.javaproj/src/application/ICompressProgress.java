@@ -9,9 +9,6 @@ public class ICompressProgress {
 	public ICompressProgress() {
 	}
 	
-	public Object Progress(Object inSize, Object outSize) {
-		return (p && /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p, inSize, outSize) != 0) ? 10 : 0/* ---------- Lzma2 ---------- */;
-	}
 	public Object LzmaEnc_MemEncode(Object pp, Object dest, Object destLen, Object src, Object srcLen, int writeEndMark, Object alloc, Object allocBig) {
 		SRes res = new SRes();
 		CLzmaEnc p = (CLzmaEnc)pp;
@@ -55,6 +52,9 @@ public class ICompressProgress {
 		} 
 		ModernizedCProgram.LzmaEnc_Destroy(p, alloc, allocBig);
 		return res;
+	}
+	public Object Progress(Object inSize, Object outSize) {
+		return (p && /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(p, inSize, outSize) != 0) ? 10 : 0/* ---------- Lzma2 ---------- */;
 	}
 	public Object getProgress() {
 		return Progress;

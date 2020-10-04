@@ -4,9 +4,9 @@ package application;
 public class generic_partition_map2 {
 	private Object partition_map_type;
 	private Object partition_map_length;
-	private Object partition_id;
+	private Object[] partition_id;
 	
-	public generic_partition_map2(Object partition_map_type, Object partition_map_length, Object partition_id) {
+	public generic_partition_map2(Object partition_map_type, Object partition_map_length, Object[] partition_id) {
 		setPartition_map_type(partition_map_type);
 		setPartition_map_length(partition_map_length);
 		setPartition_id(partition_id);
@@ -26,10 +26,10 @@ public class generic_partition_map2 {
 	public void setPartition_map_length(Object newPartition_map_length) {
 		partition_map_length = newPartition_map_length;
 	}
-	public Object getPartition_id() {
+	public Object[] getPartition_id() {
 		return partition_id;
 	}
-	public void setPartition_id(Object newPartition_id) {
+	public void setPartition_id(Object[] newPartition_id) {
 		partition_id = newPartition_id;
 	}
 }

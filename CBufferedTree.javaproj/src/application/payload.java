@@ -20,7 +20,7 @@ public class payload {
 		payload = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		payload.setKey(key);
 		payload.setVal(val);
-		payload.setNext(((Object)0));
+		payload.setNext((null));
 		payload.setType(payload_type.type);
 		return payload;
 	}
@@ -28,7 +28,7 @@ public class payload {
 		payload curr_payload = new payload();
 		payload prev_payload = new payload();
 		int compared;
-		prev_payload = ((Object)0);
+		prev_payload = (null);
 		curr_payload = payload_start;
 		is_equal = 0;
 		Object generatedKey = curr_payload.getKey();
@@ -54,7 +54,7 @@ public class payload {
 		int is_equal;
 		Object generatedContainer_size = node.getContainer_size();
 		if (container_idx >= generatedContainer_size) {
-			return ((Object)0);
+			return (null);
 		} 
 		bftree_opts generatedOpts = tree.getOpts();
 		Object generatedKey_compare = generatedOpts.getKey_compare();
@@ -68,7 +68,7 @@ public class payload {
 			if (generatedType == payload_type.Put) {
 				return curr_payload;
 			} 
-			return ((Object)0);
+			return (null);
 		} 
 		node generatedChild = container.getChild();
 		payload payload = new payload();
@@ -76,7 +76,7 @@ public class payload {
 			container_idx = generatedChild.find_container(compare, key, 0);
 			return payload.container_get(tree, generatedChild, container_idx, key);
 		} 
-		return ((Object)0);// ================================================================
+		return (null);// ================================================================
 	}
 	public payload bftree_next(bftree_iterator iter) {
 		bftree tree = new bftree();
@@ -90,7 +90,7 @@ public class payload {
 		int is_equal;
 		int generatedClosed = iter.getClosed();
 		if (generatedClosed) {
-			return ((Object)0);
+			return (null);
 		} 
 		bftree generatedTree = iter.getTree();
 		tree = generatedTree;
@@ -103,12 +103,12 @@ public class payload {
 		container[][] generatedContainers = generatedRoot.getContainers();
 		if (!generatedNext) {
 			if (generatedContainer_size == 0) {
-				return ((Object)0);
+				return (null);
 			} 
 			iter.setNext(generatedContainers[0].getPayload_first());
 		} 
 		curr = generatedNext;
-		min = ((Object)0);
+		min = (null);
 		node = generatedRoot;
 		Object generatedKey = curr.getKey();
 		payload generatedPayload_first = container.getPayload_first();

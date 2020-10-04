@@ -1,18 +1,18 @@
 package application;
 
 public class __dummy_h {
-	private Object a;
+	private Object[] a;
 	
-	public __dummy_h(Object a) {
+	public __dummy_h(Object[] a) {
 		setA(a);
 	}
 	public __dummy_h() {
 	}
 	
-	public Object getA() {
+	public Object[] getA() {
 		return a;
 	}
-	public void setA(Object newA) {
+	public void setA(Object[] newA) {
 		a = newA;
 	}
 }

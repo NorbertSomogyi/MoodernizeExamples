@@ -1,7 +1,7 @@
 package application;
 
 public class ModernizedCProgram {
-	public static byte globalCharPointer;
+	public static Byte globalCharPointer;
 	public static int globalInt = 2;
 	public static double globalFloat = 3.14;
 	public static double globalDouble;
@@ -9,6 +9,16 @@ public class ModernizedCProgram {
 	public static int[][][] x = new int[1][1][1];
 	
 	
+	public static void testApiTransform() {
+		System.out.println("Some text!");
+		java.io.FileReader in = new java.io.FileReader("asd.txt");
+		java.io.BufferedReader br = new java.io.BufferedReader(in);
+		FILE f;
+		while (br.readLine() != (true)) {
+			System.out.print(br.readLine());
+		}
+		in.close();
+	}
 	public static void fieldReferences() {
 		TestStruct test = new TestStruct(1, (byte)'A');
 		int generatedX = test.getX();
@@ -18,8 +28,9 @@ public class ModernizedCProgram {
 	}
 	public static void testPointer(Integer x) {
 		ModernizedCProgram.globalCharPointer++;
-		int y;
+		Integer y;
 		y = 2;
+		y++;
 		(x)++;
 		PointerTester tester = new PointerTester();
 		tester.setIntPointer(0);
@@ -38,7 +49,7 @@ public class ModernizedCProgram {
 		byte c = (byte)'a';
 		//Comment in testNull
 		c++;
-		return ((Object)0);
+		return (null);
 	}
 	public static void testElseIf() {
 		if (ModernizedCProgram.globalInt < /* Comment */0) {
@@ -150,12 +161,12 @@ public class ModernizedCProgram {
 		case 14:
 				controller = 0;
 				break;
-		case 99:
-				controller = 11;
-				break;
-		case 77:
 		case 27:
 				controller = controller / 3;
+				break;
+		case 77:
+		case 99:
+				controller = 11;
 				break;
 		default:
 				controller = 111;

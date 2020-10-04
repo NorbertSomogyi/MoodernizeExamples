@@ -3,9 +3,9 @@ package application;
 public class cdio_dvd_bca {
 	private Object type;
 	private int len;
-	private Object value;
+	private Object[] value;
 	
-	public cdio_dvd_bca(Object type, int len, Object value) {
+	public cdio_dvd_bca(Object type, int len, Object[] value) {
 		setType(type);
 		setLen(len);
 		setValue(value);
@@ -25,10 +25,10 @@ public class cdio_dvd_bca {
 	public void setLen(int newLen) {
 		len = newLen;
 	}
-	public Object getValue() {
+	public Object[] getValue() {
 		return value;
 	}
-	public void setValue(Object newValue) {
+	public void setValue(Object[] newValue) {
 		value = newValue;
 	}
 }

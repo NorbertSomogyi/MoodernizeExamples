@@ -25,14 +25,14 @@ package application;
  * https://sourceforge.net/p/urbackup/backend/ci/master/tree/fsimageplugin/
  */
 public class vhd_footer {
-	private Object cookie;
+	private Object[] cookie;
 	private Object features;
 	private Object file_format_version;
 	private Object data_offset;
 	private Object timestamp;
-	private Object creator_app;
+	private Object[] creator_app;
 	private Object creator_version;
-	private Object creator_host_os;
+	private Object[] creator_host_os;
 	private Object original_size;
 	private Object current_size;
 	private  disk_geometry;
@@ -40,9 +40,9 @@ public class vhd_footer {
 	private Object checksum;
 	private Object unique_id;
 	private Object saved_state;
-	private Object reserved;
+	private Object[] reserved;
 	
-	public vhd_footer(Object cookie, Object features, Object file_format_version, Object data_offset, Object timestamp, Object creator_app, Object creator_version, Object creator_host_os, Object original_size, Object current_size,  disk_geometry, Object disk_type, Object checksum, Object unique_id, Object saved_state, Object reserved) {
+	public vhd_footer(Object[] cookie, Object features, Object file_format_version, Object data_offset, Object timestamp, Object[] creator_app, Object creator_version, Object[] creator_host_os, Object original_size, Object current_size,  disk_geometry, Object disk_type, Object checksum, Object unique_id, Object saved_state, Object[] reserved) {
 		setCookie(cookie);
 		setFeatures(features);
 		setFile_format_version(file_format_version);
@@ -63,10 +63,10 @@ public class vhd_footer {
 	public vhd_footer() {
 	}
 	
-	public Object getCookie() {
+	public Object[] getCookie() {
 		return cookie;
 	}
-	public void setCookie(Object newCookie) {
+	public void setCookie(Object[] newCookie) {
 		cookie = newCookie;
 	}
 	public Object getFeatures() {
@@ -93,10 +93,10 @@ public class vhd_footer {
 	public void setTimestamp(Object newTimestamp) {
 		timestamp = newTimestamp;
 	}
-	public Object getCreator_app() {
+	public Object[] getCreator_app() {
 		return creator_app;
 	}
-	public void setCreator_app(Object newCreator_app) {
+	public void setCreator_app(Object[] newCreator_app) {
 		creator_app = newCreator_app;
 	}
 	public Object getCreator_version() {
@@ -105,10 +105,10 @@ public class vhd_footer {
 	public void setCreator_version(Object newCreator_version) {
 		creator_version = newCreator_version;
 	}
-	public Object getCreator_host_os() {
+	public Object[] getCreator_host_os() {
 		return creator_host_os;
 	}
-	public void setCreator_host_os(Object newCreator_host_os) {
+	public void setCreator_host_os(Object[] newCreator_host_os) {
 		creator_host_os = newCreator_host_os;
 	}
 	public Object getOriginal_size() {
@@ -153,10 +153,10 @@ public class vhd_footer {
 	public void setSaved_state(Object newSaved_state) {
 		saved_state = newSaved_state;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }

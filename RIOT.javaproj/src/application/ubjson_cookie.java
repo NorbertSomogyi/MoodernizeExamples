@@ -194,6 +194,388 @@ public class ubjson_cookie {
 	 * @author      René Kijewski <rene.kijewski@fu-berlin.de>
 	 * @}
 	 */
+	public  _ubjson_read_marker(Byte marker) {
+		byte generatedMarker = this.getMarker();
+		while (1) {
+			ssize_t bytes_read = new ssize_t();
+			marker = generatedMarker;
+			if (!marker) {
+				bytes_read = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(cookie, marker, 1);
+			} else {
+					this.setMarker(0);
+					bytes_read = 1;
+			} 
+			if (bytes_read == 1) {
+				return .UBJSON_OKAY;
+			}  else if (bytes_read != 0) {
+				return .UBJSON_PREMATURELY_ENDED;
+			} 
+		}
+	}
+	public Object ubjson_get_string(Object length, Object dest_) {
+		ssize_t total = 0;
+		Byte dest = dest_;
+		while (total < length) {
+			ssize_t read = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(cookie, dest, length - total);
+			if (read < 0) {
+				return read;
+			} 
+			total += read;
+			dest += read;
+		}
+		return total;
+	}
+	public Object ubjson_get_i32(Object content, Object dest) {
+		int8_t[] LENGHTS = new int8_t[]{1, 1, 2, 4};
+		Object value;
+		int type = content;
+		ssize_t result = cookie.ubjson_get_string(LENGHTS[type], value);
+		Object generatedI8 = value.getI8();
+		Object generatedU8 = value.getU8();
+		Object generatedI16 = value.getI16();
+		Object generatedI32 = value.getI32();
+		if (result > 0) {
+			switch (type) {
+			case .UBJSON_INT32_UINT8:
+					dest = generatedU8;
+					break;
+			case .UBJSON_INT32_INT32:
+					dest = (int32_t)/*Error: Function owner not recognized*/byteorder_ntohl(generatedI32);
+					break;
+			case .UBJSON_INT32_INT16:
+					dest = (int16_t)/*Error: Function owner not recognized*/byteorder_ntohs(generatedI16);
+					break;
+			case .UBJSON_INT32_INT8:
+					dest = generatedI8;
+					break;
+			default:
+					return -1;
+			}
+		} 
+		return result;
+	}
+	public Object ubjson_get_i64(Object content, Object dest) {
+		(Object)content;
+		 buf = new ();
+		ssize_t result = cookie.ubjson_get_string(8, buf);
+		dest = /*Error: Function owner not recognized*/byteorder_ntohll(buf);
+		return result;
+	}
+	public  _ubjson_read_length(Object len) {
+		ubjson_type_t type = new ubjson_type_t();
+		ssize_t content = 0;
+		ubjson_read_callback_result_t result = cookie.ubjson_peek_value(type, content);
+		if (result != .UBJSON_OKAY) {
+			return result;
+		} 
+		int64_t len64 = -1;
+		ssize_t read = new ssize_t();
+		if (type == .UBJSON_TYPE_INT32) {
+			int32_t len32 = new int32_t();
+			read = cookie.ubjson_get_i32(content, len32);
+			if (read > 0) {
+				len64 = len32;
+			} 
+		}  else if (type == .UBJSON_TYPE_INT64) {
+			read = cookie.ubjson_get_i64(content, len64);
+		} else {
+				return .UBJSON_INVALID_DATA;
+		} 
+		if (read <= 0) {
+			return .UBJSON_PREMATURELY_ENDED;
+		}  else if ((ssize_t)len64 < 0) {
+			return .UBJSON_SIZE_ERROR;
+		}  else if (len64 < 0) {
+			return .UBJSON_INVALID_DATA;
+		} 
+		len = len64;
+		return .UBJSON_OKAY;
+	}
+	public  _ubjson_get_call(byte marker,  type, Object content) {
+		content = -1;
+		switch (marker) {
+		case .UBJSON_MARKER_FLOAT32:
+				type = .UBJSON_TYPE_FLOAT;
+				break;
+		case .UBJSON_MARKER_COUNT:
+		case .UBJSON_MARKER_ARRAY_START:
+				type = .UBJSON_ENTER_ARRAY;
+				break;
+		case .UBJSON_MARKER_ARRAY_END:
+		case .UBJSON_MARKER_CHAR:
+				type = .UBJSON_TYPE_STRING;
+				break;
+		case .UBJSON_MARKER_STRING:
+				{ 
+					ubjson_read_callback_result_t result = cookie._ubjson_read_length(content);
+					if (result != .UBJSON_OKAY) {
+						return result;
+					} 
+					type = .UBJSON_TYPE_STRING;
+					break;
+				}
+		case .UBJSON_MARKER_INT16:
+				content = .UBJSON_INT32_INT16;
+				type = .UBJSON_TYPE_INT32;
+				break;
+		case .UBJSON_MARKER_INT8:
+				content = .UBJSON_INT32_INT8;
+				type = .UBJSON_TYPE_INT32;
+				break;
+		case .UBJSON_MARKER_INT64:
+				type = .UBJSON_TYPE_INT64;
+				break;
+		case .UBJSON_MARKER_INT32:
+				content = .UBJSON_INT32_INT32;
+				type = .UBJSON_TYPE_INT32;
+				break;
+		case .UBJSON_MARKER_FLOAT64:
+				type = .UBJSON_TYPE_DOUBLE;
+				break;
+		case .UBJSON_MARKER_NOOP:
+				type = .UBJSON_TYPE_NOOP;
+				break;
+		case .UBJSON_MARKER_FALSE:
+				;
+				break;
+		case .UBJSON_MARKER_OBJECT_START:
+				type = .UBJSON_ENTER_OBJECT;
+				break;
+		case .UBJSON_MARKER_NULL:
+				type = .UBJSON_TYPE_NULL;
+				break;
+		case .UBJSON_MARKER_UINT8:
+				content = .UBJSON_INT32_UINT8;
+				type = .UBJSON_TYPE_INT32;
+				break;
+		case .UBJSON_MARKER_TYPE:
+		case .UBJSON_MARKER_TRUE:
+		case .UBJSON_MARKER_OBJECT_END:
+		default:
+				return .UBJSON_INVALID_DATA;
+		}
+		return .UBJSON_OKAY;
+	}
+	public  _ubjson_read_struct(Object get_continue) {
+		ubjson_read_callback_result_t result = new ubjson_read_callback_result_t();
+		ssize_t count = -1;
+		byte marker;
+		byte type_marker = 0;
+		do {
+			result = cookie._ubjson_read_marker(marker);
+			if (result != .UBJSON_OKAY) {
+				return result;
+			} 
+		} while (0);
+		if (marker == .UBJSON_MARKER_TYPE) {
+			do {
+				result = cookie._ubjson_read_marker(marker);
+				if (result != .UBJSON_OKAY) {
+					return result;
+				} 
+			} while (0);
+			if (marker == 0) {
+				return .UBJSON_INVALID_DATA;
+			} 
+			type_marker = marker;
+			do {
+				result = cookie._ubjson_read_marker(marker);
+				if (result != .UBJSON_OKAY) {
+					return result;
+				} 
+			} while (0);
+		} 
+		if (marker == .UBJSON_MARKER_COUNT) {
+			result = cookie._ubjson_read_length(count);
+			if (result != .UBJSON_OKAY) {
+				return result;
+			} 
+			do {
+				result = cookie._ubjson_read_marker(marker);
+				if (result != .UBJSON_OKAY) {
+					return result;
+				} 
+			} while (0);
+		} 
+		this.setMarker(marker);
+		if ((type_marker != 0) && (count < 0/* If a type is specified, a count must be specified as well.
+		         * Otherwise a ']' could either be data (e.g. the character ']'),
+		         * or be meant to close the array.
+		         */)) {
+			return .UBJSON_INVALID_DATA;
+		} 
+		for (ssize_t index = 0;
+		 (count < 0) || (index < count); ++index) {
+			ubjson_type_t type1 = new ubjson_type_t();
+			ssize_t content1 = new ssize_t();
+			do {
+				result = cookie._ubjson_read_marker(marker);
+				if (result != .UBJSON_OKAY) {
+					return result;
+				} 
+			} while (0);
+			if (!/*Error: Function owner not recognized*/get_continue(cookie, marker, result, count, index, type1, content1) || (result != .UBJSON_OKAY)) {
+				break;
+			} 
+			result = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(cookie, type1, content1, .UBJSON_ABSENT, (byte)type_marker);
+			if (result != .UBJSON_OKAY) {
+				break;
+			} 
+		}
+		return result;
+	}
+	public boolean _ubjson_read_array_continue(byte marker,  result, Object count, Object index,  type1, Object content1) {
+		if (marker == .UBJSON_MARKER_ARRAY_END) {
+			if (count >= 0) {
+				result = .UBJSON_INVALID_DATA;
+			} 
+			return 0;
+		} 
+		this.setMarker(marker);
+		type1 = .UBJSON_INDEX;
+		content1 = index;
+		return 1;
+	}
+	public boolean _ubjson_read_object_continue(byte marker,  result, Object count, Object index,  type1, Object content1) {
+		(Object)index;
+		if (marker == .UBJSON_MARKER_OBJECT_END) {
+			if (count >= 0) {
+				result = .UBJSON_INVALID_DATA;
+			} 
+			return 0;
+		} 
+		this.setMarker(marker);
+		type1 = .UBJSON_KEY;
+		result = cookie._ubjson_read_length(content1);
+		return 1;
+	}
+	public  ubjson_read_array() {
+		return cookie._ubjson_read_struct(_ubjson_read_array_continue);
+	}
+	public  ubjson_read_object() {
+		return cookie._ubjson_read_struct(_ubjson_read_object_continue);
+	}
+	public  ubjson_read_next() {
+		byte marker;
+		ubjson_read_callback_result_t result = new ubjson_read_callback_result_t();
+		do {
+			result = cookie._ubjson_read_marker(marker);
+			if (result != .UBJSON_OKAY) {
+				return result;
+			} 
+		} while (0);
+		ubjson_type_t type = new ubjson_type_t();
+		ssize_t content = new ssize_t();
+		result = cookie._ubjson_get_call(marker, type, content);
+		if (result != .UBJSON_OKAY) {
+			return result;
+		} 
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(cookie, type, content, .UBJSON_ABSENT, 0);
+	}
+	public  ubjson_peek_value( type, Object content) {
+		byte marker = (byte)content;
+		if (marker == 0) {
+			ubjson_read_callback_result_t result = new ubjson_read_callback_result_t();
+			do {
+				result = cookie._ubjson_read_marker(marker);
+				if (result != .UBJSON_OKAY) {
+					return result;
+				} 
+			} while (0);
+		} 
+		return cookie._ubjson_get_call(marker, type, content);
+	}
+	public  ubjson_read(Object read, Object callback) {
+		 generatedRw = this.getRw();
+		generatedRw.setRead(read);
+		 generatedCallback = this.getCallback();
+		generatedCallback.setRead(callback);
+		this.setMarker(0);
+		return cookie/**
+		 * @brief         Use in a callback if type1 is UBJSON_KEY or UBJSON_INDEX.
+		 * @details       Call like ``ubjson_peek_value(cookie, &type2, &content2)``.
+		 * @param[in]     cookie     The cookie that was passed to the callback.
+		 * @param[in,out] type       Pointer to a variable that was initialized with the value of type2, returns the new type1.
+		 * @param[in,out] content    Pointer to a variable that was initialized with the value of content2, returns the new content1.
+		 * @returns       The same as ubjson_read().
+		 */.ubjson_read_next();
+	}
+	public Object ubjson_get_bool(Object content, Boolean dest) {
+		(Object)cookie;
+		dest = content;
+		return 1/**
+		 * @brief         Call if type1 of the callback was UBJSON_TYPE_FLOAT.
+		 * @param[in]     cookie     The cookie that was passed to the callback function.
+		 * @param[in]     content    The content1 that was passed to the callback function.
+		 * @param[out]    dest       The read datum.
+		 * @returns       The result of the read callback, probably the amount of read bytes.
+		 */;
+	}
+	public Object ubjson_get_float(Object content, Double dest) {
+		(Object)content;
+		Object value;
+		Object generatedI = value.getI();
+		ubjson_read_callback_result_t result = cookie.ubjson_get_i32(.UBJSON_INT32_INT32, generatedI);
+		Object generatedF = value.getF();
+		dest = generatedF;
+		return result/**
+		 * @brief         Call if type1 of the callback was UBJSON_TYPE_DOUBLE.
+		 * @param[in]     cookie     The cookie that was passed to the callback function.
+		 * @param[in]     content    The content1 that was passed to the callback function.
+		 * @param[out]    dest       The read datum.
+		 * @returns       The result of the read callback, probably the amount of read bytes.
+		 */;
+	}
+	public Object ubjson_get_double(Object content, Double dest) {
+		(Object)content;
+		Object value;
+		Object generatedI = value.getI();
+		ubjson_read_callback_result_t result = cookie.ubjson_get_i64(-1, generatedI);
+		Object generatedF = value.getF();
+		dest = generatedF;
+		return result/**
+		 * @brief         Call if type1 of the callback was UBJSON_ENTER_ARRAY.
+		 * @details       Inside this call the callback function will be invoked multiple times,
+		 *                once per array element, with type1=UBJSON_INDEX,
+		 *                and content1=running index in the array.
+		 *
+		 *                Use ubjson_peek_value() to determine the type of the element.
+		 * @param[in]     cookie     The cookie that was passed to the callback function.
+		 * @returns       The same as ubjson_read().
+		 */;
+	}
+	public void ubjson_write_init(Object write_fun) {
+		 generatedRw = this.getRw();
+		generatedRw.setWrite(write_fun/**
+		 * @brief         Write a null value.
+		 * @param[in]     cookie     The cookie that was initialized with ubjson_write_init().
+		 */);
+	}
+	/*
+	 * Copyright (C) 2014  René Kijewski  <rene.kijewski@fu-berlin.de>
+	 *
+	 * This library is free software; you can redistribute it and/or
+	 * modify it under the terms of the GNU Lesser General Public
+	 * License as published by the Free Software Foundation; either
+	 * version 2.1 of the License, or (at your option) any later version.
+	 *
+	 * This library is distributed in the hope that it will be useful,
+	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+	 * Lesser General Public License for more details.
+	 *
+	 * You should have received a copy of the GNU Lesser General Public
+	 * License along with this library; if not, write to the Free Software
+	 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+	 */
+	/**
+	 * @ingroup     sys_ubjson
+	 * @{
+	 * @file
+	 * @brief       Universal Binary JSON deserializer
+	 * @author      René Kijewski <rene.kijewski@fu-berlin.de>
+	 * @}
+	 */
 	public Object ubjson_write_null() {
 		ssize_t result = 0;
 		do {
@@ -556,388 +938,6 @@ public class ubjson_cookie {
 			result += wrote;
 		} while (0);
 		return result;
-	}
-	public  ubjson_read(Object read, Object callback) {
-		 generatedRw = this.getRw();
-		generatedRw.setRead(read);
-		 generatedCallback = this.getCallback();
-		generatedCallback.setRead(callback);
-		this.setMarker(0);
-		return cookie/**
-		 * @brief         Use in a callback if type1 is UBJSON_KEY or UBJSON_INDEX.
-		 * @details       Call like ``ubjson_peek_value(cookie, &type2, &content2)``.
-		 * @param[in]     cookie     The cookie that was passed to the callback.
-		 * @param[in,out] type       Pointer to a variable that was initialized with the value of type2, returns the new type1.
-		 * @param[in,out] content    Pointer to a variable that was initialized with the value of content2, returns the new content1.
-		 * @returns       The same as ubjson_read().
-		 */.ubjson_read_next();
-	}
-	public Object ubjson_get_bool(Object content, Boolean dest) {
-		(Object)cookie;
-		dest = content;
-		return 1/**
-		 * @brief         Call if type1 of the callback was UBJSON_TYPE_FLOAT.
-		 * @param[in]     cookie     The cookie that was passed to the callback function.
-		 * @param[in]     content    The content1 that was passed to the callback function.
-		 * @param[out]    dest       The read datum.
-		 * @returns       The result of the read callback, probably the amount of read bytes.
-		 */;
-	}
-	public Object ubjson_get_float(Object content, Double dest) {
-		(Object)content;
-		Object value;
-		Object generatedI = value.getI();
-		ubjson_read_callback_result_t result = cookie.ubjson_get_i32(.UBJSON_INT32_INT32, generatedI);
-		Object generatedF = value.getF();
-		dest = generatedF;
-		return result/**
-		 * @brief         Call if type1 of the callback was UBJSON_TYPE_DOUBLE.
-		 * @param[in]     cookie     The cookie that was passed to the callback function.
-		 * @param[in]     content    The content1 that was passed to the callback function.
-		 * @param[out]    dest       The read datum.
-		 * @returns       The result of the read callback, probably the amount of read bytes.
-		 */;
-	}
-	public Object ubjson_get_double(Object content, Double dest) {
-		(Object)content;
-		Object value;
-		Object generatedI = value.getI();
-		ubjson_read_callback_result_t result = cookie.ubjson_get_i64(-1, generatedI);
-		Object generatedF = value.getF();
-		dest = generatedF;
-		return result/**
-		 * @brief         Call if type1 of the callback was UBJSON_ENTER_ARRAY.
-		 * @details       Inside this call the callback function will be invoked multiple times,
-		 *                once per array element, with type1=UBJSON_INDEX,
-		 *                and content1=running index in the array.
-		 *
-		 *                Use ubjson_peek_value() to determine the type of the element.
-		 * @param[in]     cookie     The cookie that was passed to the callback function.
-		 * @returns       The same as ubjson_read().
-		 */;
-	}
-	public void ubjson_write_init(Object write_fun) {
-		 generatedRw = this.getRw();
-		generatedRw.setWrite(write_fun/**
-		 * @brief         Write a null value.
-		 * @param[in]     cookie     The cookie that was initialized with ubjson_write_init().
-		 */);
-	}
-	/*
-	 * Copyright (C) 2014  René Kijewski  <rene.kijewski@fu-berlin.de>
-	 *
-	 * This library is free software; you can redistribute it and/or
-	 * modify it under the terms of the GNU Lesser General Public
-	 * License as published by the Free Software Foundation; either
-	 * version 2.1 of the License, or (at your option) any later version.
-	 *
-	 * This library is distributed in the hope that it will be useful,
-	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	 * Lesser General Public License for more details.
-	 *
-	 * You should have received a copy of the GNU Lesser General Public
-	 * License along with this library; if not, write to the Free Software
-	 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-	 */
-	/**
-	 * @ingroup     sys_ubjson
-	 * @{
-	 * @file
-	 * @brief       Universal Binary JSON deserializer
-	 * @author      René Kijewski <rene.kijewski@fu-berlin.de>
-	 * @}
-	 */
-	public  _ubjson_read_marker(Byte marker) {
-		byte generatedMarker = this.getMarker();
-		while (1) {
-			ssize_t bytes_read = new ssize_t();
-			marker = generatedMarker;
-			if (!marker) {
-				bytes_read = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(cookie, marker, 1);
-			} else {
-					this.setMarker(0);
-					bytes_read = 1;
-			} 
-			if (bytes_read == 1) {
-				return .UBJSON_OKAY;
-			}  else if (bytes_read != 0) {
-				return .UBJSON_PREMATURELY_ENDED;
-			} 
-		}
-	}
-	public Object ubjson_get_string(Object length, Object dest_) {
-		ssize_t total = 0;
-		byte dest = dest_;
-		while (total < length) {
-			ssize_t read = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(cookie, dest, length - total);
-			if (read < 0) {
-				return read;
-			} 
-			total += read;
-			dest += read;
-		}
-		return total;
-	}
-	public Object ubjson_get_i32(Object content, Object dest) {
-		int8_t[] LENGHTS = new int8_t[]{1, 1, 2, 4};
-		Object value;
-		int type = content;
-		ssize_t result = cookie.ubjson_get_string(LENGHTS[type], value);
-		Object generatedI8 = value.getI8();
-		Object generatedU8 = value.getU8();
-		Object generatedI16 = value.getI16();
-		Object generatedI32 = value.getI32();
-		if (result > 0) {
-			switch (type) {
-			case .UBJSON_INT32_INT16:
-					dest = (int16_t)/*Error: Function owner not recognized*/byteorder_ntohs(generatedI16);
-					break;
-			case .UBJSON_INT32_UINT8:
-					dest = generatedU8;
-					break;
-			case .UBJSON_INT32_INT8:
-					dest = generatedI8;
-					break;
-			case .UBJSON_INT32_INT32:
-					dest = (int32_t)/*Error: Function owner not recognized*/byteorder_ntohl(generatedI32);
-					break;
-			default:
-					return -1;
-			}
-		} 
-		return result;
-	}
-	public Object ubjson_get_i64(Object content, Object dest) {
-		(Object)content;
-		 buf = new ();
-		ssize_t result = cookie.ubjson_get_string(8, buf);
-		dest = /*Error: Function owner not recognized*/byteorder_ntohll(buf);
-		return result;
-	}
-	public  _ubjson_read_length(Object len) {
-		ubjson_type_t type = new ubjson_type_t();
-		ssize_t content = 0;
-		ubjson_read_callback_result_t result = cookie.ubjson_peek_value(type, content);
-		if (result != .UBJSON_OKAY) {
-			return result;
-		} 
-		int64_t len64 = -1;
-		ssize_t read = new ssize_t();
-		if (type == .UBJSON_TYPE_INT32) {
-			int32_t len32 = new int32_t();
-			read = cookie.ubjson_get_i32(content, len32);
-			if (read > 0) {
-				len64 = len32;
-			} 
-		}  else if (type == .UBJSON_TYPE_INT64) {
-			read = cookie.ubjson_get_i64(content, len64);
-		} else {
-				return .UBJSON_INVALID_DATA;
-		} 
-		if (read <= 0) {
-			return .UBJSON_PREMATURELY_ENDED;
-		}  else if ((ssize_t)len64 < 0) {
-			return .UBJSON_SIZE_ERROR;
-		}  else if (len64 < 0) {
-			return .UBJSON_INVALID_DATA;
-		} 
-		len = len64;
-		return .UBJSON_OKAY;
-	}
-	public  _ubjson_get_call(byte marker,  type, Object content) {
-		content = -1;
-		switch (marker) {
-		case .UBJSON_MARKER_ARRAY_START:
-				type = .UBJSON_ENTER_ARRAY;
-				break;
-		case .UBJSON_MARKER_TRUE:
-		case .UBJSON_MARKER_TYPE:
-		case .UBJSON_MARKER_FLOAT32:
-				type = .UBJSON_TYPE_FLOAT;
-				break;
-		case .UBJSON_MARKER_NOOP:
-				type = .UBJSON_TYPE_NOOP;
-				break;
-		case .UBJSON_MARKER_INT16:
-				content = .UBJSON_INT32_INT16;
-				type = .UBJSON_TYPE_INT32;
-				break;
-		case .UBJSON_MARKER_OBJECT_START:
-				type = .UBJSON_ENTER_OBJECT;
-				break;
-		case .UBJSON_MARKER_UINT8:
-				content = .UBJSON_INT32_UINT8;
-				type = .UBJSON_TYPE_INT32;
-				break;
-		case .UBJSON_MARKER_ARRAY_END:
-		case .UBJSON_MARKER_INT8:
-				content = .UBJSON_INT32_INT8;
-				type = .UBJSON_TYPE_INT32;
-				break;
-		case .UBJSON_MARKER_FLOAT64:
-				type = .UBJSON_TYPE_DOUBLE;
-				break;
-		case .UBJSON_MARKER_STRING:
-				{ 
-					ubjson_read_callback_result_t result = cookie._ubjson_read_length(content);
-					if (result != .UBJSON_OKAY) {
-						return result;
-					} 
-					type = .UBJSON_TYPE_STRING;
-					break;
-				}
-		case .UBJSON_MARKER_CHAR:
-				type = .UBJSON_TYPE_STRING;
-				break;
-		case .UBJSON_MARKER_INT32:
-				content = .UBJSON_INT32_INT32;
-				type = .UBJSON_TYPE_INT32;
-				break;
-		case .UBJSON_MARKER_INT64:
-				type = .UBJSON_TYPE_INT64;
-				break;
-		case .UBJSON_MARKER_NULL:
-				type = .UBJSON_TYPE_NULL;
-				break;
-		case .UBJSON_MARKER_FALSE:
-				;
-				break;
-		case .UBJSON_MARKER_OBJECT_END:
-		case .UBJSON_MARKER_COUNT:
-		default:
-				return .UBJSON_INVALID_DATA;
-		}
-		return .UBJSON_OKAY;
-	}
-	public  _ubjson_read_struct(Object get_continue) {
-		ubjson_read_callback_result_t result = new ubjson_read_callback_result_t();
-		ssize_t count = -1;
-		byte marker;
-		byte type_marker = 0;
-		do {
-			result = cookie._ubjson_read_marker(marker);
-			if (result != .UBJSON_OKAY) {
-				return result;
-			} 
-		} while (0);
-		if (marker == .UBJSON_MARKER_TYPE) {
-			do {
-				result = cookie._ubjson_read_marker(marker);
-				if (result != .UBJSON_OKAY) {
-					return result;
-				} 
-			} while (0);
-			if (marker == 0) {
-				return .UBJSON_INVALID_DATA;
-			} 
-			type_marker = marker;
-			do {
-				result = cookie._ubjson_read_marker(marker);
-				if (result != .UBJSON_OKAY) {
-					return result;
-				} 
-			} while (0);
-		} 
-		if (marker == .UBJSON_MARKER_COUNT) {
-			result = cookie._ubjson_read_length(count);
-			if (result != .UBJSON_OKAY) {
-				return result;
-			} 
-			do {
-				result = cookie._ubjson_read_marker(marker);
-				if (result != .UBJSON_OKAY) {
-					return result;
-				} 
-			} while (0);
-		} 
-		this.setMarker(marker);
-		if ((type_marker != 0) && (count < 0/* If a type is specified, a count must be specified as well.
-		         * Otherwise a ']' could either be data (e.g. the character ']'),
-		         * or be meant to close the array.
-		         */)) {
-			return .UBJSON_INVALID_DATA;
-		} 
-		for (ssize_t index = 0;
-		 (count < 0) || (index < count); ++index) {
-			ubjson_type_t type1 = new ubjson_type_t();
-			ssize_t content1 = new ssize_t();
-			do {
-				result = cookie._ubjson_read_marker(marker);
-				if (result != .UBJSON_OKAY) {
-					return result;
-				} 
-			} while (0);
-			if (!/*Error: Function owner not recognized*/get_continue(cookie, marker, result, count, index, type1, content1) || (result != .UBJSON_OKAY)) {
-				break;
-			} 
-			result = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(cookie, type1, content1, .UBJSON_ABSENT, (byte)type_marker);
-			if (result != .UBJSON_OKAY) {
-				break;
-			} 
-		}
-		return result;
-	}
-	public boolean _ubjson_read_array_continue(byte marker,  result, Object count, Object index,  type1, Object content1) {
-		if (marker == .UBJSON_MARKER_ARRAY_END) {
-			if (count >= 0) {
-				result = .UBJSON_INVALID_DATA;
-			} 
-			return 0;
-		} 
-		this.setMarker(marker);
-		type1 = .UBJSON_INDEX;
-		content1 = index;
-		return 1;
-	}
-	public boolean _ubjson_read_object_continue(byte marker,  result, Object count, Object index,  type1, Object content1) {
-		(Object)index;
-		if (marker == .UBJSON_MARKER_OBJECT_END) {
-			if (count >= 0) {
-				result = .UBJSON_INVALID_DATA;
-			} 
-			return 0;
-		} 
-		this.setMarker(marker);
-		type1 = .UBJSON_KEY;
-		result = cookie._ubjson_read_length(content1);
-		return 1;
-	}
-	public  ubjson_read_array() {
-		return cookie._ubjson_read_struct(_ubjson_read_array_continue);
-	}
-	public  ubjson_read_object() {
-		return cookie._ubjson_read_struct(_ubjson_read_object_continue);
-	}
-	public  ubjson_read_next() {
-		byte marker;
-		ubjson_read_callback_result_t result = new ubjson_read_callback_result_t();
-		do {
-			result = cookie._ubjson_read_marker(marker);
-			if (result != .UBJSON_OKAY) {
-				return result;
-			} 
-		} while (0);
-		ubjson_type_t type = new ubjson_type_t();
-		ssize_t content = new ssize_t();
-		result = cookie._ubjson_get_call(marker, type, content);
-		if (result != .UBJSON_OKAY) {
-			return result;
-		} 
-		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(cookie, type, content, .UBJSON_ABSENT, 0);
-	}
-	public  ubjson_peek_value( type, Object content) {
-		byte marker = (byte)content;
-		if (marker == 0) {
-			ubjson_read_callback_result_t result = new ubjson_read_callback_result_t();
-			do {
-				result = cookie._ubjson_read_marker(marker);
-				if (result != .UBJSON_OKAY) {
-					return result;
-				} 
-			} while (0);
-		} 
-		return cookie._ubjson_get_call(marker, type, content);
 	}
 	public  getRw() {
 		return rw;

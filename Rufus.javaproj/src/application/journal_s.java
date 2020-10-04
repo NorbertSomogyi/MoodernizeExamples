@@ -20,13 +20,13 @@ public class journal_s {
 	private inode j_inode;
 	private Object j_tail_sequence;
 	private Object j_transaction_sequence;
-	private Object j_uuid;
+	private Object[] j_uuid;
 	private jbd2_revoke_table_s j_revoke;
-	private Object j_revoke_table;
+	private Object[] j_revoke_table;
 	private Object j_failed_commit;
 	private Object j_csum_seed;
 	
-	public journal_s(long j_flags, int j_errno, buffer_head j_sb_buffer, journal_superblock_s j_superblock, int j_format_version, long j_head, long j_tail, long j_free, long j_first, long j_last, Object j_dev, Object j_fs_dev, int j_blocksize, int j_blk_offset, int j_maxlen, inode j_inode, Object j_tail_sequence, Object j_transaction_sequence, Object j_uuid, jbd2_revoke_table_s j_revoke, Object j_revoke_table, Object j_failed_commit, Object j_csum_seed) {
+	public journal_s(long j_flags, int j_errno, buffer_head j_sb_buffer, journal_superblock_s j_superblock, int j_format_version, long j_head, long j_tail, long j_free, long j_first, long j_last, Object j_dev, Object j_fs_dev, int j_blocksize, int j_blk_offset, int j_maxlen, inode j_inode, Object j_tail_sequence, Object j_transaction_sequence, Object[] j_uuid, jbd2_revoke_table_s j_revoke, Object[] j_revoke_table, Object j_failed_commit, Object j_csum_seed) {
 		setJ_flags(j_flags);
 		setJ_errno(j_errno);
 		setJ_sb_buffer(j_sb_buffer);
@@ -281,10 +281,10 @@ public class journal_s {
 	public void setJ_transaction_sequence(Object newJ_transaction_sequence) {
 		j_transaction_sequence = newJ_transaction_sequence;
 	}
-	public Object getJ_uuid() {
+	public Object[] getJ_uuid() {
 		return j_uuid;
 	}
-	public void setJ_uuid(Object newJ_uuid) {
+	public void setJ_uuid(Object[] newJ_uuid) {
 		j_uuid = newJ_uuid;
 	}
 	public jbd2_revoke_table_s getJ_revoke() {
@@ -293,10 +293,10 @@ public class journal_s {
 	public void setJ_revoke(jbd2_revoke_table_s newJ_revoke) {
 		j_revoke = newJ_revoke;
 	}
-	public Object getJ_revoke_table() {
+	public Object[] getJ_revoke_table() {
 		return j_revoke_table;
 	}
-	public void setJ_revoke_table(Object newJ_revoke_table) {
+	public void setJ_revoke_table(Object[] newJ_revoke_table) {
 		j_revoke_table = newJ_revoke_table;
 	}
 	public Object getJ_failed_commit() {

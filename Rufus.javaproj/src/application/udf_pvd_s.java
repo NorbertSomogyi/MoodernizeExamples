@@ -5,14 +5,14 @@ public class udf_pvd_s {
 	private udf_tag_s tag;
 	private Object vol_desc_seq_num;
 	private Object primary_vol_desc_num;
-	private Object vol_ident;
+	private Object[] vol_ident;
 	private Object vol_seq_num;
 	private Object max_vol_seqnum;
 	private Object interchange_lvl;
 	private Object max_interchange_lvl;
 	private Object charset_list;
 	private Object max_charset_list;
-	private Object volset_id;
+	private Object[] volset_id;
 	private udf_charspec_s desc_charset;
 	private udf_charspec_s explanatory_charset;
 	private udf_extent_ad_s vol_abstract;
@@ -20,12 +20,12 @@ public class udf_pvd_s {
 	private udf_regid_s app_ident;
 	private udf_timestamp_s recording_time;
 	private udf_regid_s imp_ident;
-	private Object imp_use;
+	private Object[] imp_use;
 	private Object predecessor_vol_desc_seq_location;
 	private Object flags;
-	private Object reserved;
+	private Object[] reserved;
 	
-	public udf_pvd_s(udf_tag_s tag, Object vol_desc_seq_num, Object primary_vol_desc_num, Object vol_ident, Object vol_seq_num, Object max_vol_seqnum, Object interchange_lvl, Object max_interchange_lvl, Object charset_list, Object max_charset_list, Object volset_id, udf_charspec_s desc_charset, udf_charspec_s explanatory_charset, udf_extent_ad_s vol_abstract, udf_extent_ad_s vol_copyright, udf_regid_s app_ident, udf_timestamp_s recording_time, udf_regid_s imp_ident, Object imp_use, Object predecessor_vol_desc_seq_location, Object flags, Object reserved) {
+	public udf_pvd_s(udf_tag_s tag, Object vol_desc_seq_num, Object primary_vol_desc_num, Object[] vol_ident, Object vol_seq_num, Object max_vol_seqnum, Object interchange_lvl, Object max_interchange_lvl, Object charset_list, Object max_charset_list, Object[] volset_id, udf_charspec_s desc_charset, udf_charspec_s explanatory_charset, udf_extent_ad_s vol_abstract, udf_extent_ad_s vol_copyright, udf_regid_s app_ident, udf_timestamp_s recording_time, udf_regid_s imp_ident, Object[] imp_use, Object predecessor_vol_desc_seq_location, Object flags, Object[] reserved) {
 		setTag(tag);
 		setVol_desc_seq_num(vol_desc_seq_num);
 		setPrimary_vol_desc_num(primary_vol_desc_num);
@@ -70,10 +70,10 @@ public class udf_pvd_s {
 	public void setPrimary_vol_desc_num(Object newPrimary_vol_desc_num) {
 		primary_vol_desc_num = newPrimary_vol_desc_num;
 	}
-	public Object getVol_ident() {
+	public Object[] getVol_ident() {
 		return vol_ident;
 	}
-	public void setVol_ident(Object newVol_ident) {
+	public void setVol_ident(Object[] newVol_ident) {
 		vol_ident = newVol_ident;
 	}
 	public Object getVol_seq_num() {
@@ -112,10 +112,10 @@ public class udf_pvd_s {
 	public void setMax_charset_list(Object newMax_charset_list) {
 		max_charset_list = newMax_charset_list;
 	}
-	public Object getVolset_id() {
+	public Object[] getVolset_id() {
 		return volset_id;
 	}
-	public void setVolset_id(Object newVolset_id) {
+	public void setVolset_id(Object[] newVolset_id) {
 		volset_id = newVolset_id;
 	}
 	public udf_charspec_s getDesc_charset() {
@@ -160,10 +160,10 @@ public class udf_pvd_s {
 	public void setImp_ident(udf_regid_s newImp_ident) {
 		imp_ident = newImp_ident;
 	}
-	public Object getImp_use() {
+	public Object[] getImp_use() {
 		return imp_use;
 	}
-	public void setImp_use(Object newImp_use) {
+	public void setImp_use(Object[] newImp_use) {
 		imp_use = newImp_use;
 	}
 	public Object getPredecessor_vol_desc_seq_location() {
@@ -178,10 +178,10 @@ public class udf_pvd_s {
 	public void setFlags(Object newFlags) {
 		flags = newFlags;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }

@@ -27,7 +27,7 @@ public class unz_file_pos_s {
 	}
 	public int unzGoToFilePos(Object file) {
 		unz64_file_pos file_pos64 = new unz64_file_pos();
-		if (file_pos == ((Object)0)) {
+		if (file_pos == (null)) {
 			return (true);
 		} 
 		Object generatedPos_in_zip_directory = this.getPos_in_zip_directory();

@@ -5,9 +5,9 @@ package application;
 /** Logical Volume Header Descriptor (ECMA 167r3 4/14.15) */
 public class logical_vol_header_desc_s {
 	private Object uniqueID;
-	private Object reserved;
+	private Object[] reserved;
 	
-	public logical_vol_header_desc_s(Object uniqueID, Object reserved) {
+	public logical_vol_header_desc_s(Object uniqueID, Object[] reserved) {
 		setUniqueID(uniqueID);
 		setReserved(reserved);
 	}
@@ -20,10 +20,10 @@ public class logical_vol_header_desc_s {
 	public void setUniqueID(Object newUniqueID) {
 		uniqueID = newUniqueID;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }

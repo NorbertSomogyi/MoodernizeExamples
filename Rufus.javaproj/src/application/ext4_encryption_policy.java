@@ -15,9 +15,9 @@ public class ext4_encryption_policy {
 	private byte contents_encryption_mode;
 	private byte filenames_encryption_mode;
 	private byte flags;
-	private Object master_key_descriptor;
+	private Object[] master_key_descriptor;
 	
-	public ext4_encryption_policy(byte version, byte contents_encryption_mode, byte filenames_encryption_mode, byte flags, Object master_key_descriptor) {
+	public ext4_encryption_policy(byte version, byte contents_encryption_mode, byte filenames_encryption_mode, byte flags, Object[] master_key_descriptor) {
 		setVersion(version);
 		setContents_encryption_mode(contents_encryption_mode);
 		setFilenames_encryption_mode(filenames_encryption_mode);
@@ -51,10 +51,10 @@ public class ext4_encryption_policy {
 	public void setFlags(byte newFlags) {
 		flags = newFlags;
 	}
-	public Object getMaster_key_descriptor() {
+	public Object[] getMaster_key_descriptor() {
 		return master_key_descriptor;
 	}
-	public void setMaster_key_descriptor(Object newMaster_key_descriptor) {
+	public void setMaster_key_descriptor(Object[] newMaster_key_descriptor) {
 		master_key_descriptor = newMaster_key_descriptor;
 	}
 }

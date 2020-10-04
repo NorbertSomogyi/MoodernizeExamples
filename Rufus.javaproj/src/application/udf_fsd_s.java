@@ -12,18 +12,18 @@ public class udf_fsd_s {
 	private Object fileset_num;
 	private Object udf_fsd_num;
 	private udf_charspec_s logical_vol_id_charset;
-	private Object logical_vol_id;
+	private Object[] logical_vol_id;
 	private udf_charspec_s fileset_charset;
-	private Object fileSet_id;
-	private Object copyright_file_id;
-	private Object abstract_file_id;
+	private Object[] fileSet_id;
+	private Object[] copyright_file_id;
+	private Object[] abstract_file_id;
 	private udf_long_ad_s root_icb;
 	private udf_regid_s domain_id;
 	private udf_long_ad_s next_ext;
 	private udf_long_ad_s stream_directory_ICB;
-	private Object reserved;
+	private Object[] reserved;
 	
-	public udf_fsd_s(udf_tag_s tag, udf_timestamp_s recording_time, Object interchange_lvl, Object maxInterchange_lvl, Object charset_list, Object max_charset_list, Object fileset_num, Object udf_fsd_num, udf_charspec_s logical_vol_id_charset, Object logical_vol_id, udf_charspec_s fileset_charset, Object fileSet_id, Object copyright_file_id, Object abstract_file_id, udf_long_ad_s root_icb, udf_regid_s domain_id, udf_long_ad_s next_ext, udf_long_ad_s stream_directory_ICB, Object reserved) {
+	public udf_fsd_s(udf_tag_s tag, udf_timestamp_s recording_time, Object interchange_lvl, Object maxInterchange_lvl, Object charset_list, Object max_charset_list, Object fileset_num, Object udf_fsd_num, udf_charspec_s logical_vol_id_charset, Object[] logical_vol_id, udf_charspec_s fileset_charset, Object[] fileSet_id, Object[] copyright_file_id, Object[] abstract_file_id, udf_long_ad_s root_icb, udf_regid_s domain_id, udf_long_ad_s next_ext, udf_long_ad_s stream_directory_ICB, Object[] reserved) {
 		setTag(tag);
 		setRecording_time(recording_time);
 		setInterchange_lvl(interchange_lvl);
@@ -101,10 +101,10 @@ public class udf_fsd_s {
 	public void setLogical_vol_id_charset(udf_charspec_s newLogical_vol_id_charset) {
 		logical_vol_id_charset = newLogical_vol_id_charset;
 	}
-	public Object getLogical_vol_id() {
+	public Object[] getLogical_vol_id() {
 		return logical_vol_id;
 	}
-	public void setLogical_vol_id(Object newLogical_vol_id) {
+	public void setLogical_vol_id(Object[] newLogical_vol_id) {
 		logical_vol_id = newLogical_vol_id;
 	}
 	public udf_charspec_s getFileset_charset() {
@@ -113,22 +113,22 @@ public class udf_fsd_s {
 	public void setFileset_charset(udf_charspec_s newFileset_charset) {
 		fileset_charset = newFileset_charset;
 	}
-	public Object getFileSet_id() {
+	public Object[] getFileSet_id() {
 		return fileSet_id;
 	}
-	public void setFileSet_id(Object newFileSet_id) {
+	public void setFileSet_id(Object[] newFileSet_id) {
 		fileSet_id = newFileSet_id;
 	}
-	public Object getCopyright_file_id() {
+	public Object[] getCopyright_file_id() {
 		return copyright_file_id;
 	}
-	public void setCopyright_file_id(Object newCopyright_file_id) {
+	public void setCopyright_file_id(Object[] newCopyright_file_id) {
 		copyright_file_id = newCopyright_file_id;
 	}
-	public Object getAbstract_file_id() {
+	public Object[] getAbstract_file_id() {
 		return abstract_file_id;
 	}
-	public void setAbstract_file_id(Object newAbstract_file_id) {
+	public void setAbstract_file_id(Object[] newAbstract_file_id) {
 		abstract_file_id = newAbstract_file_id;
 	}
 	public udf_long_ad_s getRoot_icb() {
@@ -155,10 +155,10 @@ public class udf_fsd_s {
 	public void setStream_directory_ICB(udf_long_ad_s newStream_directory_ICB) {
 		stream_directory_ICB = newStream_directory_ICB;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }

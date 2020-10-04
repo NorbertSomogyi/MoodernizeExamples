@@ -8,9 +8,9 @@ public class linkedlist_datablock_internal_s {
 	private Object avail_in_this_block;
 	private Object filled_in_this_block;
 	private Object unused;
-	private Object data;
+	private Object[] data;
 	
-	public linkedlist_datablock_internal_s(linkedlist_datablock_internal_s next_datablock, Object avail_in_this_block, Object filled_in_this_block, Object unused, Object data) {
+	public linkedlist_datablock_internal_s(linkedlist_datablock_internal_s next_datablock, Object avail_in_this_block, Object filled_in_this_block, Object unused, Object[] data) {
 		setNext_datablock(next_datablock);
 		setAvail_in_this_block(avail_in_this_block);
 		setFilled_in_this_block(filled_in_this_block);
@@ -23,8 +23,8 @@ public class linkedlist_datablock_internal_s {
 	public linkedlist_datablock_internal_s allocate_new_datablock() {
 		linkedlist_datablock_internal ldi = new linkedlist_datablock_internal();
 		ldi = (linkedlist_datablock_internal)(/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/));
-		if (ldi != ((Object)0)) {
-			ldi.setNext_datablock(((Object)0));
+		if (ldi != (null)) {
+			ldi.setNext_datablock((null));
 			ldi.setFilled_in_this_block(0);
 			ldi.setAvail_in_this_block((4096 - (4 * 4)));
 		} 
@@ -32,7 +32,7 @@ public class linkedlist_datablock_internal_s {
 	}
 	public void free_datablock() {
 		linkedlist_datablock_internal_s generatedNext_datablock = this.getNext_datablock();
-		while (ldi != ((Object)0)) {
+		while (ldi != (null)) {
 			linkedlist_datablock_internal ldinext = generatedNext_datablock;
 			{ 
 				if (ldi) {
@@ -67,10 +67,10 @@ public class linkedlist_datablock_internal_s {
 	public void setUnused(Object newUnused) {
 		unused = newUnused;
 	}
-	public Object getData() {
+	public Object[] getData() {
 		return data;
 	}
-	public void setData(Object newData) {
+	public void setData(Object[] newData) {
 		data = newData;
 	}
 }

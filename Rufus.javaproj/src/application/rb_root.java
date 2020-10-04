@@ -9,10 +9,6 @@ public class rb_root {
 	public rb_root() {
 	}
 	
-	public int ext2fs_rb_empty_root() {
-		rb_node generatedRb_node = this.getRb_node();
-		return generatedRb_node == ((Object)0);
-	}
 	public void rb_free_tree() {
 		bmap_rb_extent ext = new bmap_rb_extent();
 		rb_node node = new rb_node();
@@ -47,6 +43,10 @@ public class rb_root {
 					ext.setCount(new_max - generatedStart + 1);
 			} 
 		}
+	}
+	public int ext2fs_rb_empty_root() {
+		rb_node generatedRb_node = this.getRb_node();
+		return generatedRb_node == (null);
 	}
 	public rb_node getRb_node() {
 		return rb_node;

@@ -24,14 +24,25 @@ public class zlib_filefunc64_def_s {
 	}
 	
 	public Object zipOpen2_64(Object pathname, int append, Object globalcomment) {
-		if (pzlib_filefunc_def != ((Object)0)) {
+		if (pzlib_filefunc_def != (null)) {
 			zlib_filefunc64_32_def zlib_filefunc64_32_def_fill = new zlib_filefunc64_32_def();
 			zlib_filefunc64_32_def_fill.setZfile_func64(pzlib_filefunc_def);
-			zlib_filefunc64_32_def_fill.setZtell32_file(((Object)0));
-			zlib_filefunc64_32_def_fill.setZseek32_file(((Object)0));
+			zlib_filefunc64_32_def_fill.setZtell32_file((null));
+			zlib_filefunc64_32_def_fill.setZseek32_file((null));
 			return zlib_filefunc64_32_def_fill.zipOpen3(pathname, append, globalcomment);
 		} else {
-				return ((Object)0).zipOpen3(pathname, append, globalcomment);
+				return (null).zipOpen3(pathname, append, globalcomment);
+		} 
+	}
+	public Object unzOpen2_64(Object path) {
+		if (pzlib_filefunc_def != (null)) {
+			zlib_filefunc64_32_def zlib_filefunc64_32_def_fill = new zlib_filefunc64_32_def();
+			zlib_filefunc64_32_def_fill.setZfile_func64(pzlib_filefunc_def);
+			zlib_filefunc64_32_def_fill.setZtell32_file((null));
+			zlib_filefunc64_32_def_fill.setZseek32_file((null));
+			return zlib_filefunc64_32_def_fill.unzOpenInternal(path, 1);
+		} else {
+				return (null).unzOpenInternal(path, 1);
 		} 
 	}
 	public void fill_fopen64_filefunc() {
@@ -42,7 +53,7 @@ public class zlib_filefunc64_def_s {
 		this.setZseek64_file(ModernizedCProgram.fseek64_file_func);
 		this.setZclose_file(ModernizedCProgram.fclose_file_func);
 		this.setZerror_file(ModernizedCProgram.ferror_file_func);
-		this.setOpaque(((Object)0));
+		this.setOpaque((null));
 	}
 	public void fill_win32_filefunc64() {
 		this.setZopen64_file(win32_open64_file_func);
@@ -52,7 +63,7 @@ public class zlib_filefunc64_def_s {
 		this.setZseek64_file(ModernizedCProgram.win32_seek64_file_func);
 		this.setZclose_file(ModernizedCProgram.win32_close_file_func);
 		this.setZerror_file(ModernizedCProgram.win32_error_file_func);
-		this.setOpaque(((Object)0));
+		this.setOpaque((null));
 	}
 	public void fill_win32_filefunc64A() {
 		this.setZopen64_file(win32_open64_file_funcA);
@@ -62,7 +73,7 @@ public class zlib_filefunc64_def_s {
 		this.setZseek64_file(ModernizedCProgram.win32_seek64_file_func);
 		this.setZclose_file(ModernizedCProgram.win32_close_file_func);
 		this.setZerror_file(ModernizedCProgram.win32_error_file_func);
-		this.setOpaque(((Object)0));
+		this.setOpaque((null));
 	}
 	public void fill_win32_filefunc64W() {
 		this.setZopen64_file(win32_open64_file_funcW);
@@ -72,18 +83,7 @@ public class zlib_filefunc64_def_s {
 		this.setZseek64_file(ModernizedCProgram.win32_seek64_file_func);
 		this.setZclose_file(ModernizedCProgram.win32_close_file_func);
 		this.setZerror_file(ModernizedCProgram.win32_error_file_func);
-		this.setOpaque(((Object)0));
-	}
-	public Object unzOpen2_64(Object path) {
-		if (pzlib_filefunc_def != ((Object)0)) {
-			zlib_filefunc64_32_def zlib_filefunc64_32_def_fill = new zlib_filefunc64_32_def();
-			zlib_filefunc64_32_def_fill.setZfile_func64(pzlib_filefunc_def);
-			zlib_filefunc64_32_def_fill.setZtell32_file(((Object)0));
-			zlib_filefunc64_32_def_fill.setZseek32_file(((Object)0));
-			return zlib_filefunc64_32_def_fill.unzOpenInternal(path, 1);
-		} else {
-				return ((Object)0).unzOpenInternal(path, 1);
-		} 
+		this.setOpaque((null));
 	}
 	public Object getZopen64_file() {
 		return zopen64_file;

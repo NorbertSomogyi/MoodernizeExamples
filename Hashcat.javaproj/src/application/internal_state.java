@@ -41,17 +41,17 @@ public class internal_state {
 	private int strategy;
 	private Object good_match;
 	private int nice_match;
-	private Object dyn_ltree;
-	private Object dyn_dtree;
-	private Object bl_tree;
+	private Object[] dyn_ltree;
+	private Object[] dyn_dtree;
+	private Object[] bl_tree;
 	private tree_desc_s l_desc;
 	private tree_desc_s d_desc;
 	private tree_desc_s bl_desc;
-	private Object bl_count;
-	private Object heap;
+	private Object[] bl_count;
+	private Object[] heap;
 	private int heap_len;
 	private int heap_max;
-	private Object depth;
+	private Object[] depth;
 	private Object[] l_buf;
 	private Object lit_bufsize;
 	private Object last_lit;
@@ -64,7 +64,7 @@ public class internal_state {
 	private int bi_valid;
 	private Object high_water;
 	
-	public internal_state(Object strm, int status, Object[] pending_buf, Object pending_buf_size, Object pending_out, Object pending, int wrap, Object gzhead, Object gzindex, Object method, int last_flush, Object w_size, Object w_bits, Object w_mask, Object[] window, Object window_size, Object[] prev, Object[] head, Object ins_h, Object hash_size, Object hash_bits, Object hash_mask, Object hash_shift, long block_start, Object match_length, Object prev_match, int match_available, Object strstart, Object match_start, Object lookahead, Object prev_length, Object max_chain_length, Object max_lazy_match, int level, int strategy, Object good_match, int nice_match, Object dyn_ltree, Object dyn_dtree, Object bl_tree, tree_desc_s l_desc, tree_desc_s d_desc, tree_desc_s bl_desc, Object bl_count, Object heap, int heap_len, int heap_max, Object depth, Object[] l_buf, Object lit_bufsize, Object last_lit, Object[] d_buf, Object opt_len, Object static_len, Object matches, Object insert, Object bi_buf, int bi_valid, Object high_water) {
+	public internal_state(Object strm, int status, Object[] pending_buf, Object pending_buf_size, Object pending_out, Object pending, int wrap, Object gzhead, Object gzindex, Object method, int last_flush, Object w_size, Object w_bits, Object w_mask, Object[] window, Object window_size, Object[] prev, Object[] head, Object ins_h, Object hash_size, Object hash_bits, Object hash_mask, Object hash_shift, long block_start, Object match_length, Object prev_match, int match_available, Object strstart, Object match_start, Object lookahead, Object prev_length, Object max_chain_length, Object max_lazy_match, int level, int strategy, Object good_match, int nice_match, Object[] dyn_ltree, Object[] dyn_dtree, Object[] bl_tree, tree_desc_s l_desc, tree_desc_s d_desc, tree_desc_s bl_desc, Object[] bl_count, Object[] heap, int heap_len, int heap_max, Object[] depth, Object[] l_buf, Object lit_bufsize, Object last_lit, Object[] d_buf, Object opt_len, Object static_len, Object matches, Object insert, Object bi_buf, int bi_valid, Object high_water) {
 		setStrm(strm);
 		setStatus(status);
 		setPending_buf(pending_buf);
@@ -128,763 +128,6 @@ public class internal_state {
 	public internal_state() {
 	}
 	
-	/* defined(GEN_TREES_H) || !defined(STDC) */
-	/* ===========================================================================
-	 * Genererate the file trees.h describing the static trees.
-	 */
-	/* GEN_TREES_H */
-	/* ===========================================================================
-	 * Initialize the tree data structures for a new zlib stream.
-	 */
-	public void _tr_init() {
-		ModernizedCProgram.tr_static_init();
-		Object generatedDyn_ltree = this.getDyn_ltree();
-		tree_desc_s generatedL_desc = this.getL_desc();
-		generatedL_desc.setDyn_tree(generatedDyn_ltree);
-		generatedL_desc.setStat_desc(ModernizedCProgram.static_l_desc);
-		Object generatedDyn_dtree = this.getDyn_dtree();
-		tree_desc_s generatedD_desc = this.getD_desc();
-		generatedD_desc.setDyn_tree(generatedDyn_dtree);
-		generatedD_desc.setStat_desc(ModernizedCProgram.static_d_desc);
-		Object generatedBl_tree = this.getBl_tree();
-		tree_desc_s generatedBl_desc = this.getBl_desc();
-		generatedBl_desc.setDyn_tree(generatedBl_tree);
-		generatedBl_desc.setStat_desc(ModernizedCProgram.static_bl_desc);
-		this.setBi_buf(0);
-		this.setBi_valid(0);
-		/* Initialize the first block of the first file: */s/* ===========================================================================
-		 * Initialize a new block.
-		 */.init_block();
-	}
-	public void init_block() {
-		/* iterates over tree elements */int n;
-		Object generatedDyn_ltree = this.getDyn_ltree();
-		for (n = 0; n < (256 + 1 + 29); n++) {
-			generatedDyn_ltree[n].getFc().setFreq(/* Initialize the trees. */0);
-		}
-		Object generatedDyn_dtree = this.getDyn_dtree();
-		for (n = 0; n < 30; n++) {
-			generatedDyn_dtree[n].getFc().setFreq(0);
-		}
-		Object generatedBl_tree = this.getBl_tree();
-		for (n = 0; n < 19; n++) {
-			generatedBl_tree[n].getFc().setFreq(0);
-		}
-		generatedDyn_ltree[256].getFc().setFreq(1);
-		this.setOpt_len(this.setStatic_len(-1024));
-		this.setLast_lit(this.setMatches(0/* Index within the heap array of least frequent node in the Huffman tree */));
-	}
-	/* ===========================================================================
-	 * Remove the smallest element from the heap and recreate the heap with
-	 * one less element. Updates heap and heap_len.
-	 */
-	/* ===========================================================================
-	 * Construct the Huffman tree for the bit lengths and return the index in
-	 * bl_order of the last bit length code to send.
-	 */
-	public int build_bl_tree() {
-		/* index of last bit length code of non zero freq */int max_blindex;
-		Object generatedDyn_ltree = this.getDyn_ltree();
-		tree_desc_s generatedL_desc = this.getL_desc();
-		int generatedMax_code = generatedL_desc.getMax_code();
-		ModernizedCProgram.scan_tree(s, (ct_data)generatedDyn_ltree, generatedMax_code);
-		Object generatedDyn_dtree = this.getDyn_dtree();
-		ModernizedCProgram.scan_tree(s, (ct_data)generatedDyn_dtree, generatedMax_code);
-		tree_desc_s generatedBl_desc = this.getBl_desc();
-		ModernizedCProgram.build_tree(s, (tree_desc)((generatedBl_desc)));
-		Object generatedBl_tree = this.getBl_tree();
-		for (max_blindex = 19 - 1; max_blindex >= 3; /* Determine the number of bit length codes to send. The pkzip format
-		     * requires that at least 4 bit length codes be sent. (appnote.txt says
-		     * 3 but the actual value used is 4.)
-		     */max_blindex--) {
-			if (generatedBl_tree[ModernizedCProgram.bl_order[max_blindex]].getDl().getLen() != 0) {
-				break;
-			} 
-		}
-		Object generatedOpt_len = this.getOpt_len();
-		generatedOpt_len += 3 * ((ulg)max_blindex + 1) + 5 + 5 + /* Update opt_len to include the bit length tree and counts */4;
-		;
-		return max_blindex/* ===========================================================================
-		 * Send the header for a block using dynamic Huffman trees: the counts, the
-		 * lengths of the bit length codes, the literal tree and the distance tree.
-		 * IN assertion: lcodes >= 257, dcodes >= 1, blcodes >= 4.
-		 */;
-	}
-	public void send_all_trees(int lcodes, int dcodes, int blcodes) {
-		/* number of codes for each tree *//* index in bl_order */int rank;
-		;
-		;
-		;
-		int generatedBi_valid = this.getBi_valid();
-		Object generatedBi_buf = this.getBi_buf();
-		Object[] generatedPending_buf = this.getPending_buf();
-		Object generatedPending = this.getPending();
-		{ 
-			int len = 5;
-			if (generatedBi_valid > (int)16 - len) {
-				int val = (int)lcodes - 257;
-				generatedBi_buf |=  (ush)val << generatedBi_valid;
-				{ 
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-					}
-					;
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-					}
-					;
-				}
-				;
-				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-				generatedBi_valid += len - 16;
-			} else {
-					generatedBi_buf |=  (ush)(lcodes - 257) << generatedBi_valid;
-					generatedBi_valid += /* not +255 as stated in appnote.txt */len;
-			} 
-		}
-		;
-		{ 
-			int len = 5;
-			if (generatedBi_valid > (int)16 - len) {
-				int val = (int)dcodes - 1;
-				generatedBi_buf |=  (ush)val << generatedBi_valid;
-				{ 
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-					}
-					;
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-					}
-					;
-				}
-				;
-				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-				generatedBi_valid += len - 16;
-			} else {
-					generatedBi_buf |=  (ush)(dcodes - 1) << generatedBi_valid;
-					generatedBi_valid += len;
-			} 
-		}
-		;
-		{ 
-			int len = 4;
-			if (generatedBi_valid > (int)16 - len) {
-				int val = (int)blcodes - 4;
-				generatedBi_buf |=  (ush)val << generatedBi_valid;
-				{ 
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-					}
-					;
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-					}
-					;
-				}
-				;
-				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-				generatedBi_valid += len - 16;
-			} else {
-					generatedBi_buf |=  (ush)(blcodes - 4) << generatedBi_valid;
-					generatedBi_valid += /* not -3 as stated in appnote.txt */len;
-			} 
-		}
-		;
-		Object generatedBl_tree = this.getBl_tree();
-		for (rank = 0; rank < blcodes; rank++) {
-			;
-			{ 
-				int len = 3;
-				if (generatedBi_valid > (int)16 - len) {
-					int val = (int)generatedBl_tree[ModernizedCProgram.bl_order[rank]].getDl().getLen();
-					generatedBi_buf |=  (ush)val << generatedBi_valid;
-					{ 
-						{ 
-							generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-						}
-						;
-						{ 
-							generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-						}
-						;
-					}
-					;
-					this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-					generatedBi_valid += len - 16;
-				} else {
-						generatedBi_buf |=  (ush)(generatedBl_tree[ModernizedCProgram.bl_order[rank]].getDl().getLen()) << generatedBi_valid;
-						generatedBi_valid += len;
-				} 
-			}
-			;
-		}
-		;
-		Object generatedDyn_ltree = this.getDyn_ltree();
-		ModernizedCProgram.send_tree(s, (ct_data)generatedDyn_ltree, lcodes - /* literal tree */1);
-		;
-		Object generatedDyn_dtree = this.getDyn_dtree();
-		ModernizedCProgram.send_tree(s, (ct_data)generatedDyn_dtree, dcodes - /* distance tree */1);
-		;/* ===========================================================================
-		 * Send a stored block
-		 */
-	}
-	public void _tr_stored_block(Object buf, Object stored_len, int last) {
-		int generatedBi_valid = this.getBi_valid();
-		Object generatedBi_buf = this.getBi_buf();
-		Object[] generatedPending_buf = this.getPending_buf();
-		Object generatedPending = this.getPending();
-		{ 
-			int len = 3;
-			if (generatedBi_valid > (int)16 - len) {
-				int val = (int)(0 << 1) + last;
-				generatedBi_buf |=  (ush)val << generatedBi_valid;
-				{ 
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-					}
-					;
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-					}
-					;
-				}
-				;
-				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-				generatedBi_valid += len - 16;
-			} else {
-					generatedBi_buf |=  (ush)((0 << 1) + last) << generatedBi_valid;
-					generatedBi_valid += /* length of input block *//* one if this is the last block for a file *//* send block type */len;
-			} 
-		}
-		;
-		/* align on byte boundary */s.bi_windup();
-		{ 
-			{ 
-				generatedPending_buf[generatedPending++] = (Bytef)((uch)(((ush)stored_len) & -1024));
-			}
-			;
-			{ 
-				generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)((ush)stored_len) >> 8));
-			}
-			;
-		}
-		;
-		{ 
-			{ 
-				generatedPending_buf[generatedPending++] = (Bytef)((uch)(((ush)~stored_len) & -1024));
-			}
-			;
-			{ 
-				generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)((ush)~stored_len) >> 8));
-			}
-			;
-		}
-		;
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPending_buf + generatedPending, (Bytef)buf, stored_len);
-		generatedPending += stored_len;
-	}
-	/* input block */
-	/* ===========================================================================
-	 * Flush the bits in the bit buffer to pending output (leaves at most 7 bits)
-	 */
-	public void _tr_flush_bits() {
-		s/* ===========================================================================
-		 * Send one empty static block to give enough lookahead for inflate.
-		 * This takes 10 bits, of which 7 may remain in the bit buffer.
-		 */.bi_flush();
-	}
-	public void _tr_align() {
-		int generatedBi_valid = this.getBi_valid();
-		Object generatedBi_buf = this.getBi_buf();
-		Object[] generatedPending_buf = this.getPending_buf();
-		Object generatedPending = this.getPending();
-		{ 
-			int len = 3;
-			if (generatedBi_valid > (int)16 - len) {
-				int val = (int)1 << 1;
-				generatedBi_buf |=  (ush)val << generatedBi_valid;
-				{ 
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-					}
-					;
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-					}
-					;
-				}
-				;
-				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-				generatedBi_valid += len - 16;
-			} else {
-					generatedBi_buf |=  (ush)(1 << 1) << generatedBi_valid;
-					generatedBi_valid += len;
-			} 
-		}
-		;
-		{ 
-			int len = ModernizedCProgram.static_ltree[256].getDl().getLen();
-			if (generatedBi_valid > (int)16 - len) {
-				int val = (int)ModernizedCProgram.static_ltree[256].getFc().getCode();
-				generatedBi_buf |=  (ush)val << generatedBi_valid;
-				{ 
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-					}
-					;
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-					}
-					;
-				}
-				;
-				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-				generatedBi_valid += len - 16;
-			} else {
-					generatedBi_buf |=  (ush)(ModernizedCProgram.static_ltree[256].getFc().getCode()) << generatedBi_valid;
-					generatedBi_valid += len;
-			} 
-		}
-		;
-		/* 3 for block type, 7 for EOB */s/* ===========================================================================
-		 * Determine the best encoding for the current block: dynamic trees, static
-		 * trees or store, and write out the encoded block.
-		 */.bi_flush();
-	}
-	public void _tr_flush_block(Object buf, Object stored_len, int last) {
-		/* length of input block *//* one if this is the last block for a file *//* opt_len and static_len in bytes */ulg opt_lenb = new ulg();
-		ulg static_lenb = new ulg();
-		int max_blindex = /* index of last bit length code of non zero freq */0;
-		int generatedLevel = this.getLevel();
-		Object generatedStrm = this.getStrm();
-		tree_desc_s generatedL_desc = this.getL_desc();
-		tree_desc_s generatedD_desc = this.getD_desc();
-		Object generatedOpt_len = this.getOpt_len();
-		Object generatedStatic_len = this.getStatic_len();
-		if (generatedLevel > /* Build the Huffman trees unless a stored block is forced */0) {
-			if (generatedStrm.getData_type() == /* Check if the file is binary or text */2) {
-				generatedStrm.setData_type(s.detect_data_type());
-			} 
-			ModernizedCProgram.build_tree(s, (tree_desc)((generatedL_desc)));
-			;
-			ModernizedCProgram.build_tree(s, (tree_desc)((generatedD_desc)));
-			;
-			max_blindex = /* Build the bit length tree for the above two trees, and get the index
-			         * in bl_order of the last bit length code to send.
-			         */s.build_bl_tree();
-			opt_lenb = (generatedOpt_len + 3 + 7) >> /* Determine the best encoding. Compute the block lengths in bytes. */3;
-			static_lenb = (generatedStatic_len + 3 + 7) >> 3;
-			;
-			if (static_lenb <= opt_lenb) {
-				opt_lenb = static_lenb;
-			} 
-		} else {
-				;
-				opt_lenb = static_lenb = stored_len + /* force a stored block */5;
-		} 
-		int generatedStrategy = this.getStrategy();
-		int generatedBi_valid = this.getBi_valid();
-		Object generatedBi_buf = this.getBi_buf();
-		Object[] generatedPending_buf = this.getPending_buf();
-		Object generatedPending = this.getPending();
-		int generatedMax_code = generatedL_desc.getMax_code();
-		Object generatedDyn_ltree = this.getDyn_ltree();
-		Object generatedDyn_dtree = this.getDyn_dtree();
-		if (stored_len + 4 <= opt_lenb && buf != (byte)/* force stored block */0/* 4: two words for the lengths *//* The test buf != NULL is only necessary if LIT_BUFSIZE > WSIZE.
-		         * Otherwise we can't have processed more than WSIZE input bytes since
-		         * the last block flush, because compression would have been
-		         * successful. If LIT_BUFSIZE <= WSIZE, it is never too late to
-		         * transform a block into a stored block.
-		         */) {
-			s._tr_stored_block(buf, stored_len, last);
-		}  else if (generatedStrategy == 4 || static_lenb == /* force static trees */opt_lenb) {
-			{ 
-				int len = 3;
-				if (generatedBi_valid > (int)16 - len) {
-					int val = (int)(1 << 1) + last;
-					generatedBi_buf |=  (ush)val << generatedBi_valid;
-					{ 
-						{ 
-							generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-						}
-						;
-						{ 
-							generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-						}
-						;
-					}
-					;
-					this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-					generatedBi_valid += len - 16;
-				} else {
-						generatedBi_buf |=  (ush)((1 << 1) + last) << generatedBi_valid;
-						generatedBi_valid += len;
-				} 
-			}
-			;
-			s.compress_block((ct_data)ModernizedCProgram.static_ltree, (ct_data)ModernizedCProgram.static_dtree);
-		} else {
-				{ 
-					int len = 3;
-					if (generatedBi_valid > (int)16 - len) {
-						int val = (int)(2 << 1) + last;
-						generatedBi_buf |=  (ush)val << generatedBi_valid;
-						{ 
-							{ 
-								generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-							}
-							;
-							{ 
-								generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-							}
-							;
-						}
-						;
-						this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-						generatedBi_valid += len - 16;
-					} else {
-							generatedBi_buf |=  (ush)((2 << 1) + last) << generatedBi_valid;
-							generatedBi_valid += len;
-					} 
-				}
-				;
-				s.send_all_trees(generatedMax_code + 1, generatedMax_code + 1, max_blindex + 1);
-				s.compress_block((ct_data)generatedDyn_ltree, (ct_data)generatedDyn_dtree);
-		} 
-		;/* The above check is made mod 2^32, for files larger than 512 MB
-		     * and uLong implemented on 32 bits.
-		     */
-		s.init_block();
-		if (last) {
-			s/* align on byte boundary */.bi_windup();
-		} 
-		;/* ===========================================================================
-		 * Save the match info and tally the frequency counts. Return true if
-		 * the current block must be flushed.
-		 */
-	}
-	/* input block, or NULL if too old */
-	public int _tr_tally(int dist, int lc) {
-		Object[] generatedD_buf = this.getD_buf();
-		Object generatedLast_lit = this.getLast_lit();
-		generatedD_buf[generatedLast_lit] = (ush)/* match length-MIN_MATCH or unmatched char (if dist==0) */dist;
-		Object[] generatedL_buf = this.getL_buf();
-		generatedL_buf[generatedLast_lit++] = (uch)lc;
-		Object generatedDyn_ltree = this.getDyn_ltree();
-		Object generatedMatches = this.getMatches();
-		Object generatedDyn_dtree = this.getDyn_dtree();
-		if (dist == 0) {
-			generatedDyn_ltree[lc].getFc().getFreq()++;
-		} else {
-				generatedMatches++;
-				/* Here, lc is the match length - MIN_MATCH *//* dist = match distance - 1 */dist--;
-				;
-				generatedDyn_ltree[ModernizedCProgram._length_code[lc] + 256 + 1].getFc().getFreq()++;
-				generatedDyn_dtree[((dist) < 256 ? ModernizedCProgram._dist_code[dist] : ModernizedCProgram._dist_code[256 + ((dist) >> 7)])].getFc().getFreq()++;
-		} 
-		Object generatedLit_bufsize = this.getLit_bufsize();
-		return (generatedLast_lit == generatedLit_bufsize - 1/* We avoid equality with lit_bufsize because of wraparound at 64K
-		     * on 16 bit machines and because stored blocks are restricted to
-		     * 64K-1 bytes.
-		     */);
-	}
-	/* distance of matched string */
-	/* ===========================================================================
-	 * Send the block data compressed using the given Huffman trees
-	 */
-	public void compress_block(Object[] ltree, Object[] dtree) {
-		/* distance tree *//* distance of matched string */int dist;
-		/* match length or unmatched char (if dist == 0) */int lc;
-		int lx = /* running index in l_buf */0;
-		/* the code to send */int code;
-		/* number of extra bits to send */int extra;
-		Object generatedLast_lit = this.getLast_lit();
-		Object[] generatedD_buf = this.getD_buf();
-		Object[] generatedL_buf = this.getL_buf();
-		int generatedBi_valid = this.getBi_valid();
-		Object generatedBi_buf = this.getBi_buf();
-		Object[] generatedPending_buf = this.getPending_buf();
-		Object generatedPending = this.getPending();
-		if (generatedLast_lit != 0) {
-			do {
-				dist = generatedD_buf[lx];
-				lc = generatedL_buf[lx++];
-				if (dist == 0) {
-					{ 
-						int len = ltree[lc].getDl().getLen();
-						if (generatedBi_valid > (int)16 - len) {
-							int val = (int)ltree[lc].getFc().getCode();
-							generatedBi_buf |=  (ush)val << generatedBi_valid;
-							{ 
-								{ 
-									generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-								}
-								;
-								{ 
-									generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-								}
-								;
-							}
-							;
-							this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-							generatedBi_valid += len - 16;
-						} else {
-								generatedBi_buf |=  (ush)(ltree[lc].getFc().getCode()) << generatedBi_valid;
-								generatedBi_valid += /* send a literal byte */len;
-						} 
-					}
-					;
-					;
-				} else {
-						code = ModernizedCProgram._length_code[/* Here, lc is the match length - MIN_MATCH */lc];
-						{ 
-							int len = ltree[code + 256 + 1].getDl().getLen();
-							if (generatedBi_valid > (int)16 - len) {
-								int val = (int)ltree[code + 256 + 1].getFc().getCode();
-								generatedBi_buf |=  (ush)val << generatedBi_valid;
-								{ 
-									{ 
-										generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-									}
-									;
-									{ 
-										generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-									}
-									;
-								}
-								;
-								this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-								generatedBi_valid += len - 16;
-							} else {
-									generatedBi_buf |=  (ush)(ltree[code + 256 + 1].getFc().getCode()) << generatedBi_valid;
-									generatedBi_valid += /* send the length code */len;
-							} 
-						}
-						;
-						extra = ModernizedCProgram.extra_lbits[code];
-						if (extra != 0) {
-							lc -= ModernizedCProgram.base_length[code];
-							{ 
-								int len = extra;
-								if (generatedBi_valid > (int)16 - len) {
-									int val = (int)lc;
-									generatedBi_buf |=  (ush)val << generatedBi_valid;
-									{ 
-										{ 
-											generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-										}
-										;
-										{ 
-											generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-										}
-										;
-									}
-									;
-									this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-									generatedBi_valid += len - 16;
-								} else {
-										generatedBi_buf |=  (ush)(lc) << generatedBi_valid;
-										generatedBi_valid += /* send the extra length bits */len;
-								} 
-							}
-							;
-						} 
-						/* dist is now the match distance - 1 */dist--;
-						code = ((dist) < 256 ? ModernizedCProgram._dist_code[dist] : ModernizedCProgram._dist_code[256 + ((dist) >> 7)]);
-						;
-						{ 
-							int len = dtree[code].getDl().getLen();
-							if (generatedBi_valid > (int)16 - len) {
-								int val = (int)dtree[code].getFc().getCode();
-								generatedBi_buf |=  (ush)val << generatedBi_valid;
-								{ 
-									{ 
-										generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-									}
-									;
-									{ 
-										generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-									}
-									;
-								}
-								;
-								this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-								generatedBi_valid += len - 16;
-							} else {
-									generatedBi_buf |=  (ush)(dtree[code].getFc().getCode()) << generatedBi_valid;
-									generatedBi_valid += /* send the distance code */len;
-							} 
-						}
-						;
-						extra = ModernizedCProgram.extra_dbits[code];
-						if (extra != 0) {
-							dist -= (int)ModernizedCProgram.base_dist[code];
-							{ 
-								int len = extra;
-								if (generatedBi_valid > (int)16 - len) {
-									int val = (int)dist;
-									generatedBi_buf |=  (ush)val << generatedBi_valid;
-									{ 
-										{ 
-											generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-										}
-										;
-										{ 
-											generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-										}
-										;
-									}
-									;
-									this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-									generatedBi_valid += len - 16;
-								} else {
-										generatedBi_buf |=  (ush)(dist) << generatedBi_valid;
-										generatedBi_valid += /* send the extra distance bits */len/* literal or match pair ? */;
-								} 
-							}
-							;
-						} 
-				} 
-				;
-			} while (lx < generatedLast_lit);
-		} 
-		{ 
-			int len = ltree[256].getDl().getLen();
-			if (generatedBi_valid > (int)16 - len) {
-				int val = (int)ltree[256].getFc().getCode();
-				generatedBi_buf |=  (ush)val << generatedBi_valid;
-				{ 
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-					}
-					;
-					{ 
-						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-					}
-					;
-				}
-				;
-				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
-				generatedBi_valid += len - 16;
-			} else {
-					generatedBi_buf |=  (ush)(ltree[256].getFc().getCode()) << generatedBi_valid;
-					generatedBi_valid += len/* ===========================================================================
-					 * Check if the data type is TEXT or BINARY, using the following algorithm:
-					 * - TEXT if the two conditions below are satisfied:
-					 *    a) There are no non-portable control characters belonging to the
-					 *       "black list" (0..6, 14..25, 28..31).
-					 *    b) There is at least one printable character belonging to the
-					 *       "white list" (9 {TAB}, 10 {LF}, 13 {CR}, 32..255).
-					 * - BINARY otherwise.
-					 * - The following partially-portable control characters form a
-					 *   "gray list" that is ignored in this detection algorithm:
-					 *   (7 {BEL}, 8 {BS}, 11 {VT}, 12 {FF}, 26 {SUB}, 27 {ESC}).
-					 * IN assertion: the fields Freq of dyn_ltree are set.
-					 */;
-			} 
-		}
-		;
-	}
-	/* literal tree */
-	public int detect_data_type() {
-		long black_mask = -1024;
-		int n;
-		Object generatedDyn_ltree = this.getDyn_ltree();
-		for (n = 0; n <= 31; ) {
-			if ((black_mask & 1) && (generatedDyn_ltree[n].getFc().getFreq() != 0)) {
-				return 0;
-			} 
-		}
-		if (generatedDyn_ltree[9].getFc().getFreq() != 0 || generatedDyn_ltree[10].getFc().getFreq() != /* Check for textual ("white-listed") bytes. */0 || generatedDyn_ltree[13].getFc().getFreq() != 0) {
-			return 1;
-		} 
-		for (n = 32; n < 256; n++) {
-			if (generatedDyn_ltree[n].getFc().getFreq() != 0) {
-				return 1/* There are no "black-listed" or "white-listed" bytes:
-				     * this stream either is empty or has tolerated ("gray-listed") bytes only.
-				     */;
-			} 
-		}
-		return 0/* ===========================================================================
-		 * Reverse the first len bits of a code, using straightforward code (a faster
-		 * method would use a table)
-		 * IN assertion: 1 <= len <= 15
-		 */;
-	}
-	/* black_mask is the bit mask of black-listed bytes
-	     * set bits 0..6, 14..25, and 28..31
-	     * 0xf3ffc07f = binary 11110011111111111100000001111111
-	     */
-	public void bi_flush() {
-		int generatedBi_valid = this.getBi_valid();
-		Object[] generatedPending_buf = this.getPending_buf();
-		Object generatedPending = this.getPending();
-		Object generatedBi_buf = this.getBi_buf();
-		if (generatedBi_valid == 16) {
-			{ 
-				{ 
-					generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-				}
-				;
-				{ 
-					generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-				}
-				;
-			}
-			;
-			this.setBi_buf(0);
-			this.setBi_valid(0);
-		}  else if (generatedBi_valid >= 8) {
-			{ 
-				generatedPending_buf[generatedPending++] = (Bytef)((Byte)generatedBi_buf);
-			}
-			;
-			generatedBi_buf >>=  8;
-			generatedBi_valid -= 8;
-		} 
-	}
-	/* Send a code of the given tree. c and tree must not have side effects */
-	/* !ZLIB_DEBUG */
-	/* ===========================================================================
-	 * Output a short LSB first on the stream.
-	 * IN assertion: there is enough room in pendingBuf.
-	 */
-	/* ===========================================================================
-	 * Send a value on a given number of bits.
-	 * IN assertion: length <= 16 and value fits in length bits.
-	 */
-	/* value to send */
-	/* number of bits */
-	/* ===========================================================================
-	 * Flush the bit buffer and align the output on a byte boundary
-	 */
-	public void bi_windup() {
-		int generatedBi_valid = this.getBi_valid();
-		Object[] generatedPending_buf = this.getPending_buf();
-		Object generatedPending = this.getPending();
-		Object generatedBi_buf = this.getBi_buf();
-		if (generatedBi_valid > 8) {
-			{ 
-				{ 
-					generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
-				}
-				;
-				{ 
-					generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
-				}
-				;
-			}
-			;
-		}  else if (generatedBi_valid > 0) {
-			{ 
-				generatedPending_buf[generatedPending++] = (Bytef)((Byte)generatedBi_buf);
-			}
-			;
-		} 
-		this.setBi_buf(0);
-		this.setBi_valid(0);
-	}
 	/* ===========================================================================
 	 * Initialize the hash table (avoiding 64K overflow for 16 bit systems).
 	 * prev[] will be initialized on the fly.
@@ -999,8 +242,8 @@ public class internal_state {
 		int chain_length = generatedMax_chain_length;
 		Object[] generatedWindow = this.getWindow();
 		Object generatedStrstart = this.getStrstart();
-		Bytef scan = generatedWindow + generatedStrstart;
-		/* matched string */Bytef match = new Bytef();
+		Bytef[] scan = generatedWindow + generatedStrstart;
+		/* matched string */Bytef[] match = new Bytef();
 		/* length of current match */int len;
 		Object generatedPrev_length = this.getPrev_length();
 		int best_len = (int)generatedPrev_length;
@@ -1011,7 +254,7 @@ public class internal_state {
 		     * we prevent matches with the string of window index 0.
 		     */;
 		Object[] generatedPrev = this.getPrev();
-		Posf prev = generatedPrev;
+		Posf[] prev = generatedPrev;
 		Object generatedW_mask = this.getW_mask();
 		uInt wmask = generatedW_mask;
 		Bytef strend = generatedWindow + generatedStrstart + 258;
@@ -1401,8 +644,8 @@ public class internal_state {
 		Object[] generatedD_buf = this.getD_buf();
 		Object generatedLast_lit = this.getLast_lit();
 		Object[] generatedL_buf = this.getL_buf();
-		Object generatedDyn_ltree = this.getDyn_ltree();
-		Object generatedDyn_dtree = this.getDyn_dtree();
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
+		Object[] generatedDyn_dtree = this.getDyn_dtree();
 		Object generatedLit_bufsize = this.getLit_bufsize();
 		Object generatedMax_lazy_match = this.getMax_lazy_match();
 		Object[] generatedWindow = this.getWindow();
@@ -1548,8 +791,8 @@ public class internal_state {
 		Object[] generatedD_buf = this.getD_buf();
 		Object generatedLast_lit = this.getLast_lit();
 		Object[] generatedL_buf = this.getL_buf();
-		Object generatedDyn_ltree = this.getDyn_ltree();
-		Object generatedDyn_dtree = this.getDyn_dtree();
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
+		Object[] generatedDyn_dtree = this.getDyn_dtree();
 		Object generatedLit_bufsize = this.getLit_bufsize();
 		long generatedBlock_start = this.getBlock_start();
 		Object[] generatedWindow = this.getWindow();
@@ -1718,8 +961,8 @@ public class internal_state {
 		Object[] generatedD_buf = this.getD_buf();
 		Object generatedLast_lit = this.getLast_lit();
 		Object[] generatedL_buf = this.getL_buf();
-		Object generatedDyn_ltree = this.getDyn_ltree();
-		Object generatedDyn_dtree = this.getDyn_dtree();
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
+		Object[] generatedDyn_dtree = this.getDyn_dtree();
 		Object generatedLit_bufsize = this.getLit_bufsize();
 		long generatedBlock_start = this.getBlock_start();
 		Object generatedStrm = this.getStrm();
@@ -1837,7 +1080,7 @@ public class internal_state {
 		Object[] generatedD_buf = this.getD_buf();
 		Object generatedLast_lit = this.getLast_lit();
 		Object[] generatedL_buf = this.getL_buf();
-		Object generatedDyn_ltree = this.getDyn_ltree();
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
 		Object generatedLit_bufsize = this.getLit_bufsize();
 		long generatedBlock_start = this.getBlock_start();
 		Object generatedStrm = this.getStrm();
@@ -1908,6 +1151,763 @@ public class internal_state {
 		} 
 		;
 		return .block_done;
+	}
+	/* defined(GEN_TREES_H) || !defined(STDC) */
+	/* ===========================================================================
+	 * Genererate the file trees.h describing the static trees.
+	 */
+	/* GEN_TREES_H */
+	/* ===========================================================================
+	 * Initialize the tree data structures for a new zlib stream.
+	 */
+	public void _tr_init() {
+		ModernizedCProgram.tr_static_init();
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
+		tree_desc_s generatedL_desc = this.getL_desc();
+		generatedL_desc.setDyn_tree(generatedDyn_ltree);
+		generatedL_desc.setStat_desc(ModernizedCProgram.static_l_desc);
+		Object[] generatedDyn_dtree = this.getDyn_dtree();
+		tree_desc_s generatedD_desc = this.getD_desc();
+		generatedD_desc.setDyn_tree(generatedDyn_dtree);
+		generatedD_desc.setStat_desc(ModernizedCProgram.static_d_desc);
+		Object[] generatedBl_tree = this.getBl_tree();
+		tree_desc_s generatedBl_desc = this.getBl_desc();
+		generatedBl_desc.setDyn_tree(generatedBl_tree);
+		generatedBl_desc.setStat_desc(ModernizedCProgram.static_bl_desc);
+		this.setBi_buf(0);
+		this.setBi_valid(0);
+		/* Initialize the first block of the first file: */s/* ===========================================================================
+		 * Initialize a new block.
+		 */.init_block();
+	}
+	public void init_block() {
+		/* iterates over tree elements */int n;
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
+		for (n = 0; n < (256 + 1 + 29); n++) {
+			generatedDyn_ltree[n].getFc().setFreq(/* Initialize the trees. */0);
+		}
+		Object[] generatedDyn_dtree = this.getDyn_dtree();
+		for (n = 0; n < 30; n++) {
+			generatedDyn_dtree[n].getFc().setFreq(0);
+		}
+		Object[] generatedBl_tree = this.getBl_tree();
+		for (n = 0; n < 19; n++) {
+			generatedBl_tree[n].getFc().setFreq(0);
+		}
+		generatedDyn_ltree[256].getFc().setFreq(1);
+		this.setOpt_len(this.setStatic_len(-1024));
+		this.setLast_lit(this.setMatches(0/* Index within the heap array of least frequent node in the Huffman tree */));
+	}
+	/* ===========================================================================
+	 * Remove the smallest element from the heap and recreate the heap with
+	 * one less element. Updates heap and heap_len.
+	 */
+	/* ===========================================================================
+	 * Construct the Huffman tree for the bit lengths and return the index in
+	 * bl_order of the last bit length code to send.
+	 */
+	public int build_bl_tree() {
+		/* index of last bit length code of non zero freq */int max_blindex;
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
+		tree_desc_s generatedL_desc = this.getL_desc();
+		int generatedMax_code = generatedL_desc.getMax_code();
+		ModernizedCProgram.scan_tree(s, (ct_data)generatedDyn_ltree, generatedMax_code);
+		Object[] generatedDyn_dtree = this.getDyn_dtree();
+		ModernizedCProgram.scan_tree(s, (ct_data)generatedDyn_dtree, generatedMax_code);
+		tree_desc_s generatedBl_desc = this.getBl_desc();
+		ModernizedCProgram.build_tree(s, (tree_desc)((generatedBl_desc)));
+		Object[] generatedBl_tree = this.getBl_tree();
+		for (max_blindex = 19 - 1; max_blindex >= 3; /* Determine the number of bit length codes to send. The pkzip format
+		     * requires that at least 4 bit length codes be sent. (appnote.txt says
+		     * 3 but the actual value used is 4.)
+		     */max_blindex--) {
+			if (generatedBl_tree[ModernizedCProgram.bl_order[max_blindex]].getDl().getLen() != 0) {
+				break;
+			} 
+		}
+		Object generatedOpt_len = this.getOpt_len();
+		generatedOpt_len += 3 * ((ulg)max_blindex + 1) + 5 + 5 + /* Update opt_len to include the bit length tree and counts */4;
+		;
+		return max_blindex/* ===========================================================================
+		 * Send the header for a block using dynamic Huffman trees: the counts, the
+		 * lengths of the bit length codes, the literal tree and the distance tree.
+		 * IN assertion: lcodes >= 257, dcodes >= 1, blcodes >= 4.
+		 */;
+	}
+	public void send_all_trees(int lcodes, int dcodes, int blcodes) {
+		/* number of codes for each tree *//* index in bl_order */int rank;
+		;
+		;
+		;
+		int generatedBi_valid = this.getBi_valid();
+		Object generatedBi_buf = this.getBi_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
+		Object generatedPending = this.getPending();
+		{ 
+			int len = 5;
+			if (generatedBi_valid > (int)16 - len) {
+				int val = (int)lcodes - 257;
+				generatedBi_buf |=  (ush)val << generatedBi_valid;
+				{ 
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+					}
+					;
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+					}
+					;
+				}
+				;
+				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+				generatedBi_valid += len - 16;
+			} else {
+					generatedBi_buf |=  (ush)(lcodes - 257) << generatedBi_valid;
+					generatedBi_valid += /* not +255 as stated in appnote.txt */len;
+			} 
+		}
+		;
+		{ 
+			int len = 5;
+			if (generatedBi_valid > (int)16 - len) {
+				int val = (int)dcodes - 1;
+				generatedBi_buf |=  (ush)val << generatedBi_valid;
+				{ 
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+					}
+					;
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+					}
+					;
+				}
+				;
+				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+				generatedBi_valid += len - 16;
+			} else {
+					generatedBi_buf |=  (ush)(dcodes - 1) << generatedBi_valid;
+					generatedBi_valid += len;
+			} 
+		}
+		;
+		{ 
+			int len = 4;
+			if (generatedBi_valid > (int)16 - len) {
+				int val = (int)blcodes - 4;
+				generatedBi_buf |=  (ush)val << generatedBi_valid;
+				{ 
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+					}
+					;
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+					}
+					;
+				}
+				;
+				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+				generatedBi_valid += len - 16;
+			} else {
+					generatedBi_buf |=  (ush)(blcodes - 4) << generatedBi_valid;
+					generatedBi_valid += /* not -3 as stated in appnote.txt */len;
+			} 
+		}
+		;
+		Object[] generatedBl_tree = this.getBl_tree();
+		for (rank = 0; rank < blcodes; rank++) {
+			;
+			{ 
+				int len = 3;
+				if (generatedBi_valid > (int)16 - len) {
+					int val = (int)generatedBl_tree[ModernizedCProgram.bl_order[rank]].getDl().getLen();
+					generatedBi_buf |=  (ush)val << generatedBi_valid;
+					{ 
+						{ 
+							generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+						}
+						;
+						{ 
+							generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+						}
+						;
+					}
+					;
+					this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+					generatedBi_valid += len - 16;
+				} else {
+						generatedBi_buf |=  (ush)(generatedBl_tree[ModernizedCProgram.bl_order[rank]].getDl().getLen()) << generatedBi_valid;
+						generatedBi_valid += len;
+				} 
+			}
+			;
+		}
+		;
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
+		ModernizedCProgram.send_tree(s, (ct_data)generatedDyn_ltree, lcodes - /* literal tree */1);
+		;
+		Object[] generatedDyn_dtree = this.getDyn_dtree();
+		ModernizedCProgram.send_tree(s, (ct_data)generatedDyn_dtree, dcodes - /* distance tree */1);
+		;/* ===========================================================================
+		 * Send a stored block
+		 */
+	}
+	public void _tr_stored_block(Object buf, Object stored_len, int last) {
+		int generatedBi_valid = this.getBi_valid();
+		Object generatedBi_buf = this.getBi_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
+		Object generatedPending = this.getPending();
+		{ 
+			int len = 3;
+			if (generatedBi_valid > (int)16 - len) {
+				int val = (int)(0 << 1) + last;
+				generatedBi_buf |=  (ush)val << generatedBi_valid;
+				{ 
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+					}
+					;
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+					}
+					;
+				}
+				;
+				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+				generatedBi_valid += len - 16;
+			} else {
+					generatedBi_buf |=  (ush)((0 << 1) + last) << generatedBi_valid;
+					generatedBi_valid += /* length of input block *//* one if this is the last block for a file *//* send block type */len;
+			} 
+		}
+		;
+		/* align on byte boundary */s.bi_windup();
+		{ 
+			{ 
+				generatedPending_buf[generatedPending++] = (Bytef)((uch)(((ush)stored_len) & -1024));
+			}
+			;
+			{ 
+				generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)((ush)stored_len) >> 8));
+			}
+			;
+		}
+		;
+		{ 
+			{ 
+				generatedPending_buf[generatedPending++] = (Bytef)((uch)(((ush)~stored_len) & -1024));
+			}
+			;
+			{ 
+				generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)((ush)~stored_len) >> 8));
+			}
+			;
+		}
+		;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedPending_buf + generatedPending, (Bytef)buf, stored_len);
+		generatedPending += stored_len;
+	}
+	/* input block */
+	/* ===========================================================================
+	 * Flush the bits in the bit buffer to pending output (leaves at most 7 bits)
+	 */
+	public void _tr_flush_bits() {
+		s/* ===========================================================================
+		 * Send one empty static block to give enough lookahead for inflate.
+		 * This takes 10 bits, of which 7 may remain in the bit buffer.
+		 */.bi_flush();
+	}
+	public void _tr_align() {
+		int generatedBi_valid = this.getBi_valid();
+		Object generatedBi_buf = this.getBi_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
+		Object generatedPending = this.getPending();
+		{ 
+			int len = 3;
+			if (generatedBi_valid > (int)16 - len) {
+				int val = (int)1 << 1;
+				generatedBi_buf |=  (ush)val << generatedBi_valid;
+				{ 
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+					}
+					;
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+					}
+					;
+				}
+				;
+				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+				generatedBi_valid += len - 16;
+			} else {
+					generatedBi_buf |=  (ush)(1 << 1) << generatedBi_valid;
+					generatedBi_valid += len;
+			} 
+		}
+		;
+		{ 
+			int len = ModernizedCProgram.static_ltree[256].getDl().getLen();
+			if (generatedBi_valid > (int)16 - len) {
+				int val = (int)ModernizedCProgram.static_ltree[256].getFc().getCode();
+				generatedBi_buf |=  (ush)val << generatedBi_valid;
+				{ 
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+					}
+					;
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+					}
+					;
+				}
+				;
+				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+				generatedBi_valid += len - 16;
+			} else {
+					generatedBi_buf |=  (ush)(ModernizedCProgram.static_ltree[256].getFc().getCode()) << generatedBi_valid;
+					generatedBi_valid += len;
+			} 
+		}
+		;
+		/* 3 for block type, 7 for EOB */s/* ===========================================================================
+		 * Determine the best encoding for the current block: dynamic trees, static
+		 * trees or store, and write out the encoded block.
+		 */.bi_flush();
+	}
+	public void _tr_flush_block(Object buf, Object stored_len, int last) {
+		/* length of input block *//* one if this is the last block for a file *//* opt_len and static_len in bytes */ulg opt_lenb = new ulg();
+		ulg static_lenb = new ulg();
+		int max_blindex = /* index of last bit length code of non zero freq */0;
+		int generatedLevel = this.getLevel();
+		Object generatedStrm = this.getStrm();
+		tree_desc_s generatedL_desc = this.getL_desc();
+		tree_desc_s generatedD_desc = this.getD_desc();
+		Object generatedOpt_len = this.getOpt_len();
+		Object generatedStatic_len = this.getStatic_len();
+		if (generatedLevel > /* Build the Huffman trees unless a stored block is forced */0) {
+			if (generatedStrm.getData_type() == /* Check if the file is binary or text */2) {
+				generatedStrm.setData_type(s.detect_data_type());
+			} 
+			ModernizedCProgram.build_tree(s, (tree_desc)((generatedL_desc)));
+			;
+			ModernizedCProgram.build_tree(s, (tree_desc)((generatedD_desc)));
+			;
+			max_blindex = /* Build the bit length tree for the above two trees, and get the index
+			         * in bl_order of the last bit length code to send.
+			         */s.build_bl_tree();
+			opt_lenb = (generatedOpt_len + 3 + 7) >> /* Determine the best encoding. Compute the block lengths in bytes. */3;
+			static_lenb = (generatedStatic_len + 3 + 7) >> 3;
+			;
+			if (static_lenb <= opt_lenb) {
+				opt_lenb = static_lenb;
+			} 
+		} else {
+				;
+				opt_lenb = static_lenb = stored_len + /* force a stored block */5;
+		} 
+		int generatedStrategy = this.getStrategy();
+		int generatedBi_valid = this.getBi_valid();
+		Object generatedBi_buf = this.getBi_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
+		Object generatedPending = this.getPending();
+		int generatedMax_code = generatedL_desc.getMax_code();
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
+		Object[] generatedDyn_dtree = this.getDyn_dtree();
+		if (stored_len + 4 <= opt_lenb && buf != (byte)/* force stored block */0/* 4: two words for the lengths *//* The test buf != NULL is only necessary if LIT_BUFSIZE > WSIZE.
+		         * Otherwise we can't have processed more than WSIZE input bytes since
+		         * the last block flush, because compression would have been
+		         * successful. If LIT_BUFSIZE <= WSIZE, it is never too late to
+		         * transform a block into a stored block.
+		         */) {
+			s._tr_stored_block(buf, stored_len, last);
+		}  else if (generatedStrategy == 4 || static_lenb == /* force static trees */opt_lenb) {
+			{ 
+				int len = 3;
+				if (generatedBi_valid > (int)16 - len) {
+					int val = (int)(1 << 1) + last;
+					generatedBi_buf |=  (ush)val << generatedBi_valid;
+					{ 
+						{ 
+							generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+						}
+						;
+						{ 
+							generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+						}
+						;
+					}
+					;
+					this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+					generatedBi_valid += len - 16;
+				} else {
+						generatedBi_buf |=  (ush)((1 << 1) + last) << generatedBi_valid;
+						generatedBi_valid += len;
+				} 
+			}
+			;
+			s.compress_block((ct_data)ModernizedCProgram.static_ltree, (ct_data)ModernizedCProgram.static_dtree);
+		} else {
+				{ 
+					int len = 3;
+					if (generatedBi_valid > (int)16 - len) {
+						int val = (int)(2 << 1) + last;
+						generatedBi_buf |=  (ush)val << generatedBi_valid;
+						{ 
+							{ 
+								generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+							}
+							;
+							{ 
+								generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+							}
+							;
+						}
+						;
+						this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+						generatedBi_valid += len - 16;
+					} else {
+							generatedBi_buf |=  (ush)((2 << 1) + last) << generatedBi_valid;
+							generatedBi_valid += len;
+					} 
+				}
+				;
+				s.send_all_trees(generatedMax_code + 1, generatedMax_code + 1, max_blindex + 1);
+				s.compress_block((ct_data)generatedDyn_ltree, (ct_data)generatedDyn_dtree);
+		} 
+		;/* The above check is made mod 2^32, for files larger than 512 MB
+		     * and uLong implemented on 32 bits.
+		     */
+		s.init_block();
+		if (last) {
+			s/* align on byte boundary */.bi_windup();
+		} 
+		;/* ===========================================================================
+		 * Save the match info and tally the frequency counts. Return true if
+		 * the current block must be flushed.
+		 */
+	}
+	/* input block, or NULL if too old */
+	public int _tr_tally(int dist, int lc) {
+		Object[] generatedD_buf = this.getD_buf();
+		Object generatedLast_lit = this.getLast_lit();
+		generatedD_buf[generatedLast_lit] = (ush)/* match length-MIN_MATCH or unmatched char (if dist==0) */dist;
+		Object[] generatedL_buf = this.getL_buf();
+		generatedL_buf[generatedLast_lit++] = (uch)lc;
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
+		Object generatedMatches = this.getMatches();
+		Object[] generatedDyn_dtree = this.getDyn_dtree();
+		if (dist == 0) {
+			generatedDyn_ltree[lc].getFc().getFreq()++;
+		} else {
+				generatedMatches++;
+				/* Here, lc is the match length - MIN_MATCH *//* dist = match distance - 1 */dist--;
+				;
+				generatedDyn_ltree[ModernizedCProgram._length_code[lc] + 256 + 1].getFc().getFreq()++;
+				generatedDyn_dtree[((dist) < 256 ? ModernizedCProgram._dist_code[dist] : ModernizedCProgram._dist_code[256 + ((dist) >> 7)])].getFc().getFreq()++;
+		} 
+		Object generatedLit_bufsize = this.getLit_bufsize();
+		return (generatedLast_lit == generatedLit_bufsize - 1/* We avoid equality with lit_bufsize because of wraparound at 64K
+		     * on 16 bit machines and because stored blocks are restricted to
+		     * 64K-1 bytes.
+		     */);
+	}
+	/* distance of matched string */
+	/* ===========================================================================
+	 * Send the block data compressed using the given Huffman trees
+	 */
+	public void compress_block(Object[] ltree, Object[] dtree) {
+		/* distance tree *//* distance of matched string */int dist;
+		/* match length or unmatched char (if dist == 0) */int lc;
+		int lx = /* running index in l_buf */0;
+		/* the code to send */int code;
+		/* number of extra bits to send */int extra;
+		Object generatedLast_lit = this.getLast_lit();
+		Object[] generatedD_buf = this.getD_buf();
+		Object[] generatedL_buf = this.getL_buf();
+		int generatedBi_valid = this.getBi_valid();
+		Object generatedBi_buf = this.getBi_buf();
+		Object[] generatedPending_buf = this.getPending_buf();
+		Object generatedPending = this.getPending();
+		if (generatedLast_lit != 0) {
+			do {
+				dist = generatedD_buf[lx];
+				lc = generatedL_buf[lx++];
+				if (dist == 0) {
+					{ 
+						int len = ltree[lc].getDl().getLen();
+						if (generatedBi_valid > (int)16 - len) {
+							int val = (int)ltree[lc].getFc().getCode();
+							generatedBi_buf |=  (ush)val << generatedBi_valid;
+							{ 
+								{ 
+									generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+								}
+								;
+								{ 
+									generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+								}
+								;
+							}
+							;
+							this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+							generatedBi_valid += len - 16;
+						} else {
+								generatedBi_buf |=  (ush)(ltree[lc].getFc().getCode()) << generatedBi_valid;
+								generatedBi_valid += /* send a literal byte */len;
+						} 
+					}
+					;
+					;
+				} else {
+						code = ModernizedCProgram._length_code[/* Here, lc is the match length - MIN_MATCH */lc];
+						{ 
+							int len = ltree[code + 256 + 1].getDl().getLen();
+							if (generatedBi_valid > (int)16 - len) {
+								int val = (int)ltree[code + 256 + 1].getFc().getCode();
+								generatedBi_buf |=  (ush)val << generatedBi_valid;
+								{ 
+									{ 
+										generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+									}
+									;
+									{ 
+										generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+									}
+									;
+								}
+								;
+								this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+								generatedBi_valid += len - 16;
+							} else {
+									generatedBi_buf |=  (ush)(ltree[code + 256 + 1].getFc().getCode()) << generatedBi_valid;
+									generatedBi_valid += /* send the length code */len;
+							} 
+						}
+						;
+						extra = ModernizedCProgram.extra_lbits[code];
+						if (extra != 0) {
+							lc -= ModernizedCProgram.base_length[code];
+							{ 
+								int len = extra;
+								if (generatedBi_valid > (int)16 - len) {
+									int val = (int)lc;
+									generatedBi_buf |=  (ush)val << generatedBi_valid;
+									{ 
+										{ 
+											generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+										}
+										;
+										{ 
+											generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+										}
+										;
+									}
+									;
+									this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+									generatedBi_valid += len - 16;
+								} else {
+										generatedBi_buf |=  (ush)(lc) << generatedBi_valid;
+										generatedBi_valid += /* send the extra length bits */len;
+								} 
+							}
+							;
+						} 
+						/* dist is now the match distance - 1 */dist--;
+						code = ((dist) < 256 ? ModernizedCProgram._dist_code[dist] : ModernizedCProgram._dist_code[256 + ((dist) >> 7)]);
+						;
+						{ 
+							int len = dtree[code].getDl().getLen();
+							if (generatedBi_valid > (int)16 - len) {
+								int val = (int)dtree[code].getFc().getCode();
+								generatedBi_buf |=  (ush)val << generatedBi_valid;
+								{ 
+									{ 
+										generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+									}
+									;
+									{ 
+										generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+									}
+									;
+								}
+								;
+								this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+								generatedBi_valid += len - 16;
+							} else {
+									generatedBi_buf |=  (ush)(dtree[code].getFc().getCode()) << generatedBi_valid;
+									generatedBi_valid += /* send the distance code */len;
+							} 
+						}
+						;
+						extra = ModernizedCProgram.extra_dbits[code];
+						if (extra != 0) {
+							dist -= (int)ModernizedCProgram.base_dist[code];
+							{ 
+								int len = extra;
+								if (generatedBi_valid > (int)16 - len) {
+									int val = (int)dist;
+									generatedBi_buf |=  (ush)val << generatedBi_valid;
+									{ 
+										{ 
+											generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+										}
+										;
+										{ 
+											generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+										}
+										;
+									}
+									;
+									this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+									generatedBi_valid += len - 16;
+								} else {
+										generatedBi_buf |=  (ush)(dist) << generatedBi_valid;
+										generatedBi_valid += /* send the extra distance bits */len/* literal or match pair ? */;
+								} 
+							}
+							;
+						} 
+				} 
+				;
+			} while (lx < generatedLast_lit);
+		} 
+		{ 
+			int len = ltree[256].getDl().getLen();
+			if (generatedBi_valid > (int)16 - len) {
+				int val = (int)ltree[256].getFc().getCode();
+				generatedBi_buf |=  (ush)val << generatedBi_valid;
+				{ 
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+					}
+					;
+					{ 
+						generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+					}
+					;
+				}
+				;
+				this.setBi_buf((ush)val >> (16 - generatedBi_valid));
+				generatedBi_valid += len - 16;
+			} else {
+					generatedBi_buf |=  (ush)(ltree[256].getFc().getCode()) << generatedBi_valid;
+					generatedBi_valid += len/* ===========================================================================
+					 * Check if the data type is TEXT or BINARY, using the following algorithm:
+					 * - TEXT if the two conditions below are satisfied:
+					 *    a) There are no non-portable control characters belonging to the
+					 *       "black list" (0..6, 14..25, 28..31).
+					 *    b) There is at least one printable character belonging to the
+					 *       "white list" (9 {TAB}, 10 {LF}, 13 {CR}, 32..255).
+					 * - BINARY otherwise.
+					 * - The following partially-portable control characters form a
+					 *   "gray list" that is ignored in this detection algorithm:
+					 *   (7 {BEL}, 8 {BS}, 11 {VT}, 12 {FF}, 26 {SUB}, 27 {ESC}).
+					 * IN assertion: the fields Freq of dyn_ltree are set.
+					 */;
+			} 
+		}
+		;
+	}
+	/* literal tree */
+	public int detect_data_type() {
+		long black_mask = -1024;
+		int n;
+		Object[] generatedDyn_ltree = this.getDyn_ltree();
+		for (n = 0; n <= 31; ) {
+			if ((black_mask & 1) && (generatedDyn_ltree[n].getFc().getFreq() != 0)) {
+				return 0;
+			} 
+		}
+		if (generatedDyn_ltree[9].getFc().getFreq() != 0 || generatedDyn_ltree[10].getFc().getFreq() != /* Check for textual ("white-listed") bytes. */0 || generatedDyn_ltree[13].getFc().getFreq() != 0) {
+			return 1;
+		} 
+		for (n = 32; n < 256; n++) {
+			if (generatedDyn_ltree[n].getFc().getFreq() != 0) {
+				return 1/* There are no "black-listed" or "white-listed" bytes:
+				     * this stream either is empty or has tolerated ("gray-listed") bytes only.
+				     */;
+			} 
+		}
+		return 0/* ===========================================================================
+		 * Reverse the first len bits of a code, using straightforward code (a faster
+		 * method would use a table)
+		 * IN assertion: 1 <= len <= 15
+		 */;
+	}
+	/* black_mask is the bit mask of black-listed bytes
+	     * set bits 0..6, 14..25, and 28..31
+	     * 0xf3ffc07f = binary 11110011111111111100000001111111
+	     */
+	public void bi_flush() {
+		int generatedBi_valid = this.getBi_valid();
+		Object[] generatedPending_buf = this.getPending_buf();
+		Object generatedPending = this.getPending();
+		Object generatedBi_buf = this.getBi_buf();
+		if (generatedBi_valid == 16) {
+			{ 
+				{ 
+					generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+				}
+				;
+				{ 
+					generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+				}
+				;
+			}
+			;
+			this.setBi_buf(0);
+			this.setBi_valid(0);
+		}  else if (generatedBi_valid >= 8) {
+			{ 
+				generatedPending_buf[generatedPending++] = (Bytef)((Byte)generatedBi_buf);
+			}
+			;
+			generatedBi_buf >>=  8;
+			generatedBi_valid -= 8;
+		} 
+	}
+	/* Send a code of the given tree. c and tree must not have side effects */
+	/* !ZLIB_DEBUG */
+	/* ===========================================================================
+	 * Output a short LSB first on the stream.
+	 * IN assertion: there is enough room in pendingBuf.
+	 */
+	/* ===========================================================================
+	 * Send a value on a given number of bits.
+	 * IN assertion: length <= 16 and value fits in length bits.
+	 */
+	/* value to send */
+	/* number of bits */
+	/* ===========================================================================
+	 * Flush the bit buffer and align the output on a byte boundary
+	 */
+	public void bi_windup() {
+		int generatedBi_valid = this.getBi_valid();
+		Object[] generatedPending_buf = this.getPending_buf();
+		Object generatedPending = this.getPending();
+		Object generatedBi_buf = this.getBi_buf();
+		if (generatedBi_valid > 8) {
+			{ 
+				{ 
+					generatedPending_buf[generatedPending++] = (Bytef)((uch)((generatedBi_buf) & -1024));
+				}
+				;
+				{ 
+					generatedPending_buf[generatedPending++] = (Bytef)((uch)((ush)(generatedBi_buf) >> 8));
+				}
+				;
+			}
+			;
+		}  else if (generatedBi_valid > 0) {
+			{ 
+				generatedPending_buf[generatedPending++] = (Bytef)((Byte)generatedBi_buf);
+			}
+			;
+		} 
+		this.setBi_buf(0);
+		this.setBi_valid(0);
 	}
 	public Object getStrm() {
 		return strm;
@@ -2131,22 +2131,22 @@ public class internal_state {
 	public void setNice_match(int newNice_match) {
 		nice_match = newNice_match;
 	}
-	public Object getDyn_ltree() {
+	public Object[] getDyn_ltree() {
 		return dyn_ltree;
 	}
-	public void setDyn_ltree(Object newDyn_ltree) {
+	public void setDyn_ltree(Object[] newDyn_ltree) {
 		dyn_ltree = newDyn_ltree;
 	}
-	public Object getDyn_dtree() {
+	public Object[] getDyn_dtree() {
 		return dyn_dtree;
 	}
-	public void setDyn_dtree(Object newDyn_dtree) {
+	public void setDyn_dtree(Object[] newDyn_dtree) {
 		dyn_dtree = newDyn_dtree;
 	}
-	public Object getBl_tree() {
+	public Object[] getBl_tree() {
 		return bl_tree;
 	}
-	public void setBl_tree(Object newBl_tree) {
+	public void setBl_tree(Object[] newBl_tree) {
 		bl_tree = newBl_tree;
 	}
 	public tree_desc_s getL_desc() {
@@ -2167,16 +2167,16 @@ public class internal_state {
 	public void setBl_desc(tree_desc_s newBl_desc) {
 		bl_desc = newBl_desc;
 	}
-	public Object getBl_count() {
+	public Object[] getBl_count() {
 		return bl_count;
 	}
-	public void setBl_count(Object newBl_count) {
+	public void setBl_count(Object[] newBl_count) {
 		bl_count = newBl_count;
 	}
-	public Object getHeap() {
+	public Object[] getHeap() {
 		return heap;
 	}
-	public void setHeap(Object newHeap) {
+	public void setHeap(Object[] newHeap) {
 		heap = newHeap;
 	}
 	public int getHeap_len() {
@@ -2191,10 +2191,10 @@ public class internal_state {
 	public void setHeap_max(int newHeap_max) {
 		heap_max = newHeap_max;
 	}
-	public Object getDepth() {
+	public Object[] getDepth() {
 		return depth;
 	}
-	public void setDepth(Object newDepth) {
+	public void setDepth(Object[] newDepth) {
 		depth = newDepth;
 	}
 	public Object[] getL_buf() {

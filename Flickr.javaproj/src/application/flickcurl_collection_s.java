@@ -69,12 +69,12 @@ public class flickcurl_collection_s {
 	 * Return value: a collection or NULL on failure
 	 **/
 	public flickcurl_collection_s flickcurl_collections_getInfo(flickcurl_s fc, Object collection_id) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_collection collection = ((Object)0);
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_collection collection = (null);
 		fc.flickcurl_init_params(0);
 		if (!collection_id) {
-			return ((Object)0);
+			return (null);
 		} 
 		fc.flickcurl_add_param("collection_id", collection_id);
 		fc.flickcurl_end_params();
@@ -98,7 +98,7 @@ public class flickcurl_collection_s {
 			if (collection) {
 				collection.flickcurl_free_collection();
 			} 
-			collection = ((Object)0);
+			collection = (null);
 		} 
 		return collection/**
 		 * flickcurl_collections_getTree:
@@ -114,9 +114,9 @@ public class flickcurl_collection_s {
 		 **/;
 	}
 	public flickcurl_collection_s flickcurl_collections_getTree(flickcurl_s fc, Object collection_id, Object user_id) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_collection collection = ((Object)0);
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_collection collection = (null);
 		fc.flickcurl_init_params(0);
 		if (collection_id) {
 			fc.flickcurl_add_param("collection_id", collection_id);
@@ -145,9 +145,35 @@ public class flickcurl_collection_s {
 			if (collection) {
 				collection.flickcurl_free_collection();
 			} 
-			collection = ((Object)0);
+			collection = (null);
 		} 
 		return collection;
+	}
+	public void command_print_collection() {
+		Byte generatedId = this.getId();
+		Byte generatedSecret = this.getSecret();
+		int generatedServer = this.getServer();
+		Byte generatedTitle = this.getTitle();
+		Byte generatedDescription = this.getDescription();
+		Byte generatedIconlarge = this.getIconlarge();
+		Byte generatedIconsmall = this.getIconsmall();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "Collection id %s  secret %s  server %d\n  Title %s\n  Description %s\n  Large icon %s\n  Small Icon %s\n", generatedId, generatedSecret, generatedServer, generatedTitle, (generatedDescription ? generatedDescription : "(None)"), generatedIconlarge, generatedIconsmall);
+		flickcurl_photo_s[][] generatedPhotos = this.getPhotos();
+		if (generatedPhotos) {
+			int i;
+			for (i = 0; generatedPhotos[i]; i++) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "  icon photo %d) ", i);
+				generatedPhotos[i].command_print_photo();
+			}
+		} 
+		flickcurl_collection_s[][] generatedCollections = this.getCollections();
+		if (generatedCollections) {
+			int i;
+			for (i = 0; generatedCollections[i]; i++) {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "  Sub-Collection %d)", i);
+				generatedCollections[i].command_print_collection();
+			}
+		} 
 	}
 	/* -*- Mode: c; c-basic-offset: 2 -*-
 	 *
@@ -219,10 +245,10 @@ public class flickcurl_collection_s {
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(collection);
 	}
 	public flickcurl_collection_s flickcurl_build_collections(flickcurl_s fc, Object xpathCtx, Object xpathExpr, Integer collection_count_p) {
-		flickcurl_collection collections = ((Object)0);
+		flickcurl_collection[][] collections = (null);
 		int nodes_count;
 		int collection_count;
-		 xpathObj = ((Object)0);
+		 xpathObj = (null);
 		 nodes = new ();
 		[] full_xpath = new ();
 		size_t xpathExpr_len = new size_t();
@@ -245,7 +271,7 @@ public class flickcurl_collection_s {
 			 node = nodes.getNodeTab()[i];
 			flickcurl_collection collection = new flickcurl_collection();
 			int expri;
-			 xpathNodeCtx = ((Object)0);
+			 xpathNodeCtx = (null);
 			if (node.getType() != XML_ELEMENT_NODE) {
 				fc.flickcurl_error("Got unexpected node type %d", node.getType());
 				fc.setFailed(1);
@@ -258,7 +284,7 @@ public class flickcurl_collection_s {
 				flickcurl_collection_field_type field = collection_fields_table[expri].getField();
 				flickcurl_field_value_type datatype = collection_fields_table[expri].getType();
 				 field_xpath = collection_fields_table[expri].getXpath();
-				byte string_value;
+				Byte string_value;
 				int int_value = -1;
 				time_t unix_time = new time_t();
 				if (datatype == .VALUE_TYPE_ICON_PHOTOS) {
@@ -270,29 +296,22 @@ public class flickcurl_collection_s {
 					continue;
 				} 
 				switch (datatype) {
+				case .VALUE_TYPE_COLLECTION_ID:
+				case .VALUE_TYPE_STRING:
 				case .VALUE_TYPE_URI:
 						break;
-				case .VALUE_TYPE_TAG_STRING:
-				case .VALUE_TYPE_PERSON_ID:
-						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
-				case .VALUE_TYPE_STRING:
-				case .VALUE_TYPE_UNIXTIME:
-				case /* This case is handled above */.VALUE_TYPE_ICON_PHOTOS:
-						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
 				case .VALUE_TYPE_NONE:
-				case .VALUE_TYPE_PHOTO_ID:
+				case .VALUE_TYPE_PHOTO_URI:
 				case .VALUE_TYPE_BOOLEAN:
 						int_value = /*Error: Function owner not recognized*/atoi(string_value);
 						break;
-				case .VALUE_TYPE_COLLECTION_ID:
-				case .VALUE_TYPE_FLOAT:
-				case .VALUE_TYPE_INTEGER:
 				case .VALUE_TYPE_MEDIA_TYPE:
+				case .VALUE_TYPE_UNIXTIME:
 				case .VALUE_TYPE_DATETIME:
 						if (datatype == .VALUE_TYPE_UNIXTIME) {
 							unix_time = /*Error: Function owner not recognized*/atoi(string_value);
 						} else {
-								unix_time = /*Error: Function owner not recognized*/curl_getdate((byte)string_value, ((Object)0));
+								unix_time = /*Error: Function owner not recognized*/curl_getdate((byte)string_value, (null));
 						} 
 						if (unix_time >= 0) {
 							int_value = (int)unix_time;
@@ -300,44 +319,51 @@ public class flickcurl_collection_s {
 								int_value = -/* else failed to convert */1;
 						} 
 						break;
-				case .VALUE_TYPE_PHOTO_URI:
+				case /* This case is handled above */.VALUE_TYPE_ICON_PHOTOS:
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
+				case .VALUE_TYPE_PHOTO_ID:
+				case .VALUE_TYPE_TAG_STRING:
+				case .VALUE_TYPE_INTEGER:
+				case .VALUE_TYPE_PERSON_ID:
+						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/abort();
+				case .VALUE_TYPE_FLOAT:
 				}
 				switch (field) {
-				case .COLLECTION_FIELD_child_count:
-						collection.setChild_count(int_value);
-						break;
 				case .COLLECTION_FIELD_secret:
 						collection.setSecret(string_value);
-						string_value = ((Object)0);
-						break;
-				case .COLLECTION_FIELD_iconsmall:
-						collection.setIconsmall(string_value);
-						string_value = ((Object)0);
-						break;
-				case .COLLECTION_FIELD_title:
-						collection.setTitle(string_value);
-						string_value = ((Object)0);
-						break;
-				case .COLLECTION_FIELD_id:
-						collection.setId(string_value);
-						string_value = ((Object)0);
+						string_value = (null);
 						break;
 				case .COLLECTION_FIELD_iconlarge:
 						collection.setIconlarge(string_value);
-						string_value = ((Object)0);
+						string_value = (null);
+						break;
+				case .COLLECTION_FIELD_iconsmall:
+						collection.setIconsmall(string_value);
+						string_value = (null);
 						break;
 				case .COLLECTION_FIELD_iconphotos:
 						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[2]), "Do not know how to handle iconphotos field yet\n");
 						break;
-				case .COLLECTION_FIELD_date_created:
-						collection.setDate_created(int_value);
-						break;
-				case .COLLECTION_FIELD_description:
-						collection.setDescription(string_value);
-						string_value = ((Object)0);
+				case .COLLECTION_FIELD_id:
+						collection.setId(string_value);
+						string_value = (null);
 						break;
 				case .COLLECTION_FIELD_server:
 						collection.setServer(int_value);
+						break;
+				case .COLLECTION_FIELD_description:
+						collection.setDescription(string_value);
+						string_value = (null);
+						break;
+				case .COLLECTION_FIELD_child_count:
+						collection.setChild_count(int_value);
+						break;
+				case .COLLECTION_FIELD_title:
+						collection.setTitle(string_value);
+						string_value = (null);
+						break;
+				case .COLLECTION_FIELD_date_created:
+						collection.setDate_created(int_value);
 						break;
 				}
 				if (string_value) {
@@ -359,15 +385,15 @@ public class flickcurl_collection_s {
 			if (collections) {
 				collections.flickcurl_free_collections();
 			} 
-			collections = ((Object)0);
+			collections = (null);
 		} 
 		return collections;
 	}
 	public flickcurl_collection_s flickcurl_build_collection(flickcurl_s fc, Object xpathCtx, Object root_xpathExpr) {
-		flickcurl_collection collections = new flickcurl_collection();
-		flickcurl_collection result = ((Object)0);
+		flickcurl_collection[][] collections = new flickcurl_collection();
+		flickcurl_collection result = (null);
 		flickcurl_collection_s flickcurl_collection_s = new flickcurl_collection_s();
-		collections = flickcurl_collection_s.flickcurl_build_collections(fc, xpathCtx, root_xpathExpr, ((Object)0));
+		collections = flickcurl_collection_s.flickcurl_build_collections(fc, xpathCtx, root_xpathExpr, (null));
 		if (collections) {
 			result = collections[0];
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(collections);
@@ -391,32 +417,6 @@ public class flickcurl_collection_s {
 			collections[i].flickcurl_free_collection();
 		}
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(collections);
-	}
-	public void command_print_collection() {
-		Byte generatedId = this.getId();
-		Byte generatedSecret = this.getSecret();
-		int generatedServer = this.getServer();
-		Byte generatedTitle = this.getTitle();
-		Byte generatedDescription = this.getDescription();
-		Byte generatedIconlarge = this.getIconlarge();
-		Byte generatedIconsmall = this.getIconsmall();
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "Collection id %s  secret %s  server %d\n  Title %s\n  Description %s\n  Large icon %s\n  Small Icon %s\n", generatedId, generatedSecret, generatedServer, generatedTitle, (generatedDescription ? generatedDescription : "(None)"), generatedIconlarge, generatedIconsmall);
-		flickcurl_photo_s[][] generatedPhotos = this.getPhotos();
-		if (generatedPhotos) {
-			int i;
-			for (i = 0; generatedPhotos[i]; i++) {
-				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "  icon photo %d) ", i);
-				generatedPhotos[i].command_print_photo();
-			}
-		} 
-		flickcurl_collection_s[][] generatedCollections = this.getCollections();
-		if (generatedCollections) {
-			int i;
-			for (i = 0; generatedCollections[i]; i++) {
-				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "  Sub-Collection %d)", i);
-				generatedCollections[i].command_print_collection();
-			}
-		} 
 	}
 	public Byte getId() {
 		return id;

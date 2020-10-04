@@ -2,12 +2,12 @@ package application;
 
 public class bar_progress_hist {
 	private Object pos;
-	private Object times;
-	private Object bytes;
+	private Object[] times;
+	private Object[] bytes;
 	private Object total_time;
 	private Object total_bytes;
 	
-	public bar_progress_hist(Object pos, Object times, Object bytes, Object total_time, Object total_bytes) {
+	public bar_progress_hist(Object pos, Object[] times, Object[] bytes, Object total_time, Object total_bytes) {
 		setPos(pos);
 		setTimes(times);
 		setBytes(bytes);
@@ -23,16 +23,16 @@ public class bar_progress_hist {
 	public void setPos(Object newPos) {
 		pos = newPos;
 	}
-	public Object getTimes() {
+	public Object[] getTimes() {
 		return times;
 	}
-	public void setTimes(Object newTimes) {
+	public void setTimes(Object[] newTimes) {
 		times = newTimes;
 	}
-	public Object getBytes() {
+	public Object[] getBytes() {
 		return bytes;
 	}
-	public void setBytes(Object newBytes) {
+	public void setBytes(Object[] newBytes) {
 		bytes = newBytes;
 	}
 	public Object getTotal_time() {

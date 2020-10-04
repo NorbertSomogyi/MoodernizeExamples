@@ -43,7 +43,7 @@ public class S_NTFSSECT_VOLINFO_ {
 	public Object NtfsSectGetVolumeHandle(Object VolumeName) {
 		CHAR[] volname = "\\\\.\\";
 		CHAR volname_short = volname + /*Error: sizeof expression not supported yet*/ - 1;
-		CHAR c = new CHAR();
+		CHAR[] c = new CHAR();
 		DWORD rc = new DWORD();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/strcpy(volname + /*Error: sizeof expression not supported yet*/ - 1, /* Prefix "\\.\" onto the passed volume name */VolumeName);
 		for (c = volname_short; c; ++/* Find the last non-null character */c) {
@@ -52,7 +52,7 @@ public class S_NTFSSECT_VOLINFO_ {
 		if (c[-1] == /* Remove trailing back-slash */(byte)'\\') {
 			c[-1] = 0;
 		} 
-		this.setHandle(/*Error: Function owner not recognized*/CreateFileA(volname, -1024, -1024 | -1024, ((Object)0), 3, 0, ((Object)0)));
+		this.setHandle(/*Error: Function owner not recognized*/CreateFileA(volname, -1024, -1024 | -1024, (null), 3, 0, (null)));
 		rc = /*Error: Function owner not recognized*/GetLastError();
 		Object generatedHandle = this.getHandle();
 		if (generatedHandle == (HANDLE)(true)) {
@@ -72,12 +72,12 @@ public class S_NTFSSECT_VOLINFO_ {
 			return -1024;
 		} 
 		Object generatedHandle = this.getHandle();
-		if ((generatedHandle == ((Object)0)) || (generatedHandle == (HANDLE)(/* Only create a handle if it's not already been set */true))) {
+		if ((generatedHandle == (null)) || (generatedHandle == (HANDLE)(/* Only create a handle if it's not already been set */true))) {
 			rc = VolumeInfo.NtfsSectGetVolumeHandle(VolumeName);
 			if (rc != -1024) {
 				;
 			} 
-			if ((generatedHandle == ((Object)0)) || (generatedHandle == (HANDLE)(true))) {
+			if ((generatedHandle == (null)) || (generatedHandle == (HANDLE)(true))) {
 				return -1024;
 			} 
 		} 
@@ -127,7 +127,7 @@ public class S_NTFSSECT_VOLINFO_ {
 		DWORD output_size = new DWORD();
 		DWORD rc = new DWORD();
 		Object generatedHandle = this.getHandle();
-		ok = /*Error: Function owner not recognized*/DeviceIoControl(generatedHandle, (((((ULONG)(byte)'V')) << 16) | ((true) << 14) | ((false) << 2) | (false)), ((Object)0), 0, vol_disk_extents, /*Error: sizeof expression not supported yet*/, output_size, ((Object)0));
+		ok = /*Error: Function owner not recognized*/DeviceIoControl(generatedHandle, (((((ULONG)(byte)'V')) << 16) | ((true) << 14) | ((false) << 2) | (false)), (null), 0, vol_disk_extents, /*Error: sizeof expression not supported yet*/, output_size, (null));
 		rc = /*Error: Function owner not recognized*/GetLastError();
 		if (!ok) {
 			(ModernizedCProgram.NtfsSectLastErrorMessage = ("Couldn't fetch volume disk extent(s)!"));

@@ -38,7 +38,7 @@ public class __pthread_tls_datum {
 	 */
 	public __pthread_tls_datum find_specific(Object key, __pthread_tls_datum prev) {
 		tls_data_t specific = tls;
-		prev = ((Object)0);
+		prev = (null);
 		Object generatedKey = specific.getKey();
 		__pthread_tls_datum generatedNext = specific.getNext();
 		while (specific) {
@@ -60,7 +60,7 @@ public class __pthread_tls_datum {
 		pthread_t self_id = ModernizedCProgram.pthread_self();
 		if (self_id == 0) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DEBUG("ERROR called pthread_self() returned 0 in \"%s\"!\n", __func__);
-			return ((Object)0);
+			return (null);
 		} 
 		__pthread_tls_datum __pthread_tls_datum = new __pthread_tls_datum();
 		tls_data_t tls = __pthread_tls_datum.__pthread_get_tls_head(self_id);
@@ -79,7 +79,7 @@ public class __pthread_tls_datum {
 		if (specific) {
 			specific.setKey(key);
 			specific.setNext(tls);
-			specific.setValue(((Object)0));
+			specific.setValue((null));
 			tls = specific;
 		} else {
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DEBUG("ERROR out of memory in %s!\n", __func__);
@@ -89,7 +89,7 @@ public class __pthread_tls_datum {
 	public __pthread_tls_datum __pthread_get_tls_head(int self_id) {
 		pthread_thread_t self = ModernizedCProgram.pthread_sched_threads[self_id - 1];
 		Object generatedTls_head = self.getTls_head();
-		return self ? generatedTls_head : ((Object)0);
+		return self ? generatedTls_head : (null);
 	}
 	public Object getKey() {
 		return key;

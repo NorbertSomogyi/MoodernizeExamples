@@ -43,8 +43,8 @@ public class ext2_xattr_handle {
 		ext2_filsys fs = generatedFs;
 		int inode_size = (((fs.getSuper()).getS_rev_level() == 0) ? 128 : (fs.getSuper()).getS_inode_size());
 		ext2_inode_large inode = new ext2_inode_large();
-		byte start;
-		byte block_buf = ((Object)0);
+		Byte start;
+		Byte block_buf = (null);
 		ext2_ext_attr_header header = new ext2_ext_attr_header();
 		 ea_inode_magic = new ();
 		 blk = new ();
@@ -71,7 +71,7 @@ public class ext2_xattr_handle {
 		} 
 		Object generatedI_extra_isize = inode.getI_extra_isize();
 		if (generatedI_extra_isize == /* If extra_isize isn't set, we need to set it now */0 && inode_size > 128) {
-			byte p = (byte)inode;
+			Byte p = (byte)inode;
 			size_t extra = fs.getSuper().getS_want_extra_isize();
 			if (extra == 0) {
 				extra = /*Error: Unsupported expression*/;
@@ -134,7 +134,7 @@ public class ext2_xattr_handle {
 	}
 	public void xattrs_free_keys() {
 		ext2_xattr[] generatedAttrs = this.getAttrs();
-		ext2_xattr a = generatedAttrs;
+		ext2_xattr[] a = generatedAttrs;
 		int i;
 		int generatedCapacity = this.getCapacity();
 		for (i = 0; i < generatedCapacity; i++) {
@@ -153,8 +153,8 @@ public class ext2_xattr_handle {
 		ext2_ext_attr_header header = new ext2_ext_attr_header();
 		 ea_inode_magic = new ();
 		int storage_size;
-		byte start;
-		byte block_buf = ((Object)0);
+		Byte start;
+		Byte block_buf = (null);
 		 blk = new ();
 		size_t i = new size_t();
 		 err = new ();
@@ -257,7 +257,7 @@ public class ext2_xattr_handle {
 	}
 	public Object ext2fs_xattr_get(Object key, Object value, Object value_len) {
 		ext2_xattr x = new ext2_xattr();
-		byte val;
+		Byte val;
 		 err = new ();
 		Object generatedMagic = (h).getMagic();
 		if (!(h) || generatedMagic != (EXT2_ET_MAGIC_EA_HANDLE)) {
@@ -295,7 +295,7 @@ public class ext2_xattr_handle {
 		int needed;
 		int name_len;
 		int name_idx;
-		byte shortname;
+		Byte shortname;
 		int new_idx;
 		int ret;
 		ModernizedCProgram.find_ea_index(name, shortname, name_idx);
@@ -376,9 +376,9 @@ public class ext2_xattr_handle {
 		Object generatedFs = this.getFs();
 		ext2_filsys fs = generatedFs;
 		int inode_size = (((fs.getSuper()).getS_rev_level() == 0) ? 128 : (fs.getSuper()).getS_inode_size());
-		ext2_inode_large inode = ((Object)0);
+		ext2_inode_large inode = (null);
 		ext2_xattr x = new ext2_xattr();
-		byte new_value;
+		Byte new_value;
 		int ibody_free;
 		int block_free;
 		int in_inode = 0;

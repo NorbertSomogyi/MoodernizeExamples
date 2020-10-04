@@ -26,7 +26,7 @@ public class ext2_ext_attr_entry {
 	 */
 	public Object ext2fs_ext_attr_hash_entry(Object data) {
 		 hash = 0;
-		byte name = ((byte)entry) + /*Error: Unsupported expression*/;
+		Byte name = ((byte)entry) + /*Error: Unsupported expression*/;
 		int n;
 		Object generatedE_name_len = this.getE_name_len();
 		for (n = 0; n < generatedE_name_len; n++) {

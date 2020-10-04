@@ -11,21 +11,21 @@ package application;
 public class AdapterInfo {
 	private int iSize;
 	private int iAdapterIndex;
-	private Object strUDID;
+	private Object[] strUDID;
 	private int iBusNumber;
 	private int iDeviceNumber;
 	private int iFunctionNumber;
 	private int iVendorID;
-	private Object strAdapterName;
-	private Object strDisplayName;
+	private Object[] strAdapterName;
+	private Object[] strDisplayName;
 	private int iPresent;
 	private int iExist;
-	private Object strDriverPath;
-	private Object strDriverPathExt;
-	private Object strPNPString;
+	private Object[] strDriverPath;
+	private Object[] strDriverPathExt;
+	private Object[] strPNPString;
 	private int iOSDisplayIndex;
 	
-	public AdapterInfo(int iSize, int iAdapterIndex, Object strUDID, int iBusNumber, int iDeviceNumber, int iFunctionNumber, int iVendorID, Object strAdapterName, Object strDisplayName, int iPresent, int iExist, Object strDriverPath, Object strDriverPathExt, Object strPNPString, int iOSDisplayIndex) {
+	public AdapterInfo(int iSize, int iAdapterIndex, Object[] strUDID, int iBusNumber, int iDeviceNumber, int iFunctionNumber, int iVendorID, Object[] strAdapterName, Object[] strDisplayName, int iPresent, int iExist, Object[] strDriverPath, Object[] strDriverPathExt, Object[] strPNPString, int iOSDisplayIndex) {
 		setISize(iSize);
 		setIAdapterIndex(iAdapterIndex);
 		setStrUDID(strUDID);
@@ -57,10 +57,10 @@ public class AdapterInfo {
 	public void setIAdapterIndex(int newIAdapterIndex) {
 		iAdapterIndex = newIAdapterIndex;
 	}
-	public Object getStrUDID() {
+	public Object[] getStrUDID() {
 		return strUDID;
 	}
-	public void setStrUDID(Object newStrUDID) {
+	public void setStrUDID(Object[] newStrUDID) {
 		strUDID = newStrUDID;
 	}
 	public int getIBusNumber() {
@@ -87,16 +87,16 @@ public class AdapterInfo {
 	public void setIVendorID(int newIVendorID) {
 		iVendorID = newIVendorID;
 	}
-	public Object getStrAdapterName() {
+	public Object[] getStrAdapterName() {
 		return strAdapterName;
 	}
-	public void setStrAdapterName(Object newStrAdapterName) {
+	public void setStrAdapterName(Object[] newStrAdapterName) {
 		strAdapterName = newStrAdapterName;
 	}
-	public Object getStrDisplayName() {
+	public Object[] getStrDisplayName() {
 		return strDisplayName;
 	}
-	public void setStrDisplayName(Object newStrDisplayName) {
+	public void setStrDisplayName(Object[] newStrDisplayName) {
 		strDisplayName = newStrDisplayName;
 	}
 	public int getIPresent() {
@@ -111,22 +111,22 @@ public class AdapterInfo {
 	public void setIExist(int newIExist) {
 		iExist = newIExist;
 	}
-	public Object getStrDriverPath() {
+	public Object[] getStrDriverPath() {
 		return strDriverPath;
 	}
-	public void setStrDriverPath(Object newStrDriverPath) {
+	public void setStrDriverPath(Object[] newStrDriverPath) {
 		strDriverPath = newStrDriverPath;
 	}
-	public Object getStrDriverPathExt() {
+	public Object[] getStrDriverPathExt() {
 		return strDriverPathExt;
 	}
-	public void setStrDriverPathExt(Object newStrDriverPathExt) {
+	public void setStrDriverPathExt(Object[] newStrDriverPathExt) {
 		strDriverPathExt = newStrDriverPathExt;
 	}
-	public Object getStrPNPString() {
+	public Object[] getStrPNPString() {
 		return strPNPString;
 	}
-	public void setStrPNPString(Object newStrPNPString) {
+	public void setStrPNPString(Object[] newStrPNPString) {
 		strPNPString = newStrPNPString;
 	}
 	public int getIOSDisplayIndex() {

@@ -62,9 +62,9 @@ public class struct_NV_GPU_PERF_POLICIES_INFO_PARAMS_V1 {
 	private Object version;
 	private Object a;
 	private Object info_value;
-	private Object x;
+	private Object[] x;
 	
-	public struct_NV_GPU_PERF_POLICIES_INFO_PARAMS_V1(Object version, Object a, Object info_value, Object x) {
+	public struct_NV_GPU_PERF_POLICIES_INFO_PARAMS_V1(Object version, Object a, Object info_value, Object[] x) {
 		setVersion(version);
 		setA(a);
 		setInfo_value(info_value);
@@ -91,10 +91,10 @@ public class struct_NV_GPU_PERF_POLICIES_INFO_PARAMS_V1 {
 	public void setInfo_value(Object newInfo_value) {
 		info_value = newInfo_value;
 	}
-	public Object getX() {
+	public Object[] getX() {
 		return x;
 	}
-	public void setX(Object newX) {
+	public void setX(Object[] newX) {
 		x = newX;
 	}
 }

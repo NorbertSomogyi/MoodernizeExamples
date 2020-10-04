@@ -3,10 +3,10 @@ package application;
 public class dictstat {
 	private Object cnt;
 	private stat stat;
-	private Object encoding_from;
-	private Object encoding_to;
+	private Object[] encoding_from;
+	private Object[] encoding_to;
 	
-	public dictstat(Object cnt, stat stat, Object encoding_from, Object encoding_to) {
+	public dictstat(Object cnt, stat stat, Object[] encoding_from, Object[] encoding_to) {
 		setCnt(cnt);
 		setStat(stat);
 		setEncoding_from(encoding_from);
@@ -27,16 +27,16 @@ public class dictstat {
 	public void setStat(stat newStat) {
 		stat = newStat;
 	}
-	public Object getEncoding_from() {
+	public Object[] getEncoding_from() {
 		return encoding_from;
 	}
-	public void setEncoding_from(Object newEncoding_from) {
+	public void setEncoding_from(Object[] newEncoding_from) {
 		encoding_from = newEncoding_from;
 	}
-	public Object getEncoding_to() {
+	public Object[] getEncoding_to() {
 		return encoding_to;
 	}
-	public void setEncoding_to(Object newEncoding_to) {
+	public void setEncoding_to(Object[] newEncoding_to) {
 		encoding_to = newEncoding_to;
 	}
 }

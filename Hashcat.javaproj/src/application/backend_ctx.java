@@ -5,9 +5,9 @@ public class backend_ctx {
 	private Object ocl;
 	private Object cuda;
 	private Object nvrtc;
-	private Object backend_device_from_cuda;
-	private Object backend_device_from_opencl;
-	private Object backend_device_from_opencl_platform;
+	private Object[] backend_device_from_cuda;
+	private Object[] backend_device_from_opencl;
+	private Object[][] backend_device_from_opencl_platform;
 	private int backend_devices_cnt;
 	private int backend_devices_active;
 	private int cuda_devices_cnt;
@@ -38,7 +38,7 @@ public class backend_ctx {
 	private byte[][] opencl_platforms_version;
 	private Object opencl_device_types_filter;
 	
-	public backend_ctx(boolean enabled, Object ocl, Object cuda, Object nvrtc, Object backend_device_from_cuda, Object backend_device_from_opencl, Object backend_device_from_opencl_platform, int backend_devices_cnt, int backend_devices_active, int cuda_devices_cnt, int cuda_devices_active, int opencl_devices_cnt, int opencl_devices_active, Object backend_devices_filter, hc_device_param[] devices_param, Object hardware_power_all, Object kernel_power_all, Object kernel_power_final, double target_msec, boolean need_adl, boolean need_nvml, boolean need_nvapi, boolean need_sysfs, int comptime, int force_jit_compilation, int nvrtc_driver_version, int cuda_driver_version, Object opencl_platforms, Object opencl_platforms_cnt, Object[][] opencl_platforms_devices, Object opencl_platforms_devices_cnt, byte[][] opencl_platforms_name, byte[][] opencl_platforms_vendor, Object opencl_platforms_vendor_id, byte[][] opencl_platforms_version, Object opencl_device_types_filter) {
+	public backend_ctx(boolean enabled, Object ocl, Object cuda, Object nvrtc, Object[] backend_device_from_cuda, Object[] backend_device_from_opencl, Object[][] backend_device_from_opencl_platform, int backend_devices_cnt, int backend_devices_active, int cuda_devices_cnt, int cuda_devices_active, int opencl_devices_cnt, int opencl_devices_active, Object backend_devices_filter, hc_device_param[] devices_param, Object hardware_power_all, Object kernel_power_all, Object kernel_power_final, double target_msec, boolean need_adl, boolean need_nvml, boolean need_nvapi, boolean need_sysfs, int comptime, int force_jit_compilation, int nvrtc_driver_version, int cuda_driver_version, Object opencl_platforms, Object opencl_platforms_cnt, Object[][] opencl_platforms_devices, Object opencl_platforms_devices_cnt, byte[][] opencl_platforms_name, byte[][] opencl_platforms_vendor, Object opencl_platforms_vendor_id, byte[][] opencl_platforms_version, Object opencl_device_types_filter) {
 		setEnabled(enabled);
 		setOcl(ocl);
 		setCuda(cuda);
@@ -103,22 +103,22 @@ public class backend_ctx {
 	public void setNvrtc(Object newNvrtc) {
 		nvrtc = newNvrtc;
 	}
-	public Object getBackend_device_from_cuda() {
+	public Object[] getBackend_device_from_cuda() {
 		return backend_device_from_cuda;
 	}
-	public void setBackend_device_from_cuda(Object newBackend_device_from_cuda) {
+	public void setBackend_device_from_cuda(Object[] newBackend_device_from_cuda) {
 		backend_device_from_cuda = newBackend_device_from_cuda;
 	}
-	public Object getBackend_device_from_opencl() {
+	public Object[] getBackend_device_from_opencl() {
 		return backend_device_from_opencl;
 	}
-	public void setBackend_device_from_opencl(Object newBackend_device_from_opencl) {
+	public void setBackend_device_from_opencl(Object[] newBackend_device_from_opencl) {
 		backend_device_from_opencl = newBackend_device_from_opencl;
 	}
-	public Object getBackend_device_from_opencl_platform() {
+	public Object[][] getBackend_device_from_opencl_platform() {
 		return backend_device_from_opencl_platform;
 	}
-	public void setBackend_device_from_opencl_platform(Object newBackend_device_from_opencl_platform) {
+	public void setBackend_device_from_opencl_platform(Object[][] newBackend_device_from_opencl_platform) {
 		backend_device_from_opencl_platform = newBackend_device_from_opencl_platform;
 	}
 	public int getBackend_devices_cnt() {

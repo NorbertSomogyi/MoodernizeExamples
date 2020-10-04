@@ -20,7 +20,7 @@ public class dictht {
 	/* Reset a hash table already initialized with ht_init().
 	 * NOTE: This function should only be called by ht_destroy(). */
 	public void _dictReset() {
-		this.setTable(((Object)0));
+		this.setTable((null));
 		this.setSize(0);
 		this.setSizemask(0);
 		this.setUsed(0);

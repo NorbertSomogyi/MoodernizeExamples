@@ -5,9 +5,9 @@ public class unalloc_space_desc_s {
 	private udf_tag_s tag;
 	private Object vol_desc_seq_num;
 	private Object i_alloc_descs;
-	private Object allocDescs;
+	private Object[] allocDescs;
 	
-	public unalloc_space_desc_s(udf_tag_s tag, Object vol_desc_seq_num, Object i_alloc_descs, Object allocDescs) {
+	public unalloc_space_desc_s(udf_tag_s tag, Object vol_desc_seq_num, Object i_alloc_descs, Object[] allocDescs) {
 		setTag(tag);
 		setVol_desc_seq_num(vol_desc_seq_num);
 		setI_alloc_descs(i_alloc_descs);
@@ -34,10 +34,10 @@ public class unalloc_space_desc_s {
 	public void setI_alloc_descs(Object newI_alloc_descs) {
 		i_alloc_descs = newI_alloc_descs;
 	}
-	public Object getAllocDescs() {
+	public Object[] getAllocDescs() {
 		return allocDescs;
 	}
-	public void setAllocDescs(Object newAllocDescs) {
+	public void setAllocDescs(Object[] newAllocDescs) {
 		allocDescs = newAllocDescs;
 	}
 }

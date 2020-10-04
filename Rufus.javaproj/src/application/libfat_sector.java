@@ -20,9 +20,9 @@ package application;
 public class libfat_sector {
 	private Object n;
 	private libfat_sector next;
-	private Object data;
+	private Object[] data;
 	
-	public libfat_sector(Object n, libfat_sector next, Object data) {
+	public libfat_sector(Object n, libfat_sector next, Object[] data) {
 		setN(n);
 		setNext(next);
 		setData(data);
@@ -42,10 +42,10 @@ public class libfat_sector {
 	public void setNext(libfat_sector newNext) {
 		next = newNext;
 	}
-	public Object getData() {
+	public Object[] getData() {
 		return data;
 	}
-	public void setData(Object newData) {
+	public void setData(Object[] newData) {
 		data = newData;
 	}
 }

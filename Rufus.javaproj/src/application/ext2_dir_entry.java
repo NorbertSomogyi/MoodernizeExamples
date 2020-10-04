@@ -7,9 +7,9 @@ public class ext2_dir_entry {
 	private Object inode;
 	private Object rec_len;
 	private Object name_len;
-	private Object name;
+	private Object[] name;
 	
-	public ext2_dir_entry(Object inode, Object rec_len, Object name_len, Object name) {
+	public ext2_dir_entry(Object inode, Object rec_len, Object name_len, Object[] name) {
 		setInode(inode);
 		setRec_len(rec_len);
 		setName_len(name_len);
@@ -18,68 +18,12 @@ public class ext2_dir_entry {
 	public ext2_dir_entry() {
 	}
 	
-	/*
-	 * dir_iterate.c --- ext2fs directory iteration operations
-	 *
-	 * Copyright (C) 1993, 1994, 1994, 1995, 1996, 1997 Theodore Ts'o.
-	 *
-	 * %Begin-Header%
-	 * This file may be redistributed under the terms of the GNU Library
-	 * General Public License, version 2.
-	 * %End-Header%
-	 */
-	public Object ext2fs_get_rec_len(Object fs, Integer rec_len) {
-		Object generatedRec_len = this.getRec_len();
-		int len = generatedRec_len;
-		if (fs.getBlocksize() < 65536) {
-			rec_len = len;
-		}  else if (len == ((1 << 16) - 1) || len == 0) {
-			rec_len = fs.getBlocksize();
-		} else {
-				rec_len = (len & 65532) | ((len & 3) << 16);
-		} 
-		return 0;
-	}
-	public Object ext2fs_set_rec_len(Object fs, int len) {
-		if ((len > fs.getBlocksize()) || (fs.getBlocksize() > (1 << 18)) || (len & 3)) {
-			return 22;
-		} 
-		if (len < 65536) {
-			this.setRec_len(len);
-			return 0;
-		} 
-		if (len == fs.getBlocksize()) {
-			if (fs.getBlocksize() == 65536) {
-				this.setRec_len(((1 << 16) - 1));
-			} else {
-					this.setRec_len(0);
-			} 
-		} else {
-				this.setRec_len((len & 65532) | ((len >> 16) & 3));
-		} 
-		return 0/*
-		 * This function checks to see whether or not a potential deleted
-		 * directory entry looks valid.  What we do is check the deleted entry
-		 * and each successive entry to make sure that they all look valid and
-		 * that the last deleted entry ends at the beginning of the next
-		 * undeleted entry.  Returns 1 if the deleted entry looks valid, zero
-		 * if not valid.
-		 */;
-	}
-	public int xlate_func(Object dir, int entry, int offset, int blocksize, Byte buf, Object priv_data) {
-		xlate xl = (xlate)priv_data;
-		Object generatedReal_private = xl.getReal_private();
-		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(dirent, offset, blocksize, buf, generatedReal_private);
-		xlate xl = (xlate)priv_data;
-		Object generatedReal_private = xl.getReal_private();
-		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(fs, blocknr, (int)blockcnt, generatedReal_private);
-	}
 	public int ext2fs_dirent_has_tail(Object fs) {
-		return ModernizedCProgram.__get_dirent_tail(fs, dirent, ((Object)0), 0) == 0;
+		return ModernizedCProgram.__get_dirent_tail(fs, dirent, (null), 0) == 0;
 	}
 	public Object ext2fs_dirent_csum(Object fs, Object inum, Object crc, int size) {
 		 retval = new ();
-		byte buf = (byte)dirent;
+		Byte buf = (byte)dirent;
 		 gen = new ();
 		ext2_inode inode = new ext2_inode();
 		retval = inode.ext2fs_read_inode(fs, inum);
@@ -185,10 +129,10 @@ public class ext2_dir_entry {
 		if (!fs.getSuper().ext2fs_has_feature_metadata_csum()) {
 			return 1;
 		} 
-		if (ModernizedCProgram.__get_dirent_tail(fs, dirent, ((Object)0), 1) == 0) {
+		if (ModernizedCProgram.__get_dirent_tail(fs, dirent, (null), 1) == 0) {
 			return dirent.ext2fs_dirent_csum_verify(fs, inum);
 		} 
-		if (ModernizedCProgram.__get_dx_countlimit(fs, dirent, ((Object)0), ((Object)0), 1) == 0) {
+		if (ModernizedCProgram.__get_dx_countlimit(fs, dirent, (null), (null), 1) == 0) {
 			return dirent.ext2fs_dx_csum_verify(fs, inum);
 		} 
 		return 0;
@@ -197,16 +141,88 @@ public class ext2_dir_entry {
 		if (!fs.getSuper().ext2fs_has_feature_metadata_csum()) {
 			return 0;
 		} 
-		if (ModernizedCProgram.__get_dirent_tail(fs, dirent, ((Object)0), 1) == 0) {
+		if (ModernizedCProgram.__get_dirent_tail(fs, dirent, (null), 1) == 0) {
 			return dirent.ext2fs_dirent_csum_set(fs, inum);
 		} 
-		if (ModernizedCProgram.__get_dx_countlimit(fs, dirent, ((Object)0), ((Object)0), 1) == 0) {
+		if (ModernizedCProgram.__get_dx_countlimit(fs, dirent, (null), (null), 1) == 0) {
 			return dirent.ext2fs_dx_csum_set(fs, inum);
 		} 
 		if (fs.getFlags() & -1024) {
 			return 0;
 		} 
 		return EXT2_ET_DIR_NO_SPACE_FOR_CSUM;
+	}
+	/*
+	 * dir_iterate.c --- ext2fs directory iteration operations
+	 *
+	 * Copyright (C) 1993, 1994, 1994, 1995, 1996, 1997 Theodore Ts'o.
+	 *
+	 * %Begin-Header%
+	 * This file may be redistributed under the terms of the GNU Library
+	 * General Public License, version 2.
+	 * %End-Header%
+	 */
+	public Object ext2fs_get_rec_len(Object fs, Integer rec_len) {
+		Object generatedRec_len = this.getRec_len();
+		int len = generatedRec_len;
+		if (fs.getBlocksize() < 65536) {
+			rec_len = len;
+		}  else if (len == ((1 << 16) - 1) || len == 0) {
+			rec_len = fs.getBlocksize();
+		} else {
+				rec_len = (len & 65532) | ((len & 3) << 16);
+		} 
+		return 0;
+	}
+	public Object ext2fs_set_rec_len(Object fs, int len) {
+		if ((len > fs.getBlocksize()) || (fs.getBlocksize() > (1 << 18)) || (len & 3)) {
+			return 22;
+		} 
+		if (len < 65536) {
+			this.setRec_len(len);
+			return 0;
+		} 
+		if (len == fs.getBlocksize()) {
+			if (fs.getBlocksize() == 65536) {
+				this.setRec_len(((1 << 16) - 1));
+			} else {
+					this.setRec_len(0);
+			} 
+		} else {
+				this.setRec_len((len & 65532) | ((len >> 16) & 3));
+		} 
+		return 0/*
+		 * This function checks to see whether or not a potential deleted
+		 * directory entry looks valid.  What we do is check the deleted entry
+		 * and each successive entry to make sure that they all look valid and
+		 * that the last deleted entry ends at the beginning of the next
+		 * undeleted entry.  Returns 1 if the deleted entry looks valid, zero
+		 * if not valid.
+		 */;
+	}
+	public int xlate_func(Object dir, int entry, int offset, int blocksize, Byte buf, Object priv_data) {
+		xlate xl = (xlate)priv_data;
+		Object generatedReal_private = xl.getReal_private();
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(dirent, offset, blocksize, buf, generatedReal_private);
+		xlate xl = (xlate)priv_data;
+		Object generatedReal_private = xl.getReal_private();
+		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(fs, blocknr, (int)blockcnt, generatedReal_private);
+	}
+	public int lookup_proc(int offset, int blocksize, Byte buf, Object priv_data) {
+		lookup_struct ls = (lookup_struct)priv_data;
+		int generatedLen = ls.getLen();
+		if (generatedLen != ModernizedCProgram.ext2fs_dirent_name_len(dirent)) {
+			return 0;
+		} 
+		Object generatedName = ls.getName();
+		if (/*Error: Function owner not recognized*/strncmp(generatedName, generatedName, ModernizedCProgram.ext2fs_dirent_name_len(dirent))) {
+			return 0;
+		} 
+		Object generatedInode = ls.getInode();
+		generatedInode = generatedInode;
+		int generatedFound = ls.getFound();
+		generatedFound++;
+		return 2;
 	}
 	public int link_proc(int offset, int blocksize, Byte buf, Object priv_data) {
 		link_struct ls = (link_struct)priv_data;
@@ -261,7 +277,7 @@ public class ext2_dir_entry {
 			t.ext2fs_initialize_dirent_tail(generatedFs);
 			ret = 1;
 		} 
-		Object generatedName = this.getName();
+		Object[] generatedName = this.getName();
 		if (/* De-convert a dx_root block */csum_size && curr_rec_len == generatedFs.getBlocksize() - (((true) + 8 + (4 - 1)) & ~(4 - 1)) && offset == (((true) + 8 + (4 - 1)) & ~(4 - 1)) && generatedName[0] == (byte)'.' && generatedName[1] == (byte)'.') {
 			curr_rec_len -= csum_size;
 			ls.setErr(dirent.ext2fs_set_rec_len(generatedFs, curr_rec_len));
@@ -316,22 +332,6 @@ public class ext2_dir_entry {
 		 * entry filetype.
 		 */;
 	}
-	public int lookup_proc(int offset, int blocksize, Byte buf, Object priv_data) {
-		lookup_struct ls = (lookup_struct)priv_data;
-		int generatedLen = ls.getLen();
-		if (generatedLen != ModernizedCProgram.ext2fs_dirent_name_len(dirent)) {
-			return 0;
-		} 
-		Object generatedName = ls.getName();
-		if (/*Error: Function owner not recognized*/strncmp(generatedName, generatedName, ModernizedCProgram.ext2fs_dirent_name_len(dirent))) {
-			return 0;
-		} 
-		Object generatedInode = ls.getInode();
-		generatedInode = generatedInode;
-		int generatedFound = ls.getFound();
-		generatedFound++;
-		return 2;
-	}
 	public Object getInode() {
 		return inode;
 	}
@@ -350,10 +350,10 @@ public class ext2_dir_entry {
 	public void setName_len(Object newName_len) {
 		name_len = newName_len;
 	}
-	public Object getName() {
+	public Object[] getName() {
 		return name;
 	}
-	public void setName(Object newName) {
+	public void setName(Object[] newName) {
 		name = newName;
 	}
 }

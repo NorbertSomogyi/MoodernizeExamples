@@ -6,9 +6,9 @@ public class struct_NV_GPU_PERF_POLICIES_STATUS_PARAMS_V1 {
 	private Object a;
 	private Object b;
 	private Object throttle;
-	private Object x;
+	private Object[] x;
 	
-	public struct_NV_GPU_PERF_POLICIES_STATUS_PARAMS_V1(Object version, Object info_value, Object a, Object b, Object throttle, Object x) {
+	public struct_NV_GPU_PERF_POLICIES_STATUS_PARAMS_V1(Object version, Object info_value, Object a, Object b, Object throttle, Object[] x) {
 		setVersion(version);
 		setInfo_value(info_value);
 		setA(a);
@@ -49,10 +49,10 @@ public class struct_NV_GPU_PERF_POLICIES_STATUS_PARAMS_V1 {
 	public void setThrottle(Object newThrottle) {
 		throttle = newThrottle;
 	}
-	public Object getX() {
+	public Object[] getX() {
 		return x;
 	}
-	public void setX(Object newX) {
+	public void setX(Object[] newX) {
 		x = newX;
 	}
 }

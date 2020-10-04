@@ -54,6 +54,60 @@ public class flickcurl_shapedata_s {
 			}
 		} 
 	}
+	public flickcurl_shapedata_s flickcurl_places_getShapeHistory(flickcurl_s fc, Object place_id, int woe_id) {
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_shapedata shapes = (null);
+		byte[] woe_id_str = new byte[20];
+		fc.flickcurl_init_params(0);
+		if (!place_id && woe_id < 0) {
+			return (null);
+		} 
+		if (place_id) {
+			fc.flickcurl_add_param("place_id", place_id);
+		} 
+		if (woe_id >= 0) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(woe_id_str, "%d", woe_id);
+			fc.flickcurl_add_param("woe_id", woe_id_str);
+		} 
+		fc.flickcurl_end_params();
+		if (fc.flickcurl_prepare("flickr.places.getShapeHistory")) {
+			;
+		} 
+		doc = fc.flickcurl_invoke();
+		if (!doc) {
+			;
+		} 
+		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
+		if (!xpathCtx) {
+			fc.flickcurl_error("Failed to create XPath context for document");
+			fc.setFailed(1);
+			;
+		} 
+		flickcurl_shapedata_s flickcurl_shapedata_s = new flickcurl_shapedata_s();
+		shapes = flickcurl_shapedata_s.flickcurl_build_shapes(fc, xpathCtx, ()"/rsp/shapes/shapedata|/rsp/shapes/shape", (null));
+		int generatedFailed = fc.getFailed();
+		if (generatedFailed) {
+			if (shapes) {
+				shapes.flickcurl_free_shapes();
+			} 
+			shapes = (null);
+		} 
+		return shapes/**
+		 * flickcurl_places_getTopPlacesList:
+		 * @fc: flickcurl context
+		 * @place_type: The place type to cluster photos by. Valid place types are : neighbourhood, locality, region, country and continent
+		 * @date: A valid date in YYYY-MM-DD format. The default is yesterday. (or NULL)
+		 * @woe_id: Limit your query to only those top places belonging to a specific Where on Earth (WOE) identifier. (or NULL)
+		 * @place_id: Limit your query to only those top places belonging to a specific Flickr Places identifier. (or NULL)
+		 * 
+		 * Return the top 100 most geotagged places for a day.
+		 *
+		 * Implements flickr.places.getTopPlacesList (1.12)
+		 * 
+		 * Return value: array of places or NULL on failure
+		 **/;
+	}
 	/* -*- Mode: c; c-basic-offset: 2 -*-
 	 *
 	 * shape.c - Flickr shape support calls
@@ -121,10 +175,10 @@ public class flickcurl_shapedata_s {
 	}
 	/* get shapedata from value */
 	public flickcurl_shapedata_s flickcurl_build_shapes(flickcurl_s fc, Object xpathCtx, Object xpathExpr, Integer shape_count_p) {
-		flickcurl_shapedata shapes = ((Object)0);
+		flickcurl_shapedata shapes = (null);
 		int nodes_count;
 		int shape_count;
-		 xpathObj = ((Object)0);
+		 xpathObj = (null);
 		 nodes = new ();
 		int i;
 		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, xpathCtx);
@@ -147,74 +201,20 @@ public class flickcurl_shapedata_s {
 			if (shapes) {
 				shapes.flickcurl_free_shapes();
 			} 
-			shapes = ((Object)0);
+			shapes = (null);
 		} 
 		return shapes;
 	}
 	public flickcurl_shapedata_s flickcurl_build_shape(flickcurl_s fc, Object xpathCtx, Object xpathExpr) {
-		flickcurl_shapedata shapes = new flickcurl_shapedata();
-		flickcurl_shapedata result = ((Object)0);
+		flickcurl_shapedata[][] shapes = new flickcurl_shapedata();
+		flickcurl_shapedata result = (null);
 		flickcurl_shapedata_s flickcurl_shapedata_s = new flickcurl_shapedata_s();
-		shapes = flickcurl_shapedata_s.flickcurl_build_shapes(fc, xpathCtx, xpathExpr, ((Object)0));
+		shapes = flickcurl_shapedata_s.flickcurl_build_shapes(fc, xpathCtx, xpathExpr, (null));
 		if (shapes) {
 			result = shapes[0];
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(shapes);
 		} 
 		return result;
-	}
-	public flickcurl_shapedata_s flickcurl_places_getShapeHistory(flickcurl_s fc, Object place_id, int woe_id) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_shapedata shapes = ((Object)0);
-		byte[] woe_id_str = new byte[20];
-		fc.flickcurl_init_params(0);
-		if (!place_id && woe_id < 0) {
-			return ((Object)0);
-		} 
-		if (place_id) {
-			fc.flickcurl_add_param("place_id", place_id);
-		} 
-		if (woe_id >= 0) {
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/sprintf(woe_id_str, "%d", woe_id);
-			fc.flickcurl_add_param("woe_id", woe_id_str);
-		} 
-		fc.flickcurl_end_params();
-		if (fc.flickcurl_prepare("flickr.places.getShapeHistory")) {
-			;
-		} 
-		doc = fc.flickcurl_invoke();
-		if (!doc) {
-			;
-		} 
-		xpathCtx = /*Error: Function owner not recognized*/xmlXPathNewContext(doc);
-		if (!xpathCtx) {
-			fc.flickcurl_error("Failed to create XPath context for document");
-			fc.setFailed(1);
-			;
-		} 
-		flickcurl_shapedata_s flickcurl_shapedata_s = new flickcurl_shapedata_s();
-		shapes = flickcurl_shapedata_s.flickcurl_build_shapes(fc, xpathCtx, ()"/rsp/shapes/shapedata|/rsp/shapes/shape", ((Object)0));
-		int generatedFailed = fc.getFailed();
-		if (generatedFailed) {
-			if (shapes) {
-				shapes.flickcurl_free_shapes();
-			} 
-			shapes = ((Object)0);
-		} 
-		return shapes/**
-		 * flickcurl_places_getTopPlacesList:
-		 * @fc: flickcurl context
-		 * @place_type: The place type to cluster photos by. Valid place types are : neighbourhood, locality, region, country and continent
-		 * @date: A valid date in YYYY-MM-DD format. The default is yesterday. (or NULL)
-		 * @woe_id: Limit your query to only those top places belonging to a specific Where on Earth (WOE) identifier. (or NULL)
-		 * @place_id: Limit your query to only those top places belonging to a specific Flickr Places identifier. (or NULL)
-		 * 
-		 * Return the top 100 most geotagged places for a day.
-		 *
-		 * Implements flickr.places.getTopPlacesList (1.12)
-		 * 
-		 * Return value: array of places or NULL on failure
-		 **/;
 	}
 	public int getCreated() {
 		return created;

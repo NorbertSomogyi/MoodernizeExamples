@@ -6,12 +6,12 @@ public class commit_header {
 	private Object h_sequence;
 	private byte h_chksum_type;
 	private byte h_chksum_size;
-	private Object h_padding;
-	private Object h_chksum;
+	private Object[] h_padding;
+	private Object[] h_chksum;
 	private Object h_commit_sec;
 	private Object h_commit_nsec;
 	
-	public commit_header(Object h_magic, Object h_blocktype, Object h_sequence, byte h_chksum_type, byte h_chksum_size, Object h_padding, Object h_chksum, Object h_commit_sec, Object h_commit_nsec) {
+	public commit_header(Object h_magic, Object h_blocktype, Object h_sequence, byte h_chksum_type, byte h_chksum_size, Object[] h_padding, Object[] h_chksum, Object h_commit_sec, Object h_commit_nsec) {
 		setH_magic(h_magic);
 		setH_blocktype(h_blocktype);
 		setH_sequence(h_sequence);
@@ -55,16 +55,16 @@ public class commit_header {
 	public void setH_chksum_size(byte newH_chksum_size) {
 		h_chksum_size = newH_chksum_size;
 	}
-	public Object getH_padding() {
+	public Object[] getH_padding() {
 		return h_padding;
 	}
-	public void setH_padding(Object newH_padding) {
+	public void setH_padding(Object[] newH_padding) {
 		h_padding = newH_padding;
 	}
-	public Object getH_chksum() {
+	public Object[] getH_chksum() {
 		return h_chksum;
 	}
-	public void setH_chksum(Object newH_chksum) {
+	public void setH_chksum(Object[] newH_chksum) {
 		h_chksum = newH_chksum;
 	}
 	public Object getH_commit_sec() {

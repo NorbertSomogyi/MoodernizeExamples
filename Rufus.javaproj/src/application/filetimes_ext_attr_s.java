@@ -4,13 +4,13 @@ package application;
 public class filetimes_ext_attr_s {
 	private Object attr_type;
 	private Object attr_subtype;
-	private Object reserved;
+	private Object[] reserved;
 	private Object attrLength;
 	private Object dataLength;
 	private Object fileTimeExistence;
 	private Object fileTimes;
 	
-	public filetimes_ext_attr_s(Object attr_type, Object attr_subtype, Object reserved, Object attrLength, Object dataLength, Object fileTimeExistence, Object fileTimes) {
+	public filetimes_ext_attr_s(Object attr_type, Object attr_subtype, Object[] reserved, Object attrLength, Object dataLength, Object fileTimeExistence, Object fileTimes) {
 		setAttr_type(attr_type);
 		setAttr_subtype(attr_subtype);
 		setReserved(reserved);
@@ -34,10 +34,10 @@ public class filetimes_ext_attr_s {
 	public void setAttr_subtype(Object newAttr_subtype) {
 		attr_subtype = newAttr_subtype;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public Object getAttrLength() {

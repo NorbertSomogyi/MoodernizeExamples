@@ -57,7 +57,7 @@ public class iib_link_set_entry {
 	
 	public iib_link_set_entry iib_process_hello(Object if_pid, nib_entry nb_elt, Object validity_time, Object is_sym_nb, Object is_lost) {
 		iib_base_entry_t base_elt = new iib_base_entry_t();
-		iib_link_set_entry_t ls_entry = ((Object)0);
+		iib_link_set_entry_t ls_entry = (null);
 		timex_t now = new timex_t();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_lock(ModernizedCProgram.mtx_iib_access);
 		ModernizedCProgram.cleanup_link_sets();
@@ -101,7 +101,7 @@ public class iib_link_set_entry {
 	public iib_link_set_entry update_link_set(iib_base_entry base_entry, nib_entry nb_elt,  now, Object val_time, Object sym, Object lost) {
 		iib_link_set_entry_t ls_elt = new iib_link_set_entry_t();
 		iib_link_set_entry_t ls_tmp = new iib_link_set_entry_t();
-		iib_link_set_entry_t matching_lt = ((Object)0);
+		iib_link_set_entry_t matching_lt = (null);
 		nhdp_addr_entry_t lt_elt = new nhdp_addr_entry_t();
 		timex_t v_time = new timex_t();
 		timex_t l_hold = new timex_t();
@@ -138,7 +138,7 @@ public class iib_link_set_entry {
 		} else {
 				matching_lt = iib_link_set_entry.add_default_link_set_entry(base_entry, now, /* No single matching link tuple existant, create a new one */val_time);
 				if (!matching_lt) {
-					return ((Object)/* Insufficient memory */0);
+					return (null);
 				} 
 		} 
 		v_time = ModernizedCProgram.timex_from_uint64(val_time * (true));
@@ -147,7 +147,7 @@ public class iib_link_set_entry {
 		matching_lt.setAddress_list_head(nhdp_addr_entry.nhdp_generate_addr_list_from_tmp((/* Set Sending Address List as this tuples address list */true)));
 		if (!generatedAddress_list_head) {
 			ModernizedCProgram.rem_link_set_entry(base_entry, /* Insufficient memory */matching_lt);
-			return ((Object)0);
+			return (null);
 		} 
 		matching_lt.setNb_elt(nb_elt);
 		nib_entry generatedNb_elt = matching_lt.getNb_elt();
@@ -198,9 +198,9 @@ public class iib_link_set_entry {
 		iib_link_set_entry_t new_entry = new iib_link_set_entry_t();
 		new_entry = (iib_link_set_entry_t)ModernizedCProgram.malloc(/*Error: Unsupported expression*/);
 		if (!new_entry) {
-			return ((Object)/* Insufficient memory */0);
+			return (null);
 		} 
-		new_entry.setAddress_list_head(((Object)0));
+		new_entry.setAddress_list_head((null));
 		ModernizedCProgram.reset_link_set_entry(new_entry, now, val_time);
 		iib_link_set_entry generatedLink_set_head = base_entry.getLink_set_head();
 		do {
@@ -214,9 +214,7 @@ public class iib_link_set_entry {
 	public void release_link_tuple_addresses() {
 		nhdp_addr_entry generatedAddress_list_head = this.getAddress_list_head();
 		generatedAddress_list_head.nhdp_free_addr_list();
-		this.setAddress_list_head(((Object)0/**
-		 * Update the 2-Hop Set during HELLO message processing
-		 */));
+		this.setAddress_list_head((null));
 	}
 	public nhdp_addr_entry getAddress_list_head() {
 		return address_list_head;

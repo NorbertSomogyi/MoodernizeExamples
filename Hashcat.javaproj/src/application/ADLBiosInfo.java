@@ -1,11 +1,11 @@
 package application;
 
 public class ADLBiosInfo {
-	private Object strPartNumber;
-	private Object strVersion;
-	private Object strDate;
+	private Object[] strPartNumber;
+	private Object[] strVersion;
+	private Object[] strDate;
 	
-	public ADLBiosInfo(Object strPartNumber, Object strVersion, Object strDate) {
+	public ADLBiosInfo(Object[] strPartNumber, Object[] strVersion, Object[] strDate) {
 		setStrPartNumber(strPartNumber);
 		setStrVersion(strVersion);
 		setStrDate(strDate);
@@ -13,22 +13,22 @@ public class ADLBiosInfo {
 	public ADLBiosInfo() {
 	}
 	
-	public Object getStrPartNumber() {
+	public Object[] getStrPartNumber() {
 		return strPartNumber;
 	}
-	public void setStrPartNumber(Object newStrPartNumber) {
+	public void setStrPartNumber(Object[] newStrPartNumber) {
 		strPartNumber = newStrPartNumber;
 	}
-	public Object getStrVersion() {
+	public Object[] getStrVersion() {
 		return strVersion;
 	}
-	public void setStrVersion(Object newStrVersion) {
+	public void setStrVersion(Object[] newStrVersion) {
 		strVersion = newStrVersion;
 	}
-	public Object getStrDate() {
+	public Object[] getStrDate() {
 		return strDate;
 	}
-	public void setStrDate(Object newStrDate) {
+	public void setStrDate(Object[] newStrDate) {
 		strDate = newStrDate;
 	}
 }

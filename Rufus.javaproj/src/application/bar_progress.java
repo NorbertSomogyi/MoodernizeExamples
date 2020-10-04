@@ -62,11 +62,11 @@ public class bar_progress {
 			recent_age = 1000;
 		} 
 		Object generatedTotal_time = hist.getTotal_time();
-		Object generatedTimes = hist.getTimes();
+		Object[] generatedTimes = hist.getTimes();
 		Object generatedPos = hist.getPos();
 		// To correctly maintain the totals, first invalidate existing data// (least recent in time) at this position. */// To correctly maintain the totals, first invalidate existing data// (least recent in time) at this position. */generatedTotal_time -= generatedTimes[generatedPos];
 		Object generatedTotal_bytes = hist.getTotal_bytes();
-		Object generatedBytes = hist.getBytes();
+		Object[] generatedBytes = hist.getBytes();
 		generatedTotal_bytes -= generatedBytes[generatedPos];
 		// Now store the new data and update the totals.// Now store the new data and update the totals.generatedTimes[generatedPos] = recent_age;
 		generatedBytes[generatedPos] = generatedRecent_bytes;

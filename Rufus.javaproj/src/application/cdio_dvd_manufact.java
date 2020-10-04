@@ -4,9 +4,9 @@ public class cdio_dvd_manufact {
 	private Object type;
 	private Object layer_num;
 	private int len;
-	private Object value;
+	private Object[] value;
 	
-	public cdio_dvd_manufact(Object type, Object layer_num, int len, Object value) {
+	public cdio_dvd_manufact(Object type, Object layer_num, int len, Object[] value) {
 		setType(type);
 		setLayer_num(layer_num);
 		setLen(len);
@@ -33,10 +33,10 @@ public class cdio_dvd_manufact {
 	public void setLen(int newLen) {
 		len = newLen;
 	}
-	public Object getValue() {
+	public Object[] getValue() {
 		return value;
 	}
-	public void setValue(Object newValue) {
+	public void setValue(Object[] newValue) {
 		value = newValue;
 	}
 }

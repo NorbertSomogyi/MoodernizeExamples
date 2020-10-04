@@ -3,9 +3,9 @@ package application;
 public class libfat_direntry {
 	private Object sector;
 	private int offset;
-	private Object entry;
+	private Object[] entry;
 	
-	public libfat_direntry(Object sector, int offset, Object entry) {
+	public libfat_direntry(Object sector, int offset, Object[] entry) {
 		setSector(sector);
 		setOffset(offset);
 		setEntry(entry);
@@ -25,10 +25,10 @@ public class libfat_direntry {
 	public void setOffset(int newOffset) {
 		offset = newOffset;
 	}
-	public Object getEntry() {
+	public Object[] getEntry() {
 		return entry;
 	}
-	public void setEntry(Object newEntry) {
+	public void setEntry(Object[] newEntry) {
 		entry = newEntry;
 	}
 }

@@ -2,9 +2,9 @@ package application;
 
 public class _RTL_PROCESS_HEAPS {
 	private Object NumberOfHeaps;
-	private Object Heaps;
+	private Object[] Heaps;
 	
-	public _RTL_PROCESS_HEAPS(Object NumberOfHeaps, Object Heaps) {
+	public _RTL_PROCESS_HEAPS(Object NumberOfHeaps, Object[] Heaps) {
 		setNumberOfHeaps(NumberOfHeaps);
 		setHeaps(Heaps);
 	}
@@ -17,10 +17,10 @@ public class _RTL_PROCESS_HEAPS {
 	public void setNumberOfHeaps(Object newNumberOfHeaps) {
 		NumberOfHeaps = newNumberOfHeaps;
 	}
-	public Object getHeaps() {
+	public Object[] getHeaps() {
 		return Heaps;
 	}
-	public void setHeaps(Object newHeaps) {
+	public void setHeaps(Object[] newHeaps) {
 		Heaps = newHeaps;
 	}
 }

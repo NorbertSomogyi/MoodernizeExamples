@@ -2,7 +2,7 @@ package application;
 
 /* A FAT filesystem directory entry */
 public class fat_dirent {
-	private Object name;
+	private Object[] name;
 	private Object attribute;
 	private Object caseflags;
 	private Object ctime_ms;
@@ -13,7 +13,7 @@ public class fat_dirent {
 	private Object clustlo;
 	private Object size;
 	
-	public fat_dirent(Object name, Object attribute, Object caseflags, Object ctime_ms, Object ctime, Object atime, Object clusthi, Object mtime, Object clustlo, Object size) {
+	public fat_dirent(Object[] name, Object attribute, Object caseflags, Object ctime_ms, Object ctime, Object atime, Object clusthi, Object mtime, Object clustlo, Object size) {
 		setName(name);
 		setAttribute(attribute);
 		setCaseflags(caseflags);
@@ -35,20 +35,20 @@ public class fat_dirent {
 			offset = 0;
 			sector = fs.libfat_nextsector(sector);
 			if ((sector == 0) || (sector == (libfat_sector_t)-1)) {
-				return ((Object)0);
+				return (null);
 			} 
 		} 
 		dep = fs.libfat_get_sector(sector);
 		if (!dep) {
-			return ((Object)0);
+			return (null);
 		} 
 		dep = (fat_dirent)((byte)dep)[offset];
 		return dep;
 	}
-	public Object getName() {
+	public Object[] getName() {
 		return name;
 	}
-	public void setName(Object newName) {
+	public void setName(Object[] newName) {
 		name = newName;
 	}
 	public Object getAttribute() {

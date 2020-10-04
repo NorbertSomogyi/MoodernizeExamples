@@ -26,7 +26,7 @@ public class brain_server_dbs {
 			return 0;
 		} 
 		DIR dirp = /*Error: Function owner not recognized*/opendir(path);
-		if (dirp == ((Object)0)) {
+		if (dirp == (null)) {
 			(_iob[2]).brain_logging(0, "%s: %s\n", path, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			return 0;
 		} 
@@ -34,8 +34,8 @@ public class brain_server_dbs {
 		Object generatedD_name = entry.getD_name();
 		brain_server_db_hash[] generatedHash_buf = this.getHash_buf();
 		int generatedHash_cnt = this.getHash_cnt();
-		while ((entry = /*Error: Function owner not recognized*/readdir(dirp)) != ((Object)0)) {
-			byte file = generatedD_name;
+		while ((entry = /*Error: Function owner not recognized*/readdir(dirp)) != (null)) {
+			Byte file = generatedD_name;
 			size_t len = /*Error: Function owner not recognized*/strlen(file);
 			if (len != 19) {
 				continue;
@@ -108,16 +108,16 @@ public class brain_server_dbs {
 			return 0;
 		} 
 		DIR dirp = /*Error: Function owner not recognized*/opendir(path);
-		if (dirp == ((Object)0)) {
+		if (dirp == (null)) {
 			(_iob[2]).brain_logging(0, "%s: %s\n", path, /*Error: Function owner not recognized*/strerror((/*Error: Function owner not recognized*/_errno())));
 			return 0;
 		} 
-		dirent entry = ((Object)0);
+		dirent entry = (null);
 		Object generatedD_name = entry.getD_name();
 		brain_server_db_attack[] generatedAttack_buf = this.getAttack_buf();
 		int generatedAttack_cnt = this.getAttack_cnt();
-		while ((entry = /*Error: Function owner not recognized*/readdir(dirp)) != ((Object)0)) {
-			byte file = generatedD_name;
+		while ((entry = /*Error: Function owner not recognized*/readdir(dirp)) != (null)) {
+			Byte file = generatedD_name;
 			size_t len = /*Error: Function owner not recognized*/strlen(file);
 			if (len != 19) {
 				continue;

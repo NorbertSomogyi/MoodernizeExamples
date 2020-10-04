@@ -6,11 +6,11 @@ public class partitionIntegrityEntry {
 	private udf_icbtag_s icb_tag;
 	private udf_timestamp_s recording_time;
 	private Object integrityType;
-	private Object reserved;
+	private Object[] reserved;
 	private udf_regid_s imp_id;
-	private Object imp_use;
+	private Object[] imp_use;
 	
-	public partitionIntegrityEntry(udf_tag_s tag, udf_icbtag_s icb_tag, udf_timestamp_s recording_time, Object integrityType, Object reserved, udf_regid_s imp_id, Object imp_use) {
+	public partitionIntegrityEntry(udf_tag_s tag, udf_icbtag_s icb_tag, udf_timestamp_s recording_time, Object integrityType, Object[] reserved, udf_regid_s imp_id, Object[] imp_use) {
 		setTag(tag);
 		setIcb_tag(icb_tag);
 		setRecording_time(recording_time);
@@ -46,10 +46,10 @@ public class partitionIntegrityEntry {
 	public void setIntegrityType(Object newIntegrityType) {
 		integrityType = newIntegrityType;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public udf_regid_s getImp_id() {
@@ -58,10 +58,10 @@ public class partitionIntegrityEntry {
 	public void setImp_id(udf_regid_s newImp_id) {
 		imp_id = newImp_id;
 	}
-	public Object getImp_use() {
+	public Object[] getImp_use() {
 		return imp_use;
 	}
-	public void setImp_use(Object newImp_use) {
+	public void setImp_use(Object[] newImp_use) {
 		imp_use = newImp_use;
 	}
 }

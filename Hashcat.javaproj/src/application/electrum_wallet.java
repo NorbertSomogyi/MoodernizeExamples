@@ -2,10 +2,10 @@ package application;
 
 public class electrum_wallet {
 	private Object salt_type;
-	private Object iv;
-	private Object encrypted;
+	private Object[] iv;
+	private Object[] encrypted;
 	
-	public electrum_wallet(Object salt_type, Object iv, Object encrypted) {
+	public electrum_wallet(Object salt_type, Object[] iv, Object[] encrypted) {
 		setSalt_type(salt_type);
 		setIv(iv);
 		setEncrypted(encrypted);
@@ -19,16 +19,16 @@ public class electrum_wallet {
 	public void setSalt_type(Object newSalt_type) {
 		salt_type = newSalt_type;
 	}
-	public Object getIv() {
+	public Object[] getIv() {
 		return iv;
 	}
-	public void setIv(Object newIv) {
+	public void setIv(Object[] newIv) {
 		iv = newIv;
 	}
-	public Object getEncrypted() {
+	public Object[] getEncrypted() {
 		return encrypted;
 	}
-	public void setEncrypted(Object newEncrypted) {
+	public void setEncrypted(Object[] newEncrypted) {
 		encrypted = newEncrypted;
 	}
 }

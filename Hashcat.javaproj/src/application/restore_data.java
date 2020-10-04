@@ -2,14 +2,14 @@ package application;
 
 public class restore_data {
 	private int version;
-	private Object cwd;
+	private Object[] cwd;
 	private Object dicts_pos;
 	private Object masks_pos;
 	private Object words_cur;
 	private Object argc;
 	private byte[][] argv;
 	
-	public restore_data(int version, Object cwd, Object dicts_pos, Object masks_pos, Object words_cur, Object argc, byte[][] argv) {
+	public restore_data(int version, Object[] cwd, Object dicts_pos, Object masks_pos, Object words_cur, Object argc, byte[][] argv) {
 		setVersion(version);
 		setCwd(cwd);
 		setDicts_pos(dicts_pos);
@@ -27,10 +27,10 @@ public class restore_data {
 	public void setVersion(int newVersion) {
 		version = newVersion;
 	}
-	public Object getCwd() {
+	public Object[] getCwd() {
 		return cwd;
 	}
-	public void setCwd(Object newCwd) {
+	public void setCwd(Object[] newCwd) {
 		cwd = newCwd;
 	}
 	public Object getDicts_pos() {

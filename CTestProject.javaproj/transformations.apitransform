@@ -1,0 +1,77 @@
+transformation {
+	source function printf {
+		parameters: text
+	}
+	targets {
+		function println {
+			parameters: text
+			owner: System.out
+		}
+	}
+}
+
+transformation {
+	source function fopen {
+		parameters: path mode
+	}
+	targets {
+		instantiation {
+			instance in {
+				className: java.io.FileReader
+				parameters: path
+			}
+			instance br {
+				className: java.io.BufferedReader
+				parameters: in
+			}
+		}
+	}
+}
+
+transformation {
+	source function fclose {
+		parameters: file
+	}
+	targets {
+		function close {
+			parameters:
+			owner: in
+		}
+	}
+}
+
+transformation {
+	source function getc {
+		parameters: file
+	}
+	targets {
+		function readLine {
+			parameters:
+			owner: br
+		}
+	}
+}
+
+transformation {
+	source function fgets {
+		parameters: buffer maxLimit file
+	}
+	targets {
+		function readLine {
+			parameters:
+			owner: br
+		}
+	}
+}
+
+transformation {
+	source function putchar {
+		parameters: c
+	}
+	targets {
+		function print {
+			parameters: c
+			owner: System.out
+		}
+	}
+}

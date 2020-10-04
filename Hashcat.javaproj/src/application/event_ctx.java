@@ -1,16 +1,16 @@
 package application;
 
 public class event_ctx {
-	private Object old_buf;
-	private Object old_len;
+	private Object[][] old_buf;
+	private Object[] old_len;
 	private int old_cnt;
-	private Object msg_buf;
+	private Object[] msg_buf;
 	private Object msg_len;
 	private boolean msg_newline;
 	private Object prev_len;
 	private Object mux_event;
 	
-	public event_ctx(Object old_buf, Object old_len, int old_cnt, Object msg_buf, Object msg_len, boolean msg_newline, Object prev_len, Object mux_event) {
+	public event_ctx(Object[][] old_buf, Object[] old_len, int old_cnt, Object[] msg_buf, Object msg_len, boolean msg_newline, Object prev_len, Object mux_event) {
 		setOld_buf(old_buf);
 		setOld_len(old_len);
 		setOld_cnt(old_cnt);
@@ -23,16 +23,16 @@ public class event_ctx {
 	public event_ctx() {
 	}
 	
-	public Object getOld_buf() {
+	public Object[][] getOld_buf() {
 		return old_buf;
 	}
-	public void setOld_buf(Object newOld_buf) {
+	public void setOld_buf(Object[][] newOld_buf) {
 		old_buf = newOld_buf;
 	}
-	public Object getOld_len() {
+	public Object[] getOld_len() {
 		return old_len;
 	}
-	public void setOld_len(Object newOld_len) {
+	public void setOld_len(Object[] newOld_len) {
 		old_len = newOld_len;
 	}
 	public int getOld_cnt() {
@@ -41,10 +41,10 @@ public class event_ctx {
 	public void setOld_cnt(int newOld_cnt) {
 		old_cnt = newOld_cnt;
 	}
-	public Object getMsg_buf() {
+	public Object[] getMsg_buf() {
 		return msg_buf;
 	}
-	public void setMsg_buf(Object newMsg_buf) {
+	public void setMsg_buf(Object[] newMsg_buf) {
 		msg_buf = newMsg_buf;
 	}
 	public Object getMsg_len() {

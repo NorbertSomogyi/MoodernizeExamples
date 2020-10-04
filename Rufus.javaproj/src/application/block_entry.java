@@ -2,9 +2,9 @@ package application;
 
 public class block_entry {
 	private Object physblock;
-	private Object sha;
+	private Object[] sha;
 	
-	public block_entry(Object physblock, Object sha) {
+	public block_entry(Object physblock, Object[] sha) {
 		setPhysblock(physblock);
 		setSha(sha);
 	}
@@ -17,10 +17,10 @@ public class block_entry {
 	public void setPhysblock(Object newPhysblock) {
 		physblock = newPhysblock;
 	}
-	public Object getSha() {
+	public Object[] getSha() {
 		return sha;
 	}
-	public void setSha(Object newSha) {
+	public void setSha(Object[] newSha) {
 		sha = newSha;
 	}
 }

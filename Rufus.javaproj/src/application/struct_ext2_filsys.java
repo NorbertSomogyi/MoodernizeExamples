@@ -54,7 +54,7 @@ public class struct_ext2_filsys {
 	private int cluster_ratio_bits;
 	private Object default_bitmap_type;
 	private Object pad;
-	private Object reserved;
+	private Object[] reserved;
 	private Object priv_data;
 	private ext2_inode_cache icache;
 	private Object image_io;
@@ -74,7 +74,7 @@ public class struct_ext2_filsys {
 	private ext2fs_hashmap block_sha_map;
 	private Object encoding;
 	
-	public struct_ext2_filsys(Object magic, Object io, int flags, Byte device_name, ext2_super_block super, int blocksize, int fragsize, Object group_desc_count, long desc_blocks, opaque_ext2_group_desc group_desc, int inode_blocks_per_group, Object inode_map, Object block_map, Object get_blocks, Object check_directory, Object write_bitmaps, Object read_inode, Object write_inode, Object badblocks, Object dblist, Object stride, ext2_super_block orig_super, ext2_image_hdr image_header, Object umask, Object now, int cluster_ratio_bits, Object default_bitmap_type, Object pad, Object reserved, Object priv_data, ext2_inode_cache icache, Object image_io, Object get_alloc_block, Object get_alloc_block2, Object block_alloc_stats, Object mmp_buf, Object mmp_cmp, int mmp_fd, long mmp_last_written, ext2fs_progress_ops progress_ops, Object csum_seed, Object journal_io, Byte journal_name, Object new_range, Object block_alloc_stats_range, ext2fs_hashmap block_sha_map, Object encoding) {
+	public struct_ext2_filsys(Object magic, Object io, int flags, Byte device_name, ext2_super_block super, int blocksize, int fragsize, Object group_desc_count, long desc_blocks, opaque_ext2_group_desc group_desc, int inode_blocks_per_group, Object inode_map, Object block_map, Object get_blocks, Object check_directory, Object write_bitmaps, Object read_inode, Object write_inode, Object badblocks, Object dblist, Object stride, ext2_super_block orig_super, ext2_image_hdr image_header, Object umask, Object now, int cluster_ratio_bits, Object default_bitmap_type, Object pad, Object[] reserved, Object priv_data, ext2_inode_cache icache, Object image_io, Object get_alloc_block, Object get_alloc_block2, Object block_alloc_stats, Object mmp_buf, Object mmp_cmp, int mmp_fd, long mmp_last_written, ext2fs_progress_ops progress_ops, Object csum_seed, Object journal_io, Byte journal_name, Object new_range, Object block_alloc_stats_range, ext2fs_hashmap block_sha_map, Object encoding) {
 		setMagic(magic);
 		setIo(io);
 		setFlags(flags);
@@ -294,10 +294,10 @@ public class struct_ext2_filsys {
 	public void setPad(Object newPad) {
 		pad = newPad;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public Object getPriv_data() {

@@ -3,9 +3,9 @@ package application;
 public class cdio_dvd_disckey {
 	private Object type;
 	private int agid;
-	private Object value;
+	private Object[] value;
 	
-	public cdio_dvd_disckey(Object type, int agid, Object value) {
+	public cdio_dvd_disckey(Object type, int agid, Object[] value) {
 		setType(type);
 		setAgid(agid);
 		setValue(value);
@@ -25,10 +25,10 @@ public class cdio_dvd_disckey {
 	public void setAgid(int newAgid) {
 		agid = newAgid;
 	}
-	public Object getValue() {
+	public Object[] getValue() {
 		return value;
 	}
-	public void setValue(Object newValue) {
+	public void setValue(Object[] newValue) {
 		value = newValue;
 	}
 }

@@ -14,18 +14,18 @@ public class journal_superblock_s {
 	private Object s_feature_compat;
 	private Object s_feature_incompat;
 	private Object s_feature_ro_compat;
-	private Object s_uuid;
+	private Object[] s_uuid;
 	private Object s_nr_users;
 	private Object s_dynsuper;
 	private Object s_max_transaction;
 	private Object s_max_trans_data;
 	private Object s_checksum_type;
-	private Object s_padding2;
-	private Object s_padding;
+	private Object[] s_padding2;
+	private Object[] s_padding;
 	private Object s_checksum;
-	private Object s_users;
+	private Object[] s_users;
 	
-	public journal_superblock_s(journal_header_s s_header, Object s_blocksize, Object s_maxlen, Object s_first, Object s_sequence, Object s_start, Object s_errno, Object s_feature_compat, Object s_feature_incompat, Object s_feature_ro_compat, Object s_uuid, Object s_nr_users, Object s_dynsuper, Object s_max_transaction, Object s_max_trans_data, Object s_checksum_type, Object s_padding2, Object s_padding, Object s_checksum, Object s_users) {
+	public journal_superblock_s(journal_header_s s_header, Object s_blocksize, Object s_maxlen, Object s_first, Object s_sequence, Object s_start, Object s_errno, Object s_feature_compat, Object s_feature_incompat, Object s_feature_ro_compat, Object[] s_uuid, Object s_nr_users, Object s_dynsuper, Object s_max_transaction, Object s_max_trans_data, Object s_checksum_type, Object[] s_padding2, Object[] s_padding, Object s_checksum, Object[] s_users) {
 		setS_header(s_header);
 		setS_blocksize(s_blocksize);
 		setS_maxlen(s_maxlen);
@@ -110,10 +110,10 @@ public class journal_superblock_s {
 	public void setS_feature_ro_compat(Object newS_feature_ro_compat) {
 		s_feature_ro_compat = newS_feature_ro_compat;
 	}
-	public Object getS_uuid() {
+	public Object[] getS_uuid() {
 		return s_uuid;
 	}
-	public void setS_uuid(Object newS_uuid) {
+	public void setS_uuid(Object[] newS_uuid) {
 		s_uuid = newS_uuid;
 	}
 	public Object getS_nr_users() {
@@ -146,16 +146,16 @@ public class journal_superblock_s {
 	public void setS_checksum_type(Object newS_checksum_type) {
 		s_checksum_type = newS_checksum_type;
 	}
-	public Object getS_padding2() {
+	public Object[] getS_padding2() {
 		return s_padding2;
 	}
-	public void setS_padding2(Object newS_padding2) {
+	public void setS_padding2(Object[] newS_padding2) {
 		s_padding2 = newS_padding2;
 	}
-	public Object getS_padding() {
+	public Object[] getS_padding() {
 		return s_padding;
 	}
-	public void setS_padding(Object newS_padding) {
+	public void setS_padding(Object[] newS_padding) {
 		s_padding = newS_padding;
 	}
 	public Object getS_checksum() {
@@ -164,10 +164,10 @@ public class journal_superblock_s {
 	public void setS_checksum(Object newS_checksum) {
 		s_checksum = newS_checksum;
 	}
-	public Object getS_users() {
+	public Object[] getS_users() {
 		return s_users;
 	}
-	public void setS_users(Object newS_users) {
+	public void setS_users(Object[] newS_users) {
 		s_users = newS_users;
 	}
 }

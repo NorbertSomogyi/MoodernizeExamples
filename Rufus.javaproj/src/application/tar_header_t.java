@@ -5,24 +5,24 @@ package application;
 /* POSIX tar Header Block, from POSIX 1003.1-1990  */
 /* byte offset */
 public class tar_header_t {
-	private Object name;
-	private Object mode;
-	private Object uid;
-	private Object gid;
-	private Object size;
-	private Object mtime;
-	private Object chksum;
+	private Object[] name;
+	private Object[] mode;
+	private Object[] uid;
+	private Object[] gid;
+	private Object[] size;
+	private Object[] mtime;
+	private Object[] chksum;
 	private byte typeflag;
-	private Object linkname;
-	private Object magic;
-	private Object uname;
-	private Object gname;
-	private Object devmajor;
-	private Object devminor;
-	private Object prefix;
-	private Object padding;
+	private Object[] linkname;
+	private Object[] magic;
+	private Object[] uname;
+	private Object[] gname;
+	private Object[] devmajor;
+	private Object[] devminor;
+	private Object[] prefix;
+	private Object[] padding;
 	
-	public tar_header_t(Object name, Object mode, Object uid, Object gid, Object size, Object mtime, Object chksum, byte typeflag, Object linkname, Object magic, Object uname, Object gname, Object devmajor, Object devminor, Object prefix, Object padding) {
+	public tar_header_t(Object[] name, Object[] mode, Object[] uid, Object[] gid, Object[] size, Object[] mtime, Object[] chksum, byte typeflag, Object[] linkname, Object[] magic, Object[] uname, Object[] gname, Object[] devmajor, Object[] devminor, Object[] prefix, Object[] padding) {
 		setName(name);
 		setMode(mode);
 		setUid(uid);
@@ -43,46 +43,46 @@ public class tar_header_t {
 	public tar_header_t() {
 	}
 	
-	public Object getName() {
+	public Object[] getName() {
 		return name;
 	}
-	public void setName(Object newName) {
+	public void setName(Object[] newName) {
 		name = newName;
 	}
-	public Object getMode() {
+	public Object[] getMode() {
 		return mode;
 	}
-	public void setMode(Object newMode) {
+	public void setMode(Object[] newMode) {
 		mode = newMode;
 	}
-	public Object getUid() {
+	public Object[] getUid() {
 		return uid;
 	}
-	public void setUid(Object newUid) {
+	public void setUid(Object[] newUid) {
 		uid = newUid;
 	}
-	public Object getGid() {
+	public Object[] getGid() {
 		return gid;
 	}
-	public void setGid(Object newGid) {
+	public void setGid(Object[] newGid) {
 		gid = newGid;
 	}
-	public Object getSize() {
+	public Object[] getSize() {
 		return size;
 	}
-	public void setSize(Object newSize) {
+	public void setSize(Object[] newSize) {
 		size = newSize;
 	}
-	public Object getMtime() {
+	public Object[] getMtime() {
 		return mtime;
 	}
-	public void setMtime(Object newMtime) {
+	public void setMtime(Object[] newMtime) {
 		mtime = newMtime;
 	}
-	public Object getChksum() {
+	public Object[] getChksum() {
 		return chksum;
 	}
-	public void setChksum(Object newChksum) {
+	public void setChksum(Object[] newChksum) {
 		chksum = newChksum;
 	}
 	public byte getTypeflag() {
@@ -91,52 +91,52 @@ public class tar_header_t {
 	public void setTypeflag(byte newTypeflag) {
 		typeflag = newTypeflag;
 	}
-	public Object getLinkname() {
+	public Object[] getLinkname() {
 		return linkname;
 	}
-	public void setLinkname(Object newLinkname) {
+	public void setLinkname(Object[] newLinkname) {
 		linkname = newLinkname;
 	}
-	public Object getMagic() {
+	public Object[] getMagic() {
 		return magic;
 	}
-	public void setMagic(Object newMagic) {
+	public void setMagic(Object[] newMagic) {
 		magic = newMagic;
 	}
-	public Object getUname() {
+	public Object[] getUname() {
 		return uname;
 	}
-	public void setUname(Object newUname) {
+	public void setUname(Object[] newUname) {
 		uname = newUname;
 	}
-	public Object getGname() {
+	public Object[] getGname() {
 		return gname;
 	}
-	public void setGname(Object newGname) {
+	public void setGname(Object[] newGname) {
 		gname = newGname;
 	}
-	public Object getDevmajor() {
+	public Object[] getDevmajor() {
 		return devmajor;
 	}
-	public void setDevmajor(Object newDevmajor) {
+	public void setDevmajor(Object[] newDevmajor) {
 		devmajor = newDevmajor;
 	}
-	public Object getDevminor() {
+	public Object[] getDevminor() {
 		return devminor;
 	}
-	public void setDevminor(Object newDevminor) {
+	public void setDevminor(Object[] newDevminor) {
 		devminor = newDevminor;
 	}
-	public Object getPrefix() {
+	public Object[] getPrefix() {
 		return prefix;
 	}
-	public void setPrefix(Object newPrefix) {
+	public void setPrefix(Object[] newPrefix) {
 		prefix = newPrefix;
 	}
-	public Object getPadding() {
+	public Object[] getPadding() {
 		return padding;
 	}
-	public void setPadding(Object newPadding) {
+	public void setPadding(Object[] newPadding) {
 		padding = newPadding;
 	}
 }

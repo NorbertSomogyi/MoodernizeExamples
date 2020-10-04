@@ -1,20 +1,20 @@
 package application;
 
 public class pw {
-	private Object i;
+	private Object[] i;
 	private Object pw_len;
 	
-	public pw(Object i, Object pw_len) {
+	public pw(Object[] i, Object pw_len) {
 		setI(i);
 		setPw_len(pw_len);
 	}
 	public pw() {
 	}
 	
-	public Object getI() {
+	public Object[] getI() {
 		return i;
 	}
-	public void setI(Object newI) {
+	public void setI(Object[] newI) {
 		i = newI;
 	}
 	public Object getPw_len() {

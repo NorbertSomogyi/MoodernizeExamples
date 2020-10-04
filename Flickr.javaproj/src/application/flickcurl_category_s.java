@@ -77,9 +77,9 @@ public class flickcurl_category_s {
 	 * Return value: non-0 on failure
 	 **/
 	public flickcurl_category_s flickcurl_groups_browse(flickcurl_s fc, int cat_id) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_category category = ((Object)0);
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_category category = (null);
 		byte[] cat_id_str = new byte[10];
 		fc.flickcurl_init_params(0);
 		if (cat_id >= 0) {
@@ -111,7 +111,7 @@ public class flickcurl_category_s {
 			if (category) {
 				category.flickcurl_free_category();
 			} 
-			category = ((Object)0);
+			category = (null);
 		} 
 		return category/**
 		 * flickcurl_groups_getInfo:
@@ -195,11 +195,11 @@ public class flickcurl_category_s {
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(categories_object);
 	}
 	public flickcurl_category_s flickcurl_build_categories(flickcurl_s fc, Object xpathCtx, Object xpathExpr, Integer category_count_p) {
-		flickcurl_category categories = ((Object)0);
+		flickcurl_category[][] categories = (null);
 		int nodes_count;
 		int category_count;
 		int i;
-		 xpathObj = ((Object)0);
+		 xpathObj = (null);
 		 nodes = new ();
 		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, xpathCtx);
 		if (!xpathObj) {
@@ -222,8 +222,8 @@ public class flickcurl_category_s {
 			c = (flickcurl_category)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 			for (attr = node.getProperties(); attr; attr = attr.getNext()) {
 				size_t attr_len = /*Error: Function owner not recognized*/strlen((byte)attr.getChildren().getContent());
-				byte attr_name = (byte)attr.getName();
-				byte attr_value;
+				Byte attr_name = (byte)attr.getName();
+				Byte attr_value;
 				attr_value = (byte)/*Error: Function owner not recognized*/malloc(attr_len + 1);
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(attr_value, attr.getChildren().getContent(), attr_len + 1);
 				if (!/*Error: Function owner not recognized*/strcmp(attr_name, "id")) {

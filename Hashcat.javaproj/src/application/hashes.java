@@ -63,152 +63,14 @@ public class hashes {
 		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
 			return (parser_rc.PARSER_HASH_FILE);
 		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_TC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
-		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_TC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
-		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_TC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
-		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
 		size_t n = fp.hc_fread(in, 1, 512);
 		fp.hc_fclose();
 		if (n != 512) {
 			return (parser_rc.PARSER_VC_FILE_SIZE);
 		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
+		hash_t[] hashes_buf = generatedHashes_buf;
 		hash_t hash = hashes_buf[0];
 		Object generatedDigest = hash.getDigest();
 		salt generatedSalt = hash.getSalt();
@@ -221,20 +83,20 @@ public class hashes {
 		} 
 		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
 		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
 		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
 			while (keyfile) {
 				if (ModernizedCProgram.hc_path_read(keyfile)) {
 					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
 				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
 			}
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
 		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
 		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
 		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
 			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
@@ -256,60 +118,14 @@ public class hashes {
 		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
 			return (parser_rc.PARSER_HASH_FILE);
 		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_TC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
-		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
 		size_t n = fp.hc_fread(in, 1, 512);
 		fp.hc_fclose();
 		if (n != 512) {
 			return (parser_rc.PARSER_VC_FILE_SIZE);
 		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
+		hash_t[] hashes_buf = generatedHashes_buf;
 		hash_t hash = hashes_buf[0];
 		Object generatedDigest = hash.getDigest();
 		salt generatedSalt = hash.getSalt();
@@ -322,20 +138,20 @@ public class hashes {
 		} 
 		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
 		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
 		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
 			while (keyfile) {
 				if (ModernizedCProgram.hc_path_read(keyfile)) {
 					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
 				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
 			}
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
 		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
 		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
 		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
 			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
@@ -357,14 +173,14 @@ public class hashes {
 		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
 			return (parser_rc.PARSER_HASH_FILE);
 		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
 		size_t n = fp.hc_fread(in, 1, 512);
 		fp.hc_fclose();
 		if (n != 512) {
 			return (parser_rc.PARSER_VC_FILE_SIZE);
 		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
+		hash_t[] hashes_buf = generatedHashes_buf;
 		hash_t hash = hashes_buf[0];
 		Object generatedDigest = hash.getDigest();
 		salt generatedSalt = hash.getSalt();
@@ -377,20 +193,20 @@ public class hashes {
 		} 
 		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
 		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
 		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
 			while (keyfile) {
 				if (ModernizedCProgram.hc_path_read(keyfile)) {
 					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
 				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
 			}
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
 		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
 		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
 		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
 			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
@@ -412,14 +228,14 @@ public class hashes {
 		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
 			return (parser_rc.PARSER_HASH_FILE);
 		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
 		size_t n = fp.hc_fread(in, 1, 512);
 		fp.hc_fclose();
 		if (n != 512) {
 			return (parser_rc.PARSER_VC_FILE_SIZE);
 		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
+		hash_t[] hashes_buf = generatedHashes_buf;
 		hash_t hash = hashes_buf[0];
 		Object generatedDigest = hash.getDigest();
 		salt generatedSalt = hash.getSalt();
@@ -432,176 +248,20 @@ public class hashes {
 		} 
 		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
 		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
 		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
 			while (keyfile) {
 				if (ModernizedCProgram.hc_path_read(keyfile)) {
 					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
 				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
 			}
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
 		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_TC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
-		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
 		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
 		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
 			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
@@ -623,14 +283,14 @@ public class hashes {
 		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
 			return (parser_rc.PARSER_HASH_FILE);
 		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
 		size_t n = fp.hc_fread(in, 1, 512);
 		fp.hc_fclose();
 		if (n != 512) {
 			return (parser_rc.PARSER_TC_FILE_SIZE);
 		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
+		hash_t[] hashes_buf = generatedHashes_buf;
 		hash_t hash = hashes_buf[0];
 		Object generatedDigest = hash.getDigest();
 		salt generatedSalt = hash.getSalt();
@@ -643,20 +303,20 @@ public class hashes {
 		} 
 		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
 		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
 		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
 			while (keyfile) {
 				if (ModernizedCProgram.hc_path_read(keyfile)) {
 					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
 				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
 			}
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
 		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
 		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
 		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
 			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
@@ -669,399 +329,14 @@ public class hashes {
 		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
 			return (parser_rc.PARSER_HASH_FILE);
 		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 2048);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 2048);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 2048);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
 		size_t n = fp.hc_fread(in, 1, 512);
 		fp.hc_fclose();
 		if (n != 512) {
 			return (parser_rc.PARSER_TC_FILE_SIZE);
 		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
+		hash_t[] hashes_buf = generatedHashes_buf;
 		hash_t hash = hashes_buf[0];
 		Object generatedDigest = hash.getDigest();
 		salt generatedSalt = hash.getSalt();
@@ -1074,20 +349,20 @@ public class hashes {
 		} 
 		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
 		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
 		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
 			while (keyfile) {
 				if (ModernizedCProgram.hc_path_read(keyfile)) {
 					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
 				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
 			}
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
 		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
 		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
 		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
 			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
@@ -1100,124 +375,14 @@ public class hashes {
 		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
 			return (parser_rc.PARSER_HASH_FILE);
 		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
 		size_t n = fp.hc_fread(in, 1, 512);
 		fp.hc_fclose();
 		if (n != 512) {
 			return (parser_rc.PARSER_TC_FILE_SIZE);
 		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
+		hash_t[] hashes_buf = generatedHashes_buf;
 		hash_t hash = hashes_buf[0];
 		Object generatedDigest = hash.getDigest();
 		salt generatedSalt = hash.getSalt();
@@ -1230,20 +395,20 @@ public class hashes {
 		} 
 		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
 		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
 		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
 			while (keyfile) {
 				if (ModernizedCProgram.hc_path_read(keyfile)) {
 					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
 				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
 			}
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
 		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
 		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
 		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
 			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
@@ -1251,428 +416,15 @@ public class hashes {
 			} 
 		} 
 		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_TC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
-		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_TC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
-		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_TC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
-		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 2048);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_VC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
-		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		// veracrypt PIMsalt_t salt = generatedSalt;
-		int generatedPim_stop = vc.getPim_stop();
-		Object generatedSalt_iter = salt.getSalt_iter();
-		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
-			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
-			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
-			salt.setSalt_iter(generatedPim_stop * 1000);
-			generatedSalt_iter--;
-		} 
-		return 1;
-		hash generatedHashes_buf = this.getHashes_buf();
-		//  hashes->hashlist_mode = HL_MODE_FILE; ???hash_t hashes_buf = generatedHashes_buf;
+		//  hashes->hashlist_mode = HL_MODE_FILE; ???hash_t[] hashes_buf = generatedHashes_buf;
 		int hashes_cnt = 0;
 		HCFILE fp = new HCFILE();
 		Object generatedHashfile = this.getHashfile();
 		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
 			return -1;
 		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
+		Byte in = (byte)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
 		Object generatedDigest = hash.getDigest();
 		salt generatedSalt = hash.getSalt();
 		Object generatedEsalt = hash.getEsalt();
@@ -1722,15 +474,107 @@ public class hashes {
 		ModernizedCProgram.hcfree(in);
 		fp.hc_fclose();
 		return hashes_cnt;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_TC_FILE_SIZE);
+		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		//  hashes->hashlist_mode = HL_MODE_FILE; ???hash_t hashes_buf = generatedHashes_buf;
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		tc_t tc = (tc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
+		if (user_options.getTruecrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_TC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		tc_t tc = (tc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
+		if (user_options.getTruecrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		return 1;
+		hash generatedHashes_buf = this.getHashes_buf();
+		//  hashes->hashlist_mode = HL_MODE_FILE; ???hash_t[] hashes_buf = generatedHashes_buf;
 		int hashes_cnt = 0;
 		HCFILE fp = new HCFILE();
 		Object generatedHashfile = this.getHashfile();
 		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
 			return -1;
 		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
+		Byte in = (byte)ModernizedCProgram.hcmalloc(/*Error: Unsupported expression*/);
 		Object generatedDigest = hash.getDigest();
 		salt generatedSalt = hash.getSalt();
 		Object generatedEsalt = hash.getEsalt();
@@ -1780,8 +624,1045 @@ public class hashes {
 		ModernizedCProgram.hcfree(in);
 		fp.hc_fclose();
 		return hashes_cnt;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 2048);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 2048);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_TC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		tc_t tc = (tc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
+		if (user_options.getTruecrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_TC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		tc_t tc = (tc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
+		if (user_options.getTruecrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_TC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		tc_t tc = (tc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
+		if (user_options.getTruecrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_TC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		tc_t tc = (tc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
+		if (user_options.getTruecrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_TC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		tc_t tc = (tc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
+		if (user_options.getTruecrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_TC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		tc_t tc = (tc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
+		if (user_options.getTruecrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_TC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		tc_t tc = (tc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = tc.getKeyfile_buf();
+		if (user_options.getTruecrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 2048);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
 		int hashes_cnt = 0;
 		salt generatedSalt = hash.getSalt();
 		Object generatedEsalt = hash.getEsalt();
@@ -1806,60 +1687,14 @@ public class hashes {
 		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
 			return (parser_rc.PARSER_HASH_FILE);
 		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
-		size_t n = fp.hc_fread(in, 1, 512);
-		fp.hc_fclose();
-		if (n != 512) {
-			return (parser_rc.PARSER_TC_FILE_SIZE);
-		} 
-		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
-		hash_t hash = hashes_buf[0];
-		Object generatedDigest = hash.getDigest();
-		salt generatedSalt = hash.getSalt();
-		Object generatedEsalt = hash.getEsalt();
-		Object generatedHook_salt = hash.getHook_salt();
-		hashinfo generatedHash_info = hash.getHash_info();
-		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
-		if (parser_status != parser_rc.PARSER_OK) {
-			return 0;
-		} 
-		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
-		tc_t tc = (tc_t)generatedEsalt;
-		Object generatedKeyfile_buf = tc.getKeyfile_buf();
-		if (user_options.getTruecrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getTruecrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
-			while (keyfile) {
-				if (ModernizedCProgram.hc_path_read(keyfile)) {
-					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
-				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
-			}
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
-		} 
-		Object generatedKeyboard_layout_mapping_buf = tc.getKeyboard_layout_mapping_buf();
-		int generatedKeyboard_layout_mapping_cnt = tc.getKeyboard_layout_mapping_cnt();
-		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
-			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
-				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
-			} 
-		} 
-		return 1;
-		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
-		Object generatedHashfile = this.getHashfile();
-		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
-			return (parser_rc.PARSER_HASH_FILE);
-		} 
-		byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
 		size_t n = fp.hc_fread(in, 1, 512);
 		fp.hc_fclose();
 		if (n != 512) {
 			return (parser_rc.PARSER_VC_FILE_SIZE);
 		} 
 		hash generatedHashes_buf = this.getHashes_buf();
-		hash_t hashes_buf = generatedHashes_buf;
+		hash_t[] hashes_buf = generatedHashes_buf;
 		hash_t hash = hashes_buf[0];
 		Object generatedDigest = hash.getDigest();
 		salt generatedSalt = hash.getSalt();
@@ -1872,20 +1707,185 @@ public class hashes {
 		} 
 		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
 		vc_t vc = (vc_t)generatedEsalt;
-		Object generatedKeyfile_buf = vc.getKeyfile_buf();
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
 		if (user_options.getVeracrypt_keyfiles()) {
-			byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
-			byte saveptr = ((Object)0);
-			byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
 			while (keyfile) {
 				if (ModernizedCProgram.hc_path_read(keyfile)) {
 					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
 				} 
-				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)((Object)0), ",", saveptr);
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
 			}
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
 		} 
-		Object generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 2048);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
+		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
+		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
+			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {
+				generatedKeyboard_layout_mapping_buf.initialize_keyboard_layout_mapping(user_options.getKeyboard_layout_mapping(), generatedKeyboard_layout_mapping_cnt);
+			} 
+		} 
+		// veracrypt PIMsalt_t salt = generatedSalt;
+		int generatedPim_stop = vc.getPim_stop();
+		Object generatedSalt_iter = salt.getSalt_iter();
+		if ((user_options.getVeracrypt_pim_start()) && (user_options.getVeracrypt_pim_stop())) {
+			vc.setPim_start(15 + user_options.getVeracrypt_pim_start());
+			vc.setPim_stop(15 + user_options.getVeracrypt_pim_stop());
+			salt.setSalt_iter(generatedPim_stop * 1000);
+			generatedSalt_iter--;
+		} 
+		return 1;
+		// note: if module_hash_binary_parse exists, then module_hash_decode is not calledHCFILE fp = new HCFILE();
+		Object generatedHashfile = this.getHashfile();
+		if (fp.hc_fopen(generatedHashfile, "rb") == 0) {
+			return (parser_rc.PARSER_HASH_FILE);
+		} 
+		Byte in = (byte)ModernizedCProgram.hcmalloc(512);
+		size_t n = fp.hc_fread(in, 1, 512);
+		fp.hc_fclose();
+		if (n != 512) {
+			return (parser_rc.PARSER_VC_FILE_SIZE);
+		} 
+		hash generatedHashes_buf = this.getHashes_buf();
+		hash_t[] hashes_buf = generatedHashes_buf;
+		hash_t hash = hashes_buf[0];
+		Object generatedDigest = hash.getDigest();
+		salt generatedSalt = hash.getSalt();
+		Object generatedEsalt = hash.getEsalt();
+		Object generatedHook_salt = hash.getHook_salt();
+		hashinfo generatedHash_info = hash.getHash_info();
+		int parser_status = ModernizedCProgram.module_hash_decode(hashconfig, generatedDigest, generatedSalt, generatedEsalt, generatedHook_salt, generatedHash_info, in, 512);
+		if (parser_status != parser_rc.PARSER_OK) {
+			return 0;
+		} 
+		ModernizedCProgram.hcfree(in)// keyfiles;// keyfiles
+		vc_t vc = (vc_t)generatedEsalt;
+		Object[] generatedKeyfile_buf = vc.getKeyfile_buf();
+		if (user_options.getVeracrypt_keyfiles()) {
+			Byte keyfiles = ModernizedCProgram.hcstrdup(user_options.getVeracrypt_keyfiles());
+			Byte saveptr = (null);
+			Byte keyfile = /*Error: Function owner not recognized*/strtok_r(keyfiles, ",", saveptr);
+			while (keyfile) {
+				if (ModernizedCProgram.hc_path_read(keyfile)) {
+					ModernizedCProgram.cpu_crc32(keyfile, (u8)generatedKeyfile_buf);
+				} 
+				keyfile = /*Error: Function owner not recognized*/strtok_r((byte)(null), ",", saveptr);
+			}
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(keyfiles);
+		} 
+		Object[] generatedKeyboard_layout_mapping_buf = vc.getKeyboard_layout_mapping_buf();
 		int generatedKeyboard_layout_mapping_cnt = vc.getKeyboard_layout_mapping_cnt();
 		// keyboard layout mappingif (user_options.getKeyboard_layout_mapping()) {
 			if (ModernizedCProgram.hc_path_read(user_options.getKeyboard_layout_mapping())) {

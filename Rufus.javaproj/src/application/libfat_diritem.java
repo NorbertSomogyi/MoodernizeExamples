@@ -1,11 +1,11 @@
 package application;
 
 public class libfat_diritem {
-	private Object name;
+	private Object[] name;
 	private Object size;
 	private Object attributes;
 	
-	public libfat_diritem(Object name, Object size, Object attributes) {
+	public libfat_diritem(Object[] name, Object size, Object attributes) {
 		setName(name);
 		setSize(size);
 		setAttributes(attributes);
@@ -13,10 +13,10 @@ public class libfat_diritem {
 	public libfat_diritem() {
 	}
 	
-	public Object getName() {
+	public Object[] getName() {
 		return name;
 	}
-	public void setName(Object newName) {
+	public void setName(Object[] newName) {
 		name = newName;
 	}
 	public Object getSize() {

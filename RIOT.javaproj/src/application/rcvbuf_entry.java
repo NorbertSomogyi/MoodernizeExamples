@@ -22,9 +22,9 @@ package application;
  */
 public class rcvbuf_entry {
 	private Object used;
-	private Object buffer;
+	private Object[] buffer;
 	
-	public rcvbuf_entry(Object used, Object buffer) {
+	public rcvbuf_entry(Object used, Object[] buffer) {
 		setUsed(used);
 		setBuffer(buffer);
 	}
@@ -37,10 +37,10 @@ public class rcvbuf_entry {
 	public void setUsed(Object newUsed) {
 		used = newUsed;
 	}
-	public Object getBuffer() {
+	public Object[] getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(Object newBuffer) {
+	public void setBuffer(Object[] newBuffer) {
 		buffer = newBuffer;
 	}
 }

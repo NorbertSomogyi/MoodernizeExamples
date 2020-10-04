@@ -9,12 +9,12 @@ public class extra_info_straight {
 	private Object fp;
 	private Object rule_pos_prev;
 	private Object rule_pos;
-	private Object base_buf;
+	private Object[] base_buf;
 	private Object base_len;
-	private Object out_buf;
+	private Object[] out_buf;
 	private Object out_len;
 	
-	public extra_info_straight(Object pos, Object fp, Object rule_pos_prev, Object rule_pos, Object base_buf, Object base_len, Object out_buf, Object out_len) {
+	public extra_info_straight(Object pos, Object fp, Object rule_pos_prev, Object rule_pos, Object[] base_buf, Object base_len, Object[] out_buf, Object out_len) {
 		setPos(pos);
 		setFp(fp);
 		setRule_pos_prev(rule_pos_prev);
@@ -51,10 +51,10 @@ public class extra_info_straight {
 	public void setRule_pos(Object newRule_pos) {
 		rule_pos = newRule_pos;
 	}
-	public Object getBase_buf() {
+	public Object[] getBase_buf() {
 		return base_buf;
 	}
-	public void setBase_buf(Object newBase_buf) {
+	public void setBase_buf(Object[] newBase_buf) {
 		base_buf = newBase_buf;
 	}
 	public Object getBase_len() {
@@ -63,10 +63,10 @@ public class extra_info_straight {
 	public void setBase_len(Object newBase_len) {
 		base_len = newBase_len;
 	}
-	public Object getOut_buf() {
+	public Object[] getOut_buf() {
 		return out_buf;
 	}
-	public void setOut_buf(Object newOut_buf) {
+	public void setOut_buf(Object[] newOut_buf) {
 		out_buf = newOut_buf;
 	}
 	public Object getOut_len() {

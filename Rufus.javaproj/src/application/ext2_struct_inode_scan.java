@@ -29,9 +29,9 @@ public class ext2_struct_inode_scan {
 	private Object done_group_data;
 	private int bad_block_ptr;
 	private int scan_flags;
-	private Object reserved;
+	private Object[] reserved;
 	
-	public ext2_struct_inode_scan(Object magic, Object fs, Object current_inode, Object current_block, Object current_group, Object inodes_left, Object blocks_left, Object groups_left, Object inode_buffer_blocks, Byte inode_buffer, int inode_size, Byte ptr, int bytes_left, Byte temp_buffer, Object done_group, Object done_group_data, int bad_block_ptr, int scan_flags, Object reserved) {
+	public ext2_struct_inode_scan(Object magic, Object fs, Object current_inode, Object current_block, Object current_group, Object inodes_left, Object blocks_left, Object groups_left, Object inode_buffer_blocks, Byte inode_buffer, int inode_size, Byte ptr, int bytes_left, Byte temp_buffer, Object done_group, Object done_group_data, int bad_block_ptr, int scan_flags, Object[] reserved) {
 		setMagic(magic);
 		setFs(fs);
 		setCurrent_inode(current_inode);
@@ -163,10 +163,10 @@ public class ext2_struct_inode_scan {
 	public void setScan_flags(int newScan_flags) {
 		scan_flags = newScan_flags;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }

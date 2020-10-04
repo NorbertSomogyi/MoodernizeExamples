@@ -5,9 +5,9 @@ public class spaceBitmapDesc {
 	private udf_tag_s tag;
 	private Object i_bits;
 	private Object i_bytes;
-	private Object bitmap;
+	private Object[] bitmap;
 	
-	public spaceBitmapDesc(udf_tag_s tag, Object i_bits, Object i_bytes, Object bitmap) {
+	public spaceBitmapDesc(udf_tag_s tag, Object i_bits, Object i_bytes, Object[] bitmap) {
 		setTag(tag);
 		setI_bits(i_bits);
 		setI_bytes(i_bytes);
@@ -34,10 +34,10 @@ public class spaceBitmapDesc {
 	public void setI_bytes(Object newI_bytes) {
 		i_bytes = newI_bytes;
 	}
-	public Object getBitmap() {
+	public Object[] getBitmap() {
 		return bitmap;
 	}
-	public void setBitmap(Object newBitmap) {
+	public void setBitmap(Object[] newBitmap) {
 		bitmap = newBitmap;
 	}
 }

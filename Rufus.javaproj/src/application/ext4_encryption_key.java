@@ -2,10 +2,10 @@ package application;
 
 public class ext4_encryption_key {
 	private Object mode;
-	private Object raw;
+	private Object[] raw;
 	private Object size;
 	
-	public ext4_encryption_key(Object mode, Object raw, Object size) {
+	public ext4_encryption_key(Object mode, Object[] raw, Object size) {
 		setMode(mode);
 		setRaw(raw);
 		setSize(size);
@@ -19,10 +19,10 @@ public class ext4_encryption_key {
 	public void setMode(Object newMode) {
 		mode = newMode;
 	}
-	public Object getRaw() {
+	public Object[] getRaw() {
 		return raw;
 	}
-	public void setRaw(Object newRaw) {
+	public void setRaw(Object[] newRaw) {
 		raw = newRaw;
 	}
 	public Object getSize() {

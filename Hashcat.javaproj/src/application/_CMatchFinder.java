@@ -30,11 +30,11 @@ public class _CMatchFinder {
 	private Object fixedHashSize;
 	private Object hashSizeSum;
 	private Object result;
-	private Object crc;
+	private Object[] crc;
 	private Object numRefs;
 	private Object expectedDataSize;
 	
-	public _CMatchFinder(Object buffer, Object pos, Object posLimit, Object streamPos, Object lenLimit, Object cyclicBufferPos, Object cyclicBufferSize, Object streamEndWasReached, Object btMode, Object bigHash, Object directInput, Object matchMaxLen, Object[] hash, Object[] son, Object hashMask, Object cutValue, Object bufferBase, ISeqInStream stream, Object blockSize, Object keepSizeBefore, Object keepSizeAfter, Object numHashBytes, Object directInputRem, Object historySize, Object fixedHashSize, Object hashSizeSum, Object result, Object crc, Object numRefs, Object expectedDataSize) {
+	public _CMatchFinder(Object buffer, Object pos, Object posLimit, Object streamPos, Object lenLimit, Object cyclicBufferPos, Object cyclicBufferSize, Object streamEndWasReached, Object btMode, Object bigHash, Object directInput, Object matchMaxLen, Object[] hash, Object[] son, Object hashMask, Object cutValue, Object bufferBase, ISeqInStream stream, Object blockSize, Object keepSizeBefore, Object keepSizeAfter, Object numHashBytes, Object directInputRem, Object historySize, Object fixedHashSize, Object hashSizeSum, Object result, Object[] crc, Object numRefs, Object expectedDataSize) {
 		setBuffer(buffer);
 		setPos(pos);
 		setPosLimit(posLimit);
@@ -77,7 +77,7 @@ public class _CMatchFinder {
 		Object generatedBufferBase = this.getBufferBase();
 		if (!generatedDirectInput) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, generatedBufferBase);
-			this.setBufferBase(((Object)0));
+			this.setBufferBase((null));
 		} 
 	}
 	/* keepSizeBefore + keepSizeAfter + keepSizeReserv must be < 4G) */
@@ -97,7 +97,7 @@ public class _CMatchFinder {
 			this.setBlockSize(blockSize);
 			this.setBufferBase((Byte)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, (size_t)blockSize));
 		} 
-		return (generatedBufferBase != ((Object)0));
+		return (generatedBufferBase != (null));
 	}
 	public Object MatchFinder_GetPointerToCurrentPos() {
 		Object generatedBuffer = this.getBuffer();
@@ -209,12 +209,12 @@ public class _CMatchFinder {
 	}
 	public void MatchFinder_Construct() {
 		int i;
-		this.setBufferBase(((Object)0));
+		this.setBufferBase((null));
 		this.setDirectInput(0);
-		this.setHash(((Object)0));
+		this.setHash((null));
 		this.setExpectedDataSize((UInt64)(Int64)-1);
 		p.MatchFinder_SetDefaultSettings();
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		for (i = 0; i < 256; i++) {
 			UInt32 r = (UInt32)i;
 			int j;
@@ -227,7 +227,7 @@ public class _CMatchFinder {
 	public void MatchFinder_FreeThisClassMemory(Object alloc) {
 		Object[] generatedHash = this.getHash();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, generatedHash);
-		this.setHash(((Object)0));
+		this.setHash((null));
 	}
 	public void MatchFinder_Free(Object alloc) {
 		p.MatchFinder_FreeThisClassMemory(alloc);
@@ -359,7 +359,7 @@ public class _CMatchFinder {
 	public void MatchFinder_Init_LowHash() {
 		size_t i = new size_t();
 		Object[] generatedHash = this.getHash();
-		CLzRef items = generatedHash;
+		CLzRef[] items = generatedHash;
 		Object generatedFixedHashSize = this.getFixedHashSize();
 		size_t numItems = generatedFixedHashSize;
 		for (i = 0; i < numItems; i++) {
@@ -370,7 +370,7 @@ public class _CMatchFinder {
 		size_t i = new size_t();
 		Object[] generatedHash = this.getHash();
 		Object generatedFixedHashSize = this.getFixedHashSize();
-		CLzRef items = generatedHash + generatedFixedHashSize;
+		CLzRef[] items = generatedHash + generatedFixedHashSize;
 		Object generatedHashMask = this.getHashMask();
 		size_t numItems = (size_t)generatedHashMask + 1;
 		for (i = 0; i < numItems; i++) {
@@ -443,7 +443,7 @@ public class _CMatchFinder {
 		int offset;
 		int lenLimit;
 		UInt32 hv = new UInt32();
-		Byte cur = new Byte();
+		Byte[] cur = new Byte();
 		UInt32 curMatch = new UInt32();
 		Object generatedLenLimit = this.getLenLimit();
 		lenLimit = (int)generatedLenLimit;
@@ -480,7 +480,7 @@ public class _CMatchFinder {
 		int offset;
 		int lenLimit;
 		UInt32 hv = new UInt32();
-		Byte cur = new Byte();
+		Byte[] cur = new Byte();
 		UInt32 curMatch = new UInt32();
 		Object generatedLenLimit = this.getLenLimit();
 		lenLimit = (int)generatedLenLimit;
@@ -492,7 +492,7 @@ public class _CMatchFinder {
 		}
 		Object generatedBuffer = this.getBuffer();
 		cur = generatedBuffer;
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		hv = ((cur[2] | ((UInt32)cur[0] << 8)) ^ generatedCrc[cur[1]]) & -1024;
 		;
 		Object[] generatedHash = this.getHash();
@@ -520,10 +520,10 @@ public class _CMatchFinder {
 		UInt32 pos = new UInt32();
 		int maxLen;
 		int offset;
-		UInt32 hash = new UInt32();
+		UInt32[] hash = new UInt32();
 		int lenLimit;
 		UInt32 hv = new UInt32();
-		Byte cur = new Byte();
+		Byte[] cur = new Byte();
 		UInt32 curMatch = new UInt32();
 		Object generatedLenLimit = this.getLenLimit();
 		lenLimit = (int)generatedLenLimit;
@@ -535,7 +535,7 @@ public class _CMatchFinder {
 		}
 		Object generatedBuffer = this.getBuffer();
 		cur = generatedBuffer;
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		Object generatedHashMask = this.getHashMask();
 		{ 
 			UInt32 temp = generatedCrc[cur[0]] ^ cur[1];
@@ -601,10 +601,10 @@ public class _CMatchFinder {
 		UInt32 pos = new UInt32();
 		int maxLen;
 		int offset;
-		UInt32 hash = new UInt32();
+		UInt32[] hash = new UInt32();
 		int lenLimit;
 		UInt32 hv = new UInt32();
-		Byte cur = new Byte();
+		Byte[] cur = new Byte();
 		UInt32 curMatch = new UInt32();
 		Object generatedLenLimit = this.getLenLimit();
 		lenLimit = (int)generatedLenLimit;
@@ -616,7 +616,7 @@ public class _CMatchFinder {
 		}
 		Object generatedBuffer = this.getBuffer();
 		cur = generatedBuffer;
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		Object generatedHashMask = this.getHashMask();
 		{ 
 			UInt32 temp = generatedCrc[cur[0]] ^ cur[1];
@@ -774,10 +774,10 @@ public class _CMatchFinder {
 		UInt32 pos = new UInt32();
 		int maxLen;
 		int offset;
-		UInt32 hash = new UInt32();
+		UInt32[] hash = new UInt32();
 		int lenLimit;
 		UInt32 hv = new UInt32();
-		Byte cur = new Byte();
+		Byte[] cur = new Byte();
 		UInt32 curMatch = new UInt32();
 		Object generatedLenLimit = this.getLenLimit();
 		lenLimit = (int)generatedLenLimit;
@@ -789,7 +789,7 @@ public class _CMatchFinder {
 		}
 		Object generatedBuffer = this.getBuffer();
 		cur = generatedBuffer;
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		Object generatedHashMask = this.getHashMask();
 		{ 
 			UInt32 temp = generatedCrc[cur[0]] ^ cur[1];
@@ -944,7 +944,7 @@ public class _CMatchFinder {
 		int offset;
 		int lenLimit;
 		UInt32 hv = new UInt32();
-		Byte cur = new Byte();
+		Byte[] cur = new Byte();
 		UInt32 curMatch = new UInt32();
 		Object generatedLenLimit = this.getLenLimit();
 		lenLimit = (int)generatedLenLimit;
@@ -956,7 +956,7 @@ public class _CMatchFinder {
 		}
 		Object generatedBuffer = this.getBuffer();
 		cur = generatedBuffer;
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		hv = ((cur[2] | ((UInt32)cur[0] << 8)) ^ generatedCrc[cur[1]]) & -1024;
 		;
 		Object[] generatedHash = this.getHash();
@@ -1015,7 +1015,7 @@ public class _CMatchFinder {
 	public void Bt3Zip_MatchFinder_Skip(Object num) {
 		Object generatedLenLimit = this.getLenLimit();
 		Object generatedBuffer = this.getBuffer();
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
 		Object[] generatedSon = this.getSon();
@@ -1052,7 +1052,7 @@ public class _CMatchFinder {
 	public void Bt3_MatchFinder_Skip(Object num) {
 		Object generatedLenLimit = this.getLenLimit();
 		Object generatedBuffer = this.getBuffer();
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		Object generatedHashMask = this.getHashMask();
 		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
@@ -1097,7 +1097,7 @@ public class _CMatchFinder {
 	public void Bt4_MatchFinder_Skip(Object num) {
 		Object generatedLenLimit = this.getLenLimit();
 		Object generatedBuffer = this.getBuffer();
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		Object generatedHashMask = this.getHashMask();
 		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
@@ -1164,7 +1164,7 @@ public class _CMatchFinder {
 	public void Hc4_MatchFinder_Skip(Object num) {
 		Object generatedLenLimit = this.getLenLimit();
 		Object generatedBuffer = this.getBuffer();
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		Object generatedHashMask = this.getHashMask();
 		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
@@ -1229,7 +1229,7 @@ public class _CMatchFinder {
 	public void Hc3Zip_MatchFinder_Skip(Object num) {
 		Object generatedLenLimit = this.getLenLimit();
 		Object generatedBuffer = this.getBuffer();
-		Object generatedCrc = this.getCrc();
+		Object[] generatedCrc = this.getCrc();
 		Object[] generatedHash = this.getHash();
 		Object generatedPos = this.getPos();
 		Object[] generatedSon = this.getSon();
@@ -1422,10 +1422,10 @@ public class _CMatchFinder {
 	public void setResult(Object newResult) {
 		result = newResult;
 	}
-	public Object getCrc() {
+	public Object[] getCrc() {
 		return crc;
 	}
-	public void setCrc(Object newCrc) {
+	public void setCrc(Object[] newCrc) {
 		crc = newCrc;
 	}
 	public Object getNumRefs() {

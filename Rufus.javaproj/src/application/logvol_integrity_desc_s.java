@@ -6,11 +6,11 @@ public class logvol_integrity_desc_s {
 	private udf_timestamp_s recording_time;
 	private Object integrity_type;
 	private udf_extent_ad_s next_integrity_ext;
-	private Object logvol_contents_use;
+	private Object[] logvol_contents_use;
 	private Object i_partitions;
 	private  u;
 	
-	public logvol_integrity_desc_s(udf_tag_s tag, udf_timestamp_s recording_time, Object integrity_type, udf_extent_ad_s next_integrity_ext, Object logvol_contents_use, Object i_partitions,  u) {
+	public logvol_integrity_desc_s(udf_tag_s tag, udf_timestamp_s recording_time, Object integrity_type, udf_extent_ad_s next_integrity_ext, Object[] logvol_contents_use, Object i_partitions,  u) {
 		setTag(tag);
 		setRecording_time(recording_time);
 		setIntegrity_type(integrity_type);
@@ -46,10 +46,10 @@ public class logvol_integrity_desc_s {
 	public void setNext_integrity_ext(udf_extent_ad_s newNext_integrity_ext) {
 		next_integrity_ext = newNext_integrity_ext;
 	}
-	public Object getLogvol_contents_use() {
+	public Object[] getLogvol_contents_use() {
 		return logvol_contents_use;
 	}
-	public void setLogvol_contents_use(Object newLogvol_contents_use) {
+	public void setLogvol_contents_use(Object[] newLogvol_contents_use) {
 		logvol_contents_use = newLogvol_contents_use;
 	}
 	public Object getI_partitions() {

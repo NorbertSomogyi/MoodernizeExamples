@@ -17,7 +17,7 @@ public class hash_state {
 		 t1 = new ();
 		int i;
 		sha512_state generatedSha512 = this.getSha512();
-		Object generatedState = generatedSha512.getState();
+		Object[] generatedState = generatedSha512.getState();
 		for (i = 0; i < 8; /* copy state into S */i++) {
 			S[i] = generatedState[i];
 		}
@@ -79,7 +79,7 @@ public class hash_state {
 		sha512_state generatedSha512 = this.getSha512();
 		generatedSha512.setCurlen(0);
 		generatedSha512.setLength(0);
-		Object generatedState = generatedSha512.getState();
+		Object[] generatedState = generatedSha512.getState();
 		generatedState[0] = -1024;
 		generatedState[1] = -1024;
 		generatedState[2] = -1024;
@@ -95,7 +95,7 @@ public class hash_state {
 		Object generatedLength = generatedSha512.getLength();
 		long generatedCurlen = generatedSha512.getCurlen();
 		generatedLength += generatedCurlen * /* increase the length of the message */8;
-		Object generatedBuf = generatedSha512.getBuf();
+		Object[] generatedBuf = generatedSha512.getBuf();
 		generatedBuf[generatedCurlen++] = (byte)/* append the '1' bit */-1024/* if the length is currently above 112 bytes we append zeros then
 			 * compress. Then we can fall back to padding zeros and length encoding
 			 * like normal. */;
@@ -121,7 +121,7 @@ public class hash_state {
 			(generatedBuf + 120)[7] = (byte)((generatedLength) & 255);
 		} while (/* store length */0);
 		md.sha512_compress(generatedBuf);
-		Object generatedState = generatedSha512.getState();
+		Object[] generatedState = generatedSha512.getState();
 		for (i = 0; i < 8; /* copy output */i++) {
 			do {
 				(out + (8 * i))[0] = (byte)(((generatedState[i]) >> 56) & 255);
@@ -140,7 +140,7 @@ public class hash_state {
 		sha512_state generatedSha512 = this.getSha512();
 		long generatedCurlen = generatedSha512.getCurlen();
 		Object generatedLength = generatedSha512.getLength();
-		Object generatedBuf = generatedSha512.getBuf();
+		Object[] generatedBuf = generatedSha512.getBuf();
 		while (inlen > 0) {
 			if (generatedCurlen == 0 && inlen >= 128) {
 				md.sha512_compress(in);

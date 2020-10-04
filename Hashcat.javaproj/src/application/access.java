@@ -19,7 +19,7 @@ public class access {
 	/* Deallocate an index built by build_index() */
 	public void free_index() {
 		point[] generatedList = this.getList();
-		if (index != ((Object)0)) {
+		if (index != (null)) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedList);
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(index);
 		} 
@@ -29,24 +29,24 @@ public class access {
 		point[] generatedList = this.getList();
 		int generatedHave = this.getHave();
 		int generatedSize = this.getSize();
-		if (index == ((Object)/* if list is empty, create it (start with eight points) */0)) {
+		if (index == (null)) {
 			index = /*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
-			if (index == ((Object)0)) {
-				return ((Object)0);
+			if (index == (null)) {
+				return (null);
 			} 
 			this.setList(/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/ << 3));
-			if (generatedList == ((Object)0)) {
+			if (generatedList == (null)) {
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(index);
-				return ((Object)0);
+				return (null);
 			} 
 			this.setSize(8);
 			this.setHave(0);
 		}  else if (generatedHave == generatedSize) {
 			generatedSize <<=  1;
 			next = /*Error: Function owner not recognized*/realloc(generatedList, /*Error: Unsupported expression*/ * generatedSize);
-			if (next == ((Object)0)) {
+			if (next == (null)) {
 				index.free_index();
-				return ((Object)0);
+				return (null);
 			} 
 			this.setList(next);
 		} 
@@ -54,7 +54,7 @@ public class access {
 		next.setBits(bits);
 		next.setIn(in);
 		next.setOut(out);
-		Object generatedWindow = next.getWindow();
+		Object[] generatedWindow = next.getWindow();
 		if (left) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedWindow, window + -1024 - left, left);
 		} 

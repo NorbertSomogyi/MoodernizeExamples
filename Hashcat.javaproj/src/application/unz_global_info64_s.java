@@ -15,7 +15,7 @@ public class unz_global_info64_s {
 	
 	public int unzGetGlobalInfo64(Object file) {
 		unz64_s s = new unz64_s();
-		if (file == ((Object)0)) {
+		if (file == (null)) {
 			return (true);
 		} 
 		s = (unz64_s)file;

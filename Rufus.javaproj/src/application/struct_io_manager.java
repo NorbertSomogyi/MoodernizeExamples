@@ -17,9 +17,9 @@ public class struct_io_manager {
 	private Object discard;
 	private Object cache_readahead;
 	private Object zeroout;
-	private Object reserved;
+	private Object[] reserved;
 	
-	public struct_io_manager(Object magic, Object name, Object open, Object close, Object set_blksize, Object read_blk, Object write_blk, Object flush, Object write_byte, Object set_option, Object get_stats, Object read_blk64, Object write_blk64, Object discard, Object cache_readahead, Object zeroout, Object reserved) {
+	public struct_io_manager(Object magic, Object name, Object open, Object close, Object set_blksize, Object read_blk, Object write_blk, Object flush, Object write_byte, Object set_option, Object get_stats, Object read_blk64, Object write_blk64, Object discard, Object cache_readahead, Object zeroout, Object[] reserved) {
 		setMagic(magic);
 		setName(name);
 		setOpen(open);
@@ -137,10 +137,10 @@ public class struct_io_manager {
 	public void setZeroout(Object newZeroout) {
 		zeroout = newZeroout;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }

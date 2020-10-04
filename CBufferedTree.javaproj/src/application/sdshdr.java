@@ -32,9 +32,9 @@ package application;
 public class sdshdr {
 	private int len;
 	private int free;
-	private Object buf;
+	private Object[] buf;
 	
-	public sdshdr(int len, int free, Object buf) {
+	public sdshdr(int len, int free, Object[] buf) {
 		setLen(len);
 		setFree(free);
 		setBuf(buf);
@@ -54,10 +54,10 @@ public class sdshdr {
 	public void setFree(int newFree) {
 		free = newFree;
 	}
-	public Object getBuf() {
+	public Object[] getBuf() {
 		return buf;
 	}
-	public void setBuf(Object newBuf) {
+	public void setBuf(Object[] newBuf) {
 		buf = newBuf;
 	}
 }

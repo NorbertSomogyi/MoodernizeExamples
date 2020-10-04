@@ -106,26 +106,6 @@ public class rb_node {
 	public rb_node() {
 	}
 	
-	public void ext2fs_rb_set_parent(rb_node p) {
-		Object generatedRb_parent_color = this.getRb_parent_color();
-		this.setRb_parent_color((generatedRb_parent_color & 3) | (uintptr_t)p);
-	}
-	public void ext2fs_rb_set_color(int color) {
-		Object generatedRb_parent_color = this.getRb_parent_color();
-		this.setRb_parent_color((generatedRb_parent_color & ~1) | color);
-	}
-	public int ext2fs_rb_empty_node() {
-		Object generatedRb_parent_color = (node).getRb_parent_color();
-		return ((rb_node)(generatedRb_parent_color & ~3)) == node;
-	}
-	public void ext2fs_rb_clear_node() {
-		node.ext2fs_rb_set_parent(node);
-	}
-	public void ext2fs_rb_link_node(rb_node parent, rb_node rb_link) {
-		this.setRb_parent_color((uintptr_t)parent);
-		this.setRb_left(this.setRb_right(((Object)0)));
-		rb_link = node/* _LINUX_RBTREE_H */;
-	}
 	public void ext2fs_rb_augment_path(Object func, Object data) {
 		rb_node parent = new rb_node();
 		Object generatedRb_parent_color = (node).getRb_parent_color();
@@ -176,7 +156,7 @@ public class rb_node {
 		} else {
 				deepest = node.ext2fs_rb_next();
 				if (!deepest) {
-					return ((Object)0);
+					return (null);
 				} 
 				if (generatedRb_right) {
 					deepest = generatedRb_right;
@@ -200,7 +180,7 @@ public class rb_node {
 		rb_node n = new rb_node();
 		n = root.getRb_node();
 		if (!n) {
-			return ((Object)0);
+			return (null);
 		} 
 		rb_node generatedRb_left = n.getRb_left();
 		while (generatedRb_left) {
@@ -212,7 +192,7 @@ public class rb_node {
 		rb_node n = new rb_node();
 		n = root.getRb_node();
 		if (!n) {
-			return ((Object)0);
+			return (null);
 		} 
 		rb_node generatedRb_right = n.getRb_right();
 		while (generatedRb_right) {
@@ -224,7 +204,7 @@ public class rb_node {
 		rb_node parent = new rb_node();
 		Object generatedRb_parent_color = (node).getRb_parent_color();
 		if (((rb_node)(generatedRb_parent_color & ~3)) == node) {
-			return ((Object)0);
+			return (null);
 		} 
 		rb_node generatedRb_right = this.getRb_right();
 		rb_node generatedRb_left = this.getRb_left();
@@ -249,7 +229,7 @@ public class rb_node {
 		rb_node parent = new rb_node();
 		Object generatedRb_parent_color = (node).getRb_parent_color();
 		if (((rb_node)(generatedRb_parent_color & ~3)) == node) {
-			return ((Object)0);
+			return (null);
 		} 
 		rb_node generatedRb_left = this.getRb_left();
 		rb_node generatedRb_right = this.getRb_right();
@@ -264,6 +244,26 @@ public class rb_node {
 			node = parent;
 		}
 		return parent;
+	}
+	public void ext2fs_rb_set_parent(rb_node p) {
+		Object generatedRb_parent_color = this.getRb_parent_color();
+		this.setRb_parent_color((generatedRb_parent_color & 3) | (uintptr_t)p);
+	}
+	public void ext2fs_rb_set_color(int color) {
+		Object generatedRb_parent_color = this.getRb_parent_color();
+		this.setRb_parent_color((generatedRb_parent_color & ~1) | color);
+	}
+	public int ext2fs_rb_empty_node() {
+		Object generatedRb_parent_color = (node).getRb_parent_color();
+		return ((rb_node)(generatedRb_parent_color & ~3)) == node;
+	}
+	public void ext2fs_rb_clear_node() {
+		node.ext2fs_rb_set_parent(node);
+	}
+	public void ext2fs_rb_link_node(rb_node parent, rb_node rb_link) {
+		this.setRb_parent_color((uintptr_t)parent);
+		this.setRb_left(this.setRb_right((null)));
+		rb_link = node/* _LINUX_RBTREE_H */;
 	}
 	public Object getRb_parent_color() {
 		return rb_parent_color;

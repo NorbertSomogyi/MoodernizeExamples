@@ -117,7 +117,7 @@ public class ISeqOutStream {
 		if (res == 0) {
 			res = outStream.XzEncIndex_WriteFooter(xzIndex, (CXzStreamFlags)0);
 		} 
-		// g_Alloc// g_AllocxzIndex.XzEncIndex_Free(((Object)0));
+		// g_Alloc// g_AllocxzIndex.XzEncIndex_Free((null));
 		return res;
 	}
 	public Object getWrite() {

@@ -19,7 +19,7 @@ public class attr_item {
 	public void push_attr(Byte fname, int mode, Object time) {
 		attr_item item = new attr_item();
 		item = (attr_item)/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
-		if (item == ((Object)0)) {
+		if (item == (null)) {
 			ModernizedCProgram.error("Out of memory");
 		} 
 		item.setFname(/*Error: Function owner not recognized*/strdup(fname));
@@ -36,14 +36,14 @@ public class attr_item {
 		Object generatedTime = item.getTime();
 		int generatedMode = item.getMode();
 		attr_item generatedNext = item.getNext();
-		for (item = list; item != ((Object)0); /*Error: Unsupported expression*/) {
+		for (item = list; item != (null); /*Error: Unsupported expression*/) {
 			ModernizedCProgram.setfiletime(generatedFname, generatedTime);
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/chmod(generatedFname, generatedMode);
 			prev = item;
 			item = generatedNext;
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(prev);
 		}
-		list = ((Object)0/* match regular expression */);
+		list = (null);
 	}
 	public attr_item getNext() {
 		return next;

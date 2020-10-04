@@ -36,6 +36,48 @@ public class _CdioDataSource {
 	public _CdioDataSource() {
 	}
 	
+	public void cdio_stdio_destroy() {
+		p_obj.cdio_stream_destroy();
+	}
+	public _CdioDataSource cdio_stdio_new(Object pathname) {
+		CdioDataSource_t new_obj = NULL;
+		cdio_stream_io_functions funcs = new cdio_stream_io_functions(NULL, NULL, NULL, NULL, NULL, NULL);
+		_UserData ud = NULL;
+		stat statbuf = new stat();
+		Byte pathdup;
+		if (pathname == NULL) {
+			return NULL;
+		} 
+		pathdup = ModernizedCProgram._cdio_strdup_fixpath(/* MinGW may require a translated path */pathname);
+		if (pathdup == NULL) {
+			return NULL;
+		} 
+		if (/*Error: Function owner not recognized*/stat(pathdup, statbuf) == -1) {
+			ModernizedCProgram.cdio_warn("could not retrieve file info for `%s': %s", pathdup, /*Error: Function owner not recognized*/strerror(errno));
+			ModernizedCProgram.cdio_free(pathdup);
+			return NULL;
+		} 
+		ud = /*Error: Function owner not recognized*/calloc(1, /*Error: Unsupported expression*/);
+		((ud != NULL) ? null : /*Error: Function owner not recognized*/_assert("ud != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Rufus\\src\\_cdio_stdio.c", 269));
+		ud.setPathname(pathdup);
+		Object generatedStat = statbuf.getStat();
+		ud.setSt_size(generatedStat);
+		funcs.setOpen(_stdio_open);
+		funcs.setSeek(_stdio_seek);
+		funcs.setStat(_stdio_stat);
+		funcs.setRead(_stdio_read);
+		funcs.setClose(_stdio_close);
+		funcs.setFree(_stdio_free);
+		_CdioDataSource _CdioDataSource = new _CdioDataSource();
+		new_obj = _CdioDataSource.cdio_stream_new(ud, funcs);
+		return new_obj/*
+		 * Local variables:
+		 *  c-file-style: "gnu"
+		 *  tab-width: 8
+		 *  indent-tabs-mode: nil
+		 * End:
+		 */;
+	}
 	public void cdio_stream_close() {
 		if (!p_obj) {
 			return /*Error: Unsupported expression*/;
@@ -79,7 +121,7 @@ public class _CdioDataSource {
 	public _CdioDataSource cdio_stream_new(Object user_data, Object funcs) {
 		CdioDataSource_t new_obj = new CdioDataSource_t();
 		new_obj = /*Error: Function owner not recognized*/calloc(1, /*Error: Unsupported expression*/);
-		((new_obj != NULL) ? (Object)0 : /*Error: Function owner not recognized*/_assert("new_obj != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Rufus\\src\\_cdio_stream.c", 102));
+		((new_obj != NULL) ? null : /*Error: Function owner not recognized*/_assert("new_obj != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Rufus\\src\\_cdio_stream.c", 102));
 		new_obj.setUser_data(user_data);
 		 generatedOp = new_obj.getOp();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy((generatedOp), funcs, /*Error: Unsupported expression*/);
@@ -183,48 +225,6 @@ public class _CdioDataSource {
 		} 
 		Object generatedUser_data = this.getUser_data();
 		return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedUser_data);
-	}
-	public void cdio_stdio_destroy() {
-		p_obj.cdio_stream_destroy();
-	}
-	public _CdioDataSource cdio_stdio_new(Object pathname) {
-		CdioDataSource_t new_obj = NULL;
-		cdio_stream_io_functions funcs = new cdio_stream_io_functions(NULL, NULL, NULL, NULL, NULL, NULL);
-		_UserData ud = NULL;
-		stat statbuf = new stat();
-		byte pathdup;
-		if (pathname == NULL) {
-			return NULL;
-		} 
-		pathdup = ModernizedCProgram._cdio_strdup_fixpath(/* MinGW may require a translated path */pathname);
-		if (pathdup == NULL) {
-			return NULL;
-		} 
-		if (/*Error: Function owner not recognized*/stat(pathdup, statbuf) == -1) {
-			ModernizedCProgram.cdio_warn("could not retrieve file info for `%s': %s", pathdup, /*Error: Function owner not recognized*/strerror(errno));
-			ModernizedCProgram.cdio_free(pathdup);
-			return NULL;
-		} 
-		ud = /*Error: Function owner not recognized*/calloc(1, /*Error: Unsupported expression*/);
-		((ud != NULL) ? (Object)0 : /*Error: Function owner not recognized*/_assert("ud != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\Rufus\\src\\_cdio_stdio.c", 269));
-		ud.setPathname(pathdup);
-		Object generatedStat = statbuf.getStat();
-		ud.setSt_size(generatedStat);
-		funcs.setOpen(_stdio_open);
-		funcs.setSeek(_stdio_seek);
-		funcs.setStat(_stdio_stat);
-		funcs.setRead(_stdio_read);
-		funcs.setClose(_stdio_close);
-		funcs.setFree(_stdio_free);
-		_CdioDataSource _CdioDataSource = new _CdioDataSource();
-		new_obj = _CdioDataSource.cdio_stream_new(ud, funcs);
-		return new_obj/*
-		 * Local variables:
-		 *  c-file-style: "gnu"
-		 *  tab-width: 8
-		 *  indent-tabs-mode: nil
-		 * End:
-		 */;
 	}
 	public Object getUser_data() {
 		return user_data;

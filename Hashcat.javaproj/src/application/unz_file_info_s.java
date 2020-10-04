@@ -40,7 +40,7 @@ public class unz_file_info_s {
 	public int unzGetCurrentFileInfo(Object file, Byte szFileName, Object fileNameBufferSize, Object extraField, Object extraFieldBufferSize, Byte szComment, Object commentBufferSize) {
 		int err;
 		unz_file_info64 file_info64 = new unz_file_info64();
-		err = ModernizedCProgram.unz64local_GetCurrentFileInfoInternal(file, file_info64, ((Object)0), szFileName, fileNameBufferSize, extraField, extraFieldBufferSize, szComment, commentBufferSize);
+		err = ModernizedCProgram.unz64local_GetCurrentFileInfoInternal(file, file_info64, (null), szFileName, fileNameBufferSize, extraField, extraFieldBufferSize, szComment, commentBufferSize);
 		Object generatedVersion = file_info64.getVersion();
 		Object generatedVersion_needed = file_info64.getVersion_needed();
 		Object generatedFlag = file_info64.getFlag();
@@ -54,7 +54,7 @@ public class unz_file_info_s {
 		Object generatedInternal_fa = file_info64.getInternal_fa();
 		Object generatedExternal_fa = file_info64.getExternal_fa();
 		Object generatedUncompressed_size = file_info64.getUncompressed_size();
-		if ((err == (false)) && (pfile_info != ((Object)0))) {
+		if ((err == (false)) && (pfile_info != (null))) {
 			this.setVersion(generatedVersion);
 			this.setVersion_needed(generatedVersion_needed);
 			this.setFlag(generatedFlag);

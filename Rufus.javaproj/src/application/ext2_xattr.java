@@ -19,8 +19,8 @@ public class ext2_xattr {
 	public Object write_xattrs_to_buffer(Object fs, int count, Object entries_start, int storage_size, int value_offset_correction, int write_hash) {
 		ext2_xattr x = new ext2_xattr();
 		ext2_ext_attr_entry e = entries_start;
-		byte end = (byte)entries_start + storage_size;
-		byte shortname;
+		Byte end = (byte)entries_start + storage_size;
+		Byte shortname;
 		int value_size;
 		int idx;
 		int ret;
@@ -64,8 +64,8 @@ public class ext2_xattr {
 	}
 	public Object xattr_update_entry(Object fs, Object name, Object value, Object value_len, int in_inode) {
 		 ea_ino = 0;
-		Object new_value = ((Object)0);
-		byte new_name = ((Object)0);
+		Object new_value = (null);
+		Byte new_name = (null);
 		int name_len;
 		 ret = new ();
 		Byte generatedName = this.getName();
@@ -117,8 +117,8 @@ public class ext2_xattr {
 	public int xattr_find_position(int count, Object name) {
 		ext2_xattr x = new ext2_xattr();
 		int i;
-		byte shortname;
-		byte x_shortname;
+		Byte shortname;
+		Byte x_shortname;
 		int name_idx;
 		int x_name_idx;
 		int shortname_len;
@@ -150,7 +150,7 @@ public class ext2_xattr {
 	public int space_used(int count) {
 		int total = 0;
 		ext2_xattr x = new ext2_xattr();
-		byte shortname;
+		Byte shortname;
 		int i;
 		int len;
 		int name_idx;

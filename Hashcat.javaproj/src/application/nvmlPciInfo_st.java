@@ -1,7 +1,7 @@
 package application;
 
 public class nvmlPciInfo_st {
-	private Object busId;
+	private Object[] busId;
 	private int domain;
 	private int bus;
 	private int device;
@@ -12,7 +12,7 @@ public class nvmlPciInfo_st {
 	private int reserved2;
 	private int reserved3;
 	
-	public nvmlPciInfo_st(Object busId, int domain, int bus, int device, int pciDeviceId, int pciSubSystemId, int reserved0, int reserved1, int reserved2, int reserved3) {
+	public nvmlPciInfo_st(Object[] busId, int domain, int bus, int device, int pciDeviceId, int pciSubSystemId, int reserved0, int reserved1, int reserved2, int reserved3) {
 		setBusId(busId);
 		setDomain(domain);
 		setBus(bus);
@@ -27,10 +27,10 @@ public class nvmlPciInfo_st {
 	public nvmlPciInfo_st() {
 	}
 	
-	public Object getBusId() {
+	public Object[] getBusId() {
 		return busId;
 	}
-	public void setBusId(Object newBusId) {
+	public void setBusId(Object[] newBusId) {
 		busId = newBusId;
 	}
 	public int getDomain() {

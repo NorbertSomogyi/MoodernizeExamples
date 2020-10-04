@@ -17,11 +17,11 @@ public class flickcurl_serializer_s {
 		flickcurl_serializer serializer = new flickcurl_serializer();
 		Object generatedVersion = factory.getVersion();
 		if (!factory || (factory && generatedVersion != 1)) {
-			return ((Object)0);
+			return (null);
 		} 
 		serializer = (flickcurl_serializer)/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/);
 		if (!serializer) {
-			return ((Object)0);
+			return (null);
 		} 
 		serializer.setFc(fc);
 		serializer.setData(data);

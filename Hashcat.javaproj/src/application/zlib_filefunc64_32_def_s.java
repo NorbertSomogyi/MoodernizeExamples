@@ -22,17 +22,17 @@ public class zlib_filefunc64_32_def_s {
 		zip64_internal zi = new zip64_internal();
 		int err = (false);
 		Object generatedZ_filefunc = ziinit.getZ_filefunc();
-		generatedZ_filefunc.setZseek32_file(((Object)0));
-		generatedZ_filefunc.setZtell32_file(((Object)0));
-		if (pzlib_filefunc64_32_def == ((Object)0)) {
+		generatedZ_filefunc.setZseek32_file((null));
+		generatedZ_filefunc.setZtell32_file((null));
+		if (pzlib_filefunc64_32_def == (null)) {
 			generatedZ_filefunc.getZfile_func64().fill_fopen64_filefunc();
 		} else {
 				ziinit.setZ_filefunc(pzlib_filefunc64_32_def);
 		} 
 		ziinit.setFilestream((ModernizedCProgram.call_zopen64(((generatedZ_filefunc)), (pathname), ((append == (false)) ? ((true) | (true) | (true)) : ((true) | (true) | (true))))));
 		Object generatedFilestream = ziinit.getFilestream();
-		if (generatedFilestream == ((Object)0)) {
-			return ((Object)0);
+		if (generatedFilestream == (null)) {
+			return (null);
 		} 
 		if (append == (true)) {
 			(ModernizedCProgram.call_zseek64(((generatedZ_filefunc)), (generatedFilestream), (false), (true)));
@@ -46,11 +46,11 @@ public class zlib_filefunc64_32_def_s {
 		Object generatedCentral_dir = ziinit.getCentral_dir();
 		(generatedCentral_dir).init_linkedlist();
 		zi = (zip64_internal)(/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/));
-		if (zi == ((Object)0)) {
+		if (zi == (null)) {
 			(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((generatedZ_filefunc).getZfile_func64().getOpaque(), generatedFilestream));
-			return ((Object)0);
+			return (null);
 		} 
-		ziinit.setGlobalcomment(((Object)/* now we add file in a zipfile */0));
+		ziinit.setGlobalcomment((null));
 		if (append == (true)) {
 			err = ziinit.LoadCentralDirectoryRecord();
 		} 
@@ -71,26 +71,11 @@ public class zlib_filefunc64_32_def_s {
 				} 
 			}
 			;
-			return ((Object)0);
+			return (null);
 		} else {
 				zi = ziinit;
 				return (zipFile)zi;
 		} 
-	}
-	public void fill_zlib_filefunc64_32_def_from_filefunc32(Object p_filefunc32) {
-		zlib_filefunc64_def_s generatedZfile_func64 = this.getZfile_func64();
-		generatedZfile_func64.setZopen64_file(((Object)0));
-		this.setZopen32_file(p_filefunc32.getZopen_file());
-		generatedZfile_func64.setZerror_file(p_filefunc32.getZerror_file());
-		generatedZfile_func64.setZread_file(p_filefunc32.getZread_file());
-		generatedZfile_func64.setZwrite_file(p_filefunc32.getZwrite_file());
-		generatedZfile_func64.setZtell64_file(((Object)0));
-		generatedZfile_func64.setZseek64_file(((Object)0));
-		generatedZfile_func64.setZclose_file(p_filefunc32.getZclose_file());
-		generatedZfile_func64.setZerror_file(p_filefunc32.getZerror_file());
-		generatedZfile_func64.setOpaque(p_filefunc32.getOpaque());
-		this.setZseek32_file(p_filefunc32.getZseek_file());
-		this.setZtell32_file(p_filefunc32.getZtell_file());
 	}
 	public Object unzOpenInternal(Object path, int is64bitOpenFunction) {
 		unz64_s us = new unz64_s();
@@ -106,12 +91,12 @@ public class zlib_filefunc64_32_def_s {
 		                                   (same than number_entry on nospan) */ZPOS64_T number_entry_CD = new ZPOS64_T();
 		int err = (false);
 		if (ModernizedCProgram.unz_copyright[0] != (byte)' ') {
-			return ((Object)0);
+			return (null);
 		} 
 		Object generatedZ_filefunc = us.getZ_filefunc();
-		generatedZ_filefunc.setZseek32_file(((Object)0));
-		generatedZ_filefunc.setZtell32_file(((Object)0));
-		if (pzlib_filefunc64_32_def == ((Object)0)) {
+		generatedZ_filefunc.setZseek32_file((null));
+		generatedZ_filefunc.setZtell32_file((null));
+		if (pzlib_filefunc64_32_def == (null)) {
 			generatedZ_filefunc.getZfile_func64().fill_fopen64_filefunc();
 		} else {
 				us.setZ_filefunc(pzlib_filefunc64_32_def);
@@ -119,8 +104,8 @@ public class zlib_filefunc64_32_def_s {
 		us.setIs64bitOpenFunction(is64bitOpenFunction);
 		us.setFilestream((ModernizedCProgram.call_zopen64(((generatedZ_filefunc)), (path), ((true) | (true)))));
 		Object generatedFilestream = us.getFilestream();
-		if (generatedFilestream == ((Object)0)) {
-			return ((Object)0);
+		if (generatedFilestream == (null)) {
+			return (null);
 		} 
 		central_pos = ModernizedCProgram.unz64local_SearchCentralDir64(generatedZ_filefunc, generatedFilestream);
 		Object generatedGi = us.getGi();
@@ -215,18 +200,33 @@ public class zlib_filefunc64_32_def_s {
 		} 
 		if (err != (false)) {
 			(/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME((generatedZ_filefunc).getZfile_func64().getOpaque(), generatedFilestream));
-			return ((Object)0);
+			return (null);
 		} 
 		us.setByte_before_the_zipfile(central_pos - (generatedOffset_central_dir + generatedSize_central_dir));
 		us.setCentral_pos(central_pos);
-		us.setPfile_in_zip_read(((Object)0));
+		us.setPfile_in_zip_read((null));
 		us.setEncrypted(0);
 		s = (unz64_s)(/*Error: Function owner not recognized*/malloc(/*Error: Unsupported expression*/));
-		if (s != ((Object)0)) {
+		if (s != (null)) {
 			s = us;
 			ModernizedCProgram.unzGoToFirstFile((unzFile)s);
 		} 
 		return (unzFile)s;
+	}
+	public void fill_zlib_filefunc64_32_def_from_filefunc32(Object p_filefunc32) {
+		zlib_filefunc64_def_s generatedZfile_func64 = this.getZfile_func64();
+		generatedZfile_func64.setZopen64_file((null));
+		this.setZopen32_file(p_filefunc32.getZopen_file());
+		generatedZfile_func64.setZerror_file(p_filefunc32.getZerror_file());
+		generatedZfile_func64.setZread_file(p_filefunc32.getZread_file());
+		generatedZfile_func64.setZwrite_file(p_filefunc32.getZwrite_file());
+		generatedZfile_func64.setZtell64_file((null));
+		generatedZfile_func64.setZseek64_file((null));
+		generatedZfile_func64.setZclose_file(p_filefunc32.getZclose_file());
+		generatedZfile_func64.setZerror_file(p_filefunc32.getZerror_file());
+		generatedZfile_func64.setOpaque(p_filefunc32.getOpaque());
+		this.setZseek32_file(p_filefunc32.getZseek_file());
+		this.setZtell32_file(p_filefunc32.getZtell_file());
 	}
 	public zlib_filefunc64_def_s getZfile_func64() {
 		return zfile_func64;

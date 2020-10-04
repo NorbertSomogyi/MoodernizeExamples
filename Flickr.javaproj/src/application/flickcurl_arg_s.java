@@ -50,11 +50,11 @@ public class flickcurl_arg_s {
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(arg);
 	}
 	public flickcurl_arg_s flickcurl_build_args(flickcurl_s fc, Object xpathCtx, Object xpathExpr, Integer arg_count_p) {
-		flickcurl_arg args = ((Object)0);
+		flickcurl_arg[][] args = (null);
 		int nodes_count;
 		int arg_count;
 		int i;
-		 xpathObj = ((Object)0);
+		 xpathObj = (null);
 		 nodes = new ();
 		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, /* Now do args */xpathCtx);
 		if (!xpathObj) {
@@ -79,7 +79,7 @@ public class flickcurl_arg_s {
 			} 
 			arg = (flickcurl_arg)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 			for (attr = node.getProperties(); attr; attr = attr.getNext()) {
-				byte attr_name = (byte)attr.getName();
+				Byte attr_name = (byte)attr.getName();
 				if (!/*Error: Function owner not recognized*/strcmp(attr_name, "name")) {
 					size_t len = /*Error: Function owner not recognized*/strlen((byte)attr.getChildren().getContent());
 					arg.setName((byte)/*Error: Function owner not recognized*/malloc(len + 1));

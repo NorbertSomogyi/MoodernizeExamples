@@ -1,5 +1,6 @@
 package application;
 
+// nevercrack is required because it's quite likely that a collision is found which will not necessarily work as password for the archive
 // this is required to force mingw to accept the packed attribute
 public class pkzip_hash {
 	private Object data_type_enum;
@@ -13,9 +14,9 @@ public class pkzip_hash {
 	private Object data_length;
 	private Object checksum_from_crc;
 	private Object checksum_from_timestamp;
-	private Object data;
+	private Object[] data;
 	
-	public pkzip_hash(Object data_type_enum, Object magic_type_enum, Object compressed_length, Object uncompressed_length, Object crc32, Object offset, Object additional_offset, Object compression_type, Object data_length, Object checksum_from_crc, Object checksum_from_timestamp, Object data) {
+	public pkzip_hash(Object data_type_enum, Object magic_type_enum, Object compressed_length, Object uncompressed_length, Object crc32, Object offset, Object additional_offset, Object compression_type, Object data_length, Object checksum_from_crc, Object checksum_from_timestamp, Object[] data) {
 		setData_type_enum(data_type_enum);
 		setMagic_type_enum(magic_type_enum);
 		setCompressed_length(compressed_length);
@@ -98,10 +99,10 @@ public class pkzip_hash {
 	public void setChecksum_from_timestamp(Object newChecksum_from_timestamp) {
 		checksum_from_timestamp = newChecksum_from_timestamp;
 	}
-	public Object getData() {
+	public Object[] getData() {
 		return data;
 	}
-	public void setData(Object newData) {
+	public void setData(Object[] newData) {
 		data = newData;
 	}
 }

@@ -16,9 +16,9 @@ public class container {
 	public container container_create() {
 		container container = new container();
 		container = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
-		container.setPayload_first(((Object)0));
+		container.setPayload_first((null));
 		container.setPayload_size(0);
-		container.setChild(((Object)0));
+		container.setChild((null));
 		return container;
 	}
 	public container remove_container(node node, Object idx) {

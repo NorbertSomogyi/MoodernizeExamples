@@ -14,11 +14,11 @@ public class htab_table {
 	}
 	
 	public Object htab_create(Object nel) {
-		if (htab == ((Object)0)) {
+		if (htab == (null)) {
 			return 0;
 		} 
 		htab_entry[] generatedTable = this.getTable();
-		if (generatedTable != ((Object)0)) {
+		if (generatedTable != (null)) {
 			ModernizedCProgram._uprintf("warning: htab_create() was called with a non empty table");
 			return 0;
 		} 
@@ -30,7 +30,7 @@ public class htab_table {
 		this.setFilled(0);
 		Object generatedSize = this.getSize();
 		// allocate memory and zero out.// allocate memory and zero out.this.setTable((htab_entry)/*Error: Function owner not recognized*/calloc(generatedSize + 1, /*Error: Unsupported expression*/));
-		if (generatedTable == ((Object)0)) {
+		if (generatedTable == (null)) {
 			ModernizedCProgram._uprintf("could not allocate space for hash table\n");
 			return 0;
 		} 
@@ -40,7 +40,7 @@ public class htab_table {
 	public void htab_destroy() {
 		size_t i = new size_t();
 		htab_entry[] generatedTable = this.getTable();
-		if ((htab == ((Object)0)) || (generatedTable == ((Object)0))) {
+		if ((htab == (null)) || (generatedTable == (null))) {
 			return /*Error: Unsupported expression*/;
 		} 
 		Object generatedSize = this.getSize();
@@ -48,7 +48,7 @@ public class htab_table {
 			if (generatedTable[i].getUsed()) {
 				do {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)generatedTable[i].getStr());
-					generatedTable[i].setStr(((Object)0));
+					generatedTable[i].setStr((null));
 				} while (0);
 			} 
 		}
@@ -56,18 +56,9 @@ public class htab_table {
 		this.setSize(0);
 		do {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)generatedTable);
-			this.setTable(((Object)0));
+			this.setTable((null));
 		} while (0);
-		this.setTable(((Object)0/*
-		 * This is the search function. It uses double hashing with open addressing.
-		 * We use a trick to speed up the lookup. The table is created with one
-		 * more element available. This enables us to use the index zero special.
-		 * This index will never be used because we store the first hash index in
-		 * the field used where zero means not used. Every other value means used.
-		 * The used field can be used as a first fast comparison for equality of
-		 * the stored and the parameter value. This helps to prevent unnecessary
-		 * expensive calls of strcmp.
-		 */));
+		this.setTable((null));
 	}
 	public Object htab_hash(Byte str) {
 		uint32_t hval = new uint32_t();
@@ -75,9 +66,9 @@ public class htab_table {
 		uint32_t idx = new uint32_t();
 		uint32_t r = 0;
 		int c;
-		byte sz = str;
+		Byte sz = str;
 		htab_entry[] generatedTable = this.getTable();
-		if ((htab == ((Object)0)) || (generatedTable == ((Object)0)) || (str == ((Object)0))) {
+		if ((htab == (null)) || (generatedTable == (null)) || (str == (null))) {
 			return 0;
 		} 
 		// shown to produce half the collisions as djb2's).// See http://www.cse.yorku.ca/~oz/hash.htmlwhile ((c = sz++) != 0) {
@@ -93,7 +84,7 @@ public class htab_table {
 		} 
 		// Try the first index// Try the first indexidx = hval;
 		if (generatedTable[idx].getUsed()) {
-			if ((generatedTable[idx].getUsed() == hval) && (/*Error: Function owner not recognized*/strcmp(((str == ((Object)0)) ? "<NULL>" : str), ((generatedTable[idx].getStr() == ((Object)0)) ? "<NULL>" : generatedTable[idx].getStr())) == 0)) {
+			if ((generatedTable[idx].getUsed() == hval) && (/*Error: Function owner not recognized*/strcmp(((str == (null)) ? "<NULL>" : str), ((generatedTable[idx].getStr() == (null)) ? "<NULL>" : generatedTable[idx].getStr())) == 0)) {
 				return idx;
 			} 
 			hval2 = 1 + hval % (generatedSize - 2);
@@ -106,7 +97,7 @@ public class htab_table {
 				if (idx == hval) {
 					break;
 				} 
-				if ((generatedTable[idx].getUsed() == hval) && (/*Error: Function owner not recognized*/strcmp(((str == ((Object)0)) ? "<NULL>" : str), ((generatedTable[idx].getStr() == ((Object)0)) ? "<NULL>" : generatedTable[idx].getStr())) == 0)) {
+				if ((generatedTable[idx].getUsed() == hval) && (/*Error: Function owner not recognized*/strcmp(((str == (null)) ? "<NULL>" : str), ((generatedTable[idx].getStr() == (null)) ? "<NULL>" : generatedTable[idx].getStr())) == 0)) {
 					return idx;
 				} 
 			} while (generatedTable[idx].getUsed());
@@ -118,15 +109,15 @@ public class htab_table {
 		} 
 		do {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free((Object)generatedTable[idx].getStr());
-			generatedTable[idx].setStr(((Object)0));
+			generatedTable[idx].setStr((null));
 		} while (0);
 		generatedTable[idx].setUsed(hval);
-		generatedTable[idx].setStr((byte)/*Error: Function owner not recognized*/malloc(((((byte)str) == ((Object)0)) ? 0 : /*Error: Function owner not recognized*/strlen(str)) + 1));
-		if (generatedTable[idx].getStr() == ((Object)0)) {
+		generatedTable[idx].setStr((byte)/*Error: Function owner not recognized*/malloc(((((byte)str) == (null)) ? 0 : /*Error: Function owner not recognized*/strlen(str)) + 1));
+		if (generatedTable[idx].getStr() == (null)) {
 			ModernizedCProgram._uprintf("could not duplicate string for hash table\n");
 			return 0;
 		} 
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedTable[idx].getStr(), str, ((((byte)str) == ((Object)0)) ? 0 : /*Error: Function owner not recognized*/strlen(str)) + 1);
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedTable[idx].getStr(), str, ((((byte)str) == (null)) ? 0 : /*Error: Function owner not recognized*/strlen(str)) + 1);
 		++generatedFilled;
 		return idx;
 	}

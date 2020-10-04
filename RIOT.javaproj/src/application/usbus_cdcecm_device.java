@@ -66,18 +66,18 @@ public class usbus_cdcecm_device {
 	private Object rx_flush;
 	private Object tx_xmit;
 	private Object netdev;
-	private Object mac_netdev;
-	private Object mac_host;
+	private Object[] mac_netdev;
+	private Object[] mac_host;
 	private Object mac_str;
 	private Object usbus;
 	private Object out_lock;
 	private Object tx_len;
-	private Object in_buf;
+	private Object[] in_buf;
 	private Object len;
 	private  notif;
 	private int active_iface;
 	
-	public usbus_cdcecm_device(Object handler_ctrl, Object iface_data, Object iface_ctrl, Object iface_data_alt, Object ep_in, Object ep_out, Object ep_ctrl, Object ecm_hdr, Object rx_flush, Object tx_xmit, Object netdev, Object mac_netdev, Object mac_host, Object mac_str, Object usbus, Object out_lock, Object tx_len, Object in_buf, Object len,  notif, int active_iface) {
+	public usbus_cdcecm_device(Object handler_ctrl, Object iface_data, Object iface_ctrl, Object iface_data_alt, Object ep_in, Object ep_out, Object ep_ctrl, Object ecm_hdr, Object rx_flush, Object tx_xmit, Object netdev, Object[] mac_netdev, Object[] mac_host, Object mac_str, Object usbus, Object out_lock, Object tx_len, Object[] in_buf, Object len,  notif, int active_iface) {
 		setHandler_ctrl(handler_ctrl);
 		setIface_data(iface_data);
 		setIface_ctrl(iface_ctrl);
@@ -169,16 +169,16 @@ public class usbus_cdcecm_device {
 	public void setNetdev(Object newNetdev) {
 		netdev = newNetdev;
 	}
-	public Object getMac_netdev() {
+	public Object[] getMac_netdev() {
 		return mac_netdev;
 	}
-	public void setMac_netdev(Object newMac_netdev) {
+	public void setMac_netdev(Object[] newMac_netdev) {
 		mac_netdev = newMac_netdev;
 	}
-	public Object getMac_host() {
+	public Object[] getMac_host() {
 		return mac_host;
 	}
-	public void setMac_host(Object newMac_host) {
+	public void setMac_host(Object[] newMac_host) {
 		mac_host = newMac_host;
 	}
 	public Object getMac_str() {
@@ -205,10 +205,10 @@ public class usbus_cdcecm_device {
 	public void setTx_len(Object newTx_len) {
 		tx_len = newTx_len;
 	}
-	public Object getIn_buf() {
+	public Object[] getIn_buf() {
 		return in_buf;
 	}
-	public void setIn_buf(Object newIn_buf) {
+	public void setIn_buf(Object[] newIn_buf) {
 		in_buf = newIn_buf;
 	}
 	public Object getLen() {

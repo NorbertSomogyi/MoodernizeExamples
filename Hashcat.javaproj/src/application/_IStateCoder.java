@@ -59,10 +59,10 @@ public class _IStateCoder {
 			this.setSetProps(Lzma2State_SetProps);
 			this.setInit(Lzma2State_Init);
 			this.setCode2(Lzma2State_Code2);
-			this.setFilter(((Object)0));
+			this.setFilter((null));
 			{ 
-				((generatedDecoder).getDecoder()).setDic(((Object)0));
-				(generatedDecoder).setProbs(((Object)0));
+				((generatedDecoder).getDecoder()).setDic((null));
+				(generatedDecoder).setProbs((null));
 			}
 			;
 		} 

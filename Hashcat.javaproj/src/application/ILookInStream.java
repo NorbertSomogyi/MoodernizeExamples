@@ -15,69 +15,6 @@ public class ILookInStream {
 	public ILookInStream() {
 	}
 	
-	public Object LookInStream_SeekRead_ForArc(Object offset, Object buf, Object size) {
-		{ 
-			int __result__ = (ModernizedCProgram.LookInStream_SeekTo(stream, offset));
-			if (__result__ != 0) {
-				return __result__;
-			} 
-		}
-		;
-		return ModernizedCProgram.LookInStream_Read(stream, buf, size/* return LookInStream_Read2(stream, buf, size, SZ_ERROR_NO_ARCHIVE); */);
-	}
-	public Object SzArEx_Extract(Object p, Object fileIndex, Object blockIndex, Object tempBuf, Object outBufferSize, Object offset, Object outSizeProcessed, Object allocMain, Object allocTemp) {
-		UInt32 folderIndex = p.getFileToFolder()[fileIndex];
-		SRes res = 0;
-		offset = 0;
-		outSizeProcessed = 0;
-		if (folderIndex == (UInt32)-1) {
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, tempBuf);
-			blockIndex = folderIndex;
-			tempBuf = ((Object)0);
-			outBufferSize = 0;
-			return 0;
-		} 
-		if (tempBuf == ((Object)0) || blockIndex != folderIndex) {
-			UInt64 unpackSizeSpec = ModernizedCProgram.SzAr_GetFolderUnpackSize(p.getDb(), folderIndex/*
-			    UInt64 unpackSizeSpec =
-			        p->UnpackPositions[p->FolderToFile[(size_t)folderIndex + 1]] -
-			        p->UnpackPositions[p->FolderToFile[folderIndex]];
-			    */);
-			size_t unpackSize = (size_t)unpackSizeSpec;
-			if (unpackSize != unpackSizeSpec) {
-				return 2;
-			} 
-			blockIndex = folderIndex;
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, tempBuf);
-			tempBuf = ((Object)0);
-			if (res == 0) {
-				outBufferSize = unpackSize;
-				if (unpackSize != 0) {
-					tempBuf = (Byte)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, unpackSize);
-					if (tempBuf == ((Object)0)) {
-						res = 2;
-					} 
-				} 
-				if (res == 0) {
-					res = inStream.SzAr_DecodeFolder(p.getDb(), folderIndex, p.getDataPos(), tempBuf, unpackSize, allocTemp);
-				} 
-			} 
-		} 
-		if (res == 0) {
-			UInt64 unpackPos = p.getUnpackPositions()[fileIndex];
-			offset = (size_t)(unpackPos - p.getUnpackPositions()[p.getFolderToFile()[folderIndex]]);
-			outSizeProcessed = (size_t)(p.getUnpackPositions()[(size_t)fileIndex + 1] - unpackPos);
-			if (offset + outSizeProcessed > outBufferSize) {
-				return 11;
-			} 
-			if (((p.getCRCs()).getDefs() && ((p.getCRCs()).getDefs()[(fileIndex) >> 3] & (-1024 >> ((fileIndex) & 7))) != 0)) {
-				if (ModernizedCProgram.CrcCalc(tempBuf + offset, outSizeProcessed) != p.getCRCs().getVals()[fileIndex]) {
-					res = 3;
-				} 
-			} 
-		} 
-		return res;
-	}
 	/* 7zDec.c -- Decoding from 7z folder
 	2019-02-02 : Igor Pavlov : Public domain */
 	/* #define _7ZIP_PPMD_SUPPPORT */
@@ -85,8 +22,8 @@ public class ILookInStream {
 		CLzmaDec state = new CLzmaDec();
 		SRes res = 0;
 		{ 
-			(state).setDic(((Object)0));
-			(state).setProbs(((Object)0));
+			(state).setDic((null));
+			(state).setProbs((null));
 		}
 		;
 		{ 
@@ -101,7 +38,7 @@ public class ILookInStream {
 		state.LzmaDec_Init();
 		Object generatedDicPos = state.getDicPos();
 		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
-			Object inBuf = ((Object)0);
+			Object inBuf = (null);
 			size_t lookahead = (1 << 18);
 			if (lookahead > inSize) {
 				lookahead = (size_t)inSize;
@@ -147,8 +84,8 @@ public class ILookInStream {
 		SRes res = 0;
 		Object generatedDecoder = (state).getDecoder();
 		{ 
-			(generatedDecoder).setDic(((Object)0));
-			(generatedDecoder).setProbs(((Object)0));
+			(generatedDecoder).setDic((null));
+			(generatedDecoder).setProbs((null));
 		}
 		;
 		if (propsSize != 1) {
@@ -165,7 +102,7 @@ public class ILookInStream {
 		generatedDecoder.setDicBufSize(outSize);
 		state.Lzma2Dec_Init();
 		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
-			Object inBuf = ((Object)0);
+			Object inBuf = (null);
 			size_t lookahead = (1 << 18);
 			if (lookahead > inSize) {
 				lookahead = (size_t)inSize;
@@ -416,19 +353,19 @@ public class ILookInStream {
 									break;
 								}
 						case -1024:
-								ModernizedCProgram.ARM_Convert(outBuffer, outSize, 0, 0);
+								ModernizedCProgram.SPARC_Convert(outBuffer, outSize, 0, 0);
 								break;
 						case -1024:
 								ModernizedCProgram.IA64_Convert(outBuffer, outSize, 0, 0);
 								break;
 						case -1024:
-								ModernizedCProgram.PPC_Convert(outBuffer, outSize, 0, 0);
-								break;
-						case -1024:
 								ModernizedCProgram.ARMT_Convert(outBuffer, outSize, 0, 0);
 								break;
 						case -1024:
-								ModernizedCProgram.SPARC_Convert(outBuffer, outSize, 0, 0);
+								ModernizedCProgram.PPC_Convert(outBuffer, outSize, 0, 0);
+								break;
+						case -1024:
+								ModernizedCProgram.ARM_Convert(outBuffer, outSize, 0, 0);
 								break;
 						default:
 								return 4;
@@ -472,6 +409,69 @@ public class ILookInStream {
 			} 
 			return res;
 		}
+	}
+	public Object LookInStream_SeekRead_ForArc(Object offset, Object buf, Object size) {
+		{ 
+			int __result__ = (ModernizedCProgram.LookInStream_SeekTo(stream, offset));
+			if (__result__ != 0) {
+				return __result__;
+			} 
+		}
+		;
+		return ModernizedCProgram.LookInStream_Read(stream, buf, size/* return LookInStream_Read2(stream, buf, size, SZ_ERROR_NO_ARCHIVE); */);
+	}
+	public Object SzArEx_Extract(Object p, Object fileIndex, Object blockIndex, Object tempBuf, Object outBufferSize, Object offset, Object outSizeProcessed, Object allocMain, Object allocTemp) {
+		UInt32 folderIndex = p.getFileToFolder()[fileIndex];
+		SRes res = 0;
+		offset = 0;
+		outSizeProcessed = 0;
+		if (folderIndex == (UInt32)-1) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, tempBuf);
+			blockIndex = folderIndex;
+			tempBuf = (null);
+			outBufferSize = 0;
+			return 0;
+		} 
+		if (tempBuf == (null) || blockIndex != folderIndex) {
+			UInt64 unpackSizeSpec = ModernizedCProgram.SzAr_GetFolderUnpackSize(p.getDb(), folderIndex/*
+			    UInt64 unpackSizeSpec =
+			        p->UnpackPositions[p->FolderToFile[(size_t)folderIndex + 1]] -
+			        p->UnpackPositions[p->FolderToFile[folderIndex]];
+			    */);
+			size_t unpackSize = (size_t)unpackSizeSpec;
+			if (unpackSize != unpackSizeSpec) {
+				return 2;
+			} 
+			blockIndex = folderIndex;
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, tempBuf);
+			tempBuf = (null);
+			if (res == 0) {
+				outBufferSize = unpackSize;
+				if (unpackSize != 0) {
+					tempBuf = (Byte)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(allocMain, unpackSize);
+					if (tempBuf == (null)) {
+						res = 2;
+					} 
+				} 
+				if (res == 0) {
+					res = inStream.SzAr_DecodeFolder(p.getDb(), folderIndex, p.getDataPos(), tempBuf, unpackSize, allocTemp);
+				} 
+			} 
+		} 
+		if (res == 0) {
+			UInt64 unpackPos = p.getUnpackPositions()[fileIndex];
+			offset = (size_t)(unpackPos - p.getUnpackPositions()[p.getFolderToFile()[folderIndex]]);
+			outSizeProcessed = (size_t)(p.getUnpackPositions()[(size_t)fileIndex + 1] - unpackPos);
+			if (offset + outSizeProcessed > outBufferSize) {
+				return 11;
+			} 
+			if (((p.getCRCs()).getDefs() && ((p.getCRCs()).getDefs()[(fileIndex) >> 3] & (-1024 >> ((fileIndex) & 7))) != 0)) {
+				if (ModernizedCProgram.CrcCalc(tempBuf + offset, outSizeProcessed) != p.getCRCs().getVals()[fileIndex]) {
+					res = 3;
+				} 
+			} 
+		} 
+		return res;
 	}
 	public Object getLook() {
 		return Look;

@@ -75,15 +75,15 @@ public class saul_reg {
 	}
 	public int saul_reg_add() {
 		saul_reg_t tmp = ModernizedCProgram.saul_reg;
-		if (dev == ((Object)0)) {
+		if (dev == (null)) {
 			return -ENODEV;
 		} 
-		this.setNext(((Object)/* prepare new entry */0));
+		this.setNext((null));
 		saul_reg generatedNext = tmp.getNext();
-		if (ModernizedCProgram.saul_reg == ((Object)/* add to registry */0)) {
+		if (ModernizedCProgram.saul_reg == (null)) {
 			ModernizedCProgram.saul_reg = dev;
 		} else {
-				while (generatedNext != ((Object)0)) {
+				while (generatedNext != (null)) {
 					tmp = generatedNext;
 				}
 				tmp.setNext(dev);
@@ -92,7 +92,7 @@ public class saul_reg {
 	}
 	public int saul_reg_rm() {
 		saul_reg_t tmp = ModernizedCProgram.saul_reg;
-		if (ModernizedCProgram.saul_reg == ((Object)0) || dev == ((Object)0)) {
+		if (ModernizedCProgram.saul_reg == (null) || dev == (null)) {
 			return -ENODEV;
 		} 
 		saul_reg generatedNext = this.getNext();
@@ -129,7 +129,7 @@ public class saul_reg {
 			} 
 			tmp = generatedNext;
 		}
-		return ((Object)0);
+		return (null);
 	}
 	public saul_reg saul_reg_find_name(Object name) {
 		saul_reg_t tmp = ModernizedCProgram.saul_reg;
@@ -141,7 +141,7 @@ public class saul_reg {
 			} 
 			tmp = generatedNext;
 		}
-		return ((Object)0);
+		return (null);
 	}
 	public saul_reg getNext() {
 		return next;

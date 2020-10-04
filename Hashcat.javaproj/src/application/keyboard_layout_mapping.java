@@ -20,14 +20,14 @@ public class keyboard_layout_mapping {
 		if (fp.hc_fopen(filename, "r") == 0) {
 			return 0;
 		} 
-		byte line_buf = (byte)ModernizedCProgram.hcmalloc(-1024);
+		Byte line_buf = (byte)ModernizedCProgram.hcmalloc(-1024);
 		int maps_cnt = 0;
-		Object generatedLen_min = token.getLen_min();
-		Object generatedLen_max = token.getLen_max();
-		Object generatedSep = token.getSep();
-		Object generatedAttr = token.getAttr();
-		Object generatedBuf = token.getBuf();
-		Object generatedLen = token.getLen();
+		Object[] generatedLen_min = token.getLen_min();
+		Object[] generatedLen_max = token.getLen_max();
+		Object[] generatedSep = token.getSep();
+		Object[] generatedAttr = token.getAttr();
+		Object[] generatedBuf = token.getBuf();
+		Object[] generatedLen = token.getLen();
 		while (!fp.hc_feof()) {
 			size_t line_len = fp.fgetl(line_buf, -1024);
 			if (line_len == 0) {

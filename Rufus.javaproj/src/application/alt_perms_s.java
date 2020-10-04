@@ -4,13 +4,13 @@ package application;
 public class alt_perms_s {
 	private Object attr_type;
 	private Object attr_subtype;
-	private Object reserved;
+	private Object[] reserved;
 	private Object attrLength;
 	private Object owner_id;
 	private Object group_id;
 	private Object permission;
 	
-	public alt_perms_s(Object attr_type, Object attr_subtype, Object reserved, Object attrLength, Object owner_id, Object group_id, Object permission) {
+	public alt_perms_s(Object attr_type, Object attr_subtype, Object[] reserved, Object attrLength, Object owner_id, Object group_id, Object permission) {
 		setAttr_type(attr_type);
 		setAttr_subtype(attr_subtype);
 		setReserved(reserved);
@@ -34,10 +34,10 @@ public class alt_perms_s {
 	public void setAttr_subtype(Object newAttr_subtype) {
 		attr_subtype = newAttr_subtype;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public Object getAttrLength() {

@@ -28,9 +28,9 @@ package application;
 public class mallocd_pipe {
 	private riot_pipe pipe;
 	private Object rb;
-	private Object buffer;
+	private Object[] buffer;
 	
-	public mallocd_pipe(riot_pipe pipe, Object rb, Object buffer) {
+	public mallocd_pipe(riot_pipe pipe, Object rb, Object[] buffer) {
 		setPipe(pipe);
 		setRb(rb);
 		setBuffer(buffer);
@@ -50,10 +50,10 @@ public class mallocd_pipe {
 	public void setRb(Object newRb) {
 		rb = newRb;
 	}
-	public Object getBuffer() {
+	public Object[] getBuffer() {
 		return buffer;
 	}
-	public void setBuffer(Object newBuffer) {
+	public void setBuffer(Object[] newBuffer) {
 		buffer = newBuffer;
 	}
 }

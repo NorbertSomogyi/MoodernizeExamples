@@ -17,7 +17,7 @@ public class bftree_iterator {
 		bftree_iterator iter = new bftree_iterator();
 		iter = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		iter.setTree(tree);
-		iter.setNext(((Object)0));
+		iter.setNext((null));
 		iter.setClosed(0);
 		return iter;
 	}

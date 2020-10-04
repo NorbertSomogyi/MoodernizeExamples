@@ -100,10 +100,42 @@ public class ext2fs_extent {
 		Object generatedExt3_extent_header = eh.getExt3_extent_header();
 		Object generatedEnd_blk = path.getEnd_blk();
 		switch (op) {
-		case -1024:
+		case /* fallthrough */-1024:
+				if (generatedLeft <= 0) {
+					return EXT2_ET_EXTENT_NO_NEXT;
+				} 
+				if (generatedCurr) {
+					ix = generatedCurr;
+					ix++;
+				} else {
+						eh = (ext3_extent_header)generatedBuf;
+						ix = /*Error: Function owner not recognized*/EXT_FIRST_INDEX(eh);
+				} 
+				generatedLeft--;
+				path.setCurr(ix);
+				path.setVisit_num(0);
+				break;
 		case -1024:
 				ix = generatedCurr;
 				break;
+		case -1024:
+				if (handle.getLevel() <= 0) {
+					return EXT2_ET_EXTENT_NO_UP;
+				} 
+				handle.getLevel()--;
+				path--;
+				ix = generatedCurr;
+				if ((orig_op == -1024) || (orig_op == -1024)) {
+					path.setVisit_num(0);
+				} 
+				break;
+		case /* fallthrough */-1024:
+				path.setLeft(generatedEntries);
+				path.setCurr(0);
+		case -1024:
+				handle.setLevel(0);
+				path = handle.getPath() + handle.getLevel();
+		case -1024:
 		case -1024:
 				eh = (ext3_extent_header)generatedBuf;
 				path.setCurr(/*Error: Function owner not recognized*/EXT_LAST_EXTENT(eh));
@@ -111,9 +143,6 @@ public class ext2fs_extent {
 				path.setLeft(0);
 				path.setVisit_num(0);
 				break;
-		case /* fallthrough */-1024:
-				path.setLeft(generatedEntries);
-				path.setCurr(0);
 		case -1024:
 				if (!generatedCurr || generatedLeft + 1 >= generatedEntries) {
 					return EXT2_ET_EXTENT_NO_PREV;
@@ -178,35 +207,6 @@ public class ext2fs_extent {
 						if (handle.getLevel() < handle.getMax_depth()) {
 							path.setVisit_num(1);
 						} 
-				} 
-				break;
-		case -1024:
-				handle.setLevel(0);
-				path = handle.getPath() + handle.getLevel();
-		case /* fallthrough */-1024:
-				if (generatedLeft <= 0) {
-					return EXT2_ET_EXTENT_NO_NEXT;
-				} 
-				if (generatedCurr) {
-					ix = generatedCurr;
-					ix++;
-				} else {
-						eh = (ext3_extent_header)generatedBuf;
-						ix = /*Error: Function owner not recognized*/EXT_FIRST_INDEX(eh);
-				} 
-				generatedLeft--;
-				path.setCurr(ix);
-				path.setVisit_num(0);
-				break;
-		case -1024:
-				if (handle.getLevel() <= 0) {
-					return EXT2_ET_EXTENT_NO_UP;
-				} 
-				handle.getLevel()--;
-				path--;
-				ix = generatedCurr;
-				if ((orig_op == -1024) || (orig_op == -1024)) {
-					path.setVisit_num(0);
 				} 
 				break;
 		default:

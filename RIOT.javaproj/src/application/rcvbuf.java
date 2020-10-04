@@ -2,9 +2,9 @@ package application;
 
 public class rcvbuf {
 	private Object lock;
-	private Object entries;
+	private Object[] entries;
 	
-	public rcvbuf(Object lock, Object entries) {
+	public rcvbuf(Object lock, Object[] entries) {
 		setLock(lock);
 		setEntries(entries);
 	}
@@ -17,10 +17,10 @@ public class rcvbuf {
 	public void setLock(Object newLock) {
 		lock = newLock;
 	}
-	public Object getEntries() {
+	public Object[] getEntries() {
 		return entries;
 	}
-	public void setEntries(Object newEntries) {
+	public void setEntries(Object[] newEntries) {
 		entries = newEntries;
 	}
 }

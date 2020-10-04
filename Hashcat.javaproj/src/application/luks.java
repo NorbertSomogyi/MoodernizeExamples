@@ -5,10 +5,10 @@ public class luks {
 	private int key_size;
 	private int cipher_type;
 	private int cipher_mode;
-	private Object ct_buf;
-	private Object af_src_buf;
+	private Object[] ct_buf;
+	private Object[] af_src_buf;
 	
-	public luks(int hash_type, int key_size, int cipher_type, int cipher_mode, Object ct_buf, Object af_src_buf) {
+	public luks(int hash_type, int key_size, int cipher_type, int cipher_mode, Object[] ct_buf, Object[] af_src_buf) {
 		setHash_type(hash_type);
 		setKey_size(key_size);
 		setCipher_type(cipher_type);
@@ -43,16 +43,16 @@ public class luks {
 	public void setCipher_mode(int newCipher_mode) {
 		cipher_mode = newCipher_mode;
 	}
-	public Object getCt_buf() {
+	public Object[] getCt_buf() {
 		return ct_buf;
 	}
-	public void setCt_buf(Object newCt_buf) {
+	public void setCt_buf(Object[] newCt_buf) {
 		ct_buf = newCt_buf;
 	}
-	public Object getAf_src_buf() {
+	public Object[] getAf_src_buf() {
 		return af_src_buf;
 	}
-	public void setAf_src_buf(Object newAf_src_buf) {
+	public void setAf_src_buf(Object[] newAf_src_buf) {
 		af_src_buf = newAf_src_buf;
 	}
 }

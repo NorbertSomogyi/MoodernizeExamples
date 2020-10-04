@@ -18,8 +18,8 @@ package application;
  */
 /* The poor excuse FAT has for a superblock -- in the boot sector */
 public class fat_bootsect {
-	private Object bsJump;
-	private Object bsOemName;
+	private Object[] bsJump;
+	private Object[] bsOemName;
 	private Object bsBytesPerSec;
 	private Object bsSecPerClust;
 	private Object bsResSectors;
@@ -35,7 +35,7 @@ public class fat_bootsect {
 	private  u;
 	private Object bsSignature;
 	
-	public fat_bootsect(Object bsJump, Object bsOemName, Object bsBytesPerSec, Object bsSecPerClust, Object bsResSectors, Object bsFATs, Object bsRootDirEnts, Object bsSectors, Object bsMedia, Object bsFATsecs, Object bsSecPerTrack, Object bsHeads, Object bsHiddenSecs, Object bsHugeSectors,  u, Object bsSignature) {
+	public fat_bootsect(Object[] bsJump, Object[] bsOemName, Object bsBytesPerSec, Object bsSecPerClust, Object bsResSectors, Object bsFATs, Object bsRootDirEnts, Object bsSectors, Object bsMedia, Object bsFATsecs, Object bsSecPerTrack, Object bsHeads, Object bsHiddenSecs, Object bsHugeSectors,  u, Object bsSignature) {
 		setBsJump(bsJump);
 		setBsOemName(bsOemName);
 		setBsBytesPerSec(bsBytesPerSec);
@@ -56,16 +56,16 @@ public class fat_bootsect {
 	public fat_bootsect() {
 	}
 	
-	public Object getBsJump() {
+	public Object[] getBsJump() {
 		return bsJump;
 	}
-	public void setBsJump(Object newBsJump) {
+	public void setBsJump(Object[] newBsJump) {
 		bsJump = newBsJump;
 	}
-	public Object getBsOemName() {
+	public Object[] getBsOemName() {
 		return bsOemName;
 	}
-	public void setBsOemName(Object newBsOemName) {
+	public void setBsOemName(Object[] newBsOemName) {
 		bsOemName = newBsOemName;
 	}
 	public Object getBsBytesPerSec() {

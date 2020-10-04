@@ -12,25 +12,25 @@ public class linkedlist_data_s {
 	}
 	
 	public void init_linkedlist() {
-		this.setFirst_block(this.setLast_block(((Object)0)));
+		this.setFirst_block(this.setLast_block((null)));
 	}
 	public void free_linkedlist() {
 		linkedlist_datablock_internal_s generatedFirst_block = this.getFirst_block();
 		generatedFirst_block.free_datablock();
-		this.setFirst_block(this.setLast_block(((Object)0)));
+		this.setFirst_block(this.setLast_block((null)));
 	}
 	public int add_data_in_datablock(Object buf, Object len) {
 		linkedlist_datablock_internal ldi = new linkedlist_datablock_internal();
-		byte from_copy;
-		if (ll == ((Object)0)) {
+		Byte from_copy;
+		if (ll == (null)) {
 			return (true);
 		} 
 		linkedlist_datablock_internal_s generatedLast_block = this.getLast_block();
 		linkedlist_datablock_internal_s linkedlist_datablock_internal_s = new linkedlist_datablock_internal_s();
 		linkedlist_datablock_internal_s generatedFirst_block = this.getFirst_block();
-		if (generatedLast_block == ((Object)0)) {
+		if (generatedLast_block == (null)) {
 			this.setFirst_block(this.setLast_block(linkedlist_datablock_internal_s.allocate_new_datablock()));
-			if (generatedFirst_block == ((Object)0)) {
+			if (generatedFirst_block == (null)) {
 				return (true);
 			} 
 		} 
@@ -38,15 +38,15 @@ public class linkedlist_data_s {
 		from_copy = (byte)buf;
 		Object generatedAvail_in_this_block = ldi.getAvail_in_this_block();
 		linkedlist_datablock_internal_s generatedNext_datablock = ldi.getNext_datablock();
-		Object generatedData = ldi.getData();
+		Object[] generatedData = ldi.getData();
 		Object generatedFilled_in_this_block = ldi.getFilled_in_this_block();
 		while (len > 0) {
 			uInt copy_this = new uInt();
 			uInt i = new uInt();
-			byte to_copy;
+			Byte to_copy;
 			if (generatedAvail_in_this_block == 0) {
 				ldi.setNext_datablock(linkedlist_datablock_internal_s.allocate_new_datablock());
-				if (generatedNext_datablock == ((Object)0)) {
+				if (generatedNext_datablock == (null)) {
 					return (true);
 				} 
 				ldi = generatedNext_datablock;

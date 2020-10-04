@@ -3,10 +3,10 @@ package application;
 public class apple_secure_notes {
 	private Object Z_PK;
 	private Object ZCRYPTOITERATIONCOUNT;
-	private Object ZCRYPTOSALT;
-	private Object ZCRYPTOWRAPPEDKEY;
+	private Object[] ZCRYPTOSALT;
+	private Object[] ZCRYPTOWRAPPEDKEY;
 	
-	public apple_secure_notes(Object Z_PK, Object ZCRYPTOITERATIONCOUNT, Object ZCRYPTOSALT, Object ZCRYPTOWRAPPEDKEY) {
+	public apple_secure_notes(Object Z_PK, Object ZCRYPTOITERATIONCOUNT, Object[] ZCRYPTOSALT, Object[] ZCRYPTOWRAPPEDKEY) {
 		setZ_PK(Z_PK);
 		setZCRYPTOITERATIONCOUNT(ZCRYPTOITERATIONCOUNT);
 		setZCRYPTOSALT(ZCRYPTOSALT);
@@ -27,16 +27,16 @@ public class apple_secure_notes {
 	public void setZCRYPTOITERATIONCOUNT(Object newZCRYPTOITERATIONCOUNT) {
 		ZCRYPTOITERATIONCOUNT = newZCRYPTOITERATIONCOUNT;
 	}
-	public Object getZCRYPTOSALT() {
+	public Object[] getZCRYPTOSALT() {
 		return ZCRYPTOSALT;
 	}
-	public void setZCRYPTOSALT(Object newZCRYPTOSALT) {
+	public void setZCRYPTOSALT(Object[] newZCRYPTOSALT) {
 		ZCRYPTOSALT = newZCRYPTOSALT;
 	}
-	public Object getZCRYPTOWRAPPEDKEY() {
+	public Object[] getZCRYPTOWRAPPEDKEY() {
 		return ZCRYPTOWRAPPEDKEY;
 	}
-	public void setZCRYPTOWRAPPEDKEY(Object newZCRYPTOWRAPPEDKEY) {
+	public void setZCRYPTOWRAPPEDKEY(Object[] newZCRYPTOWRAPPEDKEY) {
 		ZCRYPTOWRAPPEDKEY = newZCRYPTOWRAPPEDKEY;
 	}
 }

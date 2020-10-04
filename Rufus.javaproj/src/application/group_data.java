@@ -47,13 +47,13 @@ package application;
 /* Other housekeeping constants */
 /* This is what we know about each Huffman coding group */
 public class group_data {
-	private Object limit;
-	private Object base;
-	private Object permute;
+	private Object[] limit;
+	private Object[] base;
+	private Object[] permute;
 	private int minLen;
 	private int maxLen;
 	
-	public group_data(Object limit, Object base, Object permute, int minLen, int maxLen) {
+	public group_data(Object[] limit, Object[] base, Object[] permute, int minLen, int maxLen) {
 		setLimit(limit);
 		setBase(base);
 		setPermute(permute);
@@ -63,22 +63,22 @@ public class group_data {
 	public group_data() {
 	}
 	
-	public Object getLimit() {
+	public Object[] getLimit() {
 		return limit;
 	}
-	public void setLimit(Object newLimit) {
+	public void setLimit(Object[] newLimit) {
 		limit = newLimit;
 	}
-	public Object getBase() {
+	public Object[] getBase() {
 		return base;
 	}
-	public void setBase(Object newBase) {
+	public void setBase(Object[] newBase) {
 		base = newBase;
 	}
-	public Object getPermute() {
+	public Object[] getPermute() {
 		return permute;
 	}
-	public void setPermute(Object newPermute) {
+	public void setPermute(Object[] newPermute) {
 		permute = newPermute;
 	}
 	public int getMinLen() {

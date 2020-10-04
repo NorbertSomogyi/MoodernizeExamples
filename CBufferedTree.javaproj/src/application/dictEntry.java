@@ -58,9 +58,9 @@ public class dictEntry {
 		} 
 		if ((index = d._dictKeyIndex(key)) == -/* Get the index of the new element, or -1 if
 		     * the element already exists. */1) {
-			return ((Object)0);
+			return (null);
 		} 
-		Object generatedHt = d.getHt();
+		Object[] generatedHt = d.getHt();
 		ht = (generatedRehashidx != -1) ? generatedHt[1] : generatedHt[/* Allocate the memory and store the new entry */0];
 		entry = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
 		dictEntry[][] generatedTable = ht.getTable();
@@ -94,9 +94,9 @@ public class dictEntry {
 		int h;
 		int idx;
 		int table;
-		Object generatedHt = d.getHt();
+		Object[] generatedHt = d.getHt();
 		if (generatedHt[0].getSize() == 0) {
-			return ((Object)/* We don't have a table at all */0);
+			return (null);
 		} 
 		int generatedRehashidx = (d).getRehashidx();
 		if ((generatedRehashidx != -1)) {
@@ -118,15 +118,15 @@ public class dictEntry {
 				he = generatedNext;
 			}
 			if (!(generatedRehashidx != -1)) {
-				return ((Object)0);
+				return (null);
 			} 
 		}
-		return ((Object)0);
+		return (null);
 	}
 	public dictEntry dictNext(dictIterator iter) {
 		dictEntry generatedEntry = iter.getEntry();
 		dict generatedD = iter.getD();
-		Object generatedHt = generatedD.getHt();
+		Object[] generatedHt = generatedD.getHt();
 		int generatedTable = iter.getTable();
 		int generatedSafe = iter.getSafe();
 		int generatedIndex = iter.getIndex();
@@ -136,7 +136,7 @@ public class dictEntry {
 		dictEntry generatedNextEntry = iter.getNextEntry();
 		dictEntry generatedNext = generatedEntry.getNext();
 		while (1) {
-			if (generatedEntry == ((Object)0)) {
+			if (generatedEntry == (null)) {
 				dictht ht = generatedHt[generatedTable];
 				if (generatedSafe && generatedIndex == -1 && generatedTable == 0) {
 					generatedIterators++;
@@ -160,7 +160,7 @@ public class dictEntry {
 				return generatedEntry;
 			} 
 		}
-		return ((Object)0);
+		return (null);
 	}
 	/* Return a random entry from the hash table. Useful to
 	 * implement randomized algorithms */
@@ -170,9 +170,9 @@ public class dictEntry {
 		int h;
 		int listlen;
 		int listele;
-		Object generatedHt = (d).getHt();
+		Object[] generatedHt = (d).getHt();
 		if ((generatedHt[0].getUsed() + generatedHt[1].getUsed()) == 0) {
-			return ((Object)0);
+			return (null);
 		} 
 		int generatedRehashidx = (d).getRehashidx();
 		if ((generatedRehashidx != -1)) {
@@ -182,15 +182,12 @@ public class dictEntry {
 			do {
 				h = 1220 % (generatedHt[0].getSize() + generatedHt[1].getSize());
 				he = (h >= generatedHt[0].getSize()) ? generatedHt[1].getTable()[h - generatedHt[0].getSize()] : generatedHt[0].getTable()[h];
-			} while (he == ((Object)0));
+			} while (he == (null));
 		} else {
 				do {
 					h = 1220 & generatedHt[0].getSizemask();
 					he = generatedHt[0].getTable()[h];
-				} while (he == ((Object)0/* Now we found a non empty bucket, but it is a linked
-				     * list and we need to get a random element from the list.
-				     * The only sane way to do so is counting the elements and
-				     * select a random index. */));
+				} while (he == (null));
 		} 
 		listlen = 0;
 		orighe = he;

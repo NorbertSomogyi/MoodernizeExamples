@@ -92,7 +92,7 @@ public class flickrdf_nspace_s {
 		if (ns) {
 			return list;
 		} 
-		ns = ((Object)0);
+		ns = (null);
 		for (n = 0; generatedUri; n++) {
 			if (prefix && generatedPrefix_len == prefix_len && !/*Error: Function owner not recognized*/strcmp(generatedPrefix, prefix)) {
 				ns = ModernizedCProgram.namespace_table[n];

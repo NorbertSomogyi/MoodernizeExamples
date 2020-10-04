@@ -131,7 +131,7 @@ public class xz_dec_bcj {
 	}
 	public xz_dec_bcj xz_dec_bcj_create(boolean single_call) {
 		xz_dec_bcj s = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
-		if (s != ((Object)0)) {
+		if (s != (null)) {
 			s.setSingle_call(single_call);
 		} 
 		return s;

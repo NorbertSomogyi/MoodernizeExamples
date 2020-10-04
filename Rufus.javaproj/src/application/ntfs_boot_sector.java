@@ -2,12 +2,12 @@ package application;
 
 /* NTFS bootsector format */
 public class ntfs_boot_sector {
-	private Object bsJump;
-	private Object bsOemName;
+	private Object[] bsJump;
+	private Object[] bsOemName;
 	private Object bsBytesPerSec;
 	private Object bsSecPerClust;
 	private Object bsResSectors;
-	private Object bsZeroed_0;
+	private Object[] bsZeroed_0;
 	private Object bsZeroed_1;
 	private Object bsMedia;
 	private Object bsZeroed_2;
@@ -20,17 +20,17 @@ public class ntfs_boot_sector {
 	private Object bsMFTLogicalClustNr;
 	private Object bsMFTMirrLogicalClustNr;
 	private Object bsClustPerMFTrecord;
-	private Object bsUnused_4;
+	private Object[] bsUnused_4;
 	private Object bsClustPerIdxBuf;
-	private Object bsUnused_5;
+	private Object[] bsUnused_5;
 	private Object bsVolSerialNr;
 	private Object bsUnused_6;
-	private Object Code;
+	private Object[] Code;
 	private Object bsMagic;
 	private Object bsForwardPtr;
 	private Object bsSignature;
 	
-	public ntfs_boot_sector(Object bsJump, Object bsOemName, Object bsBytesPerSec, Object bsSecPerClust, Object bsResSectors, Object bsZeroed_0, Object bsZeroed_1, Object bsMedia, Object bsZeroed_2, Object bsUnused_0, Object bsUnused_1, Object bsUnused_2, Object bsZeroed_3, Object bsUnused_3, Object bsTotalSectors, Object bsMFTLogicalClustNr, Object bsMFTMirrLogicalClustNr, Object bsClustPerMFTrecord, Object bsUnused_4, Object bsClustPerIdxBuf, Object bsUnused_5, Object bsVolSerialNr, Object bsUnused_6, Object Code, Object bsMagic, Object bsForwardPtr, Object bsSignature) {
+	public ntfs_boot_sector(Object[] bsJump, Object[] bsOemName, Object bsBytesPerSec, Object bsSecPerClust, Object bsResSectors, Object[] bsZeroed_0, Object bsZeroed_1, Object bsMedia, Object bsZeroed_2, Object bsUnused_0, Object bsUnused_1, Object bsUnused_2, Object bsZeroed_3, Object bsUnused_3, Object bsTotalSectors, Object bsMFTLogicalClustNr, Object bsMFTMirrLogicalClustNr, Object bsClustPerMFTrecord, Object[] bsUnused_4, Object bsClustPerIdxBuf, Object[] bsUnused_5, Object bsVolSerialNr, Object bsUnused_6, Object[] Code, Object bsMagic, Object bsForwardPtr, Object bsSignature) {
 		setBsJump(bsJump);
 		setBsOemName(bsOemName);
 		setBsBytesPerSec(bsBytesPerSec);
@@ -62,16 +62,16 @@ public class ntfs_boot_sector {
 	public ntfs_boot_sector() {
 	}
 	
-	public Object getBsJump() {
+	public Object[] getBsJump() {
 		return bsJump;
 	}
-	public void setBsJump(Object newBsJump) {
+	public void setBsJump(Object[] newBsJump) {
 		bsJump = newBsJump;
 	}
-	public Object getBsOemName() {
+	public Object[] getBsOemName() {
 		return bsOemName;
 	}
-	public void setBsOemName(Object newBsOemName) {
+	public void setBsOemName(Object[] newBsOemName) {
 		bsOemName = newBsOemName;
 	}
 	public Object getBsBytesPerSec() {
@@ -92,10 +92,10 @@ public class ntfs_boot_sector {
 	public void setBsResSectors(Object newBsResSectors) {
 		bsResSectors = newBsResSectors;
 	}
-	public Object getBsZeroed_0() {
+	public Object[] getBsZeroed_0() {
 		return bsZeroed_0;
 	}
-	public void setBsZeroed_0(Object newBsZeroed_0) {
+	public void setBsZeroed_0(Object[] newBsZeroed_0) {
 		bsZeroed_0 = newBsZeroed_0;
 	}
 	public Object getBsZeroed_1() {
@@ -170,10 +170,10 @@ public class ntfs_boot_sector {
 	public void setBsClustPerMFTrecord(Object newBsClustPerMFTrecord) {
 		bsClustPerMFTrecord = newBsClustPerMFTrecord;
 	}
-	public Object getBsUnused_4() {
+	public Object[] getBsUnused_4() {
 		return bsUnused_4;
 	}
-	public void setBsUnused_4(Object newBsUnused_4) {
+	public void setBsUnused_4(Object[] newBsUnused_4) {
 		bsUnused_4 = newBsUnused_4;
 	}
 	public Object getBsClustPerIdxBuf() {
@@ -182,10 +182,10 @@ public class ntfs_boot_sector {
 	public void setBsClustPerIdxBuf(Object newBsClustPerIdxBuf) {
 		bsClustPerIdxBuf = newBsClustPerIdxBuf;
 	}
-	public Object getBsUnused_5() {
+	public Object[] getBsUnused_5() {
 		return bsUnused_5;
 	}
-	public void setBsUnused_5(Object newBsUnused_5) {
+	public void setBsUnused_5(Object[] newBsUnused_5) {
 		bsUnused_5 = newBsUnused_5;
 	}
 	public Object getBsVolSerialNr() {
@@ -200,10 +200,10 @@ public class ntfs_boot_sector {
 	public void setBsUnused_6(Object newBsUnused_6) {
 		bsUnused_6 = newBsUnused_6;
 	}
-	public Object getCode() {
+	public Object[] getCode() {
 		return Code;
 	}
-	public void setCode(Object newCode) {
+	public void setCode(Object[] newCode) {
 		Code = newCode;
 	}
 	public Object getBsMagic() {

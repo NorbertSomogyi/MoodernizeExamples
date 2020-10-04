@@ -19,7 +19,7 @@ public class _CMtCoder {
 	private Object finishedEvent;
 	private Object writeRes;
 	private int writeIndex;
-	private Object ReadyBlocks;
+	private Object[] ReadyBlocks;
 	private Object numFinishedThreads;
 	private int numStartedThreadsLimit;
 	private int numStartedThreads;
@@ -28,12 +28,12 @@ public class _CMtCoder {
 	private Object readProcessed;
 	private Object cs;
 	private int freeBlockHead;
-	private Object freeBlockList;
+	private Object[] freeBlockList;
 	private  mtProgress;
-	private Object blocks;
-	private Object threads;
+	private Object[] blocks;
+	private Object[] threads;
 	
-	public _CMtCoder(Object blockSize, int numThreadsMax, Object expectedDataSize, ISeqInStream inStream, Object inData, Object inDataSize, ICompressProgress progress, Object allocBig,  mtCallback, Object mtCallbackObject, Object allocatedBufsSize, Object readEvent, Object blocksSemaphore, Object stopReading, Object readRes, Object finishedEvent, Object writeRes, int writeIndex, Object ReadyBlocks, Object numFinishedThreads, int numStartedThreadsLimit, int numStartedThreads, int numBlocksMax, int blockIndex, Object readProcessed, Object cs, int freeBlockHead, Object freeBlockList,  mtProgress, Object blocks, Object threads) {
+	public _CMtCoder(Object blockSize, int numThreadsMax, Object expectedDataSize, ISeqInStream inStream, Object inData, Object inDataSize, ICompressProgress progress, Object allocBig,  mtCallback, Object mtCallbackObject, Object allocatedBufsSize, Object readEvent, Object blocksSemaphore, Object stopReading, Object readRes, Object finishedEvent, Object writeRes, int writeIndex, Object[] ReadyBlocks, Object numFinishedThreads, int numStartedThreadsLimit, int numStartedThreads, int numBlocksMax, int blockIndex, Object readProcessed, Object cs, int freeBlockHead, Object[] freeBlockList,  mtProgress, Object[] blocks, Object[] threads) {
 		setBlockSize(blockSize);
 		setNumThreadsMax(numThreadsMax);
 		setExpectedDataSize(expectedDataSize);
@@ -74,32 +74,32 @@ public class _CMtCoder {
 		this.setBlockSize(0);
 		this.setNumThreadsMax(0);
 		this.setExpectedDataSize((UInt64)(Int64)-1);
-		this.setInStream(((Object)0));
-		this.setInData(((Object)0));
+		this.setInStream((null));
+		this.setInData((null));
 		this.setInDataSize(0);
-		this.setProgress(((Object)0));
-		this.setAllocBig(((Object)0));
-		this.setMtCallback(((Object)0));
-		this.setMtCallbackObject(((Object)0));
+		this.setProgress((null));
+		this.setAllocBig((null));
+		this.setMtCallback((null));
+		this.setMtCallbackObject((null));
 		this.setAllocatedBufsSize(0);
 		Object generatedReadEvent = this.getReadEvent();
-		(generatedReadEvent) = ((Object)0);
+		(generatedReadEvent) = (null);
 		Object generatedBlocksSemaphore = this.getBlocksSemaphore();
-		(generatedBlocksSemaphore) = ((Object)0);
-		Object generatedThreads = this.getThreads();
+		(generatedBlocksSemaphore) = (null);
+		Object[] generatedThreads = this.getThreads();
 		Object generatedStartEvent = t.getStartEvent();
 		Object generatedThread = t.getThread();
 		for (i = 0; i < 64; i++) {
 			CMtCoderThread t = generatedThreads[i];
 			t.setMtCoder(p);
 			t.setIndex(i);
-			t.setInBuf(((Object)0));
+			t.setInBuf((null));
 			t.setStop(0);
-			(generatedStartEvent) = ((Object)0);
-			(generatedThread) = ((Object)0);
+			(generatedStartEvent) = (null);
+			(generatedThread) = (null);
 		}
 		Object generatedFinishedEvent = this.getFinishedEvent();
-		(generatedFinishedEvent) = ((Object)0);
+		(generatedFinishedEvent) = (null);
 		Object generatedCs = this.getCs();
 		ModernizedCProgram.CriticalSection_Init(generatedCs);
 		ModernizedCProgram.CriticalSection_Init(generatedCs);
@@ -111,7 +111,7 @@ public class _CMtCoder {
 		  if (Event_IsCreated(&p->readEvent))
 		    Event_Set(&p->readEvent);
 		  */
-		Object generatedThreads = this.getThreads();
+		Object[] generatedThreads = this.getThreads();
 		for (i = 0; i < 64; i++) {
 			generatedThreads[i].MtCoderThread_Destruct();
 		}
@@ -152,7 +152,7 @@ public class _CMtCoder {
 			numBlocksMax = (((true) + (true) / 8 + 1) + 3);
 		} 
 		Object generatedAllocatedBufsSize = this.getAllocatedBufsSize();
-		Object generatedThreads = this.getThreads();
+		Object[] generatedThreads = this.getThreads();
 		Object generatedInBuf = t.getInBuf();
 		Object generatedAllocBig = this.getAllocBig();
 		if (generatedBlockSize != generatedAllocatedBufsSize) {
@@ -160,7 +160,7 @@ public class _CMtCoder {
 				CMtCoderThread t = generatedThreads[i];
 				if (generatedInBuf) {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAllocBig, generatedInBuf);
-					t.setInBuf(((Object)0));
+					t.setInBuf((null));
 				} 
 			}
 			this.setAllocatedBufsSize(generatedBlockSize);
@@ -185,7 +185,7 @@ public class _CMtCoder {
 				} 
 			}
 			;
-			if (((generatedBlocksSemaphore) != ((Object)0))) {
+			if (((generatedBlocksSemaphore) != (null))) {
 				{ 
 					if ((ModernizedCProgram.HandlePtr_Close(generatedBlocksSemaphore)) != 0) {
 						return 12;
@@ -200,7 +200,7 @@ public class _CMtCoder {
 			}
 			;
 		}
-		Object generatedFreeBlockList = this.getFreeBlockList();
+		Object[] generatedFreeBlockList = this.getFreeBlockList();
 		for (i = 0; i < (((true) + (true) / 8 + 1) + 3) - 1; i++) {
 			generatedFreeBlockList[i] = i + 1;
 		}
@@ -212,7 +212,7 @@ public class _CMtCoder {
 		this.setStopReading(0);
 		this.setWriteIndex(0);
 		this.setWriteRes(0);
-		Object generatedReadyBlocks = this.getReadyBlocks();
+		Object[] generatedReadyBlocks = this.getReadyBlocks();
 		for (i = 0; i < (((true) + (true) / 8 + 1) + 3); i++) {
 			generatedReadyBlocks[i] = 0;
 		}
@@ -364,10 +364,10 @@ public class _CMtCoder {
 	public void setWriteIndex(int newWriteIndex) {
 		writeIndex = newWriteIndex;
 	}
-	public Object getReadyBlocks() {
+	public Object[] getReadyBlocks() {
 		return ReadyBlocks;
 	}
-	public void setReadyBlocks(Object newReadyBlocks) {
+	public void setReadyBlocks(Object[] newReadyBlocks) {
 		ReadyBlocks = newReadyBlocks;
 	}
 	public Object getNumFinishedThreads() {
@@ -418,10 +418,10 @@ public class _CMtCoder {
 	public void setFreeBlockHead(int newFreeBlockHead) {
 		freeBlockHead = newFreeBlockHead;
 	}
-	public Object getFreeBlockList() {
+	public Object[] getFreeBlockList() {
 		return freeBlockList;
 	}
-	public void setFreeBlockList(Object newFreeBlockList) {
+	public void setFreeBlockList(Object[] newFreeBlockList) {
 		freeBlockList = newFreeBlockList;
 	}
 	public  getMtProgress() {
@@ -430,16 +430,16 @@ public class _CMtCoder {
 	public void setMtProgress( newMtProgress) {
 		mtProgress = newMtProgress;
 	}
-	public Object getBlocks() {
+	public Object[] getBlocks() {
 		return blocks;
 	}
-	public void setBlocks(Object newBlocks) {
+	public void setBlocks(Object[] newBlocks) {
 		blocks = newBlocks;
 	}
-	public Object getThreads() {
+	public Object[] getThreads() {
 		return threads;
 	}
-	public void setThreads(Object newThreads) {
+	public void setThreads(Object[] newThreads) {
 		threads = newThreads;
 	}
 }

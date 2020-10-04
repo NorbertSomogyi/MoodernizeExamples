@@ -19,11 +19,11 @@ public class bunzip_data {
 	private Object[] dbuf;
 	private int dbufSize;
 	private Object jmpbuf;
-	private Object crc32Table;
-	private Object selectors;
-	private Object groups;
+	private Object[] crc32Table;
+	private Object[] selectors;
+	private Object[] groups;
 	
-	public bunzip_data(int inbufBitCount, int inbufBits, int in_fd, int out_fd, int inbufCount, int inbufPos, Object[] inbuf, int writeCopies, int writePos, int writeRunCountdown, int writeCount, int writeCurrent, Object headerCRC, Object totalCRC, Object writeCRC, Object[] dbuf, int dbufSize, Object jmpbuf, Object crc32Table, Object selectors, Object groups) {
+	public bunzip_data(int inbufBitCount, int inbufBits, int in_fd, int out_fd, int inbufCount, int inbufPos, Object[] inbuf, int writeCopies, int writePos, int writeRunCountdown, int writeCount, int writeCurrent, Object headerCRC, Object totalCRC, Object writeCRC, Object[] dbuf, int dbufSize, Object jmpbuf, Object[] crc32Table, Object[] selectors, Object[] groups) {
 		setInbufBitCount(inbufBitCount);
 		setInbufBits(inbufBits);
 		setIn_fd(in_fd);
@@ -90,8 +90,8 @@ public class bunzip_data {
 		int dbufCount;
 		int dbufSize;
 		int groupCount;
-		int base;
-		int limit;
+		int[] base;
+		int[] limit;
 		int selector;
 		int i;
 		int j;
@@ -105,14 +105,14 @@ public class bunzip_data {
 		uint8_t uc = new uint8_t();
 		uint8_t[] symToByte = new uint8_t();
 		uint8_t[] mtfSymbol = new uint8_t();
-		uint8_t selectors = new uint8_t();
-		uint32_t dbuf = new uint32_t();
+		uint8_t[] selectors = new uint8_t();
+		uint32_t[] dbuf = new uint32_t();
 		int origPtr;
 		Object[] generatedDbuf = this.getDbuf();
 		dbuf = generatedDbuf;
 		int generatedDbufSize = this.getDbufSize();
 		dbufSize = generatedDbufSize;
-		Object generatedSelectors = this.getSelectors();
+		Object[] generatedSelectors = this.getSelectors();
 		selectors = generatedSelectors;
 		i = bd.get_bits(/* Read in header signature and CRC, then validate signature.
 			   (last block signature means CRC is for whole file, return now) */24);
@@ -178,10 +178,10 @@ public class bunzip_data {
 		symCount = symTotal + /* Read the Huffman coding tables for each group, which code for symTotal
 			   literal symbols, plus two run symbols (RUNA, RUNB) */2;
 		int generatedInbufBitCount = this.getInbufBitCount();
-		Object generatedGroups = this.getGroups();
-		Object generatedBase = hufGroup.getBase();
-		Object generatedLimit = hufGroup.getLimit();
-		Object generatedPermute = hufGroup.getPermute();
+		Object[] generatedGroups = this.getGroups();
+		Object[] generatedBase = hufGroup.getBase();
+		Object[] generatedLimit = hufGroup.getLimit();
+		Object[] generatedPermute = hufGroup.getPermute();
 		for (j = 0; j < groupCount; j++) {
 			uint8_t[] length = new uint8_t();
 			int[] temp = new int[20 + /* 8 bits is ALMOST enough for temp[], see below */1];
@@ -364,7 +364,7 @@ public class bunzip_data {
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedInbuf, inbuf, len);
 		} 
 		bd.setInbufCount(len);
-		Object generatedCrc32Table = bd.getCrc32Table();
+		Object[] generatedCrc32Table = bd.getCrc32Table();
 		ModernizedCProgram.crc32_filltable(generatedCrc32Table, /* Init the CRC32 table (big endian) */1);
 		Object generatedJmpbuf = bd.getJmpbuf();
 		i = /*Error: Function owner not recognized*/_setjmp(generatedJmpbuf);
@@ -499,22 +499,22 @@ public class bunzip_data {
 	public void setJmpbuf(Object newJmpbuf) {
 		jmpbuf = newJmpbuf;
 	}
-	public Object getCrc32Table() {
+	public Object[] getCrc32Table() {
 		return crc32Table;
 	}
-	public void setCrc32Table(Object newCrc32Table) {
+	public void setCrc32Table(Object[] newCrc32Table) {
 		crc32Table = newCrc32Table;
 	}
-	public Object getSelectors() {
+	public Object[] getSelectors() {
 		return selectors;
 	}
-	public void setSelectors(Object newSelectors) {
+	public void setSelectors(Object[] newSelectors) {
 		selectors = newSelectors;
 	}
-	public Object getGroups() {
+	public Object[] getGroups() {
 		return groups;
 	}
-	public void setGroups(Object newGroups) {
+	public void setGroups(Object[] newGroups) {
 		groups = newGroups;
 	}
 }

@@ -3,7 +3,7 @@ package application;
 /** Boot Descriptor (ECMA 167r3 2/9.4) */
 public class boot_desc_s {
 	private Object struct_type;
-	private Object std_ident;
+	private Object[] std_ident;
 	private Object struct_version;
 	private Object reserved1;
 	private udf_regid_s arch_type;
@@ -14,10 +14,10 @@ public class boot_desc_s {
 	private Object start_address;
 	private udf_timestamp_s desc_creation_time;
 	private Object flags;
-	private Object reserved2;
-	private Object boot_use;
+	private Object[] reserved2;
+	private Object[] boot_use;
 	
-	public boot_desc_s(Object struct_type, Object std_ident, Object struct_version, Object reserved1, udf_regid_s arch_type, udf_regid_s boot_ident, Object bool_ext_location, Object bool_ext_length, Object load_address, Object start_address, udf_timestamp_s desc_creation_time, Object flags, Object reserved2, Object boot_use) {
+	public boot_desc_s(Object struct_type, Object[] std_ident, Object struct_version, Object reserved1, udf_regid_s arch_type, udf_regid_s boot_ident, Object bool_ext_location, Object bool_ext_length, Object load_address, Object start_address, udf_timestamp_s desc_creation_time, Object flags, Object[] reserved2, Object[] boot_use) {
 		setStruct_type(struct_type);
 		setStd_ident(std_ident);
 		setStruct_version(struct_version);
@@ -42,10 +42,10 @@ public class boot_desc_s {
 	public void setStruct_type(Object newStruct_type) {
 		struct_type = newStruct_type;
 	}
-	public Object getStd_ident() {
+	public Object[] getStd_ident() {
 		return std_ident;
 	}
-	public void setStd_ident(Object newStd_ident) {
+	public void setStd_ident(Object[] newStd_ident) {
 		std_ident = newStd_ident;
 	}
 	public Object getStruct_version() {
@@ -108,16 +108,16 @@ public class boot_desc_s {
 	public void setFlags(Object newFlags) {
 		flags = newFlags;
 	}
-	public Object getReserved2() {
+	public Object[] getReserved2() {
 		return reserved2;
 	}
-	public void setReserved2(Object newReserved2) {
+	public void setReserved2(Object[] newReserved2) {
 		reserved2 = newReserved2;
 	}
-	public Object getBoot_use() {
+	public Object[] getBoot_use() {
 		return boot_use;
 	}
-	public void setBoot_use(Object newBoot_use) {
+	public void setBoot_use(Object[] newBoot_use) {
 		boot_use = newBoot_use;
 	}
 }

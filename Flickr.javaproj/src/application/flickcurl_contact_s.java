@@ -23,6 +23,17 @@ public class flickcurl_contact_s {
 	public flickcurl_contact_s() {
 	}
 	
+	public void command_print_contact(int i) {
+		Byte generatedNsid = this.getNsid();
+		Byte generatedUsername = this.getUsername();
+		int generatedIconserver = this.getIconserver();
+		Byte generatedRealname = this.getRealname();
+		int generatedIs_friend = this.getIs_friend();
+		int generatedIs_family = this.getIs_family();
+		int generatedIgnored = this.getIgnored();
+		int generatedUploaded = this.getUploaded();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "contact %d: NSID %s username %s iconserver %d realname %s friend %d family %d ignored %d upload count %d\n", i, generatedNsid, generatedUsername, generatedIconserver, generatedRealname, generatedIs_friend, generatedIs_family, generatedIgnored, generatedUploaded);
+	}
 	/* -*- Mode: c; c-basic-offset: 2 -*-
 	 *
 	 * contacts-api.c - Flickr flickr.contacts.* API calls
@@ -58,9 +69,9 @@ public class flickcurl_contact_s {
 	 * Return value: NULL on failure
 	 **/
 	public flickcurl_contact_s flickcurl_contacts_getList(flickcurl_s fc, Object filter, int page, int per_page) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_contact contacts = ((Object)0);
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_contact contacts = (null);
 		int contacts_count = 0;
 		byte[] page_str = new byte[10];
 		byte[] per_page_str = new byte[10];
@@ -97,7 +108,7 @@ public class flickcurl_contact_s {
 			if (contacts) {
 				contacts.flickcurl_free_contacts();
 			} 
-			contacts = ((Object)0);
+			contacts = (null);
 		} 
 		return contacts/**
 		 * flickcurl_contacts_getListRecentlyUploaded:
@@ -117,9 +128,9 @@ public class flickcurl_contact_s {
 		 **/;
 	}
 	public flickcurl_contact_s flickcurl_contacts_getListRecentlyUploaded(flickcurl_s fc, int date_lastupload, Object filter) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_contact contacts = ((Object)0);
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_contact contacts = (null);
 		int contacts_count = 0;
 		byte[] date_lastupload_str = new byte[20];
 		fc.flickcurl_init_params(0);
@@ -151,7 +162,7 @@ public class flickcurl_contact_s {
 			if (contacts) {
 				contacts.flickcurl_free_contacts();
 			} 
-			contacts = ((Object)0);
+			contacts = (null);
 		} 
 		return contacts/**
 		 * flickcurl_contacts_getPublicList:
@@ -168,15 +179,15 @@ public class flickcurl_contact_s {
 		 **/;
 	}
 	public flickcurl_contact_s flickcurl_contacts_getPublicList(flickcurl_s fc, Object user_id, int page, int per_page) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_contact contacts = ((Object)0);
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_contact contacts = (null);
 		int contacts_count = 0;
 		byte[] page_str = new byte[10];
 		byte[] per_page_str = new byte[10];
 		fc.flickcurl_init_params(1);
 		if (!user_id) {
-			return ((Object)0);
+			return (null);
 		} 
 		fc.flickcurl_add_param("user_id", user_id);
 		if (page >= 0) {
@@ -208,7 +219,7 @@ public class flickcurl_contact_s {
 			if (contacts) {
 				contacts.flickcurl_free_contacts();
 			} 
-			contacts = ((Object)0);
+			contacts = (null);
 		} 
 		return contacts/**
 		 * flickcurl_contacts_getTaggingSuggestions:
@@ -230,9 +241,9 @@ public class flickcurl_contact_s {
 		 **/;
 	}
 	public flickcurl_contact_s flickcurl_contacts_getTaggingSuggestions(flickcurl_s fc, Object include_self, Object include_address_book, int page, int per_page) {
-		 doc = ((Object)0);
-		 xpathCtx = ((Object)0);
-		flickcurl_contact contacts = ((Object)0);
+		 doc = (null);
+		 xpathCtx = (null);
+		flickcurl_contact contacts = (null);
 		int contacts_count = 0;
 		byte[] page_str = new byte[10];
 		byte[] per_page_str = new byte[10];
@@ -272,20 +283,9 @@ public class flickcurl_contact_s {
 			if (contacts) {
 				contacts.flickcurl_free_contacts();
 			} 
-			contacts = ((Object)0);
+			contacts = (null);
 		} 
 		return contacts;
-	}
-	public void command_print_contact(int i) {
-		Byte generatedNsid = this.getNsid();
-		Byte generatedUsername = this.getUsername();
-		int generatedIconserver = this.getIconserver();
-		Byte generatedRealname = this.getRealname();
-		int generatedIs_friend = this.getIs_friend();
-		int generatedIs_family = this.getIs_family();
-		int generatedIgnored = this.getIgnored();
-		int generatedUploaded = this.getUploaded();
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "contact %d: NSID %s username %s iconserver %d realname %s friend %d family %d ignored %d upload count %d\n", i, generatedNsid, generatedUsername, generatedIconserver, generatedRealname, generatedIs_friend, generatedIs_family, generatedIgnored, generatedUploaded);
 	}
 	/* -*- Mode: c; c-basic-offset: 2 -*-
 	 *
@@ -355,11 +355,11 @@ public class flickcurl_contact_s {
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(contacts_object);
 	}
 	public flickcurl_contact_s flickcurl_build_contacts(flickcurl_s fc, Object xpathCtx, Object xpathExpr, Integer contact_count_p) {
-		flickcurl_contact contacts = ((Object)0);
+		flickcurl_contact[][] contacts = (null);
 		int nodes_count;
 		int contact_count;
 		int i;
-		 xpathObj = ((Object)0);
+		 xpathObj = (null);
 		 nodes = new ();
 		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, /* Now do contacts */xpathCtx);
 		if (!xpathObj) {
@@ -382,8 +382,8 @@ public class flickcurl_contact_s {
 			contact_object = (flickcurl_contact)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 			for (attr = node.getProperties(); attr; attr = attr.getNext()) {
 				size_t attr_len = /*Error: Function owner not recognized*/strlen((byte)attr.getChildren().getContent());
-				byte attr_name = (byte)attr.getName();
-				byte attr_value;
+				Byte attr_name = (byte)attr.getName();
+				Byte attr_value;
 				attr_value = (byte)/*Error: Function owner not recognized*/malloc(attr_len + 1);
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(attr_value, attr.getChildren().getContent(), attr_len + 1);
 				if (!/*Error: Function owner not recognized*/strcmp(attr_name, "nsid")) {

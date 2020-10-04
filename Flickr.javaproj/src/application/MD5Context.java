@@ -36,12 +36,12 @@ package application;
  */
 /* original code from header - function names have changed */
 public class MD5Context {
-	private Object buf;
-	private Object bits;
-	private Object in;
-	private Object digest;
+	private Object[] buf;
+	private Object[] bits;
+	private Object[] in;
+	private Object[] digest;
 	
-	public MD5Context(Object buf, Object bits, Object in, Object digest) {
+	public MD5Context(Object[] buf, Object[] bits, Object[] in, Object[] digest) {
 		setBuf(buf);
 		setBits(bits);
 		setIn(in);
@@ -56,12 +56,12 @@ public class MD5Context {
 	 * initialization constants.
 	 */
 	public void MD5Init() {
-		Object generatedBuf = this.getBuf();
+		Object[] generatedBuf = this.getBuf();
 		generatedBuf[0] = -1024;
 		generatedBuf[1] = -1024;
 		generatedBuf[2] = -1024;
 		generatedBuf[3] = -1024;
-		Object generatedBits = this.getBits();
+		Object[] generatedBits = this.getBits();
 		generatedBits[0] = 0;
 		generatedBits[1] = 0/*
 		 * Update context to reflect the concatenation of another buffer full
@@ -70,17 +70,17 @@ public class MD5Context {
 	}
 	public void MD5Update(Object buf, int len) {
 		 t = new ();
-		Object generatedBits = this.getBits();
+		Object[] generatedBits = this.getBits();
 		t = generatedBits[/* Update bitcount */0];
 		if ((generatedBits[0] = t + (()len << 3)) < t) {
 			generatedBits[/* Carry from low to high */1]++;
 		} 
 		generatedBits[1] += len >> 29;
 		t = (t >> 3) & /* Bytes already in shsInfo->data */-1024;
-		Object generatedIn = this.getIn();
-		Object generatedBuf = this.getBuf();
+		Object[] generatedIn = this.getIn();
+		Object[] generatedBuf = this.getBuf();
 		if (/* Handle any leading odd-sized chunks */t) {
-			byte p = (byte)generatedIn + t;
+			Byte p = (byte)generatedIn + t;
 			t = 64 - t;
 			if (len < t) {
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(p, buf, len);
@@ -107,15 +107,15 @@ public class MD5Context {
 	/* Interface altered by DJB to write digest into pre-allocated context */
 	public void MD5Final() {
 		int count;
-		byte p;
-		Object generatedBits = this.getBits();
+		Byte p;
+		Object[] generatedBits = this.getBits();
 		count = (generatedBits[0] >> 3) & /* Compute number of bytes mod 64 */-1024;
-		Object generatedIn = this.getIn();
+		Object[] generatedIn = this.getIn();
 		p = generatedIn + /* Set the first char of padding to 0x80.  This is safe since there is
 		     always at least one byte free */count;
 		p++ = -1024;
 		count = 64 - 1 - /* Bytes of padding needed to make 64 bytes */count;
-		Object generatedBuf = this.getBuf();
+		Object[] generatedBuf = this.getBuf();
 		if (count < /* Pad out to 56 mod 64 */8) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(p, 0, /* Two lots of padding:  Pad the first block to 64 bytes */count);
 			;
@@ -129,31 +129,31 @@ public class MD5Context {
 		(()generatedIn)[15] = generatedBits[1];
 		ModernizedCProgram.MD5Transform(generatedBuf, ()generatedIn);
 		;
-		Object generatedDigest = this.getDigest();
+		Object[] generatedDigest = this.getDigest();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedDigest, generatedBuf, 16/* The four core functions - F1 is optimized somewhat */)/* #define F1(x, y, z) (x & y | ~x & z) */;/* #define F1(x, y, z) (x & y | ~x & z) */
 	}
-	public Object getBuf() {
+	public Object[] getBuf() {
 		return buf;
 	}
-	public void setBuf(Object newBuf) {
+	public void setBuf(Object[] newBuf) {
 		buf = newBuf;
 	}
-	public Object getBits() {
+	public Object[] getBits() {
 		return bits;
 	}
-	public void setBits(Object newBits) {
+	public void setBits(Object[] newBits) {
 		bits = newBits;
 	}
-	public Object getIn() {
+	public Object[] getIn() {
 		return in;
 	}
-	public void setIn(Object newIn) {
+	public void setIn(Object[] newIn) {
 		in = newIn;
 	}
-	public Object getDigest() {
+	public Object[] getDigest() {
 		return digest;
 	}
-	public void setDigest(Object newDigest) {
+	public void setDigest(Object[] newDigest) {
 		digest = newDigest;
 	}
 }

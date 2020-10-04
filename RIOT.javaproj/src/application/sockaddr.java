@@ -80,9 +80,9 @@ package application;
  */
 public class sockaddr {
 	private Object sa_family;
-	private Object sa_data;
+	private Object[] sa_data;
 	
-	public sockaddr(Object sa_family, Object sa_data) {
+	public sockaddr(Object sa_family, Object[] sa_data) {
 		setSa_family(sa_family);
 		setSa_data(sa_data);
 	}
@@ -95,10 +95,10 @@ public class sockaddr {
 	public void setSa_family(Object newSa_family) {
 		sa_family = newSa_family;
 	}
-	public Object getSa_data() {
+	public Object[] getSa_data() {
 		return sa_data;
 	}
-	public void setSa_data(Object newSa_data) {
+	public void setSa_data(Object[] newSa_data) {
 		sa_data = newSa_data;
 	}
 }

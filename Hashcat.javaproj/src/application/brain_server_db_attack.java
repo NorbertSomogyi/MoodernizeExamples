@@ -33,14 +33,14 @@ public class brain_server_db_attack {
 		this.setBrain_attack(brain_attack);
 		this.setAb(0);
 		this.setShort_cnt(0);
-		this.setShort_buf(((Object)0));
+		this.setShort_buf((null));
 		this.setShort_alloc(0);
 		this.setLong_cnt(0);
-		this.setLong_buf(((Object)0));
+		this.setLong_buf((null));
 		this.setLong_alloc(0);
 		this.setWrite_attacks(0);
-		this.setMux_ar(/*Error: Function owner not recognized*/CreateMutexA(((Object)0), 0, ((Object)0)));
-		this.setMux_ag(/*Error: Function owner not recognized*/CreateMutexA(((Object)0), 0, ((Object)0)));
+		this.setMux_ar(/*Error: Function owner not recognized*/CreateMutexA((null), 0, (null)));
+		this.setMux_ag(/*Error: Function owner not recognized*/CreateMutexA((null), 0, (null)));
 	}
 	public boolean brain_server_db_attack_realloc(Object new_long_cnt, Object new_short_cnt) {
 		Object generatedLong_cnt = this.getLong_cnt();
@@ -49,7 +49,7 @@ public class brain_server_db_attack {
 		if ((generatedLong_cnt + new_long_cnt) > generatedLong_alloc) {
 			i64 realloc_size_total = (i64)ModernizedCProgram.mydivc64((u64)new_long_cnt, (u64)ModernizedCProgram.BRAIN_SERVER_REALLOC_ATTACK_SIZE) * ModernizedCProgram.BRAIN_SERVER_REALLOC_ATTACK_SIZE;
 			brain_server_attack_long_t long_buf = (brain_server_attack_long_t)ModernizedCProgram.hcrealloc(generatedLong_buf, generatedLong_alloc * /*Error: Unsupported expression*/, realloc_size_total * /*Error: Unsupported expression*/);
-			if (long_buf == ((Object)0)) {
+			if (long_buf == (null)) {
 				return 0;
 			} 
 			this.setLong_buf(long_buf);
@@ -61,7 +61,7 @@ public class brain_server_db_attack {
 		if ((generatedShort_cnt + new_short_cnt) > generatedShort_alloc) {
 			i64 realloc_size_total = (i64)ModernizedCProgram.mydivc64((u64)new_short_cnt, (u64)ModernizedCProgram.BRAIN_SERVER_REALLOC_ATTACK_SIZE) * ModernizedCProgram.BRAIN_SERVER_REALLOC_ATTACK_SIZE;
 			brain_server_attack_short_t short_buf = (brain_server_attack_short_t)ModernizedCProgram.hcrealloc(generatedShort_buf, generatedShort_alloc * /*Error: Unsupported expression*/, realloc_size_total * /*Error: Unsupported expression*/);
-			if (short_buf == ((Object)0)) {
+			if (short_buf == (null)) {
 				return 0;
 			} 
 			this.setShort_buf(short_buf);
@@ -80,10 +80,10 @@ public class brain_server_db_attack {
 		ModernizedCProgram.hcfree(generatedShort_buf);
 		this.setAb(0);
 		this.setLong_cnt(0);
-		this.setLong_buf(((Object)0));
+		this.setLong_buf((null));
 		this.setLong_alloc(0);
 		this.setShort_cnt(0);
-		this.setShort_buf(((Object)0));
+		this.setShort_buf((null));
 		this.setShort_alloc(0);
 		this.setBrain_attack(0);
 		this.setWrite_attacks(0);

@@ -1,58 +1,42 @@
 package application;
 
 public class tc64_tmp {
-	private Object ipad;
-	private Object opad;
-	private Object dgst;
-	private Object out;
-	private Object pim_key;
-	private int pim;
+	private Object[] ipad;
+	private Object[] opad;
+	private Object[] dgst;
+	private Object[] out;
 	
-	public tc64_tmp(Object ipad, Object opad, Object dgst, Object out, Object pim_key, int pim) {
+	public tc64_tmp(Object[] ipad, Object[] opad, Object[] dgst, Object[] out) {
 		setIpad(ipad);
 		setOpad(opad);
 		setDgst(dgst);
 		setOut(out);
-		setPim_key(pim_key);
-		setPim(pim);
 	}
 	public tc64_tmp() {
 	}
 	
-	public Object getIpad() {
+	public Object[] getIpad() {
 		return ipad;
 	}
-	public void setIpad(Object newIpad) {
+	public void setIpad(Object[] newIpad) {
 		ipad = newIpad;
 	}
-	public Object getOpad() {
+	public Object[] getOpad() {
 		return opad;
 	}
-	public void setOpad(Object newOpad) {
+	public void setOpad(Object[] newOpad) {
 		opad = newOpad;
 	}
-	public Object getDgst() {
+	public Object[] getDgst() {
 		return dgst;
 	}
-	public void setDgst(Object newDgst) {
+	public void setDgst(Object[] newDgst) {
 		dgst = newDgst;
 	}
-	public Object getOut() {
+	public Object[] getOut() {
 		return out;
 	}
-	public void setOut(Object newOut) {
+	public void setOut(Object[] newOut) {
 		out = newOut;
-	}
-	public Object getPim_key() {
-		return pim_key;
-	}
-	public void setPim_key(Object newPim_key) {
-		pim_key = newPim_key;
-	}
-	public int getPim() {
-		return pim;
-	}
-	public void setPim(int newPim) {
-		pim = newPim;
 	}
 }

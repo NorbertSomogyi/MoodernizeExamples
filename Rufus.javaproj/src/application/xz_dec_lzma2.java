@@ -27,12 +27,12 @@ public class xz_dec_lzma2 {
 		Object generatedPos = generatedDict.getPos();
 		Object generatedLiteral_pos_mask = generatedLzma.getLiteral_pos_mask();
 		uint32_t high = (generatedPos & generatedLiteral_pos_mask) << generatedLc;
-		Object generatedLiteral = generatedLzma.getLiteral();
+		Object[][] generatedLiteral = generatedLzma.getLiteral();
 		return generatedLiteral[low + high];
 	}
 	/* Decode a literal (one 8-bit byte) */
 	public void lzma_literal() {
-		uint16_t probs = new uint16_t();
+		uint16_t[] probs = new uint16_t();
 		uint32_t symbol = new uint32_t();
 		uint32_t match_byte = new uint32_t();
 		uint32_t match_bit = new uint32_t();
@@ -82,13 +82,13 @@ public class xz_dec_lzma2 {
 		generatedLzma.setRep1(generatedRep0);
 		lzma_len_dec generatedMatch_len_dec = generatedLzma.getMatch_len_dec();
 		ModernizedCProgram.lzma_len(s, generatedMatch_len_dec, pos_state);
-		Object generatedDist_slot = generatedLzma.getDist_slot();
+		Object[][] generatedDist_slot = generatedLzma.getDist_slot();
 		Object generatedLen = generatedLzma.getLen();
 		probs = generatedDist_slot[/*Error: Function owner not recognized*/lzma_get_dist_state(generatedLen)];
 		rc_dec generatedRc = this.getRc();
 		dist_slot = generatedRc.rc_bittree(probs, (1 << 6)) - (1 << 6);
-		Object generatedDist_special = generatedLzma.getDist_special();
-		Object generatedDist_align = generatedLzma.getDist_align();
+		Object[] generatedDist_special = generatedLzma.getDist_special();
+		Object[] generatedDist_align = generatedLzma.getDist_align();
 		if (dist_slot < 4) {
 			generatedLzma.setRep0(dist_slot);
 		} else {
@@ -113,12 +113,12 @@ public class xz_dec_lzma2 {
 		uint32_t tmp = new uint32_t();
 		rc_dec generatedRc = this.getRc();
 		lzma_dec generatedLzma = this.getLzma();
-		Object generatedIs_rep0 = generatedLzma.getIs_rep0();
+		Object[] generatedIs_rep0 = generatedLzma.getIs_rep0();
 		lzma_state generatedState = generatedLzma.getState();
-		Object generatedIs_rep0_long = generatedLzma.getIs_rep0_long();
-		Object generatedIs_rep1 = generatedLzma.getIs_rep1();
+		Object[][] generatedIs_rep0_long = generatedLzma.getIs_rep0_long();
+		Object[] generatedIs_rep1 = generatedLzma.getIs_rep1();
 		Object generatedRep1 = generatedLzma.getRep1();
-		Object generatedIs_rep2 = generatedLzma.getIs_rep2();
+		Object[] generatedIs_rep2 = generatedLzma.getIs_rep2();
 		Object generatedRep2 = generatedLzma.getRep2();
 		Object generatedRep3 = generatedLzma.getRep3();
 		Object generatedRep0 = generatedLzma.getRep0();
@@ -164,9 +164,9 @@ public class xz_dec_lzma2 {
 		rc_dec generatedRc = this.getRc();
 		Object generatedPos = generatedDict.getPos();
 		Object generatedPos_mask = generatedLzma.getPos_mask();
-		Object generatedIs_match = generatedLzma.getIs_match();
+		Object[][] generatedIs_match = generatedLzma.getIs_match();
 		lzma_state generatedState = generatedLzma.getState();
-		Object generatedIs_rep = generatedLzma.getIs_rep();
+		Object[] generatedIs_rep = generatedLzma.getIs_rep();
 		while (ModernizedCProgram.dict_has_space(generatedDict) && !ModernizedCProgram.rc_limit_exceeded(generatedRc)) {
 			pos_state = generatedPos & generatedPos_mask;
 			if (!generatedRc.rc_bit(generatedIs_match[generatedState][pos_state])) {
@@ -189,7 +189,7 @@ public class xz_dec_lzma2 {
 		 */;
 	}
 	public void lzma_reset() {
-		uint16_t probs = new uint16_t();
+		uint16_t[] probs = new uint16_t();
 		size_t i = new size_t();
 		lzma_dec generatedLzma = this.getLzma();
 		generatedLzma.setState(lzma_state.STATE_LIT_LIT);
@@ -205,7 +205,7 @@ public class xz_dec_lzma2 {
 			 * probabilities that are actually required. In the common case
 			 * we would write 12 KiB less.
 			 */);
-		Object generatedIs_match = generatedLzma.getIs_match();
+		Object[][] generatedIs_match = generatedLzma.getIs_match();
 		probs = generatedIs_match[0];
 		for (i = 0; i < (1846 + (1 << 4) * -1024); ++i) {
 			probs[i] = (1 << 11) / 2;
@@ -244,8 +244,8 @@ public class xz_dec_lzma2 {
 	}
 	public xz_dec_lzma2 xz_dec_lzma2_create(xz_mode mode, Object dict_max) {
 		xz_dec_lzma2 s = /*Error: Function owner not recognized*/malloc(/*Error: sizeof expression not supported yet*/);
-		if (s == ((Object)0)) {
-			return ((Object)0);
+		if (s == (null)) {
+			return (null);
 		} 
 		dictionary generatedDict = s.getDict();
 		generatedDict.setMode(xz_mode.mode);
@@ -253,12 +253,12 @@ public class xz_dec_lzma2 {
 		Object[] generatedBuf = generatedDict.getBuf();
 		if (((xz_mode.mode) == xz_mode.XZ_PREALLOC)) {
 			generatedDict.setBuf(/*Error: Function owner not recognized*/malloc(dict_max));
-			if (generatedBuf == ((Object)0)) {
+			if (generatedBuf == (null)) {
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(s);
-				return ((Object)0);
+				return (null);
 			} 
 		}  else if (((xz_mode.mode) == xz_mode.XZ_DYNALLOC)) {
-			generatedDict.setBuf(((Object)0));
+			generatedDict.setBuf((null));
 			generatedDict.setAllocated(0);
 		} 
 		return s;
@@ -284,7 +284,7 @@ public class xz_dec_lzma2 {
 				if (generatedAllocated < generatedSize) {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(generatedBuf);
 					generatedDict.setBuf(/*Error: Function owner not recognized*/malloc(generatedSize));
-					if (generatedBuf == ((Object)0)) {
+					if (generatedBuf == (null)) {
 						generatedDict.setAllocated(0);
 						return xz_ret.XZ_MEM_ERROR;
 					} 

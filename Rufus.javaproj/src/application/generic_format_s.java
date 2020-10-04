@@ -4,11 +4,11 @@ package application;
 public class generic_format_s {
 	private Object attr_type;
 	private Object attr_subtype;
-	private Object reserved;
+	private Object[] reserved;
 	private Object attrLength;
-	private Object attrData;
+	private Object[] attrData;
 	
-	public generic_format_s(Object attr_type, Object attr_subtype, Object reserved, Object attrLength, Object attrData) {
+	public generic_format_s(Object attr_type, Object attr_subtype, Object[] reserved, Object attrLength, Object[] attrData) {
 		setAttr_type(attr_type);
 		setAttr_subtype(attr_subtype);
 		setReserved(reserved);
@@ -30,10 +30,10 @@ public class generic_format_s {
 	public void setAttr_subtype(Object newAttr_subtype) {
 		attr_subtype = newAttr_subtype;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public Object getAttrLength() {
@@ -42,10 +42,10 @@ public class generic_format_s {
 	public void setAttrLength(Object newAttrLength) {
 		attrLength = newAttrLength;
 	}
-	public Object getAttrData() {
+	public Object[] getAttrData() {
 		return attrData;
 	}
-	public void setAttrData(Object newAttrData) {
+	public void setAttrData(Object[] newAttrData) {
 		attrData = newAttrData;
 	}
 }

@@ -27,6 +27,21 @@ public class archive_handle_t {
 	 *
 	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
 	 */
+	/* Accept any non-null name, its not really a filter at all */
+	public byte filter_accept_all() {
+		file_header_t generatedFile_header = this.getFile_header();
+		Byte generatedName = generatedFile_header.getName();
+		if (generatedName) {
+			return 0;
+		} 
+		return 1;
+	}
+	/* vi: set sw=4 ts=4: */
+	/*
+	 * Copyright (C) 2002 by Glenn McGrath
+	 *
+	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
+	 */
 	/*
 	 * Accept names that are in the accept list, ignoring reject list.
 	 */
@@ -55,72 +70,6 @@ public class archive_handle_t {
 	}
 	/* vi: set sw=4 ts=4: */
 	/*
-	 * Copyright (C) 2002 by Glenn McGrath
-	 *
-	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
-	 */
-	/* Accept any non-null name, its not really a filter at all */
-	public byte filter_accept_all() {
-		file_header_t generatedFile_header = this.getFile_header();
-		Byte generatedName = generatedFile_header.getName();
-		if (generatedName) {
-			return 0;
-		} 
-		return 1;
-	}
-	/* vi: set sw=4 ts=4: */
-	/*
-	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
-	 */
-	public void data_skip() {
-		int generatedSrc_fd = this.getSrc_fd();
-		file_header_t generatedFile_header = this.getFile_header();
-		Object generatedSize = generatedFile_header.getSize();
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSrc_fd, generatedSize);
-	}
-	/* vi: set sw=4 ts=4: */
-	/*
-	 * Copyright (C) 2002 by Glenn McGrath
-	 *
-	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
-	 */
-	/*
-	 * Accept names that are in the accept list and not in the reject list
-	 */
-	public byte filter_accept_reject_list() {
-		byte key;
-		llist_t reject_entry = new llist_t();
-		llist_t accept_entry = new llist_t();
-		file_header_t generatedFile_header = this.getFile_header();
-		Byte generatedName = generatedFile_header.getName();
-		key = generatedName;
-		Object generatedReject = this.getReject();
-		reject_entry = ModernizedCProgram.find_list_entry2(generatedReject, /* If the key is in a reject list fail */key);
-		if (reject_entry) {
-			return 1;
-		} 
-		Object generatedAccept = this.getAccept();
-		if (generatedAccept) {
-			accept_entry = ModernizedCProgram.find_list_entry2(generatedAccept, key);
-			if (!accept_entry) {
-				return 1;
-			} 
-		} 
-		return /* Accepted */0;
-	}
-	/* vi: set sw=4 ts=4: */
-	/*
-	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
-	 */
-	public void data_align(int boundary) {
-		Object generatedOffset = this.getOffset();
-		int skip_amount = (boundary - (generatedOffset % boundary)) % boundary;
-		int generatedSrc_fd = this.getSrc_fd();
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSrc_fd, skip_amount);
-		generatedOffset += skip_amount;
-	}
-	/* vi: set sw=4 ts=4: */
-	/*
 	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
 	 */
 	public void data_extract_all() {
@@ -132,10 +81,10 @@ public class archive_handle_t {
 		int generatedAh_flags = this.getAh_flags();
 		Byte generatedName = file_header.getName();
 		if (generatedAh_flags & (1 << 1)) {
-			byte slash = /*Error: Function owner not recognized*/strrchr(generatedName, (byte)'/');
+			Byte slash = /*Error: Function owner not recognized*/strrchr(generatedName, (byte)'/');
 			if (slash) {
 				slash = (byte)'\0';
-				((Object)0).SHCreateDirectoryExU(((Object)0), generatedName);
+				(null).SHCreateDirectoryExU((null), generatedName);
 				slash = (byte)'/';
 			} 
 		} 
@@ -161,7 +110,7 @@ public class archive_handle_t {
 				if (/*Error: Function owner not recognized*/_unlink(generatedName) == -/* Proceed with deleting */1 && (/*Error: Function owner not recognized*/_errno()) != 2) {
 					do {
 						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
+							if (ModernizedCProgram.bled_printf != (null)) {
 								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't remove old file %s", generatedName);
 							} else {
 									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't remove old file %s", generatedName);
@@ -178,7 +127,7 @@ public class archive_handle_t {
 				if ((/*Error: Function owner not recognized*/_errno()) != 2) {
 					do {
 						do {
-							if (ModernizedCProgram.bled_printf != ((Object)0)) {
+							if (ModernizedCProgram.bled_printf != (null)) {
 								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't stat old file");
 							} else {
 									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't stat old file");
@@ -191,7 +140,7 @@ public class archive_handle_t {
 			}  else if (generatedSt_mtime >= generatedMtime) {
 				if (!(generatedAh_flags & (1 << 3)) && !(((generatedMode) & -1024) == -1024)) {
 					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+						if (ModernizedCProgram.bled_printf != (null)) {
 							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: %s not created: newer or same age file exists", generatedName);
 						} else {
 								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: %s not created: newer or same age file exists", generatedName);
@@ -204,7 +153,7 @@ public class archive_handle_t {
 			}  else if ((/*Error: Function owner not recognized*/_unlink(generatedName) == -1) && ((/*Error: Function owner not recognized*/_errno()) != 21)) {
 				do {
 					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+						if (ModernizedCProgram.bled_printf != (null)) {
 							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't remove old file %s", generatedName);
 						} else {
 								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't remove old file %s", generatedName);
@@ -220,7 +169,7 @@ public class archive_handle_t {
 			res = ModernizedCProgram.link(generatedLink_target, generatedName);
 			if ((res == -1) && !(generatedAh_flags & (1 << 3))) {
 				do {
-					if (ModernizedCProgram.bled_printf != ((Object)0)) {
+					if (ModernizedCProgram.bled_printf != (null)) {
 						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't create %slink from %s to %s", "hard", generatedName, generatedLink_target);
 					} else {
 							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't create %slink from %s to %s", "hard", generatedName, generatedLink_target);
@@ -232,11 +181,46 @@ public class archive_handle_t {
 		} 
 		Object generatedDevice = file_header.getDevice();
 		switch (generatedMode & /* Create the filesystem entry */-1024) {
+		case -1024/* Regular file */:
+				{ 
+					Byte dst_name;
+					int flags = 1 | -1024 | -1024;
+					if (generatedAh_flags & (1 << 8)) {
+						flags = 1 | -1024 | -1024;
+					} 
+					dst_name = generatedName;
+					if (/*Error: Function owner not recognized*/_sopen_s(dst_fd, dst_name, flags, -1024, generatedMode) != /* rpm-style temp file name */0) {
+						do {
+							do {
+								if (ModernizedCProgram.bled_printf != (null)) {
+									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't open file %s", dst_name);
+								} else {
+										/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't open file %s", dst_name);
+										/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+								} 
+							} while (0);
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(ModernizedCProgram.bb_error_jmp, 1);
+						} while (0);
+					} 
+					do {
+						if (ModernizedCProgram.bled_printf != (null)) {
+							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: Not implemented");
+						} else {
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: Not implemented");
+								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
+						} 
+					} while (0);
+					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_close(dst_fd);
+					break;
+				}
+		case -1024:
+		case -1024:
+		case -1024:
 		case -1024:
 				res = ModernizedCProgram._mkdirU(generatedName);
 				if ((res == -1) && ((/*Error: Function owner not recognized*/_errno()) != /* btw, Linux doesn't return this */21) && ((/*Error: Function owner not recognized*/_errno()) != 17) && !(generatedAh_flags & (1 << 3))) {
 					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+						if (ModernizedCProgram.bled_printf != (null)) {
 							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't make dir %s", generatedName);
 						} else {
 								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't make dir %s", generatedName);
@@ -249,7 +233,7 @@ public class archive_handle_t {
 				res = ModernizedCProgram.symlink(generatedLink_target, generatedName);
 				if ((res == -1) && !(generatedAh_flags & (1 << 3))) {
 					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+						if (ModernizedCProgram.bled_printf != (null)) {
 							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't create %slink from %s to %s", "sym", generatedName, generatedLink_target);
 						} else {
 								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't create %slink from %s to %s", "sym", generatedName, generatedLink_target);
@@ -259,44 +243,10 @@ public class archive_handle_t {
 				} 
 				break;
 		case -1024:
-		case -1024:
-		case -1024/* Regular file */:
-				{ 
-					byte dst_name;
-					int flags = 1 | -1024 | -1024;
-					if (generatedAh_flags & (1 << 8)) {
-						flags = 1 | -1024 | -1024;
-					} 
-					dst_name = generatedName;
-					if (/*Error: Function owner not recognized*/_sopen_s(dst_fd, dst_name, flags, -1024, generatedMode) != /* rpm-style temp file name */0) {
-						do {
-							do {
-								if (ModernizedCProgram.bled_printf != ((Object)0)) {
-									/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't open file %s", dst_name);
-								} else {
-										/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't open file %s", dst_name);
-										/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-								} 
-							} while (0);
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/longjmp(ModernizedCProgram.bb_error_jmp, 1);
-						} while (0);
-					} 
-					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
-							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: Not implemented");
-						} else {
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: Not implemented");
-								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/putchar((byte)'\n');
-						} 
-					} while (0);
-					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/_close(dst_fd);
-					break;
-				}
-		case -1024:
 				res = ModernizedCProgram.mknod(generatedName, generatedMode, generatedDevice);
 				if ((res == -1) && !(generatedAh_flags & (1 << 3))) {
 					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+						if (ModernizedCProgram.bled_printf != (null)) {
 							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: can't create node %s", generatedName);
 						} else {
 								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: can't create node %s", generatedName);
@@ -305,11 +255,10 @@ public class archive_handle_t {
 					} while (0);
 				} 
 				break;
-		case -1024:
 		default:
 				do {
 					do {
-						if (ModernizedCProgram.bled_printf != ((Object)0)) {
+						if (ModernizedCProgram.bled_printf != (null)) {
 							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: unrecognized file type");
 						} else {
 								/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: unrecognized file type");
@@ -339,6 +288,57 @@ public class archive_handle_t {
 				ModernizedCProgram.utimes(generatedName, t);
 			} 
 		} 
+	}
+	/* vi: set sw=4 ts=4: */
+	/*
+	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
+	 */
+	public void data_align(int boundary) {
+		Object generatedOffset = this.getOffset();
+		int skip_amount = (boundary - (generatedOffset % boundary)) % boundary;
+		int generatedSrc_fd = this.getSrc_fd();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSrc_fd, skip_amount);
+		generatedOffset += skip_amount;
+	}
+	/* vi: set sw=4 ts=4: */
+	/*
+	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
+	 */
+	public void data_skip() {
+		int generatedSrc_fd = this.getSrc_fd();
+		file_header_t generatedFile_header = this.getFile_header();
+		Object generatedSize = generatedFile_header.getSize();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedSrc_fd, generatedSize);
+	}
+	/* vi: set sw=4 ts=4: */
+	/*
+	 * Copyright (C) 2002 by Glenn McGrath
+	 *
+	 * Licensed under GPLv2 or later, see file LICENSE in this source tree.
+	 */
+	/*
+	 * Accept names that are in the accept list and not in the reject list
+	 */
+	public byte filter_accept_reject_list() {
+		Byte key;
+		llist_t reject_entry = new llist_t();
+		llist_t accept_entry = new llist_t();
+		file_header_t generatedFile_header = this.getFile_header();
+		Byte generatedName = generatedFile_header.getName();
+		key = generatedName;
+		Object generatedReject = this.getReject();
+		reject_entry = ModernizedCProgram.find_list_entry2(generatedReject, /* If the key is in a reject list fail */key);
+		if (reject_entry) {
+			return 1;
+		} 
+		Object generatedAccept = this.getAccept();
+		if (generatedAccept) {
+			accept_entry = ModernizedCProgram.find_list_entry2(generatedAccept, key);
+			if (!accept_entry) {
+				return 1;
+			} 
+		} 
+		return /* Accepted */0;
 	}
 	public int getAh_flags() {
 		return ah_flags;

@@ -5,10 +5,10 @@ public class netntlm {
 	private int domain_len;
 	private int srvchall_len;
 	private int clichall_len;
-	private Object userdomain_buf;
-	private Object chall_buf;
+	private Object[] userdomain_buf;
+	private Object[] chall_buf;
 	
-	public netntlm(int user_len, int domain_len, int srvchall_len, int clichall_len, Object userdomain_buf, Object chall_buf) {
+	public netntlm(int user_len, int domain_len, int srvchall_len, int clichall_len, Object[] userdomain_buf, Object[] chall_buf) {
 		setUser_len(user_len);
 		setDomain_len(domain_len);
 		setSrvchall_len(srvchall_len);
@@ -43,16 +43,16 @@ public class netntlm {
 	public void setClichall_len(int newClichall_len) {
 		clichall_len = newClichall_len;
 	}
-	public Object getUserdomain_buf() {
+	public Object[] getUserdomain_buf() {
 		return userdomain_buf;
 	}
-	public void setUserdomain_buf(Object newUserdomain_buf) {
+	public void setUserdomain_buf(Object[] newUserdomain_buf) {
 		userdomain_buf = newUserdomain_buf;
 	}
-	public Object getChall_buf() {
+	public Object[] getChall_buf() {
 		return chall_buf;
 	}
-	public void setChall_buf(Object newChall_buf) {
+	public void setChall_buf(Object[] newChall_buf) {
 		chall_buf = newChall_buf;
 	}
 }

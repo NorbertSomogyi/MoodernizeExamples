@@ -5,9 +5,9 @@ public class anchor_vol_desc_ptr_s {
 	private udf_tag_s tag;
 	private udf_extent_ad_s main_vol_desc_seq_ext;
 	private udf_extent_ad_s reserve_vol_desc_seq_ext;
-	private Object reserved;
+	private Object[] reserved;
 	
-	public anchor_vol_desc_ptr_s(udf_tag_s tag, udf_extent_ad_s main_vol_desc_seq_ext, udf_extent_ad_s reserve_vol_desc_seq_ext, Object reserved) {
+	public anchor_vol_desc_ptr_s(udf_tag_s tag, udf_extent_ad_s main_vol_desc_seq_ext, udf_extent_ad_s reserve_vol_desc_seq_ext, Object[] reserved) {
 		setTag(tag);
 		setMain_vol_desc_seq_ext(main_vol_desc_seq_ext);
 		setReserve_vol_desc_seq_ext(reserve_vol_desc_seq_ext);
@@ -34,10 +34,10 @@ public class anchor_vol_desc_ptr_s {
 	public void setReserve_vol_desc_seq_ext(udf_extent_ad_s newReserve_vol_desc_seq_ext) {
 		reserve_vol_desc_seq_ext = newReserve_vol_desc_seq_ext;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }

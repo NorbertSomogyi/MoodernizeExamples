@@ -20,7 +20,7 @@ public class unz64_file_pos_s {
 	*/
 	public int unzGetFilePos64(Object file) {
 		unz64_s s = new unz64_s();
-		if (file == ((Object)0) || file_pos == ((Object)0)) {
+		if (file == (null) || file_pos == (null)) {
 			return (true);
 		} 
 		s = (unz64_s)file;

@@ -13,7 +13,7 @@ public class _CMatchFinderMt {
 	private Object[] crc;
 	private Object MixMatchesFunc;
 	private _CMtSync btSync;
-	private Object btDummy;
+	private Object[] btDummy;
 	private Object[] hashBuf;
 	private Object hashBufPos;
 	private Object hashBufPosLimit;
@@ -30,7 +30,7 @@ public class _CMatchFinderMt {
 	private Object GetHeadsFunc;
 	private _CMatchFinder MatchFinder;
 	
-	public _CMatchFinderMt(Object pointerToCurPos, Object[] btBuf, Object btBufPos, Object btBufPosLimit, Object lzPos, Object btNumAvailBytes, Object hash, Object fixedHashSize, Object historySize, Object[] crc, Object MixMatchesFunc, _CMtSync btSync, Object btDummy, Object[] hashBuf, Object hashBufPos, Object hashBufPosLimit, Object hashNumAvail, Object son, Object matchMaxLen, Object numHashBytes, Object pos, Object buffer, Object cyclicBufferPos, Object cyclicBufferSize, Object cutValue, _CMtSync hashSync, Object GetHeadsFunc, _CMatchFinder MatchFinder) {
+	public _CMatchFinderMt(Object pointerToCurPos, Object[] btBuf, Object btBufPos, Object btBufPosLimit, Object lzPos, Object btNumAvailBytes, Object hash, Object fixedHashSize, Object historySize, Object[] crc, Object MixMatchesFunc, _CMtSync btSync, Object[] btDummy, Object[] hashBuf, Object hashBufPos, Object hashBufPosLimit, Object hashNumAvail, Object son, Object matchMaxLen, Object numHashBytes, Object pos, Object buffer, Object cyclicBufferPos, Object cyclicBufferSize, Object cutValue, _CMtSync hashSync, Object GetHeadsFunc, _CMatchFinder MatchFinder) {
 		setPointerToCurPos(pointerToCurPos);
 		setBtBuf(btBuf);
 		setBtBufPos(btBufPos);
@@ -85,7 +85,7 @@ public class _CMatchFinderMt {
 		Object[] generatedHashBuf = this.getHashBuf();
 		Object generatedStreamPos = mf.getStreamPos();
 		Object generatedNumHashBytes = mf.getNumHashBytes();
-		Object generatedCrc = mf.getCrc();
+		Object[] generatedCrc = mf.getCrc();
 		Object generatedFilledSemaphore = p.getFilledSemaphore();
 		for (; /*Error: Unsupported expression*/; /*Error: Unsupported expression*/) {
 			UInt32 numProcessedBlocks = 0;
@@ -281,7 +281,7 @@ public class _CMatchFinderMt {
 		}
 	}
 	public void MatchFinderMt_Construct() {
-		this.setHashBuf(((Object)0));
+		this.setHashBuf((null));
 		_CMtSync generatedHashSync = this.getHashSync();
 		generatedHashSync.MtSync_Construct();
 		_CMtSync generatedBtSync = this.getBtSync();
@@ -290,7 +290,7 @@ public class _CMatchFinderMt {
 	public void MatchFinderMt_FreeMem(Object alloc) {
 		Object[] generatedHashBuf = this.getHashBuf();
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(alloc, generatedHashBuf);
-		this.setHashBuf(((Object)0));
+		this.setHashBuf((null));
 	}
 	public void MatchFinderMt_Destruct(Object alloc) {
 		_CMtSync generatedHashSync = this.getHashSync();
@@ -354,7 +354,7 @@ public class _CMatchFinderMt {
 		this.setHash(generatedHash);
 		Object generatedFixedHashSize = mf.getFixedHashSize();
 		this.setFixedHashSize(generatedFixedHashSize);
-		Object generatedCrc = mf.getCrc();
+		Object[] generatedCrc = mf.getCrc();
 		this.setCrc(generatedCrc);
 		Object[] generatedSon = mf.getSon();
 		this.setSon(generatedSon);
@@ -420,9 +420,9 @@ public class _CMatchFinderMt {
 		UInt32 h2 = new UInt32();
 		UInt32 curMatch2 = new UInt32();
 		Object generatedHash = this.getHash();
-		UInt32 hash = generatedHash;
+		UInt32[] hash = generatedHash;
 		Object generatedPointerToCurPos = this.getPointerToCurPos();
-		Byte cur = generatedPointerToCurPos;
+		Byte[] cur = generatedPointerToCurPos;
 		Object generatedLzPos = this.getLzPos();
 		UInt32 lzPos = generatedLzPos;
 		Object[] generatedCrc = this.getCrc();
@@ -443,9 +443,9 @@ public class _CMatchFinderMt {
 		UInt32 curMatch2 = new UInt32();
 		UInt32 curMatch3 = new UInt32();
 		Object generatedHash = this.getHash();
-		UInt32 hash = generatedHash;
+		UInt32[] hash = generatedHash;
 		Object generatedPointerToCurPos = this.getPointerToCurPos();
-		Byte cur = generatedPointerToCurPos;
+		Byte[] cur = generatedPointerToCurPos;
 		Object generatedLzPos = this.getLzPos();
 		UInt32 lzPos = generatedLzPos;
 		Object[] generatedCrc = this.getCrc();
@@ -529,7 +529,7 @@ public class _CMatchFinderMt {
 	public Object MatchFinderMt2_GetMatches(Object[] distances) {
 		Object[] generatedBtBuf = this.getBtBuf();
 		Object generatedBtBufPos = this.getBtBufPos();
-		UInt32 btBuf = generatedBtBuf + generatedBtBufPos;
+		UInt32[] btBuf = generatedBtBuf + generatedBtBufPos;
 		UInt32 len = btBuf++;
 		generatedBtBufPos += 1 + len;
 		Object generatedBtNumAvailBytes = this.getBtNumAvailBytes();
@@ -554,7 +554,7 @@ public class _CMatchFinderMt {
 	public Object MatchFinderMt_GetMatches(Object distances) {
 		Object[] generatedBtBuf = this.getBtBuf();
 		Object generatedBtBufPos = this.getBtBufPos();
-		UInt32 btBuf = generatedBtBuf + generatedBtBufPos;
+		UInt32[] btBuf = generatedBtBuf + generatedBtBufPos;
 		UInt32 len = btBuf++;
 		generatedBtBufPos += 1 + len;
 		Object generatedBtNumAvailBytes = this.getBtNumAvailBytes();
@@ -741,10 +741,10 @@ public class _CMatchFinderMt {
 	public void setBtSync(_CMtSync newBtSync) {
 		btSync = newBtSync;
 	}
-	public Object getBtDummy() {
+	public Object[] getBtDummy() {
 		return btDummy;
 	}
-	public void setBtDummy(Object newBtDummy) {
+	public void setBtDummy(Object[] newBtDummy) {
 		btDummy = newBtDummy;
 	}
 	public Object[] getHashBuf() {

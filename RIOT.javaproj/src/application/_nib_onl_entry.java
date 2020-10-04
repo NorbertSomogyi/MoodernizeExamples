@@ -72,7 +72,7 @@ public class _nib_onl_entry {
 	}
 	
 	public void _nib_onl_set_if(int iface) {
-		((iface <= ((GNRC_IPV6_NIB_NC_INFO_IFACE_MASK) >> (GNRC_IPV6_NIB_NC_INFO_IFACE_POS))) ? (Object)0 : /*Error: Function owner not recognized*/_assert("iface <= _NIB_IF_MAX", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\RIOT\\src\\_nib-internal.h", 294));
+		((iface <= ((GNRC_IPV6_NIB_NC_INFO_IFACE_MASK) >> (GNRC_IPV6_NIB_NC_INFO_IFACE_POS))) ? null : /*Error: Function owner not recognized*/_assert("iface <= _NIB_IF_MAX", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\RIOT\\src\\_nib-internal.h", 294));
 		Object generatedInfo = this.getInfo();
 		generatedInfo &=  ~((GNRC_IPV6_NIB_NC_INFO_IFACE_MASK));
 		generatedInfo |=  ((iface << (GNRC_IPV6_NIB_NC_INFO_IFACE_POS)) & (GNRC_IPV6_NIB_NC_INFO_IFACE_MASK/**
@@ -102,10 +102,10 @@ public class _nib_onl_entry {
 		 */;
 	}
 	public _nib_onl_entry _nib_dad_add(Object addr) {
-		((addr != ((Object)0)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("addr != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\RIOT\\src\\_nib-internal.h", 411));
+		((addr != (null)) ? null : /*Error: Function owner not recognized*/_assert("addr != NULL", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\RIOT\\src\\_nib-internal.h", 411));
 		_nib_onl_entry_t node = /*Error: Function owner not recognized*/_nib_onl_alloc(addr, 0);
 		Object generatedMode = node.getMode();
-		if (node != ((Object)0)) {
+		if (node != (null)) {
 			generatedMode |=  ((true));
 		} 
 		return node/**

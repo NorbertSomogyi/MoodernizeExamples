@@ -44,17 +44,17 @@ public class _CMtSync {
 		this.setCsWasInitialized(0);
 		this.setCsWasEntered(0);
 		Object generatedThread = this.getThread();
-		(generatedThread) = ((Object)0);
+		(generatedThread) = (null);
 		Object generatedCanStart = this.getCanStart();
-		(generatedCanStart) = ((Object)0);
+		(generatedCanStart) = (null);
 		Object generatedWasStarted = this.getWasStarted();
-		(generatedWasStarted) = ((Object)0);
+		(generatedWasStarted) = (null);
 		Object generatedWasStopped = this.getWasStopped();
-		(generatedWasStopped) = ((Object)0);
+		(generatedWasStopped) = (null);
 		Object generatedFreeSemaphore = this.getFreeSemaphore();
-		(generatedFreeSemaphore) = ((Object)0);
+		(generatedFreeSemaphore) = (null);
 		Object generatedFilledSemaphore = this.getFilledSemaphore();
-		(generatedFilledSemaphore) = ((Object)0);
+		(generatedFilledSemaphore) = (null);
 	}
 	public void MtSync_GetNextBlock() {
 		Object generatedNeedStart = this.getNeedStart();
@@ -90,7 +90,7 @@ public class _CMtSync {
 		UInt32 myNumBlocks = generatedNumProcessedBlocks;
 		Object generatedThread = this.getThread();
 		Object generatedNeedStart = this.getNeedStart();
-		if (!((generatedThread) != ((Object)0)) || generatedNeedStart) {
+		if (!((generatedThread) != (null)) || generatedNeedStart) {
 			return /*Error: Unsupported expression*/;
 		} 
 		this.setStopWriting(1);
@@ -115,7 +115,7 @@ public class _CMtSync {
 		Object generatedThread = this.getThread();
 		Object generatedNeedStart = this.getNeedStart();
 		Object generatedCanStart = this.getCanStart();
-		if (((generatedThread) != ((Object)0))) {
+		if (((generatedThread) != (null))) {
 			p.MtSync_StopWriting();
 			this.setExit(1);
 			if (generatedNeedStart) {

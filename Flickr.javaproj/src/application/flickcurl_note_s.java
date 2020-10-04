@@ -23,29 +23,6 @@ public class flickcurl_note_s {
 	public flickcurl_note_s() {
 	}
 	
-	public void command_print_notes(Object label, Object value) {
-		int i;
-		if (!notes) {
-			return /*Error: Unsupported expression*/;
-		} 
-		if (label) {
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%s: %s %s notes\n", ModernizedCProgram.program, label, (value ? value : "(none)"));
-		} else {
-				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "notes:\n");
-		} 
-		int generatedId = note.getId();
-		Byte generatedAuthor = note.getAuthor();
-		Byte generatedAuthorname = note.getAuthorname();
-		int generatedX = note.getX();
-		int generatedY = note.getY();
-		int generatedW = note.getW();
-		int generatedH = note.getH();
-		Byte generatedText = note.getText();
-		for (i = 0; notes[i]; i++) {
-			flickcurl_note note = notes[i];
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%d) id %d note: author ID %s name %s  x %d y %d w %d h %d text '%s'\n", i, generatedId, generatedAuthor, (generatedAuthorname ? generatedAuthorname : "(Unknown)"), generatedX, generatedY, generatedW, generatedH, generatedText);
-		}
-	}
 	/* -*- Mode: c; c-basic-offset: 2 -*-
 	 *
 	 * note.c - Flickcurl note functions
@@ -93,11 +70,11 @@ public class flickcurl_note_s {
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/free(note);
 	}
 	public flickcurl_note_s flickcurl_build_notes(flickcurl_s fc, flickcurl_photo_s photo, Object xpathCtx, Object xpathExpr, Integer note_count_p) {
-		flickcurl_note notes = ((Object)0);
+		flickcurl_note[][] notes = (null);
 		int nodes_count;
 		int note_count;
 		int i;
-		 xpathObj = ((Object)0);
+		 xpathObj = (null);
 		 nodes = new ();
 		xpathObj = /*Error: Function owner not recognized*/xmlXPathEvalExpression(xpathExpr, /* Now do notes */xpathCtx);
 		if (!xpathObj) {
@@ -122,8 +99,8 @@ public class flickcurl_note_s {
 			n = (flickcurl_note)/*Error: Function owner not recognized*/calloc(/*Error: Unsupported expression*/, 1);
 			for (attr = node.getProperties(); attr; attr = attr.getNext()) {
 				size_t attr_len = /*Error: Function owner not recognized*/strlen((byte)attr.getChildren().getContent());
-				byte attr_name = (byte)attr.getName();
-				byte attr_value;
+				Byte attr_name = (byte)attr.getName();
+				Byte attr_value;
 				attr_value = (byte)/*Error: Function owner not recognized*/malloc(attr_len + 1);
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(attr_value, attr.getChildren().getContent(), attr_len + 1);
 				if (!/*Error: Function owner not recognized*/strcmp(attr_name, "id")) {
@@ -162,6 +139,29 @@ public class flickcurl_note_s {
 			note_count_p = note_count;
 		} 
 		return notes;
+	}
+	public void command_print_notes(Object label, Object value) {
+		int i;
+		if (!notes) {
+			return /*Error: Unsupported expression*/;
+		} 
+		if (label) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%s: %s %s notes\n", ModernizedCProgram.program, label, (value ? value : "(none)"));
+		} else {
+				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "notes:\n");
+		} 
+		int generatedId = note.getId();
+		Byte generatedAuthor = note.getAuthor();
+		Byte generatedAuthorname = note.getAuthorname();
+		int generatedX = note.getX();
+		int generatedY = note.getY();
+		int generatedW = note.getW();
+		int generatedH = note.getH();
+		Byte generatedText = note.getText();
+		for (i = 0; notes[i]; i++) {
+			flickcurl_note note = notes[i];
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/fprintf((_iob[1]), "%d) id %d note: author ID %s name %s  x %d y %d w %d h %d text '%s'\n", i, generatedId, generatedAuthor, (generatedAuthorname ? generatedAuthorname : "(Unknown)"), generatedX, generatedY, generatedW, generatedH, generatedText);
+		}
 	}
 	public int getId() {
 		return id;

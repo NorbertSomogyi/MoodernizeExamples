@@ -4,13 +4,13 @@ package application;
 public class impUseExtAttr {
 	private Object attr_type;
 	private Object attr_subtype;
-	private Object reserved;
+	private Object[] reserved;
 	private Object attrLength;
 	private Object imp_useLength;
 	private udf_regid_s imp_id;
-	private Object imp_use;
+	private Object[] imp_use;
 	
-	public impUseExtAttr(Object attr_type, Object attr_subtype, Object reserved, Object attrLength, Object imp_useLength, udf_regid_s imp_id, Object imp_use) {
+	public impUseExtAttr(Object attr_type, Object attr_subtype, Object[] reserved, Object attrLength, Object imp_useLength, udf_regid_s imp_id, Object[] imp_use) {
 		setAttr_type(attr_type);
 		setAttr_subtype(attr_subtype);
 		setReserved(reserved);
@@ -34,10 +34,10 @@ public class impUseExtAttr {
 	public void setAttr_subtype(Object newAttr_subtype) {
 		attr_subtype = newAttr_subtype;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public Object getAttrLength() {
@@ -58,10 +58,10 @@ public class impUseExtAttr {
 	public void setImp_id(udf_regid_s newImp_id) {
 		imp_id = newImp_id;
 	}
-	public Object getImp_use() {
+	public Object[] getImp_use() {
 		return imp_use;
 	}
-	public void setImp_use(Object newImp_use) {
+	public void setImp_use(Object[] newImp_use) {
 		imp_use = newImp_use;
 	}
 }

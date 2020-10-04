@@ -27,11 +27,11 @@ public class brain_server_db_hash {
 		this.setBrain_session(brain_session);
 		this.setHb(0);
 		this.setLong_cnt(0);
-		this.setLong_buf(((Object)0));
+		this.setLong_buf((null));
 		this.setLong_alloc(0);
 		this.setWrite_hashes(0);
-		this.setMux_hr(/*Error: Function owner not recognized*/CreateMutexA(((Object)0), 0, ((Object)0)));
-		this.setMux_hg(/*Error: Function owner not recognized*/CreateMutexA(((Object)0), 0, ((Object)0)));
+		this.setMux_hr(/*Error: Function owner not recognized*/CreateMutexA((null), 0, (null)));
+		this.setMux_hg(/*Error: Function owner not recognized*/CreateMutexA((null), 0, (null)));
 	}
 	public boolean brain_server_db_hash_realloc(Object new_long_cnt) {
 		Object generatedLong_cnt = this.getLong_cnt();
@@ -40,7 +40,7 @@ public class brain_server_db_hash {
 		if ((generatedLong_cnt + new_long_cnt) > generatedLong_alloc) {
 			i64 realloc_size_total = (i64)ModernizedCProgram.mydivc64((u64)new_long_cnt, (u64)ModernizedCProgram.BRAIN_SERVER_REALLOC_HASH_SIZE) * ModernizedCProgram.BRAIN_SERVER_REALLOC_HASH_SIZE;
 			brain_server_hash_long_t long_buf = (brain_server_hash_long_t)ModernizedCProgram.hcrealloc(generatedLong_buf, generatedLong_alloc * /*Error: Unsupported expression*/, realloc_size_total * /*Error: Unsupported expression*/);
-			if (long_buf == ((Object)0)) {
+			if (long_buf == (null)) {
 				return 0;
 			} 
 			this.setLong_buf(long_buf);
@@ -57,7 +57,7 @@ public class brain_server_db_hash {
 		ModernizedCProgram.hcfree(generatedLong_buf);
 		this.setHb(0);
 		this.setLong_cnt(0);
-		this.setLong_buf(((Object)0));
+		this.setLong_buf((null));
 		this.setLong_alloc(0);
 		this.setWrite_hashes(0);
 		this.setBrain_session(0);

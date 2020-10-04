@@ -3,9 +3,9 @@ package application;
 public class _SYSTEM_HANDLE_INFORMATION_EX {
 	private Object NumberOfHandles;
 	private Object Reserved;
-	private Object Handles;
+	private Object[] Handles;
 	
-	public _SYSTEM_HANDLE_INFORMATION_EX(Object NumberOfHandles, Object Reserved, Object Handles) {
+	public _SYSTEM_HANDLE_INFORMATION_EX(Object NumberOfHandles, Object Reserved, Object[] Handles) {
 		setNumberOfHandles(NumberOfHandles);
 		setReserved(Reserved);
 		setHandles(Handles);
@@ -25,10 +25,10 @@ public class _SYSTEM_HANDLE_INFORMATION_EX {
 	public void setReserved(Object newReserved) {
 		Reserved = newReserved;
 	}
-	public Object getHandles() {
+	public Object[] getHandles() {
 		return Handles;
 	}
-	public void setHandles(Object newHandles) {
+	public void setHandles(Object[] newHandles) {
 		Handles = newHandles;
 	}
 }

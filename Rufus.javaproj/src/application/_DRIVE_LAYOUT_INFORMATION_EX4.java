@@ -5,9 +5,9 @@ public class _DRIVE_LAYOUT_INFORMATION_EX4 {
 	private Object PartitionStyle;
 	private Object PartitionCount;
 	private  Type;
-	private Object PartitionEntry;
+	private Object[] PartitionEntry;
 	
-	public _DRIVE_LAYOUT_INFORMATION_EX4(Object PartitionStyle, Object PartitionCount,  Type, Object PartitionEntry) {
+	public _DRIVE_LAYOUT_INFORMATION_EX4(Object PartitionStyle, Object PartitionCount,  Type, Object[] PartitionEntry) {
 		setPartitionStyle(PartitionStyle);
 		setPartitionCount(PartitionCount);
 		setType(Type);
@@ -34,10 +34,10 @@ public class _DRIVE_LAYOUT_INFORMATION_EX4 {
 	public void setType( newType) {
 		Type = newType;
 	}
-	public Object getPartitionEntry() {
+	public Object[] getPartitionEntry() {
 		return PartitionEntry;
 	}
-	public void setPartitionEntry(Object newPartitionEntry) {
+	public void setPartitionEntry(Object[] newPartitionEntry) {
 		PartitionEntry = newPartitionEntry;
 	}
 }

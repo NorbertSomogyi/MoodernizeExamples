@@ -5,9 +5,9 @@ public class pathComponent {
 	private Object component_type;
 	private Object lengthComponent_id;
 	private Object componentFileVersionNum;
-	private Object component_id;
+	private Object[] component_id;
 	
-	public pathComponent(Object component_type, Object lengthComponent_id, Object componentFileVersionNum, Object component_id) {
+	public pathComponent(Object component_type, Object lengthComponent_id, Object componentFileVersionNum, Object[] component_id) {
 		setComponent_type(component_type);
 		setLengthComponent_id(lengthComponent_id);
 		setComponentFileVersionNum(componentFileVersionNum);
@@ -34,10 +34,10 @@ public class pathComponent {
 	public void setComponentFileVersionNum(Object newComponentFileVersionNum) {
 		componentFileVersionNum = newComponentFileVersionNum;
 	}
-	public Object getComponent_id() {
+	public Object[] getComponent_id() {
 		return component_id;
 	}
-	public void setComponent_id(Object newComponent_id) {
+	public void setComponent_id(Object[] newComponent_id) {
 		component_id = newComponent_id;
 	}
 }

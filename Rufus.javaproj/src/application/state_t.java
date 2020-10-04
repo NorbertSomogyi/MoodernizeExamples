@@ -78,8 +78,8 @@ public class state_t {
 		(generatedInflate_codes_tl).huft_free();
 		huft_t generatedInflate_codes_td = this.getInflate_codes_td();
 		(generatedInflate_codes_td).huft_free();
-		(generatedInflate_codes_tl) = ((Object)0);
-		(generatedInflate_codes_td) = ((Object)0);
+		(generatedInflate_codes_tl) = (null);
+		(generatedInflate_codes_td) = (null);
 	}
 	public void abort_unzip() {
 		state.huft_free_all();
@@ -287,29 +287,6 @@ public class state_t {
 					state.inflate_codes_setup(bl, /* set up data for inflate_codes() */bd);
 					return -/* huft_free code moved into inflate_codes */2;
 				}
-		case /* Inflate stored */0:
-				{ 
-					int n;
-					int b_stored;
-					int k_stored;
-					b_stored = (generatedGunzip_bb);
-					k_stored = (generatedGunzip_bk);
-					n = k_stored & /* go to byte boundary */7;
-					b_stored >>=  n;
-					k_stored -= n;
-					b_stored = state.fill_bitbuffer(b_stored, k_stored, /* get the length and its complement */16);
-					n = ((int)b_stored & -1024);
-					b_stored >>=  16;
-					k_stored -= 16;
-					b_stored = state.fill_bitbuffer(b_stored, k_stored, 16);
-					if (n != (int)((~b_stored) & -1024)) {
-						/* error in compressed data */state.abort_unzip();
-					} 
-					b_stored >>=  16;
-					k_stored -= 16;
-					state.inflate_stored_setup(n, b_stored, k_stored);
-					return -1;
-				}
 		case /* Inflate dynamic */2:
 				{ 
 					huft_t td = new huft_t();
@@ -352,7 +329,7 @@ public class state_t {
 						ll[ModernizedCProgram.border[j]] = 0;
 					}
 					bl = /* build decoding table for trees - single level, 7 bit lookup */7;
-					i = (generatedInflate_codes_tl).huft_build(ll, 19, 19, ((Object)0), ((Object)0), bl);
+					i = (generatedInflate_codes_tl).huft_build(ll, 19, 19, (null), (null), bl);
 					if (i != 0) {
 						state.abort_unzip();
 					} 
@@ -421,6 +398,29 @@ public class state_t {
 					state.inflate_codes_setup(bl, /* set up data for inflate_codes() */bd);
 					return -/* huft_free code moved into inflate_codes */2;
 				}
+		case /* Inflate stored */0:
+				{ 
+					int n;
+					int b_stored;
+					int k_stored;
+					b_stored = (generatedGunzip_bb);
+					k_stored = (generatedGunzip_bk);
+					n = k_stored & /* go to byte boundary */7;
+					b_stored >>=  n;
+					k_stored -= n;
+					b_stored = state.fill_bitbuffer(b_stored, k_stored, /* get the length and its complement */16);
+					n = ((int)b_stored & -1024);
+					b_stored >>=  16;
+					k_stored -= 16;
+					b_stored = state.fill_bitbuffer(b_stored, k_stored, 16);
+					if (n != (int)((~b_stored) & -1024)) {
+						/* error in compressed data */state.abort_unzip();
+					} 
+					b_stored >>=  16;
+					k_stored -= 16;
+					state.inflate_stored_setup(n, b_stored, k_stored);
+					return -1;
+				}
 		default:
 				state.abort_unzip();
 				return 0;
@@ -455,11 +455,11 @@ public class state_t {
 				(generatedNeed_another_block) = 0;
 			} 
 			switch ((generatedMethod)) {
-			case -1:
-					ret = state.inflate_stored();
-					break;
 			case -2:
 					ret = state.inflate_codes();
+					break;
+			case -1:
+					ret = state.inflate_stored();
 					break;
 			default:
 					state.abort_unzip();
@@ -485,7 +485,7 @@ public class state_t {
 			(generatedBytebuffer_size) = ModernizedCProgram.full_read((generatedGunzip_src_fd), (generatedBytebuffer)[count], -1024 - count);
 			if ((int)(generatedBytebuffer_size) < 0) {
 				do {
-					if (ModernizedCProgram.bled_printf != ((Object)0)) {
+					if (ModernizedCProgram.bled_printf != (null)) {
 						/*Error: Function owner not recognized*//*Error: Function owner not recognized*/bled_printf("Error: read error");
 					} else {
 							/*Error: Function owner not recognized*//*Error: Function owner not recognized*/printf("Error: read error");

@@ -4,13 +4,13 @@ package application;
 public class infoTimesExtAttr {
 	private Object attr_type;
 	private Object attr_subtype;
-	private Object reserved;
+	private Object[] reserved;
 	private Object attrLength;
 	private Object dataLength;
 	private Object infoTimeExistence;
-	private Object infoTimes;
+	private Object[] infoTimes;
 	
-	public infoTimesExtAttr(Object attr_type, Object attr_subtype, Object reserved, Object attrLength, Object dataLength, Object infoTimeExistence, Object infoTimes) {
+	public infoTimesExtAttr(Object attr_type, Object attr_subtype, Object[] reserved, Object attrLength, Object dataLength, Object infoTimeExistence, Object[] infoTimes) {
 		setAttr_type(attr_type);
 		setAttr_subtype(attr_subtype);
 		setReserved(reserved);
@@ -34,10 +34,10 @@ public class infoTimesExtAttr {
 	public void setAttr_subtype(Object newAttr_subtype) {
 		attr_subtype = newAttr_subtype;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public Object getAttrLength() {
@@ -58,10 +58,10 @@ public class infoTimesExtAttr {
 	public void setInfoTimeExistence(Object newInfoTimeExistence) {
 		infoTimeExistence = newInfoTimeExistence;
 	}
-	public Object getInfoTimes() {
+	public Object[] getInfoTimes() {
 		return infoTimes;
 	}
-	public void setInfoTimes(Object newInfoTimes) {
+	public void setInfoTimes(Object[] newInfoTimes) {
 		infoTimes = newInfoTimes;
 	}
 }

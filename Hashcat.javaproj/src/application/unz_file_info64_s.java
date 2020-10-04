@@ -39,7 +39,7 @@ public class unz_file_info64_s {
 	}
 	
 	public int unzGetCurrentFileInfo64(Object file, Byte szFileName, Object fileNameBufferSize, Object extraField, Object extraFieldBufferSize, Byte szComment, Object commentBufferSize) {
-		return ModernizedCProgram.unz64local_GetCurrentFileInfoInternal(file, pfile_info, ((Object)0), szFileName, fileNameBufferSize, extraField, extraFieldBufferSize, szComment, commentBufferSize);
+		return ModernizedCProgram.unz64local_GetCurrentFileInfoInternal(file, pfile_info, (null), szFileName, fileNameBufferSize, extraField, extraFieldBufferSize, szComment, commentBufferSize);
 	}
 	public Object getVersion() {
 		return version;

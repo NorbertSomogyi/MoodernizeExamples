@@ -51,23 +51,6 @@ public class riot_pipe {
 	public riot_pipe() {
 	}
 	
-	public riot_pipe pipe_malloc(int size) {
-		mallocd_pipe m_pipe = ModernizedCProgram.malloc(/*Error: sizeof expression not supported yet*/ + size);
-		Object generatedRb = m_pipe.getRb();
-		Object generatedBuffer = m_pipe.getBuffer();
-		riot_pipe generatedPipe = m_pipe.getPipe();
-		if (m_pipe) {
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ringbuffer_init(generatedRb, generatedBuffer, size);
-			generatedPipe.pipe_init(generatedRb, ModernizedCProgram.free);
-		} 
-		return generatedPipe;
-	}
-	public void pipe_free() {
-		Object generatedFree = this.getFree();
-		if (rp && generatedFree) {
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(rp);
-		} 
-	}
 	public Object pipe_read(Object buf, Object n) {
 		Object generatedRb = this.getRb();
 		Object generatedWrite_blocked = this.getWrite_blocked();
@@ -82,6 +65,23 @@ public class riot_pipe {
 	}
 	public void pipe_init(Object rb, Object free) {
 		pipe = /*Error: Unsupported expression*/;
+	}
+	public riot_pipe pipe_malloc(int size) {
+		mallocd_pipe m_pipe = ModernizedCProgram.malloc(/*Error: sizeof expression not supported yet*/ + size);
+		Object generatedRb = m_pipe.getRb();
+		Object[] generatedBuffer = m_pipe.getBuffer();
+		riot_pipe generatedPipe = m_pipe.getPipe();
+		if (m_pipe) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ringbuffer_init(generatedRb, generatedBuffer, size);
+			generatedPipe.pipe_init(generatedRb, ModernizedCProgram.free);
+		} 
+		return generatedPipe;
+	}
+	public void pipe_free() {
+		Object generatedFree = this.getFree();
+		if (rp && generatedFree) {
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(rp);
+		} 
 	}
 	public Object getRb() {
 		return rb;

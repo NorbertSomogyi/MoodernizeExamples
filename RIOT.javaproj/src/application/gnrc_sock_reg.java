@@ -28,9 +28,9 @@ package application;
 public class gnrc_sock_reg {
 	private Object entry;
 	private Object mbox;
-	private Object mbox_queue;
+	private Object[] mbox_queue;
 	
-	public gnrc_sock_reg(Object entry, Object mbox, Object mbox_queue) {
+	public gnrc_sock_reg(Object entry, Object mbox, Object[] mbox_queue) {
 		setEntry(entry);
 		setMbox(mbox);
 		setMbox_queue(mbox_queue);
@@ -50,10 +50,10 @@ public class gnrc_sock_reg {
 	public void setMbox(Object newMbox) {
 		mbox = newMbox;
 	}
-	public Object getMbox_queue() {
+	public Object[] getMbox_queue() {
 		return mbox_queue;
 	}
-	public void setMbox_queue(Object newMbox_queue) {
+	public void setMbox_queue(Object[] newMbox_queue) {
 		mbox_queue = newMbox_queue;
 	}
 }

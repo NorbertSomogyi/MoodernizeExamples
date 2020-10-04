@@ -4,9 +4,9 @@ public class udf_id_suffix_s {
 	private Object udf_revision;
 	private Object os_class;
 	private Object os_identifier;
-	private Object reserved;
+	private Object[] reserved;
 	
-	public udf_id_suffix_s(Object udf_revision, Object os_class, Object os_identifier, Object reserved) {
+	public udf_id_suffix_s(Object udf_revision, Object os_class, Object os_identifier, Object[] reserved) {
 		setUdf_revision(udf_revision);
 		setOs_class(os_class);
 		setOs_identifier(os_identifier);
@@ -33,10 +33,10 @@ public class udf_id_suffix_s {
 	public void setOs_identifier(Object newOs_identifier) {
 		os_identifier = newOs_identifier;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }

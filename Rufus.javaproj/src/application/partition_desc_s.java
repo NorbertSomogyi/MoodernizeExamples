@@ -7,15 +7,15 @@ public class partition_desc_s {
 	private Object flags;
 	private Object number;
 	private udf_regid_s contents;
-	private Object contents_use;
+	private Object[] contents_use;
 	private Object access_type;
 	private Object start_loc;
 	private Object part_len;
 	private udf_regid_s imp_id;
-	private Object imp_use;
-	private Object reserved;
+	private Object[] imp_use;
+	private Object[] reserved;
 	
-	public partition_desc_s(udf_tag_s tag, Object vol_desc_seq_num, Object flags, Object number, udf_regid_s contents, Object contents_use, Object access_type, Object start_loc, Object part_len, udf_regid_s imp_id, Object imp_use, Object reserved) {
+	public partition_desc_s(udf_tag_s tag, Object vol_desc_seq_num, Object flags, Object number, udf_regid_s contents, Object[] contents_use, Object access_type, Object start_loc, Object part_len, udf_regid_s imp_id, Object[] imp_use, Object[] reserved) {
 		setTag(tag);
 		setVol_desc_seq_num(vol_desc_seq_num);
 		setFlags(flags);
@@ -62,10 +62,10 @@ public class partition_desc_s {
 	public void setContents(udf_regid_s newContents) {
 		contents = newContents;
 	}
-	public Object getContents_use() {
+	public Object[] getContents_use() {
 		return contents_use;
 	}
-	public void setContents_use(Object newContents_use) {
+	public void setContents_use(Object[] newContents_use) {
 		contents_use = newContents_use;
 	}
 	public Object getAccess_type() {
@@ -92,16 +92,16 @@ public class partition_desc_s {
 	public void setImp_id(udf_regid_s newImp_id) {
 		imp_id = newImp_id;
 	}
-	public Object getImp_use() {
+	public Object[] getImp_use() {
 		return imp_use;
 	}
-	public void setImp_use(Object newImp_use) {
+	public void setImp_use(Object[] newImp_use) {
 		imp_use = newImp_use;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }

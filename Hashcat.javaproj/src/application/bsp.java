@@ -1,13 +1,13 @@
 package application;
 
 public class bsp {
-	private Object signature;
-	private Object digest;
-	private Object salt;
+	private Object[] signature;
+	private Object[] digest;
+	private Object[] salt;
 	private Object iter;
 	private Object crc32;
 	
-	public bsp(Object signature, Object digest, Object salt, Object iter, Object crc32) {
+	public bsp(Object[] signature, Object[] digest, Object[] salt, Object iter, Object crc32) {
 		setSignature(signature);
 		setDigest(digest);
 		setSalt(salt);
@@ -17,22 +17,22 @@ public class bsp {
 	public bsp() {
 	}
 	
-	public Object getSignature() {
+	public Object[] getSignature() {
 		return signature;
 	}
-	public void setSignature(Object newSignature) {
+	public void setSignature(Object[] newSignature) {
 		signature = newSignature;
 	}
-	public Object getDigest() {
+	public Object[] getDigest() {
 		return digest;
 	}
-	public void setDigest(Object newDigest) {
+	public void setDigest(Object[] newDigest) {
 		digest = newDigest;
 	}
-	public Object getSalt() {
+	public Object[] getSalt() {
 		return salt;
 	}
-	public void setSalt(Object newSalt) {
+	public void setSalt(Object[] newSalt) {
 		salt = newSalt;
 	}
 	public Object getIter() {

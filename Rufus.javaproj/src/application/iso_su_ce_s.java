@@ -9,11 +9,11 @@ package application;
 /**< Identifier length. Value 10?. */
 /**< Extension version. Value 1? */
 public class iso_su_ce_s {
-	private Object extent;
-	private Object offset;
-	private Object size;
+	private Object[] extent;
+	private Object[] offset;
+	private Object[] size;
 	
-	public iso_su_ce_s(Object extent, Object offset, Object size) {
+	public iso_su_ce_s(Object[] extent, Object[] offset, Object[] size) {
 		setExtent(extent);
 		setOffset(offset);
 		setSize(size);
@@ -21,22 +21,22 @@ public class iso_su_ce_s {
 	public iso_su_ce_s() {
 	}
 	
-	public Object getExtent() {
+	public Object[] getExtent() {
 		return extent;
 	}
-	public void setExtent(Object newExtent) {
+	public void setExtent(Object[] newExtent) {
 		extent = newExtent;
 	}
-	public Object getOffset() {
+	public Object[] getOffset() {
 		return offset;
 	}
-	public void setOffset(Object newOffset) {
+	public void setOffset(Object[] newOffset) {
 		offset = newOffset;
 	}
-	public Object getSize() {
+	public Object[] getSize() {
 		return size;
 	}
-	public void setSize(Object newSize) {
+	public void setSize(Object[] newSize) {
 		size = newSize;
 	}
 }

@@ -42,77 +42,6 @@ public class nhdp_addr {
 	public nhdp_addr() {
 	}
 	
-	public nhdp_addr nhdp_addr_db_get_address(Object addr, Object addr_size, Object addr_type) {
-		nhdp_addr_t addr_elt = new nhdp_addr_t();
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_lock(ModernizedCProgram.mtx_addr_access);
-		Object generatedAddr_size = addr_elt.getAddr_size();
-		Object generatedAddr_type = addr_elt.getAddr_type();
-		Object generatedAddr = addr_elt.getAddr();
-		nhdp_addr generatedNext = (addr_elt).getNext();
-		for (addr_elt = ModernizedCProgram.nhdp_addr_db_head; addr_elt; addr_elt = generatedNext) {
-			if ((generatedAddr_size == addr_size) && (generatedAddr_type == addr_type)) {
-				if (/*Error: Function owner not recognized*/memcmp(generatedAddr, addr, addr_size) == 0/* Found a matching entry */) {
-					break;
-				} 
-			} 
-		}
-		if (!addr_elt) {
-			addr_elt = (nhdp_addr_t)ModernizedCProgram.malloc(/*Error: Unsupported expression*//* No matching entry, create a new one */);
-			if (!addr_elt) {
-				return /* Insufficient memory */NULL;
-			} 
-			addr_elt.setAddr((uint8_t)ModernizedCProgram.malloc(addr_size * /*Error: Unsupported expression*//* Allocate space for the address */));
-			if (!generatedAddr) {
-				ModernizedCProgram.free(/* Insufficient memory */addr_elt);
-				return NULL;
-			} 
-			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedAddr, addr, addr_size);
-			addr_elt.setAddr_size(addr_size);
-			addr_elt.setAddr_type(addr_type);
-			addr_elt.setUsg_count(0);
-			addr_elt.setIn_tmp_table((true));
-			addr_elt.setTmp_metric_val((false));
-			do {
-				(addr_elt).setNext(ModernizedCProgram.nhdp_addr_db_head);
-				ModernizedCProgram.nhdp_addr_db_head = addr_elt;
-			} while (0);
-		} 
-		Object generatedUsg_count = addr_elt.getUsg_count();
-		generatedUsg_count++;
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(ModernizedCProgram.mtx_addr_access);
-		return addr_elt;
-	}
-	public void nhdp_decrement_addr_usage() {
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_lock(ModernizedCProgram.mtx_addr_access);
-		Object generatedUsg_count = this.getUsg_count();
-		nhdp_addr generatedNext = _tmp.getNext();
-		Object generatedAddr = this.getAddr();
-		if (/* Decrement usage count and delete address if no longer used */addr) {
-			generatedUsg_count--;
-			if (generatedUsg_count == 0) {
-				do {
-					int _tmp;
-					if ((ModernizedCProgram.nhdp_addr_db_head) == (addr)) {
-						(ModernizedCProgram.nhdp_addr_db_head) = (ModernizedCProgram.nhdp_addr_db_head).getNext();
-					} else {
-							_tmp = ModernizedCProgram.nhdp_addr_db_head;
-							while (generatedNext && (generatedNext != (addr))) {
-								_tmp = generatedNext;
-							}
-							if (generatedNext) {
-								_tmp.setNext((generatedNext));
-							} 
-					} 
-				} while (/* Free address space if address is no longer used */0);
-				ModernizedCProgram.free(generatedAddr);
-				ModernizedCProgram.free(addr);
-			} 
-		} 
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(ModernizedCProgram.mtx_addr_access);
-	}
-	public nhdp_addr nhdp_get_addr_db_head() {
-		return ModernizedCProgram.nhdp_addr_db_head;
-	}
 	public int lib_add_if_addr(Object if_pid) {
 		lib_entry_t lib_elt = new lib_entry_t();
 		nhdp_addr_entry_t addr_elt = new nhdp_addr_entry_t();
@@ -185,6 +114,99 @@ public class nhdp_addr {
 		 * Add another address to an interface entry
 		 */;
 	}
+	public nhdp_addr nhdp_addr_db_get_address(Object addr, Object addr_size, Object addr_type) {
+		nhdp_addr_t addr_elt = new nhdp_addr_t();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_lock(ModernizedCProgram.mtx_addr_access);
+		Object generatedAddr_size = addr_elt.getAddr_size();
+		Object generatedAddr_type = addr_elt.getAddr_type();
+		Object generatedAddr = addr_elt.getAddr();
+		nhdp_addr generatedNext = (addr_elt).getNext();
+		for (addr_elt = ModernizedCProgram.nhdp_addr_db_head; addr_elt; addr_elt = generatedNext) {
+			if ((generatedAddr_size == addr_size) && (generatedAddr_type == addr_type)) {
+				if (/*Error: Function owner not recognized*/memcmp(generatedAddr, addr, addr_size) == 0/* Found a matching entry */) {
+					break;
+				} 
+			} 
+		}
+		if (!addr_elt) {
+			addr_elt = (nhdp_addr_t)ModernizedCProgram.malloc(/*Error: Unsupported expression*//* No matching entry, create a new one */);
+			if (!addr_elt) {
+				return /* Insufficient memory */NULL;
+			} 
+			addr_elt.setAddr((uint8_t)ModernizedCProgram.malloc(addr_size * /*Error: Unsupported expression*//* Allocate space for the address */));
+			if (!generatedAddr) {
+				ModernizedCProgram.free(/* Insufficient memory */addr_elt);
+				return NULL;
+			} 
+			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(generatedAddr, addr, addr_size);
+			addr_elt.setAddr_size(addr_size);
+			addr_elt.setAddr_type(addr_type);
+			addr_elt.setUsg_count(0);
+			addr_elt.setIn_tmp_table((true));
+			addr_elt.setTmp_metric_val((false));
+			do {
+				(addr_elt).setNext(ModernizedCProgram.nhdp_addr_db_head);
+				ModernizedCProgram.nhdp_addr_db_head = addr_elt;
+			} while (0);
+		} 
+		Object generatedUsg_count = addr_elt.getUsg_count();
+		generatedUsg_count++;
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(ModernizedCProgram.mtx_addr_access);
+		return addr_elt;
+	}
+	public void nhdp_decrement_addr_usage() {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_lock(ModernizedCProgram.mtx_addr_access);
+		Object generatedUsg_count = this.getUsg_count();
+		nhdp_addr generatedNext = _tmp.getNext();
+		Object generatedAddr = this.getAddr();
+		if (/* Decrement usage count and delete address if no longer used */addr) {
+			generatedUsg_count--;
+			if (generatedUsg_count == 0) {
+				do {
+					int _tmp;
+					if ((ModernizedCProgram.nhdp_addr_db_head) == (addr)) {
+						(ModernizedCProgram.nhdp_addr_db_head) = (ModernizedCProgram.nhdp_addr_db_head).getNext();
+					} else {
+							_tmp = ModernizedCProgram.nhdp_addr_db_head;
+							while (generatedNext && (generatedNext != (addr))) {
+								_tmp = generatedNext;
+							}
+							if (generatedNext) {
+								_tmp.setNext((generatedNext));
+							} 
+					} 
+				} while (/* Free address space if address is no longer used */0);
+				ModernizedCProgram.free(generatedAddr);
+				ModernizedCProgram.free(addr);
+			} 
+		} 
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(ModernizedCProgram.mtx_addr_access);
+	}
+	public nhdp_addr nhdp_get_addr_db_head() {
+		return ModernizedCProgram.nhdp_addr_db_head;
+	}
+	public void netaddr_from_nhdp_address(Object target) {
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(target.get_addr(), 0, NETADDR_MAX_LENGTH);
+		Object generatedAddr = this.getAddr();
+		Object generatedAddr_size = this.getAddr_size();
+		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(target.get_addr(), generatedAddr, generatedAddr_size);
+		Object generatedAddr_type = this.getAddr_type();
+		switch (generatedAddr_type) {
+		case AF_INET6/* Fall-through */:
+		case nhdp_address_type_t.AF_CC110X:
+				target.set_prefix_len(-1024);
+				target.set_type(nhdp_address_type_t.AF_CC110X);
+				break;
+		case AF_INET:
+				target.set_prefix_len(-1024);
+				target.set_type(AF_INET);
+				break;
+		default:
+				target.set_prefix_len(-1024);
+				target.set_type(AF_INET6);
+				break;
+		}
+	}
 	public rfc5444_result check_addr_validity() {
 		if (ModernizedCProgram._nhdp_addr_tlvs[RFC5444_ADDRTLV_LOCAL_IF].getRfc5444_reader_tlvblock_consumer_entry()) {
 			if (ModernizedCProgram._nhdp_addr_tlvs[RFC5444_ADDRTLV_LINK_STATUS].getRfc5444_reader_tlvblock_consumer_entry() || ModernizedCProgram._nhdp_addr_tlvs[RFC5444_ADDRTLV_OTHER_NEIGHB].getRfc5444_reader_tlvblock_consumer_entry()) {
@@ -207,10 +229,10 @@ public class nhdp_addr {
 	public nhdp_addr get_nhdp_db_addr(Object addr, Object prefix) {
 		nhdp_addr nhdp_addr = new nhdp_addr();
 		switch (prefix) {
-		case 8:
-				return nhdp_addr.nhdp_addr_db_get_address(addr, 1, nhdp_address_type_t.AF_CC110X);
 		case 32:
 				return nhdp_addr.nhdp_addr_db_get_address(addr, 4, AF_INET);
+		case 8:
+				return nhdp_addr.nhdp_addr_db_get_address(addr, 1, nhdp_address_type_t.AF_CC110X);
 		default:
 				if (prefix < 32) {
 					return nhdp_addr.nhdp_addr_db_get_address(addr, 4, AF_INET);
@@ -229,28 +251,6 @@ public class nhdp_addr {
 				this.setTmp_metric_val(metric_enc);
 			} 
 		} 
-	}
-	public void netaddr_from_nhdp_address(Object target) {
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memset(target.get_addr(), 0, NETADDR_MAX_LENGTH);
-		Object generatedAddr = this.getAddr();
-		Object generatedAddr_size = this.getAddr_size();
-		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/memcpy(target.get_addr(), generatedAddr, generatedAddr_size);
-		Object generatedAddr_type = this.getAddr_type();
-		switch (generatedAddr_type) {
-		case AF_INET6/* Fall-through */:
-		case AF_INET:
-				target.set_prefix_len(-1024);
-				target.set_type(AF_INET);
-				break;
-		case nhdp_address_type_t.AF_CC110X:
-				target.set_prefix_len(-1024);
-				target.set_type(nhdp_address_type_t.AF_CC110X);
-				break;
-		default:
-				target.set_prefix_len(-1024);
-				target.set_type(AF_INET6);
-				break;
-		}
 	}
 	public Object getAddr() {
 		return addr;

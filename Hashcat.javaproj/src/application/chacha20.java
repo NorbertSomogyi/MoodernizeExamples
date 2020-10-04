@@ -1,12 +1,12 @@
 package application;
 
 public class chacha20 {
-	private Object iv;
-	private Object plain;
-	private Object position;
+	private Object[] iv;
+	private Object[] plain;
+	private Object[] position;
 	private Object offset;
 	
-	public chacha20(Object iv, Object plain, Object position, Object offset) {
+	public chacha20(Object[] iv, Object[] plain, Object[] position, Object offset) {
 		setIv(iv);
 		setPlain(plain);
 		setPosition(position);
@@ -15,22 +15,22 @@ public class chacha20 {
 	public chacha20() {
 	}
 	
-	public Object getIv() {
+	public Object[] getIv() {
 		return iv;
 	}
-	public void setIv(Object newIv) {
+	public void setIv(Object[] newIv) {
 		iv = newIv;
 	}
-	public Object getPlain() {
+	public Object[] getPlain() {
 		return plain;
 	}
-	public void setPlain(Object newPlain) {
+	public void setPlain(Object[] newPlain) {
 		plain = newPlain;
 	}
-	public Object getPosition() {
+	public Object[] getPosition() {
 		return position;
 	}
-	public void setPosition(Object newPosition) {
+	public void setPosition(Object[] newPosition) {
 		position = newPosition;
 	}
 	public Object getOffset() {

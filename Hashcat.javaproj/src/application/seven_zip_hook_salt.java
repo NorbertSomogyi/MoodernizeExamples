@@ -1,21 +1,21 @@
 package application;
 
 public class seven_zip_hook_salt {
-	private Object iv_buf;
+	private Object[] iv_buf;
 	private Object iv_len;
-	private Object salt_buf;
+	private Object[] salt_buf;
 	private Object salt_len;
 	private Object crc;
 	private Object crc_len;
 	private Object data_type;
-	private Object data_buf;
+	private Object[] data_buf;
 	private Object data_len;
 	private Object unpack_size;
-	private Object coder_attributes;
+	private Object[] coder_attributes;
 	private Object coder_attributes_len;
 	private int aes_len;
 	
-	public seven_zip_hook_salt(Object iv_buf, Object iv_len, Object salt_buf, Object salt_len, Object crc, Object crc_len, Object data_type, Object data_buf, Object data_len, Object unpack_size, Object coder_attributes, Object coder_attributes_len, int aes_len) {
+	public seven_zip_hook_salt(Object[] iv_buf, Object iv_len, Object[] salt_buf, Object salt_len, Object crc, Object crc_len, Object data_type, Object[] data_buf, Object data_len, Object unpack_size, Object[] coder_attributes, Object coder_attributes_len, int aes_len) {
 		setIv_buf(iv_buf);
 		setIv_len(iv_len);
 		setSalt_buf(salt_buf);
@@ -33,10 +33,10 @@ public class seven_zip_hook_salt {
 	public seven_zip_hook_salt() {
 	}
 	
-	public Object getIv_buf() {
+	public Object[] getIv_buf() {
 		return iv_buf;
 	}
-	public void setIv_buf(Object newIv_buf) {
+	public void setIv_buf(Object[] newIv_buf) {
 		iv_buf = newIv_buf;
 	}
 	public Object getIv_len() {
@@ -45,10 +45,10 @@ public class seven_zip_hook_salt {
 	public void setIv_len(Object newIv_len) {
 		iv_len = newIv_len;
 	}
-	public Object getSalt_buf() {
+	public Object[] getSalt_buf() {
 		return salt_buf;
 	}
-	public void setSalt_buf(Object newSalt_buf) {
+	public void setSalt_buf(Object[] newSalt_buf) {
 		salt_buf = newSalt_buf;
 	}
 	public Object getSalt_len() {
@@ -75,10 +75,10 @@ public class seven_zip_hook_salt {
 	public void setData_type(Object newData_type) {
 		data_type = newData_type;
 	}
-	public Object getData_buf() {
+	public Object[] getData_buf() {
 		return data_buf;
 	}
-	public void setData_buf(Object newData_buf) {
+	public void setData_buf(Object[] newData_buf) {
 		data_buf = newData_buf;
 	}
 	public Object getData_len() {
@@ -93,10 +93,10 @@ public class seven_zip_hook_salt {
 	public void setUnpack_size(Object newUnpack_size) {
 		unpack_size = newUnpack_size;
 	}
-	public Object getCoder_attributes() {
+	public Object[] getCoder_attributes() {
 		return coder_attributes;
 	}
-	public void setCoder_attributes(Object newCoder_attributes) {
+	public void setCoder_attributes(Object[] newCoder_attributes) {
 		coder_attributes = newCoder_attributes;
 	}
 	public Object getCoder_attributes_len() {

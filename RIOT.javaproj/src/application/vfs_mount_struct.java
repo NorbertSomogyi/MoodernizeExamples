@@ -23,7 +23,7 @@ public class vfs_mount_struct {
 	public int check_mount() {
 		Object generatedFs = this.getFs();
 		Object[] generatedMount_point = this.getMount_point();
-		if ((mountp == ((Object)0)) || (generatedFs == ((Object)0)) || (generatedMount_point == ((Object)0))) {
+		if ((mountp == (null)) || (generatedFs == (null)) || (generatedMount_point == (null))) {
 			return -22;
 		} 
 		Object generatedPrivate_data = this.getPrivate_data();
@@ -36,7 +36,7 @@ public class vfs_mount_struct {
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_lock(ModernizedCProgram._mount_mutex);
 		Object generatedList_entry = this.getList_entry();
 		 found = /*Error: Function owner not recognized*/clist_find(ModernizedCProgram._vfs_mounts_list, generatedList_entry);
-		if (found != ((Object)0)) {
+		if (found != (null)) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(/* Same mount is already mounted */ModernizedCProgram._mount_mutex);
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DEBUG("vfs: check_mount: Already mounted\n");
 			return -16;
@@ -51,8 +51,8 @@ public class vfs_mount_struct {
 		} 
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(ModernizedCProgram._mount_mutex);
 		Object generatedFs = this.getFs();
-		if (generatedFs.getFs_op() != ((Object)0)) {
-			if (generatedFs.getFs_op().getFormat() != ((Object)0)) {
+		if (generatedFs.getFs_op() != (null)) {
+			if (generatedFs.getFs_op().getFormat() != (null)) {
 				return /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(mountp);
 			} 
 		} 
@@ -65,8 +65,8 @@ public class vfs_mount_struct {
 			return ret;
 		} 
 		Object generatedFs = this.getFs();
-		if (generatedFs.getFs_op() != ((Object)0)) {
-			if (generatedFs.getFs_op().getMount() != ((Object)0)) {
+		if (generatedFs.getFs_op() != (null)) {
+			if (generatedFs.getFs_op().getMount() != (null)) {
 				int res = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(/* yes, a file system driver does not need to implement mount/umount */mountp);
 				if (res < 0) {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DEBUG("vfs_mount: error %d\n", res);
@@ -85,12 +85,12 @@ public class vfs_mount_struct {
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DEBUG("vfs_umount: %p\n", (Object)mountp);
 		int ret = mountp.check_mount();
 		switch (ret) {
-		case -16/* -EBUSY returned when fs is mounted, just continue */:
-				break;
 		case 0:
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DEBUG("vfs_umount: not mounted\n");
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(ModernizedCProgram._mount_mutex);
 				return -22;
+		case -16/* -EBUSY returned when fs is mounted, just continue */:
+				break;
 		default:
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DEBUG("vfs_umount: invalid fs\n");
 				return -22;
@@ -102,8 +102,8 @@ public class vfs_mount_struct {
 			return -16;
 		} 
 		Object generatedFs = this.getFs();
-		if (generatedFs.getFs_op() != ((Object)0)) {
-			if (generatedFs.getFs_op().getUmount() != ((Object)0)) {
+		if (generatedFs.getFs_op() != (null)) {
+			if (generatedFs.getFs_op().getUmount() != (null)) {
 				int res = /*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(mountp);
 				if (res < 0) {
 					/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DEBUG("vfs_umount: ERR %d!\n", /* umount failed */res);
@@ -114,7 +114,7 @@ public class vfs_mount_struct {
 		} 
 		Object generatedList_entry = this.getList_entry();
 		 node = /*Error: Function owner not recognized*/clist_remove(ModernizedCProgram._vfs_mounts_list, generatedList_entry);
-		if (node == ((Object)0)) {
+		if (node == (null)) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/DEBUG(/* not found */"vfs_umount: ERR not mounted!\n");
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(ModernizedCProgram._mount_mutex);
 			return -22;
@@ -156,11 +156,11 @@ public class vfs_mount_struct {
 		size_t name_len = /*Error: Function owner not recognized*/strlen(name);
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_lock(ModernizedCProgram._mount_mutex);
 		 node = ModernizedCProgram._vfs_mounts_list.getNext();
-		if (node == ((Object)0)) {
+		if (node == (null)) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(/* list empty */ModernizedCProgram._mount_mutex);
 			return -2;
 		} 
-		vfs_mount_t mountp = ((Object)0);
+		vfs_mount_t mountp = (null);
 		Object generatedMount_point_len = it.getMount_point_len();
 		Object[] generatedMount_point = it.getMount_point();
 		do {
@@ -183,7 +183,7 @@ public class vfs_mount_struct {
 				mountp = it;
 			} 
 		} while (node != ModernizedCProgram._vfs_mounts_list.getNext());
-		if (mountp == ((Object)0)) {
+		if (mountp == (null)) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(/* not found */ModernizedCProgram._mount_mutex);
 			return -2;
 		} 
@@ -191,7 +191,7 @@ public class vfs_mount_struct {
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/__atomic_fetch_add((generatedOpen_files), (true), /* Increment open files counter for this mount */5);
 		/*Error: Function owner not recognized*//*Error: Function owner not recognized*/mutex_unlock(ModernizedCProgram._mount_mutex);
 		mountpp = mountp;
-		if (rel_path != ((Object)0)) {
+		if (rel_path != (null)) {
 			rel_path = name + longest_match;
 		} 
 		return 0;

@@ -19,12 +19,12 @@ package application;
  * tinymt32 internal state vector and parameters
  */
 public class TINYMT32_T {
-	private Object status;
+	private Object[] status;
 	private Object mat1;
 	private Object mat2;
 	private Object tmat;
 	
-	public TINYMT32_T(Object status, Object mat1, Object mat2, Object tmat) {
+	public TINYMT32_T(Object[] status, Object mat1, Object mat2, Object tmat) {
 		setStatus(status);
 		setMat1(mat1);
 		setMat2(mat2);
@@ -33,6 +33,102 @@ public class TINYMT32_T {
 	public TINYMT32_T() {
 	}
 	
+	public void period_certification() {
+		Object[] generatedStatus = this.getStatus();
+		if ((generatedStatus[0] & -1024) == 0 && generatedStatus[1] == 0 && generatedStatus[2] == 0 && generatedStatus[3] == 0) {
+			generatedStatus[0] = (byte)'T';
+			generatedStatus[1] = (byte)'I';
+			generatedStatus[2] = (byte)'N';
+			generatedStatus[3] = (byte)'Y'/**
+			 * This function initializes the internal state array with a 32-bit
+			 * unsigned integer seed.
+			 * @param random tinymt state vector.
+			 * @param seed a 32-bit unsigned integer used as a seed.
+			 */;
+		} 
+	}
+	public void tinymt32_init(Object seed) {
+		Object[] generatedStatus = this.getStatus();
+		generatedStatus[0] = seed;
+		Object generatedMat1 = this.getMat1();
+		generatedStatus[1] = generatedMat1;
+		Object generatedMat2 = this.getMat2();
+		generatedStatus[2] = generatedMat2;
+		Object generatedTmat = this.getTmat();
+		generatedStatus[3] = generatedTmat;
+		for (int i = 1;
+		 i < 8; i++) {
+			generatedStatus[i & 3] ^=  i + -1024 * (generatedStatus[(i - 1) & 3] ^ (generatedStatus[(i - 1) & 3] >> 30));
+		}
+		random.period_certification();
+		for (int i = 0;
+		 i < 8; i++) {
+			random/**
+			 * This function initializes the internal state array,
+			 * with an array of 32-bit unsigned integers used as seeds
+			 * @param random tinymt state vector.
+			 * @param init_key the array of 32-bit integers, used as a seed.
+			 * @param key_length the length of init_key.
+			 */.tinymt32_next_state();
+		}
+	}
+	public void tinymt32_init_by_array(Object[] init_key, int key_length) {
+		int lag = 1;
+		int mid = 1;
+		int size = 4;
+		int i;
+		int j;
+		int count;
+		uint32_t r = new uint32_t();
+		Object[] generatedStatus = this.getStatus();
+		uint32_t[] st = generatedStatus[0];
+		st[0] = 0;
+		Object generatedMat1 = this.getMat1();
+		st[1] = generatedMat1;
+		Object generatedMat2 = this.getMat2();
+		st[2] = generatedMat2;
+		Object generatedTmat = this.getTmat();
+		st[3] = generatedTmat;
+		if (key_length + 1 > 8) {
+			count = key_length + 1;
+		} else {
+				count = 8;
+		} 
+		r = ModernizedCProgram.ini_func1(st[0] ^ st[mid % size] ^ st[(size - 1) % size]);
+		st[mid % size] += r;
+		r += key_length;
+		st[(mid + lag) % size] += r;
+		st[0] = r;
+		count--;
+		for (; (j < count) && (j < key_length); j++) {
+			r = ModernizedCProgram.ini_func1(st[i % size] ^ st[(i + mid) % size] ^ st[(i + size - 1) % size]);
+			st[(i + mid) % size] += r;
+			r += init_key[j] + i;
+			st[(i + mid + lag) % size] += r;
+			st[i % size] = r;
+			i = (i + 1) % size;
+		}
+		for (; j < count; j++) {
+			r = ModernizedCProgram.ini_func1(st[i % size] ^ st[(i + mid) % size] ^ st[(i + size - 1) % size]);
+			st[(i + mid) % size] += r;
+			r += i;
+			st[(i + mid + lag) % size] += r;
+			st[i % size] = r;
+			i = (i + 1) % size;
+		}
+		for (j = 0; j < size; j++) {
+			r = ModernizedCProgram.ini_func2(st[i % size] + st[(i + mid) % size] + st[(i + size - 1) % size]);
+			st[(i + mid) % size] ^=  r;
+			r -= i;
+			st[(i + mid + lag) % size] ^=  r;
+			st[i % size] = r;
+			i = (i + 1) % size;
+		}
+		random.period_certification();
+		for (i = 0; i < 8; i++) {
+			random.tinymt32_next_state();
+		}
+	}
 	public int tinymt32_get_mexp() {
 		(Object)random;
 		return 127/**
@@ -44,7 +140,7 @@ public class TINYMT32_T {
 	public void tinymt32_next_state() {
 		uint32_t x = new uint32_t();
 		uint32_t y = new uint32_t();
-		Object generatedStatus = this.getStatus();
+		Object[] generatedStatus = this.getStatus();
 		y = generatedStatus[3];
 		x = (generatedStatus[0] & -1024) ^ generatedStatus[1] ^ generatedStatus[2];
 		x ^=  (x << 1);
@@ -61,7 +157,7 @@ public class TINYMT32_T {
 	public Object tinymt32_temper() {
 		uint32_t t0 = new uint32_t();
 		uint32_t t1 = new uint32_t();
-		Object generatedStatus = this.getStatus();
+		Object[] generatedStatus = this.getStatus();
 		t0 = generatedStatus[3];
 		t1 = generatedStatus[0] + (generatedStatus[2] >> 8);
 		t0 ^=  t1;
@@ -78,7 +174,7 @@ public class TINYMT32_T {
 		uint32_t t0 = new uint32_t();
 		uint32_t t1 = new uint32_t();
 		Object conv;
-		Object generatedStatus = this.getStatus();
+		Object[] generatedStatus = this.getStatus();
 		t0 = generatedStatus[3];
 		t1 = generatedStatus[0] + (generatedStatus[2] >> 8);
 		t0 ^=  t1;
@@ -91,7 +187,7 @@ public class TINYMT32_T {
 		uint32_t t0 = new uint32_t();
 		uint32_t t1 = new uint32_t();
 		Object conv;
-		Object generatedStatus = this.getStatus();
+		Object[] generatedStatus = this.getStatus();
 		t0 = generatedStatus[3];
 		t1 = generatedStatus[0] + (generatedStatus[2] >> 8);
 		t0 ^=  t1;
@@ -163,106 +259,10 @@ public class TINYMT32_T {
 		return random.tinymt32_temper() * (1.0 / 4.294967296E9);
 	}
 	/* TINYMT32_H */
-	public void period_certification() {
-		Object generatedStatus = this.getStatus();
-		if ((generatedStatus[0] & -1024) == 0 && generatedStatus[1] == 0 && generatedStatus[2] == 0 && generatedStatus[3] == 0) {
-			generatedStatus[0] = (byte)'T';
-			generatedStatus[1] = (byte)'I';
-			generatedStatus[2] = (byte)'N';
-			generatedStatus[3] = (byte)'Y'/**
-			 * This function initializes the internal state array with a 32-bit
-			 * unsigned integer seed.
-			 * @param random tinymt state vector.
-			 * @param seed a 32-bit unsigned integer used as a seed.
-			 */;
-		} 
-	}
-	public void tinymt32_init(Object seed) {
-		Object generatedStatus = this.getStatus();
-		generatedStatus[0] = seed;
-		Object generatedMat1 = this.getMat1();
-		generatedStatus[1] = generatedMat1;
-		Object generatedMat2 = this.getMat2();
-		generatedStatus[2] = generatedMat2;
-		Object generatedTmat = this.getTmat();
-		generatedStatus[3] = generatedTmat;
-		for (int i = 1;
-		 i < 8; i++) {
-			generatedStatus[i & 3] ^=  i + -1024 * (generatedStatus[(i - 1) & 3] ^ (generatedStatus[(i - 1) & 3] >> 30));
-		}
-		random.period_certification();
-		for (int i = 0;
-		 i < 8; i++) {
-			random/**
-			 * This function initializes the internal state array,
-			 * with an array of 32-bit unsigned integers used as seeds
-			 * @param random tinymt state vector.
-			 * @param init_key the array of 32-bit integers, used as a seed.
-			 * @param key_length the length of init_key.
-			 */.tinymt32_next_state();
-		}
-	}
-	public void tinymt32_init_by_array(Object[] init_key, int key_length) {
-		int lag = 1;
-		int mid = 1;
-		int size = 4;
-		int i;
-		int j;
-		int count;
-		uint32_t r = new uint32_t();
-		Object generatedStatus = this.getStatus();
-		uint32_t st = generatedStatus[0];
-		st[0] = 0;
-		Object generatedMat1 = this.getMat1();
-		st[1] = generatedMat1;
-		Object generatedMat2 = this.getMat2();
-		st[2] = generatedMat2;
-		Object generatedTmat = this.getTmat();
-		st[3] = generatedTmat;
-		if (key_length + 1 > 8) {
-			count = key_length + 1;
-		} else {
-				count = 8;
-		} 
-		r = ModernizedCProgram.ini_func1(st[0] ^ st[mid % size] ^ st[(size - 1) % size]);
-		st[mid % size] += r;
-		r += key_length;
-		st[(mid + lag) % size] += r;
-		st[0] = r;
-		count--;
-		for (; (j < count) && (j < key_length); j++) {
-			r = ModernizedCProgram.ini_func1(st[i % size] ^ st[(i + mid) % size] ^ st[(i + size - 1) % size]);
-			st[(i + mid) % size] += r;
-			r += init_key[j] + i;
-			st[(i + mid + lag) % size] += r;
-			st[i % size] = r;
-			i = (i + 1) % size;
-		}
-		for (; j < count; j++) {
-			r = ModernizedCProgram.ini_func1(st[i % size] ^ st[(i + mid) % size] ^ st[(i + size - 1) % size]);
-			st[(i + mid) % size] += r;
-			r += i;
-			st[(i + mid + lag) % size] += r;
-			st[i % size] = r;
-			i = (i + 1) % size;
-		}
-		for (j = 0; j < size; j++) {
-			r = ModernizedCProgram.ini_func2(st[i % size] + st[(i + mid) % size] + st[(i + size - 1) % size]);
-			st[(i + mid) % size] ^=  r;
-			r -= i;
-			st[(i + mid + lag) % size] ^=  r;
-			st[i % size] = r;
-			i = (i + 1) % size;
-		}
-		random.period_certification();
-		for (i = 0; i < 8; i++) {
-			random.tinymt32_next_state();
-		}
-	}
-	public Object getStatus() {
+	public Object[] getStatus() {
 		return status;
 	}
-	public void setStatus(Object newStatus) {
+	public void setStatus(Object[] newStatus) {
 		status = newStatus;
 	}
 	public Object getMat1() {

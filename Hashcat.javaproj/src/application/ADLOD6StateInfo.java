@@ -4,9 +4,9 @@ public class ADLOD6StateInfo {
 	private int iNumberOfPerformanceLevels;
 	private int iExtValue;
 	private int iExtMask;
-	private Object aLevels;
+	private Object[] aLevels;
 	
-	public ADLOD6StateInfo(int iNumberOfPerformanceLevels, int iExtValue, int iExtMask, Object aLevels) {
+	public ADLOD6StateInfo(int iNumberOfPerformanceLevels, int iExtValue, int iExtMask, Object[] aLevels) {
 		setINumberOfPerformanceLevels(iNumberOfPerformanceLevels);
 		setIExtValue(iExtValue);
 		setIExtMask(iExtMask);
@@ -33,10 +33,10 @@ public class ADLOD6StateInfo {
 	public void setIExtMask(int newIExtMask) {
 		iExtMask = newIExtMask;
 	}
-	public Object getALevels() {
+	public Object[] getALevels() {
 		return aLevels;
 	}
-	public void setALevels(Object newALevels) {
+	public void setALevels(Object[] newALevels) {
 		aLevels = newALevels;
 	}
 }

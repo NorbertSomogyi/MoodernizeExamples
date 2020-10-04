@@ -33,9 +33,9 @@ public class _CMtDec {
 	private Object needInterrupt;
 	private Object interruptIndex;
 	private  mtProgress;
-	private Object threads;
+	private Object[] threads;
 	
-	public _CMtDec(Object inBufSize, int numThreadsMax, int numThreadsMax_2, ISeqInStream inStream, ICompressProgress progress, Object alloc,  mtCallback, Object mtCallbackObject, Object allocatedBufsSize, Object exitThread, Object exitThreadWRes, Object blockIndex, Object isAllocError, Object overflow, Object threadingErrorSRes, Object needContinue, Object readRes, Object codeRes, Object wasInterrupted, int numStartedThreads_Limit, int numStartedThreads, Object crossBlock, Object crossStart, Object crossEnd, Object readProcessed, Object readWasFinished, Object inProcessed, int filledThreadStart, int numFilledThreads, Object needInterrupt, Object interruptIndex,  mtProgress, Object threads) {
+	public _CMtDec(Object inBufSize, int numThreadsMax, int numThreadsMax_2, ISeqInStream inStream, ICompressProgress progress, Object alloc,  mtCallback, Object mtCallbackObject, Object allocatedBufsSize, Object exitThread, Object exitThreadWRes, Object blockIndex, Object isAllocError, Object overflow, Object threadingErrorSRes, Object needContinue, Object readRes, Object codeRes, Object wasInterrupted, int numStartedThreads_Limit, int numStartedThreads, Object crossBlock, Object crossStart, Object crossEnd, Object readProcessed, Object readWasFinished, Object inProcessed, int filledThreadStart, int numFilledThreads, Object needInterrupt, Object interruptIndex,  mtProgress, Object[] threads) {
 		setInBufSize(inBufSize);
 		setNumThreadsMax(numThreadsMax);
 		setNumThreadsMax_2(numThreadsMax_2);
@@ -75,7 +75,7 @@ public class _CMtDec {
 	
 	public void MtDec_CloseThreads() {
 		int i;
-		Object generatedThreads = this.getThreads();
+		Object[] generatedThreads = this.getThreads();
 		for (i = 0; i < 32; i++) {
 			generatedThreads[i].MtDecThread_CloseThread();
 		}
@@ -136,7 +136,7 @@ public class _CMtDec {
 		if (!cr) {
 			cr = (Byte)/*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, /*Error: Unsupported expression*/ + generatedInBufSize);
 			if (!cr) {
-				return ((Object)0);
+				return (null);
 			} 
 			this.setCrossBlock(cr);
 		} 
@@ -153,12 +153,12 @@ public class _CMtDec {
 		Object generatedAlloc = this.getAlloc();
 		if (generatedCrossBlock && generatedCrossStart == generatedCrossEnd) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, generatedCrossBlock);
-			this.setCrossBlock(((Object)0));
+			this.setCrossBlock((null));
 		} 
 		int generatedNumStartedThreads = this.getNumStartedThreads();
 		int generatedNumFilledThreads = this.getNumFilledThreads();
 		int generatedFilledThreadStart = this.getFilledThreadStart();
-		Object generatedThreads = this.getThreads();
+		Object[] generatedThreads = this.getThreads();
 		{ 
 			int i;
 			for (i = 0; i < 32; i++) {
@@ -171,7 +171,7 @@ public class _CMtDec {
 	}
 	public Object MtDec_Read(Object inLim) {
 		int generatedNumFilledThreads = this.getNumFilledThreads();
-		Object generatedThreads = this.getThreads();
+		Object[] generatedThreads = this.getThreads();
 		int generatedFilledThreadStart = this.getFilledThreadStart();
 		Object generatedInBuf = t.getInBuf();
 		Object generatedAlloc = this.getAlloc();
@@ -230,26 +230,26 @@ public class _CMtDec {
 			inLim = 0;
 			if (generatedCrossBlock) {
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, generatedCrossBlock);
-				this.setCrossBlock(((Object)0));
+				this.setCrossBlock((null));
 			} 
-			return ((Object)0);
+			return (null);
 		}
 	}
 	public void MtDec_Construct() {
 		int i;
 		this.setInBufSize((size_t)1 << 18);
 		this.setNumThreadsMax(0);
-		this.setInStream(((Object)0))// p->inData = NULL;;// p->inData = NULL;
-		// p->inDataSize = 0;// p->inDataSize = 0;this.setCrossBlock(((Object)0));
+		this.setInStream((null))// p->inData = NULL;;// p->inData = NULL;
+		// p->inDataSize = 0;// p->inDataSize = 0;this.setCrossBlock((null));
 		this.setCrossStart(0);
 		this.setCrossEnd(0);
 		this.setNumFilledThreads(0);
-		this.setProgress(((Object)0));
-		this.setAlloc(((Object)0));
-		this.setMtCallback(((Object)0));
-		this.setMtCallbackObject(((Object)0));
+		this.setProgress((null));
+		this.setAlloc((null));
+		this.setMtCallback((null));
+		this.setMtCallbackObject((null));
 		this.setAllocatedBufsSize(0);
-		Object generatedThreads = this.getThreads();
+		Object[] generatedThreads = this.getThreads();
 		Object generatedCanRead = t.getCanRead();
 		Object generatedCanWrite = t.getCanWrite();
 		Object generatedThread = t.getThread();
@@ -257,10 +257,10 @@ public class _CMtDec {
 			CMtDecThread t = generatedThreads[i];
 			t.setMtDec(p);
 			t.setIndex(i);
-			t.setInBuf(((Object)0));
-			(generatedCanRead) = ((Object)0);
-			(generatedCanWrite) = ((Object)0);
-			(generatedThread) = ((Object)0);
+			t.setInBuf((null));
+			(generatedCanRead) = (null);
+			(generatedCanWrite) = (null);
+			(generatedThread) = (null);
 		}
 		 generatedMtProgress = this.getMtProgress();
 		Object generatedCs = generatedMtProgress.getCs();
@@ -269,7 +269,7 @@ public class _CMtDec {
 	public void MtDec_Free() {
 		int i;
 		this.setExitThread(1);
-		Object generatedThreads = this.getThreads();
+		Object[] generatedThreads = this.getThreads();
 		for (i = 0; i < 32; i++) {
 			generatedThreads[i].MtDecThread_Destruct();
 		}
@@ -277,7 +277,7 @@ public class _CMtDec {
 		Object generatedAlloc = this.getAlloc();
 		if (generatedCrossBlock) {
 			/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, generatedCrossBlock);
-			this.setCrossBlock(((Object)0));
+			this.setCrossBlock((null));
 		} 
 	}
 	public void MtDec_Destruct() {
@@ -316,7 +316,7 @@ public class _CMtDec {
 		}
 		Object generatedInBufSize = this.getInBufSize();
 		Object generatedAllocatedBufsSize = this.getAllocatedBufsSize();
-		Object generatedThreads = this.getThreads();
+		Object[] generatedThreads = this.getThreads();
 		Object generatedInBuf = t.getInBuf();
 		Object generatedCrossBlock = this.getCrossBlock();
 		Object generatedAlloc = this.getAlloc();
@@ -329,7 +329,7 @@ public class _CMtDec {
 			}
 			if (generatedCrossBlock) {
 				/*Error: Function owner not recognized*//*Error: Function owner not recognized*/ERROR_UNRECOGNIZED_FUNCTIONNAME(generatedAlloc, generatedCrossBlock);
-				this.setCrossBlock(((Object)0));
+				this.setCrossBlock((null));
 			} 
 			this.setAllocatedBufsSize(generatedInBufSize);
 		} 
@@ -569,10 +569,10 @@ public class _CMtDec {
 	public void setMtProgress( newMtProgress) {
 		mtProgress = newMtProgress;
 	}
-	public Object getThreads() {
+	public Object[] getThreads() {
 		return threads;
 	}
-	public void setThreads(Object newThreads) {
+	public void setThreads(Object[] newThreads) {
 		threads = newThreads;
 	}
 }

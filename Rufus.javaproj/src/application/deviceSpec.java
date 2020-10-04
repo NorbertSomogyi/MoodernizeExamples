@@ -4,14 +4,14 @@ package application;
 public class deviceSpec {
 	private Object attr_type;
 	private Object attr_subtype;
-	private Object reserved;
+	private Object[] reserved;
 	private Object attrLength;
 	private Object imp_useLength;
 	private Object majorDevice_id;
 	private Object minorDevice_id;
-	private Object imp_use;
+	private Object[] imp_use;
 	
-	public deviceSpec(Object attr_type, Object attr_subtype, Object reserved, Object attrLength, Object imp_useLength, Object majorDevice_id, Object minorDevice_id, Object imp_use) {
+	public deviceSpec(Object attr_type, Object attr_subtype, Object[] reserved, Object attrLength, Object imp_useLength, Object majorDevice_id, Object minorDevice_id, Object[] imp_use) {
 		setAttr_type(attr_type);
 		setAttr_subtype(attr_subtype);
 		setReserved(reserved);
@@ -36,10 +36,10 @@ public class deviceSpec {
 	public void setAttr_subtype(Object newAttr_subtype) {
 		attr_subtype = newAttr_subtype;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public Object getAttrLength() {
@@ -66,10 +66,10 @@ public class deviceSpec {
 	public void setMinorDevice_id(Object newMinorDevice_id) {
 		minorDevice_id = newMinorDevice_id;
 	}
-	public Object getImp_use() {
+	public Object[] getImp_use() {
 		return imp_use;
 	}
-	public void setImp_use(Object newImp_use) {
+	public void setImp_use(Object[] newImp_use) {
 		imp_use = newImp_use;
 	}
 }

@@ -3,8 +3,8 @@ package application;
 // FILE_SYSTEM_PROP_FLAG
 /* Large FAT32 */
 public class tagFAT_BOOTSECTOR32 {
-	private Object sJmpBoot;
-	private Object sOEMName;
+	private Object[] sJmpBoot;
+	private Object[] sOEMName;
 	private Object wBytsPerSec;
 	private Object bSecPerClus;
 	private Object wRsvdSecCnt;
@@ -23,15 +23,15 @@ public class tagFAT_BOOTSECTOR32 {
 	private Object dRootClus;
 	private Object wFSInfo;
 	private Object wBkBootSec;
-	private Object Reserved;
+	private Object[] Reserved;
 	private Object bDrvNum;
 	private Object Reserved1;
 	private Object bBootSig;
 	private Object dBS_VolID;
-	private Object sVolLab;
-	private Object sBS_FilSysType;
+	private Object[] sVolLab;
+	private Object[] sBS_FilSysType;
 	
-	public tagFAT_BOOTSECTOR32(Object sJmpBoot, Object sOEMName, Object wBytsPerSec, Object bSecPerClus, Object wRsvdSecCnt, Object bNumFATs, Object wRootEntCnt, Object wTotSec16, Object bMedia, Object wFATSz16, Object wSecPerTrk, Object wNumHeads, Object dHiddSec, Object dTotSec32, Object dFATSz32, Object wExtFlags, Object wFSVer, Object dRootClus, Object wFSInfo, Object wBkBootSec, Object Reserved, Object bDrvNum, Object Reserved1, Object bBootSig, Object dBS_VolID, Object sVolLab, Object sBS_FilSysType) {
+	public tagFAT_BOOTSECTOR32(Object[] sJmpBoot, Object[] sOEMName, Object wBytsPerSec, Object bSecPerClus, Object wRsvdSecCnt, Object bNumFATs, Object wRootEntCnt, Object wTotSec16, Object bMedia, Object wFATSz16, Object wSecPerTrk, Object wNumHeads, Object dHiddSec, Object dTotSec32, Object dFATSz32, Object wExtFlags, Object wFSVer, Object dRootClus, Object wFSInfo, Object wBkBootSec, Object[] Reserved, Object bDrvNum, Object Reserved1, Object bBootSig, Object dBS_VolID, Object[] sVolLab, Object[] sBS_FilSysType) {
 		setSJmpBoot(sJmpBoot);
 		setSOEMName(sOEMName);
 		setWBytsPerSec(wBytsPerSec);
@@ -63,16 +63,16 @@ public class tagFAT_BOOTSECTOR32 {
 	public tagFAT_BOOTSECTOR32() {
 	}
 	
-	public Object getSJmpBoot() {
+	public Object[] getSJmpBoot() {
 		return sJmpBoot;
 	}
-	public void setSJmpBoot(Object newSJmpBoot) {
+	public void setSJmpBoot(Object[] newSJmpBoot) {
 		sJmpBoot = newSJmpBoot;
 	}
-	public Object getSOEMName() {
+	public Object[] getSOEMName() {
 		return sOEMName;
 	}
-	public void setSOEMName(Object newSOEMName) {
+	public void setSOEMName(Object[] newSOEMName) {
 		sOEMName = newSOEMName;
 	}
 	public Object getWBytsPerSec() {
@@ -183,10 +183,10 @@ public class tagFAT_BOOTSECTOR32 {
 	public void setWBkBootSec(Object newWBkBootSec) {
 		wBkBootSec = newWBkBootSec;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return Reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		Reserved = newReserved;
 	}
 	public Object getBDrvNum() {
@@ -213,16 +213,16 @@ public class tagFAT_BOOTSECTOR32 {
 	public void setDBS_VolID(Object newDBS_VolID) {
 		dBS_VolID = newDBS_VolID;
 	}
-	public Object getSVolLab() {
+	public Object[] getSVolLab() {
 		return sVolLab;
 	}
-	public void setSVolLab(Object newSVolLab) {
+	public void setSVolLab(Object[] newSVolLab) {
 		sVolLab = newSVolLab;
 	}
-	public Object getSBS_FilSysType() {
+	public Object[] getSBS_FilSysType() {
 		return sBS_FilSysType;
 	}
-	public void setSBS_FilSysType(Object newSBS_FilSysType) {
+	public void setSBS_FilSysType(Object[] newSBS_FilSysType) {
 		sBS_FilSysType = newSBS_FilSysType;
 	}
 }

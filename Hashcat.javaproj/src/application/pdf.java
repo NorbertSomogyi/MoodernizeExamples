@@ -5,16 +5,16 @@ public class pdf {
 	private int R;
 	private int P;
 	private int enc_md;
-	private Object id_buf;
-	private Object u_buf;
-	private Object o_buf;
+	private Object[] id_buf;
+	private Object[] u_buf;
+	private Object[] o_buf;
 	private int id_len;
 	private int o_len;
 	private int u_len;
-	private Object rc4key;
-	private Object rc4data;
+	private Object[] rc4key;
+	private Object[] rc4data;
 	
-	public pdf(int V, int R, int P, int enc_md, Object id_buf, Object u_buf, Object o_buf, int id_len, int o_len, int u_len, Object rc4key, Object rc4data) {
+	public pdf(int V, int R, int P, int enc_md, Object[] id_buf, Object[] u_buf, Object[] o_buf, int id_len, int o_len, int u_len, Object[] rc4key, Object[] rc4data) {
 		setV(V);
 		setR(R);
 		setP(P);
@@ -55,22 +55,22 @@ public class pdf {
 	public void setEnc_md(int newEnc_md) {
 		enc_md = newEnc_md;
 	}
-	public Object getId_buf() {
+	public Object[] getId_buf() {
 		return id_buf;
 	}
-	public void setId_buf(Object newId_buf) {
+	public void setId_buf(Object[] newId_buf) {
 		id_buf = newId_buf;
 	}
-	public Object getU_buf() {
+	public Object[] getU_buf() {
 		return u_buf;
 	}
-	public void setU_buf(Object newU_buf) {
+	public void setU_buf(Object[] newU_buf) {
 		u_buf = newU_buf;
 	}
-	public Object getO_buf() {
+	public Object[] getO_buf() {
 		return o_buf;
 	}
-	public void setO_buf(Object newO_buf) {
+	public void setO_buf(Object[] newO_buf) {
 		o_buf = newO_buf;
 	}
 	public int getId_len() {
@@ -91,16 +91,16 @@ public class pdf {
 	public void setU_len(int newU_len) {
 		u_len = newU_len;
 	}
-	public Object getRc4key() {
+	public Object[] getRc4key() {
 		return rc4key;
 	}
-	public void setRc4key(Object newRc4key) {
+	public void setRc4key(Object[] newRc4key) {
 		rc4key = newRc4key;
 	}
-	public Object getRc4data() {
+	public Object[] getRc4data() {
 		return rc4data;
 	}
-	public void setRc4data(Object newRc4data) {
+	public void setRc4data(Object[] newRc4data) {
 		rc4data = newRc4data;
 	}
 }

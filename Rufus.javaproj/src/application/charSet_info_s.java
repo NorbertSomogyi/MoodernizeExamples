@@ -4,13 +4,13 @@ package application;
 public class charSet_info_s {
 	private Object attr_type;
 	private Object attr_subtype;
-	private Object reserved;
+	private Object[] reserved;
 	private Object attrLength;
 	private Object escapeSeqLength;
 	private Object charSetType;
-	private Object escapeSeq;
+	private Object[] escapeSeq;
 	
-	public charSet_info_s(Object attr_type, Object attr_subtype, Object reserved, Object attrLength, Object escapeSeqLength, Object charSetType, Object escapeSeq) {
+	public charSet_info_s(Object attr_type, Object attr_subtype, Object[] reserved, Object attrLength, Object escapeSeqLength, Object charSetType, Object[] escapeSeq) {
 		setAttr_type(attr_type);
 		setAttr_subtype(attr_subtype);
 		setReserved(reserved);
@@ -34,10 +34,10 @@ public class charSet_info_s {
 	public void setAttr_subtype(Object newAttr_subtype) {
 		attr_subtype = newAttr_subtype;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 	public Object getAttrLength() {
@@ -58,10 +58,10 @@ public class charSet_info_s {
 	public void setCharSetType(Object newCharSetType) {
 		charSetType = newCharSetType;
 	}
-	public Object getEscapeSeq() {
+	public Object[] getEscapeSeq() {
 		return escapeSeq;
 	}
-	public void setEscapeSeq(Object newEscapeSeq) {
+	public void setEscapeSeq(Object[] newEscapeSeq) {
 		escapeSeq = newEscapeSeq;
 	}
 }

@@ -116,7 +116,7 @@ public class tsrb {
 	 * @param[in]    bufsize   `sizeof (buffer)`, must be power of 2.
 	 */
 	public void tsrb_init(Object buffer, int bufsize) {
-		(((bufsize != 0) && ((bufsize & (~bufsize + 1)) == bufsize)) ? (Object)0 : /*Error: Function owner not recognized*/_assert("(bufsize != 0) && ((bufsize & (~bufsize + 1)) == bufsize)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\RIOT\\src\\tsrb.h", 63));
+		(((bufsize != 0) && ((bufsize & (~bufsize + 1)) == bufsize)) ? null : /*Error: Function owner not recognized*/_assert("(bufsize != 0) && ((bufsize & (~bufsize + 1)) == bufsize)", "E:\\Programfiles\\Eclipse\\Workspaces\\runtime-EclipseApplication\\RIOT\\src\\tsrb.h", 63));
 		this.setBuf(buffer);
 		this.setSize(bufsize);
 		this.setReads(0);

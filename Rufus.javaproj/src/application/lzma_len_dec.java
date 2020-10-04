@@ -6,11 +6,11 @@ package application;
 public class lzma_len_dec {
 	private Object choice;
 	private Object choice2;
-	private Object low;
-	private Object mid;
-	private Object high;
+	private Object[][] low;
+	private Object[][] mid;
+	private Object[] high;
 	
-	public lzma_len_dec(Object choice, Object choice2, Object low, Object mid, Object high) {
+	public lzma_len_dec(Object choice, Object choice2, Object[][] low, Object[][] mid, Object[] high) {
 		setChoice(choice);
 		setChoice2(choice2);
 		setLow(low);
@@ -32,22 +32,22 @@ public class lzma_len_dec {
 	public void setChoice2(Object newChoice2) {
 		choice2 = newChoice2;
 	}
-	public Object getLow() {
+	public Object[][] getLow() {
 		return low;
 	}
-	public void setLow(Object newLow) {
+	public void setLow(Object[][] newLow) {
 		low = newLow;
 	}
-	public Object getMid() {
+	public Object[][] getMid() {
 		return mid;
 	}
-	public void setMid(Object newMid) {
+	public void setMid(Object[][] newMid) {
 		mid = newMid;
 	}
-	public Object getHigh() {
+	public Object[] getHigh() {
 		return high;
 	}
-	public void setHigh(Object newHigh) {
+	public void setHigh(Object[] newHigh) {
 		high = newHigh;
 	}
 }

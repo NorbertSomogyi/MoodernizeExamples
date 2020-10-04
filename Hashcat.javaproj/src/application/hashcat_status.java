@@ -52,14 +52,14 @@ public class hashcat_status {
 	private double cpt_avg_hour;
 	private double cpt_avg_day;
 	private Byte cpt;
-	private Object device_info_buf;
+	private Object[] device_info_buf;
 	private int device_info_cnt;
 	private int device_info_active;
 	private double hashes_msec_all;
 	private double exec_msec_all;
 	private Byte speed_sec_all;
 	
-	public hashcat_status(Byte hash_target, Byte hash_name, int guess_mode, Byte guess_base, int guess_base_offset, int guess_base_count, double guess_base_percent, Byte guess_mod, int guess_mod_offset, int guess_mod_count, double guess_mod_percent, Byte guess_charset, int guess_mask_length, Byte session, Object status_string, int status_number, Byte time_estimated_absolute, Byte time_estimated_relative, Byte time_started_absolute, Byte time_started_relative, double msec_paused, double msec_running, double msec_real, int digests_cnt, int digests_done, double digests_percent, int salts_cnt, int salts_done, double salts_percent, int progress_mode, double progress_finished_percent, Object progress_cur, Object progress_cur_relative_skip, Object progress_done, Object progress_end, Object progress_end_relative_skip, Object progress_ignore, Object progress_rejected, double progress_rejected_percent, Object progress_restored, Object progress_skip, Object restore_point, Object restore_total, double restore_percent, int cpt_cur_min, int cpt_cur_hour, int cpt_cur_day, double cpt_avg_min, double cpt_avg_hour, double cpt_avg_day, Byte cpt, Object device_info_buf, int device_info_cnt, int device_info_active, double hashes_msec_all, double exec_msec_all, Byte speed_sec_all) {
+	public hashcat_status(Byte hash_target, Byte hash_name, int guess_mode, Byte guess_base, int guess_base_offset, int guess_base_count, double guess_base_percent, Byte guess_mod, int guess_mod_offset, int guess_mod_count, double guess_mod_percent, Byte guess_charset, int guess_mask_length, Byte session, Object status_string, int status_number, Byte time_estimated_absolute, Byte time_estimated_relative, Byte time_started_absolute, Byte time_started_relative, double msec_paused, double msec_running, double msec_real, int digests_cnt, int digests_done, double digests_percent, int salts_cnt, int salts_done, double salts_percent, int progress_mode, double progress_finished_percent, Object progress_cur, Object progress_cur_relative_skip, Object progress_done, Object progress_end, Object progress_end_relative_skip, Object progress_ignore, Object progress_rejected, double progress_rejected_percent, Object progress_restored, Object progress_skip, Object restore_point, Object restore_total, double restore_percent, int cpt_cur_min, int cpt_cur_hour, int cpt_cur_day, double cpt_avg_min, double cpt_avg_hour, double cpt_avg_day, Byte cpt, Object[] device_info_buf, int device_info_cnt, int device_info_active, double hashes_msec_all, double exec_msec_all, Byte speed_sec_all) {
 		setHash_target(hash_target);
 		setHash_name(hash_name);
 		setGuess_mode(guess_mode);
@@ -427,10 +427,10 @@ public class hashcat_status {
 	public void setCpt(Byte newCpt) {
 		cpt = newCpt;
 	}
-	public Object getDevice_info_buf() {
+	public Object[] getDevice_info_buf() {
 		return device_info_buf;
 	}
-	public void setDevice_info_buf(Object newDevice_info_buf) {
+	public void setDevice_info_buf(Object[] newDevice_info_buf) {
 		device_info_buf = newDevice_info_buf;
 	}
 	public int getDevice_info_cnt() {

@@ -1,11 +1,11 @@
 package application;
 
 public class pot {
-	private Object plain_buf;
+	private Object[] plain_buf;
 	private int plain_len;
 	private hash hash;
 	
-	public pot(Object plain_buf, int plain_len, hash hash) {
+	public pot(Object[] plain_buf, int plain_len, hash hash) {
 		setPlain_buf(plain_buf);
 		setPlain_len(plain_len);
 		setHash(hash);
@@ -13,10 +13,10 @@ public class pot {
 	public pot() {
 	}
 	
-	public Object getPlain_buf() {
+	public Object[] getPlain_buf() {
 		return plain_buf;
 	}
-	public void setPlain_buf(Object newPlain_buf) {
+	public void setPlain_buf(Object[] newPlain_buf) {
 		plain_buf = newPlain_buf;
 	}
 	public int getPlain_len() {

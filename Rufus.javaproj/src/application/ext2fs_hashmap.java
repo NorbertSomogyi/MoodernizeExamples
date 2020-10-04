@@ -6,9 +6,9 @@ public class ext2fs_hashmap {
 	private Object free;
 	private ext2fs_hashmap_entry first;
 	private ext2fs_hashmap_entry last;
-	private Object entries;
+	private Object[] entries;
 	
-	public ext2fs_hashmap(Object size, Object hash, Object free, ext2fs_hashmap_entry first, ext2fs_hashmap_entry last, Object entries) {
+	public ext2fs_hashmap(Object size, Object hash, Object free, ext2fs_hashmap_entry first, ext2fs_hashmap_entry last, Object[] entries) {
 		setSize(size);
 		setHash(hash);
 		setFree(free);
@@ -27,7 +27,7 @@ public class ext2fs_hashmap {
 		h.setSize(size);
 		h.setFree(free_fct);
 		h.setHash(hash_fct);
-		h.setFirst(h.setLast(((Object)0)));
+		h.setFirst(h.setLast((null)));
 		return h;
 	}
 	public void ext2fs_hashmap_add(Object data, Object key, Object key_len) {
@@ -40,10 +40,10 @@ public class ext2fs_hashmap {
 		e.setData(data);
 		e.setKey(key);
 		e.setKey_len(key_len);
-		Object generatedEntries = this.getEntries();
+		Object[] generatedEntries = this.getEntries();
 		e.setNext(generatedEntries[hash]);
 		generatedEntries[hash] = e;
-		e.setList_prev(((Object)0));
+		e.setList_prev((null));
 		ext2fs_hashmap_entry generatedFirst = this.getFirst();
 		e.setList_next(generatedFirst);
 		if (generatedFirst) {
@@ -63,18 +63,18 @@ public class ext2fs_hashmap {
 		Object generatedKey = iter.getKey();
 		Object generatedData = iter.getData();
 		ext2fs_hashmap_entry generatedNext = iter.getNext();
-		Object generatedEntries = this.getEntries();
+		Object[] generatedEntries = this.getEntries();
 		for (iter = generatedEntries[hash]; iter; iter = generatedNext) {
 			if (generatedKey_len == key_len && !/*Error: Function owner not recognized*/memcmp(generatedKey, key, key_len)) {
 				return generatedData;
 			} 
 		}
-		return ((Object)0);
+		return (null);
 	}
 	public void ext2fs_hashmap_free() {
 		size_t i = new size_t();
 		Object generatedSize = this.getSize();
-		Object generatedEntries = this.getEntries();
+		Object[] generatedEntries = this.getEntries();
 		ext2fs_hashmap_entry generatedNext = it.getNext();
 		Object generatedFree = this.getFree();
 		Object generatedData = it.getData();
@@ -121,10 +121,10 @@ public class ext2fs_hashmap {
 	public void setLast(ext2fs_hashmap_entry newLast) {
 		last = newLast;
 	}
-	public Object getEntries() {
+	public Object[] getEntries() {
 		return entries;
 	}
-	public void setEntries(Object newEntries) {
+	public void setEntries(Object[] newEntries) {
 		entries = newEntries;
 	}
 }

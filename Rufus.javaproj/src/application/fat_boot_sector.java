@@ -2,8 +2,8 @@ package application;
 
 /* FAT bootsector format, also used by other disk-based derivatives */
 public class fat_boot_sector {
-	private Object bsJump;
-	private Object bsOemName;
+	private Object[] bsJump;
+	private Object[] bsOemName;
 	private Object bsBytesPerSec;
 	private Object bsSecPerClust;
 	private Object bsResSectors;
@@ -22,7 +22,7 @@ public class fat_boot_sector {
 	private Object bsForwardPtr;
 	private Object bsSignature;
 	
-	public fat_boot_sector(Object bsJump, Object bsOemName, Object bsBytesPerSec, Object bsSecPerClust, Object bsResSectors, Object bsFATs, Object bsRootDirEnts, Object bsSectors, Object bsMedia, Object bsFATsecs, Object bsSecPerTrack, Object bsHeads, Object bsHiddenSecs, Object bsHugeSectors,  bs16,  bs32, Object bsMagic, Object bsForwardPtr, Object bsSignature) {
+	public fat_boot_sector(Object[] bsJump, Object[] bsOemName, Object bsBytesPerSec, Object bsSecPerClust, Object bsResSectors, Object bsFATs, Object bsRootDirEnts, Object bsSectors, Object bsMedia, Object bsFATsecs, Object bsSecPerTrack, Object bsHeads, Object bsHiddenSecs, Object bsHugeSectors,  bs16,  bs32, Object bsMagic, Object bsForwardPtr, Object bsSignature) {
 		setBsJump(bsJump);
 		setBsOemName(bsOemName);
 		setBsBytesPerSec(bsBytesPerSec);
@@ -46,16 +46,16 @@ public class fat_boot_sector {
 	public fat_boot_sector() {
 	}
 	
-	public Object getBsJump() {
+	public Object[] getBsJump() {
 		return bsJump;
 	}
-	public void setBsJump(Object newBsJump) {
+	public void setBsJump(Object[] newBsJump) {
 		bsJump = newBsJump;
 	}
-	public Object getBsOemName() {
+	public Object[] getBsOemName() {
 		return bsOemName;
 	}
-	public void setBsOemName(Object newBsOemName) {
+	public void setBsOemName(Object[] newBsOemName) {
 		bsOemName = newBsOemName;
 	}
 	public Object getBsBytesPerSec() {

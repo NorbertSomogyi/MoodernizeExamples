@@ -5,14 +5,14 @@ package application;
  * License.....: MIT
  */
 public class sha224_ctx {
-	private Object h;
-	private Object w0;
-	private Object w1;
-	private Object w2;
-	private Object w3;
+	private Object[] h;
+	private Object[] w0;
+	private Object[] w1;
+	private Object[] w2;
+	private Object[] w3;
 	private int len;
 	
-	public sha224_ctx(Object h, Object w0, Object w1, Object w2, Object w3, int len) {
+	public sha224_ctx(Object[] h, Object[] w0, Object[] w1, Object[] w2, Object[] w3, int len) {
 		setH(h);
 		setW0(w0);
 		setW1(w1);
@@ -23,34 +23,34 @@ public class sha224_ctx {
 	public sha224_ctx() {
 	}
 	
-	public Object getH() {
+	public Object[] getH() {
 		return h;
 	}
-	public void setH(Object newH) {
+	public void setH(Object[] newH) {
 		h = newH;
 	}
-	public Object getW0() {
+	public Object[] getW0() {
 		return w0;
 	}
-	public void setW0(Object newW0) {
+	public void setW0(Object[] newW0) {
 		w0 = newW0;
 	}
-	public Object getW1() {
+	public Object[] getW1() {
 		return w1;
 	}
-	public void setW1(Object newW1) {
+	public void setW1(Object[] newW1) {
 		w1 = newW1;
 	}
-	public Object getW2() {
+	public Object[] getW2() {
 		return w2;
 	}
-	public void setW2(Object newW2) {
+	public void setW2(Object[] newW2) {
 		w2 = newW2;
 	}
-	public Object getW3() {
+	public Object[] getW3() {
 		return w3;
 	}
-	public void setW3(Object newW3) {
+	public void setW3(Object[] newW3) {
 		w3 = newW3;
 	}
 	public int getLen() {

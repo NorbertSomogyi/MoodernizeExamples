@@ -19,9 +19,9 @@ public class ext2fs_struct_generic_bitmap_32 {
 	private Byte description;
 	private Byte bitmap;
 	private Object base_error_code;
-	private Object reserved;
+	private Object[] reserved;
 	
-	public ext2fs_struct_generic_bitmap_32(Object magic, Object fs, Object start, Object end, Object real_end, Byte description, Byte bitmap, Object base_error_code, Object reserved) {
+	public ext2fs_struct_generic_bitmap_32(Object magic, Object fs, Object start, Object end, Object real_end, Byte description, Byte bitmap, Object base_error_code, Object[] reserved) {
 		setMagic(magic);
 		setFs(fs);
 		setStart(start);
@@ -83,10 +83,10 @@ public class ext2fs_struct_generic_bitmap_32 {
 	public void setBase_error_code(Object newBase_error_code) {
 		base_error_code = newBase_error_code;
 	}
-	public Object getReserved() {
+	public Object[] getReserved() {
 		return reserved;
 	}
-	public void setReserved(Object newReserved) {
+	public void setReserved(Object[] newReserved) {
 		reserved = newReserved;
 	}
 }
